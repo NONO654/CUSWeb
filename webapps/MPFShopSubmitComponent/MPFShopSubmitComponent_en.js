@@ -1,0 +1,1 @@
+define("DS/MPFShopSubmitComponent/MPFShopSubmitComponent_en",{});define("DS/MPFShopSubmitComponent/assets/nls/ShopSubmitComponent",{submitShop:"Submit shop",confirmShopSubmit:"Confirm shop submit",confirmShopSubmitMessage:"Warning! Shop information may not be complete. Please make sure that the lab is ready to be submitted as some informations may not be editable afterwards."});

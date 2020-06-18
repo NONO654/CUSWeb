@@ -1,0 +1,1 @@
+define("DS/MPFMenuComponent/MPFMenuComponent_it",{});define("DS/MPFMenuComponent/assets/nls/MenuComponent",{back:"Indietro",finish:"Finitura",loading:"Caricamento",next:"Avanti"});

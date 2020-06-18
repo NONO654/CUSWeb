@@ -1,0 +1,61 @@
+Let Reference (PLMEntity)
+Let CADOriginValueAggregated(STRING)
+Let CADOriginListAggregating(List)
+Let index(Integer)
+Let ErrorMessageSet(Boolean)
+
+set Reference = Parameters->GetAttributeObject("ReferenceToInstantiate")
+Validation = true
+ErrorMessageSet = false
+
+if (Validation == true and ThisObject.IsSupporting("XCADExtension") == true){
+	if ((Reference.IsSupporting("VPMRepReference") == false) and (Reference.IsSupporting("XCADAssemblyRepReference") == false)) {
+		if (Reference.IsSupporting("XCADExtension")) {
+			if(ThisObject.HasAttribute("V_CADOrigin") == true){
+				if(Reference.HasAttribute("V_CADOrigin") == true){
+					CADOriginListAggregating = (ThisObject.GetAttributeObject("V_CADOrigin") : List)
+					CADOriginValueAggregated = (Reference.GetAttributeObject("V_CADOrigin") : List).GetItem(1)
+
+					index = 1
+					Validation = false
+					for index while index <= CADOriginListAggregating.Size() {
+						Validation = Validation or (CADOriginListAggregating.GetItem(index) == CADOriginValueAggregated)
+					}
+				}
+				else {
+					Validation=false
+				}
+			}
+		}
+		else {
+			CADOriginListAggregating = (ThisObject.GetAttributeObject("V_CADOrigin") : List)
+			
+			index = 1
+			Validation = false
+			for index while index <= CADOriginListAggregating.Size() {
+							Validation = Validation or (CADOriginListAggregating.GetItem(index) == "SOLIDWORKS")
+			}
+		}
+	}
+	else if (Reference.IsSupporting("XCADRepExtension") == true)
+	{
+		if (Reference.IsSupporting("Drawing") == true)
+		{
+				Validation = false
+		}
+		
+		if (Validation == false)
+		{
+			/*Parameters.Message = "The reference to add can not be aggregated by the father reference."*/
+			Parameters.NLSMessage = BuildDeferredMessageNLS("VPMReferenceBLAggregation", "FatherValidationCheck.Title")
+			Parameters.Message=BuildMessageNLS("VPMReferenceBLAggregation","FatherValidationCheck.Title")
+			ErrorMessageSet = true
+		}
+	}
+	
+	if((Validation==false) and (ErrorMessageSet==false)) {
+		Parameters.Message = "The reference to add cannot be inserted because its CAD Master is incompatible with the aggregating reference."
+		Parameters.NLSMessage = BuildDeferredMessageNLS("VPMReferenceBLAggregation", "Aggregation.Title")
+		Parameters.Message=BuildMessageNLS("VPMReferenceBLAggregation","Aggregation.Title")
+	}
+}

@@ -1,0 +1,264 @@
+<!--------------------------------------------------------------------
+[xs-instantiator HTML Document]
+
+Project:		xs
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:46:03 GMT
+Assigned to:	d6u
+Primary use:	Displays UI for instantiating the experience
+Description:    TODO: Description about the component
+------------------------------------------------------------------- -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+
+<link rel="import" href="../xs-player/xs-player.html">
+<link rel="import" href="../../SMAProcXSStudioComponents/xs-template-checker/xs-template-checker.html">
+
+
+<dom-module id="xs-instantiator">
+  <!-- <link rel="import" type="css" href="xs-instantiator.css"> -->
+  <template>
+      <style>
+      :host {
+        display: block;
+        height: 100%;
+        font-family: Arial; }
+
+      .optional-begin-screen {
+        padding: 15px;
+        margin-top: 1px;
+        width: 100%;
+        position: fixed;
+        top: 50px;
+        overflow-y: auto;
+        height : 100%;
+        z-index: 20;
+        display: none;
+        background-color: #d5e8f2;
+        -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+        line-height: 2; }
+        .optional-begin-screen .warning-title {
+          margin-bottom: 0;
+          margin-top: 0; }
+        .optional-begin-screen .proceed-actions {
+          margin-top: 15px; }
+
+      .optional-begin-screen.is-notplaying {
+        display: block; }
+
+      .top-bar {
+        min-height: 50px;
+        height: auto;
+        width: 100%;
+        padding: 5px;
+        position: fixed;
+        top: 0;
+        /* z-index: 20; removing z index as template is rendered below it */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+        background-color: #F1F1F1;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+        color: #368EC4; }
+        .top-bar .main-title {
+          margin: 0 5px 0 15px;
+          font-size: 1.5em;
+          font-weight: 700;
+          line-height: 1.5;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; }
+        .top-bar .actions {
+          margin-right: 15px;
+          flex-shrink: 0;
+          visibility: hidden; }
+        .top-bar .actions.is-playing {
+          visibility: visible; }
+
+      .space-before-maincontent {
+        height: 220px;
+        width: 100%;
+        background-color: white;
+        z-index: 15; }
+
+      .space-before-maincontent.is-playing {
+        height: 50px; }
+
+      .player {
+        display: none; }
+
+      .player.is-playing, .player.is-notplaying {
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - 50px);}
+
+      .player.is-notplaying {
+        pointer-events: none; }
+
+      .player-overlay {
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        z-index: 10;
+        top: 0px;
+        display: none;
+        background-color: #ffffff;
+        opacity: 0.6; }
+
+      .player-overlay.is-notplaying {
+        display: flex; }
+
+      .fonticon {
+        font-family: entypo;
+        font-style: normal;
+        font-weight: normal;
+        speak: none;
+        display: inline-block;
+        text-decoration: inherit;
+        width: 1em;
+        margin: 0 0.2em;
+        text-align: center;
+        /* For safety - reset parent styles, that can break glyph codes*/
+        font-variant: normal;
+        text-transform: none; }
+
+      .feedback-warning-icon:before {
+        content: '\e83d';
+        color: #ff7900; }
+
+      .no-display {
+        display: none;
+      }
+
+      .playerupdpnl {
+        display: block;
+        position: absolute;
+        width: 100%;
+        z-index: 10;
+        flex-direction: column;
+        height: calc(100% - 50px);
+      }
+
+      .is-playing.actions.is-playing {
+        height: 100%;
+      }
+      </style>
+
+
+        <sp-dashboard id="dashboard"></sp-dashboard>
+        <xs-template-checker id="templateChecker"></xs-template-checker>
+        <!--Request to create a new transient process based on the experience-->
+        <sp-mcsservice id="playWS" verb="POST" data="{{transientsim}}" on-request="onPostRequest" on-response="onPlayResponse" on-error="onPlayError" uri="{{_computeUri(templateData.objectId)}}"></sp-mcsservice>
+
+        <!--Request to delete a simulation-->
+        <sp-mcsservice id="deleteSimWS" verb="DELETE" on-response="onDeleteSimulation" on-error="onDeleteSimError" uri="{{_computeUri2(transientsim)}}">
+        </sp-mcsservice>
+
+        <!--Request to delete a simulation before Restarting Play-->
+        <sp-mcsservice id="deleteSimWS1" verb="DELETE" on-response="play" on-error="onDeleteSimError" uri="{{_computeUri2(transientsim)}}">
+        </sp-mcsservice>
+
+
+        <!--Request to complete instantiation with the transient process id-->
+        <sp-mcsservice id="instantiateWS" verb="POST" on-response="onInstantiationSuccess" on-error="onInstantiationError" uri="{{_computeUri3(transientsim,templateData)}}">
+        </sp-mcsservice>
+
+        <!--Instantiate page Top bar with Experience title and action buttons-->
+        <nav class="top-bar" id="topNav">
+            <span class="main-title">Instantiate <span>{{templateTitle}}</span> Experience</span>
+            <div id="topActionbar" class$="{{_computeClass(playstatus)}}">
+                <button id="triggerInstantiation" class="action-button" primary="" is="sp-button-type" on-click="onTriggerInstantiation" disabled$="{{_computeDisabled(loadstatus, playerupdating)}}">Done</button>
+                <button id="saveForLater" class="action-button save-action" is="sp-button-type" on-click="onSaveForLater" disabled$="{{_computeDisabled(loadstatus, playerupdating)}}">Save and Close</button>
+                <button class="action-button " is="sp-button-type" on-click="onCancelAttempt" disabled$="{{_computeDisabled2(loadstatus)}}">Cancel</button>
+            </div>
+        </nav>
+
+        <sp-notification id="notification" position="TR" width="400"></sp-notification>
+
+        <!--Cancel confirmation-->
+        <sp-modal id="warningDialog" class="warning-dialog" width="500px" heading="Confirm cancel">
+            <section id="dialogText">
+                <span>This will delete all your updates and cancel instantiation.Do you want to proceed?</span>
+            </section>
+            <footer>
+                <button id="okButton" is="sp-button-type" on-click="onCancelInstantiation">Yes</button>
+                <button id="dismissButton" is="sp-button-type" primary="" on-click="hideWarningDialog">No</button>
+            </footer>
+        </sp-modal>
+
+        <!--Generic Modal window to display any information-->
+         <sp-modal id="infoDialog" class="info-dialog" width="500px">
+            <section id="infoDialogText">
+                <span></span>
+
+            </section>
+            <footer>
+                <button id="okButton" is="sp-button-type" primary="" on-click="hideInfoDialog">Ok</button>
+            </footer>
+        </sp-modal>
+
+        <!--Close confirmation-->
+        <sp-modal id="discardChangesDialog" class="warning-dialog" width="500px" heading="Confirm">
+            <section id="dialogText">
+                <span>There are some unsaved changes due to errors. Do you want to proceed?</span>
+            </section>
+            <footer>
+                <button id="proceedDiscard" is="sp-button-type">Yes</button>
+                <button id="dismissButton" is="sp-button-type" primary="" on-click="hideDiscardDialog">No</button>
+            </footer>
+        </sp-modal>
+
+        <!--Error Msg-->
+        <sp-modal id="errorMsg" class="warning-dialog" width="500px" heading="Not Supported" on-close="resetUI">
+                <section id="dialogText">
+                    <span>{{errorMsg}}</span>
+                </section>
+                <footer>
+                    <button primary is="sp-button-type" on-click="resetUI">Close</button>
+                </footer>
+        </sp-modal>
+
+        <!--Warning if there is an existing Transient process-->
+
+       <div id="preInstantiateWarning" class$="{{_computeClass2(loadstatus, playstatus)}}">
+            <h3 class="warning-title">An Instantiation is already in progress.</h3>
+            <span class="action-title"><b>Resume </b></span><span>to continue with the saved data or</span>
+            <span class="action-title"><b>Start new </b></span><span>to restart Instantiation</span>
+
+            <div class="resume-warning">
+                <span class="fonticon feedback-warning-icon"></span>
+                <span>Resuming may lead to unexpected results if there were any recent changes to the Template.</span>
+            </div>
+
+            <div class="proceed-actions">
+                <button is="sp-button-type" primary="" on-click="onProceedPlay" disabled$="{{_computeDisabled3(loadstatus)}}">Resume</button>
+                <button is="sp-button-type" on-click="onRestartPlay" disabled$="{{_computeDisabled3(loadstatus)}}">Start new</button>
+            </div>
+        </div>
+
+
+        <div class$="{{_computeClass3(playstatus)}}"></div>
+
+         <!--Updatepanel that displays loading indicator during Delete, Instantiation or Saving-->
+        <sp-updatepanel id="playerUpdatepanel" class="playerupdpnl" state="{{loadstatus}}" updateswhen="is-loading,is-updating">
+            <!--Player overlay when Play is not in progress-->
+
+            <div id="overlay" class$="{{_computeClass4(playstatus)}}"></div>
+            <!--Experience player for the transient process-->
+            <xs-player id="player" on-canvasready="onCanvasReady" isupdating="{{playerupdating}}" simid="{{transientsim.id}}" simtitle="{{_computeClass5(playstatus)}}" class$="{{_computeClass(playstatus)}}" mode="instantiation"></xs-player>
+
+        </sp-updatepanel>
+
+    </template>
+  <script type="text/javascript" src="xs-instantiator.js"></script>
+</dom-module>

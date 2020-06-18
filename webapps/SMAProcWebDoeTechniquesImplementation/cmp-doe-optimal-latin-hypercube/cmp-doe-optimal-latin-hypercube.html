@@ -1,0 +1,53 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+
+<dom-module id="cmp-doe-optimal-latin-hypercube">
+
+	<template>
+		<style>
+		.display-flex {
+			display: inline-flex;
+		}
+
+		.margin-auto {
+			margin: auto;
+		}
+
+		.points-div {
+			margin-bottom: 5px;
+		}
+
+		sp-input {
+			width: 40%;
+		}
+		.num-points {
+			padding-left: 1.4em;
+		}
+		.max-time-label {
+			padding-left: 0.7em;
+			width: 50%;
+		}
+
+		label {
+			font-weight: normal;
+		}
+		</style>
+		<div>
+			<div class="display-flex points-div">
+				<label class="margin-auto num-points">Number of Points: </label>
+				<sp-input class="margin-auto" type="text" id="points" value="{{techniqueOptions.numberOfPoints}}" on-change="_numOfPointsUpdated"></sp-input>
+			</div>
+			<div class="display-flex points-div">
+				<label class="margin-auto max-time-label">Maximum time to optimize (minutes): </label>
+				<sp-input class="margin-auto" type="text" id="time" value="{{techniqueOptions.maxTime}}" on-change="_numOfPointsUpdated"></sp-input>
+			</div>
+			<div class="display-flex">
+				<sp-checkbox class="margin-auto" checked="{{techniqueOptions.isSeedEnabled}}"></sp-checkbox>
+				<label class="margin-auto">Use a fixed seed: </label>
+				<sp-input class="margin-auto" type="text" id="seed" readonly="{{!techniqueOptions.isSeedEnabled}}" value="{{techniqueOptions.randomSeed}}"></sp-input>
+			</div>
+		</div>
+	</template>
+	<script type="text/javascript" src="cmp-doe-optimal-latin-hypercube.js"></script>
+
+</dom-module>

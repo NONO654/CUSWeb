@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="ENOSTRFLVPMSystemTypeDS" />
+    <m1.package name="ENOSTRFLVPMSystemTypeDS" />
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="ENOSTSystemTypeReference" />
+      <m1.type name="ENOSTSystemTypeReference" />
+
+      <!-- Basic Concat -->
+      <pattern.VPLM_BASIC_CONCAT>
+        <vplm.Simple name="PLM_ExternalID" />
+        <m1.basic name="name" />
+      </pattern.VPLM_BASIC_CONCAT>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="E_fromExternalId" />
+        <m1.attribute name="ENOSTSystemTypeReference.E_fromExternalId" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="E_versionComment" />
+        <m1.attribute name="ENOSTSystemTypeReference.E_versionComment" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="ENOSTSystemTypeInstance" />
+      <m1.relationship name="ENOSTSystemTypeInstance" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

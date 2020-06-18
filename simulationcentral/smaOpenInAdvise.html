@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+    <!-- Can be used as entry point to launch Results Analytics -->
+    <!-- Expects a valid PLM Object ID or Physical ID and an
+         action that determines the RA redirect url. -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="inline" content="true" />
+        <meta name="debugMode" content="true" />
+        
+        <title>Isight Results Analytics</title>
+        
+        <script type="text/javascript">
+            
+            /* Read url query string parameters. */
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
+                    results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+            
+            /* Set the dataset id in session for the
+               redirect url to retrieve. */
+            function setObjectToSession(oId){
+                if(typeof oId !== 'undeifned' &&
+                    oId !== null){
+                        sessionStorage.setItem('ADVISE_DATA',
+                            JSON.stringify({
+                                'data_id': oId,
+                                'stamp': Date.now()
+                            }));
+                    }
+            }
+            
+            var objectId = getParameterByName('objectId'),
+                action = getParameterByName('action'),
+                suiteDir = '../simulationcentral',
+                commonDir = '../common/',
+                runUrl = '';
+                
+            if(! objectId.length > 0){
+                // Show the error page
+            }
+            
+            setObjectToSession(objectId);
+            
+            switch(action.toUpperCase()){
+                case 'OPENVARIANTCONTAINER':
+                    runUrl = suiteDir + '/smaOpenVariantContainerInAdvise.jsp?action=readsession';
+                    break;
+                default:
+                    //runUrl = commonDir + '/emxNavigator.jsp?appName=SIMREII_AP';
+                    runUrl = '';
+                    break;
+            }
+            if(runUrl.length > 0) {
+            window.location.href = commonDir + '/emxNavigator.jsp?appName=SIMREII_AP&ContentPage=' + encodeURIComponent(runUrl);
+            }
+            else {
+            	window.location.href = commonDir + '/emxNavigator.jsp?appName=SIMREII_AP';
+            }
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>

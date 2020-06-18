@@ -1,0 +1,52 @@
+<!--------------------------------------------------------------------
+[xs-wg-page HTML Document]
+
+Project:		xs
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:46:52 GMT
+Assigned to:	Aravind Mohan
+Primary use:	TODO: Write where this component is being used
+Description:    TODO: Description about the component
+--------------------------------------------------------------------->
+
+<!--------------------------------------------------------------------
+
+[Table of contents]
+TODO: Update this according to your template
+1. main
+	2. nav
+		2.1. header / Tools
+		2.2. header / Fields
+		2.3. header / Rules
+	3. section / Tools
+	4. section / Fields
+	5. section / Rules
+
+------------------------------------------------------------------- -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+
+<dom-module id="xs-wg-page">
+  <!-- <link rel="import" type="css" href="xs-wg-page.css"> -->
+  <template>
+    <style>
+    :host {
+      display: block;
+      background-color: #fafafa; }
+    </style>
+
+		<content></content>
+		<!--Delete confirmation-->
+        <sp-modal id="deleteDialog" class="warning-dialog" width="500px" heading="Confirm Delete">
+            <section id="dialogText">
+                <span>{{_msg}}</span>
+            </section>
+            <footer>
+                <button id="okButton" is="sp-button-type" on-click="confirmRemove">Yes</button>
+                <button id="dismissButton" is="sp-button-type" primary="" on-click="hideMe">No</button>
+            </footer>
+        </sp-modal>
+    </template>
+  <script src="xs-wg-page.js"></script>
+</dom-module>

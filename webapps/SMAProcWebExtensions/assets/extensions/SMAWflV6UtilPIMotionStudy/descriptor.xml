@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.V6UtilPIMotionStudy" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflV6UtilPIMotionStudy" nlsID="SMAWflV6UtilPIMotionStudy.Title">3D Motion Study</DisplayName>
+	<Description nlsFile="SMAWflV6UtilPIMotionStudy" nlsID="SMAWflV6UtilPIMotionStudy.Description">3D Motion Study</Description>
+	<LongDescription/>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>V6Utility</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.sma.plugin.V6UtilPIMotionStudy</Value>
+		</Attribute>
+		<Attribute name="PRIVATE">
+			<Value>SIMULIA_COMPOSE_16X</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflV6UtilPIMotionStudy.CATNls" targetFilename="SMAWflV6UtilPIMotionStudy.CATNls"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflV6UtilPIMotionStudy.dll" targetFilename="win_b64/SMAWflV6UtilPIMotionStudy.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflV6UtilPIMotionStudy.sypstyle" targetFilename="SMAWflV6UtilPIMotionStudy.sypstyle"/>
+	</Streams>
+	<Interfaces>
+
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflV6UtilityMotionStudyEditorPlugin_VLT</LateType>
+				</Implementation>
+			</Implementations>
+		</Interface>
+
+	</Interfaces>
+	<Properties>
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[V6Utility]]>
+			</Value>
+		</Property>
+
+		<Property name="PLMBatchName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[SWXMnPLMBatch]]>
+			</Value>
+		</Property>
+
+		<Property name="PLMBatchArguments" type="aggregate" valuetype="single">
+			<!-- whether to compute all studies YES or NO -->
+			<Property name="UseDynamicsSolver" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<!-- SelectedParameters -->
+			<Property name="MappingsString" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="UseCustomFPS" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="CustomFPSValue" type="integer" valuetype="single">
+				<Value>25</Value>
+			</Property>
+		</Property>
+		<Property name="PLMObjectType" type="string" valuetype="single">
+			<Value>
+				<![CDATA[VPMReference]]>
+			</Value>
+		</Property>
+		<!--Value of this property is ID of PLM content which it refers to.-->
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Value/>
+		</Property>
+	</Properties>
+</wfext:Extension>

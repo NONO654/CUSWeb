@@ -1,0 +1,25 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../ad-execdir-view/ad-execdir-view.html">
+<link rel="import" href="../ad-mdata-view/ad-mdata-view.html">
+
+<dom-module id="ad-data-view">
+  <link rel="import" type="css" href="ad-data-view.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+    	<sp-variable id="currentDragObject" name="currentDragObject"></sp-variable>
+		<main>            
+ 			<section class="data-panel">
+					<ad-mdata-view id="mdataView" view-mode="icon" session="{{session}}" on-select="onManagedDataSelect" on-open="onManagedDataOpen" on-itemsdragged="onItemsDragged"></ad-mdata-view>
+			</section>
+			<section class="data-panel">
+					<ad-execdir-view id="execdirView" view-mode="icon" session="{{session}}" show-tail-button="true" show-configure-button="true" show-remove-button="true" on-select="onExecutionDataSelect" on-open="onExecutionDataOpen" on-itemsdragged="onItemsDragged"></ad-execdir-view>
+			</section>			
+		</main>
+		
+	</template>
+  <script src="ad-data-view.js"></script>
+</dom-module>
+
+

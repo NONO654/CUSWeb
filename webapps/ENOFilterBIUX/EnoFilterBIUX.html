@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+      <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+      <!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+      <head>
+
+            <title>Test EnoFilterBIUX</title>
+            <script>
+                  /* global widget */
+                  (function() {
+                        'use strict';
+                        widget.addEvent('onLoad', function() {
+                              require(['DS/ENOFilterBIUX/FilterComponent',
+                                      'text!DS/ENOFilterBIUX/assets/fakeInput.json'],
+                                    function(FilterComponent, FakeInputJSON) {
+                                        var filterComponent = new FilterComponent({
+                                          nodesPath: JSON.parse(FakeInputJSON),
+                                          widgetID: widget.id
+                                        });
+                                          //'https://vdevpril862dsy.ux.dsone.3ds.com:443/federated/search?query_type=federatedsearch'
+                                          //'https://vdevpril862dsy.ux.dsone.3ds.com:443/federated/search'
+                                          //'https://vdevpril862dsy.ux.dsone.3ds.com/federated/search'
+
+                                          /*WAFData.proxifiedRequest('https://vdevpril862dsy.ux.dsone.3ds.com/federated/search', {
+                                                headers: {
+                                                      Accept: 'application/json',
+                                                      'Content-Type': 'application/json'
+                                                },
+                                                method: 'POST',
+                                                type: 'json',
+                                                proxy: 'passport',
+                                                data: JSON.stringify({
+                                                      query: 'physicalid:"EAD2383500002A70559390410000BF8B" OR physicalid:"EAD2383500002A70559390410000BF84"',
+                                                      order_by: 'asc',
+                                                      order_field: 'update',
+                                                      locale: "en",
+                                                      nresults: 40,
+                                                      start: 0,
+                                                      tenant: "OnPremise"
+                                                }),
+                                                onComplete: function(response) {
+                                                      console.log(response);
+                                                },
+                                                onFailure: function(error) {
+                                                      console.log(error);
+                                                }
+                                          });*/
+                                    });
+                        });
+                  }());
+                  //{"nresults":40,"start":"0","locale":"en","tenant":"OnPremise","query_type":"federatedsearch","page":0}
+            </script>
+      </head>
+
+      <body>
+      </body>
+
+      </html>

@@ -1,0 +1,158 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+
+<link rel="import" href="../../SMAProcSPUI/sp-alert-message/sp-alert-message.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-radio-buttons/sp-radio-buttons.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel-message/sp-updatepanel-message.html">
+
+<link rel="import" href="../ps-simulation-abstract-list/ps-simulation-abstract-list.html">
+<link rel="import" href="../ps-simulation-item/ps-simulation-item.html">
+<link rel="import" href="../../SMAProcSP/sp-6wtagger/sp-6wtagger.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+
+<dom-module id="ps-simulation-list">
+  <link rel="import" type="css" href="ps-simulation-list.css">
+  <template>
+
+        <!--This component maintains the proxy to talk to BPS Tag Navigator module-->
+        <sp-6wtagger id="pstagger"></sp-6wtagger>
+        <sp-variable id="mcsBaseURL" name="mcsBaseURL"></sp-variable>
+
+        <sp-dashboard id="dashboard"></sp-dashboard>
+
+        <!--Request list of Simulation IDs limited by an upper limit-->
+        <sp-mcsservice
+            id="simidlistWS"
+            data="{{simidlist}}"
+            uri="simulations?fields=id&amp;sort=lastModified&amp;simulationKind=*"
+            on-dataready="onSimidListReady"
+            on-request="onSimidListReq">
+        </sp-mcsservice>
+
+        <!--Requests subset of simulations when lazy loading for first time-->
+        <sp-mcsservice
+            id="simlistWS"
+            uri="simulations/filter"
+            on-request="onIncrementalDatareq">
+        </sp-mcsservice>
+
+        <!--Requests subset of simulations on refresh-->
+        <sp-mcsservice
+            id="simlistRefreshWS"
+            uri="simulations/filter"
+            on-request="onRefreshReq">
+        </sp-mcsservice>
+
+        <sp-variable id="errorMessageForRunFailed"> </sp-variable>
+
+        <div class="sidebar">
+            <!-- content from ps-simulation-abstract-list-->
+             <ps-simulation-abstract-list
+                 id="simAbstractList"
+                 settings="{{settings}}"
+                 selecteditems="{{selecteditems}}"
+                 simlist="{{simlist}}"
+                 refreshed-data="[[refreshedData]]"
+                 on-displaysettings="onDisplaySettings"
+                 on-simulationdeleted="onSimulationDeleted"
+                 on-refresh="onRefresh"
+                 sidebarmode="{{sidebarmode}}"
+                 activeitemindex="{{activeitemindex}}"
+                 >
+             </ps-simulation-abstract-list>
+
+            <!--All user settings related to simulation list are displayed in this dialog-->
+            <sp-modal id="listSettings" heading="List settings" class="settingsmodal mediummodal" width="40%" height="30%" on-close="onSettingsChange">
+                <section>
+                  <div class="hidde" id="platformDiv">
+                    <label class="settingHeader">Platform</label>
+                    <select name="WATenant" id="platform">
+
+                    </select>
+                  </div>
+                  <div class="hidde" id="platformSelectorDiv">
+                    <label id="platformLabel"  class="settingHeader">License Pool</label>
+                      <select name="WUTenants" id="platformSelector" on-change="setWUTenant">
+
+                      </select>
+                  </div>
+
+
+                    <div class="settingSection">
+                    	<label id="maxSimLabel" for="maxSimInput" class="settingHeader">Number of Simulations</label>
+                        <input id="maxSimInput" class="settingInputLine" placeholder="Enter number" type="number" on-input ="onSettingsMaxsimChange"></input>
+                        <sp-alert-message id="validInputWarning" class="settingWarning" closable="true" message="Enter  positive integer number" type="warning"> </sp-alert-message>
+                        <sp-alert-message id="maxSimInputWarning" class="settingWarning" closable="true" message="Large limit will slow down performance.Consider changing it to less than 500" type="warning">
+                         </sp-alert-message>
+
+                    </div>
+                    <div class="settingSection">
+                    	<label id="simOwnerLabel" for="ownerSetting" class="settingHeader">Simulations to be shown</label>
+                        <sp-radio-buttons id="ownerSetting" class="settingInputLine" optionsicon="user,users-group" options="Owned,All" selectedindex="0" on-optionselect="onSettingsOwnerChange"></sp-radio-buttons>
+                    </div>
+                </section>
+                <footer>
+                   <sp-updatepanel class="settingsupdatepanel" state="{{listSettingsEditState}}">
+                        <!-- State messages -->
+                        <sp-updatepanel-message class="settings-updatepanel-message" from="is-completed" to="is-updating" message="Saving changes"></sp-updatepanel-message>
+                    </sp-updatepanel>
+                    <div class="settingsactions">
+                        <button is="sp-button-type" id="listsettingbutton" primary="" on-click="onSettingsChange">Close</button>
+                        <!--<button is="sp-button-type" on-click="{{onSettingsCancel}}">Cancel</button>-->
+                    </div>
+                </footer>
+            </sp-modal>
+
+            <div id="list" class="processlist" on-scroll="onVerticalScroll">
+                <div id="emptyMessage" class="emptyMessage"></div>
+                <div class="listWrapper">
+                  <template is="dom-repeat" items="{{simlist}}" as="item" index-as="itemIndex">
+                      <sp-updatepanel class="itemupdatepanel" state="{{item.$state}}" updateswhen="is-updating,is-deleting"  data-id$="{{item.id}}">
+
+                          <!-- State messages -->
+                          <sp-updatepanel-message class="update-panel-message" to="is-updating" message="Saving changes" ></sp-updatepanel-message>
+                          <!-- <sp-updatepanel-message class="update-panel-message readonly" to="is-readonly" message="Read Only" state="{{item.$state}}" ></sp-updatepanel-message> -->
+                          <sp-updatepanel-message class="update-panel-message failing" to="is-failingtorun" message="Failed to Run" on-click="detailedErrorMsg">></sp-updatepanel-message>
+                          <sp-updatepanel-message class="update-panel-message failing" to="is-failingtoanalyze" message="Failed to Analyze Results" on-click="raFailedMsg"></sp-updatepanel-message>
+                          <sp-updatepanel-message class="update-panel-message failing" to="is-failingtoabort" message="Failed to Stop" ></sp-updatepanel-message>
+                          <sp-updatepanel-message class="update-panel-message failing" from="is-updating" to="is-failing" message="Failed to save" ></sp-updatepanel-message>
+                          <sp-updatepanel-message class="update-panel-message deleting" to="is-deleting" message="Deleting" ></sp-updatepanel-message>
+                          <sp-updatepanel-message class="update-panel-message failing" from="is-deleting" to="is-failing" message="Failed to delete"></sp-updatepanel-message>
+
+                          <!-- Simulations-->
+                          <ps-simulation-item
+                              simitem="{{item}}"
+                              on-click="onSimItemClick"
+                              on-multiselect="onMultiSelect"
+                              on-multiunselect="onMultiUnselect"
+                              on-updateerror="onUpdateError"
+                              simulation-factory="{{simulationFactory}}"
+                              data-activeindex$="{{_computeDataActiveindex(activeitemid, item)}}"
+                              data-itemindex$="{{itemIndex}}"
+                              class$="{{_computeClass(activeitemid, item)}}">
+                          </ps-simulation-item>
+                      </sp-updatepanel>
+                  </template>
+
+                  <sp-modal id="errorModal" class="errorModal" heading="Error" width="50%" height="50%" >
+                      <section>
+                        <div id ="errorMessageID" > </div>
+                      </section>
+                  </sp-modal>
+                  <!--Display update panel.This is only used for lazy loading data-->
+                  <sp-updatepanel id="listupdatepanel" class="lazyloadupdatepanel is-active" state="{{incrementalsimlist.$state}}" updateswhen="is-getting">
+                  </sp-updatepanel>
+                </div>
+            </div>
+             <sp-alert-message id="endoflistInfo" closable="true" message="{{_computeMessage(settings.maxSims)}}" type="info"></sp-alert-message>
+        </div>
+
+    </template>
+  <script type="text/javascript" src="ps-simulation-list.js"></script>
+</dom-module>

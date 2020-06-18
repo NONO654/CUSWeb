@@ -1,0 +1,1 @@
+define("DS/ENXDataGrid/ENXDataGrid_ko",{});define("DS/ENXDataGrid/assets/nls/graphToolbar",{"Show/Hide Image":"이미지 표시/숨기기",Rotate:"회전","Show/Hide Minimap":"미니맵 표시/숨기기"});define("DS/ENXDataGrid/assets/nls/message",{success:"변경 사항이 데이터베이스에 저장되었습니다",error:"변경 사항을 데이터베이스에 저장할 수 없습니다",copy:"복사",move:"이동",cancel:"취소",title:"놓기 작업"});

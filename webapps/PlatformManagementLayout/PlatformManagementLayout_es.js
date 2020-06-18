@@ -1,0 +1,1 @@
+define("DS/PlatformManagementLayout/PlatformManagementLayout_es",{});define("DS/PlatformManagementLayout/assets/nls/PlatformManagementLayout",{welcome:"Bienvenido a ",platformManagement:"Gestión de plataformas",more:"Más",less:"Menos"});

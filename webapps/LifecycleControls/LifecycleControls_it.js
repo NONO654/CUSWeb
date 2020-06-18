@@ -1,0 +1,1 @@
+define("DS/LifecycleControls/LifecycleControls_it",{});define("DS/LifecycleControls/assets/nls/CommandDialog",{okButton:"OK",cancelButton:"Annulla"});define("DS/LifecycleControls/assets/nls/CustomizeColumns",{CustomizeColumns:"Personalizza colonne",newTarget:"Nuova destinazione"});

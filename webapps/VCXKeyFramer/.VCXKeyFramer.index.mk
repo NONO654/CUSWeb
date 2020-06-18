@@ -1,0 +1,10 @@
+m|VCXWebKeyFramingEngine\VCXKeyFramer.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19096
+r|G:\R421\BSF\.
+t|win_b64\webapps\VCXKeyFramer\VCXKeyFramer.js|1554530840|20802
+s|VCXWebKeyFramingEngine\VCXKeyFramer.mweb\src\VCXScenario.js|1554111550|43716
+s|VCXWebKeyFramingEngine\VCXKeyFramer.mweb\src\VCXObjectAnimation.js|1487933976|6925
+s|VCXWebKeyFramingEngine\VCXKeyFramer.mweb\src\VCXKeyFramer.js|1533026748|34850
+s|VCXWebKeyFramingEngine\VCXKeyFramer.mweb\src\VCXScenarioVisibility.js|1513844857|12810

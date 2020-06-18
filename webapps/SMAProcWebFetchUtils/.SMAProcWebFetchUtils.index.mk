@@ -1,0 +1,17 @@
+m|SMAProcWebCMM\SMAProcWebFetchUtils.mweb
+b|j|n,m
+b|c|c,m
+v|6.421.8.19214
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAProcWebFetchUtils\SMAProcWebFetchUtils.js|1554530806|79
+s|SMAProcWebCMM\SMAProcWebFetchUtils.mweb\src\SMAProcWebFetchUtils.js|1550853135|110
+t|SMAProcWebCMM\SMAProcWebFetchUtils.mweb\LocalGenerated\win_b64\requests.js|1564791401|10141
+s|SMAProcWebCMM\SMAProcWebFetchUtils.mweb\src\requests.ts|1563555300|6334
+s|SMAProcWebCMM\SMAProcWebFetchUtils.mweb\typings\WAFData\WAFData.d.ts|1529503586|6839
+t|win_b64\webapps\SMAProcWebFetchUtils\requests.html|1551492187|6774
+s|SMAProcWebCMM\SMAProcWebFetchUtils.mweb\src\requests.html|1551152628|6774
+t|win_b64\webapps\SMAProcWebFetchUtils\requests.js|1564791435|4538
+g|SMAProcWebCMM\SMAProcWebFetchUtils.mweb\LocalGenerated\win_b64\requests.js|1564791401|10141
+t|win_b64\typings\SMAProcWebFetchUtils\requests.d.ts|1564791385|1922
+s|SMAProcWebCMM\SMAProcWebFetchUtils.mweb\src\requests.ts|1563555300|6334
+s|SMAProcWebCMM\SMAProcWebFetchUtils.mweb\typings\WAFData\WAFData.d.ts|1529503586|6839

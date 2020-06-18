@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+ <!-- Copyright 2016 , Dassault Systemes. All rights reserved. -->
+<head>
+    <title>3DMessaging</title>
+
+	<!-- Application Metas Start -->
+    <meta name="description" content="3DMessaging" />
+    <meta name="keywords" content="3DMessaging" />
+    <meta name="autoRefresh" content="0" />
+    <meta http-Equiv="Cache-Control" Content="no-cache" />
+    <meta http-Equiv="Pragma" Content="no-cache" />
+    <meta http-Equiv="Expires" Content="0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!-- Application Preferences Start -->
+
+	<!-- Application Metas End -->
+
+    <link rel="stylesheet" href="../UIKIT/UIKIT.css">
+
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+    
+</head>
+
+	<!-- Application JS Start -->
+    <script >
+
+    var storageClear = localStorage.getItem('3dimStorage');
+
+    if ( storageClear !== 'done' ){
+        localStorage.clear();
+        localStorage.setItem('3dimStorage', 'done');
+    }
+
+	document.rtcwidget_x3dphoto = false || document.URL.indexOf('x3dphoto3DIM') != -1;
+	var embeddedManager = false || document.URL.indexOf('127.0.0.1:8176') != -1 || document.URL.indexOf("embedded3DIM") != -1;
+	var loadWidget = function(container, appId, Alone, widget) {
+		require(['DS/InstantMessagingW/InstantMessagingW','DS/3DPlayHelper/3DPlayHelper'], function (InstantMessagingW,PlayHelper) {
+				"use strict";
+
+				if (embeddedManager) {
+					var IMWMngr = new InstantMessagingW({
+						appId : appId,
+						container : container,
+						rtcUrl : widget ? /*(new URL(widget.uwaUrl)).origin*/ widget.uwaUrl.substr(0,widget.uwaUrl.indexOf('resources')-1) : null
+					});
+					IMWMngr.setup();
+
+
+				}
+				else {
+					require(['DS/InstantMessagingW/js/controller/IMWController', 'DS/InstantMessagingW/js/view/IMWView', 'DS/MessageBus/MessageBus', 'DS/PlatformAPI/PlatformAPI'],
+						function (IMWController, IMWView, MessageBus, PlatformAPI) {
+							//widget.body.innerHTML = '';
+							var IMWCtrl = IMWController.getInstance({
+								embeddedManager:false,
+								container:container,
+								appId:appId,
+								rtcUrl : widget ? /*(new URL(widget.uwaUrl)).origin*/ widget.uwaUrl.substr(0,widget.uwaUrl.indexOf('resources')-1) : null
+							});
+/*
+							var IMWView = new IMWView({ctrl:IMWCtrl});
+							IMWView.inject(widget.body);*/
+						}
+					);
+				}
+			}
+		);	
+	}
+    if (typeof widget != 'undefined' ){
+        widget.addEvent('onLoad', function() {
+			loadWidget(widget, widget.data.appId, null, widget);
+		 });
+
+		widget.addEvent('onRefresh', function() {
+			//console.log('eee');
+			document.location.reload();
+		});     
+    }
+    else{
+        require([
+            'UWA/Drivers/Alone'
+            ], function(Alone) {
+				loadWidget(document, "devEnv", Alone, null);
+        });
+    }
+
+    </script>
+	<!-- Application JS End -->
+</head>
+<body>
+</body>
+</html>

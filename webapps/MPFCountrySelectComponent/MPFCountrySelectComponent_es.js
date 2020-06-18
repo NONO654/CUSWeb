@@ -1,0 +1,1 @@
+define("DS/MPFCountrySelectComponent/MPFCountrySelectComponent_es",{});define("DS/MPFCountrySelectComponent/assets/nls/countries",{BEL:"BÉLGICA",FRA:"FRANCIA",SGP:"SINGAPUR",USA:"ESTADOS UNIDOS",DEU:"ALEMANIA"});define("DS/MPFCountrySelectComponent/assets/nls/countrySelectComponent",{placeholder:"Seleccionar un país",label:"País"});

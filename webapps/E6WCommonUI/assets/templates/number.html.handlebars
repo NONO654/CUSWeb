@@ -1,0 +1,28 @@
+
+        {{#if label}}
+        	<label>{{label}}
+       		{{~#if required~}}
+            		<sup class="required-field">*</sup>
+            {{~/if~}}
+            {{~#if customButtons~}}
+            <span class="actions">
+               {{~#each customButtons~}}
+                  <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                      <span class="fonticon {{iconClass}}"></span>
+                  </button>
+               {{~/each~}}
+            </span>
+            {{~/if~}}
+         </label>
+        {{/if}}
+        {{~#if readWrite~}}
+            \{{~#if canEdit~}}
+                <div class="input-group">
+                    <input class="form-control data-entry" type="number-as-text" inputmode="numeric" pattern="[0-9]*" value="\{{~ {{name}} ~}}" min="{{minimumValue}}" {{#if integerOnly}}step="1"{{else}}step="any"{{/if}}/>
+                </div>
+            \{{~else~}}
+                <span>\{{~ {{name}} ~}}</span>
+            \{{~/if~}}
+        {{~else~}}
+            <span>\{{~ {{name}} ~}}</span>
+        {{/if~}}

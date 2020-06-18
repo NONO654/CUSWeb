@@ -1,0 +1,86 @@
+<Scripts>
+  <!-- This CATRuleExit has been built to serve as a replacement of OCDX policy chooser PLMPolicyChooser@team.xml  -->
+  <!-- Some modifications have been done to adapt the specifications of Policy chooser to CATRule mechanism  -->
+
+  <!-- Reference are in vault vplm and eService Production: vplm for creation. I think that the fact that we search in eService Production is due to Polar Bear whiwh is suppressed in R2016x. So we may simplify this -->
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMReference"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMCoreReference"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMCoreRepReference"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMCoreReference"    ScriptName="ENOVaultChoice_vplmarchive" >
+     <Condition Attribute="OperationId" Value="correction" />
+  </Script>
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMCoreRepReference" ScriptName="ENOVaultChoice_vplmarchive" >
+     <Condition Attribute="OperationId" Value="correction" />
+  </Script>
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMCoreReference"    ScriptName="ENOVaultChoice_vplmarchive" >
+    <Condition Attribute="OperationId" Value="corrections" />
+  </Script>
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMCoreRepReference" ScriptName="ENOVaultChoice_vplmarchive" >
+    <Condition Attribute="OperationId" Value="corrections" />
+  </Script>
+
+  <!-- Port, Connections, Instances, Reference are in vault vplm -->
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMPort"    ScriptName="ENOVaultChoice_PLMCORE" />
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMConnection"    ScriptName="ENOVaultChoice_PLMCORE" />
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMPosResourceCoreRepRef"    ScriptName="ENOVaultChoice_PLMCORE" />
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMResourceSetSubItem"    ScriptName="ENOVaultChoice_PLMCORE" />
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMResourceSetSubItemCriterionValue"    ScriptName="ENOVaultChoice_PLMCORE" />
+
+  <!-- PLMLOGEntity is hidden from business rules and is inheriting from PLMCoreReference. So the same rule will apply, which will add a search in eService Production is due to Polar Bear 
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMLOGEntity"    ScriptName="RuleChoosingVaultvplm" /> -->
+  <!-- Instances, Reference are in vault vplm and eService Production: vplm for creation -->
+
+  <!-- Open questions: do we need to compute vaults for instances and relations: it seems not. -->
+  <!-- .. Yes, we need: instances can be bound to a vault -->
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMInstance"    ScriptName="RuleChoosingVaulteserviceProductionAndvplm" />
+  <!--
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMCoreInstance"    ScriptName="RuleChoosingVaulteserviceProductionAndvplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMCoreRepInstance"    ScriptName="RuleChoosingVaulteserviceProductionAndvplm" />
+  -->
+  <Script OpeningID="INFRAVaultsSelection" Type="RelationType"    ScriptName="RuleChoosingVaulteserviceProductionAndvplm" />
+
+  <!-- Unicorn types: created from native client are saved in vplm but they are saved in eServiceProduction when accessed from web -->
+  <Script OpeningID="INFRAVaultsSelection" Type="RFLPLMImplementConnection"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Requirement"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Requirement Specification"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Requirement Group"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Chapter"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Comment"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Test Case"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Test Execution"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Use Case"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  <Script OpeningID="INFRAVaultsSelection" Type="DerivedOutputEntity" ScriptName="ENOVaultChoice_eserviceproduction_vplm"/>
+
+  <!-- PLMParameter are in vault vplm and eService Production: eService Production for creation -->
+  <Script OpeningID="INFRAVaultsSelection" Type="PlmParameter"    ScriptName="ENOVaultChoice_eserviceproduction_vplmSearch" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Internal Core Material"    ScriptName="ENOVaultChoice_eserviceproduction_vplmSearch" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Internal Covering Material"    ScriptName="ENOVaultChoice_eserviceproduction_vplmSearch" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Internal Covering Material"    ScriptName="ENOVaultChoice_eserviceproduction_vplmSearch" />
+  <Script OpeningID="INFRAVaultsSelection" Type="Document"    ScriptName="ENOVaultChoice_eserviceproduction_vplmSearch" />
+
+  <!-- Specific vaults for Bio -->
+  <Script OpeningID="INFRAVaultsSelection" Type="BioMockUp_BioElement"    ScriptName="ENOVaultChoice_BioMockUp" />
+  <Script OpeningID="INFRAVaultsSelection" Type="BioMockUp_BioRoot"    ScriptName="ENOVaultChoice_BioMockUp" />
+
+  <!-- Vaults SIXW for tags -->
+  <Script OpeningID="INFRAVaultsSelection" Type="RDFLiteral"    ScriptName="ENOVaultChoice_SIXTags" />
+  <Script OpeningID="INFRAVaultsSelection" Type="RDFResource"    ScriptName="ENOVaultChoice_SIXTags" />
+  
+  <!-- No vault precised  -->
+  <Script OpeningID="INFRAVaultsSelection" Type="DS6W_TAG"    ScriptName="ENOVaultChoice_EmptyChoice" />
+  <Script OpeningID="INFRAVaultsSelection" Type="RDFPredicate"    ScriptName="ENOVaultChoice_EmptyChoice" />
+  <Script OpeningID="INFRAVaultsSelection" Type="LibraryFeatureReference"    ScriptName="ENOVaultChoice_EmptyChoice" />
+  <Script OpeningID="INFRAVaultsSelection" Type="LibraryFeaturePort"    ScriptName="ENOVaultChoice_EmptyChoice" />
+  
+  <!-- By default for all governance objects: we choose eService Production-->
+  <!-- .. and vplm : for instance some Parts for EBOM are created in vplm -->
+  <!-- Management of default vault too -->
+  <Script OpeningID="INFRAVaultsSelection" Type="BusinessType"    ScriptName="ENOVaultChoice_eserviceproduction_vplm_defaultSearch" />
+
+  <!-- PLMExchangeStatusDS specific-->
+  <Script OpeningID="INFRAVaultsSelection" Type="PLMExchangeStatusDS" ScriptName="ENOVaultChoice_PLMExchangeStatusDS_vplm" />
+
+  <!-- CoexMpgEntities specific -->
+  <Script OpeningID="INFRAVaultsSelection" Type="CoexMpgConvAppliInfoEntity"    ScriptName="ENOVaultChoice_eserviceproduction_vplm" />
+  
+</Scripts>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.LoopPIFor" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflLoopPIFor" nlsID="dispname">For</DisplayName>
+	<Description nlsFile="SMAWflLoopPIFor" nlsID="desc">Executes subflows while continuously incrementing the value of a selected parameter.</Description>
+	<LongDescription/>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Loop</Value>
+		</Attribute>
+	</Attributes>
+
+	<Streams>
+
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflLoopPIFor.CATNls" targetFilename="SMAWflLoopPIFor.CATNls"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflLoopPIFor.dll" targetFilename="win_b64/SMAWflLoopPIFor.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflLoopPIFor.sypstyle" targetFilename="SMAWflLoopPIFor.sypstyle"/>
+
+
+	</Streams>
+
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflLoopConnForLoopEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+
+	</Interfaces>
+	<Properties>
+		<Property name="type" type="string" valuetype="single">
+			<Value>
+				<![CDATA[for]]>
+			</Value>
+		</Property>
+		<Property name="failed runs policy" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="reusePolicy" type="string" valuetype="single">
+			<Value>
+				<![CDATA[any]]>
+			</Value>
+		</Property>
+		<Property name="sequential" type="boolean" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="from" type="string" valuetype="single">
+			<Value>
+				<![CDATA[C1]]>
+			</Value>
+		</Property>
+		<Property name="to" type="string" valuetype="single">
+			<Value>
+				<![CDATA[C10]]>
+			</Value>
+		</Property>
+		<Property name="incr" type="string" valuetype="single">
+			<Value>
+				<![CDATA[C1]]>
+			</Value>
+		</Property>
+		<Property name="conditionParam" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="items" type="aggregate" valuetype="single">
+		</Property>
+		<Property name="conditions" type="aggregate" valuetype="single">
+		</Property>
+		<Property name="maxIterations" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[10]]>
+			</Value>
+		</Property>
+		<Property name="maxIterBoolean" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[True]]>
+			</Value>
+		</Property>
+		<Property name="array count" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="array mappings" type="string" valuetype="array" arraydim="[1,1]" sizable="true">
+		</Property>
+	</Properties>
+</wfext:Extension>

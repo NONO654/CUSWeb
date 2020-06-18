@@ -1,0 +1,235 @@
+<meta charset="UTF-8"/>
+CATPLMBusinessLogic.Alias="Implémentations de logique applicative PLM";
+CATPLMBusinessLogic.Description="Définition d'ouvertures pour la personnalisation du système PLM avec des règles métier.";
+
+PLMInstanceAggregationCheck.Alias="Vérification de l'agrégat d'instances";
+PLMInstanceAggregationCheck.Description="Permet d'intégrer une logique applicative pour valider l'agrégation de références dans d'autres via des instances.";
+
+PLMInstanceAggregationCheck.ThisObject.Alias="Référence d'agrégat";
+PLMInstanceAggregationCheck.ThisObject.Description="Le fait de cette logique applicative est la référence dans laquelle vous tentez d'agréger une instance.";
+
+PLMInstanceAggregationCheck.ReferenceToInstantiate.Alias="Référence à instancier";
+PLMInstanceAggregationCheck.ReferenceToInstantiate.Description="Ce paramètre contient la référence à agréger sous l'autre référence";
+
+PLMIdentificationInitialization.Alias="Initialisation des attributs";
+PLMIdentificationInitialization.Description="Permet d'intégrer une logique applicative afin d'associer préalablement une valeur aux attributs PLM d'un objet lors de la création.";
+
+PLMIdentificationInitialization.ThisObject.Alias="Référence à créer.";
+PLMIdentificationInitialization.ThisObject.Description="Le fait de cette logique applicative est la référence que vous créez. Il ne s'agit pas encore d'un objet PLM. Il s'agit d'un proxy PLM.";
+
+PLMIdentificationInitialization.OperationId.Alias="Opération exécutée sur l'objet.";
+PLMIdentificationInitialization.OperationId.Description="Préciser le contexte de la création de l'objet : Nouveau pour la commande Nouveau PLM, Clonage si l'objet est utilisé dans le cadre d'une duplication, Implicite si l'objet est créé par une application, Par défaut dans tous les autres cas.";
+
+PLMIdentificationInitialization.IdString.Alias="Préfixe proposé.";
+PLMIdentificationInitialization.IdString.Description="Contient un préfixe proposé pour l'évaluation des attributs d'identification.";
+
+PLMIdentificationInitialization.IdCloningString.Alias="Préfixe proposé en mode duplication.";
+PLMIdentificationInitialization.IdCloningString.Description="Contient un préfixe proposé pour l'évaluation des attributs d'identification dans le contexte de duplication.";
+
+PLMIdentificationInitialization.CopyFrom.Alias="Objet copié.";
+PLMIdentificationInitialization.CopyFrom.Description="Contient l'objet d'origine qui est dupliqué dans le contexte de duplication. Il est utile de lire certains de ses attributs.";
+
+PLMIdentificationInitialization.CoupledRef.Alias="Référence couplée.";
+PLMIdentificationInitialization.CoupledRef.Description="Contient la référence qui est dupliquée lorsqu'une représentation est dupliquée.";
+
+PLMIdentificationInitialization.AggregatingReference.Alias="Référence d'agrégat.";
+PLMIdentificationInitialization.AggregatingReference.Description="Référence d'agrégat de l'instance qui est créée (en cas d'initialisation d'une instance).";
+
+PLMIdentificationInitialization.Reference.Alias="Référence de l'instance.";
+PLMIdentificationInitialization.Reference.Description="Référence de l'instance initialisée (en cas d'initialisation d'une instance).";
+
+PLMIdentificationInitialization.IncSessionId.Alias="Incrément en session.";
+PLMIdentificationInitialization.IncSessionId.Description="Entier incrémenté en session pour l'évaluation des attributs d'identification.";
+
+PLMAttributesValuationCheck.Alias="Vérification de l'évaluation des attributs";
+PLMAttributesValuationCheck.Description="Permet d'intégrer une logique applicative après la modification d'un attribut par un utilisateur final.";
+
+PLMAttributesValuationCheck.ThisObject.Alias="Objet modifié.";
+PLMAttributesValuationCheck.ErrorAttributes.Description="Le fait de cette logique applicative est l'objet PLM pour lequel un attribut a été modifié.";
+
+PLMAttributesValuationCheck.ErrorAttributes.Alias="Attributs générant une erreur.";
+PLMAttributesValuationCheck.ErrorAttributes.Description="Contient la liste des attributs en erreur après la modification.";
+
+PLMAttributesValuationCheck.WarningAttributes.Alias="Attributs générant un avertissement.";
+PLMAttributesValuationCheck.ErrorAttributes.Description="Contient la liste des attributs pour lesquels un avertissement a été émis après la modification.";
+
+PLMAttributesValuationCheck.ErrorMessages.Alias="Messages d'erreur.";
+PLMAttributesValuationCheck.ErrorMessages.Description="Contient la liste des messages d'erreur à émettre.";
+
+PLMAttributesValuationCheck.WarningMessages.Alias="Messages d'avertissement.";
+PLMAttributesValuationCheck.WarningMessages.Description="Contient la liste des messages d'avertissement à émettre.";
+
+PLMAttributesValuationFinalization.Alias="Vérification de la finalisation de l'évaluation des attributs";
+PLMAttributesValuationFinalization.Description="Permet d'intégrer une logique applicative après la modification d'un attribut par un utilisateur final.";
+
+PLMAttributesValuationFinalization.ThisObject.Alias="Objet modifié.";
+PLMAttributesValuationFinalization.ErrorAttributes.Description="Le fait de cette logique applicative est l'objet PLM pour lequel un attribut a été modifié.";
+
+PLMAttributesValuationFinalization.ErrorAttributes.Alias="Attributs générant une erreur.";
+PLMAttributesValuationFinalization.ErrorAttributes.Description="Contient la liste des attributs en erreur après la modification.";
+
+PLMAttributesValuationFinalization.WarningAttributes.Alias="Attributs générant un avertissement.";
+PLMAttributesValuationFinalization.ErrorAttributes.Description="Contient la liste des attributs pour lesquels un avertissement a été émis après la modification.";
+
+PLMAttributesValuationFinalization.ErrorMessages.Alias="Messages d'erreur.";
+PLMAttributesValuationFinalization.ErrorMessages.Description="Contient la liste des messages d'erreur à émettre.";
+
+PLMAttributesValuationFinalization.WarningMessages.Alias="Messages d'avertissement.";
+PLMAttributesValuationFinalization.WarningMessages.Description="Contient la liste des messages d'avertissement à émettre.";
+
+PLMAttributesPropagation.Alias="Propagation de l'évaluation des attributs";
+PLMAttributesPropagation.Description="Permet d'intégrer une logique applicative après la modification d'un attribut par un utilisateur final en vue de propager les informations : modification d'attribut ou visibilité de l'attribut.";
+
+PLMAttributesPropagation.ThisObject.Alias="Objet modifié.";
+PLMAttributesPropagation.ThisObject.Description="Le fait de cette logique applicative est l'objet PLM pour lequel un attribut a été modifié.";
+
+PLMAttributesPropagation.PropagationMode.Alias="Mode propagation.";
+PLMAttributesPropagation.PropagationMode.Description="Détermine si la logique applicative doit propager les valeurs des attributs (évaluation) ou leur visibilité (édition).";
+
+PLMAttributesPropagation.EditAttributeId.Alias="Attribut modifié.";
+PLMAttributesPropagation.EditAttributeId.Description="Nom de l'attribut qui a été modifié.";
+
+PLMImportExportAttributesValuation.Alias="Propagation de l'évaluation à l'importation/exportation";
+PLMImportExportAttributesValuation.Description="Permet d'intégrer une logique applicative à l'importation (pour associer des valeurs aux attributs PLM) ou à l'exportation (pour extraire des informations à partir des attributs PLM).";
+
+PLMImportExportAttributesValuation.ThisObject.Alias="Objet à exporter ou proxy PLM à évaluer à l'importation.";
+PLMImportExportAttributesValuation.ThisObject.Description="Le fait de cette logique applicative est l'objet PLM qui est exporté ou l'objet qui va être créé à l'importation (proxy PLM).";
+
+PLMImportExportAttributesValuation.OperationId.Alias="Opération exécutée sur l'objet.";
+PLMImportExportAttributesValuation.OperationId.Description="Préciser le contexte d'utilisation de cette logique applicative : DataExchangeExport lors de l'exportation reposant sur un fichier, DataExchangeImport lors de l'importation reposant sur un fichier, BriefcaseImport pour l'importation d'un porte-documents.";
+
+PLMImportExportAttributesValuation.IdString.Alias="Préfixe proposé.";
+PLMImportExportAttributesValuation.IdString.Description="Contient un préfixe proposé pour l'évaluation des attributs d'identification.";
+
+PLMImportExportAttributesValuation.iFileId.Alias="Nom du fichier";
+PLMImportExportAttributesValuation.iFileId.Description="Nom du fichier qui est importé.";
+
+PLMImportExportAttributesValuation.oReferenceId.Alias="Nom du fichier à créer";
+PLMImportExportAttributesValuation.oReferenceId.Description="Nom du fichier qui va être exporté.";
+
+PLMImportExportAttributesValuation.IncSessionId.Alias="Incrément en session.";
+PLMImportExportAttributesValuation.IncSessionId.Description="Entier incrémenté en session pour l'évaluation des attributs d'identification.";
+
+PLMImportExportAttributesValuation.GlobalWarningMessage.ComponentType="pour le type de composant : /p1.  \n";
+PLMImportExportAttributesValuation.WarningMessage.Truncation="L'attribut /p1 a été tronqué en /p2 caractères.\n";
+
+PLMRelationEstablishmentCheck.Alias="Contrôle de l'établissement de la relation";
+PLMRelationEstablishmentCheck.Description="Permet d'intégrer une logique applicative pour valider l'établissement d'une relation entre deux objets.";
+
+PLMRelationEstablishmentCheck.RelationType.Alias="Type de relation.";
+PLMRelationEstablishmentCheck.RelationType.Description="Type de la relation. Dans PLM, toutes les relations ont un type particulier";
+
+PLMRelationEstablishmentCheck.Target.Alias="Cible.";
+PLMRelationEstablishmentCheck.RelationType.Description="Objet que la relation doit référencer";
+
+PLMCustoTypeMapping.Alias="Calcul du mappage des types personnalisés";
+PLMCustoTypeMapping.Description="Permet d'intégrer une logique applicative dans un scénario de coexistence afin de définir le type personnalisé cible des objets en fonction des attributs et du type personnalisé source.";
+
+PLMCustoTypeMapping.ThisObject.Alias="Objet entité.";
+PLMCustoTypeMapping.ThisObject.Description="Le fait de cette logique applicative est l'objet cible devant être créé sans type personnalisé (à ne pas utiliser).";
+
+PLMCustoTypeMapping.OperationId.Alias="Opération exécutée sur l'objet.";
+PLMCustoTypeMapping.OperationId.Description="Préciser le contexte d'utilisation de cette logique applicative : coexistence lors de l'échange de coexistence.";
+
+PLMCustoTypeMapping.SourceObject.Alias="Objet source.";
+PLMCustoTypeMapping.SourceObject.Description="Proxy PLM représentant l'objet source avec ses attributs et son type personnalisé.";
+
+PLMCustoTypeMapping.SourceProvider.Alias="Nom du fournisseur source";
+PLMCustoTypeMapping.SourceProvider.Description="Nom du fournisseur de l'objet source.";
+
+PLMCustoTypeMapping.TargetProvider.Alias="Nom du fournisseur cible";
+PLMCustoTypeMapping.TargetProvider.Description="Nom du fournisseur de l'objet cible.";
+
+PLMAttributesMapping.Alias="Exécution du mappage des attributs";
+PLMAttributesMapping.Description="Permet d'intégrer une logique applicative dans un scénario de coexistence afin de mapper les attributs externes.";
+
+PLMAttributesMapping.ThisObject.Alias="Objet cible.";
+PLMAttributesMapping.ThisObject.Description="Le fait de cette logique applicative est le proxy de l'objet cible sur lequel les attributs sont définis.";
+
+PLMAttributesMapping.OperationId.Alias="Opération exécutée sur l'objet.";
+PLMAttributesMapping.OperationId.Description="Préciser le contexte d'utilisation de cette logique applicative : coexistence lors de l'échange de coexistence.";
+
+PLMAttributesMapping.SourceObject.Alias="Objet source.";
+PLMAttributesMapping.SourceObject.Description="Proxy PLM représentant l'objet source avec ses attributs et son type personnalisé.";
+
+PLMAttributesMapping.SourceProvider.Alias="Nom du fournisseur source";
+PLMAttributesMapping.SourceProvider.Description="Nom du fournisseur de l'objet source.";
+
+PLMAttributesMapping.TargetProvider.Alias="Nom du fournisseur cible";
+PLMAttributesMapping.TargetProvider.Description="Nom du fournisseur de l'objet cible.";
+
+ContactAdministrator="Contacter votre administrateur pour résoudre le problème suivant.";
+
+PLMRelationSuppressionCheck.Alias="Vérification de la suppression de relation";
+PLMRelationSuppressionCheck.Description="Permet d'intégrer une logique applicative pour valider la suppression d'une relation entre deux objets.";
+
+PLMRelationSuppressionCheck.RelationType.Alias="Type de relation.";
+PLMRelationSuppressionCheck.RelationType.Description="Type de la relation. Dans PLM, toutes les relations ont un type particulier";
+
+PLMRelationSuppressionCheck.Target.Alias="Cible.";
+PLMRelationSuppressionCheck.RelationType.Description="Objet référencé par la relation à déconnecter";
+
+PLMFinalizationForOffline.Alias="Finalisation des attributs hors ligne";
+PLMFinalizationForOffline.Description="Active la finalisation des valeurs d'attributs d'objets nouvellement créés lors de la reconnexion d'une session hors ligne.";
+
+PLMFinalizationForOffline.ThisObject.Alias="Référence créée.";
+PLMFinalizationForOffline.ThisObject.Description="Cette logique applicative porte sur la référence créée lors d'une session hors ligne.";
+
+PLMFinalizationForOffline.OperationId.Alias="Opération exécutée sur l'objet.";
+PLMFinalizationForOffline.OperationId.Description="Dans ce mode, seule une nouvelle opération peut être finalisée";
+
+PLMFinalizationForOffline.IdString.Alias="Préfixe proposé.";
+PLMFinalizationForOffline.IdString.Description="Contient un préfixe proposé pour l'évaluation des attributs d'identification.";
+
+PLMFinalizationForOffline.AggregatingReference.Alias="Référence d'agrégat.";
+PLMFinalizationForOffline.AggregatingReference.Description="Référence d'agrégat de l'instance qui est créée (en cas de finalisation d'une instance).";
+
+PLMFinalizationForOffline.Reference.Alias="Référence de l'instance.";
+PLMFinalizationForOffline.Reference.Description="Référence de l'instance initialisée (en cas de finalisation d'une instance).";
+
+PLMCoexDelete.Alias="Vérification de la suppression de coexistence";
+PLMCoexDelete.Description="Vérifie si l'instance d'entrée doit être supprimée dans le référentiel cible ou non.";
+
+PLMCoexDelete.ThisObject.Alias="Instance.";
+PLMCoexDelete.ThisObject.Description="L'instance doit être vérifiée";
+
+PLMCoexDelete.AggregatingReference.Alias="Objet parent.";
+PLMCoexDelete.AggregatingReference.Description="Référence mère de l'instance.";
+
+PLMCoexDelete.AggregatedReference.Alias="Objet enfant.";
+PLMCoexDelete.AggregatedReference.Description="Référence enfant de l'instance.";
+
+PLMMigrationAttributesValuation.Alias="Evaluation des attributs de migration";
+PLMMigrationAttributesValuation.Description="Permet d'intégrer une logique applicative dans un contexte BatchV4V6";
+PLMMigrationAttributesValuation.ThisObject.Alias="Objet modifié";
+PLMMigrationAttributesValuation.ThisObject.Description="Le fait de cette logique applicative est l'objet PLM pour lequel un attribut a été modifié";
+PLMMigrationAttributesValuation.OperationId.Alias="Opération exécutée sur l'objet";
+PLMMigrationAttributesValuation.OperationId.Description="Précisez le contexte d'utilisation de cette logique applicative : uniquement BatchV4V6 pour le moment.";
+PLMMigrationAttributesValuation.IdString.Alias="Préfixe proposé";
+PLMMigrationAttributesValuation.IdString.Description="Contient un préfixe proposé pour l'évaluation des attributs d'identification";
+PLMMigrationAttributesValuation.CustoType.Alias="Type de personnalisation";
+PLMMigrationAttributesValuation.CustoType.Description="Indique le type de personnalisation de l'objet";
+PLMMigrationAttributesValuation.OriginalRepRefPropertiesModel.Alias="Liste des attributs de référence de représentation";
+PLMMigrationAttributesValuation.OriginalRepRefPropertiesModel.Description="Récupère la liste des attributs de la référence de représentation d'origine avec le modèle V4";
+PLMMigrationAttributesValuation.MigrationProperties.Alias="Liste des propriétés de migration de l'utilisateur";
+PLMMigrationAttributesValuation.MigrationProperties.Description="Récupère la liste des propriétés de migration de l'utilisateur";
+
+PLMAuthoringDefaultPropagationScope.Alias="Propagation de l'opération";
+PLMAuthoringDefaultPropagationScope.Description="Active l'opération à propager ou pas";
+PLMAuthoringDefaultPropagationScope.ThisObject.Alias="Objet modifié";
+PLMAuthoringDefaultPropagationScope.ThisObject.Description="Le fait de cette logique applicative est l'objet PLM pour lequel un attribut a été modifié";
+PLMAuthoringDefaultPropagationScope.OperationId.Alias="Opération exécutée sur l'objet";
+PLMAuthoringDefaultPropagationScope.OperationId.Description="Précisez le contexte d'utilisation de cette logique applicative : clonage uniquement pour le moment.";
+PLMAuthoringDefaultPropagationScope.OperationDetail.Alias="Détails de l'opération";
+PLMAuthoringDefaultPropagationScope.OperationDetail.Description="Contient les détails de l'opération";
+PLMAuthoringDefaultPropagationScope.RootContext.Alias="Contexte de l'opération";
+PLMAuthoringDefaultPropagationScope.RootContext.Description="Indique le contexte de l'opération";
+PLMAuthoringDefaultPropagationScope.Propagate.Alias="Indication de poursuite";
+PLMAuthoringDefaultPropagationScope.Propagate.Description="Contient la décision concernant la poursuite ou non de l'opération";
+
+PLMDeleteCheck.Alias="Supprimer la vérification de l'opération";
+PLMDeleteCheck.Description="Permet d'intégrer une logique applicative afin de valider la suppression d'un objet";
+PLMDeleteCheck.ThisObject.alias="objet à supprimer";
+PLMDeleteCheck.ThisObjectDescription="La logique applicative porte sur l'objet sur lequel une opération de suppression est lancée.";
+PLMDeleteCheck.OperationId.Alias="Opération exécutée sur l'objet";
+PLMDeleteCheck.OperationId.Description="Spécifier le contexte d'utilisation de cette logique applicative : pendant l'opération de suppression d'un objet.";

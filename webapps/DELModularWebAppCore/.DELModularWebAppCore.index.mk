@@ -1,0 +1,10 @@
+m|DELModularWebAppCore\DELModularWebAppCore.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19217
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELModularWebAppCore\DELModularWebAppCore.js|1565034910|12864
+s|DELModularWebAppCore\DELModularWebAppCore.mweb\src\Core.js|1544705569|37638
+s|DELModularWebAppCore\DELModularWebAppCore.mweb\src\Logger.js|1532711153|2835
+s|DELModularWebAppCore\DELModularWebAppCore.mweb\src\Mediator.js|1543990478|7735
+s|DELModularWebAppCore\DELModularWebAppCore.mweb\src\FacadeBase.js|1564585941|4588

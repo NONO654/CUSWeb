@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+    <!-- Application Metas -->
+    <title>&lt;sp-encryption&gt; sample widget</title>
+    <meta name="apiVersion" content="1.3" />
+    <meta name="autoRefresh" content="0" />
+
+    <!-- Load the web components polyfill -->
+    <script type="text/javascript" src="../../Polymer-1.1.4/webcomponents-lite.min.js"></script>
+
+    <!-- Load AmdLoader -->
+    <script type="text/javascript" src="../../AmdLoader/AmdLoader.js"></script>
+
+    <!-- Load the UWA framework -->
+    <script type="text/javascript" src="../../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../c/UWA/assets/css/standalone.css" />
+
+    <widget:preferences>
+      <widget:preference name="pubkey" type="text" label="Public key" defaultValue="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCRwJnUdoTCjPYDNW4sBD3birJ5wLngtts+i+MDBsb6CcoBKJvcwiehiG6SiBsVjnrkpkbNq37HMkYph9IuHO+8YQ53Wvf0Vgu7M1qtT90cCsHcRDgnjmpyj2hsNAJjboYF8GCLGMJE2EGa/KLh3acGhytx+9h5BwUx/n46jYkLKwIDAQAB" />
+      <widget:preference name="privkey" type="text" label="Private key" defaultValue="MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJHAmdR2hMKM9gM1biwEPduKsnnAueC22z6L4wMGxvoJygEom9zCJ6GIbpKIGxWOeuSmRs2rfscyRimH0i4c77xhDnda9/RWC7szWq1P3RwKwdxEOCeOanKPaGw0AmNuhgXwYIsYwkTYQZr8ouHdpwaHK3H72HkHBTH+fjqNiQsrAgMBAAECgYBr5xB7UDq85SqD+ZxUjddVnvq+VEXH7NenGFy5sty/41tfPDcXWc2JMr3ZUVXrwY2NlOO6A4pZ4gg7WsfpR5ba2uWd5PGOOpQ3WSKOkyEkbic0mVSN3OzvjzvSD9siCS8nWHb/w9ZmEVkxeIJuWmbk3/gKG5zrJXHOUcDlxws9QQJBAMzoQyMFZPAzpX9GvYzDP1KgxeqC6GdOjZGbXpvgsajQUN5/t2eVkbmrNTv53b8VedOGAYU43V0ZrYP2DBGfXDECQQC2GFVcpHaegpuMPdqQL3HoXjHLnoUvDQ4CWj4WBSDsUO+br2rmBaemYnaAXNS7ppXLL0eFOR2LpkrfkYX01PIbAkAp8Kg9NM9yMr//CxWlCBmf6fRYia7T5konsWtt8FGswearg+ygMQcAv8BHpF70y4qB9v28rOTyN11Ck0vpF3shAkBsIN7veCmHzn6XNFOIsuOs2+Ityx/C5Lmg4/1iDgGS0iy2AeA0Xr9Cqc08Q+N+2liwoo6RqWzF9CUZxMwKqjhpAkEArIt+sg/xImvK+D2mXYSnZoEWkW4x81ONBVGp8LVvd6iyiSu0fJ9x2N3XOXfLDJ63RCvKj/r48g3s6Ee/yGO2sA==" />
+    </widget:preferences>
+
+    <!-- Load Polymer and any other web components -->
+    <link rel="import" href="sp-encryption.html"/>
+
+
+    <!-- Application Source -->
+    <style type="text/css">
+    .encryptor2015 textarea {
+      width: 98%;
+    }
+    .encryptor2015 input {
+        margin-right:0;
+    }
+    pre {
+        word-wrap: break-word;
+        background-color:#eee;
+    }
+    </style>
+    <script type="text/javascript">
+    /* globals require, widget*/
+    require(['UWA/Core'],
+       function () {
+            'use strict';
+            var WebComponentWidget = {
+                onLoad: function () {
+                    var spEncryption = widget.getElement('sp-encryption');
+                    spEncryption.setAttribute('pubkey', widget.getValue('pubkey'));
+                    widget.getElement('.pubkey').setText(spEncryption.pubkey);
+                    widget.getElement('.privkey').setText(widget.getValue('privkey'));
+                    if (window.console && window.console.log) {
+                        window.console.log(spEncryption);
+                    }
+                    widget.getElement('.encryptor2015 .encrypt').onclick = function () {
+                        widget.getElement('.encrypted').setText(
+                            spEncryption.encrypt(widget.getElement('.encryptor2015 textarea').value)
+                        );
+                    };
+
+                    widget.getElement('.encryptor2015 .decrypt').onclick = function () {
+                        widget.getElement('.decrypted').setText(
+                            spEncryption.decrypt(widget.getElement('.encryptor2015 textarea').value, widget.getValue('privkey'))
+                        );
+                    };
+                },
+                onRefresh: function () {}
+            };
+            widget.addEvents(WebComponentWidget);
+        }
+    );
+    </script>
+</head>
+<body>
+    <h1>&lt;sp-encryption&gt; sample</h1>
+    <p>Enter your message</p>
+    <form class='encryptor2015' action="#">
+      <textarea>Hello there!</textarea>
+      <button class="encrypt">Encrypt</button>
+      <button class="decrypt">Decrypt</button>
+    </form>
+    
+    <sp-encryption></sp-encryption>
+    <hr />
+    <p>Public key: <pre class="pubkey"></pre></p>
+    <p>Encrypted message:</p>
+    <pre class="encrypted"></pre>
+    <hr />
+    <p>Private key: <pre class="privkey"></pre></p>
+    <p>Decrypted message:</p>
+    <pre class="decrypted"></pre>
+</body>
+</html>

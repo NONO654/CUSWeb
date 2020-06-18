@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:widget="http://www.netvibes.com/ns/"> 
+    <head> 
+ 
+        <!-- Application Metas -->
+        <meta name="debugMode" content="false" /> 
+        <meta name="author" content="DELMIA 3D Workbook" />
+        <meta name="description" content="Displays a Shop Floor plan." />
+        
+        <!-- UWA Version (mandatory) -->
+		<meta name="apiVersion" content="1.3" />
+		
+	
+ 
+        <!-- Application Standalone emulation files -->
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+		
+		<link rel="stylesheet" type="text/css" href="./css/Details.css" />
+		
+        <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+        <link rel="stylesheet" type="text/css" href="./css/nwork.css" />
+        <link rel="stylesheet" type="text/css" href="./css/3DWorkbook.css" />
+        
+        <link rel="stylesheet" type="text/css" href="./css/Opers.css" />
+        <link rel="stylesheet" type="text/css" href="./css/WkbNavPanel.css" />
+        <link rel="stylesheet" type="text/css" href="./css/WkbHeaderPanel.css" />
+        <link rel="stylesheet" type="text/css" href="./css/Wkb2DPanel.css" />
+        <link rel="stylesheet" type="text/css" href="../DELMOMWKIExperience/css/wkiExperience.css"></link>
+
+	    <script type="text/javascript" src="../TopBarProxy/TopBarProxy.js"></script>
+	    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+	    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+	    <script type="text/javascript" src="../WebVisualization/WebVisualization.js"></script>
+	    <script type="text/javascript" src="../3DPlay/3DPlay.js"></script>
+	    <script type="text/javascript" src="../3DPlayHelper/3DPlayHelper.js"></script>
+	    
+
+    	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+    	
+ 
+       <!-- Application JavaScript Source -->
+        <script type="text/javascript"> 
+      		//fix for connectedmode
+        	//localStorage.setItem('3DPlay.pad3DViewer', 'false');
+      		
+      		//this kicks off the 3DSWorkbook app logic javascript and makes sure all required objects loaded  
+      		//started with core and widget just to see if it helps with first time loading bcos seems like you have to refresh multiple times b4 its working.
+	        require(['UWA/Core'], function (core) {
+	        		
+	        	require(['DS/3DWorkbook/js/WkbMain', 'DS/3DWorkbook/js/WkbUtils', 'DS/3DWorkbook/js/WkbPreferences', 'i18n!DS/3DWorkbook/assets/nls/3DWorkbook'], function (workbook, WkbUtils, WkbPreferences, nlsWB) {
+
+
+	        	    var prefObj = null;
+	        	    
+	        	    var self = {
+		                workbook: null,
+	    				onLoad: function () {	
+	    					require(['DS/3DWorkbook/js/WkbMain'], function (Workbook) {
+	    						
+	    						//load widget preferences
+		    	                prefObj = new WkbPreferences();
+		    	                prefObj.loadPreferences();
+		    	                
+	    						var opts = {
+	                                    preferences: widget.getPreferences(),
+	                                    //app_socket_id: 'in_ctx_search_sample_' + widget.id === null ? 'harcoded_widget.id' : widget.id,
+	                                    widget_id: widget.id,
+	                                    //widget_id: widget.id === null ? 'harcoded_widget.id' : widget.id
+										url: widget.getUrl(),
+										widgetBody: widget.body
+	                                };
+	                            self.workbook = new Workbook(opts);
+	                            
+	                            prefObj.loadUserRoles(self);
+	                            
+		    					//load widget header
+		    					widget.setIcon(self.workbook.getAppURL() + 'assets/images/widgets/DelmiaBrandLogo.png');
+		    					// If we set the title, it gets appended after '3DWorkbook'. So leave it blank for now.
+		    	                widget.setTitle('');
+		    					
+		    	                const WINDOWED_CONST = 'windowed';
+		    					const MAXIMIZED_CONST = 'maximized';
+		    					var viewOpt = {
+                                    type: MAXIMIZED_CONST
+                                };
+		    					var isMaximized = widget.getValue(MAXIMIZED_CONST);
+		    					if (!UWA.is(isMaximized) || widget.getValue(MAXIMIZED_CONST) === 'true') {
+			    					viewOpt.type = MAXIMIZED_CONST;
+		    					} else {
+		    					    viewOpt.type = WINDOWED_CONST;
+		    					}
+		    					widget.requestView(viewOpt);
+		    					
+		    					//Publish an event that the widget is loaded
+		    					self.workbook.publishWidgetLoaded();
+
+	    					});
+	    					
+	    				},
+	    				
+	    				onSearch: function(query){
+	    					UWA.log('Search executed on SearchIntegrationSample widget!!!');
+	                        self.workbook.onSearch(query)
+	                    }
+	                };
+			        
+	                widget.addEvent('onLoad', self.onLoad);
+	                widget.addEvent('onSearch', self.onSearch);
+	                
+	                widget.addEvents({
+	                	onRefresh: function () {
+	    	                //self.workbook.onRefresh(widget.getPreferences());
+	    	                
+	    	            },
+	    	            
+	    	            onDestroy: function () {
+	    	                self.workbook.onDestroy();
+	    	                
+	    	            },
+	    	            
+	    	            endEdit: function () {
+	    	                self.workbook.endEdit(widget.getPreferences());
+	    	                
+	    	            }
+	    	            
+	    			});  //end add events		
+	    			
+	        	});	//end of require #3DWorkbook
+			});	//end of require core
+            
+
+        </script> 
+      </head> 
+      <body class="moduleWrapper maximized">
+		<p><span>Loading 3DWorkbook...</span></p>
+      </body>
+</html>

@@ -1,0 +1,168 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY DELLmiMaterialPathCnxCustDS
+// --------------------------------------------------
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR reserved;N;N;$
+ATTR reservedby;N;N;$
+ATTR PLM_ExternalID;N;N;$
+ATTR V_CustoDiscipline;N;N;$
+ATTR V_Name;N;N;$
+ATTR V_PriorityIN;N;N;1
+ATTR V_PriorityOUT;N;N;1
+ATTR V_ProportionIN;N;N;1.0
+ATTR V_ProportionOUT;N;N;1.0
+ATTR V_description;N;N;$
+ATTR V_discipline;N;N;$
+ATTR V_isVPLMControlled;N;N;true
+ATTR V_nature;N;Y;Specification
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Specification
+//VALUE Definition
+//VALUE Presentation
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR V_sec_level;N;N;0
+ATTR V_usage;N;N;$
+ATTR owner;Y;N;$
+FUNC Create
+FATTR PLM_ExternalID;Y
+FATTR V_Name;Y
+FATTR V_sec_level;Y
+FATTR V_description;Y
+FATTR V_PriorityOUT;Y
+FATTR V_ProportionIN;Y
+FATTR V_PriorityIN;Y
+FATTR V_ProportionOUT;Y
+FUNC EZQuery
+FATTR V_nature;Y
+FATTR PLM_ExternalID;Y
+FATTR V_Name;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR V_sec_level;Y
+FATTR V_usage;Y
+FATTR V_CustoDiscipline;Y
+FATTR V_discipline;Y
+FATTR V_description;Y
+FATTR project;Y
+FATTR reservedby;Y
+FATTR reserved;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR V_isVPLMControlled;Y
+FATTR V_PriorityOUT;Y
+FATTR V_ProportionIN;Y
+FATTR V_PriorityIN;Y
+FATTR V_ProportionOUT;Y
+FUNC List
+FATTR V_nature;N
+FATTR PLM_ExternalID;N
+FATTR V_Name;N
+FATTR modified;N
+FATTR originated;N
+FATTR V_sec_level;N
+FATTR V_usage;N
+FATTR V_CustoDiscipline;N
+FATTR V_discipline;N
+FATTR V_description;N
+FATTR project;N
+FATTR reservedby;N
+FATTR reserved;N
+FATTR owner;N
+FATTR organization;N
+FATTR V_isVPLMControlled;N
+FATTR V_PriorityOUT;N
+FATTR V_ProportionIN;N
+FATTR V_PriorityIN;N
+FATTR V_ProportionOUT;N
+FUNC Query
+FATTR V_nature;Y
+FATTR PLM_ExternalID;Y
+FATTR V_Name;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR V_sec_level;Y
+FATTR V_usage;Y
+FATTR V_CustoDiscipline;Y
+FATTR V_discipline;Y
+FATTR V_description;Y
+FATTR project;Y
+FATTR reservedby;Y
+FATTR reserved;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR V_isVPLMControlled;Y
+FATTR V_PriorityOUT;Y
+FATTR V_ProportionIN;Y
+FATTR V_PriorityIN;Y
+FATTR V_ProportionOUT;Y
+FUNC Read
+FATTR V_nature;N
+FATTR PLM_ExternalID;N
+FATTR V_Name;N
+FATTR modified;N
+FATTR originated;N
+FATTR V_sec_level;N
+FATTR V_usage;N
+FATTR V_CustoDiscipline;N
+FATTR V_discipline;N
+FATTR V_description;N
+FATTR project;N
+FATTR reservedby;N
+FATTR reserved;N
+FATTR owner;N
+FATTR organization;N
+FATTR V_isVPLMControlled;N
+FATTR V_PriorityOUT;N
+FATTR V_ProportionIN;N
+FATTR V_PriorityIN;N
+FATTR V_ProportionOUT;N
+FUNC Write
+FATTR V_nature;N
+FATTR PLM_ExternalID;Y
+FATTR V_Name;Y
+FATTR modified;N
+FATTR originated;N
+FATTR V_sec_level;Y
+FATTR V_usage;N
+FATTR V_CustoDiscipline;N
+FATTR V_discipline;N
+FATTR V_description;Y
+FATTR project;N
+FATTR reservedby;N
+FATTR reserved;N
+FATTR owner;N
+FATTR organization;N
+FATTR V_isVPLMControlled;N
+FATTR V_PriorityOUT;Y
+FATTR V_ProportionIN;Y
+FATTR V_PriorityIN;Y
+FATTR V_ProportionOUT;Y

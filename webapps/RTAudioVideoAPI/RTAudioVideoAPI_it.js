@@ -1,0 +1,1 @@
+define("DS/RTAudioVideoAPI/RTAudioVideoAPI_it",{});define("DS/RTAudioVideoAPI/assets/nls/feed",{startAudioCall:"Avvia una chiamata audio",startVideoCall:"Avvia una chiamata video",callNotAvailable:"Nessun utente disponibile per avviare una chiamata",callUnavailable:"Chiamata non disponibile"});

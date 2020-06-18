@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright DASSAULT SYSTEMES 2011 -->
+<RelationsList xmlns="DS_DELMIAPPRRelations" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="DS_DELMIAPPRRelations ../xsd/ModelRelations.xsd" Title="PPR Relations" Description="Sample configuration file delivered by DS.">
+
+  <!-- DROP ON A PROCESS -->
+  <PROCESS>
+    <!-- DRAGGED ITEM IS A PRODUCT -->
+    <!-- MEANING FROM: PRCS TO: PRD -->
+    <PRODUCT>
+      <Relation type="ProductImplementLink" read="true" write="true"/>
+      <Relation type="ProductImplementLinkOcc" read="true" write="true"/>
+    </PRODUCT>
+    <PART>
+      <Relation type="ProductImplementLink" read="true" write="true"/>
+      <Relation type="ProductImplementLinkOcc" read="true" write="true"/>
+    </PART>
+    <PROCESS>
+      <Relation type="HistorizationLinkRefRef" read="true" write="true"/>
+      <Relation type="HistorizationLinkRefRef_inverse" read="true" write="false"/>
+      <Relation type="MfgProcessAlternate" read="true" write="true"/>
+      <Relation type="MfgProcessAlternate_inverse" read="true" write="false"/>
+    </PROCESS>
+    <SYSTEM>
+      <Relation type="ProcessImplementLink_inverse" read="true" write="true"/>
+      <Relation type="DELLmiProductionSystemOutputCnxToMBOM_inverse" read="true" write="false"/>
+    </SYSTEM>
+    <OPERATION>
+      <Relation type="DELLmiProductionSystemOutputCnxToMBOM_inverse" read="true" write="false"/>
+      <Relation type="ProcessImplementLinkOcc_inverse" read="true" write="true"/>
+    </OPERATION>
+    <RESOURCE>
+      <Relation type="DELAsmProcessCanUseCnx" read="true" write="true"/>
+    </RESOURCE>
+  </PROCESS>
+
+  <SYSTEM>
+    <PROCESS>
+      <Relation type="ProcessImplementLink" read="true" write="true"/>
+      <Relation type="DELLmiProductionSystemOutputCnxToMBOM" read="true" write="true"/>
+    </PROCESS>
+    <SYSTEM>
+      <Relation type="HistorizationLinkRefRef" read="true" write="true"/>
+      <Relation type="HistorizationLinkRefRef_inverse" read="true" write="false"/>
+      <Relation type="DELLmiMaterialPathCnxCust" read="true" write="true"/>
+      <Relation type="DELLmiMaterialPathCnxCust_inverse" read="true" write="false"/>
+    </SYSTEM>
+    <RESOURCE>
+      <Relation type="SystemImplementLink_inverse" read="false" write="false"/>
+      <Relation type="DELAsmProcessCanUseCnx" read="true" write="true"/>
+    </RESOURCE>
+  </SYSTEM>
+
+  <OPERATION>
+    <PROCESS>
+        <Relation type="DELLmiProductionSystemOutputCnxToMBOM" read="true" write="true"/>
+        <Relation type="ProcessImplementLinkOcc" read="true" write="true"/>
+    </PROCESS>
+    <OPERATION>
+      <Relation type="HistorizationLinkRefRef" read="true" write="true"/>
+      <Relation type="HistorizationLinkRefRef_inverse" read="true" write="false"/>
+      <Relation type="DELLmiTimeConstraintCnx" read="true" write="true"/>
+      <Relation type="DELLmiTimeConstraintCnx_inverse" read="true" write="false"/>
+    </OPERATION>
+    <RESOURCE>
+      <Relation type="DELAsmProcessCanUseCnx" read="true" write="true"/>
+    </RESOURCE>
+  </OPERATION>
+
+  <RESOURCE>
+    <SYSTEM>
+      <Relation type="DELAsmProcessCanUseCnx_inverse" read="true" write="false"/>
+      <Relation type="SystemImplementLink" read="false" write="false"/>
+    </SYSTEM>
+    <RESOURCE>
+      <Relation type="HistorizationLinkRefRef" read="true" write="true"/>
+      <Relation type="HistorizationLinkRefRef_inverse" read="true" write="false"/>
+    </RESOURCE>
+  </RESOURCE>
+
+  <PRODUCT>
+    <PROCESS>
+      <Relation type="ProductImplementLink_inverse" read="true" write="true"/>
+      <Relation type="ProductImplementLinkOcc_inverse" read="true" write="true"/>
+    </PROCESS>
+  </PRODUCT>
+
+  <PART>
+    <PROCESS>
+      <Relation type="ProductImplementLink_inverse" read="true" write="true"/>
+      <Relation type="ProductImplementLinkOcc_inverse" read="true" write="true"/>
+    </PROCESS>
+   </PART>
+
+</RelationsList>

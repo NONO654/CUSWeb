@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+    <!-- Application Infos -->
+    <title>Quality Metrics</title>
+    <meta name="description" content="Quality Rules Metrics" />
+    <meta name="keywords" content="Quality Rules Metrics" />
+
+    <!-- UWA Environment -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+    <link rel="stylesheet" type="text/css" href="../QKMQualityMetrics/QKMQualityMetrics.css" />
+
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+    <!-- Application Preferences -->
+    <widget:preferences>
+    </widget:preferences>
+
+
+    <!-- Application Styles -->
+    <style type="text/css">
+    </style>
+
+    <!-- Application Source -->
+    <script type="text/javascript">
+       /*global require, widget*/
+        require([
+        	'DS/QKMQualityMetrics/view/QKMQualityMetricsView',
+        	'DS/QKMQualityMetrics/model/QKMQualityMetricsModel',
+        	'DS/QKMQualityMetrics/controller/QKMQualityMetricsController',
+            'DS/i3DXCompassPlatformServices/i3DXCompassPlatformServices'
+
+       	], function(
+   			QKMQualityMetricsView,
+   			QKMQualityMetricsModel,
+   			QKMQualityMetricsController,
+   			i3DXCompassPlatformServices
+		) {
+
+        	'use strict';
+
+            var MyWidget = {
+
+
+                onLoad: function() {
+
+					i3DXCompassPlatformServices.getPlatformServices({
+
+						onComplete: function(data)
+						{
+							var SearchServerBaseUrl = data[0]["3DSearch"];
+							var tenant = data[0]["platformId"];
+
+		                    var model = new QKMQualityMetricsModel({
+								serverBaseUrl : SearchServerBaseUrl,
+								tenant : tenant
+		                	});
+
+		                    var view = new QKMQualityMetricsView({
+		                        model: model,
+		                        id: "QKMQualityMetricsView-" + model.id
+		                    });
+
+		                    var controller = new QKMQualityMetricsController({
+		                        model: model,
+		                        view: view
+		                    });
+
+		                    widget.body.setStyles({
+		                        'height': '1px',
+		                        'min-height': '300px',
+		                    });
+		                    view.render().inject(widget.body);
+
+		                    // because if you save preference, onload is triggered again
+		                    widget.removeEvent('onLoad', MyWidget.onLoad);
+						}.bind(this)
+
+					});
+                }
+            };
+
+            widget.addEvent('onLoad', MyWidget.onLoad);
+        });
+    </script>
+</head>
+
+<body>
+    <p></p>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+define("DS/SMAProcWebContents/ContentService",["DS/SMAProcWebContents/WebContentService","DS/SMAProcWebContents/NativeContentService","DS/SMAProcWebContents/FakeContentService","DS/SMAProcWebCMMUtils/SMAWINAuthoringUtils"],function(b,a,d,c){if(c.isWebInWin()){return a}else{return b}});

@@ -1,0 +1,224 @@
+/**	Sticky note image */
+.stickyNoteViewBackground
+{
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  width: 100%;
+  height: 100%;
+}
+.stickyNoteViewScalableContent
+{
+    width: 100%;
+    height: 100%;
+    background: white; 
+    position: relative;
+}
+.stickyNoteView
+{
+  pointer-events: none;
+  position: inherit;
+  width: 7em;
+  height: 7em;
+}
+.infraView .stickyNoteViewScalable,
+.pageView > .pageFloatableCollectionView .stickyNoteViewScalable
+{
+    transition: none;
+}
+.infraView.focused .stickyNoteViewScalable,
+.pageView.focused > .pageFloatableCollectionView .stickyNoteViewScalable
+{
+  transition: transform 0.4s ease-out;
+}
+.stickyNoteViewScalable
+{
+  width: 100%;
+  height: 100%;
+}
+.stickyNoteView.selected .stickyNoteViewContent
+{
+  box-shadow: 0 0 0 0.2em #627A8F !important;
+}
+.stickyNoteViewContent
+{
+  background-size: contain;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.stickyNoteDescription
+{
+    position: absolute;
+    overflow: hidden;
+    text-align: center;
+    line-height: 1.5em;
+    white-space: pre-wrap;
+    user-select: none;
+    word-break: break-word;
+    color: black;
+    top: 5%;
+    height: 90%;
+    width: 85%;
+    left: 7.5%;
+}
+.swipeTransition .stickyNoteDescription
+{
+    visibility: hidden !important;
+}
+.stickyNoteViewSVG {
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.stickyNoteDropZone
+{
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+.stickyNoteView.enable .stickyNoteViewContent
+{
+  z-index: 4;
+}
+.infraView.focused .stickyNoteViewContent,
+.pageView.focused > .pageFloatableCollectionView .stickyNoteViewContent
+{
+  box-shadow: 0 0 0.4em 0 rgba(0,0,0,0.3);
+}
+.postit-header
+{
+  width: 30%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  left: -16%;
+  top: -16%;
+  pointer-events: none;
+  z-index: 5;
+}
+.postit-header-peoplePicture
+{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  border-radius: 50%;
+  height: 30%;
+  pointer-events: all;
+  margin-bottom: 10%;
+  display: none;
+  background-color: white;
+}
+.infraView.focused .postit-header-peoplePicture,
+.pageView.focused > .pageFloatableCollectionView .postit-header-peoplePicture
+{
+    box-shadow: 0 0 0.3em 0 rgba(0,0,0,0.3);
+}
+.postit-header-stickerPicture
+{
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 30%;
+  pointer-events: all;
+  display: none;
+}
+.postit-header-stickerPicture.stickerDeleteButton,
+.postit-header-peoplePicture.peopleDeleteButton
+{
+    display: block;
+    background-color: transparent;
+    box-shadow: none !important;
+}
+.postit-info
+{
+    width: 24%;
+    height: 80%;
+    display: block;
+    position: absolute;
+    left: 88%;
+    top: -12%;
+    pointer-events: none;
+    z-index: 5;
+}
+.postit-info-status
+{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 30%;
+  pointer-events: all;
+  margin-bottom: 20%;
+  display: none;
+  border-radius: 50%;
+  background-color: white;
+}
+.infraView.focused .postit-info-status,
+.pageView.focused > .pageFloatableCollectionView .postit-info-status
+{
+    box-shadow: 0 0 0.3em 0 rgba(0,0,0,0.3);
+}
+.postit-info-status.done
+{
+    background-size: 70%;
+    background-color: #57b847;
+    background-position-y: 35%;
+    background-position-x: center;
+}
+.postit-info-status.action_done
+{
+    background-size: 130%;
+}
+.postit-sketch
+{
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+.stickyNoteView.onTop
+{
+  z-index: 10;
+}
+.infraView .stickyNoteViewContent
+{
+    pointer-events: none;
+}
+.pageView.focused > .pageFloatableCollectionView .stickyNoteViewContent,
+.infraView.focused .stickyNoteViewContent
+{
+    pointer-events: all;
+}
+.infraView:not(.focused) .stickyNoteView .postit-header,
+.infraView:not(.focused) .stickyNoteView .postit-info,
+.infraView:not(.focused) .stickyNoteView .stickyNoteDropZone,
+.infraView:not(.focused) .stickyNoteView .stickyNoteEditZone,
+.infraView:not(.focused) .stickyNoteView .taskClipContent,
+.infraView:not(.focused) .stickyNoteView .issueClipContent
+{
+    display: none !important;
+}
+.postit-info-status-arrow
+{
+    top: -5%;
+    width: 100%;
+    display: block;
+    height: 20%;
+    position: absolute;
+    background-size: inherit;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.stickyNoteEditZone 
+{
+  display: none;
+}

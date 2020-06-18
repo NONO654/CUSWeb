@@ -1,0 +1,57 @@
+<!--------------------------------------------------------------------
+[xs-wg-layout HTML Document]
+
+Project:		xs
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:46:48 GMT
+Assigned to:	Aravind Mohan
+Primary use:	TODO: Write where this component is being used
+Description:    TODO: Description about the component
+------------------------------------------------------------------- -->
+
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="xs-wg-layout-style.html">
+
+<dom-module id="xs-wg-layout">
+	<template>
+		<style include="xs-wg-layout-style"></style>
+		
+	<div id="main" class$="{{_computeMainClass(label,_isDesignMode,_isTopLayout,hidden)}}">
+		<div id="handle" class$="{{_computeHandleClass(label,_isDesignMode,_isTopLayout)}}" on-click="onClick" on-dragenter="onHandleDragEnter" on-dragover="onHandleDragOver" on-dragleave="onHandleDragLeave" on-drop="onHandleDrop" on-dragstart="onLayoutDragStart" on-mouseover="onHandleMouseOver" on-mouseleave="onHandleMouseLeave" draggable={{_computeDraggable(_isDesignMode,disabled)}} on-dblclick="_collapseInDesignMode">
+			<div class="layout-label-container">
+				<div class="grip-icon-container">
+					<span class="fonticon grip-icon"></span>
+					<span class="fonticon grip-icon"></span>
+				</div>
+
+				<div class$="{{_computeCollapseContainerClass(iscollapsible)}}">
+					<span class$="{{_computeCollapseIconClass(collapsed,_isDesignMode,collapsedInDesignMode)}}"></span>
+				</div>
+				<span class="heading-label" title$="{{label}}">{{label}}</span>
+				<!-- <span class="restrict-msg" title$="{{_computeRestrictMsgTitle(vertical,_maxColumnLevel,_isTopLayout)}}">{{_computeRestrictMsg(vertical,_maxColumnLevel,_isTopLayout)}}</span> -->
+			</div>
+
+			<div class="layout-options">
+				<span id="delete" class$="{{_computeDeleteClass(_hover,disabled)}}" title="Delete" on-click="onConfirmRemove"></span>
+			</div>
+		</div>
+
+		<div id="flexcontent" class$="{{_computeClassBody(iscollapsible,collapsed,_isDesignMode,collapsedInDesignMode,_isTopLayout)}}" on-itemdragremove="_removeDragOver">
+			<span id="hiddenOverlay" on-drop="onHandleDrop" on-dragenter="onHandleDragEnter" on-dragover="onHandleDragOver" on-dragleave="onHandleDragLeave"></span>
+			<div id="column1" class$="{{_computeClassColumn1(vertical,_maxColumnLevel,_isTopLayout)}}" data-column="1" on-dragover="onColumnDragOver" on-dragleave="onColumnDragLeave" on-dragEnter="onColumnDragEnter" on-drop="onColumnDrop">
+				<content select='[column="1"]'></content>
+			</div>
+			<div id="column2" class$="{{_computeClassColumn2(vertical,_maxColumnLevel)}}" data-column="2" on-dragover="onColumnDragOver" on-dragleave="onColumnDragLeave" on-drop="onColumnDrop" on-dragEnter="onColumnDragEnter">
+				<content select='[column="2"]'></content>
+			</div>
+			<div id="column3" class$="{{_computeClassColumn3(vertical,_maxColumnLevel)}}" data-column="3" on-dragover="onColumnDragOver" on-dragleave="onColumnDragLeave" on-drop="onColumnDrop" on-dragEnter="onColumnDragEnter">
+				<content select='[column="3"]'></content>
+			</div>
+		</div>
+
+		<div id="overlay" class="overlay"></div>
+	</div>
+	</template>
+	<script type="text/javascript" src="xs-wg-layout.js"></script>
+</dom-module>

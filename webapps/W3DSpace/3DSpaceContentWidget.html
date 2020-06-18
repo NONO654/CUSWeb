@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<meta name="author" content="Dassault Systèmes" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="debugMode" content="true" />
+<meta name="autoRefresh" content="0" />
+<title>3DSpace News</title>
+<widget:preferences>
+    <preference name="collab-storage" type="list" label="storage_label" defaultValue="">
+        <option value="" label="loading_label" />
+    </preference>
+    <preference name="collab-space" type="list" label="space_label" defaultValue="">
+        <option value="" label="loading_label" />
+    </preference>
+    <preference name="main-view" type="list" label="view_label" defaultValue="list">
+        <option value="list" label="list_label" />
+        <option value="channel" label="channel_label" />
+    </preference>
+    <preference name="id-card-view" type="boolean" label="minimized_label" defaultValue="true"></preference>
+</widget:preferences>
+
+<script>
+    widget.addEvents({
+
+        onLoad : function(event) {
+            require([ 'DS/W3DSpace/W3DSpaceContent' ], function(W3DSpaceContent) {
+                W3DSpaceContent.onLoad.call(null, event);
+            });
+
+        }
+    });
+</script>
+
+</head>
+<body></body>
+</html>

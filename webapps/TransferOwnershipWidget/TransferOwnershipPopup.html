@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE HTML>
+<html xmlns:widget="http://www.netvibes.com/ns/">
+  <head>
+    <!-- Application Metas -->
+	<!-- These information will be displayed in the widget preferences -->
+    <title>Transfer Ownership pop up</title>
+    <meta name="author" content="G5C" />
+    <meta name="description" content="Access Rights popup" />
+    <!-- UWA Environment -->
+	
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<!-- Load UWA environment --> 
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+	<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+          
+    <widget:preferences>
+       <widget:preference name="admin" type="boolean" label="Active admin" defaultValue="true" />
+       <widget:preference name="autoRefreshHist" type="boolean" label="Auto-refresh history" defaultValue="true" />
+       <widget:preference name="asyncTrans" type="boolean" label="Active asynchrone transfer" defaultValue="true" />
+    </widget:preferences>
+    
+    <script type="text/javascript">
+
+    
+        var dependencies = dependencies || [];
+        require(
+            // dependencies
+            [
+                'UWA/Utils/InterCom',
+
+                'DS/UIKIT/Input/Button',
+ 
+                'DS/PlatformAPI/PlatformAPI',
+                'DS/WidgetServices/WidgetServices',
+                'DS/TransferOwnershipPopup/TransferOwnershipPopup',
+                'DS/TransferOwnershipWidget/TransferOwnershipConstant',
+                
+         	    'DS/DataGridWidget/DataGridWidget',
+         	     //'DS/TagNavigatorProxy/TagNavigatorProxy',
+         	     "DS/PROTO_IndependantSearchWidget/Beans/ResultElement",
+         	     
+                'DS/UIKIT/Input/Text'
+            ].concat(dependencies),
+
+            // execute this callback, passing all dependencies as params
+
+            function (InterCom, UIButton,plateformAPI, widgetServices, WidgetCore, TOSConstant,
+            		DataGridWidget, ResultElement, /*TagNavigatorProxy, */TextUI) {
+
+            	var activateAdmin = widget.getBool("admin");
+            	var pubSubNameId = 'TOS.Object.Com';
+                var WIWI = {
+                    searchReference: function () {
+                        var that = this;
+
+                        var serverUrl = widget.ServerName.getValue();
+                        var serverUri = widget.ServerUri.getValue();
+
+                        fullServerUrl = widgetServices.getFullUrl(serverUrl, serverUri);
+
+                        dataUrl = fullServerUrl + '/resources/restTest/myTest/Reference';
+                        proxyUsed = "passport";
+
+
+                        headers = {
+                            Accept: 'application/ds-json',
+                            'Content-Type': 'application/ds-json'
+                        };
+                        headers['Accept-Language'] = widget.lang;
+                        UWA.Data.request(dataUrl, {
+                            type: 'json',
+                            method: 'GET',
+                            proxy: proxyUsed,
+                            headers: headers,
+                            /*
+                            parameters: {
+                                action: 'ARAction',
+                                actionAR: 'newAction',
+                                ownershipVector: JSONUtil.encode(OwnershipVector),//value
+                            },*/
+                            onComplete: function (response) { that._onComplete(response); }, //end complete
+                            onFailure: function (globalError, errorObj, connexionParam) { that._onFailure(globalError, errorObj, connexionParam); },
+                            onTimeout: function () { that._onTimeout(); }/*,
+						onCancel: function () {
+						    that.hideLoadingArea();
+						}*/
+                        });
+                    },
+
+                    _onComplete: function (response) {
+                        var listItem = [];
+                        if (response.success == true) {
+                            var TheObjectList = response.objectList;
+                            TheObjectList.forEach(function (element) {
+                                listItem.push({
+                                    "PhysId": element.physId,
+                                    "ExternalName": element.title,
+                                    "Owner": element.owner,
+                                    "Project": element.project,
+                                    "Org": element.organization,
+                                });
+                            });
+                        }
+                        widget.MainTable.AddDatasInTable(listItem);
+                    },
+
+                    _onFailure: function (globalError, errorObj, connexionParam) {
+                    },
+
+                    _onTimeout: function () {
+
+                    },
+
+                    onLoad: function () { //Needed to be sure to have a widget.body
+                       /* window.top.document.documentElement.firstChild.appendChild("\
+	                        <script type='text/javascript' src='../AmdLoader/AmdLoader.js'>"+"<"+"/script> \
+                            <script type='text/javascript'> \
+                                var serverId = 'MyServerPerso';\n \
+                                var server = new InterCom.Server(serverId, {  \
+                                        isPublic: true \
+                                    }); \
+                                server.setDebugMode(true);" +
+                            "<" + "/script>");
+                        */
+
+                      /*  // Request a Server for socketA
+                        var InitScript = UWA.createElement('script', {
+                            type: 'text/javascript',
+                            src: '../AmdLoader/AmdLoader.js'
+                        });*/
+                       /* var script = UWA.createElement('script', {
+                            html: "        require(['UWA/Utils/InterCom'], function(InterCom){ \
+                                var serverId = 'MyServerPerso';\n \
+                                var server = new InterCom.Server(serverId, {  \
+                                    isPublic: true \
+                                }); \
+                                server.setDebugMode(true);alert('Server ready');});"
+                        });
+                        // now append the script into HEAD, it will fetched and executed
+                        //window.top.document.documentElement.firstChild.appendChild(InitScript);
+                        window.top.document.documentElement.firstChild.appendChild(script);
+                        */
+                        var that = this;
+                        this.waitingObject = null;
+                       /* serverId = 'MyServerPerso';*/
+						widget.setBody("");
+                        /*
+                        var server = new InterCom.Server(serverId, {
+                            isPublic: true // Allow Socket looking for Server to connect
+                        });
+                        server.setDebugMode(true);
+                        // Request a Server for socketA
+                        */
+                        // Init "socketA" into an iframe or main page
+                       /* var socketA = new InterCom.Socket('socketA');
+                        socketA.subscribeServer(serverId, window.top, window.top.location.origin); // no server name means that the first server with isPublic option will be matched
+*/
+                        // Handle "SocketAEvent" event
+                         
+                        plateformAPI.subscribe(pubSubNameId, function(object){
+
+                            if (object.hasOwnProperty("isResultElement")) {
+                            	object= new ResultElement(object);
+                                if (that.myOverlay != null && that.myOverlay.options.serverUri == object.getServerUri() &&
+                                     that.myOverlay.options.serverName == object.getServerHost()) {
+                                    that.myOverlay.show([{
+                                        'physicalId': object.getPhysicalId(),
+                                        'name': object.getTitle(),
+                                        'urlIcon': widgetServices.getRealPath("TransferOwnershipWidget/assets/defaultProd.png", widget, false)
+                                    }]);
+                                }
+                                else {
+                                    that.waitingObject =object
+                                }
+
+                            }
+                            else that.waitingObject = null;
+                        });
+                       /* socketA.addListener('selectionObject', function (json, info) {
+                            
+                        });*/
+                        
+                        var readOnly = false;
+                        //widgetServices.setODTComment(true);
+
+                        that.myOverlay = null;
+
+                        that.MainTable = new DataGridWidget([{
+                            text: UWA.i18n('PhysicalId'),
+                            dataIndex: 'PhysId',
+                            sortKey: function (value) {
+                                return value;
+                            },
+                            sortable: true
+                        },
+                        {
+                            text: UWA.i18n('ExternalName'),
+                            dataIndex: 'ExternalName',
+                            sortKey: function (value) {
+                                return value;
+                            },
+                            sortable: true,
+                            defaultSort: true
+                        },
+                       {
+                           text: UWA.i18n('Owner'),
+                           dataIndex: 'Owner',
+                           sortKey: function (value) {
+                               return value;
+                           },
+                           sortable: true
+                       }, {
+                           text: UWA.i18n('Project'),
+                           dataIndex: 'Project',
+                           sortKey: function (value) {
+                               return value;
+                           },
+                           sortable: true
+                       }, {
+                           text: UWA.i18n('Organization'),
+                           dataIndex: 'Org',
+                           sortKey: function (value) {
+                               return value;
+                           },
+                           sortable: true
+                       }],
+                       {
+                           'name': 'tableObject',
+                           'className': 'tableObject',
+                           'setHeaderColumn': true,
+                           'setScroller': false,
+                           'activeSelection': true
+                       }).inject(widget.body);
+                        ///////////////////////////////////////////TOS BUTTON ///////////////////////////////////////
+
+                        //widgetServices.setReplayODT(true);
+                        var Bouton = new UIButton({
+                            value: "Transfer ownership",
+                            name: "toOpenButton"
+                        });
+                        Bouton.addEvent('onClick', function () {
+                            if (that.waitingObject != null) {
+                                that.myOverlay = new WidgetCore( document.body, {
+                                    'readOnly': readOnly,
+                                    'transferType': TOSConstant.TransferFull,
+                                    'serverName': that.waitingObject.getServerHost(),
+                                    'serverUri': that.waitingObject.getServerUri(),
+                                    'activeAdminCheckBox': activateAdmin
+                                });
+
+                                that.myOverlay.show([{
+                                    'physicalId': that.waitingObject.getPhysicalId(),
+                                    'name': that.waitingObject.getName(),
+                                    'urlIcon': widgetServices.getRealPath("TransferOwnershipWidget/assets/defaultProd.png", widget, false)
+                                }]);
+                            }
+                            else {
+                                var physicalId = "1";
+                                if (that.PhysicalID.getValue() != "") {
+                                    physicalId = that.PhysicalID.getValue();
+                                }
+
+                                var name = 'g5c_TheProduct';
+                                var line = that.MainTable.getCurrentSelectedLine();
+                                if (line.length > 0) {
+                                    var physId = that.MainTable.getCellContent(line[0], "PhysId");
+                                    if (physId != null && physId != "")
+                                        physicalId = physId;
+
+                                    var nameTemp = that.MainTable.getCellContent(line[0], "ExternalName");
+                                    if (nameTemp != null && nameTemp != "")
+                                        name = nameTemp;
+                                }
+
+                                if (that.myOverlay != null) {
+                                    that.myOverlay.destroy();
+                                }
+
+                                that.myOverlay = new WidgetCore( document.body, {
+                                    'readOnly': readOnly,
+                                    'transferType': TOSConstant.TransferFull,
+                                    'serverName': that.ServerName.getValue(),
+                                    'serverUri': that.ServerUri.getValue(),
+                                    'activeAdminCheckBox': activateAdmin
+                                });
+
+                                that.myOverlay.show([{
+                                    'physicalId': physicalId,
+                                    'name': name,
+                                    'urlIcon': widgetServices.getRealPath("TransferOwnershipWidget/assets/defaultProd.png", widget, false)
+                                }/*,{
+							'physicalId': 2,
+							'name': 'g5c_Product',
+							'urlIcon': widgetServices.getRealPath("assets/defaultProds.png", widget)
+						},{
+							'physicalId': 3,
+							'name': 'g5c_Product'
+						}*/]);
+                                //myOverlay.fx.element.setStyle('height',test.height);
+                            }
+                        });
+                        Bouton.inject(widget.body);
+                        ////////////////////////////////////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////Change collab space BUTTON ///////////////////////////////////////
+
+                        //widgetServices.setReplayODT(true);
+                        var BoutonCS = new UIButton({
+                            value: "Change collaborative space",
+                            name: "toOpenButton"
+                        });
+                        BoutonCS.addEvent('onClick', function () {
+                            if (that.waitingObject != null) {
+                                that.myOverlay = new WidgetCore( document.body, {
+                                    'readOnly': readOnly,
+                                    'transferType': TOSConstant.TransferCollabSpace,
+                                    'serverName': that.waitingObject.getServerHost(),
+                                    'serverUri': that.waitingObject.getServerUri(),
+                                    'activeAdminCheckBox': activateAdmin
+                                });
+
+                                that.myOverlay.show([{
+                                    'physicalId': that.waitingObject.getPhysicalId(),
+                                    'name': that.waitingObject.getName(),
+                                    'urlIcon': widgetServices.getRealPath("TransferOwnershipWidget/assets/defaultProd.png", widget, false)
+                                }]);
+                            }
+                            else {
+
+                                var physicalId = "1";
+                                if (that.PhysicalID.getValue() != "") {
+                                    physicalId = that.PhysicalID.getValue();
+                                }
+
+                                var name = 'g5c_TheProduct';
+                                var line = that.MainTable.getCurrentSelectedLine();
+                                if (line.length > 0) {
+                                    var physId = that.MainTable.getCellContent(line[0], "PhysId");
+                                    if (physId != null && physId != "")
+                                        physicalId = physId;
+
+                                    var nameTemp = that.MainTable.getCellContent(line[0], "ExternalName");
+                                    if (nameTemp != null && nameTemp != "")
+                                        name = nameTemp;
+                                }
+
+                                if (that.myOverlay != null) {
+                                    that.myOverlay.destroy();
+                                }
+
+                                that.myOverlay = new WidgetCore( document.body, {
+                                    'readOnly': readOnly,
+                                    'transferType': TOSConstant.TransferCollabSpace,
+                                    'serverName': that.ServerName.getValue(),
+                                    'serverUri': that.ServerUri.getValue(),
+                                    'activeAdminCheckBox': activateAdmin
+                                });
+
+
+                                that.myOverlay.show([{
+                                    'physicalId': physicalId,
+                                    'name': name,
+                                    'urlIcon': widgetServices.getRealPath("TransferOwnershipWidget/assets/defaultProd.png", widget, false)
+                                }]);
+                            }                           
+                        });
+                        BoutonCS.inject(widget.body);
+                        ////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        ////////////////////////////////////////////////////////////////////////////////////////////////
+                        ///////////////////////////////////////////Change collab space BUTTON ///////////////////////////////////////
+
+                        //widgetServices.setReplayODT(true);
+                        var BoutonUser = new UIButton({
+                            value: "Change responsible",
+                            name: "toOpenButton"
+                        });
+                        BoutonUser.addEvent('onClick', function () {
+                            if (that.waitingObject != null) {
+                                that.myOverlay = new WidgetCore( document.body, {
+                                    'readOnly': readOnly,
+                                    'transferType': TOSConstant.TransferPerson,
+                                    'serverName': that.waitingObject.getServerHost(),
+                                    'serverUri': that.waitingObject.getServerUri(),
+                                    'activeAdminCheckBox': activateAdmin
+                                });
+
+                                that.myOverlay.show([{
+                                    'physicalId': that.waitingObject.getPhysicalId(),
+                                    'name': that.waitingObject.getName(),
+                                    'urlIcon': widgetServices.getRealPath("TransferOwnershipWidget/assets/defaultProd.png", widget, false)
+                                }]);
+                            }
+                            else {
+                                var physicalId = "1";
+                                if (that.PhysicalID.getValue() != "") {
+                                    physicalId = that.PhysicalID.getValue();
+                                }
+
+                                var name = 'g5c_TheProduct';
+                                var line = that.MainTable.getCurrentSelectedLine();
+                                if (line.length > 0) {
+                                    var physId = that.MainTable.getCellContent(line[0], "PhysId");
+                                    if (physId != null && physId != "")
+                                        physicalId = physId;
+
+                                    var nameTemp = that.MainTable.getCellContent(line[0], "ExternalName");
+                                    if (nameTemp != null && nameTemp != "")
+                                        name = nameTemp;
+                                }
+
+                                if (that.myOverlay != null) {
+                                    that.myOverlay.destroy();
+                                }
+
+                                that.myOverlay = new WidgetCore( document.body, {
+                                    'readOnly': readOnly,
+                                    'transferType': TOSConstant.TransferPerson,
+                                    'serverName': that.ServerName.getValue(),
+                                    'serverUri': that.ServerUri.getValue(),
+                                    'activeAdminCheckBox': activateAdmin
+                                });
+
+
+                                that.myOverlay.show([{
+                                    'physicalId': physicalId,
+                                    'name': name,
+                                    'urlIcon': widgetServices.getRealPath("TransferOwnershipWidget/assets/defaultProd.png", widget, false)
+                                }
+                                ]);
+                            }
+                        });
+                        BoutonUser.inject(widget.body);
+                        ////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        that.ServerName = new TextUI({
+                            value: "https://vdevpril541dsy.ux.dsone.3ds.com",
+                            name: 'ARP_ServerName',
+                            className: 'ARP_ServerName',
+                            id: 'ARP_ServerName',
+                            attributes: {
+                                placeholder: "Server name",
+                            }
+                        }).inject(widget.body);
+
+                        that.ServerUri = new TextUI({
+                            value: "3dexperience",
+                            name: 'ARP_ServerUri',
+                            className: 'ARP_ServerUri',
+                            id: 'ARP_ServerUri',
+                            attributes: {
+                                placeholder: "Server Uri",
+                            }
+                        }).inject(widget.body);
+
+                        that.PhysicalID = new TextUI({
+                            value: "2C49B556DB590000A453205497940300",
+                            name: 'ARP_PhysicalID',
+                            className: 'ARP_PhysicalID',
+                            id: 'ARP_PhysicalID',
+                            attributes: {
+                                placeholder: "PhysicalID",
+                            }
+                        }).inject(widget.body);
+
+                        var BoutonClear = new UIButton({
+                            value: "clear",
+                            name: "toOpenButton"
+                        }).inject(widget.body);
+                        BoutonClear.addEvent('onClick', function () {
+                            that.ServerName.setValue("");
+                            that.ServerUri.setValue("");
+                            that.PhysicalID.setValue("");
+                        });
+
+
+                        var Bouton2 = new UIButton({
+                            value: "R417 server",
+                            name: "toOpenButton"
+                        }).inject(widget.body);
+                        Bouton2.addEvent('onClick', function () {
+                            that.ServerName.setValue("https://vdevpril541dsy.ux.dsone.3ds.com");
+                            that.ServerUri.setValue("3dexperience");
+                            that.PhysicalID.setValue("2C49B556DB590000A453205497940300");
+                            WIWI.searchReference();
+                        });
+
+                        var Bouton3 = new UIButton({
+                            value: "R418 server",
+                            name: "toOpenButton"
+                        }).inject(widget.body);
+                        Bouton3.addEvent('onClick', function () {
+                            that.ServerName.setValue("https://vdevpril972dsy.ux.dsone.3ds.com");
+                            that.ServerUri.setValue("3dexperience");
+                            that.PhysicalID.setValue("BF24B5563D31000038CD6D54596E0B00");
+                            WIWI.searchReference();
+                        });
+
+                        widget.body.setStyle("height", "900px");
+
+                        //WIWI._onContextChangeCb();
+                    },
+                    
+                    onRefresh: function () {
+                    	activateAdmin = widget.getBool("admin");
+                    	if (this.myOverlay!=null)
+                        	this.myOverlay.onRefresh();
+                    },
+                    onResize: function () {
+                    	if (this.myOverlay!=null)
+                        	this.myOverlay.onResize();
+                    },
+
+                    _onContextChangeCb: function(){
+                    	var that=  this;
+                        var taggerProxy = TagNavigatorProxy.createProxy({
+                        	//contextId: contextId,
+                        	widgetId: widget.id,
+                        	id: widget.id,
+                        	filteringMode: 'WithFilteringServices',
+                        	proxyDisplayName: 'Refine summary',
+                        	event:{
+                        		addFilterSubjectsListener: that._on6WContentFilter
+                        	}
+                        });            
+                        
+
+                    	var tags =  {
+                        'subject-1-uri':[
+                               {'object':"Alice",'sixw':"ds6w:who/ds6w:responsible", 'dispValue':"Alice"},
+                               {'object': "2011/05/30", 'sixw': "ds6w:when/ds6w:start", 'dispValue': "WILL NOT BE DISPLAYED", 'type': "date"},
+                               {'object':"Post",'sixw':"ds6w:what/ds6w:type", 'dispValue':"Post"}
+                           ],
+                           'subject-2-uri':[
+                               {'object':"Thomas",'sixw':"ds6w:who/ds6w:responsible", 'dispValue':"Thomas"},
+                              {'object':"Post",'sixw':"ds6w:what/ds6w:type", 'dispValue':"Post"}
+                           ]
+                       };
+                    	         
+                    	if (taggerProxy!=null)
+                    		taggerProxy.setSubjectsTags(tags);
+                    },
+                    
+                };
+                widget.addEvent('onLoad', WIWI.onLoad);
+                widget.addEvent('onRefresh', WIWI.onRefresh);
+                widget.addEvent('onResize', WIWI.onResize);
+                
+
+                var test= widget.contextId;
+                var test= 2;
+            });
+
+
+    </script>
+
+      
+  </head>
+  <body>
+   </body>
+</html>

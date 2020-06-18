@@ -1,0 +1,20 @@
+/* this rule has been created for OCDX mode in order to be consistent with PolicyChooser						*/
+/* it valuates the creation vault to eService Production and proposes to search in eService Production and vplm	*/ 
+/* it is made for data created in web applications	but that can also be created in native app					*/
+let listVaultForSearch(List)
+let curVault(String)
+
+listVaultForSearch.Append("eService Production")
+listVaultForSearch.Append("vplm")
+curVault = getCurrentVaultNameFromContext()
+if (curVault <> NULL and curVault == "")
+{
+	curVault = "eService Production"
+}
+if (curVault <> NULL and listVaultForSearch.IndexOf(curVault, 1) == 0)
+{
+	listVaultForSearch.Append(curVault)
+}
+Parameters->SetAttributeObject("VaultsForSearch",listVaultForSearch)
+
+Parameters->SetAttributeString("DefaultVaultNameForCreation", curVault)

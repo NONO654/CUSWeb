@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2006. All rights reserved. -->
+<xs:schema targetNamespace="http://www.3ds.com/xsd/DELUPR" xmlns:xs3d="http://www.3ds.com/xsd/3DXML" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ext="http://www.3ds.com/xsd/DELUPRExtensions" xmlns:tns="http://www.3ds.com/xsd/DELUPR"
+elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+                <xs:appinfo>
+                        <webserviceSchema/>
+                </xs:appinfo>
+        </xs:annotation>
+	<xs:import namespace="http://www.3ds.com/xsd/3DXML" schemaLocation="3dxml/3DXML.xsd"/>
+  <xs:import namespace="http://www.3ds.com/xsd/DELUPRExtensions" schemaLocation="DELAsmAssemblyModel.xsd"/>
+  <xs:complexType name="DELFmiProcessReferenceSampleType">
+		<xs:annotation>
+			<xs:documentation>Process Reference DS definition</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="xs3d:PLMCoreReferenceType">
+        <xs:sequence>
+          <xs:element name="Extension" type="xs3d:ExtensionType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DELFmiProcessInstanceSampleType">
+    <xs:annotation>
+      <xs:documentation>Process Instance DS definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xs3d:InstanceType">
+        <xs:sequence>
+          <xs:element name="Extension" type="xs3d:ExtensionType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

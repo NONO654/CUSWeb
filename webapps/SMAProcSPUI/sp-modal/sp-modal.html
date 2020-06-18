@@ -1,0 +1,28 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+
+<dom-module id="sp-modal">
+  <link rel="import" type="css" href="sp-modal.css">
+  <template>
+		
+        
+        <main id="wrap" class="modal-wrap">
+			<div class="modal-content">
+				<header class="modal-header">
+					<button id="close" class="close" on-click="onClose">×</button>
+					<template is="dom-if" if="{{heading}}">
+						<h4>{{heading}}</h4>
+					</template>
+					<content select="header"></content>
+				</header>
+				<section id="body" class="modal-body">
+					<content select="section"></content>
+				</section>
+				<footer class="modal-footer">
+					<content select="footer"></content>
+				</footer>
+			</div>
+		</main>
+    </template>
+  <script type="text/javascript" src="sp-modal.js"></script>
+</dom-module>

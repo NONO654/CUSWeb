@@ -1,0 +1,14 @@
+m|CAT3DPlayAnnotations\3DPlayAnnotation2D.mweb
+b|j|c,m
+b|c|n,m
+v|6.421.7.19173
+r|G:\R421\BSF\.
+t|win_b64\webapps\3DPlayAnnotation2D\3DPlayAnnotation2D.js|1561163830|29692
+s|CAT3DPlayAnnotations\3DPlayAnnotation2D.mweb\src\AnnotationManager.js|1559281819|1735
+s|CAT3DPlayAnnotations\3DPlayAnnotation2D.mweb\src\Annotation2DCommand.js|1523540999|1126
+s|CAT3DPlayAnnotations\3DPlayAnnotation2D.mweb\src\Annotation2DDraw.js|1550067474|4498
+s|CAT3DPlayAnnotations\3DPlayAnnotation2D.mweb\src\Annotation2DErase.js|1539272870|1867
+s|CAT3DPlayAnnotations\3DPlayAnnotation2D.mweb\src\Annotation2DEraseHandle.js|1560418987|6966
+s|CAT3DPlayAnnotations\3DPlayAnnotation2D.mweb\src\Annotation2DText.js|1553239837|11504
+s|CAT3DPlayAnnotations\3DPlayAnnotation2D.mweb\src\AnnotationCommands.js|1555065542|11687
+s|CAT3DPlayAnnotations\3DPlayAnnotation2D.mweb\src\Annotation2DDrawPreview.js|1559803383|11734

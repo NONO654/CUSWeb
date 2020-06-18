@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!-- Copyright 2015, Dassault Systemes. All rights reserved. -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+      <title>Abaqus/CAE Launcher Widget</title>
+
+      <!-- Application Metas Start -->
+      <meta name="description" content="3D Experience Launcher for Abaqus /CAE" />
+      <meta name="keywords" content="3D Experience Abaqus /CAE" />
+      <!-- Application Metas End -->
+      <script type="text/javascript" src="../Polymer-1.1.4/webcomponents-lite.min.js"></script>
+
+      <!-- Load AmdLoader -->
+      <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+      <!-- Load the UWA framework -->
+      <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+      <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+      <script type="text/javascript" src="../UWA2/js/Class/Model.js"></script>
+      <script type="text/javascript" src="../UWA2/js/Class/Collection.js"></script>
+      <script type="text/javascript" src="../UWA2/js/Class/View.js"></script>
+
+      <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+      <script type="text/javascript" src="../W3DXComponents/W3DXComponents.js"></script>
+
+      <!-- Load any external JS or CSS file -->
+      <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+      <link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+
+      <!-- Load Polymer and any other web components -->
+      <link rel="import" href="../SMAProcSPUI/sp-drop/sp-drop.html" />
+      <link rel="import" href="../SMAProcSPUI/sp-notification/sp-notification.html" />
+      <link rel="import" href="../SMAProcSP/sp-webservice/sp-webservice.html" />
+
+      <!--Load CAE Launcher Polymer Element  -->
+      <link rel="import" href="cae-launcher/cae-launcher.html" />
+
+      <!--WIDGET Preference  spell check starts-->
+      <widget:preferences>
+            <!--<widget:preference type="hidden" name="collabspaces" defaultValue="ctx::VPLMProjectLeader.MyCompany.DemoDesign"></widget:preference> -->
+            <widget:preference type="hidden" name="collabspaces" defaultValue=""></widget:preference>
+            <widget:preference type="hidden" name="debug" defaultValue="false"></widget:preference>
+      </widget:preferences>
+
+      <!-- WIDGET Preference ends -->
+
+      <!-- Application JS End -->
+      <!-- Style of the widget, here we simply add scrollers if the widget is too small -->
+      <style>
+            body {
+                  overflow-x: none;
+                  overflow-y: auto;
+            }
+            
+            #notification {
+                  position: absolute;
+                  width: 100%;
+            }
+            
+            #notificationcomponent {
+                  left: 0px;
+                  padding-right: 2%;
+            }
+
+      </style>
+      <script type="text/javascript">
+            window.require.config({
+                  i18n: {
+                        locale: 'en'
+                  },
+                  locale: 'en'
+            });
+            var CAEWidget = {
+                  onLoad: function() {
+                        var caeComponent = UWA.createElement('cae-launcher');
+                        widget.body.empty();
+                        if (widget.getValue('templateName')) {
+                              caeComponent.setAttribute('template-display-name', widget.getValue('templateDisplayName'));
+                              caeComponent.setAttribute('template-display-launch-name', widget.getValue('templateDisplayLaunchName'));
+                              caeComponent.setAttribute('template-name', widget.getValue('templateName'));
+                              caeComponent.setAttribute('template-revision', widget.getValue('templateRevision'));
+                              caeComponent.setAttribute('adapter-id', widget.getValue('adapterId'));
+                        }
+                        caeComponent.inject(widget.body);
+                        caeComponent.addEventListener('licenseError', CAEWidget.onLicenseError);
+                  },
+                  setWidgetValue: function() {
+                        require(['UWA/Core', 'DS/PlatformAPI/PlatformAPI'],
+                              function(UWACore, PlatformAPI) {
+                                    var myAppsUrl = PlatformAPI.getApplicationConfiguration('app.urls.myapps');
+                                    widget.setValue("myAppsUrl", myAppsUrl);
+                                    CAEWidget.spWebservice = UWACore.createElement('sp-webservice');
+                                    var onWSComplete, onWSError, options, tenantId;
+                                    var tenantPreference = {
+                                          name: "tenantId",
+                                          type: "list",
+                                          label: "Tenant"
+                                    };
+                                    onWSComplete = function(httpRequest) {
+                                          var tenantIdList, tenantPrefOptions = [];
+                                          if (httpRequest.response) {
+                                                tenantIdList = httpRequest.response.split(/\n/)[0].split(/=/)[1].split(/,/);
+                                                if (tenantIdList.length > 1) {
+                                                      for (var i = 0; i < tenantIdList.length; i++) {
+                                                            tenantPrefOptions.push({
+                                                                  value: tenantIdList[i],
+                                                                  label: tenantIdList[i]
+                                                            });
+                                                      }
+                                                      tenantPreference.options = tenantPrefOptions;
+                                                      tenantPreference.defaultValue = tenantIdList[0];
+                                                      widget.addPreference(tenantPreference);
+                                                } else {
+                                                      widget.setValue("tenantId", tenantIdList[0]);
+                                                }
+                                          }
+                                    }.bind(this);
+                                    onWSError = function(httpRequest) {
+                                          var message = {
+                                                detail: {
+                                                      message: 'Unable to get Tenant ID'
+                                                }
+                                          };
+                                          CAEWidget.onLicenseError(message);
+                                    }.bind(this);
+                                    options = {
+                                          verb: 'GET',
+                                          uri: myAppsUrl + '/resources/AppsMngt/licenses/whereused',
+                                          headers: {
+                                                'Accept': 'text/plain'
+                                          },
+                                          onComplete: onWSComplete,
+                                          onError: onWSError
+                                    };
+                                    CAEWidget.spWebservice.sendRequest(options);
+                              }
+                        );
+                  },
+                  onLicenseError: function(event) {
+                        var notification = UWA.createElement('sp-notification', {
+                              'width': '96%',
+                              'postion': 'TL',
+                              'id': 'notification'
+                        });
+                        widget.body.empty();
+                        notification.inject(widget.body);
+                        notification.logMessage({
+                              text: event.detail.message,
+                              type: 'error',
+                              autoRemove: false,
+                              clickToRemove: false
+                        });
+                  }
+            };
+            widget.addEvent('onLoad', CAEWidget.onLoad);
+            if (document.createElement('sp-webservice').sendRequest) {
+                  CAEWidget.setWidgetValue();
+            } else {
+                  window.addEventListener('WebComponentsReady', CAEWidget.setWidgetValue);
+            }
+
+      </script>
+</head>
+
+<body>
+      Loading..
+</body>
+
+</html>

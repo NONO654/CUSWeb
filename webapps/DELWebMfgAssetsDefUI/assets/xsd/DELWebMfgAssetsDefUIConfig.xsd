@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMGAConfiguration" xmlns:tns="DS_DELMIAMGAConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="Config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Preferences">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="TableView" type="tns:BlocType" minOccurs="0"/>
+              <xs:element name="LeftBloc" type="tns:BlocType" minOccurs="0"/>
+              <xs:element name="RightBloc" type="tns:BlocType" minOccurs="0"/>
+              <xs:element name="AuxiliaryView" type="tns:BlocType" minOccurs="0"/>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Title" type="xs:string" use="required"/>
+      <xs:attribute name="Description" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="BlocType">
+    <xs:sequence>
+      <xs:element name="Label" type="tns:ColumnParamsType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Columns" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Column" type="tns:ColumnParamsType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="ColumnParamsType">
+    <xs:attribute name="dataIndex" type="xs:string"/>
+    <xs:attribute name="dicoType" type="xs:string"/>
+    <xs:attribute name="displayType" type="xs:string"/>
+    <xs:attribute name="minWidth" type="xs:nonNegativeInteger"/>
+    <xs:attribute name="Tooltip" type="xs:string"/>
+    <xs:attribute name="Type" type="xs:string"/>
+  </xs:complexType>
+</xs:schema>

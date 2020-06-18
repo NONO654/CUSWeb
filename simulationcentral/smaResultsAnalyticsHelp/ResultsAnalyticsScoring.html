@@ -1,0 +1,349 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msolistparagraphcxspfirst, li.msolistparagraphcxspfirst, div.msolistparagraphcxspfirst
+	{mso-style-name:msolistparagraphcxspfirst;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msolistparagraphcxspmiddle, li.msolistparagraphcxspmiddle, div.msolistparagraphcxspmiddle
+	{mso-style-name:msolistparagraphcxspmiddle;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msolistparagraphcxsplast, li.msolistparagraphcxsplast, div.msolistparagraphcxsplast
+	{mso-style-name:msolistparagraphcxsplast;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msopapdefault, li.msopapdefault, div.msopapdefault
+	{mso-style-name:msopapdefault;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+.MsoChpDefault
+	{font-size:10.0pt;
+	font-family:"Calibri","sans-serif";}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
+</head>
+
+<body lang="EN-US" link="blue" vlink="purple">
+
+<div class="WordSection1" style="scroll:auto; width:100%; height:100%">
+
+<p class="MsoNormal" style="text-indent:.25in"><b><span style="font-size:14.0pt;
+line-height:115%">Overall Scoring</span></b></p>
+
+<p class="MsoNormal" style="margin-left:.25in">Data points are ranked
+automatically within Results Analytics based on requirements - <i>Thresholds</i>
+and <i>Objectives - </i>and <i>Priority</i> and <i>Weight</i> assigned to
+parameters and parameter groups. Since parameters can be grouped, scoring is hierarchical
+- the effects of priorities/weights are cascaded from groups to sub-groups to
+parameters, and all requirements are rolled up to determine an overall score
+for a data point. The relationship between priority and weight, and ability to
+adjust both, is described below, followed by the ranking method choices that
+use this information to produce the overall score, as well as scores at any
+level in the requirements hierarchy.</p>
+
+<p class="MsoNormal" style="margin-left:.25in"><b>Calculating weight factors for
+groups and parameters</b></p>
+
+<p class="MsoListParagraph" style="margin-left:.25in">Two interdependent settings
+are used to control the final weight factor of any group or parameter: 1) <b><i>priority</i></b>
+(possible values are "MH" - Must Have, "P1",
+"P2", "P3", "P4", "P5", default value
+is "P5"), and 2) <b><i>weight</i></b> (possible values are in range
+[1...5], default value is 1.0). The value of <b><i>priority</i></b> is mainly
+used for setting the initial <b><i>weight</i></b> of a group or a parameter;
+the user can override the initial <b><i>weight</i></b> value by using the
+weight slider on the Collaborate page. The final weight factor of a
+parameter or a group is calculated as described below.</p>
+
+<p class="MsoListParagraph" style="margin-left:.75in;text-indent:-.25in">a.<span style="font-size:7.0pt;line-height:115%;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>The top level (root) parameter group always has a <b><i>weight</i></b>
+of 1.0</p>
+
+<p class="MsoListParagraph" style="margin-left:.75in;text-indent:-.25in">b.<span style="font-size:7.0pt;line-height:115%;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>For each sub-group or parameter within a group, the <b><i>weight</i></b>
+is determined from either the <b><i>priority</i></b> or the weight slider
+setting as follows:</p>
+
+<p class="MsoListParagraph" style="margin-left:1.25in;text-indent:-.25in">i.<span style="font-size:7.0pt;line-height:115%;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Initially, <b><i>priority</i></b> of the group or parameter is converted
+into its <b><i>weight</i></b> as follows: </p>
+
+<ul>
+<li class="MsoListParagraph" style="margin-left:1.5in;">
+<b><i>priority</i></b> "Must Have" and "P1" = <b><i>weight</i></b>
+of 5.0</li>
+
+<li class="MsoListParagraph" style="margin-left:1.5in;">
+<b><i>priority</i></b> "P2" = <b><i>weight</i></b> of 4.0</li>
+
+<li class="MsoListParagraph" style="margin-left:1.5in;">
+<b><i>priority</i></b> "P3" = <b><i>weight</i></b> of 3.0</li>
+
+<li class="MsoListParagraph" style="margin-left:1.5in;">
+<b><i>priority</i></b> "P4" = <b><i>weight</i></b> of 2.0</li>
+
+<li class="MsoListParagraph" style="margin-left:1.5in;">
+<b><i>priority</i></b> "P5" = <b><i>weight</i></b> of 1.0</li>
+</ul>
+
+<p class="MsoListParagraph" style="margin-left:1.25in;text-indent:-.25in">ii.<span style="font-size:7.0pt;line-height:115%;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>The weight slider on the Elicit Preferences page overrides the initial <b><i>priority</i></b>
+setting to set the <b><i>weight</i></b> of the parameter or group (possible
+values in the range [1...5])</p>
+
+<p class="MsoListParagraph" style="margin-left:.75in;text-indent:-.25in">c.<span style="font-size:7.0pt;line-height:115%;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>All <b><i>weights</i></b> for sub-groups and parameters are added up to
+get a sum of weights within a given parent group</p>
+
+<p class="MsoListParagraph" style="margin-left:.75in;text-indent:-.25in">d.<span style="font-size:7.0pt;line-height:115%;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Each <b><i>weight</i></b> for sub-groups and parameters is divided by
+the above sum to get a fraction of the total sum; this value is the <b><i>fractional
+weight</i></b> of a sub-group or a parameter</p>
+
+<p class="MsoListParagraph" style="margin-left:.75in;text-indent:-.25in">e.<span style="font-size:7.0pt;line-height:115%;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&nbsp;The final weight factor of a group or a parameter is the product
+of its own <b><i>fractional weight</i></b>, and the <b><i>fractional weights</i></b>
+of all ancestor groups above this group or parameter; this final weight factor is
+used by the selected ranking method to rank the data points</p>
+
+<p class="MsoNormal">&nbsp;</p>
+
+<p class="MsoNormal" style="margin-left:.25in"><b>Ranking Methods</b></p>
+
+<p class="MsoNormal" style="margin-left:.25in">The process of ranking alternatives
+in Results Analytics falls under the formal definition of <b>Multi-Criteria
+Decision Making (MCDM)</b> since in a majority of cases multiple conflicting
+objectives are present in a design problem and a compromise between various
+objectives is required. For example, the cost and weight of a produced part are
+normally in direct opposition to the strength, quality, and reliability of the
+final product. The difficulty of the problem is always increased by the
+presence of more than one criterion. There is no longer a single optimal
+solution to an MCDM problem that can be obtained without incorporating
+preference information. The concept of a single optimal solution is replaced by
+the set of non-dominated solutions where it is not possible to move away from
+such solution to any other without sacrificing in at least one criterion.
+Generally, however, the set of non-dominated solutions is too large to be presented
+to the decision maker for his final choice. Results Analytics helps the
+decision maker focus on his preferred solutions by applying preferences
+(priority and weight) and allowing the user to observe how the preferences
+affect the ranking of the alternatives (quick "tradeoff"
+studies).&nbsp; </p>
+
+<p class="MsoListParagraph" style="margin-left:54.75pt;text-indent:-18.75pt">a.<span style="font-size:7.0pt;line-height:115%;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><a href="http://vm76-32sim/ematrix/simulationcentral/smaResultsAnalyticsHelp/ResultsAnalyticsWeightedSum.html">Weighted Sum</a> - the best
+known and simplest method for evaluating the goodness of multiple 
+alternatives in terms of several objectives. The score value of each
+alternative is simply a sum of all objective values, each multiplied by the final
+weight factor calculated as described previously. For the Weighted Sum method
+to be valid all objectives must be normalized and brought into the same range, otherwise
+effects of different objective functions will not be equally represented.</p>
+
+<p class="MsoListParagraph" style="margin-left:54.75pt;text-indent:-18.75pt">b.<span style="font-size:7.0pt;line-height:115%;font-family:&quot;Times New Roman&quot;,&quot;serif&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><a href="http://vm76-32sim/ematrix/simulationcentral/smaResultsAnalyticsHelp/ResultsAnalyticsTOPSIS.html">TOPSIS (Technique for Order of
+Preference by Similarity to Ideal Solution)</a> - a multi-criteria ranking
+method that employs the concepts of the positive ideal point (best objective
+values for all criteria) and the negative ideal point (worst objective values
+in all criteria) in the objective domain. Alternatives are ranked based
+on the shortest geometric distance from the positive ideal point and the
+longest geometric distance from the negative ideal point in terms of the
+objective values. For the distance calculations of TOPSIS to be valid all
+objectives must be normalized to be in the same range of values. The final weight
+factors calculated as described previously are applied to each objective value
+when making distance calculations and then comparing alternatives.</p>
+
+<p class="MsoNormal" style="margin-left:.25in">TOPSIS will rank a balanced
+solution higher, even if the alternative is dominated, while Weighted Sum will rank
+a cutting edge or non-dominated solution higher.&nbsp; Both ranking methods are
+provided to accommodate the decision maker's desired result.</p>
+
+<p class="MsoNormal" style="margin-left:.25in">&nbsp;</p>
+
+<p class="MsoNormal" style="margin-left:.25in"><b>Commonly asked questions: effects of scoring/ranking on data point display</b></p>
+
+<p class="MsoNormal" style="margin-left:.25in">The process of applying requirements 
+to parameters to score and rank data points in addition to filtering capabilities 
+all effect the data displayed in Results Analytics.  These effects are described here in 
+answers to commonly asked questions:&nbsp; </p>
+
+<ul style="margin-top:0in;margin-left:.25in" type="disc">
+ <li class="MsoNormal">
+	<b><i>What is the difference between
+	<span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;
+     color:#912D2D">Thresholds</span>
+	 and parameter filters?</b></i>
+ </li>
+</ul>
+
+<p class="MsoNormal" style="margin-left:.75in"><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;">Data 
+points that violate one or more of the thresholds are marked 
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#912D2D">red</span></b>.  If the 
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#912D2D">Infeasible</span></b>
+filter is deselected, data points that violate one or more of the thresholds will not be displayed - they 
+are filtered from view, but are still scored and ranked.  When 
+thresholds are set in the Parameter Definition table on the Define page, a marker
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#912D2D">T:<i>(value)</i></span></b> 
+is displayed in the appropriate location on the parameter filter slider bar based on the threshold value and the data range 
+below a lower threshold and/or above an upper threshold will be colored
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#912D2D">red</span></b> 
+in the filter slider bar. 
+</span></p>
+
+<p class="MsoNormal" style="margin-left:.75in"><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;">Filter sliders
+for individual parameters allow filtering data points with values below a lower filter value or above an upper filter value
+from view.  Filtered data points will not be displayed in the data table, scatter plots, etc., but are still scored and ranked, 
+unlike excluded data points. Filtering data points based on parameter values will have no effect on defined 
+thresholds.  When a filter slider is moved, the slider bar data range below the lower filter or above the upper filter will be
+marked with diagonal hash marks indicating that this range has been filtered from view;  scoring/rank of the filtered alternatives is unchanged.
+</span></p>
+
+<ul style="margin-top:0in;margin-left:.25in" type="disc">
+ <li class="MsoNormal">
+	<b><i>What is the difference between
+	<span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;
+     color:#919191">Excluded Data Points</span>
+	 and filtered data points?</b></i>
+ </li>
+</ul>
+
+<p class="MsoNormal" style="margin-left:.75in"><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;">Data
+points that have been explicitly excluded by the user are not graded: Rank and Score become zero and excluded data points 
+are listed last, in 
+<b><i><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#919191">gray italics</span></i></b>, 
+in the data table if displayed.  If the 
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#919191">Excluded</span></b>
+filter is deselected, these user excluded data points will not be displayed - they 
+are filtered from view. Excluded data points are also not included in surrogate model fitting (Predict page).
+</span></p>
+
+<p class="MsoNormal" style="margin-left:.75in"><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;">
+Filtered data points are only removed from view - they will not be displayed in the data table, scatter plots, etc. - but are 
+still scored and ranked, unlike excluded data points. Filtered data points are included in surrogate model fitting (Predict page).
+</span></p>
+
+<p class="MsoNormal" style="margin-left:.75in"><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;">
+</span></p>
+
+<ul style="margin-top:0in;margin-left:.25in" type="disc">
+ <li class="MsoNormal">
+	<b><i>Why are there multiple 
+	<span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;
+     color:#198165">Best Alternatives</span>
+	 indicated?</b></i>
+ </li>
+</ul>
+
+<p class="MsoNormal" style="margin-left:.75in"><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;">Specification of multiple
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#198165">Objectives</span></b>
+allows identification of all "Tradeoff" or "Pareto optimal" data points, which are colored
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#198165">green</span></b>, 
+to facilitate Multi-Criteria Decision Making (MCDM) as discussed above.  If the 
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#198165">Best Alternatives</span></b>
+filter is deselected, these tradeoff/Pareto data points will not be displayed - they 
+are filtered from view, but are still scored and ranked.
+</span></p>
+
+<ul style="margin-top:0in;margin-left:.25in" type="disc">
+ <li class="MsoNormal"><b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;">
+ <i>Why are 
+ <b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#912D2D">Infeasible</span></b>
+ alternatives ranking above 
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#198165">Best Alternatives</span></b>
+ ?</i></span></b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;">:
+     </span></li>
+</ul>
+
+<p class="MsoNormal" style="margin-left:.75in"><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;">
+Priority as defined above will affect scoring and ranking.  By default the data points displayed in the data table are sorted by Rank, 
+which is inversely related to Overall Score. If
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#912D2D">Infeasible</span></b>
+and
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#198165">Best Alternatives</span></b>
+are both displayed (not filtered from view) it is possible for 
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#912D2D">red Infeasible</span></b>
+data points to be ranked/scored higher, and as a result displayed higher in the data table, than
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#198165">green Best Alternatives</span></b>
+.  This can happen if the 
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#912D2D">thresholds</span></b>
+are not defined with MH 'Must Have' priority.  Data points that violate a P1 - P5 priority
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#912D2D">threshold</span></b>
+are not penalized for this violation and thus can have higher score based on objective values than
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#198165">green Best Alternatives</span></b>
+with no violations. To penalize data points that do not meet 
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#912D2D">thresholds</span></b>
+, priority must be set to MH - 'Must Have'.  MH priority will force the score to zero for data points that do not meet one or more
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#912D2D">threshold</span></b>
+.  By Using MH priorities, 
+<b><span style="font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;color:#198165">Best Alternatives</span></b>
+will always be ranked higher than infeasible data points.  
+</span></p>
+
+<p class="MsoNormal">&nbsp;</p>
+
+</div>
+
+</body></html>

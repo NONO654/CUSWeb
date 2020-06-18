@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/"> 
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<head>   
+
+    <title>Hello World Widget App</title>
+    
+    <!-- Application Metas Start -->
+    
+    <meta name="description" content="CAA Web Apps basic use case " />
+    <meta name="keywords" content="CAA Use Case" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!-- Application Metas End -->
+    
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />-->
+    
+    <!--  <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script> -->
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+    <script type="text/javascript" src="../etree/etree.js"></script>
+    <script type="text/javascript" src="../egraph/egraph.js"></script>
+    
+    <!-- RGN Libraries Start -->
+    <link type="text/css" rel="stylesheet" href="../../rgn/reportmodeller/style.css">
+    <link type="text/css" rel="stylesheet" href="../../rgn/styles/emxRGNStyle.css"/>
+    <script type="text/javascript" src="../../rgn/reportmodeller/SystEnv.jsp"></script>
+    <script type="text/javascript" src="../../rgn/reportmodeller/reportmodeller.nocache.js"></script>
+    <!-- RGN Libraries End -->
+    <script>
+        window.rgdAppUrl = location.href.replace('webapps/RGD/RGD_sa.html','');
+    </script>
+    <script type="text/javascript" src="RGD.js"></script>
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />   
+    <link rel="stylesheet" type="text/css" href="../RGNServices/RGN.css" />   
+   
+   <!-- Application JS Start -->
+   <script >
+        /* global widget window */
+        require(['DS/RGNServices/Request'],
+        function (Request) {
+            var _appUrl = location.href.replace('webapps/RGD/RGD_sa.html','');
+            if (_appUrl) {
+                new Request().getJson(_appUrl + 'rgn/api/i18n').then( function (i18n) {
+                    window.I18n = i18n;
+                }, function (error) {
+                    window.I18n = {};
+                });
+            }
+        })();
+        window.rgnLog = function(message) {
+            console.log(message);
+        };
+        
+        var onload = function () {
+            new RGD({
+                app: document.querySelector('.rgd-app'),
+                appUrl: location.href.replace('webapps/RGD/RGD_sa.html',''),
+                widgetId: 'RGDWidgetId',
+                source: 'CATRGDW_AP'
+            }).createWidget();
+        };
+        window.ModellerEntryPoint = com.dassault_systemes.catrgn.reportUIModeller.gwt.diagram.ModellerEntryPoint;
+        window.onload = onload;
+   </script>
+   <!-- Application JS End -->
+</head>
+<body>
+    <div class="rgd-app">
+        <div class="result fixed-width">
+        </div>
+        <div class="layout hidden">
+            <div id="layout-header">
+                <div id="layout-toolbar" class="elorn-controlbar">
+                    <div class=" iconbar iconbar-root">
+                        <ul tabindex="1" class="iconbar-items-wrap iconbar-items-icons">
+                            <li title="" id="itm-8602e3" class="item ">
+                                <span class="fonticon fonticon-open-left"></span>
+                            </li>
+                            <li title="" id="itm-2e1aea" class="divider">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="layout-content">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

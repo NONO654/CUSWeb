@@ -1,0 +1,1 @@
+require(["DS/SMAProcWebCommonControls/Polymer"],function(a){window.Polymer({is:"mft-advanced",properties:{},ready:function(){}})});

@@ -1,0 +1,1 @@
+define("DS/DMU3DCompareAPI/DMU3DCompareAPI",["DS/DMUCompareVisu/DMUBaseCompareServices"],function(a){return a});

@@ -1,0 +1,175 @@
+﻿<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+    <meta charset="utf-8">
+    <title>SMAProcWebCommonContents</title>
+
+    <script type="text/javascript" src="../Polymer-1.11.3/webcomponents-lite.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+    <!-- <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> -->
+    <style>
+        .section {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .xcontainer {
+            width: 400px;
+            padding: 5px 0px;
+            display: block;
+            margin-left: 0px;
+        }
+
+        section {
+            justify-content: left;
+            margin-bottom: 40px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+</body>
+<template>
+    <h1>SDK Content Chooser</h1>
+    <div>
+        Showcasing new components for handling content and parameters
+    </div>
+
+
+    <section>
+        <h4>pcw-sdk-parameter-chooser</h4>
+        <div class="xcontainer">
+            <pcw-sdk-parameter-chooser create></pcw-sdk-parameter-chooser>
+        </div>
+    </section>
+
+    <section>
+        <h4>pcw-sdk-content-chooser</h4>
+        <div class="xcontainer">
+            <pcw-sdk-content-chooser></pcw-sdk-content-chooser>
+        </div>
+    </section>
+
+    <section>
+        <h4>pcw-sdk-plmobject-chooser</h4>
+        <div class="xcontainer">
+            <pcw-sdk-plmobject-chooser>
+            </pcw-sdk-plmobject-chooser>
+        </div>
+    </section>
+
+    <section>
+        <h4>pcw-sdk-file-chooser</h4>
+        <div class="xcontainer">
+            <pcw-sdk-file-chooser></pcw-sdk-file-chooser>
+        </div>
+    </section>
+
+    <section>
+        <div class="xcontainer">
+            <div>Individual demo pages:</div>
+        </div>
+
+        <div>
+            <a href="./pcw-sdk-combo-box-demo.html">pcw-sdk-combo-box-demo</a>
+        </div>
+
+        <div>
+            <a href="./pcw-sdk-parameter-chooser-demo.html">pcw-sdk-parameter-chooser-demo</a>
+        </div>
+
+        <div>
+            <a href="./pcw-sdk-content-chooser-demo.html">pcw-sdk-content-chooser-demo</a>
+        </div>
+
+        <div>
+            <a href="./pcw-sdk-object-chooser-demo.html">pcw-sdk-object-chooser-demo</a>
+        </div>
+
+        <div>
+            <a href="./pcw-sdk-plmobject-chooser-demo.html">pcw-sdk-plmobject-chooser-demo</a>
+        </div>
+
+        <div>
+            <a href="./pcw-sdk-file-chooser-demo.html">pcw-sdk-file-chooser-demo</a>
+        </div>
+
+    </section>
+</template>
+<script>
+
+    require([
+        'UWA/Core', 'UWA/Data', 'DS/Core/Core', 'UWA/Element',
+        'DS/ApplicationFrame/FrameWindow',
+        'DS/ApplicationFrame/FrameWindowsManager',
+        'DS/SMAProcWebContents/ContentChooser',
+        'DS/SMAProcWebContents/PlmobjectChooser',
+        'DS/SMAProcWebContents/FileChooser',
+        'DS/SMAProcWebContents/FakeContentService',
+        'DS/SMAProcWebContents/PolyUtils',
+        'DS/SMAProcWebCommonControls/FileChooser'
+    ],
+        function (UWA, UWAData, WUXCore, UWAElement,
+            FrameWindow, FrameWindowsManager, ContentChooser, PlmobjectChooser, FileChooser, FakeContentService, PolyUtils) {
+
+            WUXCore.setFullscreen();
+            widget.addEvent('onLoad', function () {
+                //we need a frame for webux diaglog (in this case parameter add dialog)
+
+                var frmWindow = new FrameWindow().inject(document.body);
+
+                frmWindow.elements.container.setStyles({ background: 'white', 'overflow-y': 'scroll' });
+
+                var uiFrame = frmWindow.getUIFrame();
+
+                var template = document.querySelector('template');
+
+                var div = UWA.createElement('div', {
+                    styles: {
+                        padding: '20px'
+                    }
+                });
+                div.innerHTML = template.innerHTML;
+
+                div.inject(uiFrame);
+
+                var service = new FakeContentService();
+
+                var dataContainer = service.getDataContainer();
+
+                service.setActivity(dataContainer);
+
+                console.log('demo ready');
+
+                PolyUtils.whenComponentReady('pcw-sdk-parameter-chooser').then(function (el) {
+                    el.setContentService(service);
+                    el.setModel(dataContainer);
+                });
+
+                PolyUtils.whenComponentReady('pcw-sdk-content-chooser').then(function (el) {
+                    el.setContentService(service);
+                    el.setModel(dataContainer);
+                });
+
+                PolyUtils.whenComponentReady('pcw-sdk-plmobject-chooser').then(function (el) {
+                    el.setContentService(service);
+                    el.setModel('param', dataContainer);
+                });
+
+                PolyUtils.whenComponentReady('pcw-sdk-file-chooser').then(function (el) {
+                    el.setContentService(service);
+                    el.setModel('content', dataContainer);
+                });
+            });
+        });
+
+</script>
+
+</html>

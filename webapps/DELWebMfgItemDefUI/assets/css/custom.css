@@ -1,0 +1,551 @@
+$separatorSize: 4px;
+$expanderSize: 22px;
+
+/*	Default box-sizing */
+* {
+	box-sizing: border-box;
+}
+
+/*	Auxiliary view same height	*/
+div.ui-container .auxiliaryBloc-container .auxiliaryView-toolbar {
+	height: 40px;
+}
+
+/*	No background effect */
+.wux-afr-framewindow
+{
+	background: none !important;
+}
+
+/*	Needed for new bloclayout	*/
+main.main {
+	height: 100%;
+}
+
+/*	Catch all events in our containers	*/
+.bodyContainer, .mbomContainer, .actionContainer
+{
+	position: relative;
+	pointer-events: all;
+	height: 100%;
+}
+
+/*	Click on MGA Auxiliary filters and treelistview	*/
+div.auxiliaryBloc-container {
+	pointer-events: auto;
+}
+
+/*	Resize inside bloc layout	*/
+div.bl-drag-column {
+	pointer-events: auto;
+}
+
+.wux-panels-sidepanel-lateral-handle
+{
+    background-color: #f5f5f5 !important;
+    opacity: 1 !important;
+}
+
+.wux-panels-sidepanel-lateral-handle:hover
+{
+    background-color: #ebebeb !important;
+    opacity: 1 !important;
+}
+
+.wux-panels-sidepanel-lateral-handle.wux-panels-sidepanel-lateral-handle-left
+{
+    box-shadow: 1px 1px 0  #cfcfcf, 0 1px 0 !important;
+}
+
+.TreeListView {
+	position: relative;
+    height: 100%;
+    display: block;
+}
+
+div.wux-panels-sidepanel {
+	width: 100%;
+}
+
+/*	Pass mouse events through to enable resize	*/
+div.bl-column-content {
+	position: relative;
+	pointer-events: none;
+    right: 0px !important;
+}
+
+/*	Pass mouse events on childs for clicks in div	*/
+div.wux-panels-panelbase {
+	pointer-events: all;
+}
+
+/*	For side panel not to recover drag handle (little higher than needed for easier manipulation)	*/
+div.wux-panels-sidepanel {
+	width: calc(100% - 20px);
+}
+
+/*	No gray background in side panels	*/
+div.wux-panels-panelbase.wux-panels-sidepanel {
+	background-color: white;
+}
+
+/*	Resize Column just below first drop layer */
+div.bl-drag-column {
+	position: relative;
+	z-index: 85;
+	right: 0px !important;
+}
+
+/*	Side panel's handles smaller	*/
+div.wux-panels-sidepanel-lateral-handle {
+	width: 22px;
+}
+
+div.wux-panels-panelbase.wux-panels-sidepanel.wux-panels-sidepanel-left {
+	margin-left: 20px;
+}
+
+div.wux-panels-panelbase.wux-panels-sidepanel.wux-panels-sidepanel-right {
+	margin-right: 20px;
+}
+
+.bodyContainer>.bodyDrop, .mbomContainer>.mbomDrop, .actionView>.dropZone {
+	height: 100%;
+	width: 100%;
+	position: relative;
+	float: left;
+}
+
+.bodyContainer>.bodyDrop>.dropLayer, .mbomContainer>.mbomDrop>.dropLayer, .actionView>.dropZone>.dropLayer {
+	z-index: 85;
+	width: 100%;
+	position: absolute;
+	top: 50%;
+}
+
+main>.mainMessages {
+	height: 0px;
+}
+
+.TreeListView, .GraphView {
+	transition: all .2s ease;
+}
+
+.TreeListView .wux-tree-treelistview, .GraphView .AbstractGraphView
+{
+    display: block;
+    margin-top: 45px;
+    position: absolute;
+    height: calc(100% - 45px);
+    width: 100%;
+}
+
+.TreeListView .ToolBar, .GraphView .ToolBar
+{
+    position: absolute;
+    height: 45px;
+    width: 100%;
+}
+
+.wrapper .GraphView {
+	//transform: translateY(100vh) rotateX(90deg);
+}
+
+.wrapper.showGraphView .TreeListView {
+	//transform: rotateX(-90deg);
+	height: 0px;
+}
+
+.wrapper.showGraphView .GraphView {
+	//transform: translateY(0) rotateX(0deg);
+	background-color: white;
+}
+
+.pad_alert div.alert-message {
+	width: 100%;
+	left: 0;
+}
+
+div.mainMessages div.alert.alert-root {
+	visibility: visible;
+	float: none !important;
+	left: 60%;
+	width: 40%;
+}
+
+/* div.modal {
+	z-index: 100000;
+} */
+
+div.actionViewLateralHandleRight
+{
+    height: 100%;
+    right: -1px;
+    z-index: 99999;
+    background: #f4f5f6;
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    cursor: default;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    opacity: 0.55;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    border-left: 1px solid #fff;
+    box-shadow: -1px 0 0 rgba(0, 0, 0, 0.2), 1px 0 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+    background-size: contain;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    width: 32px;
+    background-image:url("assets/icons/expanderBigRightArrow@2x.png");
+}
+
+div.actionViewLateralHandleRight:hover {
+
+    opacity:1;
+    background-image:url("assets/icons/expanderBigRightArrow@2x.png");
+}
+
+
+/*********************************/
+/***	View Customisation		**/
+/*********************************/
+
+/**		Normal crosshiglight : any focus + node not selected 	**/
+div.crosshighlight {
+	background-color: #CBD9E7 !important;
+}
+
+/**		Crosshighlight when node has focus + is selected	**/
+div.wux-datagrid:focus .wux-datagrid-cell.wux-datagrid-cell-highlighted.wux-datagrid-row-highlighted.crosshighlight, div.wux-tree-fixed-treelistview:focus .wux-datagrid-cell.wux-datagrid-cell-highlighted.wux-datagrid-row-highlighted.crosshighlight {
+	background-color: #0375B5!important;
+}
+
+/**		Crosshighlight when node doesn't have focus + is selected	**/
+div.wux-datagrid .wux-datagrid-cell.wux-datagrid-cell-highlighted.crosshighlight {
+	background-color: #A5BFD6!important;
+}
+
+div.wux-panels-panelbase-content {
+	padding: 0px;
+	height: 100%;
+	position: relative;
+}
+
+div.wux-panels-panelbase-content > div {
+	height: 100%;
+	position: relative;
+}
+
+/**		Column resize	**/
+div.separator {
+	width: 4px;
+    height: 100vh;
+    background-color: #C0C0C0;
+    float: left;
+    left: calc( 50% - 4px );
+    position: absolute;
+    cursor: col-resize;
+    z-index: 99;
+    transition: all .2s ease;
+}
+
+/**		COLORS AND INDICATORS	**/
+.color-none {
+	color: transparent !important;
+}
+
+.color-ok {
+	color: #005686 !important;
+}
+
+.color-nok {
+	color: red !important;
+}
+
+.color-scoped {
+	color: #42A2DA !important;
+}
+
+.color-notsure {
+	color: orange !important;
+}
+
+span.indicator {
+	display: block;
+	text-align: center;
+}
+
+span.default-indicator::before {
+	content: '■';
+}
+
+span.downdoublearrow-indicator::before {
+	content: '&dArr;';
+}
+
+span.updoublearrow-indicator::before {
+	content: '&uArr;';
+}
+
+span.uparrow-indicator::before {
+	content: '&uarr;';
+}
+
+span.downarrow-indicator::before {
+	content: '&darr;';
+}
+
+span.diamond-indicator::before {
+	content: '&diams;';
+}
+
+span.bullet-indicator::before {
+	content: '\2022';
+    font-size: 4.5rem;
+}
+
+/*********************/
+/***	FOR ODT		**/
+/*********************/
+div.module.moduleUwa.windowed-view > div.moduleWrapper {
+	height: 500px;
+}
+
+div.module.moduleUwa.windowed-view > div.moduleWrapper > div.moduleContent.environment-uwa.windowed-view {
+	height: 500px;
+}
+/*********************/
+/***	FOR ODT		**/
+/*********************/
+
+
+
+
+/*********************/
+/*** FOR SIDEPANEL  **/
+/*********************/
+.wux-panels-sidepanel-lateral-onglet
+{
+	bottom: 0px;
+    height: 40px;
+    width: 40px;
+    background-color: #f4f5f6;
+    position: fixed;
+    padding: 3px;
+    border-right: 1px solid #fff;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    box-shadow: -1px 0 1px rgba(0, 0, 0, 0.2), 1px 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.wux-panels-sidepanel-lateral-handle:hover .wux-panels-sidepanel-lateral-onglet
+{
+    background-color: #ebebeb !important;
+}
+
+.wux-panels-panelbase[data-isopen="true"] .wux-panels-sidepanel-lateral-handle-right .wux-panels-sidepanel-lateral-onglet
+{
+    opacity: 0;
+	transition: right 0.2s ease-out, opacity 0.5s ease-out;
+	right: -42px;
+}
+
+.wux-panels-panelbase[data-isopen="false"] .wux-panels-sidepanel-lateral-handle-right .wux-panels-sidepanel-lateral-onglet
+{
+    opacity: 1;
+	transition: right 0.2s ease-out;
+    right: -1px;
+}
+
+.wux-panels-panelbase[data-isopen="true"] .wux-panels-sidepanel-lateral-handle-left .wux-panels-sidepanel-lateral-onglet
+{
+    opacity: 0;
+	transition: left 0.2s ease-out, opacity 0.5s ease-out;
+	left: -42px;
+}
+
+.wux-panels-panelbase[data-isopen="false"] .wux-panels-sidepanel-lateral-handle-left .wux-panels-sidepanel-lateral-onglet
+{
+    opacity: 1;
+	transition: left 0.2s ease-out;
+    left: -1px;
+}
+
+.wux-panels-panelbase[data-isopen="false"] .dropLayer
+{
+    display:none;
+}
+
+.wux-panels-panelbase {
+    transition: width 0.2s ease-out !important;
+}
+
+.bl-column {
+    transition: width 0.2s ease-out;
+}
+
+.bl-drag-column
+{
+    width: 5px !important;
+}
+
+.wux-layouts-gridengine .wux-scroller {
+    border: 0px solid #f4f5f6 !important;
+}
+
+button.docMgmtCell {
+	padding : 0px 5px 0px 5px;
+	margin-right: 5px;
+}
+
+button.docMgmtCell .wux-layouts-treeview-icon {
+	margin-right: 0px;
+}
+
+.MGA-DELWebMfgAssetsDefUICommands-DocumentMgmtUI-Dialog .wux-layouts-treeview-icon{
+	margin-right : 0px;
+	margin-left : 10px;
+}
+
+.wux-layouts-treeview-icon {
+    margin-bottom : 2px;
+    margin-top : 2px;
+}
+
+.multiValueCell .wux-layouts-treeview-icons {
+    display: inline-block;
+    margin-bottom : 2px;
+    margin-top : 2px;
+}
+
+.MGA-DELWebMfgAssetsDefUICommands-InsertCmd-Dialog .select-dropdown{
+	width:349px;
+}
+
+.MGA-DELWebMfgAssetsDefUICommands-InsertCmd-Form > .form-group{
+	margin-left : 0px;
+}
+
+.MGA-DELWebMfgAssetsDefUIControls-LinksUI-Modal .modal-body{
+	margin-bottom: 10px;
+	overflow-y: auto;
+}
+
+.MGA-DELWebMfgAssetsDefUIServices-CreateLinkUtil-SwitchBtnDiv {
+	float: left;
+	margin-bottom: 20px;
+	margin-right: 20px;
+}
+
+.MGA-DELWebMfgAssetsDefUIServices-CreateLinkUtil-FromToDiv {
+	margin-bottom: 20px;
+}
+
+.MGA-DELWebMfgAssetsDefUIControls-EditTVColumnsUI-ToogleDiv{
+ 	cursor : move;
+ 	display:inline-block;
+ 	width:100%;
+}
+
+.MGA-DELWebMfgAssetsDefUIControls-EditTVColumnsUI-Dragged{
+    position: absolute;
+}
+
+.multiValueCell .wux-layouts-treeview-label {
+    overflow : hidden;
+    text-overflow : ellipsis;
+    display: inline-block;
+}
+
+.tableView-preferences-toggle {
+    transform: scale(0.5);
+    margin-top: auto!important;
+}
+
+.editor-read-only {
+    color: grey!important;
+}
+
+.widget-layout-block-MFN {
+		display: inline-flex;
+		height: 300px;
+    	width: 100%;
+    	padding: 25px;
+}
+.widget-layout-block-MFN .div0{
+		height : 99%;
+		width  : 30%;
+		margin-right: 10px;
+}
+.widget-layout-block-MFN .div1{
+		height : 99%;
+		width  : 35%;
+}
+.widget-layout-block-MFN .div2{
+		height : 99%;
+		width  : 35%;
+}
+.widget-layout-block-MFN #AV{
+		margin : 8% 2% 2% 2%;
+		height : 85%;
+		width  : 80%;
+}
+.widget-layout-block-MFN #LV{
+		margin-top : 8%;
+		height : 40%;
+		width  : 80%;
+}
+.widget-layout-block-MFN #LGV{
+		height : 40%;
+		width  : 80%;
+		margin : 2%;
+}
+.widget-layout-block-MFN #RV{
+		margin-top : 8%;
+		height : 40%;
+		width  : 80%;
+}
+.widget-layout-block-MFN #RGV{
+		height : 40%;
+		width  : 80%;
+		margin : 2%;
+}
+.widget-layout-block-MFN .border-selected {
+    border: solid 4px #005686;
+}
+.widget-layout-block-MFN .border-unselected {
+    border: solid 4px #b4b6ba;
+}
+
+.TNRInfo{
+		display: flex;
+}
+
+.TNRInfo > .uwa-img.MGA-Icon{
+		width: 42px;
+		height: 42px;
+		padding: 5px;
+}
+
+.TNRInfo > .CreateUpdateMfgSubLabelDiv{
+		vertical-align: middle;
+		padding: 10px;
+    max-width: 200px;
+		overflow: hidden;
+  	text-overflow: ellipsis;
+		white-space: nowrap;
+}
+
+.TNRInfo > .CreateUpdateMfgSubRevisionDiv{
+		padding: 10px;
+}
+
+.TNRInfo > .wux-controls-toggle .wux-label{
+		margin-right: 20px;
+}
+
+.container{
+	width: 300px;
+}

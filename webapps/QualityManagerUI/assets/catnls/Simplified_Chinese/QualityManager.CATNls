@@ -1,0 +1,147 @@
+<meta charset="UTF-8"/>
+
+PostProcessAALabel.Text="抗锯齿后处理";
+PostProcessAAControl.Tooltip="NoAA：
+FXAA：快速近似抗锯齿
+SMAA： ";
+
+AASettingLabel.Text="IterativeAntiAliasing";
+AASettingControl.Tooltip="在整个场景上激活抗锯齿选项。
+抗锯齿可以中和阶梯效果。";
+
+TranspModeLabel.Text="透明模式";
+TranspModeControl.Tooltip="默认（无排序 Alpha 混合处理）、
+低（Alpha 混合处理）、
+中（Alpha 混合处理）、
+高（顺序无关的透明）";
+
+AllowOutlineLabel.Text="允许轮廓查看模式";
+AllowOutlineControl.Tooltip="启用/禁用轮廓边线渲染";
+
+CullMinPixelSizeLabel.Text="最小对象大小（像素数）";
+CullMinPixelSizeControl.Tooltip="添加或移除对象的显示质量。
+即使您不希望移除几何图形，移除
+一些无需查看的细节也会有所帮助。
+如果您希望查看所有细节，则设置低值，
+否则设置高值以移除细节。";
+
+OcclusionLabel.Text="允许环境遮挡";
+OcclusionControl.Tooltip="启用/禁用环境遮挡算法。";
+
+AllowGroundShadowLabel.Text="允许地面阴影";
+AllowGroundShadowControl.Tooltip="无论代价如何，都允许地面阴影计算。";
+
+AllowInterObjShadowLabel.Text="允许对象间阴影";
+AllowInterObjShadowControl.Tooltip="激活/停用对象间阴影。";
+
+ShadowFilteringLabel.Text="过滤以使用";
+ShadowFilteringControl.Tooltip="PCF（百分比渐近过滤）
+ESM（指数阴影映射）
+泊松 ()";
+
+ShadowFilteringQualityLabel.Text="过滤质量";
+ShadowFilteringQualityControl.Tooltip="";
+
+AllowAOLabel.Text="允许环境遮挡";
+AllowAOControl.Tooltip="";
+
+AllowBloomLabel.Text="允许高光";
+AllowBloomControl.Tooltip="有时称为高光或辉光。";
+
+AllowDoFLabel.Text="允许景深";
+AllowDoFControl.Tooltip="";
+
+GroundReflModeLabel.Text="允许反射到地面";
+GroundReflModeControl.Tooltip="如果选中的反射模式未在环境中激活，则此选项不会强制执行。";
+
+ReflectionsLabel.Text="地面反射";
+ReflectionsLabel.Tooltip="无()
+镜像()";
+
+Default="默认";
+High="高";
+Low="低";
+Medium="中等";
+Ultra="超高";
+
+
+MaxSamplePerPixelLabel.Text="每像素样本最大值";
+MaxSamplePerPixelControl.Tooltip="在收敛停止前，每像素的样本最大预制数量";
+MinSamplePerPixelLabel.Text="每帧样本最小值";
+MinSamplePerPixelControl.Tooltip="在帧更新之间，每像素的样本最小预制数量。建议将大于 1 的值用于群集渲染。";
+ClammpingMaxLumLabel.Text="锁模/最大亮度";
+ClammpingMaxLumControl.Tooltip="样本可以为像素贡献的最大亮度。较低的值会使收敛更快，但使亮度变暗会影响如突出显示或发光的对象。";
+GaussFilterLabel.Text="   高斯过滤器";
+GaussFilterControl.Tooltip="激活高斯抗锯齿过滤器";
+SizeLabel.Text="     大小";
+SizeControl.Tooltip="以像素表示的高斯过滤器大小。较大的值将提高光顺程度。";
+CenterWeightLabel.Text="   中心粗细";
+CenterWeightControl.Tooltip="定义高斯过滤曲线。较大的值将降低光顺程度。";
+
+MaxTraceDepthLabel.Text="最大轨迹深度";
+MaxTraceDepthControl.Tooltip="指定光线/路径从漫反射/反射反弹或在透明表面之间传输的频率。将其设置为 1 则仅计算直接照明和无折射。较高的值可以在潜在的性能轻微下降时产生更真实的结果。";
+GlossyThresholdLabel.Text="光滑阈值";
+GlossyThresholdControl.Tooltip="指定光线与材质的相互作用从哪个光泽度值开始解释为焦散路径。可以通过焦散线明确地选择处理焦散路径。最终聚集可以处理非焦散路径，从而缩短收敛时间。";
+RenderRefractiveShadowsLabel.Text="渲染折射阴影";
+RenderRefractiveShadowsControl.Tooltip="为折射表面（例如玻璃量器）提供物理上合理的阴影。如果忽略阴影的已禁用折射，则会导致收敛更快，也会导致物理上难以置信的结果。需要正确的焦散评估。";
+LocationBasedImportanceSamplingLabel.Text="基于位置的重要采样";
+LocationBasedImportanceSamplingControl.Tooltip="优化场景中发光表面的采样。推荐用于具有许多局部网格光源的场景（例如汽车内的发光仪器。）";
+EmissiveObjectsImportanceSamplingLabel.Text="放射性对象的重要采样";
+EmissiveObjectsImportanceSamplingControl.Tooltip="指定如何相对于其他光源为网格光源采样。低于 1.0 的值会从每个渲染步骤的环境和虚拟光源生成大多数样本。";
+ImportanceDistributionMethodLabel.Text="       分布";
+ImportanceDistributionMethodControl.Tooltip="选择光源的采样方案。“相等”：样品在光源之间平均分配。“与功率成比例”：将更多样本归因于释放了更多能量的光源。";
+ImportanceSamplingFactorLabel.Text="       因素";
+ImportanceSamplingFactorControl.Tooltip="指定发光表面与其他光源相比，采样频率更高（值 > 1）还是更低（值 < 1）。对于具有可忽略能量的网格光源的场景，使用较小的值。";
+PathTerminationStartDepthLabel.Text="路径终点的起始深度";
+PathTerminationStartDepthControl.Tooltip="指定光线跟踪深度为多少以后，光线/路径可以随机终止。较高的值会降低每像素样本较少的图像中的噪声，但会显著增加帧时间和整体收敛时间。";
+
+EnableFinalGatheringLabel.Text="启用最终收集";
+EnableFinalGatheringControl.Tooltip="启用最终聚集以加速间接照明收敛。尤其是对于具有散射材料的场景来说很有用。";
+PhotonNumberLabel.Text="       光子编号";
+PhotonNumberControl.Tooltip="指定跟踪最终聚集的光子总体数量。较高的值可能产生更准确的结果，但会消耗更多的计算时间和更多的内存。";
+PathDepthLabel.Text="       路径深度";
+PathDepthControl.Tooltip="指定考虑用于光子跟踪的反射数量。更高的值会产生更真实的结果，但会对性能产生轻微影响。";
+PhotonRadiusLabel.Text="       光子半径 (mm)";
+PhotonRadiusControl.Tooltip="指定以毫米表示的受一个光子影响区域的半径。较小的半径会提高准确率，较大的半径会导致图像收敛更快。要检查最终聚集光子，请将“光子图可视化模式”设置为“最终聚集”。";
+RefineFinalGatheringMapLabel.Text="       优化最后收集图";
+RefineFinalGatheringMapControl.Tooltip="如果启用，则每个渲染步骤都将再次生成指定数量的光子并累积起来。与较少数量的光子相结合会使渲染加快，但需要更多渲染迭代。这可以增加间接照明的质量/平滑度，但以更高的计算时间为代价。";
+PrecalculateIrradianceLabel.Text="       预算辐照度";
+PrecalculateIrradianceControl.Tooltip="预先计算最终聚集操作以优化帧时间，但会降低间接照明的精度。与“优化最后聚集图”结合使用可能会降低性能。";
+
+CausticsLabel.Text="焦散";
+CausticsControl.Tooltip="选择计算焦散的模式。“无”压缩焦散以更快的收敛。\"路径跟踪器\"建议用于大型光源和无偏差的结果。焦散光子能为小型光源提供更好的结果。";
+CausticPhotonNumberLabel.Text="       光子编号";
+CausticPhotonNumberControl.Tooltip="指定焦散的光子总体数量。更高的值可能产生更准确的结果，但会消耗更多的计算时间和更多的内存。建议使用较低的数量并结合“优化焦散光子图”。";
+CausticPathDepthLabel.Text="       路径深度";
+CausticPathDepthControl.Tooltip="指定考虑用于焦散光子跟踪的反射数量。更高的值会产生更真实的结果，但会对性能产生轻微影响。";
+CausticRadiusLabel.Text="       焦散半径 (mm)";
+CausticRadiusControl.Tooltip="指定受一个光子影响的焦散区域的半径。较大的半径会提高收敛的速度，但会导致模糊的结果。";
+RefineCausticMapLabel.Text="       优化焦散光子图";
+RefineCausticMapControl.Tooltip="如果启用，则每个渲染步骤都将再次生成指定数量的光子并累积起来。如果启用，“焦散光子数量”可以设置为较低的值，同时仍能获得更高质量的结果。";
+
+RayOffsetLabel.Text="射线偏移 (mm)";
+RayOffsetControl.Tooltip="指定启动新光线的光线生命点的偏移量。应大致设置为场景中曲面之间的最小距离。太小的值可能导致黑色伪假象。值太大会降低渲染精度。";
+
+LODLabel.Text="细节级别";
+LODControl.Tooltip="细节级别";
+
+GIAllowGroundReflLabel.Text="允许反射到地面";
+GIAllowGroundReflControl.Tooltip="允许反射到地面";
+
+GIAllowGroundShadowLabel.Text="允许地面阴影";
+GIAllowGroundShadowControl.Tooltip="无论代价如何，都允许地面阴影计算。";
+
+GIAllowOutlineLabel.Text="允许轮廓查看模式";
+GIAllowOutlineControl.Tooltip="启用/禁用轮廓边线渲染";
+
+GIAllowBloomLabel.Text="允许高光";
+GIAllowBloomControl.Tooltip="允许高光";
+
+GIAllowDoFLabel.Text="允许景深";
+GIAllowDoFControl.Tooltip="允许景深";
+
+GIDownsamplingFactorLabel.Text="向下采样系数";
+GIDownsamplingFactorControl.Tooltip="指定图像应以较低分辨率渲染,以提高帧速率。值为 1 时，以原始分辨率计算图像。值为 0.5 时，图像以每个的宽度和高度的半分辨率计算。";
+
+PhotonMapVisualizationModeLabel.Text="光子图可视化模式";
+PhotonMapVisualizationModeControl.Tooltip="启用光子的方向可视化以调整光子参数。“无”将禁用直接的光子可视化并显示原始渲染图像。“最终聚集”将显示最终聚集光子。为获得最佳结果，最终聚集光子应重叠并覆盖整个感兴趣区域。“焦散”将显示焦散光子。为获得最佳效果，焦散光子应足够小，以复制细小的焦散物，但密度足以覆盖焦散区域。";

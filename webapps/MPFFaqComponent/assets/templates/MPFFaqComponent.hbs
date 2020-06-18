@@ -1,0 +1,98 @@
+<div class="mpf-faq-container mpf-faq mpf-faq-{{#if categoryToDisplay}}content{{else}}home{{/if}}">
+
+    <{{#if categoryToDisplay}}h1{{else}}div{{/if}} class="text-center mpf-faq-title">
+        <span class="main-part"><a href="{{pageUrlBase}}">{{i18n 'faqTitle'}}</a></span>
+        <span class="second-part"> - {{i18n 'faqServiceName'}}</span>
+    </{{#if categoryToDisplay}}h1{{else}}div{{/if}}>
+
+    <div class="mpf-faq-menu">
+        <div class="mpf-faq-menu-content">
+
+            <h2 class="mpf-faq-subtitle">{{ i18n 'summary'}}</h2>
+
+            <div class="mpf-faq-intro">{{ i18n 'intro'}}</div>
+
+            <div class="mpf-faq-categories">
+
+                {{#each categories}}
+                    {{#if (userHasRole ../roles role)}}
+                        <div class="mpf-faq-category" data-url="{{url}}">
+
+                            <h3 class="mpf-faq-category-title">
+                                {{#if url}}<a href="{{../../../pageUrlBase}}/{{url}}">{{/if}}
+                                    {{#if ../categoryToDisplay}}<span class="fonticon fonticon-expand-right mpf-faq-expand-item"></span> {{/if}}<span class="fonticon {{icon}}"></span> <span>{{i18n title}}</span>
+                                {{#if url}}</a>{{/if}}
+                            </h3>
+
+                            {{#if content}}
+                                <div class="mpf-faq-category-content">{{i18n content}}</div>
+                            {{/if}}
+
+                            {{#if articles}}
+                                <div class="mpf-faq-articles-links">
+                                    {{#each articles}}
+                                    <div class="mpf-faq-article-link" data-url="{{url}}">
+                                        {{#if type}}
+                                            {{#ifCond type 'component'}}
+                                                <a href="{{../../../../../pageUrlBase}}/{{url}}">
+                                            {{/ifCond}}
+                                            {{#ifCond type 'link'}}
+                                                <a href="{{url}}" target="_blank">
+                                            {{/ifCond}}
+                                        {{else}}
+                                            <a href="{{../../../../../pageUrlBase}}/{{url}}">
+                                        {{/if}}
+                                        {{i18n title}}
+                                        </a>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            {{/if}}
+
+                        </div>
+                    {{/if}}
+                {{/each}}
+
+            </div>
+
+            <div class="mpf-faq-outro">{{ i18n 'outro'}}</div>
+        </div>
+    </div><!--
+
+    --><div class="mpf-faq-bloc">
+
+        {{#if categoryToDisplay}}
+
+           <h1 class="mpf-faq-category-title">
+               <span class="fonticon {{categoryToDisplay.icon}}"></span> <span>{{i18n categoryToDisplay.title}}</span>
+           </h1>
+
+           <div class="mpf-faq-articles">
+
+               {{#each categoryToDisplay.articles}}
+                   {{#if type}}
+                   {{else}}
+                       <div class="mpf-faq-anchor" data-url="{{url}}"></div>
+                       <div class="mpf-faq-article">
+
+                           <h3 class="mpf-faq-article-title">{{i18n title}}</h3>
+
+                           <div class="mpf-faq-article-content">{{{content}}}</div>
+
+                       </div>
+                   {{/if}}
+               {{/each}}
+
+               {{#if categoryToDisplay.component}}
+                    <div class="mpf-faq-component"></div>
+               {{/if}}
+
+           </div>
+
+        {{/if}}
+
+    </div>
+
+    <div class="mpf-faq-go-top"><span class="fonticon fonticon-up"></span></div>
+
+</div>

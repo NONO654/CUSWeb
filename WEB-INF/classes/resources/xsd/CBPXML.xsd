@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2008. All rights reserved. -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://cbp.enovia.ws/CBPXML" targetNamespace="http://cbp.enovia.ws/CBPXML" elementFormDefault="qualified">
+  <annotation>
+    <appinfo>
+      <webserviceSchema/>
+    </appinfo>
+  </annotation>
+  <complexType name="Credentials">
+		<sequence>
+			<element name="user" type="string"/>
+			<element name="password" type="string" minOccurs="0"/>
+			<element name="site" type="string" minOccurs="0"/>
+			<element name="role" type="string" minOccurs="0"/>
+			<element name="validity" type="int" minOccurs="0"/>
+			<element name="locale" type="tns:Locale" minOccurs="0"/>
+			<element name="timezoneID" type="string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="TNRV">
+		<sequence>
+			<element name="type" type="string"/>
+			<element name="name" type="string"/>
+			<element name="revision" type="string" minOccurs="0"/>
+			<element name="vault" type="string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ListOfTNRV">
+		<sequence>
+			<element name="tnrvValue" type="tns:TNRV" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="NameValue">
+		<sequence>
+			<element name="name" type="string"/>
+			<element name="value" type="string"/>
+		</sequence>
+	</complexType>
+	<complexType name="Locale">
+		<sequence>
+			<element name="language" type="string"/>
+			<element name="country" type="string" minOccurs="0"/>
+			<element name="variant" type="string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ListOfNameValue">
+		<sequence>
+			<element name="nameValue" type="tns:NameValue" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ListOfString">
+		<sequence>
+			<element name="string" type="string" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ListOfColumnType">
+		<sequence>
+			<element name="colname" type="string" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="RowType">
+		<sequence>
+			<element name="value" type="string" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ListOfRowType">
+		<sequence>
+			<element name="row" type="tns:RowType" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="Table">
+		<sequence>
+			<element name="columnSize" type="int"/>
+			<element name="columnHeaders" type="tns:ListOfColumnType"/>
+			<element name="tableContent" type="tns:ListOfRowType"/>
+			<element name="rowSize" type="int"/>
+		</sequence>
+	</complexType>
+    	<complexType name="FileContent">
+		<sequence>
+			<element name="filename" type="string" minOccurs="1" maxOccurs="1"/>
+    			<element name="content" type="base64Binary" minOccurs="1" maxOccurs="1"/>
+  		</sequence>
+	</complexType>
+
+	<simpleType name="IdType">
+        <annotation>
+        	<documentation>The type of id</documentation>
+        </annotation>
+        <restriction base="string">
+			<enumeration value="object"></enumeration>
+			<enumeration value="relationship"></enumeration>
+		</restriction>
+	</simpleType>
+
+	<simpleType name="MailType">
+        <annotation>
+        	<documentation>Type of mail to send</documentation>
+        </annotation>
+        <restriction base="string">
+			<enumeration value="Email"></enumeration>
+			<enumeration value="IconMail"></enumeration>
+			<enumeration value="Both"></enumeration>
+		</restriction>
+	</simpleType>
+
+	<complexType name="MailInput">
+		<sequence>
+			<element name="instance" type="tns:InstanceId" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>
+						The id of a business object or relationship
+					</documentation>
+				</annotation>
+			</element>
+
+			<element name="toList" type="tns:ListOfString" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>
+						List of recipients for the "to" field
+					</documentation>
+				</annotation>
+			</element>
+			<element name="ccList" type="tns:ListOfString" minOccurs="0"
+				maxOccurs="1">
+				<annotation>
+					<documentation>
+						List of recipients for the "cc" field
+					</documentation>
+				</annotation>
+			</element>
+			<element name="bccList" type="tns:ListOfString"
+				minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>
+						List of recipients for the &quot;bcc&quot; field
+					</documentation>
+				</annotation>
+			</element>
+			<element name="subjectKey" type="string" minOccurs="1"
+				maxOccurs="1">
+                <annotation>
+                	<documentation>
+                		A resource bundle key for the
+                		&quot;subject&quot; field pattern
+                	</documentation>
+                </annotation>
+			</element>
+			<element name="messageKey" type="string" minOccurs="0"
+				maxOccurs="1">
+                <annotation>
+                	<documentation>
+                		A resource bundle key for the
+                		&quot;message&quot; field pattern
+                	</documentation>
+                </annotation>
+			</element>
+			<element name="messageHTMLKey" type="string" minOccurs="0"
+				maxOccurs="1">
+                <annotation>
+                	<documentation>
+                		A resource bundle key for the
+                		&quot;message&quot; field pattern when HTML
+                		format is turned on
+                	</documentation>
+                </annotation>
+			</element>
+			<element name="propertyFileName" type="string" minOccurs="0"
+				maxOccurs="1">
+                <annotation>
+                	<documentation>
+                		The base name of the resource bundle property
+                		file
+                	</documentation>
+                </annotation>
+			</element>
+			<element name="objectIdList" type="tns:ListOfString"
+				minOccurs="0" maxOccurs="1">
+                <annotation>
+                	<documentation>
+                		List of ids representing the objects to be
+                		included as links in the mail message
+                	</documentation>
+                </annotation>
+			</element>
+			<element name="urlSuffix" type="string" minOccurs="0"
+				maxOccurs="1">
+                <annotation>
+                	<documentation>
+                		Any additional text you want appended to each
+                		link in the mail message
+                	</documentation>
+                </annotation>
+			</element>
+			<element name="fromAgent" type="string" minOccurs="0"
+				maxOccurs="1">
+                <annotation>
+                	<documentation>
+                		A user to appear in the &quot;from&quot; field
+                		(the default is the context user)
+                	</documentation>
+                </annotation>
+			</element>
+			<element name="replyTo" type="tns:ListOfString"
+				minOccurs="0" maxOccurs="1">
+                <annotation>
+                	<documentation>
+                		Information to appear in the
+                		&quot;reply-to&quot; field
+                	</documentation>
+                </annotation>
+			</element>
+			<element name="preprocessJPOMethod" type="string"
+				minOccurs="0" maxOccurs="1">
+                <annotation>
+                	<documentation>
+                		A JPO method to preprocess the mail message
+                		before sending (given as JPOName:MethodName)
+                	</documentation>
+                </annotation>
+			</element>
+			<element name="mailType" type="tns:MailType" minOccurs="0"
+				maxOccurs="1">
+                <annotation>
+                	<documentation>Type of mail to send</documentation>
+                </annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="InstanceId">
+		<annotation>
+			<documentation>
+				Identifies a business object or relationship
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="id" type="string" minOccurs="1"
+				maxOccurs="1">
+			</element>
+			<element name="idType" type="tns:IdType" minOccurs="1"
+				maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="HistoryRecord">
+		<sequence>
+			<element name="event" type="string"/>
+			<element name="user" type="string"/>
+			<element name="grantor" type="string"/>
+			<element name="time" type="long"/>
+			<element name="state" type="string"/>
+			<element name="info" type="tns:ListOfNameValue"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="ListOfHistoryRecord">
+		<sequence>
+			<element name="historyRecord" type="tns:HistoryRecord" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+			
+</schema>

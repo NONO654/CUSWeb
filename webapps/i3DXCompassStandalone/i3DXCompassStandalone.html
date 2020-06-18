@@ -1,0 +1,56 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Compass</title>
+
+    <!-- Style -->
+    <!-- Compass Component Style -->
+    <link rel="stylesheet" type="text/css" href="../i3DXCompass/i3DXCompass.css">
+
+    <link rel="stylesheet" type="text/css" href="../UWA2/assets/css/netvibes.css" />
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css">
+
+    <link rel="stylesheet" type="text/css" href="i3DXCompassStandalone.css">
+
+    <script src="../AmdLoader/AmdLoader.js"></script>
+    <script src="../WebappsUtils/WebappsUtils.js"></script>
+    <script>
+        require(['WebappsUtils/WebappsUtils'], function (WebappsUtils) {
+            WebappsUtils._setWebappsBaseUrl('../');
+        });
+        var QUERY_PARAMS = {};
+
+        if (window.location.hash) {
+            window.location.hash.substring(1, window.location.hash.length).split('/').forEach(function (paramString) {
+                var param = paramString.split(':');
+
+                QUERY_PARAMS[param[0]] = param[1];
+            });
+
+            if (typeof QUERY_PARAMS.compassRichWithCef !== 'undefined' && QUERY_PARAMS.compassRichWithCef === 'true') {
+                compassRichWithCef = true;
+            }
+        }
+    </script>
+
+    <script src="../c/UWA/js/UWA_W3C_Alone.js"></script>
+    <script src="../UIKIT/UIKIT.js"></script>
+
+    <!-- Compass Init -->
+    <script src="../i3DXCompass/i3DXCompass.js"></script>
+
+</head>
+<body>
+
+
+<div id="compass-container"></div>
+
+<div class="column-left">
+    <div id="my-apps-container"></div>
+</div>
+
+<script src="i3DXCompassStandalone.js"></script>
+</html>

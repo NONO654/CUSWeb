@@ -1,0 +1,68 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-cos/sp-cos.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html" >
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html" >
+<link rel="import" href="../ps-simulation-list/ps-simulation-list.html">
+<link rel="import" href="../ps-searched-simulation/ps-searched-simulation.html">
+<link rel="import" href="../ps-simulation-compare-view/ps-simulation-compare-view.html" >
+<link rel="import" href="../ps-process/ps-process.html" >
+<link rel="import" href="../../SMAProcADUI/ad-session/ad-session.html" >
+<link rel="import" href="../ps-event-manager/ps-event-manager.html">
+
+<dom-module id="ps-container">
+      <link rel="import" type="css" href="ps-container.css">
+      <template>
+            <sp-variable id="mcsBaseURL" name="mcsBaseURL"></sp-variable>
+            <sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL"></sp-variable>
+            <sp-variable id="eedBaseURL" name="eedBaseURL"></sp-variable>
+            <sp-variable id="licenseData" name="licenseData"></sp-variable>
+            <sp-variable id="inDashBoard" name="inDashBoard"></sp-variable>
+            <!-- Used for ADSession -->
+            <sp-variable id="securityContext" name="securityContext" value=""></sp-variable>
+            <!-- Get COS URL -->
+            <sp-cos id="cosServer"></sp-cos>
+            <!-- Get liscense data-->
+            <sp-mcsservice id="license_ws1" data="{{licenseDataCmn}}" uri="license?appNames=Performance_Study,Results_Analytics,Simulation_Companion,Process_Composer" getasap="" on-dataready="licenseDataReady">
+            </sp-mcsservice>
+            
+            <sp-dashboard id="dashboard"></sp-dashboard>
+            <template is="dom-if" if="{{_computeIf(licenseDataCmn)}}">
+                  <div class="main" id="main" on-sessiontimeout="onSessionTimeout">
+                        <!--Sidebar-->
+                        <div id="list" class="sidebar">
+                              <ps-simulation-list id="psSimulationList" class="sidenav" activeitem="{{activeSim}}" sidebarmode="{{sidebarmode}}" on-comparesimulations="onSimlistCompare"
+                                   on-listready="onSimListReady" simulation-factory="{{simulationFactory}}" class$="{{_computeClass(sidebarmode)}}">
+                              </ps-simulation-list>
+                              <ps-searched-simulation id="psSearchedSimulation" activeitem="{{activeSim}}" sidebarmode="{{sidebarmode}}" activeitemindex="{{activeitemindex}}"
+                                  simulation-factory="{{simulationFactory}}" on-comparesimulations="onSimlistCompare" class$="{{_computeClass2(sidebarmode)}}">
+                              </ps-searched-simulation>
+                        </div>
+                        <!--Main simulation content-->
+                        <div class="simdetail" id="simdetail">
+                              <div id="loadingIndicator" style="display:inline-block;padding-left: 50%;padding-top: 40%;"></div>
+                              <div id="noSimulationsSelected" class="noSimulationsSelected hide">
+                                  <p>Select a Simulation Process to view its details</p>
+                              </div>
+                              <sp-modal id="compareModal" class="compareModal" heading="Compare Report" width="70%" height="80%">
+                                    <section>
+                                        <ps-simulation-compare-view
+                                              id="psCompView"
+                                              compare-items="{{compareItems}}"
+                                              on-open-simulation="onOpenSimulationFromCompare">
+                                        </ps-simulation-compare-view>
+                                    </section>
+                                    <footer>
+                                          <button is="sp-button-type" on-click="hideCompareView">Close</button>
+                                    </footer>
+                              </sp-modal>
+                        </div>
+                  </div>
+            </template>
+            <div id="licenseErrorMessage" class="alert-message alert-error hidden">Kindly request your Administrator to grant you a license to access Performance Study</div>
+      </template>
+      <script type="text/javascript" src="ps-container.js"></script>
+</dom-module>

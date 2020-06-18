@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="PLMProductDS" />
+    <m1.package name="PLMProductDS" />
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMConnection name="PLMConnectionDS" />
+      <m1.type name="PLMConnectionDS" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="PLMPortDS" />
+      <m1.type name="PLMPortDS" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="PLMProductInstanceDS" />
+      <m1.relationship name="PLMProductInstanceDS" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="PLMProductDS" />
+      <m1.type name="PLMProductDS" />
+
+      <!-- Basic Concat -->
+      <pattern.VPLM_BASIC_CONCAT>
+        <vplm.Simple name="PLM_ExternalID" />
+        <m1.basic name="name" />
+      </pattern.VPLM_BASIC_CONCAT>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_BOM" />
+        <m1.attribute name="PLMProductDS.V_BOM" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_IndustryCode" />
+        <m1.attribute name="PLMProductDS.V_IndustryCode" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_StdNumber" />
+        <m1.attribute name="PLMProductDS.V_StdNumber" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Supplier" />
+        <m1.attribute name="PLMProductDS.V_Supplier" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_SupplierName" />
+        <m1.attribute name="PLMProductDS.V_SupplierName" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreRepInstance name="PLMRepresentationInstanceDS" />
+      <m1.relationship name="PLMRepresentationInstanceDS" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreRepReference name="PLMRepresentationDS" />
+      <m1.type name="PLMRepresentationDS" />
+
+      <!-- Basic Concat -->
+      <pattern.VPLM_BASIC_CONCAT>
+        <vplm.Simple name="PLM_ExternalID" />
+        <m1.basic name="name" />
+      </pattern.VPLM_BASIC_CONCAT>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_RepKind" />
+        <m1.attribute name="PLMRepresentationDS.V_RepKind" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

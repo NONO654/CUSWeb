@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+  <Template syp:name="ENOPADHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <!-- FXED AREA -->
+      <CATCommandHeader ID="SaveSession" ClassName="DS/PowerByHome/commands/SaveSession" ResourceFile="PowerByHome/PowerByHome" Available="0"/>
+      <CATCommandHeader ID="PropertiesHdr" ClassName="DS/PowerByHome/commands/Properties" ResourceFile="PowerByHome/PowerByHome" Available="1"/>
+
+      <!-- VIEW SECTION -->
+      <CATCommandHeader ID="ExpandAll" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="0"/>
+      <CATCommandHeader ID="CollapseAll" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="0"/>
+      <CATCommandHeader ID="ExpandN" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="0"/>
+      <CATCommandHeader ID="SelectChildren" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="1"/>
+      <CATCommandHeader ID="SelectAll" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="1"/>
+      <CATCommandHeader ID="SelectInversion" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="1"/>
+      <CATCommandHeader ID="SelectParent" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="1"/>
+      <CATCommandHeader ID="SelectSiblings" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="1"/>
+      <CATCommandHeader ID="SelectLeaves" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="1"/>
+
+      <!-- TOOLS SECTION -->
+      <CATCommandHeader ID="RelationIPExplorer" ClassName="DS/PowerByHome/commands/RelationalIPExplorerCmd" ResourceFile="PowerByHome/PowerByHome"/>
+      <CATCommandHeader ID="Print" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands"/>
+      <CATCommandHeader ID="PrintOptions" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="0"/>
+      <CATCommandHeader ID="ExportCSV" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="0"/>
+      <CATCommandHeader ID="ExportCSVOptions" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands" Available="0"/>
+      <CATCommandHeader ID="ColumnVisibility" ClassName="DS/PADCommands/PADActionBarCmds" ResourceFile="PADCommands/PADCommands"/>
+
+      <!-- LIFECYCLE SECTION -->
+      <CATCommandHeader ID="MaturityHdr" ClassName="DS/LifecycleCmd/MaturityCmd" ResourceFile="LifecycleWidget/LifecycleCmd" Available="1"/>
+      <CATCommandHeader ID="RevisionHdr" ClassName="DS/LifecycleCmd/ReviseCmd" ResourceFile="LifecycleWidget/LifecycleCmd" Available="1"/>
+      <CATCommandHeader ID="ReserveHdr" ClassName="DS/PowerByHome/commands/SwitchReservationCmd" ResourceFile="PowerByHome/PowerByHome" Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="Reserve" Value="Reserve" Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="UnreserveHdr" ClassName="DS/PowerByHome/commands/SwitchReservationCmd" ResourceFile="PowerByHome/PowerByHome" Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="Unreserve" Value="Unreserve" Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="GetRevisionHdr" ClassName="DS/PowerByHome/commands/GetRevision" ResourceFile="PowerByHome/PowerByHome" Available="1"/>
+      <CATCommandHeader ID="ReplaceByRevisionHdr" ClassName="DS/PowerByHome/commands/ReplaceByRevision" ResourceFile="PowerByHome/PowerByHome" Available="1"/>
+      <CATCommandHeader ID="ReloadFromServerHdr" ClassName="DS/PowerByHome/commands/ReloadFromServer" ResourceFile="PowerByHome/PowerByHome" Available="1"/>
+      <CATCommandHeader ID="ReplaceContentHdr" ClassName="DS/PowerByHome/commands/ReplaceContentCmd" ResourceFile="PowerByHome/PowerByHome" Available="1"/>
+      <CATCommandHeader Available="1" ResourceFile="ENOCollabSharingCmds/CollabSharing_Workbench" ClassName="DS/ENOCollabSharingCmds/commands/TransferOwnershipCmd/ActionBar_ChangeOwnerCmd" ID="ActionBar_ChangeOwner"/>
+
+      <CATCommandHeader ID="SetThePartNumber" HelpResourceFile="EngineeringItemCmd/EngineeringHelpForCommands" ClassName="DS/EngineeringItemCmd/SetPartNumberCmd/SetPartCmd" ResourceFile="EngineeringItemCmd/EngineeringItemCmd" Available="1"/>                  
+
+      <CATCommandHeader ID="OptionsHdr" ClassName="DS/PowerByHome/commands/Options" ResourceFile="PowerByHome/PowerByHome" Available="1"/>
+
+
+      <!-- CONTEXTMENU HEADERS -->
+      <CATCommandHeader ID="SaveHdr" ClassName="DS/PowerByHome/commands/Save" ResourceFile="PowerByHome/PowerByHome" Available="1"/>
+      <CATCommandHeader ID="RenameHdr" ClassName="DS/PowerByHome/commands/Rename" ResourceFile="PowerByHome/PowerByHome" Available="1"/>
+
+
+    </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="ENOPADWkbAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="ENOPADWkb">
+      <!-- Fixed area -->
+      <CATCmdContainer Name="PADFixedArea" RepresentationType="AfrActionBarFixedSection">
+        <CATCmdStarter Name="SaveSession" Command="SaveSession"/>
+      </CATCmdContainer>
+      <CATCmdContainer Name="Lifecycle" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="Reserve" Command="ReserveHdr"/>
+        <CATCmdStarter Name="Unreserve" Command="UnreserveHdr"/>
+        <CATCmdStarter Name="ReloadFromServer" Command="ReloadFromServerHdr"/>
+        <CATCmdStarter Name="ReplaceByRevision" Command="ReplaceByRevisionHdr"/>
+        <CATCmdStarter Name="Maturity" Command="MaturityHdr"/>
+        <CATCmdStarter Name="Revision" Command="RevisionHdr"/>
+        <CATCmdStarter Name="Change Owner" Command="ActionBar_ChangeOwner"/>
+      </CATCmdContainer>
+
+      <CATCmdContainer Name="XSCViews" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="Properties" Command="PropertiesHdr"/>
+        <CATCmdContainer Name="XSCExpand" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter Name="Expand All" Command="ExpandAll"/>
+          <CATCmdStarter Name="Expand N" Command="ExpandN"/>
+          <CATCmdStarter Name="Collapse All" Command="CollapseAll"/>
+        </CATCmdContainer>
+
+        <CATCmdSeparator Name="PadViews_Separator"/>
+        <CATCmdContainer Name="XSCSelect" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter Name="Select All" Command="SelectAll"/>
+          <CATCmdStarter Name="Select Children" Command="SelectChildren"/>
+          <CATCmdStarter Name="Select Inversion" Command="SelectInversion"/>
+          <CATCmdStarter Name="Select Parent" Command="SelectParent"/>
+          <CATCmdStarter Name="Select Siblings" Command="SelectSiblings"/>
+          <CATCmdStarter Name="Select Leaves" Command="SelectLeaves"/>
+        </CATCmdContainer>
+      </CATCmdContainer>
+      <CATCmdContainer Name="XSCTools" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="RelationIPExplorer" Command="RelationIPExplorer"/>
+        <CATCmdStarter Name="ReplaceContent" Command="ReplaceContentHdr"/>
+        <CATCmdStarter Name="SetThePartNumber" Command="SetThePartNumber"/>
+        <CATCmdContainer Name="PrintDropDown" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter Name="Print" Command="Print"/>
+          <CATCmdStarter Name="Print Options" Command="PrintOptions"/>
+        </CATCmdContainer>
+        <CATCmdContainer Name="ExportDropDown" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter Name="Export CSV" Command="ExportCSV"/>
+          <CATCmdStarter Name="Export CSV Options" Command="ExportCSVOptions"/>
+        </CATCmdContainer>
+        <CATCmdStarter Name="Options" Command="OptionsHdr"/>
+        <CATCmdStarter Name="ColumnVisibility" Command="ColumnVisibility"/>
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

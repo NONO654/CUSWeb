@@ -1,0 +1,1 @@
+define("DS/SpecTree/SpecTree_ja",{});define("DS/SpecTree/assets/nls/shell",{search:"検索...",find:"検索...",filter:"フィルタ..."});

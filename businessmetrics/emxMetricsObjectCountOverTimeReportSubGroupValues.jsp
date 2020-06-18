@@ -1,0 +1,67 @@
+<%--  emxMetricsObjectCountOverTimeReportSubGroupValues.jsp
+    Copyright (c) 2005-2018 Dassault Systemes.
+    All Rights Reserved.
+    This program contains proprietary and trade secret information of MatrixOne,Inc.
+    Copyright notice is precautionary only
+    and does not evidence any actual or intended publication of such program
+    static const char RCSID[] = $Id: emxMetricsObjectCountOverTimeReportSubGroupValues.jsp.rca 1.5 Wed Oct 22 16:11:57 2008 przemek Experimental $
+--%>
+
+<html>
+<%@include file = "../common/emxNavigatorInclude.inc"%>
+<%@include file = "../common/emxNavigatorTopErrorInclude.inc"%>
+<jsp:useBean id="metricsReportBean" class="com.matrixone.apps.metrics.MetricsReports" scope="request"/>
+
+<head>
+    <script type="text/javascript" language="JavaScript" src="../common/scripts/emxUIConstants.js"></script>
+    <script type="text/javascript" language="JavaScript" src="../common/scripts/emxUICore.js"></script>    
+</head>
+
+<body>
+<%
+    String strType     = emxGetParameter(request,"Type");
+    String attrName    = emxGetParameter(request,"AttributeName");
+    String strLanguage = request.getHeader("Accept-Language");
+    String attrType    = "";
+    String strBundle   = "emxMetricsStringResource";
+    String strSubGroup = EnoviaResourceBundle.getProperty(context, strBundle,context.getLocale(), "emxMetrics.label.SubGroup");
+    StringBuffer attrBuffer = new StringBuffer ("<option value =\"\"></option>");
+    Map attrDetailsMap = metricsReportBean.getAttributeDetails(context,strType);
+    // Get all the Attribute names which are the keys in the HashMap
+    java.util.Set attrKeys = attrDetailsMap.keySet ();
+    java.util.Iterator attrItr = attrKeys.iterator ();
+    while ( attrItr.hasNext() ){
+        String attributeName = (String) attrItr.next ();
+        String sAttributeName = i18nNow.getAttributeI18NString(attributeName,strLanguage);
+        // Get the Range of an attribute
+        int rangeSize = metricsReportBean.getRangeSize(context,attributeName);
+        String attrTypeSpecific = (String) attrDetailsMap.get(attributeName);
+        // add all the other Range and Integer attribs to another array
+        if((rangeSize > 0 || "integer".equalsIgnoreCase(attrTypeSpecific)) && !"timestamp".equalsIgnoreCase(attrTypeSpecific)){
+            attrBuffer.append ("<option value =\""+ XSSUtil.encodeForHTMLAttribute(context, attributeName) + "\">" + sAttributeName + "</option>"); 
+        }
+    }
+    StringBuffer sbSubGroup = new StringBuffer ("<select name=\"lstSubgroup\" id=\"lstSubgroup\">");
+    sbSubGroup.append (attrBuffer.toString ());     
+    sbSubGroup.append("</select>");
+
+    //Escape single quotes
+    String sSubGroup = sbSubGroup.toString();
+    StringTokenizer st = new StringTokenizer(sSubGroup, "'");
+    StringBuffer sbSubGroupEscape = new StringBuffer();
+    while(st.hasMoreTokens() ){
+        sbSubGroupEscape.append(st.nextToken());
+        if(st.hasMoreTokens()){
+            sbSubGroupEscape.append("\\'");
+         }
+    }
+%>
+    <script>
+        var contentFrame = findFrame(getTopWindow(),"metricsReportContent");
+        var grpByObject = contentFrame.document.getElementById("subGrpBydiv");
+        //XSSOK
+        grpByObject.innerHTML = '<%= sbSubGroupEscape.toString () %>';
+    </script>
+    <%@include file = "../common/emxNavigatorBottomErrorInclude.inc"%>
+</body>
+</html>

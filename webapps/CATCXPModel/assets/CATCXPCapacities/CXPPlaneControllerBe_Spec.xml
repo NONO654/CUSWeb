@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IdeaExperienceCapacities>
+  <Header>
+    <Version>0.1</Version>
+  </Header>
+
+  <ExperienceObject>
+
+    <CXPService id="fliesTo" mode="task" fctStart="fliesTo" >
+      <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="flies to" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPService id="drivesOn" mode="task" fctStart="drivesOn">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="drives on" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPService id="takesOff" mode="task" fctStart="takesOff">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="takes off from" icon="icons/caps/I_CXPTakeOff.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPService id="landsOn" mode="task" fctStart="landsOn">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="lands on" icon="icons/caps/I_CXPLand.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPService id="fliesAlong" mode="task" fctStart="fliesAlong">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="flies along" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPEvent id="PlaneHasReachedEvent" targetParam="path">
+        <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec"/>
+        <NaturalLanguageInfo capacityType="SensorEvent" alias="has reached" icon="icons/caps/I_CXPMoveReach.png" exposedVariable="target"/>
+    </CXPEvent>
+
+    <CXPEvent id="PlaneHasCompletedEvent" targetParam="path">
+        <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+        <NaturalLanguageInfo capacityType="SensorEvent" alias="has completed" icon="icons/caps/I_CXPMoveComplete.png" exposedVariable="target"/>
+    </CXPEvent>
+
+
+    <CXPFunction id="isFlyingAlong" body="isFlyingAlong" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="SensorState" alias="is flying along" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPFunction>
+
+    <CXPFunction id="isFlyingTo" body="isFlyingTo" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec"/>
+      <NaturalLanguageInfo capacityType="SensorState" alias="is flying to" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPFunction>
+
+    <CXPFunction id="isLanded" body="isLanded" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="SensorState" alias="is landed" icon="icons/caps/I_CXPIsLanded.png"/>
+    </CXPFunction>
+
+    <CXPFunction id="isFlying" body="isFlying" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="SensorState" alias="is flying" icon="icons/caps/I_CXPIsFlying.png" />
+    </CXPFunction>
+
+</ExperienceObject>
+
+</IdeaExperienceCapacities> 

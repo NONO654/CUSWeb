@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.doe.Datafile" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAExeDOEDataFilePlugin" nlsID="dispname">Data File</DisplayName>
+	<Description nlsFile="SMAExeDOEDataFilePlugin" nlsID="desc">Data File</Description>
+	<LongDescription nlsFile="SMAExeDOEDataFilePlugin" nlsID="longdesc">
+		<![CDATA[Uses the content of a specified file as the design matrix to execute.
+
+</span><span style="font-weight:bold">Advantages:
+</span><span>   + Allows any set of points to be executed and DOE post processing results obtained.
+
+</span><span style="font-weight:bold">Disadvantages:
+</span><span>   - Design points must be externally generated and saved to file.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DOE_Technique</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.doe.DataFile</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeDOEDataFilePlugin32.gif" targetFilename="SMAExeDOEDataFilePlugin32.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeDOEDataFilePlugin.CATNls" targetFilename="SMAExeDOEDataFilePlugin.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeDOEDataFilePlugin_ja.CATNls" targetFilename="SMAExeDOEDataFilePlugin_ja.CATNls" locale="Japanese" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-data-file/cmp-doe-data-file.html" targetFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-data-file/cmp-doe-data-file.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-doe-data-file</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.doe.datafile.DataFile</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>  
+	<Properties>
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="File" type="file" valuetype="single" mode="input">
+			</Property>
+			<Property name="Contains Levels" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[False]]>
+				</Value>
+			</Property>
+			<Property name="Transposed" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[False]]>
+				</Value>
+			</Property>
+			<Property name="Use Header Row" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[True]]>
+				</Value>
+			</Property>
+			<Property name="Header Row" type="integer" valuetype="single">
+				<Value>1</Value>
+			</Property>
+			<Property name="Data Starts on Row" type="integer" valuetype="single">
+				<Value>2</Value>
+			</Property>
+			<Property name="File contains responses" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[False]]>
+				</Value>
+			</Property>
+		</Property>
+		<Property name="factor attributes" type="aggregate" valuetype="single">
+			<Property name="Column" type="integer" valuetype="single">
+				<Value>
+					<![CDATA[0]]>
+				</Value>
+			</Property>
+			<Property name="Lower" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+			<Property name="Upper" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+
+			<!-- "Row" not needed yet (no tranpose) -->
+			<!--<Property name="Row" type="integer" valuetype="single">
+        <Value><![CDATA[0]]></Value>
+      </Property>-->
+
+			<!-- Levels format not supported yet -->
+			<!--<Property name="Levels" type="string" valuetype="single">
+        <Value><![CDATA[]]></Value>
+      </Property>
+      <Property name="Relation" type="string" valuetype="single">
+        <Value><![CDATA[values]]></Value>
+      </Property>
+      <Property name="Baseline" type="string" valuetype="single">
+        <Value><![CDATA[]]></Value>
+      </Property>-->
+		</Property>
+		<Property name="Generates Values" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[True]]>
+			</Value>
+		</Property>
+		<Property name="Auto-Assign Factors" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[False]]>
+			</Value>
+		</Property>
+	</Properties>
+</wfext:Extension>

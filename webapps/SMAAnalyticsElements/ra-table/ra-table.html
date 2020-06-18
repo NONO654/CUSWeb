@@ -1,0 +1,27 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-drop/sp-drop.html">
+<link rel="import" href="../ra-table-framework/ra-table-framework.html" />
+<link rel="import" href="../ra-table-column/ra-table-column.html" />	
+<script type="text/javascript" src="../../SMAAnalyticsLiteWidget/assets/fakeData00.js"></script>
+
+
+<dom-module id="ra-table">
+	<link rel="import" type="css" href="ra-table.css">
+	<template>
+		<ra-table-framework id="tableFramework" draggable="false" regions=""
+				data-accessor="{{tableData}}"
+				display-functions="{{commonDisplayFunctions}}">
+			<ra-table-column column-id="rowheader" 
+					row-header
+					region="left"
+					display-functions="[[_getRowHeaderFunctions()]]">
+			</ra-table-column>
+			<ra-table-column column-id="requirements" 
+					region="left" 
+					display-functions="[[_getRequirementsFunctions()]]">
+			</ra-table-column>
+		</ra-table-framework>
+    </template>
+	<script type="text/javascript" src="ra-table.js"></script>
+</dom-module>

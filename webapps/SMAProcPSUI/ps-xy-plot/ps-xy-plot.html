@@ -1,0 +1,29 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcWebXYPlot/xy-plot/xy-plot.html" />
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<dom-module id="ps-xy-plot">
+  <link rel="import" type="css" href="ps-xy-plot.css">
+  <template>
+    <!-- <div id="selectmessage" class="messageDiv">
+  </div> -->
+  <div class="notificationWrap"> 
+    <sp-notification id="notification" position="TL" width="400"></sp-notification>
+  </div>
+    
+    <div id="graphContainer" class="graphContainer">
+    </div>
+    <div id="pagination" class = "pagination" >
+      <span class = "fonticon fonticon-expand-left arrows" title="Previous" id="prev" on-click="backward"></span>
+      <div id = "pageInfo" class="pageinfo">
+        <span>Page </span>
+        <div id = 'pageDropdown' class="pageDropdown"></div>
+        <span style="padding-right:5px"> of </span>
+        <span>[[nmbrOfPages]]</span>
+      </div>
+      <span class="fonticon fonticon-expand-right arrows" title="Next" id="next" on-click="forward"></span>
+    </div>
+  </template>
+  <script type="text/javascript" src="ps-xy-plot.js"></script>
+</dom-module>

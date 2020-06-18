@@ -1,0 +1,27 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../sp-base/sp-base.html">
+<link rel="import" href="../sp-cosservice/sp-cosservice.html">
+<link rel="import" href="../sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../sp-run/sp-run.html">
+
+<dom-module id="sp-cos-filemonitor">
+  <template>
+		<!--  WEB SERVICES -->
+		<sp-cosservice id="cosJobSummaryWS" uri="job/<jobId>/summary/brief/directory"></sp-cosservice>
+		<sp-mcsservice id="mcsJobSummaryWS" uri="/resources/slmservices/jobs/<jobId>/summary"></sp-mcsservice>
+        <sp-cosservice id="monitorWS" uri="job/<jobId>/monitor?Topic=FileAccess-REST&Timestamp=0"></sp-cosservice>
+        <sp-cosservice id="cancelWS" uri="execution/<jobId>/cancel"></sp-cosservice>
+		<sp-cosservice id="lsWS" uri="<host>/SMAExeStation-REST/ls"></sp-cosservice>
+		<sp-cosservice id="tailWS" uri="<host>/SMAExeStation-REST/tail"></sp-cosservice>
+		<sp-cosservice id="fileWS" uri="<host>/SMAExeStation-REST/file"></sp-cosservice>
+        <sp-cosservice id="stopWS" uri="<host>/SMAExeStation-REST/stop"></sp-cosservice>
+		        
+        <!-- OTHER WEB COMPONENTS -->
+        <sp-dashboard id="dashboard"></sp-dashboard>
+		<sp-run id="runner" timeout="60000"></sp-run> 		
+    </template>
+  <script type="text/javascript" src="sp-cos-filemonitor.js"></script>
+</dom-module>
+
+

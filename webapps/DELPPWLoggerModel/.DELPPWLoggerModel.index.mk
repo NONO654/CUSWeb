@@ -1,0 +1,9 @@
+m|DELPPWModels\DELPPWLoggerModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELPPWLoggerModel\DELPPWLoggerModel.js|1535151206|2113
+s|DELPPWModels\DELPPWLoggerModel.mweb\src\LoggerModel.js|1532440436|403
+s|DELPPWModels\DELPPWLoggerModel.mweb\src\LoggerUtils.js|1533050689|4430
+s|DELPPWModels\DELPPWLoggerModel.mweb\src\LoggerCollection.js|1532440436|346

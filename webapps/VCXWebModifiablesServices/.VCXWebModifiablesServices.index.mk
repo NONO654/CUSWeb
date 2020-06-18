@@ -1,0 +1,9 @@
+m|VCXWebExperienceBase\VCXWebModifiablesServices.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.3.18349
+r|G:\R421\BSF\.
+t|win_b64\webapps\VCXWebModifiablesServices\VCXWebModifiablesServices.js|1544837990|9466
+s|VCXWebExperienceBase\VCXWebModifiablesServices.mweb\src\VCXModifiablesAccess.js|1544452236|11881
+s|VCXWebExperienceBase\VCXWebModifiablesServices.mweb\src\VCXModifiablesServices.js|1540982128|22212
+s|VCXWebExperienceBase\VCXWebModifiablesServices.mweb\src\VCXModifiablesChangeServices.js|1489680114|3171

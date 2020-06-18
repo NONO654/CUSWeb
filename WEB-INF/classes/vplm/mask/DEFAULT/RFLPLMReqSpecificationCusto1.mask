@@ -1,0 +1,369 @@
+// ===========================================================
+// PACKAGE   : RFLPLMRequirementModelCusto1
+// ===========================================================
+// Generated : Tue August 11 2006
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr Requirement flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values Requirement flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field Requirement flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 4 entities :
+// - RFLPLMReqSpecificationInstanceCusto1
+// - RFLPLMReqSpecificationReferenceCusto1
+// - RFLPLMReqSpecificationRepInstanceCusto1
+// - RFLPLMReqSpecificationRepReferenceCusto1
+
+
+
+// ===========================================================
+ENTITY RFLPLMReqSpecificationInstanceCusto1
+// ===========================================================
+// --- attributes: 8
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR V_usage;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;Y
+FATTR reservedby;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR reservedby;Y
+FATTR originated;Y
+FATTR modified;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+
+
+// ===========================================================
+ENTITY RFLPLMReqSpecificationReferenceCusto1
+// ===========================================================
+// --- attributes: 14
+ATTR PLM_ExternalID;N;N;$
+ATTR V_Title;N;N;$
+ATTR V_description;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR current;N;N;$
+ATTR majorrevision;N;N;$
+ATTR V_SubmittedBy;N;N;$
+ATTR V_SourceCategory;N;N;$
+
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_Title;Y
+FATTR V_description;Y
+FATTR V_SubmittedBy;Y
+FATTR V_SourceCategory;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_Title;N
+FATTR V_description;Y
+FATTR owner;Y
+FATTR reservedby;Y
+FATTR V_SubmittedBy;Y
+FATTR V_SourceCategory;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_Title;N
+FATTR current;Y
+FATTR majorrevision;Y
+FATTR V_description;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR reservedby;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR V_SubmittedBy;Y
+FATTR V_SourceCategory;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_Title;N
+FATTR current;N
+FATTR majorrevision;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N 
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+FATTR V_SubmittedBy;N
+FATTR V_SourceCategory;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_Title;N
+FATTR majorrevision;N
+FATTR reservedby;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_Title;N
+FATTR current;N
+FATTR majorrevision;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+FATTR V_SubmittedBy;N
+FATTR V_SourceCategory;N
+// - unordered
+
+
+
+// ===========================================================
+ENTITY RFLPLMReqSpecificationRepInstanceCusto1
+// ===========================================================
+// --- attributes: 10
+ATTR PLM_ExternalID;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR owner;Y
+FATTR reservedby;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR reservedby;Y
+FATTR originated;Y
+FATTR modified;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+
+// ===========================================================
+ENTITY RFLPLMReqSpecificationRepReferenceCusto1
+// ===========================================================
+// --- attributes: 9
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;Y
+FATTR reservedby;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR reservedby;Y
+FATTR originated;Y
+FATTR modified;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// ===========================================================
+// End of RFLPLMReqSpecificationModelCusto1 package's DEFAULT mask file
+// ===========================================================

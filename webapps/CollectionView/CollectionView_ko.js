@@ -1,0 +1,1 @@
+define("DS/CollectionView/CollectionView_ko",{});define("DS/CollectionView/assets/nls/carousel",{close:"닫기",next:"다음",previous:"이전",dotMenu:"다른 옵션..."});define("DS/CollectionView/assets/nls/collectionviewstatusbar",{TotalRows:"총 행 수: ",SelectedRows:"선택된 행 수: ",SelectedCells:"선택된 셀: ",NoActiveCell:"활성 셀 없음",ActiveCellTooltip:"활성 셀"});

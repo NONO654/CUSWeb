@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+
+<!-- Widget Meta Data -->
+<meta name="author" content="Dassault Systemes" />
+<meta name="brand" content="ENOVIA" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="autoRefresh" content="0" />
+<meta name="description" content="ENOVIA OSLC Issue Consumer" />
+
+<!-- Widget Title -->
+<title>OSLC Issue Consumer</title>
+
+<!-- Widget Preferences -->
+<widget:preferences>
+    <widget:preference type="text" name="csId"  label="CS Physical ID" defaultValue="" ></widget:preference>
+    <widget:preference type="text" name="issueId"  label="Issue Physical ID"   defaultValue="" ></widget:preference>
+	<widget:preference type="hidden" name="x3dPlatformId"  label="x3dPlatformId"        defaultValue="OnPremise" ></widget:preference>
+</widget:preferences>
+
+<!-- Widget Events -->
+<script>
+
+    widget.addEvents({
+        onViewChange : function(event) {
+            require([ 'DS/ENOOSLCIssueConsumer/OSLCIssueConsumer' ], function (OSLCIssueConsumer) {
+                OSLCIssueConsumer.onViewChange.call(null, event);
+            });
+        },
+
+        onLoad : function(event) {
+            require([ 'DS/ENOOSLCIssueConsumer/OSLCIssueConsumer' ], function(OSLCIssueConsumer) {
+                OSLCIssueConsumer.onLoad.call(null, event);
+            });
+        },
+
+        onRefresh : function() {
+            require('DS/ENOOSLCIssueConsumer/OSLCIssueConsumer').onRefresh.call(null, arguments);
+        },
+
+        onStorageChange : function() {
+            require('DS/ENOOSLCIssueConsumer/OSLCIssueConsumer').onStorageChange.apply(null, arguments);
+        },
+        
+        onSpaceChange : function() {
+            require('DS/ENOOSLCIssueConsumer/OSLCIssueConsumer').onSpaceChange.apply(null, arguments);
+        },
+        
+        onEdit : function(event) {
+            require('DS/ENOOSLCIssueConsumer/OSLCIssueConsumer').onEdit.apply(null, arguments);
+        },
+        endEdit : function(event) {
+            require('DS/ENOOSLCIssueConsumer/OSLCIssueConsumer').endEdit.apply(null, arguments);
+        }
+    });
+</script>
+
+</head>
+<body>
+  <!-- Default Loading -->
+  <div class="spinner spinner-lg spinning fade in" style="transform: translate3d(0px, 0px, 0px); display: inline-block; margin-top: 20%; margin-left: 45%;">
+    <span class="spinner-bar"></span>
+    <span class="spinner-bar spinner-bar1"></span>
+    <span class="spinner-bar spinner-bar2"></span>
+    <span class="spinner-bar spinner-bar3"></span>
+  </div>
+</body>
+</html>

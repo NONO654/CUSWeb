@@ -1,0 +1,29 @@
+<!--------------------------------------------------------------------
+[sp-multi-value-textfield HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:    Fri, 20 Nov 2015 08:00:03 GMT
+Assigned to:	Thomas Esterle (TEE1)
+Primary use:	Multi value input
+Description:    This element is a multi-value textfield which shows the values as tags and has a textfield to add new values (when the user presses enter),
+                he can also delete them by pressing backspace when the textfield is empty.
+                TO-DO the tags should have a delete button on them
+--------------------------------------------------------------------->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../sp-tag/sp-tag.html">
+
+<!--TODO d6u, Placeholder property and read-only UI look hideous! Change after we make necessary changes to the UI-->
+
+<dom-module id="sp-multi-value-textfield">
+  <link rel="import" type="css" href="sp-multi-value-textfield.css">
+  <template>
+        <input id="input" class="input" type="text" placeholder="{{placeholder}}" on-keyup = "onKeyUp" readonly$= "{{readonly}}">
+       <div id="content" class="content" on-click="focusInput" haserror="{{haserror}}">
+            <template is="dom-repeat" items="{{valueArrayAll}}" as="subValue" observe="length">
+                <sp-tag class="tag" on-remove="removeItem" readonly="{{readonly}}" value="{{subValue}}"></sp-tag>
+            </template>
+        </div>
+    </template>
+  <script type="text/javascript" src="sp-multi-value-textfield.js"></script>
+</dom-module>

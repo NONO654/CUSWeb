@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.Mmfd" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationMmfd" nlsID="dispname">MMFD</DisplayName>
+	<Description nlsFile="SMAWflOptimizationMmfd" nlsID="desc">Modified Method of Feasible Directions</Description>
+	<LongDescription nlsFile="SMAWflOptimizationMmfd" nlsID="longdesc">
+		<![CDATA[Modified Method of Feasible Directions (MMFD)
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Direct Numerical Technique
+
+</span><span style="font-weight:bold">Parameter Types:
+</span><span>   &#8226; Real
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for highly non-linear design spaces
+   &#8226; Not well-suited for discontinuous design spaces
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Well-suited for long running simulations
+
+</span><span style="font-weight:bold">Parallel Processing: </span><span>Available
+
+</span><span style="font-weight:bold">Gradients: </span><span>Yes
+
+</span><span style="font-weight:bold">Features:
+</span><span>   &#8226; Exploits local area around initial design point
+   &#8226; Handles inequality and equality constraints directly
+   &#8226; Rapidly obtains local optimum design
+
+Used best when starting from a feasible design point. Usually requires multiple iterations consisting of a search direction calculation (using gradients of each variable), and a one-dimensional search. Follows the active constraints during the search until no further improvement can be made.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.Mmfd</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationMmfd.CATNls" targetFilename="SMAWflOptimizationMmfd.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationMmfd_Japanese.CATNls" targetFilename="SMAWflOptimizationMmfd_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.mmfd.MMFD</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="LogMessagesFileName" type="string" valuetype="single">
+			<Value>MMFD-output.txt</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Max Number of Iterations" type="integer" valuetype="single">
+				<Value>40</Value>
+			</Property>
+			<Property name="Relative Gradient Step" type="real" valuetype="single">
+				<Value>0.01</Value>
+			</Property>
+			<Property name="Min Abs Gradient Step" type="real" valuetype="single">
+				<Value>0.001</Value>
+			</Property>
+			<Property name="Absolute Convergence Criterion" type="real" valuetype="single">
+				<Value>0.001</Value>
+			</Property>
+			<Property name="Rel Convergence Criterion" type="real" valuetype="single">
+				<Value>0.001</Value>
+			</Property>
+			<Property name="Save Technique Log" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

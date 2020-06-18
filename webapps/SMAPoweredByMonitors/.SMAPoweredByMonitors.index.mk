@@ -1,0 +1,12 @@
+m|SMAPoweredByCommon\SMAPoweredByMonitors.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19133
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAPoweredByMonitors\SMAPoweredByMonitors.js|1557779077|11230
+s|SMAPoweredByCommon\SMAPoweredByMonitors.mweb\src\ad-monitor-jobs-result.js|1554473273|3754
+s|SMAPoweredByCommon\SMAPoweredByMonitors.mweb\src\ad-monitor-work-data.js|1554473275|11045
+s|SMAPoweredByCommon\SMAPoweredByMonitors.mweb\src\ad-monitor-upload-jobs.js|1554473274|3956
+s|SMAPoweredByCommon\SMAPoweredByMonitors.mweb\src\ad-monitor-manager.js|1554473274|4014
+s|SMAPoweredByCommon\SMAPoweredByMonitors.mweb\src\ad-monitor-jobs.js|1557263495|7705
+s|SMAPoweredByCommon\SMAPoweredByMonitors.mweb\src\ad-poll-work-directory.js|1554473275|2884

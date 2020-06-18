@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+    <!-- Application Metas -->
+    <title>Web Components template widget - sp-serviceurl demo</title>
+    <meta name="apiVersion" content="1.3" />
+    <meta name="autoRefresh" content="0" />
+
+    <!-- Load the web components polyfill -->
+    <script type="text/javascript" src="../../Polymer-1.1.4/webcomponents-lite.min.js"></script>
+
+    <!-- Load AmdLoader -->
+    <script type="text/javascript" src="../../AmdLoader/AmdLoader.js"></script>
+
+    <!-- Load the UWA framework -->
+    <script type="text/javascript" src="../../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../c/UWA/assets/css/standalone.css" />
+    
+    <!-- Load Polymer and any other web components -->
+    <link rel="import" href="sp-serviceurl.html"/>
+
+    <widget:preferences>
+      <widget:preference name="serviceid" type="text" label="Service id" defaultValue="3DSpace" />
+      <widget:preference name="platformid" type="list" label="Collabspaces" defaultValue="OnPremise">
+        <widget:option label="None" value="" />
+        <widget:option label="OnPremise" value="OnPremise" />
+      </widget:preference>
+    </widget:preferences>
+
+
+
+    <!-- Application Source -->
+    <style type="text/css">
+    </style>
+    <script>
+    /* globals require, widget*/
+    function onReady() {
+        require(['UWA/Core'],
+           function () {
+                var WebComponentWidget = {
+                    onLoad: function () {
+                        var serviceurl = widget.getElement('sp-serviceurl');
+                        serviceurl.setAttribute('serviceid', widget.getValue('serviceid'));
+                        widget.getElement('kbd.serviceid').textContent = widget.getValue('serviceid');
+                        serviceurl.setAttribute('platformid', widget.getValue('platformid'));
+                        widget.getElement('kbd.platformid').textContent = widget.getValue('platformid');
+                        if (window.console && window.console.log) {
+                            window.console.log(serviceurl);
+                        }
+                        serviceurl.getUrl({
+                            onComplete: function (uri) {
+                                widget.getElement('kbd.serviceuri').textContent = uri;
+                            },
+                            onError: function (err) {
+                                widget.getElement('kbd.serviceuri').textContent = 'Error:' + (err && err.message ? err.message : err);
+                            }
+                        });
+                    }
+                };
+                widget.addEvents(WebComponentWidget);
+            }
+        );
+    };
+    if (document.createElement('sp-serviceurl').getUrl) {
+        onReady();
+    } else {
+        window.addEventListener('WebComponentsReady', onReady);
+    }
+    </script>
+</head>
+<body>
+    <h1>&lt;sp-serviceurl&gt; sample</h1>
+    <p>This component reuse &lt;sp-webservice&gt; to query the Apps Management server for a given service URL and platform ID.</p>
+    <p>It will look for the platform ID (eg <em>OnPremise</em>) in</p>
+    <ol>
+      <li>a <em>plaformid</em> attribute on the component</li>
+      <li>a widget preference named <em>x3dPlatformId</em> if running in a widget</li>
+    </ol>
+    <hr />
+    <sp-serviceurl serviceid="" platformid=""></sp-serviceurl>
+    <ul>
+      <li>Service Id: <kbd class="serviceid">-</kbd></li>
+      <li>Platform Id: <kbd class="platformid">-</kbd></li>
+      <li>Service URI: <kbd class="serviceuri">Awaiting URI</kbd></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,9 @@
+m|MPFComponents\MPFLabMap.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFLabMap\MPFLabMap.js|1540605182|2235
+s|MPFComponents\MPFLabMap.mweb\src\MPFLabMap.js|1508248380|0
+s|MPFComponents\MPFLabMap.mweb\src\ShopMarkerBuilder.js|1503567675|1483
+s|MPFComponents\MPFLabMap.mweb\src\LabMap.js|1532013990|2389

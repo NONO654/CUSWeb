@@ -1,0 +1,400 @@
+{		
+		"ra-avscontourchart": {
+		"Caption": "Simple Contour chart",
+		"title": "Contour Chart",
+		"icon": "ContourPlot.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "all",
+			"usesTime": false,
+			"multiSeries": false,
+			"dimensions": [
+				{
+					"dim": "x",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "y",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "color",
+					"required": true,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "constraints",
+					"required": false,
+					"uipanel": "ra-constraintsparametercontrol"
+				}
+			]
+		},
+		"defaults": [
+			{
+				"type": "contour",
+				"x": {
+					"data": {
+						"type": "raw"
+					}
+				},
+				"y": {
+					"data": {
+						"type": "raw"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				},
+				"size": {
+					
+				},
+				"shape": {
+					
+				},
+				"label": {
+					
+				},
+				"constraints": [],
+				"approximation" : {
+					"approxId" : "RSM",
+					"numGridNodesX" : 10,
+					"numGridNodesY" : 10
+				}
+			}
+		]
+	},
+	"ra-carpetplot" : {
+			"caption" : "A two input/two output approximation visualization showing overlapping contours.",
+			"title" : "Carpet Plot",
+			"icon" : "Line-Array.png",
+			"source" : "carpetPlot"
+		},
+		
+		
+		"ra-avsbinnedscattermatrixchart" : {
+            "Caption" : "A matrix chart for testing AVS chart engine with drag-n-drop",
+            "title" : "Binned Scatter Matrix Chart",
+            "icon" : "MultiScatterMatrix.png",
+            "source" : "avsCharts",
+            "uiprops" : {
+                "usesTime" : false,
+                "multiSeries" : true,
+                "dimensions" : [
+                    {"dim":"x", "required":true, "uipanel":"ra-spatialparametercontrol"},
+                    {"dim":"y", "required":true, "uipanel":"ra-spatialparametercontrol"},
+                    {"dim":"color", "required":false, "uipanel":"ra-colorparametercontrol"},
+                    {"dim":"size", "required":false, "uipanel":"ra-sizeparametercontrol"},
+                    {"dim":"shape", "required":false, "uipanel":"ra-shapeparametercontrol"},
+                    {"dim":"label", "required":false, "uipanel":"ra-labelparametercontrol"},
+                    {"dim":"constraints", "required":false, "uipanel":"ra-constraintsparametercontrol"}
+                ]
+            },
+            "defaults" : [{
+                "type":"scatter",
+                "x":{"data":{"type":"raw"}},
+                "y":{"data":{"type":"raw"}},
+                "color":{"type":"fixed", "defaultColor":"#c74646"},
+                "size":{},
+                "shape":{},
+                "label":{},
+                "constraints":[]
+            }]
+        },
+        
+        
+        "ra-avsanovachart2" : {
+            "Caption" : "An Anova chart for testing AVS chart engine with drag-n-drop",
+            "title" : "ANOVA Chart",
+            "icon" : "Anova.png",
+            "source" : "avsCharts",
+            "uiprops" : {
+                "usesTime" : false,
+                "multiSeries" : true,
+                "dimensions" : [
+                    {"dim":"x", "required":true, "uipanel":"ra-spatialparametercontrol"},
+                    {"dim":"y", "required":true, "uipanel":"ra-spatialparametercontrol"},
+                    {"dim":"color", "required":false, "uipanel":"ra-colorparametercontrol"}
+                ]
+            },
+            "defaults" : [{
+                "type":"bar",
+                "orientation":"horizontal",
+                "bordersOn":true,
+                "barWidth":0.9,
+                "color":{"type":"fixed", "defaultColor":"#c74646"}
+            }]
+        }, 
+        
+        
+        "ra-anovatable" : {
+			"Caption" : "A table for viewing and creating ANOVA data",
+			"title" : "ANOVA Table",
+			"icon" : "Anova.png",
+			"source" : "anovaTable"
+		},
+        "ra-pcdchart" : {            
+            "Caption" : "Parallel Coordinates Chart",
+            "title" : "Parallel Coordinates Chart",
+            "icon" : "PCPlot.png",
+            "source" : "avsCharts",
+                "uiprops" : {
+                    "usesTime" : false,
+                    "multiSeries" : true,
+                    "dimensions" : [
+                        {"dim":"x", "required":true, "uipanel":"ra-spatialparametercontrol"}                    
+                    ]
+                },
+                "defaults" : [{
+                    "bar" : { "color" : { "positive": "#368ec4", "negative": "#c43636"} },
+                    "line" : { "color" : "#44403d"}
+                }]
+        },
+        "ra-pcd2chart" : {            
+        "Caption" : "Parallel coordinates chart -2",
+        "title" : "Parallel coordinates Chart- 2",
+        "icon" : "Pareto.png",
+        "source" : "avsCharts",
+            "uiprops" : {
+                "usesTime" : false,
+                "multiSeries" : true,
+                "dimensions" : [
+                    {"dim":"x", "required":true, "uipanel":"ra-spatialparametercontrol"}                    
+                ]
+            },
+            "defaults" : [{
+                "bar" : { "color" : { "positive": "#368ec4", "negative": "#c43636"} },
+                "line" : { "color" : "#44403d"}
+            }]
+    },
+    "ra-avsrawbarchart": {
+        "Caption": "Simple bar chart",
+        "title": "Bar Chart",
+        "icon": "2DBar-NoBorder.png",
+        "source": "avsCharts",
+        "uiprops": {
+            "zoomable" : "x",
+            "usesTime": false,
+            "multiSeries": true,
+            "dimensions": [
+                {
+                    "dim": "y",
+                    "required": true,
+                    "uipanel": "ra-spatialparametercontrol"
+                },
+                {
+                    "dim": "yline",
+                    "required": true,
+                    "uipanel": "ra-spatialparametercontrol"
+                },
+                {
+                    "dim": "color",
+                    "required": false,
+                    "uipanel": "ra-colorparametercontrol"
+                },
+                {
+                    "dim": "label",
+                    "required": false,
+                    "uipanel": "ra-labelparametercontrol"
+                },
+                {
+                    "dim": "constraints",
+                    "required": false,
+                    "uipanel": "ra-constraintsparametercontrol"
+                }
+            ]
+        },
+        "defaults": [
+            {
+                "type": "bar",
+                "x": {
+                    "data": {
+                        "type": "raw",
+                        "guid": "Index"
+                    },
+                    "axisProperties": {
+                        "style": "tabular"
+                    }
+                },
+                "color": {
+                    "type": "fixed",
+                    "defaultColor": "#368ec4"
+                }
+            },
+            {
+                "type": "bar",
+                "x": {
+                    "axisProperties": {
+                        "visible": false
+                    }
+                },
+                "y": {
+                    "axisProperties": {
+                        "position": "end"
+                    }
+                },
+                "color": {
+                    "type": "fixed",
+                    "defaultColor": "#368ec4"
+                }
+            }
+        ]
+    },       
+    "ra-plotlyscatterchart": {
+        "Caption": "Plotly scatter plot",
+        "title": "Plotly Scatter Chart",
+        "icon": "ScatterPlot.png",
+        "source": "avsCharts",
+        "uiprops": {
+            "zoomable" : "all",
+            "usesTime": false,
+            "multiSeries": false,
+            "dimensions": [
+                {
+                    "dim": "x",
+                    "required": true,
+                    "uipanel": "ra-spatialparametercontrol"
+                },
+                {
+                    "dim": "y",
+                    "required": true,
+                    "uipanel": "ra-spatialparametercontrol"
+                },
+                {
+                    "dim": "color",
+                    "required": false,
+                    "uipanel": "ra-colorparametercontrol"
+                },
+                {
+                    "dim": "size",
+                    "required": false,
+                    "uipanel": "ra-sizeparametercontrol"
+                },
+                {
+                    "dim": "shape",
+                    "required": false,
+                    "uipanel": "ra-shapeparametercontrol"
+                },
+                {
+                    "dim": "label",
+                    "required": false,
+                    "uipanel": "ra-labelparametercontrol"
+                },
+                {
+                    "dim": "constraints",
+                    "required": false,
+                    "uipanel": "ra-constraintsparametercontrol"
+                }
+            ]
+        },
+        "defaults": [
+            {
+                "type": "scatter",
+                "x": {
+                    "data": {
+                        "type": "raw"
+                    }
+                },
+                "y": {
+                    "data": {
+                        "type": "raw"
+                    }
+                },
+                "color": {
+                    "type": "fixed",
+                    "defaultColor": "#368ec4"
+                },
+                "size": {
+                    
+                },
+                "shape": {
+                    
+                },
+                "label": {
+                    
+                },
+                "constraints": []
+            }
+        ]
+    },
+    "ra-hcscatterchart": {
+        "Caption": "HC scatter plot",
+        "title": "HC Scatter Chart",
+        "icon": "ScatterPlot.png",
+        "source": "avsCharts",
+        "uiprops": {
+            "zoomable" : "all",
+            "usesTime": false,
+            "multiSeries": false,
+            "dimensions": [
+                {
+                    "dim": "x",
+                    "required": true,
+                    "uipanel": "ra-spatialparametercontrol"
+                },
+                {
+                    "dim": "y",
+                    "required": true,
+                    "uipanel": "ra-spatialparametercontrol"
+                },
+                {
+                    "dim": "color",
+                    "required": false,
+                    "uipanel": "ra-colorparametercontrol"
+                },
+                {
+                    "dim": "size",
+                    "required": false,
+                    "uipanel": "ra-sizeparametercontrol"
+                },
+                {
+                    "dim": "shape",
+                    "required": false,
+                    "uipanel": "ra-shapeparametercontrol"
+                },
+                {
+                    "dim": "label",
+                    "required": false,
+                    "uipanel": "ra-labelparametercontrol"
+                },
+                {
+                    "dim": "constraints",
+                    "required": false,
+                    "uipanel": "ra-constraintsparametercontrol"
+                }
+            ]
+        },
+        "defaults": [
+            {
+                "type": "scatter",
+                "x": {
+                    "data": {
+                        "type": "raw"
+                    }
+                },
+                "y": {
+                    "data": {
+                        "type": "raw"
+                    }
+                },
+                "color": {
+                    "type": "fixed",
+                    "defaultColor": "#368ec4"
+                },
+                "size": {
+                    
+                },
+                "shape": {
+                    
+                },
+                "label": {
+                    
+                },
+                "constraints": []
+            }
+        ]
+    }      
+		
+}

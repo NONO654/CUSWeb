@@ -1,0 +1,1 @@
+define("DS/ENXDataGrid/ENXDataGrid_ja",{});define("DS/ENXDataGrid/assets/nls/graphToolbar",{"Show/Hide Image":"イメージを表示/非表示",Rotate:"回転移動","Show/Hide Minimap":"ミニマップを表示/非表示"});define("DS/ENXDataGrid/assets/nls/message",{success:"変更がデータベースに保存されました",error:"変更をデータベースに保存できませんでした",copy:"コピー",move:"移動",cancel:"キャンセル",title:"ドロップアクション"});

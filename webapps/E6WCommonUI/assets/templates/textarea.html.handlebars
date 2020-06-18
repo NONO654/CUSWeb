@@ -1,0 +1,47 @@
+  <style>
+
+    #{{name}}TextArea {
+        height:auto
+    }
+
+  </style>
+  {{#if label}}
+    <label>{{label}}
+    {{~#if required~}}
+          <sup class="required-field">*</sup>
+      {{~/if~}}
+      {{~#if customButtons~}}
+      <span class="actions">
+         {{~#each customButtons~}}
+            <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                <span class="fonticon {{iconClass}}"></span>
+            </button>
+         {{~/each~}}
+      </span>
+      {{~/if~}}
+   </label>
+  {{/if}}
+  <div class="field-group">
+  <div class="input-group-wrapper">
+    <div class="input-group">
+      <div class="input-element">
+        {{~#if readWrite~}}
+            \{{~#if canEdit~}}
+                <textarea class="form-control content" {{#if fieldHTMLId}}id="{{fieldHTMLId}}TextArea{{viewId}}"{{else}}id="{{name}}TextArea{{viewId}}"{{/if}}>\{{ {{name}} }}</textarea>
+                <textarea class="form-control height-calculator" >\{{ {{name}} }}</textarea>
+	        \{{~else~}}
+	            <span class="content read-only">\{{~ readOnlyValue {{name}} ~}}</span>
+              <span class="height-calculator">\{{~  readOnlyValue {{name}} ~}}</span>
+	        \{{~/if~}}
+        {{~else~}}
+               <span class="content read-only">\{{~ readOnlyValue {{name}} ~}}</span>
+               <span class="height-calculator">\{{~  readOnlyValue {{name}} ~}}</span>
+        {{~/if~}}
+        <span class="link">
+        	<a class="show-more">{{i18n "emxFoundation.Label.showMore"}}</a>
+            <a class="show-less">{{i18n "emxFoundation.Label.showLess"}}</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

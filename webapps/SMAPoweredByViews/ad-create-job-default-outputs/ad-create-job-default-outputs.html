@@ -1,0 +1,36 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+
+<dom-module id="ad-create-job-default-outputs">
+    <link rel="import" type="css" href="ad-create-job-default-outputs.css">
+    <template>
+        <div id="saveFilesSection">
+            <label class="control-label">
+                <sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveFiles"></sp-nls>
+            </label>
+            <span id="saveFilesPopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleSaveFilesPopover" on-mouseout="_toggleSaveFilesPopover"
+                on-click="_toggleSaveFilesPopover"></span>
+            <div id="saveFilesPopover" class="popover bottom in hidden" on-click="_toggleSaveFilesPopover">
+                <h3 class="popover-title">
+                    <sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveFiles"></sp-nls>
+                </h3>
+                <div id="saveFilesPopoverBody" class="popover-body">
+                    <sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveFilesPopover"></sp-nls>
+                </div>
+            </div>
+            <!-- Additional files -->
+            <sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveAdditionalFilesPlaceholderGeneric" value={{SaveAdditionalFilesPlaceholderGeneric}}
+                no-view></sp-nls>
+            <input type="text" id="saveAdditionalFilesInput" class="form-control" placeholder="[[SaveAdditionalFilesPlaceholderGeneric]]" on-blur="filesToSaveChanged"></input>
+            <br/>
+            <span id="execDirDeleteWarning" class="alert-message alert-warning hidden">
+                <sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="ExecutionDirectoryDeleteWarning"></sp-nls>
+            </span>
+            <span id="execDirDeleteInfo" class="alert-message alert-primary hidden">
+                <sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="ExecutionDirectoryDeleteInfo"></sp-nls>
+            </span>
+        </div>
+    </template>
+    <script type="text/javascript" src="ad-create-job-default-outputs.js"></script>
+</dom-module>

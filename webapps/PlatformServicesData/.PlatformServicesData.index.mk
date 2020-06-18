@@ -1,0 +1,15 @@
+m|SNResultUX\PlatformServicesData.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.7.19190
+r|G:\R421\BSF\.
+t|win_b64\webapps\PlatformServicesData\PlatformServicesData.js|1562702285|17825
+s|SNResultUX\PlatformServicesData.mweb\src\3DSpace.js|1561525231|33160
+s|SNResultUX\PlatformServicesData.mweb\src\Geovia.js|1551946039|292
+s|SNResultUX\PlatformServicesData.mweb\src\PreviewProxy.js|1561711968|3583
+s|SNResultUX\PlatformServicesData.mweb\src\3DSpacePreviewLoader.js|1561711591|4686
+s|SNResultUX\PlatformServicesData.mweb\src\OnePart.js|1551946039|9121
+t|win_b64\webapps\PlatformServicesData\assets\3DSpace.json|1552338161|308
+s|SNResultUX\PlatformServicesData.mweb\src\assets\3DSpace.json|1551946236|308
+t|win_b64\webapps\PlatformServicesData\assets\Response.json|1561579956|371
+s|SNResultUX\PlatformServicesData.mweb\src\assets\Response.json|1560764230|371

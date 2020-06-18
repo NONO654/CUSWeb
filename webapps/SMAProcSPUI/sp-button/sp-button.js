@@ -1,0 +1,1 @@
+(function(b){var a=b.Polymer;a("sp-button",{publish:{primary:{value:false,reflect:true}},isdisabledChanged:function(){if(this.isdisabled){this.$.button.setAttribute("disabled",true)}else{this.$.button.removeAttribute("disabled")}}})}(this));console.warn("sp-button is deprecated. Please update to sp-button-type");

@@ -1,0 +1,24 @@
+Let myObject(Feature)
+Let maturity(Feature)
+Let title(Feature)
+Let priority(Feature)
+
+Let maturityValue(List)
+Let authorizedForPriority(List)
+Let maturityVal(String)
+
+Trace(1,"Begin requirement BL")
+
+set maturity = ThisObject.GetAttributeObject("attr_current")
+set title = ThisObject.GetAttributeObject("attr_Title")
+set priority = ThisObject.GetAttributeObject("attr_Priority")
+set maturityVal = ThisObject.GetAttributeString("current")
+
+set authorizedForPriority = priority.GetAttributeObject("authorizedValues")
+authorizedForPriority.Append( "test" )
+priority.SetAttributeObject("authorizedValues",authorizedForPriority)
+
+
+Trace(1,"Maturity : " + maturityVal)
+
+title.SetAttributeBoolean("readOnly",true)

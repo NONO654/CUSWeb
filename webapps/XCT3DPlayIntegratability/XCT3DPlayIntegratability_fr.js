@@ -1,0 +1,1 @@
+define("DS/XCT3DPlayIntegratability/XCT3DPlayIntegratability_fr",{});define("DS/XCT3DPlayIntegratability/assets/nls/XCT3DPlayIntegratability",{warning_objectTypeNotSupported_title:"Type d'objet non pris en charge",error_loadingMultipleFiles_title:"Le chargement de plusieurs expériences est impossible. Seule la première est chargée."});

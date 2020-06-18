@@ -1,0 +1,1 @@
+define("DS/MMPrint/MMPrint_ru",{});define("DS/MMPrint/assets/nls/MMPrint",{printErrorTitle:"Ошибка печати",printRealSizeError:"Печать с применением фактического размера не поддерживается"});

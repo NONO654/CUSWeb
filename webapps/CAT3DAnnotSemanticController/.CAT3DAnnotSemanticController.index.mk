@@ -1,0 +1,9 @@
+m|CAT3DAnnotSemanticWebUX\CAT3DAnnotSemanticController.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.9.19281
+r|G:\R421\BSF\.
+t|win_b64\webapps\CAT3DAnnotSemanticController\CAT3DAnnotSemanticController.js|1570564576|10287
+s|CAT3DAnnotSemanticWebUX\CAT3DAnnotSemanticController.mweb\src\_copyright.js|1480428882|63
+s|CAT3DAnnotSemanticWebUX\CAT3DAnnotSemanticController.mweb\src\CAT3DAnnotSemanticContInstance.js|1569918824|28161
+s|CAT3DAnnotSemanticWebUX\CAT3DAnnotSemanticController.mweb\src\CAT3DAnnotSemanticController.js|1480430732|113

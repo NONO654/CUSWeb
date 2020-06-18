@@ -1,0 +1,1 @@
+define("DS/TopBar/TopBar_en",{});define("DS/TopBar/assets/nls/TopBar",{search:"Search",clear:"Clear",login:"Log in",signup:"Sign up",notification:"Notifications",content:"Content",add:"Add",share:"Share",social:"Communities",help:"Help",mainMenu:"Main menu",close:"Close",closeApp:"Close {appName}",tagNav:"6WTags",home:"Home",myAppsRoles:"My Apps and roles",profile:"Profile"});

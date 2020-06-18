@@ -1,0 +1,1 @@
+define("DS/ENOChgActionCMDs/ENOChgActionCMDs_ru",{});define("DS/ENOChgActionCMDs/assets/nls/ENOChgActionCMDs",{ECM_CA_CA_Process:"Процесс"});

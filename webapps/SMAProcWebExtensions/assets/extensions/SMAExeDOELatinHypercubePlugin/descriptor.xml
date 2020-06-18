@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.doe.LatinHypercube" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAExeDOELatinHypercubePlugin" nlsID="dispname">Latin Hypercube</DisplayName>
+	<Description nlsFile="SMAExeDOELatinHypercubePlugin" nlsID="desc">Latin Hypercube</Description>
+	<LongDescription nlsFile="SMAExeDOELatinHypercubePlugin" nlsID="longdesc">
+		<![CDATA[Number of levels for each factor equal to number of points with random combinations.
+
+</span><span style="font-weight:bold">Advantages:
+</span><span>   + Allows many more points and more combinations can be studied for each factor.
+   + Engineer has total freedom in selecting the number of designs to run as long as it is greater than the number of factors.
+
+</span><span style="font-weight:bold">Disadvantages:
+</span><span>   - They are not reproducible unless the same random seed is used consecutively.
+   - As the number of points decreases, the chance of missing some regions of the design space increases.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DOE_Technique</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.doe.LatinHypercube</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeDOELatinHypercubePlugin32.gif" targetFilename="SMAExeDOELatinHypercubePlugin32.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeDOELatinHypercubePlugin.CATNls" targetFilename="SMAExeDOELatinHypercubePlugin.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeDOELatinHypercubePlugin_ja.CATNls" targetFilename="SMAExeDOELatinHypercubePlugin_ja.CATNls" locale="Japanese" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-latin-hypercube/cmp-doe-latin-hypercube.html" targetFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-latin-hypercube/cmp-doe-latin-hypercube.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-doe-latin-hypercube</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.doe.latinhypercube.LatinHypercube</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="# Points" type="integer" valuetype="single">
+				<Value>
+					<![CDATA[1]]>
+				</Value>
+			</Property>
+			<Property name="Fixed Seed" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[False]]>
+				</Value>
+			</Property>
+			<Property name="Random Seed" type="integer" valuetype="single">
+				<Value>
+					<![CDATA[2]]>
+				</Value>
+			</Property>
+		</Property>
+
+		<Property name="factor attributes" type="aggregate" valuetype="single">
+			<Property name="Lower" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+			<Property name="Upper" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+			<Property name="Relation" type="string" valuetype="single">
+				<Value>
+					<![CDATA[%]]>
+				</Value>
+			</Property>
+			<Property name="Baseline" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

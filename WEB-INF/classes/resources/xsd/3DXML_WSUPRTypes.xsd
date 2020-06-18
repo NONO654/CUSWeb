@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2006. All rights reserved. -->
+<xs:schema targetNamespace="http://www.3ds.com/xsd/3DXML_WSUPRTypes" xmlns:xs3d="http://www.3ds.com/xsd/3DXML" xmlns:plm="http://www.3ds.com/xsd/3DXML/PLM" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.3ds.com/xsd/3DXML_WSUPRTypes" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:appinfo>
+      <webserviceSchema />
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:import namespace="http://www.3ds.com/xsd/3DXML/PLM" schemaLocation="3DXML_WSCommonTypes.xsd" />
+  <xs:import namespace="http://www.3ds.com/xsd/3DXML" schemaLocation="3dxml/3DXML.xsd" />
+  <xs:complexType name="ListOfEntityTypeArray">
+    <xs:sequence>
+      <xs:element name="result" type="plm:ListOfEntityType" minOccurs="0" maxOccurs="unbounded">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListOfWSITypeArray">
+    <xs:sequence>
+      <xs:element name="result" type="plm:ListOfWSIType" minOccurs="0" maxOccurs="unbounded">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListOfStringTypeArray">
+    <xs:sequence>
+      <xs:element name="result" type="xs3d:ListOfStringType" minOccurs="0" maxOccurs="unbounded">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BaseStructureType">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="Reference" type="xs3d:PLMCoreReferenceType" minOccurs="0"/>
+      <xs:element name="Instance" type="xs3d:InstanceType" minOccurs="0"/>
+    </xs:choice>
+    <xs:attribute name="root" type="xs:unsignedInt" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="ExpandBaseResultType">
+    <xs:annotation>
+      <xs:documentation>type of a result of a base expand (without matrix) for web services</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="result" type="tns:BaseStructureType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>object composing the result of any expand. Type of this object is a basic 3DXML type</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

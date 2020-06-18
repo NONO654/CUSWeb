@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("widget","ar",{move:"Click and drag to move"});

@@ -1,0 +1,134 @@
+<link rel="import" href="../SMAProcSP/sp-base/sp-base.html" />
+<dom-module id="cmp-optimization">
+<template>
+    <style>
+    :host {
+        display: block;
+        margin: 1em;
+        font: 12px Arial, sans-serif;
+    }
+    em {
+        font-style: italic;
+    }
+    ul {
+        list-style-type: disc;
+    }
+    </style>
+  <pcw-extension-chooser
+    selected-extension="[[techniqueName]]"
+    plugin-type="Optimization_Technique"
+    chooserlabel="Optimization technique: "
+    disabled>
+  </pcw-extension-chooser>
+  <h4>Technique options</h4>
+  <template is="dom-repeat" items="[[pluginOptions]]"><pcw-variable-input variable="[[item]]" disabled></pcw-variable-input></template>
+
+  <h4>Variables</h4>
+  <ul>
+      <template is="dom-repeat" items="[[designVariableNames]]"><li>[[item]]</li></template>
+  </ul>
+  <h4>Constraints</h4>
+  <ul>
+      <template is="dom-repeat" items="[[outputConstraintNames]]"><li>[[item]]</li></template>
+  </ul>
+  <h4>Objectives</h4>
+  <ul>
+      <template is="dom-repeat" items="[[objectiveNames]]"><li>[[item]]</li></template>
+  </ul>
+  <h4>Execution options</h4>
+  <pcw-variable-input variable="[[executeInParallelProperty]]" disabled></pcw-variable-input>
+  <template is="dom-repeat" items="[[executionOptions]]"><pcw-variable-input variable="[[item]]" disabled></pcw-variable-input></template>
+</template>
+<script>
+(function(){
+    'use strict';
+    Polymer({
+        is: 'cmp-optimization',
+        properties: {
+            ExtensionEditorImpl: {
+                value: function () {
+                    return {
+                        UpdateUI: this.UpdateUI.bind(this),
+                        Apply: this.Apply.bind(this)
+                    };
+                }
+            },
+            techniqueName: {type: String},
+            designVariableNames: {type: Array},
+            outputConstraintNames: {type: Array},
+            objectiveNames: {type: Array},
+            pluginOptions: {type: Array},
+            executeInParallelProperty: {type: Object},
+            executionOptions: {type: Array}
+        },
+        UpdateUI: function (act, step, extensionConfig) {
+            console.log('cmp-optimization load', act, step, extensionConfig);
+            var me = this;
+            require(['DS/SMAProcWebCommonControls/ExtensionChooser', 'DS/SMAProcWebCommonControls/VariableInput']);
+            var pluginConfigurations = extensionConfig.getPluginConfigurations() || [];
+            var pluginConfiguration = pluginConfigurations[0];
+            var extensionName = pluginConfiguration && pluginConfiguration.getExtensionName();
+            if (extensionName) {
+                require(['DS/SMAProcWebCMMUtils/SMAJSCMMAuthoringUtils'], function (SMAJSCMMAuthoringUtils) {
+                    SMAJSCMMAuthoringUtils.getExtensionDescriptor(extensionName).then(function(descriptor) {
+                        console.log('Loaded:', descriptor);
+                        me.techniqueName = descriptor.getExtensionName();
+                    }, function() {
+                        console.warn('Failed:', arguments);
+                    });
+                });
+            }
+            var techniqueOptions = pluginConfiguration && pluginConfiguration.getPropertyByName('Technique Options');
+            this.pluginOptions = techniqueOptions && techniqueOptions.getProperties() || [];
+
+            var getNameAndValue = function (property) {
+                return property.getName() + ': '+ property.getValue();
+            }
+            var getAttributes = function (property) {
+                var attributesProperty = property.getPropertyByName('Attributes');
+                var attributesProperties = attributesProperty && attributesProperty.getProperties() || [];
+                var attributesPropertiesNames = (attributesProperties.map(getNameAndValue) || ['No attributes set']).join(', ');
+                return attributesPropertiesNames;
+            }
+            var listProperties = function (property) {
+                var nameProperty = property.getPropertyByName('Name');
+                var attributes = getAttributes(property);
+                return nameProperty.getValue() + ' (' + attributes + ')';
+            }
+
+            var executeInParallelProperty = extensionConfig.getPropertyByName('ExecuteInParallel');
+            if (executeInParallelProperty) {
+                this.executeInParallelProperty = executeInParallelProperty;
+            }
+
+            var designParameterProperty = extensionConfig.getPropertyByName('Design Parameters');
+
+            var designVariableProperty = designParameterProperty && designParameterProperty.getPropertyByName('Design Variable');
+            var designVariableProperties = designVariableProperty && designVariableProperty.getProperties() || [];
+            me.designVariableNames = designVariableProperties.map(listProperties);
+            if (me.designVariableNames.length === 0) {
+                me.designVariableNames = ['No design variables configured']
+            }
+
+            var outputConstraintProperty = designParameterProperty && designParameterProperty.getPropertyByName('Output Constraint');
+            var outputConstraintProperties = outputConstraintProperty && outputConstraintProperty.getProperties() || [];
+            me.outputConstraintNames = outputConstraintProperties.map(listProperties);
+            if (me.outputConstraintNames.length === 0) {
+                me.outputConstraintNames = ['No output constraints configured'];
+            }
+
+            var objectiveProperty = designParameterProperty && designParameterProperty.getPropertyByName('Objective');
+            var objectiveProperties = objectiveProperty && objectiveProperty.getProperties() || [];
+            me.objectiveNames = objectiveProperties.map(listProperties);
+            if (me.objectiveNames.length === 0) {
+                me.objectiveNames = ['No objectives configured'];
+            }
+
+            var execOptionsProperty = extensionConfig.getPropertyByName('Execution Options')
+            this.executionOptions = execOptionsProperty && execOptionsProperty.getProperties() || [];
+        },
+        Apply: function () {}
+    });
+})();
+</script>
+</dom-module>

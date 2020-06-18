@@ -1,0 +1,26 @@
+<!--
+[sp-6wtagger HTML Document]
+
+Project:		ps
+Version:		1.0
+Last change:    Wed, 21 Oct 2015 17:17:28 GMT
+Assigned to:	Vijaya Lakshmi
+Primary use:    Display 6W tags for PS based on simulations displayed in the sidebar
+Description:    This component creates and manages a Tag navigator proxy for PS to interact with
+                6W Tagger in ENOVIA/3D Dashboard
+-->
+
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+
+<dom-module id="sp-6wtagger">
+  <template>
+        <sp-dashboard id="dashboard"></sp-dashboard>
+
+        <!--BPS webservice that requests for Tags with IDs-->
+        <sp-mcsservice data="{{data}}" id="bpsTagDataWS" verb="POST" on-request="onTagDataReq" on-dataready="onTagDataReady"></sp-mcsservice>
+    </template>
+  <script src="sp-6wtagger.js"></script>
+</dom-module>

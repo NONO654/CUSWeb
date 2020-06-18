@@ -1,0 +1,2 @@
+/*!  Copyright 2018 Dassault Systemes. All rights reserved. */
+define("DS/SMAPoweredByViews/Utils/ADTableUtils",["UWA/Core","DS/UIKIT/Input/Toggle","DS/UIKIT/Input/Select"],function(e,d,c){var a={},b="primary";a.getCheckBox=function(f){if(typeof(f.className)!=="undefined"){f.className=b+" "+f.className}else{f.className=b}return new d(f)};a.getSelectMenu=function(f){return new c({placeholder:false,className:"input-sm",options:f})};a.getHTMLElement=function(f){return document.createElement(f)};return a});

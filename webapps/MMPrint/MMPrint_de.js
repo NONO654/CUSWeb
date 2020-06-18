@@ -1,0 +1,1 @@
+define("DS/MMPrint/MMPrint_de",{});define("DS/MMPrint/assets/nls/MMPrint",{printErrorTitle:"Druckfehler",printRealSizeError:"Druck in Originalgröße wird nicht unterstützt"});

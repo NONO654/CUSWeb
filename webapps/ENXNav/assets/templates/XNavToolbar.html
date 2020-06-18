@@ -1,0 +1,38 @@
+{{#if fix_left}}
+<div class="xnav_fix xnav_left" style="width:{{width fix_left}}">
+{{#each fix_left}}
+  <div class="xnav_cmd {{#if icon}}xnav_icon{{/if}}" data-cmd-id="{{name}}" {{#if icon}}style="background-image:{{icon_url icon}}"{{/if}} title="{{nls name}}">
+    {{#if fonticon}}
+    <span class="wux-ui-3ds wux-ui-3ds-2x {{fonticon}}"/>
+    {{/if}}
+  </div>
+{{/each}}
+</div>
+{{/if}}
+{{#if section}}
+{{#each section}}
+<div class="xnav_section {{active}}" title="{{nls name}}">
+  {{#each cmd}}
+    <div class="xnav_cmd {{#if icon}}xnav_icon{{/if}}" data-cmd-id="{{name}}" {{#if icon}}style="background-image:{{icon_url icon}}"{{/if}} title="{{nls name}}">
+      {{#if fonticon}}
+      <span class="wux-ui-3ds wux-ui-3ds-2x {{fonticon}}"/>
+      {{/if}}
+    </div>
+  {{/each}}
+  {{#each cmd_group}}
+  TODO
+  {{/each}}
+</div>
+{{/each}}
+{{/if}}
+{{#if fix_right}}
+<div class="xnav_fix xnav_right" style="width:{{width fix_right}}">
+{{#each fix_right}}
+  <div class="xnav_cmd {{#if icon}}xnav_icon{{/if}}" data-cmd-id="{{name}}"  {{#if icon}}style="background-image({{icon_url icon}})"{{/if}} title="{{nls name}}">
+    {{#if fonticon}}
+    <span class="wux-ui-3ds wux-ui-3ds-2x {{fonticon}}"/>
+    {{/if}}
+  </div>
+{{/each}}
+</div>
+{{/if}}

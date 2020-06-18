@@ -1,0 +1,49 @@
+<dom-module id="cmp-content-editor">
+    <template>
+      <style>
+      .button {
+          height: 39px;
+          width: 39px;
+      }
+
+      .image {
+          margin-left: -9px;
+          margin-top: -2px;
+      }
+      .contentTableDims {
+            height: calc(100% - 50px);
+            min-height: 200px;
+            min-width: 600px;
+      }
+      #contentChooser {
+          display: inline-block;
+          vertical-align: top;
+      }
+      </style>
+      <cmp-wux-dialog id="wuxDialog"
+            ok-button-flag
+            cancel-button-flag
+            movable-flag
+            resizable-flag
+            maximize-button-flag
+            auto-close-flag
+            my-position="center"
+            at-position="center"
+            title="Content">
+          <dialogcontent>
+              <button is="sp-button-type" class="button" on-click="onAdd">
+                <img class="image" src="[[images.add]]" />
+              </button>
+              <button is="sp-button-type" class="button" on-click="onRemove">
+                <img class="image" src="[[images.remove]]" />
+              </button>
+              <cmp-content-chooser id="contentChooser" documentcreate object-types="3DShape, Chapter, DesignSight, FEM, GenerativeStress, Material, PLMCoreRepReference, PLMReference, Part, PlmParameter, Physical Product, Products, Requirement, SpotFastener, Test Case, Use Case, VPMReference, XRep, DOCUMENTS, Approximation, Simulation Folder, Test Execution, Workspace Vault"></cmp-content-chooser>
+              <button is="sp-button-type" on-click="openLegacy">
+                Open in 3DSpace
+              </button>
+              <cmp-content-table class="contentTableDims" id="contentTable"></cmp-content-table>
+          </dialogcontent>
+      </cmp-wux-dialog>
+    <cmp-category-create-modal id="categoryCreateModal"></cmp-category-create-modal>
+  </template>
+</dom-module>

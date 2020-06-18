@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<description xmlns="urn:com:dassault_systemes:widl" xmlns:xs3d="http://www.3ds.com/xsd/3DXML" xmlns:plm="http://www.3ds.com/xsd/3DXML/PLM" xmlns:err="http://www.3ds.com/wserror" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd">
+  <entities targetNamespace="urn:com:dassault_systemes:webservice">
+    <schemaImports>
+      <schemaImport location="wserrors.xsd"/>
+      <schemaImport location="3dxml/3DXML.xsd"/>
+      <schemaImport location="3DXML_WSProductResultTypes.xsd"/>
+      <schemaImport location="3DXML_WSCommonTypes.xsd"/>
+    </schemaImports>
+    <interfaces>
+      <interface name="IDELDigProdExportERPService" scope="public">
+        <documentation>Interface to export workplan and process flow.</documentation>
+        <method name="exportWorkplan">
+          <documentation>Export workplan</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iArticles" type="plm:ListOfWSIType" direction="in">
+            <documentation>List of processes to export</documentation>
+          </param>
+          <param name="iUnitNames" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of unit names</documentation>
+          </param>
+          <param name="iProductionSystemFilters" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of Production System filters</documentation>
+          </param>
+          <param name="iMaturities" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of maturities</documentation>
+          </param>
+          <param name="iDateLastExport" type="xs:dateTime" direction="in" nillable="true">
+            <documentation>Date of last export</documentation>
+          </param>
+          <param name="iFtpHost" type="xs:string" direction="in">
+            <documentation>FTP host name</documentation>
+          </param>
+          <param name="iFtpPort" type="xs:int" direction="in" nillable="true">
+            <documentation>FTP port</documentation>
+          </param>
+          <param name="iFtpUser" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP user name</documentation>
+          </param>
+          <param name="iFtpPwd" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP password</documentation>
+          </param>
+          <param name="iFtpDir" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP sub-directory</documentation>
+          </param>
+          <param name="oJobID" type="xs:string" direction="out">
+            <documentation>Job ID</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="exportProcessFlow">
+          <documentation>Export process flow</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iRootProcesses" type="plm:ListOfWSIType" direction="in">
+            <documentation>List of root processes to export</documentation>
+          </param>
+          <param name="iUnitNames" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of unit names</documentation>
+          </param>
+          <param name="iMfgFilters" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of Mfg filters</documentation>
+          </param>
+          <param name="iDesignFilters" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of Design filters</documentation>
+          </param>
+          <param name="iMaturities" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of maturities</documentation>
+          </param>
+          <param name="iDateLastExport" type="xs:dateTime" direction="in" nillable="true">
+            <documentation>Date of last export</documentation>
+          </param>
+          <param name="iFtpHost" type="xs:string" direction="in">
+            <documentation>FTP host name</documentation>
+          </param>
+          <param name="iFtpPort" type="xs:int" direction="in" nillable="true">
+            <documentation>FTP port</documentation>
+          </param>
+          <param name="iFtpUser" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP user name</documentation>
+          </param>
+          <param name="iFtpPwd" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP password</documentation>
+          </param>
+          <param name="iFtpDir" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP sub-directory</documentation>
+          </param>
+          <param name="oJobID" type="xs:string" direction="out">
+            <documentation>Job ID</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="getExportStatus">
+          <documentation>Get export status</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iJobID" type="xs:string" direction="in">
+            <documentation>Job ID</documentation>
+          </param>
+          <param name="oStatus" type="xs:string" direction="out">
+            <documentation>Status</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="exportWorkplanForModel">
+          <documentation>Export workplan for model</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iArticles" type="plm:ListOfWSIType" direction="in">
+            <documentation>List of processes to export</documentation>
+          </param>
+          <param name="iModelNames" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of model names</documentation>
+          </param>
+          <param name="iMaturities" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of maturities</documentation>
+          </param>
+          <param name="iDateLastExport" type="xs:dateTime" direction="in" nillable="true">
+            <documentation>Date of last export</documentation>
+          </param>
+          <param name="iFtpHost" type="xs:string" direction="in">
+            <documentation>FTP host name</documentation>
+          </param>
+          <param name="iFtpPort" type="xs:int" direction="in" nillable="true">
+            <documentation>FTP port</documentation>
+          </param>
+          <param name="iFtpUser" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP user name</documentation>
+          </param>
+          <param name="iFtpPwd" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP password</documentation>
+          </param>
+          <param name="iFtpDir" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP sub-directory</documentation>
+          </param>
+          <param name="oJobID" type="xs:string" direction="out">
+            <documentation>Job ID</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="exportProcessFlowForModel">
+          <documentation>Export process flow for model</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iRootProcesses" type="plm:ListOfWSIType" direction="in">
+            <documentation>List of root processes to export</documentation>
+          </param>
+          <param name="iModelNames" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of model names</documentation>
+          </param>
+          <param name="iMaturities" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of maturities</documentation>
+          </param>
+          <param name="iDateLastExport" type="xs:dateTime" direction="in" nillable="true">
+            <documentation>Date of last export</documentation>
+          </param>
+          <param name="iFtpHost" type="xs:string" direction="in">
+            <documentation>FTP host name</documentation>
+          </param>
+          <param name="iFtpPort" type="xs:int" direction="in" nillable="true">
+            <documentation>FTP port</documentation>
+          </param>
+          <param name="iFtpUser" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP user name</documentation>
+          </param>
+          <param name="iFtpPwd" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP password</documentation>
+          </param>
+          <param name="iFtpDir" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP sub-directory</documentation>
+          </param>
+          <param name="oJobID" type="xs:string" direction="out">
+            <documentation>Job ID</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="exportWorkplanByDeltaForModel">
+          <documentation>Export workplan by delta for model</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iWorkplans" type="plm:ListOfWSIType" direction="in">
+            <documentation>List of workplans to export</documentation>
+          </param>
+          <param name="iProcesses" type="plm:ListOfWSIType" direction="in">
+            <documentation>List of processes to export</documentation>
+          </param>
+          <param name="iModelNames" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of model names</documentation>
+          </param>
+          <param name="iFtpHost" type="xs:string" direction="in">
+            <documentation>FTP host name</documentation>
+          </param>
+          <param name="iFtpPort" type="xs:int" direction="in" nillable="true">
+            <documentation>FTP port</documentation>
+          </param>
+          <param name="iFtpUser" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP user name</documentation>
+          </param>
+          <param name="iFtpPwd" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP password</documentation>
+          </param>
+          <param name="iFtpDir" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP sub-directory</documentation>
+          </param>
+          <param name="oJobID" type="xs:string" direction="out">
+            <documentation>Job ID</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="exportWKIByDeltaForModel">
+          <documentation>Export WKI by delta for model</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iWKI" type="plm:ListOfWSIType" direction="in">
+            <documentation>List of WKI to export</documentation>
+          </param>
+          <param name="iModelNames" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of model names</documentation>
+          </param>
+          <param name="iFtpHost" type="xs:string" direction="in">
+            <documentation>FTP host name</documentation>
+          </param>
+          <param name="iFtpPort" type="xs:int" direction="in" nillable="true">
+            <documentation>FTP port</documentation>
+          </param>
+          <param name="iFtpUser" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP user name</documentation>
+          </param>
+          <param name="iFtpPwd" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP password</documentation>
+          </param>
+          <param name="iFtpDir" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP sub-directory</documentation>
+          </param>
+          <param name="oJobID" type="xs:string" direction="out">
+            <documentation>Job ID</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="exportProcessFlowByDeltaForModel">
+          <documentation>Export process flow by delta for model</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iProcesses" type="plm:ListOfWSIType" direction="in">
+            <documentation>List of root processes to export</documentation>
+          </param>
+          <param name="iModelNames" type="xs3d:ListOfStringType" direction="in" nillable="true">
+            <documentation>List of model names</documentation>
+          </param>
+          <param name="iFtpHost" type="xs:string" direction="in">
+            <documentation>FTP host name</documentation>
+          </param>
+          <param name="iFtpPort" type="xs:int" direction="in" nillable="true">
+            <documentation>FTP port</documentation>
+          </param>
+          <param name="iFtpUser" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP user name</documentation>
+          </param>
+          <param name="iFtpPwd" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP password</documentation>
+          </param>
+          <param name="iFtpDir" type="xs:string" direction="in" nillable="true">
+            <documentation>FTP sub-directory</documentation>
+          </param>
+          <param name="oJobID" type="xs:string" direction="out">
+            <documentation>Job ID</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+      </interface>
+    </interfaces>
+    <implementations>
+      <implementation name="DELDigProdExportERPService" serviceid="DELDigProdExportERPService" implements="tns:IDELDigProdExportERPService">
+        <documentation>
+          A service to export workplan and process flow
+        </documentation>
+      </implementation>
+    </implementations>
+  </entities>
+</description>

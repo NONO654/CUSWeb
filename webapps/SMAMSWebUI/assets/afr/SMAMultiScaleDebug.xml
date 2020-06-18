@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+	<!--view commands -->
+	<Template syp:name="MultiScaleDebugAfrWorkshopHeaders" Target="CATCmdHeadersList">
+		<CATCmdHeadersList>
+			<CATCommandHeader ID="SMAMultiScaleConsoleCmdHdr"       ClassName="DS/SMAMSWebViewTST/SMAMultiScaleConsoleCmd"      ResourceFile="SMAMSWebUI/SMAMultiScale" />
+			<CATCommandHeader ID="SMAMultiScaleLocalSaveCmdHdr"     ClassName="DS/SMAMSWebViewTST/SMAMultiScaleLocalSaveCmd"    ResourceFile="SMAMSWebUI/SMAMultiScale" />
+			<CATCommandHeader ID="SMAMultiScaleOpenSaveCmdHdr"      ClassName="DS/SMAMSWebViewTST/SMAMultiScaleOpenSaveCmd"     ResourceFile="SMAMSWebUI/SMAMultiScale" />
+			<CATCommandHeader ID="SMAMultiScaleModelDumpCmdHdr"     ClassName="DS/SMAMSWebViewTST/SMAMultiScaleModelDumpCmd"    ResourceFile="SMAMSWebUI/SMAMultiScale" />
+		</CATCmdHeadersList>
+	</Template>
+
+
+	<Template syp:name="UNIWorkshopSIMAccess" Target="CATCmdWorkbench">
+		<CATCmdWorkbench Name="MSworkbench"
+			RepresentationType="AfrActionBar">
+			<!--CATWorkbenchOptions ToolbarsExclusive="1" /-->
+
+			<!-- DEBUGSECTION -->
+			<CATCmdContainer Name="Debug" RepresentationType="AfrActionBarSection">
+				<CATCmdStarter Name="MSCosole"     	Command="SMAMultiScaleConsoleCmdHdr" />
+				<CATCmdStarter Name="MSLocalSave"  	Command="SMAMultiScaleLocalSaveCmdHdr" />
+				<CATCmdStarter Name="MSOpenSave"   	Command="SMAMultiScaleOpenSaveCmdHdr" />
+				<CATCmdStarter Name="MSDumpModel"   Command="SMAMultiScaleModelDumpCmdHdr" />
+			</CATCmdContainer>
+		</CATCmdWorkbench>
+	</Template>
+</Styles>
+
+

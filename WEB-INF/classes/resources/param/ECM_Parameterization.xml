@@ -1,0 +1,77 @@
+<OOTBParameterization>
+<Domain id="ObjectIdentification" regSuite="VPLMAdministration">	
+	<Family id="ObjectIdentifier" icon="iconParameterizationIdentification.gif">
+		<Parameter id="CANaming" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="EnterpriseChangeMgt">
+			<Argument id="PrefixArg" type="string" default="CA"/>
+			<Argument id="SuffixArg" type="string" default=""/>
+			<Constant id="type" value="Change Action"/> 
+			<Constant id="appType" value="VPM"/>
+			<Constant id="sogName" value="type_ChangeAction"/> 
+			<Constant id="sogRevision" value=""/>
+		</Parameter>		
+	</Family>
+</Domain>
+
+<Domain id="ChangeParameterization" regSuite="EnterpriseChangeMgt">	
+	<Family id="StandaloneChange" icon="iconParameterizationIdentification.gif">
+		<Parameter id="DisableStandalone" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationExpressionImpl" regSuite="EnterpriseChangeMgt">
+			<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+			<Constant id="expression" value="DisableStandaloneCA" />
+			<Constant id="valueChecked" value="true"/>
+			<Constant id="valueUnchecked" value="false"/>
+		</Parameter>		
+	</Family>
+	<Family id="ChangeBaselineRoles" icon="iconParameterizationIdentification.gif">
+		<Parameter id="ChangeOwnerBaseline" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationExpressionImpl" regSuite="EnterpriseChangeMgt">
+			<Argument id="Argument" type="string" input="combobox" default="All">
+				<Value id = "Leader"/>
+				<Value id = "All"/>
+			</Argument>
+			<Constant id="expression" value="ChangeOwnerBaseline" />
+		</Parameter>
+		<Parameter id="ChangeReviewerBaseline" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationExpressionImpl" regSuite="EnterpriseChangeMgt">
+			<Argument id="Argument" type="string" input="combobox" default="OneLeader">
+				<Value id = "AllLeader"/>
+				<Value id = "OneLeader"/>
+				<Value id = "All"/>
+			</Argument>
+			<Constant id="expression" value="ChangeReviewerBaseline" />
+		</Parameter>
+		<Parameter id="ChangeReviewerIgnoreOwner" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationExpressionImpl" regSuite="EnterpriseChangeMgt">
+			<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+			<Constant id="expression" value="ChangeReviewerIgnoreOwner" />
+			<Constant id="valueChecked" value="true"/>
+			<Constant id="valueUnchecked" value="false"/>
+		</Parameter>
+		<Parameter id="ChangeReviewerIgnoreContributors" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationExpressionImpl" regSuite="EnterpriseChangeMgt">
+			<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+			<Constant id="expression" value="ChangeReviewerIgnoreContributors" />
+			<Constant id="valueChecked" value="true"/>
+			<Constant id="valueUnchecked" value="false"/>
+		</Parameter>
+		<Parameter id="ChangeReviewerIgnoreCoordinator" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationExpressionImpl" regSuite="EnterpriseChangeMgt">
+			<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+			<Constant id="expression" value="ChangeReviewerIgnoreCoordinator" />
+			<Constant id="valueChecked" value="true"/>
+			<Constant id="valueUnchecked" value="false"/>
+		</Parameter>		
+	</Family>
+	<Family id="InstanceFreezeChange" icon="iconParameterizationIdentification.gif">
+		<Parameter id="EnableInstanceFreezeChange" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationExpressionImpl" regSuite="EnterpriseChangeMgt">
+			<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+			<Constant id="expression" value="ChangeCheckInstanceFrozen" />
+			<Constant id="valueChecked" value="true"/>
+			<Constant id="valueUnchecked" value="false"/>
+		</Parameter>		
+	</Family>
+	<Family id="reviseChangeControlCheck" icon="iconParameterizationIdentification.gif">
+		<Parameter id="EnableReviseChangeControlCheck" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationExpressionImpl" regSuite="EnterpriseChangeMgt">
+			<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+			<Constant id="expression" value="EnableReviseChangeControlCheck" />
+			<Constant id="valueChecked" value="true"/>
+			<Constant id="valueUnchecked" value="false"/>
+		</Parameter>		
+	</Family>
+</Domain>
+
+</OOTBParameterization>

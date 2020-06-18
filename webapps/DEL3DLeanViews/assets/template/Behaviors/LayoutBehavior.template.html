@@ -1,0 +1,19 @@
+<div class="layout_MainDropGrid">
+	<% for (var i = 0; i < sizeX; i++) { %>
+		<% for (var j = 0; j < sizeY; j++) { %>
+			<div class="layout_DropGridBlock"
+			data-x="<%- i %>"
+			data-y="<%- j %>"
+			style="
+				width:	<%- (blockSizeX).toFixed(2) + '%' %>;
+				height:	<%- (blockSizeY).toFixed(2) + '%' %>;
+				left:	<%- (((i * blockSizeX) === 0 ? 0 : (i * (blockSizeX - 2)) + (i * 1.2)) + 0.8).toFixed(2) + '%' %>;
+				top:	<%- (j * blockSizeY).toFixed(2) + '%' %>;
+			">
+				<div class="createPageButton createPageX<%- i %>Y<%- j %>">
+				</div>
+			</div>
+		<% } %>
+	<% } %>
+	<div class="layout_Phantom"></div>
+</div>

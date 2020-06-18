@@ -1,0 +1,50 @@
+<dom-module id="cmp-parameter-editor">
+  <template>
+        <style>
+            #dialogContent {
+                height:  100%;
+            }
+            .wux-windows-dialog {
+                padding-bottom: 0px;
+            }
+        </style>
+        <cmp-wux-dialog
+          id="parameterDialog"
+          class="wux-windows-dialog"
+          my-position="right"
+          at-position="right"
+          title="Parameters"
+          height="700"
+          width="960"
+          min-width="450"
+          ok-button-flag
+          apply-button-flag
+          cancel-button-flag
+          movable-flag
+          resizable-flag
+          maximize-button-flag
+          modal-flag>
+            <dialogcontent id="parameterDialogContent">
+              <div id="dialogContent">
+                  Loading...
+              </div>
+            </dialogcontent>
+        </cmp-wux-dialog>
+
+
+        <cmp-wux-dialog
+          id="confirmClose"
+          my-position="center"
+          at-position="center"
+          title="Save changes before closing"
+          height="120"
+          width="350"
+          min-width="200"
+          yes-button-flag
+          no-button-flag
+          modal-flag>
+            <dialogcontent id="closeDialogContent">
+            </dialogcontent>
+        </cmp-wux-dialog>
+    </template>
+</dom-module>

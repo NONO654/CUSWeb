@@ -1,0 +1,1 @@
+define("DS/CollectionView/CollectionView_zh",{});define("DS/CollectionView/assets/nls/carousel",{close:"关闭",next:"下一个",previous:"上一个",dotMenu:"更多选项..."});define("DS/CollectionView/assets/nls/collectionviewstatusbar",{TotalRows:"总行数： ",SelectedRows:"选定行： ",SelectedCells:"选定单元格： ",NoActiveCell:"无活动单元格",ActiveCellTooltip:"活动单元格"});

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+	  <!-- Application Metas -->
+    <title>Iterations</title>
+    
+    <!-- AMDLoader -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- UWA -->
+    <!--link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" /-->
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+    <!-- Web Fundamentals -->
+    <script type="text/javascript" src="../WebVisualization/WebVisualization.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+     <!-- fullscreen widget :do not use in production -->
+    <link rel="stylesheet" type="text/css" href="../Controls/nv-patch.css" />
+    
+    <style>
+    	.wux-notification-screen {
+    		z-index: -1 !important
+    	}
+    	.topBarContainer {
+    		z-index: -1 !important
+    	}
+    </style>
+	<script type="text/javascript">
+	    // Use iframe to avoid cross domain problem when using CGRViewer in an iframe. 
+	    // We use CGRViewer in an iframe to avoid some of its limitations caused by storing data in window, e.g. two CGRViewers cannot function properly in the same page.
+	    require(
+        {
+            baseUrl: '../'
+        },
+        [
+            'UWA/Core',
+            'DS/LifecycleControls/Assembly3DViewerImpl'
+        ],
+
+        function (UWA, Assembly3DViewerImpl) {
+            "use strict";
+
+            function getUrlParamVal(variable) {            	
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split("=");
+                    if (pair[0] == variable) {
+                        return decodeURIComponent(pair[1]);
+                    }
+                }
+                return '';
+            }
+
+            function onLoad() {
+                var id = getUrlParamVal("id");
+                widget.title = id;
+                var lang = getUrlParamVal('lang');                
+                widget.id = id;
+                widget.lang = lang;
+                widget.body.innerHTML = '';                
+                window.assembly3DViewer = new Assembly3DViewerImpl(widget);
+                window.assembly3DViewer.inject(widget.body);
+            }
+
+            if (widget.launched) {
+                onLoad();
+            } else {
+                widget.onLoad = onLoad;
+            }
+        });
+	    
+	    function onUnload() {
+
+	        if (window.assembly3DViewer)
+	    	window.assembly3DViewer.postEvent('onHtmlUnload');
+	    }
+
+	</script>
+	</head>
+	<body onunload="onUnload()">		
+	</body>
+</html>

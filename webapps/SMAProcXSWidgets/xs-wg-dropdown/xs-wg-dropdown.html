@@ -1,0 +1,110 @@
+<!--------------------------------------------------------------------
+[xs-wg-dropdownmenu HTML Document]
+
+Project:		xs
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:46:40 GMT
+Assigned to:	rqu, d6u
+Primary use:	TODO: Write where this component is being used
+Description:    TODO: Description about the component
+--------------------------------------------------------------------->
+
+<!-- Import base component common to all widgets-->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+
+<dom-module id="xs-wg-dropdown">
+  <!-- <link rel="import" type="css" href="xs-wg-dropdown.css"> -->
+  <template>
+	  <!-- Including the base widget style -->
+	  <style include="xs-wg-base"></style>
+    <style>
+    :host {
+      display: inline; }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      height: 34px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.428571429;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+      transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
+
+    .form-control:focus {
+      border-color: #66afe9;
+      outline: 0; }
+
+    .form-control:-moz-placeholder {
+      color: #999; }
+
+    .form-control::-moz-placeholder {
+      color: #999;
+      opacity: 1; }
+
+    .form-control:-ms-input-placeholder {
+      color: #999; }
+
+    .form-control::-webkit-input-placeholder {
+      color: #999; }
+
+    .form-control.placeholder {
+      color: #999; }
+
+    .form-control[disabled],
+    .form-control[readonly],
+    fieldset[disabled] .form-control,
+    .form-control[disabled] + .select-choice,
+    .form-control[readonly] + .select-choice {
+      cursor: not-allowed;
+      background-color: #eee;
+      opacity: 1; }
+
+    textarea.form-control {
+      height: auto; }
+
+    .select-input {
+      width: 100%;
+      display: block; }
+
+    .select-input.has-error {
+      border-color: #d0432b; }
+      .select-input.has-error:focus {
+        box-shadow: inset 0 0 1px 2px #FFF0EE; }
+
+    textarea.form-control {
+      height: auto; }
+
+    .select-input {
+      /*margin-top: 10px;    */
+      font-family: Arial; }
+      .select-input option {
+        font-family: Arial; }
+
+    .input[readonly] {
+      cursor: default; }
+
+    select[multiple], select[size] {
+      height: auto; }
+
+    .label:empty {
+      display: inline-block; }
+    </style>
+
+		<sp-nls id="requiredMsg" nlspath="DS/SMAProcXSWidgets/assets/nls/SMAProcXSWidgets" nlskey="xs-wg-dropdown.Error.Required" no-view></sp-nls>
+	  <label class="xs-wg-label">{{calculateLabel(label,mandatory)}}</label>
+	  <select id="sMenu" class$="{{_computeInputClass(haserror)}}" title="{{value}}"
+			  disabled$="{{readonly}}" on-change="_onChange" required="{{mandatory}}">
+		  <option id="defaultoption" disabled selected> -- Select an option -- </option>
+	  </select>
+    </template>
+  <script type="text/javascript" src="xs-wg-dropdown.js"></script>
+</dom-module>

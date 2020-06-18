@@ -1,0 +1,90 @@
+// ===========================================================
+// PACKAGE   : RFLVPMLogicalPublicationDS
+// ===========================================================
+// Generated : Thursday, September 13, 2007 10:16:14 AM
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+// --- entities: 1
+// ===========================================================
+ENTITY RFLVPMLogicalPublicationDS
+// ===========================================================
+// --- attributes: 6
+ATTR V_FunctionalName;Y;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR reservedby;N;N;$
+ATTR reserved;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// as of New PLM New activation (July 2012), and waiting for correct management of
+// functional name editable in Creation panel only, a hack is used: no attribute in creation mask
+FATTR V_FunctionalName;Y
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR V_FunctionalName;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR V_FunctionalName;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR reservedby;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR V_FunctionalName;N
+FATTR originated;N
+FATTR modified;N
+FATTR reservedby;N
+FATTR reserved;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR V_FunctionalName;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR V_FunctionalName;N
+FATTR modified;N
+FATTR reservedby;N
+FATTR reserved;N
+// - unordered
+// ===========================================================
+// End of DEFAULT mask file
+// ===========================================================

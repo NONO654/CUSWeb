@@ -1,0 +1,1 @@
+define("DS/ENOChgOSLCConsumer/ENOChgOSLCConsumer_ko",{});define("DS/ENOChgOSLCConsumer/assets/nls/ECMOSLC",{ECM_OSLC_Select_Reported_Against:"보고 위치 선택",ECM_OSLC_Select_External_Change:"외부 변경 선택",ECM_OSLC_Create_External_Change:"외부 변경 생성"});

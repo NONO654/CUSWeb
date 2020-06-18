@@ -1,0 +1,51 @@
+<!DOCTYPE weblogic-web-app PUBLIC "-//BEA Systems, Inc.//DTD Web Application 6.0//EN" "http://www.beasys.com/j2ee/dtds/weblogic-web-jar.dtd">
+<wls:weblogic-web-app
+xmlns:wls="http://xmlns.oracle.com/weblogic/weblogic-web-app"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd http://xmlns.oracle.com/weblogic/weblogic-web-app http://xmlns.oracle.com/weblogic/weblogic-web-app/1.4/weblogic-web-app.xsd">
+<wls:container-descriptor>
+<wls:prefer-application-packages>
+<wls:package-name>org.slf4j</wls:package-name>
+</wls:prefer-application-packages>
+</wls:container-descriptor>
+<!--
+</wls:weblogic-web-app>
+<weblogic-web-app>
+-->
+    <description>WebLogic Descriptor</description>
+
+    <reference-descriptor>
+    </reference-descriptor>
+<!--
+    <session-descriptor>
+        <session-param>
+            <param-name>weblogic.httpd.unknownMimeTypeIsDefault</param-name>
+            <param-value>true</param-value>
+        </session-param>
+    </session-descriptor>
+-->
+    <jsp-descriptor>
+<!--
+        <jsp-param>
+            <param-name>keepgenerated</param-name> 
+            <param-value>true</param-value>
+        </jsp-param>
+-->
+        <jsp-param>
+            <param-name>workingDir</param-name> 
+            <param-value>3dspace/generated</param-value>
+        </jsp-param>
+    </jsp-descriptor>
+    <charset-params> 
+        <input-charset> 
+            <resource-path>/*</resource-path> 
+            <java-charset-name>UTF-8</java-charset-name> 
+        </input-charset> 
+    </charset-params> 
+ <container-descriptor>
+  <show-archived-real-path-enabled>true</show-archived-real-path-enabled>
+ </container-descriptor>
+<!--
+</weblogic-web-app>
+-->
+</wls:weblogic-web-app>

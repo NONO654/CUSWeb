@@ -1,0 +1,1 @@
+define("DS/Spreadsheet2/DataGrid",["DS/Spreadsheet/DataGrid"],function(a){return a});define("DS/Spreadsheet2/Manager",["DS/Spreadsheet/Manager"],function(a){return a});define("DS/Spreadsheet2/CellView",["DS/Spreadsheet/CellView"],function(a){return a});define("DS/Spreadsheet2/CellModel",["DS/Spreadsheet/CellModel"],function(a){return a});

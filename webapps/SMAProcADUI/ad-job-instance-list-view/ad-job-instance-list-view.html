@@ -1,0 +1,24 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../ad-job-instance-log-entry-view/ad-job-instance-log-entry-view.html">
+
+<dom-module id="ad-job-instance-list-view">
+  <link rel="import" type="css" href="ad-job-instance-list-view.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+ 
+        <section class="job-panel">
+	        <div id="jobStatePanel" title="{{jobInstance.jobState}}" class$="{{_computeClass(jobInstance.jobState)}}">
+		        <div id="jobPanel" class="job-item-panel" style="cursor: pointer" on-click="onJobSelect" on-dblclick="onJobEdit" title="{{jobInstance.jobTitle}}">
+			        <div id="jobMessage" class="job-panel-title">
+				        <p><b><span>{{_computeJobType(jobInstance.jobType)}}</span> :</b>&nbsp;<span>{{jobInstance.jobLabel}}</span>&nbsp;&nbsp;&nbsp;(<span>{{parseTime(jobInstance.jobStartTime,jobInstance.jobStopTime)}}</span>)</p>
+			        </div>
+		        </div>
+	        </div>
+        </section>
+    </template>
+  <script src="ad-job-instance-list-view.js"></script>
+</dom-module>
+
+

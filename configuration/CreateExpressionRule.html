@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html id="expressionRulePage">
+	<head>
+	<link rel="stylesheet" type="text/css" href="../common/styles/emxUIDefault.css">
+	<link rel="stylesheet" type="text/css" href="../common/styles/emxUIStructureBrowser.css">
+	<link rel="stylesheet" type="text/css" href="../common/styles/emxUIForm.css">
+	
+    <script type="text/javascript" src="../webapps/AmdLoader/AmdLoader.js"></script>
+	<script language="Javascript" src="../common/scripts/emxUIConstants.js"></script>
+	<script language="Javascript" src="../common/scripts/emxUICore.js"></script>
+	<script language="javascript" src="../common/scripts/emxJSValidationUtil.js"></script>
+	
+	 
+	<script>
+		var varModelPhyID="";
+		var frameName = "";
+		var varProductPhyID="";
+        var strAlert="";
+
+		function onLoad() {
+	
+			require([
+				"DS/CfgRules/scripts/CfgRuleUtility",
+				"i18n!DS/CfgRules/assets/nls/ExpressionRule",
+			], function (CfgRuleUtility,ER_NLS)
+			{
+			   function getParameterEncoded(attributeToRetrieve){
+			        var sPageURL = window.location.search.substring(1);
+			        var splitChar = "&";
+			        var sURLVariables = sPageURL.split(splitChar);
+
+			        if (sURLVariables.length <= 1){
+			            splitChar = "%26"; // code hexa for '&'
+			            sURLVariables = sPageURL.split(splitChar);
+			        }
+
+			        for (var i = 0; i < sURLVariables.length; i += 1){
+			            var sParameterName = sURLVariables[i].split('=');
+			            if (sParameterName[0] === attributeToRetrieve){
+			                return decodeURIComponent(sParameterName[1]);
+			            }
+			        }
+			        return null;
+			    };			
+				function onCompleteCallbackDefineRule(RuleDetails) {
+					window.parent.parent.closeSlideInPanel();
+					var parsedRule = JSON.parse(RuleDetails);
+					var objectId=parsedRule.configurationRule.id
+					objectId = objectId.replace("pid:",'');
+					var contentFrame = findFrame (getTopWindow(), "content");
+					contentFrame.location.href = "../common/emxTree.jsp?objectId="+objectId+"&mode=insert&parentOID="+varProductPhyID+"&AppendParameters=true&DefaultCategory=RuleExpression&";
+				};
+				function onCompleteCallbackDone(RuleDetails) {
+					window.parent.parent.closeSlideInPanel();
+					var listFrame = findFrame(getTopWindow(),frameName);
+					listFrame.editableTable.loadData();
+					listFrame.rebuildView();
+				};
+				function onFailureCallback(arg1,arg2,arg3) {
+					var ERROR_CODE_TNR = 1500789;
+					var errorMsg = JSON.parse(arg2);
+		            if (errorMsg != undefined){
+		              errorMsg = errorMsg.errorID;
+		              if (errorMsg != undefined && errorMsg === ERROR_CODE_TNR){
+		                  alert(ER_NLS.ER_NON_UNIQUE);
+		              }
+		            }else{
+		                alert(ER_NLS.ER_ERROR);
+		            }
+				};
+				varModelPhyID = getParameterEncoded("contextObjId");
+				frameName = getParameterEncoded("postProcess");
+				varProductPhyID  = getParameterEncoded("parentOID");
+				//--------------------------------------------------------------------------------------
+				//---NEED TO REPLACE THIS EFFECTIVITY PARAM TO BE PASSED AS XML
+				//---BAD WAY TO CREATE XML AT CLIENT SIDE, IT SHOULD BE JUST PASSING PRODUCT PHYSICAL ID
+				//--------------------------------------------------------------------------------------
+				
+				document.getElementById("buttonDefineRuleTable").onclick=function() {
+					var inputText = document.getElementById("strName");
+					inputText = inputText.value.trim();
+					//TODO more validations?
+					if(inputText == ""){
+						alert(ER_NLS.ER_Create_ValidName);
+					}else if(!checkValidLength(inputText)){
+						alert(ER_NLS.ER_Create_ValidNameLength);
+					}else{
+						document.getElementById("expressionRulePage").style.cursor = "wait";
+			        	var jsonDataRuleCreate = "";
+			        	var varNameValue=document.getElementById("strName").value;
+			        	var varDescriptionValue=document.getElementById("strDescription").value;
+			        	jsonDataRuleCreate = JSON.stringify({
+			        		    "version":"1.0.1",
+				        		"configurationRule":{
+					        		"type":"ConfigurationRule",
+					        		"name": varNameValue,
+					        		"revision" : "-", 
+					        		"description":varDescriptionValue,
+					        		"policy":"ConfigurationRule",
+					        		"mathematicalExpression":"",
+					        		"attributes": { 
+	                                                "ExpressionType" :  "Boolean"
+	                                              },
+ 			        		        "effectivity":{
+	                                                 "input": {
+			                                                   "id": "pid:" + varProductPhyID,
+			                                                   "isRange":"false"
+			                                                  },
+			                                          "type":"ProductRevision"
+			                                      }		        	
+				        		}
+				        	});
+                		CfgRuleUtility.createRule(jsonDataRuleCreate,varModelPhyID,onCompleteCallbackDefineRule,onFailureCallback);
+					}
+				};
+				
+				document.getElementById("buttonCancel").onclick=function() {
+					window.parent.parent.closeSlideInPanel();
+				};
+				
+				document.getElementById("buttonDone").onclick=function() 
+				{
+					var inputText = document.getElementById("strName");
+					inputText = inputText.value.trim();
+					//TODO more validations?					
+					if(inputText == ""){
+						alert(ER_NLS.ER_Create_ValidName);
+					}else if(!checkValidLength(inputText)){
+						alert(ER_NLS.ER_Create_ValidNameLength);
+					}
+					else{
+						document.getElementById("expressionRulePage").style.cursor = "wait";
+			        	var jsonDataRuleCreate = "";
+			        	var varNameValue=document.getElementById("strName").value;
+			        	var varDescriptionValue=document.getElementById("strDescription").value;
+			        	jsonDataRuleCreate = JSON.stringify({
+			        		    "version":"1.0.1",
+				        		"configurationRule":{
+					        		"type":"ConfigurationRule",
+					        		"name": varNameValue,
+					        		"revision" : "-", 
+					        		"description":varDescriptionValue,
+					        		"policy":"ConfigurationRule",
+					        		"mathematicalExpression":"",
+					        		"attributes": { 
+	                                                "ExpressionType" :  "Boolean"
+	                                              },
+ 			        		        "effectivity":{
+	                                                 "input": {
+			                                                   "id": "pid:" + varProductPhyID,
+			                                                   "isRange":"false"
+			                                                  },
+			                                          "type":"ProductRevision"
+			                                      }	        	
+				        		}
+				        	});
+                		CfgRuleUtility.createRule(jsonDataRuleCreate,varModelPhyID,onCompleteCallbackDone,onFailureCallback);
+					}
+				};
+				
+				document.getElementById("buttonDefineRuleTable").innerHTML = ER_NLS.ER_Create_DefineRuleExpression;
+				document.getElementById("buttonDefineRuleTable").setAttribute('title',ER_NLS.ER_Create_DefineRuleExpression);
+				document.getElementById("buttonDone").innerHTML = ER_NLS.ER_Create_Done;
+				document.getElementById("buttonDone").setAttribute('title',ER_NLS.ER_Create_Done);
+				document.getElementById("buttonCancel").innerHTML = ER_NLS.ER_Create_Cancel;
+				document.getElementById("buttonCancel").setAttribute('title',ER_NLS.ER_Create_Cancel);
+				document.getElementById("labelDescription").innerHTML = ER_NLS.ER_Create_Description;
+				document.getElementById("labelName").innerHTML = ER_NLS.ER_Create_Name;
+				document.getElementById("labelCreatePage").innerHTML = ER_NLS.ER_Create_Header;
+				document.getElementById("labelBasics").innerHTML = ER_NLS.ER_Create_Basics;
+				document.getElementById("labelMandatory").innerHTML = ER_NLS.ER_Create_Mandatory;
+				document.getElementById("strDescription").setAttribute('title',ER_NLS.ER_Create_DescriptionTitle);
+				document.getElementById("strName").setAttribute('title',ER_NLS.ER_Create_NameTitle);
+				strAlert = ER_NLS.ER_Alert_InvalidChars;
+			});
+		}
+				
+		function checkBadNameChars(){
+			var url="../configuration/RuleDialogValidationUtil.jsp?mode=checkBadNameChar";
+	        var vRes = emxUICore.getData(url);
+	        var iIndex = vRes.indexOf("BNCSTART");
+	        var iLastIndex = vRes.indexOf("BNCEND");
+	        var strBadChars = vRes.substring(iIndex+"BNCSTART".length , iLastIndex );
+	        strBadChars = strBadChars.replace('\\"','"').replace('\\\\','\\');
+	        
+			var inputText = document.getElementById("strName").value;
+			var alertMsg = strAlert;
+			 //Check for Bad Name Chars
+	         var strInvalidChars = "";
+			 if(checkStringForChars != 'undefined'){
+		            strInvalidChars=checkStringForChars(inputText,strBadChars,false);
+		            strInvalidChars=strInvalidChars.trim();
+		            if(strInvalidChars.length > 0)
+		            {
+ 		            	 document.getElementById("strName").value =''; 
+		            	 alertMsg = alertMsg+strInvalidChars;
+		                 alert(alertMsg);
+		                 return false;
+		            }				 
+			 }
+	        return true;
+		}
+	
+	</script>
+	
+	</head>
+	<body onload="onLoad();" class="slide-in-panel">
+	
+	<div id="content" style="height:94%;">
+		<div id="pageHeadDiv">
+			<table>
+				<tbody>
+					<tr>
+						<td class="page-title">
+						<h2 id ="labelCreatePage"></h2>
+						</td>
+					
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<table class="form">
+		<tbody>
+			<tr>
+				<td id ="labelMandatory" class="createRequiredNotice"></td>
+			</tr>
+			<tr>
+				<td id ="labelBasics" class="heading1"></td>
+			</tr>
+			<tr>
+				<td valign="middle" width="150" class="createLabelRequired">
+					<label id="labelName" for="Name"></label>
+				</td>
+			</tr>
+			<table class="">
+				<tbody>
+					<tr>
+						<td  valign="middle" class="createInputField">
+							<input value="" id="strName" name="Name" type="text" fieldlabel="Name" title="Name" size="20" onchange="checkBadNameChars()"> 
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+
+			<table>
+			<tbody>
+				<tr>
+					<td valign="middle" width="150" class="createLabel">
+						<label id="labelDescription" for="Description"></label>
+					</td>
+				</tr>
+			</tbody>
+			</table>
+			<tr>
+				<td>
+					<table class="textarea">
+						<tbody>
+							<tr>
+								<td valign="middle" class="createInputField" colspan="0">
+									<textarea cols="25" rows="5" name="Description" id="strDescription" fieldlabel="Description" title="Description"></textarea>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+	
+	<div id="divPageFoot" style="height:5%; width:100%; bottom:0px;">
+		<div style="float:right;padding: 5px 10px 5px 0; width:95%">
+			<button id="buttonDefineRuleTable" class="btn-default" style="width: 44%; overflow: hidden; text-overflow: ellipsis;" ></button>
+			<button id="buttonDone" class="btn-primary" style="width: 25%; overflow: hidden; text-overflow: ellipsis;"></button>
+			<button id="buttonCancel" class="btn-default" style="width: 25%; overflow: hidden; text-overflow: ellipsis;"></button>
+		</div>
+	</div>
+	
+	</body>
+</html>

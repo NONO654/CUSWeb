@@ -1,0 +1,9 @@
+m|VENBrightcoveVideoJS\DSVideoJS.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.3.19010
+r|G:\R421\BSF\.
+t|win_b64\webapps\DSVideoJS\DSVideoJS.js|1547152689|1450
+s|VENBrightcoveVideoJS\DSVideoJS.mweb\src\DSVideoResolutionSwitcherPlugin.js|1524057403|992
+s|VENBrightcoveVideoJS\DSVideoJS.mweb\src\DSVideoJS.js|1546878474|1188
+s|VENBrightcoveVideoJS\DSVideoJS.mweb\src\DSVideoThumbnailPlugin.js|1520415648|938

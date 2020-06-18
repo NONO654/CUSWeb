@@ -1,0 +1,9 @@
+m|W3DXComponents\3DXHighcharts.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\3DXHighcharts\3DXHighcharts.js|1531551048|466
+s|W3DXComponents\3DXHighcharts.mweb\src\3DXHighcharts.js|1418897295|1122
+t|win_b64\webapps\3DXHighcharts\3DXHighcharts.htm|1531551047|1295
+s|W3DXComponents\3DXHighcharts.mweb\src\3DXHighcharts.htm|1404747381|1295

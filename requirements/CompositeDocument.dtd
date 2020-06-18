@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT CompositeDocument (Parameters*,StructureData*,InstanceData)>
+<!ATTLIST CompositeDocument
+    user  CDATA #REQUIRED
+    date  CDATA #REQUIRED
+>
+<!ELEMENT Parameters (Parameter+)>
+
+<!ELEMENT Parameter (#PCDATA)>
+<!ATTLIST Parameter
+    name  CDATA #REQUIRED
+>
+
+<!ELEMENT StructureData (ObjectReference+)>
+<!ATTLIST StructureData
+    count CDATA "0"
+>
+<!ELEMENT ObjectReference (Relationship*)>
+<!ATTLIST ObjectReference
+    id    CDATA #REQUIRED
+    model CDATA #IMPLIED
+    type  CDATA #REQUIRED
+    name  CDATA #REQUIRED
+    count CDATA "0"
+>
+<!ELEMENT Relationship (ObjectReference+)>
+<!ATTLIST Relationship
+    type  CDATA #REQUIRED
+    order CDATA #IMPLIED
+>
+
+<!ELEMENT InstanceData (ObjectInstance*)>
+<!ATTLIST InstanceData
+    count CDATA "0"
+>
+<!ELEMENT ObjectInstance (model?,type,name,revision,Attribute*)>
+<!ATTLIST ObjectInstance
+    id    CDATA #REQUIRED
+    alias CDATA #IMPLIED
+>
+
+<!ELEMENT type (#PCDATA)>
+<!ELEMENT model (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT revision (#PCDATA)>
+
+<!ELEMENT Attribute (#PCDATA)>
+<!ATTLIST Attribute
+    name  CDATA #REQUIRED
+    type  (BOOLEAN|DATE|INTEGER|REAL|STRING) "STRING"
+   format CDATA #IMPLIED
+>

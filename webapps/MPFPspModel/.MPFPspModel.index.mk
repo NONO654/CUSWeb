@@ -1,0 +1,10 @@
+m|MPFModels\MPFPspModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.3.18352
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFPspModel\MPFPspModel.js|1545169470|1910
+s|MPFModels\MPFPspModel.mweb\src\ShopPspDataProxy.js|1540300308|1580
+s|MPFModels\MPFPspModel.mweb\src\PspModel.js|1542877257|2922
+s|MPFModels\MPFPspModel.mweb\src\MPFPspModel.js|1540215773|0
+s|MPFModels\MPFPspModel.mweb\src\CartPspDataProxy.js|1540300185|1743

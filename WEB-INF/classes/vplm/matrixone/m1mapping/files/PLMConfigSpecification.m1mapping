@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="PLMConfigSpecification" />
+    <m1.package name="PLMConfigSpecification" />
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="PLMCfgSpecificationValue" />
+      <m1.type name="PLMCfgSpecificationValue" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_CfgKey" />
+        <m1.attribute name="PLMCfgSpecificationValue.V_CfgKey" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_CriterionStatus" />
+        <m1.attribute name="PLMCfgSpecificationValue.V_CriterionStatus" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="PLMCfgSpecificationUsage" />
+      <m1.relationship name="PLMCfgSpecificationUsage" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="PLMCfgSpecification" />
+      <m1.type name="PLMCfgSpecification" />
+
+      <!-- Basic Concat -->
+      <pattern.VPLM_BASIC_CONCAT>
+        <vplm.Simple name="PLM_ExternalID" />
+        <m1.basic name="name" />
+      </pattern.VPLM_BASIC_CONCAT>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_CfgKey" />
+        <m1.attribute name="PLMCfgSpecification.V_CfgKey" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

@@ -1,0 +1,1 @@
+define("DS/CATWebUXSlideShow/CATWebUXSlideShow_ja",{});define("DS/CATWebUXSlideShow/assets/nls/CATWebUXSlideShow",{previousSlide:"前のビュー",nextSlide:"次のビュー",exitSlideShow:"スライドショーを終了",slideShowCannotBeLaunched:"スライド ショー モードで表示するものがありません"});

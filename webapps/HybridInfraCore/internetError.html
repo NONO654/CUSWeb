@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Internet Error</title>
+
+    <!-- UWA bypass to use the RequireJS AMD loader  -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+</head>
+<body>
+
+    <!-- Page content -->
+    <div id="errorBackground">
+        <div id="errorPanel">
+            <h1 id="errorTitle">Internet connection is needed</h1>
+            <div id="retryButton">
+                Retry
+            </div>
+        </div>
+    </div>
+
+    <!-- Stylesheet -->
+    <style media="screen" type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+        }
+        #errorBackground {
+            background-color: rgb(90, 149, 181);
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        #errorPanel {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: Calibri;
+            text-align: center;
+        }
+        #errorTitle {
+            color: white;
+            font-size: 40px;
+        }
+        #retryButton {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgb(69, 88, 120);
+            color: white;
+            width: 250px;
+            height: 70px;
+            font-size: 30px;
+            -webkit-border-radius: 30px;
+            text-align: center;
+            line-height: 70px;
+        }
+    </style>
+
+    <!-- Javascript -->
+    <script>           
+            require(['DS/HybridInfraCore/HybridApp'], function (HybridApp) {
+                var main = function (args) {                    
+                    var retryButton = document.getElementById('retryButton');
+                    retryButton.onclick = function () {
+                        var obj = {
+                            action: 'retry',
+                            data: args
+                        };
+                        HybridApp.sendObj('internal', obj);
+                    }
+                };
+                HybridApp.onDeviceReady(main);
+            });
+    </script>
+</body>
+</html>

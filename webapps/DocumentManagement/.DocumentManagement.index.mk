@@ -1,0 +1,11 @@
+m|ENO6WDocumentManagementClient\DocumentManagement.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.9.19312
+r|G:\R421\BSF\.
+t|win_b64\webapps\DocumentManagement\assets\blankForm.html|1531550793|251
+s|ENO6WDocumentManagementClient\DocumentManagement.mweb\src\assets\blankForm.html|1481298376|251
+t|win_b64\webapps\DocumentManagement\DocumentManagement.js|1573254845|15989
+s|ENO6WDocumentManagementClient\DocumentManagement.mweb\src\DriveDocumentManagement.js|1559852885|17264
+s|ENO6WDocumentManagementClient\DocumentManagement.mweb\src\FoundationAjax.js|1562741399|10935
+s|ENO6WDocumentManagementClient\DocumentManagement.mweb\src\DocumentManagement.js|1571064495|44413

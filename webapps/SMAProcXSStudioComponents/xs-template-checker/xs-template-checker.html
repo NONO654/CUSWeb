@@ -1,0 +1,25 @@
+<!--------------------------------------------------------------------
+[xs-template-checker HTML Document]
+
+Project:        xs
+Version:        1.0
+Last change:    Wed, 27 April 2016 09:40:03 GMT
+Assigned to:    zb8
+Primary use:    Checks whether the objectId of given business object belongs to one-click, custom template or the object is not at all a template
+Description:    UI less component
+------------------------------------------------------------------- -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+
+<dom-module id="xs-template-checker">
+    <template>
+      <sp-notification id="notify"></sp-notification>
+      <sp-dashboard id="dashboard"></sp-dashboard>
+      <sp-search id="spSearch" multi-select="false" on-change="onSearchResult"></sp-search>
+      <sp-mcsservice id="templateInfo" verb="GET"></sp-mcsservice>
+    </template>
+    <script type="text/javascript" src="xs-template-checker.js"></script>
+</dom-module>

@@ -1,0 +1,1 @@
+define("DS/Notifications/Notifications_ko",{});define("DS/Notifications/assets/nls/translation",{closeAll:"모두 닫기",closeAllTooltip:"모든 알림 닫기"});

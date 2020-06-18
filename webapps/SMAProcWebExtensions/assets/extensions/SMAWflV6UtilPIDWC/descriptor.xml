@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.V6UtilPIDWC" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflV6UtilPIDWC" nlsID="dispname">Export in V5 format</DisplayName>
+	<Description nlsFile="SMAWflV6UtilPIDWC" nlsID="desc">Export in V5 format</Description>
+	<LongDescription/>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>V6Utility</Value>
+		</Attribute>
+		<Attribute name ="JavaName">
+			<Value>com.dassault_systemes.plugin.v6utility.dwc</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflV6UtilPIDWC.CATNls" targetFilename="SMAWflV6UtilPIDWC.CATNls"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflV6UtilPIDWC.dll" targetFilename="win_b64/SMAWflV6UtilPIDWC.dll"/>
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflV6UtilPIDWC.sypstyle" targetFilename="SMAWflV6UtilPIDWC.sypstyle"/>
+
+	</Streams>
+	<Interfaces>
+
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflV6UtilPIDWCEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+
+	</Interfaces>
+	<Properties>
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[V6Utility]]>
+			</Value>
+		</Property>
+		<Property name="PLMBatchName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[DownwardCompatibility]]>
+			</Value>
+		</Property>
+		<!-- property to store types of PLM objects.-->
+		<Property name="PLMObjectType" type="string" valuetype="single">
+			<Value>
+				<![CDATA[VPMReference]]>
+			</Value>
+		</Property>
+		<!--Value of this property is ID of PLM content which it refers to.-->
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<!--Aggregate property to save PLM Batch arugments required by this batch -->
+		<Property name="PLMBatchArguments" type="aggregate" valuetype="single">
+			<Property name="CATDWC_targetedVersion" type="string" valuetype="single">
+				<Value>CATIAV5-6R2014</Value>/>
+			</Property>
+			<Property name="CATDWC_ContextName" type="string" valuetype="single">
+				<Value>COEXISTENCE</Value>
+			</Property>     
+			<Property name="CATDWC_UseMappingTable" type="string" valuetype="single">
+				<Value>YES</Value>
+			</Property>
+			<Property name="CATDWC_ConversionDirectory" type="string" valuetype="single">
+				<Expression syntax="SCE">{rundir}</Expression>
+				<Value/>
+			</Property>
+			<Property name="CATDWC_PortOnIntermediateBody" type="string" valuetype="single">
+				<Value>NO</Value>
+			</Property>
+			<Property name="CATDWC_3DRep_AsSpec" type="string" valuetype="single">
+				<Value>NO</Value>
+			</Property>
+			<!--<Property name="CATDWC_ProcessingMode" type="string" valuetype="single">
+      <Value>SEQUENTIAL_PROCESSING</Value>
+    </Property>-->
+			<Property name="CATDWC_ConversionMode" type="string" valuetype="single">
+				<Value>Convert</Value>/>
+			</Property>      
+			<Property name="CATDWC_3DRep_StartUp" type="string" valuetype="single">
+				<Value/>    
+			</Property>
+
+		</Property>
+	</Properties>
+</wfext:Extension>

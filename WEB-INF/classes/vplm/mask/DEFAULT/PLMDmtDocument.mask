@@ -1,0 +1,245 @@
+// ===========================================================
+// PACKAGE   : PLMDmtDocument for OCDX
+// ===========================================================
+// Generated : Wed Oct  16 15:01:13 2013
+// -----------------------------------------------------------
+//a) ident
+//b) description 
+//c) state of dev
+//d) owner
+//
+//******** No other exposed subtyping than V_discipline:
+//******** V_discipline is currently unpublished, When published it must expose VALUE)*******
+//******** V_usage must not be published (soon internal - 3DPart R206 exception)
+//******** V_nature is published if really used, and in RO only
+//******** ATTR V_ApplicabilityDate;N;N;$ is unused in SMB deployment
+//******** ATTR organization;Y;N;$ is non signifiant in SMB deployment: everyone in Mycompany organization
+//******** ATTR reserved;N;N;$ is "useless" as long as SMB uses optimistic locking and do not lock explicitely info... & reservedby not NULL is equivalent
+//******** FATTR reservedby;N should not be provided in Write Mask (as long as it is not updated in session)
+//
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 1 entity :
+// - PLMDMTDocument
+
+// ===========================================================
+ENTITY PLMDMTDocument
+// ===========================================================
+// --- attributes: 
+//a) ident
+ATTR V_Name;Y;N;$
+//ATTR majorrevision;N;N;$ - OCDX - Use unified revision instead of majorrevision
+ATTR revision;N;N;$
+ATTR PLM_ExternalID;Y;N;$
+
+//b) description ******** V_discipline is currently unpublished, When published it must expose VALUE)*******
+//ATTR V_discipline;N;N;$
+//VALUE ...
+//VALUE ...
+//ATTR V_nature;N;N;$
+ATTR V_description;N;N;$
+// OCDX - Change E_versionComment to V_versionComment
+ATTR V_versionComment;N;N;$
+//This plays the role of V_discipline... 
+ATTR V_DocType;Y;N;Vaulted
+ATTR V_PrimaryMimetype;N;N;$
+ATTR V_PrimaryFileName;Y;N;$
+
+//c) state of dev
+ATTR V_IsCheckedOut;Y;N;1
+ATTR V_CheckedOutUser;N;N;$
+ATTR V_CheckedOutPath;N;N;$
+
+ATTR current;N;N;$
+ATTR reservedby;N;N;$
+//ATTR reserved;N;N;$
+ATTR modified;N;N;$
+ATTR originated;N;N;$
+// OCDX - Change E_fromExternalId to V_fromExternalID
+ATTR V_fromExternalID;N;N;$ 
+
+//d) owner
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+
+// OCDX - Add ATTR policy;N;N;$ at end
+ATTR policy;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+
+FATTR V_description;Y
+FATTR V_PrimaryFileName;N
+// OCDX - Add policy at end of Create
+FATTR policy;N
+// - unordered
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+//FATTR majorrevision;Y - OCDX - Use unified revision instead of majorrevision
+FATTR revision;Y
+
+FATTR V_PrimaryFileName;Y
+
+FATTR modified;Y
+FATTR V_IsCheckedOut;Y
+
+FATTR project;Y
+
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+//FATTR majorrevision;N - OCDX - Use unified revision instead of majorrevision
+FATTR revision;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+//FATTR majorrevision;Y - OCDX - Use unified revision instead of majorrevision
+FATTR revision;Y
+FATTR PLM_ExternalID;Y
+
+//FATTR V_discipline;Y
+FATTR V_PrimaryMimetype;Y
+FATTR V_PrimaryFileName;Y
+// OCDX - Change E_versionComment to V_versionComment
+FATTR V_versionComment;Y
+FATTR V_description;Y
+
+FATTR originated;Y
+// OCDX - Change E_fromExternalId to V_fromExternalID
+FATTR V_fromExternalID;Y
+
+FATTR V_IsCheckedOut;Y
+FATTR V_CheckedOutPath;Y
+FATTR V_CheckedOutUser;Y
+// OCDX - Add policy;Y before modified.
+FATTR policy;Y
+FATTR modified;Y
+
+//FATTR reserved;Y
+FATTR reservedby;Y
+FATTR current;Y
+
+//d) owner
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+//FATTR majorrevision;N - OCDX - Use unified revision instead of majorrevision
+FATTR revision;N
+FATTR PLM_ExternalID;N
+
+//FATTR V_discipline;N
+FATTR V_PrimaryMimetype;N
+FATTR V_PrimaryFileName;N
+// OCDX - Change E_versionComment to V_versionComment
+FATTR V_versionComment;N
+FATTR V_description;N
+
+FATTR originated;N
+// OCDX - Change E_fromExternalId to V_fromExternalID
+FATTR V_fromExternalID;N
+
+FATTR V_IsCheckedOut;N
+FATTR V_CheckedOutUser;N
+FATTR V_CheckedOutPath;N
+// OCDX - Add policy;N before modified.
+FATTR policy;N
+FATTR modified;N
+FATTR current;N
+//FATTR reserved;N
+FATTR reservedby;N
+
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+//FATTR majorrevision;N - OCDX - Use unified revision instead of majorrevision
+FATTR revision;N
+FATTR PLM_ExternalID;N
+
+//FATTR V_discipline;N
+FATTR V_PrimaryMimetype;N
+FATTR V_PrimaryFileName;N
+// OCDX - Change E_versionComment to V_versionComment
+FATTR V_versionComment;Y
+FATTR V_description;Y
+
+FATTR originated;N
+// OCDX - Change E_fromExternalId to V_fromExternalID
+FATTR V_fromExternalID;N
+
+FATTR V_IsCheckedOut;N
+FATTR V_CheckedOutPath;N
+FATTR V_CheckedOutUser;N
+//FATTR reserved;N
+//FATTR reservedby;N
+// OCDX - Add policy;N before modified.
+FATTR policy;N
+FATTR modified;N
+FATTR current;N
+
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+
+// - unordered
+// ===========================================================
+// End of PLMDmtDocument package's DEFAULT mask file
+// ===========================================================

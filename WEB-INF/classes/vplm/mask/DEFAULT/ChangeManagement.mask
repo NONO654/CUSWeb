@@ -1,0 +1,240 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY Change Action
+// --------------------------------------------------
+ATTR name;Y;N;$
+ATTR Synopsis;Y;N;$
+ATTR description;Y;N;$
+ATTR Severity;N;N;Low
+ATTR current;N;N;$
+ATTR Actual Completion Date;N;N;$
+ATTR Actual Start Date;N;N;$
+ATTR Bypass Plants;N;N;Unassigned
+ATTR Category of Change;N;N;Unassigned
+ATTR Estimated Completion Date;N;N;$
+ATTR Originator;N;N;$
+ATTR Reason For Cancel;N;N;$
+ATTR Responsible Manufacturing Engineer;N;N;Unassigned
+ATTR isbestsofar;N;N;false
+ATTR ispublished;N;N;false
+ATTR locked;N;N;false
+ATTR locker;N;N;$
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR modified;N;N;$
+ATTR organization;Y;N;$
+ATTR originated;N;N;$
+ATTR owner;Y;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revindex;N;N;0
+ATTR revision;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR Synopsis;Y
+FATTR name;N
+FATTR description;Y
+FATTR Severity;Y
+FATTR Estimated Completion Date;Y
+FATTR policy;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR name;Y
+FATTR Synopsis;Y
+FATTR description;Y
+FATTR Severity;Y
+FATTR current;Y
+FATTR project;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR Originator;Y
+FATTR Estimated Completion Date;Y
+FATTR Actual Completion Date;Y
+FATTR Actual Start Date;Y
+FATTR Category of Change;Y
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR name;Y
+FATTR Synopsis;Y
+FATTR description;Y
+FATTR Severity;Y
+FATTR current;Y
+FATTR project;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR Originator;Y
+FATTR Estimated Completion Date;Y
+FATTR Actual Completion Date;Y
+FATTR Actual Start Date;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR name;Y
+FATTR Synopsis;Y
+FATTR description;Y
+FATTR Severity;Y
+FATTR current;Y
+FATTR project;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR Originator;Y
+FATTR Estimated Completion Date;Y
+FATTR Actual Completion Date;Y
+FATTR Actual Start Date;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR name;Y
+FATTR Synopsis;Y
+FATTR description;Y
+FATTR Severity;Y
+FATTR current;Y
+FATTR project;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR Originator;Y
+FATTR Estimated Completion Date;Y
+FATTR Actual Completion Date;Y
+FATTR Actual Start Date;Y
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR project;N
+FATTR description;N
+FATTR originated;N
+FATTR current;N
+FATTR modified;N
+FATTR owner;N
+FATTR organization;N
+FATTR name;N
+FATTR Originator;N
+FATTR Estimated Completion Date;N
+FATTR Actual Completion Date;N
+FATTR Actual Start Date;N
+FATTR Severity;N
+FATTR Synopsis;N
+
+// --------------------------------------------------
+ENTITY Prerequisite
+// --------------------------------------------------
+ATTR Prerequisite Type;N;N;Optional
+ATTR User Defined;N;N;No
+ATTR modified;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR originated;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR reserved;N
+FATTR User Defined;N
+FATTR Prerequisite Type;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR project;Y
+FATTR originated;Y
+FATTR reservedby;Y
+FATTR modified;Y
+FATTR owner;Y
+FATTR reserved;Y
+FATTR organization;Y
+FATTR User Defined;Y
+FATTR Prerequisite Type;Y
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR project;N
+FATTR originated;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR owner;N
+FATTR reserved;N
+FATTR organization;N
+FATTR User Defined;N
+FATTR Prerequisite Type;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR project;Y
+FATTR originated;Y
+FATTR reservedby;Y
+FATTR modified;Y
+FATTR owner;Y
+FATTR reserved;Y
+FATTR organization;Y
+FATTR User Defined;Y
+FATTR Prerequisite Type;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR project;N
+FATTR originated;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR owner;N
+FATTR reserved;N
+FATTR organization;N
+FATTR User Defined;N
+FATTR Prerequisite Type;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FUNC Write
+FATTR project;N
+FATTR originated;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR owner;N
+FATTR reserved;N
+FATTR organization;N
+FATTR User Defined;N
+FATTR Prerequisite Type;N
+

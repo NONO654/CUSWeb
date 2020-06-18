@@ -1,0 +1,83 @@
+// ===========================================================
+// PACKAGE   : CATQCCheckSeal
+// ===========================================================
+// Created: March, 19th 2010
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+// 1 entity :
+// - CATQCCheckSealExt
+// ===========================================================
+ENTITY CATQCCheckSealExt
+// ===========================================================
+// --- attributes: 3
+ATTR V_QCCheckDate;N;N;$
+ATTR V_QCStamp;N;N;$
+ATTR V_QCStatus;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_QCCheckDate;N
+FATTR V_QCStamp;N
+FATTR V_QCStatus;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_QCCheckDate;N
+FATTR V_QCStamp;N
+FATTR V_QCStatus;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_QCCheckDate;N
+FATTR V_QCStamp;N
+FATTR V_QCStatus;N
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_QCCheckDate;N
+FATTR V_QCStamp;N
+FATTR V_QCStatus;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_QCCheckDate;N
+FATTR V_QCStamp;N
+FATTR V_QCStatus;N
+// ===========================================================
+// End of CATQCCheckSeal package's DEFAULT mask file
+// ===========================================================

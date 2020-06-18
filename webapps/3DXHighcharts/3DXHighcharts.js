@@ -1,0 +1,2 @@
+/*! Copyright 2014 Dassault Syst�mes */
+if(typeof Highcharts!=="undefined"){define("DS/VEN3DXHighcharts",function(){return Highcharts})}else{(function(){var a=require.toUrl("DS/VEN3DXHighcharts/4.0.3/highcharts-all");if(a.indexOf("?")>-1){a=a.substring(0,a.indexOf("?"))}require.config({paths:{"DS/VEN3DXHighcharts":a},shim:{"DS/VEN3DXHighcharts":{exports:"Highcharts"}}})})()}define("DS/3DXHighcharts/3DXHighcharts",["DS/VEN3DXHighcharts"],function(a){return a});

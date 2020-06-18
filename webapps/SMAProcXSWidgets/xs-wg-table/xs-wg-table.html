@@ -1,0 +1,232 @@
+<!-- ------------------------------------------------------------------
+[xs-wg-table HTML Document]
+
+Project:    xs
+Version:    1.0
+Last change:
+Assigned to:  apk2
+Primary use:  xs-canvas
+Description:    plot widget which wraps xy-pot. Accepts
+                association of parameter of Array type
+------------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------------------
+
+[Table of contents]
++ xs-plot
+
+------------------------------------------------------------------- -->
+<!-- Import base component common to all widgets -->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+
+<dom-module id="xs-wg-table">
+ <!-- <link rel="import" type="css" href="xs-wg-table.css">  -->
+ <style include="xs-wg-base"></style>
+  <template>
+    <style>
+      .flexcol {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .flexrow {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .name.row {
+          width: 80px;
+          padding: 1%;
+          margin-right: 0.001px;
+          margin-left: 0.001px;
+          text-align: left;
+          padding-left: 6px;
+      }
+
+      .name.column {
+          max-width: 90px;
+          min-width: 40px;
+          width: 100%;
+          padding: 0.5px 1px;
+          padding-top: 0.5px;
+          padding-left: 0.5px;
+          padding-bottom: 0.5px;
+          margin-top: 1px;
+          margin-bottom: 0.001px;
+          min-height: 30px;
+          text-align: right;
+          padding: 6px 0px;
+          line-height: 1.42857;
+          vertical-align: middle;
+          border: 0.5px solid #e2e4e3;
+          padding-left: 6px;
+          font-weight: bold;
+          padding-right: 1%;
+      }
+
+      .main {
+          display: flex;
+          justify-content: flex-start;
+          position: relative;
+          overflow: auto;
+          min-height: 100px;
+          max-height: 300px;
+      }
+
+      .main-col {
+            margin: auto;
+            margin-left: 1px;
+      }
+
+      .blank.column.row {
+         min-width: 80px;
+         width: 80px;
+         min-height: 30px;
+      }
+
+      .name {
+        font-family: Arial;
+        box-sizing: border-box;
+        font-size: 14px;
+        border: 0.5px solid #D1D4D4;
+        overflow: hidden;
+        white-space: nowrap;
+        line-height: 1.4785;
+        text-overflow: ellipsis;
+        height: 30px;
+        min-height: 30px;
+        cursor: default;
+      }
+
+      input.cell {
+         display: block;
+         font-family: Arial;
+          box-sizing: border-box;
+          padding: 0.5px 0.5px;
+          padding-right: 1px;
+          width: 100%;
+          min-width: 40px;
+          height: 30px;
+          text-align: right;
+          border-bottom: 0.5px solid #D1D4D4;
+          border-top: 0.5px solid #D1D4D4;
+          border-right:0.5px solid #D1D4D4;
+          border-left:0.5px solid #D1D4D4;
+          border-radius: 1px;
+          background-image: none;
+          background-color: white;
+          box-shadow: inset 0.1px 0.1px.1px 0.1px rgba(0, 0, 0, 0.075);
+          color: #3D3D3D;
+          font-size: 14px;
+          line-height: 1.42857;
+          max-width: 90px;
+          transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+          -moz-appearance: textfield;
+
+      }
+
+      input.cell[readonly=true]{
+        -moz-appearance: textfield;
+        cursor: pointer;
+      }
+
+      input.cell:focus{
+        -moz-appearance: number-input;
+      }
+
+      input.cell:hover{
+        -moz-appearance: number-input;
+      }
+
+      :host([readonly=true]) .cell, :host([readonly=true]) input[readonly].cell:focus{
+        cursor: not-allowed;
+        -moz-appearance: textfield;
+      }
+
+      :host([readonly=true]) input[readonly].cell:focus{
+        background-color: #eee;
+      }
+
+      :host([readonly=true]) input[readonly].cell{
+        background-color: #eee;
+      }
+
+      input.cell:focus {
+        outline: 0;
+        border-color: #368EC4;
+      }
+
+      input[readonly].cell:focus {
+          background-color: #d5e8f2;
+          border-color:  #D1D4D4;
+      }
+
+      .cell.error {
+        border-color: #CC092F;
+      }
+
+      .no-data-info:before {
+          content: '\e209';
+          font-size: 24px;
+          display: inline-block;
+      }
+
+      .no-data-info {
+          color: #b4b6ba;
+          font-size: 20px;
+          padding-bottom: 4px;
+          display: none;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -webkit-transform: translate(-50%,-50%);
+          -moz-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+      }
+
+      span.no-data-text {
+          display: block;
+          font-family: Arial;
+      }
+
+      .no-data > .no-data-info {
+          display: block;
+      }
+    </style>
+
+
+      <label class="xs-wg-label">{{label}}</label>
+      <div id="container" class="main no-data">
+      	  <div class="no-data-info fonticon xs-wg-placeholder-icon">
+				<span class="no-data-text xs-wg-placeholder-text">No Data Present</span>
+		  </div>
+	      <div class="flexcol main-col">
+	        <div class="flexrow">
+	          <span id="blank" class="name column row blank" hidden$="{{_hidden(row,col)}}"></span>
+	          <template is="dom-repeat" items={{_getArray(col)}}  as="colname">
+	          		<span class="name column" title$="{{colname}}">{{colname}}</span>
+	          </template>
+	        </div>
+
+	        <div class="flexrow">
+	          <div class="flexcol">
+	            <template is="dom-repeat" items={{_getArray(row)}}  as="rowname">
+	        	  	<span class="name row" title$="{{rowname}}">{{rowname}}</span>
+	            </template>
+	          </div>
+
+	          <div class="flexcol">
+	            <template is="dom-repeat" items="{{_data}}"  as="rowvalue" index-as="rowindex">
+	              <div class="flexrow">
+	        	      <template is="dom-repeat" items="{{rowvalue.children}}" class="data" as="colvalue" index-as="colindex">
+	        	          <input class$="{{_computeClass(colvalue.data)}}" type="number" placeholder$="{{colvalue.arrIndex}}" readonly$="{{readonly}}" title$="{{_computeTitle(colvalue.data)}}" value$="{{colvalue.data}}"  on-change="_updateCell" on-keypress="_keypressed"/>
+	        	      </template>
+	      	      </div>
+	            </template>
+	          </div>
+	        </div>
+	    </div>
+    </div>
+  </template>
+  <script type="text/javascript" src="xs-wg-table.js"></script>
+</dom-module>

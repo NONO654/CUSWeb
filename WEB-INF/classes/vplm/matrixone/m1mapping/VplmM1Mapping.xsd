@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" xmlns:mapping="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping">
+  <xs:element name="mapping">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="mapping:pattern.VPLM_PACKAGE"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="mapping:pattern.VPLM_CLASS"/>
+          <xs:element ref="mapping:pattern.VPLM_EXTENSION"/>
+          <xs:element ref="mapping:pattern.VPLM_REL"/>
+          <xs:element ref="mapping:pattern.VPLM_RELATIONCLASS"/>
+          <xs:element ref="mapping:pattern.VPLM_RELATIONSHIP"/>
+          <xs:element name="pattern.VPLM_RELATIONSHIP_END"> <!-- overload default pattern.VPLM_RELATIONSHIP_END to add 'name' attribute -->
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="mapping:vplm.Relationship"/>
+                <xs:element name="m1.relationship"> <!-- overload default m1.relationship to add 'end' attribute -->
+                  <xs:complexType>
+                    <xs:attribute name="name" use="required"/>
+                    <xs:attribute name="end"  use="required" type="mapping:m1.relationship.end"/>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element ref="mapping:pattern.VPLM_CLASS_EXTERNAL"/>
+          <xs:element ref="mapping:pattern.VPLM_DISCIPLINE_CLASS"/>
+          <xs:element ref="mapping:pattern.VPLM_DISCIPLINE_EXTENSION"/>
+          <xs:element ref="mapping:pattern.VPLM_DISCIPLINE_REL"/>
+          <xs:element ref="mapping:pattern.VPLM_UNIQUEKEY"/>
+          <xs:element ref="mapping:pattern.VPLM_DIMENSION"/>
+          <xs:element ref="mapping:pattern.VPLM_PATHTYPE"/>
+          <xs:element ref="mapping:pattern.VPLM_FLATTABLE"/>
+        </xs:choice>
+      </xs:choice>
+      <xs:attribute name="version" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_PACKAGE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Package"/>
+        <xs:element ref="mapping:m1.package"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="mapping:pattern.VPLM_CLASS"/>
+          <xs:element ref="mapping:pattern.VPLM_EXTENSION"/>
+          <xs:element ref="mapping:pattern.VPLM_REL"/>
+          <xs:element ref="mapping:pattern.VPLM_RELATIONCLASS"/>
+          <xs:element ref="mapping:pattern.VPLM_RELATIONSHIP"/>
+          <xs:element ref="mapping:pattern.VPLM_RELATIONSHIP_END"/>
+          <xs:element ref="mapping:pattern.VPLM_CLASS_EXTERNAL"/>
+          <xs:element ref="mapping:pattern.VPLM_DISCIPLINE_CLASS"/>
+          <xs:element ref="mapping:pattern.VPLM_DISCIPLINE_EXTENSION"/>
+          <xs:element ref="mapping:pattern.VPLM_DISCIPLINE_REL"/>
+          <xs:element ref="mapping:pattern.VPLM_UNIQUEKEY"/>
+          <xs:element ref="mapping:pattern.VPLM_DIMENSION"/>
+          <xs:element ref="mapping:pattern.VPLM_PATHTYPE"/>
+          <xs:element ref="mapping:pattern.VPLM_FLATTABLE"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_CLASS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="mapping:vplm.Class"/>
+          <xs:element ref="mapping:vplm.PLMConnection"/>
+          <xs:element ref="mapping:vplm.PLMCoreInstance"/>
+          <xs:element ref="mapping:vplm.PLMCoreReference"/>
+          <xs:element ref="mapping:vplm.PLMCoreRepInstance"/>
+          <xs:element ref="mapping:vplm.PLMCoreRepReference"/>
+          <xs:element ref="mapping:vplm.PLMPort"/>
+        </xs:choice>
+        <xs:element ref="mapping:m1.type"/>
+        <xs:element minOccurs="0" ref="mapping:pubsub"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="mapping:pattern.VPLM_BASIC_CONCAT"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_BASIC"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_MULTIVALUATED"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_CONSTANT"/>
+          <xs:element ref="mapping:pattern.VPLM_VOLATILE"/>
+          <xs:element ref="mapping:pattern.VPLM_RELATIONSHIP"/>
+          <xs:element ref="mapping:pattern.VPLM_PATHTYPE"/>
+          <xs:element ref="mapping:external"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_EXTENSION">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Extension"/>
+        <xs:element ref="mapping:m1.interface"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="mapping:pattern.VPLM_BASIC_CONCAT"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_BASIC"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_MULTIVALUATED"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_CONSTANT"/>
+          <xs:element ref="mapping:pattern.VPLM_VOLATILE"/>
+          <xs:element ref="mapping:external"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_REL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="mapping:vplm.Class"/>
+          <xs:element ref="mapping:vplm.PLMConnection"/>
+          <xs:element ref="mapping:vplm.PLMCoreInstance"/>
+          <xs:element ref="mapping:vplm.PLMCoreReference"/>
+          <xs:element ref="mapping:vplm.PLMCoreRepInstance"/>
+          <xs:element ref="mapping:vplm.PLMCoreRepReference"/>
+          <xs:element ref="mapping:vplm.PLMPort"/>
+        </xs:choice>
+        <xs:element ref="mapping:m1.relationship"/>
+        <xs:element minOccurs="0" ref="mapping:pubsub"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="mapping:pattern.VPLM_BASIC_CONCAT"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_BASIC"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_MULTIVALUATED"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_CONSTANT"/>
+          <xs:element ref="mapping:pattern.VPLM_VOLATILE"/>
+          <xs:element ref="mapping:pattern.VPLM_RELATIONSHIP"/>
+          <xs:element ref="mapping:pattern.VPLM_RELATIONSHIP_END"/>
+          <xs:element ref="mapping:pattern.VPLM_CBP_SR"/>
+          <xs:element ref="mapping:pattern.VPLM_PATHTYPE"/>
+          <xs:element ref="mapping:external"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_RELATIONCLASS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="mapping:vplm.RelationClass"/>
+          <xs:element ref="mapping:vplm.PLMConnection"/>
+          <xs:element ref="mapping:vplm.PLMCoreInstance"/>
+          <xs:element ref="mapping:vplm.PLMCoreReference"/>
+          <xs:element ref="mapping:vplm.PLMCoreRepInstance"/>
+          <xs:element ref="mapping:vplm.PLMCoreRepReference"/>
+          <xs:element ref="mapping:vplm.PLMPort"/>
+        </xs:choice>
+        <xs:element ref="mapping:m1.relationship"/>
+        <xs:element minOccurs="0" ref="mapping:pubsub"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="mapping:pattern.VPLM_BASIC_CONCAT"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_BASIC"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_MULTIVALUATED"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_CONSTANT"/>
+          <xs:element ref="mapping:pattern.VPLM_VOLATILE"/>
+          <xs:element ref="mapping:pattern.VPLM_RELATIONSHIP"/>
+          <xs:element ref="mapping:pattern.VPLM_RELATIONSHIP_END"/>
+          <xs:element ref="mapping:pattern.VPLM_CBP_SR"/>
+          <xs:element ref="mapping:pattern.VPLM_PATHTYPE"/>
+          <xs:element ref="mapping:external"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_PATHTYPE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.PathType"/>
+        <xs:element ref="mapping:m1.pathtype"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE"/>
+          <xs:element ref="mapping:pattern.VPLM_SIMPLE_BASIC"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_CLASS_EXTERNAL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="mapping:vplm.Class"/>
+          <xs:element ref="mapping:vplm.PLMConnection"/>
+          <xs:element ref="mapping:vplm.PLMCoreInstance"/>
+          <xs:element ref="mapping:vplm.PLMCoreReference"/>
+          <xs:element ref="mapping:vplm.PLMCoreRepInstance"/>
+          <xs:element ref="mapping:vplm.PLMCoreRepReference"/>
+          <xs:element ref="mapping:vplm.PLMPort"/>
+        </xs:choice>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="mapping:external"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_RELATIONSHIP">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Relationship"/>
+        <xs:element name="m1.relationship"> <!-- overload default m1.relationship to add 'direction' attribute -->
+          <xs:complexType>
+            <xs:attribute name="name"      use="required"/>
+            <xs:attribute name="direction" use="required" type="mapping:m1.relationship.direction"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_RELATIONSHIP_END">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Relationship"/>
+        <xs:element name="m1.relationship"> <!-- overload default m1.relationship to add 'end' attribute and remove 'name' attribute -->
+          <xs:complexType>
+            <xs:attribute name="end" use="required" type="mapping:m1.relationship.end"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_CBP_SR">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.SubRelationship"/>
+        <xs:element name="m1.relationship"> <!-- overload default m1.relationship to add 'end' attribute and remove 'name' attribute -->
+          <xs:complexType>
+            <xs:attribute name="end" use="required" type="mapping:m1.relationship.end"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_SIMPLE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Simple"/>
+        <xs:element ref="mapping:m1.attribute"/>
+        <xs:element minOccurs="0" ref="mapping:conversion"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_SIMPLE_MULTIVALUATED">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Simple"/>
+        <!-- <xs:element ref="mapping:m1.attribute"/> -->
+        <xs:element name="m1.attribute"> <!-- overload default to not yet support local="yes" for multivaluated attributes -->
+          <xs:complexType>
+            <xs:attribute name="name" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <!-- overload end -->
+        <xs:element ref="mapping:m1.relationship"/>
+        <xs:element minOccurs="0" ref="mapping:conversion"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_SIMPLE_BASIC">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Simple"/>
+        <xs:element ref="mapping:m1.basic"/>
+        <xs:element minOccurs="0" ref="mapping:conversion"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_BASIC_CONCAT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="mapping:vplm.Context.Simple"/>
+        <xs:element maxOccurs="unbounded" ref="mapping:vplm.Simple"/>
+        <xs:element ref="mapping:m1.basic"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_SIMPLE_CONSTANT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Simple"/>
+        <xs:element ref="mapping:m1.constant"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_VOLATILE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Volatile"/>
+        <xs:element ref="mapping:m1.attribute"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_DISCIPLINE_CLASS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Discipline"/>
+        <xs:element ref="mapping:m1.type"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_DISCIPLINE_EXTENSION">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Discipline"/>
+        <xs:element ref="mapping:m1.interface"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_DISCIPLINE_REL">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Discipline"/>
+        <xs:element ref="mapping:m1.relationship"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_UNIQUEKEY">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.UniqueKey"/>
+        <xs:element ref="mapping:m1.uniquekey"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_DIMENSION">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Dimension"/>
+        <xs:element ref="mapping:m1.dimension"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="mapping:pattern.VPLM_UNIT"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_UNIT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Unit"/>
+        <xs:element ref="mapping:m1.unit"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_FLATTABLE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.FlatTable"/>
+        <xs:element ref="mapping:m1.flattabletype"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="mapping:pattern.VPLM_COLUMN"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="mapping:pattern.VPLM_INDEX"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_COLUMN">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Column"/>
+        <xs:element ref="mapping:m1.column"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pattern.VPLM_INDEX">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="mapping:vplm.Index"/>
+        <xs:element ref="mapping:m1.index"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Package">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Class">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="keep_inheritance">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="read_only">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.RelationClass">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="keep_inheritance">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="read_only">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.PathType">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.PLMConnection">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="keep_inheritance">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="read_only">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="sd_format">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.PLMCoreInstance">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="keep_inheritance">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="read_only">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.PLMCoreReference">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="keep_inheritance">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="read_only">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.PLMCoreRepInstance">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="keep_inheritance">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="read_only">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.PLMCoreRepReference">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="keep_inheritance">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="read_only">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="sd_format">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.PLMPort">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="keep_inheritance">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="read_only">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="sd_format">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Extension">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="read_only">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Relationship">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.SubRelationship">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Simple">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Context.Simple">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Volatile">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.package">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.attribute">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="local">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.basic">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.interface">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.relationship">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.pathtype">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="local">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.type">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="where_clause"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="external">
+    <xs:complexType>
+      <xs:attribute name="key" use="required"/>
+      <xs:attribute name="classname" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pubsub">
+    <xs:complexType>
+      <xs:attribute name="version" use="required" type="xs:integer"/>
+      <xs:attribute name="suiteName" use="required"/>
+      <xs:attribute name="suiteShortName" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="conversion">
+    <xs:complexType>
+      <xs:attribute name="method_alias" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Discipline">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="keep_inheritance">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="read_only">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="no"/>
+            <xs:enumeration value="yes"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.constant">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.UniqueKey">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.uniquekey">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Dimension">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.dimension">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Unit">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.unit">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.FlatTable">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.flattabletype">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Column">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.column">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vplm.Index">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="m1.index">
+    <xs:complexType>
+      <xs:attribute name="name" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="m1.relationship.end">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="to"/>
+      <xs:enumeration value="from"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="m1.relationship.direction">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="from-to"/>
+      <xs:enumeration value="to-from"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

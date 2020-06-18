@@ -1,0 +1,82 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SMAProcWebCommonControls Editor showpage</title>
+    <script type="text/javascript" src="../Polymer-1.11.3/webcomponents-lite.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        pcw-code-editor {
+            margin: 20px;
+            width: calc( 100% - 40px )
+        }
+
+        #expressionEditor, #expressionEditorAutocomplete {
+            width:600px;
+            height:100px;
+        }
+
+        #expressionEditor2 {
+            margin-top:20px;
+            width:600px;
+            height:2rem;
+        }
+    </style>
+
+</head>
+<body>
+    <script>
+        require(['DS/SMAProcWebCommonControls/CodeEditor'], function () {
+            console.log("loaded");
+        });
+
+        function addText() {
+            var el = document.getElementById('expressionEditor');
+            el.insertAtCursorPosition('sin(2)');
+        }
+
+        function showError() {
+            var el = document.getElementById('expressionEditor');
+            el.showError(0,0,"Error");
+        }
+
+        function clearError() {
+            var el = document.getElementById('expressionEditor');
+            el.clearError();
+        }
+    </script>
+
+    <h1>SMAProcWebCommonControls Rich Code Editor Showpage</h1>
+    <h2>pcw-code-editor</h2>
+
+    <p>
+        This is a simple wrapper component for ace editor.
+    </p>
+
+    <h3>Default:</h3>
+
+    <pcw-code-editor id="expressionEditor" expression="1+sin(3.1416/2);">
+    </pcw-code-editor>
+
+    <button onclick="addText()">Insert text at cursor position</button>
+    <button onclick="showError()">Show Error</button>
+    <button onclick="clearError()">Clear Error</button>
+
+    <h3>Single Line</h3>
+    <pcw-code-editor id="expressionEditor2" expression="1 + 2;" single-line>
+    </pcw-code-editor>
+
+    <h3>Maximum of 7 lines</h3>
+    <pcw-code-editor expression="1 + 2;" max-lines="7">
+    </pcw-code-editor>
+
+    <h3>Autocomplete</h3>
+    <pcw-code-editor id="expressionEditorAutocomplete" expression="abc def" autocomplete>
+    </pcw-code-editor>
+</body>
+</html>

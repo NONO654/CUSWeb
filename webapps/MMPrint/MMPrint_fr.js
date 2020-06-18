@@ -1,0 +1,1 @@
+define("DS/MMPrint/MMPrint_fr",{});define("DS/MMPrint/assets/nls/MMPrint",{printErrorTitle:"Erreur d'impression",printRealSizeError:"Impression en taille réelle non prise en charge"});

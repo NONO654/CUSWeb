@@ -1,0 +1,32 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-cosservice/sp-cosservice.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-cos/sp-cos.html">
+<link rel="import" href="../../SMAProcSP/sp-cos-filemonitor/sp-cos-filemonitor.html">
+
+<dom-module id="ad-station-manager">
+  <template>	
+        <!-- COMMON CONFIGURATION PROPERTIES -->
+		<sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL" on-valuechange="onVariableValueChange"></sp-variable>
+ 		<sp-variable id="mcsUser" name="mcsUser"></sp-variable>
+		
+		<!--  WEB SERVICES -->
+		<sp-cosservice id="stationWS" name="stationWS" uri="admin/station/query?SubmittingHost=false"></sp-cosservice>
+		<sp-cosservice id="localStationWS" name="localStationWS" uri="admin/station/query?SubmittingHost=true"></sp-cosservice>
+		<sp-cosservice id="runAsEnabledWS" name="runAsEnabledWS" uri="admin/runAsEnabled"></sp-cosservice>
+		<sp-mcsservice id="defaultServerWS" name="defaultServerWS" uri="/resources/eepservices/cos/default?serverName=<serverID>"></sp-mcsservice>
+		
+        <sp-webservice id="execdirWS" name="execdirWS" uri=""></sp-webservice>
+        <sp-webservice id="localStationInfoWS" name="localStationInfoWS" uri="" disable-default-headers="true"></sp-webservice>
+		
+		<!--  OTHER WEB COMPONENTS -->
+		<sp-dashboard id="dashboard"></sp-dashboard>
+		<sp-cos id="cos"></sp-cos>
+		<sp-cos-filemonitor id="fileMonitor"></sp-cos-filemonitor>
+    </template>
+  <script type="text/javascript" src="ad-station-manager.js"></script>
+</dom-module>

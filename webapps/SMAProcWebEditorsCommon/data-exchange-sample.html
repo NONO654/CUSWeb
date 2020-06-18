@@ -1,0 +1,112 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <style>
+      body {font-family: sans-serif;}
+      h1 {margin-bottom: 0; padding-bottom: 0; font-size:15pt;}
+      h2 {margin: 0; padding: 0; font-size:12pt;}
+      pre {
+          background: #D9D9D9;
+          white-space: pre-wrap;
+      }
+    </style>
+</head>
+<body>
+  <h1>Receive data</h1>
+  <form onsubmit="receiveDataSubmit()">
+  <label>Name of the listener to register: <input type="text" id="receiveDataListener" value='SMAsetParameterHistoryTsv'></label><input type="submit">
+  
+  <pre id="receivedDataLog">Received data log:</pre>
+  
+  <script>
+      /* Logs message to the received data log */
+      function logReceivedData(message) {
+        var container = document.querySelector('#receivedDataLog');
+        container.textContent += '\n' + message;
+      }
+      /* Handle the submission of receive data form: register a listener function with the given name that dump its arguments to received data logs*/
+      function receiveDataSubmit() {
+          var receiveDataListener = document.querySelector('#receiveDataListener').value;
+          if (receiveDataListener) {
+              window[receiveDataListener] = function () {
+                  logReceivedData('Listener "' + receiveDataListener + '" received arguments: ' + JSON.stringify([].slice.call(arguments)));
+                  console.log('Listener "' + receiveDataListener + '" received arguments: ', arguments)
+              }
+          }
+          event && event.preventDefault();
+      }
+      // register default listener
+      receiveDataSubmit();
+  </script>
+  </form>
+  <h1>Send data</h1>
+  <form onsubmit="sendDataSubmit()">
+  <label>Enter 1st string parameter to be sent: <input type="text" id="sendDataContent1" value='SMArunId'></label><br />
+  <label>Enter 2nd string parameter to be sent: <input type="text" id="sendDataContent2" value='1.1.1'></label><br />
+  <label>Enter 3rd string parameter to be sent: <input type="text" id="sendDataContent3" value=''></label><br />
+  <input type="submit">
+  <pre id="sendDataLog">Send data log:</pre>
+  <script>
+  /* Logs message to the send data log */
+  function logSendData(message) {
+    var container = document.querySelector('#sendDataLog');
+    container.textContent += '\n' + message;
+  }
+  /* Handle the submission of send data form: call CEF sendString method with 3 strings arguments from the form*/
+  function sendDataSubmit() {
+      var param1 = document.querySelector('#sendDataContent1').value;
+      var param2 = document.querySelector('#sendDataContent2').value;
+      var param3 = document.querySelector('#sendDataContent3').value;
+      if (window.dscef && window.dscef.sendString){
+          window.dscef.sendString(param1, param2, param3);
+          logSendData('Sent: "' + param1 + '", "' + param2 + '", "' + param3 + '"');
+          console.log('Sent: ', param1, param2, param3);
+      } else {
+          logSendData('window.dscef.sendString not available, failed to send: "' + param1 + '", "' + param2 + '", "' + param3 + '"');
+      }
+      event && event.preventDefault();
+  }
+  </script>
+  </form>
+  <h1>File download</h1>
+  <ul>
+  <li><a href="data:text/csv;charset=utf-8,%22name1%22%2C2%2C3%0A%22name2%22%2C4%2C5%0A%22name3%22%2C6%2C7%0A%22name4%22%2C8%2C9%0A%22name5%22%2C10%2C11">CSV content</a></li>
+  <li><a download="results.csv" href="data:text/csv;charset=utf-8,%22name1%22%2C2%2C3%0A%22name2%22%2C4%2C5%0A%22name3%22%2C6%2C7%0A%22name4%22%2C8%2C9%0A%22name5%22%2C10%2C11">CSV content with download attribute set to "results.csv"</a></li>
+  </ul>
+  <h1>File I/O</h1>
+  <h2>Read sync</h2>
+  <form onsubmit="readSync()">
+  <label>File path to read: <input type="text" id="fileReadSync" value='C:\Windows\System32\drivers\etc\hosts'></label>
+  <input type="submit">
+  <pre id="readSyncLog">Read sync log:</pre>
+  <script>
+  /* Logs message to the send data log */
+  function logReadSync(message) {
+    var container = document.querySelector('#readSyncLog');
+    container.textContent += '\n' + message;
+  }
+  /* Handle the submission of send data form: call CEF sendString method with 3 strings arguments from the form*/
+  function readSync() {
+      var fileRead = document.querySelector('#fileReadSync').value;
+      if (window.dscef && window.dscef.readFileSync) {
+          var readChars = 500;
+          var before = performance.now();
+          var content;
+          try {
+              content = window.dscef.readFileSync(fileRead) || '';
+              var duration = performance.now() - before;
+              logReadSync('Read: ' + content.length +' bytes in ' + Math.round(duration) + ' ms from "' + fileRead + '", first ' + readChars + ' chars:\n' + content.substr(0, readChars));
+              console.log('Read: ', fileRead, duration, (content || '').substr(0, 50));
+          } catch (e) {
+              logReadSync('window.dscef.readFileSync error' + e);
+              console.log('window.dscef.readFileSync error', e);
+          }
+      } else {
+          logReadSync('window.dscef.readFileSync not available');
+      }
+      event && event.preventDefault();
+  }
+  </script>
+  </form>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="DELFmiFunctionalModel" />
+    <m1.package name="DELFmiFunctionalModel" />
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="DELFmiContQuantity_Area" />
+      <m1.interface name="DELFmiContQuantity_Area" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_ContQuantity" />
+        <m1.attribute name="DELFmiContQuantity_Area.V_ContQuantity" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="DELFmiContQuantity_Length" />
+      <m1.interface name="DELFmiContQuantity_Length" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_ContQuantity" />
+        <m1.attribute name="DELFmiContQuantity_Length.V_ContQuantity" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="DELFmiContQuantity_Mass" />
+      <m1.interface name="DELFmiContQuantity_Mass" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_ContQuantity" />
+        <m1.attribute name="DELFmiContQuantity_Mass.V_ContQuantity" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="DELFmiContQuantity_Volume" />
+      <m1.interface name="DELFmiContQuantity_Volume" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_ContQuantity" />
+        <m1.attribute name="DELFmiContQuantity_Volume.V_ContQuantity" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="ProcessInstanceContinuous_Ext" />
+      <m1.interface name="ProcessInstanceContinuous_Ext" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_UsageContCoeff" />
+        <m1.attribute name="ProcessInstanceContinuous_Ext.V_UsageContCoeff" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="ProcessInstanceSet_Ext" />
+      <m1.interface name="ProcessInstanceSet_Ext" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_DiscreteQuantity" />
+        <m1.attribute name="ProcessInstanceSet_Ext.V_DiscreteQuantity" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="DELFmiFunctionInstance" />
+      <m1.relationship name="DELFmiFunctionInstance" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_2DXPosition" />
+        <m1.attribute name="DELFmiFunctionInstance.V_2DXPosition" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_2DYPosition" />
+        <m1.attribute name="DELFmiFunctionInstance.V_2DYPosition" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreRepInstance name="DELFmiFunctionRepresentationInstance" />
+      <m1.relationship name="DELFmiFunctionRepresentationInstance" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="DELFmiFunctionReference" />
+      <m1.type name="DELFmiFunctionReference" />
+
+      <!-- Basic Concat -->
+      <pattern.VPLM_BASIC_CONCAT>
+        <vplm.Simple name="PLM_ExternalID" />
+        <m1.basic name="name" />
+      </pattern.VPLM_BASIC_CONCAT>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_AnalysedTime" />
+        <m1.attribute name="DELFmiFunctionReference.V_AnalysedTime" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_EstimatedTime" />
+        <m1.attribute name="DELFmiFunctionReference.V_EstimatedTime" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_ThroughPutTime" />
+        <m1.attribute name="DELFmiFunctionReference.V_ThroughPutTime" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreRepReference name="DELFmiFunctionRepresentationReference" />
+      <m1.type name="DELFmiFunctionRepresentationReference" />
+
+      <!-- Basic Concat -->
+      <pattern.VPLM_BASIC_CONCAT>
+        <vplm.Simple name="PLM_ExternalID" />
+        <m1.basic name="name" />
+      </pattern.VPLM_BASIC_CONCAT>
+
+    </pattern.VPLM_CLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

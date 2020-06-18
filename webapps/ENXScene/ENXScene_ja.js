@@ -1,0 +1,1 @@
+define("DS/ENXScene/ENXScene_ja",{});define("DS/ENXScene/assets/nls/ENXScene",{default_view_label:"デフォルト ビュー",treelistview_label:"ツリー リスト ビュー",graphview_label:"グラフ ビュー",tileview_label:"タイル ビュー",thumbnailview_label:"サムネイル ビュー",datagridview_label:"データグリッド ビュー",storedObjectMgt_label:"リフレッシュ時にロードするオブジェクトを選択"});

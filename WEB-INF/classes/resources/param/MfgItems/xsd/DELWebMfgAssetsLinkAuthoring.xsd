@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMGAConfiguration" xmlns:tns="DS_DELMIAMGAConfiguration"  xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="LinkAuthoringConfig">		
+		<xs:complexType>
+		  <xs:sequence>
+			<xs:element name="Link" type="tns:Link" maxOccurs="unbounded" minOccurs="0"/>
+		  </xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="Link">
+		<xs:sequence>
+			<xs:element name="Event" type="tns:Event" maxOccurs="unbounded" minOccurs="1"/>			
+		</xs:sequence>
+		<xs:attribute type="xs:string" name="name" use="required"/>	
+	</xs:complexType>
+  
+	<xs:complexType name="Event">
+		<xs:sequence>
+			<xs:element name="Condition" type="tns:Condition" maxOccurs="unbounded" minOccurs="0"/>
+			<xs:element name="Action" type="tns:Action" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>			
+		<xs:attribute  type="xs:string" name="name" use="required"/>
+	</xs:complexType>
+	
+    <xs:complexType name="Condition">
+	  <xs:sequence>
+		<xs:element name="Validation" type="tns:Validation" maxOccurs="unbounded" minOccurs="1"/>			
+		<xs:element name="Action" type="tns:Action" maxOccurs="1" minOccurs="1"/>			 
+	  </xs:sequence>
+	</xs:complexType>
+    
+	<xs:complexType name="Validation">
+		<xs:sequence>
+		  <xs:element name="targetAttribute" type="tns:ValidationAttribute" maxOccurs="unbounded" minOccurs="0" />
+		  <xs:element name="sourceAttribute" type="tns:ValidationAttribute" maxOccurs="unbounded" minOccurs="0" />		 	  
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ValidationAttribute">
+		<xs:attribute type="xs:string" name="name" use="required"/>
+		<xs:attribute type="xs:string" name="value" use="required"/>
+		<xs:attribute type="xs:string" name="navigateOnLink" use="optional"/>
+	</xs:complexType>
+  
+	<xs:complexType name="Action">
+	  <xs:sequence>
+		<xs:element name="CopyAttribute" type="tns:CopyAttribute" maxOccurs="unbounded" minOccurs="0"/>
+		<xs:element name="SetAttribute" type="tns:SetAttribute" maxOccurs="unbounded" minOccurs="0"/>		
+	  </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CopyAttribute">
+		<xs:sequence>
+			<xs:element name="targetAttribute" type="tns:CopyTargetAttribute" maxOccurs="1" minOccurs="1"/>
+			<xs:element name="sourceAttribute" type="tns:CopySourceAttribute" maxOccurs="unbounded" minOccurs="1"/>
+		</xs:sequence>		
+		<xs:attribute type="xs:string" name="mode"			use="optional">
+		</xs:attribute>
+	</xs:complexType>
+	
+	<xs:complexType name="CopyTargetAttribute">
+		<xs:attribute type="xs:string" name="name" use="required"/>	
+		<xs:attribute type="xs:string" name="navigateOnLink" use="optional"/>
+		<xs:attribute type="xs:string" name="prefix" use="optional"/>
+		<xs:attribute type="xs:string" name="suffix" use="optional"/>
+		<xs:attribute type="xs:string" name="separator" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="CopySourceAttribute">
+		<xs:attribute type="xs:string" name="name" use="required"/>	
+		<xs:attribute type="xs:string" name="navigateOnLink" use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="SetAttribute">
+		<xs:sequence>
+			<xs:element name="targetAttribute" type="tns:SetTargetAttribute" maxOccurs="1" minOccurs="1"/>
+			<xs:element name="sourceAttribute" type="tns:SetSourceAttribute" maxOccurs="1" minOccurs="1"/>
+		</xs:sequence>		
+		<xs:attribute type="xs:string" name="mode"			use="optional"/>
+	</xs:complexType>
+	
+	<xs:complexType name="SetTargetAttribute">
+		<xs:attribute type="xs:string" name="name" use="required"/>
+		<xs:attribute type="xs:string" name="navigateOnLink" use="optional"/>	
+	</xs:complexType>
+	<xs:complexType name="SetSourceAttribute">
+		<xs:attribute type="xs:string" name="value" use="required"/>	
+	</xs:complexType>		
+		
+</xs:schema>

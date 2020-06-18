@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="urn:com:dassault_systemes:widl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd urn:com:dassault_systemes:widl:managed ..\xsd\widlmanaged.xsd" xmlns:managed="urn:com:dassault_systemes:widl:managed" xmlns:tns="http://cbp.enovia.ws/basic">
+  <imports>
+    <import location="CBPQueryService.widl"/>
+    <import location="CBPXML_managed.widl"/>
+  </imports>
+  <representations>
+    <representation xsi:type="managed:ManagedMappingType">
+      <managed:interfaces>
+        <managed:interface class="com.matrixone.cbp.ws.basic.interfaces.IPLMQueryService" entityRef="tns:IPLMQueryService"/>
+      </managed:interfaces>
+      <managed:implementations>
+        <managed:implementation class="com.matrixone.cbp.ws.basic.stubs.PLMQueryService" entityRef="tns:PLMQueryService"/>
+      </managed:implementations>
+    </representation>
+  </representations>
+</description>

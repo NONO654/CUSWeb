@@ -1,0 +1,178 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msolistparagraphcxspfirst, li.msolistparagraphcxspfirst, div.msolistparagraphcxspfirst
+	{mso-style-name:msolistparagraphcxspfirst;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msolistparagraphcxspmiddle, li.msolistparagraphcxspmiddle, div.msolistparagraphcxspmiddle
+	{mso-style-name:msolistparagraphcxspmiddle;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msolistparagraphcxsplast, li.msolistparagraphcxsplast, div.msolistparagraphcxsplast
+	{mso-style-name:msolistparagraphcxsplast;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msopapdefault, li.msopapdefault, div.msopapdefault
+	{mso-style-name:msopapdefault;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+.MsoChpDefault
+	{font-size:10.0pt;
+	font-family:"Calibri","sans-serif";}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple>
+
+<div class="WordSection1" style="scroll:auto; width:100%; height:100%">
+
+<p class=MsoNormal style='margin-left:.25in'><b>Calculating weight factors for
+groups and parameters</b></p>
+
+<p class=MsoListParagraph style='margin-left:.25in'>Two interdependent settings
+are used to control the final weight factor of any group or parameter: 1) <b><i>priority</i></b>
+(possible values are &quot;MH&quot; - Must Have, &quot;P1&quot;,
+&quot;P2&quot;, &quot;P3&quot;, &quot;P4&quot;, &quot;P5&quot;, default value
+is &quot;P5&quot;), and 2) <b><i>weight</i></b> (possible values are in range
+[1...5], default value is 1.0). The value of <b><i>priority</i></b> is mainly
+used for setting the initial <b><i>weight</i></b> of a group or a parameter;
+the user can override the initial <b><i>weight</i></b> value by using the
+weight slider on the Elicit Preferences page. The final weight factor of a
+parameter or a group is calculated as described below.</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>a.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>The top level (root) parameter group always has a <b><i>weight</i></b>
+of 1.0</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>b.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>For each sub-group or parameter within a group, the <b><i>weight</i></b>
+is determined from either the <b><i>priority</i></b> or the weight slider
+setting as follows:</p>
+
+<p class=MsoListParagraph style='margin-left:1.25in;text-indent:-.25in'>i.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Initially, <b><i>priority</i></b> of the group or parameter is converted
+into its <b><i>weight</i></b> as follows: </p>
+
+<ul>
+<li class=MsoListParagraph style='margin-left:1.5in;'>
+<b><i>priority</i></b> &quot;Must Have&quot; and &quot;P1&quot; = <b><i>weight</i></b>
+of 5.0</li>
+
+<li class=MsoListParagraph style='margin-left:1.5in;'>
+<b><i>priority</i></b> &quot;P2&quot; = <b><i>weight</i></b> of 4.0</li>
+
+<li class=MsoListParagraph style='margin-left:1.5in;'>
+<b><i>priority</i></b> &quot;P3&quot; = <b><i>weight</i></b> of 3.0</li>
+
+<li class=MsoListParagraph style='margin-left:1.5in;'>
+<b><i>priority</i></b> &quot;P4&quot; = <b><i>weight</i></b> of 2.0</li>
+
+<li class=MsoListParagraph style='margin-left:1.5in;'>
+<b><i>priority</i></b> &quot;P5&quot; = <b><i>weight</i></b> of 1.0</li>
+</ul>
+
+<p class=MsoListParagraph style='margin-left:1.25in;text-indent:-.25in'>ii.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>The weight slider on the Elicit Preferences page overrides the initial <b><i>priority</i></b>
+setting to set the <b><i>weight</i></b> of the parameter or group (possible
+values in the range [1...5])</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>c.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>All <b><i>weights</i></b> for sub-groups and parameters are added up to
+get a sum of weights within a given parent group</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>d.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Each <b><i>weight</i></b> for sub-groups and parameters is divided by
+the above sum to get a fraction of the total sum; this value is the <b><i>fractional
+weight</i></b> of a sub-group or a parameter</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>e.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&nbsp;The final aggregated weight factor of a group or a parameter is the product
+of its own <b><i>fractional weight</i></b>, and the <b><i>fractional weights</i></b>
+of all ancestor groups above this group or parameter; this final weight factor is
+used by the selected ranking method to rank the data points</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>e.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>&nbsp;The aggregated weight is used in scoring and shown in the <b>Aggregated Weight</b> chart in the <b>Collaborate</b> page and the <b>Tree Map</b> chart in the <b>Recommend</b> page.</p>
+
+</div>
+
+</body>
+
+</html>
+

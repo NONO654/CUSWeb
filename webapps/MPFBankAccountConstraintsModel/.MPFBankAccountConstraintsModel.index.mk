@@ -1,0 +1,15 @@
+m|MPFModels\MPFBankAccountConstraintsModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19096
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFBankAccountConstraintsModel\MPFBankAccountConstraintsModel_en.js|1554530787|381
+s|MPFModels\MPFBankAccountConstraintsModel.mweb\src\assets\nls\BankAccountConstraintsModel_en.json|1552387455|272
+t|win_b64\webapps\MPFBankAccountConstraintsModel\MPFBankAccountConstraintsModel.js|1554530786|2303
+s|MPFModels\MPFBankAccountConstraintsModel.mweb\src\BankAccountConstraintsCollection.js|1487158369|842
+s|MPFModels\MPFBankAccountConstraintsModel.mweb\src\BankAccountConstraintsDataProxy.js|1487158393|966
+s|MPFModels\MPFBankAccountConstraintsModel.mweb\src\BankAccountConstraintsModel.js|1552409186|4445
+s|MPFModels\MPFBankAccountConstraintsModel.mweb\src\MPFBankAccountConstraintsModel.js|1480073064|0
+s|MPFModels\MPFBankAccountConstraintsModel.mweb\src\BankAccountFieldConstraint.js|1487158446|1008
+t|win_b64\webapps\MPFBankAccountConstraintsModel\assets\nls\BankAccountConstraintsModel_en.json|1554530785|272
+s|MPFModels\MPFBankAccountConstraintsModel.mweb\src\assets\nls\BankAccountConstraintsModel_en.json|1552387455|272

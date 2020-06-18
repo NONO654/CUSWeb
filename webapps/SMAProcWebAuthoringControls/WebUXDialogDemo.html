@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>WebUX Dialog showpage</title>
+    <link rel="stylesheet" href="../UIKIT/UIKIT.css" />
+    <script src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+    <!-- UWA -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <!-- Web Fundamentals -->
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+    <script>
+      require(['DS/SMAProcWebAuthoringControls/WebUXDialog','DS/ApplicationFrame/FrameWindow'],function(WebUXDialog, AFRFrameWindow){
+
+            //Creare framwindows
+            var frmWindow = new AFRFrameWindow({
+                             height: '800px',
+                            width: '1400px',
+                            viewer: 'none',
+                            viewerOptions: {
+                                antiAliasing: true,
+                                useShadowMap: false,
+                                infinitePlane: false,
+                                displayGrid: false,
+                                displayLines: false,
+                                control: 'SIMPLE',
+                                /*useVignetting: false,ssao: false,dof: false,deferred: false,*/
+                                ssao: false,
+                                /* To enable capping*/
+                                debugShadowLight: false,
+                                debugBSphere: false,
+                                debugBBox: false
+                            },
+                            uiOptions: {
+                                displayActionBar: false,
+                                displayTree: false
+                            }
+                        }).inject(window.widget.body);
+            var dialog = document.querySelector('#defaultDialog');
+            dialog.show();
+            var dialog2 = document.querySelector('#defaultDialog2');
+            dialog2.show();
+        });
+    </script>
+  </head>
+  <body>
+    <h1>WebUX Dialog showpage</h1>
+    <h3>WebUX Dialog Default Configuration</h3>
+    <cmp-wux-dialog title='Dialog without buttons' id='defaultDialog'>
+      <dialogcontent>
+        <p>
+          <h2>This is a default dialog with no buttons!</h2><br/>
+          <h3>Content is set using <b>content</b> attribute.</h3>
+          <ol>
+            <li>Dialog is created declaratively</li>
+            <li>This dialog is positioned to top left using my-position and at-position attributes</li>
+          </ol>
+        </p>
+      </dialogcontent>
+    </cmp-wux-dialog>
+    <cmp-wux-dialog title='Dialog with buttons' movable-flag resizable-flag modal-flag id='defaultDialog2' my-position='center' at-position='center'
+            maximize-button-flag='false' ok-button-flag apply-button-flag  cancel-button-flag>
+        <dialogcontent>
+          <div>
+            <p>
+            <h2>This is a dialog with buttons!</h2><br/>
+            <h3>Dialog content is inserted as the child of the web-component!</h3>
+            <ol>
+              <li>Dialog is created declaratively</li>
+              <li>Button to dialog are added using ok-button-flag, apply-button-flag, cancel-button-flag </li>
+              <li>This dialog is positioned to bottom left using my-position and at-position attributes</li>
+              <li>Maximized button has been added by adding maximize-button-flag attribute</li>
+            </ol>
+          </p>
+          </div>
+        </dialogcontent>
+    </cmp-wux-dialog>
+  </body>
+</html>

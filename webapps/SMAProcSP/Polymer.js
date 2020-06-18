@@ -1,0 +1,2 @@
+/*!  Copyright 2018 Dassault Systemes. All rights reserved. */
+(function(a){if(a.Polymer){define("DS/SMAProcSP/Polymer",[],function(){return a.Polymer})}else{define("DS/SMAProcSP/Polymer",["DS/SMAProcSP/import!"+(window.POLYMER_VERSION||"DS/Polymer-1.1.4/polymer.html")],function(){return a.Polymer})}})(this);

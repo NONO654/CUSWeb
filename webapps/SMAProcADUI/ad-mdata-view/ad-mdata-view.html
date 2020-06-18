@@ -1,0 +1,180 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../ad-util/ad-util.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+<link rel="import" href="../../SMAProcSPUI/sp-3Dplayer/sp-3Dplayer.html">
+<link rel="import" href="../ad-hierarchy-browser/ad-hierarchy-browser.html">
+<link rel="import" href="../ad-multiview-panel/ad-multiview-panel.html">
+<link rel="import" href="../ad-dialog-panel/ad-dialog-panel.html">
+<link rel="import" href="../ad-properties-panel/ad-properties-panel.html">
+<link rel="import" href="../ad-session/ad-session.html">
+<link rel="import" href="../ad-mdata-remove-dialog/ad-mdata-remove-dialog.html">
+<link rel="import" href="../ad-station-manager/ad-station-manager.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSP/sp-run/sp-run.html">
+<link rel="import" href="../../SMAProcSP/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+
+<dom-module id="ad-mdata-view">
+  <link rel="import" type="css" href="../ad-hierarchy-browser/ad-hierarchy-browser.css">
+  <link rel="import" type="css" href="ad-mdata-view.css">
+  <template>
+      <style include="sp-uikit-styles"></style>
+
+        <!-- COMMON CONFIGURATION PROPERTIES -->
+		<sp-variable id="currentDragObject" name="currentDragObject"></sp-variable>
+    	<sp-variable id="mcsBaseURL" name="mcsBaseURL" on-valuechange="onVariableValueChange"></sp-variable>
+    	<sp-variable id="inDash" name="inDash" on-valuechange="onVariableValueChange"></sp-variable>
+        <sp-dashboard id="dashboard"></sp-dashboard>
+
+
+ 		<ad-station-manager id="stationManager" session="{{session}}"></ad-station-manager>
+
+	    <ad-hierarchy-browser id="managedDataChooser" class="managedDataChooser" view-mode="{{viewMode}}" view-mode-pref-name="SMAProcAdhoc.preferences.mdataViewMode" root-title="Managed Data" show-root-breadcrumb="true" on-select="onSelect" on-drilldown="onOpen" on-open="onOpen" on-dragover="onDragOver" on-drop="onDrop" show-refresh="true" show-remove="true">
+
+			<sp-access id="access" group="process" data-has-no-write-then="hide">
+				<div class="tooltip-button-wrapper" title="Add new item">
+					<button id="addManagedDataButton" type="button" class="btn btn-xs btn-default" style="position:relative" on-click="onAddManagedData">
+						<span class="fonticon fonticon-plus"><span class="caret">
+					</span></span></button>
+				</div>
+			</sp-access>
+
+			<sp-dropdown-menu id="addManagedDataMenu" class="command-menu">
+				<sp-dropdown-menu-item id="addManagedDataMenuAddRef" label="Add referenced content" on-click="onAddReferencedContent" class="command-menu-item"></sp-dropdown-menu-item>
+				<sp-dropdown-menu-item id="addManagedDataMenuAddFolder" label="Add new folder" labeltype="item" on-click="onAddNewFolder" class="command-menu-item"></sp-dropdown-menu-item>
+				<sp-dropdown-menu-item id="addManagedDataMenuUploadLocal" label="Upload local file" on-click="onUploadLocalFiles" class="command-menu-item"></sp-dropdown-menu-item>
+			</sp-dropdown-menu>
+			<sp-dropdown-menu id="changeEditorMenu" class="command-menu">
+				<sp-dropdown-menu-item id="chamgeEditorAction" label="Set Editor and Edit" on-click="onModifyEditor" class="command-menu-item"></sp-dropdown-menu-item>
+			</sp-dropdown-menu>
+	        <div class="tooltip-button-wrapper" title="View/edit selected item properties">
+		        <button id="configureItem" type="button" class="btn btn-xs btn-default" on-click="onConfigureItem"><span class="fonticon fonticon-cog"></span></button>
+	 	    </div>
+	        <div class="tooltip-button-wrapper" title="Generate 3DEXPERIENCE Results">
+		        <button id="simToSO" type="button" class="btn btn-xs btn-default" on-click="onSimToSO"><span class="fonticon fonticon fonticon fonticon-3dspace"></span></button>
+	 	    </div>
+	        <div class="tooltip-button-wrapper" title="View in 3DPlay">
+		        <button id="player3D" type="button" class="btn btn-xs btn-default" on-click="onView3DPlay"><span class="fonticon fonticon-eye"></span></button>
+	 	    </div>
+			<sp-access id="access" group="process" data-has-no-write-then="hide">
+	            <div class="tooltip-button-wrapper editFileActions" style="display: inline-block" title="Edit file">
+			        <button id="editFileButton" type="button" class="btn btn-xs btn-default" on-click="onEditFile">
+			        	<span class="fonticon fonticon-pencil"></span>
+			        </button>
+			         <button id="modifyEditorButton" type="button" class="btn btn-xs btn-default" on-click="onOpenEditorChange" title="Set Editor and Edit">
+			         	<span class="fonticon fonticon-down-open-mini modifyButtonArrow"></span>
+			        </button>
+		 	    </div>
+			</sp-access>
+	 	    <div class="tooltip-button-wrapper" style="display :inline;" title="Download file(s)">
+		        <button id="downloadFileButton" type="button" class="btn btn-xs btn-default" on-click="onDownloadFile"><span class="fonticon fonticon-download"></span></button>
+	 	    </div>
+	    	<aside>{{emptyMessage}}</aside>
+ 		</ad-hierarchy-browser>
+
+		<ad-dialog-panel id="itemConfigView" on-close="onConfigureItemClose" on-commentupdate="onCommentUpdate">
+			<ad-properties-panel id="itemPropertiesPanel"></ad-properties-panel>
+		</ad-dialog-panel>
+
+   		<sp-3dplayer id="player"></sp-3dplayer>
+        <!--
+            IR-462898-3DEXPERIENCER2016x: need plm-types to include 'DOCUMENTS' - changing list to match Performance Study.
+            <sp-search id="spSearch" plm-types="PLMCoreReference,PLMCoreRepReference,VPMReference,Physical Product,Physics Simulation,Documents,Simulation Document - Versioned,Simulation Document - NonVersioned" on-change="onChange" multi-select="false"></sp-search>
+        -->
+   		<sp-search id="spSearch" plm-types="3DShape,Chapter,DesignSight,FEM,GenerativeStress,Material,PLMCoreRepReference,PLMReference,Part,PlmParameter,Products,Requirement,SpotFastener,Test Case,Use Case,VPMReference,XRep,DOCUMENTS" on-change="onChange" multi-select="false"></sp-search>
+   		<sp-modal id="editorSetting" heading="Editor Setting" width="600px" height="260px">
+			<section class="modalSection">
+				<sp-input id="editorPath" class="editorPathClass" placeholder="Set full file path to editor executable"></sp-input>
+				<p class="message">
+				Enter the path to the program that will be used to edit your files. You must enter the complete path; for example: <br><kbd>c:\Windows\System32\notepad.exe</kbd><br><br>
+				You must have a local Compute Orchestration Station running on your workstation to execute the selected program.
+				<br><br>Editors that handle multiple files in a single instance may need to be configured to open a separate instance for each file.
+				</p>
+			</section>
+            <footer>
+				<button id="editor" is="sp-button-type" primary on-click="onSetEditor">Save</button>
+            </footer>
+        </sp-modal>
+   		<!-- hidden file input used to browse for local files -->
+   		<form id="localFileForm">
+	   		<input id="localFileChooser" name="localFileChooser" type="file" on-change="onLocalFileSelect" style="display:none" multiple>
+   		</form>
+
+         <!-- TODO: Create a web component for this input. Using UIKIT modal for now -->
+        <!--<div id="folderOverlay" class="overlay"></div>
+  		<div id="folderName" class="folderName">
+   		    <input id="getfolderName" class="form-control folderInput" name="getfolderName" on-keyup="{{onFolderNameChange}}" placeholder="Enter folder Name..." type="text" required/>
+   		    <button type="button" id="folderSubmitButton" class="btn btn-primary btn-default" on-click="{{onConfirmAddNewFolder}}">Submit</button>
+            <span id="closeFolderName" class="fonticon fonticon-cancel-squared closefolder" on-click="{{onCloseFolderName}}"></span>
+   	    </div>-->
+        <div id="folderName" class="modal fade">
+			<div class="modal-wrap">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onCloseFolderName">&times;</button>
+			        <h4>Add New Folder</h4>
+			      </div>
+			      <div id="dialogContent" class="modal-body">
+                    <input id="getfolderName" class="form-control folderInput" name="getfolderName" on-keyup="onFolderNameChange" placeholder="Enter Folder Name..." type="text" required="">
+                  </div>
+                  <div class="modal-footer">
+			        <button id="folderSubmitButton" type="button" class="btn btn-primary" on-click="onConfirmAddNewFolder">OK</button>
+			        <button id="closeFolderName" type="button" class="btn btn-default" on-click="onCloseFolderName">Cancel</button>
+			      </div>
+		        </div>
+ 		    </div>
+ 		</div>
+        <div id="myModalOverlay" class="modal-overlay fade hidden"></div>
+
+        <div id="localStationError" class="modal fade">
+			<div class="modal-wrap">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onCloseLocalStationError">&times;</button>
+			        <h4>Edit File Error</h4>
+			      </div>
+			      <div id="dialogContent" class="modal-body">The local station is necessary to edit files locally, and it is currently not running.  In order to edit this file, you must first start your local station.</div>
+                  <div class="modal-footer">
+			        <button type="button" class="btn btn-primary" on-click="onCloseLocalStationError">Close</button>
+			      </div>
+		        </div>
+ 		    </div>
+ 		</div>
+
+    <ad-run id="toolRunner" on-success="onJobStarted" on-error="onJobError" session="{{session}}"></ad-run>
+    <div id="launchSimToSO" class="modal fade">
+        <div class="modal-wrap">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onSimToSOCancel">&times;</button>
+                    <h4>Generate 3DEXPERIENCE Results</h4>
+                </div>
+                <div id="dialogContent" class="modal-body">
+                    <div id="onPremiseSimToSODialog">
+                        <ad-tool-config-where id="simToSOConfig"></ad-tool-config-where>
+                    </div>
+                    <div id="onCloudSimToSODialog">
+                        Would you like to generate 3DEXPERIENCE results for {SimFileName}?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="sim2SOAcceptButton" on-click="onSimToSOAccept">OK</button>
+                    <button type="button" class="btn btn-default" id="sim2SOCancelButton" on-click="onSimToSOCancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	</template>
+  <script src="ad-mdata-view.js"></script>
+  <script type="text/javascript" src="../../../widget/scripts/bpsWidgetUtils.js"></script>
+  <script type="text/javascript" src="../../../common/scripts/emxUIModal.js"></script>
+</dom-module>

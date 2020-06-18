@@ -1,0 +1,147 @@
+<meta charset="UTF-8"/>
+
+PostProcessAALabel.Text="Post-traitement de l'anti-crénelage";
+PostProcessAAControl.Tooltip="NoAA : 
+FXAA : Fast Approximate Anti-Aliasing
+SMAA : ";
+
+AASettingLabel.Text="IterativeAntiAliasing";
+AASettingControl.Tooltip="Active l'anticrénelage de la scène complète.
+L'anticrénelage supprime l'effet d'escalier.";
+
+TranspModeLabel.Text="Mode de transparence";
+TranspModeControl.Tooltip="Par défaut (mélange alpha sans tri),
+Faible (mélange alpha),
+Moyen (mélange alpha),
+Elevé (transparence indépendante de l'ordre)";
+
+AllowOutlineLabel.Text="Autoriser le mode d'affichage de contour";
+AllowOutlineControl.Tooltip="Activer/désactiver le rendu avec arête de contour";
+
+CullMinPixelSizeLabel.Text="Taille minimale de l'objet (en pixels)";
+CullMinPixelSizeControl.Tooltip="Améliore ou dégrade la qualité de visualisation pour les objets.
+Même si vous ne voulez pas déplacer des objets, il est parfois utile de 
+supprimer des détails que vous n'avez pas besoin de voir. 
+Choisissez une valeur basse si vous voulez voir tous les détails 
+ou une valeur élevée pour supprimer des détails.";
+
+OcclusionLabel.Text="Autoriser une occlusion ambiante";
+OcclusionControl.Tooltip="Activer/désactiver l'algorithme d'occlusion ambiante.";
+
+AllowGroundShadowLabel.Text="Autoriser les ombres au sol";
+AllowGroundShadowControl.Tooltip="Autorise le calcul des ombres au sol quand il n'est pas coûteux.";
+
+AllowInterObjShadowLabel.Text="Autoriser les ombres entre les objets";
+AllowInterObjShadowControl.Tooltip="Active/désactive les ombres entre les objets.";
+
+ShadowFilteringLabel.Text="Filtrage à utiliser";
+ShadowFilteringControl.Tooltip="PCFOptimized (Percentage Closer Filtering)
+ESM (Exponential shadow map)
+Poisson ()";
+
+ShadowFilteringQualityLabel.Text="Qualité du filtrage";
+ShadowFilteringQualityControl.Tooltip="";
+
+AllowAOLabel.Text="Autoriser une occlusion ambiante";
+AllowAOControl.Tooltip="";
+
+AllowBloomLabel.Text="Autoriser la prolifération";
+AllowBloomControl.Tooltip="Renvoie parfois au halo ou à la prolifération de lumière.";
+
+AllowDoFLabel.Text="Autoriser la profondeur de champ";
+AllowDoFControl.Tooltip="";
+
+GroundReflModeLabel.Text="Autoriser les réflexions sur le sol";
+GroundReflModeControl.Tooltip="Si le mode de réflexion sélectionné n'est pas activé dans l'ambiance, cette option ne le forcera pas.";
+
+ReflectionsLabel.Text="Réflexions au sol";
+ReflectionsLabel.Tooltip="Aucun()
+Miroir()";
+
+Default="Défaut";
+High="Elevé";
+Low="Faible";
+Medium="Moyen";
+Ultra="Ultra";
+
+
+MaxSamplePerPixelLabel.Text="Echantillons max. par pixel";
+MaxSamplePerPixelControl.Tooltip="Nombre maximum d'échantillons moulés par pixel avant la fin de la convergence";
+MinSamplePerPixelLabel.Text="Echantillons min. par image";
+MinSamplePerPixelControl.Tooltip="Nombre minimum d'échantillons moulés par pixel entre les mises à jour d'images. Les valeurs supérieures à 1 sont conseillées pour le rendu de groupe.";
+ClammpingMaxLumLabel.Text="Calage/luminance max.";
+ClammpingMaxLumControl.Tooltip="Luminance maximum qu'un échantillon peut apporter à un pixel. Les valeurs inférieures entraînent une convergence plus rapide mais assombrissent les effets de lumière, par exemple les éléments mis en surbrillance ou les objets émissifs.";
+GaussFilterLabel.Text="   Filtre gaussien";
+GaussFilterControl.Tooltip="Active le filtre gaussien anticrénelage";
+SizeLabel.Text="     Taille";
+SizeControl.Tooltip="Taille du filtre gaussien en pixels. Les valeurs élevées augmentent le lissage.";
+CenterWeightLabel.Text="   Poids central";
+CenterWeightControl.Tooltip="Définit la courbe du filtre gaussien. Des valeurs plus élevées réduisent le lissage.";
+
+MaxTraceDepthLabel.Text="Profondeur de trace max.";
+MaxTraceDepthControl.Tooltip="Spécifie à quelle fréquence un rayon/une trajectoire de lumière peut rebondir sur des surfaces diffuses/de réfraction ou transiter entre des surfaces transparentes. Un réglage sur 1 permet de calculer uniquement l'illumination directe sans la réfraction. Des valeurs plus élevées peuvent générer des résultats plus réalistes avec une légère baisse de performance possible.";
+GlossyThresholdLabel.Text="Seuil de brillance";
+GlossyThresholdControl.Tooltip="Spécifie à partir de quelle valeur de brillance une interaction entre un rayon et un matériau est interprétée comme une trajectoire caustique. La gestion des trajectoires caustiques peut explicitement être choisie via CAUSTIQUES. Les trajectoires non caustiques peuvent être gérées via un regroupement final, ce qui améliore le temps de convergence.";
+RenderRefractiveShadowsLabel.Text="Rendu d'ombres par réfraction";
+RenderRefractiveShadowsControl.Tooltip="Active les ombres physiquement plausibles pour les surfaces de réfraction (par ex. le verre volumétrique). Si la désactivation de la réfraction pour les ombres est ignorée, cela permet une convergence plus rapide mais peut également générer des résultats physiquement improbables. Cette fonction est requise pour une évaluation caustique correcte.";
+LocationBasedImportanceSamplingLabel.Text="Echantillonnage d'importance basé sur le lieu";
+LocationBasedImportanceSamplingControl.Tooltip="Optimise l'échantillonnage des surfaces émettant de la lumière dans une scène. Recommandé pour les scènes comportant de nombreuses lumières de maillage localisées (par ex. des cadrans de tableau de bord lumineux à l'intérieur d'une voiture).";
+EmissiveObjectsImportanceSamplingLabel.Text="Echantillonnage d'importance d'objets émissifs";
+EmissiveObjectsImportanceSamplingControl.Tooltip="Spécifie de quelle façon les lumières de maillage sont échantillonnées par rapport aux autres sources de lumière. Les valeurs inférieures à 1,0 génèrent plus d'échantillons à partir des ambiances et des lumières virtuelles par étape de rendu.";
+ImportanceDistributionMethodLabel.Text="       Distribution";
+ImportanceDistributionMethodControl.Tooltip="Permet de choisir un schéma d'échantillonnage pour les sources de lumière. EGAL : les échantillons sont divisés équitablement entre les sources de lumière. PROPORTIONNEL A LA PUISSANCE : attribue plus d'échantillons aux sources de lumière qui émettent plus d'énergie.";
+ImportanceSamplingFactorLabel.Text="       Facteur";
+ImportanceSamplingFactorControl.Tooltip="Spécifie si les surfaces émettant de la lumière sont échantillonnées plus (valeur > 1) ou moins (valeur < 1) fréquemment que les autres sources de lumière. Utilisez une faible valeur pour les scènes avec des lumières de maillage comportant une énergie négligeable.";
+PathTerminationStartDepthLabel.Text="Profondeur de départ d'extrémité de trajectoire";
+PathTerminationStartDepthControl.Tooltip="Spécifie après quelle profondeur de rayon-trace les rayons/trajectoires doivent être terminés stochastiquement. Des valeurs plus élevées permettent de réduire le bruit dans les images avec peu d'échantillons par pixel mais augmentent de manière significative le temps d'affichage et souvent le temps de convergence global.";
+
+EnableFinalGatheringLabel.Text="Activer le regroupement final";
+EnableFinalGatheringControl.Tooltip="Active le regroupement final pour accélérer la convergence d'illumination indirecte. Particulièrement utile dans les scènes avec des matériaux diffus.";
+PhotonNumberLabel.Text="       Nombre de photons";
+PhotonNumberControl.Tooltip="Spécifie une quantité globale de photons tracés pour le regroupement final. Des valeurs plus élevées peuvent générer des résultats plus précis au détriment d'un temps de calcul plus long et d'une consommation de mémoire accrue.";
+PathDepthLabel.Text="       Profondeur de trajectoire";
+PathDepthControl.Tooltip="Spécifie le nombre de rebonds pris en compte dans le traçage des photons. Des valeurs plus élevées produisent des résultats plus réalistes, mais avec des performances légèrement inférieures.";
+PhotonRadiusLabel.Text="       Rayon de photon (mm)";
+PhotonRadiusControl.Tooltip="Spécifie le rayon en mm de la zone affectée par un photon. Un faible rayon peut permettre d'augmenter l'exactitude tandis qu'un rayon plus important permettra une convergence d'image plus rapide. Pour inspecter les photons du regroupement final, définissez le MODE VISUALISATION DE LA CARTE DES PHOTONS sur REGROUPEMENT FINAL.";
+RefineFinalGatheringMapLabel.Text="       Affiner la carte de regroupement final";
+RefineFinalGatheringMapControl.Tooltip="Si cette option est activée, chaque étape de rendu génère à nouveau la quantité de photons spécifiée et l'accumule. Permet un rendu rapide associé à un faible nombre de photons, mais nécessite plus d'itérations de rendu. Cette fonction peut permettre d'augmenter la qualité / le lissage de l'illumination indirecte au détriment de temps de calcul plus longs.";
+PrecalculateIrradianceLabel.Text="       Précalculer l'éclairement énergétique";
+PrecalculateIrradianceControl.Tooltip="Précalcule les opérations de regroupement final pour optimiser les temps d'affichage, mais l'illumination indirecte est moins précise. Cette fonction peut réduire la performance en étant associée avec AFFINER LA CARTE DE REGROUPEMENT FINAL.";
+
+CausticsLabel.Text="Caustique";
+CausticsControl.Tooltip="Permet de choisir le mode de calcul des caustiques. AUCUN : supprime les caustiques pour une convergence plus rapide. TRACEUR DE TRAJECTOIRE : recommandé pour les sources de lumière importantes et l'obtention de résultats objectifs. PHOTONS POUR LES CAUSTIQUES : génère de meilleurs résultats pour les sources de lumière faibles.";
+CausticPhotonNumberLabel.Text="       Nombre de photons";
+CausticPhotonNumberControl.Tooltip="Spécifie une quantité globale de photons pour les caustiques. Des valeurs plus élevées peuvent générer des résultats plus précis, au détriment d'un temps de calcul et d'une consommation de mémoire plus importants. Il est recommandé d'utiliser des quantités faibles en association avec AFFINER LA CARTE DES PHOTONS DE CAUSTIQUES.";
+CausticPathDepthLabel.Text="       Profondeur de trajectoire";
+CausticPathDepthControl.Tooltip="Spécifie le nombre de rebonds pris en compte dans le calcul du traçage des photons de caustiques. Des valeurs plus élevées produisent des résultats plus réalistes, mais avec des performances légèrement inférieures.";
+CausticRadiusLabel.Text="       Rayon de caustique (mm)";
+CausticRadiusControl.Tooltip="Spécifie le rayon de la zone caustique affectée par un photon. Un rayon important peut permettre d'augmenter la vitesse de convergence, mais générera des résultats plus flous.";
+RefineCausticMapLabel.Text="       Affiner la carte des photons de caustique";
+RefineCausticMapControl.Tooltip="Si cette option est activée, chaque étape de rendu génère à nouveau la quantité spécifiée de photons et l'accumule. Si elle est activée, le NOMBRE DE PHOTONS CAUSTIQUES peut être défini sur une valeur faible sans empêcher l'obtention d'un résultat de haute qualité au fil du temps.";
+
+RayOffsetLabel.Text="Décalage de rayon (mm)";
+RayOffsetControl.Tooltip="Spécifie le décalage avec le point d'atteinte d'un rayon à partir duquel de nouveaux rayons commencent. Cette valeur doit être définie globalement en fonction de la distance minimum entre les surfaces dans la scène. Les valeurs trop faibles peuvent générer des artefacts noirs. Les valeurs trop importantes peuvent affecter la précision du rendu.";
+
+LODLabel.Text="Niveau de détail";
+LODControl.Tooltip="Niveau de détail";
+
+GIAllowGroundReflLabel.Text="Autoriser les réflexions sur le sol";
+GIAllowGroundReflControl.Tooltip="Autoriser les réflexions sur le sol";
+
+GIAllowGroundShadowLabel.Text="Autoriser les ombres au sol";
+GIAllowGroundShadowControl.Tooltip="Autorise le calcul des ombres au sol quand il n'est pas coûteux.";
+
+GIAllowOutlineLabel.Text="Autoriser le mode d'affichage de contour";
+GIAllowOutlineControl.Tooltip="Activer/désactiver le rendu avec arête de contour";
+
+GIAllowBloomLabel.Text="Autoriser la prolifération";
+GIAllowBloomControl.Tooltip="Autoriser la prolifération";
+
+GIAllowDoFLabel.Text="Autoriser la profondeur de champ";
+GIAllowDoFControl.Tooltip="Autoriser la profondeur de champ";
+
+GIDownsamplingFactorLabel.Text="Facteur de sous-échantillonnage";
+GIDownsamplingFactorControl.Tooltip="Spécifie que l'image doit être rendue à une résolution inférieure pour améliorer les fréquences d'images. Lorsque la valeur est définie sur 1, l'image est traitée selon sa résolution d'origine. Lorsque la valeur est définie sur 0,5, l'image est traitée à la moitié de sa résolution en largeur et en hauteur.";
+
+PhotonMapVisualizationModeLabel.Text="Mode de visualisation de la carte des photons";
+PhotonMapVisualizationModeControl.Tooltip="Active la visualisation de la direction des photons pour ajuster leurs paramètres. AUCUN : désactive la visualisation directe des photons et affiche l'image rendue originale. REGROUPEMENT FINAL : affiche le regroupement final de photons. Pour un résultat optimal, le regroupement final de photons doit se superposer à l'intégralité de la zone d'intérêt. CAUSTIQUES : permet d'afficher les photons caustiques. Pour un résultat optimal, les photons caustiques doivent être suffisamment petits pour pouvoir répliquer les caustiques fines, mais suffisamment denses pour couvrir la zone caustique.";

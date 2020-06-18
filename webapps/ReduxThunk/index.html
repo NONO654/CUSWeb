@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>ReduxThunk tester</title>
+	<script src="../AmdLoader/AmdLoader.js"></script>
+	<script>
+		require(['DS/ReduxThunk/ReduxThunk'], function (reduxThunk) {
+			console.log('ReduxThunk', reduxThunk);
+			if (document.body && document.body.textContent) {
+				var desc = 'redux-thunk object properties:\n';
+				for (var prop in reduxThunk) {
+					desc +=  '  * ' + prop + ': ' + typeof reduxThunk[prop] + '\n';
+				}
+				document.body.style.whiteSpace = 'pre-wrap'
+				document.body.textContent = desc;
+			}
+		});
+	</script>
+</head>
+
+<body></body>
+</html>

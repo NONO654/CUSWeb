@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="PLMEnsLogical" />
+    <m1.package name="PLMEnsLogical" />
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="PLMEnsElectricalProperties" />
+      <m1.interface name="PLMEnsElectricalProperties" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_NominalPower" />
+        <m1.attribute name="PLMEnsElectricalProperties.V_Ens_NominalPower" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="PLMEnsLogicalEquipment" />
+      <m1.interface name="PLMEnsLogicalEquipment" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_PredefinedPartNumber" />
+        <m1.attribute name="PLMEnsLogicalEquipment.V_Ens_PredefinedPartNumber" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_PredefinedPartType" />
+        <m1.attribute name="PLMEnsLogicalEquipment.V_Ens_PredefinedPartType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_SubType" />
+        <m1.attribute name="PLMEnsLogicalEquipment.V_Ens_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="EnsLogicalPortEntity" />
+      <m1.type name="EnsLogicalPortEntity" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_SubType" />
+        <m1.attribute name="EnsLogicalPortEntity.V_Ens_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="EnsLogicalEquipmentInst" />
+      <m1.relationship name="EnsLogicalEquipmentInst" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_PredefinedPartNumber" />
+        <m1.attribute name="EnsLogicalEquipmentInst.V_Ens_PredefinedPartNumber" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_PredefinedPartType" />
+        <m1.attribute name="EnsLogicalEquipmentInst.V_Ens_PredefinedPartType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_TagNumber" />
+        <m1.attribute name="EnsLogicalEquipmentInst.V_Ens_TagNumber" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="EnsLogicalInstanceEntity" />
+      <m1.relationship name="EnsLogicalInstanceEntity" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_TagNumber" />
+        <m1.attribute name="EnsLogicalInstanceEntity.V_Ens_TagNumber" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="EnsInCLogicalPort" />
+      <m1.type name="EnsInCLogicalPort" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="EnsInCLogicalPortEnd1" />
+      <m1.type name="EnsInCLogicalPortEnd1" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="EnsInCLogicalPortEnd2" />
+      <m1.type name="EnsInCLogicalPortEnd2" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="EnsInCLogicalRoute_Inst" />
+      <m1.relationship name="EnsInCLogicalRoute_Inst" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_ConnectionMagnitude" />
+        <m1.attribute name="EnsInCLogicalRoute_Inst.V_Ens_ConnectionMagnitude" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="EnsInCLoop_Inst" />
+      <m1.relationship name="EnsInCLoop_Inst" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="EnsLogicalPart_Inst" />
+      <m1.relationship name="EnsLogicalPart_Inst" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="EnsLogicalPenetration_Inst" />
+      <m1.relationship name="EnsLogicalPenetration_Inst" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_Crossing" />
+        <m1.attribute name="EnsLogicalPenetration_Inst.V_Ens_Crossing" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_PredefinedPartNumber" />
+        <m1.attribute name="EnsLogicalPenetration_Inst.V_Ens_PredefinedPartNumber" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_PredefinedPartType" />
+        <m1.attribute name="EnsLogicalPenetration_Inst.V_Ens_PredefinedPartType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="EnsLogicalEquipment" />
+      <m1.type name="EnsLogicalEquipment" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_PredefinedPartNumber" />
+        <m1.attribute name="EnsLogicalEquipment.V_Ens_PredefinedPartNumber" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_PredefinedPartType" />
+        <m1.attribute name="EnsLogicalEquipment.V_Ens_PredefinedPartType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_SubType" />
+        <m1.attribute name="EnsLogicalEquipment.V_Ens_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="EnsLogicalReferenceEntity" />
+      <m1.type name="EnsLogicalReferenceEntity" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_SubType" />
+        <m1.attribute name="EnsLogicalReferenceEntity.V_Ens_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="EnsInCLogicalBranch_Inst" />
+      <m1.relationship name="EnsInCLogicalBranch_Inst" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="EnsInCLogicalComponent_Inst" />
+      <m1.relationship name="EnsInCLogicalComponent_Inst" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="EnsInCLogicalRoute" />
+      <m1.type name="EnsInCLogicalRoute" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_ConnectionType" />
+        <m1.attribute name="EnsInCLogicalRoute.V_Ens_ConnectionType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="EnsInCLoop" />
+      <m1.type name="EnsInCLoop" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="EnsLogicalPart" />
+      <m1.type name="EnsLogicalPart" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="EnsLogicalPenetration" />
+      <m1.type name="EnsLogicalPenetration" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="EnsInCLogicalBranch" />
+      <m1.type name="EnsInCLogicalBranch" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="EnsInCLogicalComponent" />
+      <m1.type name="EnsInCLogicalComponent" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_Location" />
+        <m1.attribute name="EnsInCLogicalComponent.V_Ens_Location" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_MeasuredMagnitude" />
+        <m1.attribute name="EnsInCLogicalComponent.V_Ens_MeasuredMagnitude" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_MeasuredModifier" />
+        <m1.attribute name="EnsInCLogicalComponent.V_Ens_MeasuredModifier" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_OutputFunction" />
+        <m1.attribute name="EnsInCLogicalComponent.V_Ens_OutputFunction" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_ReadoutFunction" />
+        <m1.attribute name="EnsInCLogicalComponent.V_Ens_ReadoutFunction" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Ens_ReadoutModifier" />
+        <m1.attribute name="EnsInCLogicalComponent.V_Ens_ReadoutModifier" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

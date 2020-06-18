@@ -1,0 +1,59 @@
+$drag-row-height: 5px;
+$drag-column-width: 5px;
+
+.bl-container {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.bl-row {
+	position: relative;
+    width: 100%;
+    overflow: hidden;
+    .bl-row-content {
+		position: absolute;
+		top: $drag-row-height;
+		right: 0;
+		bottom: 0;
+		left: 0;
+    }
+    .no-drag-row {
+    	top: 0;
+    }
+    .bl-drag-row {
+	    width: 100%;
+	    height: $drag-row-height;
+	    top: 0;
+	    right: 0;
+	    left: 0;
+	    cursor: row-resize;
+	    background-color: #f1f1f1;
+    }
+}
+
+.bl-column {
+	position: relative;
+	float: left;
+    height: 100%;
+    overflow: hidden;
+    .bl-column-content {
+		position: absolute;
+		top: 0;
+		right: $drag-column-width;
+		bottom: 0;
+		left: 0;
+    }
+    .no-drag-column {
+    	right: 0;
+    }
+    .bl-drag-column {
+	    width: $drag-column-width;
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	    bottom: 0;
+	    cursor: col-resize;
+	    background-color: #f1f1f1;
+    }
+}

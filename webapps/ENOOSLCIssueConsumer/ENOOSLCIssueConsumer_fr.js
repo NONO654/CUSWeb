@@ -1,0 +1,1 @@
+define("DS/ENOOSLCIssueConsumer/ENOOSLCIssueConsumer_fr",{});define("DS/ENOOSLCIssueConsumer/assets/nls/ENOOSLCIssueConsumer",{SelectExternalRequirementPopupTitle:"Sélectionner une nouvelle exigence externe",SelectExternalChangeRequestPopupTitle:"Sélectionner une demande de modification externe"});

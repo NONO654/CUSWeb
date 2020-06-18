@@ -1,0 +1,1 @@
+define("DS/W3DDriveWrapper/W3DDriveWrapper_fr",{});define("DS/W3DDriveWrapper/assets/nls/saveToMyDrive",{loading_tree:"Chargement de l'arborescence...",loading_tenants:"Chargement des tenants...",select_tenant:"Sélectionnez un tenant.",publish:"Publier",cancel:"Annuler",title:"Titre",select_platform:"Sélectionner une plateforme",save_to_my_drive:"Enregistrer sur mon lecteur"});

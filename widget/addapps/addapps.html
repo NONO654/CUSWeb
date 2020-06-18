@@ -1,0 +1,1104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<title>Apps</title>
+<meta name="author" content="Julien EDMOND"/>
+<meta name="description" content="A descriptive description"/>
+    <!-- Application Standalone emulation files -->
+    <link rel="stylesheet" type="text/css"
+          href="http://uwa.netvibes.com/lib/c/UWA/assets/css/standalone.css"/>
+    <script type="text/javascript"
+            src="http://uwa.netvibes.com/lib/c/UWA/js/UWA_Standalone_Alone.js"></script>
+<!-- PRD -->
+<link rel="icon" type="image/x-icon"
+      href="#MYAPPSBASEURL#/widget/appslist/favicon.png"/>
+<link rel="stylesheet" type="text/css"
+      href="#MYAPPSBASEURL#/widget/appslist/apps.css"/>
+<style type="text/css">
+    fieldset {
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #c9c9c9;
+        border-radius: 4px;
+    }
+    fieldset legend {
+        font: bold 12px Tahoma;
+        padding: 0 5px;
+    }
+    .input-label {
+        font: bold 12px Tahoma;
+    }
+    .checkbox-label {
+        font: bold 12px Tahoma;
+        display: inline-block;
+        margin: 0 10px 0 5px;
+    }
+    .checkbox-wrapper {
+        display: inline-block;
+        margin: 10px 0 0 0;
+    }
+    .uwa-input {
+        margin: 0;
+    }
+    .uwa-select, .uwa-text {
+        margin: 10px 0;
+        display: block;
+        width: 75%;
+    }
+    .multiline {
+        resize: none;
+        height: 50px;
+    }
+    .uwa-button {
+        margin-right: 10px;
+    }
+    .button-wrapper {
+        margin: 10px;
+    }
+
+    .input-tooltip {
+        position: absolute;
+        font: normal 11px Tahoma;
+        color: #0d0d0d;
+        text-align: center;
+        background-color: #f5f5f5;
+        z-index: 1;
+        padding: 5px;
+        border: 1px solid #a8aaac;
+        border-radius: 2px;
+        box-shadow: 1px 1px 1px black;
+    }
+
+    .error {border-color: #b94a48}
+
+    .messages {
+        margin-left: 10px;
+    }
+    .messages li {
+        font: normal 12px Tahoma;
+        color: #b94a48;
+    }
+
+    .compass-preview {
+        background: url('#MYAPPSBASEURL#/widget/addapps/img/compass.png') no-repeat 0 -256px;
+        width: 64px;
+        height: 64px;
+    }
+    .compass-preview-on.west {
+        background-position: 0 0;
+    }
+    .compass-preview-on.south {
+        background-position: 0 -64px;
+    }
+    .compass-preview-on.north {
+        background-position: 0 -128px;
+    }
+    .compass-preview-on.east {
+        background-position: 0 -192px;
+    }
+
+
+    .field {position: relative}
+    .border .moduleContent,
+    .moduleContent {
+        padding: 0;
+    }
+
+    .information {
+        border: 1px solid #DDD;
+        padding: 8px;
+        text-align: justify;
+        margin: 5px;
+    }
+
+    .head {
+        padding: 8px;
+        line-height: 20px;
+        text-align: left;
+        vertical-align: middle;
+        border-top: 1px solid #DDD;
+        background-color: #F0F0F0
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .line {
+        padding: 8px;
+        line-height: 20px;
+        text-align: left;
+        vertical-align: middle;
+        border-top: 1px solid #DDD;
+    }
+
+    .legal-row {
+        float: left;
+        width: 33%;
+    }
+
+    .input {
+        width: 45%;
+    }
+
+    .accordion-open div {
+        background: transparent url(https://vm3dswymstoredsy.dsy.ds:1338/widget/legalManagement/img/actions.png) no-repeat 0 -127px;
+        padding-left: 20px;
+    }
+
+    .accordion-closed div {
+        background: transparent url(https://vm3dswymstoredsy.dsy.ds:1338/widget//legalManagement/img/actions.png) no-repeat 0 -288px;
+        padding-left: 20px;
+    }
+
+    .add-img:hover {
+        opacity: 0.8;
+    }
+
+    .add-img {
+        vertical-align: middle;
+        cursor: pointer;
+        height: 20px;
+        margin-left: 5px;
+        margin-right: 20px;
+        opacity: 0.3;
+        transition: all 0.3s ease 0s;
+        width: 20px;
+    }
+</style>
+
+<script type="text/javascript">
+//<![CDATA[
+require(
+        [
+            'UWA/Core',
+            'UWA/Fx',
+            'UWA/Controls/Form',
+            'UWA/Controls/Input',
+            'UWA/Utils',
+            'UWA/Controls/Img',
+            'UWA/Controls/Abstract'
+        ],
+        /**
+         *
+         * @param {UWA} UWA
+         * @param {Fx} Fx
+         */
+        function (UWA, Fx,Form, Input, Utils, Img, Abstract) {
+            'use strict';
+
+            var tools = {
+                /**
+                 * Manage error
+                 *
+                 */
+                error: {
+                    /**
+                     * Check if the error is a passport forbidden (cas session lost)
+                     *
+                     */
+                    isPassportForbiden: function (error) {
+                        return error.match(/.*passport_forbidden*/i) !== null;
+                    },
+                    /**
+                     * Check if the error is a curl error timeout
+                     *
+                     */
+                    isCurlTimeout: function (error) {
+                        UWA.log(error);
+                        //Error in cURL request: Operation timed out after 10001 milliseconds with 0 bytes received
+                        return error.match(/.*curl.*.*operation.*timed out.*/i) !== null;
+                    }
+                },
+            };
+
+            /**
+             * Ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             * @param method
+             */
+            tools.request = function (url, params, data, callbacks, method) {
+                method = method || 'GET';
+                var headers = {
+                        Accept: 'application/ds-json',
+                        'Accept-Language': MyWidget.getLang()
+                    },
+                    requestSettings,
+                    urlWithParams,
+                    proxUrl;
+
+                if (method === 'POST') {
+                    headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                }
+
+                requestSettings = {
+                    timeout: 15000,
+                    method: method,
+                    type: 'json',
+                    headers: headers,
+                    data: data,
+                    onComplete: function (data) {
+                        var RowData = data,
+                            error;
+                        //manage empty response
+                        data = data ? UWA.Json.decode(data) : {};
+                        if (data) {
+                            if ((data.code && data.code !== '0') || data.error) {
+                                error = (data.message && data.message !== '') ? data.message : data.error;
+                                if (tools.error.isPassportForbiden(error)) {
+                                    location.reload();
+                                } else if (tools.error.isCurlTimeout(error)) {
+                                    //if curl timeout error
+                                    //no problem its normal.... reload widgets....
+                                    MyWidget.onLoad();
+                                } else {
+                                    widget.unmask();
+                                    tools.message.alert(error);
+                                }
+                            } else {
+                                if (typeof callbacks.onComplete === 'function') {
+                                    callbacks.onComplete(data);
+                                }
+                            }
+                        } else {
+                            tools.message.alert(RowData);
+                        }
+                    },
+                    onFailure: function (data) {
+                        if (typeof callbacks.onFailure === 'function') {
+                            callbacks.onFailure(data.error);
+                        } else {
+                            UWA.log(data.error);
+                        }
+                    }
+                }
+
+
+                params = UWA.Utils.toQueryString(params);
+                params = (params.length > 0) ? '?' + params : '';
+                urlWithParams = url + params;
+                proxUrl = UWA.Data.proxifyUrl(urlWithParams, {proxy: 'passport'});
+                UWA.Ajax.request(proxUrl, requestSettings);
+            };
+
+            /**
+             * GET ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.get = function (url, params, callbacks) {
+                tools.request(url, params, {}, callbacks, 'GET');
+            };
+
+            /**
+             * PUT ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.put = function (url, params, data, callbacks) {
+                tools.request(url, params, data, callbacks, 'GET');
+            };
+
+            /**
+             * POST ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.post = function (url, params, data, callbacks) {
+                tools.request(url, params, data, callbacks, 'POST');
+            };
+
+            /**
+             * Widget unmask
+             */
+            widget.unmask = function () {
+                var loadingDiv = widget.getElement('.widget-loading');
+                if (loadingDiv) {
+                    loadingDiv.setStyles({
+                        display: 'none'
+                    });
+                }
+            };
+
+            /**
+             * Widget mask
+             */
+            widget.mask = function () {
+                var loadingDiv = widget.getElement('.widget-loading'),
+                        widgetSize = widget.body.getSize();
+                if (!loadingDiv) {
+                    widget.body.grab(UWA.createElement('div', {
+                        'class': 'widget-loading'
+                    }), 'top');
+
+                    loadingDiv = widget.getElement('.widget-loading');
+                }
+
+                //sync size of loader
+                loadingDiv.setStyles({
+                    height: widgetSize.height + 'px',
+                    width: widgetSize.width + 'px',
+                    display: 'block'
+                });
+            };
+
+            /**
+             *
+             * @type {{}}
+             */
+            tools.proxy = {};
+            /**
+             *
+             * @type {string}
+             */
+            tools.proxy.baseUrl = '#MYAPPSBASEURL#' + '/';
+            /**
+             *
+             * @type {string}
+             */
+            tools.proxy.baseUrlBackend = tools.proxy.baseUrl + 'resources/AppsMngt/';
+            /**
+             *
+             * @type {string}
+             */
+            tools.proxy.addapps = tools.proxy.baseUrlBackend + 'apps/add/';
+
+            /*to get env */
+            tools.proxy.partner = tools.proxy.baseUrlBackend + 'licenses/partner';
+
+            tools.isUrl = function(str){
+                var pattern = new RegExp(
+                    '^(https?:\\/\\/)?'+ // protocol
+                    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+                    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+                    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+                    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+                    '(\\#[-a-z\\d_]*)?$','i'
+                ); // fragment locator
+                if(!pattern.test(str)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            };
+
+            var InputTooltip = Abstract.extend({
+                defaultOptions: {
+                    'max-width': 300
+                },
+                name: 'input-tooltip',
+                text: '',
+
+                init: function (element, text, options) {
+                    this._parent(options);
+                    this.text = text || '';
+                    this.elements = {
+                        tooltipped: UWA.extendElement(element)
+                    };
+                    element.addEvents({
+                        focus: this.dispatchAsEventListener('onShowTooltip'),
+                        blur: this.dispatchAsEventListener('onHideTooltip')
+                    })
+                },
+
+                buildSkeleton: function () {
+                    var tooltip,
+                        tooltipped = this.elements.tooltipped,
+                        root = tooltipped.getOffsetParent();
+
+                    tooltip = UWA.createElement('div', {
+                        'class': this.getClassNames(''),
+                        styles: {
+                            'max-width': this.options['max-width'],
+                            position: 'absolute',
+                            display: 'none',
+                            opacity: 0
+                        }
+                    }).inject(root);
+
+                    this.fx = new Fx(tooltip, {
+                        duration: 250,
+                        wait: false,
+                        events: {
+                            onComplete: function () {
+                                // Force the element to hide when its opacity is 0
+                                if (tooltip.getOpacity() === 0) {
+                                    tooltip.hide();
+                                }
+                            }
+                        }
+                    });
+
+                    this.elements.tooltip = tooltip;
+
+                    return tooltip;
+                },
+
+                getPosition: function () {
+                    var tooltipped = this.elements.tooltipped,
+                        root = tooltipped.getOffsetParent(),
+                        position = tooltipped.getPosition(),
+                        size = tooltipped.getSize(),
+                        rootSize = root.getSize(),
+                        rootPaddingTop = parseInt(root.getStyle('padding-top'), 10);
+
+                    return {
+                        right: rootSize.width - position.x - size.width,
+                        top: position.y + size.height + rootPaddingTop
+                    }
+                },
+
+                setText: function (text) {
+                    this.text = text;
+                },
+
+                show: function () {
+                    var tooltip = this.elements.tooltip;
+
+                    if (!tooltip) {
+                        tooltip = this.buildSkeleton();
+                    }
+                    tooltip.setText(this.text);
+                    tooltip.setStyles(this.getPosition());
+
+                    if (!this.visible) {
+                        tooltip.show();
+                        this.fx.fade('in');
+                        this.visible = true;
+                    }
+                },
+
+                hide: function () {
+                    if (this.visible) {
+                        this.fx.fade('out');
+                        this.visible = false;
+                    }
+                },
+
+                onShowTooltip: function () {
+                    this.show();
+                },
+
+                onHideTooltip: function () {
+                    this.hide();
+                }
+            });
+
+            var MyWidget = {
+                data: {},
+                tooltips: {},
+                /**
+                 * Get the user lang
+                 * @returns {string}
+                 */
+                getLang: function () {
+                    return widget.lang.substr(0,2);
+                },
+                /**
+                 * Load I18n
+                 * @param callback - the callback function
+                 */
+                loadI18n: function () {
+                    /*
+                    var params = {};
+                    tools.proxy.i18n = tools.proxy.baseUrl + 'widget/legalManagement/lang/' + MyWidget.getLang()  + '.json';
+                    tools.request.get(tools.proxy.i18n, params, {
+                        onComplete: function(data){
+                            UWA.i18n(data);
+                            MyWidget.onInit();
+                        }
+                    });
+                    */
+                    MyWidget.onInit();
+
+                },
+                /**
+                 * Init of widget.
+                 */
+                onInit: function () {
+                    widget.setTitle(UWA.i18n('Add App'));
+                    widget.mask();
+                    tools.request.get(tools.proxy.partner, {}, {
+                        onComplete: function (data) {
+                            MyWidget.data = data;
+                            widget.unmask();
+                            MyWidget.onLoad();
+                        }
+                    });
+                },
+
+                /**
+                 * Load UI
+                 */
+                onLoad: function () {
+                    var data = MyWidget.data,
+                        i, l, keys,
+                        types = [], quadrants = [], platforms = [],
+                        configuration,
+                        formWrapper;
+
+                    // Options objects
+                    keys = Object.keys(data.types);
+                    for (i = 0, l = keys.length; i < l; i++) {
+                        types.push({
+                            label: data.types[keys[i]],
+                            value: keys[i]
+                        });
+                    }
+
+                    keys = Object.keys(data.quadrants);
+                    for (i = 0, l = keys.length; i < l; i++) {
+                        quadrants.push({
+                            label: data.quadrants[keys[i]],
+                            value: keys[i]
+                        });
+                    }
+
+                    //Load all platforms
+                    for(i = 0, l = data.platforms.length; i < l; i++){
+                        platforms.push(
+                            {
+                                tag: 'div',
+                                'class': 'checkbox-wrapper',
+                                html: [
+                                    new Input.Checkbox({
+                                        attributes: {name: data.platforms[i].id},
+                                        events: {
+                                            onClick: MyWidget.removeError
+                                        }
+                                    }),
+                                    {
+                                        tag: 'div',
+                                        'class': 'checkbox-label',
+                                        text: data.platforms[i].displayName
+                                    }
+                                ]
+                            }
+                        );
+                    }
+
+                    widget.mask();
+                    widget.body.empty();
+
+                    formWrapper = UWA.createElement('div', {
+                            styles: {
+                                float: 'left',
+                                width: '75%'
+                            }
+                        }).inject(widget.body);
+
+                    UWA.createElement('fieldset', {
+                        html: [
+                            {
+                                tag: 'legend',
+                                text: UWA.i18n('Environment')
+                            },
+                            {
+                                tag: 'div',
+                                styles: {
+                                    float: 'left',
+                                    width: '50%'
+                                },
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Type *')
+                                    },
+                                    new Input.Select({
+                                        options: types,
+                                        className: 'small',
+                                        attributes: {name: 'type'},
+                                        events: {
+                                            onChange: function () {
+                                                var selected = this.getSelection()[0],
+                                                    value = this.options.options[selected].value;
+                                                switch (value) {
+                                                    case 'web':
+                                                        MyWidget.launchInfosLabelFx.start(UWA.i18n('URL *'));
+                                                        MyWidget.configUrlFx.hide();
+                                                        MyWidget.tooltips['launch-infos'].setText(UWA.i18n('App\'s URL (Must be a valid URL)'));
+                                                        break;
+                                                    case 'widget':
+                                                        MyWidget.launchInfosLabelFx.start(UWA.i18n('Source Code URL *'));
+                                                        MyWidget.configUrlFx.show();
+                                                        MyWidget.tooltips['launch-infos'].setText(UWA.i18n('Widget\'s source code URL (Must be a valid URL)'));
+                                                        break;
+                                                    case 'native':
+                                                        MyWidget.launchInfosLabelFx.start(UWA.i18n('Workbench *'));
+                                                        MyWidget.configUrlFx.hide();
+                                                        MyWidget.tooltips['launch-infos'].setText(UWA.i18n('App\'s workbench name'));
+                                                        break;
+                                                }
+                                            }
+                                        }
+                                    }),
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Quadrant *')
+                                    },
+                                    new Input.Select({
+                                        options: quadrants,
+                                        className: 'small',
+                                        attributes: {name: 'quadrant'},
+                                        events: {
+                                            onChange: function () {
+                                                var selected = this.getSelection()[0],
+                                                    value = this.options.options[selected].value,
+                                                    preview = widget.getElement('.compass-preview-on');
+                                                preview.className = 'compass-preview compass-preview-on ' + value;
+                                            }
+                                        }
+                                    })
+                                ]
+                            },
+                            {
+                                tag: 'div',
+                                styles: {
+                                    'margin-left': '50%'
+                                },
+                                html: (function () {
+                                    if (platforms.length > 1) {
+                                        return [
+                                            {
+                                                tag: 'div',
+                                                'class': 'input-label',
+                                                text: UWA.i18n('Platforms *')
+                                            },
+                                            {
+                                                tag: 'div',
+                                                'class': 'platform-checkboxes',
+                                                html: platforms
+                                            }
+                                        ];
+                                    }
+                                    return [];
+                                })()
+                            }
+                        ]
+                    }).inject(formWrapper);
+
+                    UWA.createElement('fieldset', {
+                        html: [
+                            {
+                                tag: 'legend',
+                                text: UWA.i18n('Identity')
+                            },
+                            {
+                                tag: 'div',
+                                styles: {
+                                    float: 'left',
+                                    width: '50%'
+                                },
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Display Name *')
+                                    },
+                                    new Input.Text({
+                                        className: 'small',
+                                        attributes: {
+                                            name: 'display-name',
+                                            events: {
+                                                focus: MyWidget.removeError
+                                            }
+                                        }
+                                    }),
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Description')
+                                    },
+                                    new Input.Text({
+                                        multiline: true,
+                                        className: 'multiline',
+                                        attributes: {name: 'description'}
+                                    })
+                                ]
+                            },
+                            {
+                                tag: 'div',
+                                styles: {
+                                    'margin-left': '50%'
+                                },
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Long Name')
+                                    },
+                                    new Input.Text({
+                                        className: 'small',
+                                        attributes: {
+                                            name: 'long-name',
+                                            events: {
+                                                focus: MyWidget.removeError
+                                            }
+                                        }
+                                    }),
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Icon URL *')
+                                    },
+                                    new Input.Text({
+                                        className: 'small',
+                                        attributes: {
+                                            name: 'icon-url',
+                                            events: {
+                                                focus: MyWidget.removeError
+                                            }
+                                        }
+                                    })
+                                ]
+                            }
+                        ]
+                    }).inject(formWrapper);
+
+                    configuration = UWA.createElement('fieldset', {
+                        html: [
+                            {
+                                tag: 'legend',
+                                text: UWA.i18n('Configuration')
+                            },
+                            {
+                                tag: 'div',
+                                styles: {
+                                    float: 'left',
+                                    width: '50%'
+                                },
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label launchinfos-label',
+                                        text: UWA.i18n('URL *')
+                                    },
+                                    new Input.Text({
+                                        className: 'small',
+                                        attributes: {
+                                            name: 'launch-infos',
+                                            events: {
+                                                focus: MyWidget.removeError
+                                            }
+                                        }
+                                    }),
+                                    {
+                                        tag: 'div',
+                                        'class': 'checkbox-wrapper',
+                                        html: [
+                                            new Input.Checkbox({attributes: {name: 'active'}}),
+                                            {
+                                                tag: 'div',
+                                                'class': 'checkbox-label',
+                                                text: UWA.i18n('Active')
+                                            }
+                                        ],
+                                        styles: {
+                                            'margin-bottom': '10px'
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                tag: 'div',
+                                'class': 'configurl-wrapper',
+                                styles: {
+                                    'margin-left': '50%',
+                                    display: 'none'
+                                },
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Config URL *')
+                                    },
+                                    new Input.Text({
+                                        className: 'small',
+                                        attributes: {
+                                            name: 'config-url',
+                                            events: {
+                                                focus: MyWidget.removeError
+                                            }
+                                        }
+                                    })
+                                ]
+                            }
+                        ]
+                    }).inject(formWrapper);
+
+                    UWA.createElement('div', {
+                        'class': 'button-wrapper',
+                        html: [
+                            new Input.Button({
+                                value: UWA.i18n('Save'),
+                                className: 'small light-grey',
+                                events: {
+                                    onClick: MyWidget.validateForm
+                                }
+                            }),
+                            new Input.Button({
+                                value: UWA.i18n('Save and add another app'),
+                                className: 'small light-grey',
+                                events: {
+                                    onClick: MyWidget.validateForm
+                                }
+                            })
+                        ]
+                    }).inject(formWrapper);
+
+                    MyWidget.launchInfosLabelFx = {
+                        newText: '',
+                        fx: new Fx(configuration.getElement('.launchinfos-label'), {
+                            duration: 200,
+                            unit: '',
+                            events: {
+                                onComplete: function () {
+                                    var animated = this.element;
+                                    if (animated.getStyle('opacity') === 0) {
+                                        animated.setText(MyWidget.launchInfosLabelFx.newText);
+                                        this.start({
+                                            opacity: [0, 1]
+                                        });
+                                    }
+                                }
+                            }
+                        }),
+                        start: function (text) {
+                            if (text !== this.newText) {
+                                this.newText = text;
+                                this.fx.start({
+                                    opacity: [1, 0]
+                                });
+                            }
+                        }
+                    };
+
+                    MyWidget.configUrlFx = {
+                        fx: new Fx(configuration.getElement('.configurl-wrapper'), {
+                            duration: 200,
+                            unit: '',
+                            events: {
+                                onComplete: function () {
+                                    var animated = this.element;
+                                    if (animated.getStyle('opacity') === 0) {
+                                        animated.hide();
+                                    }
+                                }
+                            }
+                        }),
+                        show: function () {
+                            var animated = this.fx.element;
+                            if (animated.getStyle('display') === 'none') {
+                                animated.show();
+                                this.fx.start({
+                                    opacity: [0, 1]
+                                });
+                            }
+                        },
+                        hide: function () {
+                            var animated = this.fx.element;
+                            if (animated.getStyle('display') === 'block') {
+                                this.fx.start({
+                                    opacity: [1, 0]
+                                });
+                            }
+                        }
+                    };
+
+                    MyWidget.createTooltips();
+
+                    UWA.createElement('fieldset', {
+                        html: [
+                            {
+                                tag: 'legend',
+                                text: UWA.i18n('Preview')
+                            },
+                            {
+                                tag: 'div',
+                                'class': 'compass-preview',
+                                html: {
+                                    tag: 'div',
+                                    'class': 'compass-preview compass-preview-on north'
+                                }
+                            }
+                        ]
+                    }).inject(widget.body);
+
+                },
+
+                createTooltips: function () {
+                    var inputs = widget.getElements('.uwa-input.uwa-text'), input,
+                        i, l = inputs.length,
+                        text;
+
+                    for (i = 0; i < l; i++) {
+                        input = inputs[i];
+                        switch (input.name) {
+                            case 'display-name':
+                                text = UWA.i18n('Name displayed in the Compass (Minimum 3 characters)');
+                                break;
+                            case 'long-name':
+                                text = UWA.i18n('App\'s full name (Minimum 3 characters)');
+                                break;
+                            case 'description':
+                                text = UWA.i18n('Short description of the app');
+                                break;
+                            case 'icon-url':
+                                text = UWA.i18n('App\'s icon (Must be a valid URL)');
+                                break;
+                            case 'launch-infos':
+                                text = UWA.i18n('App\'s URL (Must be a valid URL)');
+                                break;
+                            case 'config-url':
+                                text = UWA.i18n('URL to the widget\'s configuration file (Must be a valid URL)');
+                                break;
+                        }
+                        MyWidget.tooltips[input.name] = new InputTooltip(input, text, {});
+                    }
+                },
+
+                removeError: function () {
+                    var element = this.elements ? this.elements.container : this;
+                    if (element.hasClassName('uwa-checkbox') && element.hasClassName('error')) {
+                        widget.getElements('.platform-checkboxes .uwa-checkbox').forEach(function (elmt) {
+                            elmt.removeClassName('error');
+                        });
+                    } else {
+                        element.removeClassName('error');
+                    }
+                },
+
+                validateForm: function () {
+                    var platformBoxes = widget.getElements('.platform-checkboxes [type=checkbox]'),
+                        values = {
+                            type: widget.getElement('[name=type]').value,
+                            quadrant: widget.getElement('[name=quadrant]').value,
+                            platforms: (function () {
+                                var i, l = platformBoxes.length, box,
+                                    checked = [];
+                                for (i = 0; i < l; i++) {
+                                    box = platformBoxes[i];
+                                    if (box.checked) {
+                                        checked.push(box.name);
+                                    }
+                                }
+                                return checked;
+                            })(),
+                            displayName: widget.getElement('[name=display-name]').value,
+                            longName: widget.getElement('[name=long-name]').value,
+                            description: widget.getElement('[name=description]').value,
+                            icon: widget.getElement('[name=icon-url]').value,
+                            active: widget.getElement('[name=active]').checked,
+                            launchInfos: widget.getElement('[name=launch-infos]').value,
+                            configUrl: widget.getElement('[name=config-url]').value
+                        }, 
+                        messages = [],
+                        messageZone = widget.getElement('.messages'), messageList;
+
+                    UWA.log(values);
+                    // Minimum one platform
+                    if (values.platforms.length === 0 && platformBoxes.length > 0) {
+                        messages.push(UWA.i18n('<b>Platforms:</b> Minimum one platform must be selected.'));
+                        platformBoxes.forEach(function (elmt) {
+                            elmt.getClosest('.uwa-checkbox').addClassName('error');
+                        });
+                    }
+                    if(values.displayName.length === 0) {
+                        messages.push(UWA.i18n('<b>Display Name:</b> This field is required.'));
+                        widget.getElement('[name=display-name]').addClassName('error');
+                    } else if (values.displayName.length < 3) {
+                        messages.push(UWA.i18n('<b>Display Name:</b> Minimum 3 characters.'));
+                        widget.getElement('[name=display-name]').addClassName('error');
+                    }
+                    if(values.longName.length > 0 && values.longName.length < 3) {
+                        messages.push(UWA.i18n('<b>Long Name:</b> Minimum 3 characters.'));
+                        widget.getElement('[name=long-name]').addClassName('error');
+                    }
+                    if (!tools.isUrl(values.icon)) {
+                        messages.push(UWA.i18n('<b>Icon URL:</b> Must be a valid URL.'));
+                        widget.getElement('[name=icon-url]').addClassName('error');
+                    }
+                    if (values.type !== 'native' && !tools.isUrl(values.launchInfos)) {
+                        if (values.type === 'web') {
+                            messages.push(UWA.i18n('<b>URL:</b> Must be a valid URL.'));
+                        } else {
+                            messages.push(UWA.i18n('<b>Source Code URL:</b> Must be a valid URL.'));
+                        }
+                        widget.getElement('[name=launch-infos]').addClassName('error');
+                    }
+                    if (values.type === 'widget' && !tools.isUrl(values.configUrl)) {
+                        messages.push(UWA.i18n('<b>Config URL:</b> Must be a valid URL.'));
+                        widget.getElement('[name=config-url]').addClassName('error');
+                    }
+                    if (messages.length === 0) {
+                        if (messageZone) {
+                            messageZone.empty();
+                        }
+                        MyWidget.submitForm(values);
+                    } else {
+                        if (!messageZone) {
+                            messageZone = UWA.createElement('div', {
+                                'class': 'messages',
+                                styles: {
+                                    height: 0,
+                                    overflow: 'hidden'
+                                }
+                            }).inject(widget.body, 'top');
+                            messageZone.fx = new Fx(messageZone, {
+                                duration: 200,
+                                unit: 'px'
+                            });
+                        } else {
+                            messageZone.empty();
+                        }
+                        messageList = UWA.createElement('ul');
+                        messages.forEach(function (message) {
+                            UWA.createElement('li', {html: message}).inject(messageList);
+                        });
+                        messageList.inject(messageZone);
+                    }
+                    if (messageZone) {
+                        messageZone.fx.start({height: [messageZone.getSize().height, 14 * messages.length]});
+                    }
+                },
+
+                submitForm: function (values) {
+                    var callbacks = {
+                        onComplete: function() {
+                            UWA.log('save complete');
+                        },
+                        onFailure: function() {
+                            UWA.log('save failure');
+                        }
+                    };
+                    tools.request.post(tools.proxy.addapps, {}, values, callbacks);
+                }
+            };
+
+            /**
+             * The "onLoad" event is the very first event triggered when
+             * the widget is fully loaded or when the preferences are validated.
+             * Here, we add MyWidget.onLoad() function as "onLoad" event
+             * listener on the widget.
+             */
+            widget.addEvents({
+                'onLoad': MyWidget.loadI18n,
+                'onRefresh': MyWidget.onLoad
+            });
+        });
+//]]>
+</script>
+</head>
+<body>
+<div style="height: 300px"></div>
+</body>
+</html>

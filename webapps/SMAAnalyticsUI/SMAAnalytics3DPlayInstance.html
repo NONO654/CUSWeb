@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script	type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+<script type="text/javascript" src="../../plugins/libs/jquery/2.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="../c/UWA/js/UWA_W3C_Alone.js"></script>
+
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+<script type="text/javascript" src="../WebUX/WebUX.js"></script>
+<script type="text/javascript" src="../WebVisualization/WebVisualization.js"></script>
+<script type="text/javascript" src="../3DPlay/3DPlay.js"></script>
+<script type="text/javascript" src="../3DPlayHelper/3DPlayHelper.js"></script>
+<script type="text/javascript" src="../SimReviewHelper/SimReviewHelper.js"></script>
+<script type="text/javascript" src="../3DPlayModelViewer/3DPlayModelViewer.js"></script>
+<script type="text/javascript" src="../TopBarProxy/TopBarProxy.js"></script>
+<script type="text/javascript" src="../SPYUI/SPYUI.js"></script>
+<script type="text/javascript" src="../SPY/SPY.js"></script>
+<script type="text/javascript" src="../ApplicationFrame/ApplicationFrame.js"></script>
+<script type="text/javascript" src="../UIBehaviors/UIBehaviors.js"></script>
+<link rel="stylesheet" type="text/css" href="SMAAnalyticsUI.css" ></link>
+<!-- link rel="stylesheet" type="text/css" href="../SPYUI/SPYUI.css" ></link-->
+
+<style type="text/css">
+.module{
+	margin:0px!important;
+	width:100%!important;
+	position: absolute!important;
+	bottom: 0px!important;
+	top: 0px!important;
+	border-width:0px!important;
+	border-style:none!important;
+}
+.moduleContent {
+	width: 100%!important;
+	padding: 0px!important;
+	bottom: 0px!important;
+	top: 0px!important;
+	position: absolute!important;
+}
+.moduleHeader {
+	height: 0 !important;
+	padding:0 !important;
+	margin:0 !important;
+}
+.moduleFooter{
+	height:0px!importatnt;
+	display:none!important;
+}
+.moduleWrapper {
+	position: absolute!important;
+	width: 100%!important;
+	height: 100%!important;
+}
+html {
+	overflow: hidden;
+}
+.sim-ui-3dplay-container{
+	position: absolute !important;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+}
+#failureText{
+	position: absolute;
+	top: 150px;
+	left: 140px;
+	border: 1px solid #555;
+	display: inline-block;
+	padding: 10px;
+}
+#_3dplayerdiv{
+	height: 100%;
+}
+
+</style>
+<script type="text/javascript">
+//<![CDATA[
+	var $simjq = jQuery.noConflict();
+	var filePlayer = {
+		play3DFile : function(containerDivObject, completeURL, options){
+
+			options = options || {};
+
+			var forcePlayer = options.forcePlayer || false,
+				playerDefinition = options.playerDefinition ||
+					{ //Set to option or default definition
+						experience: '3DPlayFullSimulation',
+						asset: {
+							provider: 'FILE',
+							filename: completeURL,
+							proxyurl: null,
+							requireAuth: null
+						}
+					},
+				playerSettings = options.playerSettings || //Set to option or default setting
+					{
+						fullScreen: false,
+						mode: 'review',
+						loading: 'autoplay'
+					},
+				playerWidget = options.widget || window.widget;
+			if(!forcePlayer && Player3DShare || PlayerSimReviewWeb) { // try the web 3dPlay
+				filePlayer.playerDiv = filePlayer.playerDiv ||  $simjq('<div/>',{'id':'_3dplayerdiv', 'class':'sim-ui-3dplay-container', 'style':'z-index:100000'});
+				filePlayer.playerDiv[0].classList.remove('sim-ui-3dplay-container');
+				$simjq(containerDivObject)
+					.addClass('sim-ui-3dplay-container')
+					.show()
+					.append(filePlayer.playerDiv);
+
+				var divID = $simjq(filePlayer.playerDiv).attr('id');
+
+				$simjq(filePlayer.playerDiv)
+					.show();
+
+				//Make sure there's no newline characters!
+				if(playerDefinition.asset.filename){
+					playerDefinition.asset.filename = playerDefinition.asset.filename.replace('\n', '');
+				}
+
+				try {
+					if(!filePlayer.theOnly3Dplayer) {
+						if(typeof options.isSimObj === 'boolean' && options.isSimObj){
+							filePlayer.theOnly3DPlayer = new PlayerSimReviewWeb({
+								'container' : divID,
+								'input' : playerDefinition,
+								'options' : playerSettings
+							});
+						}else{
+							filePlayer.theOnly3Dplayer = new Player3DShare(divID, playerDefinition, playerSettings, playerWidget);
+						}
+					} else {
+						filePlayer.theOnly3Dplayer.load({ input:{
+							asset:playerDefinition.asset,
+							experience: playerDefinition.experience
+						}});
+					}
+					$simjq(containerDivObject).addClass('sim-ui-3dplay-container').show();
+					return;
+				} catch (e) {
+					try {
+						if(!filePlayer.theOnly3Dplayer) {
+							if(typeof options.isSimObj === 'boolean' && options.isSimObj){
+								filePlayer.theOnly3DPlayer = new PlayerSimReviewWeb({
+									'container' : divID,
+									'input' : playerDefinition,
+									'options' : playerSettings
+								});
+							}else{
+								filePlayer.theOnly3Dplayer = new Player3DShare(divID, playerDefinition, playerSettings, playerWidget);
+							}
+						} else {
+							filePlayer.theOnly3Dplayer.load({ input:{
+								asset:playerDefinition.asset,
+								experience: playerDefinition.experience
+							}});
+						}
+						$simjq(containerDivObject).addClass('sim-ui-3dplay-container').show();
+						return;
+					} catch (e) {
+
+						//If nothing worked, and we don't have a 3dxml, give a message to close and re-open player.
+						var text = document.createElement('p');
+						text.id = 'failureText';
+						text.textContent = "3DPlayer failed to open. Try closing and re-opening the pop up window.";
+
+						document.getElementById('filePlayerContainerDiv').appendChild(text);
+
+						console.error("Error loading 3DPplay Web");
+						throw e;
+					}
+				}
+			}
+		},
+		close3DFile : function(popoverRoot){
+			if(filePlayer.playerDiv) {
+				filePlayer.playerDiv.appendTo($simjq('body')).hide();
+			}
+			// close the popover
+			return true;
+		},
+		playSimFromEV6 : function(plmID, filePlayDiv, format, simNavSyncServerID, platformServices){
+
+			// this is used to play simulation files
+
+			var serverurl = window.location.href.split('/webapps')[0];
+
+			var options = {
+				forcePlayer : false,
+				isSimObj : true,
+				playerDefinition : {
+					experience : '3DPlayFullSimulation',
+					asset : {
+						provider : 'EV6',
+						physicalid : plmID,
+						serverurl : serverurl,
+						proxyurl : 'none',
+                        dtype: 'DesignSight' // this line is the only difference with the below function
+					}
+				},
+				playerSettings : //Set to option or default setting
+					{
+						fullScreen: false,
+						mode: 'review',
+						loading: 'autoplay',
+						simNavSyncServer: simNavSyncServerID,
+						platformServices: platformServices, 
+						enopad: {
+							activateProbes: false // IR-583100-3DEXPERIENCE2018x
+						}
+					}
+			};
+			filePlayer.play3DFile(filePlayDiv, serverurl, options);
+		},
+		playProductFromEV6 : function(plmID, filePlayDiv, format, simNavSyncServerID, platformServices){
+
+			//This is used to play product files
+
+			var serverurl = window.location.href.split('/webapps')[0];
+
+			var options = {
+				forcePlayer : false,
+
+				playerDefinition : {
+					experience : '3DPlayModelViewer',
+					asset : {
+						provider : 'EV6',
+						physicalid : plmID,
+						serverurl : serverurl,
+						dtype: 'VPMReference',
+						requiredAuth: 'passport', 
+						tenant: document.body.platformId
+					}
+				},
+                playerSettings : //Set to option or default setting
+                {
+                    fullScreen: false,
+                    loading: 'autoplay',
+                    simNavSyncServer: simNavSyncServerID,
+                    platformServices: platformServices, 
+                    enopad: {
+                        activateProbes: false // IR-583100-3DEXPERIENCE2018x
+                    }
+                }
+			};
+
+			filePlayer.play3DFile(filePlayDiv, serverurl, options);
+
+		},
+		playFromFile : function(fileUrl, filePlayDiv, format, simNavSyncServerID, platformServices){
+
+			var options = { //options for setting up 3d player
+				forcePlayer : false,
+
+				playerDefinition : { //Set to option or default definition
+					experience: '3DPlayModelViewer',
+					asset: {
+						provider: 'FILE',
+						filename: fileUrl,
+						format: format,
+						proxyurl:'none',
+						requiredAuth: null
+					}
+				},
+                playerSettings : //Set to option or default setting
+                {
+                    fullScreen: false,
+                    //mode: 'review',
+                    loading: 'autoplay',
+                    simNavSyncServer: simNavSyncServerID,
+                    platformServices: platformServices, 
+                    enopad: {
+                        activateProbes: false // IR-583100-3DEXPERIENCE2018x
+                    }
+                }
+			};
+
+			filePlayer.play3DFile(filePlayDiv, fileUrl, options);
+
+			console.log('Entry point: playFromFile.');
+			console.log('Format: ' + format);
+		},
+		playFile : function(platformServices) {
+			// this SHOULD be the image ... but we want the cell
+			var thisCell = this.cell;
+
+			var fileName = decodeURIComponent(this.file.displayName);
+			var fileId = this.file.id;
+			var type = this.file.type;
+			var url = this.file.url;
+			var thumbnailURL = this.file.thumbnail;
+			var isImage = this.file.isImage;
+			var isVideo = this.file.isVideo;
+			var plmID = '';
+			if(typeof this.file.plmID !== 'undefined'){
+				plmID = this.file.plmID;
+			}
+			var simNavSyncServerID= null;
+			if(typeof this.simNavSyncServerID !== 'undefined'){
+				simNavSyncServerID = this.simNavSyncServerID;
+			}
+
+			filePlayDiv = $simjq('<div/>',{'id':'filePlayerContainerDiv'}).insertBefore('#sim-ui-global-spinner');
+
+			var spinner = document.querySelector('#sim-ui-global-spinner');
+
+			var options = {};
+			divs = [];
+
+			/*divs = [ filePlayDiv ];
+			var options={
+				'customCloseBehavior' : filePlayer.close3DFile,
+				'popOut' : true,
+				'windowName' : winName,
+				'windowTitle' : decodeURIComponent(fileName),
+				'newWinTitle' : title
+			};*/
+
+			var linkContainer;
+
+			var is3DXML = type.toLowerCase().indexOf('3dxml') > -1 || (thumbnailURL.toLowerCase().indexOf('3dxml') > -1),
+				isCGR = type.toLowerCase().indexOf('cgr') > -1 || (thumbnailURL.toLowerCase().indexOf('cgr') > -1),
+				_type = 'cgr';
+				
+			if (is3DXML || isCGR) {
+				// this is actually the fileUrl ... not sure why we're calling it proxUrl
+				var proxUrl = this.proxUrl; 
+				if (is3DXML) {
+					// this is a 3dxml file
+					_type = '3dxml';
+				}
+				spinner.parentNode.removeChild(spinner);
+				filePlayer.playFromFile(proxUrl, filePlayDiv, _type, simNavSyncServerID, platformServices);
+
+			}else  if (type.toLowerCase().indexOf('sim') > -1) {
+
+				spinner.parentNode.removeChild(spinner);
+				filePlayer.playSimFromEV6(plmID, filePlayDiv, _type, simNavSyncServerID, platformServices);
+
+			}else if(type.toLowerCase().indexOf('vpmobject') > -1){
+
+				spinner.parentNode.removeChild(spinner);
+				filePlayer.playProductFromEV6(plmID, filePlayDiv, _type, simNavSyncServerID, platformServices);
+
+			}
+		}
+	};
+
+	/* var observerFunction = function(mutations){
+		mutations.forEach(function(mutation){
+			if(mutation.type === 'attributes' && mutation.attributeName === 'data-plmID'){
+				// if there is a plmID on the target, then the file data is attached ...
+				filePlayer.playFile.call(mutation.target);
+			}
+		});
+	};
+	var bodyObserver = new MutationObserver(observerFunction);
+	bodyObserver.observe(window.document.body,{
+		attributes:true,
+		attributeFilter: ['data-plmID']
+	}); */
+	/* require.config(
+		      // paths
+		      {
+		          baseUrl : '../'
+		      }
+		); */
+	var file;
+	function initialize3DPlay(){
+
+		document.body.file = file;
+		document.body.proxUrl = window.proxUrl;
+		document.body.cell = window.cell;
+		document.body.simNavSyncServerID = window.simNavSyncServerID;
+		document.body.platformId = window.platformId;
+		
+		// doing this in a require call makes sure that UWA is loaded
+		require(['DS/3DPlayHelper/3DPlayHelper'],function() {
+			filePlayer.playFile.call(window.document.body, window.platformServices);
+		});
+	}
+
+//]]>
+</script>
+</head>
+<body>
+
+<div id="sim-ui-global-spinner" class="sim-spinnerHidden">
+	<div class="sim-ui-veil" id="sim-ui-veil">
+	</div>
+	<div class="loading"></div>
+</div>
+</body>
+</html>

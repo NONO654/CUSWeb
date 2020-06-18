@@ -1,0 +1,25 @@
+{{!++subtemplate++}}
+  {{!++id:range++}}
+  {{!--
+      template for range fields
+
+--}}
+  {{#if label}}
+      <label>{{label}}
+      {{~#if required~}}
+            <sup class="required-field">*</sup>
+        {{~/if~}}
+        {{~#if customButtons~}}
+        <span class="actions">
+           {{~#each customButtons~}}
+              <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                  <span class="fonticon {{iconClass}}"></span>
+              </button>
+           {{~/each~}}
+        </span>
+        {{~/if~}}
+     </label>
+    {{/if}}
+     <div class="range"  {{#if fieldHTMLId}}id="{{fieldHTMLId}}Range{{viewId}}"{{else}}id="{{name}}Range{{viewId}}"{{/if}} >
+
+         </div>

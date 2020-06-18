@@ -1,0 +1,1 @@
+define("DS/RTwebrtcAPI/RTwebrtcAPI_ru",{});define("DS/RTwebrtcAPI/assets/nls/feed",{Call:"Вызов",notCompatible:"Браузер несовместим. Используйте Chrome или Firefox"});

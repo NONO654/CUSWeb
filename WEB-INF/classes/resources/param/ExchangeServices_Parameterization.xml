@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<OOTBParameterization regSuite="ExchangeServices">
+	<Domain id="ExchangeServices">
+		<Family id="ExchangeOperation">
+			<Parameter id="ImportasNewParam" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Author,Leader" maxLength="123">
+               <Value id="Author"/>
+					<Value id="Leader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::ENOVIA_CreateAsNew"/>
+				<Constant id="Author" value="VPLMCreator"/>
+            <Constant id="Leader" value="VPLMProjectLeader"/>
+			</Parameter>
+			<Parameter id="ImportasRefParam" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Leader" maxLength="123">
+					<Value id="Author"/>
+               <Value id="Leader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::IMPORT"/>
+            <Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+			</Parameter>
+			<Parameter id="ExportParam" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Author,Leader" maxLength="123">
+                                        <Value id="Author"/>
+					<Value id="Leader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::EXPORT"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+			</Parameter>
+			<Parameter id="DetachParam" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::DATABASEDETACH"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+			</Parameter>
+			<Parameter id="DelegateWaiveParam" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Leader" maxLength="123">
+					<Value id="Leader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::ENOVIA_ImportExport_Delegate"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+			</Parameter>
+			<Parameter id="RevokeParam" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::ENOVIA_ImportExport_Revoke"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+			</Parameter>
+			<Parameter id="RepairSiteOwnershipParam" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand" packaging="OnPremise">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Admin" maxLength="123">
+					<Value id="Admin"/>
+				</Argument>
+				<Constant id="Command" value="vplm::RepairSiteOwnership"/>
+				<Constant id="Admin" value="VPLMAdmin"/>
+			</Parameter>
+            <Parameter id="CoexAdminParam" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::CoexistenceAdmin"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+			</Parameter>
+		</Family>
+  	</Domain>
+</OOTBParameterization>

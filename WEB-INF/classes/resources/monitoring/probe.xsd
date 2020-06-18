@@ -1,0 +1,494 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="probe">
+        <xs:annotation>
+            <xs:documentation>
+                Allows to configure a monitoring probe, defining , eg:
+                    - should the probe be unplugged (i.e. detached
+                        in another process);
+                    - what parameters the probe uses as input;
+                    - what frequency should the probe be called with;
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="option" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Defines a command line option to pass to
+                            the source, on the CLI of the form:
+                                -myoption param_1 ...  param_n
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="description"
+                                type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        This text will appear in the
+                                        option usage message 
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="parameter"
+                                maxOccurs="unbounded"
+                                minOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        A parameter to be passed to
+                                        the probe via the option:
+                                        On the CLI, it would be:
+                                        -myoption parameter
+                                        Parameters are ordered as they
+                                        are in the document
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element
+                                            name="short-description"
+                                            type="xs:string"
+                                            minOccurs="0">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    Short text
+                                                    describing this
+                                                    parameter. Will be
+                                                    displayed on the
+                                                    CLI helped.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="description"
+                                            type="xs:string"
+                                            minOccurs="0">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    Text
+                                                    describing this
+                                                    parameter. Will be
+                                                    displayed on the
+                                                    CLI helped.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element
+                                            name="default_value"
+                                            type="xs:string"
+                                            minOccurs="0">
+                                            <xs:annotation>
+                                                <xs:documentation>
+                                                    What value to give
+                                                    to this parameter
+                                                    if it is optional
+                                                    and not specified.
+                                                </xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="name"
+                                        type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                will be used to
+                                                identify the probe
+                                                parameter (used in
+                                                getParameter() and
+                                                setParameter()).
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute name="optional"
+                                        type="xs:boolean">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                are you forced to pass
+                                                the parameter; If not
+                                                and it is not
+                                                specified,
+                                                default_value will
+                                                be used.
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute name="multiple"
+                                        type="xs:boolean">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                makes the parameter be
+                                                a list of values
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="name" type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    identifier for this option (will
+                                    be used for example on the CLI
+                                    as the option name).
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="shortname"
+                            type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    The short identifier for this
+                                    option (will be used for example
+                                    on the CLI as an alternate option
+                                    name).
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="optional"
+                            type="xs:boolean">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Set to true if this option should
+                                    not always be given.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="hidden"
+                            type="xs:boolean">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Defines if the option help text
+                                    should not be displayed unless
+                                    explicitly required.
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="name" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+                            will be used to
+                            identify the probe
+                            parameter (used in
+                            getParameter() and
+                            setParameter()).
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+				<xs:element name="probe-description" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+                            This text will appear in the
+                            option usage message 
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+				<xs:element name="parameters" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+                            List of parameters to be passed to
+                            the probe
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="parameter"
+                                maxOccurs="unbounded"
+                                minOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        A parameter to be passed to
+                                        the probe 
+                                    </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+									<xs:sequence>
+											<xs:element
+												name="param-description"
+												type="xs:string"
+												minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+														text describing this
+														parameter. Will be
+														displayed on the
+														CLI helped.
+													</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+											<xs:element
+												name="default_value"
+												type="xs:string"
+												minOccurs="0">
+												<xs:annotation>
+													<xs:documentation>
+														What value to give
+														to this parameter
+														if it is optional
+														and not specified.
+													</xs:documentation>
+												</xs:annotation>
+											</xs:element>
+									</xs:sequence>
+									<xs:attribute name="name"
+											type="xs:string">
+										<xs:annotation>
+											<xs:documentation>
+												will be used to
+												identify the probe
+												parameter (used in
+												getParameter() and
+												setParameter()).
+											</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="optional"
+										type="xs:boolean">
+										<xs:annotation>
+											<xs:documentation>
+												are you forced to pass
+												the parameter; If not
+												and it is not
+												specified,
+												default_value will
+												be used.
+											</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="multiple"
+										type="xs:boolean">
+										<xs:annotation>
+											<xs:documentation>
+												makes the parameter be
+												a list of values
+											</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+				<xs:element name="implementation" minOccurs="1" maxOccurs="2">
+                    <xs:annotation>
+                        <xs:documentation>
+                            Describes how to find the class which
+                            implements the probe described in this
+                            configuration.
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="class"
+                                type="xs:string"
+                                maxOccurs="1"
+								minOccurs="1">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Name of the java class
+                                        implementing this probe;
+                                        Should be instanciable with a
+                                        forName &amp; newInstance.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="dll"
+                                type="xs:string"
+                                maxOccurs="1"
+								minOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation>
+                                        Name of the dll
+                                        implementing this probe;
+                                        Should be instanciable with a
+                                        forName &amp; newInstance.
+                                    </xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+						<xs:attribute name="os">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    The OS where this implementation detail is applicable 
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>  
+								<xs:restriction base="xs:string">  
+									<xs:enumeration value="windows">  
+										<xs:annotation>
+											<xs:documentation>
+												OS is Windows
+											</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="linux">
+										<xs:annotation>
+											<xs:documentation>
+												OS is Linux
+											</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="all">  
+										<xs:annotation>
+											<xs:documentation>
+												OS is Windows
+											</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+								</xs:restriction>  
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="type">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Implentation type for this probe
+									The possible values are java, dotnet 
+									etc 
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>  
+								<xs:restriction base="xs:string">  
+									<xs:enumeration value="java">  
+										<xs:annotation>
+											<xs:documentation>
+												Implemetation type of the probe is java
+											</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+									<xs:enumeration value="dotnet">
+										<xs:annotation>
+											<xs:documentation>
+												Implemetation type of the probe is dotnet
+											</xs:documentation>
+										</xs:annotation>
+									</xs:enumeration>
+								</xs:restriction>  
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+                </xs:element>
+                <xs:element name="period" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>
+                            The period used to call the probe's
+                            pull() method, the formula used based on
+                            the attributes being:
+                            period (in milliseconds) =
+                            (minutes + 60 * seconds) * 1000
+                            + milliseconds
+                        </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="minutes"
+                            type="xs:unsignedInt">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    number of minutes of the pull
+                                    periods (will be added to the
+                                    number of seconds).
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="seconds"
+                            type="xs:unsignedInt">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    number of second of the pull
+                                    period (will be added to the
+                                    number of minutes, and can be
+                                    more than 60, if for example you
+                                    only want to use this attribute).
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute name="milliseconds"
+                            type="xs:unsignedInt">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    number of millisecond of the pull
+                                    period (will be added to the
+                                    number of seconds and minutes,
+                                    and can be more than 1000,
+                                    if for example you
+                                    only want to use this attribute).
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+			</xs:sequence>
+            <xs:attribute name="name" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        Unique name identifying the probe;
+                        As for the file name, should use the format:
+                        &lt;Framework&gt;&#8901;&lt;Module&gt;&#8901;&lt;ImplementingClassName&gt;&#8901;&lt;whateverYoudLike&gt;,
+                        e.g:
+                        ENOCloudMonitoring&#8901;ENOSysCloudMonAgent&#8901;FloatingControlServer&#8901;diskusagesla;
+
+                        And the file would be named:
+                        ENOCloudMonitoring&#8901;ENOSysCloudMonAgent&#8901;FloatingControlServer&#8901;diskusagesla.xml;
+                        Here we replaced &lt;whateverYoudLike&gt;
+                        by the option name.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="kind">
+                <xs:annotation>
+                    <xs:documentation>
+                        Kind of probe (is it SLA or not).
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>  
+                    <xs:restriction base="xs:string">  
+                        <xs:enumeration value="default">  
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Default probe kind
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                        <xs:enumeration value="SLA">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Service Licence Agreement Probe
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>  
+                </xs:simpleType>  
+            </xs:attribute>
+            <xs:attribute name="unplug" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>
+                        Should the source be unplugged, ie:
+                        launched in an independant process providing:
+                        - non blocking call to pull() method
+                        - agent stability in case of probe crash,
+                          with process respawn
+                        - a kill and restart feature for probes taking
+                          too long to answer.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="needs_key_store" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>
+                        Does this source need access to the keystore
+                        to extract values from it, such as
+                        credentials.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="add_to_config" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>
+                        Should the server be added to te monitoring
+                        config
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+</xs:schema> 

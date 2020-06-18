@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/*
+* @quickreview T9N  18:10:15 IR-634904-3DEXPERIENCER2019x Remove of responsive AB behavior.
+*/
+-->
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DPlayDrawingPreviewAfrInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DPlayDrawingPreviewAfrInterface"/>
+  </Template>
+
+  <Template syp:name="3DPlayDrawingPreviewAfrHeaderList" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID = "Zoom" ClassName = "DS/ViewerCommands/VisuZoomViewCmd" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Pan" ClassName = "DS/ViewerCommands/VisuPanViewCmd" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Reframe" ClassName = "DS/ViewerCommands/VisuReframeViewCmd" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Previous" ClassName = "DS/3DPlayDrawingExperience/CmdScrollSheet" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDrawingExperience/3DPlayDrawingExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "ScrollSheet" Value = "Previous" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "Next" ClassName = "DS/3DPlayDrawingExperience/CmdScrollSheet" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDrawingExperience/3DPlayDrawingExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "ScrollSheet" Value = "Next" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+    </CATCmdHeadersList>
+  </Template>
+  <Template syp:name="3DPlayDrawingPreviewAfrWorkbench" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DPlayDrawingPreviewWorkbench">
+      <CATCmdStarter Name = "Zoom" Command = "Zoom" />
+      <CATCmdStarter Name = "Pan" Command = "Pan" />
+      <CATCmdStarter Name = "Reframe" Command = "Reframe" />
+      <CATCmdStarter Name = "Previous" Command = "Previous" />
+      <CATCmdStarter Name = "Next" Command = "Next" />
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

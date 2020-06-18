@@ -1,0 +1,1 @@
+define("DS/DMUSlideEdition/DMUSlideEdition_zh",{});define("DS/DMUSlideEdition/assets/nls/DMUSlideEdition",{normalSlideTitle:"幻灯片",createSlideMessage:"已创建"});

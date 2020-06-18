@@ -1,0 +1,224 @@
+// ===========================================================
+// PACKAGE   : PLMSpacePlanning
+// ===========================================================
+// Generated : Sep 2012
+// Owner     : BYN
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity> [@Inherits]
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+// --- entities : 7
+// - SPP_AbstractSpaceRef
+// - SPP_AbstractSpaceConcept
+// - SPP_SpaceFolder
+// - SPP_SpaceRoot
+// - SPP_SpaceRef
+// - SPP_SpaceConceptRoot
+// - SPP_SpaceConceptNode
+// ===========================================================
+
+// ===========================================================
+ENTITY SPP_AbstractSpaceRef @Inherits
+// ===========================================================
+ATTR V_StableName;N;N;$
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_StableName;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_StableName;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_StableName;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_StableName;N
+
+// ===========================================================
+ENTITY SPP_AbstractSpaceConcept @Inherits
+// ===========================================================
+ATTR V_StableName;N;N;$
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_StableName;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_StableName;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_StableName;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_StableName;N
+
+// ===========================================================
+ENTITY SPP_SpaceFolder @Inherits
+// ===========================================================
+ATTR V_StableName;N;N;$
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_StableName;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_StableName;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_StableName;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_StableName;N
+
+// ===========================================================
+ENTITY SPP_SpaceRoot @Inherits
+// ===========================================================
+
+// ===========================================================
+ENTITY SPP_SpaceRef @Inherits
+// ===========================================================
+ATTR V_Volume;N;N;$
+ATTR V_EstimatedVolume;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_EstimatedVolume;Y
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_Volume;Y
+FATTR V_EstimatedVolume;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_Volume;Y
+FATTR V_EstimatedVolume;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_Volume;N
+FATTR V_EstimatedVolume;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_Volume;N
+FATTR V_EstimatedVolume;Y
+
+// ===========================================================
+ENTITY SPP_SpaceConceptRoot @Inherits
+// ===========================================================
+ATTR V_UnionOfChildrenMustBeEqualToSpaceRootVolume;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_UnionOfChildrenMustBeEqualToSpaceRootVolume;Y
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_UnionOfChildrenMustBeEqualToSpaceRootVolume;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_UnionOfChildrenMustBeEqualToSpaceRootVolume;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_UnionOfChildrenMustBeEqualToSpaceRootVolume;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_UnionOfChildrenMustBeEqualToSpaceRootVolume;Y
+
+// ===========================================================
+ENTITY SPP_SpaceConceptNode @Inherits
+// ===========================================================
+ATTR V_SpaceAssociated;N;N;$
+ATTR V_UnionOfChildrenMustBeEqualToSpaceVolume;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_UnionOfChildrenMustBeEqualToSpaceVolume;Y
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_SpaceAssociated;Y
+FATTR V_UnionOfChildrenMustBeEqualToSpaceVolume;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_SpaceAssociated;Y
+FATTR V_UnionOfChildrenMustBeEqualToSpaceVolume;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_SpaceAssociated;N
+FATTR V_UnionOfChildrenMustBeEqualToSpaceVolume;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_SpaceAssociated;N
+FATTR V_UnionOfChildrenMustBeEqualToSpaceVolume;Y
+
+// ===========================================================
+// End of PLMSpacePlanning package's DEFAULT mask file
+// ===========================================================

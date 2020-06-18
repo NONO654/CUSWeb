@@ -1,0 +1,1 @@
+define("DS/WidgetServices/WidgetServices_ja",{});define("DS/WidgetServices/assets/nls/SecurityContextNls",{ErrorSecurityContextEmpty:"ユーザーは優先セキュリティ コンテキストを所有していません",ErrorSecurityContext:"セキュリティ コンテキストの取得中にエラーが発生しました",ErrorTimeOut:"サーバーでセキュリティ コンテキストの取得に時間がかかりすぎています"});

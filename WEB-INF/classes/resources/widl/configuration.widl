@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<description xmlns="urn:com:dassault_systemes:widl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd">
+	<entities targetNamespace="urn:com:dassault_systemes:webservice">
+		<interfaces>
+			<interface name="IConfigurationService" scope="private">
+            <documentation>Interface which defines the configuration web service.</documentation>
+				
+			<method name="checkAndEditFilter">			
+			  <documentation>
+				  Method to be implemented by an external system to check the coherency and to modify the configuration filter edited by the user.
+			  </documentation>
+
+			  <param name="iFilterXML" type="xs:string" direction="in">
+					<documentation>
+						Configuration filter to be checked and updated. The format is described in the XML schema CfgExpressionDefinition.xsd
+					</documentation>
+				  </param>
+			
+				  <param name="oStatus" type="xs:int" direction="out">
+					<documentation>
+						Output status: -1 if the service failed ; 0 if the filter is not updated ; 1 if the filter is updated
+					</documentation>
+				</param>
+
+				<param name="oFilterXML" type="xs:string" direction="out">
+					<documentation>
+						Updated configuration filter. The format need to be compliant with the XML schema CfgExpressionDefinition.xsd
+				    </documentation>
+				  </param>
+			
+				  <param name="oUserMessage" type="xs:string" direction="out">
+					<documentation>
+						Message to be displayed to the user, or empty string if no message is required.
+					</documentation>
+				</param>
+			</method>
+
+		</interface>
+		</interfaces>
+
+    <implementations>
+      <implementation name="ConfigurationService" serviceid="configuration" implements="tns:IConfigurationService">
+        <documentation>External service to process configuration data.</documentation>
+      </implementation>
+	</implementations>
+   
+	</entities>
+</description>

@@ -1,0 +1,2 @@
+/*! Copyright 2014 Dassault Syst�mes */
+if(typeof Highcharts!=="undefined"&&typeof Highcharts.drilldown!=="undefined"){define("DS/VEN3DXHighcharts",function(){return Highcharts})}else{(function(){var a=require.toUrl("DS/VEN3DXHighcharts/4.0.3/highcharts-all");if(a.indexOf("?")>-1){a=a.substring(0,a.indexOf("?"))}a=a.replace(/\/4.0.3\/highcharts-all/g,"");a=a+"/4.0.3/modules/drilldown";require.config({paths:{"DS/VEN3DXHighcharts/drilldown":a}})})()}define("DS/HighChartsModules/HighCharts_drilldown",["DS/VEN3DXHighcharts/drilldown"],function(){});

@@ -1,0 +1,45 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcPSUI/ps-simulation-contents/ps-simulation-contents.html">
+<link rel="import" href="../../SMAProcPSUI/ps-simulation-compare-view/ps-simulation-compare-view.html">
+<link rel="import" href="../../SMAProcPSUI/ps-process/ps-process.html">
+<link rel="import" href="../../SMAProcADUI/ad-session/ad-session.html">
+
+<dom-module id="ps-detailed-view">
+  <link rel="import" type="css" href="ps-detailed-view.css">
+  <template>
+
+		<sp-variable id="mcsBaseURL" name="mcsBaseURL" ></sp-variable>
+        <sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL" ></sp-variable>
+		<sp-variable id="eedBaseURL" name="eedBaseURL" ></sp-variable>
+        <sp-variable id="licenseData" name="licenseData" ></sp-variable>
+		<sp-variable id="inDashBoard" name="inDashBoard" ></sp-variable>
+		<sp-variable id="securityContext" name="securityContext"></sp-variable>
+    <sp-variable id="runSimulation" name="runSimulation"></sp-variable>
+    <sp-variable id="runActivity" name="runActivity"></sp-variable>
+
+
+		 <!-- Manage simulation data -->
+        <sp-mcsservice id="simulationProp" on-response="onUpdateResponse" on-error="onUpdateError">
+        </sp-mcsservice>
+        <sp-webservice id="dashboardWs"></sp-webservice>
+        <sp-dashboard id="spdashboard"></sp-dashboard>
+        <div class="simdetail" id="simdetail">
+            <ps-simulation-contents id="simcontent" class="simcontent" activesim="{{activeSim}}" on-simcontentready="onSimContentReady" session="{{session}}" eed-base-url="{{globals.eedBaseURL}}">
+                </ps-simulation-contents>
+            <div class="simComp" id="psCompView">
+                <header class="header">
+                    <h4>Compare Report</h4>
+                </header>
+                <div class="body">
+                    <ps-simulation-compare-view compare-items="{{compareItems}}" on-attached="onCompareViewAttached"></ps-simulation-compare-view>
+                </div>
+            </div>
+        </div>
+    </template>
+  <script type="text/javascript" src="ps-detailed-view.js"></script>
+</dom-module>

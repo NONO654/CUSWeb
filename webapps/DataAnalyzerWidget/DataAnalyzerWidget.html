@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+  <head>
+    <!-- Application Metas -->
+	<!-- These information will be displayed in the widget preferences -->
+    <title>Data Analyzer widget</title>
+    <meta name="author" content="VDU" />
+    <meta name="description" content="Data Analyze Widget" />
+    <!-- UWA Environment -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<!-- Load UWA environment --> 
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+	<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+   
+    
+    <script type="text/javascript">
+    /*
+      We create the global MyWidget object.
+      This object will be used to store variables and functions.
+    */
+    var dependencies = dependencies || [];
+
+    require(
+        // dependencies
+        [
+            'DS/DataAnalyzerWidget/DataAnalyzerWidget',
+         	'DS/WidgetServices/WidgetServices',
+         	'DS/WAFData/WAFData',
+        ].concat(dependencies),
+
+        // execute this callback, passing all dependencies as params
+
+        function(WidgetCore, widgetServices, WAFData) {
+        	
+        	defaultService = function(dataUrl, optionsRequest){
+        		if (dataUrl.indexOf(".json") >=0){
+        			require(["text!" + dataUrl], function(textJson){
+        				optionsRequest.onComplete.call(null, JSON.parse(textJson));
+        			});
+        		} else console.log("unknown service : " + dataUrl);        		
+        	};
+        	
+        	WAFData.handleRequest = function (dataUrl, optionsRequest) {
+        		if (dataUrl.indexOf("resources/pno/person/getsecuritycontext") >=0){
+        			optionsRequest.onComplete.call(null, {
+        				SecurityContext: "ctx::Leader.Org1.CS1"
+        			});
+        		}
+        		else defaultService(dataUrl, optionsRequest);
+        	};
+        	
+		    var tenantID = widgetServices.getTenantID();						    		    
+		    if(tenantID){
+		    	dataUrl += "&tenant=" + tenantID;
+		    }
+		    
+        	WAFData.authenticatedRequest = function (dataUrl, optionsRequest) {
+        		if (dataUrl.indexOf("resources/pno/person/getsecuritycontext") >=0){
+        			optionsRequest.onComplete.call(null, {
+        				SecurityContext: "ctx::Leader.Org1.CS1"
+        			});
+        		}
+        		else if (dataUrl.indexOf("resources/lifecycle/dataanalyze/structure") >=0){
+        			
+        			if (location.search.indexOf("witherror") >=0)
+        				optionsRequest.onComplete.call(null, 
+        	        			{
+        	        				"status": "failure"
+        	        			});
+        			else
+        			optionsRequest.onComplete.call(null, 
+        			{
+        				"report":[],"results":{"summary":{"max_depth":3,"nbObjects":7,"nbEntities":4,"typescount":[{"name":"VPMReference","count":"4"},{"name":"VPMInstance","count":"3"}],"nbRelations":3,"typesinfo":{"VPMReference":{"parent":"PLMCoreReference","package":"PRODUCTCFG","nls":"Physical Product","name":"VPMReference","icon":"/snresources/images/icons/small/I_VPMNavProduct.png","irpc":"PLMReference"},"VPMInstance":{"parent":"PLMCoreInstance","package":"PRODUCTCFG","nls":"Physical Product Instance","name":"VPMInstance","icon":"/snresources/images/icons/small/iconSmallDefault.gif","irpc":"PLMInstance"},"PLMCoreReference":{"package":"PLMCORE","nls":"Reference","name":"PLMCoreReference","icon":"/common/images/iconSmallDefault.gif","irpc":"PLMReference"},"PLMCoreInstance":{"package":"PLMCORE","nls":"Instance","name":"PLMCoreInstance","icon":"/snresources/images/icons/small/iconSmallDefault.gif","irpc":"PLMInstance"}}},"expand2_elapse_time":0,"srs_elapse_time":0,"expand1_elapse_time":583,"elapse_time":791,"cloudview_elapse_time":583,"structure":[{"owner":"vdu","V_Name":"Physical Product00000023","physicalid":"ADA30F6C000030D85ACF44E900009A8A","organization":"MyCompany","PLM_ExternalID":"prd-77751825-00000023","name":"prd-77751825-00000023","project":"3DS Protected Collab Space","id":"51392.16705.0.51893","type":"VPMReference","revision":"A.1","policy":"VPLM_SMB_Definition"},{"owner":"vdu","V_IsInstanceOf":"ADA30F6C00003B485ACF524000010BEE","physicalid":"ADA30F6C00003B485ACF524000010BF0","PLM_ExternalID":"Physical Product00000035.1","id":"51392.16705.29952.55995:BSF","type":"VPMInstance","V_Owner":"ADA30F6C000030D85ACF44E900009A8A"},{"owner":"vdu","V_Name":"Physical Product00000035","physicalid":"ADA30F6C00003B485ACF524000010BEE","organization":"MyCompany","PLM_ExternalID":"prd-77751825-00000035","name":"prd-77751825-00000035","project":"3DS Protected Collab Space","id":"51392.16705.24064.9730","type":"VPMReference","revision":"A.1","policy":"VPLM_SMB_Definition"},{"owner":"vdu","V_IsInstanceOf":"ADA30F6C00003B485ACF524500010C1E","physicalid":"ADA30F6C00003B485ACF524500010C20","PLM_ExternalID":"Physical Product00000036.1","id":"51392.16705.29952.55416:BSF","type":"VPMInstance","V_Owner":"ADA30F6C00003B485ACF524000010BEE"},{"owner":"vdu","V_Name":"Physical Product00000036","physicalid":"ADA30F6C00003B485ACF524500010C1E","organization":"MyCompany","PLM_ExternalID":"prd-77751825-00000036","name":"prd-77751825-00000036","project":"3DS Protected Collab Space","id":"51392.16705.24064.6035","type":"VPMReference","revision":"A.1","policy":"VPLM_SMB_Definition"},{"owner":"vdu","V_IsInstanceOf":"ADA30F6C00003B485ACF524D00010C52","physicalid":"ADA30F6C00003B485ACF524D00010C54","PLM_ExternalID":"Physical Product00000037.1","id":"51392.16705.29952.56147:BSF","type":"VPMInstance","V_Owner":"ADA30F6C000030D85ACF44E900009A8A"},{"owner":"vdu","V_Name":"Physical Product00000037","physicalid":"ADA30F6C00003B485ACF524D00010C52","organization":"MyCompany","PLM_ExternalID":"prd-77751825-00000037","name":"prd-77751825-00000037","project":"3DS Protected Collab Space","id":"51392.16705.24064.5987","type":"VPMReference","revision":"A.1","policy":"VPLM_SMB_Definition"}]},"status":"success"
+        			}); //end else
+        		}
+        		else defaultService(dataUrl, optionsRequest);
+        	};
+        	
+            var WIWI = {
+                onLoad: function() { //Needed to be sure to have a widget.body
+					var that= this;
+					widget.body.setAttribute('data-rec-id', 'DataAnalyzerWidget');
+                    widgetServices.setODTComment(true);
+              		var ServerUrl = {
+                            "platform_services": [{
+                              "3DSpace": "https://vdevpril665dsy.ux.dsone.3ds.com",
+                              "platformId":"OnPremise"
+							}]
+                    };
+					widgetServices.setReplayODT(true);              		
+					that.mySecondDiv=new WidgetCore(widget, widget.body,{
+		    			'setRefreshButton': true,
+		    			'setValidButton': true,
+		    			'setCloseButton': false,   
+		    			'isStandalone' : true,
+		    			'wintop' : true, 
+		    			'odtmode' : true,
+		    			'serverUrl' : ServerUrl.platform_services,
+						'readOnly': false
+						});
+					
+					widget.body.setContent(that.mySecondDiv);
+					that.mySecondDiv.initDatafromWin([{
+						'physicalId': '1',
+						'name': 'vduvdu'
+					}]);
+                },
+                onRefresh: function(){
+                	//this.mySecondDiv.onRefresh();
+                },
+                onResize: function(){
+                	//this.mySecondDiv.onResize();
+                }
+            };
+            
+            widget.addEvent('onLoad', WIWI.onLoad);
+            widget.addEvent('onRefresh', WIWI.onRefresh);
+            widget.addEvent('onResize', WIWI.onResize);
+        });
+   
+    </script>
+  </head>
+  <body>
+    <p>Loading...</p>
+   </body>
+</html>

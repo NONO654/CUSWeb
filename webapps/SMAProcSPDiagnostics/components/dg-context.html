@@ -1,0 +1,478 @@
+
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<link rel="import" href="dg-details.html">
+<link rel="import" href="dg-item-style.html">
+
+<dom-module id="dg-context">
+  <style include="dg-item-style"></style>
+  <style>    
+    :host {
+      display: block;
+      border: none;
+    }
+
+    .context-item {
+      border: thin solid #cacece;
+      border-bottom: none;
+      margin-bottom: 4px;
+      border-radius: 2px;
+    }
+
+    .heading {
+      cursor: pointer;
+      background: #e2e4e3;
+      padding: 6px;
+      border-bottom: thin solid #d3d3d3;
+      color: #2f84da;
+      font-size: 1.17em;
+    }
+
+    .container {
+      position: relative;
+    }
+
+    .primary-button {
+      background: #2196F3;
+      border: none;
+      padding: 8px;
+      font-family: '3ds-light';
+      color: white;
+      cursor: pointer;
+    }
+
+    .primary-button:hover {
+      opacity: 0.8;
+    }
+
+    :host([connected]) .connection {
+      display: block;
+    }
+
+    .frames {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .frame {
+      height: 15px;
+      background: #8BC34A;
+      color: white;
+      border-radius: 8px;
+      text-align: center;
+      padding: 4px;
+      margin: 5px 5px 5px 0;
+      cursor: pointer;
+      font-size: small;
+    }
+
+    .frame:not([data-connected]), .frame[data-connected="false"] {
+      background: #2F84DA;
+    }
+
+    .frame::before {
+      content: '⚫';
+      margin-right: 6px;
+    }
+
+    .frame:not([data-connected])::before, .frame[data-connected="false"]::before{
+      content: '⚪';
+    }
+
+
+    [data-item="label"] {
+      cursor: pointer;
+      user-select: none;
+    }
+
+
+    .frame:hover {
+      opacity: 0.8;
+    }
+
+    .connections-container {
+      background: #fafafa;      
+    }
+
+    .connections-title {
+      display: inline;
+      color: #2196F3;
+      font-weight: 100;
+    }
+        
+    .connections-container:not([data-framecount="0"]) .connections-placeholder{
+      display: none;
+    }
+    .detail-control {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+    }
+
+
+  </style>
+
+  <template>
+    <div class="container">
+      <div class="connections-container" data-framecount$="{{frames.length}}">
+        <h3 class="connections-title">Available widgets</h3>
+        <button class="refresh-icon" title="Click to refresh" on-click="refreshConnections">↺</button>
+        <div class="frames">
+          <span class="connections-placeholder">None</span>
+          <template is="dom-repeat" items="{{frames}}">
+            <div class="frame" data-app-id$="{{item.appId}}" data-connected$="{{item.connected}}"
+              on-mouseover="_highlightFrame" on-mouseleave="_dehighlightFrame" 
+              on-click="_toggleConnectionToFrame" title="{{item.appId}}">{{item.title}}</div>
+          </template>
+        </div>
+      </div>
+
+      <div on-click="toggleDetails">
+        <template is="dom-repeat" items="{{value}}">
+          <div class="context-item">
+            <section class="heading">
+              <label data-item="label">{{item.name}}</label>
+            </section>
+            <dg-details value="{{item}}" ctx="{{ctx}}" data-details-name$="{{item.name}}">
+              <button class="refresh-icon detail-control" title="Click to refresh" on-click="refreshDetails">↺</button>
+            </dg-details>
+          </div>
+        </template>
+      </div>
+
+    </div>
+  </template>
+  
+
+  <script>
+    (function () {
+       
+      Polymer({
+        is: 'dg-context',
+        
+        properties: {
+          value: {
+            type: Object,
+            observer: '_onValueChanged'
+          },
+          ctx: {
+            type: Object,
+            notify: true
+          },
+          bc: {
+            type: Object
+          },
+          connected: {
+            type: Boolean,
+            reflectToAttribute: true
+          },
+          frames: {
+            type: Array
+          },
+          _cb: {
+            type: Object
+          }
+
+        },
+        attached: function () {
+          this.ctx = {};
+          this._cb = new ContextBuilder(this.ctx, 'context');
+          
+          // check for frames and show available connections
+          this.refreshConnections();
+        },
+        refreshConnections: function () {
+          // get all frames other than self
+          const frames = [].filter.call(window.parent.frames, frame =>                       
+            frame.widget && frame.widget.data.appId !== widget.data.appId
+          );
+
+          // initialize frames if not yet initialized
+          this.frames = this.frames || [];
+
+          // to call from another window unload
+          const refreshOnUnload = this.refreshConnections.bind(this);
+
+          // build the details
+          this.frames = [].map.call(frames, frame => {
+            // remove connections when a widget is unloaded
+            frame.addEventListener('unload', () => 
+              window.setTimeout(refreshOnUnload, 0)
+            );
+
+            // get widget information
+            const appId = frame.widget.data.appId;
+            const title = frame.widget.options.title;
+            
+            const overlayId = '_diagnostics_overlay_'          
+            let overlay = frame.document.getElementById(overlayId);
+            
+            // if overlay doesn't exist already create and add one
+            if (!overlay) {
+              overlay = frame.document.createElement('div');
+              overlay.id = overlayId;
+              const style = `
+                background: #2F84DA; 
+                height: 100%; 
+                width:100%; 
+                position: absolute; 
+                top: 0;
+                left: 0;
+                display: none;
+                z-index: 999;
+                opacity: 0.5;  
+              `;
+              overlay.setAttribute('style', style.trim());
+              // add an overlay to the frame
+              frame.document.body.appendChild(overlay);
+            }
+
+            // get the connection status
+            frame._diagnostics_ = frame._diagnostics_ || {};
+            connected = !!frame._diagnostics_.connected;
+
+            // initiate handshake if its already connected
+            connected && this.initiateHandshake(frame);
+            
+            return {appId, title, frame, overlay, connected};
+          });
+        },
+        _changeFrameDisplay: function (appId, display) {
+          const frame = this.frames.find(frame => frame.appId === appId);
+          frame.overlay.style.display = display;
+        },
+      
+        _highlightFrame: function (ev) {
+          ev.stopPropagation();
+          const appId = ev.target.dataset.appId;
+
+          // show the frame's overlay
+          appId && this._changeFrameDisplay(appId, 'block');
+        },
+        _dehighlightFrame: function (ev) {
+          ev.stopPropagation();
+          const appId = ev.target.dataset.appId;
+          
+          // show the frame's overlay
+          appId && this._changeFrameDisplay(appId, 'none');
+        },
+        _toggleConnectionToFrame: function (ev) {
+          ev.stopPropagation();
+          const appId = ev.target.dataset.appId;
+
+          // if appId not found do nothing
+          if (!appId) {
+            return;
+          }
+          
+          const frame = this.frames.find(frame => frame.appId === appId);
+          // toggle connection status
+          frame.connected = !frame.connected;
+          ev.target.dataset.connected = frame.connected;
+                      
+          // get the widget wrapper
+          const widgetWrapper = window.parent.document.querySelector('.wi-' + frame.frame.widget.id);
+          const moduleHeaderIcon = widgetWrapper.querySelector('.moduleHeader__icon');
+          
+          // get the diagnostics icon
+          let diagnosticsIcon = widgetWrapper.querySelector('#diagnostics_icon');            
+          // create the diagnostics icon if its the first time
+          if (!diagnosticsIcon) {
+            diagnosticsIcon = window.parent.document.createElement('span');
+            diagnosticsIcon.id = 'diagnostics_icon';
+            diagnosticsIcon.innerHTML = '⚫';
+            widgetWrapper.querySelector('.moduleHeader__left').appendChild(diagnosticsIcon);
+          }
+
+          let widgetStyle = '';
+          let diagnosticsIconStyle = 'display:none';
+          moduleHeaderIcon.style.display = '';
+
+          // if frame is connected then make the frame to look as connected
+          if (frame.connected) {
+            moduleHeaderIcon.style.display = 'none';
+            widgetStyle = `
+              border: thin solid #8bc34a;
+            `;
+            diagnosticsIconStyle = `
+              color: #8bc34a;
+              font-size: large;
+            `;            
+          }
+
+          // inject script to connect with that frame if needed
+          this.injectScript(frame);
+                    
+          // update the target widget style
+          widgetWrapper.setAttribute('style', widgetStyle.trim());
+          diagnosticsIcon.setAttribute('style', diagnosticsIconStyle.trim());
+          
+        },
+        // injects the script if its not already injected
+        injectScript: function (frm) {
+          const {frame, connected} = frm;
+          const SCRIPT_ID = '_diagnostics_loaderscript_';
+
+          let loaderScript = frame.document.querySelector('#' + SCRIPT_ID);
+          if (!loaderScript) {
+            const appTitle = frame.widget.options.title.toLowerCase().trim().replace(/\s/, '_');
+
+            // if loader script is not already injected then create
+            loaderScript = frame.document.createElement('script');
+            loaderScript.id = SCRIPT_ID;
+            loaderScript.type = 'module';
+            loaderScript.src = widget.uwaUrl.split(/webapps/)[0] + 
+                              'webapps/SMAProcSPDiagnostics/assets/diagnostics/' + appTitle + '.js';
+            loaderScript.addEventListener('load', () => {
+              this.initiateHandshake(frame);
+            });
+
+            // add it to the head
+            frame.document.head.appendChild(loaderScript);
+          } else {
+            this.initiateHandshake(frame);
+          }
+
+          // update the connection status
+          frame._diagnostics_ = {...frame._diagnostics_, connected};                    
+        },
+        initiateHandshake: function (frame) {
+          frame.postMessage({$action: '_$handShake'}, '*');
+        },
+        _$handShake: function (data) {
+          this.connected = true;
+          console.log('connected. auto-requesting context');
+          this.bc.postMessage({$action: '_$contextRequest'});
+        },
+        _$contextRequest: function (data) {
+          // initialize the context if not already
+          this.ctx.context = this.ctx.context || {};
+          this.ctx.context[data.$appId] = this.ctx.context[data.$appId] || {};
+
+          // set the context with the passed on data
+          Object.keys(data).forEach(key => {
+            this.ctx.context[data.$appId][key] = data[key];
+          });
+
+          // build the context
+          this.value && this._buildContext(data.$appId);
+        },
+        _onValueChanged: function () {
+          if (this.value) {
+            // build context for every connected appId
+            const connections = this.frames.filter(frm => frm.connected);
+            connections.forEach(frm => this._buildContext(frm.appId));
+
+            // if there were no connections then build the onload contexts
+            !connections.length && this._buildContext();
+          }
+        },
+        _buildContext: function ($appId) {
+          let ctxExprs = [];
+          const {value, ctx} = this;          
+
+          const items = value.filter(val => val.$onLoad || val.$appId === $appId);
+
+          
+          items.forEach(item => {
+            const expressions = item.$onLoad || item.$afterReceive || {};
+
+            // create a new context builder with the item name
+            const cb = new ContextBuilder(ctx, item.name);
+            cb.addContext(expressions);
+            
+            // push it to the expressions to refresh (if it has ctx. keyword)
+            const filteredExprs = Object.keys(expressions).filter(expr => expr.search(/^ctx\./) > -1);
+            ctxExprs = ctxExprs.concat(filteredExprs);
+          });
+
+          this.async( () => {
+            this.querySelectorAll('dg-details').forEach(item => item.refresh());
+            
+            this.async( () => {
+              // refresh
+              this.refresh(ctxExprs);
+            });
+
+            // This is commented since it was slowing things down
+            // this.fire('buildcontext');
+          });
+        },
+        toggleDetails: function (event) {
+          const targ = event.target;  
+          
+          // if its label then query from its parent
+          const elem = targ.dataset.item === 'label' ? targ.parentElement : targ;
+          const details = elem.parentElement.querySelector('dg-details');
+          
+          if (details) {
+            details.visible = !details.visible;
+            event.stopPropagation();
+          }  
+        },
+        refreshDetails: function (event) {
+          const item = event.model.item;
+
+          // if its an app context then request context to refresh
+          if (item.$appId) {
+            this.bc.postMessage({$action: '_$contextRequest'});
+          } else {
+            const details = this.querySelector(`[data-details-name="${item.name}"]`);
+            details.refresh();
+          }          
+        },
+        refresh: function (ctxExprs) {
+          ctxExprs.forEach(async expr => {          
+            const val = this._cb.evaluate(expr);
+                      
+            this.querySelectorAll(`[data-key="${expr}"]`).forEach(item => {
+              item.title = val;
+              item.value = val;  
+            });            
+          });
+        },
+        serializeData: function () {
+          // ensure all widgets are captured
+          this.refreshConnections();                 
+          
+          // send only appId, title and connection info.
+          const widgets = this.frames.map(frame => {
+            const {appId, title, connected} = frame;
+            const {x3dPlatformId, defaultData} = frame.frame.widget.data;
+
+            return {appId, title, connected, x3dPlatformId, defaultData};
+          });
+
+          // require('DS/PlatformAPI/PlatformAPI').getAllApplicationConfigurations() - Returns all data
+          // get the release data
+          const release = require('DS/PlatformAPI/PlatformAPI').getApplicationConfiguration('app.build.number');
+
+          // get values from ctx that exist
+          const ctx = Object.entries(this.ctx).reduce((serial, [key, value]) => {
+            // if its not a web service
+            if (!value.response) {
+              serial[key] = value;
+            }
+
+            return serial;
+          }, {});
+
+          // build the environment
+          return {
+            release,
+            platform: widget.data.x3dPlatformId,
+            widgets,
+            ctx
+          };
+        }
+      });
+    })();  
+  </script>
+</dom-module>
+
+
+
+
+

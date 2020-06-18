@@ -1,0 +1,127 @@
+<script>
+	(function () {
+		'use strict';
+	
+		class ContextBuilder {  
+			constructor(ctx, name) {
+				this.ctx = ctx;
+				this.name = name;
+
+				!name && console.warn('You need to provide a name to ContextBuilder constructor');
+			}
+	
+			async addContext(expressions, response=null) {
+			  try {
+					const name = this.name;
+					const root = this.ctx[name] = this.ctx[name] || {};
+
+					// if response exists update
+					if (response) {
+						root.response = response;
+					}
+					
+					// check if the expression has module call
+					if (typeof(expressions) === 'string' && expressions.search(/:/) > -1) {
+						await this.execModuleCall(expressions);
+					} else {
+						// evaluateExpressions
+						return this.evaluateExpressions(root, expressions);
+					}
+			  } catch (ex) {
+				  console.warn('Error while adding context to ' + name, ex);
+			  }
+			}
+
+			_initializeLHS(expr) {
+				const ctx = this.ctx;		
+				let path = '';
+				expr.split(/\./).forEach(item => {
+					path += item;
+					!this.evaluate(path) && (this.evaluate(path + ' = {}'));
+					path += '.';
+				});
+			}
+
+			// returns true if its an expression
+			isExpression(str) {								
+				// expressions examples: 			
+				// this.response or ctx.simulation.id or ${ctx.slm.mcsurl}				
+				let yes = str && !!str.match(/(ctx.|this.|\${).*/) && !str.match(/ctx::/);
+				return yes;
+      }
+
+			// evaluates the expression and returns the value
+			evaluate(expr, supressWarning=false) {
+				const {ctx} = this;
+				const self = this.ctx[this.name];
+
+				try {
+					let res = expr;
+					
+					// if its an expression
+					if (this.isExpression(expr)) {
+						// if it has template expression without template backquote `
+						expr = !!expr.match(/\${.*/) && !expr.match(/`.*`/) ? '`' + expr + '`' : expr;
+
+						// build the evaluator
+						var evaluator = (new Function(`const ctx = arguments[0]; return ${expr}`));
+						res = evaluator.call(self, ctx);
+					}
+
+					return res;
+				} catch (error) {
+					!supressWarning && console.warn('Unable to evaluate ' + expr + ' in ' + this.name, self);
+				}
+			}
+	
+			evaluateExpressions(obj, expressions) {												
+				expressions && Object.keys(expressions).forEach(lhs => {
+					let expr = expressions[lhs];
+					let val = null;
+					
+					// check if lhs is an expression
+					const lhsIsAnExpr = this.isExpression(lhs);
+
+					// if lhs is a complex assignment (example: ctx.simulation.id or this.id)
+					if (lhsIsAnExpr) {
+						// intialize lhs
+						this._initializeLHS(lhs);
+
+						// update the expression to assignment
+						expr = lhs + ' = ' + expr;
+					}
+											
+					if (typeof(expr) === 'object') {
+						obj[lhs] = obj[lhs] === undefined ? {} : obj[lhs];
+						this.evaluateExpressions(obj[lhs], expr);
+					} else {
+						// if there is a context expression and it needs to be skipped
+						val = this.evaluate(expr);
+						
+						// if lhs is not an expression then set it as the value to self
+						if (!lhsIsAnExpr) {
+							obj[lhs] = val;
+						}
+					}      
+				});
+			}
+
+			async execModuleCall(expression) {
+				const splitted = expression.split(/:/);
+				const path = `${this.ctx.mcs.mcsurl}/webapps/SMAProcSPDiagnostics/assets/modules/${splitted[0]}.js`;
+				const {ctx, name} = this;
+				const root = ctx[name];
+
+				// get the module
+				const mod = await import(path);
+			
+				// call the method on default export
+				mod.default[splitted[1]].call(this, name, root, ctx);
+			}
+		}
+	
+		//TODO: Make this into a module instead of exposing it on window object
+		//https://developers.google.com/web/fundamentals/primers/modules
+		window.ContextBuilder = ContextBuilder;
+	}());
+</script>

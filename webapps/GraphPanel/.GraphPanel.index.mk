@@ -1,0 +1,15 @@
+m|ENOXConfiguratorUX\GraphPanel.mweb
+b|j|n,m
+b|c|n,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\GraphPanel\GraphPresenter.html|1534554583|26827
+s|ENOXConfiguratorUX\GraphPanel.mweb\src\GraphPresenter.html|1526370375|26827
+t|win_b64\webapps\GraphPanel\Graph\GraphPresenter.js|1534554582|10494
+s|ENOXConfiguratorUX\GraphPanel.mweb\src\Graph\GraphPresenter.js|1533805875|22522
+t|win_b64\webapps\GraphPanel\Graph\GraphSettings.js|1534554583|1203
+s|ENOXConfiguratorUX\GraphPanel.mweb\src\Graph\GraphSettings.js|1533904787|2544
+t|win_b64\webapps\GraphPanel\Graph\GraphPresenter.css|1568749445|530
+g|ENOXConfiguratorUX\GraphPanel.mweb\LocalGenerated\win_b64\Graph\GraphPresenter.css|1534554558|673
+t|ENOXConfiguratorUX\GraphPanel.mweb\LocalGenerated\win_b64\Graph\GraphPresenter.css|1534554558|673
+s|ENOXConfiguratorUX\GraphPanel.mweb\src\Graph\GraphPresenter.scss|1533904780|664

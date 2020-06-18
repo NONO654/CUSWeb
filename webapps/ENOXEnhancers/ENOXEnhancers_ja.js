@@ -1,0 +1,1 @@
+define("DS/ENOXEnhancers/ENOXEnhancers_ja",{});define("DS/ENOXEnhancers/assets/nls/ENOXEnhancers",{"message.undefined":"メッセージが利用できません","message.callback":"コールバック関数が定義されていません","message.callback.notfunction":"送信されたコールバックは関数ではありません","message.invalidinput":"無効な入力が行われました ","message.missingtype":"タイプ パターンが見つかりません "});

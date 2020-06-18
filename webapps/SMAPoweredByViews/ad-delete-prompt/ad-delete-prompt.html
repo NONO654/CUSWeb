@@ -1,0 +1,46 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../ad-redux-behaviour/ad-redux-behaviour.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+
+<dom-module id="ad-delete-prompt">
+	<link rel="import" type="css" href="ad-delete-prompt.css">
+	<template>
+		<div class="deletePromptContainer">
+			<div id="modal" class="modal fade">
+				<div class="modal-wrap">
+					<div class="modal-content">
+
+						<div class="modal-header heading">
+							<!-- Variable header, dependent on type -->
+							<sp-nls class="h4" id="defaultHeader" nlspath="DS/SMAPoweredByViews/assets/nls/ADDeletePrompt" nlskey="DefaultHeader"></sp-nls>
+							<sp-nls class="h4 hidden" id="deleteJobsHeader" nlspath="DS/SMAPoweredByViews/assets/nls/ADDeletePrompt" nlskey="DeleteJobsHeader"></sp-nls>
+							<sp-nls class="h4 hidden" id="deleteFilesHeader" nlspath="DS/SMAPoweredByViews/assets/nls/ADDeletePrompt" nlskey="DeleteFilesHeader"></sp-nls>
+							<sp-nls class="h4 hidden" id="deleteSOHeader" nlspath="DS/SMAPoweredByViews/assets/nls/ADDeletePrompt" nlskey="DeleteSOHeader"></sp-nls>
+							<!-- Close button -->
+							<button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onClose"><span class="fonticon fonticon-close"></span></button>
+						</div>
+
+						<div id="body" class="modal-body">
+							<div class="prompt"><sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADDeletePrompt" nlskey="DeleteInfo"></sp-nls></div>
+							<ul class="item-list" id="itemList"></ul>
+							<div class="prompt hidden" id="deleteJobsMessage"><sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADDeletePrompt" nlskey="DeleteJobsMessage"></sp-nls></div>
+							<div class="prompt hidden" id="deleteFilesMessage"><sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADDeletePrompt" nlskey="DeleteFilesMessage"></sp-nls></div>
+							<div class="prompt hidden" id="deleteSOMessage"><sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADDeletePrompt" nlskey="DeleteSOMessage"></sp-nls></div>
+							<div class="prompt"><sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADDeletePrompt" nlskey="DeleteConfirm"></sp-nls></div>
+						</div>
+
+						<div id="footer" class="modal-footer">
+							<button id="okButton" type="button" class="btn btn-primary" on-click="onOk">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADDeletePrompt" nlskey="Delete"></sp-nls>
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div id="modalOverlay" class="modal-overlay fade hidden"></div>
+		</div>
+	</template>
+	<script type="text/javascript" src="ad-delete-prompt.js"></script>
+</dom-module>

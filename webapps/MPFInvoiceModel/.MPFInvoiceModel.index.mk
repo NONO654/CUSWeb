@@ -1,0 +1,12 @@
+m|MPFModels\MPFInvoiceModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.3.19026
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFInvoiceModel\MPFInvoiceModel.js|1548460414|2365
+s|MPFModels\MPFInvoiceModel.mweb\src\MPFInvoiceModel.js|1518129983|0
+s|MPFModels\MPFInvoiceModel.mweb\src\InvoiceDocumentModel.js|1543397222|1882
+s|MPFModels\MPFInvoiceModel.mweb\src\InvoiceCollection.js|1547636957|477
+s|MPFModels\MPFInvoiceModel.mweb\src\CartInvoiceDocumentDataProxy.js|1543236699|1622
+s|MPFModels\MPFInvoiceModel.mweb\src\InvoiceModel.js|1547724552|1012
+s|MPFModels\MPFInvoiceModel.mweb\src\CartInvoiceDataProxy.js|1547717438|1074

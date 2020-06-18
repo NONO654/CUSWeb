@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/*
+* @fullreview   T9N 16:05:17 Creation
+*/
+  -->
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DPlaySwymAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DPlaySwymAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="3DPlaySwymAfrWorkshopHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+    <!-- Display -->
+    <CATCommandHeader ID = "FS"  ClassName = "DS/3DPlayCommands/CmdFS" ResourceFile = "3DPlay/3DPlay" />
+    <!-- View -->
+    <CATCommandHeader ID = "ViewSelector" ClassName = "DS/3DPlayCommands/CmdViewSelector"         ResourceFile = "3DPlay/3DPlayExperience3D" />
+    <CATCommandHeader ID = "Reframe"  ClassName = "DS/ViewerCommands/VisuReframeViewCmd" ResourceFile = "3DPlay/3DPlayExperience3D" />
+    <!-- Tools -->
+    <CATCommandHeader ID = "Explode" ClassName = "DS/3DPlayCommands/CmdExplode" ResourceFile = "3DPlay/3DPlayExperience3D" />
+</CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="3DPlaySwymAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DPlaySwymWorkbench">
+        <CATCmdContainer Name="Fixed Aera" RepresentationType="AfrActionBarFixedSection">
+            <CATCmdStarter Name = "Fullscreen" Command = "FS" />
+        </CATCmdContainer>
+        <CATCmdContainer Name = "SectionViews" Visibility = "1" RepresentationType="AfrActionBarSection">
+            <CATCmdStarter Name = "ViewSelector" Command = "ViewSelector" />
+            <CATCmdStarter Name = "Reframe" Command = "Reframe" />
+        </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

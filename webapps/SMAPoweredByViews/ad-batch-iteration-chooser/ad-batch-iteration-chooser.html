@@ -1,0 +1,49 @@
+<!-- Copyright 2018 Dassault Systemes. All rights reserved. -->
+<dom-module id="ad-batch-iteration-chooser">
+	<style>
+	.outer-iteration-section {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: center;
+	}
+	.inner-iteration-section {
+		display: flex;
+		flex-direction: row;
+	}
+	.iteration-button {
+ 		min-width: 40px;
+	  	margin-top: 0px;
+	  	margin-bottom: 0px;
+	  	margin-left: 2px;
+	  	margin-right: 2px;
+ 	}
+	.iteration-list {
+	  	margin-top: 0px;
+	  	margin-bottom: 0px;
+	  	margin-left: 2px;
+	  	margin-right: 2px;
+	}
+	</style>
+	<template>
+		<div id="iterationSection" class="outer-iteration-section">
+			<div class="inner-iteration-section">
+				<button id="startButton" title="[[NLS.StartButton]]" on-click="_goStart" class="iteration-button btn btn-default">
+					<span class="fonticon fonticon-move-to-start" style="margin-right:0px"></span>
+				</button>
+				<button id="leftButton" title="[[NLS.LeftButton]]" on-click="_goLeft" class="iteration-button btn btn-default">
+					<span class="fonticon fonticon-left" style="margin-right:0px"></span>
+				</button>
+				<select id="iterationSelect" class="iteration-list form-control" value="[[selectedIteration]]" on-change="_iterationSelected">
+					<!-- OPTIONS CREATED DYNAMICALLY -->
+				</select>
+				<button id="rightButton" title="[[NLS.RightButton]]" on-click="_goRight" class="iteration-button btn btn-default">
+					<span class="fonticon fonticon-right" style="margin-right:0px"></span>
+				</button>
+				<button id="endButton" title="[[NLS.EndButton]]" on-click="_goEnd" class="iteration-button btn btn-default">
+					<span class="fonticon fonticon-move-to-end" style="margin-right:0px"></span>
+				</button>
+			</div>
+		</div>
+	</template>
+</dom-module>

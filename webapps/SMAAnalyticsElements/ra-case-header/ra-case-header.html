@@ -1,0 +1,30 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<dom-module id="ra-case-header">
+	<link rel="import" type="css" href="ra-case-header.css">
+	<template>
+		<div class="raHeaderContainer">
+			<div class="titleSection">
+				<span class="case-title ra-hidden-xxs">
+					<span id="title" title=[[racase.title]]>[[racase.title]]</span>
+					<span id="revision" class="rev-link" on-click="onRevisionClick" title=[[caseheader.lifecycle]]>[[racase.revision]]</span>
+					<span id="editCaseProperties" class="fonticon fonticon-pencil fonticon-1x button" on-click="onEditCase" title=[[caseheader.edit]]></span>
+				</span>
+				<div id="description" class="description ra-hidden-xxs" title=[[racase.description]]>[[racase.description]]</div>
+			</div>
+			<div class="menuContainer">
+				<div id="searchContainer" class="searchContainer" title= [[caseheader.filterparam]]>
+				</div>
+				<span id="separator" class="separator1"></span>
+				<i id="actual" class= "fonticon wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-math-x-value ra-table-view-menu ra-table-actual button" on-click="onTableView" title=[[caseheader.table.actual]]></i>
+				<i id="magnitude" class= "fonticon wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-math-x-value-more-less ra-table-view-menu button ra-table-diff" on-click="onTableView" title=[[caseheader.table.diff]]></i>
+				<i id="percentage" class= "fonticon wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-math-percentage ra-table-view-menu button ra-table-percentage" on-click="onTableView" title=[[caseheader.table.percentage]]></i>
+				<span id="separator" class="separator"></span>
+				<i id ="ra-case-header-icon-view" class= "fonticon wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-view-small-tile ra-icon-view-menu button" on-click="onIconView" title=[[caseheader.icon.actual]]></i>
+				<span id="separator" class="separator2"></span>
+				<i id ="descending" class= "fonticon wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-num-sorting-1-2 ra-table-sort-menu button" on-click="onSort" title=[[caseheader.sort.asc]]></i>
+				<i id ="ascending" class= "fonticon wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-num-sorting-2-1 ra-table-sort-menu button" on-click="onSort" title=[[caseheader.sort.desc]]></i>
+			</div>
+		</div>	
+	</template>
+	<script type="text/javascript" src="ra-case-header.js"></script>
+</dom-module>

@@ -1,0 +1,115 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+<link rel="import" href="../../SMAProcSPUI/sp-checkbox/sp-checkbox.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<link rel="import" href="../ad-tool-manager/ad-tool-manager.html">
+<link rel="import" href="../ad-mdata-view/ad-mdata-view.html">
+<link rel="import" href="../ad-tool-config-additional-files/ad-tool-config-additional-files.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+
+
+<dom-module id="ad-tool-config-options">  
+  <link rel="import" type="css" href="ad-tool-config-options.css">
+  <template>
+		<style include="sp-uikit-styles"></style>
+		<ad-tool-manager id="toolManager"></ad-tool-manager>
+		<sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL" on-valuechange="onVariableValueChange"></sp-variable>		
+		<sp-notification id="notificationMessages" position="TR" width="400"></sp-notification>
+		<sp-mcsservice id="connectorOptionsCustom" handleprefix="false" uri="{{_computeUri2()}}">
+        </sp-mcsservice>        
+        
+       	<div class="content-section-body">
+	        <div id="optionsSection" class="hidden">
+	            <sp-access id="access" group="process" data-has-no-write-then="hide">
+		            <div class="addOptions">
+		                <a href="#/" id="addOptionsButton" on-click="onadditionalOptionsClick">Add/Remove Options</a>
+		            </div>
+	            </sp-access>	
+   				<div id="optionsForm" class=""></div>    
+
+	        </div>     	        	        
+
+		 	<!-- The loading and alert messages need to have the relative position declared inline in order to work in Firefox and IE -->
+       		<div id="loadingSection" class="hidden"></div>
+       		<div id="configurationErrorNone" class="hidden">
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				No tool is currently selected.
+				</div>
+       		</div>
+       		<div id="configurationErrorMultiple" class="hidden">
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				This configuration section can only be edited for a single tool.
+				</div>
+       		</div>
+       		<div id="configurationErrorOptions" class="hidden">
+				<div id="statusMessage" class="alert-message alert-error" style="position:relative">
+				An error occurred trying to build abaqus command line options. Please refresh your browser and try again. 
+				</div>
+       		</div>
+       		<!--  TODO: Switch to sp-modal -->
+       	    <div id="myModal" class="modal fade">	   
+                    <div class="modal-wrap">
+                        <div class="modal-content myModals">
+                          <div class="modal-header">
+                            <button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onCancel">&times;</button>
+                            <h4>Add/Remove Options</h4>
+                          </div>
+                          <div id="dialogContent" class="modal-body">
+                            <div id="toolCommandView" class="container-fluid tool-command-view">
+                                 <div id="contentArea" class="row tool-content">
+                                    <ul id="allOptionsList" class="list-unstyled allOptionsList"></ul>                                    
+                                </div>
+                                <div id="loadingRow" class="row tool-content hidden"></div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                             <button id="okButton" type="button" class="btn btn-primary" on-click="onAccept">OK</button>
+                            <button id="cancelButton" type="button" class="btn btn-default" on-click="onCancel">Cancel</button>
+                          </div>
+                        </div>
+                    </div>
+ 		        </div>
+ 		        <!--  TODO: Switch to sp-modal -->
+ 		        <div id="myModal2" class="modal fade">	   
+                    <div class="modal-wrap">
+                        <div class="modal-content myModals">
+                          <div class="modal-header">
+                            <button id="closeButton2" type="button" class="close" aria-hidden="true" on-click="onAddContentCancel">&times;</button>
+                            <h4>Add/Select Content</h4>
+                          </div>
+                          <div id="dialogContent2" class="modal-body">
+                            <div id="toolCommandView2" class="container-fluid tool-command-view">
+                                <div id="contentArea2" class="row tool-content">
+                                	<ad-mdata-view id="mdataView" view-mode="icon" on-select="onManagedDataSelect"></ad-mdata-view>                                                                        
+                                </div>                                
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button id="addOkButton" type="button" class="btn btn-primary" on-click="onAddContentAccept">OK</button>
+                            <button id="addCancelButton" type="button" class="btn btn-default" on-click="onAddContentCancel">Cancel</button>
+                          </div>
+                        </div>
+                    </div>
+ 		        </div>
+ 		        <div id="myModalOverlay" class="modal-overlay fade hidden"></div>
+        </div>
+        <div id="previewHeader" class="previewSection">
+	        <div class="content-section-heading chrome-pull-fix">
+		    	<div class="pull-left content-section-title">Command Preview</div>
+	       	</div>        	
+	        <div id="previewSection">
+			  	<div class="preview-command">				    
+				    <pre>&gt;&nbsp;<span id="previewPlaceholder" class="preview-placeholder"></span><span id="previewText"></span><input type="text" id="previewEdit" class="hidden"></pre>
+			  	</div>
+		 	</div> 	
+ 		</div>
+	</template>  
+  <script src="ad-tool-config-options.js"></script>  
+</dom-module>
+
+

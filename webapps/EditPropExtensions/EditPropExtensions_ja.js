@@ -1,0 +1,1 @@
+define("DS/EditPropExtensions/EditPropExtensions_ja",{});define("DS/EditPropExtensions/assets/nls/AddExtensionsNLS",{failMessage:"失敗: ",ok:"OK",cancel:"キャンセル",title:"拡張を追加",autoCompPlaceHolder:"拡張名を入力",urlNotFound:"要求サービス向けの正しい URL が見つかりません"});

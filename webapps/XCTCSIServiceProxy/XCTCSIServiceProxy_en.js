@@ -1,0 +1,1 @@
+define("DS/XCTCSIServiceProxy/XCTCSIServiceProxy_en",{});define("DS/XCTCSIServiceProxy/assets/nls/XCTCSIServiceProxy",{msg_uploadFromIRS:"Upload from xStudio",error_failedToConnectToHypervisor:"Failed to connect to hypervisor",error_loginFailed:"Login failed"});

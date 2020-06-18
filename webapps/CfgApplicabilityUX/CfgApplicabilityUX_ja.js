@@ -1,0 +1,1 @@
+define("DS/CfgApplicabilityUX/CfgApplicabilityUX_ja",{});define("DS/CfgApplicabilityUX/assets/nls/CfgApplicabilityNLS",{CFG_EmptyApplicability_Expression:"このコンテキストには適用可能性が定義されていません",CFG_Applicability_Summary:"適用可能性の概要",Applicability_Title_Edit:"編集",Edit_Denied:"編集操作は許可されません"});

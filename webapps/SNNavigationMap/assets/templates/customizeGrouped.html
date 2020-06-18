@@ -1,0 +1,79 @@
+  {{#if automaticNavigation}}
+<div class="customize-bodytext">
+ <p>{{bodyText}}</p>
+</div>
+<div class="customize-relations">
+ <div id="relations-list">
+   <div class="CustomizePresent-relations">
+     {{#each relations}}
+     <div class="customize-relations-input">
+       <div class="customized-grouprel toggle toggle-primary">
+         <input type="checkbox" class="customize-parenttoggle" id="checkbox-{{@key}}" value="{{@key}}" checked="">
+         <label title = "{{title}}" class="control-label" for="checkbox-{{@key}}">{{nlsLabel}}</label>
+         <span title = "{{../expanderTitle}}" class="customize-downarrow fonticon fonticon-expand-down"></span>
+       </div>
+       {{#each this}}
+       <div class="customize-childrel toggle toggle-primary" data-title = "{{title}}" hidden>
+         {{#if value}}
+         <input type="checkbox" class="customize-childtoggle" id="checkbox-{{id}}" value="{{id}}" checked=""> {{else}}
+         <input type="checkbox" class="customize-childtoggle" id="checkbox-{{id}}" value="{{id}}"> {{/if}}
+         <label class="control-label" for="checkbox-{{id}}">{{relationName}}</label>
+       </div>
+       {{/each}}
+</div>
+     {{/each}}
+   </div>
+   <div title = "{{moreNls}}" class="Customize-More Customize-expander">
+     <span> {{moreName}} </span>
+   </div>
+   <div class="Customize-Divider customize-hidden">
+   </div>
+   <div class="CustomizeAbsent-relations customize-hidden">
+     {{#each notPresent}}
+     <div class="customize-relations-input">
+       <div class="customized-grouprel toggle toggle-primary">
+         <input type="checkbox" class="customize-parenttoggle" id="checkbox-{{@key}}" value="{{@key}}" checked="">
+         <label title = "{{title}}" class="control-label" for="checkbox-{{@key}}">{{nlsLabel}}</label>
+         <span title = "{{../expanderTitle}}" class="customize-downarrow fonticon fonticon-expand-down"></span>
+       </div>
+       {{#each this}}
+       <div  class="customize-childrel toggle toggle-primary" data-title = "{{title}}" hidden>
+         {{#if value}}
+         <input type="checkbox" class="customize-childtoggle" id="checkbox-{{id}}" value="{{id}}" checked=""> {{else}}
+         <input type="checkbox" class="customize-childtoggle" id="checkbox-{{id}}" value="{{id}}"> {{/if}}
+         <label class="control-label" for="checkbox-{{id}}">{{relationName}}</label>
+       </div>
+       {{/each}}
+     </div>
+     {{/each}}
+   </div>
+   <div title = "{{lessNls}}" class="Customize-Less Customize-expander customize-hidden">
+     <span> {{lessName}} </span>
+   </div>
+ </div>
+</div>
+{{else}}
+<div class="customize-bodytext">
+ <p>{{bodyText}}</p>
+</div>
+<div class="customize-relations">
+<div id="relations-list">
+   {{#each relations}}
+   <div class="customize-relations-input">
+     <div class="customized-grouprel toggle toggle-primary">
+       <input type="checkbox" class="customize-parenttoggle" id="checkbox-{{@key}}" value="{{@key}}" checked="">
+       <label title = "{{title}}" class="control-label" for="checkbox-{{@key}}">{{nlsLabel}}</label>
+       <span  title = "{{../expanderTitle}}" class="customize-downarrow fonticon fonticon-expand-down"></span>
+     </div>
+     {{#each this}}
+     <div  class="customize-childrel toggle toggle-primary" data-title = "{{title}}"  hidden>
+  {{#if value}}
+       <input type="checkbox" class="customize-childtoggle" id="checkbox-{{id}}" value="{{id}}" checked=""> {{else}}
+       <input type="checkbox" class="customize-childtoggle" id="checkbox-{{id}}" value="{{id}}"> {{/if}}
+  <label class="control-label" for="checkbox-{{id}}">{{relationName}}</label>
+</div>
+     {{/each}}
+</div>
+   {{/each}}
+</div>
+{{/if}}

@@ -1,0 +1,248 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<link rel="import" href="dg-item-style.html">
+
+<dom-module id="dg-details">
+  <style>    
+    :host {
+      display: none;       
+      background: #f1f1f1;
+      position: relative;
+    }
+
+    :host([visible]) {
+      display: block;
+    }
+
+    .details-entry {
+      padding: 4px;
+      border-bottom: thin solid #dcdcdc;
+      background: #f6f6f6;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .details-entry:not([data-readonly]) {
+      background: #dfdfdf;
+      border-left: 2px solid #03a9f4;
+    }
+
+    .details-entry:not([data-readonly]) .details-key {
+      color: #4f4f4f;
+    }
+
+    .details-key {
+      color: #3F51B5;
+      font-size: 1.1em;
+      word-wrap: break-word;
+    }
+
+    .details-value-label {
+      color: black;
+      display: none;
+      word-wrap: break-word;
+      font-size: 11px;
+    }
+
+    .details-value-input {
+      padding: 5px;
+      border-radius: 6px;
+      border: thin solid #03a9f4;
+      display: block;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .details-value-input[readonly] {
+      background: none;
+      border-color: #ffffff00;
+      padding: 0;
+    }
+
+    [data-readonly] .details-value-input {
+      display: none;
+    }
+
+    [data-readonly] .details-value-label {
+      display: block;
+      margin-top: 2px;
+    }
+
+      
+    .hint {
+      position: relative;
+      display: inline-block;
+    }
+
+    .hint:focus:after, .hint:focus:before, .hint:hover:after, .hint:hover:before {
+      transform: translateX(8px);
+    }
+
+    .hint[aria-label]:after {
+      content: attr(aria-label);
+    }
+    .hint:hover:after, .hint:hover:before {
+      visibility: visible;
+      opacity: 1;
+      transition-delay: 100ms;
+    }
+
+    .hint[aria-label=""]:after {
+      display: none;
+    }
+
+    .hint:after, .hint:before {
+      bottom: -200%;
+    }
+    .hint:after {
+      margin-bottom: -14px;
+    }
+    .hint:after {
+      background: #383838;
+      color: #fff;
+      padding: 8px 10px;
+      font-size: 12px;
+      line-height: 12px;
+      box-shadow: 4px 4px 8px rgba(0,0,0,.3);
+      border-radius: 4px;
+    }
+    .hint:after, .hint:before {
+      position: absolute;
+      transform: translate3d(0,0,0);
+      visibility: hidden;
+      opacity: 0;
+      z-index: 1000000;
+      pointer-events: none;
+      transition: .3s ease;
+    }
+
+  </style>
+
+  <template>
+      <!-- Content -->
+      <section class="details">
+        <template is="dom-repeat" items="{{details}}">
+            <div class="details-entry" data-readonly$="{{item.readonly}}" data-type$="{{item.dataType}}">
+                <label class="details-key hint" aria-label$="{{item.val}}">{{item.key}}</label>
+                <span class="details-value-label" title="{{item.val}}">{{item.eval_val}}</span>
+                <input type="text" class="details-value-input" title="{{item.eval_val}}" readonly$="{{readonly}}"
+                  value="{{item.eval_val}}" data-key$="{{item.dataKey}}" on-change="_onDetailsValueChange"/>
+            </div>
+        </template>
+      </section>
+      <content select="*"></content>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        is: 'dg-details',
+        
+        properties: {
+          value: {
+            type: Object,
+            observer: 'refresh'
+          },
+          ctx: {
+            type: Object
+          },
+          visible: {
+            type: Boolean,
+            reflectToAttribute: true
+          },
+          details: {
+            type: Array
+          },
+          readonly: {
+            type: Boolean
+          },
+          _cb: {
+            type: Object
+          }
+        },
+        attached: function () {         
+          // create the context builder 
+          if (this.ctx && this.value && this.value.name) {
+            this._cb = new ContextBuilder(this.ctx, this.value.name);
+          }
+        },
+        refresh: function () {
+          if (this.value && this.value.name) {
+            var details = [];
+            this._buildDetails(this.value, details);
+            this.details = details;
+          }
+        },
+        _buildDetails: function (src, details) {
+          Object.keys(src).forEach(key => {
+            let val = src[key];
+
+            // join all assertions together if its in an array
+            val = key.contains('$assertions') && Array.isArray(val) ? val.join(' && ') : val;
+            
+            // if it has children and its not an array
+            if (typeof(val) === 'object' ) {
+              this._buildDetails(val, details);
+            } else {              
+              let  eval_val = this._evaluateDetail(val);
+                            
+              // set the eval_val before evaluation if evaluation returned undefined or null
+              eval_val = eval_val ? eval_val : val;
+              
+              // if its an object then stringify
+              eval_val = typeof(eval_val) === 'object' ? JSON.stringify(eval_val) : eval_val;
+              
+              let readonly = eval_val === val;
+              readonly = readonly && !(val.search && val.search(/ctx|\${|this/) > -1 );
+              readonly = readonly && val !== '';
+
+              // if its readonly then don't show hint
+              readonly && (val = '');
+
+              // allow edit if it is a parameter (starts with underscore)
+              const isParameter = key.match(/^_\w*/);
+              readonly = !isParameter;
+              const datatype = isParameter ? 'parameter' : 'attribute';
+                            
+              // if lhs is not an expression then update the keys
+              const lhsIsAnExpr = key.search(/^ctx\./) > -1;
+              const dataKey = lhsIsAnExpr ? key : `ctx.${this.value.name}.${key}`;
+              
+
+              details.push({key, eval_val, val, readonly, dataKey, datatype});
+            }
+          });
+        },
+        _evaluateDetail: function (val) {
+          try {
+            val = this.value.name ? this._cb.evaluate(val, true) : val;
+          } catch (ex) {
+            // console.warn('Cannot evaluate detail', detail);
+          }
+
+          return val;
+        },
+        _onDetailsValueChange: async function (e) {
+          const {key} = e.model.item;
+          const val = e.target.value;
+
+          // update the value
+          this.value[key] = val;
+          
+          // if this is an expression
+          const isExpression = this._cb.isExpression(val);
+          if (isExpression) {
+            this.value[key] = this._cb.evaluate(val);
+          }
+        }
+      });
+    })();
+  </script>
+</dom-module>
+
+
+
+
+

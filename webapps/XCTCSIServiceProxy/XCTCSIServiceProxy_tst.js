@@ -1,0 +1,1 @@
+define("DS/XCTCSIServiceProxy/XCTCSIServiceProxy_tst",{});define("DS/XCTCSIServiceProxy/assets/nls/XCTCSIServiceProxy",{msg_uploadFromIRS:"𝔗𝔢𝔵𝔱 𝔯𝔢𝔭𝔩𝔞𝔠𝔢𝔡",error_failedToConnectToHypervisor:"𝔗𝔢𝔵𝔱 𝔯𝔢𝔭𝔩𝔞𝔠𝔢𝔡",error_loginFailed:"𝔗𝔢𝔵𝔱 𝔯𝔢𝔭𝔩𝔞𝔠𝔢𝔡"});

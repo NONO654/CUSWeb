@@ -1,0 +1,15 @@
+/* Check if current resource set is an old model one */
+
+let rscSetStatus(String)
+let rscSetName(String)
+
+rscSetStatus = ThisObject.V_ResourceSetTableStatus
+
+Validation = TRUE
+if (rscSetStatus == "INCOMPLET2" or rscSetStatus == "COMPLETE2")
+{
+	Validation = FALSE
+
+	rscSetName = ThisObject.PLM_ExternalID
+	Parameters.NLSMessage = BuildDeferredMessageNLS("KnowledgeServerMsgs", "UnsupportedOperationOnNewModel", rscSetName)
+}

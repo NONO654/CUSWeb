@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--XML declaration file for the PLM Business Logic resources -->
+
+<src:AppResourceSet Id="CATPLMBusinessLogicForValidationOnServer" Scope="ServerOnly"
+                     xsi:schemaLocation="urn:com:dassault_systemes:AppResourceSet AppResourceSetDescription.xsd"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xmlns:src="urn:com:dassault_systemes:AppResourceSet">
+
+  <!--Business logic relative to maturity -->
+  <src:BusinessRule Id="PLMCheckMaturity" ExecutionMode="Validation">
+    <src:Parameter Name="Transition" Type="String" Mode="IN"/>
+    <src:Parameter Name="CurrentState" Type="String" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPostCheckMaturity" ExecutionMode="Validation">
+    <src:Parameter Name="Transition" Type="String" Mode="IN"/>
+    <src:Parameter Name="CurrentState" Type="String" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMActionMaturity" ExecutionMode="Execution">
+    <src:Parameter Name="Transition" Type="String" Mode="IN"/>
+    <src:Parameter Name="CurrentState" Type="String" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!-- delete -->
+  <src:BusinessRule Id="PLMPreCheckDelete" ExecutionMode="Validation">
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+  <src:BusinessRule Id="PLMPreActionDelete" ExecutionMode="Execution">
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!-- create -->
+  <src:BusinessRule Id="PLMPreCheckCreate" ExecutionMode="Validation">
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPostCheckCreate" ExecutionMode="Validation">
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMActionCreate" ExecutionMode="Execution">
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+	<src:Parameter Name="ServerReconciliationCreatedObjects" Type="List" Mode="IN"/>
+  </src:BusinessRule>
+
+
+  <!-- update -->
+  <src:BusinessRule Id="PLMPreCheckUpdate" ExecutionMode="Validation">
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPostCheckUpdate" ExecutionMode="Validation">
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMActionUpdate" ExecutionMode="Execution">
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+
+  <!-- transfer ownership -->
+  <src:BusinessRule Id="PLMPreCheckTransferOwnership" ExecutionMode="Validation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPostCheckTransferOwnership" ExecutionMode="Validation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMActionTransferOwnership" ExecutionMode="Execution">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+
+  <!-- clone -->
+  <src:BusinessRule Id="PLMPreCheckClone" ExecutionMode="Validation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPostCheckClone" ExecutionMode="Validation">
+    <src:Parameter Name="NewObject" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMActionClone" ExecutionMode="Execution">
+    <src:Parameter Name="NewObject" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!-- newversion -->
+  <src:BusinessRule Id="PLMPreCheckNewVersion" ExecutionMode="Validation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPostCheckNewVersion" ExecutionMode="Validation">
+    <src:Parameter Name="NewObject" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMActionNewVersion" ExecutionMode="Execution">
+    <src:Parameter Name="NewObject" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!-- workspace deliver -->
+  <src:BusinessRule Id="PLMPreCheckWSDeliverCreate" ExecutionMode="Validation">
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPostCheckWSDeliverCreate" ExecutionMode="Validation">
+    <src:Parameter Name="ObjectInParentWS" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMActionWSDeliverCreate" ExecutionMode="Execution">
+    <src:Parameter Name="ObjectInParentWS" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+	<src:Parameter Name="ServerReconciliationCreatedObjects" Type="List" Mode="IN"/>	
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPreCheckWSDeliverUpdate" ExecutionMode="Validation">
+    <src:Parameter Name="ObjectInParentWS" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPostCheckWSDeliverUpdate" ExecutionMode="Validation">
+    <src:Parameter Name="ObjectInParentWS" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMActionWSDeliverUpdate" ExecutionMode="Execution">
+    <src:Parameter Name="ObjectInParentWS" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPreCheckWSDeliverDelete" ExecutionMode="Validation">
+    <src:Parameter Name="ObjectInParentWS" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="CurrentWorkspace" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="UserfactNames" Type="List" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!-- import -->
+  <src:BusinessRule Id="PLMPreCheckImportCreate" ExecutionMode="Validation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPostCheckImportCreate" ExecutionMode="Validation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMActionImportCreate" ExecutionMode="Execution">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPreCheckImportUpdate" ExecutionMode="Validation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPostCheckImportUpdate" ExecutionMode="Validation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMActionImportUpdate" ExecutionMode="Execution">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <src:BusinessRule Id="PLMPreCheckImportDelete" ExecutionMode="Validation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+</src:AppResourceSet>

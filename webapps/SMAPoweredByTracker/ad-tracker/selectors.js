@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define([],function(){var a={};a.TRACKER_LS_KEY="SMAPoweredBy.enableStudyTracker";a.TRACKET_ENABLED_LS_VALUE="yes";a.TRACKET_DISABLED_LS_VALUE="no";a.isTrackingEnabled=function(){return(window.localStorage.getItem(a.TRACKER_LS_KEY)===null||window.localStorage.getItem(a.TRACKER_LS_KEY)===a.TRACKET_ENABLED_LS_VALUE)};return a});

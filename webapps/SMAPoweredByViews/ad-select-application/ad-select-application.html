@@ -1,0 +1,192 @@
+<!-- Copyright 2018 Dassault Systemes. All rights reserved. -->
+<dom-module id="ad-select-application">
+	<style>
+		:host {
+			display: block;
+		}
+		:host .modal-wrap {
+			height: 100%;
+			width: auto;
+			padding: 10px !important;
+		}
+		:host .modal-content {
+			height: 100%;
+		}
+		:host .modal-body {
+			height: calc(100% - 112px);
+			overflow-y: auto;
+		}
+		:host .heading {
+			display: flex;
+			align-items: center;
+		}
+		:host .h4 {
+			flex: auto;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		:host .alert-message {
+			display: block;
+			word-break: keep-all;
+		}
+		:host .no-apps {
+			display: table;
+			margin: 100px auto;
+			font-size: 2.0em;
+			color: #e2e2e2;
+		}
+		:host .invalid:not(:focus) {
+			border-color: red;
+		}
+		:host .spinner-container {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+		}
+		:host .disable-overlay-mask {
+			opacity: 0.4;
+			background-color: rgba(255, 255, 255, 0.4);
+			pointer-events: none;
+		}
+		:host .next-arrow {
+			margin: 0px;
+			transform: scale(1.15);
+			float: right;
+		}
+		:host .jobtype-filters {
+			display: flex;
+			justify-content: flex-end;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			height: 10%
+		}
+		:host .jobtype-filters > .toggle {
+			margin-right: 10px;
+			margin-top: 0px;
+		}
+		:host .LAFunction{
+			display : none
+		}
+		@media all and (max-width: 768px) {
+			:host .jobtype-filters {
+				height: auto;
+				flex-direction: column;
+				align-items: flex-start;
+				margin-left: 16px;
+			}
+		}
+		@media all and (min-width: 1024px) {
+			:host .modal-content {
+				max-width: 1024px;
+				/* IR-554831 - margin:auto doesn't work in IE unless width is set */
+				margin: auto;
+				width: 100%;
+			}
+		}
+	</style>
+	<template>
+		<!-- COMPONENT -->
+		<div id="modal" class="modal fade" class$="[[_computeModalClassList(isOpen)]]">
+			<div class="modal-wrap">
+				<div class="modal-content">
+					<!-- HEADER -->
+					<div class="modal-header heading">
+						<span class="h4" id="selectApplicationHeading">[[_computeHeader(clonedJobId)]]</span>
+						<button id="closeButton" type="button" class="close" aria-hidden="true" disabled$="[[isCreating]]" on-click="_onClose">
+							<span class="fonticon fonticon-close"></span>
+						</button>
+					</div>
+					<!-- BODY -->
+					<div id="body" class$="[[_computeBodyClassList(isLoading, isCreating)]]">
+						<!-- Title -->
+						<div id="selectBatchJob" class="form-group LAFunction">
+							<label for="JobType" class="control-label">[[NLS.JobType]]</label>
+							<div class="toggle toggle-primary" id="singleRunOuter" on-click="_updateBatchJobOpt">
+							  <input type="radio" name="radios" id="single" value="SingleRun" checked>
+							  <label class="control-label" for"radio1">Single Run</label>
+							</div>
+							<div class="toggle toggle-primary" id="batchRunOuter" on-click="_updateBatchJobOpt">
+							  <input type="radio" name="radios" id="batch" value="BatchJob">
+							  <label class="control-label" for="radio2">Batch Job</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="jobTitleInput" class="control-label">[[NLS.JobTitle]]</label>
+							<input
+								type="text"
+								id="jobTitleInput"
+								class$="[[_computeTitleInputClassList(isTitleValid)]]"
+								placeholder="[[NLS.JobTitlePlaceholder]]"
+								required
+								value={{jobTitle::input}}
+								on-blur="_onJobTitleInputBlur">
+							</input>
+						</div>
+						<!-- Description -->
+						<div class="form-group">
+							<label for="jobDescriptionInput" class="control-label">[[NLS.JobDescription]]</label>
+							<textarea
+								id="jobDescriptionInput"
+								class="form-control"
+								value={{jobDescription::input}}
+								rows="2">
+							</textarea>
+						</div>
+						<!-- Select Application -->
+ 						<div class$="[[_computeSelectApplicationOverlayClass(clonedJob)]]">
+							<div class="form-group">
+								<label class="control-label">[[NLS.SelectApplication]]</label>
+								<!-- Filters -->
+								<div class="jobtype-filters">
+									<div class="toggle toggle-switch" hidden$="[[!hasSimulationCompanionLicense]]">
+										<input type="checkbox" id="showExamplesToggle" checked$="[[showExamples]]" on-change="_onShowExamplesChanged"></input>
+										<label class="control-label" for="showExamplesToggle">[[NLS.ShowExamples]]</label>
+									</div>
+									<div class="toggle toggle-switch">
+										<input type="checkbox" id="showReleasedOnlyToggle" checked$="[[showReleasedOnly]]" on-change="_onShowReleasedOnlyChanged"></input>
+										<label class="control-label" for="showReleasedOnlyToggle">[[NLS.ShowReleased]]</label>
+									</div>
+									<div class="toggle toggle-switch">
+										<input type="checkbox" id="showLatestOnlyToggle" checked$="[[showLatestOnly]]" on-change="_onShowLatestOnlyChanged"></input>
+										<label class="control-label" for="showLatestOnlyToggle">[[NLS.ShowLatest]]</label>
+									</div>
+								</div>
+								<!-- Job Types -->
+								<div id="abaqusJobTypes" hidden$="[[!hasAbaqusStudyLicense]]">
+									<h5 class="job-type-header">[[NLS.AbaqusJobTypes]]</h5>
+									<div id="abaqusJobTypesContainer"></div>
+								</div>
+								<div id="customJobTypes" hidden$="[[!hasSimulationCompanionLicense]]">
+									<h5 class="job-type-header">[[NLS.CustomJobTypes]]</h5>
+									<div id="customJobTypesContainer"></div>
+								</div>
+								<!-- Messages -->
+								<div id="errorMessage" hidden$="[[!_computeIsError(isLoading, accessibleJobTypes)]]">
+									<span class="alert-message alert-error">[[NLS.LoadFailure]]</span>
+								</div>
+								<div id="noCustomAppsMessage" hidden$="[[!_computeIsNoCustomApps(isLoading, hasSimulationCompanionLicense, accessibleJobTypes)]]">
+									<span class="no-apps">[[NLS.NoCustomApps]]</span>
+								</div>
+								<div id="allAppsFilteredMessage" hidden$="[[!_computeIsAllCustomAppsFiltered(isLoading, hasSimulationCompanionLicense, accessibleJobTypes, displayedCustomJobTypes)]]">
+									<span class="no-apps">[[NLS.AllAppsFiltered]]</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- FOOTER -->
+					<div class="modal-footer">
+						<button id="cancelButton" type="button" class="btn" disabled$="[[isCreating]]" on-click="_onClose">
+							<span>[[NLS.Cancel]]</span>
+						</button>
+						<button id="nextButton" type="button" class="btn btn-primary" disabled$="[[_computeIsNextDisabled(isTitleValid, isLoading, isCreating, selectedJobTypeID)]]" on-click="_onNext">
+							<span class="fonticon fonticon-chevron-right next-arrow"></span><span>[[NLS.Next]]</span>
+						</button>
+					</div>
+					<!-- Loading "Spinner" -->
+					<div id="spinnerContainer" class="spinner-container"></div>
+				</div>
+			</div>
+		</div>
+	</template>
+</dom-module>

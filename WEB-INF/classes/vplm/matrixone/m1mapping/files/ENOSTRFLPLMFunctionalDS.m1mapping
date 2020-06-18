@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="ENOSTRFLPLMFunctionalDS" />
+    <m1.package name="ENOSTRFLPLMFunctionalDS" />
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMConnection name="ENOSTFunctionalConnection" />
+      <m1.type name="ENOSTFunctionalConnection" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="ENOSTFunctionalConnector" />
+      <m1.type name="ENOSTFunctionalConnector" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="ENOSTFunctionalInstance" />
+      <m1.relationship name="ENOSTFunctionalInstance" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreRepInstance name="ENOSTFunctionalRepInstance" />
+      <m1.relationship name="ENOSTFunctionalRepInstance" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreRepReference name="ENOSTFunctionalRepReference" />
+      <m1.type name="ENOSTFunctionalRepReference" />
+
+      <!-- Basic Concat -->
+      <pattern.VPLM_BASIC_CONCAT>
+        <vplm.Simple name="PLM_ExternalID" />
+        <m1.basic name="name" />
+      </pattern.VPLM_BASIC_CONCAT>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="E_fromExternalId" />
+        <m1.attribute name="ENOSTFunctionalRepReference.E_fromExternalId" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="E_versionComment" />
+        <m1.attribute name="ENOSTFunctionalRepReference.E_versionComment" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="ENOSTFunctionalReference" />
+      <m1.type name="ENOSTFunctionalReference" />
+
+      <!-- Basic Concat -->
+      <pattern.VPLM_BASIC_CONCAT>
+        <vplm.Simple name="PLM_ExternalID" />
+        <m1.basic name="name" />
+      </pattern.VPLM_BASIC_CONCAT>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="E_fromExternalId" />
+        <m1.attribute name="ENOSTFunctionalReference.E_fromExternalId" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="E_versionComment" />
+        <m1.attribute name="ENOSTFunctionalReference.E_versionComment" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

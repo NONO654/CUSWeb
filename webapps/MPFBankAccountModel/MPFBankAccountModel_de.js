@@ -1,0 +1,1 @@
+define("DS/MPFBankAccountModel/MPFBankAccountModel_de",{});define("DS/MPFBankAccountModel/assets/nls/BankAccountModel",{isNotValid:"ist nicht gültig",isRequired:"ist erforderlich",ibanSwiftNotConsistent:"Die Landesangaben für IBAN und SWIFT weichen voneinander ab"});

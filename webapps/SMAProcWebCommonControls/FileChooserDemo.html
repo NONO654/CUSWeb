@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SMAProcWebCommonControls FileChooser showpage</title>
+  <link rel="stylesheet" href="../UIKIT/UIKIT.css" />
+
+  <script src="../AmdLoader/AmdLoader.js"></script>
+  <script>
+      function logEvent (event) {
+          console.log('Received:', event);
+          var serializedDetail = null;
+          try {
+              serializedDetail = JSON.stringify(event && event.detail);
+          } catch (e) {
+              console.error('Could not serialize due to error:', e);
+              serializedDetail = 'Error while serializing, see console for event details.'
+          }
+          document.getElementById('eventLog').textContent += 'Received: "' + event.type + '", details: ' + serializedDetail + '\n';
+      }
+      // File chooser demo usage
+      require(['DS/SMAProcWebCommonControls/FileChooser'], function (FileChooser) {
+          console.log('FileChooser loaded: %o', FileChooser);
+          document.addEventListener('pcw-file-selected', logEvent);
+          require([
+              'DS/JSCMM/SMAJSCMMActivity',
+              'DS/JSCMM/SMAJSCMMPLMObject',
+              'DS/JSCMM/SMAJSCMMContent',
+              'text!DS/SMAProcWebCommonControls/assets/sampleSimulationCategories.json',
+              'text!DS/SMAProcWebCommonControls/assets/sampleSimulationFolderAndDocuments.json',
+              'text!DS/SMAProcWebCommonControls/assets/sampleSimulationData.json'
+          ],
+              function (JSCMMActivity, SMAJSCMMPLMObject, SMAJSCMMContent, jsonCategory, jsonDocument, jsonSimData) {
+              [].forEach.call(document.querySelectorAll('pcw-file-chooser'), function(aFileChooser){
+                  var activity = new JSCMMActivity();
+
+                  var categoriesJson = JSON.parse(jsonCategory);
+                  var folderAndDocuments = JSON.parse(jsonDocument);
+                  var folderAndDocumentsMap = {};
+                  folderAndDocuments.forEach(function (folderOrDocument) {
+                      folderAndDocumentsMap[folderOrDocument.objectId] = folderOrDocument;
+                  });
+                  categoriesJson.forEach(function (category) {
+                      var contentCategory = new SMAJSCMMContent(category);
+                      contentCategory.setParent(activity);
+                      activity.addChildContent(contentCategory);
+
+                      function addToContainer(container, folderOrDocument) {
+                          var folderOrDocumentJson = folderAndDocumentsMap[folderOrDocument.objectId];
+                          var content = new SMAJSCMMContent(folderOrDocumentJson);
+                          content.setParent(container);
+                          container.addChildContent(content);
+                          if (folderOrDocumentJson.busType === 'Simulation Folder') {
+                              folderOrDocumentJson.children.forEach(addToContainer.bind(this, content));
+                          }
+                      }
+                      category.children.forEach(addToContainer.bind(this, contentCategory));
+                  });
+
+                  var simulationData = JSON.parse(jsonSimData);
+                  simulationData.forEach(function (plmObjectJson) {
+                      var plmObj = new SMAJSCMMPLMObject(plmObjectJson);
+                      activity.addSimulationData(plmObj);
+                  });
+
+                  aFileChooser.setActivity(activity);
+              });
+              var fileChooser1 = document.querySelector('#fileChooser1');
+              var ruleString = '<rawFN>Sample Text.txt</rawFN><toOption>6</toOption><del>N</del><type></type>' +
+              '<dataEnc></dataEnc><rwEnc></rwEnc><handlerType>com.dassault_systemes.sma.datahandler.DataHandlerPLM</handlerType>' +
+              '<hconfig><Rule id="999" name="Rule-999" enabled="true" sourceFileName="Sample Text.txt" referenceId="38a496a0-69b4-4535-b373-989fd0b144bf" exportMethod="download" ' +
+              'exportPath="excludeCategoryFolder" exportEmptyFolders="False" exportSource="All" sourceDocTitle="Sample Text" contentRel="all" impactRel="all"/></hconfig>';
+              fileChooser1.setDataHandlerConfigurationString(ruleString);
+          });
+      });
+  </script>
+
+</head>
+<body>
+    <h1>SMAProcWebCommonControls showpage</h1>
+    <h2>pcw-file-chooser</h2>
+    <h3>Default configuration</h3>
+    <pcw-file-chooser  filetypes=".txt"></pcw-file-chooser>
+    <hr />
+   	<h3>Fixed width - 350px</h3>
+    <pcw-file-chooser id="fileChooser1"  style="width:350px;" filetypes=".txt,.csv,.bmp"></pcw-file-chooser>
+    <hr />
+   	<h3>Flexible witdh - 90%:</h3>
+    <pcw-file-chooser id="fileChooser2"  style="width:90%;" filetypes=".txt,.csv,.bmp"></pcw-file-chooser>
+    <hr />
+   	<h3>Readonly</h3>
+    <pcw-file-chooser id="fileChooser3"  filetypes=".txt,.csv,.bmp" disabled></pcw-file-chooser>
+    <hr />
+    Event log:
+    <pre id="eventLog"></pre>
+</body>
+</html>

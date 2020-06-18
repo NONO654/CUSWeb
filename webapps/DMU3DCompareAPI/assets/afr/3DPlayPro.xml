@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+    <Template syp:name="3DPlayProAfrWorkshopInterface" Target="CATCmdInterface">
+        <CATCmdInterface WkbInterface="CATI3DPlayProAfrWorkshopConfiguration" />
+    </Template>
+
+    <Template syp:name="3DPlayProAfrWorkshopHeaders" Target="CATCmdHeadersList">
+        <CATCmdHeadersList>
+            <!---->
+            <CATCommandHeader ID="measure2CmdHdr" ClassName="DS/DMUMeasure/DMUCreateMeasureCmd" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "3dPlay" Value = "3dPlay" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="section2CmdHdr" ClassName="DS/DMUSection/DMUCreateSectionCmd" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "3dPlay" Value = "3dPlay" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="LockUnlockSectionHdr" ClassName="DS/DMUSection/DMULockUnlockSection" ResourceFile="DMUBaseCommands/3DPlayPro" Behavior="CATAfrHeaderCheck" />
+            <!---->
+            <CATCommandHeader ID="VisuToggleShadow" ClassName="DS/ViewerCommands/VisuToggleShadowCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" Behavior="CATAfrHeaderCheck" />
+            <CATCommandHeader ID="VisuToggleMirror" ClassName="DS/ViewerCommands/VisuToggleMirrorCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" Behavior="CATAfrHeaderCheck" />
+            <CATCommandHeader ID="VisuNoShadingEdges" ClassName="DS/ViewerCommands/VisuNoShadingEdgesCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" />
+            <CATCommandHeader ID="VisuShading" ClassName="DS/ViewerCommands/VisuShadingCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" />
+            <CATCommandHeader ID="VisuShadingEdges" ClassName="DS/ViewerCommands/VisuShadingEdgesCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" />
+            <CATCommandHeader ID="VisuGrid" ClassName="DS/ViewerCommands/VisuGridCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" />
+            <CATCommandHeader ID="VisuNoEnv" ClassName="DS/ViewerCommands/VisuNoEnvCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" />
+            <CATCommandHeader ID="VisuV6Env" ClassName="DS/ViewerCommands/VisuV6EnvCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" />
+            <CATCommandHeader ID="VisuCleanSpaceEnv" ClassName="DS/ViewerCommands/VisuCleanSpaceEnvCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" />
+            <CATCommandHeader ID="VisuDarkBlueEnv" ClassName="DS/ViewerCommands/VisuDarkBlueEnvCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" />
+            <CATCommandHeader ID="VisuDarkGreyEnv" ClassName="DS/ViewerCommands/VisuDarkGreyEnvCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" />
+            <CATCommandHeader ID="VisuShinyEnv" ClassName="DS/ViewerCommands/VisuShinyEnvCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" />
+            <!---->
+            <CATCommandHeader ID="GridHdr" ClassName="DS/DMUSection/DMUContextSectionCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "sectionGrid" Value = "sectionGrid" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="CutHdr" ClassName="DS/DMUSection/DMUContextSectionCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "sectionCut" Value = "sectionCut" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="NoCutHdr" ClassName="DS/DMUSection/DMUContextSectionCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "sectionCutPlane" Value = "sectionCutPlane" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="FlipHdr" ClassName="DS/DMUSection/DMUContextSectionCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "sectionFlip" Value = "sectionFlip" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="MoveHdr" ClassName="DS/DMUSection/DMUContextSectionCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "sectionViewpoint" Value = "sectionViewpoint" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="GraphicPropHdr" ClassName="DS/DMUSection/DMUContextSectionCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "sectionColor" Value = "Color" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="SectionNormalToXHdr" ClassName="DS/DMUSection/DMUContextSectionCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" Icon="DMUBaseCommands/assets/I_SectionSwitchXYZ.png"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "sectionToX" Value = "X" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="SectionNormalToYHdr" ClassName="DS/DMUSection/DMUContextSectionCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" Icon="DMUBaseCommands/assets/I_SectionSwitchXYZ.png"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "sectionToY" Value = "Y" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="SectionNormalToZHdr" ClassName="DS/DMUSection/DMUContextSectionCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1" Icon="DMUBaseCommands/assets/I_SectionSwitchXYZ.png"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "sectionToZ" Value = "Z" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <!---->
+            <CATCommandHeader ID="measureColorHdr" ClassName="DS/DMUMeasure/DMUContextMeasureCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "measureColor" Value = "Color" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="measureUpHdr" ClassName="DS/DMUMeasure/DMUContextMeasureCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "measureUp" Value = "Up" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="measureDownHdr" ClassName="DS/DMUMeasure/DMUContextMeasureCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "measureDown" Value = "Down" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <CATCommandHeader ID="measureDisplayHdr" ClassName="DS/DMUMeasure/DMUContextMeasureCmd" SharedLibraryName="ShareUI" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"><CATAfrCommandHeaderArgs><CATCommandHeaderArg ID = "measureDisplay" Value = "Display" Mode = "In" /></CATAfrCommandHeaderArgs></CATCommandHeader>
+            <!---->
+        </CATCmdHeadersList>
+    </Template>
+
+    <Template syp:name="3DPlayProAfrWorkshopAccess" Target="CATCmdWorkbench">
+        <CATCmdWorkbench Name="3DPlayProWorkbench">
+
+            <CATCmdContainer Name="Render Options" Visibility="1" RepresentationType="AfrActionBarSection">
+                <CATCmdContainer Name="Rendering" Visibility="1" RepresentationType="AfrActionBarDropDown">
+                    <CATCmdStarter Name="ShadingTextEdges" Command="VisuShadingEdges" />
+                    <CATCmdStarter Name="ShadingText" Command="VisuShading" />
+                    <CATCmdStarter Name="Wireframe" Command="VisuNoShadingEdges" />
+                </CATCmdContainer>
+                <CATCmdContainer Name="Environments" Visibility="1" RepresentationType="AfrActionBarDropDown">
+                    <CATCmdStarter Name="V6" Command="VisuV6Env" />
+                    <CATCmdStarter Name="None" Command="VisuNoEnv" />
+                    <CATCmdStarter Name="CleanSpace" Command="VisuCleanSpaceEnv" />
+                    <CATCmdStarter Name="DarkBlue" Command="VisuDarkBlueEnv" />
+                    <CATCmdStarter Name="DarkGrey" Command="VisuDarkGreyEnv" />
+                    <CATCmdStarter Name="Shiny" Command="VisuShinyEnv" />
+                </CATCmdContainer>
+                <CATCmdStarter Name="ToggleShadow" Command="VisuToggleShadow" />
+                <CATCmdStarter Name="ToggleMirror" Command="VisuToggleMirror" />
+                <CATCmdStarter Name="Grid" Command="VisuGrid" />
+            </CATCmdContainer>
+
+            <CATCmdContainer Name="Review" Visibility="1" RepresentationType="AfrActionBarSection">
+                <CATCmdStarter Name="Measure" Command="measure2CmdHdr" />
+                <CATCmdStarter Name="Section" Command="section2CmdHdr" />
+                <CATCmdStarter Name="LockUnlockSection" Command="LockUnlockSectionHdr" />
+            </CATCmdContainer>
+
+        </CATCmdWorkbench>
+    </Template>
+</Styles>

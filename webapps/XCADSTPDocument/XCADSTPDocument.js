@@ -1,0 +1,1 @@
+define("DS/XCADSTPDocument/STPInputDocument",["DS/XCADSTEPDocument/STEPInputDocument"],function(a){return a});

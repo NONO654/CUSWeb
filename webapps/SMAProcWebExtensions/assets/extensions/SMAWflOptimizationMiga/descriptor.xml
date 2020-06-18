@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.Miga" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationMiga" nlsID="dispname">Multi-Island GA</DisplayName>
+	<Description nlsFile="SMAWflOptimizationMiga" nlsID="desc">MIGA optimization algorithm</Description>
+	<LongDescription nlsFile="SMAWflOptimizationMiga" nlsID="longdesc">
+		<![CDATA[Multi-Island Genetic Algorithm
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Exploratory Technique
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for discontinuous design spaces
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Not well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>No
+
+</span><span style="font-weight:bold">Features:
+</span><span>Divides the population into several islands. Performs traditional genetic operations on each island separately, then migrates individuals between the islands. Searches many designs and multiple locations of the design space. 
+
+In the Multi-Island Genetic Algorithm (MIGA), like other genetic algorithms, each design point is perceived as an individual with a certain value of fitness based on the value of the objective function and constraint penalty. An individual with a better value of the objective function and penalty has a higher fitness value. Each individual is represented by a chromosome in which the values of design variables are converted into a binary string of 0 and 1 characters. This conversion is called "encoding" of the individual. Each population of individuals (a set of design points) is altered via the genetic operations of "selection", "crossover", and "mutation". Each design of a population is then evaluated and its fitness value is determined. A new population of designs is selected from the original set of designs: a process based on a survival of the fittest scheme. New designs are created by the genetic crossover operation: chromosomes of two individuals are crossed at 2 points and the genes between those points are swapped in the two chromosomes resulting in two new individuals. Genetic operation of mutation changes a value of a randomly selected gene in a chromosome to further increase the variability of the population and avoid stagnation in the evolution process. Multi-Island Genetic Algorithm preserves the best individuals from the previous generation without alteration. This operation is called "elitism". Elitism guarantees that the best genetic material is carried over to the child generation. 
+
+The selection operation in Multi-Island Genetic Algorithm employs the so-called "tournament selection" scheme. In the tournament selection, the best individuals are selected not from the whole population, but rather from a smaller subset of randomly selected individuals. This scheme allows for duplicate individuals in the child population. The size of the subset from which each best individual is selected is calculated using the value of the relative tournament size. Reducing the relative tournament size will increase the randomness in the selection process. Increasing the tournament size will result in more duplicates of the best individuals in the child population. 
+
+The main feature of Multi-Island Genetic Algorithm that distinguishes it from traditional genetic algorithms is the fact that each population of individuals is divided into several sub-populations called "islands". All traditional genetic operations are performed separately on each sub-population. Some individuals are then selected from each island and migrated to different islands periodically. This operation is called "migration". Two parameters control the migration process: migration interval which is the number of generations between each migration, and migration rate which is the percentage of individuals migrated from each island at the time of migration.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.Miga</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationMiga.CATNls" targetFilename="SMAWflOptimizationMiga.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationMiga_Japanese.CATNls" targetFilename="SMAWflOptimizationMiga_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.miga.Miga</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="maxConcurrent" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="reusePolicy" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Sub-Population Size" type="integer" valuetype="single">
+				<Value>10</Value>
+			</Property>
+			<Property name="Number of Islands" type="integer" valuetype="single">
+				<Value>10</Value>
+			</Property>
+			<Property name="Number of Generations" type="integer" valuetype="single">
+				<Value>10</Value>
+			</Property>
+			<Property name="Rate of Crossover" type="real" valuetype="single">
+				<Value>1.0</Value>
+			</Property>
+			<Property name="Rate of Mutation" type="real" valuetype="single">
+				<Value>0.01</Value>
+			</Property>
+			<Property name="Rate of Migration" type="real" valuetype="single">
+				<Value>0.01</Value>
+			</Property>
+			<Property name="Interval of Migration" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Elite Size" type="integer" valuetype="single">
+				<Value>1</Value>
+			</Property>
+			<Property name="Rel Tournament Size" type="real" valuetype="single">
+				<Value>0.5</Value>
+			</Property>
+			<Property name="Penalty Base" type="real" valuetype="single">
+				<Value>0.0</Value>
+			</Property>
+			<Property name="Penalty Multiplier" type="real" valuetype="single">
+				<Value>1000.0</Value>
+			</Property>
+			<Property name="Penalty Exponent" type="integer" valuetype="single">
+				<Value>2</Value>
+			</Property>
+			<Property name="Default Variable Bound (Abs Val)" type="real" valuetype="single">
+				<Value>1000.0</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Use fixed random seed" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Random seed value" type="integer" valuetype="single">
+				<Value>-1</Value>
+			</Property>
+		</Property>
+
+		<Property name="DesignVariableAttributes" type="aggregate" valuetype="single">
+			<Property name="Lower Bound" type="real" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="Upper Bound" type="real" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="Gene Size" type="integer" valuetype="single">
+				<!-- Declared default value implies attribute MUST have a value -->
+				<Value>16</Value>
+			</Property>
+			<Property name="Scale Factor" type="real" valuetype="single">
+				<!-- Declared default value implies attribute MUST have a value -->
+				<Value>1.0</Value>
+			</Property>
+		</Property>
+		<Property name="DesignVariableDefaultAttributes" type="string" valuetype="single">
+			<Value>Gene Size,Scale Factor</Value>
+		</Property>
+
+		<Property name="DVTabInsertValueColumnAt" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[-1]]>
+			</Value>
+		</Property>
+	</Properties>
+</wfext:Extension>

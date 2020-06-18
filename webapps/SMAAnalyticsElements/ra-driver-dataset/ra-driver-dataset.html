@@ -1,0 +1,18 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-file-content/sp-file-content.html">
+
+<dom-module id="ra-driver-dataset">
+    <link rel="import" type="css" href="ra-driver-dataset.css">
+  <template>
+            <template is="dom-repeat" id="driverlist" items="{{listData}}" as="drivers">
+              <div class="items" on-click="getfile"><p>{{drivers.title}}</p>
+                <template is="dom-repeat" id="selecteddriver" items="{{drivers.selectionLabel}}" as ="selection">
+                <div class="selections"><p>{{selection}}</p></div>
+                </template>
+              </div>
+            </template>
+          <sp-file-content id="spfilecontent"></sp-file-content>
+    </template>
+  <script src="../../UIKIT/UIKIT.js"></script>
+  <script type="text/javascript" src="ra-driver-dataset.js"></script>
+</dom-module>

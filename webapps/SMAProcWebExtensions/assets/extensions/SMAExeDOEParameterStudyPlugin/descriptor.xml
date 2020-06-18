@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.doe.ParameterStudy" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAExeDOEParameterStudyPlugin" nlsID="dispname">Parameter Study</DisplayName>
+	<Description nlsFile="SMAExeDOEParameterStudyPlugin" nlsID="desc">Parameter Study</Description>
+	<LongDescription nlsFile="SMAExeDOEParameterStudyPlugin" nlsID="longdesc">
+		<![CDATA[Varies each factor independently over the specified levels, holding all others at the specified baseline design. Optionally evaluates the baseline design.
+
+</span><span style="font-weight:bold">Advantages:
+</span><span>   + Small number of points for evaluating independent effects, sensitivities.
+
+</span><span style="font-weight:bold">Disadvantages:
+</span><span>   - Does not account for interactions among factors.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DOE_Technique</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.doe.ParameterStudy</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeDOEParameterStudyPlugin32.gif" targetFilename="SMAExeDOEParameterStudyPlugin32.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeDOEParameterStudyPlugin.CATNls" targetFilename="SMAExeDOEParameterStudyPlugin.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeDOEParameterStudyPlugin_ja.CATNls" targetFilename="SMAExeDOEParameterStudyPlugin_ja.CATNls" locale="Japanese" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-parameter-study/cmp-doe-parameter-study.html" targetFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-parameter-study/cmp-doe-parameter-study.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-doe-parameter-study</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.doe.parameterstudy.ParameterStudy</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Include Baseline" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[True]]>
+				</Value>
+			</Property>
+		</Property>
+
+		<Property name="factor attributes" type="aggregate" valuetype="single">
+			<Property name="# Levels" type="integer" valuetype="single">
+				<Value>
+					<![CDATA[2]]>
+				</Value>
+			</Property>
+			<Property name="Lower" type="string" valuetype="single">
+				<Value>
+					<![CDATA[-10]]>
+				</Value>
+			</Property>
+			<Property name="Upper" type="string" valuetype="single">
+				<Value>
+					<![CDATA[10]]>
+				</Value>
+			</Property>
+			<Property name="Levels" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+			<Property name="Relation" type="string" valuetype="single">
+				<Value>
+					<![CDATA[%]]>
+				</Value>
+			</Property>
+			<Property name="Baseline" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+		</Property>
+
+		<Property name="Level Start" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[0]]>
+			</Value>
+		</Property>
+	</Properties>
+</wfext:Extension>

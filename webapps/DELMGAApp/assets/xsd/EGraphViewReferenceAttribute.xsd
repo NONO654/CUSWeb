@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMGAConfiguration" xmlns:tns="DS_DELMIAMGAConfiguration"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="Config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Preferences">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Primary">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Info">
+                      <xs:complexType>
+                        <xs:attribute name="property" type="xs:string" use="required"/>
+                        <xs:attribute name="dicoType" type="xs:string"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Secondary">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Info">
+                      <xs:complexType>
+                        <xs:attribute name="property" type="xs:string" use="required"/>
+                        <xs:attribute name="dicoType" type="xs:string"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Image">
+                <xs:complexType>
+                  <xs:attribute name="value" type="xs:boolean" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Title" type="xs:string" use="required"/>
+      <xs:attribute name="Description" type="xs:string" use="required"/>
+      </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.Loop" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="ProcessConnector">
+	<DisplayName nlsFile="SMAWflLoop" nlsID="displayname">Loop</DisplayName>
+	<Description nlsFile="SMAWflLoop" nlsID="description">Loop</Description>
+	<LongDescription>Loop</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Process</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.component.Loop</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>500</Value>
+			<Value>450</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflLoop.png" targetFilename="large/I_SMAWflLoop.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflLoop.CATNls" targetFilename="SMAWflLoop.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflLoop_Japanese.CATNls" targetFilename="SMAWflLoop.CATNls" locale="Japanese" />
+		<Stream name="Properties" streamKind="properties" sourceFilename="SMAWflLoop_CATNls.properties" targetFilename="SMAWflLoop.properties"/>
+		<Stream name="Properties_Japanese" streamKind="properties" sourceFilename="SMAWflLoop_JapaneseCATNls.properties" targetFilename="SMAWflLoop_ja.properties" locale="Japanese" />
+		<Stream name="CodeJar" streamKind="jar" sharedLoader="false" sourceFilename="SMAWflLoop.jar" targetFilename="SMAWflLoop.jar" />
+		<!--For cppEditor-->
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflLoop.dll" targetFilename="win_b64/SMAWflLoop.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflLoop.sypstyle" targetFilename="SMAWflLoop.sypstyle"/>
+		<Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebLoop/cmp-loop/cmp-loop.html" targetFilename="SMAProcWebLoop/cmp-loop/cmp-loop.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-loop</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>SMAWflWebExtensionEditor</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_stylesheet"/>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation language="java">
+					<Class>com.engineous.component.loop.LoopEditor</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflLoopConnectorEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.component.loop.LoopHandler</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflLoopHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<!--  Loop properties -->
+		<Property name="type" type="string" valuetype="single">
+			<Value>
+				<![CDATA[For]]>
+			</Value>
+		</Property>
+		<Property name="failed runs policy" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="reusePolicy" type="string" valuetype="single">
+			<Value>
+				<![CDATA[any]]>
+			</Value>
+		</Property>
+		<Property name="sequential" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[true]]>
+			</Value>
+		</Property>
+
+		<Property name="conditionParam" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="from" type="string" valuetype="single">
+			<Value>
+				<![CDATA[C1]]>
+			</Value>
+		</Property>
+		<Property name="to" type="string" valuetype="single">
+			<Value>
+				<![CDATA[C10]]>
+			</Value>
+		</Property>
+		<Property name="incr" type="string" valuetype="single">
+			<Value>
+				<![CDATA[C1]]>
+			</Value>
+		</Property>
+
+
+		<Property name="items" type="aggregate" valuetype="single">
+		</Property>
+		<Property name="conditions" type="aggregate" valuetype="single">
+		</Property>
+		<Property name="maxIterations" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[10]]>
+			</Value>
+		</Property>
+		<Property name="maxIterBoolean" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[True]]>
+			</Value>
+		</Property>
+
+		<Property name="array count" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="array mappings" type="string" valuetype="array" arraydim="[1,1]" sizable="true">
+		</Property>
+	</Properties>
+
+	<ParameterList>
+		<Parameter name="Run_Number" tag="Run_Number" mode="neutral" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[0]]>
+			</Value>
+		</Parameter>
+	</ParameterList>
+</wfext:Extension>

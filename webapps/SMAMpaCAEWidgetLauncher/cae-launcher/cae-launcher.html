@@ -1,0 +1,100 @@
+<!--
+[cae-launcher HTML Document]
+
+Project:		caeLauncher
+Version:		1.0
+Last change:	12-02-2015
+Assigned to:
+Primary use:	TODO: Write where this component is being used
+Description:    TODO: Description about the component
+-->
+
+<!-- Application Metas Start -->
+<meta name="description" content="3D Experience Launcher for Abaqus /CAE" />
+<meta name="keywords" content="3D Experience Abaqus /CAE" />
+<!-- Application Metas End -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAMpaCAEWidgetLauncher/cae-launcher-util/cae-launcher-util.html">
+<link rel="import" href="../../SMAMpaCAEWidgetLauncher/cae-process-creator/cae-process-creator.html">
+<link rel="import" href="../../SMAMpaCAEWidgetLauncher/cae-session/cae-session.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<link rel="import" href="../../SMAProcADUI/ad-mdata-view/ad-mdata-view.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-data/sp-data.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+
+<title>Abaqus/CAE Launcher Widget</title>
+
+<dom-module id="cae-launcher">
+
+      <template>
+            <style include="sp-uikit-styles"></style>
+            <sp-variable id="mcsBaseURL" name="mcsBaseURL"></sp-variable>
+            <cae-launcher-util id="caeLauncherUtil"></cae-launcher-util>
+            <cae-process-creator id="caeProcessCreator"></cae-process-creator>
+
+            <link rel="stylesheet" href="cae-launcher.css" />
+            <style no-shim>
+                  @import
+                  /* escape polymer-element CSS inlining */
+
+                  url("../../UIKIT/UIKIT.css");
+
+            </style>
+
+            <sp-dashboard id="spDashBoard"></sp-dashboard>
+            <sp-mcsservice id="ws_license" data="{{CAELicense}}" on-dataready="licenseDataReady" on-error="licenseError" getasap="" uri="license?appNames=Run_Abaqus_CAE">
+            </sp-mcsservice>
+
+            <sp-search id="spSimulationSearch" plm-types="Simulation&quot; AND sce_95_simulation_95_kind:&quot;adhoc" on-change="onSimulationSearch" multi-select="false"></sp-search>
+            <cae-session id="session" on-sessionLoaded="onSessionLoaded"></cae-session>
+            <div id="container-scroll">
+
+                  <div id="caeLauncherMain" class="cae-launcher-main">
+
+                        <div id="cae-notification">
+
+                              <sp-notification id="notification" position="TL" width="96%"></sp-notification>
+                        </div>
+
+                        <div id="inputFields">
+                              <div id="studyModeChooser"> </div>
+                              <label for="studyNameField"><sp-nls nlspath="DS/SMAMpaCAEWidgetLauncher/assets/nls/SMAMpaCAEWidgetLauncher" nlskey="SMAMpaCAEConnector.SMAMpaCAEWidgetLauncher.Property.StudyName"></sp-nls></label>
+                              <input id="studyNameField" class="newStudyName form-control" type="text" placeholder="{{studyName.placeholder}}" value="{{studyName.value}}"> </input>
+
+                              <div class="tooltip-button-wrapper newStudyButton" title="Select Process" id="searchProcessButton">
+                                    <button id="searchProcess" type="button" class="btn btn-default" on-click="searchProcess">
+                                          ....
+                                    </button>
+                              </div>
+
+                              <div id="collabSpaceDropDown">
+                                    <label for="collabSpaceDropDown"><sp-nls nlspath="DS/SMAMpaCAEWidgetLauncher/assets/nls/SMAMpaCAEWidgetLauncher" nlskey="SMAMpaCAEConnector.SMAMpaCAEWidgetLauncher.Property.CollabSpace"></sp-nls></label>
+                              </div>
+                              <div id="dataViewContainer" class="panel-body">
+                              </div>
+                        </div>
+
+                        <div id="submitButtons">
+                              <sp-access id="messageAccess" group="process">
+                                    <span data-message="Insufficient access to launch" data-has-no-write-then="show"></span>
+                              </sp-access>
+                              <sp-access id="buttonAccess" data-has-no-write-then="hide" group="process">
+                                    <button id="launchButton" type="button" class="btn btn-default" on-click="launchCAE">{{launchButtonTitle}}</button>
+                              </sp-access>
+                        </div>
+
+                  </div>
+            </div>
+
+      </template>
+
+      <script src="cae-launcher.js"></script>
+
+</dom-module>

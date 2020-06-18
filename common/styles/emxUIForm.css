@@ -1,0 +1,411 @@
+/* -------------------------------------------------------------------------
+	Form Stylesheet for Windows/Mac Platforms
+	emxUIForm.css
+	
+	Release: 2015x
+	Version: 1.5
+	
+    Copyright (c) 1992-2018 Dassault Systemes ENOVIA Corp. All Rights Reserved.
+    This program contains proprietary and trade secret information 
+    of Dassault Systemes ENOVIA Corp. Copyright notice is precautionary only
+    and does not evidence any actual or intended publication of such program
+   ------------------------------------------------------------------------- */
+
+body {background:#fff;}
+
+/* -------------------------------------------------------------------------
+    Legacy Form Support
+   ------------------------------------------------------------------------- */
+
+table {width:100%;}
+
+table tr td.requiredNotice,
+table tr td.createRequiredNotice {
+	padding:2px 5px 4px 7px;
+	font-size:10px;
+	font-style:italic;
+	color:#841000;
+}
+
+/* label base styling */
+td.label,
+td.createLabel,
+td.labelRequired,
+td.createLabelRequired {
+	width:150px;
+	padding:5px;
+	border-bottom:1px solid #d8d8d8;
+	background-color: #f8f8f8;
+}
+
+/* label text styling --adjusted for UIKit.css-- */
+td.label,
+td.label label,
+td.createLabel,
+td.createLabel label,
+td.labelRequired,
+td.labelRequired label,
+td.createLabelRequired,
+td.createLabelRequired label {
+    color:#2a2a2a;
+    font: 15px/18px Arial,Helvetica,sans-serif;
+    margin-bottom: 0;
+    text-align: left;
+    line-height: 18px;
+    display: table-cell;
+    vertical-align: middle;
+	white-space: normal;
+}
+
+/* required field label styling */
+td.labelRequired,
+td.labelRequired label,
+td.createLabelRequired,
+td.createLabelRequired label {
+	font-style:italic;
+	color:#841000;
+}
+
+/* field base styling */
+td.field,
+td.Field,
+td.inputField,
+td.createInputField {
+	padding:5px;
+	color:#2a2a2a;	
+    border-bottom:1px solid #d8d8d8;
+}
+
+td.field a,
+td.inputField a,
+td.createInputField a {text-decoration:underline;}
+
+td.field a img,
+td.inputField a img,
+td.createInputField a img {vertical-align:middle;}
+
+
+/* -------------------------------------------------------------------------
+	New UI Form Styling
+   ------------------------------------------------------------------------- */
+
+table.form {
+	border-collapse:collapse;
+	width:100%;
+}
+
+table.form tr td {
+	padding:5px;
+	line-height:14px;
+}
+
+table.form tr.required-notice td,
+table.form tr td.requiredNotice,
+table.form tr td.createRequiredNotice {
+	padding:3px 5px;
+	font-size:10px;
+	color:#841000;
+}
+
+table.form tr.required-notice td em {
+	font-weight:bold;
+	font-style:italic;
+}
+
+/* required field label styling */
+table.form .labelRequired,
+table.form .labelRequired label,
+table.form .createLabelRequired,
+table.form .createLabelRequired label {
+	font-style:italic;
+	color:#841000;
+}
+
+table.form.monitor tr td.label {width:40%;}
+
+table.form tr td img {vertical-align:middle;}
+
+table.form tr td table {
+	width:auto;
+	padding:2px 10px 2px 0;
+	background-color:transparent;
+	font-weight:normal;
+}
+
+table.form tr td table tr td {
+    padding:0;
+    border:none;
+    background:none;
+}
+
+table.form tr td table.textarea {width:100%;}
+
+table.form tr td table.multi-attr tr td {
+    width:20px;
+    padding-right:5px;
+    padding-top:5px;
+}
+
+table.form tr td table.multi-attr tr td:first-child {width:100%;}
+
+table.form tr td table.multi-attr tr:first-child td {padding-top:0;}
+
+table.form tr td ul.horizontal li,
+table.form tr td ul.horizontal li input,
+table.form tr td ul.horizontal li label {
+	display:inline;
+	font-weight:normal;
+	white-space:nowrap !important;
+}
+
+table.form tr td ul.horizontal li label {padding-right:1em;}
+
+table.form tr td ul.vertical li {margin:0 0 2px 0;}
+
+table.form tr td ul input {vertical-align:middle;}
+
+table.form tr td ul.vertical label {
+	display:inline;
+	font-weight:normal;
+}
+
+table.form tr.spacer-row td {
+	padding:3px;
+	background-color:transparent;
+	border:none;
+}
+	
+span.hint {
+	font-size:9px;
+	color:#525451;
+}	
+
+/* chooser-list input */
+table.form tr td.chooser-list table,
+table.form tr td.chooser-list table tr td {width:auto;}
+
+table.form tr td.chooser-list table tr.list td {
+	padding-top:4px;
+	vertical-align:top;
+}
+
+a.btn-remove {
+	display:block;
+	padding:0 0 0 14px;
+	background:url("../images/buttonMinus.gif") 0 2px no-repeat;
+} 
+
+
+/* -------------------------------------------------------------------------
+	Grid Styling
+   ------------------------------------------------------------------------- */
+
+table.grid tr th {
+	padding:5px;
+	font-weight:bold;
+	border-bottom:1px solid #959595;
+	border-right:1px solid #959595;
+	background-color:#D6DBDE;
+}
+
+table.grid tr.no-background th {
+	border-right:none;
+	background-color:transparent;
+}
+
+table.grid tr td {
+	padding:5px;
+	border-bottom:1px solid #ededed;
+	border-right:1px solid #ededed;
+	background-color:#EEE;
+}
+
+table.grid tr td.merge-with-next {border-right:none;}
+
+/* -------------------------------------------------------------------------
+   Slide In Form
+   ------------------------------------------------------------------------- */
+
+body.slide-in-panel table tr td.requiredNotice,
+body.slide-in-panel table tr td.createRequiredNotice {
+	padding:3px 10px;
+}
+
+/* label base styling */
+body.slide-in-panel td.label,
+body.slide-in-panel td.createLabel {color:#898b8e;}
+
+body.slide-in-panel td.label,
+body.slide-in-panel td.createLabel,
+body.slide-in-panel td.labelRequired,
+body.slide-in-panel td.createLabelRequired {
+	padding:5px 10px 3px 10px;
+	border-bottom:none;
+	background-color: #fff;
+}
+
+/* field base styling */
+body.slide-in-panel td.field,
+body.slide-in-panel td.inputField,
+body.slide-in-panel td.createInputField {
+	padding:0 5px 7px 10px;
+	border-top:none;
+}
+
+/* file drop area styling */
+body.slide-in-panel .dropArea, body.slide-in-panel .dropAreaHover, body.slide-in-panel .dropAreaMouseOver{
+	background-image: none;
+	cursor: default;
+	width: calc(100% - 20px);
+	height: auto;
+	margin: 0 3px 0 0;
+	padding: 3px 7px;
+	position: relative;
+	text-align: center;
+	vertical-align: middle;	
+	line-height: 34px;
+	border-radius: 4px;	
+	border: 1px dashed #aaa;
+	color: #aaa;
+	font-style: italic;
+	word-break: break-all;
+}
+
+body.slide-in-panel .dropAreaMouseOver {
+	border: 1px solid #42a2da;
+	background: #f2f5f7;
+	color: #5b5d5e;
+}
+
+body.slide-in-panel .dropAreaHover {
+        border: 1px solid #57b847;
+        color: #57b847;
+	background-color: #edf6eb;
+}
+
+body.slide-in-panel div.fileName, body.slide-in-panel textarea.fileCommentInit, body.slide-in-panel textarea.fileCommentEdit {
+        padding-top: 5px;
+        padding-bottom: 3px;
+        color: #2a2a2a;
+}
+
+body.slide-in-panel div.fileName {
+        width: calc(100% - 3px);
+        word-wrap: break-word;
+}
+
+body.slide-in-panel div.fileName .removeButton, body.slide-in-panel div.fileName .removeButtonMouseOver{
+        float: right;
+        border: 1px solid rgba(255, 255, 255, 0);
+}
+
+body.slide-in-panel div.fileName .removeButtonMouseOver{
+        border: 1px solid #333;
+}
+
+body.slide-in-panel textarea.fileCommentInit, body.slide-in-panel textarea.fileCommentEdit {
+        min-height:10px;
+        width:calc(100% - 20px);
+}
+
+body.slide-in-panel textarea.fileCommentInit {
+        color: grey;
+        font-style: italic;
+}
+
+body.slide-in-panel textarea.fileCommentEdit {
+        color: #2a2a2a;
+        font-style: normal;
+}
+
+/* -------------------------------------------------------------------------
+   Fix for BOM report "differences" field
+   ------------------------------------------------------------------------- */
+
+
+
+div#ReportDifferences_html td {padding: 4px 0; white-space: nowrap;}
+
+
+/* -------------------------------------------------------------------------
+   Fix for Custom Table View Dialog
+   ------------------------------------------------------------------------- */
+
+/*--turns off all the underlining--*/
+form#customtable td.inputField {
+border-bottom: 0px;
+}
+
+/*--styles the fieldset--*/
+
+form#customtable fieldset {
+border: solid 1px #bababa;
+padding: 6px;
+border-radius: 1px;
+}
+
+form#customtable legend {
+padding: 0 6px;
+}
+
+/*--aligns the select box headers over the select boxes--*/
+
+form#customtable table#Table1 {
+    width: 625px;
+    margin: 12px 0 0 12px;
+}
+
+/*--removes the background colors and borders of the select box headers--*/
+
+form#customtable table#Table1 td.label{
+	background-color: #fff;
+	border-bottom: 0px;
+	padding-bottom: 0;
+}
+
+/*--Adds a rule under the name field--*/
+form#customtable table#Table3 {
+	background-color: #f8f8f8;
+	border-bottom: solid 1px #d8d8d8;
+}
+
+/*--Aligns the name field elements--*/
+
+form#customtable table#Table3 td.label{
+	width: auto;
+	padding-left: 10px;
+}
+
+/*--changes the name field height and font size--*/
+
+form#customtable table#Table3 .inputField > input{
+	font-size: 14px;
+	line-height: 17px;
+	margin: 0;
+}
+
+/*--aligns the select boxes--*/
+form#customtable table#Table6 table td.inputField table select{
+	padding-top: 0;
+}
+
+/*--adds space below the select boxes--*/
+
+form#customtable table#Table6 td.inputField {
+padding-right: 0;
+padding-top: 0;
+padding-bottom: 10px;
+}
+
+form#customtable table td.inputField img{
+margin: 1px;
+}
+
+
+
+
+
+
+
+
+

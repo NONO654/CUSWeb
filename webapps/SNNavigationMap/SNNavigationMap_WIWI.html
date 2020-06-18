@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+  <title>Navigation Component</title>
+
+  <!-- RequireJS & config to work with wepapp build-->
+  <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+  <!--<script src="https://use.fontawesome.com/d7a92e2023.js"></script>-->
+  <!-- UWA and UIKit stylesheets -->
+  <link rel="stylesheet" type="text/css" href="../UWA2/assets/css/inline.css" />
+  <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+  <script>
+    window.onload = function () {
+      if (window.location.search.indexOf('no_jsnotif=true') === -1) {
+        sendNotificationWebInWin('PageLoaded', 'done');
+      }
+      window.parent.postMessage('Map_WebInWin_ready', '*');
+    };
+
+    window.onresize = function () {
+      if (map !== undefined)
+        map.resizeMap();
+    };
+
+    var map = {
+      initMap: function (url3DSpace, urlFederated, roles, newIDs, tenantID, tenantNls, noautomode) {
+        var that = this,
+         options = {
+           renderTo: document.body
+         };
+
+        options.root_reference = newIDs || null;
+        if (options.root_reference) {
+          options.initWithNodes = options.root_reference;
+        }
+
+        options.onReady = function () {
+          console.log('NavigationApp ready');
+        };
+
+        //options.mapSettings = {
+        //  "platform_services": [{
+        //    "3DSpace": url3DSpace,
+        //    "Federated": urlFederated
+        //  }],
+        //  "user_granted_roles": [{
+        //    "id": "UNF"
+        //  }]
+        //};
+
+        options.mapSettings = {
+          "platform_services": [{
+            "3DSpace": url3DSpace,
+            "Federated": urlFederated,
+            "platformId" : tenantID,
+            "displayName" : tenantNls
+          }],
+            "user_granted_roles": roles
+        };
+
+        if(noautomode){
+          options.mapSettings.noautomode = true;
+        }
+        require(['UWA/Core',
+                     'UWA/Drivers/Alone',
+                     'DS/SNNavigationMap/ENORIPE',
+                     'UWA/Widget'
+        ], function (UWACore, UWAAlone, ENORIPE, Widget) {
+
+          that.enoripe = new ENORIPE(options);
+          widget = new Widget();
+          //that.navigationApp.inject(document.body);
+        });
+      },
+
+      refreshMap: function (newIDs) {
+        if (this.enoripe) {
+          this.enoripe._onRefresh({
+            initWithNodes: newIDs,
+            needClear: true
+          });
+        }
+      },
+
+      clearMap: function () {
+        if (this.enoripe) {
+          this.enoripe.clearMap();
+        }
+      },
+
+      refreshOnDrop: function (DropMode, DroppedObjects) {
+        if (this.enoripe._navigationMap) {
+          this.enoripe._navigationMap.onDropFromWebInWin({
+            action: DropMode,
+            objects: DroppedObjects
+          });
+        }
+      },
+
+      resizeMap: function () {
+        if (this.enoripe) {
+          this.enoripe.onResize();
+        }
+      },
+
+      setCtxMenu: function (ctxMenu) {
+        if (this.enoripe._navigationMap) {
+          this.enoripe._navigationMap.SetContextualMenu({
+            actions: ctxMenu
+          });
+        }
+      }
+
+    };
+
+
+    function sendNotificationWebInWin(name, message) {
+      if (typeof CATCefSendString !== 'undefined') {
+        //CATCefSendString(name + '=' + message);
+        dscef.sendString(name + '=' + message);
+      } else {
+        var textarea = document.createElement("textarea");
+        textarea.setAttribute("name", name);
+        textarea.appendChild(document.createTextNode(message));
+        var form = document.createElement("form");
+        form.setAttribute("method", "POST");
+        form.setAttribute("action", "jsnotif://");
+        form.appendChild(textarea);
+        document.documentElement.appendChild(form);
+        form.submit();
+        form.parentNode.removeChild(form);
+        form = null;
+      }
+    }
+
+    function InitMap(url3DSpace, urlFederated, roles, selectedObjects, tenantID, tenantNls, noautomode) {
+      map.initMap(url3DSpace, urlFederated, roles, selectedObjects, tenantID, tenantNls, noautomode);
+    }
+
+    function RefreshMap(selectedObjects) {
+      map.refreshMap(selectedObjects);
+    }
+
+    function ClearMap() {
+      map.clearMap();
+    }
+
+    function RefreshOnDrop(DropMode, DroppedObjects) {
+      map.refreshOnDrop(DropMode, DroppedObjects);
+    }
+
+    function SetCtxMenu(ctxMenu) {
+      map.setCtxMenu(ctxMenu);
+    }
+
+  </script>
+</head>
+
+<body class="body-WIWI">
+</body>
+
+</html>

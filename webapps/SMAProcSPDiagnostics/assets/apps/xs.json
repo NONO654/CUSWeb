@@ -1,0 +1,157 @@
+{
+  "context": [
+		{
+			"name": "process_experience_studio",
+			"$afterReceive": {
+				"ctx.simulation.id": "ctx.context.xs.simId",
+				"ctx.simulation.oid": "ctx.context.xs.simOid",
+				"ctx.mcs.sec": "ctx.context.xs.securityContext"
+			},
+			"$appId": "SIMEXPS_AP"
+		}
+	],
+	"scenarios": [
+		{
+			"name": "xs_CheckAllMCSServices",
+			"sequence": [
+				"sp_FetchDefaults", "getCollabSpaces", "license", "getCSRFToken", "license", "getAllSimulations", "getSimulation",
+				"createTemplate","templateView", "templateViews","play","getIOSummaryViewForTransientProcess","Content","instantiate",
+				"getExecutionOptions","simulationView","getTypeMetaData","status","stations","attributeGroup","ticket"
+			],
+			"odt": {
+				"odt_enabled": true,
+				"odt_skip": ["templateViews"]
+			}
+		}
+	],
+	"mcs":[
+		{
+			"name": "getTypeMetaData",
+			"caption": "gets the Type MetaData",
+			"url": "${ctx.mcs.e6w}/SMA_TypeMetaData?type=SimulationTemplate&SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+			"method": "GET",
+      		"backend_id": "TypeMetaDataServices:getTypeData"
+		},
+		{
+			"name": "templateView",
+			"caption": "gets Template View object from Template",
+			"url": "${ctx.mcs.e6w}/SMA_TemplateRelation?objectId=${ctx.template.id}&SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+			"method": "GET",
+      		"$beforeSend": {
+				"headers":{
+					"accept": "application/json"
+				}
+			},
+      		"$afterReceive": {
+        	"ctx.templateView.id": "this.response.parsedData.datarecords.datagroups[1].objectId"
+      		},
+     		 "$assertions": [
+        		"this.response.data.success"
+      		]
+    	},
+		{
+			"name": "templateViews",
+			"caption": "gets the TemplateView object linked to Template",
+			"url": "${ctx.mcs.rooturl}/templateviews/${ctx.templateView.id}?SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+			"method": "GET",
+			"backend_id": "TemplateViewEntity:getTemplateView",
+			"$beforeSend": "sp:filterPayloadPrep",
+			"$afterReceive": {
+				"ctx.templateView.id": "this.id"
+				}
+		  },
+		  {
+			  "name": "play",
+			  "caption": "creates the transient process for the template",
+			  "url": "${ctx.mcs.rooturl}/templates/${ctx.template.id}/play?SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+			  "method": "POST",
+			  "backend_id": "TemplateEntity:getTemplatePlay",
+			  "$beforeSend": "sp:filterPayloadPrep",
+			  "$afterReceive": {
+				"ctx.transientProcess.id": "this.response.data.id"
+				}
+			},
+			{
+				"name": "getIOSummaryViewForTransientProcess",
+				"caption": "returns all data of transient process",
+				"url": "${ctx.mcs.rooturl}/simulations/${ctx.transientProcess.id}/iosummaryview",
+				"method": "GET",
+				"backend_id": "SimulationEntity:getSimulationInputOutput",
+				"$beforeSend": {
+					"headers": {
+						"SecurityContext": "ctx.mcs.sec",
+						"accept": "application/json"
+					}
+				},
+				"$afterReceive": {
+					"ctx.transientActivity.id": "this.response.parsedData[1].objectId"
+					}
+			},
+			{
+				"name": "Content",
+				"caption": "Gets the contents of transient Activity",
+				"url": "${ctx.mcs.e6w}/SMA_Content?SIMULATIONId=${ctx.transientActivity.id}&containerId=${ctx.transientActivity.id}&SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+				"method": "GET",
+		  		"backend_id": "SimulationWJobs:getSimulationJobIds",
+		  		"$beforeSend": {
+				"headers": {
+				"content-type": "application/json",
+				"eno_csrf_token": "ctx.mcs.csrf"
+					}
+				}
+			},
+			{
+				"name": "instantiate",
+				"caption": "instantiates the template",
+				"url": "${ctx.mcs.rooturl}/templates/${ctx.transientProcess.id}/play/instantiate?SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+				"method": "POST",
+				"backend_id": "TemplateEntity:instantiatePlay"
+			},
+			{
+				"name": "attributeGroup",
+				"caption": "Gets the attributeGroup of transient activity",
+				"url": "${ctx.mcs.e6w}/SMA_AttributeGroup?objectId=${ctx.transientActivity.id}&SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+				"method": "GET",
+		  		"backend_id": "AttributeGroupServices:connectAttributeGroups",
+		  		"$beforeSend": {
+				"headers": {
+				"content-type": "application/json",
+				"eno_csrf_token": "ctx.mcs.csrf"
+					}
+				}
+			},
+			{
+				"name": "ticket",
+				"caption": "Gets the one part fcs checkin ticket of type Simulation Document",
+				"url": "${ctx.mcs.e6w}/SMA_Ticket?count=1&SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest&policy=Simulation%20Document",
+				"method": "GET",
+		  		"backend_id": "FCSServices:getTicket",
+		  		"$beforeSend": {
+				"headers": {
+				"content-type": "application/json",
+				"eno_csrf_token": "ctx.mcs.csrf"
+					}
+				}
+			}
+	],
+	"experiments": [
+		{
+			"name": "XSRun",
+			"caption": "Run component",
+			"app": "XS",
+			"flag": "XS_RUN"
+		},
+		{
+			"name": "XS3DPlay",
+			"caption": "3DPlay component",
+			"app": "XS",
+			"flag": "XS_3DPLAY"
+		},
+		{
+			"name": "XSBeta",
+			"caption": "Beta features",
+			"app": "XS",
+			"flag": "XS_BETA"
+		}
+	]
+}

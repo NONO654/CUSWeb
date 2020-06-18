@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.Task" version="3DX.0" 
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="ProcessConnector">
+	<DisplayName nlsFile="SMAWflTask" nlsID="dispname">Task</DisplayName>
+	<Description nlsFile="SMAWflTask" nlsID="desc">Task</Description>
+	<LongDescription nlsFile="SMAWflTask" nlsID="longdesc">Task</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Process</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.component.Task</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>1000</Value>
+			<Value>700</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAWflTask16.gif" targetFilename="SMAWflTask16.gif" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflTask32.png" targetFilename="SMAWflTask32.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflTask.CATNls" targetFilename="SMAWflTask.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflTask_Japanese.CATNls" targetFilename="SMAWflTask.CATNls" locale="Japanese" />
+		<Stream name="Properties" streamKind="properties" sourceFilename="SMAWflTaskConnector_CATNls.properties" targetFilename="SMAWflTaskConnector.properties"/>
+		<Stream name="Properties_Japanese" streamKind="properties" sourceFilename="SMAWflTaskConnector_JapaneseCATNls.properties" targetFilename="SMAWflTaskConnector_ja.properties" locale="Japanese" />
+		<Stream name="CodeJar" streamKind="jar" sharedLoader="false" sourceFilename="SMAWflTaskConnector.jar" targetFilename="SMAWflTaskConnector.jar" />
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.component.task.TaskEditor</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/> 
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.component.task.TaskHandler</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/> 
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+	</Properties>
+</wfext:Extension>

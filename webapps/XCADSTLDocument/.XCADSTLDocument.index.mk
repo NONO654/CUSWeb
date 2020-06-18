@@ -1,0 +1,9 @@
+m|XCADParserWeb\XCADSTLDocument.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\XCADSTLDocument\XCADSTLDocument.js|1531551033|9168
+s|XCADParserWeb\XCADSTLDocument.mweb\src\STLInputDocument.js|1491914843|24703
+s|XCADParserWeb\XCADSTLDocument.mweb\src\XCADSTLDocument.js|1456834812|0
+s|XCADParserWeb\XCADSTLDocument.mweb\src\STLTessellatedRepresentation.js|1493125321|11490

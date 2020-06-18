@@ -1,0 +1,12 @@
+m|MPFModels\MPFPaymentCardTokenModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFPaymentCardTokenModel\MPFPaymentCardTokenModel.js|1542748046|2873
+s|MPFModels\MPFPaymentCardTokenModel.mweb\src\CompanyPaymentCardTokenDataProxy.js|1516872104|2036
+s|MPFModels\MPFPaymentCardTokenModel.mweb\src\MPFPaymentCardTokenModel.js|1508247644|0
+s|MPFModels\MPFPaymentCardTokenModel.mweb\src\PaymentCardTokenCollection.js|1506004110|686
+s|MPFModels\MPFPaymentCardTokenModel.mweb\src\PaymentCardTokenDataProxy.js|1516871310|1361
+s|MPFModels\MPFPaymentCardTokenModel.mweb\src\PaymentCardTokenModel.js|1540559374|3690
+s|MPFModels\MPFPaymentCardTokenModel.mweb\src\IndividualPayementCardTokenDataProxy.js|1516871960|2080

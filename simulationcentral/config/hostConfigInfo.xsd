@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <xsd:simpleType name="ReturnCodeType">
+     <xsd:restriction base="xsd:string">
+     <xsd:pattern value="([0-9]*(\,[0-9]*)*(\-[0-9]*)?(\:[0-9]*)?)*" />
+     </xsd:restriction>
+    </xsd:simpleType>
+ <xsd:simpleType name="ExecutionEngineType">
+     <xsd:restriction base="xsd:string">
+     <xsd:pattern value="[$]*" />
+     </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="BoolenType">
+     <xsd:restriction base="xsd:string">
+     <xsd:pattern value="[t,T][r,R][U,u][E,e]|[f,F][A,a][L,l][S,s][E,e]" />
+     </xsd:restriction>
+    </xsd:simpleType>
+  <xsd:element name="Root" type="RootType" />
+  <xsd:element name="ROOT" substitutionGroup="Root" />
+  <xsd:complexType name="RootType">
+    <xsd:sequence>
+      <xsd:element name="HostList" type="HostListType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="HostListType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="Host" type="HostType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="HostType">
+    <xsd:sequence>
+      <xsd:element name="Add" type="AddType" minOccurs="0"/>
+      <xsd:element name="Delete" type="DeleteType" minOccurs="0" />
+    </xsd:sequence>
+            <xsd:attribute name="MachineName" type="xsd:string"
+            use="required" />
+        <xsd:attribute name="ExecutionEngineDirectory" type="xsd:string"
+            use="optional" />
+       <xsd:attribute name="BaseDirectory" type="xsd:string"
+            use="required" /> 
+        <xsd:attribute name="StagingDirectory" type="xsd:string"
+            use="optional" />
+        <xsd:attribute name="GiveOwnership" type="xsd:string"
+            use="optional" />
+        <xsd:attribute name="SSHCommand" type="xsd:string" use="optional" />
+        <xsd:attribute name="platform" type="xsd:string" use="optional" />
+        <xsd:attribute name="operatingSystem" type="xsd:string"
+            use="optional" />
+        <xsd:attribute name="description" type="xsd:string" use="optional" />
+        <xsd:attribute name="Vault" type="xsd:string" use="optional" />
+        <xsd:attribute name="McsUrl" type="xsd:string" use="optional" />
+        <xsd:attribute name="ServiceUrl" type="xsd:string" use="optional" />
+        <xsd:attribute name="ModelName" type="xsd:string" use="optional" />
+        <xsd:attribute name="ModelVersion" type="xsd:string"
+            use="optional" />
+    </xsd:complexType>
+  <xsd:complexType name="DeleteType">
+    <xsd:sequence>
+      <!--  <xsd:element minOccurs="0" name="BaseDirectory" type="xsd:string" /> -->
+      <xsd:element minOccurs="0" name="ApplicationList" type="ApplicationListType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AddType">
+    <xsd:sequence>
+     <!-- <xsd:element minOccurs="1" name="BaseDirectory" type="xsd:string" /> -->
+      <xsd:element name="ApplicationList" type="ApplicationListType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ApplicationListType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="Application" type="ApplicationType" />
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:complexType name="ApplicationType">
+        <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" name="ServerData" type="ServerDataType" />
+        </xsd:sequence>
+        <xsd:attribute name="Name" type="xsd:string" use="required" />
+        <xsd:attribute name="Version" type="xsd:string" use="required" />
+        <xsd:attribute name="ExecPath" type="xsd:string" use="required" />
+        <xsd:attribute name="WorkingDirectory" type="xsd:string"
+            use="optional" />
+    </xsd:complexType>
+    <xsd:complexType name="ServerDataType">
+        <xsd:attribute name="Host" type="xsd:string" use="optional" />
+        <xsd:attribute name="Station" type="xsd:string" use="optional" />
+        <xsd:attribute name="OS" type="xsd:string" use="optional" />
+        <xsd:attribute name="OSName" type="xsd:string" use="optional" />
+        <xsd:attribute name="OSArch" type="xsd:string" use="optional" />
+        <xsd:attribute name="OSVer" type="xsd:string" use="optional" />
+        <xsd:attribute name="Others" type="xsd:string" use="optional" />
+        <xsd:attribute name="MaxTime" type="xsd:int" use="optional" />
+        <xsd:attribute name="LogStdOut" type="BoolenType" use="optional" />
+        <xsd:attribute name="LogStdErr" type="BoolenType" use="optional" />
+        <xsd:attribute name="ReturnCodes" type="ReturnCodeType" use="optional" />
+        <xsd:attribute name="LogLevel" type="xsd:string" use="optional" />
+    </xsd:complexType>
+</xsd:schema>

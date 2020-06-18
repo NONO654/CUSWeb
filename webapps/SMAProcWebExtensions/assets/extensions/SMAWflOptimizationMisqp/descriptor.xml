@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.Misqp" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationMisqp" nlsID="dispname">MISQP</DisplayName>
+	<Description nlsFile="SMAWflOptimizationMisqp" nlsID="desc">MISQP optimization algorithm</Description>
+	<LongDescription nlsFile="SMAWflOptimizationMisqp" nlsID="longdesc">
+		<![CDATA[MISQP - Mixed Integer Sequential Quadratic Programming
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Direct Numerical Technique
+   &#8226; Branch and Bound Integer search
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for highly non-linear design spaces
+   &#8226; Well-suited for problems with integer and boolean variables
+   &#8226; Not well-suited for discontinuous design spaces
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>Yes
+
+</span><span style="font-weight:bold">Features:
+</span><span>   &#8226; Exploits the local area around initial design point
+   &#8226; Uses branch-and-bound for integer variables
+   &#8226; Rapidly finds a local optimum design
+   &#8226; Handles inequality and equality constraints directly
+   
+This method builds a quadratic approximation to the Lagrange function and linear approximations to all output constraints at each iteration, starting with the identity matrix for the Hessian of the Lagrangian, and gradually updating it using the BFGS (Broydon-Fletcher-Goldfarb-Shanno) method. On each iteration, a quadratic programming problem is solved to find an improved design, until the final convergence to the optimum design.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.Misqp</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationMisqp.CATNls" targetFilename="SMAWflOptimizationMisqp.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationMisqp_Japanese.CATNls" targetFilename="SMAWflOptimizationMisqp_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.misqp.MISQP</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="maxConcurrent" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="reusePolicy" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Max Iterations" type="integer" valuetype="single">
+				<Value>40</Value>
+			</Property>
+			<Property name="Max Branch and Bound Iterations" type="integer" valuetype="single">
+				<Value>20</Value>
+			</Property>
+			<Property name="Termination Accuracy" type="real" valuetype="single">
+				<Value>1E-6</Value>
+			</Property>
+			<Property name="Rel Step Size" type="real" valuetype="single">
+				<Value>0.001</Value>
+			</Property>
+			<Property name="Min Abs Step Size" type="real" valuetype="single">
+				<Value>0.0001</Value>
+			</Property>
+			<Property name="Use Central Differences" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

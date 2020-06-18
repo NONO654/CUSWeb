@@ -1,0 +1,1 @@
+define("DS/RTwebrtcAPI/RTwebrtcAPI_de",{});define("DS/RTwebrtcAPI/assets/nls/feed",{Call:"Anruf",notCompatible:"Ihr Browser ist nicht kompatibel. Verwenden Sie Chrome oder Firefox"});

@@ -1,0 +1,1 @@
+define("DS/W3DDashboardSearchActions/W3DDashboardSearchActions_zh",{});define("DS/W3DDashboardSearchActions/assets/nls/main",{goToDashboard:"打开",type:"类型",typeValue:"控制面板",title:"标题",creationDate:"创建日期",modificationDate:"修改日期",responsible:"负责",propertiesFacet:"属性",membersFacet:"成员"});

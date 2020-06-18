@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2017 , Dassault Systemes. All rights reserved. -->
+  <head>
+    <title>Subscriptions</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Widget to manage the user subscriptions" />
+    <meta name="keywords" content="My 3DExperience subscriptions"/>
+
+    <script>
+      require([
+        'DS/MPFSubscriptionComponent/SubscriptionWidgetWrapper',
+        'DS/i3DXCompassPlatformServices/i3DXCompassPlatformServices'
+      ], function (SubscriptionWidgetWrapper, i3DXCompassPlatformServices) {
+        'use strict';
+
+        var subscriptionWidgetWrapper = new SubscriptionWidgetWrapper({
+          widget: widget,
+          container: widget.body,
+          i3DXCompassPlatformServices: i3DXCompassPlatformServices
+        });
+
+        var MyWidget = {
+
+          onLoad: function () {
+            subscriptionWidgetWrapper.whenReady()
+            .then(function () {
+              subscriptionWidgetWrapper.inject();
+            });
+          },
+
+          onRefresh: function () {
+            subscriptionWidgetWrapper.refresh();
+          }
+
+        };
+
+        widget.addEvents({
+          onLoad: MyWidget.onLoad,
+          onRefresh: MyWidget.onRefresh
+        });
+
+      });
+    </script>
+  </head>
+
+  <body>
+  </body>
+
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.CustomAdapter" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflCustomAdapter" nlsID="displayname">CustomAdapter</DisplayName>
+	<Description nlsFile="SMAWflCustomAdapter" nlsID="description">>CustomAdapter</Description>
+	<LongDescription nlsFile="SMAWflCustomAdapter" nlsID="longdesc">CustomAdapter</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.sma.adapter.CustomAdapter</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>700</Value>
+			<Value>650</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="I_SMAWflCustomAdapter.png" targetFilename="small/I_SMAWflCustomAdapter.png" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflCustomAdapter.png" targetFilename="large/I_SMAWflCustomAdapter.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflCustomAdapter.CATNls" targetFilename="SMAWflCustomAdapter.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflCustomAdapter_ja.CATNls" targetFilename="SMAWflCustomAdapter_ja.CATNls" locale="Japanese" />
+		<Stream name="Properties" streamKind="properties" sourceFilename="SMAWflCustomAdapter.properties" targetFilename="SMAWflCustomAdapter.properties"/>
+		<Stream name="Properties_Japanese" streamKind="properties" sourceFilename="SMAWflCustomAdapter_ja.properties" targetFilename="SMAWflCustomAdapter_ja.properties" locale="Japanese" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebCustomAdapter/cmp-customadapter-list/cmp-customadapter-list.html" targetFilename="SMAProcWebCustomAdapter/cmp-customadapter-list/cmp-customadapter-list.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-customadapter-list</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>SMAWflWebExtensionEditor</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_stylesheet"/>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+	<Properties>
+	</Properties>
+</wfext:Extension>

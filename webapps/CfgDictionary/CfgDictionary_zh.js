@@ -1,0 +1,1 @@
+define("DS/CfgDictionary/CfgDictionary_zh",{});define("DS/CfgDictionary/assets/nls/CfgDictionary",{option:"选项",rule:"规则",value:"值",variability_group:"可变性组",variant:"变体"});

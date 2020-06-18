@@ -1,0 +1,615 @@
+<!doctype html>
+<html>
+
+<head>
+  <!-- Definition of require : -->
+  <script type="text/javascript">
+    var query = location.search.substr(1);
+    var result = {};
+    query.split('&').forEach(function (part) {
+      if (!part) return;
+      part = part.split('+').join(' '); // replace every + with space, regexp-free version
+      var eq = part.indexOf('=');
+      var key = eq > -1 ? part.substr(0, eq) : part;
+      var val = eq > -1 ? decodeURIComponent(part.substr(eq + 1)) : '';
+      var from = key.indexOf('[');
+      if (from == -1) result[decodeURIComponent(key)] = val;
+      else {
+        var to = key.indexOf(']');
+        var index = decodeURIComponent(key.substring(from + 1, to));
+        key = decodeURIComponent(key.substring(0, from));
+        if (!result[key]) result[key] = [];
+        if (!index) result[key].push(val);
+        else result[key][index] = val;
+      }
+    });
+    COMPASS_CONFIG = {};
+
+    if (result) {
+      if (result.userid) {
+        COMPASS_CONFIG['userId'] = result.userid;
+      }
+      if (result.myAppsURL) {
+        COMPASS_CONFIG['myAppsBaseUrl'] = result.myAppsURL;
+      }
+      if (result.lang) {
+        COMPASS_CONFIG['lang'] = result.lang;
+      }
+    }
+  </script>
+
+  <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+  <!-- Load UWA environment -->
+  <!-- Application Standalone emulation files -->
+  <!--
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    -->
+  <!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+  <!-- This is required to configure RequireJS with the appropriate pathes : -->
+  <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+  <script>
+    function sendNotificationWebInWin(name, message) {
+      if (typeof dscef !== 'undefined') {
+        dscef.sendString(name + '=' + message);
+      }
+      else if (typeof CATCefSendString !== 'undefined') {
+        CATCefSendString(name + '=' + message);
+      } else {
+        var textarea = document.createElement("textarea");
+        textarea.setAttribute("name", name);
+        textarea.appendChild(document.createTextNode(message));
+        var form = document.createElement("form");
+        form.setAttribute("method", "POST");
+        form.setAttribute("action", "jsnotif://");
+        form.appendChild(textarea);
+        document.documentElement.appendChild(form);
+        form.submit();
+        form.parentNode.removeChild(form);
+        form = null;
+      }
+    }
+
+  </script>
+
+  <script type="text/javascript" src="ResultWebInWin.js"></script>
+  <!-- Include CSS for styling of the elements we are testing in that page : -->
+  <link rel="stylesheet" type="text/css" href="../UWA2/assets/css/inline.css" />
+  <link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/iframe.css" />
+
+    <style>
+      html, body {
+        height: 100%;
+        font-size: 100% !important;
+      }
+      .search-content {
+        height: 100%;
+        padding: 10px;
+        font-size: 87.5%;
+      }
+      iframe.wux-ui-is-resized{
+        z-index: -2 !important;
+      }
+
+      .wux-windows-immersive-frame {
+        pointer-events: none;
+      }
+    </style>
+
+  <script>
+      //font-size: 87.5% ; IR-624717-3DEXPERIENCER2019x
+      //font-size: 100% !important; //IR-620124-3DEXPERIENCER2018x
+      var taggerCont;
+    var mySearchWebinWin = null;
+    var myWebInWinSearchSocket = null;
+    var init_options = null;
+    var _lastSearchOptions = null; //IR-555278-3DEXPERIENCER2017x
+
+    function Init(parameter) {
+        //IR - 554449 : As a part of PCS improvement for Native Search, we try to launch the /federated/login call as early as possible
+        //so that it happens in parallel with the search UX loading and other calls
+        require(['DS/SNInfraUX/SearchRessources', 'DS/SNInfraUX/SearchLogin', 'DS/UWPClientCode/PublicAPI'], function (SearchRessources, SearchLogin, PublicAPI) {
+            var tenantObj = {};
+            tenantObj[parameter.active_tenant] = {
+                sources: {//SearchRessources created with just the 'search' url should be enough
+                    search: {
+                        displayName: parameter.tenantDisplayName,
+                        url: parameter.url//this is federated service base URL
+                    }
+                }
+            }
+            var resourcesForLogin = new SearchRessources({
+                "active_tenant": parameter.active_tenant,
+                "available_tenants": tenantObj,
+            });
+            //IR-554449
+            SearchLogin.login({
+                resources: resourcesForLogin,
+                onComplete: function () { console.log("Early /federated/login DONE from ResultWebInWin.js"); },
+                onFailure: function () { console.log("Early /federated/login FAILED from ResultWebInWin.js"); }
+            });
+        });
+
+      require([
+            'UWA/Core',
+            'UWA/Drivers/Alone',
+            'DS/ResultWebInWin/ResultWebInWin',
+            'DS/SNInfraUX/SearchSettings',
+            'DS/SNInfraUX/SearchCom',
+            'DS/SNInfraUX/SearchUtils',
+            'DS/ResultWebInWin/ResultWebInWinAction',
+            'text!DS/SNResultUX/assets/WebInWin_settings.json',
+            'DS/SNInfraUX/PredicatesNLS',
+            'DS/UWPClientCode/PublicAPI'
+      ], function (
+        UWACore,
+        StandAlone,
+        ResultWebInWin,
+        SearchSettings,
+        SearchCom,
+        SearchUtils,
+        ResultWebInWinAction,
+        settings_txt,
+        PredicatesNLS,
+        PublicAPI
+        ) {
+        // OLC to have the print panel pop up using dialog instead of vid otherwise no print available...
+        if (typeof CATCefForceDialogPopup == 'function') {
+          CATCefForceDialogPopup(true);
+        }
+
+        var query = window.location.search.substring(1);
+
+        if (query.length > 0) {
+          var vars = query.split("&"),
+                url_settings = [];
+          for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair.length == 1) {
+              url_settings[pair[0]] = true;
+            } else if (pair.length == 2) {
+              if (pair[0].length > 0) {
+                url_settings[pair[0]] = pair[1];
+              }
+            }
+          }
+          SearchSettings.urlSettings(url_settings);
+        }
+        SearchSettings.initialize(JSON.parse(settings_txt));
+
+          //check if we have some settinsg coming from C++
+        if (UWA.is(parameter.settings, "string")) {
+            console.log("initialize settings received from native=" + parameter.settings);
+            SearchSettings.initialize(JSON.parse(parameter.settings));
+        } else { console.log("no settings received from native to initialize"); }
+
+        var resource_amd = 'DS/SNInfraUX/SearchRessources';
+        if (UWA.is(parameter.odt) && parameter.odt === true) {
+          resource_amd = 'DS/SNInfraUX_karma_tst/SearchRessourceTST';
+        }
+
+        if (UWA.is(parameter.userid)) {
+          SearchUtils.setUserId(parameter.userid);
+          UWACore.log('User id set = ' + SearchUtils.getUserId());
+        }
+        if (UWA.is(parameter.securityContext)) {
+            SearchUtils.setSecurityContext(parameter.securityContext);
+            UWACore.log('securityContext id set = ' + SearchUtils.getSecurityContext());
+        }
+        if (UWA.is(parameter.cstorageUrl)) {
+            SearchUtils.setserverUrl(parameter.cstorageUrl);
+            UWACore.log('securityContext id set = ' + SearchUtils.getserverUrl());
+        }
+
+        require([resource_amd], function (SearchResources) {
+          var tenantObj = {};
+          tenantObj[parameter.active_tenant] = {
+            sources: {
+              cstorage: {
+                displayName: parameter.tenantDisplayName,
+                url: parameter.cstorageUrl
+              },
+              search: {
+                displayName: parameter.tenantDisplayName,
+                url: parameter.url
+              }
+            }
+          };
+
+          var platforms = null;
+          if (UWACore.is(parameter.platforms)) {
+            try {
+              var platformsObj = JSON.parse(parameter.platforms);
+              if (UWACore.is(platformsObj, 'object') && UWACore.is(platformsObj.platforms)) {
+                platforms = platformsObj.platforms;
+              }
+            } catch (err) {
+            }
+          }
+          init_options = {
+            federated_source: new SearchResources(
+              {
+                active_tenant: parameter.active_tenant,
+                available_tenants: tenantObj,
+                platforms: platforms,
+              }
+            ),
+            searchcontent: 'search-content',
+            in_apps_search: UWA.is(parameter.in_apps_search) ? parameter.in_apps_search : null
+          };
+
+          PredicatesNLS.setResources({ resources: init_options.federated_source });
+          SearchSettings.getTenantSettings(init_options.federated_source.getActiveTenant()).then(function(){
+            mySearchWebinWin = new ResultWebInWin(init_options);
+          });
+        });
+      });
+    }
+
+    function Search(options) {
+        require([
+              'UWA/Core',
+              'DS/ResultWebInWin/ResultWebInWin',
+        ], function (UWACore, SearchWebInWin) {
+            UWACore.log('Search for ' + options);
+            var searchCont = UWACore.extendElement(document.body).getElement('.search-content');
+            searchCont.setStyle('display', 'block');
+            mySearchWebinWin.search(options);
+        });
+    }
+
+    function InContextSearch(criteria) {
+        require([
+              'UWA/Core'
+        ], function (UWACore) {
+            var searchCont = UWACore.extendElement(document.body).getElement('.search-content');
+            searchCont.setStyle('display', 'block');
+            /*
+            //with the dev under FUN073378, this function is called ONLY during chooser mode (or some command adopting in-context search)
+            //however we need to manage the old client with latest server code as well
+            //with old client (before 17x FD06) this function is called during chooser mode OR also when launching find in this app (impl of CATI3DXPFindInThisApp)
+            //however with the dev under FUN073378, "find in this app" calls "Search" function
+            //so here we need to redirect the calls from old client (when not in chooser/in-context mode) to "Search" function if needed
+            //this client-server mismatch happens in case of Cloud customers where the server is updated with cloud update schedule
+            //but client code update is upto the individual customer (can be delayed max 2 weeks, so after some time this treatment should be removed)
+          if (UWA.is(mySearchWebinWin._searchResult)) {
+             var inContextOptions = mySearchWebinWin._searchResult.getOption("in_apps_search");
+              if (UWA.is(inContextOptions)) {
+                  mySearchWebinWin.inContextSearch(criteria);
+              } else {//no incontext options set (this is always valid with old client for chooser commands)
+                  if (UWA.is(criteria.searchString) && UWA.is(criteria.applicativeCriteria)) {
+                      Search({
+                          "value": criteria.searchString,
+                          "search_mode": "index",
+                          "appCriteria": criteria.applicativeCriteria,
+                          "adv_search": false
+                      });
+                 }
+             }
+          }
+            */
+            if (UWA.is(mySearchWebinWin)) {
+                mySearchWebinWin.inContextSearch(criteria);
+            }
+        });
+    }
+
+    function refresh() {
+      require([
+              'UWA/Core',
+              'DS/ResultWebInWin/ResultWebInWin',
+      ], function (UWACore, ResultWebInWin) {
+        UWACore.log('refresh');
+        mySearchWebinWin.refresh();
+      });
+    }
+
+    function getSuggestions(parameters) { 
+        require([
+                'UWA/Core',
+                'DS/ResultWebInWin/ResultWebInWin',
+        ], function (UWACore, ResultWebInWin) {
+            UWACore.log('getSuggestions');
+            mySearchWebinWin.getSuggestions(parameters);
+        });
+    }
+
+    //To manage shortcults (ctrl+O ...) if doNotDisplay == 1, the contextual menu is not dispalyed
+    function SetCtxMenu(jsonCtxMenu, jsonCtxSubMenu, infoObj) {
+        require([
+            'UWA/Core',
+            'DS/ResultWebInWin/ResultWebInWin'
+      ], function (UWACore, ResultWebInWin) {
+        mySearchWebinWin.setCtxMenu(jsonCtxMenu, jsonCtxSubMenu, infoObj); //IR-660540-3DEXPERIENCER2019x
+      });
+    }
+
+    function taggerWebInWinEvent(parameters) {
+      require([
+            'UWA/Core',
+            'DS/ResultWebInWin/ResultWebInWin',
+      ], function (UWACore, ResultWebInWin) {
+        mySearchWebinWin[parameters.event_id](parameters);
+      });
+    }
+
+    function activateInContextSearch(options) {
+        /*
+        require([
+              'UWA/Core',
+              'DS/ResultWebInWin/ResultWebInWin',
+        ], function (UWACore, ResultWebInWin) {
+            // Delete the old Search Component and create a new with the right options
+            // mySearchWebinWin.activateInContextSearch(options);
+            _lastSearchOptions = mySearchWebinWin._searchResult.getSNSkeleton()._lastSearchOptions; //IR-555278-3DEXPERIENCER2017x
+            mySearchWebinWin.onDestroy();
+            mySearchWebinWin = null;
+            var inAppsOpts = UWACore.extend({}, init_options, true);
+            inAppsOpts.in_apps_search = options;
+            inAppsOpts.source = ['3dspace'];//IR-385761, IR-380268
+            inAppsOpts.activateInContextSearch = true;
+            inAppsOpts.deactivateInContextSearch = false;
+            inAppsOpts._lastSearchOptions = null;
+            inAppsOpts.donotshowlastsearch = false;
+            mySearchWebinWin = new ResultWebInWin(inAppsOpts);
+        });
+        */
+        require([
+              'UWA/Core'
+        ], function (UWACore) {
+            if (UWA.is(mySearchWebinWin)) {
+                mySearchWebinWin.activateInContextSearch(options);
+            }
+        });
+    }
+
+
+    function deactivateInContextSearch(options) {
+        /*
+      require([
+            'UWA/Core',
+            'DS/ResultWebInWin/ResultWebInWin',
+      ], function (UWACore, ResultWebInWin) {
+        // Delete the old inappssearch Component and create a new with the right options
+        // mySearchWebinWin.deactivateInContextSearch();
+        init_options._lastSearchOptions = _lastSearchOptions; //IR-555278-3DEXPERIENCER2017x
+        init_options.activateInContextSearch = false;
+        init_options.deactivateInContextSearch = true;
+        init_options.donotshowlastsearch = options.donotshowlastsearch;
+        init_options.notify_to_cpp = options.notify_to_cpp;
+        mySearchWebinWin.onDestroy();
+        mySearchWebinWin = null;
+        mySearchWebinWin = new ResultWebInWin(init_options);
+      });
+      */
+      require([
+          'UWA/Core'
+      ], function (UWACore) {
+          if (UWA.is(mySearchWebinWin)) {
+              mySearchWebinWin.deactivateInContextSearch(options);
+          }
+      });
+    }
+
+      /*
+    function deleteSearchResult() {
+      require([
+            'UWA/Core',
+            'DS/ResultWebInWin/ResultWebInWin',
+      ], function (UWACore, ResultWebInWin) {
+        // Delete the old inappssearch Component and create a new with the right options
+        // mySearchWebinWin.deactivateInContextSearch();
+        mySearchWebinWin.onDestroy();
+        mySearchWebinWin = null;
+      });
+    }
+    */
+
+    function SetSessionResults(jsonSessionResults) {
+      require([
+          'UWA/Core',
+          'DS/ResultWebInWin/ResultWebInWin'
+      ], function (UWACore, ResultWebInWin) {
+          mySearchWebinWin.setSessionResults(jsonSessionResults);
+      });
+    }
+
+    function resetMultisel() {
+      require([
+            'UWA/Core',
+            'DS/ResultWebInWin/ResultWebInWin',
+      ], function (UWACore, ResultWebInWin) {
+        mySearchWebinWin.resetMultisel();
+      });
+    }
+    /*
+    function updateMultisel(parameters) {
+      require([
+            'UWA/Core',
+            'DS/ResultWebInWin/ResultWebInWin',
+      ], function (UWACore, ResultWebInWin) {
+        mySearchWebinWin.updateMultisel(parameters);
+      });
+    }
+    */
+      /*
+    function selectAll() {
+        require([
+              'UWA/Core',
+              'DS/ResultWebInWin/ResultWebInWin',
+        ], function (UWACore, ResultWebInWin) {
+            mySearchWebinWin.selectAll();
+            console.log('selectAll');
+        });
+    }*/
+
+    function ODTFunction(jsonArg) {
+      require([
+            'UWA/Core',
+            'DS/ResultWebInWin/ResultWebInWin',
+            'DS/ResultWebInWin/ResultWebInWinAction',
+      ], function (UWACore, ResultWebInWin, ResultWebInWinAction) {
+        if (!UWACore.is(jsonArg.functionName))
+          throw ('E_INVALIDARG: bad jsonArg.functionName given to ODTFunction method !');
+        if (!UWACore.is(jsonArg.functionArg))
+          throw ('E_INVALIDARG: bad jsonArg.functionArg given to ODTFunction method !');
+        var functionName = jsonArg.functionName,
+            functionArg = jsonArg.functionArg;
+        console.log(functionArg);
+
+        switch (functionName) {
+          case 'ActivateItem':
+            var label_items = UWACore.extendElement(document.body).getElements('.search-tile-title');
+            for (var i = 0, nb = functionArg.objects.length; i < nb; i++) {
+              var idtoSelect = functionArg.objects[i].id;
+              var labeltoSelect = functionArg.objects[i].label;
+              for (var iLabel = 0; iLabel < label_items.length; iLabel++) {
+                var divLabel = label_items[iLabel];
+                console.log(divLabel);
+                var labelTxt = divLabel.getText();
+                if (labelTxt === labeltoSelect) {
+                  var parent = divLabel.getParent().getParent().getParent();
+                  UWA.Event.dispatchEvent(parent.children[1], 'click');
+                }
+              }
+            }
+            break;
+
+          case 'SelectItems':
+            var nbItemToSelect = functionArg.objects.length;
+
+            var selectionMode = UWACore.extendElement(document.body).getElements('#c5-multisel-button');
+            if (selectionMode[0].checked === true && nbItemToSelect > 0) {
+              UWA.Event.dispatchEvent(selectionMode[0], 'click'); // uncheck to clear selection first
+              selectionMode = UWACore.extendElement(document.body).getElements('#c5-multisel-button');
+            }
+            if ((selectionMode[0].checked === false && nbItemToSelect > 0) || (selectionMode[0].checked === true && nbItemToSelect == 0))
+              UWA.Event.dispatchEvent(selectionMode[0], 'click');
+
+            var tileDiv = UWACore.extendElement(document.body).getElements('#tile');
+            var label_items = UWACore.extendElement(tileDiv[0]).getElements('.tile-title');
+            for (var i = 0, nb = functionArg.objects.length; i < nb; i++) {
+              var idtoSelect = functionArg.objects[i].id;
+              var labeltoSelect = functionArg.objects[i].label;
+              for (var iLabel = 0; iLabel < label_items.length; iLabel++) {
+                var divLabel = label_items[iLabel];
+                console.log(divLabel);
+                var labelTxt = divLabel.getText();
+                if (labelTxt === labeltoSelect) {
+                  var parent = divLabel.getParent().getParent().getParent();
+                  UWA.Event.dispatchEvent(parent.children[1], 'click');
+                }
+              }
+            }
+            break;
+          case 'ODTOnCtxMenu':
+            var actionBtn3 = UWACore.extendElement(document.body).getElements('.actions-inline-dotted');
+            UWA.Event.dispatchEvent(actionBtn3[0], 'click');
+            break;
+          default:
+            console.warn(jsonArg.functionName + 'ODTFunction not implemented');
+        }
+        sendNotificationWebInWin('EndODTAsync', 'OK');
+      });
+    }
+
+
+    function SetRGBTValues(jsonRGBTData, tabID) {
+      require([
+            'UWA/Core',
+            'DS/ResultWebInWin/ResultWebInWin',
+      ], function (UWACore, ResultWebInWin) {
+          mySearchWebinWin.SetShadingValues(jsonRGBTData, tabID);
+      });
+    }
+
+    function UnSetRGBTValues(tabID) {
+        require([
+              'UWA/Core',
+              'DS/ResultWebInWin/ResultWebInWin',
+        ], function (UWACore, ResultWebInWin) {
+            mySearchWebinWin.UnSetShadingValues(tabID);
+        });
+    };
+
+    function clearTaggerLocalFilters() {
+        require([
+              'UWA/Core'
+        ], function (UWACore) {
+            if (UWACore.is(mySearchWebinWin)) {
+                mySearchWebinWin.clearTaggerLocalFilters();
+            }
+        });
+    };
+
+    function logout() { // IR-449855-3DEXPERIENCER2017x
+      require([
+            'UWA/Core',
+            'DS/ResultWebInWin/ResultWebInWin',
+      ], function (UWACore, ResultWebInWin) {
+        mySearchWebinWin.logout();
+      });
+    };
+
+      /*
+    function favoriteSearches() {
+      require([
+            'UWA/Core',
+            'DS/ResultWebInWin/ResultWebInWin',
+      ], function (UWACore, SearchWebInWin) {
+        mySearchWebinWin.favoriteSearches();
+      });
+    };
+    */
+
+    function setVisibility(isPanelVisible) {
+      require([
+            'UWA/Core',
+            'DS/ResultWebInWin/ResultWebInWin',
+      ], function (UWACore, SearchWebInWin) {
+        mySearchWebinWin.setVisibility(isPanelVisible);
+      });
+    }
+
+    function setSecurityContext(role) { //IR-613009-3DEXPERIENCER2018x 
+        require([
+              'UWA/Core',
+              'DS/ResultWebInWin/ResultWebInWin',
+        ], function (UWACore, ResultWebInWin) {
+            var myRole = role;
+            console.log(myRole);
+            mySearchWebinWin.setSecurityContext(myRole);  
+        });
+    };
+
+    function activateLastSearch(number) {
+        //IR-669318-3DEXPERIENCER2019x
+        //require([
+        //      'UWA/Core',
+        //      'DS/ResultWebInWin/ResultWebInWin',
+        //], function (UWACore, ResultWebInWin) {
+
+        //    mySearchWebinWin.activateLastSearch(number);
+        //});
+    };
+
+  </script>
+</head>
+
+<body>
+    <div id="temp-search-msg" style="text-align: center; color: #e2e2e2; position: absolute; top: 2px; left: 0; right: 0; height: 100%; flex-direction: column; font-size: 2.0em">
+        <span id="temp-search-msg-span">...</span>
+    </div>
+    <div class="bypass" style="display: none;">
+      <!--
+        <iframe id="iframe_bypass_federated"></iframe>
+        <iframe id="iframe_bypass_3DSpace"></iframe>
+        <iframe id="iframe_bypass_3DExperience"></iframe>
+        -->
+    </div>
+    <div class="search-content"></div>
+</body>
+
+</html>

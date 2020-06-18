@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<!-- Application Metas -->
+<title>Manufactured Items Management</title>
+<meta name="property" content="3DS" />
+<meta name="author" content="Dassault Systèmes" />
+<meta name="description" content="Manufactured Items Management Widget" />
+<meta name="autoRefresh" content="0" />
+<meta charset="UTF-8" />
+
+<!-- Loader definition -->
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+<!-- Bootstrap -->
+<script type="text/javascript">
+var environment       = null,
+    myWidget		  = null,
+    depends           = [],
+    isNewArchi          = null,
+    oldMFNAppPath        = 'DS/DELWebMfgItemDefUI/Widget',
+    newMFNAppPath        = 'DS/DELMFNApp/App',
+    standaloneDepends = 'UWA/Environments/Standalone';
+
+require(['DS/DELWebMfgAssetsDefModelServices/BehaviorUtil'], function (BehaviorUtil) {
+    isNewArchi = BehaviorUtil.isNewArchi();
+    if (isNewArchi) {
+        depends.push(newMFNAppPath);
+    }
+    else {
+        depends.push(oldMFNAppPath);
+    }
+
+    //Standalone
+    if (typeof widget === 'undefined') {
+        depends.push(standaloneDepends);
+    }
+
+    require(depends, function (init, Standalone) {
+        if (isNewArchi) {
+            init = new init();
+        }
+
+        if (typeof widget === 'undefined') {
+            environment = new Standalone();
+            environment.launchWidget();
+            myWidget = environment.getWidget();
+        }
+        else {
+            myWidget = widget;
+        }
+
+        if (typeof myWidget === 'object') {
+            myWidget.addEvent('onLoad', init.onLoad);
+            myWidget.addEvent('onRefresh', init.onRefresh);
+            myWidget.addEvent('onResize', init.onResize);
+            myWidget.addEvent('onSearch', init.onSearch);
+            myWidget.addEvent('endEdit', init.endEditPreferences);
+        }
+    });
+});
+
+</script>
+</head>
+</html>

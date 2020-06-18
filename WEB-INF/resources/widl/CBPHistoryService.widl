@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="urn:com:dassault_systemes:widl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd" xmlns:tns="http://cbp.enovia.ws/basic" xmlns:err="http://www.3ds.com/wserror" xmlns:q1="http://cbp.enovia.ws/CBPXML">
+	<entities targetNamespace="http://cbp.enovia.ws/basic">
+		<schemaImports>
+			<schemaImport location="wserrors.xsd"/>
+			<schemaImport location="CBPXML.xsd"/>
+		</schemaImports>
+		<interfaces>
+			<interface name="IPLMHistoryService" scope="public">
+				<documentation>
+					Interface for History operations.
+				</documentation>
+				
+				<method name="addCustomHistoryToBusinessObject">
+					<documentation>
+						Add a customized history to the given business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="tag" type="xs:string" direction="in">
+						<documentation>The custom tag appearing at the beginning of the added history record.</documentation>
+					</param>
+					<param name="comment" type="xs:string" direction="in">
+						<documentation>The customized history comment.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="addCustomHistoryToConnection">
+					<documentation>
+						Add a customized history to the given connection.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="connectionId" type="xs:string" direction="in">
+						<documentation>The id of the connection.</documentation>
+					</param>
+					<param name="tag" type="xs:string" direction="in">
+						<documentation>The custom tag appearing at the beginning of the added history record.</documentation>
+					</param>
+					<param name="comment" type="xs:string" direction="in">
+						<documentation>The customized history comment.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getBusinessObjectHistory">
+					<documentation>
+						Retrieve the history of the selected event(s) of a given business object between fromDate to toDate.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="eventList" type="xs:string" direction="in">
+						<documentation>A list of selected events separated by a comma. Available event value: approve, custom, 
+							moveto, changename, delegate, override, changeowner, demote, promote, changepolicy, disable, purge, changetype, 
+							enable, reject, changevault, ignore, removedoid, checkin, lock, removefile, checkout, modify, revise, connect, 
+							modifyattribute, schedule, create, movedoid, undelegate, movefrom, unlock.  An empty string means returning all 
+							histories.
+						</documentation>
+					</param>
+					<param name="fromDate" type="xs:long" direction="in">
+						<documentation>The number of milliseconds since January 1, 1970, 00:00:00 GMT.</documentation>
+					</param>
+					<param name="toDate" type="xs:long" direction="in">
+						<documentation>The number of milliseconds since January 1, 1970, 00:00:00 GMT.</documentation>
+					</param>
+					<param name="historyRecords" type="q1:ListOfHistoryRecord" direction="out">
+						<documentation>History records.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getBusinessObjectCustomHistory">
+					<documentation>
+						Retrieve the history of the selected tag(s) of a given business object between fromDate to toDate.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="tagList" type="xs:string" direction="in">
+						<documentation>A list of selected tags separated by a comma. Available tag value: any user-
+						    defined, custom tag string.  An empty string means returning all histories.
+						</documentation>
+					</param>
+					<param name="fromDate" type="xs:long" direction="in">
+						<documentation>The number of milliseconds since January 1, 1970, 00:00:00 GMT.</documentation>
+					</param>
+					<param name="toDate" type="xs:long" direction="in">
+						<documentation>The number of milliseconds since January 1, 1970, 00:00:00 GMT.</documentation>
+					</param>
+					<param name="historyRecords" type="q1:ListOfHistoryRecord" direction="out">
+						<documentation>History records.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getConnectionHistory">
+					<documentation>
+						Retrieve the history of the selected event(s) of a given connection between fromDate to toDate.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="connectionId" type="xs:string" direction="in">
+						<documentation>The id of the connection.</documentation>
+					</param>
+					<param name="eventList" type="xs:string" direction="in">
+						<documentation>A list of selected events separated by a comma. Available event value: changetype,
+							freezethaw, modifyattribute, create, modify, purge, custom.  An empty string means returning all histories.
+						</documentation>
+					</param>
+					<param name="fromDate" type="xs:long" direction="in">
+						<documentation>The number of milliseconds since January 1, 1970, 00:00:00 GMT.</documentation>
+					</param>
+					<param name="toDate" type="xs:long" direction="in">
+						<documentation>The number of milliseconds since January 1, 1970, 00:00:00 GMT.</documentation>
+					</param>
+					<param name="historyRecords" type="q1:ListOfHistoryRecord" direction="out">
+						<documentation>History records.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getConnectionCustomHistory">
+					<documentation>
+						Retrieve the history of the selected tag(s) of a given connection between fromDate to toDate.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="connectionId" type="xs:string" direction="in">
+						<documentation>The id of the connection.</documentation>
+					</param>
+					<param name="tagList" type="xs:string" direction="in">
+						<documentation>A list of selected tags separated by a comma. Available tag value: any user-
+						    defined, custom tag string.  An empty string means returning all histories.
+						</documentation>
+					</param>
+					<param name="fromDate" type="xs:long" direction="in">
+						<documentation>The number of milliseconds since January 1, 1970, 00:00:00 GMT.</documentation>
+					</param>
+					<param name="toDate" type="xs:long" direction="in">
+						<documentation>The number of milliseconds since January 1, 1970, 00:00:00 GMT.</documentation>
+					</param>
+					<param name="historyRecords" type="q1:ListOfHistoryRecord" direction="out">
+						<documentation>History records.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+			</interface>
+		</interfaces>
+		<implementations>
+			<implementation name="PLMHistoryService" serviceid="historyService" implements="tns:IPLMHistoryService">
+				<documentation>
+					A service to provide History operations.
+				</documentation>
+			</implementation>
+		</implementations>
+	</entities>
+</description>

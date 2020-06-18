@@ -1,0 +1,1 @@
+define("DS/WebRecordBase/UIMessenger",[],function(){var a;function c(d){a=d}function b(e,d){var f={cmd:e};if(d!==null){f.arg=d}if(a){a(f)}}return{init:c,sendMessageToUI:b}});

@@ -1,0 +1,1 @@
+define("DS/TopBar/TopBar_ja",{});define("DS/TopBar/assets/nls/TopBar",{search:"検索",clear:"クリア",login:"ログイン",signup:"サインアップ",notification:"通知",content:"コンテンツ",add:"追加",share:"共有",social:"コミュニティ",help:"ヘルプ",mainMenu:"メイン メニュー",close:"閉じる",closeApp:"{appName} を閉じる",tagNav:"6W タグ",home:"ホーム",myAppsRoles:"マイ アプリケーションおよびロール",profile:"プロファイル"});

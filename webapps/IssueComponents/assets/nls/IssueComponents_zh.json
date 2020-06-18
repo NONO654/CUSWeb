@@ -1,0 +1,677 @@
+{
+    "maturity": {
+        "create": "新",
+        "assign": "待定",
+        "active": "活跃",
+        "review": "审查中",
+        "closed": "关闭"
+    },
+    "priorities": {
+        "title": "优先级",
+        "low": "低",
+        "medium": "中",
+        "high": "高",
+        "urgent": "紧急"
+    },
+    "dates": {
+        "seconds": "{number} 秒",
+        "minutes": "{number} 分钟",
+        "hours": "{number} 小时",
+        "days": "{number} 天",
+        "months": "{number} 个月",
+        "years": "{number} 年"
+    },
+    "placeholder": {
+        "reportedAgainstPlaceholder": "在 3D 中搜索、选择或放置对象，以设置为“报告依据”。",
+        "resolvedByPlaceholder": "在 3D 中搜索、选择或放置对象，以设置为“解决人”。",
+        "contextPlaceholder": "搜索或放置对象以设置为“上下文”。"
+    },
+    "lifecycle": {
+        "create": "将问题设置为“新建”状态，以指示您开始使用。",
+        "assign": "将问题设置为“待定”状态，以允许受托人使用。",
+        "active": "将问题设置为“活动”状态，以指示您正在使用。",
+        "review": "将问题设置为“审查中”状态，以允许审查您的修复。",
+        "closed": "如果所有问题都已修复，请关闭问题。",
+        "partial": "对 {number} 个问题的操作失败。",
+        "error": "出现错误，请刷新页面并重试。",
+
+        "notSupported": "仅能升级或降级具有相同成熟度状态和相同验证流程的问题。",
+        "routeIndicatorTooltip": {
+            "rejectionTitle": "拒绝者：",
+            "approvalTitle": "批准者：",
+            "rejectionText": "{name}，日期：{date}。",
+            "approvalText": "{name}，日期：{date}。",
+            "moreTooltip": {
+                "title": "{number} 个决策",
+                "approvalText": "批准日期：{date}",
+                "rejectionText": "拒绝日期：{date}"
+            },
+            "inProgressTooltip": {
+                "title": "正在等待以下人员审批：",
+                "multiSelectionTitle": "选定问题正在等待多个审阅者的审批。"
+            }
+        },
+        "approveModal": {
+            "reasonLabel": "备注：",
+            "reasonPlaceholder": "指定一些备注...",
+            "header": "审批升级到 {approveTo} 状态。",
+            "reasonRequired": "请提供备注。",
+            "actionLabel": "操作：",
+            "actionPlaceholder": "指定要执行的操作...",
+            "okButton": "批准",
+            "cancelButton": "取消"
+        },
+        "rejectModal": {
+            "reasonLabel": "原因：",
+            "reasonPlaceholder": "指定原因...",
+            "header": "拒绝升级到 {approveTo} 状态并降级到 {rejectTo}。",
+            "reasonRequired": "请提供原因。",
+            "actionLabel": "操作：",
+            "actionPlaceholder": "指定要执行的操作...",
+            "okButton": "拒绝",
+            "cancelButton": "取消"
+        },
+        "paths": {
+            "anyStateToClose": "允许问题所有者从任何状态关闭。",
+            "approve": "批准",
+            "reject": "拒绝"
+        },
+        "orgs": {
+            "Reporting": "报告组织",
+            "Responsible": "责任组织"
+        }
+    },
+    "routes": {
+        "header": {
+            "states": "成熟度升级",
+            "routes": "决策"
+        },
+        "columns": {
+            "reviewer": "审阅者",
+            "date": "决策日期",
+            "reason": "原因/备注",
+            "action": "操作",
+            "attachments": "附件"
+        },
+        "attachmentsManagerTitle": "成熟度升级决策 [{fromState} -> {toState}] [{status}]",
+        "status": {
+            "approved": "已批准",
+            "rejected": "已拒绝",
+            "inProgress": "处理中"
+        },
+        "confirm": "确认",
+        "approve": "批准"
+    },
+    "create": {
+        "title": "问题",
+        "titleTemplate": "模板",
+        "titleActionCreate": "新",
+        "titleActionEdit": "编辑",
+        "templateApplySuccess": "模板“{name}”已成功应用。",
+        "templateApplyError": "在应用模板“{name}”时出错。",
+        "templateApplyWarningAttachments": "该模板参考的某些附件不再存在。无法将其添加。",
+        "issueApplySuccess": "问题“{title} - {name}”已成功应用。",
+        "issueApplyError": "在应用问题“{title} - {name}”时出错。",
+        "required": "所请求字段一定不能为空。",
+        "creationSuccess": "问题已成功创建。",
+        "creationTemplateSuccess": "模板创建成功。",
+        "updateTemplateSuccess": "模板更新成功。",
+        "creationFailed": "在创建过程中出错，请再次重试。",
+        "validationFailed": "某些字段未正确填充。",
+        "promotionSuccess": "问题升级成功。",
+        "promotionFailed": "在升级过程中出错。",
+        "uploadImagesFailed": "上传图像过程中出错。",
+        "sendButton": "发送",
+        "saveButton": "保存",
+        "saveAsDraftButton": "另存为草稿",
+        "cancelButton": "取消",
+        "modeToggler": {
+            "multiStep": "多步骤",
+            "fullView": "完整视图",
+            "tooltipMultiStep": "切换到多步骤视图",
+            "tooltipFullView": "切换到完整表单视图"
+        },
+        "start": {
+            "title": "创建问题和模板",
+            "cancelButton": "取消",
+            "actionPage": {
+                "issue": {
+                    "title": "问题",
+                    "fromBlank": "新",
+                    "fromIssue": "复制问题",
+                    "fromTemplate": "从模板"
+                },
+                "template": {
+                    "title": "模板",
+                    "fromBlank": "新",
+                    "fromIssue": "从现有问题",
+                    "edit": "管理",
+                    "cloneSuffix": "[DUP]"
+                }
+            }
+        },
+        "views": {
+            "properties": "属性",
+            "relatedObjects": "相关对象",
+            "team": "团队",
+            "attachments": "附件",
+            "moreAttributes": "更多属性",
+            "finalize": "完成"
+        },
+        "properties": {
+            "labels": {
+                "title": "标题",
+                "titlePlaceholder": "新问题标题...",
+                "titleHelper": "问题的简单单线摘要。",
+                "similarIssues": "类似问题",
+                "similarIssuesHelper": "这些现有问题有类似的标题。作出评论可能会更好，而不是创建另一个类似问题。",
+                "description": "描述",
+                "descriptionPlaceholder": "编写描述...",
+                "descriptionHelper": "问题的详细描述。提供一系列准备就绪的待用富文本特征。",
+                "resolutionRecommendation": "建议的修复",
+                "resolutionRecommendationPlaceholder": "应如何操作？",
+                "resolutionRecommendationHelper": "用于解释应如何修复该问题的建议。",
+                "priorityHelper": "问题的重要性与其他问题有关。",
+                "priorityHelperUrgent": "紧急：最高优先级。表示该问题优先于所有其他问题。",
+                "priorityHelperHigh": "高：表示该问题将引起其他问题并需要迫切注意。",
+                "priorityHelperMedium": "中：表示该问题具有重要影响。",
+                "priorityHelperLow": "低：表示该问题的影响相对较小。",
+                "dueDate": "到期日期",
+                "dueDatePlaceholder": "选择到期日期...",
+                "dueDateHelper": "该问题应完成的日期。",
+                "resolutionStatement": "解决方法语句",
+                "resolutionStatementPlaceholder": "问题是如何解决的？"
+            }
+        },
+        "related": {
+            "labels": {
+                "reportedAgainst": "报告依据",
+                "reportedAgainstHelper": "该关系用于将任何对象链接到问题，以将其识别为“错误”。例如，可以是 3D 对象、文档...",
+                "reportedAgainstPlaceholder": "在 3D 中搜索、选择或放置对象，以设置为“报告依据”。",
+                "contexts": "上下文",
+                "contextHelper": "也称为 DMU 上下文，用于将一个对象附加到问题，以更好地了解该问题。它可以是具有更大结构的其他 3D 对象，从而看到问题的完整上下文。",
+                "contextPlaceholder": "搜索或放置对象以设置为“上下文”。"
+            },
+            "search": "搜索并添加对象。",
+            "remove": "刷新选定对象。",
+            "removeErrorNoSelection": "请选择要移除的某些对象。",
+            "addBalloonAvailable": "在 3D 中选取精细元素，以添加到问题中。",
+            "addBalloonNotAvailable": "选取 3D 特征仅在“Issue 3D Review”中可用。",
+            "alreadyReportedAgainst": "该对象已添加，请选择其他对象。",
+            "dropError": "放置的对象不受支持。",
+            "selectContextIn3D": "在 3D 中选取精细元素，以选择问题的上下文。",
+            "contextMultiError": "不支持在上下文中添加多个对象。",
+            "treelist": {
+                "tree": "标题",
+                "ds6w:type": "类型",
+                "ds6w:identifier": "名称",
+                "ds6wg:revision": "修订版"
+            }
+        },
+        "team": {
+            "labels": {
+                "owner": "所有者",
+                "coOwners": "共同所有者",
+                "ownerHelper": "此关系可让您设置问题的所有者，从而授予他们所有访问权限。",
+                "coOwnersHelper": "这种关系可让您添加问题的共同所有者，从而授予其与主要所有者相同的访问权限。",
+                "assignees": "受托人",
+                "assigneesHelper": "该关系允许您将人员分派到问题（可以是多个）。现在，人员可以在其列表中查看此问题，并开始使用。",
+                "reviewers": "审阅者",
+                "participants": "参与者",
+                "assignToMe": "分派给我",
+                "responsibleOrganization": "责任组织",
+                "responsibleOrganizationHelper": "设置此问题的组织责任人（在添加了报告依据后即可自动填充）。"
+            },
+            "alreadyAssigned": "{name} 已分派。",
+            "removeAssignee": "单击以移除此用户。",
+            "cannotAddOwnerAsCoOwner": "您无法将所有者添加为共同所有者。"
+        },
+        "attachments": {
+            "labels": {
+                "attachmentsHelper": "附件能提供与问题的内容有关的更多洞察。它们可以记录为 Issue 3D Review 应用程序的任何类型、现有 3DEXPERIENCE 对象或已标注的屏幕截图。",
+                "attachmentsPlaceholder": "上传/放置文件、搜索/放置 3DEXPERIENCE 对象或使用已标注的屏幕截图按钮来创建并添加新附件。",
+                "attachmentsPlaceholderNotAvailable": "上传/放置文件或搜索/放置 3DEXPERIENCE 对象来创建并添加新附件。",
+                "attachments": "附件"
+            },
+            "screenshotAvailable": "截取屏幕截图。",
+            "screenshotNotAvailable": "只能从“Issue 3D Review”中访问屏幕截图特征。",
+            "remove": "移除选定文档。",
+            "removeErrorNoSelection": "请选择要移除的某些文档。",
+            "attach": {
+                "fromLocalDisk": "上传文件。",
+                "from3DX": "搜索 3DEXPERIENCE 对象。"
+            },
+            "uploadDialog": {
+                "title": "正在上传 {number} 个文件...",
+                "uploadCompleted": "{success} 个文件已成功上传，共 {total} 个。"
+            }
+        },
+        "finalize": {
+            "labels": {
+                "lifecycle": "生命周期",
+                "approval": "审批",
+                "template": "模板",
+                "saveAsTemplate": "另存为模板",
+                "templateNamePlaceholder": "模板的名称（必需字段）...",
+                "templateDescriptionPlaceholder": "模板的描述...",
+                "templateOverwrite": "具有相同名称的现有模板将被覆盖。"
+            },
+            "closeDialogToggle": "在创建后关闭对话框。",
+            "promoteToAssignToggle": "直接将问题升级到“未决”状态。",
+            "enableApproval": "启用审批可确保此问题的验证和审核。",
+            "saveAsTemplateToggle": "将表单作为可重用模板保存。"
+        }
+    },
+    "templates": {
+        "title": "选择模板",
+        "titleEdit": "管理模板",
+        "cancelButton": "取消",
+        "closeButton": "关闭",
+        "selectButton": "选择",
+        "treeList": {
+            "shared": "已共享",
+            "tree": "名称",
+            "description": "描述",
+            "owner": "所有者",
+            "isNotShared": "这是私有模板",
+            "isShared": "此模板已共享",
+            "placeholder": "无可用模板。"
+        },
+        "iconBar": {
+            "title": "模板",
+            "create": "新",
+            "fromIssue": "从问题新建",
+            "clone": "复制",
+            "edit": "编辑",
+            "delete": "删除",
+            "share": "共享"
+        },
+        "lastUsed": {
+            "title": "最近使用"
+        },
+        "preview": {
+            "objectCount": "对象",
+            "noObject": "无对象"
+        },
+        "shared": {
+            "title": "问题共享模板 - {owner}",
+            "description": "此文档包含问题共享模板。",
+            "file": "问题共享模板 - {owner}",
+            "popover": {
+                "title": "链接到此共享模板",
+                "copy": "复制链接"
+            }
+        },
+        "confirmDelete": {
+            "title": "删除 {number} 个模板",
+            "text": "是否确定要删除选定模板？这会将其<b>永久</b>移除且无法撤销。",
+            "sharedInfo": "您未拥有的共享模板将仅<b>从您的列表中移除</b>。",
+            "sharedWarning": "您拥有的共享模板将<b>从全部用户</b>中移除。",
+            "okButton": "删除",
+            "cancelButton": "取消"
+        },
+        "clonePrefix": "复制 {name}",
+        "errors": {
+            "get": "在检索模板时出错，请刷新页面并重试。",
+            "remove": "在移除模板时出错，请刷新页面并重试。",
+            "save": "在保存模板时出错，请刷新页面并重试。"
+        },
+        "notifications": {
+            "sharedSuccess": "此模板已共享，且可共享 URL 已生成。",
+            "sharedTemplateAdded": "共享模板已成功添加到您的模板列表。",
+            "sharedTemplateNotValid": "此共享模板不再有效。已将其添加到您的模板列表中。",
+            "sharedTemplateAlreadyAdded": "此共享模板已在您的模板列表中。",
+            "sharedTemplateNotAdded": "在添加共享模板时出错，请刷新页面并重试。",
+            "sharedTemplateURL": "共享模板 URL 已复制到剪贴板。"
+        }
+    },
+    "open": {
+        "dialog": {
+            "title": "在以下项中打开对象...",
+            "open": "打开",
+            "cancel": "取消"
+        },
+        "labels": {
+            "placeholder": "选择您的应用程序",
+            "contexts": "上下文",
+            "reportedAgainst": "报告依据",
+            "resolvedBy": "解决人",
+            "nothing": "没有要打开的内容，请选择其他对象。"
+        },
+        "error": "打开选定对象时出错，请刷新并重试。"
+    },
+    "close": {
+        "preparing": "正在准备关闭...",
+        "title": "正在关闭 {number} 个问题",
+        "nothing": "没有要关闭的问题。",
+        "close": "关闭",
+        "cancel": "取消",
+        "warning": "是否确定要关闭这些问题？",
+        "closable": "关闭以下问题会阻止任何修改，除非重新打开：",
+        "indelible": "以下问题已关闭：",
+        "singleSuccess": "已关闭 {title}。",
+        "multipleSuccess": "已关闭 {number} 个问题。",
+        "error": "关闭过程中出错，请重试。"
+    },
+    "delete": {
+        "preparing": "正在准备删除...",
+        "title": "正在删除 {number} 个问题",
+        "nothing": "没有要删除的问题。",
+        "delete": "删除",
+        "cancel": "取消",
+        "warning": "是否确定要删除此内容？",
+        "deletable": "删除以下问题会将其<b>永久</b>移除且无法撤销：",
+        "indelible": "以下问题无法删除，因为它们不处于“新建”状态：",
+        "singleSuccess": "已删除 {title}。",
+        "multipleSuccess": "已删除 {number} 个问题。",
+        "error": "删除过程中出错，请重试。"
+    },
+    "duplicate": {
+        "title": "复制 {number} 个问题。",
+        "preparing": "正在准备复制...",
+        "duplicate": "复制",
+        "cancel": "取消",
+        "content": "将复制以下问题（<i>复制的处于“新建”状态的问题将归属您所有</i>）：",
+        "singleSuccess": "已复制 {title}。",
+        "multipleSuccess": "已复制 {number} 个问题。",
+        "multipleCopiesSuccess": "{number1} 个问题已复制 {number2} 次。",
+        "error": "复制过程中出错，请重试。",
+        "keepAttachments": "在重复问题中保留现有附件",
+        "advancedOptions": "高级复制",
+        "titleModifier": "标题修饰符",
+        "copyCount": "副本数量",
+        "replace": "替换",
+        "replacePlaceholder": "替换标题中的字符串",
+        "suffix": "后缀",
+        "suffixPlaceholder": "标题后缀",
+        "prefix": "前缀",
+        "prefixPlaceholder": "标题前缀",
+        "iterator": "迭代器",
+        "iteratorPlaceholder": "迭代器模式",
+        "replaceHelp": "提供要替换为字符串或后跟要替换为的字符串的正则表达式的部分标题。两部分用“:”分隔。例如 [a-z]*:Test 会将标题中的所有小写字符串替换为 Test",
+        "suffixHelp": "提供作为重复问题标题后缀的字符串",
+        "prefixHelp": "提供作为重复问题标题前缀的字符串",
+        "iteratorHelp": "提供在复制为字符串或正则表达式后要递增的部分标题。数字部分将递增",
+        "confirmTitle": "确认复制 {number} 个问题。",
+        "confirm": "确认",
+        "confirmMsg": "问题 {title} 将复制为"
+    },
+    "images": {
+        "title": "{count} 个图像",
+        "actions": {
+            "download": "下载",
+            "upload": "上传",
+            "delete": "删除",
+            "popup": "弹出窗口",
+            "annotate": "标记"
+        },
+        "noImages": "没有要显示的图像。",
+        "popup": {
+            "title": "图像显示",
+            "holdIssue": "保持问题",
+            "releaseIssue": "发布问题"
+        },
+        "delete": {
+            "cancel": "取消",
+            "confirmDeleteTitle": "删除图像",
+            "confirmDeleteMessage": "是否确定要永久删除此图像？",
+            "imageDisplayDeleteError": "在删除图像时出错",
+            "okButton": "确定",
+            "pictureDeleted": "图像文件已删除。"
+        },
+        "notSupported": "文件格式不受支持。<br>文件：{name}。",
+        "errorUpload": "无法上传图像 {name}。",
+        "pictureUploaded": "图像文件已上传。"
+    },
+    "team": {
+        "title": "{count} 个成员",
+        "error": {
+            "loadContent": "无法检索问题信息。",
+            "alreadyAdded": "用户 {name} 已添加到选定问题的 {role} 中。",
+            "isOwner": "用户 {name} 是选定问题的所有者，因此无法将其添加为共同所有者。",
+            "update": "无法更新问题 {role}",
+            "notSupportedDrop": "放置的对象不受支持。",
+            "notFound": "未找到结果。"
+        },
+        "success": {
+            "update": "问题 {role} 已更新。"
+        },
+        "filter": {
+            "title": "过滤",
+            "placeholder": "过滤团队成员"
+        },
+        "owner": {
+            "title": "所有者",
+            "changeOwnership": "更改所有权"
+        },
+        "confirmRemoveTitle": "从“{role}”移除“{user}”",
+        "confirmRemoveText": "是否确定要从“{role}”移除“{user}”？",
+        "removeOkButton": "移除",
+        "removeCancelButton": "取消",
+        "coOwners": {
+            "title": "共同所有者",
+            "add": "添加共同所有者",
+            "propagate": "将此共同所有者拓展到所有选定问题",
+            "propagateAll": "将所有共同所有者拓展到所有选定问题",
+            "remove": "从选定问题移除共同所有者",
+            "search": {
+                "placeholder": "搜索用户以添加为共同所有者..."
+            },
+            "addSelf": "分派给我"
+        },
+        "assignees": {
+            "title": "受托人",
+            "add": "添加受托人",
+            "propagate": "将此受托人拓展到所有选定问题",
+            "propagateAll": "将所有受托人拓展到所有选定问题",
+            "remove": "从选定问题移除受托人",
+            "search": {
+                "placeholder": "搜索用户以添加为受托人..."
+            },
+            "addSelf": "自己分配"
+        },
+        "participants": {
+            "title": "参与者",
+            "add": "添加参与者",
+            "propagate": "将此参与者拓展到所有选定问题",
+            "propagateAll": "将所有参与者拓展到所有选定问题",
+            "remove": "从选定问题移除参与者",
+            "search": {
+                "placeholder": "搜索用户以添加为参与者..."
+            }
+        },
+        "common": {
+            "tooltip": "该成员已分派到所有选定问题。",
+            "label": "已分派",
+            "notLabel": "各不相同"
+        },
+        "notSaved": {
+            "tooltip": "该成员尚未保存。"
+        },
+        "changeLayout": "更改视图布局"
+    },
+    "search": {
+        "error": {
+            "usersNotFound": "无法找到用户：{users}。",
+            "orgNotFound": "找不到组织。"
+        },
+        "info": {
+            "expressSearch": "请按 Enter 添加这些用户。"
+        }
+    },
+    "resolveIssues": {
+        "title": "解决问题",
+
+        "okButton": "确定",
+        "cancel": "取消",
+
+        "reportedAgainst": "报告依据",
+        "resolvedBy": "解决人",
+        "issue": "问题",
+        "items": "{count} 个项目",
+        "revisionFamily": "修订版系列",
+
+        "searchObjects": "搜索对象",
+        "pickObjects": "选取对象",
+        "addObjectsForReportedAgainst": "添加到报告依据",
+        "addObjectsForResolvedBy": "添加到解决人",
+        "changeViewLayout": "更改视图布局",
+
+        "tooltips": {
+            "propagateTooltip": "拓展到选定问题。",
+            "isLastRevision": "这是最后修订版",
+            "isNotLastRevision": "这不是最后修订版",
+            "noIsLastRevision": "不适用"
+        },
+
+        "contextualMenus": {
+            "detach": "拆离",
+            "propagate": "拓展",
+            "history": "历史记录",
+            "compare": "比较",
+            "whereused": "使用位置",
+            "openWith": "打开方式",
+            "replaceByRevision": "替换为修订版",
+            "replaceByLatestRevision": "替换为最新修订版",
+            "replaceByReleasedLatestRevision": "替换为发布的最新修订版",
+            "replaceByStableLatestRevision": "替换为稳定的最新修订版"
+        },
+
+        "label": "标题",
+        "name": "名称",
+        "type": "类型",
+        "revision": "修订版",
+        "isLastRevision": "是最后一个修订版",
+        "common": "",
+        "state": "成熟度状态",
+
+        "pickupError_needtoExitInspectionMode": "如果您处于检查模式，则无法选取对象。",
+        "successResolved": "相关对象已更新。",
+        "errorResolved": "无法更新相关对象。",
+        "nothingToAdd": "选定对象已成功添加。",
+        "nothingToReplace": "没有要替换的对象。",
+        "errorFetch": "无法检索对象信息。",
+        "errorGetIssues": "无法检索问题信息。",
+        "errorShowIssues": "请选择处于“活动”状态的问题，然后重试。",
+        "errorNotSupportedMultipleObject": "不支持多个对象。",
+        "errorNotSupportedObject": "不支持此对象。",
+        "issueNotDroppable": "不支持此对象。",
+        "propertiesTitle": "属性",
+
+        "confirmDialog": {
+            "detachTitle": "从 {issues} 问题拆离 {number} 个对象",
+            "confirmDetach": "是否确定要拆离选定对象？",
+            "propagateTitle": "将 {number} 个对象拓展到 {issues} 问题",
+            "confirmPropagate": "是否确定要拓展选定对象？",
+            "replaceByLatestRevisionTitle": "用 {issues} 问题中的最新修订版替换 {number} 对象",
+            "confirmReplaceByLatestRevision": "是否确定要用最新修订版替换选定对象？",
+            "replaceByReleasedLatestRevisionTitle": "用 {issues} 问题中已发布的最新修订版替换 {number} 对象",
+            "confirmReplaceByReleasedLatestRevision": "是否确定要用发布的最新修订版替换选定对象？",
+            "replaceByStableLatestRevisionTitle": "用 {issues} 问题中移除的最新修订版替换 {number} 对象",
+            "confirmReplaceByStableLatestRevision": "是否确定要用稳定的最新修订版替换选定对象？",
+            "confirmReplaceByTitleMessage": "{target} 替换为 {latest}"
+        },
+
+        "contexts": {
+            "okButton": "确定",
+            "cancel": "取消",
+            "contexts": "上下文",
+            "columnTitle": "标题",
+            "columnName": "名称",
+            "columnType": "类型",
+            "columnRevision": "修订版",
+            "addContext": "添加上下文",
+            "pickContext": "选取上下文",
+            "detachContext": "拆离上下文",
+            "contextualMenus": {
+                "detach": "拆离",
+                "propagate": "拓展",
+                "history": "历史记录",
+                "compare": "比较",
+                "whereused": "使用位置",
+                "openWith": "打开方式"
+            },
+            "errorNotSupportedMultipleObject": "不支持多个对象。",
+            "errorNotSupportedObject": "不支持此对象。",
+            "errorToGetContext": "无法检索上下文对象信息。",
+            "successUpdateContext": "上下文已更新。",
+            "successDetachContext": "上下文已拆离。",
+            "errorUpdateContext": "无法更新上下文。",
+            "errorDetachContext": "无法拆离上下文。",
+            "confirmDetachContextTitle": "拆离上下文",
+            "confirmDetachContextMessage": "是否确定要拆离此上下文？",
+            "confirmUpdateContextTitle": "更新上下文",
+            "confirmUpdateContextMessage": "是否确定要更新此上下文？"
+        }
+    },
+    "tasks": {
+        "selectIn3D": "请提供从兼容的 3D 应用程序中挑选的要添加的现有对象。",
+        "addObjects": "请提供要添加的一些现有对象。",
+        "takeScreenshot": "请提供要添加的图像。"
+    },
+    "helper": {
+        "states": {
+            "create": "问题已由请求者创建。",
+            "assign": "请求者已分派问题，以允许受托人使用。",
+            "active": "问题正在由受托人使用。",
+            "review": "建议的解决办法已由问题的创建者审核。",
+            "closed": "解决办法已被创建者接受并将问题关闭。"
+        },
+        "dialog": {
+            "title": "问题管理应用程序 - 帮助",
+            "tabStates": "状态",
+            "tabShortcuts": "快捷方式",
+            "subtitleShortcuts": "热键",
+            "subtitleMouseOperation": "鼠标操作",
+            "workflow": "工作流",
+            "states": {
+                "create": "问题已由请求者创建。",
+                "assign": "请求者已分派问题，以允许受托人使用。",
+                "active": "问题正在由受托人使用。",
+                "review": "建议的解决办法已由问题的创建者审核。",
+                "closed": "解决办法已被创建者接受并将问题关闭。"
+            },
+            "shortcut": {
+                "key": {
+                    "shortcut": {
+                        "delete": "删除",
+                        "arrowUp": "向上",
+                        "arrowDown": "向下",
+                        "arrowLeft": "左",
+                        "arrowRight": "右",
+                        "enter": "输入",
+                        "shiftArrow": "Shift + 箭头",
+                        "ctrlA": "Ctrl + A",
+                        "ctrlC": "Ctrl + C"
+                    },
+                    "mouse": {
+                        "ctrlClick": "Ctrl + 单击",
+                        "shiftClick": "Shift + 单击",
+                        "doubleClick": "双击"
+                    }
+                },
+                "detail": {
+                    "shortcut": {
+                        "delete": "删除/拆离项目",
+                        "arrowUp": "转至上一个项目",
+                        "arrowDown": "转至下一个项目",
+                        "arrowLeft": "折叠项目/转至上一个项目",
+                        "arrowRight": "展开项目/转至下一个项目",
+                        "enter": "打开属性面板/提交文本输入",
+                        "shiftArrow": "选择多个项目",
+                        "ctrlA": "选择所有项目",
+                        "ctrlC": "复制选定项目"
+                    },
+                    "mouse": {
+                        "ctrlClick": "选择您单击/取消选择的多个项目",
+                        "shiftClick": "选择您所单击的所有项目",
+                        "doubleClick": "打开属性面板/展开或折叠项目"
+                    }
+                }
+            }
+        }
+    },
+    "users": {
+        "more": "更多信息"
+    }
+}

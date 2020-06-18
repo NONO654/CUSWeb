@@ -1,0 +1,1 @@
+define("DS/WebViewControllers/WebViewControllers_ja",{});define("DS/WebViewControllers/assets/nls/WebNextableViewController",{next:"次へ",back:"戻る",finish:"完了"});

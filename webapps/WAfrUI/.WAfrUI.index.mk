@@ -1,0 +1,11 @@
+m|WAfrUI\WAfrUI.mweb
+b|j|c,m
+b|c|n,u
+v|6.421.5.19068
+r|G:\R421\BSF\.
+t|WAfrUI\WAfrUI.mweb\LocalGenerated\win_b64\wafr.css|1552093751|6889
+s|WAfrUI\WAfrUI.mweb\src\wafr.scss|1510730560|104
+s|WAfrUI\WAfrUI.mweb\src\sass\_wafr.tweakers.common.scss|1551362885|2078
+s|WAfrUI\WAfrUI.mweb\src\sass\_wafr.actionbar.scss|1551112727|1653
+t|win_b64\webapps\WAfrUI\wafr.css|1552093751|6889
+g|WAfrUI\WAfrUI.mweb\LocalGenerated\win_b64\wafr.css|1552093751|6889

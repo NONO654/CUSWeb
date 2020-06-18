@@ -1,0 +1,138 @@
+<!--------------------------------------------------------------------
+[cmp-dataflow-content HTML Document]
+
+Project:
+Version:        1.0
+Last change:    Mon, 24 May 2018
+Primary use:    TODO: Write where this component is being used
+Description:    TODO: Description about the component
+------------------------------------------------------------------- -->
+
+<dom-module id="cmp-dataflow-content">
+    <template>
+        <style>
+            .right-pane {
+                height: 100%;
+            }
+            .right-pane-message {
+            font-size: 17px;
+            height: calc(100% - 33px);
+            /* Internet Explorer 10 */
+            display:-ms-flexbox;
+            -ms-flex-pack:center;
+            -ms-flex-align:center;
+
+            /* Firefox */
+            display:-moz-box;
+            -moz-box-pack:center;
+            -moz-box-align:center;
+
+            /* Safari, Opera, and Chrome */
+            display:-webkit-box;
+            -webkit-box-pack:center;
+            -webkit-box-align:center;
+
+            /* W3C */
+            display:box;
+            box-pack:center;
+            box-align:center;
+            }
+            .right-pane-message[has-source-activity] {
+            display: none;
+            }
+            .parameters-table {
+                height: 60%;
+            }
+
+            .auto-mapping {
+                display: none;
+                height: 46%;
+                width: 100%;
+            }
+
+            .review-mapping {
+                display: none;
+                height: calc(100% - 23px);
+                width: 100%;
+            }
+
+            .tab-panel {
+                height: 100%;
+                min-height: 250px;
+                padding-top: 4px;
+                height: calc(100% - 26px);
+                display: none;
+                border-bottom: 1px solid rgb(232, 234, 234);
+                border-right: 1px solid rgb(232, 234, 234);
+                border-left: 1px solid rgb(232, 234, 234);
+            }
+            .tab-panel[has-source-activity] {
+                display: block;
+                width: 100% !important;
+            }
+
+            .divider {
+                display: inline-block;
+                color: #B4B6Ba;
+                vertical-align: middle;
+                text-align: center;
+                height: 14px;
+                width: 1px;
+                background: #B4B6Ba;
+                margin-right: 3px;
+                margin-left: 8px;
+                box-sizing: border-box;
+            }
+            .tab-bar{
+                display: flex;
+            }
+            .reseticon {
+                display: none;
+                right: 0;
+                cursor: pointer;
+                color:#b4b6ba;
+                font-size: 1.5em;
+                position: absolute;
+                z-index:1;
+            }
+            .reseticon[disabled] {
+                pointer-events: none;
+                color: #b4b6ba;
+            }
+            .reseticon:hover {
+                color: #3d3d3d;
+            }
+            .tab-bar[data-currentTab="CREATEANDMAP"] .reseticon {
+                display: block;
+            }
+            
+        </style>
+        <div class="right-pane" >
+            <div id="tabBar" class="tab-bar" data-currentTab$="{{currentTab}}">
+                    <div class="wux-ui-3ds wux-ui-3ds-reset reseticon" disabled$="{{_calculateSelectionState(selectionstate)}}" title="Reset selection" on-click="resetSelection"></div>
+            </div>
+            <div id="tabPanelContainer" class="tab-panel" has-source-activity$="{{hasSourceActivity}}"></div>
+            <div class="right-pane-message" has-source-activity$="{{hasSourceActivity}}">
+                <span class="fonticon fonticon-info"></span>
+                <span class=""> Select source activity</span>
+            </div>
+        </div>
+        <cmp-wux-dialog
+          id="unsavedChanges"
+          my-position="center"
+          at-position="center"
+          title="Save changes"
+          height="120"
+          width="350"
+          min-width="200"
+          yes-button-flag
+          no-button-flag
+          close-button-flag 
+          cancel-button-flag
+          modal-flag>
+            <dialogcontent id="closeDialogContent">
+            </dialogcontent>
+        </cmp-wux-dialog>
+        
+    </template>
+</dom-module>

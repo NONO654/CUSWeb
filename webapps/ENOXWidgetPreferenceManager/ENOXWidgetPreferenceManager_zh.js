@@ -1,0 +1,1 @@
+define("DS/ENOXWidgetPreferenceManager/ENOXWidgetPreferenceManager_zh",{});define("DS/ENOXWidgetPreferenceManager/assets/nls/ENOXWidgetPreferenceManager",{xWDGT_PREF_CREDENTIAL_LABEL:"凭据",xWDGT_PREF_SHOW_WORK_UNDER_LABEL:"显示工作范围",xWDGT_PREF_EDIT_PROP_ON_CREATE_LABEL:"在创建新对象时在编辑模式下启动“属性”面板",xWDGT_PREF_SHOW_PREF_PAGE_AT_START:"在启动应用程序时显示“首选项”页面"});

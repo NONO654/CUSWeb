@@ -1,0 +1,64 @@
+<!--------------------------------------------------------------------
+[sp-uwawidget HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:	21 Oct 2015
+Assigned to:	d6u
+Primary use:	Boilerplate code for web component app widgets
+Description:
+--------------------------------------------------------------------->
+
+<!--------------------------------------------------------------------
+
+This is a UI less component
+
+--------------------------------------------------------------------->
+
+<!-- Load dependencies -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html"/>
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html"/>
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html"/>
+
+<link rel="import" href="../../SMAProcSPUI/sp-drop/sp-drop.html"/>
+
+
+<!-- <polymer-element name="sp-uwawidget" attributes="mcsuri droptype enabledrop preferences">
+    <template>
+        <sp-dashboard id="dashboard"></sp-dashboard>-->
+        <!--If drop zone needs to be shown-->
+       	<!-- <template if="{{ enabledrop }}">
+        	<sp-drop id="dropzone" accepts="[[droptype]]"></sp-drop>
+        </template> -->
+
+        <!--If no dropzone-->
+        <!-- <template if="{{ !enabledrop }}">
+        	<content></content>
+        </template> -->
+
+        <!-- <sp-webservice uri="../AppsMngt/user/startup" on-dataready = "{{initStorages}}" getasap></sp-webservice> -->
+
+    <!-- </template>
+    <script src="sp-uwawidget.js"></script>
+</polymer-element> -->
+
+
+
+<dom-module id="sp-uwawidget">
+  <template>
+        <sp-dashboard id="dashboard"></sp-dashboard>
+        <!--If drop zone needs to be shown-->
+       	<template is="dom-if" if="{{enabledrop}}">
+        	<sp-drop id="dropzone" accepts="[[droptype]]" custom-search="[[customsearch]]" open-object="{{enabledrop}}" show-add="{{enableadd}}" show-search="{{enablesearch}}" drop-note-text="{{dropNoteText}}" add-note-text="{{addNoteText}}"></sp-drop>
+        </template>
+
+        <!--If no dropzone-->
+        <template is="dom-if" if="{{!enabledrop}}">
+        	<content></content>
+        </template>
+
+        <!-- <sp-webservice uri="../AppsMngt/user/startup" on-dataready = "{{initStorages}}" getasap></sp-webservice> -->
+
+    </template>
+  <script src="sp-uwawidget.js"></script>
+</dom-module>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright DASSAULT SYSTEMES 2016 -->
+<Config xmlns="DS_DELMIAMFNConfiguration" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="DS_DELMIAMFNConfiguration ../xsd/DELWebMfgItemDefUIBOMView.xsd" Title="BOM View display preferences" Description="Sample configuration file delivered by DS.">
+	<Preferences>		
+		<!--============================================================-->
+		<!--					MBOM GRAPH VIEW							-->
+		<!--============================================================-->		
+		<BOMView>
+			<Color>
+				<AttributeDefinition dicoType="PLMEntity" dataIndex="V_Name.reference"/>
+				<ColorDefinition code="red" 	value="A" name="Filière AS"/>
+				<ColorDefinition code="#00FF00" value="B" name="Filière ML"/>
+				<ColorDefinition code="#0000FF" value="C" name="Filière RM"/>
+			</Color>
+			<Content>
+				<Type name="CreateAssembly">
+					<Row dicoType="PLMEntity" 		dataIndex="V_Name.reference"/>
+					<Row dicoType="BusinessType" 	dataIndex="revision.reference"/>
+				</Type>
+				<Type name="CreateKit">
+					<Row dicoType="PLMEntity" 		dataIndex="PLM_ExternalID.reference"/>
+					<Row dicoType="BusinessType" 	dataIndex="owner.reference"/>
+				</Type>
+			</Content>
+		</BOMView>
+	</Preferences>
+</Config>

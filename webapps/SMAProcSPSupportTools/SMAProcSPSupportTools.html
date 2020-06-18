@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+ <!-- Copyright 2018 , Dassault Systemes. All rights reserved. -->
+<head>
+
+    <title>Diagnostic Widget</title>
+    <!-- Load AMD Loader -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+    <script>
+        var UWA;
+        define('DS/PlatformAPI/PlatformAPI', function() {
+            return {
+                getApplicationConfiguration: function () { 
+                    var THREEDSPACE_URL_OVERRIDE_KEY = 'SMA_3DSPACE_URL';
+                    var serviceUrl = localStorage.getItem(THREEDSPACE_URL_OVERRIDE_KEY);
+                    return serviceUrl;
+                }
+            };
+        });
+    </script>
+    <!-- Load the UWA framework -->
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+
+    <script>
+       require(['UWA/Core'], function (UWACore) {
+            'use strict';
+            var myWidget = {
+
+                onLoad: function() {
+                    require(['DS/SMAProcSPSupportTools/SimulationRunner'], function(SimulationRunner) {
+                        SimulationRunner.onLog = function (log) {
+                            widget.getElement('#logs').textContent += log + '\n-*-*-*-\n';
+                        }
+                        SimulationRunner.start();
+                    });
+                }
+            };
+            widget.addEvent('onLoad', myWidget.onLoad);
+        });
+    </script>
+</head>
+<body>
+    <h3>Logs</h3>
+    <pre id="logs"></pre>
+</body>
+</html>

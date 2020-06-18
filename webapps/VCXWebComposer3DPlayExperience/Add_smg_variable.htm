@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+
+    <!-- Application Metas -->
+    <title>Add SMG Player variable</title>
+    <meta name="author" content="QOU" />
+   <meta name="description" content="Add SMG Player variable" />
+
+
+    <script type="text/javascript">
+        function addClassName(element, className) {
+             var classString = element.className, nameIndex = classString.indexOf(className);
+             classString += ' ' + className;
+             localStorage.setItem("DS_COMPOSER_EXPORT_WEB", "true");
+             element.className = classString;
+        };
+        function toggleClass(event, element, className){
+                event.stopPropagation();
+                if (!element || !className){
+                   return;
+               }
+
+               var classString = element.className, nameIndex = classString.indexOf(className);
+               if (nameIndex == -1) {
+                    classString += ' ' + className;
+                    localStorage.setItem("DS_COMPOSER_EXPORT_WEB", "true");
+               }
+               else {
+                   classString = classString.substr(0, nameIndex) + classString.substr(nameIndex+className.length);
+                   localStorage.removeItem("DS_COMPOSER_EXPORT_WEB");
+               }
+               element.className = classString;
+        };
+    </script>
+
+    <style media="screen" type="text/css">
+    
+    .toggle-button { background-color: white; margin: 5px 0; border-radius: 20px; border: 2px solid #D0D0D0; height: 24px; cursor: pointer; width: 50px; position: relative; display: inline-block; user-select: none; -webkit-user-select: none; -ms-user-select: none; -moz-user-select: none; }
+.toggle-button button { cursor: pointer; outline: 0; display:block; position: absolute; left: 0; top: 0; border-radius: 100%; width: 30px; height: 30px; background-color: white; float: left; margin: -3px 0 0 -3px; border: 2px solid #D0D0D0; transition: left 0.3s; }
+.toggle-button-selected { background-color: #A2CADF; border: 2px solid #5dabf5; }
+.toggle-button-selected button { left: 26px; top: 0; margin: 0; border: none; width: 24px; height: 24px; box-shadow: 0 0 4px rgba(0,0,0,0.1); }
+
+.center { text-align:center; }
+
+.composerBackground {
+    background-image: url("assets/texture/gui/I_VCX_Player_BackgroundLogo_In3DPlay.png");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: initial;
+    /* height: auto; */
+    /* padding-bottom: 50px; */
+    margin-bottom: 420px;
+    margin-top: 50px;
+    /* width: 200px; */
+    background-size: 500px;
+    font-family: arial;
+}
+    
+    </style>
+</head>
+<body class="composerBackground">
+    <div class="center">
+    <br/>
+    Enable Import of SMG files
+    <br/>
+    OFF
+    <div class="toggle-button" onclick="toggleClass(event, this,'toggle-button-selected');">
+        <button onclick="toggleClass(event, this.parentNode,'toggle-button-selected'); "></button>
+    </div>
+    ON
+</div>
+
+
+    <script type="text/javascript">
+    
+        var status = localStorage.getItem("DS_COMPOSER_EXPORT_WEB");
+        if (status !== "null")
+            {
+                this.addClassName(document.querySelector(".toggle-button"),'toggle-button-selected');
+            }
+    </script>  
+</body>
+</html>

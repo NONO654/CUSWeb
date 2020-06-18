@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+    <!-- Application Metas -->
+    <title>&lt;sp-run&gt; sample widget</title>
+    <meta name="apiVersion" content="1.3" />
+    <meta name="autoRefresh" content="0" />
+
+    <!-- Load the web components polyfill -->
+    <script type="text/javascript" src="../../Polymer-1.1.4/webcomponents-lite.min.js"></script>
+
+    <!-- Load AMD Loader -->
+    <script type="text/javascript" src="../../AmdLoader/AmdLoader.js"></script>
+
+    <!-- Load the UWA framework -->
+    <script type="text/javascript" src="../../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../c/UWA/assets/css/standalone.css" />
+
+    <widget:preferences>
+    </widget:preferences>
+
+    <!-- Load Polymer and any other web components -->
+    <link rel="import" href="../sp-dashboard/sp-dashboard.html"/>
+    <link rel="import" href="sp-run.html"/>
+
+
+    <!-- Application Source -->
+    <style type="text/css">
+      .exmlString, .applicationDataString {
+        width : 100%;
+        min-height:15em;
+        box-sizing: border-box;
+      }
+      input[type=text] {
+        min-width:20em;
+      }
+    </style>
+    <script type="text/javascript">
+    /* globals require, widget*/
+    function onReady() {
+    require(['UWA/Core', 'UWA/Data'],
+       function (UWA, UWAData) {
+            var WebComponentWidget = {
+                onLoad: function () {
+                    // We need to have a security context selected before calling the MCS webservices
+                    var dashboard = widget.getElement('sp-dashboard');
+                    dashboard.addSecurityContextPreference();
+
+                    // Inject default EXML in textarea onload to avoid parsing issue from 3DDashboard
+                    widget.getElement('.exmlString').value = ['<?xml version="1.0" encoding="UTF-8" ?>',
+                            '<fiper_Model rootComponentId="Processb01be711-1224-56129394-144e7" version="6.417.0">',
+                            '  <Properties modelId="Processb01be711-1224-56129394-144e7" modelName="SMAExeModelSimpleFastpathRootOnly" modelVersion="6.417.0" />',
+                            '  <Component id="Processb01be711-1224-56129394-144e7" appid="B01BE7110000122456129394000144E5" name="SMAExeModelSimpleFastpathRootOnly" parentId="" type="com.dassault_systemes.sma.adapter.Task">',
+                            '    <Variable name="fastpath" role="Property" structure="Scalar" type="Boolean">',
+                            '      <Value><![CDATA[true]]></Value>',
+                            '    </Variable>',
+                            '  </Component>',
+                            '</fiper_Model>'
+                        ].join('\n');
+
+                    // Add events listener for run results
+                    var runner = widget.getElement('sp-run');
+                    runner.addEvent('success', function (evt) {
+                        console.log('success', evt);
+                        widget.getElement('.results').setText('Success: ' + evt.detail.result.context.runFrom);
+                    });
+                    runner.addEvent('error', function (evt) {
+                        console.log('error', evt);
+                        widget.getElement('.results').setText('Error: ' + evt.detail.result.context.runFrom);
+                    });
+
+                    // Run a simulation process
+                    widget.getElement('.run').onsubmit = function () {
+                        var context = {runFrom: 'Run Simulation on ' + new Date()};
+                        var simulationId = widget.getElement('.simulationidString').value;
+                        widget.getElement('.results').setText(
+                            'Waiting for simulation ' + simulationId + ' to run'
+                        );
+                        runner.runSimulation(context, simulationId, '', false);
+                        return false;
+                    };
+
+                    // Run a EXML
+                    widget.getElement('.runexml').onsubmit = function () {
+                        var context = {runFrom: 'Run EXML on ' + new Date()};
+                        var exml = widget.getElement('.exmlString').value;
+                        var resourceId = widget.getElement('.resourceidString').value;
+                        var eedticket = null;
+                        var credentials = null;
+                        var applicationData = widget.getElement('.applicationDataString').value;
+                        var hasLocalStation = widget.getElement('.hasLocalStation').checked;
+                        var cosServerID = null;
+                        widget.getElement('.results').setText(
+                            'Waiting for EXML to run'
+                        );
+                        runner.runEXML(context, exml, resourceId, eedticket, credentials, applicationData, hasLocalStation, cosServerID);
+                        return false;
+                    };
+
+                }
+            };
+            widget.addEvents(WebComponentWidget);
+        }
+    );
+    }
+    if (document.createElement('sp-run').runSimulation) {
+        onReady();
+    } else {
+        window.addEventListener('WebComponentsReady', onReady);
+    }
+    </script>
+</head>
+<body>
+    <h1>&lt;sp-run&gt; sample</h1>
+    <h2>Run a simulation</h2>
+    <form class='run' action="">
+      <label>Enter your simulation ID: <input type="text" placeholder="723E9B56073D0000BEE05556DDAF0300" class="simulationidString"/></label>
+      <input type="submit" />
+    </form>
+    <hr />
+    <h2>Run an exml</h2>
+    <form class='runexml' action="">
+      <label>Enter an object ID (optional): <input type="text" placeholder="49728.55001.39170.63333" class="resourceidString"/></label>
+      <br />
+      <label>Enter your ApplicationData (optional):<br /><textarea class="applicationDataString"></textarea></label>
+      <br />
+      <label>Enter your EXML:<br /><textarea class="exmlString"></textarea></label>
+      <br />
+      <label><input type="checkbox" class="hasLocalStation" /> EXML uses local station</label>
+      <br />
+      <input type="submit" />
+    </form>
+
+    <sp-dashboard id="dashboard"></sp-dashboard>
+    <sp-run id="runner"
+        runInfo="<RunInfo logLevel='Debug' submissionHost=''></RunInfo>"
+        timeout="150000">
+    </sp-run>
+    <hr />
+    <p>Run simulation results:</p>
+    <pre class="results"></pre>
+</body>
+</html>

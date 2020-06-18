@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.ApproxModel" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflApproxModel" nlsID="dispname">Approximation</DisplayName>
+	<Description nlsFile="SMAWflApproxModel" nlsID="desc">Runs an approximation model.</Description>
+	<LongDescription nlsFile="SMAWflApproxModel" nlsID="longdesc">Runs a fixed, pre-created approximation model to evaluate each given design point.</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.component.ApproxModel</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>800</Value>
+			<Value>600</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAWflApproxModel16.gif" targetFilename="SMAWflApproxModel16.gif" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflApproxModel32.png" targetFilename="SMAWflApproxModel32.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflApproxModel.CATNls" targetFilename="SMAWflApproxModel.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflApproxModel_Japanese.CATNls" targetFilename="SMAWflApproxModel_ja.CATNls" locale="Japanese" />
+		<!--<Stream name="Properties" streamKind="properties" sourceFilename="SMAWflApproxModel_CATNls.properties" targetFilename="SMAWflApproxModel.properties"/>-->
+		<!--<Stream name="Properties_Japanese" streamKind="properties" sourceFilename="SMAWflApproxModel_JapaneseCATNls.properties" targetFilename="SMAWflApproxModel_ja.properties" locale="Japanese" />-->
+		<Stream name="CodeJar" streamKind="jar" sharedLoader="false" sourceFilename="SMAWflApproxModel.jar" targetFilename="SMAWflApproxModel.jar" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflApproxModel.dll" targetFilename="win_b64/SMAWflApproxModel.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflApproxModelUI.sypstyle" targetFilename="SMAWflApproxModelUI.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflApproxModelEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflApproxModelHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="ConfigureAdapter">
+			<Implementations>
+				<Implementation name="ConfigureAdapter" language="cpp" platform="win_b64">
+					<LateType>SMAWflApproxModelConfig_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+	<Properties>
+
+		<Property name="ApproxModelDefinition" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="ApproxModelIsValid" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[false]]>
+			</Value>
+		</Property>
+
+		<Property name="ApproxModelTypeName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="ApproxModelToActivityParamInputMap" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="ApproxModelToActivityParamOutputMap" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="ApproxModelRecordedDesignCount" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[0]]>
+			</Value>
+		</Property>
+
+		<!--  Cosim FMU monitoring from Web -->
+		<Property name="WebMonitoring" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="FmuInstanceName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="BehaviorPath" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+	</Properties>
+
+</wfext:Extension>

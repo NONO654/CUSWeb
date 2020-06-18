@@ -1,0 +1,1 @@
+define("DS/RTPresenceAPI/RTPresenceAPI_ja",{});define("DS/RTPresenceAPI/assets/nls/feed",{Contact:"連絡先"});

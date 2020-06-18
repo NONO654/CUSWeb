@@ -1,0 +1,1 @@
+define("DS/SMAProcJobListingUI/Views/Item/ThumbnailView",["DS/SMAProcJobListingUI/Views/Item/TileView","css!DS/SMAProcJobListingUI/SMAProcJobListingUI"],function(b){var a="thumbnail",c=b.extend({name:a});return c});

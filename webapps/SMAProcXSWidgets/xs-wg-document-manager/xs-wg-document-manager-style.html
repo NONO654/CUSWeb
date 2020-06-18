@@ -1,0 +1,436 @@
+<dom-module is="xs-wg-document-manager-style">
+  <template>
+    <style>
+      :host {
+        height: auto;
+        max-width: 500px;
+        display: block;
+        min-height: 100px;
+      }
+
+      .main {
+        width: 100%;
+        height: auto;
+      }
+
+      .top-container {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .inline-label {
+        width: calc(100% - 120px);
+      }
+
+      .files-container {
+        min-height: 100px;
+        height: auto;
+        overflow-y: hidden;
+        overflow-x: hidden;
+      }
+      .files-container[data-page="multi"] {
+        min-height: 272px;
+      }
+
+      .file-container {
+        display: flex;
+        padding-right: 5px;
+      }
+      .file-container:hover {
+        background-color: #e2e4e3;
+      }
+
+      .attributeGroupSelector {
+        position: absolute;
+        display: none;
+        height: 100%;
+        width: 100%;
+        padding: 10px 5px 5px 5px;
+        z-index: 1;
+        background: white;
+      }
+
+      .attributeGroupSelector > div{
+        padding: 5px 2px 2px 2px;
+        float: right;
+      }
+      /* #container[data-state="is-updating"] .page-bar-container {
+            pointer-events: none; } */
+      .page-bar-container {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 5px;
+      }
+
+      .page-button {
+        padding: 1px;
+      }
+
+      .previous {
+        margin-right: 5px;
+      }
+
+      .next {
+        margin-left: 5px;
+      }
+
+      .current-page-info {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .block-display {
+        display: block;
+      }
+
+      .file-action {
+        cursor: pointer;
+      }
+
+      .file-actions .no-action {
+        pointer-events: none;
+        opacity: 0.2;
+      }
+
+      .progressbar {
+        padding-right: 2px;
+        padding-top: 2px;
+        display: inline-block;
+        width: 100%;
+      }
+
+      .file-title {
+        width: calc(100% - 120px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-family: '3DS-Light';
+        line-height: 1.8;
+      }
+
+      .revision-info {
+        font-size: 10px;
+      }
+
+      #container[data-state="no-data"] .dropZone {
+        display: none;
+      }
+      #container[data-state="no-data"] .no-data-present {
+        display: block;
+      }
+      #container[data-state="no-files"] .new-file {
+        display: flex;
+      }
+      #container[data-state="no-files"] .no-files-present {
+        display: block;
+        position: absolute;
+        top: 80px;
+        left: 10%;
+      }
+      #container[data-state="is-loading"] .loading-files {
+        display: block;
+        position: absolute;
+        top: 80px;
+        left: 10%;
+      }
+      #container[data-state="is-error"] .error {
+        display: block;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        -webkit-transform: translate(-50%, -50%);
+      }
+      #container[data-state="files-available"] .new-file, #container[data-state="is-updating"] .new-file {
+        display: flex;
+      }
+      #container[data-stateread] .new-file, #container[data-stateread] .update-operation {
+        display: none;
+      }
+      #container[data-stateread] .file-title {
+        width: calc(100% - 40px) !important;
+      }
+
+      .update-operation {
+        display: inline-block;
+      }
+
+      .no-data-present {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        -webkit-transform: translate(-50%, -50%);
+        display: none;
+      }
+
+      .no-files-present, .loading-files, .error {
+        display: none;
+      }
+
+      .new-file {
+        display: none;
+        flex-direction: row-reverse;
+        width: 120px;
+        height: 100%;
+        padding-top: 5px;
+      }
+      .new-file .fonticon-upload {
+        font-size: 14px;
+        padding-left: 2px;
+        cursor: pointer;
+      }
+
+      .hyperlink {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
+      .add-button {
+        padding: 3px 6px;
+        float: right;
+        right: 2px;
+      }
+      .add-button:hover .upload-new-file {
+        opacity: 1;
+      }
+      .add-button div {
+        display: inline-block;
+      }
+
+      .file-icon-container {
+        height: 28px;
+        width: 28px;
+        position: relative;
+      }
+      .file-icon-container span {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+      }
+      .file-icon-container .lock, .file-icon-container .lock-user {
+        display: none;
+        font-size: 12px;
+        color: #636363;
+        opacity: 1;
+      }
+      .file-icon-container span.image-container {
+        bottom: 6px;
+        right: 2px;
+      }
+
+      .icon-image {
+        display: none;
+      }
+
+      .image-container .icon-image, .lock-self .lock-user, .lock-other .lock {
+        display: block;
+      }
+
+      .is-disabled .new-file {
+        pointer-events: none;
+      }
+
+      .center {
+        color: #b4b6ba;
+        font-size: 14px;
+        text-align: center;
+        cursor: pointer;
+        pointer-events: none;
+      }
+
+      .fonticon {
+        color: #77797c;
+        font-size: 20px;
+        opacity: 0.6;
+      }
+      .fonticon:hover, .fonticon:focus {
+        opacity: 1;
+      }
+
+      .fonticon-refresh {
+        content: '\e152';
+      }
+
+      .fonticon-doc:before {
+        content: '\e051';
+      }
+
+      .fonticon-upload:before {
+        content: '\e037';
+      }
+
+      .fonticon-select-none {
+        font-size: 14px;
+      }
+
+      .fonticon-open-right:before {
+        content: '\e141';
+      }
+
+      .fonticon-open-left:before {
+        content: '\e140';
+      }
+
+      .dropZone {
+        width: 100%;
+        max-width: 500px;
+        position: relative;
+      }
+      .dropZone .dropOverlay {
+        opacity: 0;
+        max-width: 500px;
+        position: absolute;
+        padding: 6px 0;
+        font-size: 1.5em;
+        line-height: 1.42857;
+        text-align: center;
+        border: 2px dashed transparent;
+        transition: opacity .2s ease-out;
+        z-index: -1;
+      }
+      .dropZone .dropOverlay .dropZone-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .dropZone .dropOverlay.is-dropping {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        /* background-color: #fff; */
+        border-color: #368ec4;
+        color: #368ec4;
+        pointer-events: none;
+        z-index: 50;
+      }
+
+      .docviewer-container {
+        height: 27px;
+      }
+
+      .no-display {
+        display: none;
+      }
+
+      .divider {
+        width: 5px;
+      }
+
+      .doc-entry {
+        display: inline-block;
+        width: 100%;
+        border-bottom: 1px #e2e4e3 solid;
+      }
+
+      .progress-bar:hover {
+        background-color: #e2e4e3;
+      }
+
+      sp-document-content-ui {
+        z-index: 110;
+        position: relative;
+        margin: 2px 0px 0px 10px;
+        padding: 1px;
+        border: 1px solid #e2e4e3;
+      }
+
+      .progress-bar {
+        width: 100%;
+        padding-bottom: 4px;
+      }
+
+      .doc-info {
+        display: inline-block;
+        width: 100%;
+      }
+
+      /* .doc-actions {
+        display: inline-block;
+        width: 25px;
+      } */
+      .doc-title {
+        display: inline-block;
+        max-width: calc(100% - 116px);
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-family: '3DS-Light';
+        vertical-align: middle;
+      }
+
+      .doc-info .doc-popup {
+        font-size: 14px;
+        display: inline-block;
+        cursor: pointer;
+        vertical-align: middle;
+      }
+
+      .collapse-icon {
+        transition: transform 0.1s cubic-bezier(0.55, 0.06, 0.68, 0.19);
+        transform: rotate(90deg);
+        width: 16px;
+        height: 16px;
+        font-size: 14px;
+        vertical-align: bottom;
+        color: #3d3d3d;
+        opacity: 0.8;
+        cursor: pointer;
+      }
+
+      .is-collapsed {
+        transform: rotate(0deg);
+        color: #b4b6ba;
+      }
+
+      .collapse-icon:before {
+        content: '\e149';
+      }
+
+      .doc-entry div {
+        display: inline-block;
+      }
+
+      .doc-info div {
+        display: inline-block;
+        cursor: default;
+        vertical-align: bottom;
+      }
+
+      .no-edit {
+        color: #EA4F37;
+        display: block;
+      }
+
+      .ioinput, .iooutput, .ioinputoutput {
+        display: none;
+      }
+
+      .io-mode {
+        height: 16px;
+        width: 32px;
+      }
+      .isreferenced {
+        display: none;
+      }
+
+      .io-mode[data-iomode="Input"] .ioinput, .io-mode[data-iomode="Output"] .iooutput, .io-mode[data-iomode="InputOutput"] .ioinputoutput, .io-mode[data-isreferenced] .isreferenced {
+        display: inline-block;
+      }
+
+      .content-viewer {
+        --sp-document-content-ui-files-container-multi: {
+        height: 112px;
+        max-height: 285px;;
+        };
+      }
+
+      .attributeGroupSelector > label{
+        font-size: 14px;
+      }
+    </style>
+  </template>
+</dom-module>

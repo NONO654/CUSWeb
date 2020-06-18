@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="DS_DELMIAPPRRelations" xmlns:tns="DS_DELMIAPPRRelations"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  attributeFormDefault="unqualified">
+	<xs:element name="CustomRelationsList">
+	  <xs:complexType>
+	    <xs:sequence>
+	      <xs:element name ="RelationConfig" type="tns:TypeConfig" maxOccurs="unbounded" minOccurs="0"/>
+	    </xs:sequence>
+	    <xs:attribute type="xs:string" name="Title"/>
+	    <xs:attribute type="xs:string" name="Description"/>
+	  </xs:complexType>
+	</xs:element>
+   
+	<xs:complexType name="TypeConfig">
+	  <xs:sequence>
+	    <xs:element name="Relation" type="tns:Relations" maxOccurs="unbounded" minOccurs="0" />
+	  </xs:sequence>
+	  <xs:attribute type="xs:string" name="fromType" use="required"/>
+	  <xs:attribute type="xs:string" name="toType" use="required"/>
+	</xs:complexType>  
+  
+	<xs:complexType name="Relations">
+	  <xs:simpleContent>
+	    <xs:extension base="xs:string">
+	      <xs:attribute type="xs:string" name="type" use="required"/>
+	      <xs:attribute type="xs:boolean" name="read" use="required"/>
+	      <xs:attribute type="xs:boolean" name="write" use="required"/>
+	    </xs:extension>
+	  </xs:simpleContent>
+	</xs:complexType>
+</xs:schema>
+

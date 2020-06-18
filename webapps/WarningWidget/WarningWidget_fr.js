@@ -1,0 +1,1 @@
+define("DS/WarningWidget/WarningWidget_fr",{});define("DS/WarningWidget/assets/nls/langWW",{"DefaultMessage:":"Continuer?",Cancel:"annuler",Continue:"continuer",WARNING:"AVERTISSEMENT"});

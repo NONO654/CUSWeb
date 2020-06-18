@@ -1,0 +1,173 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-data/sp-data.html">
+<link rel="import" href="../../SMAProcSP/sp-queryparams/sp-queryparams.html">
+<link rel="import" href="../../SMAProcSP/sp-clientstorage/sp-clientstorage.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html" async>
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+
+<link rel="import" href="../ps-config-run/ps-config-run.html">
+<link rel="import" href="../ps-event-manager/ps-event-manager.html">
+<link rel="import" href="../../SMAProcSP/sp-run/sp-run.html">
+<link rel="import" href="../ps-run-as-modal/ps-run-as-modal.html">
+
+<dom-module id="ps-simulation-abstract-list">
+  <link rel="import" type="css" href="ps-simulation-abstract-list.css">
+  <template>
+        <sp-notification id="notification" class="notification" position="TR" width="400"></sp-notification>
+        <sp-variable id="licenseData" name="licenseData" on-valuechange="checkLicenseData"></sp-variable>
+        <sp-variable id="PSSettings" name="PSSettings" value="{{settings}}" on-valuechange="PSSettingsChanged"></sp-variable>
+
+        <sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL"></sp-variable>
+        <sp-variable id="errorMessageForRunFailed"></sp-variable>
+        <sp-variable id="mcsBaseURL" name="mcsBaseURL"></sp-variable>
+
+        <!--Wrapper for window.localStorage-->
+        <sp-clientstorage id="psLocalstore" namespace="pslist"></sp-clientstorage>
+        <sp-dashboard id="dashboard"></sp-dashboard>
+        <sp-search id="spSearch" multi-select="false" on-change="onSearchResult"></sp-search>
+        <!--Observes for all items in the list and sends update/delete requests as required-->
+        <sp-mcsservice
+            id="updateWS"
+            data="{{simlist}}"
+            uri="simulations"
+            on-error="onUpdateError" wait="0">
+            <sp-data id="simlistData" model="{{simlist}}" uid="id"></sp-data>
+        </sp-mcsservice>
+
+        <sp-mcsservice id="simOptionsWs" on-error="errorForSimOptions" on-dataready="useSimOptionsLogLevel"></sp-mcsservice>
+
+        <sp-mcsservice id="simTypeWs" on-dataready="processTypeInfo" uri="{{_computeTypeInfoURI()}}" getasap=""></sp-mcsservice>
+
+        <ps-event-manager on-event-manager-collabspace-changed="oncollabspaceChange"></ps-event-manager>
+        <sp-run id="runner"></sp-run>
+		<ps-config-run id="psConfigRun" on-simulationstarted="simulationStarted" on-simulationfailed="simulationFailed"></ps-config-run>
+        <ps-run-as-modal id="runAsModal"></ps-run-as-modal>
+
+        <!--Overlay for sidebar action menu bar and process list when a menu action is clicked-->
+        <div id="sidebaroverlay" class="sidebaroverlay"></div>
+        <div class="sidebarab">
+            <header id="sidebarheader" class$="[[_computeHeaderClass()]]">
+                <h2 class="title">Simulations
+                 <span class="filterIndicator">(<span>{{settings.simOwner}}</span>)</span>
+                 <span id="sidebarViewMode" on-click="switchMode" class="viewMode">{{settings.switchMessage}}</span>
+			</h2>
+
+                <!--Drop down menu for creating processes -->
+
+            </header>
+            <!-- Create SC process menu items -->
+            <sp-dropdown-menu id="createProcessMenu" class="createprocessmenu">
+                <sp-dropdown-menu-item label="Create New" labeltype="header"></sp-dropdown-menu-item>
+                <!--
+                <sp-dropdown-menu-item label="Simulation Process" on-click="onCreateNew"></sp-dropdown-menu-item>
+                 -->
+                <sp-dropdown-menu-item label="Simulation Process from Experience" on-click="onCreateFromExp"></sp-dropdown-menu-item>
+                <!--
+                <sp-dropdown-menu-item labeltype="divider"></sp-dropdown-menu-item>
+                <sp-dropdown-menu-item label="Simulation Companion Process" on-click="onCreateNewComp"></sp-dropdown-menu-item>
+                -->
+            </sp-dropdown-menu>
+            <!--Action menu bar-->
+            <div class="actionmenu">
+                <div id="defaultmenu" class="default is-active">
+                    <span id="refreshbutton" class="icon menu fonticon fonticon-cw" title="Refresh list" on-click="onRefresh"></span>
+                    <!-- Create new process button. This launches template search dialog to instantiate one -->
+                    <div id="createButton" class="hideButton" title="Create new Simulation" on-click="onCreateMenuClick">
+                            <span class="fonticon fonticon-plus" style="margin: 0 0.2em;"></span>
+                   </div>
+                    <!--Show compare and group based on number of items selected-->
+                    <div id="multiselectactions" class$="{{_computeClass(selecteditems.length)}}">
+                        <button is="sp-button-type" title="Clear" id="clearmultiselect" on-click="onClearMultiSelect">Clear</button>
+                        <button is="sp-button-type" title="Compare" id="compareaction" on-click="onCompare" class$="{{_computeClass2(selecteditems.length)}}">Compare</button>
+                        <button is="sp-button-type" title="Group" id="groupaction" on-click="onGroup">Group</button>
+                    </div>
+                    <!--Drop down menu for other actions-->
+                    <span id="menubutton" class="lastmenuitem menu icon fonticon fonticon-menu" title="More actions" on-click="onAdditionalMenuClick"></span>
+                    <!--Additional menu items besides the menu items shown in action bar.
+                    Menu items need to be shown based on whether there is none/single/multi selection-->
+                    <sp-dropdown-menu id="additionalMenu" class="additionalmenu">
+
+                        <sp-dropdown-menu-item label="Run Simulations" labeltype="header"></sp-dropdown-menu-item>
+                        <sp-dropdown-menu-item label="Run" on-click="onRun" disabled="{{_computeDisabled(selecteditems.length)}}"></sp-dropdown-menu-item>
+                        <!-- <sp-dropdown-menu-item label="Configure and Run" on-click="onConfigRun" disabled="{{_computeDisabled(selecteditems.length)}}">
+                        </sp-dropdown-menu-item> -->
+                        <sp-dropdown-menu-item label="Run As" on-click="openRunAsModal" class$="{{_showNewRunAs()}}"  disabled="{{_computeDisabledNewRunAs(selecteditems.length)}}">
+                        </sp-dropdown-menu-item>  
+                        <sp-dropdown-menu-item label="Stop" on-click="onAbort" disabled="{{_computeDisabled(selecteditems.length)}}"></sp-dropdown-menu-item>
+                        <sp-dropdown-menu-item label="Show Interactive" on-click="showInteractive" disabled="{{_computeDisabled2(selecteditems.length)}}"></sp-dropdown-menu-item>
+                       <!-- <sp-dropdown-menu-item label="Pause" disabled="{{ selecteditems.length < 1 }}"></sp-dropdown-menu-item>
+                        <sp-dropdown-menu-item label="Abort" disabled="{{ selecteditems.length < 1 }}"></sp-dropdown-menu-item>-->
+                        <sp-dropdown-menu-item labeltype="divider" disabled="{{_computeDisabled(selecteditems.length)}}"></sp-dropdown-menu-item>
+
+                        <!--Provide link to RA only if license is available-->
+                        <template is="dom-if" bind="" if="{{_computeIf(hasResultsAnalyticsLic)}}">
+                            <sp-dropdown-menu-item label="Analyze Simulations" labeltype="header"></sp-dropdown-menu-item>
+                            <sp-dropdown-menu-item label="Analyze results" on-click="openInRA" disabled="{{_computeDisabled3(selecteditems.length)}}"></sp-dropdown-menu-item>
+                            <sp-dropdown-menu-item label="Analyze results As" on-click="openInRAAs" disabled="{{_computeDisabled3(selecteditems.length)}}"></sp-dropdown-menu-item>
+                            <sp-dropdown-menu-item labeltype="divider" class="resana"></sp-dropdown-menu-item>
+                        </template>
+
+                        <sp-dropdown-menu-item label="Manage Simulations" labeltype="header"></sp-dropdown-menu-item>
+                        <sp-dropdown-menu-item label="Delete" on-click="onDeleteAttempt" disabled="{{_computeDisabled(selecteditems.length)}}">
+                        </sp-dropdown-menu-item>
+                            <sp-dropdown-menu-item label="Copy" on-click="onCopy" disabled="{{_computeDisabled2(selecteditems.length)}}"></sp-dropdown-menu-item>
+                            <sp-dropdown-menu-item label="Revise" on-click="onRevise" disabled="{{_computeDisabled2(selecteditems.length)}}"></sp-dropdown-menu-item>
+                        <sp-dropdown-menu-item label="Lifecycle" on-click="onLifecycle" disabled="{{_computeDisabled2(selecteditems.length)}}"></sp-dropdown-menu-item>
+                        <sp-dropdown-menu-item label="Access" on-click="onAccess" disabled="{{_computeDisabled2(selecteditems.length)}}"></sp-dropdown-menu-item>
+                        <!--Provide settings option only in simList mode-->
+                        <template is="dom-if" bind="" if="{{_computeIf2(sidebarmode)}}">
+                            <sp-dropdown-menu-item labeltype="divider"></sp-dropdown-menu-item>
+                            <sp-dropdown-menu-item label="Settings" on-click="onDisplaySettings"></sp-dropdown-menu-item>
+                        </template>
+                    </sp-dropdown-menu>
+                </div>
+            </div>
+
+
+
+             <!--Assign groups dialog when 'Group' is clicked-->
+            <div id="groupaction" class="taggroup">
+                <span class="label">Group into a Simulation Study</span>
+                <input id="groupassign" class="groupnameinput form-control input-sm" type="text" placeholder="Enter Simulation Study name">
+                <div class="groupassignaction">
+                    <button is="sp-button-type" primary="" on-click="onGroupassign">Ok</button>
+                    <button is="sp-button-type" on-click="onGroupassignCancel">Cancel</button>
+                    <button is="sp-button-type" on-click="onRemoveGroup">Remove existing</button>
+                </div>
+            </div>
+
+            <!--Delete confirmation dialog-->
+            <sp-modal id="deleteconfirm" class="smallmodal" heading="Confirm delete" height="30%">
+                <section>
+
+                </section>
+                <footer>
+                    <button is="sp-button-type" on-click="onDelete">Ok</button>
+                    <button is="sp-button-type" primary="" on-click="onDeleteCancel">Cancel</button>
+                </footer>
+            </sp-modal>
+
+            <!--Any alert message that needs to be shown can use this dialog-->
+            <sp-modal id="messagedialog" class="smallmodal" heading="Details">
+                <section>{{alertmessage}}</section>
+            </sp-modal>
+
+            <!--Displays a spinner when refresh is in process-->
+            <sp-updatepanel id="refreshpanel" class="refreshupdatepanel" state="{{refreshedData.$state}}" updateswhen="is-getting">
+            </sp-updatepanel>
+
+        </div>
+    </template>
+  <script type="text/javascript" src="ps-simulation-abstract-list.js"></script>
+</dom-module>

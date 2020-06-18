@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+<link rel="stylesheet" href="../UIKIT/UIKIT.css">
+<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+<link href="http://web3dinfra/WUXShowRoom/i_framed_sample.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+<script>
+	require(['UWA/Drivers/Alone', 'DS/RTShareAPI/RTShareAPI', 'DS/UIKIT/Input/Button', 'DS/UIKIT/DropdownMenu', 'DS/MessageBus/MessageBus'], function (UWA, RTShareWith, Button, DropdownMenu, justHereToLoadMessageBus) {		
+	
+		/****** DEMO *******/
+		var share_image = new RTShareWith({content:document.getElementById('random_image').outerHTML});		
+		var btnDropdownShareWith = new Button({ value: 'Dropdown Menu' }).inject(document.getElementById('btnDropdownShareWith'));
+		new DropdownMenu({
+			target: btnDropdownShareWith.getContent(),
+			items: [
+				share_image.item
+			]
+		});
+		var btnShareWith = new Button({ value: share_image.item.text });
+		btnShareWith.addEvent('onClick', share_image.item.handler);
+		btnShareWith.inject(document.getElementById('btnShareWith'));
+
+		var share_iquestion = new RTShareWith({content:datatrans});
+		var btnShareWith2 = new Button({ value: share_iquestion.item.text });
+		btnShareWith2.addEvent('onClick', share_iquestion.item.handler);
+		btnShareWith2.inject(document.getElementById('btnShareWith2'));
+		
+	});
+	var datatrans = { 
+		"source":"X3DMCTY_AP", 
+		data : { items : [{ // option : url
+			"envId":"DSDEV029",
+			"serviceId":"3DSwym",
+			"contextId":"",
+			"objectId":"4",
+			"objectType":"iquestion",
+			"displayName":"How can I complete my Rich Profile?",
+			"displayType":"iquestion",
+			"displayIcon":"fonticon:help",
+			"displayPreview":"http://www.equerre-compas.com/76-b.gif",
+			"defaultApp":"X3DMCTY_AP",
+			"urlContent":{
+			"3DSwym":"http://3ds.com",
+			"3DD":"http://3ds.com"
+			}
+	}]}};
+	var datatrans2 = {
+		"protocol": "3DXContent",
+		"version": "1.0",
+		"source": "X3DWNEW_AP",
+		"data": {
+			"items": [{
+				"envId": "DSQAL096",
+				"serviceId": "3DSwym",
+				"contextId": "",
+				"objectId": "44",
+				"objectType": "post",
+				"displayName": "sqsqds",
+				"displayType": "post",
+				"displayIcon": "fonticon:newspaper",
+				"displayPreview": "http://www.loadingartist.com/wp-content/themes/loading-artist-2015/img/author/garfield.png",
+				"defaultApp": "X3DWNEW_AP",
+				"urlContent": {
+					"3DSwym": "https://www.commitstrip.com/en?random=1",
+					"3DD": "https://www.commitstrip.com/en?random=1"
+				}
+			}]
+		}
+	};
+	var img = document.createElement("img");
+		img.src = "https://kryogenix.org/images/hackergotchi-simpler.png";
+	var dragstart_handler2 = function (evt) {
+		evt.dataTransfer.setData("text/plain", JSON.stringify(datatrans2));
+		evt.dataTransfer.setDragImage(img, 0, 0);
+	};
+	var dragstart_handler = function (evt) {
+		evt.dataTransfer.setData("text/plain", JSON.stringify(datatrans));
+		evt.dataTransfer.setDragImage(img, 0, 0);
+	};
+	var dragstart_handler3 = function (evt) {
+		evt.dataTransfer.setData("text/plain", '"<div class="content-osef"><a href="http://img-comment-fun.9cache.com/media/404800f6145668022199328413_700wa_0.gif">Click here !</a></div>"');
+		evt.dataTransfer.setDragImage(img, 0, 0);
+	};
+	
+	
+	MyWidget = {
+		onLoad : function () {
+			this.dragstart_handler=dragstart_handler;
+			this.dragstart_handler2=dragstart_handler2;
+			this.dragstart_handler3=dragstart_handler3;
+		}
+	};
+
+	try {
+		widget.addEvent('onLoad', MyWidget.onLoad);
+	}
+	catch (e) {
+		widget = document;
+		MyWidget.onLoad.apply(widget);
+	}
+	
+	</script>
+</head>
+<body>
+	
+<article id="contents">
+	<h3>Share API</h3>		
+	<p>
+		<p id="btnDropdownShareWith" style="display:none"/>
+		<p id="btnShareWith" />
+		<img id="random_image" src="https://www.3ds.com/typo3temp/pics/Business-compass09_3e8b6d787d.jpg">
+	</p>
+	<br>
+	</br><p>
+		<p id="btnShareWith2" />
+		<div id="swym_widget" style="width:300px;height:100px; background:lightgreen; text-align:center; line-height:100px;" ondragstart="widget.dragstart_handler(event);" draggable="true">I'm an iquestion</div>
+	</p><p>
+		<div id="swym_widget2" style="width:300px;height:100px; background:lightblue; text-align:center; line-height:100px;" ondragstart="widget.dragstart_handler2(event);" draggable="true">I'm a swym post</div>
+	</p><p>	
+		<div id="swym_widget2" style="width:300px;height:100px; background:lightcoral; text-align:center; line-height:100px;" ondragstart="widget.dragstart_handler3(event);" draggable="true">I'm just a link</div>
+	</p>
+	</article>
+	
+
+</body>
+</html>

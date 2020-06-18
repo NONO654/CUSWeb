@@ -1,0 +1,58 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../ad-redux-behaviour/ad-redux-behaviour.html">
+<!-- <link rel="import" href="../../SMAProcSP/sp-access-group/sp-access-group.html"> -->
+<!--<link rel="import" href="../../SMAProcSPUI/sp-drop/sp-drop.html">-->
+<link rel="import" href="../ad-landing/ad-landing.html">
+<link rel="import" href="../ad-app-alerts-container/ad-app-alerts-container.html">
+<link rel="import" href="../ad-app-observers/ad-app-observers.html">
+<link rel="import" href="../ad-app-header-container/ad-app-header-container.html">
+<link rel="import" href="../ad-create-job-container/ad-create-job-container.html">
+<link rel="import" href="../ad-delete-prompt/ad-delete-prompt.html">
+<link rel="import" href="../ad-tail-file/ad-tail-file.html">
+
+<dom-module id="ad-app-container">
+	<template>
+		<style>
+			:host {
+				display: block;
+				/* need height defined so sp-drop inherits and calculates it's height correctly */
+				height: 100%;
+			}
+
+			/* sp-drop sets height to calc(100% - 40px) which messes with skeleton sizing */
+			.drop { height: 100%; }
+
+		</style>
+
+		<!-- Define access group -->
+		<!-- <sp-access-group id="spAccessGroup" name="study"></sp-access-group> -->
+		<div id="dropZone" class="drop" on-dragenter="createDropZone" on-dragstart="onDragStart" on-dragend="onDragEnd">
+
+			<ad-landing id="landingPage"></ad-landing>
+			<ad-create-job-container id="createJob" on-deletefile="onDeleteFile" on-viewfile="onViewFile"></ad-create-job-container>
+			<ad-app-alerts-container id="alerts"></ad-app-alerts-container>
+			<ad-app-observers id="observers"></ad-app-observers>
+			<ad-delete-prompt id="deletePrompt"></ad-delete-prompt>
+			<ad-tail-file id="tailFileContainer"></ad-tail-file>
+
+			<!--Skeleton -->
+			<div id="skeletonContainer" class="hidden"
+				on-clonejob="onCloneJob"
+				on-abortjob="onAbortJob"
+				on-deletejob="onDeleteJob"
+				on-deletefile="onDeleteFile"
+				on-deleteso="onDeleteSO"
+				on-generateresult="onGenerateResult"
+				on-viewfile="onViewFile"
+				on-monitorjob="onMonitorJob">
+
+				<ad-app-header-container id="appHeader" on-switchcollection="switchCollection" on-createjob="onCreateJob" on-closestudy="onCloseStudy">
+				</ad-app-header-container>
+
+				<div id="skeletonHolder"></div>
+			</div>
+		</div>
+
+	</template>
+	<script src="ad-app-container.js"></script>
+</dom-module>

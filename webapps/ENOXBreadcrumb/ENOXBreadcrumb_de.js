@@ -1,0 +1,1 @@
+define("DS/ENOXBreadcrumb/ENOXBreadcrumb_de",{});define("DS/ENOXBreadcrumb/assets/nls/Breadcrumb",{HOME:"Startseite"});

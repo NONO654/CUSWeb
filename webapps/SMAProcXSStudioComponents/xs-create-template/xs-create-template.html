@@ -1,0 +1,103 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html" />
+<link rel="import" href="../../SMAProcXSStudioComponents/xs-content-chooser/xs-content-chooser.html" />
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSPUI/sp-textarea/sp-textarea.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../../SMAProcXSUI/xs-select/xs-select.html">
+
+<dom-module id="xs-create-template">
+  <template>
+    <link rel="stylesheet" type="text/css" href="xs-create-template.css" />
+    <sp-dashboard id="dashboard"></sp-dashboard>
+    <sp-mcsservice id="create_template" uri="/resources/e6w/service/SMA_Template" on-response="onTemplateReady"
+      on-error="onServerError"></sp-mcsservice>
+  <!--  <div id="main" class="create-main"> -->
+    <sp-modal id="modalcontainer" class="mediummodal createmodal" heading="Create Simulation Template" height="auto" width="580px" on-close="closeForm">
+      <header>
+        <sp-notification id="notification" position="TR" width="400"></sp-notification>
+      </header>
+      <section>
+        <div class="form-container" id="form">
+          <div class="form-group">
+            <label for="title" class="mandatory">Title</label>
+            <sp-input id="title" class="form-title" placeholder="Enter Title..." required maxlength="32"
+              readonly$={{isFormDisabled}}></sp-input>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <sp-textarea id="description" class="form-description" placeholder="Enter Description..."  rows="3"></sp-textarea>
+          </div>
+          <div class="form-group">
+            <label for="templateContent" class="mandatory">Template Content</label>
+            <xs-content-chooser id="templateContent"
+              class="form-templateContent"
+              placeholder="Search Template Content..."
+              on-change="onTemplateContentChange"
+              on-clear="onTemplateContentClear"
+              accept=""
+              readonly$={{isFormDisabled}} on-sp-error="spError">
+            </xs-content-chooser>
+          </div>
+          <div class="form-group">
+            <label for="templateView">Template Type</label><div id="helpText" class="help-text"> (Simulation Activity : Only One Click template is supported)</div>
+            <select id="templateView" class="form-select" title="{{value}}" disabled$={{isFormDisabled}}>        
+                <option id="customview" value="Custom" title="Custom View" selected>Custom View</option>
+                <option id="oneclick" value="oneclick" title="One-click">One-click</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="simulationKind">Simulation Kind</label>
+            <select id="simulationKind" class="form-select" disabled$={{isFormDisabled}}>
+                <option value="method" title="method">method</option>
+                <option value="adhoc" title="adhoc">adhoc</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="attributeGroup">Attribute Group</label>
+            <xs-content-chooser id="attributeGroup"
+              placeholder="Search Attribute Group..."
+              accept="Simulation Attribute Group"
+              readonly$={{isFormDisabled}} on-sp-error="spError">
+            </xs-content-chooser>
+          </div>
+          <div class="form-group">
+            <label for="instructionDoc">Instructions</label>
+            <xs-content-chooser id="instructionDoc"
+                placeholder="Search Instruction Document..."
+                accept="DOCUMENTS"
+                readonly$={{isFormDisabled}} on-sp-error="spError">
+              </xs-content-chooser>
+          </div>
+          <template is="dom-if" if="{{policyList}}">
+            <div class="form-group">
+              <label for="policy">Policy</label>
+              <!-- <select id="policy" class="form-select" disabled$={{isFormDisabled}}>
+                <template is="dom-repeat" items="{{policyList}}">
+                  <option value="{{item}}" title="{{item}}">{{item}}</option>
+                </template>
+              </select> -->
+              <xs-select id="policy" value="{{ruleNode.value}}" options="{{policyList}}" disabled="{{isFormDisabled}}"></xs-select>
+            </div>
+          </template>
+
+        </div>
+
+      </section>
+      <footer class="footer"> 
+          <sp-updatepanel id="playerUpdatepanel" state="{{createStatus}}" updateswhen="is-creating">
+          <div id="loadmsg" class="loadmsg">Creating Template...</div>
+          <button id="okButton" is="sp-button-type" class="btn-create" primary="" on-click="validateForm">Create</button>
+          <button id="dismissButton" is="sp-button-type" class="btn-cancel" on-click="closeForm">Cancel</button>
+        </sp-updatepanel>
+      </footer>
+        <!--</div>-->
+    </sp-modal>
+    </div>
+  </template>
+  <script type="text/javascript" src="xs-create-template.js"></script>
+</dom-module>

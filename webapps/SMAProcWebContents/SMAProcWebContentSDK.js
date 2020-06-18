@@ -1,0 +1,1 @@
+define("DS/SMAProcWebContents/SMAProcWebContentSDK",["DS/SMAProcWebContents/PolyUtils","DS/SMAProcWebContents/ContentService","DS/SMAProcWebContents/ParameterChooser","DS/SMAProcWebContents/FileChooser","DS/SMAProcWebContents/ContentChooser","DS/SMAProcWebContents/PlmobjectChooser"],function(b,a){return{PolyUtils:b,ContentService:a}});

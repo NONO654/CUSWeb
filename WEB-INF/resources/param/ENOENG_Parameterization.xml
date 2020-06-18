@@ -1,0 +1,161 @@
+<?xml version="1.0" ?>
+<OOTBParameterization regSuite="EngineeringCentral">
+	<Domain id="AttributeDef">
+		<Family id="Part">			
+			<Constant id="appType" value="CBP"/>
+			<Constant id="package" value="EBOM"/>
+			<Constant id="type" value="Part"/>
+			<Constant id="webForms" value="type_Part,type_CreatePart,APPPartClone,type_RevisePart"/>
+		</Family>
+	</Domain>
+	<Domain id="ObjectIdentification">
+		<Family id="VersionNaming">
+			<Parameter id="VNaming_DevelopmentPart" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationRevisionId">
+				<Argument id="Argument" type="string" input="combobox" default="AlphabeticalRev">
+					<Value id="NumericalRev"/>
+					<Value id="AlphabeticalRev"/>
+				</Argument>
+				<Constant id="policy" value="Development Part"/>
+				<Constant id="appType" value="CBP"/>
+			</Parameter>
+			<Parameter id="VNaming_ProductionPart" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationRevisionId">
+				<Argument id="Argument" type="string" input="combobox" default="NumericalRev">
+					<Value id="NumericalRev"/>
+					<Value id="AlphabeticalRev"/>
+				</Argument>
+				<Constant id="policy" value="EC Part"/>
+				<Constant id="appType" value="CBP"/>
+			</Parameter>
+		</Family>
+	</Domain>
+	<Domain id="LifecycleTopology" >
+		<Family id="EC_Part">
+			<Constant id="policyID" value="EC Part"/>
+			<Constant id="modifyTopology" value="false"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="appType" value="CBP"/>
+			<Constant id="NLSStateFileName" value="emxFrameworkStringResource.properties"/>
+			<Constant id="complementaryPropFiles" value="PLMAttrValuePart.CATNls"/>
+			<Constant id="lang" value="en,fr"/>
+
+			<GovernedType id="Part">
+				<Constant id="typeId" value="Part"/>
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnStandardData,RejectIfAttributeNotValuated,RejectIfAnyOfTheCommonlyGovernedChildNotOnTargetState"/>
+			</GovernedType>
+
+			<State id="Preliminary">
+				<Constant id="sysName" value="Preliminary"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.EC_Part.Preliminary"/>
+				<Constant id="complementaryNLSKeys" value="current.Preliminary"/>
+			</State>
+			<State id="Review">
+				<Constant id="sysName" value="Review"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.EC_Part.Review"/>
+				<Constant id="complementaryNLSKeys" value="current.Review"/>
+			</State>
+			<State id="Approved">
+				<Constant id="sysName" value="Approved"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.EC_Part.Approved"/>
+				<Constant id="complementaryNLSKeys" value="current.Approved"/>
+			</State>
+			<State id="Release">
+				<Constant id="sysName" value="Release"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.EC_Part.Release"/>
+				<Constant id="complementaryNLSKeys" value="current.Release"/>
+			</State>
+			<State id="Obsolete">
+				<Constant id="sysName" value="Obsolete"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.EC_Part.Obsolete"/>
+				<Constant id="complementaryNLSKeys" value="current.Obsolete"/>
+			</State>
+
+                        <Transition id="PreliminarytoReview">
+                                <Constant id="transName" value=""/>
+                                <Constant id="sourceState" value="Preliminary"/>
+                                <Constant id="targetState" value="Review"/>
+                                <Constant id="removal" value="false"/>
+                        </Transition>
+                        <Transition id="ReviewtoApproved">
+                                <Constant id="transName" value=""/>
+                                <Constant id="sourceState" value="Review"/>
+                                <Constant id="targetState" value="Approved"/>
+                                <Constant id="removal" value="false"/>
+                        </Transition>
+                        <Transition id="ApprovedtoRelease">
+                                <Constant id="transName" value=""/>
+                                <Constant id="sourceState" value="Approved"/>
+                                <Constant id="targetState" value="Release"/>
+                                <Constant id="removal" value="false"/>
+                        </Transition>
+                        <Transition id="ReleasetoObsolete">
+                                <Constant id="transName" value=""/>
+                                <Constant id="sourceState" value="Release"/>
+                                <Constant id="targetState" value="Obsolete"/>
+                                <Constant id="removal" value="false"/>
+                        </Transition>
+                </Family>
+        </Domain>
+		<Domain id="DataAccessRight" reloadCache="true">
+				<Family id="ConfigRoles" icon="iconParameterizationDataAccess.gif" packaging="OnPremise">
+					<Parameter id="WinCommand" implementation="com.dassault_systemes.enovia.partmanagement.modeler.impl.parameterization.Parameterization">
+						<Argument id="AccessVal" type="string" input="combobox" default="Leader">
+							<Value id = "Leader"/>
+							<Value id = "Leader/Author"/>
+						</Argument>
+						<Constant id="command" value="vplm::SynchronizeWithMatrix"/>
+						<Constant id="commandEBOMControl" value="vplm::SynchronizeAndTransferToMatrix"/>
+					</Parameter>
+				</Family>
+		</Domain>
+        <Domain id="EngineeringCentral" solution="ALL" reloadCache="true">
+                <Family id="AutomationForECPart" icon="iconParameterizationDefault.gif">
+                        <Parameter id="FloatEBOMAutomation" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ConfiguredTriggerImpl">
+                                <Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+                                <Constant id="triggerName" value="PolicyECPartStateApprovedPromoteAction"/>
+                                <Constant id="triggerRevision" value="FloatEBOMToEnd"/>
+                        </Parameter>
+                </Family>
+        </Domain>
+		<Domain id="EngineeringCentral" reloadCache="true">
+				<Family id="RevisionSeq">
+					<Parameter id="RevisionSequence" implementation="com.matrixone.apps.engineering.Part">
+						<Argument id="Argument" type="string" input="checkbox" default="Disabled"/>
+						<Constant id="policy" value="EC Part"/>
+					</Parameter>
+				</Family>
+	</Domain>
+	<Domain id="EngineeringCentral" reloadCache="true">
+				<Family id="AutomationForECPart" icon="iconParameterizationDefault.gif">
+					<Parameter id="UnConfiguredBOMModeOptions" implementation="com.dassault_systemes.enovia.partmanagement.modeler.impl.parameterization.Parameterization">
+						<Argument id="UnConfiguredBOMMode" type="string" input="combobox" default="QuantityMode">
+							<Value id = "QuantityMode"/>
+							<Value id = "InstanceMode"/>
+						</Argument>
+					</Parameter>
+					<Parameter id="FindNumberBasedRollup" implementation="com.dassault_systemes.enovia.partmanagement.modeler.impl.parameterization.Parameterization">
+						<Argument id="Argument" type="string" input="checkbox" default="Disabled"/>
+					</Parameter>
+				</Family>
+	<Family id="EBOMPSCollaboration">
+					<Parameter id="DefaultDesignCollaboration"  packaging="OnPremise" implementation="com.dassault_systemes.enovia.partmanagement.modeler.impl.parameterization.Parameterization">
+						<Argument id="Argument" type="string" input="checkbox"/>
+					</Parameter>
+					<Parameter id="AutoCollaboration" packaging="OnPremise" implementation="com.dassault_systemes.enovia.partmanagement.modeler.impl.parameterization.Parameterization">
+						<Argument id="Argument" type="string" input="checkbox" default="Enabled"/>
+					</Parameter>
+				<Parameter id="CollaborateOnDesignRelease" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ConfiguredTriggerImpl" >
+						<Argument id="Argument" default="Enabled" input="checkbox" type="boolean"/>
+						<Constant id="triggerName" value="VPLMIntegSyncObjectOnReleaseTrigger"/>
+						<Constant id="triggerRevision" value="CollaborateOnDesignRelease"/>
+					</Parameter>                    
+					<Parameter id="ChangeCollaboration" packaging="OnPremise" implementation="com.dassault_systemes.enovia.partmanagement.modeler.impl.parameterization.Parameterization">
+                        <Argument id="Argument" type="string" input="checkbox" default="Disabled"/>
+                    </Parameter>					
+				</Family>
+	</Domain>
+</OOTBParameterization>

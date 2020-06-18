@@ -1,0 +1,208 @@
+<html>
+<head>
+<link rel="stylesheet" href="../CodeMirror/lib/codemirror.css">
+<script src="../CodeMirror/lib/codemirror.js"></script>
+<script src="../SMAVenHighcharts/6.0.7/highcharts.js"></script>
+<script src="../SMAAnalyticsPreview/AnalyticsReport.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/muuri/0.5.4/muuri.js"></script>
+
+<!-- script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script-->
+</head>
+<style>
+.dropZone{
+	position:absolute;
+	top:10%;
+	left:10%;
+	z-index: 100;
+	border-style:dotted;
+	border-width:1px;
+	border-radius:5px;
+	border-color:#888;
+	width:80%;
+	height:80%;
+	text-align:center;
+	vertical-align: middle;
+}
+/*.ReportContainer {
+	overflow-x:hidden;
+	overflow-y:auto;
+	position:absolute;
+	top:0;
+	left:0;
+}*/
+.ReportTitle{
+/*	width:100%;*/
+	height:2rem;
+	padding:10px;
+	text-align:center;
+	background-color:#eee;
+	color:#121;
+	border-radius:10px;
+	font-size:2rem;
+	font-family:sans-serif;
+}
+.SectionContainer {
+	position:relative;
+	margin:10px;
+	border-style: solid;
+    border-width: 1px;
+    border-color: #ccc;
+}
+.SectionTitle {
+	background-color: #ddd;
+	color: #333;
+	padding:10px;
+	border-radius:2px;
+	font-family:sans-serif;
+}
+.ImageContainer {
+	position:absolute;
+	padding:5px;
+	margin:5px;
+	border:1px solid lightgrey;
+}
+.ImageTitle {
+	background-color: #888;
+	/*width:100%;*/
+	color:#fff;
+	text-align:center;
+	padding:5px;
+	font-family:sans-serif;
+}
+.muuri {
+	position:relative;
+}
+</style>
+<body id="body">
+<div id="dropZone" class="dropZone">Drop report file here</div>
+<!-- input type="file" id="file" name="file" onchange="handleFiles(this.files)" -->
+<div id="container"></div>
+<script>
+
+function downloadReportFile(jobId, fileName) {
+    var xhr = new XMLHttpRequest();
+    if(!fileName) {
+        fileName = "doe.json";
+    }
+    xhr.open(
+        'GET',
+        '../../resources/slmservices/advise/caseTicket?action=download&fname='+fileName+'&oid='+jobId
+    );
+    xhr.send();
+
+    xhr.onload = function() {
+        if (this.response) {
+            var ticket = encodeURIComponent(
+                this.response.
+                    split('<Ticket>')[1].
+                    split('</Ticket>')[0]
+            );
+            var fcsurl = this.response.
+            split('<FcsUrl>')[1].
+            split('</FcsUrl>')[0]
+			if(!fcsurl) {
+			    fcsurl = '../../servlet/fcs/checkout'
+			}
+            var xhr1 = new XMLHttpRequest();
+            xhr1.onload = function(e) {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var text = String.fromCharCode.apply(null, new Uint8Array(this.response));
+                    if(fileName.endsWith('.json')) {
+                    	var report = JSON.parse(text);
+                    	console.log(report);
+                    	document.getElementById('dropZone').style.display = "none";
+                    	renderReport(report);
+                    } else {
+                        
+                        console.log(text);
+                    }
+                }
+            };
+
+            // use the fcs url from the ticket
+            xhr1.open('POST',fcsurl, true);
+            xhr1.setRequestHeader('Cache-Control', 'no-cache');
+            xhr1.setRequestHeader(
+                'Content-type',
+                'application/x-www-form-urlencoded'
+            );
+            xhr1.responseType = 'arraybuffer';
+
+            var data =
+                '__fcs__jobTicket=' +
+                ticket +
+                '&__fcs__attachment=false';
+            // this needs to be like the form
+            xhr1.send(data);
+        } else {
+            deferred.resolve();
+        }
+    };
+}
+
+
+
+
+function handleFileDrop(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
+
+    handleFiles(files);
+  }
+  
+function handleDragOver(evt) {
+    document.getElementById('dropZone').style.display = "block";
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+  }
+  
+var dropZone = document.getElementById('body');
+dropZone.addEventListener('dragover', handleDragOver, false);
+dropZone.addEventListener('drop', handleFileDrop, false);
+
+
+function getUrlArgs() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+var args = getUrlArgs();
+
+
+if(args["report"]) {
+    reportPath = args["report"];
+    //document.getElementById("file")
+    
+    
+} else if(args["jobId"]) {
+    
+    downloadReportFile(args["jobId"], args["fileName"]);
+}
+function handleFiles(files) {
+    var file = files[0] || document.getElementById("file").files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = function (evt) {
+            var str =  evt.target.result;
+ //           console.log(str);
+            var report = JSON.parse(str);
+            //console.log(report);
+            document.getElementById('dropZone').style.display = "none";
+            renderReport(report);
+        }
+        reader.onerror = function (evt) {
+            document.getElementById("fileContents").innerHTML = "error reading file";
+        }
+    }
+}
+
+</script>
+</body>
+</html>

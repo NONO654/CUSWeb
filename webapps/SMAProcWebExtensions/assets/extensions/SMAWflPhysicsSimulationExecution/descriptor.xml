@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.PhysicsSimulationExecution" version="419.1"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflPhysicsSimulationExecution" nlsID="displayname">Physics Simulation</DisplayName>
+	<Description nlsFile="SMAWflPhysicsSimulationExecution" nlsID="description">Physics Simulation Execution</Description>
+	<LongDescription>Execute physics simulation</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.component.PhysicsSimulationExecution</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>600</Value>
+			<Value>500</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflPhysicsSimReference.png" targetFilename="I_SMAWflPhysicsSimReference.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="PhysicsSimulationExecution.CATNls" targetFilename="PhysicsSimulationExecution.CATNls"/>
+		<!--<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflLoop_Japanese.CATNls" targetFilename="PhysicsSimulationExecution.CATNls" locale="Japanese" />-->
+		<Stream name="Properties" streamKind="properties" sourceFilename="PhysicsSimulationExecution.properties" targetFilename="PhysicsSimulationExecution.properties"/>
+		<!--<Stream name="Properties_Japanese" streamKind="properties" sourceFilename="SMAWflLoop_JapaneseCATNls.properties" targetFilename="SMAWflLoop_ja.properties" locale="Japanese" />-->
+		<Stream name="CodeJar" streamKind="jar" sharedLoader="false" sourceFilename="PhysicsSimulationExecution.jar" targetFilename="PhysicsSimulationExecution.jar" />
+		<!--For cppEditor-->
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/PhysicsSimulationExecution.dll" targetFilename="win_b64/PhysicsSimulationExecution.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="PhysicsSimulationExecution.sypstyle" targetFilename="PhysicsSimulationExecution.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.component.PhysicsSimulationExecution</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflPhysicsSimulationExecutionEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.component.PhysicsSimulationExecutionHandler</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflPhysicsSimulationExecutionEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="ExtensionAPI">
+			<Implementations>
+				<Implementation name="web" language="web" platform="win_b64">
+					<LateType>DS/SMAProcWeb3DXParameters/SMAProcWeb3DXParameterAPI</LateType>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<!--Execute simulation-->
+		<Property name="SimulationBatchExecuter" type="aggregate" valuetype="single">
+			<Property name="cpus" type="integer" valuetype="single">
+				<Value/>
+			</Property>
+		</Property>
+		<!--Generate report-->
+		<Property name="SMAHvxPrintPlotBatch" type="aggregate" valuetype="single">
+			<Property name="GenerateReport" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="GenerateFieldPlot" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Field_Plot_Camera" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="Field_Plot_Prefix" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="GenerateHistoryPlot" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="History_Plot_Name" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="Field_Plot_Export" type="string" valuetype="single">
+				<Value>FALSE</Value>
+			</Property>
+		</Property>
+		<!--Copy object-->
+		<Property name="SMAWflPLMCopyBatch" type="aggregate" valuetype="single">
+			<Property name="CopyString" type="string" valuetype="single">
+				<Value>Copy of</Value>
+			</Property>
+			<Property name="Evolution" type="string" valuetype="single">
+				<Value>FALSE</Value>
+			</Property>
+			<Property name="outputObjectParam" type="string" valuetype="single">
+				<Value/>
+			</Property>
+		</Property>
+		<!--Clear result-->
+		<Property name="Setup Physics Results Specifications" type="aggregate" valuetype="single">
+			<Property name="ClearResults" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+		</Property>
+		<!--Common options-->
+		<Property name="ModifyBaseSimulation" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+		<Property name="SaveModification" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+		<Property name="PhysicsReportHistory" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<!--Execution properties-->
+		<Property name="reusePolicy" tag="reusePolicy" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+		<Property name="maxConcurrent" tag="maxConcurrent" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="executionMode" tag="executionMode" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="logStderr" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[true]]>
+			</Value>
+		</Property>
+		<Property name="logStdout" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[true]]>
+			</Value>
+		</Property>
+		<Property name="linesToLogStderr" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[15]]>
+			</Value>
+		</Property>
+		<Property name="linesToLogStdout" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[15]]>
+			</Value>
+		</Property>
+	</Properties>
+</wfext:Extension>

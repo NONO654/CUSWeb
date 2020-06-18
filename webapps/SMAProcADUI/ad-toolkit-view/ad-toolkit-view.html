@@ -1,0 +1,83 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../ad-tool-manager/ad-tool-manager.html">
+<link rel="import" href="../ad-station-manager/ad-station-manager.html">
+<link rel="import" href="../ad-run/ad-run.html">
+<link rel="import" href="../ad-multiview-panel/ad-multiview-panel.html">
+<link rel="import" href="../ad-tool-config-panel/ad-tool-config-panel.html">
+<link rel="import" href="../ad-tool-add-dialog/ad-tool-add-dialog.html">
+<link rel="import" href="../ad-tool-remove-dialog/ad-tool-remove-dialog.html">
+<link rel="import" href="../ad-tool-run-dialog/ad-tool-run-dialog.html">
+<link rel="import" href="../ad-session/ad-session.html">
+<link rel="import" href="../ad-dialog-panel/ad-dialog-panel.html">
+<link rel="import" href="../ad-station-credentials/ad-station-credentials.html">
+
+<dom-module id="ad-toolkit-view">
+  <link rel="import" type="css" href="ad-toolkit-view.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+
+        <!-- COMMON CONFIGURATION PROPERTIES -->
+		<sp-variable id="uiMode" name="uiMode" on-valuechange="onVariableValueChange"></sp-variable>
+		<sp-variable id="inDash" name="inDash" on-valuechange="onVariableValueChange"></sp-variable>
+
+		<sp-dashboard id="dashboard"></sp-dashboard>
+
+		<ad-tool-manager id="toolManager" session="{{session}}"></ad-tool-manager>
+		<ad-station-manager id="stationManager" session="{{session}}"></ad-station-manager>
+		<ad-run id="toolRunner" on-success="onJobStarted" on-error="onJobError" session="{{session}}"></ad-run>
+		<ad-station-credentials id="stationCredentials"></ad-station-credentials>
+
+		<div id="toolCommandView" class="container-fluid tool-command-view">
+			<div class="row tool-header chrome-pull-fix" draggable="false">
+	            <div class="pull-right">
+					<sp-access id="access" group="process" data-has-no-write-then="hide">
+						<div id="addToolsWrapper" class="tooltip-button-wrapper" title="Add new tools">
+		                <button id="addTools" type="button" class="btn btn-xs btn-default" on-click="onAddTools"><span class="fonticon fonticon-plus"></span></button>
+		            </div>
+					</sp-access>
+					<sp-access group="process" data-has-no-write-then="hide">
+						<div class="tooltip-button-wrapper" title="Configure selected tools">
+		                <button id="configureTool" type="button" class="btn btn-xs btn-default" on-click="onConfigureTools"><span class="fonticon fonticon-cog"></span></button>
+		            </div>
+					</sp-access>
+					<sp-access group="process" data-has-no-write-then="hide">
+						<div class="tooltip-button-wrapper" title="Run selected tool">
+		                <button id="runTool" type="button" class="btn btn-xs btn-default" on-click="onRunTool"><span class="fonticon fonticon-play"></span></button>
+		            </div>
+					</sp-access>
+					<sp-access group="process" data-has-no-write-then="hide">
+						<div class="tooltip-button-wrapper" title="Remove selected tools">
+		                <button id="removeTool" type="button" class="btn btn-xs btn-default" on-click="onRemoveTools"><span class="fonticon fonticon-trash"></span></button>
+		            </div>
+					</sp-access>
+			        <div class="tooltip-button-wrapper" title="Show icons">
+		                <button id="viewIcons" type="button" on-click="onViewIcons" class$="{{_computeIconViewButtonClass(viewMode)}}"><span class="fonticon fonticon-layout"></span></button>
+		            </div>
+			        <div class="tooltip-button-wrapper" title="Show list">
+		                <button id="viewList" type="button" on-click="onViewList" class$="{{_computeListViewButtonClass(viewMode)}}"><span class="fonticon fonticon-list"></span></button>
+		            </div>
+				</div>
+			</div>
+			<div id="contentRow" tabindex="0" class="row tool-content hidden" on-click="onContentAreaClick">
+	            <ad-multiview-panel id="toolPanel" view-mode="{{viewMode}}" on-select="onToolSelect" on-drilldown="onToolDrilldown" on-dragover="onDragOver"></ad-multiview-panel>
+			</div>
+			<div id="placeholderRow" class="row tool-content hidden">
+				<div class="placeholder">
+	           		Click the '+' button to add Tools to your Toolkit
+				</div>
+			</div>
+			<div id="loadingRow" class="row tool-content hidden"></div>
+		</div>
+
+		<ad-dialog-panel id="toolConfigView" on-close="onConfigureToolsClose">
+			<ad-tool-config-panel session="{{session}}"></ad-tool-config-panel>
+		</ad-dialog-panel>
+
+	</template>
+  <script src="ad-toolkit-view.js"></script>
+</dom-module>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/*
+* @quickreview T9N  18:10:15 IR-634904-3DEXPERIENCER2019x Remove of responsive AB behavior.
+*/
+-->
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DPlayDocumentAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DPlayProAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="3DPlayDocumentAfrWorkshopHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID = "Previous" ClassName = "DS/3DPlayDocumentViewer/CmdPrevious"  ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+      <CATCommandHeader ID = "Next" ClassName = "DS/3DPlayDocumentViewer/CmdNext" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+      <CATCommandHeader ID = "Reframe" ClassName = "DS/3DPlayDocumentViewer/CmdReframe" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+      <CATCommandHeader ID = "RealSize" ClassName = "DS/3DPlayDocumentViewer/CmdRealSize" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+      <CATCommandHeader ID = "Pan" ClassName = "DS/3DPlayDocumentViewer/Cmd2DPan" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+      <CATCommandHeader ID = "Zoom" ClassName = "DS/3DPlayDocumentViewer/Cmd2DZoom" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+      <CATCommandHeader ID = "AnnotationCommands2D"    ClassName = "DS/3DPlayAnnotation2D/AnnotationCommands"   ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+    </CATCmdHeadersList>
+  </Template>
+  <Template syp:name="3DPlayDocumentAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DPlayDocumentWorkbench">
+      <CATCmdContainer Name = "SectionViews" Visibility = "1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name = "Pan"           Command = "Pan"/>
+        <CATCmdStarter Name = "Zoom"          Command = "Zoom"/>
+        <CATCmdStarter Name = "Reframe"       Command = "Reframe"/>
+        <CATCmdStarter Name = "RealSize"      Command = "RealSize"/>
+
+        <CATCmdStarter Name = "Previous"      Command = "Previous"/>
+        <CATCmdStarter Name = "Next"          Command = "Next"/>
+        <CATCmdSeparator Name = "BasicManip_Separator"/>
+        <CATCmdStarter Name = "AnnotationCommands2D" Command = "AnnotationCommands2D"/>
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+        <title>OPTIMIZATION GRAPH POC </title>
+        <meta charset="ISO-8859-1">
+        <meta name="author" content="Dassault Systemes" />
+        <meta name="brand" content="ENOVIA" />
+        <!-- <link rel="stylesheet" href="../UIKIT/UIKIT.css" /> -->
+        <!-- <script src="../UIKIT/UIKIT.js"></script> -->
+
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+        <link rel="stylesheet" type="text/css" href="../WebUX/WebUX.css" />
+      
+        <style>
+            .container-c0 {
+                height:500px;
+            }
+
+            .triptych-right {
+                overflow:hidden; /* handle here for now.. should be done from xmodel-triptych-wrapper*/
+            }
+            .pc-panel  {
+                margin-top: 150px;
+            }
+        </style>
+        
+       <!-- <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>-->
+
+        <script type="text/javascript">
+            'use strict';
+        
+            //ApplicationChannel ModelEvent
+            //UpdateChannel ModelEvent
+            require(['DS/ENOXModelApp/PCOptim/OptimizationGraphPresenter',
+                     'DS/CoreEvents/ModelEvents',
+                     'DS/Controls/Button',
+                     'UWA/Drivers/Alone',
+                     'DS/CfgDictionary/CfgDictionaryMapperUtilsOptim',
+                     'DS/ENOXTriptych/js/ENOXTriptych'
+            ], function (OptimizationGraphPresenter, ModelEvents, WUXButton, _Alone, CfgDictionaryMapperUtilsOptim, Triptych) {
+
+                        var _dico =  {
+                            "_version":"3.0",
+                            "portfolioClass":{
+                                "id":"a random ID for now, representing the enterprise or the future PLE",
+                                "attributes":{
+                                    "_type":{
+                                        "name":"Dummy_Name","value":"Dummy_Value"
+                                    }
+                                },
+                                "portfolioComponents":{
+                                    "totalItems":"1",
+                                    "member": [{"id": "0A3AB05655630000A7B3BC5A521F0200","pid": "0A3AB05655630000A7B3BC5A521F0200", "lid": "yyy",
+                                        "attributes":{
+                                            "_type":{ "name":"Dummy_Name", "value":"Dummy_Name_Super"}
+                                        },
+                                        "variabilityGroups": {
+                                            "totalItems": 1,
+                                            "member": [{
+                                                "id": "aVarGroupId",
+                                                "isInherited": false,
+                                                "attributes": {
+                                                    "_sequenceNumber" : {"name": "Sequence Number", "value": 17},
+                                                    "_name": {"name": "name","value" : "VarGroup Name"},
+                                                    "_description" : {
+                                                        "name": "description",
+                                                        "value": "a cool description for a var group"
+                                                    }
+                                                },
+                                                "variants": {"totalItems": 0, "member": [] },
+                                                "options": { "totalItems": 0,"member": [] },
+                                                "variabilityGroups": { "totalItems": 0, "member": [] }
+                                            }]
+                                    },
+				                    "variants": {
+				                        "totalItems": 2,
+					                    "member": [{"kind": "instance","isInherited": false,"idRef": "43264.64712.55040.51520",
+					                        "id": "43264.64712.59648.63293",
+					                        "attributes": {
+					                            "_name": { "name": "name","value": "USB 3.0" },
+					                            "_type": {"name": "type","value": "Variant" },
+					                            "_image": {"name": "image", "value": ""},
+					                            "_description": {  "name": "description", "value": ""},
+					                            "_mandatory": {"name": "mandatory", "value": true },
+					                            "_sequenceNumber": {"name": "Sequence Number","value": 13}
+					                        },
+					                        "values": {
+					                            "totalItems": 2,
+					                            "member": [{ "isInherited": false, "constraint": "available","id": "value1",
+					                                "idRef": "43264.64712.42752.5925",
+					                                "attributes": {
+					                                    "_name": {"name": "name","value": "USB30_Yes"},
+					                                    "_type": { "name": "type", "value": "value" },
+					                                    "_image": { "name": "image", "value": ""},
+					                                    "_description": { "name": "description", "value": ""},
+					                                    "_default": { "name": "default","value": false},
+					                                    "_sequenceNumber": { "name": "Sequence Number", "value": 17 },
+					                                    "_kpis": [
+                                                          { "id": "kpi_security", "name": "Security", "value": 10 },
+                                                          { "id": "kpi_green", "name": "Green", "value": 14 },
+                                                          { "id": "kpi_confort", "name": "Confort", "value": 20 },
+                                                          { "id": "kpi_cost", "name": "Cost", "value": 18 },
+                                                          { "id": "kpi_weight", "name": "Weight", "value": 5 },
+                                                          { "id": "kpi_performant", "name": "Performant", "value": 6 }
+					                                    ]
+					                                } 
+					                            }, {
+					                                "isInherited": false, "constraint": "available", "id": "value2",
+					                                "idRef": "43264.64712.42752.5926",
+					                                "attributes": {
+					                                    "_name": { "name": "name", "value": "USB30_Yes2" },
+					                                    "_type": { "name": "type", "value": "value" },
+					                                    "_image": { "name": "image", "value": "" },
+					                                    "_description": { "name": "description", "value": "" },
+					                                    "_default": { "name": "default", "value": false },
+					                                    "_sequenceNumber": { "name": "Sequence Number", "value": 2 },
+					                                    "_kpis": [
+                                                          
+                                                           { "id": "kpi_green", "name": "Green", "value": 7 },
+                                                           { "id": "kpi_confort", "name": "Confort", "value": 1 },
+                                                           { "id": "kpi_security", "name": "Security", "value": 11 },
+                                                           { "id": "kpi_cost", "name": "Cost", "value": 1 },
+                                                           { "id": "kpi_weight", "name": "Weight", "value": 10 },
+                                                           { "id": "kpi_performant", "name": "Performant", "value": 9 }
+					                                    ]
+					                                }
+					                            }]
+					                        }
+					                    }, {
+					                        "kind": "instance",
+					                        "isInherited": false,
+					                        "id": "acoolid",
+					                        "attributes": { "_name": { "name": "name", "value": "USB 3.0" },
+					                            "_type": {"name": "type", "value": "Variant Class" },
+					                            "_image": {"name": "image", "value": ""},
+					                            "_description": { "name": "description","value": "" }
+					                  
+					                        },
+					                        "values": {
+					                            "totalItems": 1,
+					                            "member": [{ "id": "value3","idRef": "43264.64712.42752.5993", "isInherited": false,
+					                                "attributes": {
+					                                    "_name": { "name": "name", "value": "USB30_Yes" },
+					                                    "_type": { "name": "type", "value": "variant" },
+					                                    "_image": { "name": "image",  "value": "" },
+					                                    "_description": { "name": "description", "value": "" },
+					                                    "_kpis": [
+                                                           { "id": "kpi_security", "name": "Security", "value": 2 },
+                                                           { "id": "kpi_green", "name": "Green", "value": 8 },
+                                                           { "id":"kpi_confort","name": "Confort", "value": 3},
+                                                           { "id" : "kpi_cost", "name": "Cost","value": 9},
+                                                           { "id": "kpi_weight", "name": "Weight","value": 4 },
+                                                           { "id": "kpi_performant","name": "Performant",  "value": 1}
+					                                    ]
+					                                }
+					                            }]
+					                        }
+					                    }]
+				                    },
+				                    "options": {
+				                        "totalItems": 1,
+					                    "member": [{
+					                        "id": "option1",
+					                        "idRef": "XYZ",
+					                        "isInherited": false,
+					                        "attributes": {
+					                            "_name" : { "name": "name","value": "An Awesome Option Instance" },
+					                            "_type": { "name": "type", "value": "Option"},
+					                            "_image" : {},
+					                            "_description": {},
+					                            "_kpis": [
+                                                    { "id": "kpi_security", "name": "Security", "value": 5 },
+					                                { "id": "kpi_green", "name": "Green", "value": 20 },
+					                                { "id":"kpi_confort","name": "Confort", "value": 13},
+					                                { "id" : "kpi_cost", "name": "Cost","value": 8},
+					                                { "id": "kpi_weight", "name": "Weight","value": 10 },
+					                                { "id": "kpi_performant","name": "Performant",  "value": 16}]
+					                        }
+						
+					                    }]
+				                    },
+				                    "packs": {
+				                        "totalItems": 0,
+					                    "member": []
+				                    },
+				                    "rules": {
+				                        "totalItems": 1,
+					                    "member": [{
+					                        "id": "43264.64712.37376.39381",
+					                        "compiledExpression": "value of the compiled expression",
+					                        "attributes": {
+					                            "_name": {
+					                                "name": "name",
+					                                "value": "Product Baselines by Market"
+					                            },	
+					                            "_type": {
+					                                "name": "type",
+					                                "value": "Matrix Rule"
+					                            },
+					                            "_description": {
+					                                "name": "description",
+					                                "value": "Reduce product complexity by defining target product baselines for the target markets"
+					                            },
+					                            "_originator": {
+					                                "name": "Originator",
+					                                "value": "VPLMAdminUser"
+					                            }
+					                        }
+					                    }]
+				                    },
+                                 }]
+                              }
+                           }
+                        }
+                       
+                        // from ext  : list of KPI 
+                        var _listKPI = ['green', 'security', 'confort', 'cost', 'weight', 'performant'];
+                        var modelC0 = {
+                            dicoFormat: {
+                            },
+                            defConfig: {
+                                prodConf: {
+                                    id:'prodConf',
+                                    name: 'Prod Conf',
+                                    definition: {
+                                        value1: true,
+                                        option1: true
+                                    }
+                                },
+                               config0: {
+                                   name: 'Default',
+                                   id: 'config0',
+                                   definition: {
+                                       value1: true,
+                                       value2: true,
+                                       option1 : true,
+                                   }
+                                },
+                                config1: {
+                                    name: 'Config1',
+                                    id: 'config1',
+                                    definition: {
+                                        value2: true,
+                                        option1: true
+                                    }
+                                },
+                                config2: {
+                                    name: 'Config2',
+                                    id: 'config2',
+                                    definition: {
+                                        value1: true,
+                                        value2: true,
+                                        option1: true,
+                                    }
+                                }
+                            },
+                          tabId: {
+                              0: {
+                                    index: 0,
+                                    label: "Optimization 1",
+                                    kpiList: {
+                                        green: { button: true, slider: 3, max: false },
+                                        security: { button: true, slider: 5, max: true },
+                                    },
+                                    configList: ['config0', 'config1']
+                                },
+                                3: {
+                                    index: 1,
+                                    label: "Try Again 404",
+                                    kpiList: {
+                                        cost: { button: true, slider: 3, max: false },
+                                        performant: { button: true, slider: 5, max: true },
+                                    },
+                                    configList: ['config2']                                  
+                                }
+                            },
+                            current: "config1",
+                        };
+                        //dico mapping
+                        modelC0.dicoFormat = CfgDictionaryMapperUtilsOptim.mergeDicoInMap(_dico);
+
+                        var container = document.createElement('div');
+                        container.classList.add('container-c0');
+                        document.body.appendChild(container);
+                        var _modelEvents = new ModelEvents();
+                        var triptych = new Triptych();
+                        var divleft = document.createElement('div');
+                        var divright = document.createElement('div');
+                        var divmain = document.createElement('div');
+                        var options = {
+                            left: {
+                                resizable: true,
+                                originalSize: 300,
+                                originalState: 'close', // 'open' for open, 'close' for close
+                            },
+                            right: {
+                                resizable: true,
+                                originalSize: 300,
+                                originalState: 'close', // 'open' for open, 'close' for close
+                            },
+                            borderLeft: true,
+                            modelEvents: _modelEvents,
+                            container: container,
+                            withtransition: true,
+                        };
+                        console.log(modelC0);
+                      
+                        triptych.init(options, divleft, divmain, divright);
+                        //Creation of graph component
+                        var _optimGraphPresenter = new OptimizationGraphPresenter({ listKPI: _listKPI, modelEvents: _modelEvents, modelC0: modelC0});
+                        _optimGraphPresenter.inject(container);
+
+                     
+       	    });
+        </script>
+    </head>
+    <body></body>
+</html>

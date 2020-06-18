@@ -1,0 +1,11 @@
+m|MPFModels\MPFSubscriptionModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.3.18352
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFSubscriptionModel\MPFSubscriptionModel.js|1545169471|2707
+s|MPFModels\MPFSubscriptionModel.mweb\src\SubscriptionModel.js|1543327070|3229
+s|MPFModels\MPFSubscriptionModel.mweb\src\MPFSubscriptionModel.js|1513939468|0
+s|MPFModels\MPFSubscriptionModel.mweb\src\SubscriptionCollection.js|1529933753|1586
+s|MPFModels\MPFSubscriptionModel.mweb\src\UnsubscribeDataProxy.js|1529933770|2060
+s|MPFModels\MPFSubscriptionModel.mweb\src\ResubscribeDataProxy.js|1529933745|2081

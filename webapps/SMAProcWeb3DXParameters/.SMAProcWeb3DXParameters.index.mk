@@ -1,0 +1,9 @@
+m|SMAProcWebExtensionEditors\SMAProcWeb3DXParameters.mweb
+b|j|n,m
+b|c|n,m
+v|6.421.5.19040
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAProcWeb3DXParameters\SMAProcWeb3DXParameterAPI.js|1549688346|3697
+s|SMAProcWebExtensionEditors\SMAProcWeb3DXParameters.mweb\src\SMAProcWeb3DXParameterAPI.js|1541598756|7239
+t|win_b64\webapps\SMAProcWeb3DXParameters\cmp-3dxparameters.html|1540605193|5273
+s|SMAProcWebExtensionEditors\SMAProcWeb3DXParameters.mweb\src\cmp-3dxparameters.html|1539613284|5273

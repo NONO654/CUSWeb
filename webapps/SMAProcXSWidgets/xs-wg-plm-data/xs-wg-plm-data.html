@@ -1,0 +1,57 @@
+<!--------------------------------------------------------------------
+[xs-wg-plm-data HTML Document]
+
+Project:		xs
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:46:53 GMT
+Assigned to:	Aravind Mohan
+Primary use:	Used within a view
+Description:    Gets/Sets the PLM data
+--------------------------------------------------------------------->
+
+<!--------------------------------------------------------------------
+
+[Table of contents]
+This is a UI less component
+
+------------------------------------------------------------------- -->
+<!-- Import base component common to all widgets-->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+<link rel="import" href="../xs-wg-cos-data/xs-wg-cos-data.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-data/sp-data.html">
+<link rel="import" href="../../SMAProcSP/sp-access-group/sp-access-group.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<!-- <link rel="import" href="../../SMAProcXSUI/xs-data-interface/xs-data-interface.html"> -->
+
+<dom-module id="xs-wg-plm-data">
+    <template>
+		<!-- If kind and path are not provided then it assumes the uid to be the simulation id -->
+		<!-- TODO: Break down this component as a plm data source -->
+		<sp-dashboard id="dashboard"></sp-dashboard>
+		<!-- <xs-data-interface id="datainterface"></xs-data-interface> -->
+		<template is="dom-if" if="{{_computeIf(kind, path, uid)}}">
+			<main style="height: 0px;" on-dataready="onDataReady" on-request="onRequest" on-response="onResponse" on-error="onError">
+				<sp-mcsservice id="iosummaryview" data="{{iosummaryview}}" getasap="" builduri="false" uri="{{_computeUri(uid)}}" on-response="onIOResponse">
+					<sp-data id="iosummaryviewdata" model="{{iosummaryview}}"></sp-data>
+				</sp-mcsservice>
+				<sp-mcsservice id="executionoptions" data="{{executionoptions}}" getasap="" builduri="false" uri="{{_computeUri2(uid)}}">
+					<sp-data id="executionoptionsdata" model="{{executionoptions}}"></sp-data>
+				</sp-mcsservice>
+				<sp-mcsservice id="simulation" data="{{simulation}}" getasap="" builduri="false" uri="{{_computeUri3(uid)}}">
+					<sp-data id="simulationdata" model="{{simulation}}"></sp-data>
+				</sp-mcsservice>
+				<xs-wg-cos-data id="cosdata" auto-update object-id="{{uid}}" on-change="updateCOSData" on-error="onCOSError"></xs-wg-cos-data>
+				<!-- Define the access group -->
+				<sp-access-group name="simulation" data="{{simulation.basics}}"></sp-access-group>
+
+                <sp-access id="access" group="simulation"></sp-access>
+
+                <!--Read-only access-->
+                <sp-access id="readonlyaccess" ></sp-access>
+			</main>
+		</template>
+    </template>
+    <script type="text/javascript" src="xs-wg-plm-data.js"></script>
+</dom-module>

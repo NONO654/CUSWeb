@@ -1,0 +1,9 @@
+m|XCTInfrastructureWeb\XCTInfCommands.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\XCTInfCommands\XCTInfCommands.js|1531551002|1349
+s|XCTInfrastructureWeb\XCTInfCommands.mweb\src\XCTInfBaseCommand.js|1498835715|1120
+s|XCTInfrastructureWeb\XCTInfCommands.mweb\src\XCTInfLoginCmd.js|1528816091|2359
+s|XCTInfrastructureWeb\XCTInfCommands.mweb\src\XCTInfCommands.js|1498653260|102

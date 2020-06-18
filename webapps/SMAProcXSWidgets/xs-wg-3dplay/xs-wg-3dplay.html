@@ -1,0 +1,93 @@
+<!--------------------------------------------------------------------
+[xs-wg-3dplay HTML 3dplay]
+
+Description:    TODO: Description about the component
+------------------------------------------------------------------- -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+
+<!-- Import base component common to all widgets-->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+
+<dom-module id="xs-wg-3dplay">
+  <!-- <link rel="import" type="css" href="xs-wg-3dplay.css"> -->
+  <template>
+        <style include="xs-wg-base"></style>
+        <style>
+        :host {
+            width: 100%;
+            height: auto;
+            position: relative;
+            display: inline-block;
+        }
+
+        #container {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .no-data > .no-data-info {
+            display: block;
+        }
+
+        .no-design > .no-design-info {
+            display: block;
+        }
+
+        .no-data-info, .no-design-info {
+            color: #b4b6ba;
+            font-size: 20px;
+            padding-bottom: 4px;
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        }
+
+        .no-data-info:before {
+            content: '\e009';
+            font-size: 24px;
+            display: inline-block;
+        }
+
+        .no-design-info:before {
+            content: '\e009';
+            font-size: 24px;
+            display: inline-block;
+        }
+
+        .maximized {
+            position: fixed;
+            height: 100% !important;
+            max-height: 100% !important;
+            background-color: #fafafa;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right:0;
+            transition: height 0.3s cubic-bezier(1, 0.38, 1, 0.19);
+            transition: width 0.3s cubic-bezier(1, 0.38, 1, 0.19);
+            z-index: 21;
+        }
+
+        </style>
+
+        <sp-dashboard id="dashboard"></sp-dashboard>
+        <label class="xs-wg-label">{{label}}</label>
+        <div id="container" class="no-data">
+            <div class="no-data-info fonticon xs-wg-placeholder-icon">
+              <span class="xs-wg-placeholder-text">No Data Present</span>
+            </div>
+            <div class="no-design-info fonticon xs-wg-placeholder-icon">
+               <span class="xs-wg-placeholder-text">3DPlay Preview is not available in design mode.</span>
+            </div>
+            <!-- 3dplay UI will come here -->
+        </div>
+    </template>
+  <script type="text/javascript" src="xs-wg-3dplay.js"></script>
+</dom-module>

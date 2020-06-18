@@ -1,0 +1,1 @@
+define("DS/LifecycleControls/LifecycleControls_zh",{});define("DS/LifecycleControls/assets/nls/CommandDialog",{okButton:"确定",cancelButton:"取消"});define("DS/LifecycleControls/assets/nls/CustomizeColumns",{CustomizeColumns:"自定义列",newTarget:"新目标"});

@@ -1,0 +1,48 @@
+{
+	"select" : {
+		"EBOM": ["MBOM", "CMDS", "LINKS", "IMPLEMENTMOD", "MFGSTRUCTUREMOD", "AUTHORLINKMOD"],
+		"MBOM": ["EBOM", "CMDS", "LINKS", "ORIGIN", "ALTERNATE", "CAPRESOURCE", "IMPLEMENTMOD", "MFGSTRUCTUREMOD", "AUTHORLINKMOD"],
+		"AUXILIARY": ["CMDS", "LINKS", "AUTHORLINKMOD"],
+		"ORIGIN": ["CMDS"],
+		"ALTERNATE": ["CMDS"],
+		"CAPRESOURCE": ["CMDS"],
+		"MIL": ["MIL"]
+	},
+
+	"SearchAndAddCommand" : {
+		"EBOM": ["EBOM"],
+		"MBOM": ["MBOM"],
+		"ORIGIN": ["ORIGIN"],
+		"ALTERNATE": ["ALTERNATE"],
+		"CAPRESOURCE": ["CAPRESOURCE"]
+	},
+	"ActionRemove" : {
+		"ALTERNATE": ["ALTERNATE"],
+		"CAPRESOURCE": ["CAPRESOURCE"],
+		"ORIGIN": ["ORIGIN"]
+	},
+	"AlternateBL" : {
+		"ALTERNATE": ["ALTERNATE"]
+	},
+	"CapableResourceBL" : {
+		"CAPRESOURCE": ["CAPRESOURCE"]
+	},
+	"Hide" : {
+		"CommandsService": ["EBOM", "MBOM", "AUXILIARY"]
+	},
+	"HideAll" : {
+		"CommandsService": ["EBOM", "MBOM", "AUXILIARY"]
+	},
+	"ExportCSVCmd" : {
+		"CommandsService" : ["MBOM"]
+	},
+	"refreshImpacted" : {
+		"EBOM" : ["AUXILIARY","MBOM", "LINKS"],
+		"MBOM" : ["AUXILIARY","EBOM", "LINKS", "ORIGIN", "ALTERNATE", "CAPRESOURCE"],
+		"AUXILIARY" : ["MBOM","EBOM", "LINKS"]
+	},
+	"removeRoot": {
+		"EBOM": ["EBOM"],
+		"MBOM": ["MBOM"]
+	}
+}

@@ -1,0 +1,1 @@
+define("DS/HomePage/HomePage_fr",{});define("DS/HomePage/assets/nls/HomePage",{HomePage_SearchContent:"Recherche de contenu",HomePage_CreateRequirementSpecification:"Créer une spécification d'exigence",HomePage_CreateSpecificationFolder:"Créer un dossier de spécifications",HomePage_Or:"ou"});

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IdeaExperienceCapacities>
+	<Header>
+		<Version>0.1</Version>
+	</Header>
+	<ExperienceObject>
+		<CXPEvent id="ClickablePressEvent">
+			<NaturalLanguageInfo alias="is clicked" capacityType="SensorEvent" icon="icons/caps/I_CXPClick.png"/>
+		</CXPEvent>
+		<CXPFunction body="hasMaterial" id="hasMaterial" returnValue="Boolean" >
+			<Variable name="material" restrictiveTypes="CXPMaterial_Spec" type="Object"/>
+			<NaturalLanguageInfo alias="has material" capacityType="SensorState" exposedVariable="material" icon="icons/20px/I_CXPHasMaterial.png"/>
+		</CXPFunction>
+
+		<CXPFunction body="removeMaterials" id="removeMaterials" returnValue="Boolean" >
+			<NaturalLanguageInfo alias="removes material" capacityType="DriverState" icon="icons/20px/I_CXPRemovesMaterials.png"/>
+		</CXPFunction>
+
+		<CXPFunction body="applyConfiguration" id="applyConfiguration" returnValue="Boolean" capEnvironmentVariable="CXP_ENABLE_CONFIG">
+			<Variable name="configurationName" type="String"/>
+			<NaturalLanguageInfo alias="apply configuration" capacityType="DriverState" icon="icons/20px/I_CXPSubproduct.png" exposedVariable="configurationName"/>
+		</CXPFunction>
+
+		<CXPFunction body="removeConfiguration" id="removeConfiguration" returnValue="Boolean" capEnvironmentVariable="CXP_ENABLE_CONFIG">
+			<NaturalLanguageInfo alias="remove configuration" capacityType="DriverState" icon="icons/20px/I_CXPSubproduct.png"/>
+		</CXPFunction>
+
+	</ExperienceObject>
+</IdeaExperienceCapacities>

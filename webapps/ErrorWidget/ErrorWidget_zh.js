@@ -1,0 +1,1 @@
+define("DS/ErrorWidget/ErrorWidget_zh",{});define("DS/ErrorWidget/assets/nls/langEW",{"Server issue":"无法完成与服务器的通信","Forbidden access":"您未获得访问服务器的授权"});

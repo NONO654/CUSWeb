@@ -1,0 +1,3426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<title>Apps</title>
+<meta name="author" content="Julien EDMOND"/>
+<meta name="description" content="A descriptive description"/>
+
+<link rel="icon" type="image/x-icon"
+      href="#MYAPPSBASEURL#/widget/appslist/favicon.png"/>
+<link rel="stylesheet" type="text/css"
+      href="#MYAPPSBASEURL#/widget/appslist/apps.css"/>
+
+<style type="text/css">
+    /* APPS.CSS */
+#dragOpenMenuTabs .btn {
+    display: none
+}
+
+table tr.even {
+    background-color: #F9F9F9
+}
+
+table tr.odd {
+    background: #fff
+}
+
+    /* license lightbox */
+div.license-description,
+div.confirm-message {
+    font-weight: bold;
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 2px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.confirm-lightbox .confirm-button-container {
+    margin: 15px 0 10px 0;
+    text-align: left;
+}
+
+.confirm-lightbox .confirm-button {
+    display: inline;
+    padding: 0 20px;
+    margin: 5px;
+    border: 1px solid #a8aaac;
+    color: #0d0d0d;
+    background-color: #d3d4d5;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dedfe0), color-stop(100%, #c8c9ca));
+    background-image: -webkit-linear-gradient(top, #dedfe0, #c8c9ca);
+    background-image: -moz-linear-gradient(top, #dedfe0, #c8c9ca);
+    background-image: -o-linear-gradient(top, #dedfe0, #c8c9ca);
+    background-image: linear-gradient(top, #dedfe0, #c8c9ca);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    background-repeat: no-repeat;
+    background-position: 0% 50%;
+    cursor: pointer;
+}
+
+.confirm-lightbox .confirm-button:hover {
+    border-color: #0d6196;
+}
+
+.license-lightbox fieldset.license-description {
+    border: 1px solid #DDD;
+    margin-top: 15px;
+}
+
+.license-lightbox fieldset.license-description legend {
+    font-weight: bold;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.license-lightbox fieldset.license-description div {
+    padding: 15px;
+    text-align: left;
+}
+
+.accordion-open div {
+    background: transparent url(img/actions.png) no-repeat 0 -127px;
+    padding-left: 20px;
+}
+
+.accordion-closed div {
+    background: transparent url(img/actions.png) no-repeat 0 -288px;
+    padding-left: 20px;
+}
+
+.invite-user-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 7px;
+}
+
+.lightbox-content {
+    margin: 15px;
+}
+
+    /* GENERIC WIDGET LOADING*/
+.widget-loading {
+    background: url("img/module-loading-spinner.gif") no-repeat scroll 50% 50% #E9E9E9;
+    color: #C2C2C2;
+    z-index: 1;
+    opacity: 0.8;
+    position: absolute;
+}
+
+#custom-message {
+    position: absolute;
+}
+
+    /* GENERIC lightbox */
+.lightbox {
+    position: relative;
+    text-align: center;
+    background: white;
+    width: 50%;
+    margin: 130px 25% 0 25%;
+    padding: 5px;
+}
+
+.lightbox a:link,
+.lightbox a:visited {
+    color: blue;
+}
+
+.lightbox .close-panel {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    cursor: pointer;
+}
+
+    /* confirm lightbox */
+.confirm-lightbox {
+    width: 30%;
+    margin: 130px 35% 0 35%;
+}
+
+.lightbox .remove-license-img {
+    vertical-align: middle;
+    cursor: pointer;
+    height: 20px;
+    opacity: 0.3;
+    transition: all 0.3s ease 0s;
+    width: 20px;
+}
+
+.lightbox .remove-license-img:hover {
+    opacity: 0.8;
+}
+
+    /*GENERIC*/
+a {
+    color: #0088cc;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #005580;
+    text-decoration: underline;
+}
+
+    /* GENERIC TABLE */
+table {
+    max-width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.table thead th {
+    vertical-align: bottom;
+}
+
+.table th {
+    font-weight: bold;
+}
+
+.table th, .table td {
+    padding: 8px;
+    line-height: 20px;
+    text-align: left;
+    vertical-align: middle;
+    border-top: 1px solid #DDD;
+}
+
+.table thead {
+    background-color: #F0F0F0
+}
+
+.alert {
+    font-weight: bold;
+    font-size: 13px
+}
+
+    /* boostrap */
+.clearfix {
+    *zoom: 1
+}
+
+.clearfix:before, .clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0
+}
+
+.clearfix:after {
+    clear: both
+}
+
+.hide-text {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0
+}
+
+.input-block-level {
+    display: block;
+    width: 100%;
+    min-height: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.btn {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #333;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top, #fff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #fff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #fff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #fff, #e6e6e6);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #e6e6e6;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    border: 1px solid #bbb;
+    *border: 0;
+    border-bottom-color: #a2a2a2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    *margin-left: .3em;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05)
+}
+
+.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] {
+    color: #333;
+    background-color: #e6e6e6;
+    *background-color: #d9d9d9
+}
+
+.btn:active, .btn.active {
+    background-color: #ccc  \9
+}
+
+.btn:first-child {
+    *margin-left: 0
+}
+
+.btn:hover {
+    color: #333;
+    text-decoration: none;
+    background-position: 0 -15px;
+    -webkit-transition: background-position .1s linear;
+    -moz-transition: background-position .1s linear;
+    -o-transition: background-position .1s linear;
+    transition: background-position .1s linear
+}
+
+.btn:focus {
+    outline: thin dotted #333;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px
+}
+
+.btn.active, .btn:active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
+    -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15), 0 1px 2px rgba(0, 0, 0, .05)
+}
+
+.btn.disabled, .btn[disabled] {
+    cursor: default;
+    background-image: none;
+    opacity: .65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none
+}
+
+.btn-large {
+    padding: 11px 19px;
+    font-size: 17.5px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px
+}
+
+.btn-large [class^="icon-"], .btn-large [class*=" icon-"] {
+    margin-top: 4px
+}
+
+.btn-small {
+    padding: 2px 10px;
+    font-size: 11.9px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px
+}
+
+.btn-small [class^="icon-"], .btn-small [class*=" icon-"] {
+    margin-top: 0
+}
+
+.btn-mini [class^="icon-"], .btn-mini [class*=" icon-"] {
+    margin-top: -1px
+}
+
+.btn-mini {
+    padding: 0 6px;
+    font-size: 10.5px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.btn-block+.btn-block {
+    margin-top: 5px
+}
+
+input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="button"].btn-block {
+    width: 100%
+}
+
+.btn-primary.active, .btn-warning.active, .btn-danger.active, .btn-success.active, .btn-info.active, .btn-inverse.active {
+    color: rgba(255, 255, 255, 0.75)
+}
+
+.btn {
+    border-color: #c5c5c5;
+    border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25)
+}
+
+.btn-primary {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #006dcc;
+    background-image: -moz-linear-gradient(top, #08c, #04c);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#08c), to(#04c));
+    background-image: -webkit-linear-gradient(top, #08c, #04c);
+    background-image: -o-linear-gradient(top, #08c, #04c);
+    background-image: linear-gradient(to bottom, #08c, #04c);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+    border-color: #04c #0044cc #002a80;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #04c;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false)
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
+    color: #fff;
+    background-color: #04c;
+    *background-color: #003bb3
+}
+
+.btn-primary:active, .btn-primary.active {
+    background-color: #039  \9
+}
+
+.btn-warning {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #faa732;
+    background-image: -moz-linear-gradient(top, #fbb450, #f89406);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
+    background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
+    background-image: -o-linear-gradient(top, #fbb450, #f89406);
+    background-image: linear-gradient(to bottom, #fbb450, #f89406);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffbb450', endColorstr='#fff89406', GradientType=0);
+    border-color: #f89406 #f89406 #ad6704;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #f89406;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false)
+}
+
+.btn-warning:hover, .btn-warning:active, .btn-warning.active, .btn-warning.disabled, .btn-warning[disabled] {
+    color: #fff;
+    background-color: #f89406;
+    *background-color: #df8505
+}
+
+.btn-warning:active, .btn-warning.active {
+    background-color: #c67605  \9
+}
+
+.btn-danger {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #da4f49;
+    background-image: -moz-linear-gradient(top, #ee5f5b, #bd362f);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ee5f5b), to(#bd362f));
+    background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+    background-image: -o-linear-gradient(top, #ee5f5b, #bd362f);
+    background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffee5f5b', endColorstr='#ffbd362f', GradientType=0);
+    border-color: #bd362f #bd362f #802420;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #bd362f;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false)
+}
+
+.btn-danger:hover, .btn-danger:active, .btn-danger.active, .btn-danger.disabled, .btn-danger[disabled] {
+    color: #fff;
+    background-color: #bd362f;
+    *background-color: #a9302a
+}
+
+.btn-danger:active, .btn-danger.active {
+    background-color: #942a25  \9
+}
+
+.btn-success {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #5bb75b;
+    background-image: -moz-linear-gradient(top, #62c462, #51a351);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
+    background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+    background-image: -o-linear-gradient(top, #62c462, #51a351);
+    background-image: linear-gradient(to bottom, #62c462, #51a351);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
+    border-color: #51a351 #51a351 #387038;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #51a351;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false)
+}
+
+.btn-success:hover, .btn-success:active, .btn-success.active, .btn-success.disabled, .btn-success[disabled] {
+    color: #fff;
+    background-color: #51a351;
+    *background-color: #499249
+}
+
+.btn-success:active, .btn-success.active {
+    background-color: #408140  \9
+}
+
+.btn-info {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #49afcd;
+    background-image: -moz-linear-gradient(top, #5bc0de, #2f96b4);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5bc0de), to(#2f96b4));
+    background-image: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+    background-image: -o-linear-gradient(top, #5bc0de, #2f96b4);
+    background-image: linear-gradient(to bottom, #5bc0de, #2f96b4);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5bc0de', endColorstr='#ff2f96b4', GradientType=0);
+    border-color: #2f96b4 #2f96b4 #1f6377;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #2f96b4;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false)
+}
+
+.btn-info:hover, .btn-info:active, .btn-info.active, .btn-info.disabled, .btn-info[disabled] {
+    color: #fff;
+    background-color: #2f96b4;
+    *background-color: #2a85a0
+}
+
+.btn-info:active, .btn-info.active {
+    background-color: #24748c  \9
+}
+
+.btn-inverse {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #363636;
+    background-image: -moz-linear-gradient(top, #444, #222);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444), to(#222));
+    background-image: -webkit-linear-gradient(top, #444, #222);
+    background-image: -o-linear-gradient(top, #444, #222);
+    background-image: linear-gradient(to bottom, #444, #222);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff444444', endColorstr='#ff222222', GradientType=0);
+    border-color: #222 #222222 #000;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #222;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false)
+}
+
+.btn-inverse:hover, .btn-inverse:active, .btn-inverse.active, .btn-inverse.disabled, .btn-inverse[disabled] {
+    color: #fff;
+    background-color: #222;
+    *background-color: #151515
+}
+
+.btn-inverse:active, .btn-inverse.active {
+    background-color: #080808  \9
+}
+
+button.btn, input[type="submit"].btn {
+    *padding-top: 3px;
+    *padding-bottom: 3px
+}
+
+button.btn::-moz-focus-inner, input[type="submit"].btn::-moz-focus-inner {
+    padding: 0;
+    border: 0
+}
+
+button.btn.btn-large, input[type="submit"].btn.btn-large {
+    *padding-top: 7px;
+    *padding-bottom: 7px
+}
+
+button.btn.btn-small, input[type="submit"].btn.btn-small {
+    *padding-top: 3px;
+    *padding-bottom: 3px
+}
+
+button.btn.btn-mini, input[type="submit"].btn.btn-mini {
+    *padding-top: 1px;
+    *padding-bottom: 1px
+}
+
+.btn-link, .btn-link:active, .btn-link[disabled] {
+    background-color: transparent;
+    background-image: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none
+}
+
+.btn-link {
+    border-color: transparent;
+    cursor: pointer;
+    color: #08c;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0
+}
+
+.btn-link:hover {
+    color: #005580;
+    text-decoration: underline;
+    background-color: transparent
+}
+
+.btn-link[disabled]:hover {
+    color: #333;
+    text-decoration: none
+}
+
+.uwa-overlay {
+    z-index: 55
+}
+
+.alert {
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+    border-radius: 4px 4px 4px 4px;
+    margin-bottom: 20px;
+    padding: 8px 35px 8px 14px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5)
+}
+
+.alert, .alert h4 {
+    color: #c09853
+}
+
+.alert h4 {
+    margin: 0
+}
+
+.alert .close {
+    line-height: 20px;
+    position: relative;
+    right: -21px;
+    top: -2px
+}
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847
+}
+
+.alert-success h4 {
+    color: #468847
+}
+
+.alert-danger, .alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48
+}
+
+.alert-danger h4, .alert-error h4 {
+    color: #b94a48
+}
+
+.alert-info {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    color: #3a87ad
+}
+
+.alert-info h4 {
+    color: #3a87ad
+}
+
+.alert-block {
+    padding-bottom: 14px;
+    padding-top: 14px
+}
+
+.alert-block>p, .alert-block>ul {
+    margin-bottom: 0
+}
+
+.alert-block p+p {
+    margin-top: 5px
+}
+
+    /* Style for the add app form */
+
+.add-app-lightbox {
+    text-align: left;
+    width: 70%;
+    margin: 130px 15% 0 15%;
+    height: auto;
+}
+
+.add-app-lightbox .form-wrapper {
+    float: left;
+    width: 75%;
+}
+
+.add-app-lightbox fieldset {
+    margin: 0 10px 10px 10px;
+    padding: 10px;
+    border: 1px solid #c9c9c9;
+    border-radius: 4px;
+}
+
+.add-app-lightbox fieldset legend {
+    font: bold 12px Tahoma;
+    padding: 0 5px;
+}
+
+.add-app-lightbox .left-wrapper {
+    float: left;
+    width: 50%;
+}
+
+.add-app-lightbox .uwa-checkbox.checked .uwa-checkbox-content {
+    background: url(img/check.png) top left no-repeat;
+}
+
+.add-app-lightbox .input-label {
+    font: bold 12px Tahoma;
+}
+
+.add-app-lightbox .checkbox-label {
+    font: bold 12px Tahoma;
+    display: inline-block;
+    margin: 0 10px 0 5px;
+}
+
+.add-app-lightbox .checkbox-wrapper {
+    display: inline-block;
+    margin: 10px 0 0 0;
+}
+
+.add-app-lightbox .uwa-input {
+    margin: 0;
+}
+
+.add-app-lightbox .uwa-select,
+.add-app-lightbox .uwa-text {
+    margin: 10px 0;
+    display: block;
+    width: 75%;
+}
+
+.add-app-lightbox .multiline {
+    resize: none;
+    height: 50px;
+}
+
+.add-app-lightbox .uwa-button {
+    margin-right: 10px;
+}
+
+.add-app-lightbox .button-wrapper {
+    margin: 10px;
+}
+
+.add-app-lightbox .input-tooltip {
+    position: absolute;
+    font: normal 11px Tahoma;
+    color: #0d0d0d;
+    text-align: left;
+    background-color: #f5f5f5;
+    z-index: 1;
+    padding: 5px;
+    border: 1px solid #a8aaac;
+    border-radius: 2px;
+    box-shadow: 1px 1px 1px black;
+}
+
+.add-app-lightbox .error {
+    border-color: #b94a48
+}
+
+.add-app-lightbox .messages {
+    margin-left: 10px;
+}
+
+.add-app-lightbox .messages li {
+    font: normal 12px Tahoma;
+}
+
+.add-app-lightbox .messages.error li {
+    color: #b94a48;
+}
+
+.add-app-lightbox .messages.success li {
+    color: #468847;
+}
+
+.add-app-lightbox .panel-preview {
+    background: url(img/Top_Bar_Layer_Top.png) repeat-x 0 -15px #eaeaea;
+    padding: 4px 10px;
+}
+
+.add-app-lightbox .compass-preview {
+    background: url(img/compass.png) no-repeat 0 -256px;
+    width: 64px;
+    height: 64px;
+}
+
+.add-app-lightbox .compass-preview-on.west {
+    background-position: 0 0;
+}
+
+.add-app-lightbox .compass-preview-on.south {
+    background-position: 0 -64px;
+}
+
+.add-app-lightbox .compass-preview-on.north {
+    background-position: 0 -128px;
+}
+
+.add-app-lightbox .compass-preview-on.east {
+    background-position: 0 -192px;
+}
+
+.add-app-lightbox .preview-section {
+    border: 1px solid #a8aaac;
+    border-radius: 2px;
+    color: #0d0d0d;
+    background-color: #b1b3b5;
+    background-image: linear-gradient(top, #cdcfd0, #96989b);
+    background-image: -webkit-linear-gradient(top, #cdcfd0, #96989b);
+    background-repeat: no-repeat;
+    background-position: 0% 50%;
+    box-shadow: 0px 1px 5px black;
+    margin-top: 10px;
+    height: 28px;
+}
+
+.add-app-lightbox .preview-section-title {
+    padding-left: 30px;
+    font: normal 13px/27px '3ds';
+}
+
+.add-app-lightbox .preview-section-icon {
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    background: url(img/sections.png) no-repeat;
+}
+
+.add-app-lightbox .preview-section-icon.south {
+    background-position: 0 0;
+}
+
+.add-app-lightbox .preview-section-icon.north {
+    background-position: 0 -28px;
+}
+
+.add-app-lightbox .preview-section-icon.east {
+    background-position: 0 -56px;
+}
+
+.add-app-lightbox .preview-section-icon.west {
+    background-position: 0 -112px;
+}
+
+.add-app-lightbox .preview-item {
+    margin: 15px;
+    width: 88px;
+}
+
+.add-app-lightbox .preview-icon {
+    width: 64px;
+    height: 64px;
+    margin-left: 12px;
+}
+
+.add-app-lightbox .preview-title {
+    width: 80px;
+    height: 24px;
+    margin: 4px;
+    overflow: hidden;
+    font: normal 11px/12px '3ds-Light';
+    color: #0d0d0d;
+    text-align: center;
+    cursor: default;
+}
+
+    /* END APPS.CSS */
+.nv-autocomplete-suggests {
+    z-index: 1;
+}
+
+table.member-platform-list tr.even {
+    background-color: #F9F9F9
+}
+
+#tr-grant-access-licenses-user {
+    font-weight: bold;
+    display: none
+}
+
+.moduleContent {
+    padding: 0;
+}
+
+table.licenses-list td {
+    height: 30px;
+}
+
+.invite-user-img {
+    margin-top: 1px;
+}
+
+.invite-user-img,
+.platform-help-img,
+.edit-app-img,
+.add-app-img {
+    cursor: pointer;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    opacity: 0.3;
+    transition: all 0.3s ease 0s;
+    width: 20px;
+    vertical-align: middle;
+}
+
+.invite-user-img.invite-user-img-disabled:hover,
+.invite-user-img.invite-user-img-disabled {
+    cursor: default;
+    opacity: 0.1;
+}
+
+#platform-help-button-apps {
+    text-align: right;
+}
+
+.invite-user-img:hover,
+.platform-help-img:hover,
+.edit-app:hover .edit-app-img {
+    opacity: 0.8;
+}
+
+.platform-help-element {
+    background: none;
+    padding: 0;
+}
+
+.platform-help-container, .platform-help-list,
+.platform-help {
+    padding: 0;
+    overflow: hidden;
+}
+
+table.licenses-list td.platform-help {
+    height: auto;
+    text-align: justify;
+    padding: 10px 25px;
+}
+
+.user-autocomplete {
+    width: 50%;
+    float: left
+}
+
+.edit-app, .add-app {
+    cursor: pointer;
+}
+
+.edit-app-img, .add-app-img {
+    margin-left: 0;
+    padding-left: 10px;
+}
+
+</style>
+
+<script type="text/javascript">
+//<![CDATA[
+require(
+        [
+            'UWA/Core',
+            'UWA/Data',
+            'UWA/Fx',
+            'UWA/Controls/Autocomplete',
+            'UWA/Controls/Input',
+            'UWA/Controls/Abstract',
+            'UWA/Event',
+        ],
+        /**
+         *
+         * @param {UWA} UWA
+         * @param Fx
+         */
+                function (UWA, Data, Fx, Autocomplete, Input, Abstract, Event) {
+            'use strict';
+
+            var isFirstManagerSet = false;
+            var OneCallAutoComplete = Autocomplete.extend({
+                /*
+                 Method: onKeyUp
+
+                 Invoked when a key is typed in the autocomplete field.
+
+                 Returns:
+                 * Nothing.
+                 */
+                onKeyUp: function (e) {
+
+                    var target = Event.getElement(e);
+
+                    if (false && target.value.length === 0) { // empty entry
+                        this.onHideSuggests();
+                        //this.dispatchEvent('onUpdateSuggests', []);
+                        return;
+                    }
+
+                    if (target.value.length >= this.options.minLength && !this.typeTimeout) {
+                        clearTimeout(this.typeTimeout);
+                        this.typeTimeout = setTimeout(function () {
+                            this.getSuggestions(target.value);
+                        }.bind(this), this.options.typeDelay);
+                    }
+                },
+                cleanCache: function () {
+                    this.dataCache = {};
+                },
+                resizeSuggests: function () {
+                    var elements = this.elements,
+                            dimSearch = elements.input.getDimensions();
+                    elements.suggestsContainer.setStyle('width', dimSearch.width + 'px');
+
+                    //Patch for true maxHeight...
+                    if (this.options.maxHeight && this.options.maxHeight !== 'auto' && elements.suggests.getSize().height > this.options.maxHeight) {
+                        elements.suggestsContainer.setStyle('height', this.options.maxHeight + 'px');
+                    } else {
+                        elements.suggestsContainer.setStyle('height', elements.suggests.getSize().height + 'px');
+
+                    }
+                },
+                text: null,
+                filter: function (value) {
+                    var display = value.firstName.toLowerCase() + ' ' + value.lastName.toLowerCase() + ' - ' + value.email.toLowerCase();
+                    return display.contains(this.text.toLowerCase());
+                },
+                jsfilter: function (text) {
+                    this.text = text;
+                    var data = {};
+                    if (text === '*') {
+                        data = this.dataCache['*'];
+                    } else {
+                        data = this.dataCache['*'].filter(this.filter.bind(this));
+                    }
+                    return data;
+                },
+                getSuggestions: function (text) {
+
+                    var finalUrl;
+
+                    if (!text) {
+                        text = '*';
+                        //this.typeTimeout = null;
+                        //return;
+                    }
+                    if (this.dataCache[text]) { // already in internal cache
+
+                        this.dispatchEvent('onUpdateSuggests', [this.dataCache[text]]);
+                        this.typeTimeout = null;
+                        return;
+                    }
+
+                    if (this.options.suggestUrl) {
+
+                        if (!this.dataCache['*']) {
+                            finalUrl = this.options.suggestUrl.replace('{text}', text);
+                            var elements = this.elements,
+                                    input = elements.input,
+                                    loader = UWA.createElement('img', {
+                                        src: tools.proxy.baseUrl + 'widget/appslist/img/loader-legal.gif',
+                                        styles: {
+                                            position: 'absolute',
+                                            right: '3',
+                                            top: '4px',
+                                            height: '16px',
+                                            width: '16px'
+                                        }
+                                    });
+                            //Patch for display an ajax loader
+                            loader.inject(input, 'after');
+                            UWA.Data.getJson(finalUrl, function (data) {
+                                //Patch for remove ajax loader
+                                loader.destroy();
+                                data = this.dataParse(data);
+
+                                if (data.length > 0) {
+                                    this.dataCache['*'] = data;
+                                    this.dispatchEvent('onUpdateSuggests', [this.jsfilter(text)]);
+                                }
+                                this.typeTimeout = null;
+                            }.bind(this));
+                        } else {
+
+                            var filtered = this.jsfilter(text);
+                            //
+                            this.dataCache[text] = filtered;
+                            this.dispatchEvent('onUpdateSuggests', [filtered]);
+                            this.typeTimeout = null;
+                        }
+
+                    }
+                }
+            });
+            var CustomTooltip = Abstract.extend({
+                defaultOptions: {
+                    'max-width': 300,
+                    'z-index': 0,
+                    showEvent: 'mouseover',
+                    hideEvent: 'mouseout'
+                },
+                name: 'myapps-custom-tooltip',
+                text: '',
+                title: '',
+                description: '',
+
+                init: function (element, text, options) {
+                    var events = {};
+                    this._parent(options);
+                    this.opacitySupport = 'opacity' in document.body.style;
+                    this.text = text || '';
+                    this.elements = {
+                        tooltipped: UWA.extendElement(element)
+                    };
+                    events[this.options.showEvent] = this.dispatchAsEventListener('onShowTooltip');
+                    events[this.options.hideEvent] = this.dispatchAsEventListener('onHideTooltip');
+                    element.addEvents(events);
+                },
+
+                buildSkeleton: function () {
+                    var tooltip,
+                            tooltipped = this.elements.tooltipped,
+                            root = tooltipped.getOffsetParent();
+
+                    tooltip = UWA.createElement('div', {
+                        'class': this.getClassNames(''),
+                        styles: {
+                            'max-width': this.options['max-width'],
+                            'z-index': this.options['z-index'],
+                            position: 'absolute',
+                            display: 'none',
+                            opacity: 0
+                        }
+                    }).inject(root);
+
+                    this.fx = new Fx(tooltip, {
+                        duration: 250,
+                        wait: false,
+                        events: {
+                            onComplete: function () {
+                                // Force the element to hide when its opacity is 0
+                                if (tooltip.getOpacity() === 0) {
+                                    tooltip.hide();
+                                }
+                            }
+                        }
+                    });
+
+                    this.elements.tooltip = tooltip;
+
+                    return tooltip;
+                },
+
+                getPosition: function () {
+                    var tooltipped = this.elements.tooltipped,
+                            root = tooltipped.getOffsetParent(),
+                            position = tooltipped.getPosition(),
+                            size = tooltipped.getSize(),
+                            rootSize = root.getSize(),
+                            marginTop = parseInt(tooltipped.getStyle('margin-top'), 10);
+                    return {
+                        right: rootSize.width - position.x - size.width,
+                        top: position.y + size.height + marginTop
+                    }
+                },
+
+                setTitle: function (title) {
+                    this.title = title;
+                    this.text = title + (this.description && this.description !== '' ? '<br/><br/>' + this.description : '');
+                },
+
+                setDescription: function (description) {
+                    this.description = description;
+                    this.text = this.title + (description && description !== '' ? '<br/><br/>' + description : '');
+                },
+
+                setText: function (text) {
+                    this.text = text;
+                },
+
+                show: function () {
+                    var tooltip = this.elements.tooltip;
+
+                    if (!tooltip) {
+                        tooltip = this.buildSkeleton();
+                    }
+                    tooltip.setContent(this.text);
+                    tooltip.setStyles(this.getPosition());
+
+                    if (!this.visible) {
+                        tooltip.show();
+                        if (this.opacitySupport) {
+                            this.fx.fade('in');
+                        }
+                        this.visible = true;
+                    }
+                },
+
+                hide: function () {
+                    if (this.visible) {
+                        if (this.opacitySupport) {
+                            this.fx.fade('out');
+                        } else {
+                            this.elements.tooltip.hide();
+                        }
+                        this.visible = false;
+                    }
+                },
+
+                onShowTooltip: function () {
+                    this.show();
+                },
+
+                onHideTooltip: function () {
+                    this.hide();
+                }
+            });
+
+            var tools = {
+                /**
+                 * Retrieve all params url
+                 */
+                getUrlParams: function () {
+                    var prmstr = window.location.search.substr(1),
+                            prmarr = prmstr.split('&'),
+                            params = {};
+
+                    for (var i = 0; i < prmarr.length; i++) {
+                        var tmparr = prmarr[i].split('=');
+                        params[tmparr[0]] = tmparr[1];
+                    }
+
+                    return params;
+                },
+
+                /**
+                 *    Retrieve the token from uri
+                 *    (Suppose that token is allways in last position)
+                 */
+                getToken: function () {
+                    var params = tools.getUrlParams();
+                    return (params.platform_token) ? params.platform_token : false;
+                },
+
+                isUrl: function (str) {
+                    var pattern = new RegExp(
+                            '^(https?:\\/\\/)?' + // protocol
+                                    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+                                    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+                                    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+                                    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+                                    '(\\#[-a-z\\d_]*)?$', 'i'
+                    ); // fragment locator
+                    if (!pattern.test(str)) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            };
+
+            /**
+             * Manage error
+             *
+             */
+            tools.error = {
+                /**
+                 * Check if the error is a passport forbidden (cas session lost)
+                 *
+                 */
+                isPassportForbiden: function (error) {
+                    return error.match(/.*passport_forbidden*/i) !== null;
+                },
+
+                /**
+                 * Check if the error is a curl error timeout
+                 *
+                 */
+                isCurlTimeout: function (error) {
+                    UWA.log(error);
+                    //Error in cURL request: Operation timed out after 10001 milliseconds with 0 bytes received
+                    return error.match(/.*curl.*.*operation.*timed out.*/i) !== null;
+                }
+            };
+
+            tools.syncOverlay = function () {
+                var overlay = document.body.getElement('.uwa-overlay');
+                if (overlay) {
+                    overlay.setStyle('height', document.body.scrollHeight);
+                }
+            };
+            /**
+             *    Display custom alert message
+             */
+            tools.message = function (message, type) {
+                var content = document.body.getElement('#divTabs .uwa-scroller-wrapper, #divTabs .uwa-scroller .-wrapper');
+                var customMessadeDiv = document.body.getElement('#custom-message');
+                if (!customMessadeDiv) {
+                    var customMessadeDiv = UWA.createElement('div', {
+                        'id': 'custom-message',
+                        'class': 'alert'
+                    });
+                    content.grab(customMessadeDiv, 'top');
+                } else {
+                    //Div exist remove alert class
+                    customMessadeDiv.removeClassName('alert-success');
+                    customMessadeDiv.removeClassName('alert-error');
+                }
+
+                //Set css alert class + set text
+                customMessadeDiv.setText(message);
+                customMessadeDiv.addClassName('alert-' + type);
+
+                var divTabsPaddingLeft = parseInt(document.getElementById('divTabs').getStyle('padding-left'), 10);
+                var left = ((document.body.getWidth() - customMessadeDiv.getWidth()) / 2) - divTabsPaddingLeft;
+                customMessadeDiv.setStyles({
+                    'left': left + 'px'
+                });
+
+                //show
+                var fx = new Fx(customMessadeDiv, {
+                    duration: 450,
+                    transition: 'linear',
+                    events: {
+                        onStart: function () {
+                            // Callback trigered when Animation Start
+                        },
+                        onComplete: function () {
+                            // Callback trigered when Animation End
+                        }
+                    }
+                });
+
+                var customMessadeDivOpacity = document.body.getElement('#custom-message').getOpacity();
+                if (isNaN(customMessadeDivOpacity) || customMessadeDivOpacity < 1) {
+                    // Run Show Fx
+                    fx.start({
+                        opacity: [0, 1]
+                    });
+                }
+
+                //hide
+                var fx = new Fx(customMessadeDiv, {
+                    duration: 450,
+                    transition: 'linear',
+                    events: {
+                        onStart: function () {
+                            // Callback trigered when Animation Start
+                        },
+                        onComplete: function () {
+                            // Callback trigered when Animation End
+                        }
+                    }
+                });
+
+
+                //hide after 5sc
+                setTimeout(function () {
+                    var customMessadeDivOpacity = document.body.getElement('#custom-message').getOpacity();
+                    if (customMessadeDivOpacity === 1) {
+                        // Run Hide Fx
+                        fx.start({
+                            opacity: [1, 0]
+                        });
+                    }
+                }, 3000);
+
+            };
+
+            /**
+             *    Success alert
+             */
+            tools.message.success = function (message) {
+                tools.message(message, 'success');
+            };
+
+            /**
+             *    Error alert
+             */
+            tools.message.alert = function (message) {
+                tools.message(message, 'error');
+            };
+
+            /**
+             * Ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             * @param method
+             */
+            tools.request = function (url, params, callbacks, method) {
+                method = method || 'GET';
+                var headers = {
+                    Accept: 'application/ds-json',
+                    'Accept-Language': MyWidget.getLang()
+                }, formData;
+                if (method === 'POST' || method === 'PUT') {
+                    formData = params;
+                    params = '';
+                    headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                } else {
+                    params = UWA.Utils.toQueryString(params);
+                    params = (params.length > 0) ? '?' + params : '';
+                }
+                var requestSettings = {
+                            timeout: 15000,
+                            method: method,
+                            type: 'json',
+                            headers: headers,
+                            proxy: 'passport',
+                            data: formData,
+                            onComplete: function (data) {
+                                var RowData = data,
+                                        error;
+                                if (data) {
+                                    if ((data.code && data.code !== '0') || data.error) {
+                                        error = (data.message && data.message !== '') ? data.message : data.error;
+                                        if (tools.error.isPassportForbiden(error)) {
+                                            location.reload();
+                                        } else if (tools.error.isCurlTimeout(error)) {
+                                            //if curl timeout error
+                                            //no problem its normal.... reload widgets....
+                                            MyWidget.onLoad();
+                                        } else {
+                                            widget.unmask();
+                                            tools.message.alert(error);
+                                            if (typeof callbacks.onFailure === 'function') {
+                                                callbacks.onFailure(data);
+                                            }
+                                        }
+                                    } else {
+                                        if (typeof callbacks.onComplete === 'function') {
+                                            callbacks.onComplete(data);
+                                        }
+                                    }
+                                } else {
+                                    tools.message.alert(RowData);
+                                }
+                            },
+                            onFailure: function (data) {
+                                if (typeof callbacks.onFailure === 'function') {
+                                    callbacks.onFailure(data);
+                                } else {
+                                    UWA.log(data.error);
+                                }
+                            }
+                        },
+                        urlWithParams;
+
+                UWA.log('Send with method ' + requestSettings.method);
+                urlWithParams = url + params;
+                Data.request(urlWithParams, requestSettings);
+            };
+
+            /**
+             * GET ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.get = function (url, params, callbacks) {
+                tools.request(url, params, callbacks, 'GET');
+            };
+
+            /**
+             * PUT ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.put = function (url, params, callbacks) {
+                tools.request(url, params, callbacks, 'GET');
+            };
+
+            tools.request.realPut = function (url, params, callbacks) {
+                tools.request(url, params, callbacks, 'PUT');
+            };
+
+            /**
+             * POST ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.post = function (url, params, callbacks) {
+                tools.request(url, params, callbacks, 'POST');
+            };
+
+            /**
+             * Widget unmask
+             */
+            widget.unmask = function () {
+                var loadingDiv = widget.getElement('.widget-loading');
+                if (loadingDiv) {
+                    loadingDiv.setStyles({
+                        display: 'none'
+                    });
+                }
+            };
+
+            /**
+             * Widget mask
+             */
+            widget.mask = function () {
+                var loadingDiv = widget.getElement('.widget-loading'),
+                        widgetSize = widget.body.getSize();
+                if (!loadingDiv) {
+                    widget.body.grab(UWA.createElement('div', {
+                        'class': 'widget-loading'
+                    }), 'top');
+
+                    loadingDiv = widget.getElement('.widget-loading');
+                }
+
+                //sync size of loader
+                loadingDiv.setStyles({
+                    height: widgetSize.height + 'px',
+                    width: widgetSize.width + 'px',
+                    display: 'block'
+                });
+            };
+
+            var confirmLightbox = {
+                _getMessage: function (message) {
+                    return {
+                        tag: 'div',
+                        'class': 'confirm-message',
+                        text: message
+                    };
+                },
+                _getButtons: function (callbacks) {
+                    return {
+                        tag: 'div',
+                        'class': 'confirm-button-container',
+                        html: [
+                            {
+                                tag: 'div',
+                                'class': 'confirm-button',
+                                text: UWA.i18n('Yes'),
+                                events: {
+                                    click: function () {
+                                        confirmLightbox._oldContent = false;
+                                        MyWidget.lightbox.close();
+                                        callbacks.yes();
+                                    }
+                                }
+                            },
+                            {
+                                tag: 'div',
+                                'class': 'confirm-button',
+                                text: UWA.i18n('No'),
+                                events: {
+                                    click: function () {
+                                        confirmLightbox._close();
+                                        if (callbacks.no) {
+                                            callbacks.no();
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    };
+                },
+                _getContent: function (message, callbacks) {
+                    return {
+                        tag: 'div',
+                        'class': 'lightbox confirm-lightbox',
+                        styles: {
+                            borderRadius: '5px'
+                        },
+                        html: [
+                            {
+                                tag: 'div',
+                                'class': 'close-panel',
+                                html: {
+                                    tag: 'a',
+                                    html: '<img alt="close" title="close" src="' + tools.proxy.baseUrl + 'widget/appslist/img/cancel_app.png" />',
+                                    events: {
+                                        'click': function () {
+                                            confirmLightbox._close();
+                                        }
+                                    }
+                                }
+                            },
+                            this._getMessage(message),
+                            this._getButtons(callbacks)
+                        ]
+                    };
+                },
+                _close: function () {
+                    MyWidget.lightbox.close();
+                    if (confirmLightbox._oldContent) {
+                        MyWidget.lightbox = new UWA.Controls.Lightbox({
+                            closeable: false
+                        });
+
+                        MyWidget.lightbox.setContent(confirmLightbox._oldContent).inject(document.body);
+                        MyWidget.lightbox.open();
+                    }
+                    confirmLightbox._oldContent = false;
+                },
+                show: function (message, callbacks) {
+                    if (document.getElementsByClassName('uwa-overlay')[0]) {
+                        confirmLightbox._oldContent = document.getElementsByClassName('uwa-overlay')[0].getChildren();
+                    }
+
+                    MyWidget.lightbox = new UWA.Controls.Lightbox({
+                        closeable: false
+                    });
+
+                    MyWidget.lightbox.setContent(this._getContent(message, callbacks)).inject(document.body);
+                    MyWidget.lightbox.open();
+                    tools.syncOverlay();
+
+                },
+                _oldContent: false
+            };
+
+            /* PROXY */
+            tools.proxy = {};
+            tools.proxy.baseUrl = '#MYAPPSBASEURL#' + '/';
+            tools.proxy.baseUrlBackend = tools.proxy.baseUrl + 'resources/AppsMngt/';
+            tools.proxy.listlicenses = tools.proxy.baseUrlBackend + 'licenses/all';
+            tools.proxy.licensesusers = tools.proxy.baseUrlBackend + 'licenses/users';
+            tools.proxy.userselect = tools.proxy.baseUrlBackend + 'user/select';
+            tools.proxy.memberslist = tools.proxy.baseUrlBackend + 'user/memberslist';
+            tools.proxy.usergrantlicenses = tools.proxy.baseUrlBackend + 'user/grantlicenses';
+            tools.proxy.removeuserlicence = tools.proxy.baseUrlBackend + 'user/removelicenses';
+            tools.proxy.addappinfos = tools.proxy.baseUrlBackend + 'apps/infosUI';
+            tools.proxy.addapp = tools.proxy.baseUrlBackend + 'apps';
+
+            var mainTable = {
+                _table: null,
+                _tbody: null,
+                firstShowHelperId: null,
+                isPartner: function (envid) {
+                    return envid === 'CustomEnvironment';
+                },
+                _helpRows: {
+                    rows: {}/**/,
+                    cells: {},
+                    lists: {},
+                    areOpen: {}/*true*/,
+                    intIds: {}/*null*/,
+                    step: 10,
+                    hide: function (id) {
+                        var margin = parseInt(this.lists[id].getStyle('margin-top').slice(0, -2), 10),
+                                size = this.lists[id].getSize().height;
+                        if (margin > -size) {
+                            this.lists[id].setStyle('margin-top', Math.max(margin - this.step, -size));
+                        } else {
+                            this.cells[id].hide();
+                            window.clearInterval(this.intIds[id]);
+                        }
+                    },
+                    show: function (id) {
+                        var margin = parseInt(this.lists[id].getStyle('margin-top').slice(0, -2), 10);
+                        if (margin < 0) {
+                            this.lists[id].setStyle('margin-top', Math.min(margin + this.step, 0));
+                        } else {
+                            window.clearInterval(this.intIds[id]);
+                        }
+                    },
+                    toggle: function (id) {
+                        this.areOpen[id] = !this.areOpen[id];
+                        if (this.areOpen[id]) {
+                            window.clearInterval(this.intIds[id]);
+                            this.cells[id].show();
+                            this.intIds[id] = window.setInterval(this.show.bind(this, id), 500 * this.step / this.lists[id].getSize().height);
+                        } else {
+                            window.clearInterval(this.intIds[id]);
+                            this.intIds[id] = window.setInterval(this.hide.bind(this, id), 500 * this.step / this.lists[id].getSize().height);
+                        }
+                        return true;
+                    },
+                    initHide: function () {
+                        var id;
+                        for (id in this.lists) {
+                            if (this.lists[id]) {
+                                this.lists[id].setStyle('margin-top', -this.lists[id].getSize().height);
+                                this.cells[id].hide();
+                                this.areOpen[id] = false;
+                            }
+
+                        }
+                    },
+                    add: function (id, rowHead) {
+                        this.rows[id] = UWA.createElement('tr', {'class': 'even' });
+                        UWA.createElement('td', {
+                            id: 'platform-help-' + id,
+                            colspan: 6,
+                            'class': 'platform-help',
+                            html: {
+                                tag: 'ul',
+                                'class': 'platform-help-list',
+                                id: 'platform-help-list-' + id,
+                                html: [
+                                    {
+                                        tag: 'li',
+                                        'class': 'platform-help-element',
+                                        text: UWA.i18n('The Platform Management dashboard lets you add members to your 3DEXPERIENCE platforms and manage member access to apps and storage.')
+                                    },
+                                    {
+                                        tag: 'li',
+                                        'class': 'platform-help-element',
+                                        text: UWA.i18n('1. Invite users to the 3DEXPERIENCE platform in the People Management widget. Users vill receive an email invitation to create a DSPassport or sign in with one they already have.*')
+                                    },
+                                    {
+                                        tag: 'li',
+                                        'class': 'platform-help-element',
+                                        text: UWA.i18n('2. After the user signs in with a DSPassport in response to the email, use the Apps Management widget to give access to licenses and apps to the members.')
+                                    },
+                                    {
+                                        tag: 'li',
+                                        'class': 'platform-help-element',
+                                        text: UWA.i18n('3. Use the IFWE Compass medallion at the top of the page to go to the Collaborative Space Management app to give users access to content storage.')
+                                    },
+                                    {
+                                        tag: 'li',
+                                        'class': 'platform-help-element',
+                                        text: UWA.i18n('* New members will appear with the status \"Pending\" until they use the emailed link to sign in with a DSPassport. If necessary, you can refresh your screen to update member status.')
+                                    }
+                                ]
+                            }
+                        }).inject(this.rows[id]);
+
+                        this.rows[id].inject(rowHead);
+                        this.cells[id] = this.rows[id].getElement('#platform-help-' + id);
+                        this.lists[id] = this.rows[id].getElement('#platform-help-list-' + id);
+
+                    }
+                },
+                _addHeader: function (env, displayTitleRow) {
+                    if (this.firstShowHelperId === null) {
+                        this.firstShowHelperId = env.id;
+                    }
+                    //add OID information
+                    var rowHead = UWA.createElement('thead', {
+                                'id': 'th-accordion-' + env.id,
+                                'class': 'accordion-open'
+                            }),
+                            row = UWA.createElement('tr', {
+                                styles: {
+                                    cursor: 'pointer'
+                                },
+                                events: {
+                                    click: function (envid) {
+                                        var acc = widget.body.getElementsByClassName('accordion-' + envid);
+                                        var th = widget.body.getElement('#th-accordion-' + envid);
+                                        if (th) {
+                                            th.toggleClassName('accordion-closed');
+                                            th.toggleClassName('accordion-open');
+                                        }
+                                        for (var i = acc.length - 1; i >= 0; i--) {
+                                            acc[i].toggle();
+                                        }
+                                    }.bind(this, env.id)
+                                }
+
+                            });
+
+                    UWA.createElement('th', {colspan: 5, html: '<div>' + env.displayName + '</div>'}).inject(row);
+
+                    if (this.firstShowHelperId === env.id) {
+                        UWA.createElement('th', {
+                            id: 'platform-help-button-apps',
+                            'class': 'platform-help-button',
+                            html: {
+                                tag: 'img',
+                                'class': 'platform-help-img',
+                                src: tools.proxy.baseUrl + 'widget/userslist/img/help.png',
+                                events: {
+                                    click: function (e) {
+                                        mainTable._helpRows.toggle(env.id);
+                                        if (e.stopPropagation) {
+                                            e.stopPropagation();
+                                        } else {
+                                            e.cancelBubble = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }).inject(row);
+                    } else {
+                        UWA.createElement('th', {}).inject(row);
+                    }
+                    row.inject(rowHead);
+                    rowHead.inject(this._table);
+
+
+                    rowHead = UWA.createElement('thead');
+
+                    if (this.isPartner(env.id)) {
+                        UWA.createElement('tr', {
+                            'class': 'accordion-' + env.id,
+                            html: [
+                                {
+                                    tag: 'th',
+                                    colspan: 6,
+                                    html: {
+                                        tag: 'a',
+                                        'class': 'add-app',
+                                        html: [
+                                            {
+                                                tag: 'span',
+                                                text: UWA.i18n('Add'),
+                                                styles: {'padding-left': '20px'}
+                                            },
+                                            {
+                                                tag: 'img',
+                                                src: tools.proxy.baseUrl + 'widget/userslist/img/inviteuser.png',
+                                                'class': 'add-app-img'
+                                            }
+                                        ],
+                                        events: {
+                                            click: function () {
+                                                addAppLightBox.show();
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }).inject(rowHead);
+                    }
+
+                    this._helpRows.add(env.id, rowHead);
+
+                    if (displayTitleRow) {
+                        row = UWA.createElement('tr', {'class': 'table-people-header accordion-' + env.id});
+
+                        UWA.createElement('th', {text: '#'}).inject(row);
+                        UWA.createElement('th', {text: UWA.i18n('User Experiences name')}).inject(row);
+                        if (this.isPartner(env.id)) {
+                            UWA.createElement('th', {text: UWA.i18n('Visibility')}).inject(row);
+                            UWA.createElement('th', {text: UWA.i18n('Edit')}).inject(row);
+                            UWA.createElement('th', {text: UWA.i18n('Platforms')}).inject(row);
+                        } else {
+                            UWA.createElement('th', {text: UWA.i18n('ID')}).inject(row);
+                            /*
+                             UWA.createElement('th', {text: 'Type'}).inject(row);
+                             */
+                            UWA.createElement('th', {text: UWA.i18n('Availability')}).inject(row);
+                            UWA.createElement('th', {text: UWA.i18n('Expiration Date')}).inject(row);
+                        }
+                        //Apps
+                        UWA.createElement('th', {text: UWA.i18n('Granted Members')}).inject(row);
+                        row.inject(rowHead);
+                    }
+
+                    rowHead.inject(this._table);
+
+                    this._tbody = UWA.createElement('tbody').inject(this._table);
+
+                    return this._tbody;
+                },
+                _addRow: function (data, envid) {
+                    var isEven = this._tbody.childNodes.length % 2,
+                            row = UWA.createElement('tr', {'class': isEven ? 'even accordion-' + envid : 'odd accordion-' + envid }),
+                            name,
+                            disabled = this.isPartner(envid) ? ' disabled' : '';
+
+                    //####
+                    UWA.createElement('td', {
+                        html: '<input type="checkbox" name="select-license" value="' + envid + ':' + data.id + '"' + disabled + '>',
+                        events: {
+                            click: function () {
+                                //tr-grant-access-licenses-user
+                                var licenseSelector = widget.getElements('[name=select-license]:checked');
+                                var count = licenseSelector.length;
+                                /*
+                                 if (licenseSelector) {
+                                 for (var i = 0 , ilen = licenseSelector.length; i < ilen; i++) {
+                                 if (licenseSelector[i].checked) {
+                                 count++;
+                                 }
+                                 }
+                                 }*/
+                                if (MyWidget.addLicenseUser !== null && count > 0) {
+                                    MyWidget.addLicenseButton.removeClassName('invite-user-img-disabled');
+                                } else {
+                                    MyWidget.addLicenseButton.addClassName('invite-user-img-disabled');
+                                }
+                                /*
+                                 if (count > 0) {
+                                 document.getElementById('tr-grant-access-licenses-user').show();
+                                 } else {
+                                 document.getElementById('tr-grant-access-licenses-user').hide();
+
+                                 }
+                                 var msg = (count > 1) ? UWA.i18n('Add {0} User Experiences to member').format(count) : UWA.i18n('Add {0} User Experience to member').format(count);
+                                 document.getElementById('count-grant-licenses-' + widget.id).setText(msg);
+                                 */
+
+                            }
+                        }
+                    }).inject(row);
+
+                    //Apps name
+                    name = UWA.createElement('td', {
+                        text: data.name || data.title || data.id
+                    }).inject(row);
+
+                    if (this.isPartner(envid)) {
+
+                        if (data.description) {
+                            new CustomTooltip(name, data.description, {'max-width': '500px'});
+                        }
+
+                        UWA.createElement('td', {
+                            html: [
+                                {
+                                    tag: 'div',
+                                    styles: {'white-space': 'nowrap'},
+                                    html: [
+                                        {
+                                            tag: 'input',
+                                            id: 'active-' + envid,
+                                            type: 'checkbox',
+                                            disabled: true,
+                                            checked: data.active
+                                        },
+                                        {
+                                            tag: 'label',
+                                            'for': 'active-' + envid,
+                                            text: UWA.i18n('Active'),
+                                            styles: {'padding-left': '5px'}
+                                        }
+                                    ]
+                                },
+                                {
+                                    tag: 'div',
+                                    styles: {'white-space': 'nowrap', display: 'none'},
+                                    html: [
+                                        {
+                                            tag: 'input',
+                                            id: 'public-' + envid,
+                                            type: 'checkbox',
+                                            disabled: true,
+                                            checked: data.public
+                                        },
+                                        {
+                                            tag: 'label',
+                                            'for': 'active-' + envid,
+                                            text: UWA.i18n('Public'),
+                                            styles: {'padding-left': '5px'}
+                                        }
+                                    ]
+                                }
+                            ]
+                        }).inject(row);
+
+                        UWA.createElement('td', {
+                            html: {
+                                tag: 'a',
+                                'class': 'edit-app',
+                                html: [
+                                    {
+                                        tag: 'span',
+                                        text: UWA.i18n('Edit')
+                                    },
+                                    {
+                                        tag: 'img',
+                                        src: tools.proxy.baseUrl + 'widget/userslist/img/edit.png',
+                                        'class': 'edit-app-img'
+                                    }
+                                ],
+                                events: {
+                                    click: function (appid) {
+                                        addAppLightBox.show(appid);
+                                    }.bind(this, data.id)
+                                }
+                            }
+                        }).inject(row);
+
+                        UWA.createElement('td', {
+                            text: (function (platforms) {
+                                var stack = '', i, l;
+                                for (i = 0, l = platforms.length; i < l; i++) {
+                                    if (i) {
+                                        stack += ' - ';
+                                    }
+                                    stack += platforms[i].displayName;
+                                }
+                                return stack;
+                            })(data.platforms)
+                        }).inject(row);
+
+                    } else {
+                        //ID column
+                        UWA.createElement('td', {
+                            text: data.id
+                        }).inject(row);
+                        /*
+                         //Type column
+                         UWA.createElement('td', {
+                         text : data.type
+                         }).inject(row);
+                         */
+                        //Availabilty column
+                        UWA.createElement('td', {
+                            text: data.freeLicenses + '/' + data.totalLicenses
+                        }).inject(row);
+
+                        //expirationDate
+                        UWA.createElement('td', {
+                            text: (data.expirationDate) ? data.expirationDate : ''
+                        }).inject(row);
+                    }
+                    //Details
+                    UWA.createElement('td', {
+                        html: [
+                            {
+                                tag: 'a',
+                                text: this.isPartner(envid) ? '' : UWA.i18n('View details'),
+                                events: {
+                                    click: function (license, envid) {
+                                        widget.mask();
+                                        tools.request.get(tools.proxy.licensesusers, {envid: envid, licid: license.id}, {
+                                            onComplete: function (data) {
+                                                widget.unmask();
+                                                licenseDetailsLightBox.initData(data.user, license, envid);
+                                                licenseDetailsLightBox.show();
+                                            }
+                                        });
+
+                                    }.bind(this, data, envid)
+                                }
+                            }
+                        ]
+                    }).inject(row);
+
+                    row.inject(this._tbody);
+                },
+                _addGrantAcessRow: function (users) {
+                    var isEven = this._tbody.childNodes.length % 2,
+                            row = UWA.createElement('tr', { id: 'tr-grant-access-licenses-user', 'class': isEven ? 'even' : 'odd' }),
+                            option = UWA.createElement('select', { id: 'option-grant-licenses-user-' + widget.id});
+
+                    for (var i = 0, len = users.length; i < len; i++) {
+                        if (users[i].state === '0') {
+                            var value = users[i].firstName.ucfirst() + ' ' + users[i].lastName.ucfirst() + ' - ' + users[i].email;
+                            UWA.createElement('option', {
+                                value: users[i].id,
+                                text: value
+                            }).inject(option);
+                        }
+                    }
+
+                    UWA.createElement('td', {
+                        colspan: 6,
+                        html: [
+                            {
+                                tag: 'span',
+                                id: 'count-grant-licenses-' + widget.id,
+                                text: '0'
+                            },
+                            option,
+                            {
+                                tag: 'img',
+                                'class': 'invite-user-img ',
+                                title: UWA.i18n('Grant to selected member'),
+                                src: tools.proxy.baseUrl + 'widget/userslist/img/inviteuser.png',
+                                events: {
+                                    click: function () {
+
+                                        var licenseSelector = widget.bodygetElementsByName('select-license'),
+                                                licenseSelected = {},
+                                                userid = widget.body.getElement('#option-grant-licenses-user' + widget.id).value;
+                                        if (licenseSelector) {
+                                            for (var i = 0 , ilen = licenseSelector.length; i < ilen; i++) {
+                                                if (licenseSelector[i].checked) {
+                                                    var value = licenseSelector[i].value.split(':');
+
+                                                    if (!licenseSelected[value[0]]) {
+                                                        licenseSelected[value[0]] = '';
+                                                    } else {
+                                                        licenseSelected[value[0]] += ',';
+                                                    }
+
+                                                    licenseSelected[value[0]] += value[1];
+                                                }
+                                            }
+
+                                            var stringOIDLicences = '' , first = true;
+                                            for (var i in licenseSelected) {
+                                                if (licenseSelected.hasOwnProperty(i)) {
+                                                    if (!first) {
+                                                        stringOIDLicences += ';';
+                                                    } else {
+                                                        first = false;
+                                                    }
+                                                    stringOIDLicences += i + ':' + licenseSelected[i];
+                                                }
+                                            }
+
+                                            if (stringOIDLicences.length > 0) {
+                                                widget.mask();
+                                                var onComplete = function () {
+                                                    tools.message.success(UWA.i18n('New User Experience(s) has been granted'));
+                                                    widget.unmask();
+                                                }.bind(this);
+
+                                                var params = {licenses: stringOIDLicences, userid: userid};
+                                                tools.request.put(tools.proxy.usergrantlicenses, params, {
+                                                    onComplete: onComplete
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+
+                    }).inject(row);
+
+                    var firstThead = widget.getElement('.licenses-list thead');
+                    row.inject(firstThead, 'top');
+
+
+                },
+                get: function (data) {
+
+                    this._table = UWA.createElement('table', {'class': 'table licenses-list'});
+                    var emptyTable = true,
+                            env = null,
+                            licenses = null,
+                            j = 0,
+                            jlen = 0;
+
+                    for (var i = 0 , ilen = data.length; i < ilen; i++) {
+                        if (data[i].licenses.length > 0 || this.isPartner(data[i].env.id)) {
+                            //env info
+                            env = data[i].env;
+                            emptyTable = false;
+
+                            licenses = this.isPartner(env.id) ? data[i].apps : data[i].licenses;
+
+                            this._addHeader(env, licenses.length > 0);
+
+                            for (j = 0 , jlen = licenses.length; j < jlen; j++) {
+                                this._addRow(licenses[j], env.id);
+                            }
+                        }
+                    }
+
+                    //if no license
+                    if (emptyTable) {
+                        var rowHead = UWA.createElement('thead'),
+                                row = UWA.createElement('th', {
+                                    text: UWA.i18n('You have no User Experiences')
+                                });
+                        row.inject(rowHead);
+                        rowHead.inject(this._table);
+                    } else {
+                        //Add grant to access
+                        // this._addGrantAcessRow(data.user);
+                        /*
+                         var onComplete = function (data) {
+                         widget.unmask();
+                         this._addGrantAcessRow(data.user);
+                         }.bind(this);
+                         var params = {};
+                         tools.request.get(tools.proxy.memberslist, params, {
+                         onComplete: onComplete
+                         });
+                         */
+                    }
+
+                    return this._table;
+                }
+            };
+
+            /**
+             *
+             * @type {{_table: null, _tbody: null, _addHeader: Function, getUserFullName: Function, _addRow: Function, _getTable: Function, _addEmptyRow: Function, _getDescription: Function, _getContent: Function, data: {user: null, license: null, envid: null}, initData: Function, show: Function, refresh: Function}}
+             */
+            var licenseDetailsLightBox = {
+                _table: null,
+                _tbody: null,
+                _addHeader: function () {
+                    var rowHead = UWA.createElement('thead'),
+                            row = UWA.createElement('tr', {'class': 'table-people-header'});
+
+                    /*
+                     UWA.createElement('th', {text : 'License Number'}).inject(row);
+                     */
+                    UWA.createElement('th', {text: UWA.i18n('Granted Members')}).inject(row);
+                    /*
+                     UWA.createElement('th', {text:'Status'}).inject(row);
+                     */
+                    UWA.createElement('th', {text: UWA.i18n('Start date')}).inject(row);
+
+                    UWA.createElement('th', {text: UWA.i18n('Status')}).inject(row);
+                    row.inject(rowHead);
+                    rowHead.inject(this._table);
+
+                    this._tbody = UWA.createElement('tbody').inject(this._table);
+
+                    return this._tbody;
+                },
+                getUserFullName: function (user) {
+                    return user.firstName.ucfirst() + ' ' + user.lastName.ucfirst();
+                },
+                _addRow: function (user) {
+                    var isEven = this._tbody.childNodes.length % 2,
+                            row = UWA.createElement('tr', {'class': isEven ? 'even' : 'odd' });
+                    /*
+                     UWA.createElement('td', {text : data.licid}).inject(row);
+                     */
+                    UWA.createElement('td', {text: this.getUserFullName(user)}).inject(row);
+                    /*
+                     UWA.createElement('td', {text:data.status}).inject(row);
+                     */
+                    UWA.createElement('td', {text: (user.startDate) ? user.startDate : ''}).inject(row);
+
+                    //Remove column
+                    UWA.createElement('td', {
+                        html: user.state === '1' ? {
+                            tag: 'img',
+                            src: tools.proxy.baseUrl + 'widget/userslist/img/trash.png',
+                            'class': 'remove-license-img',
+                            events: {
+                                click: function (user) {
+                                    UWA.log('lightbox closed');
+                                    confirmLightbox.show(
+                                            UWA.i18n('Are you sure you want to delete this user : {0} ?').format(licenseDetailsLightBox.getUserFullName(user)),
+                                            {
+                                                yes: function () {
+                                                    var onComplete = function () {
+                                                        tools.message.success(UWA.i18n('{0} has been removed').format(licenseDetailsLightBox.getUserFullName(user)));
+                                                        //reopen view details
+                                                        tools.request.get(tools.proxy.licensesusers, {
+                                                            envid: licenseDetailsLightBox.data.env,
+                                                            licid: licenseDetailsLightBox.data.license.id
+                                                        }, {
+                                                            onComplete: function () {
+                                                                widget.unmask();
+                                                                licenseDetailsLightBox.show();
+                                                            }
+                                                        });
+                                                    };
+                                                    var params = {
+                                                        userid: user.id,
+                                                        licenses: licenseDetailsLightBox.data.env + ':' + licenseDetailsLightBox.data.license.id
+                                                    };
+                                                    tools.request.put(tools.proxy.removeuserlicence, params, {
+                                                        onComplete: onComplete
+                                                    });
+                                                },
+                                                no: function () {
+                                                }
+                                            });
+
+                                }.bind(this, user)
+                            }
+                        } : {
+                            tag: 'span',
+                            text: UWA.i18n('Locked')
+                        }
+                    }).inject(row);
+
+                    row.inject(this._tbody);
+                },
+
+                _getTable: function () {
+                    this._table = UWA.createElement('table', {'class': 'table licenses-list'});
+                    var users = this.data.users;
+                    if (users.length > 0) {
+                        this._addHeader();
+                        for (var i = 0 , len = users.length; i < len; i++) {
+                            this._addRow(users[i]);
+                        }
+                    } else {
+                        this._addEmptyRow();
+                    }
+                    return this._table;
+                },
+                _addEmptyRow: function () {
+                    var row = UWA.createElement('tr', {text: UWA.i18n('No User Experiences Granted')});
+                    row.inject(this._table);
+                },
+                _getDescription: function () {
+                    return    '<div class="license-description">' + this.data.license.name + '</div>';
+                },
+                _getContent: function () {
+                    return {
+                        tag: 'div',
+                        'class': 'lightbox license-lightbox',
+                        styles: {
+                            borderRadius: '5px'
+                        },
+                        html: [
+                            {
+                                tag: 'div',
+                                'class': 'close-panel',
+                                html: {
+                                    tag: 'a',
+                                    html: '<img alt="close" title="close" src="' + tools.proxy.baseUrl + 'widget/appslist/img/cancel_app.png" />',
+                                    events: {
+                                        'click': function () {
+                                            MyWidget.lightbox.close();
+                                        }
+                                    }
+                                }
+
+                            },
+                            this._getDescription(),
+                            this._getTable()
+                        ]
+
+                    };
+                },
+                data: {
+                    user: null,
+                    license: null,
+                    envid: null
+                },
+                initData: function (users, license, env) {
+                    this.data.users = users;
+                    this.data.license = license;
+                    this.data.env = env;
+                },
+                show: function () {
+                    MyWidget.lightbox = new UWA.Controls.Lightbox({
+                        closeable: false
+                    });
+                    MyWidget.lightbox.setContent(this._getContent()).inject(document.body);
+                    MyWidget.lightbox.open();
+                    tools.syncOverlay();
+                },
+                refresh: function () {
+                    MyWidget.lightbox.setContent(this._getContent());
+                }
+
+            };
+
+            var addAppLightBox = {
+                content: undefined,
+                launchInfosLabelFx: undefined,
+                configUrlFx: undefined,
+                tooltips: {},
+                editData: {},
+                quadrantData: {},
+                defaultData: {displayname: '', icon: '', active: true, platforms: [], public: true, quadrant: 'NORTH', tooltip: '', description: '', type: 'Web'},
+                controls: {platforms: []},
+                imageIsValid: false,
+                _getData: function (options) {
+                    widget.mask();
+                    tools.request.get(tools.proxy.addappinfos, options, {
+                        onComplete: function (data) {
+                            if (data.app) {
+                                addAppLightBox.editData = data.app;
+                            } else {
+                                addAppLightBox.editData = addAppLightBox.defaultData;
+                            }
+                            addAppLightBox._buildBox(data);
+                            addAppLightBox._updatePreview(addAppLightBox.editData);
+                            widget.unmask();
+                        }
+                    })
+                },
+                _getDefault: function (key) {
+                    return this.editData[key] || '';
+                },
+                _getContent: function (data) {
+                    this.content = UWA.createElement('div', {
+                        html: [
+                            {
+                                tag: 'div',
+                                styles: {'margin-top': '10px'},
+                                html: [this._getForm(data), this._getPreview(data)]
+                            },
+                            {tag: 'div', styles: {clear: 'both'}}
+                        ]
+                    });
+
+                    return {
+                        tag: 'div',
+                        'class': 'lightbox add-app-lightbox',
+                        styles: {
+                            borderRadius: '5px'
+                        },
+                        html: [
+                            {
+                                tag: 'div',
+                                'class': 'close-panel',
+                                html: {
+                                    tag: 'a',
+                                    html: '<img alt="close" title="close" src="' + tools.proxy.baseUrl + 'widget/appslist/img/cancel_app.png" />',
+                                    events: {
+                                        'click': function () {
+                                            MyWidget.lightbox.close();
+                                        }
+                                    }
+                                }
+                            },
+                            this.content
+                        ]
+                    };
+                },
+
+                _getPreview: function (data) {
+                    var previewTitle = UWA.createElement('div', {
+                        tag: 'div',
+                        'class': 'preview-title'
+                    });
+                    this.tooltips['preview'] = new CustomTooltip(previewTitle, '', {showEvent: 'mouseover', hideEvent: 'mouseout', 'z-index': 1});
+                    return UWA.createElement('fieldset', {
+                        html: [
+                            {
+                                tag: 'legend',
+                                text: UWA.i18n('Preview')
+                            },
+                            {
+                                tag: 'div',
+                                'class': 'panel-preview',
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'compass-preview',
+                                        html: {
+                                            tag: 'div',
+                                            'class': 'compass-preview compass-preview-on ' + this.editData.quadrant.toLowerCase()
+                                        }
+                                    },
+                                    {
+                                        tag: 'div',
+                                        'class': 'preview-section',
+                                        html: [
+                                            {
+                                                tag: 'span',
+                                                'class': 'preview-section-icon'
+                                            },
+                                            {
+                                                tag: 'span',
+                                                'class': 'preview-section-title',
+                                                text: 'title'
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        tag: 'div',
+                                        'class': 'preview-item',
+                                        html: [
+                                            {
+                                                tag: 'img',
+                                                'class': 'preview-icon',
+                                                events: {
+                                                    error: function () {
+                                                        addAppLightBox.imageIsValid = false;
+                                                    }
+                                                }
+                                            },
+                                            previewTitle
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    });
+                },
+
+                _updatePreview: function (options) {
+                    var displayname = options.displayname,
+                            icon = options.icon,
+                            quadrant = options.quadrant,
+                            tooltip = options.tooltip,
+                            description = options.description;
+                    if (!addAppLightBox.content) {
+                        return;
+                    }
+                    if (UWA.is(displayname)) {
+                        addAppLightBox.content.getElement('.preview-title').setText(displayname);
+                    }
+                    if (UWA.is(icon)) {
+                        if (tools.isUrl(icon)) {
+                            addAppLightBox.imageIsValid = true;
+                            addAppLightBox.content.getElement('.preview-icon').src = icon;
+                        } else {
+                            addAppLightBox.imageIsValid = false;
+                            addAppLightBox.content.getElement('.preview-icon').src = '';
+                        }
+                    }
+                    if (UWA.is(quadrant)) {
+                        addAppLightBox.content.getElement('.compass-preview-on').className = 'compass-preview compass-preview-on ' + quadrant.toLowerCase();
+                        addAppLightBox.content.getElement('.preview-section-icon').className = 'preview-section-icon ' + quadrant.toLowerCase();
+                        addAppLightBox.content.getElement('.preview-section-title').setText(this.quadrantData[quadrant]);
+                    }
+                    if (UWA.is(tooltip)) {
+                        if (tooltip === '') {
+                            tooltip = addAppLightBox.content.getElement('[name=display-name]').value;
+                        }
+                        this.tooltips.preview.setTitle(tooltip);
+                    }
+                    if (UWA.is(description)) {
+                        this.tooltips.preview.setDescription(description);
+                    }
+                },
+
+                _buildBox: function (data) {
+                    MyWidget.lightbox = new UWA.Controls.Lightbox({
+                        closeable: false
+                    });
+                    MyWidget.lightbox.setContent(this._getContent(data)).inject(document.body);
+                    MyWidget.lightbox.open();
+                    tools.syncOverlay();
+                },
+                _getForm: function (data) {
+                    var i, l, keys,
+                            types = [], quadrants = [], platforms = [], selected,
+                            quadrantId = 0, typeId = 0,
+                            configuration,
+                            formWrapper = UWA.createElement('div', {'class': 'form-wrapper'}),
+                            checkbox;
+                    // Build options objects
+                    selected = this._getDefault('type');
+                    keys = Object.keys(data.appType);
+                    for (i = 0, l = keys.length; i < l; i++) {
+                        if (data.appType[keys[i]].id !== 'Widget') {
+                            types.push({
+                                label: data.appType[keys[i]].displayName,
+                                value: data.appType[keys[i]].id/*,
+                                selected: selected === data.appType[keys[i]].id*/
+                            });
+                            if (selected === data.appType[keys[i]].id) {
+                                typeId = types.length - 1;
+                            }
+                            if (this.defaultData.type === data.appType[keys[i]].id) {
+                                this.defaultData.typeId = types.length - 1;
+                            }
+                        }
+                    }
+
+                    selected = this._getDefault('quadrant');
+                    keys = Object.keys(data.appQuadrant);
+                    for (i = 0, l = keys.length; i < l; i++) {
+                        if (data.appQuadrant[keys[i]].id !== 'PLAY') {
+                            quadrants.push({
+                                label: data.appQuadrant[keys[i]].displayName,
+                                value: data.appQuadrant[keys[i]].id/*,
+                                selected: selected === data.appQuadrant[keys[i]].id*/
+                            });
+                            this.quadrantData[data.appQuadrant[keys[i]].id] = data.appQuadrant[keys[i]].displayName;
+                            if (selected === data.appQuadrant[keys[i]].id) {
+                                quadrantId = quadrants.length - 1;
+                            }
+                            if (this.defaultData.quadrant === data.appQuadrant[keys[i]].id) {
+                                this.defaultData.quadrantId = quadrants.length - 1;
+                            }
+                        }
+                    }
+
+                    // Load all platforms
+                    selected = this._getDefault('platforms');
+                    for (i = 0, l = data.appPlatform.length; i < l; i++) {
+                        checkbox = new Input.Checkbox({
+                            attributes: {
+                                name: data.appPlatform[i].id,
+                                checked: selected.indexOf(data.appPlatform[i].id) > -1
+                            },
+                            events: {
+                                onClick: this._removeError
+                            }
+                        });
+                        platforms.push(
+                                {
+                                    tag: 'div',
+                                    'class': 'checkbox-wrapper',
+                                    html: [
+                                        checkbox,
+                                        {
+                                            tag: 'div',
+                                            'class': 'checkbox-label',
+                                            text: data.appPlatform[i].displayName
+                                        }
+                                    ]
+                                }
+                        );
+                        this.controls.platforms.push(checkbox);
+                    }
+
+                    // Build first fieldset: Environment
+                    UWA.createElement('fieldset', {
+                        html: [
+                            {
+                                tag: 'legend',
+                                text: UWA.i18n('Environment')
+                            },
+                            {
+                                tag: 'div',
+                                'class': 'left-wrapper',
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Type *')
+                                    },
+                                    (this.controls.type = new Input.Select({
+                                        options: types,
+                                        className: 'small',
+                                        attributes: {name: 'type'},
+                                        events: {
+                                            onChange: function () {
+                                                var selected = this.getSelection()[0],
+                                                        value = this.options.options[selected].value.toLowerCase(),
+                                                        launchInfosLabelFx = addAppLightBox.launchInfosLabelFx,
+                                                        configUrlFx = addAppLightBox.configUrlFx,
+                                                        tooltips = addAppLightBox.tooltips;
+                                                switch (value) {
+                                                    case 'web':
+                                                        launchInfosLabelFx.start(UWA.i18n('URL *'));
+                                                        configUrlFx.hide();
+                                                        tooltips['launch-infos'].setText(UWA.i18n('App\'s URL (Must be a valid URL)'));
+                                                        break;
+                                                    case 'widget':
+                                                        launchInfosLabelFx.start(UWA.i18n('Source Code URL *'));
+                                                        configUrlFx.show();
+                                                        tooltips['launch-infos'].setText(UWA.i18n('Widget\'s source code URL (Must be a valid URL)'));
+                                                        break;
+                                                    case 'native':
+                                                        launchInfosLabelFx.start(UWA.i18n('Workbench *'));
+                                                        configUrlFx.hide();
+                                                        tooltips['launch-infos'].setText(UWA.i18n('App\'s workbench name'));
+                                                        break;
+                                                }
+                                            }
+                                        }
+                                    })),
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Quadrant *')
+                                    },
+                                    (this.controls.quadrant = new Input.Select({
+                                        options: quadrants,
+                                        className: 'small',
+                                        attributes: {name: 'quadrant'},
+                                        events: {
+                                            onChange: function () {
+                                                var selected = this.getSelection()[0],
+                                                        value = this.options.options[selected].value;
+                                                addAppLightBox._updatePreview({quadrant: value});
+                                            }
+                                        }
+                                    }))
+                                ]
+                            },
+                            {
+                                tag: 'div',
+                                styles: {
+                                    'margin-left': '50%',
+                                    'display': platforms.length > 1 ? 'block' : 'none'
+                                },
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Platforms *')
+                                    },
+                                    {
+                                        tag: 'div',
+                                        'class': 'platform-checkboxes',
+                                        html: platforms
+                                    }
+                                ]
+                            }
+                        ]
+                    }).inject(formWrapper);
+
+                    // Build second fieldset: indentity
+                    UWA.createElement('fieldset', {
+                        html: [
+                            {
+                                tag: 'legend',
+                                text: UWA.i18n('Identity')
+                            },
+                            {
+                                tag: 'div',
+                                'class': 'left-wrapper',
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Display Name *')
+                                    },
+                                    new Input.Text({
+                                        className: 'small',
+                                        value: this._getDefault('displayname'),
+                                        attributes: {
+                                            name: 'display-name',
+                                            events: {
+                                                focus: this._removeError,
+                                                keyup: function () {
+                                                    addAppLightBox._updatePreview({displayname: this.value});
+                                                }
+                                            }
+                                        }
+                                    }),
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Description')
+                                    },
+                                    new Input.Text({
+                                        multiline: true,
+                                        className: 'multiline',
+                                        value: this._getDefault('description'),
+                                        attributes: {
+                                            name: 'description',
+                                            events: {
+                                                keyup: function () {
+                                                    addAppLightBox._updatePreview({description: this.value});
+                                                }
+                                            }
+                                        }
+                                    })
+                                ]
+                            },
+                            {
+                                tag: 'div',
+                                styles: {
+                                    'margin-left': '50%'
+                                },
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Long Name')
+                                    },
+                                    new Input.Text({
+                                        className: 'small',
+                                        value: this._getDefault('tooltip'),
+                                        attributes: {
+                                            name: 'long-name',
+                                            events: {
+                                                focus: this._removeError,
+                                                keyup: function () {
+                                                    addAppLightBox._updatePreview({tooltip: this.value});
+                                                }
+                                            }
+                                        }
+                                    }),
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Icon URL *')
+                                    },
+                                    new Input.Text({
+                                        className: 'small',
+                                        value: this._getDefault('icon'),
+                                        attributes: {
+                                            name: 'icon-url',
+                                            events: {
+                                                focus: this._removeError,
+                                                blur: function () {
+                                                    addAppLightBox._updatePreview({icon: this.value});
+                                                }
+                                            }
+                                        }
+                                    })
+                                ]
+                            }
+                        ]
+                    }).inject(formWrapper);
+
+                    // Build third fieldset: configuration
+                    configuration = UWA.createElement('fieldset', {
+                        html: [
+                            {
+                                tag: 'legend',
+                                text: UWA.i18n('Configuration')
+                            },
+                            {
+                                tag: 'div',
+                                'class': 'left-wrapper',
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label launchinfos-label',
+                                        text: UWA.i18n('URL *')
+                                    },
+                                    new Input.Text({
+                                        className: 'small',
+                                        value: this._getDefault('launchinfos'),
+                                        attributes: {
+                                            name: 'launch-infos',
+                                            events: {
+                                                focus: this._removeError
+                                            }
+                                        }
+                                    }),
+                                    {
+                                        tag: 'div',
+                                        'class': 'checkbox-wrapper',
+                                        html: [
+                                            (this.controls.active = new Input.Checkbox({attributes: {
+                                                name: 'active',
+                                                checked: this._getDefault('active'),
+                                                disabled: true
+                                            }})),
+                                            {
+                                                tag: 'div',
+                                                'class': 'checkbox-label',
+                                                text: UWA.i18n('Active')
+                                            }
+                                        ],
+                                        styles: {
+                                            'margin-bottom': '10px'
+                                        }
+                                    },
+                                    {
+                                        tag: 'div',
+                                        'class': 'checkbox-wrapper',
+                                        html: [
+                                            (this.controls.public = new Input.Checkbox({attributes: {
+                                                name: 'public',
+                                                checked: this._getDefault('public'),
+                                                disabled: true
+                                            }})),
+                                            {
+                                                tag: 'div',
+                                                'class': 'checkbox-label',
+                                                text: UWA.i18n('Public')
+                                            }
+                                        ],
+                                        styles: {
+                                            'margin-bottom': '10px',
+                                            display: 'none'
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                tag: 'div',
+                                'class': 'configurl-wrapper',
+                                styles: {
+                                    'margin-left': '50%',
+                                    display: this._getDefault('type') === 'Widget' ? 'block' : 'none'
+                                },
+                                html: [
+                                    {
+                                        tag: 'div',
+                                        'class': 'input-label',
+                                        text: UWA.i18n('Config URL *')
+                                    },
+                                    new Input.Text({
+                                        className: 'small',
+                                        value: this._getDefault('config'),
+                                        attributes: {
+                                            name: 'config-url',
+                                            events: {
+                                                focus: this._removeError
+                                            }
+                                        }
+                                    })
+                                ]
+                            }
+                        ]
+                    }).inject(formWrapper);
+
+                    // Submit buttons: save + close and save + add other app
+                    UWA.createElement('div', {
+                        'class': 'button-wrapper',
+                        html: [
+                            new Input.Button({
+                                value: UWA.i18n('Save'),
+                                className: 'small light-grey',
+                                events: {
+                                    onClick: this._validateForm.bind(this, true)
+                                }
+                            }),
+                            new Input.Button({
+                                value: UWA.i18n('Save and add another app'),
+                                className: 'small light-grey',
+                                events: {
+                                    onClick: this._validateForm.bind(this, false)
+                                }
+                            })
+                        ]
+                    }).inject(formWrapper);
+
+                    // Add Fx to the launch infos input
+                    this.launchInfosLabelFx = {
+                        newText: '',
+                        fx: new Fx(configuration.getElement('.launchinfos-label'), {
+                            duration: 200,
+                            unit: '',
+                            events: {
+                                onComplete: function () {
+                                    var animated = this.element;
+                                    if (animated.getStyle('opacity') === 0) {
+                                        animated.setText(addAppLightBox.launchInfosLabelFx.newText);
+                                        this.start({
+                                            opacity: [0, 1]
+                                        });
+                                    }
+                                }
+                            }
+                        }),
+                        start: function (text) {
+                            if (text !== this.newText) {
+                                this.newText = text;
+                                this.fx.start({
+                                    opacity: [1, 0]
+                                });
+                            }
+                        }
+                    };
+
+                    // Add Fx to the config URL input
+                    this.configUrlFx = {
+                        fx: new Fx(configuration.getElement('.configurl-wrapper'), {
+                            duration: 200,
+                            unit: '',
+                            events: {
+                                onComplete: function () {
+                                    var animated = this.element,
+                                            field = animated.getElement('input');
+                                    if (animated.getStyle('opacity') === 0) {
+                                        animated.hide();
+                                        field.value = '';
+                                    }
+                                }
+                            }
+                        }),
+                        show: function () {
+                            var animated = this.fx.element;
+                            if (animated.getStyle('display') === 'none') {
+                                animated.show();
+                                this.fx.start({
+                                    opacity: [0, 1]
+                                });
+                            }
+                        },
+                        hide: function () {
+                            var animated = this.fx.element;
+                            if (animated.getStyle('display') === 'block') {
+                                this.fx.start({
+                                    opacity: [1, 0]
+                                });
+                            }
+                        }
+                    };
+
+                    this._createTooltips(formWrapper);
+
+                    this.controls.type.setSelection([typeId]);
+                    if (this.editData['id']) {
+                        this.controls.type.elements.container.addClassName('disabled');
+                    }
+                    this.controls.quadrant.setSelection([quadrantId]);
+
+                    return formWrapper;
+                },
+
+                _createTooltips: function (formWrapper) {
+                    var inputs = formWrapper.getElements('.uwa-input.uwa-text'), input,
+                            i, l = inputs.length,
+                            text;
+
+                    for (i = 0; i < l; i++) {
+                        input = inputs[i];
+                        switch (input.name) {
+                            case 'display-name':
+                                text = UWA.i18n('Name displayed in the Compass (Minimum 3 characters)');
+                                break;
+                            case 'long-name':
+                                text = UWA.i18n('App\'s full name (Minimum 3 characters)');
+                                break;
+                            case 'description':
+                                text = UWA.i18n('Short description of the app');
+                                break;
+                            case 'icon-url':
+                                text = UWA.i18n('App\'s icon (Must be a valid URL)');
+                                break;
+                            case 'launch-infos':
+                                text = UWA.i18n('App\'s URL (Must be a valid URL)');
+                                break;
+                            case 'config-url':
+                                text = UWA.i18n('URL to the widget\'s configuration file (Must be a valid URL)');
+                                break;
+                        }
+                        this.tooltips[input.name] = new CustomTooltip(input, text, {showEvent: 'focus', hideEvent: 'blur'});
+                    }
+                },
+
+                _resetForm: function () {
+                    var content = this.content;
+
+                    this.editData = this.defaultData;
+                    this.imageIsValid = false;
+
+                    this.controls.type.elements.container.removeClassName('disabled');
+                    this.controls.type.setSelection([this.defaultData.typeId || 0]);
+                    this.controls.quadrant.setSelection([this.defaultData.quadrantId || 0]);
+                    this.controls.platforms.forEach(function (checkbox) {
+                        checkbox.elements.input.checked = false;
+                        checkbox.elements.container.removeClassName('checked');
+                    });
+
+                    this.controls.active.elements.input.checked = this._getDefault('active');
+                    if (this._getDefault('active')) {
+                        this.controls.active.elements.container.addClassName('checked');
+                    } else {
+                        this.controls.active.elements.container.removeClassName('checked');
+                    }
+
+                    this.controls.public.elements.input.checked = this._getDefault('active');
+                    if (this._getDefault('public')) {
+                        this.controls.public.elements.container.addClassName('checked');
+                    } else {
+                        this.controls.public.elements.container.removeClassName('checked');
+                    }
+
+                    content.getElements('.uwa-input.uwa-text').forEach(function (input) {
+                        input.value = '';
+                    });
+                    this._updatePreview(this.editData);
+                },
+
+                _removeError: function () {
+                    var element = this.elements ? this.elements.container : this,
+                            content = addAppLightBox.content;
+                    if (element.hasClassName('uwa-checkbox') && element.hasClassName('error')) {
+                        content.getElements('.platform-checkboxes .uwa-checkbox').forEach(function (elmt) {
+                            elmt.removeClassName('error');
+                        });
+                    } else {
+                        element.removeClassName('error');
+                    }
+                },
+
+                _validateForm: function (close) {
+                    var content = this.content,
+                            platformBoxes = content.getElements('.platform-checkboxes [type=checkbox]'),
+                            values = {
+                                id: this.editData.id,
+                                type: content.getElement('[name=type]').value,
+                                quadrant: content.getElement('[name=quadrant]').value,
+                                platforms: (function () {
+                                    var i, l = platformBoxes.length, box,
+                                            checked = [];
+                                    for (i = 0; i < l; i++) {
+                                        box = platformBoxes[i];
+                                        if (box.checked || l === 1) {
+                                            checked.push(box.name);
+                                        }
+                                    }
+                                    return checked.join(',');
+                                })(),
+                                displayname: content.getElement('[name=display-name]').value.replace(/^\s+|\s+$/g, ''),
+                                tooltip: content.getElement('[name=long-name]').value.replace(/^\s+|\s+$/g, ''),
+                                description: content.getElement('[name=description]').value,
+                                icon: content.getElement('[name=icon-url]').value,
+                                active: content.getElement('[name=active]').checked,
+                                launchinfos: content.getElement('[name=launch-infos]').value,
+                                config: content.getElement('[name=config-url]').value
+                            },
+                            messages = [];
+
+                    this._mask();
+
+                    // Minimum one platform
+                    if (values.platforms.length === 0 && platformBoxes.length > 0) {
+                        messages.push('<b>' + UWA.i18n('Platforms: ') + '</b>' + UWA.i18n('Minimum one platform must be selected.'));
+                        platformBoxes.forEach(function (elmt) {
+                            elmt.getClosest('.uwa-checkbox').addClassName('error');
+                        });
+                    }
+                    if (values.displayname.length === 0) {
+                        messages.push('<b>' + UWA.i18n('Display Name: ') + '</b>' + UWA.i18n('This field is required.'));
+                        content.getElement('[name=display-name]').addClassName('error');
+                    } else if (values.displayname.length < 3) {
+                        messages.push('<b>' + UWA.i18n('Display Name: ') + '</b>' + UWA.i18n('Minimum 3 characters.'));
+                        content.getElement('[name=display-name]').addClassName('error');
+                    }
+                    if (values.tooltip.length > 0 && values.tooltip.length < 3) {
+                        messages.push('<b>' + UWA.i18n('Long Name: ') + '</b>' + UWA.i18n('Minimum 3 characters.'));
+                        content.getElement('[name=long-name]').addClassName('error');
+                    }
+                    if (!tools.isUrl(values.icon)) {
+                        messages.push('<b>' + UWA.i18n('Icon URL: ') + '</b>' + UWA.i18n('Must be a valid URL.'));
+                        content.getElement('[name=icon-url]').addClassName('error');
+                    } else if (!this.imageIsValid) {
+                        messages.push('<b>' + UWA.i18n('Icon URL: ') + '</b>' + UWA.i18n('The image can\'t be retrieved.'));
+                        content.getElement('[name=icon-url]').addClassName('error');
+                    }
+                    if (values.type !== 'Native' && !tools.isUrl(values.launchinfos)) {
+                        if (values.type === 'Web') {
+                            messages.push('<b>' + UWA.i18n('URL: ') + '</b>' + UWA.i18n('Must be a valid URL.'));
+                        } else {
+                            messages.push('<b>' + UWA.i18n('Source Code URL: ') + '</b>' + UWA.i18n('Must be a valid URL.'));
+                        }
+                        content.getElement('[name=launch-infos]').addClassName('error');
+                    } else if (values.type === 'Native' && values.launchinfos.length === 0) {
+                        messages.push('<b>' + UWA.i18n('Workbench: ') + '</b>' + UWA.i18n('This field is required.'));
+                        content.getElement('[name=launch-infos]').addClassName('error');
+                    }
+                    if (values.type === 'Widget' && !tools.isUrl(values.config)) {
+                        messages.push('<b>' + UWA.i18n('Config URL: ') + '</b>' + UWA.i18n('Must be a valid URL.'));
+                        content.getElement('[name=config-url]').addClassName('error');
+                    }
+                    if (messages.length === 0) {
+                        this._clearMessages();
+                        this._submitForm(values, close);
+                    } else {
+                        this._showMessages(messages, 'error');
+                        this._unmask();
+                    }
+                },
+
+                _clearMessages: function () {
+                    var messageZone = this.content.getElement('.messages');
+                    if (messageZone) {
+                        messageZone.empty();
+                        messageZone.fx.start({height: [messageZone.getSize().height, 0]});
+                    }
+                },
+
+                _showMessages: function (messages, severity) {
+                    var content = this.content,
+                            messageZone = content.getElement('.messages'), messageList,
+                            messageHeight;
+                    if (!messageZone) {
+                        messageZone = UWA.createElement('div', {
+                            styles: {
+                                height: 0,
+                                overflow: 'hidden'
+                            }
+                        }).inject(content, 'top');
+                        messageZone.fx = new Fx(messageZone, {
+                            duration: 200,
+                            unit: 'px'
+                        });
+                    } else {
+                        messageZone.empty();
+                    }
+                    messageZone.className = 'messages';
+                    messageZone.addClassName(severity);
+                    messageList = UWA.createElement('ul');
+                    messages.forEach(function (message) {
+                        UWA.createElement('li', {html: message}).inject(messageList);
+                    });
+                    messageList.inject(messageZone);
+                    if (messages.length > 0) {
+                        messageHeight = messageList.getElement('li').getSize().height;
+                    } else {
+                        messageHeight = 0;
+                    }
+                    messageZone.fx.start({height: [messageZone.getSize().height, messageHeight * messages.length]});
+                },
+
+                _submitForm: function (values, close) {
+                    var message,
+                            callbacks = {
+                                onComplete: function (data) {
+                                    addAppLightBox._unmask();
+                                    message = UWA.i18n('{0} has been saved successfully').format(values.displayname);
+                                    if (close) {
+                                        MyWidget.lightbox.close();
+                                        tools.message.success(message);
+                                    } else {
+                                        addAppLightBox._showMessages([message], 'success');
+                                        addAppLightBox._resetForm();
+                                    }
+                                    MyWidget.onLoad();
+                                },
+                                onFailure: function (data) {
+                                    addAppLightBox._unmask();
+                                    if (data && data.message) {
+                                        addAppLightBox._showMessages([data.message], 'error');
+                                    } else {
+                                        addAppLightBox._showMessages([UWA.i18n('Unable to save {0}').format(values.displayname)], 'error');
+                                    }
+                                }
+                            };
+                    if (values.id) {
+                        tools.request.realPut(tools.proxy.addapp, values, callbacks);
+                    } else {
+                        tools.request.post(tools.proxy.addapp, values, callbacks);
+                    }
+                },
+
+                _mask: function () {
+                    var parent = this.content.getClosest('.add-app-lightbox'),
+                            size = {width: '100%', height: '100%'},
+                            mask = parent.getElement('.widget-loading');
+                    if (!mask) {
+                        mask = UWA.createElement('div', {'class': 'widget-loading'}).inject(parent);
+                    }
+                    mask.setStyles(UWA.merge(size, {left: 0, top: 0}));
+                    mask.show();
+                },
+
+                _unmask: function () {
+                    var mask = this.content.getClosest('.add-app-lightbox').getElement('.widget-loading');
+                    if (mask) {
+                        mask.hide();
+                    }
+                },
+
+                show: function (appid) {
+                    var options = {appid: appid};
+                    this._getData(options);
+                }
+            }
+
+            var MyWidget = {
+                /**
+                 * Get the user lang
+                 * @returns {string}
+                 */
+                getLang: function () {
+                    return widget.lang.substr(0, 2);
+                },
+                /**
+                 * Load I18n
+                 * @param callback - the callback function
+                 */
+                loadI18n: function (callback) {
+                    if (MyWidget.getLang() != 'en') {
+                        var params = {};
+                        tools.proxy.i18n = tools.proxy.baseUrl + 'widget/appslist/lang/' + MyWidget.getLang() + '.json';
+                        tools.request.get(tools.proxy.i18n, params, {
+                            onComplete: function (data) {
+                                UWA.i18n(data);
+                                callback();
+                            },
+                            onFailure: callback
+                        });
+                    } else {
+                        callback();
+                    }
+                },
+                addLicenseUser: null,
+                addLicenseButton: null,
+                buildAddLicensePanel: function () {
+                    var addLicense = UWA.createElement('img', {
+                        'class': 'invite-user-img invite-user-img-disabled',
+                        title: UWA.i18n('Grant to selected member'),
+                        src: tools.proxy.baseUrl + 'widget/userslist/img/inviteuser.png',
+                        events: {
+                            click: function () {
+
+                                var licenseSelector = widget.getElements('[name=select-license]:checked'),
+                                        licenseSelected = {};
+                                if (MyWidget.addLicenseUser && licenseSelector.length > 0) {
+                                    if (licenseSelector) {
+                                        for (var i = 0 , ilen = licenseSelector.length; i < ilen; i++) {
+                                            var value = licenseSelector[i].value.split(':');
+
+                                            if (!licenseSelected[value[0]]) {
+                                                licenseSelected[value[0]] = '';
+                                            } else {
+                                                licenseSelected[value[0]] += ',';
+                                            }
+
+                                            licenseSelected[value[0]] += value[1];
+                                        }
+
+                                        var stringOIDLicences = '' , first = true;
+                                        for (var i in licenseSelected) {
+                                            if (licenseSelected.hasOwnProperty(i)) {
+                                                if (!first) {
+                                                    stringOIDLicences += ';';
+                                                } else {
+                                                    first = false;
+                                                }
+                                                stringOIDLicences += i + ':' + licenseSelected[i];
+                                            }
+                                        }
+
+                                        if (stringOIDLicences.length > 0) {
+                                            widget.mask();
+                                            var onComplete = function () {
+                                                tools.message.success(UWA.i18n('New User Experience(s) has been granted'));
+                                                widget.unmask();
+                                            }.bind(this);
+
+                                            var params = {licenses: stringOIDLicences, userid: MyWidget.addLicenseUser};
+                                            tools.request.put(tools.proxy.usergrantlicenses, params, {
+                                                onComplete: onComplete
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    MyWidget.addLicenseButton = addLicense;
+
+                    var autocomplete = new OneCallAutoComplete({
+                        suggestUrl: UWA.Data.proxifyUrl(tools.proxy.userselect, {proxy: 'passport'}),
+                        placeholder: UWA.i18n('Select a user to give license'),
+                        typeDelay: 500,
+                        minLength: 0,
+                        suggestFormat: '{firstName} {lastName} - {email}',
+                        maxHeight: 150,
+                        dataParser: function (data) {
+                            return data.user;
+                        },
+                        events: {
+                            onSelect: function (selection, item) {
+                                if (item) {
+                                    MyWidget.addLicenseUser = item.id || item.email;
+                                    var licenseSelector = widget.getElements('[name=select-license]:checked');
+                                    if (MyWidget.addLicenseUser && licenseSelector.length > 0) {
+                                        addLicense.removeClassName('invite-user-img-disabled');
+                                    }
+                                }
+                            }
+                        }
+
+                    });
+
+
+                    var wrap = UWA.createElement('div', {
+                        'class': 'user-autocomplete',
+                        html: [
+                            autocomplete
+                        ]
+                    });
+
+                    wrap.getElements('.nv-autocomplete-input')[0].addEvent('keyup', function () {
+                        MyWidget.addLicenseUser = null;
+                        addLicense.addClassName('invite-user-img-disabled');
+                    });
+
+                    wrap.inject(widget.body, 'top');
+                    addLicense.inject(widget.body);
+                },
+                /**
+                 * Load i18n and load widget
+                 */
+                // TODO remove when on WP (see bottom)
+                isInit: false,
+                onInit: function () {
+                    if (!MyWidget.isInit) {
+                        MyWidget.isInit = true;
+                        MyWidget.loadI18n(MyWidget.onLoad);
+                    }
+                },
+                /*
+                 The onLoad() function is the first one,
+                 it will be triggered by widget "onLoad" event.
+                 */
+                onLoad: function () {
+
+                    //create event listener
+                    var InterCom = UWA.Utils.InterCom;
+                    // Create a new Server Instance into main page
+                    var server = new InterCom.Server('licenses-server', {
+                        isPublic: true
+                    });
+                    var socketA = new InterCom.Socket('userlist-refresh-socket');
+                    socketA.subscribeServer('licenses-server', window, 'http://'); // no server name mean match first server with isPublic option
+                    // Handle "SocketAEvent" event
+                    socketA.addListener('userlist-refresh', function () {
+                        MyWidget.onLoad();
+                    }.bind(this, widget));
+
+
+                    widget.setTitle(UWA.i18n('User Experiences Management - Available User Experiences'));
+                    widget.mask();
+                    var firstManagerToken = tools.getToken();
+
+                    if (!firstManagerToken || isFirstManagerSet) {
+                        tools.request.get(tools.proxy.listlicenses, {}, {
+                            onComplete: function (data) {
+                                widget.body.empty();
+                                if (data.envlic.length > 0) {
+                                    MyWidget.buildAddLicensePanel();
+                                }
+                                mainTable.get(data.envlic).inject(widget.body);
+                                var helpRows = mainTable._helpRows;
+                                helpRows.initHide();
+
+                                //hide all
+                                for (var i = 0 , len = data.envlic.length; i < len; i++) {
+                                    if (i !== 0) {
+                                        var envid = data.envlic[i].env.id;
+                                        var th = widget.body.getElement('#th-accordion-' + envid);
+                                        if (th) {
+                                            th.toggleClassName('accordion-closed');
+                                            th.toggleClassName('accordion-open');
+                                        }
+                                        var acc = widget.body.getElementsByClassName('accordion-' + envid);
+                                        for (var j = acc.length - 1; j >= 0; j--) {
+                                            acc[j].toggle();
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        //by pass to skip the first refresh of the widget when set the first manager
+                        isFirstManagerSet = true;
+                    }
+                }
+            };
+
+            /*
+             The "onLoad" event is the very first event triggered when
+             the widget is fully loaded or when the preferences are validated.
+
+             Here, we add MyWidget.onLoad() function as "onLoad" event
+             listener on the widget.
+             */
+            widget.addEvents({
+                'onLoad': MyWidget.onInit,
+                'onRefresh': MyWidget.onLoad
+            });
+            // TODO remove when only on WP 14x (onInit() not called due to require Input)
+            MyWidget.onInit();
+        });
+//]]>
+</script>
+</head>
+<body>
+<div style="height: 300px"></div>
+</body>
+</html>

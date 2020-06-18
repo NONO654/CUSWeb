@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  /*
+  * @Quickreview  NWL 13:11:07 IR-266698V6R2014x
+  * @Quickreview  NWL 13:10:28 remove FS commande For v6r2014x
+  * @quickreview CNI1 15:02:20 Change in modules
+  * @Quickreview  T9N 15:03:09 organize commands to unify UI with native
+  * @Quickreview CNI1 16:03:08 removed GraphicOptimizer
+  */
+  -->
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DSHAREAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DSHAREAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="3DSHAREAfrWorkshopHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+    <!-- Navigation -->
+      <CATCommandHeader ID = "Zoom"     ClassName = "DS/ViewerCommands/VisuZoomViewCmd"    HelpResourceFile = "3DPlay/3DPlayHelpForCommands3D" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Pan"      ClassName = "DS/ViewerCommands/VisuPanViewCmd"     HelpResourceFile = "3DPlay/3DPlayHelpForCommands3D" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Rotate"   ClassName = "DS/ViewerCommands/VisuRotateViewCmd"  HelpResourceFile = "3DPlay/3DPlayHelpForCommands3D" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Reframe"  ClassName = "DS/ViewerCommands/VisuReframeViewCmd" HelpResourceFile = "3DPlay/3DPlayHelpForCommands3D" ResourceFile = "3DPlay/3DPlayExperience3D" />
+    </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="3DSHAREAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DSHAREWorkbench">
+
+      <CATCmdContainer Name = "SectionViews" Visibility = "1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name = "Rotate"        Command = "Rotate" />
+        <CATCmdStarter Name = "Pan"           Command = "Pan" />
+        <CATCmdStarter Name = "Zoom"          Command = "Zoom" />
+        <CATCmdStarter Name = "Reframe"       Command = "Reframe" />
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

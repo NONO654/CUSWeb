@@ -1,0 +1,1 @@
+define("DS/ENOXPageToolBar/ENOXPageToolBar_ko",{});define("DS/ENOXPageToolBar/assets/nls/PageToolBar",{collapse:"축소",expand:"확장",information:"정보"});

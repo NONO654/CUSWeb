@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+
+<!-- Widget Meta Data -->
+<meta name="author" content="Dassault Systemes" />
+<meta name="brand" content="ENOVIA" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="autoRefresh" content="0" />
+<meta name="description" content="ENOVIA Route Management" />
+
+<!-- Widget Title -->
+<title>Routes</title>
+
+<!-- Widget Preferences -->
+<widget:preferences>
+    <preference name="collab-storage" type="list" label="storage_label" defaultValue="">
+        <option value="" label="loading_label" />
+    </preference>
+    <preference name="main-view" type="list" label="view_label" defaultValue="list">
+        <option value="list" label="list_label" />
+    </preference>
+    <preference name="id-card-view" type="boolean" label="minimized_label" defaultValue="true"></preference>
+    <preference name="routeFilter" type="list" label="Route_Filter" defaultValue="Active_Routes">
+        <option value="Active_Routes" label="Active_Routes" />
+        <option value="Completed_Routes" label="Completed_Routes" />
+        <option value="All_Routes" label="All_Routes" />
+    </preference>
+    <widget:preference type="hidden" name="routeName"   defaultValue="" ></widget:preference>
+    <widget:preference type="hidden" name="routeId"     defaultValue="" ></widget:preference>
+	<widget:preference type="hidden" name="x3dPlatformId"  label="x3dPlatformId"        defaultValue="OnPremise" ></widget:preference>
+</widget:preferences>
+
+<!-- Widget Events -->
+<script>
+
+    widget.addEvents({
+        onViewChange : function(event) {
+            require([ 'DS/ENORouteMgmt/ENOMyRoutesWidget' ], function (ENOMyRoutesWidget) {
+                ENOMyRoutesWidget.onViewChange.call(null, event);
+            });
+        },
+
+        onLoad : function(event) {
+            require([ 'DS/ENORouteMgmt/ENOMyRoutesWidget' ], function(ENOMyRoutesWidget) {
+                ENOMyRoutesWidget.onLoad.call(null, event);
+            });
+        },
+
+        onRefresh : function() {
+            require('DS/ENORouteMgmt/ENOMyRoutesWidget').onRefresh.call(null, arguments);
+        },
+
+        onStorageChange : function() {
+            require('DS/ENORouteMgmt/ENOMyRoutesWidget').onStorageChange.apply(null, arguments);
+        },
+        
+        onSpaceChange : function() {
+            require('DS/ENORouteMgmt/ENOMyRoutesWidget').onSpaceChange.apply(null, arguments);
+        },
+        
+        onEdit : function(event) {
+            require('DS/ENORouteMgmt/ENOMyRoutesWidget').onEdit.apply(null, arguments);
+        },
+        endEdit : function(event) {
+            require('DS/ENORouteMgmt/ENOMyRoutesWidget').endEdit.apply(null, arguments);
+        }
+    });
+</script>
+
+</head>
+<body>
+  <!-- Default Loading -->
+  <div class="spinner spinner-lg spinning fade in" style="transform: translate3d(0px, 0px, 0px); display: inline-block; margin-top: 20%; margin-left: 45%;">
+    <span class="spinner-bar"></span>
+    <span class="spinner-bar spinner-bar1"></span>
+    <span class="spinner-bar spinner-bar2"></span>
+    <span class="spinner-bar spinner-bar3"></span>
+  </div>
+</body>
+</html>

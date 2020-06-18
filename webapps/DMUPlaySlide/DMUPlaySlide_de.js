@@ -1,0 +1,1 @@
+define("DS/DMUPlaySlide/DMUPlaySlide_de",{});define("DS/DMUPlaySlide/assets/nls/DMUPlaySlide",{nominalSlide:"Nominalstadium"});

@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<description xmlns="urn:com:dassault_systemes:widl" xmlns:xs3d="http://www.3ds.com/xsd/3DXML" xmlns:plm="http://www.3ds.com/xsd/3DXML/PLM" xmlns:upr="http://www.3ds.com/xsd/3DXML_WSUPRTypes" xmlns:cbp="http://cbp.enovia.ws/CBPXML" xmlns:err="http://www.3ds.com/wserror" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd">
+	<entities targetNamespace="urn:com:dassault_systemes:webservice">
+		<schemaImports>
+			<schemaImport location="wserrors.xsd"/>
+      <schemaImport location="3dxml/3DXML.xsd"/>
+      <schemaImport location="3DXML_WSProductResultTypes.xsd"/>
+      <schemaImport location="3DXML_WSCommonTypes.xsd"/>
+      <schemaImport location="3DXML_WSUPRTypes.xsd"/>
+      <schemaImport location="CBPXML.xsd"/>
+		</schemaImports>
+    
+		<interfaces>
+			<interface name="IDELDigProdOrchestrationService" scope="public">
+        <documentation>Interface to navigate through the UPR model and execute a Shop Order.</documentation>
+        <method name="expandExecutionStructure">
+          <documentation>Expand the execution structure</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iEntityID" type="xs:base64Binary" direction="in">
+            <documentation>Identifier of a PLM Reference or PLM Instance in the Shop Order structure to expand (Shop Order, Exec System or Exec Operation)</documentation>
+          </param>
+          <param name="iLevel" type="xs:int" direction="in">
+            <documentation>expand level; -1 means that all the structure will be expanded</documentation>
+          </param>
+          <param name="oResult" type="upr:ExpandBaseResultType" direction="out">
+            <documentation>Expanded Shop Order structure</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="getMfgItem">
+          <documentation>Get the Mfg Item associated to the Shop Order</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iShopOrderID" type="xs:base64Binary" direction="in">
+            <documentation>Identifier of the Shop Order</documentation>
+          </param>
+          <param name="oMfgItem" type="plm:ListOfEntityType" direction="out">
+            <documentation>Mfg Item for which the Shop Order was created</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="getUnitItem">
+          <documentation>Get the Unit Item produced/provided by the Shop Order</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iShopOrderID" type="xs:base64Binary" direction="in">
+            <documentation>Identifier of the Shop Order</documentation>
+          </param>
+          <param name="oUnitItem" type="xs3d:EntityType" direction="out">
+            <documentation>Unit Item produced/provided by the Shop Order</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="getUnitsInContextWSI">
+          <documentation>Get the list of Units associated to the Operation</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iOperationID" type="xs:base64Binary" direction="in">
+            <documentation>Identifier of the Operation</documentation>
+          </param>
+          <param name="oUnits" type="upr:ListOfWSITypeArray" direction="out">
+            <documentation>List of Mfg Items / Units</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="expandUnitStructure">
+          <documentation>Expand the Unit structure</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iUnitID" type="xs:base64Binary" direction="in">
+            <documentation>Identifier of the Unit Item (PLM Reference or PLM Instance)</documentation>
+          </param>
+          <param name="iLevel" type="xs:int" direction="in">
+            <documentation>expand level; -1 means that all the structure will be expanded</documentation>
+          </param>
+          <param name="oResult" type="upr:ExpandBaseResultType" direction="out">
+            <documentation>Expanded Unit structure</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="getResourcesInContext">
+          <documentation>Get the list of Resources associated to the Operation</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iOperationID" type="xs:base64Binary" direction="in">
+            <documentation>Identifier of the Operation</documentation>
+          </param>
+          <param name="oResources" type="upr:ListOfEntityTypeArray" direction="out">
+            <documentation>List of Resources</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="installUnitWSI">
+          <documentation>Replace the Mfg Item reference of a given Unit occurrence by the Unit reference that corresponds to a given serial number or lot number. If neither a serial number nor a lot number is given, create or retrieve a Unit reference and replace a given Unit occurrence</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iReplacedUnit" type="plm:ListOfWSIType" direction="in">
+            <documentation>Unit to be replaced</documentation>
+          </param>
+          <param name="iSerialNumber" type="xs:string" direction="in" nillable="true">
+            <documentation>Serial number of the tracked part to be installed (optional)</documentation>
+          </param>
+          <param name="iLotNumber" type="xs:string" direction="in" nillable="true">
+            <documentation>Lot number of the tracked part to be installed (optional)</documentation>
+          </param>
+          <param name="oNewUnit" type="plm:ListOfWSIType" direction="out">
+            <documentation>New Unit</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="setExecutionStatusWSI">
+          <documentation>Set the execution status of a given Unit occurrence</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iUnit" type="plm:ListOfWSIType" direction="in">
+            <documentation>Unit of which the status is to be updated</documentation>
+          </param>
+          <param name="iStatus" type="xs:string" direction="in">
+            <documentation>Execution status</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="setAttributes">
+          <documentation>Modify attributes of a given entity</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iEntityID" type="xs:base64Binary" direction="in">
+            <documentation>Entity that has to be modified</documentation>
+          </param>
+          <param name="iAttributeValues" type="upr:ListOfStringTypeArray" direction="in">
+            <documentation>List of attribute/value pairs to be set</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+        <method name="getAttributes">
+          <documentation>Get attributes of a given entity</documentation>
+          <param name="iPLMKeyAccess" type="xs:string" direction="in">
+            <documentation>Key to re-establish connection with the PLM core server</documentation>
+          </param>
+          <param name="iEntityID" type="xs:base64Binary" direction="in">
+            <documentation>Entity from that the attributes have to be read</documentation>
+          </param>
+          <param name="iAttributes" type="xs3d:ListOfStringType" direction="in">
+            <documentation>List of attributes to be read</documentation>
+          </param>
+          <param name="oAttributeValues" type="upr:ListOfStringTypeArray" direction="out">
+            <documentation>List of attribute/value pairs</documentation>
+          </param>
+          <fault type="err:ErrorType">
+            <documentation>Raised in case an error is detected in the web service infrastructure.</documentation>
+          </fault>
+        </method>
+      </interface>
+    </interfaces>
+
+    <implementations>
+      <implementation name="DELDigProdOrchestrationService" serviceid="DELDigProdOrchestrationService" implements="tns:IDELDigProdOrchestrationService">
+        <documentation>
+          A service to navigate through the UPR model and execute a Shop Order
+        </documentation>
+      </implementation>
+		</implementations>
+    
+	</entities>
+</description>

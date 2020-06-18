@@ -1,0 +1,149 @@
+<meta charset="UTF-8"/>
+//---------------------------------------------------------------------------
+// Check_TeamDemoUsers
+//---------------------------------------------------------------------------
+Check_TeamDemoUsers.Title  = "One-Click Deployment Experience Security Contexts";
+Check_TeamDemoUsers.CheckButton ="Set Up One-Click Deployment Experience Security Contexts (for demo purposes only)";
+Check_TeamDemoUsers.Resume.true  = "Set Up One-Click Deployment Experience Security Contexts: Yes";
+Check_TeamDemoUsers.Resume.false = "Set Up One-Click Deployment Experience Security Contexts: No";
+
+Text_DataTBS_wrap.Title  = "Vaults Details";
+Text_DataTBS_wrap.Label1 = "Specify the Data and Index table spaces for the production vaults.";
+Text_DataTBS_wrap.Label2 = "In order to use the database's default storage area, leave the fields blank.";
+
+//---------------------------------------------------------------------------
+// Text_DataTBS_wrap
+//---------------------------------------------------------------------------
+Text_DataTBS_wrap.Label3 = "Data table space for eService Production vault";
+Text_DataTBS_wrap.Resume = "Data table space for eService Production vault: /p1";
+
+//---------------------------------------------------------------------------
+// Text_IndexTBS_wrap
+//---------------------------------------------------------------------------
+Text_IndexTBS_wrap.Label1 = "Index table space for eService Production vault";
+Text_IndexTBS_wrap.Resume = "Index table space for eService Production vault: /p1";
+
+//---------------------------------------------------------------------------
+// VplmDataTBS
+//---------------------------------------------------------------------------
+VplmDataTBS.Label1 = "Data table space for vplm vaults";
+VplmDataTBS.Resume = "Data table space for vplm vaults: /p1";
+
+//---------------------------------------------------------------------------
+// VplmIndexTBS
+//---------------------------------------------------------------------------
+VplmIndexTBS.Label1 = "Index table space for vplm vaults";
+VplmIndexTBS.Resume = "Index table space for vplm vaults: /p1";
+
+//---------------------------------------------------------------------------
+// VPLMCentralAdminUser
+//---------------------------------------------------------------------------
+VPLMCentralAdminUser.Title  = "Administrator definition";
+VPLMCentralAdminUser.Label1 = "Administrator name"; 
+VPLMCentralAdminUser.Resume = "Administrator name: /p1";
+//VPLMCentralAdminUser.Label2 = "Click Next to continue.";
+
+//---------------------------------------------------------------------------
+// VPLMCentralAdminPwd
+//---------------------------------------------------------------------------
+VPLMCentralAdminPwd.Title  = "Administrator password";
+VPLMCentralAdminPwd.Label1 = "Administrator password"; 
+//VPLMCentralAdminPwd.Label2 = "Click Next to continue.";
+
+//---------------------------------------------------------------------------
+// VPLMRepositoryName
+//---------------------------------------------------------------------------
+VPLMRepositoryName.Title  = "default VPM Repository name";
+VPLMRepositoryName.Label1 = "Please enter the name of the VPM Repository (for Data exchange)"; 
+VPLMRepositoryName.Resume = "VPM Repository name (for Data exchange): /p1";
+//VPLMRepositoryName.Label2 = "Click Next to continue.";
+
+//---------------------------------------------------------------------------
+// VPLMCentralStorePath
+//---------------------------------------------------------------------------
+VPLMCentralStorePath.Title  = "VPM store path";
+VPLMCentralStorePath.Label1 = "Please enter the path of the VPM store for files storage";
+VPLMCentralStorePath.Resume = "VPM store path: /p1";
+//VPLMCentralStorePath.Label2 = "Click Next to continue.";
+
+//---------------------------------------------------------------------------
+// Database insert of schema
+//---------------------------------------------------------------------------
+ExecuteFamiliesScript.Title  = "Update the database during installation";
+ExecuteFamiliesScript.Label1 = "Uncheck to install in staging area only without updating the database"; 
+
+
+//---------------------------------------------------------------------------
+// Hot Fix installer - VPMADM password check
+//---------------------------------------------------------------------------
+ConnectionVPMADMFailed.Title="Database Connection Error for the Administrator";
+ConnectionVPMADMFailed.Text="The following error has been reported:\n/p1";
+
+
+//---------------------------------------------------------------------------
+// mxmrun "INST_VPLMRepoName.mql" generation
+//---------------------------------------------------------------------------
+RepoNameMQLgenerationFailed.Title="INST_VPLMRepoName.mql Generation Failure";
+RepoNameMQLgenerationFailed.Text="'mxmrun' utility has failed to generate INST_VPLMRepoName.mql file. \nPlease check the level and bit mode of the JDK specified during ENOVIA Live Collaboration Server setup.";
+
+
+//---------------------------------------------------------------------------
+// VPLMPosMigrateCompany Post Install Step Warning
+//---------------------------------------------------------------------------
+cmdToExecuteVPLMDataMigration.Title="Mandatory Step for Database Migration ";
+cmdToExecuteVPLMDataMigration.Text="You are migrating an existing installation.\nThe following MQL command must be executed manually (it may take several minutes).\nStart a MQL command window from <server> installation and type this: \n  MQL>set context person creator;\n  MQL>exec prog VPLMDataMigration;";
+
+//---------------------------------------------------------------------------
+// Execute Data Migration
+//---------------------------------------------------------------------------
+Check_ExecuteDataMigration.Title  = "Database Migration"; 
+Check_ExecuteDataMigration.Label1 = "Select the check box to migrate existing data (this is a mandatory step)"; 
+Check_ExecuteDataMigration.Label2 = "This step can take time and depends on the size of your database.We advise you to run it as a post-installation step."; 
+Check_ExecuteDataMigration.Resume.true  = "Data migration selected: Yes";
+Check_ExecuteDataMigration.Resume.false = "Data migration selected: No";
+Check_ExecuteDataMigration.CheckButton = "Migrate existing data";
+
+//---------------------------------------------------------------------------
+// Check_VPMDemoUsers
+//---------------------------------------------------------------------------
+Check_VPMDemoUsers.Title  = "People and Organization Demo Data"; 
+Check_VPMDemoUsers.Resume.true  = "Set up predefined P&0 demo data: Yes";
+Check_VPMDemoUsers.Resume.false = "Set up predefined P&0 demo data: No";
+Check_VPMDemoUsers.CheckButton ="Set up People and Organization demo data (for test purposes only)";
+
+//---------------------------------------------------------------------------
+// Install VPM Customization Sample
+//---------------------------------------------------------------------------
+Check_InstallVPMCustoSample.Title  = "Customization Sample Installation"; 
+Check_InstallVPMCustoSample.Label1 = "Select the check box to install the VPM customization sample"; 
+Check_InstallVPMCustoSample.Label2 = "(the sample should be used for test purposes only, and not for production"; 
+Check_InstallVPMCustoSample.Label3 = "For production, a complete customization will be required.)"; 
+Check_InstallVPMCustoSample.Resume.true  = "VPM customization sample selected: Yes";
+Check_InstallVPMCustoSample.Resume.false = "VPM customization sample selected: No";
+Check_InstallVPMCustoSample.CheckButton = "Install VPM customization sample";
+
+//---------------------------------------------------------------------------
+// Dynamic relationship checker
+//---------------------------------------------------------------------------
+relationshipNotDynamic.Title="Mandatory Step for Database Migration ";
+relationshipNotDynamic.Text="Custom policies have been detected. They need to be modified to be compliant with the Minor/Major feature\nRefer to the description of the Transition commands in the guide Installing the Server in the ENOVIA Live Collaboration documentation\nServer should not be started until this procedure has been applied.";
+
+//---------------------------------------------------------------------------
+// Mapping Removal - Installation not authorized.
+//---------------------------------------------------------------------------
+MappingRemovalCannotInstall.Title="Migration from this level is not authorized";
+MappingRemovalCannotInstall.Text="The previous installation detected in the database is too old.\nPlease install ENOVIA Multi-Discipline Collaboration Platform 2014x first, then install this media";
+
+//---------------------------------------------------------------------------
+// 16x FD01 migration of SR LastPIDAndRole
+//---------------------------------------------------------------------------
+cmdToExecuteVPLMDataMigrationHF.Title="Mandatory Step after Hot Fix Installation";
+cmdToExecuteVPLMDataMigrationHF.Text="A manual step is required after this hot fix installation.\nThe following MQL command must be executed (it may take several minutes).\nStart a MQL command window from <server> installation and type this: \n  MQL>set context person creator;\n  MQL>exec prog VPLMDataMigration;";
+
+//---------------------------------------------------------------------------
+// error handling while executing installVPMMultiDisciplineV6R201xx.tcl
+//---------------------------------------------------------------------------
+execDBScript_failed.Title="Database installation failure";
+execDBScript_failed.Text="The following database installation script has failed:\n/P1\nThe following error has been reported:\n/P2";
+
+

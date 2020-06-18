@@ -1,0 +1,43 @@
+Let Prefix=""
+Let BufferStart=""
+Let BufferEnd=""
+Let AttrSize=0
+Let Operation=""
+Let New_PLMExternalID=""
+
+Operation=Parameters->GetAttributeString("OperationId")
+
+
+if (Parameters->HasAttribute("IdString") == true)
+{
+      Prefix = Parameters->GetAttributeString("IdString")
+      if (Prefix == NULL) Prefix = ""
+}
+
+if ( Operation=="FBDIImport" )
+ {
+        ThisObject.V_Name = ThisObject.PLM_ExternalID
+        New_PLMExternalID = ThisObject.PLM_ExternalID + "-" + GetUniqueKey( Parameters->GetAttributeString("CustoType"))
+        ThisObject.V_description = "Imported from "  + ThisObject.V_Name
+ }
+ 
+AttrSize=  ThisObject.V_Name->Length() 
+if ( AttrSize> 50 ) 
+{
+  BufferStart = ThisObject.V_Name->Extract(0,8) 
+  BufferEnd = ThisObject.V_Name->Extract( AttrSize- 38, 38 )
+  ThisObject.V_Name = BufferStart + "..." + BufferEnd
+} 
+
+AttrSize=  New_PLMExternalID.Length() 
+if ( AttrSize> 60 )
+{
+  BufferStart = New_PLMExternalID.Extract(0,8) 
+  BufferEnd = New_PLMExternalID.Extract( AttrSize- 49, 49 )
+  New_PLMExternalID = BufferStart + "..." + BufferEnd
+} 
+
+if ( New_PLMExternalID <> "" )
+{
+	ThisObject.PLM_ExternalID  = New_PLMExternalID
+}

@@ -1,0 +1,1 @@
+define("DS/CAT3DComposeConstraints/CAT3DComposeConstraints_ja",{});define("DS/CAT3DComposeConstraints/assets/nls/CAT3DComposeConstraintsView",{cstCoincidence:"一致",cstContact:"接触",plane:"平面",sidePanel:"代替をスナップ"});

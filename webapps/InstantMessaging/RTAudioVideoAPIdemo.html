@@ -1,0 +1,73 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+<link href="http://web3dinfra/WUXShowRoom/i_framed_sample.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../UIKIT/UIKIT.css">
+<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+<script>
+	// API instanciation
+	require(['UWA/Drivers/Alone', 'DS/RTAudioVideoAPI/RTAudioVideoAPI', 'DS/MessageBus/MessageBus', 'DS/UIKIT/DropdownMenu', 'DS/UIKIT/Input/Button'], function (UWA, RTAudioVideoAPI, justHereToLoadMessageBus, Dropdown, Button) {
+			document.avapi = RTAudioVideoAPI;
+			document.avapiObj = new RTAudioVideoAPI({tenantId : 'hyper3dsy', logins:['ii9','p8d'], size:'80px'}); // 
+			document.avapiObj.renderTo({container:document.getElementById('RTwebrtcAPIDemov2'), type:'both'});
+			
+			document.avapiObj2 = new RTAudioVideoAPI({tenantId : 'hyper3dsy', logins:['ii9','p8d'], size:'80px', svgIcon:false});
+			document.avapiObj2.renderTo({container:document.getElementById('RTwebrtcAPIDemov3'), type:'both'});
+			
+			var button = new Button({ value: '2 items' }).inject(document.querySelector('#RTwebrtcAPIDemov4'));
+			new Dropdown({
+				items : document.avapiObj.getItems(),
+				target: button.getContent()
+			});			
+			
+			var button2 = new Button({ value: '1 item' }).inject(document.querySelector('#RTwebrtcAPIDemov4'));
+			new Dropdown({
+				items : document.avapiObj.getItem('video'),
+				target: button2.getContent()
+			});
+	});
+
+	// shortcut to static method
+	function startCall(){
+		document.avapi.startCall({
+			logins : callees,
+			type : 'video'
+		});
+	}
+	document.startCall = startCall;
+
+	// demo checkbox listener
+	var callees = [];
+	function checkboxListener(login){
+		var checkbox = document.getElementById(login);
+		if (checkbox.checked) return callees.push(login);
+		var index = callees.indexOf(login);
+		if (index == -1) return console.error("login "+login+" can not be removed from callees");
+		delete callees[index];
+	}
+	document.checkboxListener=checkboxListener;
+
+</script>
+</head>
+<body>
+	<article id="RTwebrtcAPIDemov4"><center><h3>RT AudioVideo API dropdown items</h3></center>	</article>
+	<article id="RTwebrtcAPIDemov3"><center><h3>RT AudioVideo API svg</h3></center>	</article>
+	<article id="RTwebrtcAPIDemov2"><center><h3>RT AudioVideo API fonticon</h3></center>	</article>
+	<article id="RTwebrtcAPIDemo"><center><h3>RT AudioVideo API static method</h3></center>
+		<ul>
+			<li><input type='checkbox' id='uxodtmem' onclick='document.checkboxListener(this.id)'>Uxodt Member</li>
+			<li><input type='checkbox' id='uxodtidp' onclick='document.checkboxListener(this.id)'>Uxodt ITP</li>
+			<li><input type='checkbox' id='t5r' onclick='document.checkboxListener(this.id)'>Thierry Olivier</li>
+			<li><input type='checkbox' id='p8d' onclick='document.checkboxListener(this.id)'>Paul Simard</li>
+			<li><input type='checkbox' id='ii9' onclick='document.checkboxListener(this.id)'>Adrien Berton</li>
+			<li><input type='checkbox' id='pne1' onclick='document.checkboxListener(this.id)'>Pierre Negre</li>
+			<li><input type='checkbox' id='ali2' onclick='document.checkboxListener(this.id)'>Achraf Lansari</li>
+			<li><input type='checkbox' id='henry' onclick='document.checkboxListener(this.id)'>Henry</li>
+		</ul>
+		<button id='btnStartCall' onclick='document.startCall()'>start call</button>
+	</article>
+</body>
+</html>
+
+

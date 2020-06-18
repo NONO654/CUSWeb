@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  /*
+  * @fullreview   MMA2 15:01:07 Created for migration to the Scenario modules infra.
+  * @quickreview CNI1 15:02:20 Change in modules
+  * @quickreview CNI1 16:01:14 change in the name of the View action bar
+  */
+  -->
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DSHAREAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DSHAREFixedAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="3DSHAREAfrWorkshopHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID = "Scenario"   ClassName = "DS/3DPlayCommands/CmdScenario"  ResourceFile = "3DPlay/3DPlay"  />
+    </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="3DSHAREAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DSHAREFixedWorkbench">
+      <CATCmdContainer Name="Fixed Aera" RepresentationType="AfrActionBarFixedSection">
+    <!--
+      Do not need the CmdScenario here because it is already available in the 3DPlay afr.
+    -->
+      </CATCmdContainer>
+      <CATCmdContainer Name = "SectionViews" Visibility = "1" RepresentationType="AfrActionBarSection">
+
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

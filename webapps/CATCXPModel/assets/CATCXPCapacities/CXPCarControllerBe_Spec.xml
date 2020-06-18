@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IdeaExperienceCapacities>
+  <Header>
+    <Version>0.1</Version>
+  </Header>
+
+  <ExperienceObject>
+
+    <CXPService id="followPath" mode="task" fctStart="followPath" >
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="follows" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPFunction id="isFollowingPath" body="isFollowingPath" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="SensorState" alias="is following" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPFunction>
+
+    <CXPEvent id="CarHasCompletedEvent" targetParam="path">
+        <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+        <NaturalLanguageInfo capacityType="SensorEvent" alias="has completed" icon="icons/caps/I_CXPMoveComplete.png" exposedVariable="target"/>
+    </CXPEvent>
+
+  </ExperienceObject>
+
+</IdeaExperienceCapacities> 

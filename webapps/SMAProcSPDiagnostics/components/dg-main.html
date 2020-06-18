@@ -1,0 +1,291 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+
+<link rel="import" href="dg-menu.html">
+<link rel="import" href="dg-utility.html">
+<link rel="import" href="dg-context.html">
+<link rel="import" href="dg-scenario.html">
+<link rel="import" href="dg-service.html">
+<link rel="import" href="dg-experiment.html">
+<link rel="import" href="dg-sensor.html">
+<link rel="import" href="dg-settings.html">
+<link rel="import" href="dg-about.html">
+
+
+<dom-module id="dg-main">
+  <style>
+    * {
+      font-family: Arial;
+    }
+
+    :host {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .menu {
+      position: absolute;
+      left: 0;
+    }
+
+    .service-item {
+      margin-bottom: 4px;
+    }
+
+    .is-hidden {
+      display: none;
+    }
+    
+  </style>
+
+  <template>
+    <main>
+      <div class="container" on-response-received="_refreshContext">
+        <dg-menu id="menu" class="menu is-hidden" selected="context">
+
+          <!-- CONTEXT -->
+          <section class="content" id="context">
+            <dg-context id="dgcontext" data-test-id="context" value="{{config.context}}" ctx="{{ctx}}"
+              bc="{{bc}}" on-buildcontext="_onBuildContext" data-serialize-key="context" data-serialize-type="info">
+            </dg-context>
+          </section>
+
+          <!-- SCENARIOS -->
+          <section class="content" id="scenarios" >
+            <template is="dom-repeat" items="{{config.scenarios}}">
+              <dg-scenario class="service-item" value="{{item}}" name$="{{item.name}}" 
+                data-test-id$="{{item.name}}" ctx="[[ctx]]" 
+                config="[[config]]" data-serialize-key="scenarios" data-serialize-type="check"></dg-scenario>
+            </template>
+          </section>
+          
+          <!-- MCS SERVICES -->
+          <section class="content" id="mcs">
+            <template is="dom-repeat" items="{{config.mcs}}">
+              <dg-service class="service-item" name$="{{item.name}}" data-test-id$="{{item.name}}" 
+                request="{{item}}" ctx="{{ctx}}" data-serialize-key="services" data-serialize-type="check">
+              </dg-service>
+            </template>
+          </section>
+
+          <!-- COS SERVICES -->
+          <section class="content" id="cos">
+            <template is="dom-repeat" items="{{config.cos}}">
+              <dg-service class="service-item" name$="{{item.name}}" data-test-id$="{{item.name}}" 
+                request="{{item}}" ctx="{{ctx}}" data-serialize-key="services" data-serialize-type="check">
+              </dg-service>
+            </template>
+          </section>
+
+          <!-- EXPERIMENTS -->
+          <section class="content" id="experiments">
+            <template is="dom-repeat" items="{{config.experiments}}">
+              <dg-experiment class="service-item" name$={{item.name}} data-test-id$="{{item.name}}" data-type="experiment"
+                value="{{item}}" data-serialize-key="experiments" data-serialize-type="info">
+              </dg-experiment>
+            </template>
+          </section>
+
+          <!-- SENSORS -->
+          <section class="content" id="sensors">
+            <template is="dom-repeat" items="{{config.sensors}}">
+              <dg-sensor class="service-item" name$="{{item.name}}" data-test-id$="{{item.name}}" 
+                request="{{item}}" ctx="{{ctx}}" bc="{{bc}}"
+                data-serialize-key="sensor" data-serialize-type="check">
+              </dg-sensor>
+            </template>
+          </section>
+
+          <!-- SETTINGS -->
+          <section class="content" id="settings">
+            <dg-settings id="dgsettings" data-test-id="settings" ctx="{{ctx}}" value="{{config.settings}}"
+              data-serialize-key="settings" data-serialize-type="info">
+            </dg-settings>
+          </section>
+
+          <!-- ABOUT -->
+          <section class="content" id="about">
+            <dg-about id="dgabout" data-test-id="about" ctx="{{ctx}}" value="{{config.$about}}"
+              on-serialize-request="_onSerializeRequest" on-deserialize-request="_onDeserializeRequest"
+              data-serialize-key="about" data-serialize-type="info">
+            </dg-about>
+          </section>
+
+        </dg-menu>
+      </div>
+    </main>
+  </template>
+    
+  <script>
+    (function () {
+
+      Polymer({
+        is: 'dg-main',
+        
+        properties: {
+          config: {
+            type: Object
+          },
+          ctx: {
+            // ctx  initialized from dg-context
+            type: Object
+          },
+          bc: {
+            type: Object
+          }
+        },
+        _fetchJSON: async function (url) {
+          try {
+            const path = this.resolveUrl(url);
+            const response = await fetch(path, {credentials:'include'});
+            const json = await response.json();
+            return json;
+          } catch (ex) {
+            window.alert(`Check ${url} for issues`, ex);
+          }
+        },
+        attached: async function () {         
+          // Connection to a broadcast channel
+          // https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API 
+          // create a broadcast channel
+          this.bc = new BroadcastChannel('sp-diagnostics');
+
+          // handle the messages
+          window.parent.addEventListener('message', this._onMessageReceive.bind(this));
+
+          // get the config
+          const config = await this._fetchJSON('../assets/config.json');
+          
+          // the keys
+          const keys = Object.keys(config).filter(key => key.search(/^\$/) < 0);
+
+          // get the includes from config
+          for (const appConfigFileName of config.$include) {
+            const appConfig = await this._fetchJSON(`../assets/apps/${appConfigFileName}.json`);
+            
+            // concatenate the items from include to config
+            keys.forEach(key => {
+              // if the entry exist then concatenate
+              if(appConfig[key]) {
+                // add the config name to these entries
+                appConfig[key].forEach(item => {item.$appConfig = appConfigFileName});
+                
+                // concatenate
+                config[key] = config[key].concat(appConfig[key]);  
+              }
+              
+              // remove this entry if it exists
+              delete appConfig[key];
+            });            
+          }
+
+          // update the config data
+          this.config = config;
+
+          // unhide the menu
+          this.$.menu.classList.remove('is-hidden');
+
+          this.fire('ready');
+        },
+        _onMessageReceive: function (ev) {
+          // handles the broadcast channel's message receive
+          const $action = ev.data.$action;          
+          
+          // don't do anything if there is no $action
+          if (!$action) {
+            return;
+          }
+           
+          try {
+            // if the $action contains underscore then its internal and send 
+            // the data to dg-context else direct it to dg-sensor                    
+            if ($action.startsWith('_')) {
+              this.$.dgcontext[$action] && this.$.dgcontext[$action](ev.data);
+            } else {
+              const sensor = this.$.sensors.querySelector(`dg-sensor[name="${$action}"]`);
+              sensor ? sensor.onmessage(ev.data) : console.warn(`${$action} is not defined as a sensor. Check your json file`);
+            }
+          } catch (ex) {
+            console.warn('Unable to pass the message back to diagnostics app. Check if you are passing the right $action name', ev.data);
+          }
+        },
+        _onBuildContext: function () {
+          this.async( () => {
+            this.querySelectorAll('dg-service').forEach(item => item.buildContext());
+            this.querySelectorAll('dg-sensor').forEach(item => item.buildContext());
+          });
+        },
+        _refreshContext: function (event) {
+          const {expressions} = event.detail;
+          
+          // refresh the context with these expressions
+          this.$.dgcontext.refresh(Object.keys(expressions));
+        },
+        getDateTime: function () {
+          const today = new Date(); 
+          return (today.getMonth()+1) + '/'
+                + today.getDate() + '/' 
+                + today.getFullYear() + '#'  
+                + today.getHours() + 'h:'  
+                + today.getMinutes() + 'm:'
+                + today.getSeconds() + 's';
+        },
+        _serializeReducer: function (serial, item) {
+            // initialize if not yet initialized
+            serial[item.dataset.serializeKey] = serial[item.dataset.serializeKey] || {};
+            
+            // serialize the data
+            const val = item.serializeData();
+
+            // if val exist
+            if (val) {
+              // if name doesn't exist add the data to root
+              if (item.name) {
+                serial[item.dataset.serializeKey][item.name] = val;
+              } else {
+                serial[item.dataset.serializeKey] = val;
+              }
+            }
+                                    
+            return serial;
+        },
+        _onSerializeRequest: function () {
+          // find all serializable content and serialize
+          let content_info = [].reduce.call(document.querySelectorAll('[data-serialize-type="info"]'), this._serializeReducer, {});
+          let content_check = [].reduce.call(document.querySelectorAll('[status][data-serialize-type="check"]'), this._serializeReducer, {});
+
+          // merge these contents together
+          const content = {...content_info, ...content_check};
+          const serialized = encodeURIComponent(JSON.stringify(content));
+
+          // add timestamp at the end to create a unique file each time
+          const fileName = `diagnostics_${this.getDateTime()}.json`;
+          
+          const elem = document.createElement('a');
+          elem.setAttribute('href', 'data:text/json;charset=utf-8,' + serialized);
+          elem.setAttribute('download', fileName);
+          elem.style.display = 'none';
+          window.document.body.appendChild(elem);
+          elem.click();
+          document.body.removeChild(elem);
+        },
+        _onDeserializeRequest: function () {
+          // TODO
+        }
+      });
+    })();
+  </script>
+</dom-module>
+
+
+
+
+

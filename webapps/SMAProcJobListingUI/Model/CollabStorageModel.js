@@ -1,0 +1,1 @@
+define("DS/SMAProcJobListingUI/Model/CollabStorageModel",["UWA/Core","UWA/Class/Model"],function(d,c){var a="collabstorage";var b=c.extend({name:a,defaults:{url:""},url:function(){return this.get("url")}});return b});

@@ -1,0 +1,201 @@
+/* Rule ENONT_PLMInstance_BLInitialization (ThisObject: PLMInstance, Parameters: RuleContext)        */
+/* NOT CONTRACTUAL and PROPERTY OF TE (TEAM ENVIRONMENT) DEFINITION, ANY CHANGE MAY HAPPEN WITHOUT NOTICE        */
+/*                                                                                                               */
+/* Parameters contains many information such as name, user, security ...                                         */
+/* Principle: Determine Instance Default Name from PLMReference ID in case of Implicit Creation                  */
+/*                   ID is not unique and is based on prefix + VName + suffix                                    */
+/*                   prefix being taken from NLS file: can be NULL                                               */
+/*                   VName being defaultly taken as instanciated Reference.VName                                 */ 
+/*                   suffix being computed based on number of loaded instance have VName in AggregatingReference */
+/*                                                                                                               */  
+/*           For Creation from existing instance like Replacement, Cut, Cloning, it is supposed to be CopyFrom   */
+/*                                               => (keep instance name unchanged)                               */
+/*           For Creation from copied/pasted instance behavior is undefined                                      */
+                                                                                            
+Let TypePrefix(STRING)
+Let UserSuffix(STRING)
+Let UserPrefix(String)
+Let Suffix(String)
+Let Inc(Integer)
+
+Let Operation (STRING)
+
+Let CopyFromObject(Feature)
+Let AggregatingReference(PLMEntity) 
+Let Reference(PLMEntity) 
+
+Let ProjectUsage (STRING)
+Let VNameWas(STRING)
+
+Let VName(STRING)
+Let ID(STRING)
+Let IDSize(INTEGER)
+
+Let IDNumber(STRING)
+Let IDType(STRING)
+Let IDSite(STRING)
+Let VDR(STRING)
+
+UserPrefix = ""
+Suffix = ""
+
+CopyFromObject=NULL
+AggregatingReference=NULL
+Reference = NULL
+
+         /* checking Rule calling context  */ 
+
+if ((ThisObject->IsSupporting("PLMCoreInstance") == false ) and (ThisObject->IsSupporting("PLMCoreRepInstance") == false )){
+     Trace (1, "ENONT_PLMInstance_BLInitialization: deployed on an unsupported relation type"  ) 
+     Parameters.Message="wrong usage of rule ENONT_PLMInstance_BLInitialization on a none instance type"
+	 Report("Error",Parameters.Message, Parameters.Message)  
+}
+
+Operation=Parameters->GetAttributeString("OperationId")          
+
+/* What is the correct naming for the reference to instanciate???? */ 
+if ( Parameters->HasAttribute("Reference") == true ) {
+     set Reference=Parameters->GetAttributeObject("Reference")
+}
+
+if ( Reference == NULL ) {
+    Trace (1, "ENONT_PLMInstance_BLInitialization: No instantiated Reference given for creating instance"  )    
+/* Import case does not provide it
+     Parameters.Message="wrong usage of rule ENONT_PLMInstance_BLInitialization, no Reference given"
+	 Report("Error",Parameters.Message, Parameters.Message) 
+*/ 
+
+}
+else if ((Reference->IsSupporting("PLMCoreReference") == false ) and (Reference->IsSupporting("PLMCoreRepReference") == false )){
+     Trace (1, "ENONT_PLMInstance_BLInitialization: Unsupported type for Reference"  )  
+     Parameters.Message="wrong usage of rule ENONT_PLMInstance_BLInitialization on type of pointed reference"
+	 Report("Error",Parameters.Message, Parameters.Message)  
+}
+
+/* What is the correct naming for the reference aggregating the instance ???? */ 
+if ( Parameters->HasAttribute("AggregatingReference") == true ) {
+     set AggregatingReference=Parameters->GetAttributeObject("AggregatingReference")
+}
+
+if ( AggregatingReference == NULL ) {
+ Trace (1, "ENONT_PLMInstance_BLInitialization: No Aggregated Reference given for creating instance"  )    
+/* Import case does not provide it
+  Parameters.Message="wrong usage of rule ENONT_PLMInstance_BLInitialization, no Aggregating Reference given"
+  Report("Warning",Parameters.Message, Parameters.Message) 
+*/
+}
+else if ( AggregatingReference->IsSupporting("PLMCoreReference") == false ) {
+  Trace (1, "ENONT_PLMInstance_BLInitialization: Wrong aggregating reference type"  )    
+  Parameters.Message="wrong usage of rule ENONT_PLMInstance_BLInitialization, unsupported aggregating reference type"
+  Report("Error",Parameters.Message, Parameters.Message) 
+}
+
+TypePrefix="" 
+TypePrefix=BuildMessageNLS("PLMEntity","PLMInstance.Prefix")
+
+UserPrefix=""
+if ( Parameters->HasAttribute("IdString") == true ) {
+    UserPrefix = Parameters->GetAttributeString("IdString")
+    if (UserPrefix == NULL) UserPrefix = ""
+}
+
+if ( Parameters->HasAttribute("Project") == true ) {
+   ProjectUsage=Parameters->GetAttributeString("Project")
+}
+
+if ( Parameters->HasAttribute("CopyFrom") == true ) {         
+   set CopyFromObject=Parameters->GetAttributeObject("CopyFrom") 
+}                                                            
+
+          /* recycle instance name in case of creation from an existing instance */
+          
+/* Notice that VNameWas prefix and/or suffix should be removed when computing a new name from an existing one    */
+/* To support operation like Copy/Paste on renamed Instance: ie "I_MyRef.1" -> "Piston.1"                        */
+/* Next allocation with same Ref should gave Piston.2 and not I_MyRef.2                                          */
+/*                                                                                                               */
+/* Considering the operation where VNameWas will be signifiant, it will reuse the same full VNName  ASIS         */
+/* So we are not considering Extracting Prefix & Suffix from VName                                               */
+
+VNameWas=""
+
+if ( (VNameWas == "") and (CopyFromObject <> NULL)) {
+   if (CopyFromObject->HasAttribute("V_Name") == true){
+	   VNameWas=CopyFromObject->GetAttributeString("V_Name")
+   }
+}
+
+if ( (VNameWas == "") and (CopyFromObject <> NULL)) {
+   if (CopyFromObject->HasAttribute("PLM_ExternalID") == true){
+	   VNameWas=CopyFromObject->GetAttributeString("PLM_ExternalID")
+   }
+}
+
+/* Getting Current VName for new instance */
+VName=""
+if  ( Reference <> NULL ) { 
+  if ( Reference->HasAttribute("V_Name") == true )  {
+     VName=Reference->GetAttributeString("V_Name")
+  }
+}
+
+/* supporting mix mod where Reference do not deploy title*/
+if  ( (Reference <> NULL ) and (VName=="") ) { 
+  if ( Reference->HasAttribute("PLM_ExternalID") == true )  {
+     VName=Reference->GetAttributeString("PLM_ExternalID")
+  }
+}
+
+/*would never happend I guess*/
+if ( (VName=="") and (ThisObject->HasAttribute("V_Name") == true) ) { 
+   VName=ThisObject->GetAttributeString("V_Name") 
+} 
+
+if ( CopyFromObject <> NULL ){
+   /* Creation from copied object keep same name*/
+   VName=VNameWas
+} 
+
+/* Suffix for VPMInstance, i.e. incr of instance with same VName but suffix can not be determine by User Exit */
+/* Notice that the exploration of AggregatingReference is not possible to determine a suffix,                 */
+/*        but would only inform about subset of loaded instance                                               */
+/* => this is why we use this bad algo for suffix definition based on IncSessionId!                           */
+
+IDNumber=""
+UserSuffix="."
+/*UserSuffix=BuildMessageNLS("PLMEntity","PLMInstance.Suffix")*/
+if ( (Suffix == "") and (UserSuffix == ".") ) {
+   /* TBD: IDNumber=STAutoNumberInObject(VName, 3, AggregatingReference) */
+   if ( (IDNumber=="") and (Parameters->HasAttribute("IncSessionId") == true) ) {
+    Inc = Parameters->GetAttributeInteger("IncSessionId")
+    IDNumber=ToString(Inc)
+    if ( IDNumber == NULL) IDNumber = ""
+   }
+   Suffix=UserSuffix+IDNumber
+}
+
+          /* Apply business logic  for Creation */ 
+
+/* tree naming - default value */
+if ( CopyFromObject == NULL ){
+   /* brand new object: always a prefix: DO NOT USE context prefix for Instance*/
+   ID =TypePrefix+ VName + Suffix
+} else if ( (Operation == "Default") or (Operation == "Implicit") or (Operation == "New") ){
+   /* Reallocate a new name in any case for new Creation */   
+   ID =TypePrefix+ VName + Suffix
+}
+else {
+   ID=VNameWas
+}
+
+IDSize=ID.Length()
+if (IDSize>100) {
+   ID=ID.Extract(0,96)+ "..."
+}
+
+ThisObject.PLM_ExternalID=ID
+
+/* wk34 - does not run. This is not normal.... 
+if ( ThisObject->HasAttribute("PLM_ExternalID") == true ) {
+   ThisObject->SetAttributeString("PLM_ExternalID",ID)
+}
+*/

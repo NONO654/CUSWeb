@@ -1,0 +1,40 @@
+<!-- Import base component common to all widgets-->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+
+<!--Import SP UI components-->
+<link rel="import" href="../../SMAProcSPUI/sp-calendar/sp-calendar.html">
+
+<dom-module id="xs-wg-timestamp">
+	<!-- <link rel="import" type="css" href="xs-wg-timestamp.css"> -->
+	<template>
+		<!-- Including the base widget style -->
+	  	<style include="xs-wg-base"></style>
+			<style>
+			:host {
+				display: inline;
+				}
+
+			.input-field {
+			 display: inline-block;
+				 --sp-calendar-date-input: {
+						min-width: 100px;
+						max-width: 155px;
+						width: 100%;
+					};
+				}
+				.input-field-large {
+			    display: block;
+			    --sp-calendar-date-input: {
+			      min-width: 100px;
+			      width: 100%;
+			     };
+				 }
+			</style>
+
+			<div class$="{{_computeClass(nolabel)}}">
+				<label class="xs-wg-label">{{calculateLabel(label,mandatory)}}</label></div>
+			<sp-calendar id="calendar" class$="{{_computeClass1(nolabel)}}"  type="timestamp" readonly="{{readonly}}" placeholder="{{placeholder}}" value="{{value}}" on-click="onShowCalendar" haserror="{{_adp.hasError}}">
+			</sp-calendar>
+	</template>
+	<script src="xs-wg-timestamp.js"></script>
+</dom-module>

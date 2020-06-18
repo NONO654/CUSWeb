@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define(["DS/SMAPoweredByState/ad-state-app-alerts/action-types"],function(b){var a={};a.addAlert=function(d,f,e,c){return{type:b.ADD_ALERT,category:d,level:f,text:(e?e:null),code:(c?c:null)}};a.removeAlert=function(c){return{type:b.REMOVE_ALERT,alertID:c}};a.removeAllAlerts=function(){return{type:b.REMOVE_ALL_ALERTS}};return a});

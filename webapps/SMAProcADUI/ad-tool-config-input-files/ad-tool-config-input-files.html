@@ -1,0 +1,66 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../ad-multiview-panel/ad-multiview-panel.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="ad-tool-config-input-files">
+  <link rel="import" type="css" href="ad-tool-config-input-files.css">
+  <template>
+      <style include="sp-uikit-styles"></style>
+
+        <!-- COMMON CONFIGURATION PROPERTIES -->
+		<sp-variable id="currentDragObject" name="currentDragObject"></sp-variable>
+		<sp-dashboard id="dashboard"></sp-dashboard>
+		
+		<!--  WEB SERVICES -->
+        <div id="mainContentSection" class="content-section-body">
+	        <div id="configurationSection" class="container-fluid">
+				<div class="row input-file-header chrome-pull-fix" draggable="false">
+				    <div class="pull-left content-section-title">Files to be Downloaded</div>
+		            <div class="pull-right" style="height:28px">
+						<sp-access group="process" data-has-no-write-then="hide">
+		                	<button id="removeInputs" type="button" class="btn btn-xs btn-default" title="Remove selected inputs" on-click="onRemoveInputs">
+								<span class="fonticon fonticon-trash">
+							</span></button>
+						</sp-access>
+		                <button id="viewIcons" type="button" title="Show icons" on-click="onViewIcons" class$="{{_computeClass(viewMode)}}"><span class="fonticon fonticon-layout"></span></button>
+		                <button id="viewList" type="button" title="Show list" on-click="onViewList" class$="{{_computeClass2(viewMode)}}"><span class="fonticon fonticon-list"></span></button>
+					</div>
+				</div>
+	        	<div id="contentRow" class="row input-file-container hidden" on-click="onContentAreaClick" tabindex="0">                
+		            <ad-multiview-panel id="filesPanel" view-mode="{{viewMode}}" on-select="onInputSelect" on-dragover="onDragOver" on-drop="onDrop"></ad-multiview-panel>		        
+	        	</div>
+	        	<div id="placeholderRow" class="row input-file-container hidden">
+					<div class="placeholder" on-dragover="onDragOver" on-drop="onDrop">
+	    				Drag content from your Managed Data to this panel to make it available to the Tool during execution
+					</div>
+	        	</div>
+	        </div>
+		 	<!-- The alert messages need to have the relative position declared inline in order to work in Firefox and IE -->
+       		<div id="configurationErrorNone" class="hidden">
+			    <div class="content-section-title">Files to be Downloaded</div>
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				No tool is currently selected.
+				</div>
+       		</div>
+       		<div id="configurationErrorMultiple" class="hidden">
+			    <div class="content-section-title">Files to be Downloaded</div>
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				This configuration section can only be edited for a single tool.
+				</div>
+       		</div>
+        </div>
+        <div id="noDownloadSupportNote" class="hidden">
+		   	<div class="content-section-title">Files to be Downloaded</div>
+			<div class="alert-message alert-warning" style="position:relative">
+				This tool does not support download.
+			</div>
+       	</div>
+	</template>
+  <script src="ad-tool-config-input-files.js"></script>
+</dom-module>
+
+

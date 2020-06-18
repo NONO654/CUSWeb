@@ -1,0 +1,1 @@
+(function(){var a=[];function b(c,e){var d=new CustomEvent("event-manager-"+c,{bubbles:false,detail:e});a.forEach(function(f){f.dispatchEvent(d)})}document.addEventListener("event-manager",function(c){b(c.detail.name,c.detail.data)});Polymer({attached:function(){a.push(this)},removed:function(){var c=a.indexOf(this);if(c>=0){a.splice(c,1)}}})}(this));

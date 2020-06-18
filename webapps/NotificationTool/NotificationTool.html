@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+ <!-- Copyright 2016 , Dassault Systemes. All rights reserved. -->
+<head>
+    <title>3DNotification Center</title>
+
+	<!-- Application Metas Start -->
+    <meta name="description" content="3DNotification Center" />
+    <meta name="keywords" content="3DNotification Center" />
+    <meta name="autoRefresh" content="0" />
+
+	<!-- Application Preferences Start -->
+
+	<!-- Application Metas End -->
+
+    <link rel="stylesheet" href="../UIKIT/UIKIT.css">
+
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+</head>
+
+	<!-- Application JS Start -->
+    <script >
+
+
+        require(['UWA/Drivers/Alone','UWA/Core','UWA/Controls/TabView','DS/NotificationsCenter/js/controller/NotificationCenterController'], function(Alone, UWA, TabView,NotificationCenterController) {
+
+
+        /*var notifCenter = undefined;
+        var mainView = UWA.createElement('div', {
+            styles:{
+                width:'300px',
+                height:'100%'
+            }
+        }).inject(document.body);
+
+        notifCenter = NotificationCenterController.getInstance({body:mainView});
+
+
+        var listOfServices = '[{"platformId":"DSDEV001","displayName":"DS - DSDEV001","3DCompass":"https://dsdev001-euw1-19dna11026-apps.3dx-staging.3ds.com/enovia","3ddesignlinux":"https://dsdev001-euw1-19dna11026-3ddesignlinux.3dx-staging.3ds.com","cassandraservice":"https://dsdev001-euw1-19dna11026-kvs.3dx-staging.3ds.com","3dnotifications":"https://dsdev001-euw1-19dna11026-intf.3dx-staging.3ds.com/intf","3drendering":"https://dsdev001-euw1-19dna11026-3drendering.3dx-staging.3ds.com","remoteapps":"https://dsdev001-euw1-19dna11026-remoteapps.3dx-staging.3ds.com","SPAContentOptimizer":"https://dsdev001-euw1-19dna11026-spacontentoptimizer.3dx-staging.3ds.com/hypervisor","netvibes":"https://trunk.3dd.preview.nvdev.com","3DSpace":"https://dsdev001-euw1-19dna11026-space.3dx-staging.3ds.com/enovia","mpordering":"https://dsdev001-euw1-19dna11026-mpo.3dx-staging.3ds.com","3dsearch":"https://dsdev001-euw1-19dna11026-fedsearch.3dx-staging.3ds.com/enovia","mysolidworks":"https://myswdev.npd.misnvbdevwb1.misdev.swk/","saasmessagingservice":"https://dsdev001-euw1-19dna11026-msgbus.3dx-staging.3ds.com","3dxengineeringapps":"https://dsdev001-euw1-19dna11026-mysvc.3dx-staging.3ds.com/3DXEngineeringApps","dsls":"https://dsdev001-euw1-19dna11026-lic.3dx-staging.3ds.com//","opcimporter":"https://dsdev001-euw1-19dna11026-opcimp.3dx-staging.3ds.com","3DDrive":"https://dsdev001-euw1-19dna11026-drive.3dx-staging.3ds.com/enovia","smaexecloudndb":"https://dsdev001-euw1-19dna11026-hpc.3dx-staging.3ds.com/SMAExeServer-REST","6WTags":"https://dsdev001-euw1-19dna11026-6wtag.3dx-staging.3ds.com/enovia","3DSwym":"https://dsdev001-euw1-19dna11026-3dswym.3dx-staging.3ds.com","comment":"https://dsdev001-euw1-19dna11026-3dcomment.3dx-staging.3ds.com","e3DBOM":"https://dsdev001-euw1-19dna11026-ebom.3dx-staging.3ds.com/enovia","mppresentation":"https://dsdev001-euw1-19dna11026-3dprint.3dx-staging.3ds.com","3DMessaging":"https://dsdev001-euw1-19dna11026-rtc1.3dx-staging.3ds.com:8081/rest","monitoringbroker":"https://dsdev001-euw1-19dna11026-mon.3dx-staging.3ds.com","3DDashboard":"https://euw1-19dna11026-ifwe.3dx-staging.3ds.com","3DSearch":"https://dsdev001-euw1-19dna11026-fedsearch.3dx-staging.3ds.com/federated","3DComputeOrchestration":"https://euw1-19dna11026-hpc.3dx-staging.3ds.com/SMAExeServer-REST"}]';
+        var listS = JSON.parse(listOfServices);
+
+        notifCenter.listOfService = listS;
+
+            var histo = '[{"ID":16,"TYPE":"Tk9USUZfVUk=","MESSAGE":"eyJpY29uIjp7InR5cGUiOiJsb2dpbiIsImRhdGEiOiJseG0ifSwibmxzIjp7Im1zZyI6IjxzdHJvbmc+emFlcibDqcOow6fDuV5wPC9zdHJvbmc+IHdvdWxkIGxpa2UgdG8gc2hhcmUgdGhlIGNvbW11bml0eSA8c3Ryb25nPkdldHRpbmcgU3RhcnRlZDwvc3Ryb25nPiB3aXRoIHlvdS4gVGVzdGluZyBub3RpZmljYXRpb24iLCJkYXRhIjp7IkZST01fVVNFUl9OQU1FIjoiemFlcibDqcOow6fDuV5wIiwiQ09NTVVOSVRZX1RJVExFIjoiR2V0dGluZyBTdGFydGVkIiwiTk9USUZJRVJfTUVTU0FHRSI6IlRlc3Rpbmcgbm90aWZpY2F0aW9uIn19LCJhY3Rpb25zIjpbeyJ0eXBlIjoiYnV0dG9uIiwib3B0aW9ucyI6eyJsYWJlbCI6IkRlbnkiLCJldmVudCI6eyJ0eXBlIjoidXJsIiwib3B0aW9ucyI6eyJ1cmwiOiJodHRwczovL2V1dzEtMTlkbmExMDkxNi1pZndlLjNkeC1zdGFnaW5nLjNkcy5jb20vP2RlYnVnJmRlYnVnTk9USUY9dHJ1ZSZzZXJ2ZXJJZD1GUk9OVF8wI2Rhc2hib2FyZDplODhhNzlmOS1iODZjLTQ0OWQtYjQzOC1kY2E1NDQ1ZDRhOWIvUGxhdGZvcm0lMjBJbmZvcm1hdGlvbiIsInR5cGUiOiJHRVQifX19fV19","PRIORITY":null,"CREATION_DATE":"2016-10-27T14:43:59.000Z","READ_DATE":null,"ACTION":null,"ACTION_DATE":"0000-00-00 00:00:00","APPID":"X3DMCTY_AP"},{"ID":15,"TYPE":"Tk9USUZfVUk=","MESSAGE":"eyJpY29uIjp7InR5cGUiOiJsb2dpbiIsImRhdGEiOiJseG0ifSwibmxzIjp7Im1zZyI6IjxzdHJvbmc+emFlcibDqcOow6fDuV5wPC9zdHJvbmc+IHdvdWxkIGxpa2UgdG8gc2hhcmUgdGhlIGNvbW11bml0eSA8c3Ryb25nPkdldHRpbmcgU3RhcnRlZDwvc3Ryb25nPiB3aXRoIHlvdS4gVGVzdGluZyBub3RpZmljYXRpb24iLCJkYXRhIjp7IkZST01fVVNFUl9OQU1FIjoiemFlcibDqcOow6fDuV5wIiwiQ09NTVVOSVRZX1RJVExFIjoiR2V0dGluZyBTdGFydGVkIiwiTk9USUZJRVJfTUVTU0FHRSI6IlRlc3Rpbmcgbm90aWZpY2F0aW9uIn19LCJhY3Rpb25zIjpbeyJ0eXBlIjoiYnV0dG9uIiwib3B0aW9ucyI6eyJsYWJlbCI6IkRlbnkiLCJldmVudCI6eyJ0eXBlIjoidXJsIiwib3B0aW9ucyI6eyJ1cmwiOiJodHRwczovL2V1dzEtMTlkbmExMDkxNi1pZndlLjNkeC1zdGFnaW5nLjNkcy5jb20vP2RlYnVnJmRlYnVnTk9USUY9dHJ1ZSZzZXJ2ZXJJZD1GUk9OVF8wI2Rhc2hib2FyZDplODhhNzlmOS1iODZjLTQ0OWQtYjQzOC1kY2E1NDQ1ZDRhOWIvUGxhdGZvcm0lMjBJbmZvcm1hdGlvbiIsInR5cGUiOiJHRVQifX19fV19","PRIORITY":null,"CREATION_DATE":"2016-10-27T14:43:57.000Z","READ_DATE":null,"ACTION":null,"ACTION_DATE":"0000-00-00 00:00:00","APPID":"X3DMCTY_AP"},{"ID":13,"TYPE":"Tk9USUZfVUk=","MESSAGE":"eyJpY29uIjp7InR5cGUiOiJsb2dpbiIsImRhdGEiOiJseG0ifSwibmxzIjp7Im1zZyI6IjxzdHJvbmc+emFlcibDqcOow6fDuV5wPC9zdHJvbmc+IHdvdWxkIGxpa2UgdG8gc2hhcmUgdGhlIGNvbW11bml0eSA8c3Ryb25nPkdldHRpbmcgU3RhcnRlZDwvc3Ryb25nPiB3aXRoIHlvdS4gVGVzdGluZyBub3RpZmljYXRpb24iLCJkYXRhIjp7IkZST01fVVNFUl9OQU1FIjoiemFlcibDqcOow6fDuV5wIiwiQ09NTVVOSVRZX1RJVExFIjoiR2V0dGluZyBTdGFydGVkIiwiTk9USUZJRVJfTUVTU0FHRSI6IlRlc3Rpbmcgbm90aWZpY2F0aW9uIn19LCJhY3Rpb25zIjpbeyJ0eXBlIjoiYnV0dG9uIiwib3B0aW9ucyI6eyJsYWJlbCI6IkRlbnkiLCJldmVudCI6eyJ0eXBlIjoidXJsIiwib3B0aW9ucyI6eyJ1cmwiOiJodHRwczovL2V1dzEtMTlkbmExMDkxNi1pZndlLjNkeC1zdGFnaW5nLjNkcy5jb20vP2RlYnVnJmRlYnVnTk9USUY9dHJ1ZSZzZXJ2ZXJJZD1GUk9OVF8wI2Rhc2hib2FyZDplODhhNzlmOS1iODZjLTQ0OWQtYjQzOC1kY2E1NDQ1ZDRhOWIvUGxhdGZvcm0lMjBJbmZvcm1hdGlvbiIsInR5cGUiOiJHRVQifX19fV19","PRIORITY":null,"CREATION_DATE":"2016-10-27T14:43:56.000Z","READ_DATE":null,"ACTION":null,"ACTION_DATE":"0000-00-00 00:00:00","APPID":"X3DMCTY_AP"},{"ID":14,"TYPE":"Tk9USUZfVUk=","MESSAGE":"eyJpY29uIjp7InR5cGUiOiJsb2dpbiIsImRhdGEiOiJseG0ifSwibmxzIjp7Im1zZyI6IjxzdHJvbmc+emFlcibDqcOow6fDuV5wPC9zdHJvbmc+IHdvdWxkIGxpa2UgdG8gc2hhcmUgdGhlIGNvbW11bml0eSA8c3Ryb25nPkdldHRpbmcgU3RhcnRlZDwvc3Ryb25nPiB3aXRoIHlvdS4gVGVzdGluZyBub3RpZmljYXRpb24iLCJkYXRhIjp7IkZST01fVVNFUl9OQU1FIjoiemFlcibDqcOow6fDuV5wIiwiQ09NTVVOSVRZX1RJVExFIjoiR2V0dGluZyBTdGFydGVkIiwiTk9USUZJRVJfTUVTU0FHRSI6IlRlc3Rpbmcgbm90aWZpY2F0aW9uIn19LCJhY3Rpb25zIjpbeyJ0eXBlIjoiYnV0dG9uIiwib3B0aW9ucyI6eyJsYWJlbCI6IkRlbnkiLCJldmVudCI6eyJ0eXBlIjoidXJsIiwib3B0aW9ucyI6eyJ1cmwiOiJodHRwczovL2V1dzEtMTlkbmExMDkxNi1pZndlLjNkeC1zdGFnaW5nLjNkcy5jb20vP2RlYnVnJmRlYnVnTk9USUY9dHJ1ZSZzZXJ2ZXJJZD1GUk9OVF8wI2Rhc2hib2FyZDplODhhNzlmOS1iODZjLTQ0OWQtYjQzOC1kY2E1NDQ1ZDRhOWIvUGxhdGZvcm0lMjBJbmZvcm1hdGlvbiIsInR5cGUiOiJHRVQifX19fV19","PRIORITY":null,"CREATION_DATE":"2016-10-27T14:43:56.000Z","READ_DATE":null,"ACTION":null,"ACTION_DATE":"0000-00-00 00:00:00","APPID":"X3DMCTY_AP"},{"ID":12,"TYPE":"Tk9USUZfVUk=","MESSAGE":"eyJpY29uIjp7InR5cGUiOiJsb2dpbiIsImRhdGEiOiJseG0ifSwibmxzIjp7Im1zZyI6IjxzdHJvbmc+emFlcibDqcOow6fDuV5wPC9zdHJvbmc+IHdvdWxkIGxpa2UgdG8gc2hhcmUgdGhlIGNvbW11bml0eSA8c3Ryb25nPkdldHRpbmcgU3RhcnRlZDwvc3Ryb25nPiB3aXRoIHlvdS4gVGVzdGluZyBub3RpZmljYXRpb24iLCJkYXRhIjp7IkZST01fVVNFUl9OQU1FIjoiemFlcibDqcOow6fDuV5wIiwiQ09NTVVOSVRZX1RJVExFIjoiR2V0dGluZyBTdGFydGVkIiwiTk9USUZJRVJfTUVTU0FHRSI6IlRlc3Rpbmcgbm90aWZpY2F0aW9uIn19LCJhY3Rpb25zIjpbeyJ0eXBlIjoiYnV0dG9uIiwib3B0aW9ucyI6eyJsYWJlbCI6IkRlbnkiLCJldmVudCI6eyJ0eXBlIjoidXJsIiwib3B0aW9ucyI6eyJ1cmwiOiJodHRwczovL2V1dzEtMTlkbmExMDkxNi1pZndlLjNkeC1zdGFnaW5nLjNkcy5jb20vP2RlYnVnJmRlYnVnTk9USUY9dHJ1ZSZzZXJ2ZXJJZD1GUk9OVF8wI2Rhc2hib2FyZDplODhhNzlmOS1iODZjLTQ0OWQtYjQzOC1kY2E1NDQ1ZDRhOWIvUGxhdGZvcm0lMjBJbmZvcm1hdGlvbiIsInR5cGUiOiJHRVQifX19fV19","PRIORITY":null,"CREATION_DATE":"2016-10-27T14:43:55.000Z","READ_DATE":null,"ACTION":null,"ACTION_DATE":"0000-00-00 00:00:00","APPID":"X3DMCTY_AP"},{"ID":11,"TYPE":"Tk9USUZfVUk=","MESSAGE":"eyJpY29uIjp7InR5cGUiOiJsb2dpbiIsImRhdGEiOiJseG0ifSwibmxzIjp7Im1zZyI6IjxzdHJvbmc+emFlcibDqcOow6fDuV5wPC9zdHJvbmc+IHdvdWxkIGxpa2UgdG8gc2hhcmUgdGhlIGNvbW11bml0eSA8c3Ryb25nPkdldHRpbmcgU3RhcnRlZDwvc3Ryb25nPiB3aXRoIHlvdS4gVGVzdGluZyBub3RpZmljYXRpb24iLCJkYXRhIjp7IkZST01fVVNFUl9OQU1FIjoiemFlcibDqcOow6fDuV5wIiwiQ09NTVVOSVRZX1RJVExFIjoiR2V0dGluZyBTdGFydGVkIiwiTk9USUZJRVJfTUVTU0FHRSI6IlRlc3Rpbmcgbm90aWZpY2F0aW9uIn19LCJhY3Rpb25zIjpbeyJ0eXBlIjoiYnV0dG9uIiwib3B0aW9ucyI6eyJsYWJlbCI6IkRlbnkiLCJldmVudCI6eyJ0eXBlIjoidXJsIiwib3B0aW9ucyI6eyJ1cmwiOiJodHRwczovL2V1dzEtMTlkbmExMDkxNi1pZndlLjNkeC1zdGFnaW5nLjNkcy5jb20vP2RlYnVnJmRlYnVnTk9USUY9dHJ1ZSZzZXJ2ZXJJZD1GUk9OVF8wI2Rhc2hib2FyZDplODhhNzlmOS1iODZjLTQ0OWQtYjQzOC1kY2E1NDQ1ZDRhOWIvUGxhdGZvcm0lMjBJbmZvcm1hdGlvbiIsInR5cGUiOiJHRVQifX19fV19","PRIORITY":null,"CREATION_DATE":"2016-10-27T14:43:50.000Z","READ_DATE":null,"ACTION":null,"ACTION_DATE":"0000-00-00 00:00:00","APPID":"X3DMCTY_AP"},{"ID":10,"TYPE":"Tk9USUZfVUk=","MESSAGE":"eyJpY29uIjp7InR5cGUiOiJsb2dpbiIsImRhdGEiOiJseG0ifSwibmxzIjp7Im1zZyI6IjxzdHJvbmc+emFlcibDqcOow6fDuV5wPC9zdHJvbmc+IHdvdWxkIGxpa2UgdG8gc2hhcmUgdGhlIGNvbW11bml0eSA8c3Ryb25nPkdldHRpbmcgU3RhcnRlZDwvc3Ryb25nPiB3aXRoIHlvdS4gVGVzdGluZyBub3RpZmljYXRpb24iLCJkYXRhIjp7IkZST01fVVNFUl9OQU1FIjoiemFlcibDqcOow6fDuV5wIiwiQ09NTVVOSVRZX1RJVExFIjoiR2V0dGluZyBTdGFydGVkIiwiTk9USUZJRVJfTUVTU0FHRSI6IlRlc3Rpbmcgbm90aWZpY2F0aW9uIn19LCJhY3Rpb25zIjpbeyJ0eXBlIjoiYnV0dG9uIiwib3B0aW9ucyI6eyJsYWJlbCI6IkRlbnkiLCJldmVudCI6eyJ0eXBlIjoidXJsIiwib3B0aW9ucyI6eyJ1cmwiOiJodHRwczovL2V1dzEtMTlkbmExMDkxNi1pZndlLjNkeC1zdGFnaW5nLjNkcy5jb20vP2RlYnVnJmRlYnVnTk9USUY9dHJ1ZSZzZXJ2ZXJJZD1GUk9OVF8wI2Rhc2hib2FyZDplODhhNzlmOS1iODZjLTQ0OWQtYjQzOC1kY2E1NDQ1ZDRhOWIvUGxhdGZvcm0lMjBJbmZvcm1hdGlvbiIsInR5cGUiOiJHRVQifX19fV19","PRIORITY":null,"CREATION_DATE":"2016-10-27T14:40:34.000Z","READ_DATE":null,"ACTION":null,"ACTION_DATE":"0000-00-00 00:00:00","APPID":"X3DMCTY_AP"},{"ID":7,"TYPE":"Tk9USUZfVUk=","MESSAGE":"eyJubHMiOnsibXNnIjoiPHN0cm9uZz5zdmNfYnNmcnBvZCBzdmNfYnNmcnBvZDwvc3Ryb25nPiBoYXMgcmVxdWVzdGVkIHRoZSBmb2xsb3dpbmcgcm9sZTogPHN0cm9uZz4zRE1hc3RlciBDb25jZXB0dWFsIERlc2lnbmVyPC9zdHJvbmc+IFBsZWFzZSByZXNwb25kIHRvIHRoaXMgcmVxdWVzdCBmb3JtIFBsYXRmb3JtIE1hbmFnZW1lbnQuIiwiZGF0YSI6eyJ1c2VyZmlyc3RuYW1lIjoic3ZjX2JzZnJwb2QiLCJ1c2VybGFzdG5hbWUiOiJzdmNfYnNmcnBvZCIsInJvbGUiOiIzRE1hc3RlciBDb25jZXB0dWFsIERlc2lnbmVyIn19LCJpY29uIjp7InR5cGUiOiJsb2dpbiIsImRhdGEiOiJzdmNfYnNmcnBvZCJ9LCJhY3Rpb25zIjpbeyJ0eXBlIjoibGluayIsIm9wdGlvbnMiOnsiZXZlbnQiOnsidHlwZSI6InVybCIsIm9wdGlvbnMiOnsidXJsIjoiaHR0cHM6Ly9ldXcxLTE5ZG5hMTEwMjYtaWZ3ZS4zZHgtc3RhZ2luZy4zZHMuY29tI2FwcDpYM0RPUE1SX0FQIiwidHlwZSI6IkdFVCJ9fX19XX0=","PRIORITY":null,"CREATION_DATE":"2016-10-27T14:25:54.000Z","READ_DATE":null,"ACTION":null,"ACTION_DATE":"0000-00-00 00:00:00","APPID":"X3DOPMR_AP"}]';
+
+            notifCenter.setHistory(JSON.parse(histo));
+
+            console.log("Num of notif : " + Object.keys(notifcenter.centerView.alerts));
+      */
+
+        var tabView = new TabView({
+                    className: 'tab tab-center tab-icons',
+                    tabs: [
+                          new TabView.Tab({name: 'json', text: 'Tab 1'}),
+                          new TabView.Tab({name: 'settings', text: 'Tab 2'}),
+                          new TabView.Tab({name: 'nls', text: 'Tab 3'}),
+
+                    ],
+                    events: {
+                        onSelectTab: function (newTab, oldTab, event) {
+                            newTab.setContent('some content in : '+newTab.options.name);
+                        }
+                }
+            }).inject(document.body);
+        //tabView.elements.tabList.innerHTML="";
+        tabView.tabs[0].elements.container.innerHTML="";
+        UWA.createElement('a', {
+            'class':'tab-item',
+            html:'<span class="fonticon fonticon-users"></span>'
+        }).inject(tabView.tabs[0].elements.container);
+
+      });
+
+
+
+    </script>
+	<!-- Application JS End -->
+</head>
+<body>
+  <nav class="tab tab-center tab-icons">
+    <a class="tab-item active"><span class="fonticon fonticon-chat"></span></a>
+    <a class="tab-item"><span class="fonticon fonticon-users"></span></a>
+    <a class="tab-item"><span class="fonticon fonticon-comment"></span></a>
+</nav>
+</body>
+</html>

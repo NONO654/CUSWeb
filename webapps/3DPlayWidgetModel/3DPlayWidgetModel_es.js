@@ -1,0 +1,1 @@
+define("DS/3DPlayWidgetModel/3DPlayWidgetModel_es",{});define("DS/3DPlayWidgetModel/assets/nls/prefs",{Label:"Calidad preferida para la geometría de 3DSpace",Label_External_App:"3DPlay incorporada : calidad preferida para la geometría de 3DSpace",auto:"Automático",base:"Alta calidad",index:"Baja calidad"});

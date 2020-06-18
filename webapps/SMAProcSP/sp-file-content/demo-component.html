@@ -1,0 +1,172 @@
+<link rel="import" href="../sp-base/sp-base.html" />
+<link rel="import" href="sp-file-content.html">
+<dom-module id="demo-component">
+  <template>
+    <div style="overflow: auto;height: 100%;">
+    <sp-file-content id="filecontent"></sp-file-content>
+    <h1>Download/Show Content Test</h1>
+    <br/>
+     Object Id (Mand for every operation) <br/>
+    <input type="text" id="objectid" value="23232.65452.6912.53713"></input>
+    <br/>
+     File Name (Mand for every operation)<br/>
+    <input type="text" id="filename" value="DBZ_Android_Saga.jpg"></input>
+    <br/>
+     Type of File (For Show content only)<br/>
+    <input type="text" id="type" value="blob"></input>
+    <br/>
+     Download File Name (For download only - optional - default value filename)<br/>
+    <input type="text" id="dFileName" value="cmd.bat"></input>
+    <br/>
+    CheckOut (For download only - optional - default download only)<br/>
+    <input type="checkbox" id="checkout"></input>
+    <br/>
+    <button on-click="showFiles">Show Files</button><button on-click="downloadFile">Download</button><button on-click="showContent">Show Content</button>
+    <br/>
+    <div id="fileinfo"></div>
+    <div id="content"></div>
+    <br/>
+    <br/>
+    <br/>
+
+
+    <h1>Upload Content Test</h1>
+    <br/>
+     Object Id *<br/>
+    <input type="text" id="uobjectid" value="23232.65452.6912.53713"></input>
+    <br/>
+     Policy (default: Simulation Document)<br/>
+    <input type="text" id="upolicy" value="Simulation Job"></input><br/>
+     FileName (to be replaced)<br/>
+    <input type="text" id="ufilename" value="condition.png"></input><br/>
+    Format (Default: generic)<br/>
+    <input type="text" id="uformat" value="generic"></input><br/>
+    Comment<br/>
+    <textarea rows="4" cols="50" id="uComment" value="sadasd"></textarea><br/>
+    <br/>
+    <input id="uChooser" type="file"></input><br/>
+    <br/>
+    <button on-click="uploadFiles">Upload File</button>
+  </div>
+
+  </template>
+  <script>
+      Polymer({
+        is: 'demo-component',
+
+        downloadFile: function(){
+          debugger;
+          var action = "download";
+          if(this.$.checkout.checked){
+            action = "checkout";
+          }
+          this.$.filecontent.downloadFile(this.$.objectid.value,this.$.filename.value,this.$.dFileName.value,action).then(function(info){
+              alert("Download Success. Info : "+info);
+            }).catch(function(info){
+              alert("Download Failed. Info : "+info);
+            });
+        },
+
+        showContent: function(){
+          debugger;
+          this.$.filecontent.getFileContent(this.$.objectid.value,this.$.filename.value,this.$.type.value).then(function(info){
+              if(this.$.type.value === 'text'){
+                this.$.content.innerHTML = info.response;
+              } else if(this.$.type.value === 'blob'){
+                //It can be anything but in case it is image  then it will be rendered in content panel
+                if(info.response.type === 'image/png' || info.response.type === 'image/jpg' || info.response.type === 'image/jpeg'){
+                  var image = document.createElement('img');
+                  var blob = new Blob([info.response]);
+                  var url = window.URL.createObjectURL(blob);
+                  image.src = url;
+                  this.$.content.appendChild(image);
+                } else if(info.response.type === 'video/mp4' || info.response.type ==='application/octet-stream') {
+
+                    var tempIframe = document.createElement('iframe');
+                    tempIframe.height = '500px';
+                    tempIframe.width = '500px';
+                    tempIframe.allowFullscreen = "true";
+                    tempIframe.setAttribute('allowFullscreen','true');
+                    var documentVideo = document.createElement("video");
+                    documentVideo.width = 500;
+                    documentVideo.height = 500;
+                    documentVideo.controls = true;
+                    documentVideo.allowFullscreen = true;
+                    //var source = document.createElement("source");
+                   // source.type = info.response.type;
+                     var blob = new Blob([info.response]);
+                  var url = window.URL.createObjectURL(blob);
+                   // source.src = url;
+                   documentVideo.src = url;
+                   // documentVideo.appendChild(source);
+                   this.$.content.appendChild(tempIframe);
+                    tempIframe.contentDocument.body.appendChild(documentVideo);
+
+
+//                   <video width="320" height="240" controls>
+//   <source src="movie.mp4" type="video/mp4">
+//   <source src="movie.ogg" type="video/ogg">
+// Your browser does not support the video tag.
+// </video>
+                } else{
+                   this.$.content.innerHTML = info.response;
+                }
+
+              }
+            }.bind(this)).catch(function(info){
+              alert("Feching file Failed. Info : "+info);
+            }.bind(this));
+        },
+
+        showFiles: function(){
+              this.$.filecontent.getContentInfo(this.$.objectid.value).then(function(info){      
+               this.$.fileinfo.innerHTML = info;
+            }.bind(this)).catch(function(info){
+              alert("Fetching Content. Info : "+info);
+            }.bind(this));
+        },
+
+        uploadFiles: function(){
+            this.readFile(this.$.uChooser.files[0]).then(function(file){
+                var options = {
+                      documentid : this.$.uobjectid.value,
+                      policy: this.$.upolicy.value,
+                      fileName: this.$.ufilename.value,
+                      format: this.$.uformat.value,
+                      comment: this.$.uComment.value,
+                      newFileName: this.$.uChooser.files[0].name,
+                      file: file                     
+                };
+                this.$.filecontent.uploadFile(options).then(function(info){
+                  alert("File Upload Success "+info);
+                }.bind(this)).catch(function(info){
+                  alert("File Upload Error "+info);
+                }.bind(this));
+            }.bind(this)).catch(function(info){
+              alert("Something went wrong: "+info);
+            }.bind(this));
+            
+        },
+
+        readFile: function(file){
+          return new Promise(function (resolve, reject) {
+             if(file.size < 500000000){
+                  var reader = new FileReader();
+                  reader.onload = function(){
+                    resolve(file);
+                  }.bind(this);
+                  reader.onerror = reject;
+                  try{
+                      reader.readAsText(file);
+                  }catch(e){
+                      reject(e);
+                  }
+               }else{
+                  reject({error: 'File too large to handle'});
+               }
+          }.bind(this));
+        }
+      });
+  
+  </script>
+</dom-module>

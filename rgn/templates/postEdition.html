@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>title</title>
+<!-- Generator is using UTF-8 -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style type="text/css">
+body {
+	font-family: Arial, Helvetica;
+	font-size: 10pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+}
+
+table {
+	border-collapse: collapse;
+	empty-cells: show;
+	font-size: 10pt;
+}
+
+td {
+	border: 1px solid black;
+}
+
+th {
+	border: 1px solid black;
+}
+
+h1 {
+	font-size: 180%;
+	font-style: italic;
+	font-weight: bold;
+	margin-top: 2em;
+	margin-bottom: 3em;
+	text-align: center;
+}
+
+h2 {
+	font-size: 140%;
+	margin-top: 1em;
+	margin-bottom: 0.8em;
+}
+
+h3 {
+	font-size: 130%;
+	margin-top: 0.8em;
+	margin-bottom: 0.8em;
+	margin-left: 0.3em;
+}
+
+h4 {
+	font-size: 110%;
+	margin-left: 1em;
+}
+
+h5 {
+	font-size: 100%;
+	margin-left: 1.8em;
+}
+
+h6 {
+	font-size: 90%;
+	margin-left: 2.8em;
+}
+
+.subtitle {
+	font-weight: normal;
+	font-style: italic
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	text-indent: 0em;
+	text-align: justify;
+}
+
+p.abstract {
+	margin-left: 2.5cm;
+	margin-right: 2.5cm;
+}
+
+p.image {
+	text-align: center;
+}
+
+p.caption {
+	margin-bottom: 1em;
+	font-weight: bold;
+	text-align: center;
+}
+
+.newpage {
+	page-break-before: always;
+}
+
+.headernote {
+	font-family: Arial, Helvetica;
+	font-weight: bold;
+	font-style: italic;
+	background-color: #81CDE9;
+}
+
+.footernote {
+	font-family: Arial, Helvetica;
+	font-weight: bold;
+	color: #000080;
+}
+
+@media screen {
+	a:link {
+		color: #0000FF;
+	}
+	a:visited {
+		color: #000099;
+	}
+	a:active {
+		color: #0000FF;
+	}
+	th {
+		background-color: #99CCCC;
+		color: #003366;
+	}
+	h1 {
+		color: #660000;
+	}
+	h2 {
+		color: #003333;
+	}
+	h3 {
+		color: #003366;
+	}
+	h4 {
+		color: #003399;
+	}
+	h5 {
+		color: #336666;
+	}
+	h6 {
+		color: #336699;
+	}
+	span[contenteditable="true"] {
+		border: 1px dashed DarkGray;
+		background-color: #EAEAEA;
+	}
+	div.postedition-main-container {
+		position: absolute;
+		top: 5pt;
+		left: 5pt;
+		right: 5pt;
+		bottom: 5pt;
+		overflow: hidden;
+	}
+	div.postedition-preview {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		right: 40px;
+		height: 100%;
+		overflow: auto;
+	}
+	div.postedition-radar {
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		width: 40px;
+		height: 100%;
+		background-color: lightgray;
+	}
+	div.scroll-highlight {
+		background-color: yellow;
+	}
+}
+
+@media print {
+	a:link {
+		color: #000000;
+		text-decoration: none;
+	}
+	a:visited {
+		color: #000000;
+		text-decoration: none;
+	}
+	a:active {
+		color: #0000FF;
+		text-decoration: none;
+	}
+	div.postedition-radar {
+		display: none;
+	}
+}
+</style>
+<script language="javascript">
+	var ScrollHighlight = function() {
+		var makeHighlights = function(config) {
+			var minHeight = config.minHighlightHeight ? minHighlightHeight : 5;
+			var mainDiv = document.querySelector(config.mainSelector);
+			var radarDiv = document.querySelector(config.radarSelector);
+			var click = function(event) {
+				mainDiv.scrollTop = event.target.dataset.scrollTop;
+			};
+			var l = mainDiv.querySelectorAll(config.highlightSelector);
+			var prevSizes = {
+				mainW : -1,
+				mainH : -1,
+				radarH : -1
+			};
+			var resetHighlights = function() {
+				radarDiv.innerHTML = "";
+				prevSizes = {
+					mainW : mainDiv.offsetWidth,
+					mainH : mainDiv.offsetHeight,
+					radarH : radarDiv.offsetHeight
+				};
+				var h = mainDiv.scrollHeight;
+				var len = l.length;
+				for (var i = 0; i < len; i++) {
+					var e = l[i];
+					var area = document.createElement("div");
+					var top = 0;
+					for (var it = e; it != null && it != mainDiv; it = it.offsetParent)
+						top += it.offsetTop;
+					area.dataset.scrollTop = top;
+					area.onclick = click;
+					area.style.position = "absolute";
+					var areaH = Math.max(e.offsetHeight * radarDiv.offsetHeight
+							/ h, minHeight);
+					var areaY = top * radarDiv.offsetHeight / h;
+					areaY = areaY + areaH < radarDiv.offsetHeight ? areaY
+							: radarDiv.offsetHeight - areaH;
+					area.style.top = areaY + "px";
+					area.style.height = areaH + "px";
+					area.style.left = "0px";
+					area.style.width = "100%";
+					area.className = "scroll-highlight";
+					radarDiv.appendChild(area);
+				}
+			};
+			resetHighlights();
+			var resizePeriod = 500;
+			var handleResize = function() {
+				if (mainDiv.offsetWidth != prevSizes.mainW
+						|| mainDiv.offsetHeight != prevSizes.mainH
+						|| radarDiv.offsetHeight != prevSizes.radarH)
+					resetHighlights();
+			};
+			window.addEventListener("resize", resetHighlights);
+			window.setInterval(handleResize, resizePeriod);
+			var len = l.length;
+			for (var i = 0; i < len; i++) {
+				var e = l[i];
+				e.addEventListener("input", resetHighlights);
+			}
+			;
+		};
+		return {
+			install : function(config) {
+				window.addEventListener("load", function() {
+					makeHighlights(config);
+				});
+			}
+		};
+	};
+	ScrollHighlight().install({
+		mainSelector : "div.postedition-preview",
+		radarSelector : "div.postedition-radar",
+		highlightSelector : "span[contenteditable='true']",
+	});
+</script>
+</head>
+<body>
+	<div class="postedition-main-container">
+		<div class="postedition-preview">
+			<table>
+				<tr>
+					<td class="headernote">CATIA Report Generation</br>$PostEdition</td>
+				</tr>
+			</table>
+			<p>&nbsp;</p>
+			<div>
+				%endheader
+				<p>&nbsp;</p>
+				<p class="footernote">CATIA Report Generation will delete
+					everything contained between these tags during the document
+					generation, and will replace it by the analysis results.</p>
+				<p class="footernote">You can edit the page before the
+					&quot;endheader&quot; tag and after the &quot;begintrailer&quot;
+					one&nbsp; to customize it according to your needs.</p>
+				<p>&nbsp;</p>
+				<h1>Title</h1>
+				<h2>1. Header 1</h2>
+				<h3>1.1. Header 2</h3>
+				<h4>1.1.1. Header 3</h4>
+				<h5>1.1.1.1. Header 4</h5>
+				<h6>1.1.1.1.1. Header 5</h6>
+				<p>First paragraph...</p>
+				<p>Second paragraph...</p>
+				<p>blablablablablablablabla</p>
+				<table align="center" border="1" width="100%">
+					<colgroup>
+						<col width="1*">
+						<col width="1*">
+						<col width="1*">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>Column heading 1</th>
+							<th>Column heading 2</th>
+							<th>Column heading 3</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Line 1</td>
+							<td>Next cell is empty</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Line 2</td>
+							<td>Cell 2.2</td>
+							<td>Cell 2.3</td>
+						</tr>
+					</tbody>
+				</table>
+				%begintrailer
+			</div>
+		</div>
+		<div class="postedition-radar"></div>
+	</div>
+</body>
+</html>

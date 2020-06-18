@@ -1,0 +1,1 @@
+define("DS/3DPlayExperienceModule/3DPlayExperienceModule_de",{});define("DS/3DPlayExperienceModule/assets/nls/3DPlayExperienceModule",{DROP_MSG_LP:"Fügen Sie Ihren Inhalt hier ein",Label:"Bevorzugte Qualität für 3DSpace-Geometrie",auto:"Automatisch",base:"Hohe Qualität",index:"Geringe Qualität"});

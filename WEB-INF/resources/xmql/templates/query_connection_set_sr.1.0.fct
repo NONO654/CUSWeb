@@ -1,0 +1,7 @@
+Language: xMQL
+
+start transaction;
+mod set ${setname} add connection ${rootids};
+label ${label} query connection where "member[${setname}]==TRUE" vault ${vault} type ${type} select ${select,noescape= } dump | tcl;
+label ${labelSR} query path type SemanticRelation where "ownermember[${setname}] == TRUE" select ${selectpath,noescape= } dump | tcl;
+abort transaction;

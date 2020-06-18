@@ -1,0 +1,25 @@
+Let Reference (PLMEntity)
+set Reference = Parameters->GetAttributeObject("ReferenceToInstantiate")
+Validation = true
+
+if (Reference.IsSupporting("VPMRepReference") == true)
+{
+	if (ThisObject.V_usage == "3DPart")
+	{
+		
+		if (Reference.V_nature == "Definition")
+		{
+			if (Reference.V_usage == "3DShape")
+			{
+				Validation  = false
+			}
+		}
+	}
+}
+
+if (Validation == false)
+{
+	/*Parameters.Message = "The reference to add can not be aggregated by the father reference."*/
+	Parameters.NLSMessage = BuildDeferredMessageNLS("3DPartBLAggregation", "ValidationCheck.Title")
+	Parameters.Message=BuildMessageNLS("3DPartBLAggregation","ValidationCheck.Title")
+}

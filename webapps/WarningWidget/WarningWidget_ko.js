@@ -1,0 +1,1 @@
+define("DS/WarningWidget/WarningWidget_ko",{});define("DS/WarningWidget/assets/nls/langWW",{"DefaultMessage:":"계속하시겠습니까?",Cancel:"취소",Continue:"계속",WARNING:"경고"});

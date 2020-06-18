@@ -1,0 +1,79 @@
+﻿</html>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:widget="http://www.netvibes.com/ns/">
+    <!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+    <head>
+
+        <!-- Application Metas Start -->
+
+        <meta name="description"
+            content="CAA Web Apps basic use case " />
+        <meta name="keywords"
+            content="CAA Use Case" />
+        <title>Image Manager Widget App</title>
+        <meta name="author"
+            content="Dassault Systèmes" />
+        <meta name="brand"
+            content="ENOVIA" />
+        <meta name="autoRefresh"
+            content="0" />
+        <meta name="description"
+            content="Image Manager widget" />
+        <meta name="keywords"
+            content="Image Manager" />
+        <meta http-equiv="X-UA-Compatible"
+            content="IE=Edge" />
+        <meta charset="UTF-8" />
+
+        <script type="text/javascript"
+            src="../AmdLoader/AmdLoader.js"></script>
+        <link rel="stylesheet"
+            type="text/css"
+            href="../c/UWA/assets/css/standalone.css" />
+        <script type="text/javascript"
+            src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+        <!-- Application Metas End -->
+
+        <!-- Application JS Start -->
+        <script>
+            /* global widget */
+            require(['DS/ImageManager/ImageManager', 'DS/UIKIT/Input/Button', 'DS/UIKIT/Input/Text'],
+                function (
+                    ImageManager, Button, Input) {
+                    'use strict';
+                    var myWidget = {
+                        onLoad: function () {
+                            var input = new Input({
+                                placeholder: 'Object Id'
+                            }).inject(widget.body);
+                            new Button({
+                                value: 'execute',
+                                events: {
+                                    onClick: function (e) {
+                                        var value = input.getValue();
+                                        value = value ? value :
+                                            "859BB056D83900000B9DC95BA8940300";
+                                        new ImageManager({
+                                            modelId: value
+                                            // modelId: '3A36C2FB6B9E4D26914802E3A76DB218' //LOCKED
+                                        }).execute({})
+                                    }
+                                }
+                            }).inject(widget.body)
+                        }
+                    };
+                    widget.addEvent('onLoad', myWidget.onLoad);
+                })
+        </script>
+        <!-- Application JS End -->
+    </head>
+
+    <body>
+        <!-- <input type="text" placeholder="object id"> -->
+    </body>
+
+</html>

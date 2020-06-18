@@ -1,0 +1,9 @@
+m|MPFModels\MPFBuyer.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.5.19054
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFBuyer\MPFBuyer.js|1550891652|1563
+s|MPFModels\MPFBuyer.mweb\src\MPFBuyer.js|1508247443|0
+s|MPFModels\MPFBuyer.mweb\src\Buyer.js|1549016254|2466
+s|MPFModels\MPFBuyer.mweb\src\BuyerType.js|1549016192|1162

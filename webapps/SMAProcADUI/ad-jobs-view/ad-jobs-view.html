@@ -1,0 +1,113 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-cosservice/sp-cosservice.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+<link rel="import" href="../../SMAProcSPUI/sp-job-log/sp-job-log.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+<link rel="import" href="../ad-job-list-view/ad-job-list-view.html">
+<link rel="import" href="../ad-job-instance-list-view/ad-job-instance-list-view.html">
+<link rel="import" href="../ad-job-log-sidepanel/ad-job-log-sidepanel.html">
+<link rel="import" href="../ad-job-remove-dialog/ad-job-remove-dialog.html">
+<link rel="import" href="../ad-dialog-panel/ad-dialog-panel.html">
+
+<dom-module id="ad-jobs-view">
+  <link rel="import" type="css" href="ad-jobs-view.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+
+        <sp-cosservice id="abortJobsWS" uri="execution/<jobId>/cancel"></sp-cosservice>
+        <sp-dashboard id="spDash"></sp-dashboard>
+
+        <div id=" jobsCommandView" class="container-fluid is-visible">
+	        <div class="row jobs-menu chrome-pull-fix" draggable="false">
+		        <div class="pull-right">
+
+                    <!-- Refresh button -->
+			        <button id="refreshJobsMenuButton" class="btn btn-xs btn-default" title="Refresh" on-click="onRefreshJobsMenuButton">
+				        <span class="fonticon fonticon-cw"></span>
+			        </button>
+
+                    <!-- Filter button -->
+			        <button id="filterJobsTypeMenuButton" class="btn btn-xs btn-default" title="Filter" on-click="onFilterJobsTypeMenuButton">
+				        <span class="fonticon fonticon-menu"><span class="caret"></span></span>
+			        </button>
+                    <sp-dropdown-menu id="jobTypeSelector" class="command-menu" on-click="onFilterJobsTypeMenuSelect">
+    			        <div id="jobTypeSelectorWrap">
+    			            <div class="divCheck">
+			                    <sp-checkbox id="tools" checked="true"></sp-checkbox>
+                                <span>Tools</span>
+                            </div>
+    			            <div class="divCheck">
+			                    <sp-checkbox id="uploads" checked="true"></sp-checkbox>
+                                <span>Uploads</span>
+                            </div>
+    			            <div class="divCheck">
+			                    <sp-checkbox id="downloads" checked="true"></sp-checkbox>
+                                <span>Downloads</span>
+                            </div>
+    			            <div class="separator"></div>
+    			            <div class="divCheck">
+			                    <sp-checkbox id="running" checked="true"></sp-checkbox>
+                                <span>Running</span>
+                            </div>
+    			            <div class="divCheck">
+			                    <sp-checkbox id="completed" checked="true"></sp-checkbox>
+                                <span>Completed</span>
+                            </div>
+    			            <div class="divCheck">
+			                    <sp-checkbox id="failed" checked="true"></sp-checkbox>
+                                <span>Failed</span>
+                            </div>
+    			            <div class="divCheck">
+			                    <sp-checkbox id="aborted" checked="true"></sp-checkbox>
+                                <span>Aborted</span>
+                            </div>
+                        </div>
+			        </sp-dropdown-menu>
+			        <!--<div id="jobTypeSelector">
+			        </div>-->
+                    <!-- Stop button -->
+					<sp-access group="process" data-has-no-write-then="hide" title="Abort Selected Job(s)">
+						<button id="stopJobsMenuButton" class="btn btn-xs btn-default" on-click="onStopJobsMenuButton">
+							<span class="fonticon fonticon-stop"></span>
+						</button>
+					</sp-access>
+
+                    <!-- Delete button -->
+					<sp-access group="process" data-has-no-write-then="hide" title="Delete Selected Job(s)">
+						<button id="deleteJobsMenuButton" class="btn btn-xs btn-default"  on-click="onDeleteJobsMenuButton">
+							<span class="fonticon fonticon-trash"></span>
+						</button>
+					</sp-access>
+
+                    <!-- Log button -->
+            <div class="pull-right" title="View Selected Job's Log">
+			        <button id="ViewJobsLogMenuButton" class="btn btn-xs btn-default" on-click="onViewJobsLogMenuButton">
+				        <span class="fonticon fonticon-cog"></span>
+			        </button>
+            </div>
+
+		        </div>
+                <div class="pull-right" id="filterInfo">
+		        </div>
+	        </div>
+        </div>
+
+       	<ad-job-list-view id="jobList"></ad-job-list-view>
+
+        <ad-dialog-panel id="jobLogPanel" on-stretch="onStretch" on-popup="onPopUp" on-close="onJobsPanelClose" showstretch="true" class="normal">
+	       	<span id="jobLogTitle" class="jobLogTitle is-readonly"></span>
+	       	<sp-job-log id="adJobLog"></sp-job-log>
+	    </ad-dialog-panel>
+
+        <ad-job-log-sidepanel id="jobLogSidepanel" panel-title="Full Log" panel-orientation="right"
+        					  show-cancel show-refresh cancel-tooltip="Close"
+        					  on-cancel="onJobLogSidepanelCancel" on-refresh="onJobLogSidepanelRefresh"> </ad-job-log-sidepanel>
+    </template>
+  <script src="ad-jobs-view.js"></script>
+</dom-module>

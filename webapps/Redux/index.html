@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Redux tester</title>
+	<script src="../AmdLoader/AmdLoader.js"></script>
+	<script>
+		require(['DS/Redux/Redux'], function (redux) {
+			console.log('Redux', redux);
+			if (document.body && document.body.textContent) {
+				var desc = 'redux object properties:\n';
+				for (var prop in redux) {
+					desc +=  '  * ' + prop + ': ' + typeof redux[prop] + '\n';
+				}
+				document.body.style.whiteSpace = 'pre-wrap'
+				document.body.textContent = desc;
+			}
+		});
+	</script>
+</head>
+
+<body></body>
+</html>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.Knowledgeware" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflKnowledgeware" nlsID="displayname">V6 Parameters</DisplayName>
+	<Description nlsFile="SMAWflKnowledgeware" nlsID="description">V6 Parameters</Description>
+	<LongDescription nlsFile="SMAWflKnowledgeware" nlsID="longdescription">V6 Parameters</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>V6Parameters</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>1050</Value>
+			<Value>700</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflKWConnector.png" targetFilename="large/I_SMAWflKWConnector.png" />
+		<Stream name="MapToKW" streamKind="image" sourceFilename="MapToKW.png" targetFilename="MapToKW.png" />
+		<Stream name="MapFromKW" streamKind="image" sourceFilename="MapFromKW.png" targetFilename="MapFromKW.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflKnowledgeware.CATNls" targetFilename="SMAWflKnowledgeware.CATNls"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflKnowledgeware.dll" targetFilename="win_b64/SMAWflKnowledgeware.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflKWConnector.sypstyle" targetFilename="SMAWflKWConnector.sypstyle"/>
+		<Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWeb3DXParameters/cmp-3dxparameters.html" targetFilename="SMAProcWeb3DXParameters/cmp-3dxparameters.html"/>
+
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-3dxparameters</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>SMAWflWebExtensionEditor</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_stylesheet"/>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation language="cpp" platform="win_b64">
+					<LateType>SMAWflKWConnEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflKWConnHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="ExtensionAPI">
+			<Implementations>
+				<Implementation name="web" language="web" platform="win_b64">
+					<LateType>DS/SMAProcWeb3DXParameters/SMAProcWeb3DXParameterAPI</LateType>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+
+	<Properties>
+
+		<!-- Property to store content object value will contain reference to activity content -->
+		<!-- Temporarily the value will cotain direct PLM ID of selected PLM object -->
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Description nlsFile="SMAWflKnowledgeware" nlsID="PLMObject">PLMObject</Description>
+			<Value>
+				<![CDATA[]]>
+			</Value>
+		</Property>
+
+		<Property name="KWParamCache" type="string" valuetype="single">
+			<Description nlsFile="SMAWflKnowledgeware" nlsID="KWParamCache">KWParamCache</Description>
+			<Value>
+				<![CDATA[]]>
+			</Value>
+		</Property>
+
+
+		<!-- Property to store mapping direction 0: Map FROM activity TO kw, 1: Map FROM kw TO Activity -->
+		<Property name="mappingDirection" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[0]]>
+			</Value>
+		</Property>
+
+		<!-- Aggregate property to store all mappings -->
+		<!-- The values will contain a xml string similar to following -->
+		<!--
+			<kwmap kwparam="xxxxxxx" activityparam="yyyyyyyyy"/>
+		-->
+		<Property name="mappings" type="aggregate" valuetype="single">
+			<Property name="map" type="string" valuetype="single">
+				<Value/>
+			</Property>
+		</Property>
+		<Property name="reusePolicy" tag="reusePolicy" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+		<Property name="maxConcurrent" tag="maxConcurrent" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="executionMode" tag="executionMode" type="integer" valuetype="single">
+			<Value>0</Value>
+		</Property>
+
+		<!-- stdout messages in log -->
+		<Property name="stdout" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+		<!-- stderr messages in log -->
+		<Property name="stderr" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+
+	</Properties>
+</wfext:Extension>

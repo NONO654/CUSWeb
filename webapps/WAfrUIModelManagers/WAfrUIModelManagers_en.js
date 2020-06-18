@@ -1,0 +1,1 @@
+define("DS/WAfrUIModelManagers/WAfrUIModelManagers_en",{});define("DS/WAfrUIModelManagers/assets/nls/ActionBarContextMenu",{"iconLabel.title":"Display Commands Name","iconLabelHide.title":"Hide Commands Name","resetActionBar.title":"Reset Position"});define("DS/WAfrUIModelManagers/assets/nls/WAfrCategories",{"WAfrStandard.Title":"Standard"});

@@ -1,0 +1,42 @@
+<style>
+</style>
+  {{#if label}}
+    <label>{{label}}
+    {{~#if required~}}
+          <sup class="required-field">*</sup>
+      {{~/if~}}
+      {{~#if customButtons~}}
+      <span class="actions">
+         {{~#each customButtons~}}
+            <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                <span class="fonticon {{iconClass}}"></span>
+            </button>
+         {{~/each~}}
+      </span>
+      {{~/if~}}
+   </label>
+  {{/if}}
+<div class="field-group">
+  <div class="input-group-wrapper">
+    <div class="input-group">
+      <div class="input-element ck-editor">
+        {{~#if readWrite~}}
+        	\{{~#if canEdit~}}
+                <div id="RTEditor_{{name}}" contenteditable="true" class="content"></div>
+                <textarea class="form-control height-calculator" >\{{ {{name}} }}</textarea>
+            \{{~else~}}
+              	<span id="span_{{name}}" class="content read-only">\{{{ {{{name}}} }}}</span>
+              	<span class="height-calculator read-only"></span>
+            \{{~/if~}}
+        {{~else~}}
+              	<span id="span_{{name}}" class="content read-only">\{{{ {{{name}}} }}}</span>
+              	<span class="height-calculator read-only"></span>
+        {{~/if~}}
+      </div>
+      <span class="link">
+        	<a class="show-more">{{i18n "emxFoundation.Label.showMore"}}</a>
+          <a class="show-less">{{i18n "emxFoundation.Label.showLess"}}</a>
+      </span>
+    </div>
+  </div>
+</div>

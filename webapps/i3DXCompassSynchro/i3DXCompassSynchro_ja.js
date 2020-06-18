@@ -1,0 +1,1 @@
+define("DS/i3DXCompassSynchro/i3DXCompassSynchro_ja",{});define("DS/i3DXCompassSynchro/assets/nls/i3DXCompassSynchro",{waiting:"設定中です。数秒お待ちください",logout:"別の 3DPassport アカウントを使用してください",noInvitation:"プラットフォームにまだ招待されていません。プラットフォーム管理者に招待するように依頼してください。",noAccess:"この 3DEXPERIENCE Platform へのアクセス権がありません。",denied:"アクセスが拒否されました。"});

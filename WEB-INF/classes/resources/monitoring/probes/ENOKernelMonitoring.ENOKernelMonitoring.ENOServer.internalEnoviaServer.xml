@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<probe name=
+    "ENOSystemMonitoring.ENOSysMonitoringAgent.ENOServer.internalEnoviaServer"
+    kind="default" unplug="false" add_to_config="true">
+    <option name="internalEnoviaServer" shortname="ie"
+        optional="true" hidden="true">
+        <description>
+            Set the ENOVIA server to be monitored
+        </description>
+        <parameter name="enoviaServerKeyStoreKey"
+            optional="false" multiple="false">
+            <short-description>
+                key store key
+            </short-description>
+            <description>
+                The identifier for the service in the key store
+            </description>
+        </parameter>
+    </option>
+    <implementation>
+        <class>
+            com.dassault_systemes.infra.monitoring.mcs.ENOServer
+        </class>
+    </implementation>
+    <period minutes="5"/>
+</probe>

@@ -1,0 +1,1106 @@
+[{
+	"Application Version": "6.8",
+	"physicalid": "14F50BD0000024A853A3555D00000A50",
+	"connectoroptions": [{
+		"id": "1",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of all files generated during the run and the name of files that are read in the continue, convert, and recover phases.",
+		"name": "job",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "2",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Abaqus performs a complete analysis.",
+		"name": "analysis",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "3",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Abaqus performs only a data check; no analysis will be performed. Abaqus saves all files necessary to continue the analysis.",
+		"name": "datacheck",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "4",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Abaqus only checks the input parameters when you are using parametric. Abaqus does not perform an analysis or data check.",
+		"name": "parametercheck",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "5",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "The analysis begins at the point at which a previous data check run ended.",
+		"name": "continue",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "6",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "Which files will be postprocessed.",
+		"name": "convert",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "7",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Abaqus only checks the syntax of the input file and does not consume any license tokens.",
+		"name": "syntaxcheck",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "8",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The input file name, with or without the .inp extension. If this option is not supplied, Abaqus looks for an input file called job-name.inp in the current directory.",
+		"name": "input",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "9",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of a FORTRAN source or object file that contains any user subroutines to be used in the analysis. The name of the user routine may contain a path name and may be given with or without a file extension.",
+		"name": "user",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "10",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the files from a previous run from which a restart or postprocessing run is to be started or from which results are to be imported. A path or file extension is not allowed.",
+		"name": "oldjob",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "11",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "Joins the output from restarted analyses into a single, continuous results file. You can choose whether the data from the old results file specified in a restart run are included at the beginning of the new results file (default). If you specify fil=new, the new results file will contain only the data from the point in the analysis where the restart occurred.",
+		"name": "fil",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "12",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the global models results file or output database file from which the results are to be interpolated to drive a submodel analysis.",
+		"name": "globalmodel",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "13",
+		"defaultValues": "1",
+		"separatorValue": "=",
+		"description": "The number of processors to use during an analysis run if parallel processing is available.",
+		"name": "cpus",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "14",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option specifies the number of parallel domains in Abaqus/Explicit. If the value is greater than 1, the domain decomposition will be performed regardless of the values of the parallel and cpus options. However, if parallel=domain, the value of cpus must be evenly divisible into the value of domains. The default value is set equal to the number of processors used during the analysis run if parallel=domain and 1 if parallel=loop. The default value can be changed in the environment file.",
+		"name": "domains",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "15",
+		"defaultValues": "mpi",
+		"separatorValue": "=",
+		"description": "If this option is set equal to mpi, the MPI-based parallelization method will be used when applicable. Set mp_mode=threads to use the thread-based parallelization method. The default value is mpi on all platforms except Windows, which supports only thread-based parallel execution. The default setting on all other platforms can be changed in the environment file.mpi\nthreads",
+		"name": "mp_mode",
+		"Choices": ["mpi",
+		"threads"],
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "16",
+		"defaultValues": "all",
+		"separatorValue": "=",
+		"description": "The default parallel execution mode in Abaqus/Standard if you do not specify the parallel mode on the abaqus command line. If this parameter is set equal to ALL, both the element operations and the solver will run in parallel. If this parameter is set equal to SOLVER, only the solver will run in parallel. The default parallel execution mode is ALL.all\nsolver",
+		"name": "standard_parallel",
+		"Choices": ["all",
+		"solver"],
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "17",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The maximum amount of memory that can be allocated by the analysis input file processor. The default is sufficient for most problems.",
+		"name": "memory",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "18",
+		"defaultValues": null,
+		"description": "Whether to run the  job interactively. Abaqus outputs the log file to the screen.",
+		"name": "interactive",
+		"required": "True",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "19",
+		"defaultValues": null,
+		"description": "Submit the job to run in the background, which is the default.",
+		"name": "background",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "20",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "Submit the job to a batch queue. If the option appears with no value, the job will be submitted to the system default queue. The available queues are site specific.",
+		"name": "queue",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "21",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "Specify the time at which the job will start in the selected batch queue.",
+		"name": "after",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "22",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The precision of the nodal field output written to the output database file (job-name.odb).",
+		"name": "output_precision",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "23",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option chooses between two internal Abaqus/Standard algorithms that are associated with how the direct sparse solver accounts for changes in connectivity during an analysis. Abaqus/Standard will choose a default setting that generally optimizes performance depending on characteristics of the model. Overriding the default setting may occasionally result in improved performance. You can directly choose between the algorithms by specifying active_topology=on or off. The default setting typically, but not always, corresponds to active_topology=on, in which case solver memory estimates and memory usage are based on the current list of nodal interactions rather than a conservative estimate of this list. Abaqus/Standard requires one algorithm or the other for some models if you specify the opposite algorithm in such cases, Abaqus/Standard issues a warning message indicating which features cannot be used with the specified algorithm and the opposite algorithm is used.",
+		"name": "active_topology",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "24",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option writes information about the installation and the environment that is in effect to the screen or to the file job-name.log.  For output information for each value of this option, see Execution procedure for obtaining information, Section 3.2.1 of the Abaqus Analysis Users Guide.  If the information option is used in conjunction with the analysis option, the job must be run in the background to write the information text to the log file.",
+		"name": "information",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "25",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "Full path name of the directory to be used for scratch files. The default value on UNIX is the value of the $TMPDIR environment variable or /tmp if $TMPDIR is not defined. On Windows the default value is the value of the %TEMP% environment variable or \\TEMP if %TEMP% is not defined. During the analysis a subdirectory will be created under this directory to hold the analysis scratch files. The name of the subdirectory is constructed from the users user name, the job ID, and the jobs process number. The subdirectory and its contents are deleted upon completion of the analysis.",
+		"name": "scratch",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "26",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option is used to specify the TCP/UDP port number for co-simulation between Abaqus and AcuSolve (see Preparing an Abaqus analysis for co-simulation,\" Section 13.1.2 of the Abaqus Analysis Users Guide). Set port equal to the port number used for the connection. The default value is 48000. The default port number that Abaqus uses to initiate communication can be set with the cosimulation_port parameter in the environment file (see \"Using the Abaqus environment settings,\" Section 3.3.1 of the Abaqus Analysis Users Guide).",
+		"name": "port",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "27",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option is used to specify the host name for co-simulation between Abaqus and AcuSolve (see \"Preparing an Abaqus analysis for co-simulation, Section 13.1.2 of the Abaqus Analysis Users Guide). This option specifies the name of the machine that is hosting the connection. The host option is required if AcuSolve initiates communication. If Abaqus initiates communication, do not specify the host name.",
+		"name": "host",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "28",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option is used to specify a timeout value for co-simulation connection (see Preparing an Abaqus analysis for co-simulation, Section 13.1.2 of the Abaqus Analysis Users Guide). This option specifies the timeout period in seconds. Abaqus terminates if it does not receive any communication from the external program during the time specified. The default value is 3600 seconds. The default timeout value that Abaqus uses can be set with the cosimulation_timeout parameter in the environment file (see Using the Abaqus environment settings, Section 3.3.1 of the Abaqus Analysis Users Guide).",
+		"name": "timeout",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "29",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option is used to request that Abaqus/Standard create element and node sets for unconnected regions in the analysis output database. Set unconnected_regions=yes to create element and node sets that are named MESH COMPONENT N, where N is the component number.yes\nno",
+		"name": "unconnected_regions",
+		"Choices": ["yes",
+		"no"],
+		"required": "False",
+		"optionType": "Option-Value"
+	}],
+	"Connector Kind": "application",
+	"name": "Abaqus/Standard",
+	"Application Name": "Abaqus/Standard",
+	"Title": "Abaqus/Standard"
+},
+{
+	"Application Version": "6.8",
+	"physicalid": "14F50BD0000024A853A3555E00000A6D",
+	"connectoroptions": [{
+		"id": "1",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The value of this option specifies the name of all files generated during the run and the name of files that are read in the continue, convert, and recover phases. Mutually exclusive options that determine which phases of an analysis are performed",
+		"name": "job",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "2",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Abaqus performs a complete analysis.",
+		"name": "analysis",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "3",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Abaqus performs only a data check; no analysis will be performed. Abaqus saves all files necessary to continue the analysis.",
+		"name": "datacheck",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "4",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Abaqus only checks the input parameters when you are using parametric. Abaqus does not perform an analysis or data check.",
+		"name": "parametercheck",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "5",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "The analysis begins at the point at which a previous data check run ended.",
+		"name": "continue",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "6",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "Which files will be postprocessed.",
+		"name": "convert",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "7",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "This option applies only to Abaqus/Explicit. It indicates that an analysis is to be restarted at the last available step and increment in the state file. This capability is available to restart after a catastrophic failure, such as exceeding a CPU limit or a disk quota. If the original analysis was run in parallel with parallel=domain, it must be restarted with parallel=domain and the same number of processors.",
+		"name": "recover",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "8",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Abaqus only checks the syntax of the input file and does not consume any license tokens.",
+		"name": "syntaxcheck",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "9",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The input file name, with or without the .inp extension. If this option is not supplied, Abaqus looks for an input file called job-name.inp in the current directory.",
+		"name": "input",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "10",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of a FORTRAN source or object file that contains any user subroutines to be used in the analysis. The name of the user routine may contain a path name and may be given with or without a file extension.",
+		"name": "user",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "11",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the files from a previous run from which a restart or postprocessing run is to be started or from which results are to be imported. A path or file extension is not allowed.",
+		"name": "oldjob",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "12",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "Joins the output from restarted analyses into a single, continuous results file. You can choose whether the data from the old results file specified in a restart run are included at the beginning of the new results file (default). If you specify fil=new, the new results file will contain only the data from the point in the analysis where the restart occurred. Setting fil=new is not allowed for Abaqus/Explicit runs.",
+		"name": "fil",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "13",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the global models results file or output database file from which the results are to be interpolated to drive a submodel analysis.",
+		"name": "globalmodel",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "14",
+		"defaultValues": "domain",
+		"separatorValue": "=",
+		"description": "This option specifies the method to use for thread-based parallel processing in Abaqus/Explicit. The possible values are domain and loop. If parallel=domain, the domain-level method is used to break the model into geometric domains. If parallel=loop, the loop-level method is used to parallelize low-level loops.domain\nloop",
+		"name": "parallel",
+		"Choices": ["domain",
+		"loop"],
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "15",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": " This option specifies the number of parallel domains in Abaqus/Explicit. If the value is greater than 1, the domain decomposition will be performed regardless of the values of the parallel and cpus options. However, if parallel=domain, the value of cpus must be evenly divisible into the value of domains. The default value is set equal to the number of processors used during the analysis run if parallel=domain and 1 if parallel=loop. The default value can be changed in the environment file.",
+		"name": "domains",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "16",
+		"defaultValues": "mpi",
+		"separatorValue": "=",
+		"description": "Whether the MPI-based parallelization method will be used when applicable.mpi\nthreads",
+		"name": "mp_mode",
+		"Choices": ["mpi",
+		"threads"],
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "17",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The maximum amount of memory that can be allocated by the analysis input file processor. The default is sufficient for most problems.",
+		"name": "memory",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "18",
+		"defaultValues": null,
+		"description": "Whether to run the job interactively. Abaqus outputs the status file and the log file to the screen.",
+		"name": "interactive",
+		"required": "True",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "19",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Submit the job to run in the background, which is the default.",
+		"name": "background",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "20",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "Submit the job to a batch queue. If the option appears with no value, the job will be submitted to the system default queue. The available queues are site specific.",
+		"name": "queue",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "21",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "Specify the time at which the job will start in the selected batch queue.",
+		"name": "after",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "22",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "This option is used to specify that the double precision executable is to be used for Abaqus/Explicit. This option is available only on machines where the default length of a single precision, floating point word is 32 bits. This option will run the executable for Abaqus/Explicit that was built using double precision, floating point word lengths of 64 bits. This capability is also supported through the Abaqus environment file with the environment.",
+		"name": "double",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "23",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The precision of the nodal field output written to the output database file (job-name.odb).",
+		"name": "output_precision",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "24",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option is used to specify the MADYMO input file name for a co-simulation analysis that couples Abaqus/Explicit and MADYMO. The MADYMO input file name must be given with the .saf extension.",
+		"name": "madymo",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "25",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option writes information about the installation and the environment that is in effect to the screen or to the file job-name.log.  For output information for each value of this option, see \"Execution procedure for obtaining information,\" Section 3.2.1 of the Abaqus Analysis Users Guide.  If the information option is used in conjunction with the analysis option, the job must be run in the background to write the information text to the log file.",
+		"name": "information",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "26",
+		"separatorValue": "=",
+		"description": "Number of processors to use during an analysis run if parallel processing is available. The default value for this parameter is 1.",
+		"name": "cpus",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "27",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "Full path name of the directory to be used for scratch files. The default value on UNIX is the value of the $TMPDIR environment variable or /tmp if $TMPDIR is not defined. On Windows the default value is the value of the %TEMP% environment variable or \\TEMP if %TEMP% is not defined. During the analysis a subdirectory will be created under this directory to hold the analysis scratch files. The name of the subdirectory is constructed from the users user name, the job ID, and the jobs process number. The subdirectory and its contents are deleted upon completion of the analysis.",
+		"name": "scratch",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "28",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option is used to specify the TCP/UDP port number for co-simulation between Abaqus and AcuSolve (see \"Preparing an Abaqus analysis for co-simulation,\" Section 13.1.2 of the Abaqus Analysis Users Guide). Set port equal to the port number used for the connection. The default value is 48000. The default port number that Abaqus uses to initiate communication can be set with the cosimulation_port parameter in the environment file (see \"Using the Abaqus environment settings,\" Section 3.3.1 of the Abaqus Analysis Users Guide).",
+		"name": "port",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "29",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option is used to specify the host name for co-simulation between Abaqus and AcuSolve (see \"Preparing an Abaqus analysis for co-simulation,\" Section 13.1.2 of the Abaqus Analysis Users Guide). This option specifies the name of the machine that is hosting the connection. The host option is required if AcuSolve initiates communication. If Abaqus initiates communication, do not specify the host name.",
+		"name": "host",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "30",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "This option is used to specify a timeout value for co-simulation connection (see \"Preparing an Abaqus analysis for co-simulation,\" Section 13.1.2 of the Abaqus Analysis Users Guide). This option specifies the timeout period in seconds. Abaqus terminates if it does not receive any communication from the external program during the time specified. The default value is 3600 seconds. The default timeout value that Abaqus uses can be set with the cosimulation_timeout parameter in the environment file (see \"Using the Abaqus environment settings,\" Section 3.3.1 of the Abaqus Analysis Users Guide).",
+		"name": "timeout",
+		"required": "False",
+		"optionType": "Option-Value"
+	}],
+	"Connector Kind": "application",
+	"name": "Abaqus/Explicit",
+	"Application Name": "Abaqus/Explicit",
+	"Title": "Abaqus/Explicit"
+},
+{
+	"Application Version": "6.8",
+	"physicalid": "14F50BD0000024A853A3555E00000A71",
+	"connectoroptions": [{
+		"id": "1",
+		"defaultValues": null,
+		"description": "Abaqus CAE startup option.",
+		"name": "cae",
+		"required": "True",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "2",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the model database to open.",
+		"name": "database",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "3",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the file from which commands are to be replayed.",
+		"name": "replay",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "4",
+		"defaultValues": null,
+		"description": "This option starts a separate user interface containing the Abaqus Python development environment. The Abaqus Python development environment allows you to create, edit, step through, and debug Python scripts.",
+		"name": "pde",
+		"required": "False",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "5",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the file from which a model database is to be rebuilt.",
+		"name": "recover",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "6",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the file containing Python commands to be run when Abaqus/CAE starts.",
+		"name": "startup",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "7",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the file containing Python commands to be run when Abaqus/CAE starts. You can pass arguments into the file by entering -- on the command line, followed by the arguments.",
+		"name": "script",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "8",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of a file containing Python scripts to be run by Abaqus/CAE without the graphical user interface (GUI). Abaqus/CAE runs the commands in the file and exits upon their completion. If you choose the noGUI option, Abaqus/CAE ignores any other command line options. You can pass arguments into the file by entering -- on the command line, followed by the arguments.",
+		"name": "noGUI",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "9",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Configuration commands in the environment files should not be run when Abaqus/CAE starts.",
+		"name": "noenvstartup",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "10",
+		"defaultValues": null,
+		"description": "Abaqus/CAE does not apply the display options settings stored in abaqus_v6.6.gpr.",
+		"name": "noSavedOptions",
+		"required": "False",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "11",
+		"defaultValues": null,
+		"description": "Abaqus/CAE does not display the Start Session dialog box.",
+		"name": "noStartupDialog",
+		"required": "False",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "12",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the file containing Abaqus GUI Toolkit commands.",
+		"name": "custom",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "13",
+		"defaultValues": null,
+		"description": "The -mesa command line option causes /CAE to use a pure software version of OpenGL (based on the Mesa 3D Graphics Library) instead of whatever OpenGL driver happens to be installed on the system.  Graphics performance will be diminished.  This option is useful when there is a problem with the installed OpenGL driver or the display is remote and the X11 GLX extension on the client is not compatible with the GLX extension on the server.",
+		"name": "-mesa",
+		"required": "False",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "14",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Custom arguments can be passed to the application by specifying them using the -- option. These arguments will be ignored by the execution procedures error checker, but they will be accessible from within a Python script via the sys.argv list.",
+		"name": "--",
+		"required": "False",
+		"optionType": "Option-Value"
+	}],
+	"Connector Kind": "application",
+	"name": "Abaqus/CAE",
+	"Application Name": "Abaqus/CAE",
+	"Title": "Abaqus/CAE"
+},
+{
+	"Application Version": "6.8",
+	"physicalid": "14F50BD0000024A853A3555F00000A75",
+	"connectoroptions": [{
+		"id": "1",
+		"defaultValues": null,
+		"description": "Abaqus Viewer startup option.",
+		"name": "viewer",
+		"required": "True",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "2",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the model database to open.",
+		"name": "database",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "3",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the file from which commands are to be replayed.",
+		"name": "replay",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "4",
+		"defaultValues": null,
+		"description": "This option starts a separate user interface containing the Abaqus Python development environment. The Abaqus Python development environment allows you to create, edit, step through, and debug Python scripts.",
+		"name": "pde",
+		"required": "False",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "5",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the file containing Python commands to be run when Abaqus/CAE starts.",
+		"name": "startup",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "6",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the file containing Python commands to be run when Abaqus/CAE starts. You can pass arguments into the file by entering -- on the command line, followed by the arguments.",
+		"name": "script",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "7",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of a file containing Python scripts to be run by Abaqus/CAE without the graphical user interface (GUI). Abaqus/CAE runs the commands in the file and exits upon their completion. If you choose the noGUI option, Abaqus/CAE ignores any other command line options. You can pass arguments into the file by entering -- on the command line, followed by the arguments.",
+		"name": "noGUI",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "8",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Configuration commands in the environment files should not be run when Abaqus/CAE starts.",
+		"name": "noenvstartup",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "9",
+		"defaultValues": null,
+		"description": "Abaqus/CAE does not apply the display options settings stored in abaqus_v6.6.gpr.",
+		"name": "noSavedOptions",
+		"required": "False",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "10",
+		"defaultValues": null,
+		"description": "Abaqus/CAE does not display the Start Session dialog box.",
+		"name": "noStartupDialog",
+		"required": "False",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "11",
+		"defaultValues": null,
+		"separatorValue": "=",
+		"description": "The name of the file containing Abaqus GUI Toolkit commands.",
+		"name": "custom",
+		"required": "False",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "12",
+		"defaultValues": null,
+		"description": "The -mesa command line option causes /CAE to use a pure software version of OpenGL (based on the Mesa 3D Graphics Library) instead of whatever OpenGL driver happens to be installed on the system.  Graphics performance will be diminished.  This option is useful when there is a problem with the installed OpenGL driver or the display is remote and the X11 GLX extension on the client is not compatible with the GLX extension on the server.",
+		"name": "-mesa",
+		"required": "False",
+		"optionType": "Standalone"
+	},
+	{
+		"id": "13",
+		"defaultValues": null,
+		"separatorValue": " ",
+		"description": "Custom arguments can be passed to the application by specifying them using the -- option. These arguments will be ignored by the execution procedures error checker, but they will be accessible from within a Python script via the sys.argv list.",
+		"name": "--",
+		"required": "False",
+		"optionType": "Option-Value"
+	}],
+	"Connector Kind": "application",
+	"name": "Abaqus/Viewer",
+	"Application Name": "Abaqus/Viewer",
+	"Title": "Abaqus/Viewer"
+},
+{
+	"Application Version": "Version 6",
+	"physicalid": "14F50BD0000024A853A3555F00000A7A",
+	"connectoroptions": [],
+	"Connector Kind": "application",
+	"name": "OdbToCgr",
+	"Application Name": "Odb to Cgr",
+	"Title": "OdbToCgr"
+},
+{
+	"Application Version": "Version 6",
+	"physicalid": "14F50BD0000024A853A3556A00000C67",
+	"connectoroptions": [],
+	"Connector Kind": "application",
+	"name": "VPMSimulation",
+	"Application Name": "VPMSimulation",
+	"Title": "VPMSimulation"
+},
+{
+	"Application Version": "Version 6",
+	"physicalid": "14F50BD0000024A853A3557200000E43",
+	"connectoroptions": [],
+	"Connector Kind": "application",
+	"name": "VPMSystemSimulation",
+	"Application Name": "VPMSystemSimulation",
+	"Title": "VPMSystemSimulation"
+},
+{
+	"Application Version": "Version 6",
+	"physicalid": "14F50BD0000024A853A3556D00000D03",
+	"connectoroptions": [{
+		"id": "1",
+		"description": "PLM Batch Name",
+		"name": "PLMBatchName",
+		"defaultValue": "DownwardCompatibility",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "2",
+		"description": "V5 Conversion Mode",
+		"name": "CATDWC_ConversionMode",
+		"defaultValue": "Convert",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "3",
+		"description": "Convert to V5 CATIA Version",
+		"name": "CATDWC_targetedVersion",
+		"defaultValue": "CATIAV5R18",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "4",
+		"description": "Use Mapping File",
+		"name": "CATDWC_ContextName",
+		"defaultValue": "COEXISTENCE",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "5",
+		"description": "Use Mapping Table",
+		"name": "CATDWC_UseMappingTable",
+		"defaultValue": "NO",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "6",
+		"description": "Port on intermediate body",
+		"name": "CATDWC_PortOnIntermediateBody",
+		"defaultValue": "NO",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "7",
+		"description": "Run Directory",
+		"name": "CATDWC_ConversionDirectory",
+		"defaultValue": "${rundir}",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "8",
+		"description": "3D Rep as Spec",
+		"name": "CATDWC_3DRep_AsSpec",
+		"defaultValue": "NO",
+		"required": "True",
+		"optionType": "Option-Value"
+	}],
+	"Connector Kind": "exporter",
+	"name": "V5 Export",
+	"Application Name": "V5 Export",
+	"Title": "V5 Export"
+},
+{
+	"Application Version": "Version 6",
+	"physicalid": "14F50BD0000024A853A3556D00000D0D",
+	"connectoroptions": [{
+		"id": "1",
+		"description": "PLM Batch Name",
+		"name": "PLMBatchName",
+		"defaultValue": "Export 3D XML",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "2",
+		"description": "3DXML Export File Name",
+		"name": "FileName",
+		"defaultValue": "SCEDefault",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "3",
+		"description": "3DXML Export File Path",
+		"name": "FilePath",
+		"defaultValue": "${rundir}",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "4",
+		"description": "3DXML Export File Description",
+		"name": "FileDesc",
+		"defaultValue": "SCE 3DXML Export",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "5",
+		"description": "Include 3D Shape RepNO\nYES",
+		"name": "REP3DShapeObject",
+		"Choices": ["NO",
+		"YES"],
+		"defaultValue": "NO",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "6",
+		"description": "3DXML Export File Format.3DXMLReview\n3DXMLAuthoring",
+		"name": "Format",
+		"Choices": ["3DXMLReview",
+		"3DXMLAuthoring"],
+		"defaultValue": "ForReview",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "7",
+		"description": "Mode",
+		"name": "Mode",
+		"defaultValue": "File Exchanges",
+		"required": "True",
+		"optionType": "Option-Value"
+	}],
+	"Connector Kind": "exporter",
+	"name": "3DXML Export",
+	"Application Name": "3DXML Export",
+	"Title": "3DXML Export"
+},
+{
+	"Application Version": "Version 6",
+	"physicalid": "14F50BD0000024A853A3556F00000D76",
+	"connectoroptions": [{
+		"id": "1",
+		"description": "PLM Batch Name",
+		"name": "PLMBatchName",
+		"defaultValue": "UnitaryFastenerReport",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "2",
+		"description": "Report output pathname",
+		"name": "UnitaryFastenerReport_OuputPath",
+		"defaultValue": null,
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "3",
+		"description": "Produce long format report",
+		"name": "UnitaryFastenerReport_LongReport",
+		"defaultValue": "TRUE",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "4",
+		"description": "Order zones in report",
+		"name": "UnitaryFastenerReport_OrderedZones",
+		"defaultValue": "TRUE",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "5",
+		"description": "Include comments in report",
+		"name": "UnitaryFastenerReport_InclComments",
+		"defaultValue": "TRUE",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "6",
+		"description": "Translate coded values",
+		"name": "UnitaryFastenerReport_TranslateCodedVals",
+		"defaultValue": "TRUE",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "7",
+		"description": "Units for report",
+		"name": "UnitaryFastenerReport_Unit",
+		"defaultValue": "Millimeter",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "8",
+		"description": "Numerical precision in report",
+		"name": "UnitaryFastenerReport_PrecisionNumber",
+		"defaultValue": "2",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "9",
+		"description": "Use scientific notation",
+		"name": "UnitaryFastenerReport_ScientificNotation",
+		"defaultValue": "FALSE",
+		"optionType": "Option-Value"
+	}],
+	"Connector Kind": "exporter",
+	"name": "Fastener Export",
+	"Application Name": "Fastener Export",
+	"Title": "Fastener Export"
+},
+{
+	"Application Version": "Version 6",
+	"physicalid": "14F50BD0000024A853A3558D0000149D",
+	"connectoroptions": [{
+		"id": "1",
+		"description": "false",
+		"name": "debug",
+		"defaultValue": "false",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "2",
+		"description": "MxCATIAV5",
+		"name": "integrationname",
+		"defaultValue": "MxCATIAV5",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "3",
+		"description": "true",
+		"name": "multiport",
+		"defaultValue": "true",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "4",
+		"description": "2000",
+		"name": "portrangemin",
+		"defaultValue": "2000",
+		"required": "True",
+		"optionType": "Option-Value"
+	},
+	{
+		"id": "5",
+		"description": "5000",
+		"name": "portrangemax",
+		"defaultValue": "5000",
+		"required": "True",
+		"optionType": "Option-Value"
+	}],
+	"Connector Kind": "exporter",
+	"name": "DesignerCentralExport",
+	"Application Name": "DesignerCentralExport",
+	"Title": "DesignerCentralExport"
+},
+{
+	"Application Version": "5.5",
+	"physicalid": "14F50BD0000024A853A3558D00001498",
+	"connectoroptions": [{
+		"id": "1",
+		"separatorValue": ":",
+		"description": "Simflow run time option",
+		"name": "run",
+		"defaultValue": "local",
+		"required": "True",
+		"optionType": "Option-Value"
+	}],
+	"Connector Kind": "simflow",
+	"name": "Simflow",
+	"Application Name": "Simflow",
+	"Title": "Simflow"
+}]

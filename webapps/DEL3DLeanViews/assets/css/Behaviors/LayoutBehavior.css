@@ -1,0 +1,65 @@
+.layout_Phantom {
+    width: 0;
+    height: 0;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: rgba(35, 157, 232, .5);
+    transition: width .3s ease-out, height .3s ease-out, left .3s ease-out, top .3s ease-out;
+    display: none;
+}
+
+.layout_MainDropGrid
+{
+    width:      100%;
+    height:     100%;
+    position:   relative;
+}
+.layout_DropGridBlock
+{
+    position:	absolute;
+    display:	flex;
+    box-sizing:	border-box;
+    padding: 1%;
+    /**	Padding relative to width only, so to get good height padding, set it relative to viewport height **/
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+.layout_DropGridBlock.droppable:after
+{
+    content:	'';
+    outline:	.2em dashed rgba(98, 122, 143, 0.5);
+    width:		100%;
+    height:		100%;
+}
+.layout_DropGridBlock.droppable.loading:after
+{
+    background-color: white;
+}
+
+.layout_DropGridBlock.canDrop
+{
+    background-color: #8192af;
+}
+.layout_DropGridBlock .createPageButton
+{
+    visibility: hidden;
+}
+.layout_DropGridBlock.droppable:not(.loading) .createPageButton
+{
+    visibility: visible;
+}
+.createPageButton
+{
+    top: 30%;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    position:	absolute;
+    pointer-events: all;
+}
+.createPageButton > .buttonView
+{
+    height: 100%;
+    width: 100%;
+}

@@ -1,0 +1,1 @@
+define("DS/MPFMultiBiddingSelector/MPFMultiBiddingSelector_en",{});define("DS/MPFMultiBiddingSelector/assets/nls/MultiBiddingSelector",{next:"Next",selectedLabs:"Select labs"});

@@ -1,0 +1,44 @@
+<!--------------------------------------------------------------------
+[xs-wg-textarea HTML Document]
+
+Project:		xs
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:47:02 GMT
+Assigned to:	d6u
+Primary use:	Multi line text area
+Description:    TODO: Description about the component
+--------------------------------------------------------------------->
+
+<!-- Import base component common to all widgets available as tools -->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+
+<dom-module id="xs-wg-textarea">
+  <!-- <link rel="import" type="css" href="xs-wg-textarea.css"> -->
+  <template>
+        <!-- Including the base widget style -->
+		<style include="xs-wg-base"></style>
+    <style>
+    :host {
+      display: block;
+      padding: 3px; }
+
+    .text-area {
+      min-height: 101px;
+      display: inline;
+      box-sizing: border-box;
+      font-family: Arial; }
+
+    .haserror{
+      border-color: #ea4f37; }
+
+    .haserror:focus{
+      border-color: #ea4f37;
+    }
+    </style>
+        <label class="xs-wg-label" for="textarea">{{calculateLabel(label,mandatory)}}</label>
+        <textarea id="textarea" class="text-area form-control " placeholder="{{placeholder}}"
+                  value="{{value::input}}" haserror="{{_adp.hasError}}" disabled$="{{readonly}}">
+        </textarea>
+    </template>
+  <script src="xs-wg-textarea.js"></script>
+</dom-module>

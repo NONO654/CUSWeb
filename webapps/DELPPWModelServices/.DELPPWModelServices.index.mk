@@ -1,0 +1,16 @@
+m|DELPPWModels\DELPPWModelServices.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19221
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELPPWModelServices\DELPPWModelServices.js|1565395456|42932
+s|DELPPWModels\DELPPWModelServices.mweb\src\BehaviorUtil.js|1564566167|5639
+s|DELPPWModels\DELPPWModelServices.mweb\src\EGraphUtils.js|1536300434|21289
+s|DELPPWModels\DELPPWModelServices.mweb\src\CollectionUtils.js|1565098047|68242
+s|DELPPWModels\DELPPWModelServices.mweb\src\DocumentObjAttributesUtils.js|1532440436|3370
+s|DELPPWModels\DELPPWModelServices.mweb\src\ModelUtils.js|1564728115|6439
+s|DELPPWModels\DELPPWModelServices.mweb\src\Navigation\IndexedDBUtils.js|1547725599|9618
+s|DELPPWModels\DELPPWModelServices.mweb\src\Navigation\NavigateOnLocalStore.js|1532440436|10738
+s|DELPPWModels\DELPPWModelServices.mweb\src\BIUtils.js|1561037069|16027
+t|win_b64\webapps\DELPPWModelServices\assets\modelMock.json|1543871584|294714
+s|DELPPWModels\DELPPWModelServices.mweb\src\assets\modelMock.json|1543410939|294714

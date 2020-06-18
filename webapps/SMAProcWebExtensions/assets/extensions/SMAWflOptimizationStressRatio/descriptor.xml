@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.StressRatio" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationStressRatio" nlsID="dispname">Stress Ratio</DisplayName>
+	<Description nlsFile="SMAWflOptimizationStressRatio" nlsID="desc">Stress Ratio optimization algorithm</Description>
+	<LongDescription nlsFile="SMAWflOptimizationStressRatio" nlsID="longdesc">
+		<![CDATA[Stress Ratio
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Fully Stress Design (FSD) Structural Method
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for linear design spaces
+   &#8226; Well-suited for non-linear design spaces
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>No
+
+</span><span style="font-weight:bold">Features:
+</span><span>The stress ratio optimizer is a fully stressed design method commonly used in structural optimization. It takes a set of design variables, typically dimensions such as thicknesses, areas, or moments of inertia, and a corresponding set of constraints on allowable stresses, and modifies the design variables according to the relation x_new = x_old(sigma_actual/sigma_allowable)^power. 
+
+The user associated design variables and constraints through a naming convention: xAt... ---> stressAt... Each design variable can have any number of constraints associated with it. The algorithm will apply the critical constraint when modifying the design variable.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.StressRatio</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+		<Attribute name="EnableRunInParallel">
+			<Value>false</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationStressRatio.CATNls" targetFilename="SMAWflOptimizationStressRatio.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationStressRatio_Japanese.CATNls" targetFilename="SMAWflOptimizationStressRatio_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.stressratio.StressRatio</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="ExecutesInParallel" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Max Iterations" type="integer" valuetype="single">
+				<Value>20</Value>
+			</Property>
+			<Property name="Power" type="real" valuetype="single">
+				<Value>0.4</Value>
+			</Property>
+			<Property name="Constraint Critical Ratio" type="real" valuetype="single">
+				<Value>1.0</Value>
+			</Property>
+			<Property name="Tolerance" type="real" valuetype="single">
+				<Value>0.0</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

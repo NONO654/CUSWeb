@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="DMUSlideShowHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID="dmuPlayPreviousSlideHdr" ClassName="DS/DMUPlaySlide/commands/DMUNavigationSlideShowCmd" ResourceFile="DMUPlaySlide/DMUPlaySlide" Available="1" />
+      <CATCommandHeader ID="dmuPlayNextSlideHdr" ClassName="DS/DMUPlaySlide/commands/DMUNavigationSlideShowCmd" ResourceFile="DMUPlaySlide/DMUPlaySlide" Available="1" />
+      <CATCommandHeader ID="dmuPlayExitSlideShowHdr" ClassName="DS/DMUPlaySlide/commands/DMUNavigationSlideShowCmd" ResourceFile="DMUPlaySlide/DMUPlaySlide" Available="1" />
+    </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="DMUSlideShowAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="DMUSlideShowWorkbench">
+
+      <CATCmdContainer Name="Fixed Area" RepresentationType="AfrActionBarFixedSection">
+        <CATCmdStarter Name="dmuPlayExitSlideShowStr" Command="dmuPlayExitSlideShowHdr" />
+      </CATCmdContainer>
+
+      <CATCmdContainer Name="DMUNavigation" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="dmuPlayPreviousSlideStr" Command="dmuPlayPreviousSlideHdr" />
+        <CATCmdStarter Name="dmuPlayNextSlideStr" Command="dmuPlayNextSlideHdr" />
+      </CATCmdContainer>
+      
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

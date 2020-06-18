@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="urn:com:dassault_systemes:webservice" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <types>
+  <xs:schema targetNamespace="urn:com:dassault_systemes:webservice:messages">
+   <xs:import namespace="urn:com:dassault_systemes:webservice" schemaLocation="../xsd/IOrgService.xsd"/>
+  </xs:schema>
+ </types>
+ <message name="createOrgInput">
+  <part element="tns:createOrg" name="parameters"/>
+ </message>
+ <message name="createOrgOutput">
+  <part element="tns:createOrgResponse" name="parameters"/>
+ </message>
+ <message name="createOrgErrorType">
+  <part element="tns:createOrgErrorType" name="details"/>
+ </message>
+ <message name="queryOrgInput">
+  <part element="tns:queryOrg" name="parameters"/>
+ </message>
+ <message name="queryOrgOutput">
+  <part element="tns:queryOrgResponse" name="parameters"/>
+ </message>
+ <message name="queryOrgErrorType">
+  <part element="tns:queryOrgErrorType" name="details"/>
+ </message>
+ <message name="updateOrgInput">
+  <part element="tns:updateOrg" name="parameters"/>
+ </message>
+ <message name="updateOrgOutput">
+  <part element="tns:updateOrgResponse" name="parameters"/>
+ </message>
+ <message name="updateOrgErrorType">
+  <part element="tns:updateOrgErrorType" name="details"/>
+ </message>
+ <portType name="IOrgService">
+  <documentation>Interface associated to an organisation</documentation>
+  <operation name="createOrg">
+   <input message="tns:createOrgInput"/>
+   <output message="tns:createOrgOutput"/>
+   <fault message="tns:createOrgErrorType" name="createOrgErrorType"/>
+  </operation>
+  <operation name="queryOrg">
+   <input message="tns:queryOrgInput"/>
+   <output message="tns:queryOrgOutput"/>
+   <fault message="tns:queryOrgErrorType" name="queryOrgErrorType"/>
+  </operation>
+  <operation name="updateOrg">
+   <input message="tns:updateOrgInput"/>
+   <output message="tns:updateOrgOutput"/>
+   <fault message="tns:updateOrgErrorType" name="updateOrgErrorType"/>
+  </operation>
+ </portType>
+ <binding name="IOrgServiceBinding" type="tns:IOrgService">
+  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="createOrg">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="createOrgErrorType">
+    <soap:fault name="createOrgErrorType" use="literal"/>
+   </fault>
+  </operation>
+  <operation name="queryOrg">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="queryOrgErrorType">
+    <soap:fault name="queryOrgErrorType" use="literal"/>
+   </fault>
+  </operation>
+  <operation name="updateOrg">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="updateOrgErrorType">
+    <soap:fault name="updateOrgErrorType" use="literal"/>
+   </fault>
+  </operation>
+ </binding>
+ <service name="OrgService">
+  <port binding="tns:IOrgServiceBinding" name="IOrgService">
+   <soap:address location="http://localhost:9081/dummyURI/OrgService"/>
+  </port>
+ </service>
+</definitions>

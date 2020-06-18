@@ -1,0 +1,9 @@
+m|MPFModels\MPFInviteModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFInviteModel\MPFInviteModel.js|1540605182|791
+s|MPFModels\MPFInviteModel.mweb\src\MPFInviteModel.js|1521539943|0
+s|MPFModels\MPFInviteModel.mweb\src\CompanyInviteDataProxy.js|1521559894|659
+s|MPFModels\MPFInviteModel.mweb\src\InviteModel.js|1521555565|1035

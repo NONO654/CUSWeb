@@ -1,0 +1,201 @@
+{
+	"relations": [
+{
+		"name" : "v6_implementScope_from",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "51","semantics" : "5"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "52","semantics" : "7"}, "direction" : "to"}],"keepTypes": ["PLMCoreReference","Part"]}
+		]
+	},
+	{
+		"name" : "v6_implementScope_to",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "52","semantics" : "7"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "51","semantics" : "5"}, "direction" : "to"}],"keepTypes": ["PLMCoreReference","Part"]}
+		]
+	}, 
+  {
+  "name": "v6_implementOccOcc_from",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "51","semantics" : "5"}, "direction" : "from","mode":"ends"},{"navigationType" : "SR","qualityFilter" : {"role" : "52","semantics" : "7"}, "direction" : "to","mode":"last"}],"keepTypes": ["PLMCoreInstance"]}
+		]
+	},
+	{
+		"name" : "v6_implementOccOcc_to",
+
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "52","semantics" : "7"}, "direction" : "from","mode":"ends"},{"navigationType" : "SR","qualityFilter" : {"role" : "51","semantics" : "5"}, "direction" : "to","mode":"last"}],"keepTypes": ["PLMCoreInstance"]}
+		]
+	},
+	{
+		"name" : "v6_capableRsc_from",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "204","semantics" : "6"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "203","semantics" : "5"}, "direction" : "to"}]}
+		]
+	},
+	{
+		"name" : "v6_capableRsc_to",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "203","semantics" : "5"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "204","semantics" : "6"}, "direction" : "to"}]}
+		]
+	},
+	{
+		"name" : "v6_MBOMPredecessor_from",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "to"},{"navigationType" : "SR","qualityFilter" : {"role" : "55","semantics" : "5"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "56","semantics" : "7"}, "direction" : "to"},{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "from"}]}
+		]
+	},
+	{
+		"name" : "v6_MBOMPredecessor_to",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "to"},{"navigationType" : "SR","qualityFilter" : {"role" : "56","semantics" : "7"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "55","semantics" : "5"}, "direction" : "to"},{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "from"}]}
+		]
+	},
+	{
+		"name" : "v6_ProductOutputOfMBOM_from",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "149","semantics" : "5"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "150","semantics" : "7"}, "direction" : "to"},{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "from"}]}
+		]
+	},
+	{
+		"name" : "v6_ProductOutputOfMBOM_to",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "to"},{"navigationType" : "SR","qualityFilter" : {"role" : "150","semantics" : "7"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "149","semantics" : "5"}, "direction" : "to"}]}
+		]
+	},
+	{
+		"name" : "v6_origin_from",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "307","semantics" : "5"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "308","semantics" : "7"}, "direction" : "to"}]}
+		]
+	},
+	{
+		"name" : "v6_origin_to",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "308","semantics" : "7"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "307","semantics" : "5"}, "direction" : "to"}]}
+		]
+	},
+	{
+		"name": "v6_MBOMAlternate_to",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "MfgProcessAlternate"}, "direction" : "to"}]}]
+	},
+	{
+		"name": "v6_MBOMAlternate_from",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "MfgProcessAlternate"}, "direction" : "from"}]}]
+	},
+	{
+		"name" : "v6_MaterialFlow_from",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "to"},{"navigationType" : "SR","qualityFilter" : {"role" : "294","semantics" : "1"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "295","semantics" : "1"}, "direction" : "to"},{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "from"}]}
+		]
+	},
+	{
+		"name" : "v6_MaterialFlow_to",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "to"},{"navigationType" : "SR","qualityFilter" : {"role" : "295","semantics" : "1"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "294","semantics" : "1"}, "direction" : "to"},{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "from"}]}
+		]
+	},
+	{
+		"name" : "v6_ProcessMaterialFlow_from",
+		"queries" :  [
+			{"definition":
+				[ 	{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "to"},
+					{"definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "294","semantics" : "1"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "295","semantics" : "1"}, "direction" : "to"}],"iteration":-1},
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "from"}
+				],
+				"keepTypes": ["DELLmiPPRSystemReference"]
+			}
+        ]
+	},
+	{
+		"name" : "v6_ProcessMaterialFlow_to",
+		"queries" :  [
+			{"definition":
+				[ 	{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "to"},
+					{"definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "295","semantics" : "1"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "294","semantics" : "1"}, "direction" : "to"}],"iteration":-1},
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "from"}
+				],
+				"keepTypes": ["DELLmiPPRSystemReference"]
+			}
+        ]
+	},
+	{
+		"name" : "v6_OperationMaterialFlow_from",
+		"queries" :  [
+			{"definition":
+				[ 	{"navigationType" : "relation","qualityFilter" : {"rel_type" : "DELLmiPPROperationInstance"}, "direction" : "from", "mode":"stop_at_rel"},
+					{"definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "294","semantics" : "1"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "295","semantics" : "1"}, "direction" : "to"}],"iteration":-1},
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "DELLmiPPROperationInstance"}, "direction" : "to"}
+				],
+				"keepTypes": ["DELLmiPPROperationReference"]
+			}
+        ]
+	},
+	{
+		"name" : "v6_OperationMaterialFlow_to",
+		"queries" :  [
+			{"definition":
+				[ 	{"navigationType" : "relation","qualityFilter" : {"rel_type" : "DELLmiPPROperationInstance"}, "direction" : "from", "mode":"stop_at_rel"},
+					{"definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "295","semantics" : "1"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "294","semantics" : "1"}, "direction" : "to"}],"iteration":-1},
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "DELLmiPPROperationInstance"}, "direction" : "to"}
+				],
+				"keepTypes": ["DELLmiPPROperationReference"]
+			}
+        ]
+	},
+	{
+		"name" : "v6_MBOMOutputOfProcess_from",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "363","semantics" : "1"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "296","semantics" : "1"}, "direction" : "to"},{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "from"}]}
+		]
+	},
+	{
+		"name" : "v6_MBOMOutputOfProcess_to",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "to"},{"navigationType" : "SR","qualityFilter" : {"role" : "296","semantics" : "1"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "363","semantics" : "1"}, "direction" : "to"}]}
+		]
+	},
+	{
+		"name" : "v6_MBOMOutputOfOperation_from",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "363","semantics" : "1"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "296","semantics" : "1"}, "direction" : "to"}]}
+		]
+	},
+	{
+		"name" : "v6_MBOMOutputOfOperation_to",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "296","semantics" : "1"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "363","semantics" : "1"}, "direction" : "to"}]}
+		]
+	},
+	{
+        "name" : "v6_ManufResp_from",
+        "queries" :  [
+                  { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "417","semantics" : "6"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "416","semantics" : "9"}, "direction" : "to"}]}
+              ]
+       },
+       {
+         "name" : "v6_ManufResp_to",
+         "queries" :  [
+                  { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "416","semantics" : "9"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "417","semantics" : "6"}, "direction" : "to"}]}
+              ]
+       },
+	   	{
+		"name": "v6_MfgFTADerivedFromEngFTA_from",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "MfgFTADerivedFromEngFTA"}, "direction" : "to"}]}]
+	},
+	{
+		"name": "v6_MfgFTADerivedFromEngFTA_to",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "MfgFTADerivedFromEngFTA"}, "direction" : "from"}]}]
+	},
+	{
+		"name" : "v6_HowTo_from",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "324","semantics" : "5"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "323","semantics" : "7"}, "direction" : "to"}]}
+		]
+	},
+	{
+		"name" : "v6_HowTo_to",
+		"queries" :  [
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "323","semantics" : "7"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "324","semantics" : "5"}, "direction" : "to"}]}
+		]
+	}
+	]
+}

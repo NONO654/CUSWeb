@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.sampling.Sobol" version="3DX.0" 
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAExeSamplingSobolPlugin" nlsID="dispname">Sobol Sampling</DisplayName>
+	<Description nlsFile="SMAExeSamplingSobolPlugin" nlsID="desc">Uniform sub-random combinations</Description>
+	<LongDescription nlsFile="SMAExeSamplingSobolPlugin" nlsID="longdesc"/>
+	<Attributes>      
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Sampling_Technique</Value>
+		</Attribute>	 
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.sampling.Sobol</Value>
+		</Attribute>    
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeSamplingSobolPlugin32.gif" targetFilename="SMAExeSamplingSobolPlugin32.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeSamplingSobolPlugin.CATNls" targetFilename="SMAExeSamplingSobolPlugin.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeSamplingSobolPlugin_Japanese.CATNls" targetFilename="SMAExeSamplingSobolPlugin_Japanese.CATNls" locale="Japanese" />
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.sampling.sobol.Sobol</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Number of Simulations" type="integer" valuetype="single">
+				<Value>100</Value>
+			</Property>
+			<Property name="Random Seed" type="integer" valuetype="single">
+				<Value>-1</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

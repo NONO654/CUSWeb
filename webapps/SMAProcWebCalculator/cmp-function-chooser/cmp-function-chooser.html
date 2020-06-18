@@ -1,0 +1,32 @@
+<!--------------------------------------------------------------------
+[cmp-function-chooser HTML Document]
+
+Project:
+Version:
+Last change:    Fri, 20 Nov 2015 17:55:52 GMT
+Primary use:	TODO: Write where this component is being used
+Description:    TODO: Description about the component
+--------------------------------------------------------------------->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<dom-module id="cmp-function-chooser">
+  <link rel="import" type="css" href="cmp-function-chooser.css">
+  <template>
+
+        <select class="function-chooser-dropdown" id="functionTypes" name="functionTypes" on-change="onFunctionDropDownItemChanged">
+            <!--<template repeat="{{item in data}}">
+                <option value="{{item.id}}">{{ item.type }}</option>
+            </template>-->
+        </select>
+            
+        <div id="functionTable" class="functionTable">
+            <template is="dom-repeat" items="{{listFunctions}}" as="item">
+                <div class="functionTableRow" on-click="onFunctionTableItemSelect" title="{{item.description}}">
+                    <span class="functionTableCell">{{ item.displayName }}</span>
+                </div>
+            </template>                
+        </div>
+    </template>
+  <script type="text/javascript" src="cmp-function-chooser.js"></script>
+</dom-module>
+
+

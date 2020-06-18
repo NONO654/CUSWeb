@@ -1,0 +1,1 @@
+define("DS/SMAProcWebContents/SMAProcWebContents_ja",{});define("DS/SMAProcWebContents/assets/nls/SMAProcWebContentsNLS",{"SortableDNDListMgr.tooltip.title":"削除","SortableDNDListMgr.tooltip.deleteIcon":"クリックして選択した行を削除します"});

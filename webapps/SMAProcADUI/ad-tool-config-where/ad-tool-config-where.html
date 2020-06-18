@@ -1,0 +1,96 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../ad-station-manager/ad-station-manager.html">
+<link rel="import" href="../../SMAProcSPUI/sp-credits-calculator/sp-credits-calculator.html">
+
+<dom-module id="ad-tool-config-where">
+  <link rel="import" type="css" href="ad-tool-config-where.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+		
+		<ad-station-manager id="stationManager" session="{{session}}"></ad-station-manager>		
+		<template is="dom-if" if="{{!abaqusStudyMode}}">
+        	<div class="content-section-heading">Where to Run</div>
+        </template>
+        <div class="content-section-body">
+        	<div id="configurationSection">
+             <table class="whereTable">
+                <tbody>
+                <tr>
+                    <td class="content-cell">
+                        <label for="serverList" class="content-label">COS Server:</label>
+                    </td>
+                    <td class="content-cell">
+	                    <div id="serverListContainer" class="content-field"></div>
+ 					</td>
+                   	<td class="content-cell">
+                        <div title="Refresh server list" class="tooltip-button-wrapper">
+                            <button id="refreshServers" type="button" class="btn btn-xs btn-default" on-click="onRefreshServers"><span class="fonticon fonticon-cw"></span></button>
+                        </div>
+					</td>
+                   	<td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="content-cell">
+                        <label for="stationList" class="content-label">Station:</label>
+                    </td>
+                    <td class="content-cell">
+	                    <div id="stationListContainer" class="content-field"></div>
+ 					</td>
+                   	<td class="content-cell">
+				        <div title="Refresh station list" class="tooltip-button-wrapper">
+		                    <button id="refreshStations" type="button" class="btn btn-xs btn-default" on-click="onRefreshStations"><span class="fonticon fonticon-cw"></span></button>
+		                </div>
+					</td>
+                    <td class="content-cell">
+                    	<div id="stationErrorMessage" class="hidden">
+                    		&nbsp;&nbsp;<span id="stationErrorMessageIcon" on-click="onClickAlert" title="" class="message-icon fonticon fonticon-attention text-warning">
+                    	</span></div>
+				 		<!-- The inline styling in the popover appears to be necessary to get this to work -->
+				 		<!--  properly, although further investigation when time allows might produce a CSS class fix.      -->
+						<div id="stationErrorPopover" class="popover bottom in hidden" on-click="onClickAlert" style="min-width:200px;">
+						  <h3 class="popover-title">Warning</h3>
+						  <div id="stationErrorMessageText" class="popover-body"></div>
+						</div>
+					</td>
+                </tr>
+                 
+                <tr>
+                    <td class="content-cell">
+                        <label for="directoryList" class="content-label">Execution directory:</label>
+                    </td>
+                    <td class="content-cell">
+	                    <div id="directoryListContainer" class="content-field"></div>
+                     </td>
+                   <td>&nbsp;</td>
+                   <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td class="content-cell">
+                    	<div id="cleanupOptionContainer"></div>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+             </tbody></table>
+            </div>
+            <div id="creditsEstimatorContainer">
+     			<!-- <sp-credits-calculator id="spCreditsCalculator" on-coreschanged="onNumCoresChanged"></sp-credits-calculator> -->
+			</div>
+		 	<!-- The alert messages need to have the relative position declared inline in order to work in Firefox and IE -->
+       		<div id="configurationErrorNone" class="hidden">
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				No tool is currently selected.
+				</div>
+       		</div>
+       	</div>
+
+	</template>
+
+    <script type="text/javascript" src="../../UIKIT/UIKIT.js"></script> 
+  	<script src="ad-tool-config-where.js"></script>
+</dom-module>
+
+

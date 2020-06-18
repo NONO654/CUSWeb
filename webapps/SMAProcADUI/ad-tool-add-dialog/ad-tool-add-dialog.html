@@ -1,0 +1,65 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../ad-tool-manager/ad-tool-manager.html">
+<link rel="import" href="../ad-multiview-panel/ad-multiview-panel.html">
+
+<dom-module id="ad-tool-add-dialog">
+  <link rel="import" type="css" href="ad-tool-add-dialog.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+    			
+		<ad-tool-manager id="toolManager"></ad-tool-manager>
+		
+ 		<div id="myModal" class="modal fade">	   
+			<div class="modal-wrap">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onCancel">&times;</button>
+			        <h4>{{_computeHeader(headerText)}}</h4>
+			      </div>
+			      <div id="dialogContent" class="modal-body">
+					<div id="toolCommandView" class="container-fluid tool-command-view">
+						<div class="row tool-header chrome-pull-fix" draggable="false">
+							<div class="pull-left">
+								<div class="toggle toggle-primary" style="display:inline; margin-right:10px">
+								  <input type="checkbox" id="showReleasedOnlyOption" on-change="onShowReleasedOnlyChange" checked><label class="control-label" for="showReleasedOnlyOption">{{_computeOptions1(headerText)}}</label>
+								</div>
+								<div class="toggle toggle-primary" style="display:inline">
+								  <input type="checkbox" id="showLatestOnlyOption" on-change="onShowLatestOnlyChange" checked><label class="control-label" for="showLatestOnlyOption">Show latest revisions only</label>
+								</div>
+							</div>
+							<div class="pull-right">
+			                    <button id="refresh" type="button" title="Refresh" on-click="onRefresh" class="btn btn-xs btn-default" ><span class="fonticon fonticon-cw"></span></button>
+				                <button id="viewIcons" type="button" title="Show icons" on-click="onViewIcons" class$="{{_computeClass(viewMode)}}"><span class="fonticon fonticon-layout"></span></button>
+				                <button id="viewList" type="button" title="Show list" on-click="onViewList" class$="{{_computeClass2(viewMode)}}"><span class="fonticon fonticon-list"></span></button>
+							</div>
+						</div>
+						<div id="contentArea" tabindex="0" class="row tool-content" on-click="onContentAreaClick">
+				            <ad-multiview-panel id="toolPanel" view-mode="{{viewMode}}" on-select="onToolSelect" on-drilldown="onToolDrilldown"></ad-multiview-panel>
+						</div>
+						<div id="loadingRow" class="row tool-content hidden"></div>
+					</div>
+			      </div>
+			      <div class="modal-footer">
+				      <!--  <div id="pendingNote" class="{{ {'hidden': showOk} | tokenList }}tooltip left in {{ {'hidden': showOk} | tokenList }}">
+  						<div class="tooltip-arrow"></div>
+  						<div class="tooltip-body">Saving pending data changes</div>
+					  </div> -->
+			      	<div id="pendingNote" class$="{{_computeClass3(showOk)}}">			      		
+			      		<span class="pendingNoteText">Saving pending data changes</span>
+			      	</div>
+			      	<!-- <span id="pendingNote" class="{{ {'hidden': showOk} | tokenList }}pendingNote {{ {'hidden': showOk} | tokenList }}"><p class="bg-warning">Saving pending data changes</p></span>-->
+			        <button id="okButton" type="button" class="btn btn-primary" on-click="onAccept">OK</button>
+			        <button id="cancelButton" type="button" class="btn btn-default" on-click="onCancel">Cancel</button>
+			      </div>
+	 		    </div>
+ 		    </div>
+ 		</div>
+ 		<div id="myModalOverlay" class="modal-overlay fade hidden"></div>
+		
+	</template>
+  <script src="ad-tool-add-dialog.js"></script>
+</dom-module>
+
+

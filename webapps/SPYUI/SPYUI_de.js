@@ -1,0 +1,1 @@
+define("DS/SPYUI/SPYUI_de",{});define("DS/SPYUI/assets/nls/CATSimNavDataCameraSelector",{"static":"Statische Kamera",tracking:"Verfolgungskamera",focus:"Fokus"});define("DS/SPYUI/assets/nls/CATSimNavDataOverlaysManager",{title:"Stromlinien",nameAttr:"Name"});define("DS/SPYUI/assets/nls/CATSimNavDataSpeedControl",{title:"Geschwindigkeit:"});

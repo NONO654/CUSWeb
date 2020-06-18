@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<html>
+
+<head>
+
+    <!-- Application Metas -->
+    <title>Set Part Number widget</title>
+    <meta name="author" content="sbm2" />
+    <meta name="brand" content="ENOVIA" />
+    <meta name="description" content="Set Part Number widget" />
+
+    <!-- AMDLoader -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <!-- <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script> -->
+
+    <!-- UWA -->
+    <link rel="stylesheet" type="text/css" href="./SetPartNumberWintop.css" /> <!-- Hide UWA layout -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+  	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+    <!-- <script type="text/javascript" src="../SetEnterpriseItemNumberWintop/SetPartNumberWintop.js"></script>
+    <script type="text/javascript" src="../EngineeringItemCmd/SetPartNumberCmd/setPartNumberListView.js"></script> -->
+
+    <!-- Sample code -->
+    <script type="text/javascript">
+    function showMessage(message){
+      widget.body.empty();
+
+      require(['UWA/Core','DS/ENOXEngineerCommonUtils/xEngAlertManager'], function (UWA,xEngAlertManager) {
+        
+      this._informationContainerBox = UWA.createElement('div', {
+                'class': 'container_information'
+            });
+            this._informationBox = UWA.createElement('div', {
+                'class': 'documentslist_information'
+            }).inject(this._informationContainerBox);
+            UWA.createElement('span', {
+                'class': 'documentslist_information_icon wux-ui-3ds wux-ui-3ds-5x wux-ui-3ds-issue'
+            }).inject(this._informationBox);
+            this._messageInformationBox = UWA.createElement('h2', {
+                'class': 'caddocumentslist_information_msg'
+            }).inject(this._informationBox);
+
+            this._messageInformationBox.setText(message);
+            this._informationContainerBox.inject(widget.body);
+      });
+
+    }
+
+    var launchSetEnterpriseItemNumber = function(){
+      require(['DS/SetEnterpriseItemNumberWintop/SetPartNumberWintop'], function (SetPartNumberWintop) {
+        'use strict';
+        widget.addEvent('onLoad', SetPartNumberWintop.onLoad);
+        widget.addEvent('onRefresh', SetPartNumberWintop.onRefresh);
+      });
+        }
+
+        /**
+        *	Set the options of the widget
+        *	@param {String} options.myAppsBaseUrl - the url to my apps url
+        *	@param {String} [options.userId] - The current id of the user
+        *	@param {String} [options.lang] - language of the browser
+        */
+        var setOptions = function(options){
+        	if (!window["COMPASS_CONFIG"]) window["COMPASS_CONFIG"] = {};
+
+           	if (options.myAppsBaseUrl) window["COMPASS_CONFIG"].myAppsBaseUrl = options.myAppsBaseUrl;
+           	if (options.userId) window["COMPASS_CONFIG"].userId = options.userId;
+           	if (options.lang) window["COMPASS_CONFIG"].lang = options.lang;
+
+           	
+        }
+
+        var setSelectedItems = function(items){
+          /*items is an array of [{
+             objectId: PHYid1,
+             title: title2
+        },{
+           objectId: PHYid2,
+           title: title2
+      }]*/
+
+      
+
+        if(!Array.isArray(items)) {
+          setTimeout(function(){
+            showMessage('Invalid Selection');
+          },50);
+          
+          return ;
+        }
+          window["selectedItems"] = items;
+          launchSetEnterpriseItemNumber();
+      
+
+        };
+        /**
+        *	Set the options of properties
+        *	@param {String} [options.selected] - list of selected items (EditPropModel with at least objectId. (It's better with metatype ))
+        */
+        // var setPropertiesOptions = function(options){
+        // 	if (options.selected && Array.isArray(options.selected)) {
+        // 		if (currentPropertiesOptions.component) currentPropertiesOptions.component.initDatas(options.selected);
+        // 		else currentPropertiesOptions.selected = options.selected;
+        // 	}
+        // }
+
+        //Load EditPropWidgetHTML and its prerequisite in order to load quicker
+require([
+    'DS/ENOXEngineerCommonUtils/XENMask',
+    'DS/EngineeringItemCmd/SetPartNumberCmd/SetPartCmd',
+    'DS/MessageBus/MessageBus',
+    'DS/UWPClientCode/PublicAPI',
+    
+], function(XENMask){
+
+  // XENMask.mask(widget.body);
+
+});
+
+</script>
+
+</head>
+
+<body>
+    <div class="spinner spinner-lg spinning fade in" style="transform: translate3d(0px, 0px, 0px); display: inline-block; margin-top: 20%; margin-left: 45%;">
+        <span class="spinner-bar"></span>
+        <span class="spinner-bar spinner-bar1"></span>
+        <span class="spinner-bar spinner-bar2"></span>
+        <span class="spinner-bar spinner-bar3"></span>
+      </div>
+</body>
+
+</html>

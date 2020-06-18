@@ -1,0 +1,280 @@
+<dom-module is="xs-wg-layout-style">
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: auto; }
+
+      :host([hidden]) {
+        display: block !important;
+      }
+
+      .layout_main_container {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+
+      .layout_container {
+        display: block;
+        position: relative;
+        width: calc(100% - 10px);
+        height: auto;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        box-shadow: 0.05em 0.05em 1.2em 0.01em rgba(0, 0, 0, 0.1);
+        background: #fff;
+        border: 1px solid #dfdfdf;
+        border-radius: 0 0 10px 10px;
+      }
+
+      .designer-handle {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 3px;
+        height: 30px;
+        background: #E2E4E3;
+        border-bottom: thin solid #d5d5d5; }
+
+      .restrict-msg {
+          display: inline-block;
+          width: 50px;
+          color: #844138;
+          font-family: '3ds-Light';
+          position: absolute;
+          float: right;
+          right: 35px;
+          background: #E2E4E3;
+          height: 20px;}
+
+      .designer-handle:hover {
+          background: #D1D4D4;
+      }
+
+      .designer-handle:active {
+          border-color: #77797C;
+          background-color: #B4B6Ba;
+      }
+
+      .layout-label-container {
+        display: flex;
+        width: 100%;
+      }
+
+      .grip-icon-container {
+        display: flex;
+      }
+
+
+      .grip-icon {
+         display: none;
+         margin: 0;
+         padding-top: 2.5px;
+         width: 8px;
+      }
+
+      .grip-icon-container {
+        opacity: 0.4;
+      }
+
+      .grip-icon-container:hover {
+        opacity: 0.8;
+      }
+
+      .grip-icon:before {
+        content: '\e002';
+      }
+
+      .xs-wg-collapse-icon-container {
+        position: relative;
+        display: inline-block;
+        width: 25px;
+        cursor: pointer; }
+
+
+      .xs-wg-collapse-icon {
+        transition: transform 0.1s cubic-bezier(0.55, 0.06, 0.68, 0.19);
+        transform: rotate(90deg); }
+
+      .xs-wg-collapse-icon:before {
+        content: '\e149';
+        color: #42a2da;
+      }
+
+      .xs-wg-collapse-icon.is-collapsed {
+          transform: rotate(0deg);
+          color: #42a2da; }
+
+
+      .heading-label {
+        font-size: 1.2em;
+        color: #3d3d3d;
+        font-weight: 700;
+        cursor: pointer;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 100%;
+        line-height: 1.2;
+      }
+
+
+
+      .layout-options {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2em;
+      }
+
+
+      .remove {
+        display: block;
+        z-index: 15;
+        font-size: 18px;
+        position: absolute;
+        right: 10px;
+        box-sizing: border-box;
+        text-align: center;
+        opacity: 0.3;
+        transition: opacity 0.2s;
+        cursor: pointer; }
+
+      .remove:hover {
+        opacity: 1; }
+
+      .fonticon {
+        vertical-align: middle;
+      }
+
+      .fonticon-trash:before {
+        content: '\e846'; }
+
+
+      .layout-body {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;}
+
+      .layout-body ::content {
+          display: flex;
+          box-sizing: border-box;
+          position: relative; }
+
+      .no-display {
+        display: none;
+      }
+
+      .one-third-width {
+        width: calc(100% * (1/3));
+      }
+
+      .one-half-width {
+         width: 50%;
+      }
+
+      .full-width {
+        width: 100%;
+      }
+
+      .left-dashed-border {
+        border-left: 0.5px dashed gainsboro;
+      }
+
+      .right-dashed-border{
+        border-right: 0.5px dashed gainsboro;
+      }
+
+      .top-dashed-border{
+        border-top: 0.5px dashed gainsboro;
+      }
+
+      .no-min-height {
+        min-height: 0px !important;
+      }
+
+      .overlay {
+          left: 0;
+          right: 0;
+          top: 33px;
+          height: calc(100% - 36px);
+          width: calc(100% - 6px);
+          left: 3px;
+          bottom: 0;
+          position: absolute;
+           display: none;
+          opacity: 0.1;
+          background-color: #368EC4;
+          transition: all 0.1s cubic-bezier(0.18, 0.4, 1, 1);
+      }
+
+      .is-dragover {
+        transition: all 0s;
+        overflow: hidden;
+        box-sizing: border-box;
+        outline: 2px dashed #368ec4;
+        background: #eef2f5;
+        z-index: 20;
+        outline-offset: 2px;}
+
+
+      :host-context(.design) .is-selected.overlay {
+        opacity: 0.1;
+        display: block; }
+
+      :host-context(.design) .grip-icon {
+        display: block; }
+
+      :host-context(.design) .layout-body {
+        min-height: 70px; }
+
+      :host-context(.design) .layout-main-body {
+        min-height: 0;
+      }
+
+      :host-context(.design) .layout-body > div {
+          min-height: 69px;
+      }
+
+      :host-context(.design) .layout-body > div {
+          z-index: 1;
+      }
+
+      :host-context(.design) .heading-label {
+        cursor: move; }
+
+      :host-context(.design) .xs-wg-collapse-icon-container {
+        cursor: move; }
+
+      :host-context(.design) .layout-label-container {
+        cursor: move; }
+
+      :host-context(.design) .is-selected.designer-handle {
+        background-color: #d4dee4; }
+
+      :host-context(.design) .grip-icon-container {
+         padding-right: 5px; }
+
+      :host-context(.design) .designer-handle:hover {
+        border: 1px solid #E2E4E3; }
+
+      :host-context(.design) .designer-handle:active {
+       border: 1px solid #E2E4E3; }
+
+       .hiddenOverlay {
+         position: absolute;
+         height: 100%;
+         width: 100%;
+         background-image: repeating-linear-gradient(135deg, rgba(224, 197, 197, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 2px, transparent 3px, rgba(0, 0, 0, 0.3) 3px);
+         pointer-events: none;
+         z-index: 25;
+       }
+    </style>
+  </template>
+</dom-module>

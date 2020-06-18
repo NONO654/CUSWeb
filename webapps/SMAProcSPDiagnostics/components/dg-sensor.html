@@ -1,0 +1,112 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+
+<link rel="import" href="dg-details.html">
+<link rel="import" href="dg-viewer.html">
+<link rel="import" href="dg-item-style.html">
+
+<dom-module id="dg-sensor">
+  <template>
+    <style include="dg-item-style"></style>
+
+    <div class="container">
+      <!-- Header -->
+      <section class="heading" on-click="toggleDetails" data-status$="{{status}}">
+        <button class="method label" on-click="run" >Run</button>
+        <label class="name label">{{request.name}}</label>
+        <label class="caption label">{{request.caption}}</label>
+        <label class="response" data-status$="{{status}}">
+          <span class="status label">{{status}}</span>
+          <div class="loadingspinner"></div>
+        </label>
+      </section>
+      
+      <dg-details value="{{request}}" ctx="{{ctx}}" hide-refresh-button
+                  visible="{{showdetails}}" readonly="{{isDetailsReadonly}}">
+        <dg-viewer class="viewer"></dg-viewer>
+      </dg-details>
+    </div>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+      
+      Polymer({
+        is: 'dg-sensor',
+        
+        properties: {
+          request: {
+            type: Object,
+            notify: true
+          },
+          status: {
+            type: String,
+            reflectToAttribute: true
+          },
+          response: {
+            type: Array
+          },
+          bc: {
+            type: Object
+          },
+          ctx: {
+            type: Object
+          },
+          showdetails: {
+            type: Boolean
+          }
+        },
+        attached: function () {
+          this.response = [];
+        },
+        run: function (event) {
+          event && event.stopPropagation();
+
+          const $action = this.request.name;
+          // send all the data that was declared in config file
+          const $request = this.request;
+
+          // toggle between on
+          const $status = !this.status ? 'on' : '';
+          this.status = $status;
+          
+          this.bc.postMessage({$action, $request, $status});
+        },
+        onmessage: function (data) {          
+          try {
+            // append data to viewer only if it is on
+            if (this.status) {
+              // preserve it to response
+              this.response.push(data);
+              const viewer = this.querySelector('.viewer');
+              viewer.append(data);
+            }
+          } catch (ex) {
+            console.warn('Error while appending data to viewer', ex, data);
+          }
+        },
+        buildContext: function () {
+          this.querySelector('dg-details').refresh();
+        },
+        toggleDetails: function () {
+          this.showdetails = !this.showdetails;
+        },
+        serializeData: function () {
+          let serialized = null;
+
+          // set the serialized data only if sensor has data
+          const {name, response, status} = this;
+          serialized = response.length ? {name, response, status} : serialized;
+          
+          return serialized;
+        }
+      });
+    })();
+  </script>
+</dom-module>
+
+
+
+
+

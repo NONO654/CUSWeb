@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+    <title>Results Analytics</title>
+
+    <!-- Application Metas -->
+    <meta name="author" content="Dassault Systèmes" />
+    <meta name="description" content="Test" />
+    <meta name="apiVersion" content="1.3" />
+    <meta name="debugMode" content="false" />
+    <meta name="strictMode" content="false" />
+
+    <!-- Stop widget auto refresh that happens every 20 mins -->
+    <meta name="autoRefresh" content="0" />
+
+    <!-- Widget Preferences -->
+    <widget:preference type="list" name="platform" label="3DEXPERIENCE Platform"></widget:preference>
+    <widget:preference type="list" name="createcollabspaces" label="Collaborative Space"></widget:preference>
+    <widget:preference type="list" name="stations" label="Station" defaultValue="" ></widget:preference>
+    <widget:preference type="list" name="timeout" label="Timeout"></widget:preference>
+
+    <!-- Hidden Widget Preferences -->
+    <widget:preference type="hidden" name="analytics-engine" defaultValue="" ></widget:preference>
+    <widget:preference type="hidden" name="raactivecase" defaultValue="" ></widget:preference>
+    <widget:preference type="hidden" name="lastactivecase" defaultValue="" ></widget:preference>
+    <widget:preference type="hidden" name="collabspaces"></widget:preference>
+
+	<!-- Polymer -->
+	<script type="text/javascript" src="../Polymer-1.1.4/webcomponents-lite.js"></script>
+	<link rel="import" href="../Polymer-1.1.4/polymer.html" />
+
+	<!-- AMD & UWA Imports -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<script type="text/javascript" src="../PanelSlider/PanelSlider.js"></script>
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+
+	<script type="text/javascript" src="../D3js_external/D3js_external.js"></script>
+
+	<link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<link rel="stylesheet" type="text/css" href="..W3DXComponents/W3DXComponents.css" />
+
+	<!-- SP Web Components -->
+	<link rel="import" href="../SMAProcSP/sp-base/sp-base.html" />
+	<link rel="import" href="../SMAProcSP/sp-serviceurl/sp-serviceurl.html" />
+	<link rel="import" href="../SMAProcSP/sp-dashboard/sp-dashboard.html" />
+	<link rel="import" href="../SMAProcSP/sp-webservice/sp-webservice.html" />
+	<link rel="import" href="../SMAProcSP/sp-mcsservice/sp-mcsservice.html" />
+	<link rel="import" href="../SMAProcSP/sp-cos/sp-cos.html" />
+	<link rel="import" href="../SMAProcSP/sp-run/sp-run.html" />
+	<link rel="import" href="../SMAProcSP/sp-cosservice/sp-cosservice.html" />
+	<link rel="import" href="../SMAProcSP/sp-costickets/sp-costickets.html" />
+
+	<!-- RA Web Components -->
+	<link rel="import" href="../SMAAnalyticsElements/ra-driver-browser/ra-driver-browser.html" />
+	<link rel="import" href="../SMAAnalyticsElements/ra-create-input-page/ra-create-input-page.html" />
+	<link rel="import" href="../SMAAnalyticsElements/ra-approximation-view/ra-approximation-view.html" />
+
+	<!-- RA Widget Imports -->
+	<script type="text/javascript" src="../SMAAnalyticsWidget/SMAAnalyticsWidget.js"></script>
+
+	<!-- RA Widget Style Sheets -->
+	<link rel="stylesheet" href="../SMAAnalyticsWidget/SMAAnalyticsWidget.css" type="text/css" />
+	<link rel="stylesheet" href="../SMAAnalyticsWidget/views/SMAAnalyticsWidgetCustomPageStyles.css" type="text/css" />
+	<link rel="stylesheet" href="../SMAAnalyticsWidget/views/SMAAnalyticsWidgetImmersiveFrameHacks.css" type="text/css" />
+	<!-- Styles needed for the Hierarchical table (More Info) -->
+	<link rel="stylesheet" href="../SMAAnalyticsCompareTable/SMAAnalyticsCompareTable.css" type="text/css" />
+
+	<!-- Application JavaScript Source -->
+    <script type="text/javascript">
+
+        var onReady = function() {
+
+            var onLoad = function() {
+
+                widget.body.empty();
+
+                require([
+                    'DS/UIKIT/Mask',
+                    'DS/D3js_external/D3js',
+                    'DS/ApplicationFrame/FrameWindow',
+                    'DS/SMAAnalyticsWidget/SMAAnalyticsWidgetInit',
+                    'DS/SMAAnalyticsCommon/SMAAnalyticsTagger',
+                    'i18n!DS/SMAAnalyticsNLS/assets/nls/SMAAnalyticsWidgetNLSfile',
+                    'DS/Usage/TrackerAPI',
+                    'DS/Usage/UsageManager'
+                ], function(Mask, _d3, FrameWindow, RIWLoad, AnalyticsTagger, NLS, TrackerAPI, UsageManager) {
+
+                	
+                	try{
+            			UsageManager.init({
+            				service: 'SIMREII_AP',
+            				uploadPath: ''
+            			});
+            		} catch(error){
+            			console.log(error);
+            		}
+            		TrackerAPI.init();
+            		try{
+            			UsageManager.init({
+            				service: 'SIMREII_AP',
+            				uploadPath: '/upload'
+            			});
+            		} catch(error){
+            			console.log(error);
+            		}
+            		TrackerAPI.init();
+            		var currentPlatformId = widget.getValue('x3dPlatformId') || '';
+    				if(currentPlatformId.length > 0 && currentPlatformId !== 'OnPremise'){
+    					widget.addPreference({
+                    		type:'list',
+                    		name:'platform',
+                    		label: NLS.get('PLATFORM'),
+                    		defaultValue: currentPlatformId,
+                    		options: [{
+                    			value: currentPlatformId,
+                    			label: currentPlatformId
+                    		}]
+                   		});
+    				}
+                	// FIXME: D3js_external must be added to imake link_with
+                	// and VenD3js must be added to the Identity card.
+                	// Since that's not done yet, we are requiring d3 in html
+                	// to trick the MKMK jsruler from throwing a reference error.
+                	// Once the id card changes are done, move d3 require to the
+                	// custompageview. Its not needed here.
+					widget.addPreference({
+						name: 'timeout',
+						label: NLS.get('TIMEOUT'),
+						type: 'list',
+						options: [{
+							label: '30 '+ NLS.get('MINUTES'),
+							value: 30
+						},{
+							label: '60 '+ NLS.get('MINUTES'),
+							value: 60
+						},{
+							label: '90 '+ NLS.get('MINUTES'),
+							value: 90
+						},{
+							label: '120 '+ NLS.get('MINUTES'),
+							value: 120
+						}],
+						defaultValue: 30
+					});
+                    Mask.mask(window.widget.body, NLS.get('LOAD_RAW'));
+
+                	//Check for X3DContentId
+                	var raCaseId = widget.getValue('lastactivecase');
+                	if(raCaseId && raCaseId.length>0){
+                		                		
+                	}else{
+                		var x3dContentId = widget.getValue('X3DContentId');
+                      	if (x3dContentId) {
+                      		var x3dContent = UWA.is(x3dContentId, 'string') ? JSON.parse(x3dContentId) : x3dContentId;
+                           	var selectedObjects = x3dContent && x3dContent.data && x3dContent.data.items;
+                           	if (selectedObjects && selectedObjects.length > 0) {
+                               	var raCase = selectedObjects[0];
+                               	if (raCase && raCase.objectId && raCase.objectType === 'Analytics Case') {
+                               		raCaseId = raCase.objectId;
+                                   	widget.setValue('lastactivecase', raCaseId);
+                               	}
+                           	}
+                       	}
+                	}
+                    var raFrameWindow = new FrameWindow({
+                        'viewer': 'none',
+                        'height': '100%'
+                    });
+                    var raUIFrame = raFrameWindow.getUIFrame();
+                    raFrameWindow.getViewerFrame().style.backgroundColor='#FFFFFF';
+                    raUIFrame.parentNode.style.height = '100%'
+                    raFrameWindow.inject(widget.body, 'top');
+                    window.widget._frameWnd = raFrameWindow;
+                    AnalyticsTagger.initialize();
+                    //Restore widget to last view size
+                    if(UWA.is(widget.getValue('lastviewsize'))){
+						widget.requestView(widget.getValue('lastviewsize'));
+					}
+                    RIWLoad.load().
+                        then(function(){
+                            if (Mask.isMasked(window.widget.body)){
+                                Mask.unmask(window.widget.body);
+                            }
+                        })
+                        ['catch'](function(err) {
+                            var msg = err.message || '';
+                            if (msg.length == 0){
+                                msg = NLS.get('ERROR_LOAD_RAW');
+                            }
+                            console.error(err);
+                            RIWLoad.notifs.errorNotif(msg);
+                            Mask.mask(window.widget.body, NLS.get('LOAD_ERR'));
+                        });
+                }, function(err) {
+                    console.error(err);
+                    var errmsg = document.createTextNode('Error loading the Results Analytics widget source.');
+                    window.widget.body.appendChild(errmsg);
+                });
+            };
+
+            widget.addEvents({
+                'onLoad' : onLoad
+            });
+        }
+
+        if (document.createElement('sp-dashboard').isInDashboard) {
+            onReady();
+        } else {
+            window.addEventListener('WebComponentsReady', onReady);
+        }
+
+    </script>
+</head>
+<body>
+    <div id="templates" style="display:none">
+        <!-- the template below is used for building the ecommerce table -->
+        <template id="SMAAnalyticsECommerceTable">
+            <div class="smaAdviseEcommerceBase">
+                <div class="smaAdviseEcommerceHeader">
+                    <div class="smaAdviseEcommerceHeadOuter">
+                        <div class="smaAdviseEcommerceHeadInner"></div>
+                    </div>
+                </div>
+                <div class="smaAdviseEcommerceMain">
+                    <div class="smaAdviseEcommerceContentOuter">
+                        <div class="smaAdviseEcommerceContentInner">
+                        </div>
+                    </div>
+                </div>
+                <div class="smaAdviseEcommerceFooter">
+                    <div class="smaAdviseEcommerceFooterOuter">
+                        <div class="smaAdviseEcommerceFooterInner">
+                        </div>
+                    </div>
+                </div>
+                <div class="smaAdviseTable-leftbar"></div>
+                <div class="smaAdviseTable-rightbar"></div>
+            </div>
+        </template>
+        <template id="smaAdviseECommerceHeaderRow">
+            <row-head>
+            </row-head>
+        </template>
+        <template id="smaAdviseECommerceDataHead">
+            <data-handle></data-handle>
+            <h1 data-text="Alt. Name">Alt. Name</h1>
+            <div class="data-head-flags"><span class="smaAdviseIsRecommended"></span></div>
+            <div class="smaAdviseHeaderImgContainer">
+                <div class="missing-image" data-text="No Image">No Image</div>
+                <img src="" />
+            </div>
+        </template>
+        <template id="smaAdviseECommerceDataGroup">
+            <row-head>
+                <data-handle></data-handle>
+                <!-- <span class="collapse-group ui-icon ui-icon-triangle-1-n sim-ui-panel-controlgroup-toolbarbutton"></span>
+                <h1 class="group-name display-name"></h1> -->
+            </row-head>
+        </template>
+        <template id="smaAdviseECommerceDataRow">
+            <row-head>
+                <data-handle></data-handle>
+            </row-head>
+        </template>
+    </div>
+</body>
+</html>

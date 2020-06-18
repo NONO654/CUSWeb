@@ -1,0 +1,113 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-cos/sp-cos.html">
+<link rel="import" href="../../SMAProcSP/sp-cosservice/sp-cosservice.html">
+<link rel="import" href="../../SMAProcSP/sp-access-group/sp-access-group.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel-message/sp-updatepanel-message.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<link rel="import" href="../ps-facets/ps-facets.html">
+<link rel="import" href="../ps-simulation-description/ps-simulation-description.html">
+<link rel="import" href="../ps-simulation-details/ps-simulation-details.html">
+<link rel="import" href="../ps-input-output/ps-input-output.html">
+<link rel="import" href="../../SMAProcSPUI/sp-job-log/sp-job-log.html">
+<link rel="import" href="../ps-parameter-history/ps-parameter-history.html">
+<link rel="import" href="../ps-file-monitor/ps-file-monitor.html">
+<link rel="import" href="../ps-event-manager/ps-event-manager.html">
+
+<dom-module id="ps-simulation-contents">
+	<link rel="import" type="css" href="ps-simulation-contents.css">
+	<template>
+
+		<!-- COMMON CONFIGURATION PROPERTIES -->
+		<sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL"></sp-variable>
+		<sp-variable id="mcsBaseURL" name="mcsBaseURL"></sp-variable>
+		<sp-variable id="eedBaseURL" name="eedBaseURL"></sp-variable>
+		<sp-variable id="inDashBoard" name="inDashBoard"></sp-variable>
+		<!-- Listen Left side events -->
+    <ps-event-manager on-event-manager-list-refreshed="refreshData"></ps-event-manager>
+		<!-- Execution Options Service -->
+		<sp-mcsservice id="exeOptWs" uri="{{_computeUriOfExeOptions(activesim.id)}}" data="{{exeOpt}}"  on-dataready="onExeOptReady">
+		</sp-mcsservice>
+
+		<!-- Manage simulation data -->
+		<sp-mcsservice id="simulationProp" data="{{simulation}}" builduri="false" on-response="onUpdateResponse" uri="{{_computeUri(objectId)}}">
+		</sp-mcsservice>
+		<!-- Access groups -->
+		<sp-access-group name="simulation" data="{{simulation.basics}}"></sp-access-group>
+
+		<!-- Get the relevant view -->
+		<sp-mcsservice id="xsView" data="{{view}}" on-dataready="onViewReady" uri="{{_computeUri3(objectId)}}">
+		</sp-mcsservice>
+
+		<sp-webservice id="eedTicketWs"  data="{{ eedTicketData }}"  uri="{{_computeEEDTicketUri()}}" on-dataready="setEEDTicket">
+		</sp-webservice>
+		<sp-cos id="cosServer"></sp-cos>
+    <sp-cosservice id="stationList"></sp-cosservice>
+		
+		<!-- 0 The Top section of RHS -->
+		<sp-updatepanel updateswhen="is-getting" state="{{jobList.$state}}">
+			<ps-simulation-description id="psSimDesc" sim-oid="{{objectId}}" eedjob-id="{{eedjobId}}" running-task="{{runningTask}}" sim-details="{{simulation}}"
+			eed-base-url="{{eedBaseURL}}" imagesrc="{{activesim.image}}" jobs-data="{{jobList}}" updates-pending="{{updatesPending}}">
+		</ps-simulation-description>
+		<sp-notification id="notificationMessages" position="TR" width="400"></sp-notification>
+	</sp-updatepanel>
+	<ps-facets id="facets" class="facets" tab="{{tab}}" on-tabchange="onTabChange" style="padding-top: 10px;">
+		<!-- 1. Properties -->
+		<section id="details" class="content" data-header="Properties" data-selected="true" data-title="Properties" data-icon="doc-text">
+			<sp-updatepanel class="facetcontent" updateswhen="is-getting" state="{{simulation.$state}}">
+				<!-- State messages -->
+				<sp-updatepanel-message class="update-panel-message" from="is-getting" to="is-failing" message="Unable to get data">
+				</sp-updatepanel-message>
+				<sp-updatepanel-message class="update-panel-message" to="is-updating" message="Saving changes">
+				</sp-updatepanel-message>
+				<sp-updatepanel-message class="update-panel-message" from="is-updating" to="is-failing" message="Failed to save">
+				</sp-updatepanel-message>
+				<ps-simulation-details id="psSimDetails" simulation="{{simulation}}" xs-view="{{templateDefinition}}"></ps-simulation-details>
+			</sp-updatepanel>
+		</section>
+
+		<section id="contents" class="content" data-header="Inputs/Outputs"  data-title="Inputs/Outputs" data-icon="down">
+			<sp-updatepanel class="facetcontent" updateswhen="is-getting" state="{{state}}">
+				<!-- State messages -->
+				<sp-updatepanel-message class="update-panel-message" to="is-getting" message="Getting data">
+				</sp-updatepanel-message>
+				<sp-updatepanel-message class="update-panel-message" from="is-getting" to="is-failing" message="Unable to get data">
+				</sp-updatepanel-message>
+				<sp-updatepanel-message class="update-panel-message" to="is-updating" message="Saving changes">
+				</sp-updatepanel-message>
+				<sp-updatepanel-message class="update-panel-message" from="is-updating" to="is-failing" message="Failed to save">
+				</sp-updatepanel-message>
+				<sp-updatepanel-message class="update-panel-message not-supported" to="not-supported" message="Incompatible Object">
+				</sp-updatepanel-message>
+				<ps-input-output id="pssimcontent" state="{{state}}" selected-facet="{{selectedFacet}}" data-type="inputoutput" xs-view="{{view.templateviewdefinition}}" on-runactivity="runActivity">
+				</ps-input-output>
+			</sp-updatepanel>
+		</section>
+
+		<section id="log" class="content" data-header="Log"  data-title="Log" data-icon="th-list-alt">
+			<!-- job log monitoring-->
+			<sp-job-log id="psjoblog" class="facetcontent" job-title="{{jobTitle}}" job-object-id="{{jobObjectId}}" job-execution-status="{{jobExecutionStatus}}" cos-server-id="{{cosServerId}}"
+			eedjob-id="{{eedjobId}}" eed-base-url="{{eedBaseURL}}" running-task="{{runningTask}}" job-execution-time="{{jobExecutionTime}}">
+		</sp-job-log>
+	</section>
+	<section id="history" class="content" data-header="Parameters"  data-title="Parameters" data-icon="back-in-time">
+		<!-- parameter history monitoring-->
+		<ps-parameter-history id="psparamhistory" class="facetcontent" eedjob-id="{{eedjobId}}" job-execution-status="{{jobExecutionStatus}}"
+		eed-base-url="{{eedBaseURL}}" job-object-id="{{jobObjectId}}"  cos-server-id="{{cosServerId}}"  sim-id="{{objectId}}">
+	</ps-parameter-history>
+</section>
+<section id="files" class="content" data-header="Files"  data-title="Files" data-icon="docs">
+	<!-- File monitoring-->
+	<ps-file-monitor id="fileMonitorView" class="facetcontent" session="{{session}}" sim-oid="{{objectId}}" job-execution-status="{{jobExecutionStatus}}"
+	job-object-id="{{jobObjectId}}" eedjob-id="{{eedjobId}}" sim-title="{{activesim.attributes.title}}">
+</ps-file-monitor>
+</section>
+</ps-facets>
+</template>
+<script type="text/javascript" src="ps-simulation-contents.js"></script>
+</dom-module>

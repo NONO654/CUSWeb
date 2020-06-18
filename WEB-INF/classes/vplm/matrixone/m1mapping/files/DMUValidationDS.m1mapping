@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="DMUValidationDS" />
+    <m1.package name="DMUValidationDS" />
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMConnection name="DMUValidationCheckDS" />
+      <m1.type name="DMUValidationCheckDS" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Validation_Check_Priority" />
+        <m1.attribute name="DMUValidationCheckDS.V_Validation_Check_Priority" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="DMUValidationExposedPresentationDS" />
+      <m1.type name="DMUValidationExposedPresentationDS" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Validation_Presentation_Priority" />
+        <m1.attribute name="DMUValidationExposedPresentationDS.V_Validation_Presentation_Priority" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="DMUValidationValidationDS" />
+      <m1.type name="DMUValidationValidationDS" />
+
+      <!-- Basic Concat -->
+      <pattern.VPLM_BASIC_CONCAT>
+        <vplm.Simple name="PLM_ExternalID" />
+        <m1.basic name="name" />
+      </pattern.VPLM_BASIC_CONCAT>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Validation_Archived" />
+        <m1.attribute name="DMUValidationValidationDS.V_Validation_Archived" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

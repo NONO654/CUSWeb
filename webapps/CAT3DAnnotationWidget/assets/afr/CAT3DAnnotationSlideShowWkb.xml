@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="CAT3DAnnotationSlideShowHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID="CAT3DAnnotationPlayPreviousSlideHdr" ClassName="DS/CAT3DAnnotationBaseCmds/CAT3DAnnotationNavigationSlideShowCmd" ResourceFile="CAT3DAnnotationBaseCmds/CAT3DAnnotationBaseCmds" Available="1" />
+      <CATCommandHeader ID="CAT3DAnnotationPlayNextSlideHdr" ClassName="DS/CAT3DAnnotationBaseCmds/CAT3DAnnotationNavigationSlideShowCmd" ResourceFile="CAT3DAnnotationBaseCmds/CAT3DAnnotationBaseCmds" Available="1" />
+      <CATCommandHeader ID="CAT3DAnnotationPlayExitSlideShowHdr" ClassName="DS/CAT3DAnnotationBaseCmds/CAT3DAnnotationNavigationSlideShowCmd" ResourceFile="CAT3DAnnotationBaseCmds/CAT3DAnnotationBaseCmds" Available="1" />
+    </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="CAT3DAnnotationSlideShowAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="CAT3DAnnotationSlideShowWorkbench">
+
+      <CATCmdContainer Name="Fixed Area" RepresentationType="AfrActionBarFixedSection">
+        <CATCmdStarter Name="CAT3DAnnotationPlayExitSlideShowStr" Command="CAT3DAnnotationPlayExitSlideShowHdr" />
+      </CATCmdContainer>
+
+      <CATCmdContainer Name="CAT3DAnnotationNavigation" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="CAT3DAnnotationPlayPreviousSlideStr" Command="CAT3DAnnotationPlayPreviousSlideHdr" />
+        <CATCmdStarter Name="CAT3DAnnotationPlayNextSlideStr" Command="CAT3DAnnotationPlayNextSlideHdr" />
+      </CATCmdContainer>
+      
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

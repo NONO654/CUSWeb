@@ -1,0 +1,27 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAAnalyticsElements/ra-driver-treeview/ra-driver-treeview.html">
+<link rel="import" href="../../SMAAnalyticsElements/ra-driver-dataset/ra-driver-dataset.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+
+<dom-module id="ra-driver-browser">
+  <link rel="import" type="css" href="ra-driver-browser.css">
+  <template>
+    <sp-modal id="modalcontainer" class="mediummodal1" heading="Select Component" width="700px" height="400px">
+      <section class="body">
+        <div class="maincontainer">
+          <div class="container-items">
+            <ra-driver-dataset id="radriverdataset" list-data={{listDataset}}></ra-driver-dataset>
+          </div>
+          <div class="treestruct" id="treecomponent">
+            <ra-driver-treeview id="radrivertreeview"></ra-driver-treeview>
+          </div>
+        </div>
+      </section>
+      <footer>
+        <button is="sp-button-type" title="Close" on-click="closeRA">Close</button>
+      </footer>
+    </sp-modal>
+  </template>
+  <script type="text/javascript" src="ra-driver-browser.js"></script>
+</dom-module>

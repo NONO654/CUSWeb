@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<head>
+
+    <title>My Company</title>
+
+    <!-- Application Metas Start -->
+    <meta name="author" content="Dassault Systemes (DM8)" />
+    <meta name="description" content="3DPrint Web" />
+    <meta name="keywords" content="3DPrint Web" />
+    <meta name="apiVersion" content="1.3" />
+    <meta name="debugMode" content="true" />
+
+    <!-- CSS  -->
+    <style type="text/css" media="screen">
+        body
+        {
+            /*height: 100%;
+            overflow: hidden;*/
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+
+    <!-- UWA bypass to use the RequireJS AMD loader  -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+    <!-- Application Standalone emulation files -->
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <!--<script type="text/javascript" src="https://uwa.netvibes.com/lib/c/UWA/js/UWA_Standalone_Alone.js"></script>-->
+    <!--<link rel="stylesheet" type="text/css" href="https://uwa.netvibes.com/lib/c/UWA/assets/css/standalone.css" />-->
+
+    <!-- Application Stylesheet -->
+    <!--<link rel="stylesheet" type="text/css" href="assets/css/WidgetStyle.css" />-->
+
+    <!-- Required preloaded scripts - to remove -->
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+    <!-- Application JS Start -->
+    <script type="text/javascript">
+      require([
+        'DS/MPFCompanyComponent/CompanyManagementWidget'
+      ], function (CompanyManagementWidget) {
+        'use strict';
+
+        var companyManagementWidget = new CompanyManagementWidget(widget);
+        widget.addEvent('onLoad', companyManagementWidget.load.bind(companyManagementWidget));
+      });
+    </script>
+
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+    <link rel="stylesheet" type="text/css" href="../MP3DPWAPConfig/assets/css/MP3DPWAP.css" />
+
+    <!-- Preferences -->
+    <widget:preference type="text" name="WidgetHeight" label="Widget Height" defaultvalue="" />
+
+</head>
+<body>
+    <!--<p>Loading</p>-->
+</body>
+</html>

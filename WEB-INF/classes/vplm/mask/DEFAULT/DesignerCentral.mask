@@ -1,0 +1,372 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY IEF Family
+// --------------------------------------------------
+ATTR Access Type;Y;Y;Inherited
+VALUE Inherited
+VALUE Specific
+ATTR Checkin Reason;N;N;
+ATTR Designated User;N;N;Unassigned
+ATTR IEF-EBOMExpositionMode;N;Y;multiple
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE multiple
+//VALUE single
+ATTR IEF-ObjectBasedConfigurationRevisionMode;N;Y;together
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE together
+//VALUE individual
+ATTR Is Version Object;N;Y;
+ATTR Language;N;Y;English
+VALUE Chinese
+VALUE English
+VALUE French
+VALUE German
+VALUE Italian
+VALUE Japanese
+VALUE Korean
+ATTR MCADInteg-InstanceAttributes;N;N;$
+ATTR MCADInteg-InstanceNames;N;N;$
+ATTR MCADInteg-InstanceSpecificAttributes;N;N;$
+ATTR MCADInteg-InstanceStructure;N;N;$
+ATTR MCADInteg-Instances;N;N;$
+ATTR Originator;N;N;
+ATTR Title;N;N;
+ATTR current;N;N;
+ATTR description;N;N;
+ATTR name;Y;N;
+ATTR originated;N;N;
+ATTR owner;N;N;
+ATTR reserved;N;N;
+ATTR reservedby;N;N;
+ATTR revision;N;N;
+ATTR project;N;N;
+ATTR modified;N;N;$
+FUNC List
+FATTR name;N
+FATTR project;N
+FATTR description;N
+FATTR Originator;N
+FATTR Title;N
+FATTR Language;N
+FATTR revision;N
+FATTR current;N
+FUNC Query
+FATTR Title;N
+FATTR owner;N
+FATTR project;N
+FATTR modified;N
+FATTR revision;N
+FATTR description;N
+FATTR Originator;N
+FATTR revision;N
+FATTR current;N
+FUNC Read
+FATTR Title;N
+FATTR owner;N
+FATTR project;N
+FATTR modified;N
+FATTR revision;N
+FATTR description;N
+FATTR Originator;N
+FATTR revision;N
+FATTR current;N
+FUNC Tree
+FATTR Title;N
+FATTR owner;N
+FATTR project;N
+FATTR modified;N
+FATTR revision;N
+FUNC Write
+FATTR name;N
+FATTR revision;N
+FATTR Title;N
+FATTR current;N
+FATTR description;N
+FATTR owner;N
+FATTR originated;N
+FATTR Originator;N
+FATTR reserved;N
+FATTR reservedby;N
+// --------------------------------------------------
+ENTITY CgrViewable
+// --------------------------------------------------
+ATTR CAD Type;N;Y;$
+ATTR Originator;N;N;$
+ATTR Viewable Base Filename;N;N;Unassigned
+ATTR Viewable Base Format;N;N;Unassigned
+ATTR Viewable State;N;Y;$
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Empty
+//VALUE Unsynchronized
+//VALUE Synchronized
+ATTR Viewing Tool;N;N;Unassigned
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR isbestsofar;N;N;false
+ATTR ispublished;N;N;false
+ATTR locked;N;N;false
+ATTR locker;N;N;$
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revindex;N;N;0
+ATTR revision;N;N;$
+FUNC List
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR policy;N
+FATTR locked;N
+FUNC Read
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR policy;N
+FATTR locked;N
+FUNC Tree
+FUNC Write
+FATTR name;N
+FATTR description;N
+FATTR organization;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR policy;N
+FATTR locked;N
+// --------------------------------------------------
+ENTITY MCAD Model
+// --------------------------------------------------
+ATTR Access Type;Y;Y;Inherited
+VALUE Inherited
+VALUE Specific
+ATTR CAD Type;N;Y;$
+ATTR Checkin Reason;N;N;
+ATTR DSC-IsReplacementDone;N;N;false
+ATTR Designated User;N;N;Unassigned
+ATTR IEF-ConnectedECO;N;N;$
+ATTR IEF-EBOMSync-PartTypeAttribute;N;N;$
+ATTR IEF-ExcludeFromBOM;N;N;false
+ATTR IEF-FileMessageDigest;N;N;$
+ATTR IEF-FileSource;N;Y;designtool
+ATTR IEF-LockInformation;N;N;$
+ATTR IEF-Specification;N;N;$
+ATTR IEF-UUID;N;N;$
+ATTR Is Version Object;N;Y;
+ATTR Language;N;Y;English
+VALUE Chinese
+VALUE English
+VALUE French
+VALUE German
+VALUE Italian
+VALUE Japanese
+VALUE Korean
+ATTR MCAD Label;N;N;$
+ATTR MCADInteg-Comment;N;N;$
+ATTR Modified CAD Attributes;N;N;$
+ATTR Modified in Matrix;N;N;$
+ATTR Newly Created in Matrix;N;N;$
+ATTR Originator;N;N;
+ATTR Renamed From;N;N;$
+ATTR Source;N;N;$
+ATTR Title;N;N;
+ATTR current;N;N;
+ATTR description;N;N;
+ATTR name;Y;N;
+ATTR originated;N;N;
+ATTR owner;N;N;
+ATTR reserved;N;N;
+ATTR reservedby;N;N;
+ATTR revision;N;N;
+FUNC Create
+FATTR MCADInteg-Comment;Y
+FATTR Newly Created in Matrix;Y
+FATTR CAD Type;Y
+FATTR IEF-FileSource;Y
+FATTR IEF-UUID;Y
+FATTR IEF-FileMessageDigest;Y
+FATTR Source;Y
+FATTR Modified in Matrix;Y
+FATTR DSC-IsReplacementDone;Y
+FUNC EZQuery
+FATTR name;Y
+FATTR description;Y
+FATTR Originator;Y
+FATTR Title;Y
+FATTR Language;Y
+FATTR revision;Y
+FATTR current;Y
+FUNC List
+FATTR name;N
+FATTR description;N
+FATTR Originator;N
+FATTR Title;N
+FATTR Language;N
+FATTR revision;N
+FATTR current;N
+FUNC Query
+FATTR name;Y
+FATTR description;Y
+FATTR Originator;Y
+FATTR Title;Y
+FATTR revision;Y
+FATTR current;Y
+FUNC Read
+FATTR name;N
+FATTR description;N
+FATTR Originator;N
+FATTR Title;N
+FATTR Language;N
+FATTR revision;N
+FATTR current;N
+FUNC Tree
+FATTR Title;Y
+FATTR revision;Y
+FUNC Write
+FATTR name;N
+FATTR revision;N
+FATTR Title;Y
+FATTR current;N
+FATTR description;N
+FATTR owner;N
+FATTR originated;N
+FATTR Originator;N
+FATTR reserved;N
+FATTR reservedby;N
+// --------------------------------------------------
+ENTITY Relation.Viewable
+// --------------------------------------------------
+ATTR CAD Object Name;N;N;$
+ATTR Must In Structure;N;N;true
+ATTR Relationship UUID;N;N;$
+ATTR Renamed From;N;N;$
+ATTR modified;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+FUNC Create
+FATTR CAD Object Name;Y
+FUNC EZQuery
+FATTR owner;Y
+FATTR organization;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR modified;Y
+FATTR reserved;Y
+FATTR reservedby;Y
+FATTR Relationship UUID;Y
+FATTR Must In Structure;Y
+FATTR CAD Object Name;Y
+FATTR Renamed From;Y
+FUNC Read
+FATTR owner;N
+FATTR organization;N
+FATTR originated;N
+FATTR project;N
+FATTR Must In Structure;N
+FUNC Tree
+FUNC Write
+FATTR owner;N
+FATTR organization;N
+FATTR originated;N
+FATTR project;N
+FATTR Must In Structure;N
+// --------------------------------------------------
+ENTITY CAD SubComponent
+// --------------------------------------------------
+ATTR Bounding Box;N;N;Unassigned
+ATTR CAD Object Name;N;N;$
+ATTR Child Instance;N;N;$
+ATTR IEF-ExcludeFromBOM;N;N;false
+ATTR IEF-UUID;N;N;$
+ATTR MCADInteg-RevReplacedFrom;N;N;$
+ATTR Must In Structure;N;N;true
+ATTR New Transformation Matrix;N;N;$
+ATTR Parent Instance;N;N;$
+ATTR Quantity;N;N;1.0
+ATTR Reference Designator;N;N;$
+ATTR Relationship Modification Status in Matrix;N;N;$
+ATTR Relationship UUID;N;N;$
+ATTR Renamed From;N;N;$
+ATTR Spatial Location;N;N;Unassigned
+ATTR modified;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+FUNC Read
+FATTR owner;N
+FATTR organization;N
+FATTR originated;N
+FATTR project;N
+FATTR modified;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR Reference Designator;N
+FATTR Relationship UUID;N
+FATTR IEF-ExcludeFromBOM;N
+FATTR Quantity;N
+FATTR IEF-UUID;N
+FATTR Child Instance;N
+FATTR MCADInteg-RevReplacedFrom;N
+FATTR Must In Structure;N
+FATTR Spatial Location;N
+FUNC Tree
+FUNC Write
+FATTR owner;N
+FATTR organization;N
+FATTR originated;N
+FATTR project;N
+FATTR Reference Designator;N
+FATTR Must In Structure;N
+FATTR Spatial Location;N

@@ -1,0 +1,22 @@
+<dom-module id="ad-popover">
+	<style>
+		:host .popover-body {
+			display: block;
+			word-break: keep-all;
+		}
+		:host .fonticon.icon 		{ color: #b4b6ba; } /** icon grey **/
+		:host .fonticon.icon:hover	{ color: #3d3d3d; } /** dark grey **/
+		:host .fonticon.icon:active	{ color: #368ec4; } /** dark blue **/
+	</style>
+	<template>
+		<span id="icon" class="fonticon icon fonticon-help"
+			on-mouseover="_togglePopover"
+			on-mouseout="_hidePopover"
+			on-click="_togglePopover">
+		</span>
+		<div id="popover" class="popover bottom in hidden" on-click="_togglePopover">
+			<div id="title" class="popover-title">[[title]]</div>
+			<div id="body" class="popover-body">[[body]]</div>
+		</div>
+	</template>
+</dom-module>

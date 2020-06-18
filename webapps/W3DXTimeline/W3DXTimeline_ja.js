@@ -1,0 +1,1 @@
+define("DS/W3DXTimeline/W3DXTimeline_ja",{});define("DS/W3DXTimeline/assets/nls/feed",{today:"今日",yesterday:"昨日"});

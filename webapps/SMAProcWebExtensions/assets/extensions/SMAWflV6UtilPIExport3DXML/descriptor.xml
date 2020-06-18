@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.V6UtilityExport3DXML" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflV6UtilPIExport3DXML" nlsID="dispname">Export to 3DXML</DisplayName>
+	<Description nlsFile="SMAWflV6UtilPIExport3DXML" nlsID="desc">Export to 3DXML</Description>
+	<LongDescription/>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>V6Utility</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.plugin.v6utility.export3dxml</Value>
+		</Attribute>
+	</Attributes>
+
+	<Streams>
+
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflV6UtilPIExport3DXML.CATNls" targetFilename="SMAWflV6UtilPIExport3DXML.CATNls"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflV6UtilPIExport3DXML.dll" targetFilename="win_b64/SMAWflV6UtilPIExport3DXML.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflV6UtilPIExport3DXML.sypstyle" targetFilename="SMAWflV6UtilPIExport3DXML.sypstyle"/>
+
+
+	</Streams>
+
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflV6UtilPIExport3DXMLEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+
+	</Interfaces>
+	<Properties>
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[V6Utility]]>
+			</Value>
+		</Property>
+		<Property name="PLMBatchName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[Export 3D XML]]>
+			</Value>
+		</Property>
+
+		<!--Aggregate properrty to save PLM Batch arugments required by this batch -->
+		<Property name="PLMBatchArguments" type="aggregate" valuetype="single">
+			<!--Mode default is file exchange-->
+			<Property name="Mode" type="string" valuetype="single">
+				<Value>File Exchanges</Value>
+			</Property>
+			<!--3DXML file name without extension-->
+			<Property name="FileName" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<!--3DXML file path default is runtime directory-->
+			<Property name="FilePath" type="string" valuetype="single">
+				<Expression syntax="SCE">{rundir}</Expression>
+				<Value/>
+			</Property>
+			<!--3DXML file description-->
+			<Property name="FileDesc" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<!-- whether to export 3dshape YES or NO -->
+			<Property name="REP3DShapeObject" type="string" valuetype="single">
+				<Value>YES</Value>
+			</Property>
+			<!-- format ForReview or WithAuthoring -->
+			<Property name="Format" type="string" valuetype="single">
+				<Value>WithAuthoring</Value>
+			</Property>
+		</Property>
+
+		<!--Value of this property is ID of PLM content which it refers to.-->
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<!-- Array property to store types of PLM objects.-->
+		<Property name="PLMObjectType" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+	</Properties>
+</wfext:Extension>

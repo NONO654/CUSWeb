@@ -1,0 +1,137 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-data/sp-data.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSPUI/sp-tab/sp-tab.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-exe-options/sp-exe-options.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../ps-event-manager/ps-event-manager.html">
+
+
+
+<dom-module id="ps-simulation-details">
+  <link rel="import" type="css" href="../../UIKIT/UIKIT.css">
+  <link rel="import" type="css" href="ps-simulation-details.css">
+  <template>
+
+        <!-- COMMON CONFIGURATION PROPERTIES -->
+        <sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL"></sp-variable>
+        <sp-variable id="mcsBaseURL" name="mcsBaseURL"></sp-variable>
+        <sp-variable id="eedBaseURL" name="eedBaseURL"></sp-variable>
+        <sp-dashboard id="spDashboard"></sp-dashboard>
+
+        <sp-mcsservice id="simulationProp1" data="{{simulation}}">
+        </sp-mcsservice>
+        <ps-event-manager on-event-manager-update-group="updateGroup"> </ps-event-manager>
+        <!-- Execution Options Service -->
+        <sp-mcsservice id="exeOptionsWs" uri="{{_computeUriForExeOptions(simOid)}}" data="{{exeOptions}}" builduri="false" on-dataready="onExeOptionsReady" on-updatecomplete="onUpdateComplete">
+
+        </sp-mcsservice>
+
+        <sp-webservice id="exe_drm_modes" builduri="false"></sp-webservice>
+        <sp-webservice id="cos_url_ws" uri="cos/url"></sp-webservice>
+
+        <div class="containerDiv">
+            <div class="properties actions">
+                <button is="sp-button-type" on-click="onShowImpactGraph">
+                    <span class="fonticon fonticon-share"></span> Impact Graph
+                </button>
+                    <button is="sp-button-type" on-click="onShowExecutionOptions" class$="{{_computeClass2(simulation)}}">
+                        <span class="fonticon fonticon-cog"></span>Execution Options
+                    </button>
+            </div>
+            <div class="ps-properties-table">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td class="ps-properties-table-label">Owner</td>
+                            <td>{{simulation.basics.owner}}</td>
+                        </tr>
+                        <tr>
+                            <td class="ps-properties-table-label">Created</td>
+                            <td>{{_computeOriginated(simulation)}}</td>
+                        </tr>
+                        <tr>
+                            <td class="ps-properties-table-label">Modified</td>
+                            <td>{{_computeModified(simulation)}}</td>
+                        </tr>
+                        <tr>
+                            <td class="ps-properties-table-label">Simulation Kind</td>
+                            <td>{{_computeSimulationKind(simulation)}}</td>
+                        </tr>
+                        <tr>
+                            <td class="ps-properties-table-label">Experience</td>
+                            <td>{{simulation.experienceTitle}}</td>
+                        </tr>
+                        <tr>
+                            <td class="ps-properties-table-label">Up to Date</td>
+                            <td>{{_computeUptoDate(simulation)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class$="{{_computeClass(xsView)}}">
+                <div>
+                    <sp-access group="simulation">
+                        <div>
+                            <label class="sim-title-title">Title</label>
+                            <sp-input type="text" id="simTitle" class="sim-title" on-keyup="simulationDetailsChange" required placeholder="Enter new title" ></sp-input>
+                        </div>
+                        <div class="description-title">Description</div>
+                        <div>
+                            <textarea id="simDescription" rows="3" class="form-control description" value="{{simulation.attributes.description::input}}"></textarea>
+                        </div>
+                        <!-- added class hide to promote under the flag until 
+                        a function is defined -->
+                        <div class="hide">
+                            <label class="sim-study-title">Simulation Study</label>
+                            <sp-input id="simulationStudy" type="text" class="sim-title" value="{{simulation.attributes.Simulation Study::input}}"></sp-input>
+                        </div>
+                    </sp-access>
+                </div>
+            </div>
+        </div>
+
+        <sp-modal id="optionsMd" class="exe-optn-modal" heading="Execution Options" height="600px" width="800px"
+            on-close="hideExecutionOptions" data-state="{{exeOptions.$state}}">
+            <section>
+                <sp-tab id="tab" tab="{{tab}}" on-click="showDRMTab" onlaod >
+                    <section id="exeConfigOptions"  data-header="Execution" data-selected="true">
+                         <sp-exe-options id="exeOptions" class="exe-options"></sp-exe-options>
+                    </section>
+
+                    <section id="drmOptions" data-header="Affinities">
+
+                        <template id="actListRepeat" is="dom-repeat" items="{{drmTabOptions.activities}}" as="activity" index-as="indexx">
+                            <div class='activitySection' id ='actSection' >
+                                 <span class='activityTitle'>{{_activityTitleDisplay(activity)}}</span>
+                                 <div class='drmModeDiv' id='{{_activityTitle(activity)}}' on-drmoptionsinvalid="invalidChange" on-drmoptionsvalid="validChange" on-resetrequiredcount="resetRequiredCount"></div>
+                            </div>
+                        </template>
+                    </section>
+                </sp-tab>
+            </section>
+            <footer>
+                <sp-updatepanel state="{{exeOptions.$state}}">
+
+                    <sp-updatepanel-message class="update-panel-message" to="is-getting" message="Retrieving data...Please wait"></sp-updatepanel-message>
+                    <sp-updatepanel-message class="update-panel-message" from="is-getting" to="is-failing" message="Unable to get data"></sp-updatepanel-message>
+                    <sp-updatepanel-message class="update-panel-message" to="is-updating" message="Saving changes"></sp-updatepanel-message>
+
+                </sp-updatepanel>
+                <div id="requiredFieldMessage" > </div>
+                <button id="saveButton" is="sp-button-type" class="button-exe-options-close" on-click="saveExecutionOptions" primary>Ok</button>
+                <button is="sp-button-type" class="button-exe-options-wait" on-click="hideExecutionOptions" >Cancel</button>
+            </footer>
+
+        </sp-modal>
+    </template>
+  <script type="text/javascript" src="ps-simulation-details.js"></script>
+</dom-module>

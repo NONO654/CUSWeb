@@ -1,0 +1,15 @@
+m|ENOXConfigCommonUX\CfgResizableTable.mweb
+b|j|c,m
+b|c|n,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\CfgResizableTable\CfgResizableTable.js|1546895331|16619
+s|ENOXConfigCommonUX\CfgResizableTable.mweb\src\CfgResizableTable.js|1546596139|34834
+t|win_b64\webapps\CfgResizableTable\CfgResizableTable_ellipsis.css|1568749489|552
+g|ENOXConfigCommonUX\CfgResizableTable.mweb\LocalGenerated\win_b64\CfgResizableTable_ellipsis.css|1531550739|3240
+t|win_b64\webapps\CfgResizableTable\CfgResizableTable.css|1568749489|1701
+g|ENOXConfigCommonUX\CfgResizableTable.mweb\LocalGenerated\win_b64\CfgResizableTable.css|1531550739|2260
+t|ENOXConfigCommonUX\CfgResizableTable.mweb\LocalGenerated\win_b64\CfgResizableTable.css|1531550739|2260
+s|ENOXConfigCommonUX\CfgResizableTable.mweb\src\CfgResizableTable.scss|1525707072|2405
+t|ENOXConfigCommonUX\CfgResizableTable.mweb\LocalGenerated\win_b64\CfgResizableTable_ellipsis.css|1531550739|3240
+s|ENOXConfigCommonUX\CfgResizableTable.mweb\src\CfgResizableTable_ellipsis.scss|1512468434|3470

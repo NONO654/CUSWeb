@@ -1,0 +1,102 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "title": "A JSON schema for the Media Publishing",
+    "description": "A JSON schema describing the JSON to be created for the Media Publishing (Sequence/Panorama/Image).",
+    "version": "05.03.2016",
+    "type": "object",
+    "required": [
+        "meta",
+        "root",
+        "asset"
+      ],
+    "properties": {
+        "meta": {
+            "type": "object",
+            "required": [
+                    "stillResolution",
+                    "version"
+            ],
+            "properties": {
+                "stillResolution": {
+                    "type": "object",
+                    "required": [
+                        "height",
+                        "width",
+                        "units"
+                    ],
+                    "properties": {
+                        "height": {
+                            "type": "number",
+                            "minimum": 1
+                        },
+                        "width": {
+                            "type": "number",
+                            "minimum": 1
+                        },
+                        "units": {
+                            "type": "string",
+                            "enum": ["px"]
+                        }
+                    }
+                },
+                "version": {
+                    "type": "string",
+                    "pattern": "^(\\d)+(\\.(\\d)+)*"
+                }
+            },
+            "asset": {
+                "type": "object",
+                "required": [
+                    "states",
+                    "transitions"
+                ],
+                "properties": {
+                    "events": {
+                        "type": "array",
+                        "minItems": 1,
+                        "uniqueItems": true,
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "enum": ["left", "right", "down", "up"]
+                                },
+                                {
+                                    "type": "array",
+                                    "minItems": 1,
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "states": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+
+                    },
+                    "transitions": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "patternProperties": {
+                                    "^(\\d+)": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

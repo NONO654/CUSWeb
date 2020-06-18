@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+
+    <title>OSLC Consumer</title>
+
+    <!-- Application Metas Start -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+    <meta name="author" content="DS"></meta>
+    <meta name="description" content="OSLC Consumer"></meta>
+    <!-- Application Metas End -->
+
+    <!-- Adding a physical id widget preference for debug ONLY; a physicalid should be entered-->
+    <widget:preferences>
+    </widget:preferences>
+
+    <!-- Load UWA stand alone environment(for running widgets in stand alone mode) -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+    <!-- The DS AMD loader -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+
+    <script type="text/javascript">
+        'use strict';
+
+        var dependencies = dependencies || [];
+
+        require(
+            // load the widget javascript
+            ['DS/OSLCConsumer/OSLCConsumer',
+                'DS/LifecycleServices/LifecycleServices',
+                'DS/LifecycleServices/LifecycleServicesSettings',
+                'DS/LifecycleCmd/CommandBase',
+                'DS/LifecycleCmd/OSLCConsumerCmd',
+                'DS/Controls/Button',
+                'DS/WAFData/WAFData'
+            ].concat(dependencies),
+            function(OSLCConsumer, LifecycleServices, LifecycleServicesSettings, BaseCmd, OSLCConsumerCmd, Button, WAFData) {
+
+                var MyWidget = {
+
+                    onLoad: function() {
+                        var that = this;
+                        LifecycleServicesSettings.app_initialization(function() {
+                            widget.body.empty(); // Clear 'Loading...' text
+
+                            var configureRMThroughCmdButton = new Button({
+                                label: 'Test Select OSLC Requirement through Cmd'
+                            }).inject(widget.body);
+							var configureCMThroughCmdButton = new Button({
+                                label: 'Test Select OSLC Change through Cmd'
+                            }).inject(widget.body);							
+                            var configureRMDirectlyButton = new Button({
+                                label: 'Test Create OSLC Requirement Directly'
+                            }).inject(widget.body);
+                           var configureCMDirectlyButton = new Button({
+                                label: 'Test Create OSLC Change Directly'
+                            }).inject(widget.body);							
+                            var oslcRequestsButton = new Button({
+                                label: 'Test OSLC Resource'
+                            }).inject(widget.body);
+                            var oauthButton = new Button({
+                                label: 'Test OAuth Twitter'
+                            }).inject(widget.body);
+
+                            configureRMThroughCmdButton.addEventListener('buttonclick', function(event) {
+                                var oslcRMConsumerCmd = new OSLCConsumerCmd();
+                                oslcRMConsumerCmd.setup({
+                                    title: "Insert External Existing Requirements", //dialog title
+                                    resourceType: "http://open-services.net/ns/rm#Requirement", //service of which resourceType to use
+                                    operation: "selectionDialog", //what factory or service to use: creationDialog, selectionDialog, etc. (used to match xml tags returned by OSLC catalog)
+                                    proxyType: "Requirement Proxy", //type of proxy object being created
+                                    providerFilter: "RM", //used to match "domain" in OSLCConfig.json to filter repositories.
+                                    securityContext: "",
+                                    tenantId: "OnPremise",
+                                    singleObject: false, //allow multi-creation/multi-selection or not
+                                    notification: function(result) {
+                                        //result can be an array of objects
+                                        console.log('result:');
+                                        console.log(result);
+                                    }
+                                });
+                                oslcRMConsumerCmd.execute();
+                            });
+                           configureCMThroughCmdButton.addEventListener('buttonclick', function(event) {
+                                var oslcCMConsumerCmd = new OSLCConsumerCmd();
+                                oslcCMConsumerCmd.setup({
+                                    title: "Insert External Existing Change", //dialog title
+                                    resourceType: "http://open-services.net/ns/cm#ChangeRequest", //service of which resourceType to use
+                                    operation: "selectionDialog", //what factory or service to use: creationDialog, selectionDialog, etc. (used to match xml tags returned by OSLC catalog)
+                                    proxyType: "Change Proxy", //type of proxy object being created
+                                    providerFilter: "CM", //used to match "domain" in OSLCConfig.json to filter repositories.
+									//For test purpose of not having defaultServices: true, //tag any of the dialog service tagged with "default"									
+                                    securityContext: "",
+                                    tenantId: "OnPremise",
+                                    singleObject: false, //allow multi-creation/multi-selection or not
+                                    notification: function(result) {
+                                        //result can be an array of objects
+                                        console.log('result:');
+                                        console.log(result);
+                                    }
+                                });
+                                oslcCMConsumerCmd.execute();
+                            });
+                            configureRMDirectlyButton.addEventListener('buttonclick', function(event) {
+                                var AppRMCmd = BaseCmd.extend({
+                                    init: function(options) {
+                                        this._parent(options, 'app_command');
+                                    },
+
+                                    execute: function() {
+                                        var cmd = this;
+                                        cmd.executeCmd(new OSLCConsumer({
+                                            title: "Insert New External Requirement", //dialog title
+                                            resourceType: "http://open-services.net/ns/rm#Requirement", //service of which resourceType to use
+                                            operation: "creationDialog", //what factory or service to use: creationDialog, selectionDialog, etc. (used to match xml tags returned by OSLC catalog)
+                                            proxyType: "Requirement Proxy", //type of proxy object being created
+                                            providerFilter: "RM", //used to match "domain" in OSLCConfig.json to filter repositories.
+                                            securityContext: "",
+                                            tenantId: "OnPremise",
+                                            singleObject: false, //allow multi-creation/multi-selection or not
+                                            notification: function(result) {
+                                                //result can be an array of objects
+                                                console.log('result:');
+                                                console.log(result);
+                                            }
+                                        }));
+                                    },
+
+                                    isSelCountSupported: function(selCount) {
+                                        return selCount === 1;
+                                    },
+
+                                    isFolderSelSupported: function() {
+                                        return false;
+                                    }
+                                });
+                                var appRMCmd = new AppRMCmd();
+                                appRMCmd.execute();
+                            });
+							
+							configureCMDirectlyButton.addEventListener('buttonclick', function(event) {
+                                var AppCMCmd = BaseCmd.extend({
+                                    init: function(options) {
+                                        this._parent(options, 'app_command');
+                                    },
+
+                                    execute: function() {
+                                        var cmd = this;
+                                        cmd.executeCmd(new OSLCConsumer({
+                                            title: "Insert New External Change", //dialog title
+                                            resourceType: "http://open-services.net/ns/cm#ChangeRequest", //service of which resourceType to use
+                                            operation: "creationDialog", //what factory or service to use: creationDialog, selectionDialog, etc. (used to match xml tags returned by OSLC catalog)
+                                            proxyType: "Change Proxy", //type of proxy object being created
+                                            providerFilter: "CM", //used to match "domain" in OSLCConfig.json to filter repositories.
+											defaultServices: true, //tag any of the dialog service tagged with "default"
+                                            securityContext: "",
+                                            tenantId: "OnPremise",
+                                            singleObject: false, //allow multi-creation/multi-selection or not
+                                            notification: function(result) {
+                                                //result can be an array of objects
+                                                console.log('result:');
+                                                console.log(result);
+                                            }
+                                        }));
+                                    },
+
+                                    isSelCountSupported: function(selCount) {
+                                        return selCount === 1;
+                                    },
+
+                                    isFolderSelSupported: function() {
+                                        return false;
+                                    }
+                                });
+                                var appCMCmd = new AppCMCmd();
+                                appCMCmd.execute();
+                            });
+
+                            oslcRequestsButton.addEventListener('buttonclick', function(event) {
+                                LifecycleServices.oslcRequest(
+                                    'OnPremise',
+									'', // default is first repository defined: ie 'doorsNG RM'
+									'', // default is resourceUrl: ie 'https://valm01dsy.dsone.3ds.com:9443/rm/resources/__scX8SFJEeievcmbAiMSsw'
+                                    {
+                                        method: 'GET',
+                                        headers: {
+                                            Accept: "application/rdf+xml",
+											"oscl-core-version": '2.0'
+                                        },
+                                        onSuccess: function(response) {
+                                            console.log('response: application/rdf+xml');
+                                            console.log(response);
+                                        },
+                                        onError: function(err) {
+                                            console.log('Error application/rdf+xml: ' + err);
+                                        }
+                                    });
+
+                                LifecycleServices.oslcRequest(
+                                    'OnPremise',
+									'', // default is first repository defined: ie 'doorsNG RM'
+									'', // default is resourceUrl: ie 'https://valm01dsy.dsone.3ds.com:9443/rm/resources/__scX8SFJEeievcmbAiMSsw'
+                                    {
+                                        method: 'GET',
+                                        headers: {
+                                            Accept: "application/x-oslc-compact+xml",
+											"oscl-core-version": '2.0'
+                                        },
+                                        onSuccess: function(response) {
+                                            console.log('response: application/x-oslc-compact+xml');
+                                            console.log(response);
+                                        },
+                                        onError: function(err) {
+                                            console.log('Error application/x-oslc-compact+xml: ' + err);
+                                        }
+                                    });
+									
+									LifecycleServices.oslcRequest(
+                                    'OnPremise',
+									'', // default is first repository defined: ie 'doorsNG RM'
+									'', // default is resourceUrl: ie 'https://valm01dsy.dsone.3ds.com:9443/rm/resources/__scX8SFJEeievcmbAiMSsw'
+                                    {
+                                        method: 'GET',
+                                        headers: {
+                                            Accept: "text/html",
+											"oscl-core-version": '2.0'
+                                        },
+                                        onSuccess: function(response) {
+                                            console.log('response: text/html');
+                                            console.log(response);
+                                        },
+                                        onError: function(err) {
+                                            console.log('Error text/html: ' + err);
+                                        }
+                                    });
+                            });
+
+                            oauthButton.addEventListener('buttonclick', function(event) {
+                                // Verify we can successfully make an OAuth 1.0a request using the
+                                // Twitter API.
+
+                                // The Twitter API has CORS restrictions, so this test will only
+                                // work if you're using Chrome and disable the web security by
+                                // launching Chrome with a command like the following:
+                                // chrome --disable-web-security --user-data-dir="c:/chromedev"
+
+                                // First, you need to go to https://apps.twitter.com and create an
+                                // app. I don't think the initial app settings you give matter that
+                                // much for this test, and I didn't give a Callback URL (all of the
+                                // settings can also be easily changed after creating the app).
+
+                                // Fill in the following two values from your app's Keys and Access
+                                // Tokens settings:
+                                var oauth_consumer_key = 'app_oauth_consumer_key';
+                                var oauth_consumer_secret = 'app_oauth_consumer_secret';
+                                // From the same settings page, click on the button to create your
+                                // own access token to fill in the following two values:
+                                var oauth_token = 'your_oauth_token';
+                                var oauth_token_secret = 'your_oauth_token_secret';
+
+                                // Set the URL to the API to post a status update (tweet)
+                                var url = 'https://api.twitter.com/1.1/statuses/update.json';
+
+                                // Twitter doesn't allow you to tweet a duplicate status, so we'll randomize our tweet.
+                                var tweet = 'This is a test tweet brought to you by the number ' + Math.random() + '.';
+
+                                var data = { status: tweet };
+
+                                // Call LifecycleServices function to generate the Authorization
+                                // header. In an actual app, we wouldn't be calling this directly,
+                                // and it would be automatically invoked as part of the oslcRequest.
+                                // Also, in an actual app, we would be doing some of these steps,
+                                // like retrieving the key/token information through 3DPassport.
+                                // Here, we're just trying to verify we can successfully make an
+                                // OAuth request with a given set of key/token information, so we're
+                                // going to call the Twitter API directly, instead of going through
+                                // 3DPassport.
+                                LifecycleServices._getAuthorizationHeaderPromise(
+                                    'POST',
+                                    url,
+                                    data,
+                                    {
+                                        oauth_consumer_key: oauth_consumer_key,
+                                        oauth_consumer_secret: oauth_consumer_secret,
+                                        oauth_token: oauth_token,
+                                        oauth_token_secret: oauth_token_secret
+                                    }).then(function(authHeader) {
+                                        console.log('authHeader: ' + authHeader);
+
+                                        WAFData.authenticatedRequest(url, {
+                                            method: 'POST',
+                                            type: 'json',
+                                            headers: { Authorization: authHeader },
+                                            data: data,
+                                            timeout: 600000, // the value in milliseconds = 10 minutes.
+                                            onComplete: function(response) {
+                                                console.log('response:');
+                                                console.log(response);
+                                            },
+                                            ontimeout: function(err) {
+                                                console.log('err:');
+                                                console.log(err);
+                                            },
+                                            onFailure: function(err) {
+                                                console.log('err:');
+                                                console.log(err);
+                                            }
+                                        });
+                                    });
+                            });
+                        });
+                    },
+                    onRefresh: function() {
+                        console.log('onRefresh');
+                    }
+
+                }; // end var
+
+                //The "onLoad" event is the very first event triggered when the widget is fully loaded.
+                widget.addEvent('onLoad', MyWidget.onLoad);
+                widget.addEvent('onRefresh', MyWidget.onRefresh);
+
+            } // end function
+        ); // end require
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

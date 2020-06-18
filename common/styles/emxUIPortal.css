@@ -1,0 +1,485 @@
+/* -------------------------------------------------------------------------
+	Powerview Stylesheet for Windows/Mac Platforms
+	emxUIPowerview.css
+
+	Release: 2015x
+	Version: 1.3
+	
+    Copyright (c) 1992-2018 Dassault Systemes ENOVIA Corp. All Rights Reserved.
+    This program contains proprietary and trade secret information 
+    of Dassault Systemes ENOVIA Corp. Copyright notice is precautionary only
+    and does not evidence any actual or intended publication of such program
+   ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+   Default
+   ------------------------------------------------------------------------- */
+
+html, body{
+    position:absolute;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    height:100%;
+    width:100%; 
+}
+
+div {padding:0;}
+
+#divPageBody {
+    position:absolute;
+    top:40px;
+    bottom:0;
+    background-color:magenta; /* this is for testing purposes - if you see magenta, something is wrong */
+}
+
+div.pv-container {
+	position:absolute;
+	width:100%;
+	height:100%;
+	overflow-x:hidden;
+	overflow-y:auto;
+	background-color:#E4E7F0;
+}
+	
+div.pv-row {
+	border-color:#0D0;
+	width:100%;
+}	
+	
+/* -------------------------------------------------------------------------
+   Channel
+   ------------------------------------------------------------------------- */
+
+div.pv-channel {
+	background-color:#fff; /* when empty channel is maximized, this will show */
+	position:relative;
+}
+
+div.pv-channel-tabs {
+	position:relative;
+	width:100%;
+	height:35px;
+	border-bottom:1px solid #bcbcbc;
+    background: #ffffff;
+}
+
+div.pv-channel-content {
+	position:absolute;
+	top:36px;
+	left:0;
+	right:0;
+	bottom:0;
+	width:auto;
+	height:auto;
+}
+
+div.pv-channel-content iframe {
+	position:relative;
+	width:100%;
+	height:100%;
+}
+
+.last-child {margin:0;}
+	
+div.maximized {
+	z-index:10;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+}
+
+/* -------------------------------------------------------------------------
+   Tab Settings
+   ------------------------------------------------------------------------- */
+
+.pv-channel-tabs > table {
+    float:left;
+    margin:9px;
+}
+
+.pv-channel-tabs div.window-size {
+	position:absolute;
+	display:block;
+	right:8px;
+	top:8px;
+	height:20px;
+	width:20px;
+	cursor:pointer;
+}
+
+.pv-channel-tabs div.window-size.btn-maximize {background:url("../images/utilPowerviewMinmax.png") 0 0 no-repeat;}
+
+.pv-channel-tabs div.window-size.btn-minimize {background:url("../images/utilPowerviewMinmax.png") -22px 0 no-repeat;}
+
+.tabset-button {
+	cursor:pointer;
+	cursor:hand;
+	padding:0 5px;
+	display: inline-block;
+}
+
+.tabset-background {
+	height:100px;
+	border:10px solid #000;
+}
+
+/* The tab-header class is for the div that displays the tab header. 16 Aug 2007 */   
+.tab-header {
+	color:#990000;
+	font-weight:bold;
+	font-size:12px;	    
+	background-color:#DDDECB;
+	border-bottom:1px solid #B4B4B0;
+	border-right:1px solid #B4B4B0;
+	border-top:1px solid #B4B4B0;
+	border-left:1px solid #B4B4B0;
+}
+
+td.tab-buttons {
+	cursor:pointer;
+	cursor:hand;
+}
+
+td.corner {width:4px;}
+
+td.corner img {display:none;}
+
+.tab-active,
+.tab-inactive {
+    background:none;
+    -moz-user-select:none;
+}
+
+/* Inner Table */
+.tab-active table,
+.tab-inactive table {
+    cursor:pointer;
+    cursor:hand;
+    height:24px;
+}
+
+.tab-active tr td,
+.tab-inactive tr td {
+    display:inline-block;
+    padding:3px 10px 4px 14px;
+    border-top:1px solid #bcbcbc;
+    border-right:none;
+    border-bottom:1px solid #f8f8f8;
+    border-left:1px solid #bcbcbc;
+    border-radius:0;
+    border-top-left-radius:3px;
+}
+
+
+.tab-inactive tr td {
+    border:1px solid transparent;
+
+}
+
+.tab-active .text,
+.tab-inactive .text {
+    font-weight:bold;
+    vertical-align:top;
+    white-space:nowrap; 
+    overflow:hidden;
+    color:#000;
+}
+
+.tab-inactive .text {
+    color:#636363;
+}
+
+.tab-active tr td.corner,
+.tab-inactive tr td.corner {
+    margin-right:4px;
+    padding:0;
+    border-top:1px solid #bcbcbc;
+    border-right:1px solid #bcbcbc;
+    border-bottom:1px solid #f8f8f8;
+    border-left:none;
+    border-radius:0;
+    border-top-right-radius:3px;
+    height:25px;
+}
+
+
+/* -------------------------------------------------------------------------
+   Active Tab Settings
+   ------------------------------------------------------------------------- */
+
+.tab-active tr td,
+.tab-active tr td.corner {background:#f8f8f8;}
+
+
+/* -------------------------------------------------------------------------
+   Inactive Tab Settings
+   ------------------------------------------------------------------------- */
+
+.tab-inactive tr td,
+.tab-inactive tr td.corner {
+    background:transparent;
+    border:1px solid transparent;
+}
+
+
+/* -------------------------------------------------------------------------
+   Tabset Menu
+   ------------------------------------------------------------------------- */
+
+/* Menu body */
+div.tabset, body.tabset {
+	background-color:#DDD;
+	border:1px solid #666;
+	position:absolute; 
+	width:200px; 
+}
+
+/* Menu Separator Line Appearance */
+div.tabset div.menu-separator,
+body.tabset div.menu-separator { 
+	border-bottom:1px solid white; 
+	border-top:1px solid #928B8B; 
+	overflow:hidden;
+}
+
+/* Text display for menu item */
+div.tabset td.menu-label,
+body.tabset td.menu-label {
+	border-bottom:1px solid #666; 
+	border-top:1px solid white; 
+	cursor:pointer;
+	cursor:hand;
+	height:25px;
+	padding:4px 4px 5px 4px;
+}
+
+/* Background color for selected menu item */
+div.tabset tr.menu-item-selected,
+body.tabset tr.menu-item-selected { 
+	background-color:#8e8e8e; 
+}
+
+/* Text display for selected menu item */
+div.tabset tr.menu-item-selected td.menu-label,
+body.tabset tr.menu-item-selected td.menu-label { 
+	background-image:none;
+	border-bottom:1px solid #666; 
+	border-top:1px solid white; 
+	color:#FFF;
+	cursor:pointer;
+	cursor:hand;
+	height:25px;
+	padding:4px 4px 5px 4px;
+}
+
+/* Menu Scroll Buttons */
+div.tabset div.upbutton,
+body.tabset div.upbutton,
+div.tabset div.upbutton-hover,
+body.tabset div.upbutton-hover,
+div.tabset div.downbutton,
+body.tabset div.downbutton,
+div.tabset div.downbutton-hover,
+body.tabset div.downbutton-hover {
+    background-position:center middle;
+    background-color:#C9C9C9;
+    background-repeat:no-repeat;
+    border-bottom:1px solid #B4B4B0;
+    border-left:1px solid #EEE;
+    border-right:1px solid #B4B4B0;
+    border-top:1px solid #EEE;
+    height:14px;
+    width:100%;
+}
+ 
+/* Scroll Up Button on the menu */
+div.tabset div.upbutton,
+body.tabset div.upbutton {background-image:url(../images/utilActionScrollArrowUp.gif);}
+
+/* Up Button (for mouse over) */
+div.tabset div.upbutton-hover,
+body.tabset div.upbutton-hover {background-image:url(../images/utilActionScrollArrowUp.gif);}
+
+/* Down Button */
+div.tabset div.downbutton,
+body.tabset div.downbutton {background-image:url(../images/utilActionScrollArrowDown.gif);}
+
+/* Down Button (for mouse over) */
+div.tabset div.downbutton-hover,
+body.tabset div.downbutton-hover {background-image:url(../images/utilActionScrollArrowDown.gif);}
+
+.action-next,
+.action-prev {
+	background-color:#DDD;
+	border:1px solid #666;
+	cursor:pointer;
+	cursor:hand;
+	height:25px;
+	padding:7px 0 0 1px;
+	width:16px;
+}
+
+.action-next {border-left:1px solid #FFF;}
+
+.pv-channel.float {
+	border: 4px solid #444444;
+	border-top:none;
+}
+
+/* Splitbar styles; these are the default class names and required styles */
+.aboveIframes {
+	position:absolute;
+	width:100%;
+	height:100%;
+	background:transparent;
+	user-select:none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+}
+
+.splitbarH,
+.splitbarV {
+    line-height:0;
+    font-size:0;
+}
+
+.splitbarV {
+	float:left;
+	height:100%;
+	width:9px;
+	background:#f8f8f8 url("../images/utilPowerviewVGrab.gif") no-repeat center center;
+	border-left:1px solid #d8d8d8;
+	border-right:1px solid #d8d8d8;
+	cursor:w-resize;
+}
+
+.splitbarH {
+	text-align:left;
+	height:9px;
+	left:0;
+    background:#f8f8f8 url("../images/utilPowerviewHGrab.gif") no-repeat center center;
+    border-top:1px solid #d8d8d8;
+    border-bottom:1px solid #d8d8d8;
+	cursor:n-resize;
+}
+
+.splitbarV.working, .splitbarH.working {
+    opacity:0.5;
+    -moz-opacity:0.5; 
+	filter:alpha(opacity=50); 
+}
+    
+.pv-channel-tabs .progress-image {
+    background: url(../images/utilProgressGraySmall.gif) no-repeat scroll 0 0 transparent;
+    display:block;
+    position:absolute;
+    right: 80px;
+    top:8px;
+    height:18px;
+    width:18px;
+}
+#txtProgressDivChannel {
+    position: relative;
+    right: -25px;
+    top: 0px;
+    height: 18px;
+    width: 18px;
+}
+
+   div.pv-col.left{
+    left:0px;
+    right: auto;
+}
+
+div.pv-col {
+	background-color:#fff; /* when empty channel is maximized, this will show */
+	position:relative;
+	height:100%;
+	float:left;
+}
+
+/*--Vertical bar to display the names of the hidden columns--*/
+
+div.pv-col.closed-cols{
+    left:auto;
+    right: 0px;
+    width: 30px;
+    background-color: #f8f8f8;
+    border-left: 1px solid #d8d8d8;
+    position: absolute;
+}
+
+div.pv-col.closed-cols.hidden{
+    display: none;
+}
+
+/*--Container element to rotate the buttons--*/
+
+div.rotate90 {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    transform-origin: left bottom 0;
+    display: block;
+    white-space: nowrap;
+    margin-top: 14px;
+    margin-left: 5px;
+
+}
+
+/*--Button Style for the Hidden Columns--*/
+button.show-pv-col{
+    display: inline-block;
+    background: url("../../common/images/utilPVRowHideButtons.png");
+    background-repeat: no-repeat;
+    background-position: -5px -6px;
+    width: auto;
+    padding: 1pt 6pt 2pt 22px;;
+    vertical-align: middle;
+    letter-spacing: 0.08em;
+    margin-right: 0;
+}
+
+button.show-pv-col:hover{background-position: -5px -37px;}
+
+button.show-pv-col:active{
+    background-position: -5px -70px;
+    color: #288fd1;
+    }
+    
+    /*--Hover borders & background for the show & hide buttons--*/
+    
+button.show-pv-col:hover, button.hide-pv-col:hover{
+    background-color: #fff;
+    border: solid 1px #b4b6ba;
+}
+
+/*--Button Style for the "hide" button that appears at the right of the tab row--*/
+button.hide-pv-col {
+    display: inline-block;
+    background: url("../../common/images/utilPVRowHideButtons.png");
+    background-repeat: no-repeat;
+    background-position: -6px -101px;
+    background-color: transparent;
+    height: 24px;
+    width: 24px;
+    position:absolute;
+    right:28px;
+    top:6px;
+    border: solid 1px transparent;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+    
+button.hide-pv-col:hover{background-position: -6px -133px;}
+
+button.hide-pv-col:active{
+    background-position: -5px -165px;
+    }
+    

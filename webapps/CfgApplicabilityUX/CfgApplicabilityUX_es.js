@@ -1,0 +1,1 @@
+define("DS/CfgApplicabilityUX/CfgApplicabilityUX_es",{});define("DS/CfgApplicabilityUX/assets/nls/CfgApplicabilityNLS",{CFG_EmptyApplicability_Expression:"Ninguna aplicabilidad definida para este contexto",CFG_Applicability_Summary:"Resumen de aplicabilidad",Applicability_Title_Edit:"Editar",Edit_Denied:"La operación Editar no está permitida"});

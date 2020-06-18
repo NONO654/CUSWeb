@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.mft.MockMFT" version="3DX.0" 
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" extensionKind="Plugin">
+  <DisplayName>Mock MFT</DisplayName>
+  <Description>Managed File Transfer</Description>
+  <Attributes>
+    <Attribute name="Category">
+      <Value>Plugin</Value>
+    </Attribute>
+    <Attribute name="PluginType">
+      <Value>MFT_Solution</Value>
+    </Attribute>
+    <Attribute name="DefaultDialogSize">
+      <Value>600</Value>
+      <Value>500</Value>
+    </Attribute>
+  </Attributes>
+  <Streams>
+    <Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflMFT.png" targetFilename="SMAWflMFT.png" />
+    <Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebMFT/plugins/mft-plugin-mock/mft-plugin-mock.html" targetFilename="SMAProcWebMFT/plugins/mft-plugin-mock/mft-plugin-mock.html" />
+    <Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+  </Streams>
+  <Interfaces>
+    <Interface interfaceKind="WebtopEditor">
+      <Implementations>
+        <Implementation name="webEditor" language="web" platform="win_b64">
+          <LateType>mft-plugin-mock</LateType>
+          <StreamRefs>
+            <StreamRef refStreamName="Web_Editor"/>
+          </StreamRefs>
+        </Implementation>
+      </Implementations>
+    </Interface>
+    <Interface interfaceKind="DesktopEditor">
+      <Implementations>
+        <Implementation name="webEditor" language="web" platform="win_b64">
+          <LateType>SMAWflWebExtensionEditor</LateType>
+          <StreamRefs>
+            <StreamRef refStreamName="Web_stylesheet"/>
+            <StreamRef refStreamName="Web_Editor"/>
+          </StreamRefs>
+        </Implementation>
+      </Implementations>
+    </Interface>
+  </Interfaces>
+
+  <Properties>
+    <Property name="PluginName" type="string" valuetype="single">
+      <Value><![CDATA[MFT_Solution]]></Value>
+    </Property>
+    <Property name="config" type="string" valuetype="single" mode="input">
+      <Value/>
+    </Property>
+  </Properties>
+</wfext:Extension>

@@ -1,0 +1,29 @@
+<!--------------------------------------------------------------------
+[xs-wg-multiselect HTML Document]
+
+Project:		xs-wg
+Version:		1.0
+Primary use:	Text field that takes multiple values delimited by return key
+Description:    This supports entering multiple values in a text field
+------------------------------------------------------------------- -->
+
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+<link rel="import" href="../../SMAProcXSUI/xs-multi-select/xs-multi-select.html">
+
+<dom-module id="xs-wg-multiselect">
+  <!-- <link rel="import" type="css" href="xs-wg-multiselect.css"> -->
+  <template>
+	  <!-- Including the base widget style -->
+	  <style include="xs-wg-base"></style>
+	  <div>
+		  <label class="xs-wg-label">{{_calculateLabel(label,mandatory)}}</label>
+			<xs-multi-select id="multiselect" options="{{_computeOptions(choices)}}"
+											 value="{{_computeValue(value)}}" 
+											 on-change="_onChange" 		 
+											 disabled="{{readonly}}"
+											 required="{{mandatory}}">
+			</xs-multi-select>
+	  </div>
+	</template>
+  <script src="xs-wg-multiselect.js"></script>
+</dom-module>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Copyright 2016, Dassault Systemes. All rights reserved. -->
+
+    <!-- Widget title -->
+    <title>Getting started widget</title>
+
+    <!-- Widget metas -->
+    <meta name="author" content="ddn1" />
+    <meta name="description" content="A widget that show how to use the WEB APP Platform" />
+    <meta name="charset" content="utf-8" />
+
+    <!-- Widget external resources -->
+
+    <!-- Widget css styles -->
+    <style type="text/css">
+      .gs-uppercase {
+        text-transform: uppercase;
+      }
+
+      .gs-container {
+        text-align: center;
+      }
+
+      .gs-content {
+        text-align: left;
+        display: inline-block;
+      }
+
+      .gs-ds-font {
+        font-family: '3ds';
+        font-weight: 500;
+      }
+
+      .gs-ds-corporate-blue {
+        color: #368ec4;
+      }
+
+      .gs-text {
+        font-size: 16px;
+        border-left: 0.2em solid #368ec4;
+        margin: 2em;
+        padding: 2em;
+        line-height: 1.2em;
+      }
+
+    </style>
+
+    <!-- Widget js code -->
+    <script>
+        /* global require, widget */
+        require(['DS/UIKIT/Alert'], function (Alert) {
+
+            'use strict';
+
+            var alert;
+
+            /*
+                We create the global GettingStartedWidget object (it could be any other name).
+                This object will be used to store variables and functions.
+            */
+            var GettingStartedWidget = {
+
+                displayTooltip: function (type, message, autoHide) {
+
+                    if (alert) { alert.destroy(); }
+
+                    var options = {
+                        visible: true,
+                        closeOnClick: true
+                    };
+
+                    if (autoHide) {
+                        options.autoHide = true;
+                        options.hideDelay = 4000;
+                    }
+
+                    alert = new Alert({
+                        visible: true,
+                        closeOnClick: true,
+                        autoHide: autoHide
+                    }).inject(widget.body, 'top');
+
+                    alert.add({
+                        className: type,
+                        message: message
+                    });
+                },
+
+                events: {
+                    onSearch: function (options) {
+                        GettingStartedWidget.displayTooltip('success', '<span class="gs-ds-font" style="font-size: 16px"> <strong> Search feedback </strong> | ' + options.value + '</span>');
+                    },
+                    onResetSearch: function () {
+                        GettingStartedWidget.displayTooltip('warning', '<span class="gs-ds-font" style="font-size: 16px"><strong> Search cleared </strong></span>');
+                    },
+                    onLoad: function () {
+                      var linksData = widget.getValue('links'),
+                          links = {
+                            uikit: linksData.uikit || 'https://jabba.dsone.3ds.com/webappsdev420/UIKITPreview/#/',
+                            wap: linksData.wap || 'https://jabba.dsone.3ds.com/webappsdev418/WAPDoc/#/use/admin-console/',
+                            ds: linksData.ds || 'http://dsdoc/devdoccaa/3DEXPERIENCER2018x/en/DSDoc.htm',
+                            uwa: linksData.uwa || 'http://uwa.netvibes.com/docs/Uwa/html'
+                          };
+
+                      for (var link in links) {
+                        if (!links.hasOwnProperty(link)) continue;
+                        document.querySelector('#' + link + '-link').setAttribute('href', links[link]);
+                      }
+                      
+                    }
+                }
+            };
+
+            widget.addEvents(GettingStartedWidget.events);
+        });
+    </script>
+  </head>
+
+  <!-- Widget HTML code -->
+  <body>
+    <div class="gs-container">
+      <article class="gs-content">
+        <header>
+          <h1 class="gs-ds-font gs-ds-corporate-blue gs-uppercase">That's running !</h1>
+        </header>
+        <section>
+          <header>
+            <h2 class="gs-ds-font" >Welcome to your 3DS Web Application !</h2>
+          </header>
+            <p class="gs-ds-font gs-text">
+              You see this page because the Web Application Platform is ready to be used.<br/>
+              You can now start working on your Web Application.<br/>
+            </p>
+        </section>
+        <section>
+          <header>
+            <h2 class="gs-ds-font">How do I start ?</h2>
+          </header>
+            <p class="gs-ds-font gs-text">
+              To manage your web app go to the <a href="admin" target="_blank">admin console</a>.<br/>
+              Check out how to use it in our <a id="wap-link" target="_blank">documentation page</a>.<br/>
+              You will be able to arrange your content to build your app.
+            </p>
+        </section>
+        <section>
+          <header>
+            <h2 class="gs-ds-font">How do I develop widgets ?</h2>
+          </header>
+            <p class="gs-ds-font gs-text">
+              To learn how to create your own widgets, please head to <a id="ds-link" target="_blank">dsdoc</a>.<br/>
+              The <a id="uwa-link" target="_blank">official Netvibes documentation</a> will also helps you.<br/>
+              If you were wondering how to build a 3DS-complient UX, don't worry. Everthing you need is <a id="uikit-link" target="_blank">our UIKIT</a> ! <br/>
+            </p>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>

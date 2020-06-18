@@ -1,0 +1,1 @@
+define("DS/MPFMyProfileComponent/MPFMyProfileComponent_zh",{});define("DS/MPFMyProfileComponent/assets/nls/MyProfileComponent",{myProfile:"我的配置文件"});

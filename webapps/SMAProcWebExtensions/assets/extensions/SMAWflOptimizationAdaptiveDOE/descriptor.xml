@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.AdaptiveDOE" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationAdaptiveDOE" nlsID="dispname">Adaptive DOE</DisplayName>
+	<Description nlsFile="SMAWflOptimizationAdaptiveDOE" nlsID="desc">Adaptive DOE</Description>
+	<LongDescription nlsFile="SMAWflOptimizationAdaptiveDOE" nlsID="longdesc">
+		<![CDATA[Adaptive search through DOE-based sampling and iterative focus narrowing.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+		<Attribute name="EnableRunInParallel">
+			<Value>true</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationAdaptiveDOE.CATNls" targetFilename="SMAWflOptimizationAdaptiveDOE.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationAdaptiveDOE_Japanese.CATNls" targetFilename="SMAWflOptimizationAdaptiveDOE_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.adaptivedoe.AdaptiveDOE</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="ExecutesInParallel" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Number of Adaptive Iterations" type="integer" valuetype="single">
+				<Value>10</Value>
+			</Property>
+			<Property name="Subflow Evaluations per Iteration" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Significant Effect" type="integer" valuetype="single">
+				<Value>0</Value>
+			</Property>
+			<Property name="Convergence Quality" type="integer" valuetype="single">
+				<Value>0</Value>
+			</Property>
+			<Property name="Significant Step Size" type="real" valuetype="single">
+				<Value>1.0e-2</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

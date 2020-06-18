@@ -1,0 +1,80 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcXSUI/xs-select/xs-select.html">
+<link rel="import" href="../../SMAProcXSUI/xs-multi-select/xs-multi-select.html">
+<link rel="import" href="../../SMAProcXSWidgets/xs-wg-timestamp/xs-wg-timestamp.html">
+<link rel="import" href="xs-rule-builder-style.html">
+
+<dom-module id="xs-rule-builder">
+      <!-- <link rel="import" type="css" href="xs-rule-builder.css"> -->
+      <template>
+          <style include="xs-rule-builder-style"></style>
+            <fieldset class="main">
+                  <legend class="ruleseq">Rule
+                        <span class="seqnum">{{getSequenceNumber(sequence)}}</span>
+                  </legend>
+                  <div class="action">
+                        <!--rule delete button-->
+                        <template is="dom-if" if="{{!disabled}}">
+                              <div class="removerule fonticon fonticon-trash" title="Remove rule" on-click="removeRule"></div>
+                        </template>
+                        <div class="action-text">Set
+                              <span class="component-name">{{_cname}}</span>'s
+                              <span>{{propName}}</span> to </div>
+                        <template is="dom-if" if="{{isStringProp(meta,viewInfo,ruleNode.prop)}}" restamp>
+                              <sp-input placeholder="{{_getPlaceHolder(meta,viewInfo,ruleNode.prop)}}" readonly$="{{disabled}}" value="{{ruleNode.value}}" on-keypress="_onKeyPress"></sp-input>
+                        </template>
+
+                        <template is="dom-if" if="{{isMultiChoiceProp(meta,viewInfo,ruleNode.prop)}}" restamp>
+                              <xs-multi-select value="{{ruleNode.value}}" options="{{getDataChoices(meta,viewInfo)}}" disabled="{{disabled}}"></xs-multi-select>
+                        </template>
+
+                        <template is="dom-if" if="{{getChoices(meta,viewInfo,ruleNode.prop)}}" restamp>
+                              <xs-select id="newRuleValueSelect" value="{{ruleNode.value}}" options="{{getChoices(meta,viewInfo,ruleNode.prop)}}" disabled="{{disabled}}"></xs-select>
+                        </template>
+
+                  </div>
+                  <fieldset class="condition-list-fieldset"><br>
+                        <legend>When</legend>
+
+                        <div class="condition-list">
+
+                              <template is="dom-if" if="{{checkConditions(conditions)}}" restamp>
+                                    <div class="fonticon files-check">
+                                          <div class="no-condition">No Conditions Present</div>
+                                    </div>
+                              </template>
+
+                              <template id="conditions" is="dom-repeat" items="{{conditions}}" as="condition" observe="toggle" restamp>
+
+                                    <div class="condition">
+                                          <!-- component name drop down -->
+                                          <xs-select value="{{condition.itemname}}" on-change="setCorrectProp" class="condition-choice comp-condition" tooltip-visible options="{{eligibleItems}}" disabled="{{disabled}}"></xs-select>
+
+                                          <!-- property selection dropdown -->
+                                          <xs-select value="{{condition.prop}}" on-change="setCorrectValue" class="condition-choice condition-property" options="{{getPropertyListUI(meta,viewInfo,condition.itemname)}}" disabled="{{disabled}}"></xs-select>
+                                          <!-- condition operator dropdown -->
+                                          <xs-select value="{{condition.operator}}"  class="condition-choice condition-operator" options="{{getConditionOperators(viewInfo, condition.itemname)}}" disabled="{{disabled}}"></xs-select>
+                                          <!--condition value-->
+                                          <div class="condition-value" data-valuetype$="{{getValueType(meta, viewInfo, condition.prop, condition.itemname, condToggle)}}">
+                                                <xs-wg-timestamp class="condition-calendar" value="{{condition.value}}" readonly="{{disabled}}" nolabel></xs-wg-timestamp>
+                                                <sp-input class="condition-input" placeholder="Enter new value" readonly="{{disabled}}" value="{{condition.value}}" ></sp-input>
+                                                <xs-select value="{{condition.value}}" class="condition-choices" options="{{getChoicesUI(meta,viewInfo,condition.prop,condition.itemname,condToggle)}}" disabled="{{disabled}}"></xs-select>
+                                          </div>
+                                          <!--condition delete button-->
+                                          <div class$="{{computeClass(disabled)}}}" title="Remove Condition" on-click="removeCondition"></div>
+                                    </div>
+                              </template>
+                  </fieldset>
+                  <template is="dom-if" if="{{!disabled}}">
+                        <div class="add-condition">
+                              <button is="sp-button-type" on-click="addCondition" title="Add Condition">Add Condition</button>
+                        </div>
+                  </template>
+
+            </fieldset>
+      </template>
+      <script type="text/javascript" src="xs-rule-builder.js"></script>
+</dom-module>

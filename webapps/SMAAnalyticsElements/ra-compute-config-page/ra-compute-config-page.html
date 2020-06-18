@@ -1,0 +1,60 @@
+<dom-module id="ra-compute-config-page">
+    <template>
+    	<link rel="stylesheet" href="ra-compute-config-page.css"/>
+    	<form>
+    		<!-- Platform Select -->
+    		<div class="form-group">
+    			<label class="control-label">[[title.platform]]</label>
+    			<div id="platform">
+    				<div class="toggle toggle-primary">
+						<input type="radio" name="platformRadio" id="onWindowsOption" value="windows" on-click="platformChanged" checked>
+						<label class="control-label" for="onWindowsOption">[[title.windows]]</label>
+					</div>
+					<div class="toggle toggle-primary">
+						<input type="radio" name="platformRadio" id="onLinuxOption" value="linux" on-click="platformChanged">
+						<label class="control-label" for="onLinuxOption">[[title.linux]]</label>
+					</div>
+    			</div>
+    		</div>
+    		<!-- COS -->
+    		<div id="onPremisesSection" class="none">
+				<!-- COS Server Select -->
+				<div class="form-group">
+					<label for="cosServersSelect" class="control-label">[[title.cosserver]]</label>
+					<div class="selectWithIcon">
+						<select id="cosServersSelect" class="form-control" on-change="cosServerChanged"></select>
+						<span id="cosServersRefreshIcon" class="fonticon fonticon-refresh selectIcon" on-click="refreshCosServers"></span>
+					</div>
+					<span id="cosServersError" class="alert-message alert-error hidden"></span>
+				</div>
+				<!-- Station Select -->
+				<div class="form-group">
+					<label for="stationsSelect" class="control-label">[[title.station]]</label>
+					<div class="selectWithIcon">
+						<select id="stationsSelect" class="form-control" on-change="stationChanged"></select>
+						<span id="stationsRefreshIcon" class="fonticon fonticon-refresh selectIcon close" on-click="refreshStations"></span>
+					</div>
+					<span id="stationsError" class="alert-message alert-error hidden"></span>
+				</div>
+				<!-- Run-As Section -->
+				<div id="runAsSection" class="hidden">
+					<span id="runAsAlert" class="alert-message alert-primary">[[title.runas]]</span>
+					<div class="form-group" id="runAsDomain">
+						<label for="runAsDomainInput" class="control-label">[[title.domain]]</label>
+						<input type="text" id="runAsDomainInput" class="form-control" on-blur="runAsDomainChanged"></input>
+					</div>
+
+					<div class="form-group" id="runAsUser">
+						<label for="runAsUserInput" class="control-label">[[title.username]]</label>
+						<input type="text" id="runAsUserInput" class="form-control" on-blur="runAsUserChanged"></input>
+					</div>
+					<div class="form-group" id="runAsPass">
+						<label for="runAsPassInput" class="control-label">[[title.password]]</label>
+						<input type="password" id="runAsPassInput" class="form-control" on-blur="runAsPassChanged"></input>
+					</div>
+				</div>
+    		</div>
+    	</form>
+   	</template>
+   	<script type="text/javascript" src="ra-compute-config-page.js"></script>
+</dom-module>

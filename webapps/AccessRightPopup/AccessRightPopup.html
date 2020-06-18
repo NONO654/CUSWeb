@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+  <head>
+    <!-- Application Metas -->
+	<!-- These information will be displayed in the widget preferences -->
+    <title>Access Rights pop up</title>
+    <meta name="author" content="G5C" />
+    <meta name="description" content="Access Rights popup" />
+    <!-- UWA Environment -->
+	
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<!-- Load UWA environment --> 
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+	<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+
+    
+    <script type="text/javascript">
+    var dependencies = dependencies || [];
+    require(
+        // dependencies
+        [
+         	'DS/UIKIT/Input/Button',
+
+            'DS/PlatformAPI/PlatformAPI',
+         	'DS/WidgetServices/WidgetServices',
+         	'DS/AccessRightPopup/AccessRightPopup',
+         	'DS/DataGridWidget/DataGridWidget',
+         	"DS/PROTO_IndependantSearchWidget/Beans/ResultElement",
+            'DS/UIKIT/Input/Text'
+        ].concat(dependencies),
+
+        // execute this callback, passing all dependencies as params
+
+        function (UIButton,PlatformAPI, widgetServices, WidgetCore, DataGridWidget,ResultElement, TextUI) {
+
+            var WIWI = {
+                searchReference: function () {
+                    var that = this;
+
+                    var serverUrl = widget.ServerName.getValue();
+                    var serverUri = widget.ServerUri.getValue();
+
+                    fullServerUrl = widgetServices.getFullUrl(serverUrl, serverUri);
+
+                    dataUrl = fullServerUrl + '/resources/pno2/myTest/Reference';
+                    proxyUsed = "passport";
+
+
+                    headers = {
+                        Accept: 'application/ds-json',
+                        'Content-Type': 'application/ds-json'
+                    };
+                    headers['Accept-Language'] = widget.lang;
+                    
+                    UWA.Data.request(dataUrl, {
+                        type: 'json',
+                        method: 'GET',
+                        proxy: proxyUsed,
+                        headers: headers,
+                        /*
+						parameters: {
+							action: 'ARAction',
+							actionAR: 'newAction',
+							ownershipVector: JSONUtil.encode(OwnershipVector),//value
+						},*/
+                        onComplete: function (response) { that._onComplete(response); }, //end complete
+                        onFailure: function (globalError, errorObj, connexionParam) { that._onFailure(globalError, errorObj, connexionParam); },
+                        onTimeout: function () { that._onTimeout(); }/*,
+						onCancel: function () {
+						    that.hideLoadingArea();
+						}*/
+                    });
+                },
+
+                _onComplete: function (response) {
+                    var listItem = [];
+                    if (response.success == true) {
+                        var TheObjectList = response.objectList;
+                        TheObjectList.forEach(function (element) {
+                            listItem.push({
+                                "PhysId": element.physId,
+                                "ExternalName": element.title,
+                                "Owner": element.owner,
+                                "Project": element.project,
+                                "Org": element.organization,
+                            });
+                        });
+                    }
+                    widget.MainTable.AddDatasInTable(listItem);
+                },
+
+                _onFailure: function(globalError, errorObj, connexionParam){
+                },
+
+                _onTimeout:function(){
+
+                },
+
+                onLoad: function() { //Needed to be sure to have a widget.body
+                    var that = this;
+                
+                    that.waitingObject = null;
+                    
+                    PlatformAPI.subscribe("TOS.Object.Com", function(object){
+
+                        if (object.hasOwnProperty("serverUrl") && object.hasOwnProperty("serverUri")) {
+                        	object= new ResultElement(object);
+                            if (that.myOverlay != null && that.myOverlay.options.serverUri == object.serverUri &&
+                                 that.myOverlay.options.serverName == object.serverUrl) {
+                                that.myOverlay.show([{
+                                    'physicalId': object.getPhysicalId(),
+                                    'name': object.getTitle(),
+                                    'urlIcon': widgetServices.getRealPath("./assets/defaultProd.png", widget, false)
+                                }]);
+                            }
+                            else {
+                                that.waitingObject =object
+                            }
+
+                        }
+                        else that.waitingObject = null;
+                    });
+                    
+                    var readOnly = false;
+                    //widgetServices.setODTComment(true);
+
+					that.myOverlay=null;
+
+					that.MainTable = new DataGridWidget([{
+					    text: UWA.i18n('PhysicalId'),
+					    dataIndex: 'PhysId',
+					    sortKey: function (value) {
+					        return value;
+					    },
+					    sortable: true
+					},
+                    {
+					    text: UWA.i18n('ExternalName'),
+					    dataIndex: 'ExternalName',
+					    sortKey: function (value) {
+					        return value;
+					    },
+					    sortable: true,
+					    defaultSort: true
+					},
+				   {
+				       text: UWA.i18n('Owner'),
+				       dataIndex: 'Owner',
+				       sortKey: function (value) {
+				           return value;
+				       },
+				       sortable: true
+				   }, {
+				       text: UWA.i18n('Project'),
+				       dataIndex: 'Project',
+				       sortKey: function (value) {
+				           return value;
+				       },
+				       sortable: true
+				   }, {
+				       text: UWA.i18n('Organization'),
+				       dataIndex: 'Org',
+				       sortKey: function (value) {
+				           return value;
+				       },
+				       sortable: true
+				   }],
+				   {
+				       'name': 'tableObject',
+				       'className': 'tableObject',
+				       'setHeaderColumn': true,
+				       'setScroller': false,
+				       'activeSelection': true
+				   }).inject(widget.body);
+
+
+                    //widgetServices.setReplayODT(true);
+					var Bouton = new UIButton({
+						name: "toOpenButton"						
+					});
+					Bouton.addEvent('onClick',function(){
+						var physicalId= "1";
+						if (that.PhysicalID.getValue()!="")
+						{
+							physicalId=that.PhysicalID.getValue();
+						}
+
+						var name = 'g5c_TheProduct';
+						var line = that.MainTable.getCurrentSelectedLine();
+						if (line.length > 0 )
+						{
+						    var physId = that.MainTable.getCellContent(line[0], "PhysId");
+						    if (physId != null && physId != "")
+						        physicalId = physId;
+
+						    var nameTemp = that.MainTable.getCellContent(line[0], "ExternalName");
+						    if (nameTemp != null && nameTemp != "")
+						        name = nameTemp;
+						}					
+
+						var currentServerName = "";
+						var currentServerUri = "";
+						
+						if (that.waitingObject!=null){
+							currentServerName = that.waitingObject.serverUrl;
+							currentServerUri = that.waitingObject.serverUri;
+							physicalId = that.waitingObject.getPhysicalId();
+							name = that.waitingObject.getTitle();
+						}
+						else{
+							currentServerName= that.ServerName.getValue();
+							currentServerUri= that.ServerUri.getValue();								
+						}
+							
+					    that.myOverlay = new WidgetCore(widget, document.body, {
+					        'readOnly': readOnly,
+							'serverName': currentServerName,
+							'serverUri': currentServerUri
+							});
+					
+						
+						that.myOverlay.show([{
+						    'physicalId': physicalId,
+						    'name': name,
+							'urlIcon': widgetServices.getRealPath("./assets/defaultProd.png", widget, true)
+						}/*,{
+							'physicalId': 2,
+							'name': 'g5c_Product',
+							'urlIcon': widgetServices.getRealPath("assets/defaultProds.png", widget)
+						},{
+							'physicalId': 3,
+							'name': 'g5c_Product'
+						}*/]);
+						//myOverlay.fx.element.setStyle('height',test.height);
+					});
+					Bouton.inject(widget.body);
+					
+					that.ServerName = new TextUI({
+		            	value: "https://vdevpril541dsy.ux.dsone.3ds.com",
+		            	name: 'ARP_ServerName',
+		                className: 'ARP_ServerName',
+		                id: 'ARP_ServerName',
+		                attributes: {
+		                	placeholder:"Server name",
+		                }
+		            }).inject(widget.body);  
+
+					that.ServerUri = new TextUI({
+		            	value: "3dexperience",
+		            	name: 'ARP_ServerUri',
+		                className: 'ARP_ServerUri',
+		                id: 'ARP_ServerUri',
+		                attributes: {
+		                	placeholder:"Server Uri",
+		                }
+		            }).inject(widget.body);  
+
+					that.PhysicalID = new TextUI({
+		            	value: "2C49B556DB590000A453205497940300",
+		            	name: 'ARP_PhysicalID',
+		                className: 'ARP_PhysicalID',
+		                id: 'ARP_PhysicalID',
+		                attributes: {
+		                	placeholder:"PhysicalID",
+		                }
+		            }).inject(widget.body);  
+
+					var Bouton = new UIButton({
+                        value: "clear",
+						name: "toOpenButton"						
+					}).inject(widget.body);
+					Bouton.addEvent('onClick',function(){
+						that.ServerName.setValue("");
+						that.ServerUri.setValue("");
+						that.PhysicalID.setValue("");
+					});
+					
+
+					var Bouton2 = new UIButton({
+					    value: "R417 server",
+						name: "toOpenButton"						
+					}).inject(widget.body);
+					Bouton2.addEvent('onClick',function(){
+						that.ServerName.setValue("https://vdevpril541dsy.ux.dsone.3ds.com");
+						that.ServerUri.setValue("3dexperience");
+						that.PhysicalID.setValue("2C49B556DB590000A453205497940300");
+						WIWI.searchReference();
+					});
+
+					var Bouton3 = new UIButton({
+					    value: "R418 server",
+					    name: "toOpenButton"
+					}).inject(widget.body);
+					Bouton3.addEvent('onClick', function () {
+					    that.ServerName.setValue("https://vdevpril972dsy.ux.dsone.3ds.com");
+					    that.ServerUri.setValue("3DSpace");
+					    that.PhysicalID.setValue("BF24B5563D31000038CD6D54596E0B00"/*"52C07591000085345458A28E0006BEAF"*/);
+					    WIWI.searchReference();
+					});
+
+					widget.body.setStyle("height", "900px");
+					
+                },
+                onRefresh: function(){
+					this.myOverlay.onRefresh();
+                },
+                onResize: function(){
+					this.myOverlay.onResize();
+                }
+            };
+            widget.addEvent('onLoad', WIWI.onLoad);
+            widget.addEvent('onRefresh', WIWI.onRefresh);
+            widget.addEvent('onResize', WIWI.onResize);
+        });
+    </script>
+  </head>
+  <body>
+      <div>
+      </div>
+   </body>
+</html>

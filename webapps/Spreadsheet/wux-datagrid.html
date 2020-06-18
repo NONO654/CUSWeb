@@ -1,0 +1,83 @@
+<!-- <link rel="import" href="../Polymer/polymer.html"> -->
+
+<polymer-element name="wux-datagrid" parameters useprivate>
+      <!-- template -->
+      <template>
+            <style>
+                  :host {
+                        font-family: sans-serif;
+                        font-size: 0.8em;
+                  }
+
+            </style>
+            <link rel="stylesheet" type="text/css" href="../Core/wux.css" />
+            <div id="el"></div>
+      </template>
+      <!-- script -->
+      <script>
+            (function() {
+                  Polymer('wux-datagrid', {
+                        // -- lifecycle --
+                        created: function() {},
+                        // ready: function() {},
+                        attached: function() {},
+                        domReady: function() {},
+                        detached: function() {},
+                        attributeChanged: function(attrName, oldVal, newVal) {},
+                        // -- exposed attributes -
+                        publish: {
+                              parameters: null,
+                              useprivate: false
+                        },
+                        // -- private attributes --
+                        ready: function() {
+                              var polymerInstance = this;
+                              var componentToLoad = 'DS/Spreadsheet/DataGrid';
+                              // --
+                              require(['UWA/Drivers/Alone', 'UWA/Core', componentToLoad], function(Alone, UWACore, Component) {
+                                    var options;
+                                    if (polymerInstance.parameters !== '' && polymerInstance.parameters !== null) {
+                                          options = JSON.parse(polymerInstance.parameters);
+                                    }
+                                    var comp = new Component(options);
+                                    // -- populate attributes --
+                                    var attr;
+                                    var objProperty;
+                                    var defaultOptions = comp.defaultOptions;
+                                    for (attr in defaultOptions) {
+                                          var optionValue = defaultOptions[attr];
+                                          // console.log(attr, '-->', optionValue, typeof optionValue);
+                                          polymerInstance.publish[attr] = optionValue;
+                                    }
+                                    // -- populate methods --
+                                    for (attr in comp) {
+                                          objProperty = comp[attr];
+                                          // console.log(attr, '-->', typeof objProperty);
+                                          if (typeof objProperty === 'function') {
+                                                if (!polymerInstance.useprivate) {
+                                                      if (attr.substring(0, 1) !== '_') {
+                                                            polymerInstance[attr] = comp[attr].bind(comp);
+                                                      }
+                                                } else {
+                                                      polymerInstance[attr] = comp[attr].bind(comp);
+                                                }
+                                          }
+                                    }
+                                    // -- populate methods --
+                                    for (attr in comp) {
+                                          objProperty = comp[attr];
+                                          // console.log(attr, '-->', typeof objProperty);
+                                          if (typeof objProperty === 'function') {
+                                                polymerInstance[attr] = comp[attr].bind(comp);
+                                          }
+                                    }
+                                    polymerInstance.$.el.appendChild(comp.getContent());
+                              }, function(err) {
+                                    console.log('error', err);
+                              }); // -- require
+                        }
+                  });
+            })();
+
+      </script>
+</polymer-element>

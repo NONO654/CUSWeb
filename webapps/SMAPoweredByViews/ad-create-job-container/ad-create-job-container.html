@@ -1,0 +1,27 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+
+<link rel="import" href="../ad-redux-behaviour/ad-redux-behaviour.html">
+<link rel="import" href="../ad-create-job-wizard/ad-create-job-wizard.html">
+
+<dom-module id="ad-create-job-container">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+		<div id='selectAppContainer'>
+
+		</div>
+		<ad-select-application id="selectApp" on-next="onApplicationSelected"></ad-select-application>
+        <ad-create-job-wizard id="wizard" on-runjob="onRunJob" on-cancelcreatejob="onCancelCreateJob"></ad-create-job-wizard>
+
+		<!-- Getting values from ad-create-job-compute -->
+		<sp-variable id="runAsDomainVariable" name="runAsDomain"></sp-variable>
+		<sp-variable id="runAsUserVariable" name="runAsUser"></sp-variable>
+		<sp-variable id="runAsPassVariable" name="runAsPass"></sp-variable>
+
+    </template>
+    <script type="text/javascript" src="ad-create-job-container.js"></script>
+</dom-module>

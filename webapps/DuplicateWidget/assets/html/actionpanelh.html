@@ -1,0 +1,127 @@
+<div class="lcm-actionpanel-main-container is-mobile">
+  <div class="lcm-actionpanel-actions is-mobile">
+    <span>[[panel-actions]]</span><br />
+    <select
+      class="enolcm-dup-select"
+      id="groupActionH"
+      data-wuxcontrol="DropdownBtn"
+      data-wuxstyle="width: 180px; margin-bottom: 2px"
+      data-bind="event=change, function=onChangeActionCombo;event=click, function=applyAction"
+    >
+      <!-- prettier-ignore   -->
+      {{actions}}
+    </select>
+  </div>
+
+  <div
+    style="position:relative; display:inline-block; width: 1px; height:70px;"
+  >
+    <div
+      style="position:relative; top:5px;  width: 1px; height:90px; border-left:1px solid #dad2d2"
+    ></div>
+  </div>
+
+  <div class="lcm-actionpanel-text is-mobile">
+    <span>[[panel-addText]]</span>
+    <br />
+    <input
+      class="enolcm-dup-input"
+      id="addTextEditH"
+      data-wuxcontrol="LineEditor"
+      data-wuxstyle="display:inline-block; width: 120px; height: 24px"
+      data-bind="event=keydown, key=13, function=addText;attribute=value, property=addText"
+    />
+    <select
+      class=""
+      id="addtextBtnH"
+      style="display:inline-block"
+      data-wuxcontrol="DropdownBtn"
+      data-wuxstyle="display:inline-block"
+      data-bind="event=change, function=onChangeAddCombo;event=click, function=addText"
+    >
+      <option value="before">[[panel-beforeName]]</option>
+      <option value="after">[[panel-afterName]]</option>
+    </select>
+    <br />
+    <input
+      class="enolcm-dup-checkbox"
+      type="checkbox"
+      id="applyChildrenCheckH"
+      data-wuxcontrol="Checkbox"
+      data-wuxlabel="[[panel-applyToChildren]]"
+      data-bind="event=change, function=onApplyChildrenChange"
+    />
+    <label id="applyChildrenLabelH" data-delete-element="true">
+      [[panel-applyToChildren]]
+    </label>
+  </div>
+
+  <div
+    style="position:relative; display:inline-block; width: 1px; height:75px;"
+  >
+    <div
+      style="position:relative; top:5px;  width: 1px; height:90px; border-left:1px solid #dad2d2"
+    ></div>
+  </div>
+
+  <div class="lcm-actionpanel-replace is-mobile">
+    <span style="width:60px; display: inline-block">[[panel-find]]</span>
+    <input
+      class="enolcm-dup-input"
+      id="findTextEditH"
+      style="width:120px"
+      data-wuxcontrol="LineEditor"
+      data-wuxstyle="display:inline-block; width: 120px; height: 24px; margin-bottom:2px"
+      data-bind="event=keydown, key=13, function=replace;attribute=value, property=findText"
+    />
+    <br />
+    <div class="lcm-dup-mobile-marginy-10 is-mobile"></div>
+    <span style="width:60px; display: inline-block">[[panel-replace]]</span>
+    <input
+      class="enolcm-dup-input"
+      id="replaceTextEditH"
+      style="width:120px"
+      data-wuxcontrol="LineEditor"
+      data-wuxstyle="display:inline-block; width: 120px; height: 24px"
+      data-bind="event=keydown, key=13, function=replace;attribute=value, property=replaceText"
+    />
+
+    <div class="lcm-dup-mobile-marginy-10 is-mobile"></div>
+    <div style="text-align: right">
+      <button
+        class="enolcm-dup-btn"
+        id="replaceBtnH"
+        data-wuxcontrol="Button"
+        data-wuxlabel="[[panel-replace2]]"
+        data-wuxstyle="width:60px; margin-top:2px"
+        data-bind="event=click, function=replace"
+      >
+        <span data-delete-element="true">[[panel-replace2]]</span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    style="position:relative; display:inline-block; width: 1px; height:70px;"
+  >
+    <div
+      style="position:relative; top:5px;  width: 1px; height:90px; border-left:1px solid #dad2d2"
+    ></div>
+  </div>
+
+  <div
+    class=""
+    style="display:inline-block; height:70px; vertical-align:top; width:auto; margin-left: 10px; margin-right: 10px"
+  >
+    <button
+      class="enolcm-dup-btn"
+      id="replaceBtn"
+      data-wuxcontrol="Button"
+      data-wuxlabel="[[panel-reset]]"
+      data-wuxstyle="position:relative; top:30px"
+      data-bind="event=click, function=reset"
+    >
+      <span>[[panel-reset]]</span>
+    </button>
+  </div>
+</div>

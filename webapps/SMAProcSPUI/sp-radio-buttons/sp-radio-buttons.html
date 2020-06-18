@@ -1,0 +1,33 @@
+<!--------------------------------------------------------------------
+[sp-radio-buttons HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:    Wed, 07 Oct 2015 19:58:39 GMT
+Assigned to:	Vijaya Kantamneni
+Primary use:	Group of radio buttons styled like buttons
+Description:    This hides the default round disc for radio and shows the options as contiguous block of buttons
+--------------------------------------------------------------------->
+
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<dom-module id="sp-radio-buttons">
+  <link rel="import" type="css" href="sp-radio-buttons.css">
+  <template>
+        <div class="radiogroup">
+          <template is="dom-repeat" items="[[_labelarr]]" as="label" index-as="labelindex">
+            <input type="radio" id="{{_getId(labelindex)}}" class="btn btn-default" name="[[id]]" checked="{{computeChecked(labelindex,selectedindex)}}">
+              <label class$="{{_labelClass(optionsicon)}}" on-click="_onOptionselect"
+                    for$="{{_getId(labelindex)}}"
+                    data-index$="[[labelindex]]" title="{{_getTitle(optionsicon,label)}}">
+                    <template is="dom-if" if="{{!_optionsiconPresent(optionsicon)}}">[[label]]</template>
+                    <template is="dom-if" if="{{_optionsiconPresent(optionsicon)}}">
+                      <span class$="{{_iconClass(_labelarricon,labelindex)}}"></span>
+                    </template>
+              </label>
+          </template>
+        </div>
+    </template>
+  <script type="text/javascript" src="sp-radio-buttons.js"></script>
+</dom-module>

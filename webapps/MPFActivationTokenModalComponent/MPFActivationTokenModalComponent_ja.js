@@ -1,0 +1,1 @@
+define("DS/MPFActivationTokenModalComponent/MPFActivationTokenModalComponent_ja",{});define("DS/MPFActivationTokenModalComponent/assets/nls/ActivationTokenModalComponent",{tokenAlreaydyUsed:"申し訳ありません。このコードは、すでに使用されています。サポートにお問い合わせください",tokenError:"申し訳ありません。有効な登録コードではありません",tokenSuccess:"有効な登録コード",enterCode:"コードを入力",verify:"検証"});

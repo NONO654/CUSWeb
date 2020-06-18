@@ -1,0 +1,1 @@
+define("DS/ENOXRelatedItem/ENOXRelatedItem_ko",{});define("DS/ENOXRelatedItem/assets/nls/ENOXRelatedItem",{ConfirmationButton:"확인",CancelButton:"취소",SearchPlaceHolder:"필요한 항목을 검색하려면 여기에 입력",noResultMessage:"일치하는 항목을 찾을 수 없음...",WarningForMultipleItemsSelection:"하나의 항목만 끌어오거나 선택할 수 있음...",AllowedTypes:"허용되는 유형: ",TypesNotAllowed:". 따라서 다음 항목은 추가되지 않습니다. "});

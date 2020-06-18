@@ -1,0 +1,1 @@
+define("DS/MobilePairing/MobilePairing_ru",{});define("DS/MobilePairing/assets/nls/mobilePairing",{description:"Используйте следующие коды для сопряжения мобильного приложения с платформой 3DEXPERIENCE"});

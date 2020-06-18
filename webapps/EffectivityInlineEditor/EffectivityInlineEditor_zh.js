@@ -1,0 +1,1 @@
+define("DS/EffectivityInlineEditor/EffectivityInlineEditor_zh",{});define("DS/EffectivityInlineEditor/assets/nls/EffectivityInlineEditor",{EFF_CLEAR:"清除表达式",MODEL_RM:"从编辑器移除模型",MODEL_ADD:"键入模型名称...",NO_FEATURES:"未找到任何变体和选项",Evolution_Impact_Msg:"有些变体/选项缺少“衍生有效性”中的更改",NO_MODELS_MSG:"您没有定义任何变体和选项表达式，您可以开始添加模型并定义变体和选项表达式"});

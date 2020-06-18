@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>pcw-sdk-calculator-editor</title>
+
+    <script type="text/javascript" src="../Polymer-1.11.3/webcomponents-lite.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+    <script>
+
+        localStorage.setItem('tst-mode', true);
+    </script>
+
+    <style>
+        .section {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        pcw-sdk-calculator-editor {
+            width: 600px;
+            padding: 5px 0px;
+        }
+    </style>
+</head>
+
+<body>
+</body>
+
+<template>
+        <section>
+            <h2>pcw-sdk-calculator-editor</h2>
+            <p>
+                Calculator Editor
+            </p>
+            <pcw-sdk-calculator-editor id="calcEditor" expression="2+2"></pcw-sdk-calculator-editor>
+        </section>
+        <section>
+            <h2>pcw-sdk-calculator-editor - max-lines 5</h2>
+            <pcw-sdk-calculator-editor id="calcEditor" expression="2+2" max-lines="5"></pcw-sdk-calculator-editor>
+        </section>
+        <section>
+            <h2>pcw-sdk-calculator-editor - 200px height</h2>
+            <pcw-sdk-calculator-editor id="calcEditor" expression="2+2" style="height:200px;"></pcw-sdk-calculator-editor>
+        </section>
+</template>
+
+
+<script>
+
+    require(['UWA/Core', 'UWA/Data', 'DS/Core/Core', 'UWA/Element',
+        'DS/ApplicationFrame/FrameWindow', 'DS/ApplicationFrame/FrameWindowsManager',
+        'DS/SMAProcWebCommonControls/CalculatorEditor', 'DS/SMAProcWebContents/FakeContentService',
+        'DS/SMAProcWebContents/PolyUtils'],
+        function (UWA, UWAData, WUXCore, UWAElement,
+            FrameWindow, FrameWindowsManager, CalculatorEditor, FakeContentService, PolyUtils) {
+
+            WUXCore.setFullscreen();
+            widget.addEvent('onLoad', function () {
+
+                var frmWindow = new FrameWindow().inject(document.body);
+
+                frmWindow.elements.container.setStyles({ background: 'white', 'overflow-y': 'scroll' });
+
+                var uiFrame = frmWindow.getUIFrame();
+
+                var template = document.querySelector('template');
+
+                var div = UWA.createElement('div', {
+                    styles: {
+                        padding: '20px'
+                    }
+                });
+                div.innerHTML = template.innerHTML;
+
+                div.inject(uiFrame);
+
+                var service = new FakeContentService();
+                var activity = service.getDataContainer();
+
+                service.setActivity(activity);
+
+                var parameters = activity.getParameters();
+
+                PolyUtils.whenComponentReady('#calcEditor').then(function (el) {
+                    el.setContentService(service);
+                    el.setActivity(activity);
+                    el.setModel(parameters, 'a = 2');
+                });
+            });
+        });
+</script>
+</body>
+
+</html>

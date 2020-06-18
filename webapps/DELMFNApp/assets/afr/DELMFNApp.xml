@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="DELWebMfgAssemblyDefHeaders" Target="CATCmdHeadersList">
+
+    <CATCmdHeadersList>
+     <!--================	AUTHORING	COMMANDS ================-->
+      <!--	Hide:                                -->
+      <!--	Alternate:                           -->
+      <!--	Origin:                              -->
+      <!--	CapResource:                         -->
+     <!--=====================================================-->
+     <!--<CATCommandHeader ID = "SearchAndAddCommand"  ClassName = "DS/DELPPWAfrCommands/MBOMSearchAndAddCommand" ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/> -->
+      
+      <CATCommandHeader ID = "Edit"	     ClassName = "DS/DELPPWAfrCommands/CheckCommand"       ResourceFile = "DELMFNApp/DELMFNApp" Available = "0"/>
+      <CATCommandHeader ID = "Hide"	     ClassName = "DS/DELPPWAfrCommands/AfrCommand"       ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "HideAll"     ClassName = "DS/DELPPWAfrCommands/AfrCommand"     ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "Relations"   ClassName = "DS/DELPPWAfrCommands/CheckCommand" Behavior = "CATAfrHeaderCheck"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "0"/>
+      <CATCommandHeader ID = "Alternates"  ClassName = "DS/DELPPWAfrCommands/CheckCommand" Behavior = "CATAfrHeaderCheck"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "0"/>
+      <CATCommandHeader ID = "Origin"      ClassName = "DS/DELPPWAfrCommands/CheckCommand" Behavior = "CATAfrHeaderCheck"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "0"/>
+      <CATCommandHeader ID = "CapableResource" ClassName = "DS/DELPPWAfrCommands/CheckCommand" Behavior = "CATAfrHeaderCheck" ResourceFile = "DELMFNApp/DELMFNApp" Available = "0"/>
+      <CATCommandHeader ID = "Refresh"     ClassName = "DS/DELPPWAfrCommands/AfrCommand" 	ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "ShowCharacteristicsCmd" 		ClassName = "DS/ENOCharacteristicsWebApp/commands/ShowCharacteristicsCmd" 		 ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "ShowConsolidatedCharactscsCmd" 	ClassName = "DS/ENOCharacteristicsWebApp/commands/ShowConsolidatedCharactscsCmd" ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+
+     <!--================	AUTHORING	COMMANDS ================-->
+      <!--	Add New: 		Create Instance + Reference	-->
+      <!--	Add Existing: 	Instanciate a Reference		-->
+      <!--	Delete: 		Delete the Reference		-->
+      <!--	Remove: 		Deletes the Instance		-->
+     <!--=====================================================-->
+
+      <CATCommandHeader ID = "InsertCreateAssembly"  ClassName = "DS/DELPPWAfrCommands/InsertCmd"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        	<CATAfrCommandHeaderArgs>
+          		<CATCommandHeaderArg ID="ReferenceType" Value="DELAsmAssemblyModelDisciplines/CreateAssembly" Mode="In" />
+          		<CATCommandHeaderArg ID="DisplayedInTableView" 	Value="PROCESS" Mode="In" />
+          		<CATCommandHeaderArg ID="PPRType"				Value="PROCESS" Mode="In" />
+        	</CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "InsertCreateMaterial"  ClassName = "DS/DELPPWAfrCommands/InsertCmd"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        	<CATAfrCommandHeaderArgs>
+          		<CATCommandHeaderArg ID="ReferenceType"  Value="DELAsmAssemblyModelDisciplines/CreateMaterial" Mode="In" />
+          		<CATCommandHeaderArg ID="DisplayedInTableView" 	Value="PROCESS" Mode="In" />
+          		<CATCommandHeaderArg ID="PPRType"        Value="PROCESS" Mode="In" />
+        	</CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "InsertCreateKit"  ClassName = "DS/DELPPWAfrCommands/InsertCmd"   ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        	<CATAfrCommandHeaderArgs>
+          		<CATCommandHeaderArg ID="ReferenceType"  Value="DELAsmAssemblyModelDisciplines/CreateKit" Mode="In" />
+          		<CATCommandHeaderArg ID="DisplayedInTableView" 	Value="PROCESS" Mode="In" />
+          		<CATCommandHeaderArg ID="PPRType"        Value="PROCESS" Mode="In" />
+        	</CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+	  	<CATCommandHeader ID = "InsertProvide"   ClassName = "DS/DELPPWAfrCommands/InsertCmd"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        	<CATAfrCommandHeaderArgs>
+          		<CATCommandHeaderArg ID="ReferenceType"  Value="DELAsmAssemblyModelDisciplines/Provide" Mode="In" />
+          		<CATCommandHeaderArg ID="DisplayedInTableView" 	Value="PROCESS" Mode="In" />
+          		<CATCommandHeaderArg ID="PPRType"        Value="PROCESS" Mode="In" />
+        	</CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "ReplaceByLatestRevision"    ClassName = "DS/DELPPWAfrCommands/AfrCommand"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+          <CATAfrCommandHeaderArgs>
+                      <CATCommandHeaderArg ID="Restriction" Value="InstancesOnly" />
+          </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "ReplaceByExistingRevision"    ClassName = "DS/DELPPWAfrCommands/AfrCommand"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+          <CATAfrCommandHeaderArgs>
+                      <CATCommandHeaderArg ID="Restriction" Value="InstancesOnly" />
+          </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "ReplaceByNewRevision"    		ClassName = "DS/DELPPWAfrCommands/AfrCommand"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+          <CATAfrCommandHeaderArgs>
+                      <CATCommandHeaderArg ID="Restriction" Value="InstancesOnly" />
+          </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <!--	 Create Process and Scope       	-->
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+      <CATCommandHeader ID = "CreateAssemblyAndScope" ClassName = "DS/DELMFNAfrCommands/CreateMfgItemAndScopeCmd" ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="ReferenceType" 		Value="DELAsmAssemblyModelDisciplines/CreateAssembly" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "CreateMaterialAndScope" ClassName = "DS/DELMFNAfrCommands/CreateMfgItemAndScopeCmd" ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="ReferenceType" 		Value="DELAsmAssemblyModelDisciplines/CreateMaterial" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "CreateKitAndScope" ClassName = "DS/DELMFNAfrCommands/CreateMfgItemAndScopeCmd" ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="ReferenceType" 		Value="DELAsmAssemblyModelDisciplines/CreateKit" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "CreateProvideAndScope" ClassName = "DS/DELMFNAfrCommands/CreateMfgItemAndScopeCmd" ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="ReferenceType" 		Value="DELAsmAssemblyModelDisciplines/Provide" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <!--	Create and Update Mfg Item	-->
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <CATCommandHeader ID = "CreateMfgItemStructure"   ClassName = "DS/DELPPWAfrCommands/AfrCommand"   ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "UpdateMfgItemStructure"   ClassName = "DS/DELPPWAfrCommands/AfrCommand"   ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+
+
+	    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <!--	Product Assignment -->
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <CATCommandHeader ID = "AssignAssembly"  ClassName = "DS/DELMFNAfrCommands/AssignProductCmd"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="ReferenceType" 	Value="DELAsmAssemblyModelDisciplines/CreateAssembly" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "AssignMaterial"  ClassName = "DS/DELMFNAfrCommands/AssignProductCmd"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="ReferenceType" 	Value="DELAsmAssemblyModelDisciplines/CreateMaterial" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "AssignKit"       ClassName = "DS/DELMFNAfrCommands/AssignProductCmd"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="ReferenceType" 	Value="DELAsmAssemblyModelDisciplines/CreateKit" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "AssignProvide"   ClassName = "DS/DELMFNAfrCommands/AssignProductCmd"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="ReferenceType" 	Value="DELAsmAssemblyModelDisciplines/Provide" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "UnassignProduct" ClassName = "DS/DELPPWAfrCommands/AfrCommand"	ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+
+      <CATCommandHeader ID = "DetachInstance"  ClassName = "DS/DELPPWAfrCommands/AfrCommand"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="Restriction" 	Value="InstancesOnly" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <!--	Manage Inconsistent Links Command	-->
+      <CATCommandHeader ID = "ManageInconsistentLinks" ClassName = "DS/DELPPWAfrCommands/CheckCommand" Behavior = "CATAfrHeaderCheck" ResourceFile = "DELMFNApp/DELMFNApp" Available = "0"/>
+      <CATCommandHeader ID = "BIEssentialsCmd"         ClassName = "DS/DELPPWAfrCommands/CheckCommand" Behavior = "CATAfrHeaderCheck" ResourceFile = "DELMFNApp/DELMFNApp" Available = "0"/>
+      <CATCommandHeader ID = "CreateInstance" ClassName = "DS/DELPPWAfrCommands/AfrCommand" ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "SearchAndAddInstanceCommand" ClassName = "DS/DELPPWAfrCommands/AfrCommand" ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "CreateLink"     ClassName = "DS/DELPPWAfrCommands/AfrCommand" ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "ActionBar_Attributes"    ClassName = "DS/ENOCollabSharingCmds/commands/EditPropCmd/ActionBar_EditPropCmd" ResourceFile = "ENOCollabSharingCmds/CollabSharing_Workbench" Available = "1"/>
+
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <!--	Scope Link Related	-->
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <CATCommandHeader ID = "CreateScopeLink" ClassName = "DS/DELPPWAfrCommands/AfrCommand"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "ReconnectScope"  ClassName = "DS/DELPPWAfrCommands/AfrCommand"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "ReviseAndReconnectScope" ClassName="DS/DELPPWAfrCommands/AfrCommand" ResourceFile= "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "DeleteScopeLink" ClassName = "DS/DELPPWAfrCommands/AfrCommand"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+
+     <!--================ LIFECYCLE COMMANDS ===============-->
+      <!--	Maturity:                      -->
+      <!--	Revision:                      -->
+      <!--	Duplicate:                     -->
+      <!--	Delete :                       -->
+     <!--===================================================-->
+      <CATCommandHeader ID = "MaturityHdr"   ClassName = "DS/LifecycleCmd/MaturityCmd"          ResourceFile = "LifecycleCmd/MaturityCmd"  Available = "1"/>
+      <CATCommandHeader ID = "RevisionHdr"   ClassName = "DS/LifecycleCmd/ReviseCmd"            ResourceFile = "LifecycleCmd/ReviseCmd"    Available = "1"/>
+      <CATCommandHeader ID = "DuplicateHdr"  ClassName = "DS/LifecycleCmd/DuplicateCmd"         ResourceFile = "LifecycleCmd/DuplicateCmd" Available = "1"/>
+      <CATCommandHeader ID = "DuplicateAdv"  ClassName = "DS/DELPPWAfrCommands/AfrCommand"      ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "Delete"         ClassName = "DS/DELPPWAfrCommands/AfrCommand"     ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "HistoryHdr"     ClassName = "DS/LifecycleCmd/HistoryCmd"          ResourceFile = "LifecycleCmd/HistoryCmd" Available = "1" />
+      <CATCommandHeader ID = "ActionBar_ChangeOwner" 	ClassName = "DS/ENOCollabSharingCmds/commands/TransferOwnershipCmd/ActionBar_ChangeOwnerCmd" ResourceFile = "ENOCollabSharingCmds/CollabSharing_Workbench" Available = "1"/>
+
+     <!--================	DOCUMENT COMMANDS	===============-->
+      <!--	AttachDocument:	                -->
+      <!--	DownloadDocument:               -->
+      <!--	PurgeDocument:	                -->
+     <!--===================================================-->
+      <CATCommandHeader ID = "AttachDocument"   ClassName = "DS/DELPPWAfrCommands/AfrCommand"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "SearchDocument"   ClassName = "DS/DELPPWAfrCommands/AfrCommand"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "ManageDocuments"  ClassName = "DS/DELPPWAfrCommands/AfrCommand"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+
+     <!--================	VIEW COMMANDS		=================-->
+      <!--	Toggle Product View: Shows EBOM     -->
+      <!--	Toggle Graph View:                  -->
+      <!--	Reframe:                            -->
+      <!--	ReframeOn:                          -->
+     <!--===================================================-->
+      <CATCommandHeader ID = "ToggleGraphView"  ClassName = "DS/DELPPWAfrCommands/AfrCommand"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "Reframe"          ClassName = "DS/DELPPWAfrCommands/AfrCommand"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "ReframeOn"        ClassName = "DS/DELPPWAfrCommands/AfrCommand"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "ToggleOrientation" ClassName = "DS/DELPPWAfrCommands/AfrCommand" ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+      <CATCommandHeader ID = "ToggleOverview"   ClassName = "DS/DELPPWAfrCommands/AfrCommand"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+
+      <CATCommandHeader ID = "ToggleAuxiliaryView"    ClassName = "DS/DELPPWAfrCommands/CheckCommand" Behavior = "CATAfrHeaderCheck"	ResourceFile = "DELMFNApp/DELMFNApp" Available = "0"/>
+
+      <CATCommandHeader ID = "ProductsParts" ClassName = "DS/DELPPWAfrCommands/CheckCommand" Behavior = "CATAfrHeaderCheck"	ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="CheckGroup"   Value="ViewsGroup"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "ManufacturingItems" ClassName = "DS/DELPPWAfrCommands/CheckCommand" Behavior = "CATAfrHeaderCheck" ResourceFile = "DELMFNApp/DELMFNApp" Available = "1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="CheckGroup"   Value="ViewsGroup"/>
+        </CATAfrCommandHeaderArgs>
+    </CATCommandHeader>
+
+	<CATCommandHeader ID = "ExpandAll"		ClassName = "DS/DELPPWAfrCommands/AfrCommand"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+    <CATCommandHeader ID = "ShowLogPanel"   ClassName = "DS/DELPPWAfrCommands/CheckCommand" Behavior = "CATAfrHeaderCheck" ResourceFile = "DELMFNApp/DELMFNApp" Available = "0"/>
+    <CATCommandHeader ID = "ExportCSV"      ClassName = "DS/DELPPWAfrCommands/AfrCommand"    ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+    <CATCommandHeader ID = "RelationalExplorerCmd"   ClassName = "DS/DELPPWAfrCommands/RelationalExplorerCmd"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+    <CATCommandHeader ID = "EditViewPreferences"        ClassName = "DS/DELPPWAfrCommands/AfrCommand" 	ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+    <CATCommandHeader ID = "LayoutPreferences" ClassName = "DS/DELPPWAfrCommands/AfrCommand"  ResourceFile = "DELMFNApp/DELMFNApp" Available = "1"/>
+
+    <!--================    CONFIGURATION	================-->
+    <!--	EditConfigurationContext:						            -->
+    <!--	EditVariant:								                    -->
+    <!--	EditEvolution:								                  -->
+    <!--==================================================-->
+    <CATCommandHeader ID = "EditConfigurationContext"       ClassName = "DS/DELPPWAfrCommands/FilterCommands/EditConfigContextCmd"      ResourceFile = "CfgConfigurationCommands/CfgEditConfigurationContextCmd" Available = "1"/>
+    <CATCommandHeader ID = "EditVariant"                    ClassName = "DS/DELPPWAfrCommands/FilterCommands/EditVariantCmd"            ResourceFile = "CfgEffectivityCommands/CfgVariantEffectivityCmd" Available = "1"/>
+    <CATCommandHeader ID = "EditEvolution"                  ClassName = "DS/DELPPWAfrCommands/FilterCommands/EditEvolutionCmd"          ResourceFile = "CfgEffectivityCommands/CfgEvolutionCmd" Available = "1"/>
+
+    <CATCommandHeader ID="DefineFilter" ClassName="DS/DELPPWAfrCommands/FilterCommands/ExpandFilterCmd"  ResourceFile="ENONextGenFilterCmd/ENONextGenFilterCmd" Available = "1">
+        <CATAfrCommandHeaderArgs>
+            <CATCommandHeaderArg ID="AuthorizeFilter" Value="true" Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+    </CATCommandHeader>
+
+  </CATCmdHeadersList>
+
+  </Template>
+
+  <!--======================================================================================================================================-->
+  <!--======================================================================================================================================-->
+  <!--======================================================================================================================================-->
+  <!--======================================================================================================================================-->
+  <!--======================================================================================================================================-->
+
+  <Template syp:name="DELWebMfgAssemblyDefAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="DELWebMfgAssemblyDefWorkbench">
+
+     <!--===============================================================================================================================-->
+     <!--=================================================  COMMON COMMANDS   ==========================================================-->
+     <!--===============================================================================================================================-->
+      <CATCmdContainer 	Name="SWXUiFixedCommands" RepresentationType="AfrActionBarFixedSection">
+        <CATCmdStarter    Name = "Edit"          Command = "Edit" />
+        <CATCmdStarter    Name = "Refresh"          Command = "Refresh" />
+        <CATCmdContainer  Name = "Hide" Visibility = "1" 	RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter  Name = "Hide"             Command = "Hide" />
+          <CATCmdStarter  Name = "HideAll"          Command = "HideAll" />
+        </CATCmdContainer>
+        <CATCmdStarter 	  Name = "ToggleAuxiliaryView"    Command = "ToggleAuxiliaryView" />
+        <CATCmdStarter 	  Name = "ProductsParts"    Command = "ProductsParts" />
+        <CATCmdStarter 	  Name = "ManufacturingItems" Command="ManufacturingItems" />
+      </CATCmdContainer>
+
+     <!--===============================================================================================================================-->
+     <!--=============================================   MFN AUTHORING COMMANDS   ======================================================-->
+     <!--===============================================================================================================================-->
+      <CATCmdContainer 	Name = "Authoring" Visibility = "1" RepresentationType="AfrActionBarSection">
+        <CATCmdContainer  Name = "Create"    Visibility = "1" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter  Name = "InsertCreateAssembly" Command = "InsertCreateAssembly" />
+          <CATCmdStarter  Name = "InsertProvide"        Command = "InsertProvide" />
+          <CATCmdStarter  Name = "InsertCreateMaterial" Command = "InsertCreateMaterial" />
+          <CATCmdStarter  Name = "InsertCreateKit"      Command = "InsertCreateKit" />
+        </CATCmdContainer>
+
+        <CATCmdContainer 	Name = "CreateMfgItemAndScope" Visibility = "1" RepresentationType="AfrActionBarDropDown">
+           <CATCmdStarter 		Name = "CreateAssemblyAndScope" Command = "CreateAssemblyAndScope" />
+           <CATCmdStarter 		Name = "CreateMaterialAndScope" Command = "CreateMaterialAndScope" />
+           <CATCmdStarter 		Name = "CreateKitAndScope" Command = "CreateKitAndScope" />
+           <CATCmdStarter 		Name = "CreateProvideAndScope" Command = "CreateProvideAndScope" />
+        </CATCmdContainer>
+
+        <CATCmdContainer 	Name = "Create" Visibility = "1" 	RepresentationType="AfrActionBarDropDown">
+            <CATCmdStarter 		Name=  "ReplaceByLatestRevision"         Command = "ReplaceByLatestRevision" />
+            <CATCmdStarter 		Name=  "ReplaceByExistingRevision"         Command = "ReplaceByExistingRevision" />
+            <CATCmdStarter 		Name=  "ReplaceByNewRevision"         	Command = "ReplaceByNewRevision" />
+        </CATCmdContainer>
+
+        <!-- Assign Product Related Commands	-->
+        <CATCmdContainer 	Name = "ProductAssignation" Visibility = "1" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter 	Name = "AssignAssembly" 	Command = "AssignAssembly" />
+          <CATCmdStarter 	Name = "AssignMaterial" 	Command = "AssignMaterial" />
+          <CATCmdStarter 	Name = "AssignKit" 			  Command = "AssignKit" />
+          <CATCmdStarter 	Name = "AssignProvide" 		Command = "AssignProvide" />
+          <CATCmdStarter 	Name = "UnassignProduct" 	Command = "UnassignProduct" />
+        </CATCmdContainer>
+
+        <!-- Scope Related Commands -->
+        <CATCmdContainer  Name = "Scope" Visibility = "1" RepresentationType="AfrActionBarDropDown">
+  	      <CATCmdStarter  Name = "CreateScopeLink" 	    Command = "CreateScopeLink" />
+          <CATCmdStarter  Name = "ReconnectScope"       Command = "ReconnectScope" />
+          <!-- <CATCmdStarter  Name = "ReviseAndReconnectScope" Command = "ReviseAndReconnectScope" />-->
+          <CATCmdStarter  Name = "DeleteScopeLink" 		Command = "DeleteScopeLink" />
+        </CATCmdContainer>
+
+        <CATCmdStarter Name = "CreateInstance" Command = "CreateInstance" />
+        <CATCmdStarter    Name = "SearchAndAddInstanceCommand" Command = "SearchAndAddInstanceCommand" />
+        <CATCmdStarter    Name = "DetachInstance"     Command = "DetachInstance" />
+        <CATCmdStarter    Name = "CreateLink" Command = "CreateLink" />
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+  			<CATCmdSeparator 	Name="BasicManip_Separator" />
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+        <CATCmdStarter    Name = "CreateMfgItemStructure"   Command = "CreateMfgItemStructure" />
+        <CATCmdStarter    Name = "UpdateMfgItemStructure"   Command = "UpdateMfgItemStructure" />
+        <CATCmdStarter    Name = "ManageInconsistentLinks"  Command = "ManageInconsistentLinks" />
+
+        <!-- Other Commands	-->
+
+        <CATCmdStarter    Name = "Relations"          Command = "Relations" />
+        <CATCmdStarter 	  Name = "Properties" 		    Command = "ActionBar_Attributes" />
+
+         <CATCmdContainer Name = "Show Characteristics" Visibility = "1" RepresentationType="AfrActionBarDropDown">
+  	      <CATCmdStarter  Name = "ShowCharacteristicsCmd" Command = "ShowCharacteristicsCmd" />
+  	      <CATCmdStarter  Name = "ShowConsolidatedCharactscsCmd" Command = "ShowConsolidatedCharactscsCmd" />
+        </CATCmdContainer>
+
+      </CATCmdContainer>
+
+     <!--===============================================================================================================================-->
+     <!--==============================================   LIFECYCLE COMMANDS   =========================================================-->
+     <!--===============================================================================================================================-->
+      <CATCmdContainer Name="Lifecycle" Visibility="1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter    Name = "Maturity"         Command="MaturityHdr" />
+        <CATCmdStarter    Name = "Revision"         Command="RevisionHdr" />
+        <CATCmdStarter    Name = "Delete"           Command="Delete"/>
+        <CATCmdContainer  Name = "Duplicate"  Visibility = "1" RepresentationType="AfrActionBarDropDown">
+    	    <CATCmdStarter  Name = "Duplicate"      Command = "DuplicateHdr" />
+    	    <CATCmdStarter  Name = "DuplicateAdv"   Command = "DuplicateAdv" />
+        </CATCmdContainer>
+        <CATCmdStarter    Name = "History"          Command="HistoryHdr" />
+        <CATCmdStarter 	  Name = "ChangeOwner"      Command = "ActionBar_ChangeOwner" />
+        <!-- <CATCmdStarter Name="ActionViewFilter"	 Command = "ActionViewFilter" /> -->
+      </CATCmdContainer>
+
+
+     <!--===============================================================================================================================-->
+     <!--==============================================   DOCUMENT COMMANDS   ==========================================================-->
+     <!--===============================================================================================================================-->
+      <CATCmdContainer Name = "Document" Visibility = "1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter 	  Name = "AttachDocument"     Command = "AttachDocument" />
+        <CATCmdStarter	  Name = "SearchDocument"     Command = "SearchDocument" />
+        <CATCmdStarter	  Name = "ManageDocuments"    Command = "ManageDocuments" />
+      </CATCmdContainer>
+
+
+     <!--===============================================================================================================================-->
+     <!--==============================================      VIEW COMMANDS     =========================================================-->
+     <!--===============================================================================================================================-->
+      <CATCmdContainer Name="View" Visibility="1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter    Name = "ExpandAll"          Command = "ExpandAll" />
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <CATCmdSeparator  Name="BasicManip_Separator" />
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <CATCmdStarter    Name = "Alternates"       Command = "Alternates" />
+        <CATCmdStarter    Name = "Origin"           Command = "Origin" />
+        <CATCmdStarter    Name = "CapableResource"  Command = "CapableResource" />
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <CATCmdSeparator  Name="BasicManip_Separator" />
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <CATCmdStarter    Name = "ToggleGraphView" 	  Command = "ToggleGraphView" />
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <CATCmdSeparator  Name="BasicManip_Separator" />
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <CATCmdStarter    Name = "Reframe"            Command = "Reframe" />
+        <CATCmdStarter    Name = "ReframeOn"          Command = "ReframeOn" />
+        <CATCmdStarter    Name = "ToggleOrientation"  Command = "ToggleOrientation" />
+        <CATCmdStarter    Name = "ToggleOverview"     Command = "ToggleOverview" />
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <CATCmdSeparator  Name="BasicManip_Separator" />
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <CATCmdStarter    Name = "ShowLogPanel"       Command = "ShowLogPanel" />
+      </CATCmdContainer>
+
+
+     <!--===============================================================================================================================-->
+     <!--==============================================     TOOLS COMMANDS     =========================================================-->
+     <!--===============================================================================================================================-->
+      <CATCmdContainer Name="Tools" Visibility="1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter    Name = "BIEssentialsCmd"        Command = "BIEssentialsCmd" />
+        <CATCmdStarter    Name = "EditViewPreferences"    Command = "EditViewPreferences" />
+        <CATCmdStarter    Name = "LayoutPreferences"      Command = "LayoutPreferences"/>
+        <CATCmdStarter    Name = "ExportCSV"              Command = "ExportCSV" />
+        <CATCmdStarter    Name = "RelationalExplorerCmd"  Command = "RelationalExplorerCmd" />
+        <CATCmdStarter    Name = "ExpandFilterCmd"        Command = "DefineFilter" />
+      </CATCmdContainer>
+
+     <!--===============================================================================================================================-->
+     <!--============================================== CONFIGURATION COMMANDS =========================================================-->
+     <!--===============================================================================================================================-->
+      <CATCmdContainer Name="Configuration" Visibility="1" RepresentationType="AfrActionBarSection">
+          <CATCmdStarter          Name = "EditConfigurationContext"   Command = "EditConfigurationContext"/>
+          <CATCmdStarter          Name = "EditVariant"                Command = "EditVariant"/>
+          <CATCmdStarter          Name = "EditEvolution"              Command = "EditEvolution"/>
+      </CATCmdContainer>
+
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

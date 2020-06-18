@@ -1,0 +1,1 @@
+define("DS/PowerByLogin/PowerByLogin_de",{});define("DS/PowerByLogin/assets/nls/PowerByLogin",{getStarted:"Verbinden"});

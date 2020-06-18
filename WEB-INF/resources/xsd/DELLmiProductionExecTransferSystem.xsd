@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2006. All rights reserved. -->
+<xs:schema targetNamespace="http://www.3ds.com/xsd/DELUPRBase" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.3ds.com/xsd/DELUPRBase" xmlns:psbase="http://www.3ds.com/xsd/DELUPRProdSysBase" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+                <xs:appinfo>
+                        <webserviceSchema/>
+                </xs:appinfo>
+        </xs:annotation>
+  <xs:import namespace="http://www.3ds.com/xsd/DELUPRProdSysBase" schemaLocation="DELLmiProductionSystem.xsd"/>
+  <xs:complexType name="DELLmiExecTransferSystemReferenceType">
+    <xs:annotation>
+      <xs:documentation>Exec Transfer System Reference definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="psbase:DELLmiProductionSystemReferenceType">
+        <xs:sequence>
+          <xs:element name="V_PlannedStartDate" type="xs:date" minOccurs="0" />
+          <xs:element name="V_PlannedEndDate" type="xs:date" minOccurs="0" />
+          <xs:element name="V_ActualStartDate" type="xs:date" minOccurs="0" />
+          <xs:element name="V_ActualEndDate" type="xs:date" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DELLmiExecTransferSystemInstanceType">
+    <xs:annotation>
+      <xs:documentation>Exec Transfer System Instance definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="psbase:DELLmiProductionSystemInstanceType">
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

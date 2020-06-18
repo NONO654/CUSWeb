@@ -1,0 +1,359 @@
+.forceInfraIndex
+{
+    z-index: 5;
+}
+.infraView
+{
+    transition: width .5s ease-out, height .5s ease-out, top .5s ease-out,left .5s ease-out;
+    pointer-events: none;
+    box-sizing: border-box !important;
+    overflow: hidden;
+    position: absolute;
+}
+.mapView.focused .pageView .infraView 
+{
+    transition: none;
+}
+.infraLeangetContainer
+{
+    pointer-events: none;
+}
+.infraView.focused
+{
+    pointer-events: all;
+}
+.infraView.focusable
+{
+    pointer-events: all;
+}
+.infraView.focused .infraLeangetContainer
+{
+    pointer-events: all;
+}
+.mapView.meetingPreparationOpened .infraView.selectedForMeeting
+{
+    outline: #627a8f;
+    outline-style: dashed;
+    outline-width: 0.2em;
+}
+.infraView.customized
+{
+    pointer-events: all;
+    transition: width .3s ease-out, height .3s ease-out;
+    box-shadow: none;
+}
+.mainView.onScreenshot *
+{
+    touch-action: none !important;
+    pointer-events: none !important;
+    transition: none !important;
+}
+.infraView.maximize.screenshot .infraSketchContainer
+{
+    border: 0.15em transparent;
+}
+.infraView.maximize
+{
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+.pageView .infraView.maximize
+{
+    backface-visibility: hidden;
+    z-index: 2;
+    top: 2.5% !important;
+    left: 2.5% !important;
+    width: 95% !important;
+    height: 95% !important;
+}
+.mapStaticCollectionView > .infraView.maximize
+{
+    z-index: 3;
+}
+.infraTemplate
+{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    overflow: hidden;
+}
+.infraView.maximize .infraTemplate
+{
+    top: 0;
+    left: 0;
+}
+.infraHeader
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2em;
+    overflow: hidden;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: #299de8;
+}
+.infraView .infraLeangetContainer
+{
+    position: absolute;
+    top: 1em;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 1em);
+}
+.pageView .infraLeangetContainer
+{
+    top: 0.5em;
+    height: calc(100% - 0.5em);
+}
+.infraView.maximize .infraLeangetContainer,
+.pageView.maximize .infraLeangetContainer
+{
+    top: 2em;
+    height: calc(100% - 2em);
+}
+.infraView .infraName
+{
+    position: absolute;
+    width: calc(100% - 0.4em);
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    text-align: center;
+    color: #fff;
+    font-size: 2.25em;
+    line-height: 1.75em;
+    height: 1.75em;
+    background-color: rgba(58, 160, 226, 0.8);
+    z-index: 1;
+    text-shadow: #627a8f 0.04em 0.04em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.infraHeaderToolsButton
+{
+    width: 2em;
+    height: 2em;
+    position: relative;
+    color: #299de8;
+    pointer-events: none;
+    margin-left: 1em;
+}
+.infraHeaderToolsButton:not(.infraClose)
+{
+    display: none;
+}
+.infraHeaderToolsButton .buttonView
+{
+    pointer-events: all;
+}
+.infraSketchContainer
+{
+    position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	color: #299de8;
+    height: calc(100% - 2em);
+    top: 2em;
+    display: none;
+}
+.infraHeaderToolsButton:not(.infraClose) .buttonIconImage
+{
+    height: 60%;
+}
+.infraHeaderTools
+{
+    width: 30%;
+    height: 2em;
+    position: absolute;
+    color: #299de8;
+    pointer-events: none;
+    right: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    top: 0;
+}
+.mapStaticCollectionView > .infraView .infraHeaderTools
+{
+    top: 0.2em;
+    right: 0.2em;
+}
+.infraView .infraCoachMarkContainer
+{
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    top: 1em;
+    height: calc(100% - 1em);
+    display: none;
+}
+.infraView.focused .infraCoachMarkContainer
+{
+    transition: background-color 150ms ease-out;
+    z-index: 1;
+    background-color: transparent;
+}
+.pageView .infraCoachMarkContainer
+{
+    top: 0.5em;
+    height: calc(100% - 0.5em);
+}
+.infraView.maximize .infraCoachMarkContainer,
+.pageView.maximize .infraCoachMarkContainer
+{
+    top: 2em;
+    height: calc(100% - 2em);
+}
+.infraHeader .infraTitle
+{
+    max-width: 75%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 1.35em;
+}
+.infraView.maximize .infraTitle
+{
+    font-size: 1.35em;
+    font-weight: 400;
+}
+
+.infraView .captureContextValidation
+{
+    position: absolute;
+    width: 8em;
+    height: 8em;
+    z-index: 12;
+}
+.infraView .captureCancel
+{
+    width: 3.5em;
+    height: 3.5em;
+}
+.infraView .captureContextValidation
+{
+    bottom: 1em;
+    right: 2.5em;
+}
+.infraView .captureContextValidation .buttonIconImage,
+.infraView .captureCancel .buttonIconImage
+{
+    height: 100%;
+}
+.infraView.focused.onSketch:not(.screenshot) .infraCoachMarkContainer
+{
+    height: calc(100% - 2.4em);
+    border: 0.2em #299de8;
+    border-style: dashed;
+    width: calc(100% - 0.4em);
+}
+.infraView.focused.onCapture .infraCoachMarkContainer
+{
+    background-color: #239de847;
+    height: 100% !important;
+    top: 0 !important;
+}
+.infraView.focused.onCaptureError .infraCoachMarkContainer
+{
+    background-color: #ff22005c;
+    height: 100% !important;
+    top: 0 !important;
+}
+.infraSketchControls
+{
+    position: absolute;
+    width: 100%;
+    bottom: 1em;
+    z-index: 12;
+}
+.infraSketchControls .sketchControlButtons .buttonView .buttonIcon
+{
+    border: 0.2em solid;
+}
+.infraSketchControls .sketchControlButtons .buttonView.checked .buttonIcon
+{
+    color: #62798f;
+}
+.infraSketchControls .buttonView.disabled .buttonIcon
+{
+    color: #ccc !important;
+}
+.infraSketchControls .sketchControlButtons
+{
+    flex-direction: column;
+}
+.infraView .rowControls
+{
+    bottom: 7em;
+    right: 1em;
+    position: absolute;
+    z-index: 12;
+}
+.infraView .captureCancel
+{
+    width: 3.5em;
+    height: 3.5em;
+}
+.infraSketchControls
+{
+    position: absolute;
+    bottom: 3em;
+    z-index: 12;
+    bottom: 14em;
+    width: 3.5em;
+    margin-left: 0.25em;
+}
+.infraSketchControls .sketchControlButtons .buttonView
+{
+    width: 2.5em;
+    margin: 0em;
+    margin-bottom: 1em;
+}
+.infraView .infraSettingsContainer
+{
+    display: none;
+}
+.infraView.focused .infraSettingsContainer
+{
+    display: block;
+}
+.infraView .infraSizeContainer
+{
+    display: none;
+}
+.infraView.customized .infraSizeContainer
+{
+    display: block;
+}
+.infraView.onSketch .infraCoachMarkContainer,
+.infraView.onCapture .infraCoachMarkContainer,
+.infraView.onCaptureError .infraCoachMarkContainer
+{
+    display: block;
+}
+.infraView.customized .infraTitle
+{
+    display: none;
+}
+.infraTemplate .infraSketchContainer canvas
+{
+    z-index: 10;
+}
+.pageView.hideUnfocusedSN .infraView:not(.maximize)
+{
+    display: none;
+}
+.pageView.hideUnfocusedSN > .pageFloatableCollectionView
+{
+    display: none;
+}
+.minMaxTransition .infraTitle 
+{
+    display: none;
+}

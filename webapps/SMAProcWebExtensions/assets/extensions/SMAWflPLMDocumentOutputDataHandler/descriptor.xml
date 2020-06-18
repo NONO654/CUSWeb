@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.datahandler.DataHandlerPLM-Out" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="DataHandler">
+	<DisplayName nlsFile="SMAWflPLMDocumentOutputDataHandler" nlsID="dispname">PLMDocument</DisplayName>
+	<Description nlsFile="SMAWflPLMDocumentOutputDataHandler" nlsID="desc">PLMDocument</Description>
+	<LongDescription nlsFile="SMAWflPLMDocumentOutputDataHandler" nlsID="longdesc">PLMDocument</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DataHandler</Value>
+		</Attribute>
+		<Attribute name="DataHandlerKind">
+			<Value>Output</Value>
+		</Attribute>
+		<Attribute name="HandlerType">
+			<Value>com.dassault_systemes.sma.datahandler.DataHandlerPLM</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAWflPLMDocumentInputDataHandler16.png" targetFilename="SMAWflPLMDocumentInputDataHandler16.png" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflPLMDocumentInputDataHandler32.png" targetFilename="SMAWflPLMDocumentInputDataHandler32.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflPLMDocumentInputDataHandler.CATNls" targetFilename="SMAWflPLMDocumentInputDataHandler.CATNls"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflPLMDocumentInputDataHandler.dll" targetFilename="win_b64/SMAWflPLMDocumentInputDataHandler.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflPLMDocumentInputDataHandler.sypstyle" targetFilename="SMAWflPLMDocumentInputDataHandler.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.datahandler.datahandlerplm.DataHandlerPLM</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflPLMDocumentInputDataHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopPreview">
+			<Implementations>
+				<Implementation name="PreviewObject" language="cpp" platform="win_b64">
+					<LateType>SMAWflPLMDocumentInputPreview_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="XMLTransformer">
+			<Implementations>
+				<Implementation name="XMLTransformer" language="cpp" platform="win_b64">
+					<LateType>SMAWflPLMDocumentInputXMLTransformer_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<!--  PLM document Data Handler properties -->
+
+		<!-- Export definition properties -->
+
+		<!--Destination option selection 10 = Automatic 12 = specified location -->
+		<Property name="toOption" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[10]]>
+			</Value>
+		</Property>
+
+		<!-- Export path -->
+		<Property name="exportPath" type="string" valuetype="single">
+			<Value>
+				<![CDATA[{rundir}]]>
+			</Value>
+		</Property>
+
+		<!-- Export file name or pattern -->
+		<Property name="exportPattern" type="string" valuetype="single">
+			<Value>
+				<![CDATA[]]>
+			</Value>
+		</Property>
+
+		<!-- File type filter(s) separated by , -->
+		<Property name="filter" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<!--handler type constant-->
+		<Property name="handlerType" type="string" valuetype="single">
+			<Value>
+				<![CDATA[com.dassault_systemes.sma.datahandler.DataHandlerPLM]]>
+			</Value>
+		</Property>
+
+
+		<!-- To store export rule xml -->
+		<Property name="Rule" type="string" valuetype="single">
+			<Value>
+				<![CDATA[]]>
+			</Value>
+		</Property>
+
+	</Properties>
+</wfext:Extension>

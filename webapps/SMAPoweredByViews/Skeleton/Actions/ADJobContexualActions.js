@@ -1,0 +1,1 @@
+define("DS/SMAPoweredByViews/Skeleton/Actions/ADJobContexualActions",[],function(){var a={};function b(c){var d=c.get("handler");var f=[];if(d&&d.actions){var e=d.actions;e.forEach(function(g){f.push(g(c))})}return f}a.getContexualActions=function(){return b(this)};return a});

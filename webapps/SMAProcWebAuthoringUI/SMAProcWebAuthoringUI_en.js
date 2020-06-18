@@ -1,0 +1,1 @@
+define("DS/SMAProcWebAuthoringUI/SMAProcWebAuthoringUI_en",{});define("DS/SMAProcWebAuthoringUI/assets/nls/AdapterEditor",{Loading:"Loading..."});define("DS/SMAProcWebAuthoringUI/assets/nls/CustomAdapterList",{NoAdaptersAvailable:"No adapters available.",ErrorFetchingAdapter:"There was an error fetching one or more of the adapter descriptors."});

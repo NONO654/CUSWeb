@@ -1,0 +1,1 @@
+define("DS/OnePart3DSearch/OnePart3DSearch_en",{});define("DS/OnePart3DSearch/assets/nls/onepart",{facet:{properties:{title:"Properties"}},action:{openInOnePart:{title:"Open in OnePart..."}},error:{cannotRetrieveAppInfo:"Error retrieving app info"}});

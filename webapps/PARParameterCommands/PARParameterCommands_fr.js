@@ -1,0 +1,1 @@
+define("DS/PARParameterCommands/PARParameterCommands_fr",{});define("DS/PARParameterCommands/assets/nls/PARParameterCommandsNls",{no_requirement_object:" L'objet sélectionné n'est pas une exigence.",multiselectedobjects:"Sélection multiple non prise en charge."});

@@ -1,0 +1,55 @@
+<!--------------------------------------------------------------------
+[xs-wg-checkbox HTML Document]
+
+Project:		xs
+Version:		1.0
+Last change:    Thu, 29 Oct 2015 19:52:22 GMT
+Assigned to:	d6u, tee1
+Primary use:	xs-canvas
+Description:    Checkbox widget which wraps sp-checkbox. Accepts
+                association of parameter/attribute of Boolean type
+--------------------------------------------------------------------->
+
+<!--------------------------------------------------------------------
+
+[Table of contents]
++ label
++ sp-checkbox
+
+--------------------------------------------------------------------->
+<!-- Import base component common to all widgets -->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+
+<link rel="import" href="../../SMAProcSPUI/sp-checkbox/sp-checkbox.html">
+
+<dom-module id="xs-wg-checkbox">
+  <!-- <link rel="import" type="css" href="xs-wg-checkbox.css"> -->
+  <template>
+	  <!-- Including the base widget style -->
+	  <style include="xs-wg-base"></style>
+    <style>
+    :host {
+      display: inline-block;
+      width: 100%;}
+
+    .sp-checkbox {
+      width: 20px;
+      height: 20px;
+      display: inline-block;}
+
+    .xs-wg-checkbox.xs-wg-checkbox-label {
+      margin-right: 5px;
+      display: inline-block;
+      max-width: 100%;
+      }
+    </style>
+
+      <!--label-->
+      <label for="xs-checkbox" class="xs-wg-label xs-wg-checkbox-label">{{label}}</label>
+      <!--Checkbox control-->
+      <sp-checkbox id="checkbox" class="sp-checkbox" readonly="{{readonly}}"
+                   on-checked-changed="_onCheckedChange">
+      </sp-checkbox>
+    </template>
+  <script type="text/javascript" src="xs-wg-checkbox.js"></script>
+</dom-module>

@@ -1,0 +1,64 @@
+<link rel="import" href="../sp-base/sp-base.html">
+<link rel="import" href="../sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../sp-cosservice/sp-cosservice.html">
+<link rel="import" href="../sp-webservice/sp-webservice.html">
+<link rel="import" href="../sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../sp-encryption/sp-encryption.html">
+<link rel="import" href="../sp-cos/sp-cos.html">
+
+<dom-module id="sp-run">
+  	<template>
+
+		<!--  WEB SERVICES -->
+        <sp-mcsservice 	id="user_id_ws"
+         				uri="/resources/v0/model/bus?type=Person&select=id&name=<login>"
+        				on-error="onWSError"
+        				timeout="{{timeout}}">
+        </sp-mcsservice>
+        <sp-mcsservice 	id="job_xml_ws"
+        				uri="/resources/slmservices/jobs/buildJob" 
+        				on-error="onWSError"
+        				json="false"
+        				timeout="{{timeout}}">
+        </sp-mcsservice>
+        <sp-mcsservice 	id="job_state_ws"
+        				uri="/resources/slmservices/jobinfo/job/<jobId>/Execution/state?<stateparams>"
+        				on-error="onWSError"
+        				timeout="{{timeout}}">
+        </sp-mcsservice>
+        <sp-mcsservice 	id="mcs_ticket_ws"
+        				uri="/ticket/get"
+        				on-error="onWSError"
+        				timeout="{{timeout}}">
+        </sp-mcsservice>
+        <sp-mcsservice 	id="encrypt_ws"
+        				uri="/resources/slmservices/data/getEncryptedCreds"
+        				on-error="onWSError"
+        				json="false"
+        				timeout="{{timeout}}">
+        </sp-mcsservice>
+        <sp-cosservice 	id="cos_pubkey_ws"
+        				uri="execution/pubkey"
+        				on-error="onWSError"
+        				timeout="{{timeout}}">
+        </sp-cosservice>
+        <sp-cosservice 	id="run_ws"
+        				uri="execution/run"
+        				on-error="onWSError"
+        				timeout="{{timeout}}">
+        </sp-cosservice>
+        <sp-webservice 	id="local_station_claim_ws"
+        				uri="/station/claim?jobids=<jobId>"
+        				disable-default-headers="true"
+        				on-error="onWSError"
+        				timeout="{{timeout}}">
+        </sp-webservice>
+
+		<!--  OTHER WEB COMPONENTS -->
+        <sp-dashboard id="spDashboard"></sp-dashboard>
+        <sp-encryption id="spEncryption"></sp-encryption>
+        <sp-cos id="spCos"></sp-cos>
+
+	</template>
+  	<script src="sp-run.js"></script>
+</dom-module>

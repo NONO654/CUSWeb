@@ -1,0 +1,1 @@
+define("DS/ENOChgActionProp/ENOChgActionProp_zh",{});define("DS/ENOChgActionProp/assets/nls/ChangePropertiesFacet",{"Change Required":"必要更改：",Release_Auth:"发布授权：",Order:"订单",Name:"名称",Title:"标题",Approver:"审批人",Maturity:"成熟度",Comments:"评论",Action:"状态",Completion_Date:"批准日期",ECM_OBJECT_NOT_RELEASED_ERR:"对象未发布",ECM_CONFIGURED_DATA_ERR:"不适用。数据已配置"});

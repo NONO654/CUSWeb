@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="ENOSTRFLVPMLogicalDS" />
+    <m1.package name="ENOSTRFLVPMLogicalDS" />
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMConnection name="ENOSTLogicalConnection" />
+      <m1.type name="ENOSTLogicalConnection" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="ENOSTLogicalPort" />
+      <m1.type name="ENOSTLogicalPort" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="ENOSTLogicalInstance" />
+      <m1.relationship name="ENOSTLogicalInstance" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreRepInstance name="ENOSTLogicalRepInstance" />
+      <m1.relationship name="ENOSTLogicalRepInstance" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreRepReference name="ENOSTLogicalRepReference" />
+      <m1.type name="ENOSTLogicalRepReference" />
+
+      <!-- Basic Concat -->
+      <pattern.VPLM_BASIC_CONCAT>
+        <vplm.Simple name="PLM_ExternalID" />
+        <m1.basic name="name" />
+      </pattern.VPLM_BASIC_CONCAT>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="E_fromExternalId" />
+        <m1.attribute name="ENOSTLogicalRepReference.E_fromExternalId" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="E_versionComment" />
+        <m1.attribute name="ENOSTLogicalRepReference.E_versionComment" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="ENOSTLogicalReference" />
+      <m1.type name="ENOSTLogicalReference" />
+
+      <!-- Basic Concat -->
+      <pattern.VPLM_BASIC_CONCAT>
+        <vplm.Simple name="PLM_ExternalID" />
+        <m1.basic name="name" />
+      </pattern.VPLM_BASIC_CONCAT>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="E_fromExternalId" />
+        <m1.attribute name="ENOSTLogicalReference.E_fromExternalId" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="E_versionComment" />
+        <m1.attribute name="ENOSTLogicalReference.E_versionComment" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

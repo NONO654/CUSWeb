@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+  <head>
+    <!-- Application Metas -->
+	<!-- These information will be displayed in the widget preferences -->
+    <title>Access Rights pop up</title>
+    <meta name="author" content="G5C" />
+    <meta name="description" content="Access Rights popup" />
+    <!-- UWA Environment -->
+	
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<!-- Load UWA environment --> 
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+	<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+
+    
+    <script type="text/javascript">
+    var dependencies = dependencies || [];
+    require(
+        // dependencies
+        [
+         	'DS/UIKIT/Input/Button',
+
+         	'DS/WidgetServices/WidgetServices',
+         	'DS/AccessRightPopup/AccessRightPopup',
+            'DS/UIKIT/DropdownMenu',
+            'DS/UIKIT/Input/Text'
+        ].concat(dependencies),
+
+        // execute this callback, passing all dependencies as params
+
+        function(UIButton,widgetServices, WidgetCore,DropdownMenu, TextUI) {
+
+            var WIWI = {
+                onLoad: function() { //Needed to be sure to have a widget.body
+                    var that = this;
+                    //widgetServices.setODTComment(true);
+
+                    //widgetServices.setDistantServer(true);
+                    widgetServices.setODTMultiSel(true);
+					that.myOverlay=null;
+
+                    //widgetServices.setReplayODT(true);
+					var Bouton = new UIButton({
+						name: "toOpenButton"						
+					});
+					Bouton.addEvent('onClick',function(){
+						var physicalId= "1";
+						if (that.PhysicalID.getValue()!="")
+						{
+							physicalId=that.PhysicalID.getValue();
+						}
+
+						var physicalId2 = "2";
+						if (that.PhysicalID2.getValue() != "") {
+						    physicalId2 = that.PhysicalID2.getValue();
+						}
+
+						if (that.myOverlay == null)
+						{
+						    that.myOverlay = new WidgetCore(widget, document.body, {
+								'readOnly': false,
+								'serverName': that.ServerName.getValue(),
+								'serverUri': that.ServerUri.getValue()
+								});
+						}
+						
+						that.myOverlay.show([{
+						    'physicalId': physicalId,
+							'name': 'g5c_Product',
+							'urlIcon': widgetServices.getRealPath("./assets/defaultProd.png", widget, true)
+						},{
+						    'physicalId': physicalId2,
+							'name': 'g5c_Product 2',
+							'urlIcon': widgetServices.getRealPath("./assets/defaultProd.png", widget, true)
+						},/*{
+							'physicalId': 3,
+							'name': 'g5c_Product'
+						}*/]);
+						//myOverlay.fx.element.setStyle('height',test.height);
+					});
+					Bouton.inject(widget.body);
+					
+					that.ServerName = new TextUI({
+		            	value: "https://vdevpril541dsy.ux.dsone.3ds.com",
+		            	name: 'ARP_ServerName',
+		                className: 'ARP_ServerName',
+		                id: 'ARP_ServerName',
+		                attributes: {
+		                	placeholder:"Server name",
+		                }
+		            }).inject(widget.body);  
+
+					that.ServerUri = new TextUI({
+		            	value: "3dexperience",
+		            	name: 'ARP_ServerUri',
+		                className: 'ARP_ServerUri',
+		                id: 'ARP_ServerUri',
+		                attributes: {
+		                	placeholder:"Server Uri",
+		                }
+		            }).inject(widget.body);  
+
+					that.PhysicalID = new TextUI({
+		            	value: "2C49B556DB590000A453205497940300",
+		            	name: 'ARP_PhysicalID',
+		                className: 'ARP_PhysicalID',
+		                id: 'ARP_PhysicalID',
+		                attributes: {
+		                	placeholder:"PhysicalID",
+		                }
+		            }).inject(widget.body);  
+
+					that.PhysicalID2 = new TextUI({
+					    value: "2C49B556DB590000A453205497940300",
+					    name: 'ARP_PhysicalID',
+					    className: 'ARP_PhysicalID',
+					    id: 'ARP_PhysicalID',
+					    attributes: {
+					        placeholder: "PhysicalID 2",
+					    }
+					}).inject(widget.body);
+
+					var Bouton = new UIButton({
+						name: "toOpenButton"						
+					}).inject(widget.body);
+					Bouton.addEvent('onClick',function(){
+						that.ServerName.setValue("");
+						that.ServerUri.setValue("");
+						that.PhysicalID.setValue("");
+						that.PhysicalID2.setValue("");
+					});
+					
+
+					var Bouton2 = new UIButton({
+						name: "toOpenButton"						
+					}).inject(widget.body);
+					Bouton2.addEvent('onClick',function(){
+						that.ServerName.setValue("https://vdevpril541dsy.ux.dsone.3ds.com");
+						that.ServerUri.setValue("3dexperience");
+						that.PhysicalID.setValue("2C49B556DB590000A453205497940300");
+						that.PhysicalID2.setValue("2C49B556DB590000A453205497940300");
+					});
+
+					var Bouton3 = new UIButton({
+					    name: "toOpenButton"
+					}).inject(widget.body);
+					Bouton3.addEvent('onClick', function () {
+					    that.ServerName.setValue("https://vdevpril972dsy.ux.dsone.3ds.com");
+					    that.ServerUri.setValue("3dexperience");
+					    that.PhysicalID.setValue("BF24B5563D31000038CD6D54596E0B00"/*"52C07591000085345458A28E0006BEAF"*/);
+					    that.PhysicalID2.setValue("52C0759100001A40546C9AB50006BDE6");
+					});
+
+					widget.body.setStyle("height", "900px");
+
+					var myButton = new UIButton({ value: "Click me" }).inject(widget.body);
+					var myDropdownMenu = new DropdownMenu({
+					    target: myButton.getContent(),
+					    items: [
+                            { text: "Rastapopulos haris maisn frédéric zoafhnzvze", icon: "fonticon fonticon-user" },
+                            { text: "Another action", icon: "fonticon fonticon-user" },
+                            { text: "Rastapopulos haris maisn fezoa zoafhnzvze", icon: "fonticon fonticon-user" },
+                            { text: "Another action", icon: "fonticon fonticon-user" },
+                            { text: "Rastapopulos haris maisn fezoa zoafhnzvze", icon: "fonticon fonticon-user" },
+                            { text: "Another action", icon: "fonticon fonticon-user" },
+                            { className: "divider" },
+                            { text: "Header example", className: "header" },
+                            { text: "Action", icon: "fonticon fonticon-users" }
+					    ]
+					});
+             //WidgetCore.helloWorld(widget);
+                },
+                onRefresh: function(){
+					this.myOverlay.onRefresh();
+                },
+                onResize: function(){
+					this.myOverlay.onResize();
+                }
+            };
+            widget.addEvent('onLoad', WIWI.onLoad);
+            widget.addEvent('onRefresh', WIWI.onRefresh);
+            widget.addEvent('onResize', WIWI.onResize);
+        });
+    </script>
+  </head>
+  <body>
+	    
+   </body>
+</html>

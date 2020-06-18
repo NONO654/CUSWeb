@@ -1,0 +1,9 @@
+m|XCT25DViewer\XCT25DWidget.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\XCT25DWidget\XCT25DWidget.html|1531551036|61575
+s|XCT25DViewer\XCT25DWidget.mweb\src\XCT25DWidget.html|1488890552|61575
+t|win_b64\webapps\XCT25DWidget\assets\icons\64\XCT25DViewer.png|1531551036|4736
+s|XCT25DViewer\XCT25DWidget.mweb\src\assets\icons\64\XCT25DViewer.png|1437383514|4736

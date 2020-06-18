@@ -1,0 +1,1 @@
+(function(b){var a=b.Polymer;b.SPTag=Polymer({is:"sp-tag",properties:{readonly:{type:Boolean,notify:true},value:{type:String,notify:true}},removeMe:function(){this.fire("remove",{value:this.value})}})}(this));

@@ -1,0 +1,1 @@
+define("DS/Controls/Controls_ko",{});define("DS/Controls/assets/nls/translation",{cancel:"취소",listAllItems:"모든 항목 나열",previousItems:"이전 항목",nextItems:"다음 항목",addNewItem:"새 항목 추가",close:"닫기",rename:"이름 바꾸기",moreHelp:"도움말 더 보기",loading:"로드 중...",newTab:"새 탭",clearAll:"모두 지우기",AutoComplete:{Placeholder:"검색..."},matchCase:"Match case"});

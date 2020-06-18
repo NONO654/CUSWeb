@@ -1,0 +1,12 @@
+m|ENO6WCollaborativeTasksClient\XTaskApp.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.7.19196
+r|G:\R421\BSF\.
+t|win_b64\webapps\XTaskApp\XTaskApp.js|1563221004|5942
+s|ENO6WCollaborativeTasksClient\XTaskApp.mweb\src\Models\ScopeModelContainer.js|1562923767|13072
+s|ENO6WCollaborativeTasksClient\XTaskApp.mweb\src\XTaskApp.js|1476127328|16
+s|ENO6WCollaborativeTasksClient\XTaskApp.mweb\src\XTaskAppBootstrap.js|1528919861|7014
+s|ENO6WCollaborativeTasksClient\XTaskApp.mweb\src\Models\XTaskAppTypeDictionary.js|1542488139|3160
+t|win_b64\webapps\XTaskApp\assets\definitions.json|1531551040|6588
+s|ENO6WCollaborativeTasksClient\XTaskApp.mweb\src\assets\definitions.json|1519745074|6588

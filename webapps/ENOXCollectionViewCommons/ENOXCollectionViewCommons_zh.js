@@ -1,0 +1,1 @@
+define("DS/ENOXCollectionViewCommons/ENOXCollectionViewCommons_zh",{});define("DS/ENOXCollectionViewCommons/assets/nls/collectionView",{IsNotLastVersion:"该版本不是最新的"});

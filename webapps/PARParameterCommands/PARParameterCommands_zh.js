@@ -1,0 +1,1 @@
+define("DS/PARParameterCommands/PARParameterCommands_zh",{});define("DS/PARParameterCommands/assets/nls/PARParameterCommandsNls",{no_requirement_object:"选定对象不是需求",multiselectedobjects:"不支持多选"});

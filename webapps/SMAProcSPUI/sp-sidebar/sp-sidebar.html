@@ -1,0 +1,45 @@
+<!--------------------------------------------------------------------
+[sp-sidebar HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:44:35 GMT
+Assigned to:	Aravind Mohan (zb8)
+Primary use:	Generic UI component
+Description:    This component could be used to wrap HTML content and 
+				provides a collapsible behavior
+--------------------------------------------------------------------->
+
+<!--------------------------------------------------------------------
+
+[Structure]
+       
++ header
+	+ span - title
+  	+ span - toggle button
++ section
+	+ content
+--------------------------------------------------------------------->
+
+<!-- Importing Polymer & base -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<dom-module id="sp-sidebar">  
+	<link rel="import" type="css" href="sp-sidebar.css">
+	<template>  	  	
+		<header class$="{{_computeClass(hideheader)}}">
+			<span class="title">{{ heading }}</span>
+			<span class="toggle" id="toggle" on-click="onToggle">‹</span>
+		</header>
+		<section class="section">
+			<content>
+				<!-- All contents declared under sidebar goes in here -->
+			</content>					
+		</section>		
+		<div id="overlay" class="overlay"></div>		
+	</template>
+	<script src="sp-sidebar.js"></script>
+</dom-module>
+
+
+

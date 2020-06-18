@@ -1,0 +1,264 @@
+{
+  "relations": [
+    {
+      "name": "simulation_from",
+      "queries": [
+        {
+          "definition": [
+            {
+              "navigationType": "SR",
+              "qualityFilter": {
+                "role": "79",
+                "semantics": "5"
+              },
+              "direction": "from"
+            },
+            {
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "VPLMrel/PLMConnection/V_Owner" },
+              "direction": "from"
+            },
+            {
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreInstance" },
+              "direction": "from"
+            }
+          ],"removeTypes": ["SIMItfSimulation"]
+        }
+      ]
+    },{
+	  "name": "simulation_to",
+	  "queries": [
+        {
+          "definition": [
+			{
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreInstance" },
+              "direction": "to"
+            },{
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "VPLMrel/PLMConnection/V_Owner" },
+              "direction": "to"
+            },{
+              "navigationType": "SR",
+              "qualityFilter": {
+                "role": "79",
+                "semantics": "5"
+              },
+              "direction": "to"
+            }
+          ]
+        }
+      ]
+	},
+	{
+      "name": "FEM_Assembly_to",
+      "queries": [
+        {
+          "definition": [
+            {
+              "navigationType": "SR","qualityFilter": {"role": "155","semantics": "5"},
+              "direction": "to"
+            }
+          ]
+        }
+      ]
+    },
+	{
+	  "name": "FEM_Assembly_from",
+      "queries": [
+        {
+          "definition": [
+            {
+              "navigationType": "SR","qualityFilter": {"role": "155","semantics": "5"},
+              "direction": "from"
+            }
+          ]
+        }
+      ]
+	},
+	{
+      "name": "Linked_Shape_to",
+      "queries": [
+        {
+          "definition": [
+            {
+              "navigationType": "SR","qualityFilter": {"role": "132","semantics": "4"},
+              "direction": "to"
+            }
+          ]
+        }
+      ]
+    },
+	{
+	  "name": "Linked_Shape_from",
+      "queries": [
+        {
+          "definition": [
+            {
+              "navigationType": "SR","qualityFilter": {"role": "132","semantics": "4"},
+              "direction": "from"
+            }
+          ]
+        }
+      ]
+	},
+	{
+	  "name": "XRep_Assembly_to",
+      "queries": [
+        {
+          "definition": [
+            {
+              "navigationType": "SR","qualityFilter": {"role": "398","semantics": "5"},
+              "direction": "to"
+            }
+          ]
+        }
+      ]
+	},
+	{
+	  "name": "XRep_Assembly_from",
+      "queries": [
+        {
+          "definition": [
+            {
+              "navigationType": "SR","qualityFilter": {"role": "398","semantics": "5"},
+              "direction": "from"
+            }
+          ]
+        }
+      ]
+	},
+	{
+	  "name": "Downstream_Simulation_from",
+	  "queries": [
+	    {
+		  "definition": [
+		    {
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreInstance" },
+              "direction": "to"
+            },
+			{
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreRepInstance" },
+              "direction": "to"
+            },
+			{
+              "navigationType": "SR","qualityFilter": {"role": "161","semantics": "6"},
+              "direction": "to"
+            },
+			{
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreRepInstance" },
+              "direction": "from"
+            },
+			{
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreInstance" },
+              "direction": "from"
+            }
+		  ]
+		}
+	  ]
+	},
+	{
+	  "name": "Downstream_Simulation_to",
+	  "queries": [
+	    {
+		  "definition": [
+		    {
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreInstance" },
+              "direction": "to"
+            },
+			{
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreRepInstance" },
+              "direction": "to"
+            },
+			{
+              "navigationType": "SR","qualityFilter": {"role": "161","semantics": "6"},
+              "direction": "from"
+            },
+			{
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreRepInstance" },
+              "direction": "from"
+            },
+			{
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreInstance" },
+              "direction": "from"
+            }
+		  ]
+		}
+	  ]
+	},
+	{
+	  "name": "Scenario_Behavior_to",
+	  "queries": [
+	    {
+		  "definition": [
+		    {
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreInstance" },
+              "direction": "to"
+            },
+			{
+              "navigationType": "relation",
+              "qualityFilter": { "rel_type": "PLMCoreRepInstance" },
+              "direction": "to"
+            },
+			{
+              "navigationType": "SR","qualityFilter": {"role": "162","semantics": "5"},
+              "direction": "to"
+            }
+		  ]
+		}
+	  ]
+	},
+	{
+	  "name": "Document_from",
+	  "queries": [
+	    {
+		  "definition": [
+		    {
+		      "navigationType": "SR","qualityFilter": {"role": "279","semantics": "6"},
+              "direction": "from"
+			}
+		  ]
+		},
+		{
+		  "definition": [
+		    {
+		      "navigationType": "SR","qualityFilter": {"role": "159","semantics": "6"},
+              "direction": "from"
+			}
+		  ]
+		}
+	  ]
+	},
+	{
+	  "name": "Document_to",
+	  "queries": [
+	    {
+		  "definition": [
+		    {
+		      "navigationType": "SR","qualityFilter": {"role": "279","semantics": "6"},
+              "direction": "to"
+			}
+		  ]
+		},
+		{
+		  "definition": [
+		    {
+		      "navigationType": "SR","qualityFilter": {"role": "159","semantics": "6"},
+              "direction": "to"
+			}
+		  ]
+		}
+	  ]
+	}
+  ]
+}

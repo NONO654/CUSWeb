@@ -1,0 +1,17 @@
+m|ENOXAppsFoundationsUX\GroupByView.mweb
+b|j|n,u
+b|c|n,u
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|ENOXAppsFoundationsUX\GroupByView.mweb\LocalGenerated\win_b64\css\GroupByView.css|1537389046|1439
+s|ENOXAppsFoundationsUX\GroupByView.mweb\src\css\GroupByView.scss|1536061817|1427
+t|win_b64\webapps\GroupByView\js\GroupByUtils.js|1513365103|1393
+s|ENOXAppsFoundationsUX\GroupByView.mweb\src\js\GroupByUtils.js|1513365103|1393
+t|win_b64\webapps\GroupByView\js\GroupingTile.js|1536062059|3327
+s|ENOXAppsFoundationsUX\GroupByView.mweb\src\js\GroupingTile.js|1536062059|3327
+t|win_b64\webapps\GroupByView\js\GroupByView.js|1536061915|1451
+s|ENOXAppsFoundationsUX\GroupByView.mweb\src\js\GroupByView.js|1536061915|1451
+t|win_b64\webapps\GroupByView\html\GroupByTileTemplate.html|1537389064|228
+s|ENOXAppsFoundationsUX\GroupByView.mweb\src\html\GroupByTileTemplate.html|1536061791|228
+t|win_b64\webapps\GroupByView\css\GroupByView.css|1537389046|1439
+g|ENOXAppsFoundationsUX\GroupByView.mweb\LocalGenerated\win_b64\css\GroupByView.css|1537389046|1439

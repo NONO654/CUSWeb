@@ -1,0 +1,10 @@
+m|SMAProcWebAuthoring\SMAProcWebAuthoringControls.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.7.19187
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAProcWebAuthoringControls\SMAProcWebAuthoringControls.js|1562371430|5274
+s|SMAProcWebAuthoring\SMAProcWebAuthoringControls.mweb\src\SMAProcWebAuthoringControls.js|1528228115|124
+s|SMAProcWebAuthoring\SMAProcWebAuthoringControls.mweb\src\WebUXDialog.js|1561988318|17826
+t|win_b64\webapps\SMAProcWebAuthoringControls\WebUXDialogDemo.html|1531550926|3678
+s|SMAProcWebAuthoring\SMAProcWebAuthoringControls.mweb\src\WebUXDialogDemo.html|1521041367|3678

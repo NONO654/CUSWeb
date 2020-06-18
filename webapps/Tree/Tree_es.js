@@ -1,0 +1,1 @@
+define("DS/Tree/Tree_es",{});define("DS/Tree/assets/nls/carousel",{close:"Cerrar",next:"Siguiente",previous:"Anterior"});

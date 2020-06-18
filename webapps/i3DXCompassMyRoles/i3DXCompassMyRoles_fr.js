@@ -1,0 +1,1 @@
+define("DS/i3DXCompassMyRoles/i3DXCompassMyRoles_fr",{});define("DS/i3DXCompassMyRoles/assets/nls/i3DXCompassMyRoles",{platform:"3DExperience Platform",apps:"{0} apps",expire:"Expire : {0}",noAdditional:"Aucune information supplémentaire pour ce rôle"});

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+    <Template syp:name="3DShare_simpleAfrWorkshopInterface" Target="CATCmdInterface">
+        <CATCmdInterface  WkbInterface="CATI3DShare_simpleAfrWorkshopConfiguration"/>
+    </Template>
+
+    <Template syp:name="3DSHARE_Scenario_SwitchVariants" Target="CATCmdHeadersList">
+        <CATCmdHeadersList>
+            <CATCommandHeader ID="SwitchVariants" ClassName="DS/XCT25DCommands/XCT25DSwitchVariantsCmd" ResourceFile="XCT25DExperience/XCT25DExperience"/>
+            <CATCommandHeader ID="Reframe" ClassName="DS/ViewerCommands/VisuReframeViewCmd" SharedLibraryName="ShareUI" ResourceFile="3DPlay/3DPlayExperience3D"/>
+        </CATCmdHeadersList>
+    </Template>
+
+    <Template syp:name="3DShare_simpleAfrWorkshopAccess" Target="CATCmdWorkbench">
+        <CATCmdWorkbench Name="XCT25DExperience">
+            <CATCmdContainer Name="Actions" Visibility="1" RepresentationType="AfrActionBarSection">
+                <CATCmdStarter Name="SwitchVariants" Command="SwitchVariants"/>
+            </CATCmdContainer>
+        </CATCmdWorkbench>
+    </Template>
+</Styles>

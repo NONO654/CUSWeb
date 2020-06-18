@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<head>
+
+    <title>Performance Study</title>
+
+    <!-- Application Metas Start -->
+    <meta name="description" content="Simulation Details Widget" />
+    <meta name="author" content="Dassault Systèmes" />
+    <meta name="apiVersion" content="1.3" />
+    <meta name="debugMode" content="false" />
+    <meta name="autoRefresh" content="0" />
+    <!-- Application Metas End -->
+
+    <!-- Load the web components polyfill -->
+    <script type="text/javascript" src="../Polymer-1.6.1/webcomponents-lite.min.js"></script>
+
+
+    <!-- Load AmdLoader -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+    <!-- Load the UWA framework -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+    <script type="text/javascript" src="../W3DXComponents/W3DXComponents.js"></script>
+
+    <!-- Load any external JS or CSS file -->
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+    <link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+	<link rel="import" href="../SMAProcSP/sp-font/sp-entypo.html">
+	<link rel="import" href="../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+    <!-- Load Polymer and any other web components -->
+    <link rel="import" href="../SMAProcSPUI/sp-drop/sp-drop.html"/>
+    <link rel="import" href="../SMAProcSP/sp-dashboard/sp-dashboard.html"/>
+    <link rel="import" href="./ps-detailed-view/ps-detailed-view.html" id="simViewer"/>
+
+	<!--  Widget preferences -->
+	<widget:preferences>
+</widget:preferences>
+<style>
+.link-frame {
+	height: 100%;
+	width: 100%;
+}
+.overlayDiv {
+	height: 100%;
+	width: 100%;
+	z-index: 1000;
+}
+.errorDiv {
+	height: 100%;
+	width: 100%;
+	border: 2px dashed #b4b6ba;
+	display: flex;
+	text-align: center;
+}
+.errorText {
+	align-self: center;
+	width: 100%;
+}
+</style>
+
+    <script type="text/javascript">
+    // appData should be used as cache in PS widget
+    appData = {};
+    appData.simData = {
+        	simulationId : null, 	//stores simulationId of current process
+          activeSimDetails : {}, //stores details of active simulation
+        	oldSimulationId : null,	//stores simulationId of previous process
+        	exeOptions : [],		//stores execution options
+        };
+        function onReady () {
+            require(
+                ['SMAProcSimViewerUI/SimulationsDetailsWidget'],
+                function (SimulationsDetailsWidget) {
+                    'use strict';
+                    if (!SimulationsDetailsWidget) {
+                        alert('SimulationsDetailsWidget object not found.');
+                    }
+                },
+                function ( /* err */ ) {
+                    'use strict';
+                    alert('Failed to load SimulationsDetailsWidget.');
+                });
+        }
+        if (document.createElement('sp-dashboard').isInDashboard) {
+            onReady();
+        } else {
+            window.addEventListener('WebComponentsReady', onReady);
+        }
+    </script>
+
+</head>
+<body>
+	<p>Loading....</p>
+</body>
+</html>

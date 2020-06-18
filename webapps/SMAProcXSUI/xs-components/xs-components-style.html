@@ -1,0 +1,286 @@
+/*------------------------------------------------------------------
+[xs-components Stylesheet]
+
+Project:        xs
+Version:        1.0
+-------------------------------------------------------------------*/
+<dom-module id="xs-components-style">
+  <template>
+    <style>
+      :host {
+        width: 100%;
+        height: 100%;
+      }
+
+      .category {
+           padding-bottom: 6px;
+      }
+
+      .category-header {
+          height: 30px;
+          background-color: #e2e4e3;
+          border-radius: 4px;
+          border: 1px solid #d1d4d4;
+          cursor: pointer;
+          margin-bottom: 2px;
+          -ms-user-select: none;
+          user-select: none;
+      }
+
+      .category-header:hover {
+          background: #d1d4d4;
+          border: 1px solid #b4b6ba;
+      }
+
+      .category-header span {
+          font: bold 16px/30px '3ds-Light';
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: calc(100% - 18px);
+          display: inline-block;
+          transition: width 300ms linear;
+          padding-left: 30px;
+      }
+
+      .category-header .left-arrow {
+          display: inline-block;
+          position: absolute;
+          left: 15px;
+          width: 38px;
+          margin: 0;
+          color: #77797c;
+          font-size: 12px;
+          line-height: 30px;
+      }
+
+      .category-header .down-arrow {
+          display: none;
+          position: absolute;
+          left: 15px;
+          font-size: 12px;
+          line-height: 30px;
+          color: #3d3d3d;
+          width: 38px;
+          margin: 0;
+      }
+
+
+      .widget-container {
+        display: flex;
+        flex-wrap: wrap;
+        max-height: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .widget {
+          border: thin solid #e2e2e2;
+          border-radius: 5%;
+          margin: 2px;
+          height: 40px;
+          background-color: white;
+          cursor: pointer;
+          width: calc(100%/2 - 4px);
+          display: flex;
+          align-items: center;
+          position: relative;}
+
+      :host[disabled] .widget:hover {
+        color: black;
+        background-color: white;
+        cursor: not-allowed;
+      }
+
+      :host[disabled] .widget:hover .fonticon{
+        color: #77797C;
+      }
+
+      .widget:hover {
+          background-color: #42a2da;
+          color: white; }
+
+      .widget:hover .fonticon{
+          color: white; }
+
+      .title-content {
+        opacity: 1;
+        color: white;
+        position: absolute; }
+
+      .caption {
+        display: flex;
+        align-items: center;
+        width: 100%;
+            padding-left: 4px;
+          padding-right: 4px; }
+
+      .caption span {
+            margin: 0;
+          font-size: 1.5em;
+          height: 30px;
+          text-align: center;
+      }
+
+      .caption div {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding-left: 5px;
+      }
+
+      .active .category-header .down-arrow {
+        display: inline-block;
+      }
+
+      .active .category-header .left-arrow {
+        display: none;
+      }
+
+      .active .widget-container {
+        opacity: 1;
+        max-height: 100%;
+        pointer-events: all;
+      }
+
+      .widget span.info {
+          position: absolute;
+          top: 0px;
+          float: right;
+          right: 0px;
+          font-size: 0.8em;
+          margin-right: 2px;
+          margin-top: 1px;
+          opacity: 0;
+          pointer-events: none;
+      }
+
+      .widget:hover span.info {
+        pointer-events: all;
+        opacity: 1;
+      }
+
+      .fonticon {
+        font-family: entypo;
+        font-style: normal;
+        font-weight: normal;
+        speak: none;
+        display: inline-block;
+        text-decoration: inherit;
+        width: 1em;
+        margin: 0 0.2em;
+        text-align: center;
+        /* For safety - reset parent styles, that can break glyph codes*/
+        font-variant: normal;
+        text-transform: none; }
+
+      .fonticon {
+        text-align: left;
+        margin-right: 10px;
+        font-size: 1.5em;
+        color: #77797C; }
+
+      .fonticon-right-dir:before {
+        content: '\e149';
+      }
+
+      .fonticon-down-dir:before {
+        content: '\e147';
+      }
+
+      .fonticon-progress-0:before {
+        content: '\e89e'; }
+
+      .fonticon-progress-1:before {
+        content: '\e89f'; }
+
+      .fonticon-progress-3:before {
+        content: '\e8a1'; }
+
+      .fonticon-check:before {
+        content: '\e811'; }
+
+      .fonticon-upload:before {
+        content: '\e82d'; }
+
+      .fonticon-list:before {
+        content: '\e8a4'; }
+
+      .fonticon-window:before {
+        content: '\e86c'; }
+
+      .fonticon-check:before {
+        content: '\e811'; }
+
+      .fonticon-calendar:before {
+        content: '\e111'; }
+
+      .fonticon-doc-text:before {
+        content: '\e84a'; }
+
+      .fonticon-doc-text-inv:before {
+        content: '\e84b'; }
+
+      .fonticon-view-small-thb:before {
+        content: '\e209'; }
+
+      .fonticon-chart-line:before {
+        content: '\e186'; }
+
+      .fonticon-docs:before {
+        content: '\e052'; }
+
+      .fonticon-view-tag-cloud:before {
+        content: '\e207'; }
+
+      .fonticon-text-icon:before {
+        content: '\e077'; }
+
+      .fonticon-table:before {
+        content: '\e298'; }
+
+      .fonticon-info:before {
+        content: '\e020'; }
+
+      .fonticon-search:before {
+        content: '\e180'; }
+
+      .fonticon-play:before {
+        content: '\e162'; }
+
+      .fonticon-number, .fonticon-text {
+        font-family: "3ds-Light";
+        font-weight: 700;
+        margin-right: 20px;
+        font-size: 1em;
+        padding: 0.2em; }
+
+      .fonticon-number:before {
+        content: '123'; }
+
+      .fonticon-text:before {
+        content: 'ABC'; }
+
+      @media only screen and (max-width: 300px) {
+        .widget {
+          width: calc(100%/3 - 4px); }
+       }
+      @media only screen and (max-width: 200px) {
+        .widget {
+          width: calc(100%/2 - 2px); }
+       }
+      @media only screen and (max-width: 100px) {
+        .widget {
+          width: 100%; }
+       }
+      @media only screen and (max-width: 50px) {
+        .widget {
+          width: 100%; }
+        .caption .div {
+          display: none;
+        }
+       }
+
+    </style>
+  </template>
+</dom-module>

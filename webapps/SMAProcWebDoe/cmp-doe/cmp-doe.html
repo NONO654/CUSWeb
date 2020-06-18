@@ -1,0 +1,96 @@
+<!--------------------------------------------------------------------
+[cmp-doe HTML Document]
+
+Project:		SMAProcWebExtensionEditors/SMAProcWebDoe
+Version:		1.0
+Last change:    Wed, 03 Feb 2016 10:25:10 GMT
+Primary use:	DOE driver adapter
+Description:    DOE driver adapter
+--------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-tab/sp-tab.html">
+<link rel="import" href="../../SMAProcSPUI/sp-checkbox/sp-checkbox.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSPUI/sp-tree-table/sp-tree-table.html">
+<!-- TLV
+<script type="text/javascript" src="../WebUX/WebUX.js"></script>-->
+
+<dom-module id="cmp-doe">
+	 <link rel="import" type="css" href="cmp-doe.css">
+
+	 <template>
+		<sp-tab>
+			<section id="general" name="general" data-id="general" data-header="General" data-selected="true">
+				<pcw-extension-chooser id="pluginchooser" extensions="{{extensions}}" selected-extension="{{selectedExtensionName}}" chooserlabel="DOE Technique: ">
+				</pcw-extension-chooser>
+				<div class="doeoptions">
+					<div class="techniqueoptions">
+						<fieldset id="doetechniqueoptions" class="doetechniqueoptions block">
+							<legend>DOE Technique Options</legend>
+						</fieldset>
+						<fieldset class="executionoptions">
+							<legend>Execution Options</legend>
+								<div>
+									<div class="inline">
+										<sp-checkbox checked="{{executionOptions.parallel}}"></sp-checkbox>
+										<label class="margin-left">Execute in parallel</label>
+									</div>
+									<div class="block margin-bottom">
+										<label>Action when design point fails:</label>
+										<select id="failrunpolicy" on-change="onPolicyChange" class="form-control">
+											<option selected="true">Ignore</option>
+											<option>Fail</option>
+											<option>Retry</option>
+											<option>Replace with</option>
+										</select>
+										<div id="designpointoptions">
+											<span>(continue executing DOE)</span>
+											<span>(terminate DOE)</span>
+											<span>
+												<sp-input class="designoptions" type="number" value="{{executionOptions.retry number}}"></sp-input>time(s)
+											</span>
+											<span>
+												<sp-input class="designoptions" type="number" value="{{executionOptions.replace pct}}"></sp-input>% modification
+											</span>
+										</div>
+									</div>
+									<div class="inline">
+										<sp-checkbox id="subflowexecution" checked="{{executionOptions.execute subflow once}}"></sp-checkbox>
+										<label class="margin-left">Execute subflow only once</label>
+									</div>
+								 </div>
+						</fieldset>
+					</div>
+					<div class="techniquedescription block">
+						<fieldset>
+							<legend>DOE Technique Description</legend>
+							<div>
+								<p id="techniquedescription"></div>
+								<template is="dom-if" if="{{techniqueimagesrc}}">
+									<img src="[[techniqueimagesrc]]"/>
+								</template>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</section>
+			<section id="factors" name="factors" data-id="factors" data-header="Factors" >
+			<!-- TLV -->
+<!-- 				<sp-tree-table id="factorstable" columns="[[columns]]" width="[[tablewidth]]" height="[[tableheight]]" ></sp-tree-table> -->
+				<div id="factortablediv" class="table"></div>
+				<div id="baseline" class="inline">
+					<sp-checkbox checked="{{executionOptions.update baselines}}"></sp-checkbox>
+					<label class="margin-left">Update baselines to current values when executing</label>
+				</div>
+			</section>
+			<section id="designmatrix" name="designmatrix" data-id="designmatrix" data-header="Design Matrix">
+				<label>Design matrix preview is not available.</label>
+			</section>
+			<section id="responses" name="responses" data-id="responses" data-header="Responses">
+				<sp-tree-table id="responsestable" columns="[[columns]]" width="[[tablewidth]]" height="[[tableheight]]" fixedwidth></sp-tree-table>
+			</section>
+		</sp-tab>
+	</template>
+	<script type="text/javascript" src="cmp-doe.js"></script>
+</dom-module>

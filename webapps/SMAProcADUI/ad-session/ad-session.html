@@ -1,0 +1,72 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-data/sp-data.html">
+<link rel="import" href="../../SMAProcSP/sp-run/sp-run.html">
+<link rel="import" href="../../SMAProcSP/sp-edit-file/sp-edit-file.html">
+<link rel="import" href="../../SMAProcSP/sp-clientstorage/sp-clientstorage.html">
+<link rel="import" href="../ad-app-event-checker/ad-app-event-checker.html">
+<link rel="import" href="../ad-util/ad-util.html">
+<link rel="import" href="../../SMAProcSP/sp-access-group/sp-access-group.html">
+
+<dom-module id="ad-session">
+  <template>
+
+        <!-- COMMON CONFIGURATION PROPERTIES -->
+		<sp-variable id="mcsBaseURL" name="mcsBaseURL" on-valuechange="onVariableValueChange"></sp-variable>
+		<sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL" on-valuechange="onVariableValueChange"></sp-variable>
+		<sp-variable id="eedBaseURL" name="eedBaseURL" on-valuechange="onVariableValueChange"></sp-variable>
+		<sp-variable id="securityContext" name="securityContext" on-valuechange="onVariableValueChange"></sp-variable>
+
+		<!--  WEB SERVICES -->
+        <sp-webservice id="eedurlWS" name="eedurlWS" fire-timeout="" uri="{{_computeEedUrlUri(globals.mcsWSBaseURL)}}"></sp-webservice>
+		<sp-mcsservice id="processWS" name="processWS" data="{{process}}" builduri="false" on-dataready="onSessionDataReady" on-error="onSessionWSError" wait="3000" fire-timeout="" uri="{{_computeProcessUri(globals.mcsWSBaseURL, queryProcessID)}}">
+			<sp-data id="process_data" name="process_data" uid="id" model="{{process}}" on-error="onSessionDataError"></sp-data>
+		</sp-mcsservice>
+
+		<sp-mcsservice data="{{envList}}" uri="../AppsMngt/environment/list" getasap="" on-dataready="envListReady"></sp-mcsservice>
+		<sp-mcsservice id="parameterWS"></sp-mcsservice>
+		<sp-mcsservice id="checkDrmWS"></sp-mcsservice>
+		<sp-mcsservice id="checkCPULimitWS"></sp-mcsservice>
+		
+		<!-- Define access group -->
+		<sp-access-group name="process" data="{{process.basics}}"></sp-access-group>
+
+		<!-- Tool Web services -->
+		<sp-mcsservice id="activitiesWS" name="activitiesWS" data="{{activities}}" on-dataready="onToolDataReady" on-error="onToolWSError" wait="3000" fire-timeout="" uri="{{_computeActivitiesUri(globals.mcsWSBaseURL, processID)}}">
+			<sp-data id="activities_data" name="activities_data" uid="id" model="{{activities}}" on-error="onToolDataError"></sp-data>
+		</sp-mcsservice>
+
+		<!-- Managed Data Web services -->
+		<sp-mcsservice id="contentWS" name="contentWS" fire-timeout="" uri="{{_computeContentUri(globals.mcsWSBaseURL)}}"></sp-mcsservice>
+ 		<sp-mcsservice id="contentCreateFileWS" name="contentCreateFileWS" fire-timeout="" uri="{{_computeCreateFileUri(globals.mcsWSBaseURL)}}"></sp-mcsservice>
+ 		<sp-mcsservice id="contentCheckinFileWS" name="contentCheckinFileWS" fire-timeout="" uri="{{_computeCheckinFileUri(globals.mcsBaseURL)}}"></sp-mcsservice>
+ 		<sp-mcsservice id="contentCommitCreateWS" name="contentCommitCreateWS" fire-timeout="" uri="{{_computeCommitCreateUri(globals.mcsWSBaseURL)}}"></sp-mcsservice>
+		<sp-mcsservice id="contentReferencedWS" name="contentReferencedWS" fire-timeout="" uri="{{_computeRefContentUri(globals.mcsWSBaseURL, processID)}}"></sp-mcsservice>
+        <sp-mcsservice id="contentFolderCreateWS" name="contentFolderCreateWS" fire-timeout="" uri="{{_computeFolderCreate(globals.mcsWSBaseURL)}}"></sp-mcsservice>
+		<sp-mcsservice id="downloadWS" name="fileUrlWS" fire-timeout=""></sp-mcsservice>
+		
+		<!-- Job Web services -->
+        <sp-mcsservice id="processJobsWS" name="processJobsWS" data="{{processJobs}}" on-dataready="onProcessJobsDataReady" on-error="onProcessJobsWSError" fire-timeout="" uri="{{_computeProcessJobsUri(globals.mcsWSBaseURL, processID)}}">
+            <sp-data id="processJobs_data" name="processJobs_data" uid="id" model="{{processJobs}}" on-error="onProcessJobsDataError"></sp-data>
+        </sp-mcsservice>
+        <sp-mcsservice id="jobDeleteWS" name="jobDeleteWS" on-error="onJobDeleteWSError" fire-timeout="" uri="{{_computeJobDeleteUri(globals.mcsWSBaseURL)}}"></sp-mcsservice>
+        <sp-mcsservice id="jobStatusWS" name="jobStatusWS" fire-timeout="" uri="{{_computeJobStatusUri(globals.mcsWSBaseURL)}}"></sp-mcsservice>
+
+		<!--  RUNNERS FOR CONTENT TRANSFER JOBS -->
+		<sp-run id="uploadRunner" job-url="/resources/slmservices/jobs/uploadJob" on-success="onUploadJobStarted" on-error="onUploadJobError" timeout="60000"></sp-run>
+		<sp-run id="downloadRunner" job-url="/resources/slmservices/jobs/downloadJob" on-success="onDownloadJobStarted" on-error="onDownloadJobError" timeout="60000"></sp-run>
+
+		<!--  Other components -->
+		<ad-app-event-checker id="eventChecker"></ad-app-event-checker>
+
+        <!--  file editor runner -->
+        <sp-edit-file id="editFileComponent" cos-url="{{globals.eedBaseURL}}" mcs-url="{{globals.mcsWSBaseURL}}"></sp-edit-file>
+
+        <!-- Editor path storage-->
+        <sp-clientstorage id="editorStore" namespace="sc_default_text_editor"></sp-clientstorage>
+	</template>
+  <script src="ad-session.js"></script>
+</dom-module>

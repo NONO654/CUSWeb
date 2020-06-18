@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+      <Template syp:name="ENOCharacteristicsHeaders" Target="CATCmdHeadersList">
+            <CATCmdHeadersList>                  
+                  <CATCommandHeader ID="DeleteConsCharacteristcs" ClassName="DS/ENOCharacteristicsWebApp/commands/DeleteConsCharacteristcs" ResourceFile="ENOCharacteristicsWebApp/ENOCharacteristicsWebApp" Available="1" />
+                  <CATCommandHeader ID="FilterConsCharacteristics" ClassName="DS/ENOCharacteristicsWebApp/commands/FilterConsCharacteristics" ResourceFile="ENOCharacteristicsWebApp/ENOCharacteristicsWebApp" Available="1" />
+                  <CATCommandHeader ID="RefreshConsCharacteristics" ClassName="DS/ENOCharacteristicsWebApp/commands/RefreshConsCharacteristics" ResourceFile="ENOCharacteristicsWebApp/ENOCharacteristicsWebApp" Available="1" />
+                  <CATCommandHeader ID="ConsExport" ClassName="DS/ENOCharacteristicsWebApp/commands/ConsExport" ResourceFile="ENOCharacteristicsWebApp/ENOCharacteristicsWebApp" Available="1" /> 
+                  <CATCommandHeader ID="EditColumnSettingsConsView" ClassName="DS/ENOCharacteristicsWebApp/commands/EditColumnSettingsConsView" ResourceFile="ENOCharacteristicsWebApp/ENOCharacteristicsWebApp" Available="1" />
+            </CATCmdHeadersList>
+      </Template>
+
+      <Template syp:name="ENOCharacteristicsWkbAccess" Target="CATCmdWorkbench">
+            <CATCmdWorkbench Name="CharacteristicsWebApp">
+                  <CATCmdContainer Name="Authoring" RepresentationType="AfrActionBarSection">                       
+                        <CATCmdStarter Name="Delete Cons Characteristics" Command="DeleteConsCharacteristcs" />
+                        <CATCmdSeparator Name="Folder_Separator" />
+                        <CATCmdStarter Name="Filter Cons Characteristics" Command="FilterConsCharacteristics" />
+                        <CATCmdStarter Name="Refresh Cons Characteristics" Command="RefreshConsCharacteristics" />                       
+                  </CATCmdContainer> 
+                  <CATCmdContainer Name="Tools" RepresentationType="AfrActionBarSection">
+                        <CATCmdStarter Name="Edit Table View" Command="EditColumnSettingsConsView" />
+                        <CATCmdStarter Name="Tools" Command="ConsExport" />
+                  </CATCmdContainer>
+            </CATCmdWorkbench>
+      </Template>
+</Styles>

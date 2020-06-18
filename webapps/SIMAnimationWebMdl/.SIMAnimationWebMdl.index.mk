@@ -1,0 +1,11 @@
+m|SIMAnimationWeb\SIMAnimationWebMdl.mweb
+b|j|c,m
+b|c|n,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\SIMAnimationWebMdl\SIMAnimationWebMdl.js|1531550890|7240
+s|SIMAnimationWeb\SIMAnimationWebMdl.mweb\src\SIMWebDictionary.js|1448355560|1061
+s|SIMAnimationWeb\SIMAnimationWebMdl.mweb\src\SIMWebExperience.js|1448355099|2633
+s|SIMAnimationWeb\SIMAnimationWebMdl.mweb\src\AnimationToKeyFramer.js|1458545681|13480
+s|SIMAnimationWeb\SIMAnimationWebMdl.mweb\src\SIMAnimationRepRefUnstreamer.js|1435907472|20529
+s|SIMAnimationWeb\SIMAnimationWebMdl.mweb\src\SIMAnimationServices.js|1448354696|4204

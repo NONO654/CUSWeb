@@ -1,0 +1,106 @@
+<!--------------------------------------------------------------------
+[xs-wg-navigation HTML Document]
+------------------------------------------------------------------- -->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+
+<dom-module id="xs-wg-navigation">
+  <!-- <link rel="import" type="css" href="xs-wg-navigation.css"> -->
+  <template>
+    <style>
+    :host {
+      display: inline-block;
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 100px;
+      height: auto;
+    }
+
+    .nav-container {
+      height: 50px;
+      width: 100%;
+      display: table;
+      table-layout: fixed;
+    }
+
+    .step {
+      display: table-cell;
+      cursor: pointer;
+    }
+
+    .step:hover {
+      background-color: #eef1f3;
+      border-radius: 10px;
+    }
+
+    .step > span {
+      display: block;
+      text-align: center;
+      font-family: '3ds-Light';
+    }
+
+    .step > div {
+      display: flex;
+      justify-content: center;
+      font-family: '3ds-Light';
+      padding: 0 2px 0 2px;
+    }
+
+    .step-circle {
+      height: 16px;
+      width: 16px;
+      border-radius: 50%;
+      border-width: 1px;
+      border-color: #000000;
+      border-style: solid;
+      background-color: white;
+      display: inline-block;
+      vertical-align: top;
+      min-width: 16px;
+      margin-top: 3px;
+    }
+
+    .step-count {
+      font-size: 16px;
+      padding-top: 5px;
+    }
+
+    .step-label {
+      font-size: 16px;
+      font-family: '3ds-Light';
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      padding-left: 5px;
+    }
+
+    .selected {
+      background: #eef1f3;
+      border-radius: 10px;
+    }
+
+    .selected > div > .step-circle {
+      border-width: 4px;
+      border-color: #005686;
+    }
+
+    .selected > div > .step-label {
+      color: #368ec4;
+    }
+    </style>
+
+    <div class="nav-container">
+      <template id="steplist" is="dom-repeat" items="{{_steps}}" as="step">
+        <div class$="{{_computeStepMainClass(index,selected)}}" title$="{{step}}" data-stepid$="{{index}}" on-click="selectStep">
+          <span class="step-count">{{_computeIndex(index)}}</span>
+          <div>
+              <span class="step-circle"></span>
+              <span class="step-label">{{step}}</span>
+          </div> 
+        </div>
+      </template>
+    </div>
+    <span style="color: #EA4F37">{{errorMsg}}</span>
+  </template>
+  <script type="text/javascript" src="xs-wg-navigation.js"></script>
+</dom-module>

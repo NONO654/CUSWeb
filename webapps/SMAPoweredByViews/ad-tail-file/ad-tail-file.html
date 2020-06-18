@@ -1,0 +1,34 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../ad-redux-behaviour/ad-redux-behaviour.html">
+<link rel="import" href="../ad-tail-log-view/ad-tail-log-view.html">
+
+<dom-module id="ad-tail-file">
+	<link rel="import" type="css" href="ad-tail-file.css">
+	<template>
+		<div>
+			<div id="tailModal" class="modal fade">
+				<div class="modal-wrap tail-modal-wrap">
+					<div class="modal-content">
+
+						<div class="modal-header heading">
+              <button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onClose"><span class="fonticon fonticon-close"></span></button>
+  						<h4>
+                <span>{{tailFileName}}</span>
+                <span class="tail-file-version">[[_formatVersion(tailFileVersion)]]</span>
+						</div>
+
+						<div id="tailModalBody" class="modal-body tail-modal-body">
+              <ad-tail-log-view id="adTailLogView" class="style-scope ad-tail-file-container"></ad-tail-log-view>
+              <div id="tailSpinnerContainer" class="spinner-container"></div>
+						</div>
+
+						<div id="footer" class="modal-footer">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="modalOverlay" class="modal-overlay fade hidden"></div>
+		</div>
+	</template>
+	<script type="text/javascript" src="ad-tail-file.js"></script>
+</dom-module>

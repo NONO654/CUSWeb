@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define(["DS/SMAPoweredByState/ad-state-domain-jobs/action-types"],function(b){var a={};a.setJobInputs=function(d,c){return{type:b.SET_JOB_INPUTS,jobID:d,inputIDs:c}};a.setJobMainInput=function(d,c){return{type:b.SET_JOB_MAIN_INPUT,jobID:d,inputID:c}};a.addJobInput=function(d,c){return{type:b.ADD_JOB_INPUT,jobID:d,inputID:c}};a.removeJobInput=function(d,c){return{type:b.REMOVE_JOB_INPUT,jobID:d,inputID:c}};a.removeAllJobInputs=function(c){return{type:b.REMOVE_ALL_JOB_INPUTS,jobID:c}};return a});

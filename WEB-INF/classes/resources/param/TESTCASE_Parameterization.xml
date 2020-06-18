@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<OOTBParameterization regSuite="ProductLine">
+<Domain id="LifecycleTopology">
+		<Family id="TestCase" collabApps="StrategicCustomerRelationship">
+			<Constant id="policyID" value="Test Case"/>
+			<Constant id="modifyTopology" value="true"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="appType" value="CBP"/>
+			<Constant id="NLSStateFileName" value="emxProductLineStringResource.properties"/>
+			<Constant id="lang" value="en,fr"/>
+
+			<GovernedType id="TestCase">
+				<Constant id="typeId" value="Test Case"/>
+				<Constant id="supportedRules" value="RejectOnExperimenter,RejectOnCreator,RejectOnStandardData"/>
+			</GovernedType>
+
+			<State id="Propose">
+				<Constant id="sysName" value="Propose"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxProductLine.State.Propose"/>
+			</State>
+			<State id="Approve">
+				<Constant id="sysName" value="Approve"/>
+				<Constant id="isRemovable" value="true"/>
+				<Constant id="NLSKey" value="emxProductLine.State.Approve"/>
+			</State>
+			<State id="Validate">
+				<Constant id="sysName" value="Validate"/>
+				<Constant id="isRemovable" value="true"/>
+				<Constant id="NLSKey" value="emxProductLine.State.Validate"/>
+			</State>	
+			<State id="Complete">
+				<Constant id="sysName" value="Complete"/>
+				<Constant id="isRemovable" value="true"/>
+				<Constant id="NLSKey" value="emxProductLine.State.Complete"/>
+			</State>
+			
+			<Transition id="ProposetoApprove">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Propose"/>
+				<Constant id="targetState" value="Approve"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="ApprovetoValidate">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Approve"/>
+				<Constant id="targetState" value="Validate"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="ValidatetoComplete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Validate"/>
+				<Constant id="targetState" value="Complete"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+		</Family>
+	</Domain>
+</OOTBParameterization>
+
+

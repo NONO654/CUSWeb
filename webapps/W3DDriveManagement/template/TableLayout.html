@@ -1,0 +1,22 @@
+<div class="table-layout">
+    <table class="table table-striped table-responsive">
+        <tr>
+            <th>{{NLS.name}}<span class="sortable fonticon fonticon-expand-down username"></span><span class="sortable fonticon fonticon-expand-up username"></span></th>
+            <th>{{NLS.email}}<span class="sortable fonticon fonticon-expand-down email"></span><span class="sortable fonticon fonticon-expand-up email"></span></th>
+            <th>{{NLS.usage}}<span class="sortable fonticon fonticon-expand-down usage"></span><span class="sortable fonticon fonticon-expand-up usage"></span></th>
+            <th>{{NLS.usage}} / {{NLS.quota}}<span class="sortable fonticon fonticon-expand-down ratio"></span><span class="sortable fonticon fonticon-expand-up ratio"></span></th>
+            <th>{{NLS.manageDrive}}</th>
+        </tr>
+        {{#each users}}
+        <tr>
+            <td title="{{username}}">{{username}}</td>
+            <td title="{{email}}">{{email}}</td>
+            <td title="{{usageNLS}}">{{usageNLS}}</td>
+            <td class="{{#ifCond ratio '>=' 100}}red{{/ifCond}} {{#ifCond ratio '>=' 80}}yellow{{/ifCond}}" title="{{ratio}}">{{ratio}} %</td>
+            <td title="">
+                <span class="fonticon fonticon-chevron-down action" data-model-id="{{user}}"></span>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+</div>

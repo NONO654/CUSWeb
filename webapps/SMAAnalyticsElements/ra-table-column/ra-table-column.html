@@ -1,0 +1,13 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../ra-table-cell/ra-table-cell.html" />
+
+<dom-module id="ra-table-column" attributes="column-id">
+	<link rel="import" type="css" href="ra-table-column.css">
+	<template>
+		<template is="dom-repeat" items="{{rowData}}">
+			<ra-table-cell display-functions="{{displayFunctions}}" column-data="{{ _getRowValue( item.id, columnData ) }}" row-box-data="{{_getRowBoxData(item, refreshCellBoxData, expandFlag)}}" expand-flag="{{expandFlag}}" row-data="{{item}}" expanded="{{_getExpansionInfo(item.id,groupExpansionData)}}" scroll-data="[[scrollData]]" refresh-cell-box-data="[[refreshCellBoxData]]" row-header="[[columnBoxData.isRowHeader]]"></ra-table-cell>
+		</template>
+	</template>
+	<script type="text/javascript" src="ra-table-column.js"></script>
+</dom-module> 

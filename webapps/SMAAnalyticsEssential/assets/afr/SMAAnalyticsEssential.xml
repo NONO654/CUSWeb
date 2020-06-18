@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+	<Template syp:name="SMAAnalyticsEssWorkbenchInterface" Target="CATCmdInterface">
+    	<CATCmdInterface WkbInterface="SMAAnalyticsEssWorkbenchAddin"/>
+  	</Template>
+  	
+  	<Template syp:name="SMAAnalyticsEssWorkbenchHeaders" Target="CATCmdHeadersList">
+  		<CATCmdHeadersList>
+	  		<CATCommandHeader ID="SMAAnalyticsEssCreateCaseHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsCreateCase"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	                        
+        	<CATCommandHeader ID="SMAAnalyticsEssSearchCaseHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsSearchCase"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	       	<CATCommandHeader ID="SMAAnalyticsEssSaveCaseHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsSaveCase"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+            <CATCommandHeader ID="SMAAnalyticsEssReviseSaveCaseHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsReviseSaveCase"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+			<CATCommandHeader ID="SMAAnalyticsEssCloseCaseHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsCloseCase"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	                        
+	       	<!-- Setup Commands -->
+	       	<CATCommandHeader ID="SMAAnalyticsEssAddDataHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsAddData"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	                        
+        	<CATCommandHeader ID="SMAAnalyticsEssAddRequirementHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsAddRequirement"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	                        
+	      	<CATCommandHeader ID="SMAAnalyticsEssParamMappingHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsParamMerge"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	                        
+	        <CATCommandHeader ID="SMAAnalyticsEssReqMappingHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsReqMerge"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	                        
+	       	<CATCommandHeader ID="SMAAnalyticsEssLifecycleHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsManageLifecycle"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	                        
+			<CATCommandHeader ID="SMAAnalyticsEssPropertiesHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsEssProperties"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	                        
+	      	<CATCommandHeader ID="SMAAnalyticsEssRAHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsOpenRA"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	                        
+	        <CATCommandHeader ID="SMAAnalyticsEssHistoryHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsHistory"
+	                        ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	       	<CATCommandHeader ID="SMAAnalyticsEssSetupHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsSetup"
+	                       	ResourceFile="SMAAnalyticsEssential/SMAAnalyticsEssCmdHeader"
+	                        SharedLibraryName="SMAAnalyticsEssCmdHeader"
+	                        Available="1"/>
+	        <CATCommandHeader ID="SMAAnalyticsSearchHdr"
+	                       	ClassName="DS/SMAAnalyticsEssential/SMAAnalyticsSearch"
+	                        SharedLibraryName="SMAAnalyticsSearchHdr"
+	                        Available="1"/>
+	        
+	        
+      	</CATCmdHeadersList>
+  	</Template>
+  	
+  	<Template syp:name="SMAAnalyticsEssWorkbenchAccess" Target="CATCmdWorkbench">
+  		<CATCmdWorkbench Name="SMAAnalyticsEssWorkbench" RepresentationType="AfrActionBar">
+  			<CATCmdContainer Name="FixedSection" RepresentationType="AfrActionBarFixedSection">
+		        <CATCmdStarter Name="SMAAnalyticsEssCreateCase" Command="SMAAnalyticsEssCreateCaseHdr"/>
+		        <CATCmdStarter Name="SMAAnalyticsEssSearchCase" Command="SMAAnalyticsEssSearchCaseHdr"/>
+		        <CATCmdContainer Name="Save" Visibility="1" RepresentationType="AfrActionBarDropDown">
+		        	<CATCmdStarter Name="SMAAnalyticsEssSaveCase" Command="SMAAnalyticsEssSaveCaseHdr"/>
+		        	<CATCmdStarter Name="SMAAnalyticsEssReviseSaveCase" Command="SMAAnalyticsEssReviseSaveCaseHdr"/>
+	        	</CATCmdContainer>
+	      		<CATCmdStarter Name="SMAAnalyticsEssCloseCase" Command="SMAAnalyticsEssCloseCaseHdr"/>
+	      	</CATCmdContainer>
+	      	<CATCmdContainer Name="Setup" Visibility="1" RepresentationType="AfrActionBarSection">
+	      		<CATCmdStarter Name="SMAAnalyticsEssAddData" Command="SMAAnalyticsEssAddDataHdr"/>
+	      		<CATCmdStarter Name="SMAAnalyticsEssAddRequirement" Command="SMAAnalyticsEssAddRequirementHdr"/>
+	      		<CATCmdStarter Name="SMAAnalyticsEssMapping" Command="SMAAnalyticsEssParamMappingHdr"/>
+	      		<CATCmdStarter Name="SMAAnalyticsEssMapping" Command="SMAAnalyticsEssReqMappingHdr"/>
+ 		   		<CATCmdStarter Name="SMAAnalyticsEssSetup" Command="SMAAnalyticsEssSetupHdr"/>
+      			<CATCmdContainer Name="OtherApps" Visibility="1" RepresentationType="AfrActionBarDropDown">
+	    	  		<CATCmdStarter Name="SMAAnalyticsEssRA" Command="SMAAnalyticsEssRAHdr"/>
+      				<CATCmdStarter Name="SMAAnalyticsEssLifecycle" Command="SMAAnalyticsEssLifecycleHdr"/>
+      				<CATCmdStarter Name="SMAAnalyticsEssProperties" Command="SMAAnalyticsEssPropertiesHdr"/>
+      			</CATCmdContainer>
+	      	</CATCmdContainer>
+  		</CATCmdWorkbench>
+  	</Template>
+</Styles>

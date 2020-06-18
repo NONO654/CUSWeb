@@ -1,0 +1,34 @@
+{
+  "tenantBasedServices" : ["3DSpace","3DSearch","6WTags"],
+  "commands":{
+    "getPreferredSC": {
+      "url":"/resources/pno/person/getsecuritycontext",
+      "method":"GET",
+      "type":"json",
+      "noSecurityContextNeeded": true,
+      "targetService":"3DSpace",
+      "isChangeControlled":false
+  },
+  "get_command_settings":{
+    "url":"/resources/v1/engineeringItem/commandSettings",
+    "method":"GET",
+    "type":"text",
+    "targetService":"3DSpace",
+    "isChangeControlled": false
+  },
+  "mcs_setPartNumber":{
+    "url":"/resources/v1/engineeringItem/setPartNumber",
+    "method":"PUT",
+    "type":"json",
+    "targetService":"3DSpace",
+    "isChangeControlled":true
+  },
+  "mcs_retrievePartNumber":{
+    "url":"/resources/v1/engineeringItem/retrievePartNumber",
+    "method":"POST",
+    "type":"json",
+    "targetService":"3DSpace",
+    "isChangeControlled":false
+  }
+  }
+}

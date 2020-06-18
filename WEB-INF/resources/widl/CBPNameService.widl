@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="urn:com:dassault_systemes:widl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd" xmlns:tns="http://cbp.enovia.ws/basic" xmlns:err="http://www.3ds.com/wserror" xmlns:q1="http://cbp.enovia.ws/CBPXML">
+	<entities targetNamespace="http://cbp.enovia.ws/basic">
+		<schemaImports>
+			<schemaImport location="wserrors.xsd"/>
+			<schemaImport location="CBPXML.xsd"/>
+		</schemaImports>
+		<interfaces>
+			<interface name="IPLMNameService" scope="public">
+				<documentation>
+					Interface for name-related operations.
+				</documentation>				
+
+				<method name="getSymbolicName">
+					<documentation>
+						Get the symbolic name of an admin type.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="adminType" type="xs:string" direction="in">
+						<documentation>The admin type.</documentation>
+					</param>
+					<param name="name" type="xs:string" direction="in">
+						<documentation>The actual name.</documentation>
+					</param>
+					<param name="symbolicName" type="xs:string" direction="out">
+						<documentation>The symbolic name.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getActualName">
+					<documentation>
+						Get the actual name of an admin type.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="symbolicName" type="xs:string" direction="in">
+						<documentation>The symbolic name.</documentation>
+					</param>
+					<param name="adminType" type="xs:string" direction="out">
+						<documentation>The admin type.</documentation>
+					</param>
+					<param name="name" type="xs:string" direction="out">
+						<documentation>The actual name.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+			</interface>
+		</interfaces>
+		<implementations>
+			<implementation name="PLMNameService" serviceid="nameService" implements="tns:IPLMNameService">
+				<documentation>
+					A service to provide name-related operations.
+				</documentation>
+			</implementation>
+		</implementations>
+	</entities>
+</description>

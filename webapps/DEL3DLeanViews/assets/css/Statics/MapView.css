@@ -1,0 +1,49 @@
+.mapView
+{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  pointer-events: all;
+}
+.leangetView.focused
+{
+	z-index: 1;
+}
+.mapView:not(.focused).childFixed .mapStaticCollectionView > .infraView:not(.maximize),
+.mapView:not(.focused).childFixed .pageView:not(.maximize)
+{
+  display: none;
+}
+.mapView.focused
+{
+    background-color: #d8e1eb;
+}
+.mapView:not(.customizeMenuOpened) .mapStaticCollectionView > .layout_MainDropGrid,
+.pageView:not(.customizeMenuOpened) .pageStaticCollectionView > .layout_MainDropGrid,
+.pageName,
+.infraName
+{
+    display: none;
+}
+.mapView.focused .mapStaticCollectionView > .infraView:not(.customized):not(.minMaxTransition) .infraName,
+.mapView.focused .pageView:not(.customized):not(.minMaxTransition) .pageName,
+.mapView:not(.customizeMenuOpened) .mapStaticCollectionView > .infraView:not(.focused):not(.maximize):not(.minMaxTransition) .infraName,
+.mapView:not(.customizeMenuOpened) .pageView:not(.focused):not(.maximize):not(.minMaxTransition) .pageName
+{
+    display: block;
+    animation: fadeIn 0.3s;
+}
+.infraView.maximize .infraHeader,
+.pageView.maximize .infraHeader
+{
+    display: flex;
+}
+.mapView > .floatableCollectionView 
+{
+    display: none;
+}
+@keyframes fadeIn 
+{
+    from { opacity: 0; }
+      to { opacity: 1; }
+}

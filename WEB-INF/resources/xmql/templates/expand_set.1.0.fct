@@ -1,0 +1,6 @@
+Language: xMQL
+
+start transaction;
+mod set ${setname} add bus ${rootids};
+label ${label} expand set ${setname} ${fromkw} ${tokw} relationship ${relpattern} type ${typepattern} ${fixedpointskw} ${fixedpointsids} ${withrootskw} ${preventduplicateskw} recurse to ${recurselevel} select businessobject ${selectbo,noescape= } ${wherebokw} ${wherebo} select relationship ${selectrel,noescape= } ${whererelkw} ${whererel}  dump | tcl terse;
+abort transaction;

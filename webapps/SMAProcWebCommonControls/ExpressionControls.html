@@ -1,0 +1,39 @@
+<dom-module id="pcw-expression-ctrl">
+    <style>
+        :host {
+            display: flex;
+            width: inherit;
+            height: inherit;
+            justify-content: space-between;
+            flex: 1;
+            margin-top:10px;
+        }
+        :host([hidden]) {
+            display: none;
+        }
+        label {
+            display:inline;
+            font-weight: normal;
+        }
+    </style>
+
+    <template>
+        <div>
+            <label>Parameters:</label>
+            <select id="paramChooser" name="paramChooser" on-change="onParamSelect" class="form-control input-sm">
+            </select>
+        </div>
+
+        <div>
+            <label>Operators:</label>
+            <select id="operatorsChooser" name="operatorChooser" on-change="onOperatorSelect" class="form-control input-sm">
+            </select>
+        </div>
+
+        <div>
+            <label>Functions:</label>
+            <select id="functionChooser" name="functionChooser" on-change="onFunctionSelect" class="form-control input-sm">
+            </select>
+        </div>
+    </template>
+</dom-module>

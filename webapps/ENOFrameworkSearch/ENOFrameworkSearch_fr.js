@@ -1,0 +1,1 @@
+define("DS/ENOFrameworkSearch/ENOFrameworkSearch_fr",{});define("DS/ENOFrameworkSearch/assets/nls/ENOFrameworkSearch",{close_button_tooltip:"Fermer",launch_tree_page:"Afficher le détail"});

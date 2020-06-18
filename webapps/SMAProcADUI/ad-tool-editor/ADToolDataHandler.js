@@ -1,0 +1,2 @@
+/*!  Copyright 2016 Dassault Systemes. All rights reserved. */
+(function(a){a.DS.SMAProcADUI=a.DS.SMAProcADUI||{};a.DS.SMAProcADUI.ADToolDataHandler={properties:{tools:{type:Array,value:function(){return[]},observer:"toolsChanged"},cos:{type:Object,value:null,observer:"cosChanged"}},validate:function(){if(this.validateImpl){return this.validateImpl.call(this)}else{return true}},toolsChanged:function(b){if(this.toolsChangedImpl){this.toolsChangedImpl.call(this,b)}},cosChanged:function(b){if(this.cosChangedImpl){this.cosChangedImpl.call(this,b)}},}}(this));

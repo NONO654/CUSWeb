@@ -1,0 +1,1 @@
+define(["i18n!DS/SMAPoweredByHandler/assets/nls/common"],function(b){var a={iconClass:"file-type-skeleton job-type-default",stepsMapping:[b.Initializing,b.Initializing,b.Running,b.Saving]};return a});

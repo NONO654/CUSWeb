@@ -1,0 +1,35 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+<link href="http://web3dinfra/WUXShowRoom/i_framed_sample.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../UIKIT/UIKIT.css">
+<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+<script>
+	require(['UWA/Drivers/Alone', 'DS/RTwebrtcAPI/RTwebrtcAPI', 'DS/MessageBus/MessageBus'], function (UWA, RTwebrtcAPI, RTShareAPI, Button, justHereToLoadMessageBus) {		
+			//var webRTCAPIInstance = new RTwebrtcAPI({users:[{login:login,tenant:'hyper3dsy',orderId:Date.now(),devEnv:true}]})
+			var webRTCAPIInstance = new RTwebrtcAPI({
+				orderId:Date.now(),
+				users:[
+						{login:'ii9',username:'Adrien Berton'},
+						{login:'t5r',username:'Thierry Olivier'},
+						{login:'p8d',username:'Paul Simard'},
+						{login:'uxodtitp',username:'monsieur uxodtitp'},
+						{login:'uxodtmem',username:'monsieur uxodtmem'}
+			]});
+			webRTCAPIInstance.addContact({
+				login: 'pne1',
+				username: 'Pierre Negre'
+			});
+			webRTCAPIInstance.renderTo(document.getElementById("RTwebrtcAPIDemo"));
+		});
+</script>
+</head>
+<body>
+	<article id="RTwebrtcAPIDemo"><center><h3>RT WebRTC API demo</h3></center>
+		
+	</article>
+</body>
+</html>
+
+

@@ -1,0 +1,1 @@
+define("DS/GraphListView/GraphListView_ja",{});define("DS/GraphListView/assets/nls/ColumnsTitles",{colGraph:"グラフ",colTitle:"タイトル "});

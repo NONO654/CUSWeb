@@ -1,0 +1,549 @@
+﻿<!DOCTYPE html>
+<html style="height:100%" lang="en">
+<head>
+    <title>HTML TABLE Test</title>
+    <!-- avoid security/hack issue -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- style -->
+    <link rel="stylesheet" type="text/css" href="scripts/wrappedTable.css">
+    <link rel="stylesheet" type="text/css" href="./CfgRules.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles/wrappedController.css">
+
+    <!-- <link rel="stylesheet" type="text/css" href="http://uwa.netvibes.com/lib/c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="http://uwa.netvibes.com/lib/c/UWA/js/UWA_Standalone_Alone.js"></script> -->
+    
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+  
+	<script type="text/javascript">
+
+	function loadMatrixRulePage(){	
+		require([
+	                //"DS/CfgRules/scripts/generateCfgMatrixRulesExpression"
+	                "DS/CfgRules/scripts/CfgMatrixRulesHighLevelController"
+	                //,"DS/CfgRules/scripts/generateCfgMatrixRulesXMLExpression"
+	                ,"DS/CfgRules/scripts/CfgMatrixRulesWebServices"
+	                //,"DS/CfgRules/scripts/generateCfgMatrixRulesJSONObj"
+                    ,"DS/CfgRules/scripts/dictionaryCfgUtils"
+                    , "DS/UIKIT/Mask"
+                    , "UWA/Core"
+                    , "UWA/Element" // coz fuc*k this - createElement doesn't come straight in UWA.....
+                    , 'UWA/Drivers/Alone'
+                    , "i18n!DS/CfgRules/assets/nls/MatrixRule"
+                    , "css!DS/UIKIT/UIKIT.css"
+		        ], function (
+	                       // generateCfgMatrixRulesExpressionFunctions
+	                         HighLevelControllerMatrixTable
+	                       // , generateCfgMatrixRulesXMLExpressionFunctions
+	                        , WebServices
+	                        //, MatrixRulesJsonObj
+		                    , dictionaryCfgUtilsFunctions
+                            , Mask
+                            , uwa_core_you_should_use_var_UWA
+                            , uwa_element
+                            , uwa_drivers_alone
+                            , MR_NLS
+                            , css_not_to_use_as_is
+	                        )
+		        {
+		            var i = 0;
+			
+		            var contents95 = document.getElementsByClassName("content95");
+		            while (contents95.length !== 0)
+		            {
+		                delete contents95[0];
+		            }
+                    var contents5 = document.getElementsByClassName("content5");
+		            while (contents5.length !== 0)
+		            {
+		                delete contents5[0];
+		            }
+	
+    				var pidModel = WebServices.getObjectIDFromURL("modelPID");
+    				var pidProduct = WebServices.getObjectIDFromURL("productPID");
+
+    			//	var modelName = "gsi12Model"; // WebServices.getObjectIDFromURL();
+    			//	var productName = "gsi12HP"; // WebServices.getObjectIDFromURL();
+    			//	var prodRevision = "A"; // WebServices.getObjectIDFromURL();
+
+    				var productName = WebServices.getObjectIDFromURL("prodname"); 
+    				var prodRevision = WebServices.getObjectIDFromURL("prodrev");
+    				var modelname = WebServices.getObjectIDFromURL("modname");
+    				if (window.localStorage.DS_Debug_MatrixRule_Performance) {
+    				    console.log('---- MR Timer Variable Activated ---- ');
+    				    var t_start = performance.now();
+    				}
+
+
+
+    				
+                    // server side ?
+		            // wrapped method... why is it needed to encode on client side while it's decoded on server side... to analyse....
+    				//var htmlEncode = function(aStringToEncode)
+    				//{
+    				//    var result = "";
+    				//    result = aStringToEncode.toString();
+    				//    result = result.replace("&", "&amp;");
+    				//    result = result.replace(">", "&gt;");
+    				//    result = result.replace("<", "&lt;");
+    				//    result = result.replace("\"", "&quot;");
+    				//    result = result.replace("\'", "&#39;");
+    				//    return result;
+    				//}
+    				//modelname = htmlEncode(modelname);
+    				//productName = htmlEncode(productName);
+    				//prodRevision = htmlEncode(prodRevision);
+    				//evolutionExpressionAsString = htmlEncode(evolutionExpressionAsString);
+
+                    // should NOT BE encoded from client side. it can be encoded/decoded on server side if need be.
+    				//var evolutionExpressionAsString = WebServices.createEvolutionExpressionAsJson(modelname, productName, prodRevision);
+                    var evolutionExpressionAsString = {};
+    		    	evolutionExpressionAsString = JSON.stringify({
+    		    		"version":"1.0.0",
+    		    		"criteria":{
+    		    			"ProductRevision":{
+    		    				"id": "pid:" + pidProduct,
+    		    				"name": productName,
+    		    				"revision":  prodRevision
+    		    			}
+    		    		}
+    		    	});
+
+    				var wrapperdiv = document.getElementById("content");
+    				UWA.extendElement(wrapperdiv);
+
+    				
+
+    				Mask.mask(wrapperdiv);
+                    /*
+    				var callbackFunction = function (dico_returned, params) // callback function called when initSolver is done
+    				{
+    				    if (params === "error")
+    				    {
+    				        Mask.unmask(wrapperdiv);
+    				        wrapperdiv.innerHTML = "An error occured while trying to fetch the corresponding dictionary.";
+    				        return;
+    				    }
+    				    var dico = null; // JOE DICO
+
+    				    var dictionaryForSolverInit = JSON.parse(dico_returned);
+    				    //var joeDico = WebServices.getDictionary(pidProduct);
+
+    				    // work-around to use initSolverDico -- mapping between Joe's and Didier's WebServices
+    				    // POST-process Didier's dico to fit on Joe's Dico
+    				    dictionaryForSolverInit = dictionaryForSolverInit.dictionary;
+    				    var i = 0, j = 0;
+    				    for (i = 0; i < dictionaryForSolverInit.features.length; i += 1)
+    				    {
+    				        dictionaryForSolverInit.features[i].displayValue = dictionaryForSolverInit.features[i].displayName;
+    				        delete dictionaryForSolverInit.features[i].displayName;
+    				        dictionaryForSolverInit.features[i].id = dictionaryForSolverInit.features[i].ruleId;
+    				        delete dictionaryForSolverInit.features[i].ruleId;
+    				        dictionaryForSolverInit.features[i].parentRelLogicalId = dictionaryForSolverInit.features[i].relLogicalId;
+    				        delete dictionaryForSolverInit.features[i].relLogicalId;
+    				        for (j = 0; j < dictionaryForSolverInit.features[i].options.length; j += 1) // no need to change ids for option
+    				        {
+    				            dictionaryForSolverInit.features[i].options[j].parentRelLogicalId = dictionaryForSolverInit.features[i].options[j].relLogicalId;
+    				            delete dictionaryForSolverInit.features[i].options[j].relLogicalId;
+    				            dictionaryForSolverInit.features[i].options[j].displayValue = dictionaryForSolverInit.features[i].options[j].displayName;
+    				            delete dictionaryForSolverInit.features[i].options[j].displayName;
+    				            dictionaryForSolverInit.features[i].options[j].parentRelPhysicalId = dictionaryForSolverInit.features[i].options[j].ruleId;
+    				        }
+    				    }
+    				    dico = dictionaryForSolverInit;
+    				    // end work-around horrible
+
+    				    var solverDetails = WebServices.getHypervisorDetails();
+    				    solverDetails = JSON.parse(solverDetails);
+    				    var solverKey = null;
+    				    if (solverDetails.solverKey !== null && solverDetails.solverKey !== undefined)
+    				    {
+    				        solverKey = solverDetails.solverKey;
+    				        console.log("solverKey from previous version : " + solverKey);
+    				    }
+
+    				    var ruleId = WebServices.getObjectIDFromURL("objectId"); // this is the ruleid
+    				    var rule = WebServices.getRule(ruleId);
+    				    var jsonRule = JSON.parse(rule);
+
+    				    WebServices.setRuleActivationOnSolver(jsonRule.configurationRule.name, false, solverKey); // desactivate current rule in Solver
+
+    				    var isEditable = false;
+    				    if (jsonRule.configurationRule.isModifiable === "TRUE")
+    				    {
+    				        isEditable = true;
+    				    }
+
+    				    var json2Load = jsonRule.configurationRule.attributes.LayoutData;
+    				    json2Load = JSON.parse(json2Load);
+
+    				    // DOES NOT work to add the ready here !! why ? no idea..
+    				    //document.addEventListener("load", function (e)
+    				    //document.addEventListener("DOMContentLoaded", function (e)
+
+    				    // uncomment to disconnect the solver
+    				    //solverKey = null;
+
+    				    var myController = new HighLevelControllerMatrixTable();
+    				    var withImage = true;
+    				    if (window.localStorage.DS_MatrixruleCookie_ImgSetting === "false")
+    				    {
+    				        withImage = false;
+    				    }
+
+    				    myController.init("IDTABLE", wrapperdiv, dico, solverKey, ruleId, "1.0.1", withImage, isEditable);
+    				    myController.setFirstModel(json2Load);
+    				    if (json2Load !== null && json2Load.drivingFeatures != null && json2Load.constrainedFeatures != null && json2Load.drivingFeatures !== undefined && json2Load.constrainedFeatures !== undefined)
+    				    {
+    				        if (json2Load.drivingFeatures.length > 0 && json2Load.constrainedFeatures.length > 0)
+    				        {
+    				            myController.getMatrixRulesController().setView("editView");
+    				            json2Load = myController.getMatrixRulesController().checkAndRemoveDiscrepancy(json2Load, dico)._simplifiedModel;
+    				            myController.getMatrixRulesController().loadJsonIn(json2Load, dico, solverKey);
+    				            myController.getMatrixRulesController().showCurrentView();
+    				        }
+    				        else
+    				        {
+    				            json2Load = myController.getMatrixRulesController().checkAndRemoveDiscrepancy(json2Load, dico)._simplifiedModel;
+    				            myController.getMatrixRulesController().loadJsonIn(json2Load, dico, solverKey);
+    				        }
+    				        myController.draw();
+    				        if (isEditable)
+    				        {
+    				            myController.addInteraction(dico, solverKey);
+    				            myController.addInteractionOnTable(dico, solverKey);
+
+    				        }
+    				        else
+    				        {
+    				            myController.addInteraction(dico, solverKey);
+    				            myController.removeInteractionOnTable(dico, solverKey);
+    				        }
+    				        myController.getConflicts();
+    				    }
+    				    else // no matrix to be loaded ?
+    				    {
+    				        //json2Load = myController.getMatrixRulesController().checkAndRemoveDiscrepancy(json2Load, dico)._simplifiedModel;
+    				        //myController.getMatrixRulesController().loadJsonIn(json2Load, dico, solverKey);
+    				        myController.draw();
+    				        if (isEditable)
+    				        {
+    				            myController.addInteraction(dico, solverKey);
+    				            myController.addInteractionOnTable(dico, solverKey);
+    				        }
+    				        else
+    				        {
+    				            myController.addInteraction(dico, solverKey);
+    				            myController.removeInteractionOnTable(dico, solverKey);
+    				        }
+    				        myController.getConflicts();
+    				        var allClosed = document.getElementsByClassName("close"); // start with slider menu opened if no matrix loaded
+    				        for (i = 0; i < allClosed.length; i += 1)
+    				        {
+    				            allClosed[i].classList.add("open"); // add before removing as it goes off from allClosed aferwards
+    				            allClosed[i].classList.remove("close");
+    				            i -= 1; // make sure we remove the index in allClosed list
+    				        }
+    				        var smallTriangle = document.getElementsByClassName("fonticon-right-dir");
+    				        smallTriangle[0].classList.add("fonticon-left-dir");
+    				        smallTriangle[0].classList.remove("fonticon-right-dir");
+    				    }
+        			    Mask.unmask(wrapperdiv);
+    				};
+                    */
+    				var callbackFunction2 = function (dico_returned, params) // callback function called when initSolver is done
+    				{
+    				    if (params === "error")
+    				    {
+    				        Mask.unmask(wrapperdiv);
+    				        wrapperdiv.innerHTML = "An error occured while trying to fetch the corresponding dictionary.";
+    				        return;
+    				    }
+
+    				    var dico = null; // JOE DICO
+    				    dico_returned = dico_returned.replace(/pid:/g, '');
+    				    dico_returned = dico_returned.replace(/lid:/g, '');
+    				    var dictionaryForSolverInit = JSON.parse(dico_returned);
+    				    //var joeDico = WebServices.getDictionary(pidProduct);
+
+    				    // work-around to use initSolverDico -- mapping between Joe's and Didier's WebServices
+    				    // POST-process Didier's dico to fit on Joe's Dico
+    				    //dictionaryForSolverInit = dictionaryForSolverInit.dictionary;
+    				    var i = 0, j = 0;
+    				    /*
+    				    for (i = 0; i < dictionaryForSolverInit.features.length; i += 1)
+    				    {
+    				        dictionaryForSolverInit.features[i].displayValue = dictionaryForSolverInit.features[i].displayName;
+    				        delete dictionaryForSolverInit.features[i].displayName;
+    				        dictionaryForSolverInit.features[i].id = dictionaryForSolverInit.features[i].ruleId;
+    				        delete dictionaryForSolverInit.features[i].ruleId;
+    				        dictionaryForSolverInit.features[i].parentRelLogicalId = dictionaryForSolverInit.features[i].relLogicalId;
+    				        delete dictionaryForSolverInit.features[i].relLogicalId;
+    				        for (j = 0; j < dictionaryForSolverInit.features[i].options.length; j += 1) // no need to change ids for option
+    				        {
+    				            dictionaryForSolverInit.features[i].options[j].parentRelLogicalId = dictionaryForSolverInit.features[i].options[j].relLogicalId;
+    				            delete dictionaryForSolverInit.features[i].options[j].relLogicalId;
+    				            dictionaryForSolverInit.features[i].options[j].displayValue = dictionaryForSolverInit.features[i].options[j].displayName;
+    				            delete dictionaryForSolverInit.features[i].options[j].displayName;
+    				            dictionaryForSolverInit.features[i].options[j].parentRelPhysicalId = dictionaryForSolverInit.features[i].options[j].ruleId;
+    				        }
+    				    }
+                        */
+    				    dico = dictionaryForSolverInit;
+    				    // end work-around horrible
+
+    				    if (window.localStorage.DS_Debug_MatrixRule_Performance) {
+    				        var t1 = performance.now();
+    				        console.log('----- Load Dictionary Timer -----');
+    				        console.log('----- time = ' + (t1 - t0) + ' ms');
+    				        console.log('---------------------------------');
+    				    }
+
+
+    				    //var solverDetails = WebServices.getHypervisorDetails();
+    				    //solverDetails = JSON.parse(solverDetails);
+    				    var solverKey = null;
+    				    //if (solverDetails.solverKey !== null && solverDetails.solverKey !== undefined)
+    				    if (dico.solverToken != null)
+    				    {
+    				        solverKey = dico.solverToken;
+    				        console.log("solverKey from new dictionary : " + solverKey);
+    				        console.log("**********************************");
+    				        window.addEventListener("beforeunload", function ()
+    				        {
+    				            WebServices.releaseSolver(solverKey);
+    				        });
+    				    }
+
+    				    var checkRulesConsistency_inMessage = {};
+    				    checkRulesConsistency_inMessage = {
+    				        _from: "matrixRuleWebApp",
+    				        _to: "solverConfiguration",
+    				        _request: "checkModelConsistency",
+    				        _data: ""
+    				    };
+
+    				    if (solverKey)
+    				    {
+    				        var check = WebServices.checkRulesConsistency(JSON.stringify(checkRulesConsistency_inMessage), solverKey);
+    				        var check_message = "";
+    				        var check_message_to_display = false;
+    				        if (check)
+    				        {
+    				            check = JSON.parse(check);
+    				            if (check._rc === "Rules_KO")
+    				            {
+    				                check_message_to_display = true;
+    				                // display error message ....
+    				                if (check._data && check._data.listOfInconsistentRulesIds)
+    				                {
+    				                    var inconsistencyRulesIds = check._data.listOfInconsistentRulesIds;
+    				                    var inconsistencyRules = [];
+    				                    var i = 0;
+    				                    for (i = 0; i < inconsistencyRulesIds.length; i += 1)
+    				                    {
+    				                        // find the rule in the dictionary
+    				                        var currentRule = dictionaryCfgUtilsFunctions.getRuleFromId(inconsistencyRulesIds[i], dico);
+    				                        if (currentRule)
+    				                        {
+    				                            inconsistencyRules.push(currentRule);
+    				                            if (check_message === "")
+    				                            {
+    				                                check_message = currentRule.name;
+    				                            }
+    				                            else
+    				                            {
+    				                                check_message += ", " + currentRule.name;
+    				                            }
+    				                        }
+    				                    }
+    				                }
+
+                                    // ... and disable the solver
+    				                solverKey = null;
+    				            }
+    				        }
+    				        //console.log("totototo");
+    				    }
+
+    				    var ruleId = WebServices.getObjectIDFromURL("objectId"); // this is the ruleid
+    				    var rule = WebServices.getRule(ruleId);
+    				    var jsonRule = JSON.parse(rule);
+
+    				    if (solverKey)
+    				    {
+    				        WebServices.setRuleActivationOnSolver(ruleId, false, solverKey); // desactivate current rule in Solver
+    				    }
+
+                        // if (toto) // solverKey = null;
+    				    
+
+    				    var isEditable = false;
+    				    if (jsonRule.configurationRule.isModifiable === "TRUE")
+    				    {
+    				        isEditable = true;
+    				    }
+    				    var urlEditable = WebServices.getObjectIDFromURL("editLink"); // mobile purpose ? if on a mobile, the editLink will be false
+    				    if (urlEditable == "false" || urlEditable == false)
+    				    {
+    				        isEditable = false;
+    				    }
+    				    //isEditable = false;
+
+    				    var json2Load = jsonRule.configurationRule.attributes.LayoutData;
+    				    if (json2Load != null && json2Load!="") {
+    				    json2Load = JSON.parse(json2Load);
+    				    }
+
+    				    // DOES NOT work to add the ready here !! why ? no idea..
+    				    //document.addEventListener("load", function (e)
+    				    //document.addEventListener("DOMContentLoaded", function (e)
+
+    				    // uncomment to disconnect the solver
+    				    //solverKey = null;
+
+    				    var myController = new HighLevelControllerMatrixTable();
+    				    var withImage = true;
+    				    if (window.localStorage.DS_MatrixruleCookie_ImgSetting === "false")
+    				    {
+    				        withImage = false;
+    				    }
+
+    				    myController.init("IDTABLE", wrapperdiv, dico, solverKey, ruleId, "1.0.1", withImage, isEditable);
+
+    				    
+    				    console.log("json loaded");
+    				    myController.setFirstModel(json2Load);
+    				    if (json2Load !== null && json2Load.drivingFeatures !== null && json2Load.constrainedFeatures !== null && json2Load.drivingFeatures !== undefined && json2Load.constrainedFeatures !== undefined)
+    				    {
+    				        if (window.localStorage.DS_Debug_MatrixRule_Performance) { var t_0 = performance.now(); }
+    				        var checkOutput = myController.getMatrixRulesController().checkAndRemoveDiscrepancy(json2Load, dico);
+    				        if (window.localStorage.DS_Debug_MatrixRule_Performance) { var t_1 = performance.now(); }
+    				        if (window.localStorage.DS_Debug_MatrixRule_Performance) {
+    				            var t_1 = performance.now();
+    				            console.log('----- Check Discrepancy Timer----');
+    				            console.log('----- time = ' + (t_1 - t_0) + ' ms');
+    				            console.log('---------------------------------');
+    				        }
+    				        if (checkOutput._discrepancyIds && checkOutput._discrepancyIds.length > 0)
+    				        {
+    				            console.warn("missing IDs : " + checkOutput._discrepancyIds);
+    				        }
+    				        json2Load = checkOutput._simplifiedModel;
+    				        myController.getMatrixRulesController().loadJsonIn(json2Load, dico, solverKey);
+    				        if (json2Load.drivingFeatures.length > 0 && json2Load.constrainedFeatures.length > 0)
+    				        {
+    				            myController.getMatrixRulesController().setView("editView");
+    				            //var checkOutput = myController.getMatrixRulesController().checkAndRemoveDiscrepancy(json2Load, dico);
+    				            //if (checkOutput._discrepancyIds && checkOutput._discrepancyIds.length > 0)
+    				            //{
+    				            //    console.warn("missing IDs : " + checkOutput._discrepancyIds);
+    				            //}
+    				            //json2Load = checkOutput._simplifiedModel;
+    				            //myController.getMatrixRulesController().loadJsonIn(json2Load, dico, solverKey);
+    				            myController.getMatrixRulesController().showCurrentView();
+    				        }
+    				        else
+    				        {
+
+    				        }
+    				        //myController.getMatrixRulesController().showCurrentView();
+    				        if (window.localStorage.DS_Debug_MatrixRule_Performance) {
+    				            var t__0 = performance.now();
+    				        }
+    				        myController.draw();
+    				        if (window.localStorage.DS_Debug_MatrixRule_Performance) {
+    				            var t__1 = performance.now();
+    				            console.log('----- Append Table in DOM time ----');
+    				            console.log('----- time = ' + (t__1 - t__0) + ' ms');
+    				            console.log('---------------------------------');
+    				        }
+    				        if (isEditable)
+    				        {
+    				            myController.addInteraction(dico, solverKey);
+    				            myController.addInteractionOnTable(dico, solverKey);
+
+    				        }
+    				        else
+    				        {
+    				            myController.addInteraction(dico, solverKey);
+    				            myController.removeInteractionOnTable(dico, solverKey);
+    				        }
+    				        myController.getConflicts();
+    				    }
+    				    else // no matrix to be loaded ?
+    				    {
+    				        if (window.localStorage.DS_Debug_MatrixRule_Performance) {
+    				            var t__0 = performance.now();
+    				        }
+    				        myController.draw();
+    				        if (window.localStorage.DS_Debug_MatrixRule_Performance) {
+    				            var t__1 = performance.now();
+    				            console.log('----- Append Table in DOM time ----');
+    				            console.log('----- time = ' + (t__1 - t__0) + ' ms');
+    				            console.log('---------------------------------');
+    				        }
+    				        if (isEditable)
+    				        {
+    				            myController.addInteraction(dico, solverKey);
+    				            myController.addInteractionOnTable(dico, solverKey);
+    				        }
+    				        else
+    				        {
+    				            myController.addInteraction(dico, solverKey);
+    				            myController.removeInteractionOnTable(dico, solverKey);
+    				        }
+    				        myController.getConflicts();
+    				        var allClosed = document.getElementsByClassName("close"); // start with slider menu opened if no matrix loaded
+    				        for (i = 0; i < allClosed.length; i += 1)
+    				        {
+    				            allClosed[i].classList.add("open"); // add before removing as it goes off from allClosed aferwards
+    				            allClosed[i].classList.remove("close");
+    				            i -= 1; // make sure we remove the index in allClosed list
+    				        }
+    				        var smallTriangle = document.getElementsByClassName("fonticon-right-dir");
+    				        smallTriangle[0].classList.add("fonticon-left-dir");
+    				        smallTriangle[0].classList.remove("fonticon-right-dir");
+    				    }
+    				    Mask.unmask(wrapperdiv);
+    				    if (window.localStorage.DS_Debug_MatrixRule_Performance) {
+    				        var t_end = performance.now();
+    				        console.log('***** Full Time *****');
+    				        console.log('***** time = ' + (t_end - t_start) / 1000 + ' s *****');
+    				        console.log('*********************');
+    				    }
+
+    				    if (check_message_to_display)
+    				    {
+    				        // alert
+    				        var fullMessage = MR_NLS.MR_InconsistentRuleDefinition;
+    				        if (check_message !== "")
+    				        {
+    				            //fullMessage += ". <br>" + MR_NLS.MR_Implied_Rules + " : <br>" + check_message;
+    				            fullMessage += ". " + MR_NLS.MR_Implied_Rules + " : " + check_message;
+    				        }
+
+    				        myController.displayAlertMessage(["warning"], fullMessage);
+    				    }
+    				};
+
+		            // Joe's dico call
+    				if (window.localStorage.DS_Debug_MatrixRule_Performance) { var t0 = performance.now(); }
+    				WebServices.getDictionary(pidModel, callbackFunction2, null, evolutionExpressionAsString);
+
+		            // Didier's dico call - init solver in an asynchronous way
+		            //WebServices.initSolver2(pidProduct, callbackFunction, null);
+		        });
+	        }
+	        document.addEventListener("DOMContentLoaded", function (e) // for some reasons, this needs to be outside of the require..
+	        {    	
+	    	    loadMatrixRulePage();     
+	        });
+    </script> 
+</head>
+<body style="height:99%; width:99%; margin:0px; overflow-y:hidden; overflow-x:auto">
+	<div id="content" style="height:100%; width:100%"> <!-- just need the 'content' now -->
+    </div>
+</body>
+</html>
+

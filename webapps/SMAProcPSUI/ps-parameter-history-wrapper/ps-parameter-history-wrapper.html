@@ -1,0 +1,31 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-queryparams/sp-queryparams.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-cos/sp-cos.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-font/sp-entypo.html">
+
+<link rel="import" href="../../SMAProcPSUI/ps-parameter-history/ps-parameter-history.html">
+
+<dom-module id="ps-parameter-history-wrapper">
+<link rel="import" type="css" href="ps-parameter-history-wrapper.css">
+  <template>
+	    <sp-queryparams id="queryparams"></sp-queryparams>
+
+	    <sp-variable id="eedBaseURL" name="eedBaseURL"></sp-variable>
+	    <sp-variable id="mcsBaseURL" name="mcsBaseURL"></sp-variable>
+
+	    <sp-cos id="cosServer"></sp-cos>
+	    <sp-dashboard id="dashboard"></sp-dashboard>
+
+	    <sp-webservice id="jobListWgtSvc" data="{{jobsData}}" on-dataready="jobsDataReady">
+        </sp-webservice>
+
+		<ps-parameter-history id="psParamHistory" class="containerDiv"></ps-parameter-history>
+
+    </template>
+  <script type="text/javascript" src="ps-parameter-history-wrapper.js"></script>
+</dom-module>

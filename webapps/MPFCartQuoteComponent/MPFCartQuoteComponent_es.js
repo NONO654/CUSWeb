@@ -1,0 +1,1 @@
+define("DS/MPFCartQuoteComponent/MPFCartQuoteComponent_es",{});define("DS/MPFCartQuoteComponent/assets/nls/CartQuoteComponent",{downloadQuote:"Descargar el presupuesto"});

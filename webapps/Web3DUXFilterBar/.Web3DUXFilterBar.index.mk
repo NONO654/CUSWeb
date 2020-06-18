@@ -1,0 +1,13 @@
+m|Web3DUX\Web3DUXFilterBar.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\Web3DUXFilterBar\Web3DUXFilterBar.js|1533152997|7768
+s|Web3DUX\Web3DUXFilterBar.mweb\src\_copyright.js|1507119037|63
+s|Web3DUX\Web3DUXFilterBar.mweb\src\Web3DUXFilterBar.js|1532591582|19760
+t|win_b64\webapps\Web3DUXFilterBar\Web3DUXFilterBar.css|1568749475|1878
+g|Web3DUX\Web3DUXFilterBar.mweb\LocalGenerated\win_b64\Web3DUXFilterBar.css|1531550745|2250
+s|Web3DUX\Web3DUXFilterBar.mweb\src\_copyright.css|1507119045|63
+t|Web3DUX\Web3DUXFilterBar.mweb\LocalGenerated\win_b64\Web3DUXFilterBar.css|1531550745|2250
+s|Web3DUX\Web3DUXFilterBar.mweb\src\Web3DUXFilterBar.scss|1508771086|2198

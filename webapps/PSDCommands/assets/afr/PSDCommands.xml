@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+      <Template syp:name="PSDHeaders" Target="CATCmdHeadersList">
+            <CATCmdHeadersList>
+				  <CATCommandHeader ID="PSDInsertExistingProduct" ClassName="DS/PSDCommands/commands/PSDCmdInsertExistingProduct" ResourceFile="PSDCommands/PSDCommands" Available="1" />
+				  <CATCommandHeader ID="PSDReplaceByExisting" ClassName="DS/PSDCommands/commands/PSDCmdReplaceByExisting" ResourceFile="PSDCommands/PSDCommands" Available="1" />
+				  <CATCommandHeader ID="PSDReplaceByLatestPublishedRevision" ClassName="DS/PSDCommands/commands/ReplaceByLatestPublishedRevision" ResourceFile="PSDCommands/PSDCommands" Available="1" />
+				  <CATCommandHeader ID="PSDReorderProduct" ClassName="DS/PSDCommands/commands/PSDCmdReorderProduct" ResourceFile="PSDCommands/PSDCommands" Available="1" />
+				  <CATCommandHeader ID="PSDReparentProduct" ClassName="DS/PSDCommands/commands/PSDCmdReparentProduct" ResourceFile="PSDCommands/PSDCommands" Available="1" />
+				  <CATCommandHeader ID="PSDDeleteProduct" ClassName="DS/PSDCommands/commands/PSDCmdDeleteProduct" ResourceFile="PSDCommands/PSDCommands" Available="1" />				  
+            </CATCmdHeadersList>
+            
+      </Template>
+
+      <Template syp:name="PSDTools" Target="CATCmdWorkbench">
+            <CATCmdWorkbench Name="PADAuthoringWkb">
+                  <CATCmdContainer Name="Tools" RepresentationType="AfrActionBarSection">
+						<CATCmdStarter Name="Reparent Product" Command="PSDReparentProduct" />                      
+						<CATCmdStarter Name="Insert Existing Product" Command="PSDInsertExistingProduct" />
+						<CATCmdContainer Name="PSDReplace" RepresentationType="AfrActionBarDropDown">
+							<CATCmdStarter Name="Replace by Existing" Command="PSDReplaceByExisting" />
+							<CATCmdStarter Name="Replace by Latest Published Revision" Command="ReplaceByLatestPublishedRevision" />
+						</CATCmdContainer>						
+						<CATCmdStarter Name="Reorder" Command="PSDReorderProduct" />
+                      	<CATCmdStarter Name="Delete Product" Command="PSDDeleteProduct" />
+                  </CATCmdContainer>
+            </CATCmdWorkbench>
+      </Template>
+</Styles>

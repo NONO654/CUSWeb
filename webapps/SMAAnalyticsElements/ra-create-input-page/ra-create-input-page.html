@@ -1,0 +1,41 @@
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+<dom-module id="ra-create-input-page">
+	<template>
+		<link rel="stylesheet" href="ra-create-input-page.css"/>
+		<div id="uploadContainer" class="uploadContainer" on-dragover="onInputFileDragOver" on-dragleave="onInputFileDragLeave"  on-drop="onInputFileDrop">
+           	<div class="row">
+           		<div class="col-sm-12">
+               		<p>[[raTitle.title]]</p>
+               		<div id="inputDataset">
+               		   <div class="row">
+	                        <div class="col-xs-4" on-click="onLocalFileClick"><i class= "upload-icon wux-ui-3ds wux-ui-3ds-2x wux-ui-3ds-upload" ></i></span></div>
+	                        <div class="col-xs-4" ><i class= "dnd-icon wux-ui-3ds wux-ui-3ds-2x wux-ui-3ds-drag-drop" ></i></div>
+	                        <div class="col-xs-4" on-click="onSearch"><i class= "upload-icon wux-ui-3ds wux-ui-3ds-2x wux-ui-3ds-search" ></i></div>
+	                    </div>
+	                    <div class="row">
+	                        <div class="link col-xs-4" on-click="onLocalFileClick">[[raTitle.upload]]</div>
+	                        <div class=".dnd-icon col-xs-4">[[raTitle.dragdrop]]</div>
+	                        <div class="link col-xs-4" on-click="onSearch">[[raTitle.search]]</div>
+	                    </div>
+               		</div>
+               		<div id="inputReqDec" class="input-hidden">
+                       <div class="row">
+                            <div class="col-xs-6" ><i class= "dnd-icon wux-ui-3ds wux-ui-3ds-2x wux-ui-3ds-drag-drop" ></i></div>
+                            <div class="col-xs-6" on-click="onSearch"><i class= "upload-icon wux-ui-3ds wux-ui-3ds-2x wux-ui-3ds-search" ></i></div>
+                        </div>
+                        <div class="row">
+                            <div class=".dnd-icon col-xs-6">[[raTitle.dragdrop]]</div>
+                            <div class="link col-xs-6" on-click="onSearch">[[raTitle.search]]</div>
+                        </div>
+                    </div>
+               		<sp-search id="spSearch" plm-types="{{plmTypes}}" on-change="onChange" multi-select="true" stay-on-search="false" new-search-context-always="true" on-sp-error="onSpError"></sp-search>
+               		<form id="localFileForm">
+   						<input id="localFileChooser" name="localFileChooser" type="file" on-change="onLocalFileSelect" style="display:none" accept="{{fileTypes}}"  multiple>
+        				<input id="localFileVersionChooser" name="localFileVersionChooser" type="file" on-change="onLocalFileVersionSelect" style="display:none">
+ 					</form>
+             	</div>
+            </div>
+   		</div>
+	</template>
+	<script type="text/javascript" src="ra-create-input-page.js"></script>
+</dom-module>

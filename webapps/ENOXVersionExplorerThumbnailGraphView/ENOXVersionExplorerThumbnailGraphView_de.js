@@ -1,0 +1,1 @@
+define("DS/ENOXVersionExplorerThumbnailGraphView/ENOXVersionExplorerThumbnailGraphView_de",{});define("DS/ENOXVersionExplorerThumbnailGraphView/assets/nls/ThumbnailText",{imageUpdating:"Bild wird aktualisiert..."});

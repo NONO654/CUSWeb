@@ -1,0 +1,52 @@
+<!-- Copyright 2015 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+
+<dom-module id="ps-simulation-compare-view">
+  <style no-shim="">/* @import/* escape polymer-element CSS inlining */ url("../../UIKIT/UIKIT.css");</style>
+  <link rel="import" type="css" href="ps-simulation-compare-view.css">
+  <template>
+        <sp-mcsservice id="simulationCompareData" data="{{simDetails}}" uri="">
+        </sp-mcsservice>
+		
+        <div style="background-color: white;">
+            <div style="padding-bottom:10px;">
+                <div style="float:left;margin-right:10px">
+                    Show
+                    <select id="relationship" size="1" on-change="filterData">
+                        <option selected value="Everything">All Data</option>
+                        <option value="Inputs">Inputs</option>
+                        <option value="Outputs">Outputs</option>
+                        <option value="None">Neutral</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="comparisonType" size="1" on-change="generateData">
+                        <option selected value="Full Comparison">Full Comparison</option>
+                        <option value="Difference">Difference</option>
+                    </select>
+                </div>
+            </div>
+           <div class="table">
+                    <div class="header table-row">
+                      <template is="dom-repeat" items="{{titles}}">
+                          <div class="table-cell">
+                              <span on-click="openSimulation" class="simTitle" id="{{item.id}}">{{item.title}}</span>
+                          </div>
+                      </template>
+                    </div>
+
+                 <template is="dom-repeat" items="{{viewData}}" as="row"><div class="table-row">
+                     <template is="dom-repeat" items="{{row}}" as="input"><div class$="{{_computeClass(input,mode)}}">
+                         <img src="../assets/images/smaIconBlank.png" width$="{{_computeLevelsWidth(input)}}" height="16px">
+                         <template is="dom-if" if="{{_computeIsIconSet(input)}}"><img src="{{_computeIcon(input)}}"></template>
+                         <span class$="{{_computeStyles(input)}}">{{input.value}}</span>
+                         <template is="dom-if" if="{{_computeIsModeSet(input)}}"><img class="mode-icon" src="{{_computeMode(input)}}"></template>
+                     </div></template>
+                 </div></template>
+            </div>
+            <span id="loadingIndicator" style="display:inline-block;padding-left:45%;"></span>
+        </div>
+    </template>
+  <script type="text/javascript" src="ps-simulation-compare-view.js"></script>
+</dom-module>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SMAProcWebCommonContents ComboBox</title>
+    <script type="text/javascript" src="../Polymer-1.11.3/webcomponents.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+    <!--
+
+        Notes:
+
+        1. Don't include UWA as commented out below. This will mess with Polymer lifecyle such as calling ready twice.
+        2. Avoid default values for Object and Array type if possible
+        3. Since this is using shady dom, use unique id for querySelector, otherwise it might point to some
+            other dom instance
+    -->
+
+
+
+
+    <script type="text/javascript" src="../c/UWA/js/UWA_W3C_Alone.js"></script>
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+    <script>
+
+        localStorage.setItem('tst-mode', true);
+    </script>
+
+    <style>
+        .section {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .xcontainer {
+            width: 400px;
+            padding: 5px 0px;
+            display: block;
+            margin-left: 0px;
+        }
+
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            background-color: lightgray
+        }
+    </style>
+
+</head>
+
+<body style="padding:20px;">
+    <section>
+        <h2>pcw-sdk-combo-box</h2>
+
+        <p>This component is based on a webux combobox component
+        </p>
+        </pre>
+        Usage:
+        <pre>
+&lt;pcw-sdk-combo-box id="combo1" enable-search-flag  /&gt;
+
+document.querySelector('combo1').setItems('[{"labelItem": "Content", "valueItem": "Content"},
+                    {"labelItem": "Parameter", "valueItem": "Parameter"}]', 'Parameter1')
+        </pre>
+
+        <template is="dom-bind">
+
+            <div class="xcontainer">
+                <pcw-sdk-combo-box id="combo1" placeholder="select.." enable-search-flag disabled style="margin-bottom: 10px;"></pcw-sdk-combo-box>
+            </div>
+
+            <div class="xcontainer">
+                <pcw-sdk-combo-box id="combo2"></pcw-sdk-combo-box>
+            </div>
+
+        </template>
+
+        <div>Selected Item:</div>
+        <div class="code"></div>
+
+    </section>
+
+    <script>
+        require(['DS/SMAProcWebContents/ComboBox', 'DS/SMAProcWebContents/FakeContentService',
+            'DS/SMAProcWebContents/PolyUtils'],
+            function (ComboBox, FakeContentService, PolyUtils) {
+
+                console.log('demo ready');
+
+                var engines = [
+                    { labelItem: 'elk', valueItem: 'elk' },
+                    { labelItem: 'graphViz', valueItem: 'graphViz' }
+                ];
+
+                var engines2 = engines.slice(0);
+
+                PolyUtils.whenComponentReady('#combo1').then(function (el) {
+                    el.setModel(engines);
+                });
+
+                PolyUtils.whenComponentReady('#combo2').then(function (el) {
+                    el.setModel(engines2, 'graphViz');
+                });
+
+                document.addEventListener('change', function (e) {
+                    if (e.target.tagName.toLowerCase() === 'pcw-sdk-combo-box') {
+                        document.querySelector('.code').textContent = e.detail.value;
+                    }
+                });
+            });
+    </script>
+</body>
+
+</html>

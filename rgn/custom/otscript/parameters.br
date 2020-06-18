@@ -1,0 +1,32 @@
+
+PACKAGE PLM;
+
+METHOD Requirement.getPlmParameters() -doc :
+	THIS.`rel_ParameterAggregation`.`to_PARParameter`.`As_PlmParameter`
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.GetParameters")
+HELPTEXT I18N("Method.Extension.GetParameters.Help");
+
+METHOD PlmParameter.displayValueUnit() -doc :
+	displayValue() + " " + displayUnit()
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.DisplayValueAndUnit")
+HELPTEXT I18N("Method.Extension.DisplayValueAndUnit.Help");
+
+METHOD PlmParameter.convertValueUnit(unit : String) -doc :
+	convertValue(unit) + " " + unit
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.ConvertValueToUnit")
+HELPTEXT I18N("Method.Extension.ConvertValueToUnit.Help");
+
+METHOD PlmParameter.customValueUnit() -doc : {
+	TMP unit := parameterType
+                    IF "ANGLE": "rad"
+                    IF "LENGTH": "m"
+                    IF "MASS": "kg"
+                    ELSE: defaultUnit();
+	convertValueUnit(unit);
+}
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.DisplayValueToUnit")
+HELPTEXT I18N("Method.Extension.DisplayValueToUnit.Help");

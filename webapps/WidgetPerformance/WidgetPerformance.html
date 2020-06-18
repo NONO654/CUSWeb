@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+    <!-- Application Metas -->
+    <title>Inline Widget performance</title>
+    <meta name="author" content="Dassault Systèmes" />
+    <meta name="description" content="Display inline widget performance" />
+    <meta name="apiVersion" content="1.3" />
+    <meta name="debugMode" content="false" />
+
+    <!-- UWA Environment -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <script type="text/javascript" src="../VEN3DXHighcharts/4.0.3/highcharts-all.js"></script>
+
+    <!-- Application Preferences -->
+    <widget:preferences>
+    </widget:preferences>
+
+    <!-- Application Styles -->
+    <style type="text/css">
+        li {
+            list-style-type: square;
+        }
+    </style>
+    <script type="text/javascript">
+        //<![CDATA[
+        /*globals UWA, Highcharts, widget, require, performance */
+        (function() {
+
+            "use strict";
+            var chart;
+
+            if (window.performance && performance.mark) {
+                performance.mark('widget_performance_inline_script_load');
+            }
+
+            function onLoad(Performance) {
+                if (chart) {
+                    chart.destroy();
+                }
+                var timing = Performance.timing;
+                var navStart = timing.navigationStart;
+
+                var timeEvents = ['navigationStart',
+                    //'redirectStart',
+                    //'redirectEnd',
+                    //'fetchStart',
+                    //'domainLookupStart',
+                    //'domainLookupEnd',
+                    'connectStart',
+                    //'secureConnectionStart',
+                    //'connectEnd',
+                    'requestStart',
+                    //'responseStart',
+                    //'responseEnd',
+                    //'unloadEventStart',
+                    //'unloadEventEnd',
+                    'domLoading',
+                    //'domInteractive',
+                    //'msFirstPaint',
+                    //'domContentLoadedEventStart',
+                    //'domContentLoadedEventEnd',
+                    //'domContentLoaded',
+                    'domComplete',
+                    //'loadEventStart',
+                    'loadEventEnd'
+                ];
+
+                var navTime = [
+                    // {name:'redirect', start:'redirectStart', end:'redirectEnd'},
+                    {
+                        name: 'DNS',
+                        start: 'domainLookupStart',
+                        end: 'domainLookupEnd'
+                    }, {
+                        name: 'TCP',
+                        start: 'connectStart',
+                        end: 'connectEnd'
+                    }, {
+                        name: 'Request',
+                        start: 'requestStart',
+                        end: 'responseStart'
+                    }, {
+                        name: 'Response',
+                        start: 'responseStart',
+                        end: 'responseEnd'
+                    }, {
+                        name: 'Processing',
+                        start: 'domLoading',
+                        end: 'domComplete'
+                    }, {
+                        name: 'onLoad',
+                        start: 'loadEventStart',
+                        end: 'loadEventEnd'
+                    }
+                ];
+                var navCat = navTime.map(function(e) {
+                    return e.name;
+                });
+                var navVal = navTime.map(function(e) {
+                    return {
+                        low: timing[e.start] - navStart,
+                        y: timing[e.end] - navStart
+                    };
+                });
+
+                if (Performance.getEntriesByName('wp_index_config_loaded').length > 0) {
+                    navCat.push('wp');
+                    navVal.push({
+                        y: Performance.getEntriesByName('wp_bootstrap_gothierarchy')[0].startTime,
+                        low: Performance.getEntriesByName('wp_index_config_loaded')[0].startTime
+                    });
+                }
+
+                if (Performance.getEntriesByName('widget_performance_onload').length > 0) {
+                    navCat.push('widget');
+                    navVal.push({
+                        y: Performance.getEntriesByName('widget_performance_onload')[0].startTime,
+                        low: Performance.getEntriesByName('widget_performance_inline_script_load')[0].startTime
+                    });
+                }
+
+
+                var perfMarks = [
+                    // index template
+                    'wp_index_config_loaded',
+                    'wp_index_bundles_loaded',
+                    'wp_index_bootstrap_start',
+                    // bootstrap
+                    'wp_bootstrap_ondomready',
+                    'wp_bootstrap_gethierarchy',
+                    'wp_bootstrap_gothierarchy',
+                    // widget
+                    'widget_performance_inline_script_load',
+                    'widget_performance_onload',
+                    // ifwe
+                    'ifwe_init_loadwidget',
+                    'ifwe_userplatformaccess_periodicalusercheck'
+                ];
+
+                var alignement = ['top', 'middle'],
+                    alignIndex = 0;
+                // Selected page loading events
+                var plotLines = timeEvents.filter(function(e) {
+                    return timing[e] > 0;
+                }).map(function(e) {
+                    return {
+                        color: 'red',
+                        value: (timing[e] - navStart),
+                        width: 1,
+                        label: {
+                            text: e,
+                            verticalAlign: alignement[alignIndex++ % alignement.length]
+                        }
+                    };
+                });
+                // Generic platform performance marks
+                plotLines = plotLines.concat(perfMarks.filter(function(e) {
+                    return Performance.getEntriesByName(e).length > 0;
+                }).map(function(e) {
+                    return {
+                        color: 'blue',
+                        value: Performance.getEntriesByName(e)[0].startTime,
+                        width: 1,
+                        label: {
+                            text: e,
+                            verticalAlign: alignement[alignIndex++ % alignement.length]
+                        }
+                    };
+                }));
+                // Widget factory
+                var widgetsRenderMarks = Performance.getEntriesByType('mark').filter(function(e) {
+                    return (/^wp_widgetfactory_render/).test(e.name);
+                });
+                var widgetRendersPlotLines = widgetsRenderMarks.map(function(e) {
+                    return {
+                        color: 'green',
+                        value: e.startTime,
+                        width: 1,
+                        label: {
+                            text: e.name,
+                            verticalAlign: alignement[alignIndex++ % alignement.length]
+                        }
+                    };
+                });
+                plotLines = plotLines.concat(widgetRendersPlotLines);
+
+                chart = new Highcharts.Chart({
+                    chart: {
+                        renderTo: widget.getElement('.performanceChart'),
+                        type: 'bar',
+                        zoomType: 'y',
+                        panning: true,
+                        panKey: 'shift'
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    title: {
+                        text: 'Inline widget performance'
+                    },
+                    subtitle: {
+                        text: 'Using the HTML5 Performance API'
+                    },
+                    xAxis: {
+                        categories: navCat
+                    },
+                    yAxis: {
+                        type: 'datetime',
+                        min: 0,
+                        // max: Performance.now(),
+                        plotLines: plotLines,
+                        labels: {
+                            format: '{value:,.0f} ms'
+                        },
+                        title: {
+                            text: null
+                        }
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    series: [{
+                        data: navVal
+                    }],
+                    legend: {
+                        enabled: false
+                    }
+                });
+
+                var resources = Performance.getEntriesByType("resource") || [];
+                var perfList = resources.sort(function(a, b) {
+                    return b.duration - a.duration;
+                }).map(function(e) {
+                    return '<li><strong>' + e.initiatorType + '</strong>:' + e.name + ' : ' + Math.ceil(e.duration) + 'ms</li>';
+                }).join('\n');
+
+                widget.getElement('.performanceResources').setHTML("Loaded <strong>" + resources.length + "</strong> resources, ordered by loading duration:<ul>" + perfList + '</ul>');
+            }
+
+            require(['DS/WebappsUtils/Performance'], function(perf) {
+                widget.addEvent('onLoad', function() {
+                    perf.mark('widget_performance_onload');
+                    UWA.Event.onDomReady(onLoad.bind(this, perf));
+                });
+                widget.addEvent('onRefresh', onLoad.bind(this, perf));
+                widget.addEvent('onResize', function() {
+                    if (chart) {
+                        chart.reflow();
+                    }
+                });
+            });
+
+        }());
+
+        //]]>
+    </script>
+</head>
+
+<body>
+    <div class="performanceChart">Loading performance chart...</div>
+    <p class="performanceResources">Loading performance resources...</p>
+</body>
+
+</html>

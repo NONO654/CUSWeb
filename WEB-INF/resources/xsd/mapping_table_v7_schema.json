@@ -1,0 +1,141 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    
+	"description": "The xCAD Mapping Table Elements",
+	"type": "object",
+	"properties":{
+		
+		"References":{
+			"title": "Set of References (or RepReferences) in the Mapping Table",
+			"type": "array",
+			"items":{
+				"type": "object",
+				"properties": {
+				
+					"xCADId": {
+						"description": "The unique identifier for the reference in the xCAD File",
+						"type": "string"
+					},
+					"3DExpId": {
+						"description": "The unique identifier for the reference in the 3DExp World",
+						"type": "string"
+					},
+					"CEStamp": {
+						"description": "The Concurrent Engineering Stamp of the object",
+						"type": "string",
+						"pattern": "^(CESv1){0}[0-9,A-Z]{32}$"
+					},
+					"IsLocal": {
+						"description": "Boolean to known if the current reference is local",
+						"type": "boolean"
+					},
+					"CustomData": {
+						"description": "Custom Data are applicative additional informations related to the xCAD",
+						"type": "string"
+					},
+					
+					"Instances":{
+						"title": "Set of Instances in the Mapping Table",
+						"type": "array",
+						"items":{
+							"type": "object",
+							"properties": {
+								"xCADId": {
+									"description": "The unique identifier for the reference in the xCAD File",
+									"type": "string"
+								},
+								"3DExpId": {
+									"description": "The unique identifier for the reference in the 3DExp World",
+									"type": "string"
+								},
+								"CEStamp": {
+									"description": "The Concurrent Engineering Stamp of the object",
+									"type": "string",
+									"pattern": "^(CESv1){0}[0-9,A-Z]{32}$"
+								},
+								"RefId": {
+									"description": "The Identifier of the Reference instance of",
+									"type": "string"
+								},
+								"IsLocal": {
+									"description": "Boolean to known if the current instance is local",
+									"type": "boolean"
+								},
+								"CustomData": {
+									"description": "Custom Data are applicative additional informations related to the xCAD",
+									"type": "string"
+								}
+							},
+							"required": [ "xCADId", "3DExpId", "CEStamp","IsLocal", "RefId" ]
+						}
+					},
+					
+					"Ports":{
+						"title": "Set of Ports in the Mapping Table",
+						"type": "array",
+						"items":{
+							"type": "object",						
+							"properties": {
+								"xCADId": {
+									"description": "The unique identifier for the reference in the xCAD File",
+									"type": "string"
+								},
+								"3DExpId": {
+									"description": "The unique identifier for the reference in the 3DExp World",
+									"type": "string"
+								},
+								"CEStamp": {
+									"description": "The Concurrent Engineering Stamp of the object",
+									"type": "string",
+									"pattern": "^(CESv1){0}[0-9,A-Z]{32}$"
+								},
+								"CustomData": {
+									"description": "Custom Data are applicative additional informations related to the xCAD",
+									"type": "string"
+								}
+							},
+							"required": ["xCADId", "3DExpId", "CEStamp"]
+						}
+					},
+					
+					"Connections":{
+						"title": "Set of Ports in the Mapping Table",
+						"type": "array",
+						"items":{
+							"type": "object",	
+							"properties": {
+								"xCADId": {
+									"description": "The unique identifier for the reference in the xCAD File",
+									"type": "string"
+								},
+								"3DExpId": {
+									"description": "The unique identifier for the reference in the 3DExp World",
+									"type": "string"
+								},
+								"CEStamp": {
+									"description": "The Concurrent Engineering Stamp of the object",
+									"type": "string",
+									"pattern": "^(CESv1){0}[0-9,A-Z]{32}$"
+								},
+								"CustomData": {
+									"description": "Custom Data are applicative additional informations related to the xCAD",
+									"type": "string"
+								}
+							},
+							"required": [ "xCADId", "3DExpId", "CEStamp" ]
+						}
+					}
+				},
+				
+				"required": [ "xCADId", "3DExpId", "CEStamp","IsLocal" ]
+			}
+		},
+		
+		"version":{
+			"title": "The Version of the mapping Table",
+			"type": "number",
+			"minimum": 7
+		}
+	},
+	"required": [ "References", "version" ]
+}

@@ -1,0 +1,237 @@
+<dom-module id="dg-menu">
+  <style>
+    :host {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+
+    .menu-heading {
+      text-transform: uppercase;
+      margin: 0;
+      padding-left: 30px;
+      line-height: 1.3em;
+      position: fixed;
+      z-index: 1;
+      background: #f6f6f6;
+      color: #2196f3;
+      display: inline-block;
+      width: 100%;
+      border-bottom: thin solid #dadada;
+      font-size: 1.8em;
+    }
+
+    .slidein-menu {
+      position: absolute;
+      width: 150px;
+      height: 100%;
+      background: #2196F3;
+      font-family: sans-serif;
+      color: white;
+      z-index: 2;
+      box-shadow: 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(0,0,0,.08);
+      bottom: 0;
+      left: 0;
+      transition: left 0.1s cubic-bezier(0, 0.82, 0.6, 0.93);
+    }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    :host([collapsed]) .overlay {
+      display: none;
+    }
+    
+    :host([collapsed]) .slidein-menu {
+      left: -160px;
+    }
+
+    :host([collapsed]) .menu-item {
+      display: none;
+    }
+
+    :host([collapsed]) .slidein-icon {  
+      color: #2196F3;
+      position: absolute;
+      right: -46px;
+      top: 0;
+    }
+
+    .slidein-icon {
+      font-size: xx-large;
+      text-align: right;
+      margin-right: -3px;
+      cursor: pointer;
+      margin: 10px;
+      color: white;
+    }
+
+    .menu-item {
+      padding: 10px;
+      border-bottom: thin solid #ffffff4d;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .menu-content {
+      height: calc(100vh - 5px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .menu-content::-webkit-scrollbar {
+      height: 12px;
+      width: 6px;
+      background: #fff;
+    }
+  
+    .menu-content::-webkit-scrollbar-thumb {
+      background: #9E9E9E;
+      border-radius: 1ex;
+    }
+
+    ::content section.content {
+      display: none;
+      margin: 42px 3px 0;
+    }
+
+    :host(:not([collapsed])) .menu-content {
+      filter: blur(2px);
+    }
+
+    :host([selected="context"]) ::content section.content[id="context"],
+    :host([selected="scenarios"]) ::content section.content[id="scenarios"],
+    :host([selected="mcs"]) ::content section.content[id="mcs"],
+    :host([selected="cos"]) ::content section.content[id="cos"],
+    :host([selected="experiments"]) ::content section.content[id="experiments"],
+    :host([selected="sensors"]) ::content section.content[id="sensors"],
+    :host([selected="settings"]) ::content section.content[id="settings"],
+    :host([selected="about"]) ::content section.content[id="about"] {
+      display: block;
+    }
+
+    :host([selected="context"]) .menu-item[data-id="context"],
+    :host([selected="scenarios"]) .menu-item[data-id="scenarios"],
+    :host([selected="mcs"]) .menu-item[data-id="mcs"],
+    :host([selected="cos"]) .menu-item[data-id="cos"],
+    :host([selected="experiments"]) .menu-item[data-id="experiments"],
+    :host([selected="sensors"]) .menu-item[data-id="sensors"],
+    :host([selected="settings"]) .menu-item[data-id="settings"],
+    :host([selected="about"]) .menu-item[data-id="about"] {
+      background: white;
+      color: #2196F3;
+      font-weight: bold;
+    }
+
+    .menu-item::after {
+      font-size: large;
+      line-height: 0;
+      margin-right: 11px;
+      position: absolute;
+      right: 7px;
+      top: 18px;
+    }
+
+    .menu-heading::after {
+      margin-left: 5px;
+    }
+
+    [data-id="context"]::after, :host([selected="context"]) .menu-heading::after {
+      content: '\2638';
+    }
+
+    [data-id="scenarios"]::after, :host([selected="scenarios"]) .menu-heading::after {
+      content: '\2691';
+    }
+
+    [data-id="mcs"]::after, :host([selected="mcs"]) .menu-heading::after {
+      content: '\2601';      
+    }
+
+    [data-id="cos"]::after, :host([selected="cos"]) .menu-heading::after {
+      content: '\2604';      
+    }
+
+    [data-id="experiments"]::after, :host([selected="experiments"]) .menu-heading::after {
+      content: '\269B';      
+    }
+
+    [data-id="sensors"]::after, :host([selected="sensors"]) .menu-heading::after {
+      content: '\2600';      
+    }
+
+    [data-id="settings"]::after, :host([selected="settings"]) .menu-heading::after {
+      content: '\2699';
+    }
+
+    [data-id="about"]::after, :host([selected="about"]) .menu-heading::after {
+      content: '\2602';
+    }
+
+
+
+       
+
+  </style>
+  <template>
+    <main class="dg-menu">      
+      <nav id="slideinMenu" class="slidein-menu" on-click="_handleClick">
+        <div class="slidein-icon">&#9776;</div>
+      
+        <div class="menu-item" data-id="context">Context</div>
+        <div class="menu-item" data-id="scenarios">Scenarios</div>
+        <div class="menu-item" data-id="mcs">MCS</div>
+        <div class="menu-item" data-id="cos">COS</div>
+        <div class="menu-item" data-id="experiments">Experiments</div>
+        <div class="menu-item" data-id="sensors">Sensors</div>
+        <div class="menu-item" data-id="settings">Settings</div>
+        <div class="menu-item" data-id="about">About</div>
+      </nav>     
+      
+      <div class="overlay" on-click="_collapse"></div>
+      
+      <div id="menucontent" class="menu-content">
+        <h1 class="menu-heading">{{selected}}</h1>
+        <content select="section.content">                
+            <!-- Tab content goes here -->
+        </content>
+      </div>
+    </main>
+  </template>
+  <script>
+    (function () {
+
+      Polymer({
+        is: 'dg-menu',
+        
+        properties: {
+          selected: {
+            type: String,
+            reflectToAttribute: true
+          },
+          collapsed: {
+            type: Boolean,
+            reflectToAttribute: true,
+            value: true
+          }
+        },
+        
+        _handleClick: function (ev) {
+          // if its a menu item then updated the selected value else toggle collapse
+          if (ev.target.classList.contains('menu-item')) {
+            this.selected = ev.target.dataset.id;
+          } else if (ev.target.classList.contains('slidein-icon')) {
+            this.collapsed = !this.collapsed;
+          }
+        },
+        _collapse: function () {
+          this.collapsed = !this.collapsed;
+        }
+      });
+    })();
+  </script>
+</dom-module>

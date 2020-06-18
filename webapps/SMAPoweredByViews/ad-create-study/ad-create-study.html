@@ -1,0 +1,93 @@
+<!-- Copyright 2018 Dassault Systemes. All rights reserved. -->
+<dom-module id="ad-create-study">
+	<style>
+		:host .heading {
+			display: flex;
+			align-items: center;
+		}
+		:host .h4 {
+			flex: auto;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		:host .modal-body > * {
+			word-break: keep-all;
+		}
+		:host .note {
+			color: #b4b6ba; /* icon-grey, using color to not interfere with fade-in by opacity */
+			margin-bottom: 16px;
+		}
+		:host .invalid:not(:focus) {
+			border-color: red;
+		}
+		:host .spinner-container {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+		}
+		:host .loading-mask {
+			opacity: 0.4;
+			background-color: rgba(255, 255, 255, 0.4);
+			pointer-events: none;
+		}
+	</style>
+	<template>
+		<!-- COMPONENT -->
+		<div>
+			<div id="createStudyModal" class$="[[_computeModalClassList(isOpen)]]">
+				<div class="modal-wrap">
+					<div class="modal-content">
+						<!-- HEADER -->
+						<div class="modal-header heading">
+							<span class="h4">[[NLS.Header]]</span>
+							<button id="closeButton" type="button" class="close" aria-hidden="true" on-click="_onClose">
+								<span class="fonticon fonticon-close"></span>
+							</button>
+						</div>
+						<!-- BODY -->
+						<div id="body" class$="[[_computeBodyClassList(isLoading, isCreating)]]">
+							<!-- Concept note -->
+							<div class="note">[[NLS.StudyConcept]]</div>
+							<!-- Title -->
+							<div class="form-group">
+								<label for="studyTitleInput" class="control-label">[[NLS.Title]]</label>
+								<input
+									type="text"
+									id="studyTitleInput"
+									class$="[[_computeTitleInputClassList(isTitleValid)]]"
+									placeholder="[[NLS.TitlePlaceholder]]"
+									required
+									autofocus
+									value={{studyTitle::input}}
+									on-blur="_onStudyTitleInputBlur">
+								</input>
+							</div>
+							<!-- Description -->
+							<div class="form-group">
+								<label for="studyDescriptionInput" class="control-label">[[NLS.Description]]</label>
+								<textarea
+									id="studyDescriptionInput"
+									class="form-control"
+									value={{studyDescription::input}}
+									rows="5">
+								</textarea>
+							</div>
+						</div>
+						<!-- FOOTER -->
+						<div class="modal-footer">
+							<button id="cancelButton" type="button" class="btn" on-click="_onClose">
+								<span>[[NLS.Cancel]]</span>
+							</button>
+							<button id="okButton" type="button" class="btn btn-primary" disabled$="[[_isOkDisabled(isTitleValid, isLoading, isCreating)]]" on-click="_onOk">
+								<span>[[NLS.Ok]]</span>
+							</button>
+						</div>
+						<!-- Loading "Spinner" -->
+						<div id="spinnerContainer" class="spinner-container"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+</dom-module>

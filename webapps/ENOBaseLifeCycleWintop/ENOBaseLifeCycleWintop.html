@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+  <head>
+    <!-- Application Metas -->
+	<!-- These information will be displayed in the widget preferences -->
+    <title>Web in Win LifeCycle</title>
+    <meta name="author" content="LHX" />
+    <meta name="description" content="AWeb in Win LifeCycle" />
+    <!-- UWA Environment -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<!-- Load UWA environment --> 
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+	<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+   
+    
+	<link rel="stylesheet" type="text/css" href="./ENOBaseLifeCycleWintop.css" />
+    
+    <script type="text/javascript">
+        /*
+          We create the global MyWidget object.
+          This object will be used to store variables and functions.
+        */
+
+        var myUrl = location.href;
+        var myUrlres = myUrl.split("?"); 
+        var myUrlres2 = myUrlres[1].split("="); 
+        var myUrlres3 = myUrlres[2].split("="); 
+        
+        var myWidgetName = myUrlres2[1];
+        var myServerUrl = myUrlres3[1]; 
+        var myEnoviaTenant = 'OnPremise'; 
+        var myEnvVars; 
+        var myWidgetOptions = {};
+        myWidgetName = myWidgetName.replace(/#47;/g, "/");
+        myServerUrl = myServerUrl.replace(/#47;/g, "/");
+        myUrlres.forEach(function (myLocalUrlres) {
+        	var myLocalVars =myLocalUrlres.split("="); 
+        	if (myLocalVars.length == 2) {
+        		var myLocalVar = myLocalVars[0]; 
+        		var myLocalVarValue = myLocalVars[1];
+        		if (myLocalVar == "widget"){
+        			myWidgetName =  myLocalVarValue.replace(/#47;/g, "/");
+        		}	
+        		else if (myLocalVar == "serverurl"){
+        			myServerUrl =  myLocalVarValue.replace(/#47;/g, "/");
+        		}
+           		else if (myLocalVar == "enoviatenant"){
+           			myEnoviaTenant =  myLocalVarValue.replace(/#47;/g, "/");
+        		}	
+           		else if (myLocalVar == "LAEnvVar"){
+           			var myEnvVarsTmp =  myLocalVarValue.replace(/#47;/g, "/");
+           			myEnvVars =  myEnvVarsTmp.split(";"); 
+        		}	   
+        	}
+            //TZ3 IR-681757-3DEXPERIENCER2019x starts with changed to lastIndexOf
+        	if (myLocalUrlres.lastIndexOf("widgetoption_", 0) === 0) {
+        		var myLocalVar = "";
+        		var myLocalVarValue = "";
+        		
+        		if (myLocalVars.length == 2) {
+        			myLocalVar = myLocalVars[0]; 
+            		myLocalVarValue = myLocalVars[1];
+        		}
+        		else
+        			myLocalVar = myLocalUrlres;
+        			
+        		myLocalVar = myLocalVar.substr("widgetoption_".length);
+    			myWidgetOptions[myLocalVar] = myLocalVarValue;
+        	}
+         });
+        
+        
+        var _webinwincom_socket = null;
+        
+        var map = {
+        		options: {
+        			mapSettings: {}
+        		},
+        		
+                initMap: function (url3DSpace) {
+                  var that = this;
+                  this.options = {};
+                  this.options.mapSettings = {
+                          "platform_services": [{
+                            "3DSpace": url3DSpace,
+                          }]
+                        };
+                   // mySecondDiv.initEnvfromWin(map.options.mapSettings);                  
+ 	               },
+ 	              
+          };
+        
+        
+        var mySecondDiv = null;
+        function addItem(physicalId, name) {
+            if (mySecondDiv != null) {
+                physicalId=physicalId.replace(/_/g, ""); // replace all _ by nothing
+                mySecondDiv.initDatafromWin([{
+                    'physicalId': physicalId,
+                    'name': name
+                }]);
+            }
+        };
+ 
+        //To manage shortcults (ctrl+O ...) if doNotDisplay == 1, the contextual menu is not dispalyed
+        function SetCtxMenu (jsonCtxMenu, jsonCtxSubMenu, doNotDisplay) {
+          var that = this;
+          if (mySecondDiv != null) {
+              mySecondDiv.onSetCtxMenuForItem(jsonCtxSubMenu);
+          }
+        };
+        
+        function addItems(objects) {
+            if (mySecondDiv != null) {
+                //objects=objects.replace(/_/g, ""); // replace all _ by nothing
+                mySecondDiv.initDatafromWin(objects);
+            }
+        };        
+		
+        function onAccept() {
+            if (mySecondDiv != null) {
+                mySecondDiv.onAcceptFromWin();
+            }
+        };        
+		
+        function onReject() {
+            if (mySecondDiv != null) {
+                mySecondDiv.onRejectFromWin();
+            }
+        };        
+
+        function licenseList(objects){
+        	if ( mySecondDiv != null){
+        		mySecondDiv.onLicenseList(objects);
+        	}
+        };
+        
+        function InitMap(url3DSpace) {
+            map.initMap(url3DSpace);
+        };
+        
+        function ErrorSelection(unMessage) {
+            if (mySecondDiv != null) {
+                var error= {
+                    code: "",
+                    message: unMessage
+                }
+                mySecondDiv.initData([]);
+                mySecondDiv.addError(error);
+            }
+        };
+        
+
+         var dependencies = dependencies || [];
+
+        require(
+            // dependencies
+            [
+                myWidgetName,
+                'DS/WidgetServices/WidgetServices',
+                'DS/LifecycleServices/LifecycleServicesSettings',
+                'DS/WebToWinInfra/WebToWinCom',
+                'DS/UWPClientCode/PublicAPI'
+                
+            ].concat(dependencies),
+
+            // execute this callback, passing all dependencies as params
+
+            function (WidgetCore, widgetServices, LifecycleServicesSettings, webinwinCom, PublicAPI) {
+
+ 
+           		var _webinwincom_socket = webinwinCom.createSocket({
+                	  socket_id: 'lf_web_in_win'
+                });        
+                
+ 
+                
+                var WIWI = {
+
+                	
+                    onLoad: function () { //Needed to be sure to have a widget.body
+                        //sendNotification('Message', "pageLoaded");
+                        //this.send_notif("pageLoaded");
+                        var that = this;
+                        
+                        _webinwincom_socket.addListener('onDispatchToWin', function (parameters){
+                      	   var name = parameters.notif_name;
+                     	   var parameters_string = UWA.is(parameters.notif_parameters, 'string') ? parameters.notif_parameters : JSON.stringify(parameters.notif_parameters);
+                     	   var message = parameters_string;
+                     	   dscef.sendString (name + '=' + message,{
+                               recordable: true,
+                               captureAll: true
+                           });              	
+                        });  
+                        
+                                          
+                  		var ServerUrl = {
+                          "platform_services": [{
+                            "3DSpace": myServerUrl,
+                            "platformId":myEnoviaTenant,
+                          }]
+                        };
+
+                 
+                  		Object.assign( myWidgetOptions ,  {
+                            //'setRefreshButton': true,
+                            //'setValidButton': true,
+                            //'setCloseButton': false,
+                            //'setRefreshButton': false,
+                            'wintop': true,
+                            'serverUrl' : ServerUrl.platform_services,
+                            //'readOnly': false,'
+                         	   events: {
+                                "onRefresh": function () {
+                                    console.log("refresh");
+                           	   },
+       	        		        "onCancel" : function(){
+       	        		        	console.log("Cancel");
+    	                           	dscef.sendString ('notifText=ClosePanel');
+    	        		       },
+      	        		        "onChangeSize" : function(){
+      	        		        	//console.log("onResize");
+    	        		    	    //that.onResize();
+      	                          if (typeof mySecondDiv.postResize === "function"){
+      	                    		var sizeBody= mySecondDiv.container.getDimensions();
+      	                    		var maxHeight = sizeBody.innerHeight;
+      	                    		mySecondDiv.postResize(maxHeight);
+      	                        }    	        		    	    
+    	        		       }                           	   
+                          	  }
+                       	 });
+                  		
+                       	 //widgetServices.setODTComment(true);
+                       	 mySecondDiv = new WidgetCore(widget, widget.body, myWidgetOptions);
+
+                         widget.setBody(mySecondDiv);
+                         widget.body.style.overflow = 'hidden';
+                       	 widget.body.setStyle("height", "100%");
+                       	 if (typeof mySecondDiv.getBottomBar === "function"){
+                        	 var modalFooter = this.elements.footer;
+                        	 if (modalFooter){
+                        		 var modalWrapper = this.elements.content;
+                        		 if (modalWrapper){
+                        			 modalWrapper.setStyle("height", "90%");
+                        		 }
+                        		 modalFooter.show();
+                        		 modalFooter.empty();
+                        		 var BottomBar = mySecondDiv.getBottomBar();
+                        		 BottomBar.inject(modalFooter);
+                        	 }
+                       	 }
+                         
+                       	dscef.sendString ('notifText=pageLoaded',{
+                            recordable: true,
+                            captureAll: true
+                        });
+                    },
+                    onRefresh: function () {
+                        mySecondDiv.onRefresh();
+                    },
+                    onResize: function () {
+                        mySecondDiv.onResize();
+                        if (typeof mySecondDiv.postResize === "function"){
+                    		var sizeBody= mySecondDiv.container.getDimensions();
+                    		var maxHeight = sizeBody.innerHeight;
+                    		mySecondDiv.postResize(maxHeight);
+                        }
+                        
+                    },
+               
+                };
+                widget.addEvent('onLoad', WIWI.onLoad);
+                widget.addEvent('onRefresh', WIWI.onRefresh);
+                widget.addEvent('onResize', WIWI.onResize);
+                return WIWI;
+            });
+        
+    </script>
+  </head>
+  <body>
+    <p>Loading...</p>
+   </body>
+</html>

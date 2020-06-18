@@ -1,0 +1,68 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../ad-hierarchy-browser/ad-hierarchy-browser.html">
+<link rel="import" href="../ad-multiview-panel/ad-multiview-panel.html">
+<link rel="import" href="../ad-tail-sidepanel/ad-tail-sidepanel.html">
+<link rel="import" href="../ad-station-manager/ad-station-manager.html">
+<link rel="import" href="../ad-dialog-panel/ad-dialog-panel.html">
+<link rel="import" href="../ad-properties-panel/ad-properties-panel.html">
+<link rel="import" href="../ad-execdir-remove-dialog/ad-execdir-remove-dialog.html">
+<link rel="import" href="../ad-execdir-login-dialog/ad-execdir-login-dialog.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../ad-tail-dialog-panel/ad-tail-dialog-panel.html">
+<link rel="import" href="../ad-util/ad-util.html">
+
+
+<dom-module id="ad-execdir-view">
+  <link rel="import" type="css" href="../ad-hierarchy-browser/ad-hierarchy-browser.css">
+  <link rel="import" type="css" href="ad-execdir-view.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+    	
+        <!-- COMMON CONFIGURATION PROPERTIES -->
+		<sp-variable id="currentDragObject" name="currentDragObject"></sp-variable>
+		<sp-dashboard id="dashboard"></sp-dashboard>
+
+		<!--  WEB SERVICES -->
+		<sp-webservice id="tailfileWS" name="tailfileWS"></sp-webservice>
+		
+		<sp-access id="access" group="process"></sp-access>
+		
+		<ad-station-manager id="stationManager" session="{{session}}"></ad-station-manager>
+
+	    <ad-hierarchy-browser id="executionDirectoryChooser" class="executionDirectoryChooser" 
+	    					  view-mode="{{viewMode}}" view-mode-pref-name="SMAProcAdhoc.preferences.execdirViewMode" 
+	    					  root-title="{{rootTitle}}" show-root-breadcrumb="true" 
+	    					  show-refresh="true" show-remove="{{showRemoveButton}}"
+	    					  on-select="onSelect" on-drilldown="onOpen" on-open="onOpen" on-dragover="onDragOver" on-drop="onDrop"> 
+	        <div class="tooltip-button-wrapper" title="Tail the Selected File">
+		    	<button id="tailExecutionFileButton" type="button" on-click="onTailExecutionFile" class$="{{_computeTailButtonClass(showTailButton)}}">
+		    		<span class="fonticon fonticon-to-end"></span>
+		    	</button>
+		    </div>
+	        <div class="tooltip-button-wrapper" title="View/edit selected item properties">
+		        <button id="configureItem" type="button" on-click="onConfigureItem" class$="{{_computeConfigureButtonClass(showConfigureButton)}}"><span class="fonticon fonticon-cog"></span></button>
+		    </div>
+	    	<aside>{{emptyMessage}}</aside>
+	    </ad-hierarchy-browser>
+ 		
+		<ad-dialog-panel id="itemConfigView" on-close="onConfigureItemClose">
+			<ad-properties-panel id="itemPropertiesPanel" session="{{session}}"></ad-properties-panel>
+		</ad-dialog-panel>
+	                   
+	    <ad-tail-dialog-panel id="tailFilePanel" on-refresh="onTailExecutionFileSidepanelRefresh" show-refresh="true" show-stretch="true"></ad-tail-dialog-panel>    
+	                        
+		<ad-tail-sidepanel id="tailExecutionFileSidepanel" panel-title="Execution File Tail" panel-orientation="left" 
+       					   show-cancel show-refresh cancel-tooltip="Close" 
+						   on-cancel="onTailExecutionFileSidepanelCancel" on-refresh="onTailExecutionFileSidepanelRefresh">
+		</ad-tail-sidepanel>
+
+	</template>
+  <script src="ad-execdir-view.js"></script>
+</dom-module>
+
+

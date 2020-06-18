@@ -1,0 +1,1 @@
+define("DS/SpecTree/SpecTree_es",{});define("DS/SpecTree/assets/nls/shell",{search:"Buscar ...",find:"Buscar ...",filter:"Filtrar ..."});

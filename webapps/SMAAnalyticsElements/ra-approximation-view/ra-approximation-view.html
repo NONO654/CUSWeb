@@ -1,0 +1,55 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html" />
+<dom-module id="ra-approximation-view">
+    <template>
+        <link rel="stylesheet" href="ra-approximation-view.css"/>
+        <div id="approxContainer">
+            <div class="datasets-details-row" id="dataset-details-title">
+			     <div class="datasets-details-label">[[title.title]]</div>
+			     <div class="datasets-details-value ra-approximation-value">[[approximation.data.title]]</div>
+			</div>
+			<div class="datasets-details-row" id="dataset-details-name">
+			    <div class="datasets-details-label">[[title.name]]</div>
+			    <div class="datasets-details-value ra-approximation-value" title='[[approximation.data.name]]'>[[approximation.data.name]]</div>
+			</div>
+			<div class="datasets-details-row" id="dataset-details-name">
+			    <div class="datasets-details-label">[[title.revision]]</div>
+			        <div class="datasets-details-value ra-approximation-value" title="{{revision}}">[[approximation.data.revision]]</div>
+			</div>
+			<div class="datasets-details-row" id="dataset-details-type">
+			    <div class="datasets-details-label">[[title.owner]]</div>
+			    <div class="datasets-details-value ra-approximation-value" title="{{owner}}">
+			        <span class="dataset-details-value-textspan">[[approximation.data.owner]]</span>
+			    </div>
+			</div>
+			<div class="datasets-details-row" id="dataset-details-type">
+			    <div class="datasets-details-label">[[title.author]]</div>
+			    <div class="datasets-details-value ra-approximation-value" title="{{author}}">[[approximation.data.author]]</div>
+			</div>
+			<div class="datasets-details-row" id="dataset-details-desc">
+			    <div class="datasets-details-label dataset-details-desc">[[title.description]]</div>
+			    <div class="datasets-details-value ra-approximation-value">[[approximation.data.description]]</div>
+			</div>
+			<div class="datasets-details-row" id="dataset-details-collabspace">
+			    <div class="datasets-details-label">[[title.collab]]</div>
+			    <div class="datasets-details-value ra-approximation-value" title='[[approximation.data.project]]'>[[approximation.data.project]]</div>
+			</div>      
+			<div class="datasets-details-row" id="dataset-details-state">
+			    <div class="datasets-details-label">[[title.maturity]]</div>
+			    <div class="datasets-details-value ra-approximation-value">
+			        <span class="dataset-details-value-textspan" id="raApproxState">{{approximation.data.state}}</span>
+			        <i class= "wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-left minimized-rem-btn minimized-rem-btn-left" title='[[title.demote]]' on-click="onDemoteClick" id='[[approximation.data.id]]'></i>
+			        <i class= "wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-right minimized-rem-btn" title='[[title.promote]]' on-click="onPromoteClick" id='[[approximation.data.id]]'></i>
+			    </div>
+			</div>
+			<div class="datasets-details-row" id="dataset-details-originated">
+			    <div class="datasets-details-label">[[title.originated]]</div>
+			    <div class="datasets-details-value ra-approximation-value">[[approximation.data.originated]]</div>
+			</div>
+			<div class="datasets-details-row" id="dataset-details-history">
+			    <div class="datasets-details-label">[[title.modified]]</div>
+			    <div class="datasets-details-value ra-approximation-value case-detail-link" on-click="onModifiedClick">[[approximation.data.modified]]</div>
+			</div>
+        </div>
+    </template>
+    <script type="text/javascript" src="ra-approximation-view.js"></script>
+</dom-module>

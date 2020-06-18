@@ -1,0 +1,207 @@
+// ===========================================================
+// PACKAGE   : PLMPIMInterfere
+// ===========================================================
+// Generated : Wed Nov 28 2008
+// ===========================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+// CREATE: controls the creation time attribute list
+// QUERY: controls list of attributes available for queries 
+// READ: controls the displayable attribute list (result list, properties); it is used both for presenting the results of a search, and also when browsing a single item of information (attributes in lines) 
+// WRITE: controls the modifiable attribute list (property editor, etc.)
+// EZQUERY: some applications (VPM Navigator) use the EZQUERY mask to define the "standard query" panel (the most-used list of attributes for query) whereas the QUERY mask is used for the "advanced query" panel (all queryable attributes)
+// TREE: LCA Navigator uses the tree mask to define the set of focal data attributes displayed in the notebook view. The focal data is displayed at the top of the page; the attributes in the read mask but not in the tree mask are displayed in the "General attributes" tab.
+// LIST: LCA Navigator uses the list mask to define the set of attributes used as column in list results for that object type (for query results and the related object lists)<package>  
+// ===========================================================
+// personal documentation
+// 
+// $ : no default value, all value are authorized
+// <required> = requires attr logical flag (Y or N) attr mandatory or not in the metadata
+// required c est comme mandatory mais au niveau UI
+// on peut mettre a required un attribut nom mandatory
+// exemple: on a L'IdentifierSet sur notre objet qui est: PLM_ExternalID revision  
+// si on a un panel d edition comme l edit properties où PLM_ExternalID et revision apparaissent
+// il faut PLM_ExternalID a Y et revision a Y
+//
+// TREE: c est le nom qui apparait dans l arbre
+// ===========================================================
+
+MASK DEFAULT
+
+// 1 entities :
+// - PLMPIMMetricReference
+
+// ===========================================================
+ENTITY PLMPIMMetricReference
+// ===========================================================
+ATTR PLM_ExternalID;Y;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR V_Name;Y;N;$
+ATTR V_description;N;N;$
+ATTR current;N;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR owner;Y;N;$
+ATTR revision;N;N;$
+ATTR V_Itf_Analysis;Y;Y;Not_Analysed
+VALUE OK 
+VALUE KO
+VALUE Not_Analysed
+VALUE Unknown
+VALUE To_Be_ReAnalysed
+ATTR V_Itf_Engine_Name;Y;N;$
+ATTR V_Itf_Solver_Name;Y;N;$
+ATTR V_Itf_Case_Of_Calc;Y;Y;Clash_Contact
+VALUE Clash
+VALUE Clash_Contact
+VALUE Clash_Contact_Clearance
+VALUE Clearance_Only
+VALUE Clash_Rule
+VALUE Clash_Simple
+VALUE MCX_Ignore
+VALUE MCX_Check_NoClash
+VALUE MCX_Check_Contact
+VALUE MCX_Check_Clearance
+ATTR V_Itf_Tolerance_Requested;Y;N;$
+ATTR V_Itf_Type;Y;Y;Undefined
+VALUE Clash
+VALUE Potential_Clash
+VALUE Clearance
+VALUE Potential_Clearance
+VALUE No_Interference
+VALUE Undefined
+ATTR V_Itf_User_Type;Y;Y;Undefined
+VALUE Clash
+VALUE Potential_Clash
+VALUE Clearance
+VALUE Potential_Clearance
+VALUE No_Interference
+VALUE Undefined
+ATTR V_Itf_Real_Tolerance_Used_For_First_Occurence;Y;N;$
+ATTR V_Itf_Real_Tolerance_Used_For_Second_Occurence;Y;N;$
+ATTR V_Itf_Real_Tolerance_Used_For_Computation;Y;N;$
+ATTR V_Itf_Status;Y;N;$
+ATTR policy;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_Name;N
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR policy;N   
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y 
+FATTR owner;Y
+FATTR V_Itf_Type;Y
+FATTR V_Itf_User_Type;Y
+FATTR V_Itf_Analysis;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+//FATTR PLM_ExternalID;Y 
+FATTR V_Name;Y
+FATTR originated;Y
+FATTR policy;Y  
+FATTR modified;Y
+FATTR current;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR revision;Y
+FATTR V_Itf_Case_Of_Calc;Y
+FATTR V_Itf_Tolerance_Requested;Y
+FATTR V_Itf_Type;Y
+FATTR V_Itf_User_Type;Y
+FATTR V_Itf_Real_Tolerance_Used_For_First_Occurence;Y
+FATTR V_Itf_Real_Tolerance_Used_For_Second_Occurence;Y
+FATTR V_Itf_Real_Tolerance_Used_For_Computation;Y
+FATTR V_Itf_Analysis;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_Name;Y
+FATTR originated;Y
+FATTR policy;N  
+FATTR modified;Y
+FATTR V_description;Y
+FATTR current;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR revision;Y
+FATTR V_Itf_Case_Of_Calc;Y
+FATTR V_Itf_Tolerance_Requested;Y
+FATTR V_Itf_Type;Y
+FATTR V_Itf_User_Type;Y
+FATTR V_Itf_Real_Tolerance_Used_For_First_Occurence;Y
+FATTR V_Itf_Real_Tolerance_Used_For_Second_Occurence;Y
+FATTR V_Itf_Real_Tolerance_Used_For_Computation;Y
+FATTR V_Itf_Analysis;Y
+
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR V_Name;N
+FATTR revision;N
+
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+FATTR V_Name;Y
+FATTR originated;N
+FATTR policy;N  
+FATTR modified;N
+FATTR V_description;Y
+FATTR current;N
+FATTR organization;N
+FATTR project;N
+FATTR owner;N
+FATTR revision;N
+FATTR V_Itf_Engine_Name;N
+FATTR V_Itf_Solver_Name;N
+FATTR V_Itf_Case_Of_Calc;N
+FATTR V_Itf_Tolerance_Requested;N
+FATTR V_Itf_Type;N
+FATTR V_Itf_User_Type;Y
+FATTR V_Itf_Real_Tolerance_Used_For_First_Occurence;N
+FATTR V_Itf_Real_Tolerance_Used_For_Second_Occurence;N
+FATTR V_Itf_Real_Tolerance_Used_For_Computation;N
+FATTR V_Itf_Analysis;Y
+
+// ===========================================================
+// End of PLMPIMInterfere package's DEFAULT mask file
+// ===========================================================

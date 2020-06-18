@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="urn:com:dassault_systemes:webservice" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <types>
+  <xs:schema targetNamespace="urn:com:dassault_systemes:webservice:messages">
+   <xs:import namespace="urn:com:dassault_systemes:webservice" schemaLocation="../xsd/IContextService.xsd"/>
+  </xs:schema>
+ </types>
+ <message name="createContextInput">
+  <part element="tns:createContext" name="parameters"/>
+ </message>
+ <message name="createContextOutput">
+  <part element="tns:createContextResponse" name="parameters"/>
+ </message>
+ <message name="createContextErrorType">
+  <part element="tns:createContextErrorType" name="details"/>
+ </message>
+ <message name="queryContextInput">
+  <part element="tns:queryContext" name="parameters"/>
+ </message>
+ <message name="queryContextOutput">
+  <part element="tns:queryContextResponse" name="parameters"/>
+ </message>
+ <message name="queryContextErrorType">
+  <part element="tns:queryContextErrorType" name="details"/>
+ </message>
+ <portType name="IContextService">
+  <documentation>Interface for Creating a Context</documentation>
+  <operation name="createContext">
+   <documentation>method for Creating a Context</documentation>
+   <input message="tns:createContextInput"/>
+   <output message="tns:createContextOutput"/>
+   <fault message="tns:createContextErrorType" name="createContextErrorType"/>
+  </operation>
+  <operation name="queryContext">
+   <documentation>method for making queries on Context</documentation>
+   <input message="tns:queryContextInput"/>
+   <output message="tns:queryContextOutput"/>
+   <fault message="tns:queryContextErrorType" name="queryContextErrorType"/>
+  </operation>
+ </portType>
+ <binding name="IContextServiceBinding" type="tns:IContextService">
+  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="createContext">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="createContextErrorType">
+    <soap:fault name="createContextErrorType" use="literal"/>
+   </fault>
+  </operation>
+  <operation name="queryContext">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="queryContextErrorType">
+    <soap:fault name="queryContextErrorType" use="literal"/>
+   </fault>
+  </operation>
+ </binding>
+ <service name="ContextService">
+  <port binding="tns:IContextServiceBinding" name="IContextService">
+   <soap:address location="http://localhost:9081/dummyURI/ContextService"/>
+  </port>
+ </service>
+</definitions>

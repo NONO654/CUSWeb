@@ -1,0 +1,168 @@
+{
+    "relations": [
+    {
+        "name":"mat_MadeOf_to",  "queries":
+        [{ "definition":[{"navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"to"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"to"}]
+        }]
+    },
+    {
+        "name":"mat_MadeOf_from",  "queries": 
+        [{ "definition":[{"navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"}],
+                        "keepTypes": ["CATMatReference"]},
+         { "definition":[{"navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"from"}],
+                        "keepTypes": ["CATMatReference"]
+        }]
+    },
+    {
+        "name":"mat_MadeOfIndirect_to", "queries":
+        [{ "definition":[{"navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "from"}]},
+         { "definition":[{"navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "from"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}]
+        }]
+    },
+    {
+        "name":"mat_MadeOfIndirect_from", "queries": 
+        [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"from"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"11","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"from"}]
+        }]
+    },
+
+
+    {
+        "name":"mat_CoveredBy_to", "queries":
+        [{ "definition":[{"navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"to"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"to"}]
+        }]
+    },
+    {
+        "name":"mat_CoveredBy_from",  "queries":
+        [{ "definition":[{"navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"}],
+                        "keepTypes": ["CATMatReference"]},
+         { "definition":[{"navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"from"}],
+                        "keepTypes": ["CATMatReference"]
+        }]
+    },
+    
+    {
+        "name":"mat_CoveredByIndirect_to", "queries":
+        [{ "definition":[{"navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "from"}]},
+         { "definition":[{"navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "from"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}]
+        }]
+    },
+    {
+        "name":"mat_CoveredByIndirect_from", "queries": 
+        [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"from"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"12","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"to"},
+                        { "navigationType" : "relation","qualityFilter":{"rel_type":"VPLMrel/PLMPort/V_Owner"}, "direction":"from"}]
+        }]
+    },
+
+
+    {
+        "name":"mat_DecalAppliedBy_to", "queries":
+        [{ "definition":[{"navigationType" : "SR","qualityFilter":{"role":"10","semantics":"5"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"437","semantics":"7"}, "direction":"to"}]
+        }]
+    },
+    {
+        "name":"mat_DecalAppliedBy_from",  "queries":
+        [{ "definition":[{"navigationType" : "SR","qualityFilter":{"role":"437","semantics":"7"}, "direction":"from"},
+                        { "navigationType" : "SR","qualityFilter":{"role":"10", "semantics":"5"}, "direction":"to"}],
+                        "keepTypes": ["CATMatReference"]
+        }]
+    },
+
+
+    {
+        "name":"mat_VectInclude_from",  "queries":
+        [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "to"}], "keepTypes": ["CATMatReference"] }]
+    },
+    {
+        "name":"mat_VectInclude_to",  "queries":
+        [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "from"}], "keepTypes": ["CATMatReference"] }]
+    },
+
+
+    {
+        "name":"mat_DomainIncluded_to",  "queries":
+        [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}], "keepTypes": ["CATMatReference"]}]
+    },
+    {
+        "name":"mat_DomainIncluded_from", "queries":
+        [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"}], "keepTypes": ["MaterialDomain"]}]
+    },
+
+	{
+        "name" : "mat_structure_to", "computepath": "to",     "instanceManagement" :  true , "queries" :
+        [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPMInstance"}, "direction" : "to"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPMRepInstance"}, "direction" : "to"}]
+        }]
+	},
+	{
+        "name" : "mat_structure_from", "computepath": "from",     "instanceManagement" :  true ,"queries" :
+        [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPMInstance"}, "direction" : "from"}]},
+         { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPMRepInstance"}, "direction" : "from"}]
+        }]
+	}
+    
+    ]
+}

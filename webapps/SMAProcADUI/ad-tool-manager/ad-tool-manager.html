@@ -1,0 +1,29 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../ad-tool-editor/ad-tool-editor.html">
+<link rel="import" href="../ad-station-manager/ad-station-manager.html">
+
+<dom-module id="ad-tool-manager">
+  	<template>
+        <!-- COMMON CONFIGURATION PROPERTIES -->
+		<sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL" on-valuechange="onVariableValueChange"></sp-variable>
+		<sp-variable id="securityContext" name="securityContext" on-valuechange="onVariableValueChange"></sp-variable>
+		
+		<!--  WEB SERVICES -->
+		<sp-mcsservice id="connectorsWS" name="connectorsWS" uri="{{_computeConnectorsUri(globals.mcsWSBaseURL)}}"></sp-mcsservice>
+		<sp-mcsservice id="templatesWS" name="templatesWS" uri="{{_computeTemplatesUri(globals.mcsWSBaseURL)}}"></sp-mcsservice>
+		<sp-mcsservice id="templateIDsWS" name="templateIDsWS" uri="{{_computeTemplateIDsUri(globals.mcsWSBaseURL)}}"></sp-mcsservice>
+		<sp-mcsservice id="templateViewsWS" name="templateViewsWS" uri="{{_computeTemplateViewsUri(globals.mcsWSBaseURL)}}"></sp-mcsservice>
+		<sp-mcsservice id="templateBaseWS" name="templateBaseWS" uri="{{_computeTemplatesBaseUri(globals.mcsWSBaseURL)}}"></sp-mcsservice>			
+        <sp-webservice id="toolsMetadata" data="{{toolsMetadata}}" handleprefix="false" getasap uri="{{_computeToolsMetadataUri(globals.mcsWSBaseURL)}}"></sp-webservice>
+  
+		<ad-station-manager id="stationManager" session="{{session}}"></ad-station-manager>
+		
+	</template>
+  	<script src="ad-tool-manager.js"></script>
+  	<script src="ad-tool-manager-oscommand.js"></script>
+  	<script src="ad-tool-manager-simtoso.js"></script>
+  	<script src="ad-tool-manager-oscommand-simtoso.js"></script>
+</dom-module>

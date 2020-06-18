@@ -1,0 +1,187 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY Change
+// --------------------------------------------------
+ATTR Originator;N;N;$
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR isbestsofar;N;N;false
+ATTR ispublished;N;N;false
+ATTR locked;N;N;false
+ATTR locker;N;N;$
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revindex;N;N;0
+ATTR revision;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR majorrevision;N
+FATTR description;Y
+FATTR locker;N
+FATTR originated;N
+FATTR current;N
+FATTR ispublished;N
+FATTR isbestsofar;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR locked;N
+FATTR policy;N
+FATTR minorrevision;N
+FATTR revision;N
+FATTR reserved;N
+FATTR name;Y
+FATTR revindex;N
+FATTR Originator;Y
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR majorrevision;Y
+FATTR project;Y
+FATTR description;Y
+FATTR locker;Y
+FATTR originated;Y
+FATTR current;Y
+FATTR ispublished;Y
+FATTR isbestsofar;Y
+FATTR reservedby;Y
+FATTR modified;Y
+FATTR locked;Y
+FATTR policy;Y
+FATTR owner;Y
+FATTR minorrevision;Y
+FATTR revision;Y
+FATTR reserved;Y
+FATTR organization;Y
+FATTR name;Y
+FATTR revindex;Y
+FATTR Originator;Y
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR majorrevision;N
+FATTR project;N
+FATTR description;N
+FATTR locker;N
+FATTR originated;N
+FATTR current;N
+FATTR ispublished;N
+FATTR isbestsofar;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR locked;N
+FATTR policy;N
+FATTR owner;N
+FATTR minorrevision;N
+FATTR revision;N
+FATTR reserved;N
+FATTR organization;N
+FATTR name;N
+FATTR revindex;N
+FATTR Originator;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR majorrevision;Y
+FATTR project;Y
+FATTR description;Y
+FATTR locker;Y
+FATTR originated;Y
+FATTR current;Y
+FATTR ispublished;Y
+FATTR isbestsofar;Y
+FATTR reservedby;Y
+FATTR modified;Y
+FATTR locked;Y
+FATTR policy;Y
+FATTR owner;Y
+FATTR minorrevision;Y
+FATTR revision;Y
+FATTR reserved;Y
+FATTR organization;Y
+FATTR name;Y
+FATTR revindex;Y
+FATTR Originator;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR majorrevision;N
+FATTR project;N
+FATTR description;N
+FATTR locker;N
+FATTR originated;N
+FATTR current;N
+FATTR ispublished;N
+FATTR isbestsofar;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR locked;N
+FATTR policy;N
+FATTR owner;N
+FATTR minorrevision;N
+FATTR revision;N
+FATTR reserved;N
+FATTR organization;N
+FATTR name;N
+FATTR revindex;N
+FATTR Originator;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR majorrevision;N
+FATTR project;N
+FATTR description;Y
+FATTR locker;N
+FATTR originated;N
+FATTR current;N
+FATTR ispublished;N
+FATTR isbestsofar;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR locked;N
+FATTR policy;N
+FATTR owner;N
+FATTR minorrevision;N
+FATTR revision;N
+FATTR reserved;N
+FATTR organization;N
+FATTR name;Y
+FATTR revindex;N
+FATTR Originator;Y

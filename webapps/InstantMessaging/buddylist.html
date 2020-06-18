@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta name="author" content="P8D" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Views test page</title>
+
+<!-- Definition of require : -->
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+<!-- This is required to configure RequireJS with the appropriate pathes : -->
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+
+<!-- Web Fundamentals -->
+<script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+<link rel="stylesheet" href="../UIKIT/UIKIT.css">
+
+<script>
+
+	function sendNotification(name, message) {
+	    if (typeof CATCefSendString !== 'undefined') {
+	        CATCefSendString(name + '=' + message);
+	    } else {
+	        var textarea = document.createElement("textarea");
+	        textarea.setAttribute("name", name);
+	        textarea.appendChild(document.createTextNode(message));
+
+	        var form = document.createElement("form");
+	        form.setAttribute("method", "POST");
+	        form.setAttribute("action", "jsnotif://");
+	        form.appendChild(textarea);
+
+	        document.documentElement.appendChild(form);
+
+	        form.submit();
+
+	        form.parentNode.removeChild(form);
+	        form = null;
+	    }
+	}
+
+
+	var buddyListController = undefined;
+	var RTProxyD = undefined;
+	var RTEventBusCtrl = undefined;
+
+	require(['UWA/Drivers/Alone','DS/InstantMessaging/js/controller/RTBuddyListController', 'DS/RTProxyDriver/RTProxyDriver', 'DS/InstantMessaging/js/controller/RTEventBusController',"css!InstantMessaging/InstantMessaging.css"], function (UWA, RTBuddyListController, RTProxyDriver, RTEventBusController ) {
+
+		if (RTProxyD === undefined)
+			RTProxyD = RTProxyDriver;
+
+		if (RTEventBusCtrl === undefined)
+			RTEventBusCtrl = RTEventBusController;
+
+		if (buddyListController === undefined) {
+
+			var optForTitle = {titleName:{txt:'3DMessaging',eventName:'onBuddylistNameClick'},
+	                eventResizePanel:{MouseDown:'onResizeBLPanelMouseDown',MouseUp:'onResizeBLPanelMouseUp'},
+	                minimizeButton:true,closeButton:true};
+
+			var opt = {
+				controller:this,
+				id:'RTBuddyListID',
+				originXPos:5,
+				originYPos:5,
+				sizeOnY:400,
+				minimumSize:32,
+				minimumResize:380,
+	        	panelLarger:270,
+				titleOpt:optForTitle,
+				showOfflineView:false
+			};
+
+			buddyListController = new RTBuddyListController(opt);
+			if (buddyListController){
+
+				buddyListController.activeOfflineView(false);
+				buddyListController.render(document.body);
+
+				createGroupNotification('_');
+
+				var data = {
+		            user:{
+		                userId:'p8d@im',
+		                userName:'Paul Simard',
+		                login:'p8d',
+		                status:'Online'
+		            },
+		            group:'_'
+		        };
+
+		        addContact(data);
+
+
+				
+
+				createGroupNotification('Mygroup1');
+				createGroupNotification('Mygroup2');
+				createGroupNotification('Mygroup3');
+				createGroupNotification('Mygroup4');
+				createGroupNotification('Mygroup5');
+				createGroupNotification('Mygroup6');
+				createGroupNotification('Mygroup7');
+				createGroupNotification('Mygroup8');
+
+
+				data = {
+		            user:{
+		                userId:'p8d@im',
+		                userName:'Paul Simard',
+		                login:'p8d',
+		                status:'Online'
+		            },
+		            group:'Mygroup1'
+		        };
+
+		        addContact(data);
+				/*
+				createGroupNotification('Mygroup9');
+				createGroupNotification('Mygroup10');
+				createGroupNotification('Mygroup11');
+				*/
+
+			}
+
+			RTProxyDriver.addEvent(RTProxyDriver.eventName.SEARCHCONTACT, function (data) {
+                searchContactCallback(data);
+            });
+
+		}
+
+	});
+
+
+
+	function buildBuddyList(roster) {
+		if (RTProxyD) {
+			RTProxyD.dispatch(RTProxyD.eventName.BUDDYLISTBUILT,[roster]);
+		}
+	}
+
+
+	function createGroupNotification(groupName) {
+		if (RTProxyD) {
+			RTProxyD.dispatch(RTProxyD.eventName.CREATEGROUP,[groupName]);
+		}
+	}
+
+	function addContact(data){
+		if (RTEventBusCtrl) {
+			RTEventBusCtrl.dispatch(RTEventBusCtrl.eventName.ONADDCONTACT, [data]);
+		}
+	}
+
+	function searchContactCallback(data){
+		sendNotification('RTSearchContactNotif',data);
+	}
+
+	function addContactInSearch(data){
+		var data = [
+	        {
+	            status: "Offline",
+	            userId: "odt1@im",
+	            userName: "Paul ODT"
+	        },
+	        {
+	            status: "Offline",
+	            userId: "odt2@im",
+	            userName: "Joss ODT"
+	        }
+	    ];
+
+	        
+	    RTProxyDriver.dispatch(RTProxyDriver.eventName.RESULTOFSEARCH,[data]);
+	}
+/*
+	function AddUserNotification(groupName,User) {
+		if (RTProxyD) {
+			RTProxyD.dispatch(RTProxyD.eventName.CREATEGROUP,[groupName]);
+		}
+	}
+*/
+
+</script>
+</head>
+<body>
+
+
+</body>
+</html>

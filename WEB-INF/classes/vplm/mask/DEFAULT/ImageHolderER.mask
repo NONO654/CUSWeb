@@ -1,0 +1,179 @@
+// ===========================================================
+// PACKAGE   : ImageHolderER  (Abstract Mask)
+// ===========================================================
+// Generated : 22nd Feb 2013
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY Image Holder
+// --------------------------------------------------
+
+
+ATTR Originator;N;N;$
+ATTR Primary Image;N;N;$
+ATTR Primary Image From Alt Path;N;Y;No
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Yes
+//VALUE No
+ATTR Traverse Alt Path;N;Y;Yes
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Yes
+//VALUE No
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR locker;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR project;N;N;$
+ATTR revision;N;N;$
+FUNC Create
+FATTR description;Y
+FATTR name;Y
+FATTR Originator;Y
+FUNC EZQuery
+FATTR revision;Y
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR locker;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR Primary Image From Alt Path;Y
+FATTR Primary Image;Y
+FATTR Traverse Alt Path;Y
+FATTR Originator;Y
+FUNC List
+FATTR revision;N
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR locker;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR Primary Image From Alt Path;N
+FATTR Primary Image;N
+FATTR Traverse Alt Path;N
+FATTR Originator;N
+FUNC Query
+FATTR revision;Y
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR locker;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR Primary Image From Alt Path;Y
+FATTR Primary Image;Y
+FATTR Traverse Alt Path;Y
+FATTR Originator;Y
+FUNC Read
+FATTR revision;N
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR locker;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR Primary Image From Alt Path;N
+FATTR Primary Image;N
+FATTR Traverse Alt Path;N
+FATTR Originator;N
+FUNC Write
+FATTR revision;N
+FATTR organization;N
+FATTR description;Y
+FATTR name;Y
+FATTR current;N
+FATTR locker;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR Primary Image From Alt Path;N
+FATTR Primary Image;N
+FATTR Traverse Alt Path;N
+FATTR Originator;Y
+// --------------------------------------------------
+ENTITY Relation.Image Holder
+// --------------------------------------------------
+ATTR modified;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR project;N;N;$
+FUNC Create
+FUNC EZQuery
+FATTR owner;Y
+FATTR project;Y
+FATTR organization;Y
+FATTR originated;Y
+FATTR modified;Y
+FUNC List
+FATTR owner;N
+FATTR project;N
+FATTR organization;N
+FATTR originated;N
+FATTR modified;N
+FUNC Query
+FATTR owner;Y
+FATTR project;Y
+FATTR organization;Y
+FATTR originated;Y
+FATTR modified;Y
+FUNC Read
+FATTR owner;N
+FATTR project;N
+FATTR organization;N
+FATTR originated;N
+FATTR modified;N
+FUNC Write
+FATTR owner;N
+FATTR project;N
+FATTR organization;N
+FATTR originated;N
+FATTR modified;N
+
+// ===========================================================
+// End of ImageHolderER package's DEFAULT mask file
+// ===========================================================
+

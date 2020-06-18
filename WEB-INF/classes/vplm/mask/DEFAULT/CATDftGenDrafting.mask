@@ -1,0 +1,76 @@
+// ===========================================================
+// PACKAGE   : CATDftGenDrafting
+// ===========================================================
+// Generated : Tue Oct	28 11:29:14 2008
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 1 entity :
+// - CATDftGenDraftingExt
+
+// ===========================================================
+ENTITY CATDftGenDraftingExt
+// ===========================================================
+// --- attributes: 2
+ATTR V_UpdateStatusComputationDate;N;N;$
+ATTR V_UpdateStatus;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_UpdateStatusComputationDate;N
+FATTR V_UpdateStatus;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_UpdateStatusComputationDate;Y
+FATTR V_UpdateStatus;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_UpdateStatusComputationDate;Y
+FATTR V_UpdateStatus;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_UpdateStatusComputationDate;Y
+FATTR V_UpdateStatus;Y
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_UpdateStatusComputationDate;N
+FATTR V_UpdateStatus;N

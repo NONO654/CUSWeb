@@ -1,0 +1,1 @@
+define("DS/ENOXIDCard/ENOXIDCard_ko",{});define("DS/ENOXIDCard/assets/nls/ENOXIDCard",{back:"뒤로",collapse:"축소",expand:"확장",home:"홈",info:"정보",menu:"메뉴"});

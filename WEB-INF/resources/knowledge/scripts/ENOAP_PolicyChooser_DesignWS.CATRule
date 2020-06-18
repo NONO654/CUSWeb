@@ -1,0 +1,61 @@
+/* Rule ENOAP_PolicyChooser_DesignWS (ThisObject: PLMEntity, Parameters: RuleContext)                           */
+/* NOT CONTRACTUAL and PROPERTY OF TE (TEAM ENVIRONMENT) DEFINITION, ANY CHANGE MAY HAPPEN WITHOUT NOTICE         */
+/* Parameters contains many information such as name, user, security ... depending on Operation                   */
+/* Notice this BL operates OpeningID INFRAAuthorizedPolicies                                                      */
+
+/*
+/*tempo code : the list of policies should be provided from server kernel dictionnary                             */
+/*                    default policy                                                                              */
+/*hard coded from the time being will be substituted by a more generic rule implying kernel policy dictionnary    */
+/* 2017/01/12 vdu/d81 : removed check (LoginRole == "VPLMCreator") as policy now takes care of it thanks to filters on expressions in the policy */
+
+Let DefaultPolicyName(STRING) 
+Let listOtherPolicies(List)
+
+Let ModelingType(Type)
+Let ModelingTypeName(String)
+
+Let LoginRole(STRING) 
+
+LoginRole=""
+DefaultPolicyName=""
+
+/********** PrimaryType is the custom type of a DS Modeling type ******/
+/* PrimaryType is the custom type of a DS Modeling type */
+ModelingTypeName=""
+ModelingType = ThisObject.ModelerType
+if (ModelingType<>NULL){
+   ModelingTypeName=ModelingType.Name 
+}
+
+/*********** Applicability of the policy ********/
+if (ThisObject->IsSupporting("ENOWSP_WorkspaceRef") == false) {
+    Trace (1, "ENOAP_PolicyChooser_DesignWS: Invalid Object type " + ModelingTypeName )    
+    Parameters.Message="wrong usage of rule ENOAP_PolicyChooser_DesignWS on type " + ModelingTypeName
+    Parameters.Severity=3 
+	Report("Error",Parameters.Message, Parameters.Message)     
+}
+
+/*********** Business Role ********/
+if ( Parameters->HasAttribute("Role") == true ) {
+   LoginRole=Parameters->GetAttributeString("Role")
+}
+
+/***********Default Policy **************/
+DefaultPolicyName="VPLM_SMB_DesignWS"
+
+/*********** Protect Safe Save some OCDX roles********/
+if ((LoginRole == "VPLMExperimenter") or (LoginRole == "VPLMViewer")) {
+    Trace (1, "ENOAP_PolicyChooser_DesignWS: Invalid Role for Object type " + ModelingTypeName )    
+    Parameters.Message="Your Role do not support Saving Object of type " + ModelingTypeName
+    Parameters.Severity=2 
+	Report("Error",Parameters.Message, Parameters.Message)     
+}
+
+Trace (1, "ENOAP_PolicyChooser: Allocating default policy "+DefaultPolicyName+" for type "+ModelingTypeName  )    
+Parameters->SetAttributeString("PolicyName",DefaultPolicyName)
+
+/***********Other Policy Applicable**************/
+/*listOtherPolicies.Append("TBD")*/
+Parameters->SetAttributeObject("OtherPolicies",listOtherPolicies)
+

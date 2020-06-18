@@ -1,0 +1,1 @@
+define("DS/i3DXCompassPlatformServices/i3DXCompassPlatformServices_es",{});define("DS/i3DXCompassPlatformServices/assets/nls/openWith",{OpenWith:"Abrir con",no_install_compatible:"Instale primero la aplicación",moreApps:"Más aplicaciones"});

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.OSCommand" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAExeOSCommandConnector" nlsID="dispname">OS Command</DisplayName>
+	<Description nlsFile="SMAExeOSCommandConnector" nlsID="desc">Create new OS Command</Description>
+	<LongDescription nlsFile="SMAExeOSCommandConnector" nlsID="longdesc">Create new OS Command</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.component.OSCommand</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>375</Value>
+			<Value>375</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="I_SMAWflOSCommand16.png" targetFilename="small/I_SMAWflOSCommand16.png" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflOSCommand.png" targetFilename="large/I_SMAWflOSCommand.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeOSCommandConnector.CATNls" targetFilename="SMAExeOSCommandConnector.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeOSCommandConnector_Japanese.CATNls" targetFilename="SMAExeOSCommandConnector.CATNls" locale="Japanese" />
+		<Stream name="Properties" streamKind="properties" sourceFilename="SMAExeOSCommandConnector_CATNls.properties" targetFilename="SMAExeOSCommandConnector.properties"/>
+		<Stream name="Properties_Japanese" streamKind="properties" sourceFilename="SMAExeOSCommandConnector_JapaneseCATNls.properties" targetFilename="SMAExeOSCommandConnector_ja.properties" locale="Japanese" />
+		<Stream name="PluginProperties" streamKind="properties" sourceFilename="SMAExeOSCommandConnectorPI_CATNls.properties" targetFilename="SMAExeOSCommandConnectorPI.properties"/>
+		<Stream name="PluginProperties_Japanese" streamKind="properties" sourceFilename="SMAExeOSCommandConnectorPI_JapaneseCATNls.properties" targetFilename="SMAExeOSCommandConnectorPI_ja.properties" locale="Japanese" />
+		<Stream name="CodeJar" streamKind="jar" sharedLoader="false" sourceFilename="SMAExeOSCommandConnector.jar" targetFilename="SMAExeOSCommandConnector.jar" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflConnOScmd.dll" targetFilename="win_b64/SMAWflConnOScmd.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflAutOSCommand.sypstyle" targetFilename="SMAWflAutOSCommand.sypstyle"/>
+		<Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebOSCommand/cmp-oscommand.html" targetFilename="SMAProcWebOSCommand/cmp-oscommand.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-oscommand</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>SMAWflWebExtensionEditor</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_stylesheet"/>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflOSCommandEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflOSCommandHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="PreferenceEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflOSCommandEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="ExtensionUpdater">
+			<Implementations>
+				<Implementation name="Updater" language="cpp" platform="win_b64">
+					<LateType>SMAWflOSCommandUpdater_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<!--  OSCommand properties -->
+		<Property name="intpName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="intpCommand" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="scriptExtension" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="intpArgument" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="scriptArgument" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="scriptContentType" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="commandType" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="scriptText" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="command" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="maxrcSuccess" type="aggregate" valuetype="single">
+			<Property name="success" type="string" valuetype="array" arraydim="[1]" sizable="true">
+				<Value index="[0]">0</Value>
+			</Property>
+		</Property>
+		<!--<Property name="timeout" type="integer" valuetype="single">
+      <Value/>
+    </Property>-->
+		<Property name="hostname" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="unix" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+		<!--<Property name="ReturnCodeCheck" type="boolean" valuetype="single">
+      <Value><![CDATA[false]]></Value>
+    </Property>-->
+		<Property name="stdOutVal" type="boolean" valuetype="single">
+			<Value><![CDATA[false]]></Value>
+		</Property>
+		<Property name="stdErrVal" type="boolean" valuetype="single">
+			<Value><![CDATA[false]]></Value>
+		</Property>
+		<Property name="logStderr" type="boolean" valuetype="single">
+			<Value><![CDATA[true]]></Value>
+		</Property>
+		<Property name="logStdout" type="boolean" valuetype="single">
+			<Value><![CDATA[false]]></Value>
+		</Property>
+		<Property name="linesToLog" type="integer" valuetype="single">
+			<Value><![CDATA[21]]></Value>
+		</Property>
+		<!-- Properties for the WAIT FOR FILE Feature -->
+		<Property name="waitFile" type="string" valuetype="single">
+			<Value><![CDATA[]]></Value>
+		</Property>
+		<Property name="waitString" type="string" valuetype="single">
+			<Value><![CDATA[]]></Value>
+		</Property>
+		<Property name="waitDelay" type="integer" valuetype="single">
+			<Value><![CDATA[0]]></Value>
+		</Property>
+		<Property name="makeJob" type="boolean" valuetype="single">
+			<Value><![CDATA[true]]></Value>
+		</Property>
+		<Property name="releaseConcurrency" type="boolean" valuetype="single">
+			<Value><![CDATA[false]]></Value>
+		</Property>
+		<Property name="oscmd_env_vars" type="string" valuetype="array" arraydim="[1]" sizable="true">
+			<Value index="[0]"/>
+		</Property>
+		<Property name="PredefinedCommandOptions" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="retvalParam" type="string" valuetype="single">
+			<Value/>
+		</Property>
+	</Properties>
+</wfext:Extension>

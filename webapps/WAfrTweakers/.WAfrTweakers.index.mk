@@ -1,0 +1,17 @@
+m|WAfrUI\WAfrTweakers.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.7.19200
+r|G:\R421\BSF\.
+t|win_b64\webapps\WAfrTweakers\assets\WAfrTypeTemplates.json|1552093796|1022
+s|WAfrUI\WAfrTweakers.mweb\src\assets\WAfrTypeTemplates.json|1551358920|1022
+t|win_b64\webapps\WAfrTweakers\assets\WAfrTypeRepresentations.json|1531551006|560
+s|WAfrUI\WAfrTweakers.mweb\src\assets\WAfrTypeRepresentations.json|1528816386|560
+t|win_b64\webapps\WAfrTweakers\WAfrTweakers.js|1563574049|31739
+s|WAfrUI\WAfrTweakers.mweb\src\TweakerHandlerRadio.js|1562915254|22093
+s|WAfrUI\WAfrTweakers.mweb\src\TweakerHandlerSimple.js|1558516350|7828
+s|WAfrUI\WAfrTweakers.mweb\src\TweakerFlyout.js|1563291214|12254
+s|WAfrUI\WAfrTweakers.mweb\src\TweakerUtilities.js|1562915448|12257
+s|WAfrUI\WAfrTweakers.mweb\src\TweakerHandlerCommand.js|1558515379|9820
+s|WAfrUI\WAfrTweakers.mweb\src\WAfrTweakers.js|1516290532|0
+s|WAfrUI\WAfrTweakers.mweb\src\TweakerHandlerCheck.js|1563291159|12713

@@ -1,0 +1,209 @@
+<!--------------------------------------------------------------------
+[xs-wg-slider HTML Document]
+
+Project:		xs
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:47:00 GMT
+Assigned to:	d6u, tee1
+Primary use:	Slider for numeric values
+Description:    TODO: Description about the component
+--------------------------------------------------------------------->
+
+<!-- Import base component common to all widgets-->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+
+<!--Import SP UI components-->
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+
+<dom-module id="xs-wg-slider">
+  <!-- <link rel="import" type="css" href="xs-wg-slider.css"> -->
+	<!-- Including the base widget style -->
+	<style include="xs-wg-base"></style>
+        <style>
+			/* If the slider is readonly */
+			.slider.is-readonly .range{
+				background-image:-webkit-linear-gradient(left,#CCCCCC 0%, #ccc 100%);
+				background-image:-moz-linear-gradient(0deg,#CCCCCC, #ccc 100%);
+			}
+        </style>
+  <template>
+        <style>
+        :host {
+          display: inline; }
+
+        .range {
+          -webkit-appearance: none; }
+
+        .slider {
+          display: flex;
+          flex-direction: row; }
+        .slider .outputvalue {
+          display: inline-block;
+          margin-left: 20px;
+          width: 100px; }
+        .slider .slidercontainer {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          width: 100%;
+          max-width: 500px; }
+        .slider .slidercontainer .rangecontainer {
+          height: 22px;
+          display: block;
+          position: relative;
+          padding-top: 13px;
+          width: 100%; }
+        @media all and (-ms-high-contrast: none), (ms-high-contrast: active) {
+            .slider .slidercontainer .rangecontainer{
+              padding-top: 7px;
+            }
+          }
+
+          .slider .slidercontainer .rangecontainer .range {
+            padding: 0;
+            -webkit-appearance: none;
+            background: -webkit-linear-gradient(left, #2980b9 50%, #ccc 50%);
+            background: -moz-linear-gradient(left, transparent 50%, transparent 50%);
+            background: -ms-linear-gradient(left, transparent 50%, transparent 50%);
+            max-width: 500px;
+            vertical-align: top;
+            width: 100%; }
+          .slider .slidercontainer .rangecontainer .range::-webkit-slider-runnable-track {
+            height: 5px;
+            border: none;
+            border-radius: 3px; }
+          .slider .slidercontainer .rangecontainer .range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            border: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #2980b9;
+            margin-top: -5px;
+            cursor: pointer; }
+          .slider .slidercontainer .rangecontainer .range::-webkit-slider-thumb:active, .slider .slidercontainer .rangecontainer .range::-webkit-slider-thumb:focus {
+            height: 22px;
+            width: 22px;
+            margin-top: -8px; }
+          .slider .slidercontainer .rangecontainer .range:focus {
+            outline: none; }
+          .slider .slidercontainer .rangecontainer .range::-moz-range-track {
+            background-color: #ccc;
+            border: none;
+            height: 5px;
+            border-radius: 3px; }
+          /* .slider .slidercontainer .rangecontainer .range:-moz-focusring {
+            outline: 1px solid white;
+            outline-offset: -1px; } */
+          .slider .slidercontainer .rangecontainer .range::-ms-track {
+            width: 100%;
+            height: 5px;
+            cursor: pointer;
+            background: transparent;
+            border-color: transparent;
+            border-width: 6px 0;
+            color: transparent;
+          top: 0px;
+        line-height: 0}
+          .slider .slidercontainer .rangecontainer .range::-ms-fill-lower {
+            background: #2980b9; }
+          .slider .slidercontainer .rangecontainer .range::-ms-fill-upper {
+            background: #ccc; }
+          .slider .slidercontainer .rangecontainer .range:focus::-ms-fill-lower {
+            background: #2980b9; }
+          .slider .slidercontainer .rangecontainer .range:focus::-ms-fill-upper {
+            background: #ccc; }
+          /* .slider .slidercontainer .rangecontainer .range:focus::-ms-tooltip {
+            display: none; } */
+          .slider .boundaries {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start; }
+          .slider .boundaries .min-limit {
+            flex-grow: 1; }
+          .slider .min-limit,
+          .slider .max-limit {
+            color: #77797c; }
+          .slider .value {
+            padding: 0.25em;
+            color: #ccc; }
+
+
+        .range::-ms-thumb {
+              border: none;
+              height: 16px;
+              width: 16px;
+              border-radius: 50%;
+              background-color: #2980b9;
+              cursor: pointer;
+              margin-top: 0px; }
+
+        .range::-moz-range-thumb {
+          border: none;
+          height: 16px;
+          width: 16px;
+          border-radius: 50%;
+          background-color: #2980b9;
+          cursor: pointer; }
+        .range::-moz-range-thumb:active, .range::-moz-range-thumb:focus {
+          height: 22px;
+          width: 22px;
+          margin-top: -8px; }
+
+        .range::-moz-range-progress {
+          background-color: #2980b9;
+          border-color: #2980b9;
+          height: 5px;
+          border-radius: 3px; }
+
+        .slider-overlay {
+          position: absolute;
+          z-index: 1;
+          height: 100%;
+          width: 100%;
+          top: 0;
+          left: 0;
+          display: none; }
+
+        :host(.is-readonly) .range::-webkit-slider-thumb {
+          background: grey;
+          cursor: none; }
+        :host(.is-readonly) .range::-ms-thumb  {
+            background: grey;
+            cursor: none; }
+        :host(.is-readonly) .range::-moz-range-thumb   {
+              background: grey;
+              cursor: none; }
+
+        :host(.is-readonly) .range::-webkit-slider-thumb:active, :host(.is-readonly) .range::-webkit-slider-thumb:focus {
+          height: 0;
+          width: 0;
+          margin-top: 0; }
+        :host(.is-readonly) .slider-overlay {
+          display: block; }
+        </style>
+
+        <label class="xs-wg-label">{{label}}</label>
+
+		<div class="slider is-readonly">
+			<!--Input range slider container-->
+			<div class="slidercontainer">			
+				<div class="rangecontainer">
+					<input id="range" class="range" type="range" on-change="onInput" on-input="onInput" value$="{{value}}" min="{{validmin}}" max="{{validmax}}" step="{{step}}">
+				</div>
+				<!--Min,max limits displayed below the slider-->
+				<div class="boundaries">
+					<span class="min-limit">{{validmin}}</span>
+					<span class="max-limit">{{validmax}}</span>
+				</div>
+			</div>
+			<!--Input field to type the value-->
+			<sp-input id="outputvalue" class="outputvalue" for="range" value="{{value}}" haserror="{{_adp.hasError}}"></sp-input>
+			<div class="slider-overlay"></div>
+		</div>
+		<div id="errorPanel" class="show-error" style="color: #EA4F37"></div>
+    </template>
+  <script type="text/javascript" src="xs-wg-slider.js"></script>
+</dom-module>

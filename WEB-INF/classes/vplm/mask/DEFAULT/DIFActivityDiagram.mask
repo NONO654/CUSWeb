@@ -1,0 +1,327 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// ==================================================
+ENTITY ActivityDiagram
+// ==================================================
+// --- attributes: 13
+ATTR V_Name;N;N;$
+ATTR PLM_ExternalID;Y;N;$
+ATTR revision;N;N;$
+ATTR V_description;N;N;$
+ATTR V_versionComment;N;N;$
+ATTR C_created;N;N;$
+ATTR V_fromExternalID;N;N;$
+ATTR C_modified;N;N;$
+ATTR V_maturity;N;N;$
+ATTR LOCKUSER;N;N;$
+ATTR policy;N;N;$
+ATTR V_user;Y;N;$
+ATTR V_organization;Y;N;$
+ATTR V_project;Y;N;$
+ATTR V_version;N;N;$
+ATTR minorrevision;N;N;$
+//---
+//ATTR V_DIFFrame;N;Y;Shown
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_description;Y
+FATTR policy;N
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;Y
+FATTR revision;Y
+FATTR C_modified;Y
+FATTR V_project;Y
+//---
+//FATTR V_DIFFrame;N
+// - unordered
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+//FATTR V_DIFFrame;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;Y
+FATTR revision;Y
+FATTR V_description;Y
+FATTR V_versionComment;Y
+FATTR C_created;Y
+FATTR V_fromExternalID;Y
+FATTR C_modified;Y
+FATTR V_maturity;Y
+FATTR LOCKUSER;Y
+FATTR policy;Y
+FATTR V_user;Y
+FATTR V_organization;Y
+FATTR V_project;Y
+//---
+FATTR V_DIFFrame;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+FATTR PLM_ExternalID;N
+FATTR revision;N
+FATTR V_description;N
+FATTR V_versionComment;N
+FATTR C_created;N
+FATTR V_fromExternalID;N
+FATTR C_modified;N
+FATTR V_maturity;N
+FATTR LOCKUSER;N
+FATTR policy;N
+FATTR V_user;N
+FATTR V_organization;N
+FATTR V_project;N
+//---
+//FATTR V_DIFFrame;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+FATTR revision;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR revision;N
+FATTR V_versionComment;Y
+FATTR V_description;Y
+FATTR C_created;N
+FATTR V_fromExternalID;N
+FATTR policy;N
+FATTR C_modified;N
+FATTR V_maturity;N
+FATTR V_user;N
+FATTR V_organization;N
+FATTR V_project;N
+//---
+//FATTR V_DIFFrame;N
+// - unordered
+// ==================================================
+ENTITY ActivityDiagramInstance
+// ==================================================
+// --- attributes: 13
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR V_user;Y;N;$
+ATTR V_organization;Y;N;$
+ATTR V_project;Y;N;$
+ATTR LOCKUSER;N;N;$
+ATTR C_created;N;N;$
+ATTR C_modified;N;N;$
+//---
+//ATTR V_DIFAngle;N;N;0.0
+// ATTR V_DIFName;N;N;$
+//ATTR V_DIFPosX;N;N;0.0
+//ATTR V_DIFPosY;N;N;0.0
+//ATTR V_DIFScale;N;N;1.0
+//---
+// ATTR LOCKSTATUS;N;N;$
+// ATTR V_CustoDiscipline;N;N;$
+// ATTR V_Name;N;N;$
+// ATTR V_discipline;N;N;$
+// ATTR V_isVPLMControlled;N;N;true
+// ATTR V_nature;N;Y;Specification
+// ATTR V_sec_level;N;N;-1
+// ATTR V_usage;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+//---
+// FATTR V_DIFName;N
+//---
+// FATTR V_Name;Y
+// FATTR V_sec_level;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR V_user;N
+FATTR V_organization;N
+FATTR V_project;N
+FATTR LOCKUSER;N
+FATTR C_created;N
+FATTR C_modified;N
+//---
+//FATTR V_DIFScale;N
+// FATTR V_DIFName;N
+//FATTR V_DIFAngle;N
+//FATTR V_DIFPosX;N
+//FATTR V_DIFPosY;N
+//---
+// FATTR V_nature;Y
+// FATTR V_Name;Y
+// FATTR V_sec_level;Y
+// FATTR V_usage;Y
+// FATTR V_CustoDiscipline;Y
+// FATTR V_discipline;Y
+// FATTR LOCKSTATUS;Y
+// FATTR V_isVPLMControlled;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR V_user;N
+FATTR V_organization;N
+FATTR V_project;N
+FATTR LOCKUSER;N
+FATTR C_created;N
+FATTR C_modified;N
+//---
+//FATTR V_DIFScale;N
+// FATTR V_DIFName;N
+//FATTR V_DIFAngle;N
+//FATTR V_DIFPosX;N
+//FATTR V_DIFPosY;N
+//---
+// FATTR V_nature;N
+// FATTR V_Name;N
+// FATTR V_sec_level;N
+// FATTR V_usage;N
+// FATTR V_CustoDiscipline;N
+// FATTR V_discipline;N
+// FATTR LOCKSTATUS;N
+// FATTR V_isVPLMControlled;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR V_user;N
+FATTR V_organization;N
+FATTR V_project;N
+FATTR LOCKUSER;N
+FATTR C_created;N
+FATTR C_modified;N
+//---
+//FATTR V_DIFScale;N
+// FATTR V_DIFName;N
+//FATTR V_DIFAngle;N
+//FATTR V_DIFPosX;N
+//FATTR V_DIFPosY;N
+//---
+// FATTR V_nature;Y
+// FATTR V_Name;Y
+// FATTR V_sec_level;Y
+// FATTR V_usage;Y
+// FATTR V_CustoDiscipline;Y
+// FATTR V_discipline;Y
+// FATTR LOCKSTATUS;Y
+// FATTR V_isVPLMControlled;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR V_user;N
+FATTR V_organization;N
+FATTR LOCKUSER;N
+FATTR C_created;N
+FATTR C_modified;N
+//---
+//FATTR V_DIFScale;N
+// FATTR V_DIFName;N
+//FATTR V_DIFAngle;N
+//FATTR V_DIFPosX;N
+//FATTR V_DIFPosY;N
+//---
+// FATTR V_nature;N
+// FATTR V_Name;N
+// FATTR V_sec_level;N
+// FATTR V_usage;N
+// FATTR V_CustoDiscipline;N
+// FATTR V_discipline;N
+// FATTR V_project;N
+// FATTR LOCKSTATUS;N
+// FATTR V_isVPLMControlled;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR V_user;N
+FATTR V_organization;N
+FATTR V_project;N
+FATTR LOCKUSER;N
+FATTR C_created;N
+FATTR C_modified;N
+//---
+//FATTR V_DIFScale;N
+// FATTR V_DIFName;N
+//FATTR V_DIFAngle;N
+//FATTR V_DIFPosX;N
+//FATTR V_DIFPosY;N
+//---
+// FATTR V_nature;N
+// FATTR V_Name;Y
+// FATTR V_sec_level;Y
+// FATTR V_usage;N
+// FATTR V_CustoDiscipline;N
+// FATTR V_discipline;N
+// FATTR LOCKSTATUS;N
+// FATTR V_isVPLMControlled;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// --------------------------------------------------

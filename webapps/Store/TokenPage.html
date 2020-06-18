@@ -1,0 +1,52 @@
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>3DEXPERIENCE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script type="text/javascript" src="<%= webappsPath %>/AmdLoader/AmdLoader.js"></script>
+  <script type="text/javascript" src="<%= webappsPath %>/c/UWA/js/UWA_W3C_Alone.js"></script>
+  <script type="text/javascript" src="<%= webappsPath %>/UIKIT/UIKIT.js"></script>
+
+  <link rel="stylesheet" href="<%= webappsPath %>/UIKIT/UIKIT.css">
+
+  <script type="text/javascript">
+    var ds = {
+      require :{
+        baseUrl: '<%= webappsPath %>',
+        paths: {
+          'DS': '<%= webappsPath %>'
+        },
+        config: {
+          i18n: {
+            locale: 'en'
+          },
+          'DS/Logger/Logger': {
+            disableLog: !false
+          }
+        },
+        skipDataMain: true
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class='container-fluid' id="content">
+    Loading...
+  </div>
+  <script>
+    require([
+      'UWA/Core',
+      'DS/Store/StoreTokenPage'
+    ], function (UWA, StoreTokenPage) {
+      var store;
+
+      store = new StoreTokenPage({
+        container: UWA.Element.getElement.call(document.body, '#content')
+      });
+
+    });
+  </script>
+</body>
+</html>

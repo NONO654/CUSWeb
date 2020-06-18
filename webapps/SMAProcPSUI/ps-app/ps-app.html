@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <style>
+      body,html{margin:0;height:100%;overflow:hidden;font-size:14px}
+             .ps-loader{height:100%;width:100%;background-color:#fff;opacity:1;will-change:opacity;position:absolute;z-index:1}
+             .ps-loader>div{top:calc(50% - 25px);left:calc(50% - 45px);position:absolute;display:block}
+             .ps-spinner{height:50px;display:flex}
+             .ps-spinner>span{background-color:#005686;height:100%;width:3px;display:inline-block;margin-right:3px;animation:ps-stretchdelay 1.2s infinite ease-in-out}
+             .ps-spinner>div{text-align:center;height:100%;line-height:50px;padding-left:5px}
+             .ps-spinner .rect2{animation-delay:-1.1s}
+             .ps-spinner .rect3{animation-delay:-1s}
+             .ps-spinner .rect4{animation-delay:-.9s}
+             @keyframes ps-stretchdelay{0%,100%,40%{transform:scaleY(.4)}20%{transform:scaleY(1)}}
+      </style>
+        <meta charset="utf-8" />
+        <title>Performance Study</title>
+
+
+        <script>
+        //simData should be used as cache
+        var appData = {};
+        appData.simData = {
+        	simulationId : null,	 //SimulationId of current process.
+          activeSimDetails : {},
+        	oldSimulationId : null,  //Previously opened process's simulationId.
+        	exeOptions : [],		 //Stores execution options.
+        };
+        appData.platformId = null; //COntains WA tenant id of the platform
+        appData.WUPlatformId = null //Contains WU tenant id of platform.
+
+        </script>
+
+        <link rel="import" id="containerImport" href="../ps-container/ps-container.html" async>
+	</head>
+  <body id="psbody">
+    <div id="loader" class="ps-loader">
+        <div>
+            <div class="ps-spinner">
+                <span class="rect1"></span>
+                <span class="rect2"></span>
+                <span class="rect3"></span>
+                <span class="rect4"></span>
+                <div>Loading...</div>
+            </div>
+        </div>
+     </div>
+
+    <script>
+        (function (window) {
+            'use strict';
+            var webComponentsSupported = ('registerElement' in document
+            && 'import' in document.createElement('link')
+            && 'content' in document.createElement('template'));
+
+
+            /**
+             * lazy loads the ps-container then removes the loader
+             */
+            function finishLazyLoading() {
+
+                /**
+                 * Parses url to read parameters
+                 * @param {String} url URL which is to be parsed
+                 * @returns {Object} URL parameters as object
+                 */
+                function getURLParams(url) {
+                    var stringToParse, queryParams = {}, param, paramName, paramValue, i;
+                    stringToParse = url.replace('?', '').split('&');
+                    for (i = 0; i < stringToParse.length; i++) {
+                        param = stringToParse[i].split('=');
+                        if (param.length > 0) {
+                            paramName = decodeURIComponent(param[0]);
+                            if (paramName.length > 0) {
+                                paramValue = param.length === 2 ? decodeURIComponent(param[1]) : true;
+                                queryParams[paramName] = paramValue;
+                            }
+                        }
+                    }
+                    return queryParams;
+                }
+
+                /**
+                 * Removes loader from UI
+                 */
+                function removeLoader(event) {
+                  event && event.stopPropagation && event.stopPropagation();
+                    setTimeout(function(){
+                        var loader = document.getElementById('loader');
+                        loader.parentNode.removeChild(loader);
+                    }, 10);
+                    try {
+                      require(['UWA/Event', 'UWA/Element', 'UWA/Controls/ToolTip', 'DS/SMAExeJsAPI/CosAPI'], function (UWAEvent, UWAElement, UWAToolTip, COSApi){
+                          UWAEvent.onDomReady(function (){
+                              UWAElement.removeEvent.call(document.querySelector('body'), 'mouseover [uwa-tooltip]');
+                              UWAElement.removeEvent.call(document.body, 'mouseover [uwa-tooltip]');
+                          });
+                          COSApi.init();
+                      });
+                    } catch (e) {
+                    //ignore
+                    }
+
+                }
+
+                /**
+                 * When container is loaded then add that element
+                 */
+                function onImportLoaded() {
+                    var psContainer, params, psbody;
+                    params = getURLParams(window.location.search);
+                    psbody = document.getElementById('psbody');
+                    psContainer = document.createElement('ps-container');
+                    // App is visible and ready to load some data!
+                    psContainer.activeitemid = params.physicalId;
+                    // Once container is attached then remove the loader
+                    psContainer.addEventListener('listready', removeLoader);
+                    psbody.appendChild(psContainer);
+                }
+
+                var link = document.querySelector('#containerImport');
+
+                // Go if the async Import loaded quickly. Otherwise wait for it.
+                if (link.import && link.import.readyState === 'complete') {
+                    onImportLoaded();
+                } else {
+                    link.addEventListener('load', onImportLoaded);
+                }
+            }
+
+            if (!webComponentsSupported) {
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = '../../Polymer-1.6.1/webcomponents-lite.min.js';
+                script.onload = function() {
+                    finishLazyLoading();
+                };
+                document.head.appendChild(script);
+            } else {
+                finishLazyLoading();
+            }
+        }(this));
+
+    </script>
+</body>
+<link rel="import" href="../../SMAProcSP/sp-font/sp-entypo.html" async>
+<script src="../../AmdLoader/AmdLoader.js"></script>
+  <!--ENOVIA specific scripts for accessing global utilities.This is specially required for tagger -->
+  <script src="../../../common/scripts/emxUICore.js" data-merge-ignore="true" async></script>
+  <script src="../../../common/scripts/emxUIConstants.js" async></script>
+</html>

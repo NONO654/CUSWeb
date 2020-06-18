@@ -1,0 +1,404 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta name="author" content="MXZ" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Views test page</title>
+<!-- Definition of require :  -->
+
+<!-- Definition of require : -->
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+<!-- This is required to configure RequireJS with the appropriate pathes : -->
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+
+
+<link rel="stylesheet" href="../UIKIT/UIKIT.css">
+
+<script>
+
+	require(['UWA/Drivers/Alone','UWA/Core','DS/InstantMessaging/InstantMessaging','DS/RTProxyDriver/RTProxyDriver', 'DS/InstantMessaging/js/controller/RTEventBusController'], function (Alone,UWA,  InstantMessaging, RTProxyDriver, RTEventBusController) {
+
+
+		InstantMessaging.init({
+			devEnv3diM:true, 
+			ODTMode:true,
+
+
+			devOptFct: function(messagingCtrl) {
+
+				if (messagingCtrl){
+					var buddy = messagingCtrl.getBuddylist();
+					UWA.log((buddy) ? 'ODT - 3DIM - Buddylist created => OK':'ODT - 3DIM - Buddylist created => KO');
+				}
+
+				var result = false;
+                if (RTProxyDriver) {
+
+                	var roster = {'_': 
+									{
+										groupId: '_',
+										groupName: '_',
+										users: {
+											'odtRoster@im': {
+												status: 'Offline',
+												userId: 'odtRoster@im',
+												userName: 'Odt Roster'
+											}
+										}										
+									}
+								};
+        			RTProxyDriver.dispatch(RTProxyDriver.eventName.BUDDYLISTBUILT, roster);
+                }
+                UWA.log((result) ? 'ODT - 3DIM - Add Contact to _ => OK':'ODT - 3DIM - Add Contact to _ => KO');
+
+
+
+				result = false;
+                if (RTProxyDriver) {
+        			RTProxyDriver.dispatch(RTProxyDriver.eventName.CREATEGROUP,['_']);
+
+                    if (RTEventBusController) {
+                        var data = {
+                            user:{
+                                userId:'p8d@im',
+                                userName:'Paul Test1',
+                                login:'p8d',
+                                status:'Online'
+                            },
+                            group:'_'
+                        };
+
+            			RTEventBusController.dispatch(RTEventBusController.eventName.ONADDCONTACT,[data]);
+
+                        var element = document.getElementById("RTTitleElement");
+                        if (element.textContent === 'Paul Test1')
+                            result= true;
+            		}
+
+                }
+                UWA.log((result) ? 'ODT - 3DIM - Add Contact to _ => OK':'ODT - 3DIM - Add Contact to _ => KO');
+
+
+                result = false;
+                if (RTProxyDriver) {
+        			RTProxyDriver.dispatch(RTProxyDriver.eventName.CREATEGROUP,['MyGroup1']);
+
+                    var elements = document.getElementsByClassName("RTGroupNamePreview");
+                    for (var i = 0; i < elements.length; i++) {
+                        if (elements[i].textContent === 'MyGroup1')
+                            result= true;
+                    }
+        		}
+        		UWA.log((result) ? 'ODT - 3DIM - Group added => OK':'ODT - 3DIM - Group added => KO');
+
+
+
+        		result = false;
+                if (RTEventBusController) {
+                    var data = {
+                        user:{
+                            userId:'p8d@im',
+                            userName:'Paul Test2',
+                            login:'p8d',
+                            status:'Online'
+                        },
+                        group:'MyGroup1'
+                    };
+
+        			RTEventBusController.dispatch(RTEventBusController.eventName.ONADDCONTACT,[data]);
+
+                    var elements = document.getElementsByClassName("RTTitleElement");
+                    for (var i = 0; i < elements.length; i++) {
+                        if (elements[i].textContent === 'Paul Test2')
+                            result= true;
+                    }
+
+        		}
+        		UWA.log((result) ? 'ODT - 3DIM - Add Contact to MyGroup1 => OK':'ODT - 3DIM - Add Contact to MyGroup1 => KO');
+
+
+
+        		result = false;
+                if (RTProxyDriver) {
+        			RTProxyDriver.dispatch(RTProxyDriver.eventName.REMOVEGROUP,['MyGroup1']);
+
+                    var elements = document.getElementsByClassName("RTGroupNamePreview");
+                    for (var i = 0; i < elements.length; i++) {
+                        if (elements[i].textContent === 'MyGroup1')
+                            result= true;
+                    }
+        		}
+        		UWA.log((!result) ? 'ODT - 3DIM - Group removed => OK':'ODT - 3DIM - Group removed => KO');
+
+
+        		result = false;
+                if (RTProxyDriver) {
+
+	                var msg = {
+	                    to:'p8d@im',
+	                    from:'t5r@im',
+	                    username:'Thierry Olivier',
+	                    typeMsg:undefined,
+	                    msg:'ODT msg1',
+	                    status:'Online',
+	                    where:'3DIMWeb',
+	                    login:'t5r'
+	                };
+
+	        			
+	        		RTProxyDriver.dispatch(RTProxyDriver.eventName.ONMESSAGERECEIVED,[msg]);
+
+	        		if (messagingCtrl){
+	        			if (messagingCtrl.miniPanels && messagingCtrl.miniPanels.views){
+	        				for (var i = 0; i < messagingCtrl.miniPanels.views.length; i++) {
+		                        if (messagingCtrl.miniPanels.views[i].idElement === 't5r@im')
+		                            result= true;
+		                    }
+
+	        			}
+	        		}
+        		}
+        		UWA.log((result) ? 'ODT - 3DIM - onMessage received and start new chat => OK':'ODT - 3DIM - onMessage received and start new chat => KO');
+
+
+        		result = false;
+        		var notif = document.getElementById("RTNotifView");
+        		if (notif){
+	        		notif.click();
+
+	        		var elements = document.getElementsByClassName("RTTitleName");
+	                for (var i = 0; i < elements.length; i++) {
+	                    if (elements[i].textContent === 'Thierry Olivier')
+	                        result= true;
+	                }
+                }
+                UWA.log((result) ? 'ODT - 3DIM - Open chat Panel => OK':'ODT - 3DIM - Open chat Panel => KO');
+
+
+                result = false;
+                if (RTProxyDriver) {
+
+	                var msg = {
+	                    to:'p8d@im',
+	                    from:'t5r@im',
+	                    username:'Thierry Olivier',
+	                    typeMsg:undefined,
+	                    msg:'ODT msg2',
+	                    status:'Online',
+	                    where:'3DIMWeb',
+	                    login:'t5r'
+	                };
+
+	        			
+	        		RTProxyDriver.dispatch(RTProxyDriver.eventName.ONMESSAGERECEIVED,[msg]);
+
+	        		var elements = document.getElementsByClassName("RTMsgTextreceived");
+	                for (var i = 0; i < elements.length; i++) {
+	                    if (elements[i].textContent === 'ODT msg2')
+	                        result= true;
+	                }
+
+	        		
+        		}
+        		UWA.log((result) ? 'ODT - 3DIM - onMessage received and start new chat => OK':'ODT - 3DIM - onMessage received and start new chat => KO');
+
+
+        		result = false;
+                if (RTProxyDriver) {
+
+	                var data = [
+	                	{
+							status: "Offline",
+							userId: "odt1@im",
+							userName: "Paul ODT"
+	                	},
+	                	{
+							status: "Offline",
+							userId: "odt2@im",
+							userName: "Joss ODT"
+	                	}
+	                ];
+
+	        			
+	        		RTProxyDriver.dispatch(RTProxyDriver.eventName.RESULTOFSEARCH,[data]);
+
+	        		var elements = document.getElementsByClassName("RTTitleElement");
+	                for (var i = 0; i < elements.length; i++) {
+	                    if (elements[i].textContent === 'Joss ODT')
+	                        result= true;
+	                }
+
+        		}
+        		UWA.log((result) ? 'ODT - 3DIM - result of search => OK':'ODT - 3DIM - result of search => KO');
+
+///////////////////////////////////////
+
+        		result = false;
+                if (RTProxyDriver) {
+
+	                var data = {
+						status: "Busy",
+						userId: "p8d@im"
+                	};
+	        			
+	        		RTProxyDriver.dispatch(RTProxyDriver.eventName.ONPRESENCERECEIVED,[data]);
+
+	        		var element = buddy.listOfGroup['_'].listOfContact['p8d@im'];
+	        		result = (element.getStatus() === 'Busy');
+
+        		}
+        		UWA.log((result) ? 'ODT - 3DIM - On presence received for contact in buddy list => OK':'ODT - 3DIM - On presence received for contact in buddy list => KO');
+
+        		result = false;
+                if (RTProxyDriver) {
+
+	                var data = {
+						status: "Offline",
+						userId: "t5r@im"
+                	};
+
+	        			
+	        		RTProxyDriver.dispatch(RTProxyDriver.eventName.ONPRESENCERECEIVED,[data]);
+
+	        		var element = buddy.listOfGroup['Recents'].listOfContact['t5r@im'];
+	        		result = (element.getStatus() === 'Offline');
+
+        		}
+        		UWA.log((result) ? 'ODT - 3DIM - On presence received Offline status => OK':'ODT - 3DIM - On presence received Offline status => KO');
+
+        		result = false;
+                if (RTProxyDriver) {
+
+	                var data = {
+						status: "Away",
+						userId: "odt1@im"
+                	};
+
+	        			
+	        		RTProxyDriver.dispatch(RTProxyDriver.eventName.ONPRESENCERECEIVED,[data]);
+
+	        		var element = buddy.listOfGroup['searchChatId'].listOfContact['odt1@im'];
+	        		result = (element.getStatus() === 'Away');
+
+	        		
+
+        		}
+        		UWA.log((result) ? 'ODT - 3DIM - On presence received for search result => OK':'ODT - 3DIM - On presence received for search result => KO');
+
+
+				result = false;
+                if (RTProxyDriver) {
+
+	                var data = {
+						status: "Online",
+						userId: "odt2@im"
+                	};
+
+	        			
+	        		RTProxyDriver.dispatch(RTProxyDriver.eventName.ONPRESENCERECEIVED,[data]);
+
+	        		var element = buddy.listOfGroup['searchChatId'].listOfContact['odt2@im'];
+	        		result = (element.getStatus() === 'Online');
+	        		
+
+        		}
+        		UWA.log((result) ? 'ODT - 3DIM - On presence received for search result 2 => OK':'ODT - 3DIM - On presence received for search result 2 => KO');
+
+        		result = false;
+                if (RTProxyDriver) {
+
+	                var data = {
+						status: "Online",
+						userId: "odt"
+                	};
+
+	        			
+	        		RTProxyDriver.dispatch(RTProxyDriver.eventName.ONPRESENCERECEIVED,[data]);
+	        		if (messagingCtrl)
+						result = (messagingCtrl.myStatus === 'Online');
+
+        		}
+        		UWA.log((result) ? 'ODT - 3DIM - On My Presence changed => OK':'ODT - 3DIM - On presence received => KO');
+
+
+
+
+        		result = false;
+                if(buddy){
+                	buddy.showBuddyList();
+
+                	result = buddy.isMinimize();
+                }
+        		UWA.log((!result) ? 'ODT - 3DIM - Maximize buddylist => OK':'ODT - Maximize buddylist => KO');
+
+
+        		result = false;
+        		if(buddy){
+                	var elements = buddy.listOfGroup['_'].listOfContact['p8d@im'];
+                	RTEventBusController.dispatch(RTEventBusController.eventName.STARTCHAT, [elements]);
+
+                	var elements = document.getElementsByClassName("RTTitleName");
+	                for (var i = 0; i < elements.length; i++) {
+	                    if (elements[i].textContent === 'Paul Test1')
+	                        result= true;
+	                }
+                }
+        		UWA.log((result) ? 'ODT - 3DIM - Start chat P8D => OK':'ODT - 3DIM - Start chat P8D => KO');
+
+        		result = false;
+        		if(buddy){
+
+        			RTEventBusController.dispatch(RTEventBusController.eventName.ONICONISEPANELCLICK, ['t5r@im']);
+
+                	var elements = document.getElementsByClassName("RTTitleName");
+	                for (var i = 0; i < elements.length; i++) {
+	                    if (elements[i].textContent === 'Paul Test1')
+	                        result= true;
+	                }
+                }
+        		UWA.log((result) ? 'ODT - 3DIM - Iconise panel => OK':'ODT - 3DIM - Iconise panel => KO');
+
+
+        		result = false;
+                if(messagingCtrl){
+
+					var elements = messagingCtrl.listOfChat['p8d@im'].sendMessage('odt msg send');
+                }
+                UWA.log((result) ? 'ODT - 3DIM - Send Message => OK':'ODT - 3DIM - Send Message => KO');
+
+
+        		
+
+/*
+        		result = false;
+        		if(messagingCtrl){
+
+        			messagingCtrl.closeChatPanel('p8d@im');          
+
+                	var elements = document.getElementsByClassName("RTTitleName");
+	                for (var i = 0; i < elements.length; i++) {
+	                    if (elements[i].textContent === 'Paul Test1')
+	                        result= true;
+	                }
+                }
+        		UWA.log((result) ? 'ODT - 3DIM - Close chat panel P8D => OK':'ODT - 3DIM - Start chat P8D => KO');
+*/
+        		
+
+
+			 }
+
+		 });
+
+	});
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DPlayDocumentViewerPreviewAfrInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DPlayDocumentViewerPreviewAfrInterface"/>
+  </Template>
+
+  <Template syp:name="3DPlayDocumentViewerPreviewAfrHeaderList" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID = "Zoom" ClassName = "DS/3DPlayDocumentViewer/Cmd2DZoom" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+      <CATCommandHeader ID = "Pan" ClassName = "DS/3DPlayDocumentViewer/Cmd2DPan" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+      <CATCommandHeader ID = "Reframe" ClassName = "DS/3DPlayDocumentViewer/CmdReframe" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+      <CATCommandHeader ID = "Previous" ClassName = "DS/3DPlayDocumentViewer/CmdPrevious" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "ScrollSheet" Value = "Previous" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "Next" ClassName = "DS/3DPlayDocumentViewer/CmdNext" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "ScrollSheet" Value = "Next" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "AnnotationCommands2D" ClassName = "DS/3DPlayAnnotation2D/AnnotationCommands" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+    </CATCmdHeadersList>
+  </Template>
+  <Template syp:name="3DPlayDocumentViewerPreviewAfrWorkbench" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DPlayDocumentViewerPreviewWorkbench">
+      <CATCmdStarter Name = "Zoom" Command = "Zoom" />
+      <CATCmdStarter Name = "Pan" Command = "Pan" />
+      <CATCmdStarter Name = "Reframe" Command = "Reframe" />
+      <CATCmdStarter Name = "Previous" Command = "Previous" />
+      <CATCmdStarter Name = "Next" Command = "Next" />
+
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

@@ -1,0 +1,1 @@
+define("DS/CfgApplicabilityUX/CfgApplicabilityUX_it",{});define("DS/CfgApplicabilityUX/assets/nls/CfgApplicabilityNLS",{CFG_EmptyApplicability_Expression:"Nessuna applicabilità definita per questo contesto",CFG_Applicability_Summary:"Riepilogo applicabilità",Applicability_Title_Edit:"Modifica",Edit_Denied:"Modifica non consentita"});

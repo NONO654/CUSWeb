@@ -1,0 +1,1 @@
+define("DS/CfgWebinWinInterop/CfgWebinWinInterop_fr",{});define("DS/CfgWebinWinInterop/assets/nls/CfgWebinWinInterop",{});

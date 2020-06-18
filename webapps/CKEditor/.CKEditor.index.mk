@@ -1,0 +1,9 @@
+m|VENCKEditor\CKEditor.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19110
+r|G:\R421\BSF\.
+t|win_b64\webapps\CKEditor\CKEditor.js|1555721278|595
+s|VENCKEditor\CKEditor.mweb\src\CKEditor.js|1554990550|1339
+t|win_b64\webapps\CKEditor\CKEditor.htm|1531550769|900
+s|VENCKEditor\CKEditor.mweb\src\CKEditor.htm|1455189920|900

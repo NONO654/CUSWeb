@@ -1,0 +1,94 @@
+<link rel="import" href="../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../SMAProcWebAuthoringUtils/cmp-plmobject-selection/cmp-plmobject-selection.html">
+
+<dom-module id="cmp-generic">
+    <template>
+        <style>
+        :host {
+            display: block;
+            padding: 1em;
+        }
+
+        .input-layout {
+          display: flex;
+          align-items: baseline;
+        }
+
+        label {
+          order: 1;
+          width: 10em;
+          text-align: right;
+          padding-right: 0.5em;
+          white-space: nowrap;
+          user-select: none;
+          font-weight: normal;
+          margin: 0;
+        }
+
+        input, textarea, select, cmp-plmobject-selection, pcw-file-chooser{
+          order: 2;
+          flex: 1 1 auto;
+          width: auto;
+        }
+        input, select, textarea{
+            border-radius:5px;
+            border: 1px solid #b4b6ba;
+            min-width: 50px;
+            height:22px;
+            padding-left: 5px;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+          order: 1;
+          flex: none;
+          width: auto;
+          margin-left: 10em;
+        }
+        input[type="checkbox"], input[type="radio"], textarea {
+            padding-left: auto;
+            min-width: auto;
+            height: auto;
+        }
+
+        input[type="checkbox"] ~ label, input[type="radio"] ~ label {
+          width: auto;
+          text-align: left;
+          padding-left: 0.4em;
+        }
+        </style>
+        <template is="dom-repeat" items="{{_properties}}" as="property" filter="_filterProperty">
+
+            <div class="input-layout">
+
+                <template is="dom-if" if="{{_displayAsInputText(property)}}">
+                    <input type="text" on-change="setProperty" id="{{getPropertyName(property)}}" value="{{_computeValue(propList, property)}}"></input>
+                </template>
+
+                <template is="dom-if" if="{{_displayAsTextarea(property)}}">
+                    <textarea rows="4" on-change="setProperty" id="{{getPropertyName(property)}}" value="{{_computeValue(propList, property)}}"></textarea>
+                </template>
+
+                <template is="dom-if" if="{{_displayAsCheckbox(property)}}">
+                    <input type="checkbox" on-change="setProperty" id="{{getPropertyName(property)}}" checked$="{{_computeBooleanValue(propList, property)}}" autocomplete="off"></input>
+                </template>
+
+                <template is="dom-if" if="{{_displayAsPLMObject(property)}}">
+                    <cmp-plmobject-selection id="{{getPropertyName(property)}}" activity="[[_activity]]" rulestring="{{_computeValue(propList, property)}}" on-change="setPLMObjectProperty" object-types="Simulation Document,Physical Product,Product,VPMReference,Any Representation,Products,Physics Simulation">
+                    </cmp-plmobject-selection>
+                </template>
+                <template is="dom-if" if="{{_displayAsFile(property)}}">
+                        <pcw-file-chooser id="[[getPropertyName(property)]]" filetypes="[[getPropertySubtype(property)]]"
+                        activity="[[_activity]]"
+                        action-type="[[getFileActionType(property)]]"
+                        data-handler-configuration-string="[[_computeValue(propList, property)]]"
+                        on-pcw-file-selected="setFileProperty"
+                        ></pcw-file-chooser>
+                </template>
+
+                <label class="input-label">{{getPropertyLabel(property)}}</label>
+            </div>
+            <br />
+        </template>
+    </template>
+    <script src="cmp-generic.js"></script>
+</dom-module>

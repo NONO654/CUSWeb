@@ -1,0 +1,226 @@
+/*=================================================================
+ *  Report Stylesheet for Unix Platforms
+ *  emxUIReport_Unix.css
+ *  Version 1.5
+ *  Requires: (nothing)
+ *  Last Updated: 29-Jun-04, Keith T. Ciociola (KTC)
+ *
+ *  This file contains style definitions for screen versions of 
+ *  consolidated reports in the applications.
+ *
+ *  Copyright (c) 1992-2018 Dassault Systemes. All Rights Reserved.
+ *  This program contains proprietary and trade secret information 
+ *  of MatrixOne,Inc. Copyright notice is precautionary only
+ *  and does not evidence any actual or intended publication of such program
+ * 
+ *  static const char RCSID[] = $Id: emxUIReport_Unix.css.rca 1.5 Wed Oct 22 16:09:28 2008 przemek Experimental przemek $
+ *=================================================================
+ */
+
+body {
+  font-family: Verdana, Arial, Helvetica;
+  background-color: rgb(255,255,255);
+  }
+  
+body,
+td {
+  font-size: 11px;
+  }
+
+div#pageHeader {
+  border-top: 2px solid rgb(0,0,0);
+  border-bottom: 2px solid rgb(0,0,0);
+  padding-top: 6px;
+  padding-bottom: 6px;
+  }
+
+h1 {
+  font-family: Arial;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(153,0,0);
+  margin: 0px;
+  padding: 0px;
+  }
+
+h2 {
+  font-family: Arial;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(153,0,0);
+  padding-bottom: 0px;
+  margin-bottom: 4px;
+  }
+
+h4 {
+  font-size: 12px;
+  font-weight: bold;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  }
+
+p {
+  margin-top: 0px;
+  }
+    
+a:link,
+a:active,
+a:hover,
+a:visited {
+  color: rgb(0,51,102);
+  text-decoration: underline;
+  }
+
+td.pageSubtitle {
+  font-size: 11px;
+  font-weight: normal;
+  text-align: right;
+  }
+
+td.filter {
+  font-size: 10px;
+  font-weight: normal;
+  text-align: right;
+  }
+
+td.paragraph {
+  border-top: 2px solid rgb(0,0,0);
+  }
+
+div.edit {
+  position: relative;
+  float: right;
+  }
+
+/* --------------------------------------------------------------------
+// Turn Main Page Header Block Off in Screen Version of Report
+// -------------------------------------------------------------------- */
+
+div#pageHeader {
+  display: none;
+  }
+
+
+/* --------------------------------------------------------------------
+// Turn Subordinate Header Blocks On in Screen Version of Report
+// -------------------------------------------------------------------- */
+
+div#comparison div#pageHeader {
+  display: block;
+  }
+
+
+/* --------------------------------------------------------------------
+// Field Labels for Attributes Section 
+// -------------------------------------------------------------------- */
+
+.label {
+  font-weight: bold;
+  }
+
+
+/* --------------------------------------------------------------------
+// Table Styles
+// -------------------------------------------------------------------- */
+
+th {
+  font-size: 12px;
+  text-align: left;
+  color: rgb(0,0,0);
+  padding: 4px;
+  background-color: rgb(240,240,240);
+  border-top: 2px solid rgb(0,0,0);
+  border-bottom: 2px solid rgb(0,0,0);
+  }
+
+/* Turn Bottom Borders Off for Spanned Titles */
+
+th.spanTitle {
+  text-align: center;
+  border-bottom: none;
+  }
+    
+#report td {
+  border-bottom: 1px solid rgb(0,0,0);
+  }
+
+/* Remove bottom borders from nested tables */
+
+#report td table tr td,
+#report td.subhead,
+#report td.filter,
+#report td.pageHeader,
+#report td.pageSubtitle {
+  border-bottom: none;
+  }
+  
+  
+/* --------------------------------------------------------------------
+// Styling for Item Comparison Section
+// -------------------------------------------------------------------- */
+
+/* Style h2 elements within 'comparison' DIV differently than other h2 */
+
+#comparison h2 {
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(0,0,0);
+  padding-bottom: 0px;
+  margin-bottom: 4px;
+  }
+
+/* Styles for individual comparison items */
+
+div#comparisonItems {
+  text-align: center;
+  /* border: 1px dotted rgb(153,0,0); */
+  }
+  
+div.item {
+  position: relative;
+  float: left;
+  width: 260px;
+  padding: 5px;
+  margin: 10px;
+  text-align: center;
+  background-color: rgb(220,220,220);
+  border: 1px solid rgb(240,240,240);
+  border-right: 1px solid rgb(153,153,153);
+  border-bottom: 1px solid rgb(153,153,153);
+  }
+
+div.item table tr td {
+  border-bottom: none;
+  }
+  
+td.itemLabel {
+  font-size: 14px;
+  font-weight: bold;
+  }
+
+/* Style for object TNR in full comparison report */
+
+#report td.comparisonAttributes {
+  border-bottom: none;
+  }
+  
+/* Style for object description in full comparison report */
+
+#report td.comparisonDescription {
+  border-bottom: none;
+  border-left: 1px solid rgb(204,204,204);
+  }
+
+/* Style for non-hyperlinked object names */
+  
+.object {
+  color: rgb(0,0,0);
+  font-weight: bold;
+  }
+  
+/* Force floated items block-level element open */
+  
+div.spacer {
+  clear: both;
+  }

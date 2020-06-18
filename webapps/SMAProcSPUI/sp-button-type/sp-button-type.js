@@ -1,0 +1,1 @@
+(function(a){Polymer({is:"sp-button-type",properties:{primary:{type:Boolean,value:false,reflectToAttribute:true}},"extends":"button"})}(this));

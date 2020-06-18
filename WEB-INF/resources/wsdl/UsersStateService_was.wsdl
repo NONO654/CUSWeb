@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="urn:com:dassault_systemes:webservice" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<types>
+ <xs:schema targetNamespace="urn:com:dassault_systemes:webservice:messages">
+  <xs:import namespace="urn:com:dassault_systemes:webservice" schemaLocation="../xsd/IUsersStateService.xsd"/>
+ </xs:schema>
+</types>
+<message name="changeUsersStateInput">
+ <part element="tns:changeUsersState" name="parameters"/>
+</message>
+<message name="changeUsersStateOutput">
+ <part element="tns:changeUsersStateResponse" name="parameters"/>
+</message>
+<message name="changeUsersStateErrorType">
+ <part element="tns:changeUsersStateErrorType" name="details"/>
+</message>
+<message name="areActiveInput">
+ <part element="tns:areActive" name="parameters"/>
+</message>
+<message name="areActiveOutput">
+ <part element="tns:areActiveResponse" name="parameters"/>
+</message>
+<message name="areActiveErrorType">
+ <part element="tns:areActiveErrorType" name="details"/>
+</message>
+<portType name="IUsersStateService">
+ <documentation>Interface for changing a list of users state (Active/inactive)</documentation>
+ <operation name="changeUsersState">
+  <documentation>Change Users State</documentation>
+  <input message="tns:changeUsersStateInput"/>
+  <output message="tns:changeUsersStateOutput"/>
+  <fault message="tns:changeUsersStateErrorType" name="changeUsersStateErrorType"/>
+ </operation>
+ <operation name="areActive">
+  <documentation>Getting the state of a list of persons</documentation>
+  <input message="tns:areActiveInput"/>
+  <output message="tns:areActiveOutput"/>
+  <fault message="tns:areActiveErrorType" name="areActiveErrorType"/>
+ </operation>
+</portType>
+<binding name="IUsersStateServiceBinding" type="tns:IUsersStateService">
+ <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+ <operation name="changeUsersState">
+  <soap:operation soapAction="" style="document"/>
+  <input>
+   <soap:body use="literal"/>
+  </input>
+  <output>
+   <soap:body use="literal"/>
+  </output>
+  <fault name="changeUsersStateErrorType">
+   <soap:fault name="changeUsersStateErrorType" use="literal"/>
+  </fault>
+ </operation>
+ <operation name="areActive">
+  <soap:operation soapAction="" style="document"/>
+  <input>
+   <soap:body use="literal"/>
+  </input>
+  <output>
+   <soap:body use="literal"/>
+  </output>
+  <fault name="areActiveErrorType">
+   <soap:fault name="areActiveErrorType" use="literal"/>
+  </fault>
+ </operation>
+</binding>
+ <service name="UsersStateService">
+  <port binding="tns:IUsersStateServiceBinding" name="UsersStateServicePort">
+   <soap:address location="http://localhost:9080/rooturi/UsersStateService"/>
+  </port>
+ </service>
+</definitions>

@@ -1,0 +1,111 @@
+// ===========================================================
+// PACKAGE   : PLMDELMIAModeler
+// ===========================================================
+// Generated : Wednesday, September 13, 2006 3:50:40 PM
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+// --- entities: 1
+// ===========================================================
+// ===========================================================
+ENTITY DELSerialNumber
+// ===========================================================
+// --- attributes: 2
+ATTR V_SerialNumber;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_SerialNumber;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_SerialNumber;Y
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_SerialNumber;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_SerialNumber;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_SerialNumber;N
+// ===========================================================
+ENTITY DELLotNumber
+// ===========================================================
+// --- attributes: 2
+ATTR V_LotNumber;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_LotNumber;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_LotNumber;Y
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_LotNumber;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_LotNumber;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_LotNumber;N
+// ===========================================================
+ENTITY DELFastenerClassification
+// ===========================================================
+// --- attributes: 2
+ATTR V_FstClassification;N;N;ReSpot
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_FstClassification;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_FstClassification;Y
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_FstClassification;Y
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_FstClassification;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_FstClassification;N
+// ===========================================================
+// End of DEFAULT mask file
+// ===========================================================

@@ -1,0 +1,1 @@
+define("DS/W3DDriveWrapper/W3DDriveWrapper_ja",{});define("DS/W3DDriveWrapper/assets/nls/saveToMyDrive",{loading_tree:"ツリーをロード中です...",loading_tenants:"テナントをロード中です...",select_tenant:"テナントを選択してください",publish:"発行",cancel:"キャンセル",title:"タイトル",select_platform:"プラットフォームを選択",save_to_my_drive:"ドライブに保存"});

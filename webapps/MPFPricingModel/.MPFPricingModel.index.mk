@@ -1,0 +1,10 @@
+m|MPFModels\MPFPricingModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19096
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFPricingModel\MPFPricingModel.js|1554530789|1876
+s|MPFModels\MPFPricingModel.mweb\src\PricingModel.js|1554197433|2842
+s|MPFModels\MPFPricingModel.mweb\src\PricingDataProxy.js|1551256073|1382
+s|MPFModels\MPFPricingModel.mweb\src\MPFPricingModel.js|1551189917|0
+s|MPFModels\MPFPricingModel.mweb\src\ShopPricingDataProxy.js|1551256432|1598

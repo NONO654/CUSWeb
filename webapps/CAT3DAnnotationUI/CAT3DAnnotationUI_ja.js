@@ -1,0 +1,1 @@
+define("DS/CAT3DAnnotationUI/CAT3DAnnotationUI_ja",{});define("DS/CAT3DAnnotationUI/assets/nls/CAT3DAnnotationUI",{ValueLbl:"公差",SelectAllLbl:"すべて選択",ApplyLbl:"適用",MinLbl:"最小",MaxLbl:"最大"});

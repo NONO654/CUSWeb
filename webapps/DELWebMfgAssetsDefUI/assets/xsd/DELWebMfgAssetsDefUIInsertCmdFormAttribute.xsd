@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMGAConfiguration" xmlns:tns="DS_DELMIAMGAConfiguration"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="AttributesDescriptionList">
+    <xs:complexType>
+      <xs:sequence>        
+        <xs:element maxOccurs="unbounded" name="Type" type="tns:Type"/>        
+      </xs:sequence>
+      <xs:attribute name="Title" type="xs:string" use="required"/>
+      <xs:attribute name="Description" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:complexType name="Type">      
+    <xs:sequence>        
+    <xs:element maxOccurs="unbounded" name="Section" type="tns:Section"/>        
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>    
+  </xs:complexType>
+  
+  <xs:complexType name="Section">
+    <xs:sequence>        
+    <xs:element maxOccurs="unbounded" name="Attribute" type="tns:Attribute"/>        
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+  
+  <xs:complexType name="Attribute">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="dicoType" type="xs:string"/>
+    <xs:attribute name="mandatory" type="xs:boolean"/>
+  </xs:complexType>
+
+</xs:schema>

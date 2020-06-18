@@ -1,0 +1,1 @@
+define("DS/DMU3DCompareAPI/DMU3DCompareAPI_ja",{});define("DS/DMU3DCompareAPI/assets/nls/DMU3DCompareAPI",{compareNotify_onemodel:"1 つのモデルだけでは比較できません",compareNotify_nomodel:"比較するプロダクトがありません"});

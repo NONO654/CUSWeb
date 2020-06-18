@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="urn:com:dassault_systemes:webservice" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <types>
+  <xs:schema targetNamespace="urn:com:dassault_systemes:webservice:messages">
+   <xs:import namespace="urn:com:dassault_systemes:webservice" schemaLocation="../xsd/IRoleService.xsd"/>
+  </xs:schema>
+ </types>
+ <message name="createRoleInput">
+  <part element="tns:createRole" name="parameters"/>
+ </message>
+ <message name="createRoleOutput">
+  <part element="tns:createRoleResponse" name="parameters"/>
+ </message>
+ <message name="createRoleErrorType">
+  <part element="tns:createRoleErrorType" name="details"/>
+ </message>
+ <message name="queryRoleInput">
+  <part element="tns:queryRole" name="parameters"/>
+ </message>
+ <message name="queryRoleOutput">
+  <part element="tns:queryRoleResponse" name="parameters"/>
+ </message>
+ <message name="queryRoleErrorType">
+  <part element="tns:queryRoleErrorType" name="details"/>
+ </message>
+ <portType name="IRoleService">
+  <documentation>Interface for Creating a Role</documentation>
+  <operation name="createRole">
+   <documentation>Method for Creating a Role</documentation>
+   <input message="tns:createRoleInput"/>
+   <output message="tns:createRoleOutput"/>
+   <fault message="tns:createRoleErrorType" name="createRoleErrorType"/>
+  </operation>
+  <operation name="queryRole">
+   <input message="tns:queryRoleInput"/>
+   <output message="tns:queryRoleOutput"/>
+   <fault message="tns:queryRoleErrorType" name="queryRoleErrorType"/>
+  </operation>
+ </portType>
+ <binding name="IRoleServiceBinding" type="tns:IRoleService">
+  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="createRole">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="createRoleErrorType">
+    <soap:fault name="createRoleErrorType" use="literal"/>
+   </fault>
+  </operation>
+  <operation name="queryRole">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="queryRoleErrorType">
+    <soap:fault name="queryRoleErrorType" use="literal"/>
+   </fault>
+  </operation>
+ </binding>
+ <service name="RoleService">
+  <port binding="tns:IRoleServiceBinding" name="IRoleService">
+   <soap:address location="http://localhost:9081/dummyURI/RoleService"/>
+  </port>
+ </service>
+</definitions>

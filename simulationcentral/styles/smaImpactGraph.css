@@ -1,0 +1,291 @@
+
+/* 4 colors are used:
+ *   2 for up-to-date items, and
+ *   2 for out-of-date items.
+ *
+ * For each of the 2 sets of colors:
+ *   - a darker shade is used for the root node, and
+ *   - a lighter shade is used for the non-root nodes.
+ *
+ * The up-to-date colors are:
+ *    dark shade (root node):    #006699
+ *    light shade (other nodes): #96bbe8
+ *
+ * The out-of-date colors are:
+ *    dark shade (root node):    #ff6666
+ *    light shade (other nodes): #ff9999
+ */
+
+/* table appearance */
+table.impactgraph 
+{ 
+  border-collapse: collapse; 
+  border-spacing: 0px; 
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+/* default cell appearance */
+table.impactgraph tr td 
+{
+  border: 0px;
+  padding: 0px;
+}
+
+/* the icon is expected to be 11x11. */
+td.ExpandBtnLeft
+{
+  width: 13px;
+  padding-left: 1px;
+}
+
+/* the icon is expected to be 11x11. */
+td.ExpandBtnRight
+{
+  width: 13px;
+  padding-right: 1px;
+}
+
+td.Branch
+{
+  width: 38px;
+}
+
+/* The branch insync markers are overlaid on top of the branch.
+ * This is accomplished by putting the image in an absolute positioned
+ * element with a positive z-index.
+ * However, for this to work requires that the parent element must
+ * also be a positioned element. But the parent can be relative
+ * position.
+ * For these markers, the parent is a separate div (created below
+ * where the branch is inserted).
+ */
+div.InSyncMarkerInput 
+{
+   width: 10px;
+   height: 10px;
+   position: absolute;
+   left: 3px;
+   top: 10px;
+   z-index: 1;
+}
+
+div.InSyncMarkerOutput 
+{
+   width: 10px;
+   height: 10px; 
+   position: absolute;
+   left: 15px;
+   top: 10px;
+   z-index: 1;
+}
+
+
+/* normal name appearance */
+/* Notice this is a div within the table cell. This is necessary
+ * to get the margin. The margin creates the separation between 
+ * adjacent cells (vertically).
+ * (the margin is added to the height)
+ */
+.IGObject
+{ 
+  color: black;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7f7ff', endColorstr='#99ddff',GradientType=0 ); /* IE6-9 */
+  background-image: -webkit-gradient(linear, 0% 0%,0% 0%, from(#e7f7ff 0%), to(#99ddff 100%));
+  background-image: -webkit-linear-gradient(top, #e7f7ff 0%, #99ddff 100%);
+  background-image: -moz-linear-gradient(top, #e7f7ff 0%, #99ddff 100%);
+  background-image: -ms-linear-gradient(top, #e7f7ff 0%, #99ddff 100%);
+  background-image: -o-linear-gradient(top, #e7f7ff 0%, #99ddff 100%);
+}
+
+/* out-of-sync name appearance */
+/* Notice this is a div within the table cell */
+.IGObjectOos
+{ 
+  color: black;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd0d7', endColorstr='#ff9dab',GradientType=0 ); /* IE6-9 */
+  background-image: -webkit-gradient(linear, 0% 0%,0% 0%, from(#ffd0d7 0%), to(#ff9dab 100%));
+  background-image: -webkit-linear-gradient(top, #ffd0d7 0%, #ff9dab 100%);
+  background-image: -moz-linear-gradient(top, #ffd0d7 0%, #ff9dab 100%);
+  background-image: -ms-linear-gradient(top, #ffd0d7 0%, #ff9dab 100%);
+  background-image: -o-linear-gradient(top, #ffd0d7 0%, #ff9dab 100%);
+}
+
+/* Higher Revision name appearance */
+/* Notice this is a div within the table cell */
+.IGObjectHR
+{ 
+  color: black;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd0d7', endColorstr='#ff9dab',GradientType=0 ); /* IE6-9 */
+  background-image: -webkit-gradient(linear, 0% 0%,0% 0%, from(#ffd0d7 0%), to(#ff9dab 100%));
+  background-image: -webkit-linear-gradient(top, #ffff88 0%, #ffff00 100%);
+  background-image: -moz-linear-gradient(top, #ffff88 0%, #ffff00 100%);
+  background-image: -ms-linear-gradient(top, #ffff88 0%, #ffff00 100%);
+  background-image: -o-linear-gradient(top, #ffff88 0%, #ffff00 100%);
+}
+
+/* root object appearance */
+/* Notice this is a div within the table cell */
+.IGObjectRoot
+{
+  color: white;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4f1ff', endColorstr='#99ddff',GradientType=0 ); /* IE6-9 */
+  background-image: -webkit-gradient(linear, 0% 0%,0% 0%, from(#d4f1ff 0%), to(#99ddff 100%));
+  background-image: -webkit-linear-gradient(top, #d4f1ff 0%, #99ddff 100%);
+  background-image: -moz-linear-gradient(top, #d4f1ff 0%, #99ddff 100%);
+  background-image: -ms-linear-gradient(top, #d4f1ff 0%, #99ddff 100%);
+  background-image: -o-linear-gradient(top, #d4f1ff 0%, #99ddff 100%);
+}
+
+/* out-of-sync root object appearance */
+/* Notice this is a div within the table cell */
+.IGObjectRootOos
+{
+  color: white;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd0d7', endColorstr='#ff9dab',GradientType=0 ); /* IE6-9 */
+  background-image: -webkit-gradient(linear, 0% 0%,0% 0%, from(#ffd0d7 0%), to(#ff9dab 100%));
+  background-image: -webkit-linear-gradient(top, #ffd0d7 0%, #ff9dab 100%);
+  background-image: -moz-linear-gradient(top, #ffd0d7 0%, #ff9dab 100%);
+  background-image: -ms-linear-gradient(top, #ffd0d7 0%, #ff9dab 100%);
+  background-image: -o-linear-gradient(top, #ffd0d7 0%, #ff9dab 100%);
+}
+
+/* Higher Revision root object appearance */
+/* Notice this is a div within the table cell */
+.IGObjectRootHR
+{
+  color: white;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd0d7', endColorstr='#ff9dab',GradientType=0 ); /* IE6-9 */
+  background-image: -webkit-gradient(linear, 0% 0%,0% 0%, from(#ffd0d7 0%), to(#ff9dab 100%));
+  background-image: -webkit-linear-gradient(top, #ffff88 0%, #ffff00 100%);
+  background-image: -moz-linear-gradient(top, #ffff88 0%, #ffff00 100%);
+  background-image: -ms-linear-gradient(top, #ffff88 0%, #ffff00 100%);
+  background-image: -o-linear-gradient(top, #ffff88 0%, #ffff00 100%);
+}
+
+/* normal name appearance */
+/* Notice this is a div within the table cell. This is necessary
+ * to get the margin. The margin creates the separation between 
+ * adjacent cells (vertically).
+ * (the margin is added to the height)
+ */
+.IGObjectName
+{ 
+  min-width: 90px;
+}
+
+/* out-of-sync name appearance */
+/* Notice this is a div within the table cell */
+.IGObjectNameOos
+{ 
+  min-width: 90px;
+}
+/* higher revision name appearance */
+/* Notice this is a div within the table cell */
+.IGObjectNameHR
+{ 
+  min-width: 90px;
+}
+/* root object appearance */
+/* Notice this is a div within the table cell */
+.IGObjectNameRoot
+{
+  min-width: 90px;
+}
+
+/* out-of-sync root object appearance */
+/* Notice this is a div within the table cell */
+.IGObjectNameRootOos
+{
+  min-width: 90px;
+}
+
+/* higher revision root object appearance */
+/* Notice this is a div within the table cell */
+.IGObjectNameRootHR
+{
+  min-width: 90px;
+}
+
+/* object type icon */
+/* Notice this is a div within the table cell.
+ * This cell needs a margin the same as the name cell.
+ * The contained icon is expected to be 16x16.
+ */
+.IGObjectType
+{
+}
+
+/* out-of-sync type icon appearance */
+/* Notice this is a div within the table cell */
+.IGObjectTypeOos
+{ 
+}
+
+/* higher revision exists icon appearance */
+/* Notice this is a div within the table cell */
+.IGObjectTypeHR
+{
+}
+
+/* root object type icon appearance */
+/* Notice this is a div within the table cell */
+.IGObjectTypeRoot
+{
+}
+
+/* out-of-sync root object appearance */
+/* Notice this is a div within the table cell */
+.IGObjectTypeRootOos
+{
+}
+
+/* root object higher revision exists icon appearance */
+/* Notice this is a div within the table cell */
+.IGObjectTypeRootHR
+{
+}
+
+/* UpToDate status icon */
+/* Notice this is a div within the table cell.
+ * This cell needs a margin the same as the name cell.
+ * The contained icon is expected to be 16x16.
+ */
+.IGObjectStatus
+{
+}
+
+/* out-of-sync status appearance */
+/* Notice this is a div within the table cell */
+.IGObjectStatusOos
+{ 
+}
+
+/* root object status appearance */
+/* Notice this is a div within the table cell */
+.IGObjectStatusRoot
+{
+}
+
+/* out-of-sync root object status appearance */
+/* Notice this is a div within the table cell */
+.IGObjectStatusRootOos
+{
+}
+
+.IGObjectEmpty
+{
+  min-width: 90px;
+}
+
+.IGObjectTypeEmpty
+{
+  width: 18px;
+}
+
+.IGObjectStatusEmpty
+{
+  width: 18px;
+}
+

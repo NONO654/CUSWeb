@@ -1,0 +1,459 @@
+{	
+	"context": [
+		{
+			"name": "my_simulations",
+			"$afterReceive": {
+				"ctx.simulation.id": "ctx.context.SIMWDIS_AP.objectId",
+				"ctx.mcs.sec": "ctx.context.SIMWDIS_AP.securityContext",
+				"ProcessTitle": "ctx.context.SIMWDIS_AP.title",
+				"ctx.job.id": "ctx.context.SIMWDIS_AP.jobId",
+				"ctx.job.oid": "ctx.context.SIMWDIS_AP.jobOid",
+				"ctx.mcs.platform": "ctx.context.SIMWDIS_AP.platform",
+				"ctx.job.eedJobId": "ctx.context.SIMWDIS_AP.eedJobId"
+			},
+			"$appId": "SIMWDIS_AP"
+		},
+		{
+			"name": "performance_study",
+			"$afterReceive": {
+				"ctx.simulation.id": "ctx.context.SIMDISB_AP.objectId",
+				"ctx.mcs.sec": "ctx.context.SIMDISB_AP.securityContext",
+				"ProcessTitle": "ctx.context.SIMDISB_AP.title",
+				"ctx.job.id": "ctx.context.SIMDISB_AP.jobId",
+				"ctx.job.oid": "ctx.context.SIMDISB_AP.jobOid",
+				"ctx.mcs.platform": "ctx.context.SIMDISB_AP.platform",
+				"ctx.job.eedJobId": "ctx.context.SIMDISB_AP.eedJobId"
+			},
+			"$appId": "SIMDISB_AP"
+		},
+		{
+			"name": "job_monitor",
+			"$afterReceive": {
+				"ctx.job.id": "ctx.context.SIMJDIS_AP.jobId",
+				"ctx.job.oid": "ctx.context.SIMJDIS_AP.jobId",
+				"ctx.mcs.sec": "ctx.context.SIMJDIS_AP.securityContext",
+				"ctx.job_monitor.view": "ctx.context.SIMJDIS_AP.preferences[0].value",
+				"ctx.job_monitor.number_of_jobs_to_display": "ctx.context.SIMJDIS_AP.preferences[1].value",
+				"ctx.job_monitor.collabspace": "ctx.context.SIMJDIS_AP.preferences[2].value",
+				"ctx.mcs.platform": "ctx.context.SIMJDIS_AP.platform"
+			},
+			"$appId": "SIMJDIS_AP"
+		}
+	],
+
+	"scenarios": [
+		{
+			"name": "ps_CheckAllMCSServices",
+			"sequence": [
+				"sp_FetchDefaults", "getCollabSpaces","license","getCSRFToken","seeurl",
+				"getAllSimulations","getSimulation","updateSimulation","getProcessDetails",
+				"getJobs","joblog","getExecutionOptions","saveExecutionOptions","getImageURL",
+				"simulationView","getIOSummaryView","saveIOSummaryView","summary",
+				"pcw_JobCheck","jobSummary","SummaryFull","parameterHistory"
+			],
+			"odt": {
+				"odt_enabled": true,
+				"odt_skip": ["pcw_JobCheck", "jobSummary", "SummaryFull", "parameterHistory"]
+			}
+		},
+		{
+			"name": "ps_CheckAllCOSServices",
+			"sequence": [
+				"sp_FetchDefaults","pcw_JobCheck", "getJobs","systemInfo",
+				"cosTicket","status","stations","getCOSConfig","isRunAsEnabled","totalRuns"
+			],
+			"odt": {
+				"odt_enabled": false
+			}
+		}
+	],
+
+	"mcs": [
+		{
+			"name": "getAllSimulations",
+			"caption": "returns all simulations",
+			"url": "${ctx.mcs.rooturl}/simulations",
+			"method": "GET",
+			"backend_id": "SimulationEntity:getSimulationList",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"accept": "application/json"
+				}
+			},
+			"$afterReceive": {
+				"ctx.simulation.id": "this.response.data[0].id"
+			}
+		},
+		{
+			"name": "getSimulation",
+			"caption": "returns a single simulation",
+			"url": "${ctx.mcs.rooturl}/simulations/${ctx.simulation.id}",
+			"method": "GET",
+			"backend_id": "SimulationEntity:getSimulation",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"accept": "application/json"
+				}
+			}
+		},
+		{
+			"name": "updateSimulation",
+			"caption": "updates a single simulation",
+			"url": "${ctx.mcs.rooturl}/simulations/${ctx.simulation.id}",
+			"method": "PUT",
+			"backend_id": "SimulationEntity:getSimulation",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"content-type": "application/json",
+					"accept": "application/json",
+					"eno_csrf_token": "ctx.mcs.csrf"
+				},
+				"payload": "ctx.getSimulation.response.data"
+			}
+		},
+		{
+			"name": "getIOSummaryView",
+			"caption": "returns all data of simulation",
+			"url": "${ctx.mcs.rooturl}/simulations/${ctx.simulation.id}/iosummaryview",
+			"method": "GET",
+			"backend_id": "SimulationEntity:getSimulationInputOutput",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"accept": "application/json"
+				}
+			}
+		},
+		{
+			"name": "saveIOSummaryView",
+			"caption": "updates all data of simulation",
+			"url": "${ctx.mcs.rooturl}/simulations/${ctx.simulation.id}/iosummaryview",
+			"method": "PUT",
+			"backend_id": "SimulationEntity:putSimulationInputOutput",
+			"$beforeSend": {
+				"payload": "ctx.getIOSummaryView.response.data",
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"content-type": "application/json",
+					"eno_csrf_token": "ctx.mcs.csrf"
+				}
+			}
+		},
+		{
+			"name": "getExecutionOptions",
+			"caption": "returns the execution options of a simulation",
+			"url": "${ctx.mcs.rooturl}/simulations/${ctx.simulation.id}/executionoptions",
+			"method": "GET",
+			"backend_id": "SimulationEntity:getSimExeOptions",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"accept": "application/json"
+				}
+			}
+		},
+		{
+			"name": "saveExecutionOptions",
+			"caption": "updates the execution options of a simulation",
+			"url": "${ctx.mcs.rooturl}/simulations/${ctx.simulation.id}/executionoptions",
+			"method": "PUT",
+			"backend_id": "SimulationEntity:putSimExeOptions",
+			"$beforeSend": {
+				"payload": "ctx.getExecutionOptions.response.data",
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"content-type": "application/json",
+					"eno_csrf_token": "ctx.mcs.csrf"
+				}
+			}
+		},
+		{
+			"name": "deleteSimulation",
+			"caption": "deletes the simulation",
+			"url": "${ctx.mcs.rooturl}/simulations/${ctx.simulation.id}?SecurityContext=${ctx.mcs.sec}",
+			"method": "DELETE",
+			"backend_id": "SimulationEntity:deleteSimulation",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"content-type": "application/json",
+					"eno_csrf_token": "ctx.mcs.csrf"
+				}
+			}
+		},
+		{
+			"name": "buildJob",
+			"caption": "creates a new simulation job",
+			"url": "${ctx.mcs.rooturl}/jobs/buildJob?SecurityContext=${ctx.mcs.sec}",
+			"method": "POST",
+			"backend_id": "SimulationJobEntity:buildJob",
+			"$beforeSend": {
+				"payload": {
+					"simpid": "ctx.simulation.id",
+					"MCSURL": "ctx.mcs.mcsurl",
+					"stepID": "",
+					"serverName": "ctx.mcs.server"
+				},
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"accept": "application/xml",
+					"content-type": "application/json",
+					"eno_csrf_token": "ctx.mcs.csrf"
+				}
+			},
+			"$afterReceive":{
+				"ctx.job.ticket": "this.response.parsedData.JobInfo.EEDTicket",
+				"ctx.job.appdata": "this.response.data"
+			}
+		},
+		{
+			"name": "getJobs",
+			"caption": "returns jobs of a simulation",
+			"url": "${ctx.mcs.rooturl}/simulations/${ctx.simulation.id}/jobs",
+			"method": "GET",
+			"backend_id": "SimulationEntity:getJobsList",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"content-type": "application/json",
+					"accept": "application/json"
+				}
+			},
+			"$afterReceive": {
+				"ctx.job.id": "this.response.data[0].physicalId",
+				"ctx.job.oid": "this.response.data[0].objectId",
+				"ctx.job.eedJobId": "this.response.data[0].eedJobId"
+			}
+		},
+		{
+			"name": "cosTicket",
+			"caption": "returns the cos ticket for a job",
+			"url": "${ctx.mcs.eepurl}/cos/configurations/${ctx.cos.id}/tickket?access=modify&timestamp=${this.time}&id=${ctx.job.id}",
+			"method": "GET",
+			"backend_id": "COSEntity:getCOSTicket",
+			"$beforeSend": {
+				"headers": {
+					"accept": "text/plain"
+				},
+				"time": "${Date.now()}"
+			},
+			"$afterReceive": {
+				"ctx.job.ticket": "ctx.cosTicket.response.data"
+			}
+		},
+		{
+			"name": "joblog",
+			"caption": "returns log of a simulation job",
+			"url": "${ctx.mcs.rooturl}/jobs/${ctx.job.oid}/log",
+			"method": "GET",
+			"backend_id": "SimulationJobEntity:getJobLogData",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"accept": "application/json"
+				}
+			}
+		},
+		{
+			"name": "encryptCredentials",
+			"caption": "encrypts and returns the credentials",
+			"url": "${ctx.mcs.rooturl}/data/getEncryptedCreds?SecurityContext=${ctx.mcs.sec}",
+			"method": "POST",
+			"backend_id": "COSEntity:getEncryptedCredentials",
+			"$beforeSend": {
+				"headers":{
+					"accept": "*/*",
+					"content-type": "*/*",
+					"eno_csrf_token": "ctx.mcs.csrf"
+				},
+				"payload": "ctx.pubkey.key"
+			},
+			"$afterReceive":{
+				"ctx.job.creds": "ctx.encryptCredentials.response.data"
+			}
+		},
+		{
+			"name": "seeurl",
+			"caption": "returns the URL of SMAFIPfiper-REST",
+			"url": "${ctx.mcs.rooturl}/data/seeurl?SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+			"method": "GET",
+			"backend_id": "COSEntity:getEncryptedCredentials",
+			"$beforeSend": {
+				"headers":{
+					"accept": "application/json"
+				}
+			}
+		},
+		{
+			"name": "getImageURL",
+			"caption": "gets the Image URL",
+			"url": "${ctx.mcs.e6w}/SMA_ImageUrl?objectId=${ctx.simulation.id}&imageSize=Small&SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+			"method": "GET",
+      		"backend_id": "SimulationService:getSimImageUrl"
+		},
+		{
+			"name": "simulationView",
+			"caption": "gets the simulation template transitions objects",
+			"url": "${ctx.mcs.rooturl}/simulations/${ctx.simulation.id}/view?tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+			"method": "GET",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"accept": "application/json"
+				}
+			}
+		},
+		{
+			"name": "getProcessDetails",
+			"caption": "gets the Process Details",
+			"url": "${ctx.mcs.e6w}/SMA_Process?objectId=${ctx.simulation.id}&SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+			"method": "GET",
+      		"backend_id": "SimulationService:getProcess"
+		},
+		{
+			"name": "getActivityDetails",
+			"caption": "gets the Activity Details",
+			"url": "${ctx.mcs.e6w}/SMA_Parameter?objectId=${ctx.activity.id}&SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+			"method": "GET",
+      		"backend_id": "ParameterService:getParameters"
+		},
+		{
+			"name": "summary",
+			"caption": "returns log of a simulation job",
+			"url": "${ctx.mcs.rooturl}/jobs/${ctx.job.oid}/summary?SecurityContext=${ctx.mcs.sec}&tenant=${ctx.mcs.platform}&xrequestedwith=xmlhttprequest",
+			"method": "GET",
+			"backend_id": "SimulationJobEntity:getJobLogData",
+			"$beforeSend": {
+				"headers": {
+					"accept": "application/json"
+				}
+			}
+		}		
+	],
+
+
+	"cos": [
+		{
+			"name": "jobSummary",
+			"caption": "returns summary of the job",
+			"url": "${ctx.cos.rooturl}/job/${ctx.job.eedJobId}/summary/brief",
+			"method": "GET",
+			"group": "job",
+			"credentials": "omit",
+			"$beforeSend": {
+				"headers": {
+					"EEDTicket": "ctx.job.ticket"
+				}
+			}
+		},
+		{
+			"name": "pubkey",
+			"caption": "returns the COS public key",
+			"url": "${ctx.cos.rooturl}/execution/pubkey",
+			"method": "GET",
+			"credentials": "omit",
+			"$beforeSend": {
+				"headers": {
+					"accept": "application/xml",
+					"EEDTicket": "${ctx.job.ticket}"
+				}
+			},
+			"$afterReceive":{
+				"ctx.pubkey.key": "this.response.data"
+			}
+		},
+		{
+			"name": "run",
+			"caption": "runs the job",
+			"url": "${ctx.cos.rooturl}/execution/run",
+			"method": "POST",
+			"credentials": "omit",
+			"$beforeSend": "ps:run_$beforeSend",
+			"$afterReceive":{
+				"ctx.pubkey.key": "ctx.pubkey.response.data",
+				"ctx.job.eedJobId": "ctx.run.response.parsedData.JobInfoBrief.JobID"
+			},
+			"$assertions": [
+				"this.response.data.JobInfoBrief['@status'] === 'Started'"
+			]
+		},
+		{
+			"name": "stationInfo1",
+			"caption": "checks presence of private station on port ${this._port}",
+			"credentials": "omit",
+			"url": "https://dslauncher.3ds.com:${this._port}/SMAExeStation-REST/station/info",
+			"method": "GET",
+			"_port": "35125",
+			"$afterReceive":{
+				"ctx.cos.pvtStnPort": "this._port",
+				"ctx.cos.pvtStnName": "this.response.data.match(/(\\w*-)*LOCALHOST/)[0]"
+			}
+		},
+		{
+			"name": "stationInfo2",
+			"caption": "checks presence of private station on port 45341",
+			"credentials": "omit",
+			"url": "https://dslauncher.3ds.com:45341/SMAExeStation-REST/station/info",
+			"method": "GET",
+			"$afterReceive":{
+				"ctx.pvtStnPort": "45341",
+				"ctx.pvtStnName": "this.response.data.StationData.name"
+			}
+		},
+		{
+			"name": "stationInfo3",
+			"caption": "checks presence of private station on port 55447",
+			"credentials": "omit",
+			"url": "https://dslauncher.3ds.com:55447/SMAExeStation-REST/station/info",
+			"method": "GET",
+			"$afterReceive":{
+				"ctx.pvtStnPort": "55447",
+				"ctx.pvtStnName": "this.response.data.StationData.name"
+			}
+		},
+		{
+			"name": "claim",
+			"caption": "invokes the claim web-service on successful port",
+			"credentials": "omit",
+			"url": "https://dslauncher.3ds.com:${ctx.cos.pvtStnPort}/SMAExeStation-REST/station/claim?jobids=${ctx.job.eedJobId}",
+			"method": "POST",
+			"$assertions": [
+				"this.response.data.trim() === 'Submit Job request successfull.'"
+			]
+		},
+		{
+			"name": "parameterHistory",
+			"caption": "returns parameter history",
+			"url": "${ctx.cos.rooturl}/job/${ctx.job.eedJobId}/results?comppath=${ctx.activityInternal.id}&start=0",
+			"method": "GET",
+			"credentials": "omit",
+			"$beforeSend": {
+				"headers": {
+					"EEDTicket": "${ctx.job.ticket}"
+				}
+			}
+		}
+	],
+
+	"experiments": [
+		{
+			"name": "ps_Plot",
+			"caption": "XY Plot",
+			"app": "PS",
+			"flag": "showPSPlots"
+		},
+		{
+			"name": "ps_RunAs",
+			"caption": "Improved Run As UX",
+			"app": "PS",
+			"flag": "newRunAs"
+		}
+	]
+
+
+
+
+}

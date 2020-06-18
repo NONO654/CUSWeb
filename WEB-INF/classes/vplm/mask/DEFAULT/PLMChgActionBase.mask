@@ -1,0 +1,301 @@
+// ===========================================================
+// PACKAGE   : PLMChgActionBase
+// ===========================================================
+// Manually created : December 11, 2006
+// -----------------------------------------------------------
+// Syntax:
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+//  with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 3 entities :
+// - PLMActionBase
+// - PLMChgAssociatedData
+// - PLMChildAction
+
+// ===========================================================
+ENTITY PLMActionBase
+// ===========================================================
+// --- attributes: 16
+ATTR PLM_ExternalID;Y;N;$
+ATTR V_description;N;N;$
+ATTR V_abstract;N;N;$
+ATTR current;N;N;$
+ATTR V_priority;N;N;Low
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR V_start_date;N;N;$
+ATTR V_actual_start_date;N;N;$
+ATTR V_end_date;N;N;$
+ATTR V_actual_end_date;N;N;$
+ATTR V_delIntervalTime;N;N;$
+ATTR V_duration;N;N;$
+ATTR originated;N;N;$
+ATTR policy;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR V_abstract;Y
+FATTR V_priority;Y
+FATTR V_start_date;Y
+FATTR V_end_date;Y
+FATTR policy;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR V_abstract;Y
+FATTR current;Y
+FATTR V_priority;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR V_start_date;Y
+FATTR V_actual_start_date;Y
+FATTR V_end_date;Y
+FATTR V_actual_end_date;Y
+FATTR V_delIntervalTime;Y
+FATTR originated;Y
+FATTR modified;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR V_abstract;Y
+FATTR current;Y
+FATTR V_priority;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR V_start_date;Y
+FATTR V_actual_start_date;Y
+FATTR V_end_date;Y
+FATTR V_actual_end_date;Y
+FATTR V_delIntervalTime;Y
+FATTR originated;Y
+FATTR policy;Y
+FATTR modified;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR V_abstract;N
+FATTR current;N
+FATTR V_priority;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR V_start_date;N
+FATTR V_actual_start_date;N
+FATTR V_end_date;N
+FATTR V_actual_end_date;N
+FATTR V_delIntervalTime;N
+FATTR V_duration;N
+FATTR originated;N
+FATTR policy;N
+FATTR modified;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR V_abstract;Y
+FATTR current;N
+FATTR V_priority;Y
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR V_start_date;Y
+FATTR V_actual_start_date;N
+FATTR V_end_date;Y
+FATTR V_actual_end_date;N
+FATTR V_delIntervalTime;Y
+FATTR V_duration;N
+FATTR originated;N
+FATTR policy;N
+FATTR modified;N
+
+// ===========================================================
+ENTITY PLMChgAssociatedData
+// ===========================================================
+// --- attributes: 5
+ATTR PLM_ExternalID;Y;N;$
+ATTR V_description;N;N;$
+ATTR V_discipline;Y;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR V_discipline;Y
+FATTR originated;Y
+FATTR modified;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR V_discipline;Y
+FATTR originated;Y
+FATTR modified;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR V_discipline;N
+FATTR originated;N
+FATTR modified;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR originated;N
+FATTR modified;N
+
+// ===========================================================
+ENTITY PLMChildAction
+// ===========================================================
+// --- attributes: 7
+ATTR PLM_ExternalID;Y;N;$
+ATTR V_description;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR originated;N;N;$
+//ATTR policy;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+//FATTR policy;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR originated;Y
+FATTR modified;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR originated;Y
+//FATTR policy;Y
+FATTR modified;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR originated;N
+//FATTR policy;N
+FATTR modified;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR originated;N
+//FATTR policy;N
+FATTR modified;N
+
+// ===========================================================
+// End of PLMChgActionBase package's DEFAULT mask file
+// ===========================================================

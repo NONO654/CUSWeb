@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+    <title>Members & Roles</title>
+    <meta name="author" content="Dassault Systèmes"/>
+    <meta name="description" content=""/>
+    <meta name="autoRefresh" content="0"/>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        /*global widget, require */
+
+        require(
+                [
+                    'DS/PlatformManagement/Widgets/MembersRoles',
+                    'css!DS/PlatformManagement/PlatformManagement'
+                ],
+                function (PlatformInformation) {
+
+                    'use strict';
+
+                    var self = new PlatformInformation({
+                        widget: widget
+                    });
+                    widget.addEvents({
+                        onLoad: self.onBeforeLoad.bind(self),
+                        onRefresh: self.onRefresh.bind(self),
+                        onResize: self.onResize.bind(self),
+                        onSearch: self.onSearch.bind(self),
+                        onResetSearch: self.onResetSearch.bind(self),
+                        onViewChange: self.onViewChange.bind(self)
+                    });
+                }
+        );
+        //]]>
+    </script>
+
+</head>
+<body>
+<div style="height: 300px"></div>
+</body>
+</html>

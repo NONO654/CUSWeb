@@ -1,0 +1,10 @@
+m|MPFCore\MPFError.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFError\MPFError.js|1540605181|1295
+s|MPFCore\MPFError.mweb\src\BadArgumentError.js|1513093893|783
+s|MPFCore\MPFError.mweb\src\NotImplementedError.js|1540221617|942
+s|MPFCore\MPFError.mweb\src\MPFError.js|1509034503|0
+s|MPFCore\MPFError.mweb\src\ValidationError.js|1513093839|776

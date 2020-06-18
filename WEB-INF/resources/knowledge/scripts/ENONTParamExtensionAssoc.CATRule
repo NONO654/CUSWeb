@@ -1,0 +1,26 @@
+let TypeExtension (Type)
+
+if (ThisObject.IsASortOf("VPMReference"))
+{
+	TypeExtension = FindType("XP_VPMReference_Ext")
+	if (TypeExtension->HasAttribute("ParamActive") == true)
+	{
+		Parameters->SetAttributeString("DeploymentExtensionName","XP_VPMReference_Ext")
+	}
+}
+else if (ThisObject.IsASortOf("VPMRepReference"))
+{
+	TypeExtension = FindType("XP_VPMRepReference_Ext")
+	if (TypeExtension->HasAttribute("ParamActive") == true)
+	{
+		Parameters->SetAttributeString("DeploymentExtensionName","XP_VPMRepReference_Ext")
+	}
+}
+else if (ThisObject.IsASortOf("Part"))
+{
+	TypeExtension = FindType("XP_Part_Ext")
+	if (TypeExtension->HasAttribute("ParamActive") == true)
+	{
+		Parameters->SetAttributeString("DeploymentExtensionName","XP_Part_Ext")
+	}
+}

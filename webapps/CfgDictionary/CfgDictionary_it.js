@@ -1,0 +1,1 @@
+define("DS/CfgDictionary/CfgDictionary_it",{});define("DS/CfgDictionary/assets/nls/CfgDictionary",{option:"opzione",rule:"regola",value:"valore",variability_group:"gruppo di variabilità",variant:"variante"});

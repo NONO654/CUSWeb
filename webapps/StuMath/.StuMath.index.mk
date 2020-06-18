@@ -1,0 +1,15 @@
+m|StudioModelRTWeb\StuMath.mweb
+b|j|n,u
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\StuMath\StuMath.js|1498570572|708
+s|StudioModelRTWeb\StuMath.mweb\src\StuMath.js|1498570572|708
+t|win_b64\webapps\StuMath\StuBox.js|1513174672|1451
+s|StudioModelRTWeb\StuMath.mweb\src\StuBox.js|1513174672|1451
+t|win_b64\webapps\StuMath\StuSphere.js|1541005275|4924
+s|StudioModelRTWeb\StuMath.mweb\src\StuSphere.js|1541005275|4924
+t|win_b64\webapps\StuMath\StuMathDefine.js|1502286741|269
+s|StudioModelRTWeb\StuMath.mweb\src\StuMathDefine.js|1502286741|269
+t|win_b64\webapps\StuMath\StuRay.js|1541692703|3042
+s|StudioModelRTWeb\StuMath.mweb\src\StuRay.js|1541692703|3042

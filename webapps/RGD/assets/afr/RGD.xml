@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+    <Template syp:name="RGDHeaders" Target="CATCmdHeadersList">
+        <CATCmdHeadersList>
+            <CATCommandHeader ID="NewCmd" ClassName="DS/RGD/commands/NewCmd" ResourceFile="RGD/RGD" Available="1"/>
+            <CATCommandHeader ID="TilesViewCmd" ClassName="DS/RGD/commands/TilesViewCmd" ResourceFile="RGD/RGD" Available="1"/>
+            <CATCommandHeader ID="TreeListViewCmd" ClassName="DS/RGD/commands/TreeListViewCmd" ResourceFile="RGD/RGD" Available="1"/>
+        </CATCmdHeadersList>
+    </Template>
+    <Template syp:name="RGDWkbAccess" Target="CATCmdWorkbench">
+        <CATCmdWorkbench Name="RGDWkb">
+            <CATCmdContainer Name="Actions" RepresentationType="AfrActionBarSection">
+                <CATCmdStarter Name="New Data" Command="NewCmd"/>
+                <CATCmdContainer Name="SwitchView" RepresentationType="AfrActionBarDropDown">
+                    <CATCmdStarter Name="TileView" Command="TilesViewCmd"/>
+                    <CATCmdStarter Name="TreeListView" Command="TreeListViewCmd"/>
+                </CATCmdContainer>
+            </CATCmdContainer>
+        </CATCmdWorkbench>
+    </Template>
+</Styles>
+
+            

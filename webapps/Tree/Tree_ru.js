@@ -1,0 +1,1 @@
+define("DS/Tree/Tree_ru",{});define("DS/Tree/assets/nls/carousel",{close:"Закрыть",next:"Далее",previous:"Назад"});

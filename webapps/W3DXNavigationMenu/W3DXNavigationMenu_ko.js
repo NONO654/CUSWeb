@@ -1,0 +1,1 @@
+define("DS/W3DXNavigationMenu/W3DXNavigationMenu_ko",{});define("DS/W3DXNavigationMenu/assets/nls/NavigationMenuDefault",{AddItem:"항목 추가",NoObjectFound:"항목을 찾을 수 없음",Search:"검색",tooltipMenu:"메뉴",Loading:"로드 중..."});

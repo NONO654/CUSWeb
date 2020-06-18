@@ -1,0 +1,1 @@
+define("DS/ENOXVersionExplorerModelManager/ENOXVersionExplorerModelManager_ru",{});define("DS/ENOXVersionExplorerModelManager/assets/nls/SemanticRelationships",{X_MODEL:{E:"Стадия",F:"Фиксация",S:"Исследование",B:"Ветвь",SP:"Разделить"},P_PRIME:{E:"Стадия",F:"Фиксация",S:"Исследование",SO:"Дополнительный выпуск",SP:"Разделить",I:"Интегрировать"}});

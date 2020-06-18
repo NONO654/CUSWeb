@@ -1,0 +1,2941 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY Member List
+// --------------------------------------------------
+ATTR V_owner;N;N;$
+ATTR V_members;N;N;$
+ATTR Originator;N;N;$
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR isbestsofar;N;N;false
+ATTR ispublished;N;N;false
+ATTR locked;N;N;false
+ATTR locker;N;N;$
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revindex;N;N;0
+ATTR revision;N;N;$
+FUNC Create
+FATTR name;Y
+FATTR description;Y
+FUNC EZQuery
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR policy;Y
+FATTR Originator;Y
+FUNC Query
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR policy;Y
+FATTR Originator;Y
+FUNC Read
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR policy;N
+FATTR Originator;N
+FATTR V_owner;N
+FATTR V_members;N
+FUNC Tree
+FUNC Write
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR policy;N
+FATTR Originator;N
+// --------------------------------------------------
+ENTITY Relation.Member List
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write
+// --------------------------------------------------
+ENTITY List Member
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write
+// --------------------------------------------------
+ENTITY Business Unit
+// --------------------------------------------------
+ATTR V_children;N;N;$
+ATTR V_departments;N;N;$
+ATTR V_parents;N;N;$
+ATTR Address;N;N;Unknown
+ATTR Alternate Name;N;N;$
+ATTR Cage Code;N;N;0
+ATTR City;N;N;$
+ATTR Country;N;Y;Unassigned
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Afghanistan
+//VALUE Azerbaijan
+//VALUE Bahamas
+//VALUE Bahrain
+//VALUE Bangladesh
+//VALUE Barbados
+//VALUE Belarus
+//VALUE Belgium
+//VALUE Belize
+//VALUE Benin
+//VALUE Bermuda
+//VALUE Bhutan
+//VALUE Bolivia
+//VALUE Bosnia And Herzegovina
+//VALUE Botswana
+//VALUE Bouvet Island
+//VALUE Brazil
+//VALUE Aland Islands
+//VALUE British Indian Ocean Territory
+//VALUE Brunei Darussalam
+//VALUE Bulgaria
+//VALUE Burkina Faso
+//VALUE Burundi
+//VALUE Cambodia
+//VALUE Cameroon
+//VALUE Canada
+//VALUE Cape Verde
+//VALUE Cayman Islands
+//VALUE Central African Republic
+//VALUE Chad
+//VALUE Chile
+//VALUE China
+//VALUE Christmas Island
+//VALUE Cocos Islands
+//VALUE Albania
+//VALUE Colombia
+//VALUE Comoros
+//VALUE Congo
+//VALUE Cook Islands
+//VALUE Costa Rica
+//VALUE Cote D'Ivoire
+//VALUE Croatia
+//VALUE Cuba
+//VALUE Cyprus
+//VALUE Czech Republic
+//VALUE Denmark
+//VALUE Djibouti
+//VALUE Dominica
+//VALUE Dominican Republic
+//VALUE Ecuador
+//VALUE Egypt
+//VALUE Algeria
+//VALUE El Salvador
+//VALUE Equatorial Guinea
+//VALUE Eritrea
+//VALUE Estonia
+//VALUE Ethiopia
+//VALUE Falkland Islands
+//VALUE Faroe Islands
+//VALUE Fiji
+//VALUE Finland
+//VALUE France
+//VALUE French Guiana
+//VALUE French Polynesia
+//VALUE French Southern Territories
+//VALUE Gabon
+//VALUE Gambia
+//VALUE Georgia
+//VALUE American Samoa
+//VALUE Germany
+//VALUE Ghana
+//VALUE Gibraltar
+//VALUE Greece
+//VALUE Greenland
+//VALUE Grenada
+//VALUE Guadeloupe
+//VALUE Guam
+//VALUE Guatemala
+//VALUE Guernsey
+//VALUE Guinea
+//VALUE Guinea-Bissau
+//VALUE Guyana
+//VALUE Haiti
+//VALUE Heard Island And McDonald Islands
+//VALUE Honduras
+//VALUE Andorra
+//VALUE Hong Kong
+//VALUE Hungary
+//VALUE Iceland
+//VALUE India
+//VALUE Indonesia
+//VALUE Iran
+//VALUE Iraq
+//VALUE Ireland
+//VALUE Isle Of Man
+//VALUE Israel
+//VALUE Italy
+//VALUE Jamaica
+//VALUE Japan
+//VALUE Jersey
+//VALUE Jordan
+//VALUE Kazakhstan
+//VALUE Angola
+//VALUE Kenya
+//VALUE Kiribati
+//VALUE Kuwait
+//VALUE Kyrgyzstan
+//VALUE Laos
+//VALUE Latvia
+//VALUE Lebanon
+//VALUE Lesotho
+//VALUE Liberia
+//VALUE Libya
+//VALUE Liechtenstein
+//VALUE Lithuania
+//VALUE Luxembourg
+//VALUE Macao
+//VALUE Macedonia
+//VALUE Madagascar
+//VALUE Anguilla
+//VALUE Malawi
+//VALUE Malaysia
+//VALUE Maldives
+//VALUE Mali
+//VALUE Malta
+//VALUE Marshall Islands
+//VALUE Martinique
+//VALUE Mauritania
+//VALUE Mauritius
+//VALUE Mayotte
+//VALUE Mexico
+//VALUE Micronesia
+//VALUE Moldova
+//VALUE Monaco
+//VALUE Mongolia
+//VALUE Montenegro
+//VALUE Antarctica
+//VALUE Montserrat
+//VALUE Morocco
+//VALUE Mozambique
+//VALUE Myanmar
+//VALUE Namibia
+//VALUE Nauru
+//VALUE Nepal
+//VALUE Netherlands
+//VALUE New Caledonia
+//VALUE New Zealand
+//VALUE Nicaragua
+//VALUE Niger
+//VALUE Nigeria
+//VALUE Niue
+//VALUE Norfolk Island
+//VALUE North Korea
+//VALUE Antigua And Barbuda
+//VALUE Northern Mariana Islands
+//VALUE Norway
+//VALUE Oman
+//VALUE Pakistan
+//VALUE Palau
+//VALUE Palestine
+//VALUE Panama
+//VALUE Papua New Guinea
+//VALUE Paraguay
+//VALUE Peru
+//VALUE Philippines
+//VALUE Pitcairn
+//VALUE Poland
+//VALUE Portugal
+//VALUE Puerto Rico
+//VALUE Qatar
+//VALUE Argentina
+//VALUE Romania
+//VALUE Rwanda
+//VALUE Saint Barthelemy
+//VALUE Saint Helena
+//VALUE Saint Kitts And Nevis
+//VALUE Saint Lucia
+//VALUE Saint Martin
+//VALUE Saint Pierre And Miquelon
+//VALUE Saint Vincent And The Grenadines
+//VALUE Samoa
+//VALUE San Marino
+//VALUE Sao Tome And Principe
+//VALUE Saudi Arabia
+//VALUE Senegal
+//VALUE Seychelles
+//VALUE Sierra Leone
+//VALUE Armenia
+//VALUE Singapore
+//VALUE Slovakia
+//VALUE Slovenia
+//VALUE Solomon Islands
+//VALUE Somalia
+//VALUE South Africa
+//VALUE South Georgia
+//VALUE South Korea
+//VALUE Spain
+//VALUE Sri Lanka
+//VALUE Sudan
+//VALUE Suriname
+//VALUE Svalbard And Jan Mayen
+//VALUE Swaziland
+//VALUE Sweden
+//VALUE Switzerland
+//VALUE Aruba
+//VALUE Syria
+//VALUE Serbia
+//VALUE Taiwan
+//VALUE Tajikistan
+//VALUE Zimbabwe
+//VALUE Zambia
+//VALUE Yemen
+//VALUE Western Sahara
+//VALUE Wallis And Futuna
+//VALUE Virgin Islands, US
+//VALUE Virgin Islands, British
+//VALUE Vietnam
+//VALUE Venezuela
+//VALUE Vatican City State
+//VALUE Vanuatu
+//VALUE Uzbekistan
+//VALUE Australia
+//VALUE Uruguay
+//VALUE United States Minor Outlying Islands
+//VALUE United States Of America
+//VALUE United Kingdom
+//VALUE United Arab Emirates
+//VALUE Unassigned
+//VALUE Ukraine
+//VALUE Uganda
+//VALUE Tuvalu
+//VALUE Turks And Caicos Islands
+//VALUE Turkmenistan
+//VALUE Turkey
+//VALUE Tunisia
+//VALUE Trinidad And Tobago
+//VALUE Tonga
+//VALUE Tokelau
+//VALUE Austria
+//VALUE Togo
+//VALUE Timor-Leste
+//VALUE Thailand
+//VALUE Tanzania
+ATTR DUNS Number;N;N;0
+ATTR Default Policy;N;N;$
+ATTR Distinguished Name;N;N;$
+ATTR Division;N;N;$
+ATTR FTP Directory;N;N;$
+ATTR FTP Host;N;N;$
+ATTR File Site;N;N;$
+ATTR File Store Symbolic Name;N;N;$
+ATTR IMDS Company ID;N;N;$
+ATTR Meeting Site ID;N;N;$
+ATTR Meeting Site Name;N;N;$
+ATTR Organization Fax Number;N;N;Unknown
+ATTR Organization ID;N;N;Unknown
+ATTR Organization Name;N;N;Unknown
+ATTR Organization Phone Number;N;N;Unknown
+ATTR Originator;N;N;$
+ATTR Postal Code;N;N;$
+ATTR Primary Key;N;N;$
+ATTR Standard Cost;N;N;0
+ATTR State/Region;N;N;$
+ATTR Web Site;N;N;$
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR isbestsofar;N;N;false
+ATTR ispublished;N;N;false
+ATTR locked;N;N;false
+ATTR locker;N;N;$
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revindex;N;N;0
+ATTR revision;N;N;$
+FUNC Create
+FATTR name;Y
+FATTR description;Y
+FUNC EZQuery
+FATTR name;Y
+FATTR description;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR modified;Y
+FATTR Organization Name;Y
+FATTR Organization ID;Y
+FATTR Cage Code;Y
+FATTR DUNS Number;Y
+FATTR Organization Phone Number;Y
+FATTR Organization Fax Number;Y
+FATTR Web Site;Y
+FATTR FTP Host;Y
+FATTR FTP Directory;Y
+FATTR Standard Cost;Y
+FATTR IMDS Company ID;Y
+FATTR Address;Y
+FATTR Postal Code;Y
+FATTR City;Y
+FATTR Country;Y
+FUNC Query
+FATTR name;Y
+FATTR description;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR modified;Y
+FATTR Organization Name;Y
+FATTR Organization ID;Y
+FATTR Cage Code;Y
+FATTR DUNS Number;Y
+FATTR Organization Phone Number;Y
+FATTR Organization Fax Number;Y
+FATTR Web Site;Y
+FATTR FTP Host;Y
+FATTR FTP Directory;Y
+FATTR Standard Cost;Y
+FATTR IMDS Company ID;Y
+FATTR Address;Y
+FATTR Postal Code;Y
+FATTR City;Y
+FATTR Country;Y
+FUNC Read
+FATTR name;N
+FATTR description;N
+FATTR current;N
+FATTR owner;N
+FATTR modified;N
+FATTR Organization Name;N
+FATTR Organization ID;N
+FATTR Cage Code;N
+FATTR DUNS Number;N
+FATTR Organization Phone Number;N
+FATTR Organization Fax Number;N
+FATTR Web Site;N
+FATTR FTP Host;N
+FATTR FTP Directory;N
+FATTR Standard Cost;N
+FATTR IMDS Company ID;N
+FATTR Address;N
+FATTR Postal Code;N
+FATTR City;N
+FATTR Country;N
+FATTR V_children;N
+FATTR V_departments;N
+FATTR V_parents;N
+FUNC Tree
+FUNC Write
+FATTR name;N
+FATTR description;N
+FATTR current;N
+FATTR owner;N
+FATTR modified;N
+FATTR Organization Name;N
+FATTR Organization ID;N
+FATTR Cage Code;N
+FATTR DUNS Number;N
+FATTR Organization Phone Number;N
+FATTR Organization Fax Number;N
+FATTR Web Site;N
+FATTR FTP Host;N
+FATTR FTP Directory;N
+FATTR Standard Cost;N
+FATTR IMDS Company ID;N
+FATTR Address;N
+FATTR Postal Code;N
+FATTR City;N
+FATTR Country;N
+// --------------------------------------------------
+ENTITY Division
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write
+// --------------------------------------------------
+ENTITY Business Unit Employee
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write
+// --------------------------------------------------
+ENTITY Company
+// --------------------------------------------------
+ATTR V_children;N;N;$
+ATTR V_departments;N;N;$
+ATTR V_divisions;N;N;$
+ATTR V_parent;N;N;$
+ATTR Address;N;N;Unknown
+ATTR Alternate Name;N;N;$
+ATTR Cage Code;N;N;0
+ATTR City;N;N;$
+ATTR Country;N;Y;Unassigned
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Afghanistan
+//VALUE Azerbaijan
+//VALUE Bahamas
+//VALUE Bahrain
+//VALUE Bangladesh
+//VALUE Barbados
+//VALUE Belarus
+//VALUE Belgium
+//VALUE Belize
+//VALUE Benin
+//VALUE Bermuda
+//VALUE Bhutan
+//VALUE Bolivia
+//VALUE Bosnia And Herzegovina
+//VALUE Botswana
+//VALUE Bouvet Island
+//VALUE Brazil
+//VALUE Aland Islands
+//VALUE British Indian Ocean Territory
+//VALUE Brunei Darussalam
+//VALUE Bulgaria
+//VALUE Burkina Faso
+//VALUE Burundi
+//VALUE Cambodia
+//VALUE Cameroon
+//VALUE Canada
+//VALUE Cape Verde
+//VALUE Cayman Islands
+//VALUE Central African Republic
+//VALUE Chad
+//VALUE Chile
+//VALUE China
+//VALUE Christmas Island
+//VALUE Cocos Islands
+//VALUE Albania
+//VALUE Colombia
+//VALUE Comoros
+//VALUE Congo
+//VALUE Cook Islands
+//VALUE Costa Rica
+//VALUE Cote D'Ivoire
+//VALUE Croatia
+//VALUE Cuba
+//VALUE Cyprus
+//VALUE Czech Republic
+//VALUE Denmark
+//VALUE Djibouti
+//VALUE Dominica
+//VALUE Dominican Republic
+//VALUE Ecuador
+//VALUE Egypt
+//VALUE Algeria
+//VALUE El Salvador
+//VALUE Equatorial Guinea
+//VALUE Eritrea
+//VALUE Estonia
+//VALUE Ethiopia
+//VALUE Falkland Islands
+//VALUE Faroe Islands
+//VALUE Fiji
+//VALUE Finland
+//VALUE France
+//VALUE French Guiana
+//VALUE French Polynesia
+//VALUE French Southern Territories
+//VALUE Gabon
+//VALUE Gambia
+//VALUE Georgia
+//VALUE American Samoa
+//VALUE Germany
+//VALUE Ghana
+//VALUE Gibraltar
+//VALUE Greece
+//VALUE Greenland
+//VALUE Grenada
+//VALUE Guadeloupe
+//VALUE Guam
+//VALUE Guatemala
+//VALUE Guernsey
+//VALUE Guinea
+//VALUE Guinea-Bissau
+//VALUE Guyana
+//VALUE Haiti
+//VALUE Heard Island And McDonald Islands
+//VALUE Honduras
+//VALUE Andorra
+//VALUE Hong Kong
+//VALUE Hungary
+//VALUE Iceland
+//VALUE India
+//VALUE Indonesia
+//VALUE Iran
+//VALUE Iraq
+//VALUE Ireland
+//VALUE Isle Of Man
+//VALUE Israel
+//VALUE Italy
+//VALUE Jamaica
+//VALUE Japan
+//VALUE Jersey
+//VALUE Jordan
+//VALUE Kazakhstan
+//VALUE Angola
+//VALUE Kenya
+//VALUE Kiribati
+//VALUE Kuwait
+//VALUE Kyrgyzstan
+//VALUE Laos
+//VALUE Latvia
+//VALUE Lebanon
+//VALUE Lesotho
+//VALUE Liberia
+//VALUE Libya
+//VALUE Liechtenstein
+//VALUE Lithuania
+//VALUE Luxembourg
+//VALUE Macao
+//VALUE Macedonia
+//VALUE Madagascar
+//VALUE Anguilla
+//VALUE Malawi
+//VALUE Malaysia
+//VALUE Maldives
+//VALUE Mali
+//VALUE Malta
+//VALUE Marshall Islands
+//VALUE Martinique
+//VALUE Mauritania
+//VALUE Mauritius
+//VALUE Mayotte
+//VALUE Mexico
+//VALUE Micronesia
+//VALUE Moldova
+//VALUE Monaco
+//VALUE Mongolia
+//VALUE Montenegro
+//VALUE Antarctica
+//VALUE Montserrat
+//VALUE Morocco
+//VALUE Mozambique
+//VALUE Myanmar
+//VALUE Namibia
+//VALUE Nauru
+//VALUE Nepal
+//VALUE Netherlands
+//VALUE New Caledonia
+//VALUE New Zealand
+//VALUE Nicaragua
+//VALUE Niger
+//VALUE Nigeria
+//VALUE Niue
+//VALUE Norfolk Island
+//VALUE North Korea
+//VALUE Antigua And Barbuda
+//VALUE Northern Mariana Islands
+//VALUE Norway
+//VALUE Oman
+//VALUE Pakistan
+//VALUE Palau
+//VALUE Palestine
+//VALUE Panama
+//VALUE Papua New Guinea
+//VALUE Paraguay
+//VALUE Peru
+//VALUE Philippines
+//VALUE Pitcairn
+//VALUE Poland
+//VALUE Portugal
+//VALUE Puerto Rico
+//VALUE Qatar
+//VALUE Argentina
+//VALUE Romania
+//VALUE Rwanda
+//VALUE Saint Barthelemy
+//VALUE Saint Helena
+//VALUE Saint Kitts And Nevis
+//VALUE Saint Lucia
+//VALUE Saint Martin
+//VALUE Saint Pierre And Miquelon
+//VALUE Saint Vincent And The Grenadines
+//VALUE Samoa
+//VALUE San Marino
+//VALUE Sao Tome And Principe
+//VALUE Saudi Arabia
+//VALUE Senegal
+//VALUE Seychelles
+//VALUE Sierra Leone
+//VALUE Armenia
+//VALUE Singapore
+//VALUE Slovakia
+//VALUE Slovenia
+//VALUE Solomon Islands
+//VALUE Somalia
+//VALUE South Africa
+//VALUE South Georgia
+//VALUE South Korea
+//VALUE Spain
+//VALUE Sri Lanka
+//VALUE Sudan
+//VALUE Suriname
+//VALUE Svalbard And Jan Mayen
+//VALUE Swaziland
+//VALUE Sweden
+//VALUE Switzerland
+//VALUE Aruba
+//VALUE Syria
+//VALUE Serbia
+//VALUE Taiwan
+//VALUE Tajikistan
+//VALUE Zimbabwe
+//VALUE Zambia
+//VALUE Yemen
+//VALUE Western Sahara
+//VALUE Wallis And Futuna
+//VALUE Virgin Islands, US
+//VALUE Virgin Islands, British
+//VALUE Vietnam
+//VALUE Venezuela
+//VALUE Vatican City State
+//VALUE Vanuatu
+//VALUE Uzbekistan
+//VALUE Australia
+//VALUE Uruguay
+//VALUE United States Minor Outlying Islands
+//VALUE United States Of America
+//VALUE United Kingdom
+//VALUE United Arab Emirates
+//VALUE Unassigned
+//VALUE Ukraine
+//VALUE Uganda
+//VALUE Tuvalu
+//VALUE Turks And Caicos Islands
+//VALUE Turkmenistan
+//VALUE Turkey
+//VALUE Tunisia
+//VALUE Trinidad And Tobago
+//VALUE Tonga
+//VALUE Tokelau
+//VALUE Austria
+//VALUE Togo
+//VALUE Timor-Leste
+//VALUE Thailand
+//VALUE Tanzania
+ATTR DUNS Number;N;N;0
+ATTR Default Policy;N;N;$
+ATTR Distinguished Name;N;N;$
+ATTR Division;N;N;$
+ATTR FTP Directory;N;N;$
+ATTR FTP Host;N;N;$
+ATTR File Site;N;N;$
+ATTR File Store Symbolic Name;N;N;$
+ATTR IMDS Company ID;N;N;$
+ATTR JAMP Company ID;N;N;$
+ATTR Meeting Site ID;N;N;$
+ATTR Meeting Site Name;N;N;$
+ATTR Organization Fax Number;N;N;Unknown
+ATTR Organization ID;N;N;Unknown
+ATTR Organization Name;N;N;Unknown
+ATTR Organization Phone Number;N;N;Unknown
+ATTR Originator;N;N;$
+ATTR Postal Code;N;N;$
+ATTR Primary Key;N;N;$
+ATTR Secondary Vaults;N;N;$
+ATTR Standard Cost;N;N;0
+ATTR State/Region;N;N;$
+ATTR Web Site;N;N;$
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR isbestsofar;N;N;false
+ATTR ispublished;N;N;false
+ATTR locked;N;N;false
+ATTR locker;N;N;$
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revindex;N;N;0
+ATTR revision;N;N;$
+FUNC Create
+FATTR name;Y
+FATTR description;Y
+FUNC EZQuery
+FATTR name;Y
+FATTR description;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR modified;Y
+FATTR Organization Name;Y
+FATTR Organization ID;Y
+FATTR Cage Code;Y
+FATTR DUNS Number;Y
+FATTR Organization Phone Number;Y
+FATTR Organization Fax Number;Y
+FATTR Web Site;Y
+FATTR FTP Host;Y
+FATTR FTP Directory;Y
+FATTR Secondary Vaults;Y
+FATTR Address;Y
+FATTR Postal Code;Y
+FATTR City;Y
+FATTR Country;Y
+FATTR Standard Cost;Y
+FATTR IMDS Company ID;Y
+FATTR JAMP Company ID;Y
+FUNC Query
+FATTR name;Y
+FATTR description;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR modified;Y
+FATTR Organization Name;Y
+FATTR Organization ID;Y
+FATTR Cage Code;Y
+FATTR DUNS Number;Y
+FATTR Organization Phone Number;Y
+FATTR Organization Fax Number;Y
+FATTR Web Site;Y
+FATTR FTP Host;Y
+FATTR FTP Directory;Y
+FATTR Secondary Vaults;Y
+FATTR Address;Y
+FATTR Postal Code;Y
+FATTR City;Y
+FATTR Country;Y
+FATTR Standard Cost;Y
+FATTR IMDS Company ID;Y
+FATTR JAMP Company ID;Y
+FUNC Read
+FATTR name;N
+FATTR description;N
+FATTR current;N
+FATTR owner;N
+FATTR modified;N
+FATTR Organization Name;N
+FATTR Organization ID;N
+FATTR Cage Code;N
+FATTR DUNS Number;N
+FATTR Organization Phone Number;N
+FATTR Organization Fax Number;N
+FATTR Web Site;N
+FATTR FTP Host;N
+FATTR FTP Directory;N
+FATTR Secondary Vaults;N
+FATTR Address;N
+FATTR Postal Code;N
+FATTR City;N
+FATTR Country;N
+FATTR Standard Cost;N
+FATTR IMDS Company ID;N
+FATTR JAMP Company ID;N
+FATTR V_children;N
+FATTR V_departments;N
+FATTR V_divisions;N
+FATTR V_parent;N
+FUNC Tree
+FUNC Write
+FATTR name;N
+FATTR description;N
+FATTR current;N
+FATTR owner;N
+FATTR modified;N
+FATTR Organization Name;N
+FATTR Organization ID;N
+FATTR Cage Code;N
+FATTR DUNS Number;N
+FATTR Organization Phone Number;N
+FATTR Organization Fax Number;N
+FATTR Web Site;N
+FATTR FTP Host;N
+FATTR FTP Directory;N
+FATTR Secondary Vaults;N
+FATTR Address;N
+FATTR Postal Code;N
+FATTR City;N
+FATTR Country;N
+FATTR Standard Cost;N
+FATTR IMDS Company ID;N
+FATTR JAMP Company ID;N
+// --------------------------------------------------
+ENTITY Subsidiary
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write
+// --------------------------------------------------
+ENTITY Employee
+// --------------------------------------------------
+ATTR Employment Type;N;Y;Employee
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Employee
+//VALUE Contractor
+FUNC Create
+FATTR Employment Type;Y
+FUNC EZQuery
+FATTR Employment Type;Y
+FUNC Query
+FATTR Employment Type;Y
+FUNC Read
+FATTR Employment Type;N
+FUNC Tree
+FUNC Write
+FATTR Employment Type;N
+// --------------------------------------------------
+ENTITY Department
+// --------------------------------------------------
+ATTR V_children;N;N;$
+ATTR V_parent;N;N;$
+ATTR Address;N;N;Unknown
+ATTR Alternate Name;N;N;$
+ATTR Cage Code;N;N;0
+ATTR City;N;N;$
+ATTR Country;N;Y;Unassigned
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Afghanistan
+//VALUE Azerbaijan
+//VALUE Bahamas
+//VALUE Bahrain
+//VALUE Bangladesh
+//VALUE Barbados
+//VALUE Belarus
+//VALUE Belgium
+//VALUE Belize
+//VALUE Benin
+//VALUE Bermuda
+//VALUE Bhutan
+//VALUE Bolivia
+//VALUE Bosnia And Herzegovina
+//VALUE Botswana
+//VALUE Bouvet Island
+//VALUE Brazil
+//VALUE Aland Islands
+//VALUE British Indian Ocean Territory
+//VALUE Brunei Darussalam
+//VALUE Bulgaria
+//VALUE Burkina Faso
+//VALUE Burundi
+//VALUE Cambodia
+//VALUE Cameroon
+//VALUE Canada
+//VALUE Cape Verde
+//VALUE Cayman Islands
+//VALUE Central African Republic
+//VALUE Chad
+//VALUE Chile
+//VALUE China
+//VALUE Christmas Island
+//VALUE Cocos Islands
+//VALUE Albania
+//VALUE Colombia
+//VALUE Comoros
+//VALUE Congo
+//VALUE Cook Islands
+//VALUE Costa Rica
+//VALUE Cote D'Ivoire
+//VALUE Croatia
+//VALUE Cuba
+//VALUE Cyprus
+//VALUE Czech Republic
+//VALUE Denmark
+//VALUE Djibouti
+//VALUE Dominica
+//VALUE Dominican Republic
+//VALUE Ecuador
+//VALUE Egypt
+//VALUE Algeria
+//VALUE El Salvador
+//VALUE Equatorial Guinea
+//VALUE Eritrea
+//VALUE Estonia
+//VALUE Ethiopia
+//VALUE Falkland Islands
+//VALUE Faroe Islands
+//VALUE Fiji
+//VALUE Finland
+//VALUE France
+//VALUE French Guiana
+//VALUE French Polynesia
+//VALUE French Southern Territories
+//VALUE Gabon
+//VALUE Gambia
+//VALUE Georgia
+//VALUE American Samoa
+//VALUE Germany
+//VALUE Ghana
+//VALUE Gibraltar
+//VALUE Greece
+//VALUE Greenland
+//VALUE Grenada
+//VALUE Guadeloupe
+//VALUE Guam
+//VALUE Guatemala
+//VALUE Guernsey
+//VALUE Guinea
+//VALUE Guinea-Bissau
+//VALUE Guyana
+//VALUE Haiti
+//VALUE Heard Island And McDonald Islands
+//VALUE Honduras
+//VALUE Andorra
+//VALUE Hong Kong
+//VALUE Hungary
+//VALUE Iceland
+//VALUE India
+//VALUE Indonesia
+//VALUE Iran
+//VALUE Iraq
+//VALUE Ireland
+//VALUE Isle Of Man
+//VALUE Israel
+//VALUE Italy
+//VALUE Jamaica
+//VALUE Japan
+//VALUE Jersey
+//VALUE Jordan
+//VALUE Kazakhstan
+//VALUE Angola
+//VALUE Kenya
+//VALUE Kiribati
+//VALUE Kuwait
+//VALUE Kyrgyzstan
+//VALUE Laos
+//VALUE Latvia
+//VALUE Lebanon
+//VALUE Lesotho
+//VALUE Liberia
+//VALUE Libya
+//VALUE Liechtenstein
+//VALUE Lithuania
+//VALUE Luxembourg
+//VALUE Macao
+//VALUE Macedonia
+//VALUE Madagascar
+//VALUE Anguilla
+//VALUE Malawi
+//VALUE Malaysia
+//VALUE Maldives
+//VALUE Mali
+//VALUE Malta
+//VALUE Marshall Islands
+//VALUE Martinique
+//VALUE Mauritania
+//VALUE Mauritius
+//VALUE Mayotte
+//VALUE Mexico
+//VALUE Micronesia
+//VALUE Moldova
+//VALUE Monaco
+//VALUE Mongolia
+//VALUE Montenegro
+//VALUE Antarctica
+//VALUE Montserrat
+//VALUE Morocco
+//VALUE Mozambique
+//VALUE Myanmar
+//VALUE Namibia
+//VALUE Nauru
+//VALUE Nepal
+//VALUE Netherlands
+//VALUE New Caledonia
+//VALUE New Zealand
+//VALUE Nicaragua
+//VALUE Niger
+//VALUE Nigeria
+//VALUE Niue
+//VALUE Norfolk Island
+//VALUE North Korea
+//VALUE Antigua And Barbuda
+//VALUE Northern Mariana Islands
+//VALUE Norway
+//VALUE Oman
+//VALUE Pakistan
+//VALUE Palau
+//VALUE Palestine
+//VALUE Panama
+//VALUE Papua New Guinea
+//VALUE Paraguay
+//VALUE Peru
+//VALUE Philippines
+//VALUE Pitcairn
+//VALUE Poland
+//VALUE Portugal
+//VALUE Puerto Rico
+//VALUE Qatar
+//VALUE Argentina
+//VALUE Romania
+//VALUE Rwanda
+//VALUE Saint Barthelemy
+//VALUE Saint Helena
+//VALUE Saint Kitts And Nevis
+//VALUE Saint Lucia
+//VALUE Saint Martin
+//VALUE Saint Pierre And Miquelon
+//VALUE Saint Vincent And The Grenadines
+//VALUE Samoa
+//VALUE San Marino
+//VALUE Sao Tome And Principe
+//VALUE Saudi Arabia
+//VALUE Senegal
+//VALUE Seychelles
+//VALUE Sierra Leone
+//VALUE Armenia
+//VALUE Singapore
+//VALUE Slovakia
+//VALUE Slovenia
+//VALUE Solomon Islands
+//VALUE Somalia
+//VALUE South Africa
+//VALUE South Georgia
+//VALUE South Korea
+//VALUE Spain
+//VALUE Sri Lanka
+//VALUE Sudan
+//VALUE Suriname
+//VALUE Svalbard And Jan Mayen
+//VALUE Swaziland
+//VALUE Sweden
+//VALUE Switzerland
+//VALUE Aruba
+//VALUE Syria
+//VALUE Serbia
+//VALUE Taiwan
+//VALUE Tajikistan
+//VALUE Zimbabwe
+//VALUE Zambia
+//VALUE Yemen
+//VALUE Western Sahara
+//VALUE Wallis And Futuna
+//VALUE Virgin Islands, US
+//VALUE Virgin Islands, British
+//VALUE Vietnam
+//VALUE Venezuela
+//VALUE Vatican City State
+//VALUE Vanuatu
+//VALUE Uzbekistan
+//VALUE Australia
+//VALUE Uruguay
+//VALUE United States Minor Outlying Islands
+//VALUE United States Of America
+//VALUE United Kingdom
+//VALUE United Arab Emirates
+//VALUE Unassigned
+//VALUE Ukraine
+//VALUE Uganda
+//VALUE Tuvalu
+//VALUE Turks And Caicos Islands
+//VALUE Turkmenistan
+//VALUE Turkey
+//VALUE Tunisia
+//VALUE Trinidad And Tobago
+//VALUE Tonga
+//VALUE Tokelau
+//VALUE Austria
+//VALUE Togo
+//VALUE Timor-Leste
+//VALUE Thailand
+//VALUE Tanzania
+ATTR DUNS Number;N;N;0
+ATTR Default Policy;N;N;$
+ATTR Distinguished Name;N;N;$
+ATTR Division;N;N;$
+ATTR FTP Directory;N;N;$
+ATTR FTP Host;N;N;$
+ATTR File Site;N;N;$
+ATTR File Store Symbolic Name;N;N;$
+ATTR Meeting Site ID;N;N;$
+ATTR Meeting Site Name;N;N;$
+ATTR Organization Fax Number;N;N;Unknown
+ATTR Organization ID;N;N;Unknown
+ATTR Organization Name;N;N;Unknown
+ATTR Organization Phone Number;N;N;Unknown
+ATTR Originator;N;N;$
+ATTR Postal Code;N;N;$
+ATTR Primary Key;N;N;$
+ATTR Standard Cost;N;N;0
+ATTR State/Region;N;N;$
+ATTR Web Site;N;N;$
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR isbestsofar;N;N;false
+ATTR ispublished;N;N;false
+ATTR locked;N;N;false
+ATTR locker;N;N;$
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revindex;N;N;0
+ATTR revision;N;N;$
+FUNC Create
+FATTR name;Y
+FATTR description;Y
+FUNC EZQuery
+FATTR name;Y
+FATTR description;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR modified;Y
+FATTR Organization Name;Y
+FATTR Organization ID;Y
+FATTR Cage Code;Y
+FATTR DUNS Number;Y
+FATTR Organization Phone Number;Y
+FATTR Organization Fax Number;Y
+FATTR Web Site;Y
+FATTR FTP Host;Y
+FATTR FTP Directory;Y
+FATTR Standard Cost;Y
+FATTR Address;Y
+FATTR Postal Code;Y
+FATTR City;Y
+FATTR Country;Y
+FUNC Query
+FATTR name;Y
+FATTR description;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR modified;Y
+FATTR Organization Name;Y
+FATTR Organization ID;Y
+FATTR Cage Code;Y
+FATTR DUNS Number;Y
+FATTR Organization Phone Number;Y
+FATTR Organization Fax Number;Y
+FATTR Web Site;Y
+FATTR FTP Host;Y
+FATTR FTP Directory;Y
+FATTR Standard Cost;Y
+FATTR Address;Y
+FATTR Postal Code;Y
+FATTR City;Y
+FATTR Country;Y
+FUNC Read
+FATTR name;N
+FATTR description;N
+FATTR current;N
+FATTR owner;N
+FATTR modified;N
+FATTR Organization Name;N
+FATTR Organization ID;N
+FATTR Cage Code;N
+FATTR DUNS Number;N
+FATTR Organization Phone Number;N
+FATTR Organization Fax Number;N
+FATTR Web Site;N
+FATTR FTP Host;N
+FATTR FTP Directory;N
+FATTR Standard Cost;N
+FATTR Address;N
+FATTR Postal Code;N
+FATTR City;N
+FATTR Country;N
+FATTR V_children;N
+FATTR V_parent;N
+FUNC Tree
+FUNC Write
+FATTR name;N
+FATTR description;N
+FATTR current;N
+FATTR owner;N
+FATTR modified;N
+FATTR Organization Name;N
+FATTR Organization ID;N
+FATTR Cage Code;N
+FATTR DUNS Number;N
+FATTR Organization Phone Number;N
+FATTR Organization Fax Number;N
+FATTR Web Site;N
+FATTR FTP Host;N
+FATTR FTP Directory;N
+FATTR Standard Cost;N
+FATTR Address;N
+FATTR Postal Code;N
+FATTR City;N
+FATTR Country;N
+// --------------------------------------------------
+ENTITY Company Department
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write
+// --------------------------------------------------
+ENTITY Department Employee
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write
+// --------------------------------------------------
+ENTITY Security Context
+// --------------------------------------------------
+ATTR V_role;N;N;$
+ATTR V_org;N;N;$
+ATTR V_prj;N;N;$
+ATTR Originator;N;N;$
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR isbestsofar;N;N;false
+ATTR ispublished;N;N;false
+ATTR locked;N;N;false
+ATTR locker;N;N;$
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revindex;N;N;0
+ATTR revision;N;N;$
+FUNC Create
+FATTR name;Y
+FATTR description;Y
+FUNC EZQuery
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR policy;Y
+FATTR Originator;Y
+FUNC Query
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR policy;Y
+FATTR Originator;Y
+FUNC Read
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR policy;N
+FATTR Originator;N
+FATTR V_role;N
+FATTR V_org;N
+FATTR V_prj;N
+FUNC Tree
+FUNC Write
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR policy;N
+FATTR Originator;N
+// --------------------------------------------------
+ENTITY Assigned Security Context
+// --------------------------------------------------
+ATTR Assignment End Date;N;N;$
+ATTR Assignment Start Date;N;N;$
+FUNC Create
+FATTR Assignment End Date;Y
+FATTR Assignment Start Date;Y
+FUNC EZQuery
+FATTR Assignment End Date;Y
+FATTR Assignment Start Date;Y
+FUNC Query
+FATTR Assignment End Date;Y
+FATTR Assignment Start Date;Y
+FUNC Read
+FATTR Assignment End Date;N
+FATTR Assignment Start Date;N
+FUNC Tree
+FUNC Write
+FATTR Assignment End Date;N
+FATTR Assignment Start Date;N
+// --------------------------------------------------
+ENTITY Security Context Project
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write
+// --------------------------------------------------
+ENTITY Security Context Role
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write
+// --------------------------------------------------
+ENTITY Security Context Organization
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write
+// --------------------------------------------------
+ENTITY Plant
+// --------------------------------------------------
+ATTR Address;N;N;Unknown
+ATTR Alternate Name;N;N;$
+ATTR Cage Code;N;N;0
+ATTR City;N;N;$
+ATTR Country;N;Y;Unassigned
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Afghanistan
+//VALUE Azerbaijan
+//VALUE Bahamas
+//VALUE Bahrain
+//VALUE Bangladesh
+//VALUE Barbados
+//VALUE Belarus
+//VALUE Belgium
+//VALUE Belize
+//VALUE Benin
+//VALUE Bermuda
+//VALUE Bhutan
+//VALUE Bolivia
+//VALUE Bosnia And Herzegovina
+//VALUE Botswana
+//VALUE Bouvet Island
+//VALUE Brazil
+//VALUE Aland Islands
+//VALUE British Indian Ocean Territory
+//VALUE Brunei Darussalam
+//VALUE Bulgaria
+//VALUE Burkina Faso
+//VALUE Burundi
+//VALUE Cambodia
+//VALUE Cameroon
+//VALUE Canada
+//VALUE Cape Verde
+//VALUE Cayman Islands
+//VALUE Central African Republic
+//VALUE Chad
+//VALUE Chile
+//VALUE China
+//VALUE Christmas Island
+//VALUE Cocos Islands
+//VALUE Albania
+//VALUE Colombia
+//VALUE Comoros
+//VALUE Congo
+//VALUE Cook Islands
+//VALUE Costa Rica
+//VALUE Cote D'Ivoire
+//VALUE Croatia
+//VALUE Cuba
+//VALUE Cyprus
+//VALUE Czech Republic
+//VALUE Denmark
+//VALUE Djibouti
+//VALUE Dominica
+//VALUE Dominican Republic
+//VALUE Ecuador
+//VALUE Egypt
+//VALUE Algeria
+//VALUE El Salvador
+//VALUE Equatorial Guinea
+//VALUE Eritrea
+//VALUE Estonia
+//VALUE Ethiopia
+//VALUE Falkland Islands
+//VALUE Faroe Islands
+//VALUE Fiji
+//VALUE Finland
+//VALUE France
+//VALUE French Guiana
+//VALUE French Polynesia
+//VALUE French Southern Territories
+//VALUE Gabon
+//VALUE Gambia
+//VALUE Georgia
+//VALUE American Samoa
+//VALUE Germany
+//VALUE Ghana
+//VALUE Gibraltar
+//VALUE Greece
+//VALUE Greenland
+//VALUE Grenada
+//VALUE Guadeloupe
+//VALUE Guam
+//VALUE Guatemala
+//VALUE Guernsey
+//VALUE Guinea
+//VALUE Guinea-Bissau
+//VALUE Guyana
+//VALUE Haiti
+//VALUE Heard Island And McDonald Islands
+//VALUE Honduras
+//VALUE Andorra
+//VALUE Hong Kong
+//VALUE Hungary
+//VALUE Iceland
+//VALUE India
+//VALUE Indonesia
+//VALUE Iran
+//VALUE Iraq
+//VALUE Ireland
+//VALUE Isle Of Man
+//VALUE Israel
+//VALUE Italy
+//VALUE Jamaica
+//VALUE Japan
+//VALUE Jersey
+//VALUE Jordan
+//VALUE Kazakhstan
+//VALUE Angola
+//VALUE Kenya
+//VALUE Kiribati
+//VALUE Kuwait
+//VALUE Kyrgyzstan
+//VALUE Laos
+//VALUE Latvia
+//VALUE Lebanon
+//VALUE Lesotho
+//VALUE Liberia
+//VALUE Libya
+//VALUE Liechtenstein
+//VALUE Lithuania
+//VALUE Luxembourg
+//VALUE Macao
+//VALUE Macedonia
+//VALUE Madagascar
+//VALUE Anguilla
+//VALUE Malawi
+//VALUE Malaysia
+//VALUE Maldives
+//VALUE Mali
+//VALUE Malta
+//VALUE Marshall Islands
+//VALUE Martinique
+//VALUE Mauritania
+//VALUE Mauritius
+//VALUE Mayotte
+//VALUE Mexico
+//VALUE Micronesia
+//VALUE Moldova
+//VALUE Monaco
+//VALUE Mongolia
+//VALUE Montenegro
+//VALUE Antarctica
+//VALUE Montserrat
+//VALUE Morocco
+//VALUE Mozambique
+//VALUE Myanmar
+//VALUE Namibia
+//VALUE Nauru
+//VALUE Nepal
+//VALUE Netherlands
+//VALUE New Caledonia
+//VALUE New Zealand
+//VALUE Nicaragua
+//VALUE Niger
+//VALUE Nigeria
+//VALUE Niue
+//VALUE Norfolk Island
+//VALUE North Korea
+//VALUE Antigua And Barbuda
+//VALUE Northern Mariana Islands
+//VALUE Norway
+//VALUE Oman
+//VALUE Pakistan
+//VALUE Palau
+//VALUE Palestine
+//VALUE Panama
+//VALUE Papua New Guinea
+//VALUE Paraguay
+//VALUE Peru
+//VALUE Philippines
+//VALUE Pitcairn
+//VALUE Poland
+//VALUE Portugal
+//VALUE Puerto Rico
+//VALUE Qatar
+//VALUE Argentina
+//VALUE Romania
+//VALUE Rwanda
+//VALUE Saint Barthelemy
+//VALUE Saint Helena
+//VALUE Saint Kitts And Nevis
+//VALUE Saint Lucia
+//VALUE Saint Martin
+//VALUE Saint Pierre And Miquelon
+//VALUE Saint Vincent And The Grenadines
+//VALUE Samoa
+//VALUE San Marino
+//VALUE Sao Tome And Principe
+//VALUE Saudi Arabia
+//VALUE Senegal
+//VALUE Seychelles
+//VALUE Sierra Leone
+//VALUE Armenia
+//VALUE Singapore
+//VALUE Slovakia
+//VALUE Slovenia
+//VALUE Solomon Islands
+//VALUE Somalia
+//VALUE South Africa
+//VALUE South Georgia
+//VALUE South Korea
+//VALUE Spain
+//VALUE Sri Lanka
+//VALUE Sudan
+//VALUE Suriname
+//VALUE Svalbard And Jan Mayen
+//VALUE Swaziland
+//VALUE Sweden
+//VALUE Switzerland
+//VALUE Aruba
+//VALUE Syria
+//VALUE Serbia
+//VALUE Taiwan
+//VALUE Tajikistan
+//VALUE Zimbabwe
+//VALUE Zambia
+//VALUE Yemen
+//VALUE Western Sahara
+//VALUE Wallis And Futuna
+//VALUE Virgin Islands, US
+//VALUE Virgin Islands, British
+//VALUE Vietnam
+//VALUE Venezuela
+//VALUE Vatican City State
+//VALUE Vanuatu
+//VALUE Uzbekistan
+//VALUE Australia
+//VALUE Uruguay
+//VALUE United States Minor Outlying Islands
+//VALUE United States Of America
+//VALUE United Kingdom
+//VALUE United Arab Emirates
+//VALUE Unassigned
+//VALUE Ukraine
+//VALUE Uganda
+//VALUE Tuvalu
+//VALUE Turks And Caicos Islands
+//VALUE Turkmenistan
+//VALUE Turkey
+//VALUE Tunisia
+//VALUE Trinidad And Tobago
+//VALUE Tonga
+//VALUE Tokelau
+//VALUE Austria
+//VALUE Togo
+//VALUE Timor-Leste
+//VALUE Thailand
+//VALUE Tanzania
+ATTR DUNS Number;N;N;0
+ATTR Default Policy;N;N;$
+ATTR Distinguished Name;N;N;$
+ATTR Division;N;N;$
+ATTR FTP Directory;N;N;$
+ATTR FTP Host;N;N;$
+ATTR File Site;N;N;$
+ATTR File Store Symbolic Name;N;N;$
+ATTR Meeting Site ID;N;N;$
+ATTR Meeting Site Name;N;N;$
+ATTR Organization Fax Number;N;N;Unknown
+ATTR Organization ID;N;N;Unknown
+ATTR Organization Name;N;N;Unknown
+ATTR Organization Phone Number;N;N;Unknown
+ATTR Originator;N;N;$
+ATTR Postal Code;N;N;$
+ATTR Primary Key;N;N;$
+ATTR Standard Cost;N;N;0
+ATTR State/Region;N;N;$
+ATTR Web Site;N;N;$
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR Non Production Days;N;N;$
+ATTR Plant Time Zone;N;N;$
+ATTR Plant ID;N;N;$
+ATTR Address1;N;N;$
+ATTR Address2;N;N;$
+ATTR Location Code;N;N;$
+ATTR Region;N;N;$
+FUNC Create
+FATTR name;Y
+FATTR description;Y
+FUNC EZQuery
+FATTR name;Y
+FATTR description;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR modified;Y
+FATTR Organization Name;Y
+FATTR Plant ID;Y
+FATTR Address1;Y
+FATTR Address2;Y
+FATTR City;Y
+FATTR Plant Time Zone;Y
+FATTR Region;Y
+FATTR Postal Code;Y
+FATTR Country;Y
+FATTR Non Production Days;Y
+FUNC Query
+FATTR name;Y
+FATTR description;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR modified;Y
+FATTR Organization Name;Y
+FATTR Plant ID;Y
+FATTR Address1;Y
+FATTR Address2;Y
+FATTR City;Y
+FATTR Plant Time Zone;Y
+FATTR Region;Y
+FATTR Postal Code;Y
+FATTR Country;Y
+FATTR Non Production Days;Y
+FUNC Read
+FATTR name;N
+FATTR description;N
+FATTR current;N
+FATTR owner;N
+FATTR modified;N
+FATTR Organization Name;N
+FATTR Plant ID;N
+FATTR Address1;N
+FATTR Address2;N
+FATTR City;N
+FATTR Plant Time Zone;N
+FATTR Region;N
+FATTR Postal Code;N
+FATTR Country;N
+FATTR Non Production Days;N
+FUNC Tree
+FUNC Write
+FATTR name;N
+FATTR description;N
+FATTR current;N
+FATTR owner;N
+FATTR modified;N
+FATTR Organization Name;N
+FATTR Plant ID;N
+FATTR Address1;N
+FATTR Address2;N
+FATTR City;N
+FATTR Plant Time Zone;N
+FATTR Region;N
+FATTR Postal Code;N
+FATTR Country;N
+FATTR Non Production Days;N
+// --------------------------------------------------
+ENTITY Organization
+// --------------------------------------------------
+ATTR Address;N;N;Unknown
+ATTR Alternate Name;N;N;$
+ATTR Cage Code;N;N;0
+ATTR City;N;N;$
+ATTR Country;N;Y;Unassigned
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Afghanistan
+//VALUE Azerbaijan
+//VALUE Bahamas
+//VALUE Bahrain
+//VALUE Bangladesh
+//VALUE Barbados
+//VALUE Belarus
+//VALUE Belgium
+//VALUE Belize
+//VALUE Benin
+//VALUE Bermuda
+//VALUE Bhutan
+//VALUE Bolivia
+//VALUE Bosnia And Herzegovina
+//VALUE Botswana
+//VALUE Bouvet Island
+//VALUE Brazil
+//VALUE Aland Islands
+//VALUE British Indian Ocean Territory
+//VALUE Brunei Darussalam
+//VALUE Bulgaria
+//VALUE Burkina Faso
+//VALUE Burundi
+//VALUE Cambodia
+//VALUE Cameroon
+//VALUE Canada
+//VALUE Cape Verde
+//VALUE Cayman Islands
+//VALUE Central African Republic
+//VALUE Chad
+//VALUE Chile
+//VALUE China
+//VALUE Christmas Island
+//VALUE Cocos Islands
+//VALUE Albania
+//VALUE Colombia
+//VALUE Comoros
+//VALUE Congo
+//VALUE Cook Islands
+//VALUE Costa Rica
+//VALUE Cote D'Ivoire
+//VALUE Croatia
+//VALUE Cuba
+//VALUE Cyprus
+//VALUE Czech Republic
+//VALUE Denmark
+//VALUE Djibouti
+//VALUE Dominica
+//VALUE Dominican Republic
+//VALUE Ecuador
+//VALUE Egypt
+//VALUE Algeria
+//VALUE El Salvador
+//VALUE Equatorial Guinea
+//VALUE Eritrea
+//VALUE Estonia
+//VALUE Ethiopia
+//VALUE Falkland Islands
+//VALUE Faroe Islands
+//VALUE Fiji
+//VALUE Finland
+//VALUE France
+//VALUE French Guiana
+//VALUE French Polynesia
+//VALUE French Southern Territories
+//VALUE Gabon
+//VALUE Gambia
+//VALUE Georgia
+//VALUE American Samoa
+//VALUE Germany
+//VALUE Ghana
+//VALUE Gibraltar
+//VALUE Greece
+//VALUE Greenland
+//VALUE Grenada
+//VALUE Guadeloupe
+//VALUE Guam
+//VALUE Guatemala
+//VALUE Guernsey
+//VALUE Guinea
+//VALUE Guinea-Bissau
+//VALUE Guyana
+//VALUE Haiti
+//VALUE Heard Island And McDonald Islands
+//VALUE Honduras
+//VALUE Andorra
+//VALUE Hong Kong
+//VALUE Hungary
+//VALUE Iceland
+//VALUE India
+//VALUE Indonesia
+//VALUE Iran
+//VALUE Iraq
+//VALUE Ireland
+//VALUE Isle Of Man
+//VALUE Israel
+//VALUE Italy
+//VALUE Jamaica
+//VALUE Japan
+//VALUE Jersey
+//VALUE Jordan
+//VALUE Kazakhstan
+//VALUE Angola
+//VALUE Kenya
+//VALUE Kiribati
+//VALUE Kuwait
+//VALUE Kyrgyzstan
+//VALUE Laos
+//VALUE Latvia
+//VALUE Lebanon
+//VALUE Lesotho
+//VALUE Liberia
+//VALUE Libya
+//VALUE Liechtenstein
+//VALUE Lithuania
+//VALUE Luxembourg
+//VALUE Macao
+//VALUE Macedonia
+//VALUE Madagascar
+//VALUE Anguilla
+//VALUE Malawi
+//VALUE Malaysia
+//VALUE Maldives
+//VALUE Mali
+//VALUE Malta
+//VALUE Marshall Islands
+//VALUE Martinique
+//VALUE Mauritania
+//VALUE Mauritius
+//VALUE Mayotte
+//VALUE Mexico
+//VALUE Micronesia
+//VALUE Moldova
+//VALUE Monaco
+//VALUE Mongolia
+//VALUE Montenegro
+//VALUE Antarctica
+//VALUE Montserrat
+//VALUE Morocco
+//VALUE Mozambique
+//VALUE Myanmar
+//VALUE Namibia
+//VALUE Nauru
+//VALUE Nepal
+//VALUE Netherlands
+//VALUE New Caledonia
+//VALUE New Zealand
+//VALUE Nicaragua
+//VALUE Niger
+//VALUE Nigeria
+//VALUE Niue
+//VALUE Norfolk Island
+//VALUE North Korea
+//VALUE Antigua And Barbuda
+//VALUE Northern Mariana Islands
+//VALUE Norway
+//VALUE Oman
+//VALUE Pakistan
+//VALUE Palau
+//VALUE Palestine
+//VALUE Panama
+//VALUE Papua New Guinea
+//VALUE Paraguay
+//VALUE Peru
+//VALUE Philippines
+//VALUE Pitcairn
+//VALUE Poland
+//VALUE Portugal
+//VALUE Puerto Rico
+//VALUE Qatar
+//VALUE Argentina
+//VALUE Romania
+//VALUE Rwanda
+//VALUE Saint Barthelemy
+//VALUE Saint Helena
+//VALUE Saint Kitts And Nevis
+//VALUE Saint Lucia
+//VALUE Saint Martin
+//VALUE Saint Pierre And Miquelon
+//VALUE Saint Vincent And The Grenadines
+//VALUE Samoa
+//VALUE San Marino
+//VALUE Sao Tome And Principe
+//VALUE Saudi Arabia
+//VALUE Senegal
+//VALUE Seychelles
+//VALUE Sierra Leone
+//VALUE Armenia
+//VALUE Singapore
+//VALUE Slovakia
+//VALUE Slovenia
+//VALUE Solomon Islands
+//VALUE Somalia
+//VALUE South Africa
+//VALUE South Georgia
+//VALUE South Korea
+//VALUE Spain
+//VALUE Sri Lanka
+//VALUE Sudan
+//VALUE Suriname
+//VALUE Svalbard And Jan Mayen
+//VALUE Swaziland
+//VALUE Sweden
+//VALUE Switzerland
+//VALUE Aruba
+//VALUE Syria
+//VALUE Serbia
+//VALUE Taiwan
+//VALUE Tajikistan
+//VALUE Zimbabwe
+//VALUE Zambia
+//VALUE Yemen
+//VALUE Western Sahara
+//VALUE Wallis And Futuna
+//VALUE Virgin Islands, US
+//VALUE Virgin Islands, British
+//VALUE Vietnam
+//VALUE Venezuela
+//VALUE Vatican City State
+//VALUE Vanuatu
+//VALUE Uzbekistan
+//VALUE Australia
+//VALUE Uruguay
+//VALUE United States Minor Outlying Islands
+//VALUE United States Of America
+//VALUE United Kingdom
+//VALUE United Arab Emirates
+//VALUE Unassigned
+//VALUE Ukraine
+//VALUE Uganda
+//VALUE Tuvalu
+//VALUE Turks And Caicos Islands
+//VALUE Turkmenistan
+//VALUE Turkey
+//VALUE Tunisia
+//VALUE Trinidad And Tobago
+//VALUE Tonga
+//VALUE Tokelau
+//VALUE Austria
+//VALUE Togo
+//VALUE Timor-Leste
+//VALUE Thailand
+//VALUE Tanzania
+ATTR DUNS Number;N;N;0
+ATTR Default Policy;N;N;$
+ATTR Distinguished Name;N;N;$
+ATTR Division;N;N;$
+ATTR FTP Directory;N;N;$
+ATTR FTP Host;N;N;$
+ATTR File Site;N;N;$
+ATTR File Store Symbolic Name;N;N;$
+ATTR Meeting Site ID;N;N;$
+ATTR Meeting Site Name;N;N;$
+ATTR Organization Fax Number;N;N;Unknown
+ATTR Organization ID;N;N;Unknown
+ATTR Organization Name;N;N;Unknown
+ATTR Organization Phone Number;N;N;Unknown
+ATTR Originator;N;N;$
+ATTR Postal Code;N;N;$
+ATTR Primary Key;N;N;$
+ATTR Standard Cost;N;N;0
+ATTR State/Region;N;N;$
+ATTR Web Site;N;N;$
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+FUNC Create
+FATTR name;Y
+FATTR description;Y
+FUNC EZQuery
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR policy;Y
+FATTR Alternate Name;Y
+FATTR DUNS Number;Y
+FATTR File Store Symbolic Name;Y
+FATTR Organization Name;Y
+FATTR Default Policy;Y
+FATTR Cage Code;Y
+FATTR Organization Fax Number;Y
+FATTR Distinguished Name;Y
+FATTR Web Site;Y
+FATTR Organization ID;Y
+FATTR FTP Directory;Y
+FATTR Organization Phone Number;Y
+FATTR Primary Key;Y
+FATTR File Site;Y
+FATTR Originator;Y
+FATTR Postal Code;Y
+FATTR Meeting Site Name;Y
+FATTR Meeting Site ID;Y
+FATTR Standard Cost;Y
+FATTR Country;Y
+FATTR City;Y
+FATTR Division;Y
+FATTR Address;Y
+FATTR FTP Host;Y
+FUNC Query
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR policy;Y
+FATTR Alternate Name;Y
+FATTR DUNS Number;Y
+FATTR File Store Symbolic Name;Y
+FATTR Organization Name;Y
+FATTR Default Policy;Y
+FATTR Cage Code;Y
+FATTR Organization Fax Number;Y
+FATTR Distinguished Name;Y
+FATTR Web Site;Y
+FATTR Organization ID;Y
+FATTR FTP Directory;Y
+FATTR Organization Phone Number;Y
+FATTR Primary Key;Y
+FATTR File Site;Y
+FATTR Originator;Y
+FATTR Postal Code;Y
+FATTR Meeting Site Name;Y
+FATTR Meeting Site ID;Y
+FATTR Standard Cost;Y
+FATTR Country;Y
+FATTR City;Y
+FATTR Division;Y
+FATTR Address;Y
+FATTR FTP Host;Y
+FUNC Read
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR policy;N
+FATTR Alternate Name;N
+FATTR DUNS Number;N
+FATTR File Store Symbolic Name;N
+FATTR Organization Name;N
+FATTR Default Policy;N
+FATTR Cage Code;N
+FATTR Organization Fax Number;N
+FATTR Distinguished Name;N
+FATTR Web Site;N
+FATTR Organization ID;N
+FATTR FTP Directory;N
+FATTR Organization Phone Number;N
+FATTR Primary Key;N
+FATTR File Site;N
+FATTR Originator;N
+FATTR Postal Code;N
+FATTR Meeting Site Name;N
+FATTR Meeting Site ID;N
+FATTR Standard Cost;N
+FATTR Country;N
+FATTR City;N
+FATTR Division;N
+FATTR Address;N
+FATTR FTP Host;N
+FUNC Tree
+FUNC Write
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR policy;N
+FATTR Alternate Name;N
+FATTR DUNS Number;N
+FATTR File Store Symbolic Name;N
+FATTR Organization Name;N
+FATTR Default Policy;N
+FATTR Cage Code;N
+FATTR Organization Fax Number;N
+FATTR Distinguished Name;N
+FATTR Web Site;N
+FATTR Organization ID;N
+FATTR FTP Directory;N
+FATTR Organization Phone Number;N
+FATTR Primary Key;N
+FATTR File Site;N
+FATTR Originator;N
+FATTR Postal Code;N
+FATTR Meeting Site Name;N
+FATTR Meeting Site ID;N
+FATTR Standard Cost;N
+FATTR Country;N
+FATTR City;N
+FATTR Division;N
+FATTR Address;N
+FATTR FTP Host;N
+// --------------------------------------------------
+ENTITY Member
+// --------------------------------------------------
+ATTR Project Access;N;Y;Project Member
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Project Lead
+//VALUE Project Member
+//VALUE Project Owner
+//VALUE Project Assessor
+//VALUE Financial Reviewer
+ATTR Project Role;N;Y;$
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Design Engineer
+//VALUE Project Lead
+//VALUE Program Manager
+//VALUE Core Team Member
+//VALUE Project Assessor
+//VALUE Financial Reviewer
+//VALUE role_Employee
+//VALUE role_DesignEngineer
+//VALUE role_SeniorDesignEngineer
+//VALUE role_ManufacturingEngineer
+//VALUE role_OrganizationManager
+//VALUE role_ProductObsolescenceManager
+//VALUE role_ECRCoordinator
+//VALUE role_ECRChairman
+//VALUE role_ChangeBoards
+//VALUE role_SupplierRepresentative
+//VALUE role_SupplierEngineer
+//VALUE role_MCOCoordinator
+FUNC Create
+FATTR Project Access;Y
+FATTR Project Role;Y
+FUNC EZQuery
+FATTR Project Access;Y
+FATTR Project Role;Y
+FUNC Query
+FATTR Project Access;Y
+FATTR Project Role;Y
+FUNC Read
+FATTR Project Access;N
+FATTR Project Role;N
+FUNC Tree
+FUNC Write
+FATTR Project Access;N
+FATTR Project Role;N
+// --------------------------------------------------
+ENTITY Person
+// --------------------------------------------------
+ATTR V_member_lists;N;N;$
+ATTR V_contexts;N;N;$
+ATTR V_company;N;N;$
+ATTR Absence Delegate;N;N;$
+ATTR Absence End Date;N;N;$
+ATTR Absence Start Date;N;N;$
+ATTR Address;N;N;$
+ATTR Cell Phone Number;N;N;$
+ATTR City;N;N;$
+ATTR Country;N;Y;Unassigned
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Afghanistan
+//VALUE Azerbaijan
+//VALUE Bahamas
+//VALUE Bahrain
+//VALUE Bangladesh
+//VALUE Barbados
+//VALUE Belarus
+//VALUE Belgium
+//VALUE Belize
+//VALUE Benin
+//VALUE Bermuda
+//VALUE Bhutan
+//VALUE Bolivia
+//VALUE Bosnia And Herzegovina
+//VALUE Botswana
+//VALUE Bouvet Island
+//VALUE Brazil
+//VALUE Aland Islands
+//VALUE British Indian Ocean Territory
+//VALUE Brunei Darussalam
+//VALUE Bulgaria
+//VALUE Burkina Faso
+//VALUE Burundi
+//VALUE Cambodia
+//VALUE Cameroon
+//VALUE Canada
+//VALUE Cape Verde
+//VALUE Cayman Islands
+//VALUE Central African Republic
+//VALUE Chad
+//VALUE Chile
+//VALUE China
+//VALUE Christmas Island
+//VALUE Cocos Islands
+//VALUE Albania
+//VALUE Colombia
+//VALUE Comoros
+//VALUE Congo
+//VALUE Cook Islands
+//VALUE Costa Rica
+//VALUE Cote D'Ivoire
+//VALUE Croatia
+//VALUE Cuba
+//VALUE Cyprus
+//VALUE Czech Republic
+//VALUE Denmark
+//VALUE Djibouti
+//VALUE Dominica
+//VALUE Dominican Republic
+//VALUE Ecuador
+//VALUE Egypt
+//VALUE Algeria
+//VALUE El Salvador
+//VALUE Equatorial Guinea
+//VALUE Eritrea
+//VALUE Estonia
+//VALUE Ethiopia
+//VALUE Falkland Islands
+//VALUE Faroe Islands
+//VALUE Fiji
+//VALUE Finland
+//VALUE France
+//VALUE French Guiana
+//VALUE French Polynesia
+//VALUE French Southern Territories
+//VALUE Gabon
+//VALUE Gambia
+//VALUE Georgia
+//VALUE American Samoa
+//VALUE Germany
+//VALUE Ghana
+//VALUE Gibraltar
+//VALUE Greece
+//VALUE Greenland
+//VALUE Grenada
+//VALUE Guadeloupe
+//VALUE Guam
+//VALUE Guatemala
+//VALUE Guernsey
+//VALUE Guinea
+//VALUE Guinea-Bissau
+//VALUE Guyana
+//VALUE Haiti
+//VALUE Heard Island And McDonald Islands
+//VALUE Honduras
+//VALUE Andorra
+//VALUE Hong Kong
+//VALUE Hungary
+//VALUE Iceland
+//VALUE India
+//VALUE Indonesia
+//VALUE Iran
+//VALUE Iraq
+//VALUE Ireland
+//VALUE Isle Of Man
+//VALUE Israel
+//VALUE Italy
+//VALUE Jamaica
+//VALUE Japan
+//VALUE Jersey
+//VALUE Jordan
+//VALUE Kazakhstan
+//VALUE Angola
+//VALUE Kenya
+//VALUE Kiribati
+//VALUE Kuwait
+//VALUE Kyrgyzstan
+//VALUE Laos
+//VALUE Latvia
+//VALUE Lebanon
+//VALUE Lesotho
+//VALUE Liberia
+//VALUE Libya
+//VALUE Liechtenstein
+//VALUE Lithuania
+//VALUE Luxembourg
+//VALUE Macao
+//VALUE Macedonia
+//VALUE Madagascar
+//VALUE Anguilla
+//VALUE Malawi
+//VALUE Malaysia
+//VALUE Maldives
+//VALUE Mali
+//VALUE Malta
+//VALUE Marshall Islands
+//VALUE Martinique
+//VALUE Mauritania
+//VALUE Mauritius
+//VALUE Mayotte
+//VALUE Mexico
+//VALUE Micronesia
+//VALUE Moldova
+//VALUE Monaco
+//VALUE Mongolia
+//VALUE Montenegro
+//VALUE Antarctica
+//VALUE Montserrat
+//VALUE Morocco
+//VALUE Mozambique
+//VALUE Myanmar
+//VALUE Namibia
+//VALUE Nauru
+//VALUE Nepal
+//VALUE Netherlands
+//VALUE New Caledonia
+//VALUE New Zealand
+//VALUE Nicaragua
+//VALUE Niger
+//VALUE Nigeria
+//VALUE Niue
+//VALUE Norfolk Island
+//VALUE North Korea
+//VALUE Antigua And Barbuda
+//VALUE Northern Mariana Islands
+//VALUE Norway
+//VALUE Oman
+//VALUE Pakistan
+//VALUE Palau
+//VALUE Palestine
+//VALUE Panama
+//VALUE Papua New Guinea
+//VALUE Paraguay
+//VALUE Peru
+//VALUE Philippines
+//VALUE Pitcairn
+//VALUE Poland
+//VALUE Portugal
+//VALUE Puerto Rico
+//VALUE Qatar
+//VALUE Argentina
+//VALUE Romania
+//VALUE Rwanda
+//VALUE Saint Barthelemy
+//VALUE Saint Helena
+//VALUE Saint Kitts And Nevis
+//VALUE Saint Lucia
+//VALUE Saint Martin
+//VALUE Saint Pierre And Miquelon
+//VALUE Saint Vincent And The Grenadines
+//VALUE Samoa
+//VALUE San Marino
+//VALUE Sao Tome And Principe
+//VALUE Saudi Arabia
+//VALUE Senegal
+//VALUE Seychelles
+//VALUE Sierra Leone
+//VALUE Armenia
+//VALUE Singapore
+//VALUE Slovakia
+//VALUE Slovenia
+//VALUE Solomon Islands
+//VALUE Somalia
+//VALUE South Africa
+//VALUE South Georgia
+//VALUE South Korea
+//VALUE Spain
+//VALUE Sri Lanka
+//VALUE Sudan
+//VALUE Suriname
+//VALUE Svalbard And Jan Mayen
+//VALUE Swaziland
+//VALUE Sweden
+//VALUE Switzerland
+//VALUE Aruba
+//VALUE Syria
+//VALUE Serbia
+//VALUE Taiwan
+//VALUE Tajikistan
+//VALUE Zimbabwe
+//VALUE Zambia
+//VALUE Yemen
+//VALUE Western Sahara
+//VALUE Wallis And Futuna
+//VALUE Virgin Islands, US
+//VALUE Virgin Islands, British
+//VALUE Vietnam
+//VALUE Venezuela
+//VALUE Vatican City State
+//VALUE Vanuatu
+//VALUE Uzbekistan
+//VALUE Australia
+//VALUE Uruguay
+//VALUE United States Minor Outlying Islands
+//VALUE United States Of America
+//VALUE United Kingdom
+//VALUE United Arab Emirates
+//VALUE Unassigned
+//VALUE Ukraine
+//VALUE Uganda
+//VALUE Tuvalu
+//VALUE Turks And Caicos Islands
+//VALUE Turkmenistan
+//VALUE Turkey
+//VALUE Tunisia
+//VALUE Trinidad And Tobago
+//VALUE Tonga
+//VALUE Tokelau
+//VALUE Austria
+//VALUE Togo
+//VALUE Timor-Leste
+//VALUE Thailand
+//VALUE Tanzania
+ATTR Distinguished Name;N;N;$
+ATTR Email Address;N;N;$
+ATTR Fax Number;N;N;Unknown
+ATTR File Store Symbolic Name;N;N;$
+ATTR First Name;N;N;$
+ATTR Home Phone Number;N;N;Unknown
+ATTR Host Meetings;N;Y;Yes
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Yes
+//VALUE No
+ATTR IMDS Contact ID;N;N;$
+ATTR Icon Mail;N;N;false
+ATTR JT Viewer Type;N;Y;None
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE eVis
+//VALUE None
+//VALUE VisView
+ATTR Last Login Date;N;N;$
+ATTR Last Name;N;N;$
+ATTR Login Type;N;Y;Standard
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Standard
+//VALUE Secure ID
+ATTR Mail Code;N;N;$
+ATTR Meeting Key;N;N;$
+ATTR Meeting Password;N;N;$
+ATTR Meeting Username;N;N;$
+ATTR Middle Name;N;N;Unknown
+ATTR Originator;N;N;$
+ATTR Pager Number;N;N;Unknown
+ATTR Postal Code;N;N;$
+ATTR Preferences;N;N;$
+ATTR State/Region;N;N;$
+ATTR Subscription Level;N;N;$
+ATTR Title;N;N;$
+ATTR Web Site;N;N;$
+ATTR Work Phone Number;N;N;$
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR isbestsofar;N;N;false
+ATTR ispublished;N;N;false
+ATTR locked;N;N;false
+ATTR locker;N;N;$
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revindex;N;N;0
+ATTR revision;N;N;$
+FUNC Create
+FATTR name;Y
+FUNC EZQuery
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR First Name;Y
+FATTR Middle Name;Y
+FATTR Last Name;Y
+FATTR Work Phone Number;Y
+FATTR Cell Phone Number;Y
+FATTR Home Phone Number;Y
+FATTR Pager Number;Y
+FATTR Fax Number;Y
+FATTR Email Address;Y
+FATTR Web Site;Y
+FATTR Login Type;Y
+FATTR Last Login Date;Y
+FATTR Host Meetings;Y
+FATTR Address;Y
+FATTR City;Y
+FATTR Postal Code;Y
+FATTR Country;Y
+FATTR Absence Start Date;Y
+FATTR Absence End Date;Y
+FATTR Absence Delegate;Y
+FATTR JT Viewer Type;Y
+FATTR Mail Code;Y
+FATTR Title;Y
+FATTR IMDS Contact ID;Y
+FUNC Query
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR First Name;Y
+FATTR Middle Name;Y
+FATTR Last Name;Y
+FATTR Work Phone Number;Y
+FATTR Cell Phone Number;Y
+FATTR Home Phone Number;Y
+FATTR Pager Number;Y
+FATTR Fax Number;Y
+FATTR Email Address;Y
+FATTR Web Site;Y
+FATTR Login Type;Y
+FATTR Last Login Date;Y
+FATTR Host Meetings;Y
+FATTR Address;Y
+FATTR City;Y
+FATTR Postal Code;Y
+FATTR Country;Y
+FATTR Absence Start Date;Y
+FATTR Absence End Date;Y
+FATTR Absence Delegate;Y
+FATTR JT Viewer Type;Y
+FATTR Mail Code;Y
+FATTR Title;Y
+FATTR IMDS Contact ID;Y
+FUNC Read
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR First Name;N
+FATTR Middle Name;N
+FATTR Last Name;N
+FATTR Work Phone Number;N
+FATTR Cell Phone Number;N
+FATTR Home Phone Number;N
+FATTR Pager Number;N
+FATTR Fax Number;N
+FATTR Email Address;N
+FATTR Web Site;N
+FATTR Login Type;N
+FATTR Last Login Date;N
+FATTR Host Meetings;N
+FATTR Address;N
+FATTR City;N
+FATTR Postal Code;N
+FATTR Country;N
+FATTR Absence Start Date;N
+FATTR Absence End Date;N
+FATTR Absence Delegate;N
+FATTR JT Viewer Type;N
+FATTR Mail Code;N
+FATTR Title;N
+FATTR IMDS Contact ID;N
+FATTR V_member_lists;N
+FATTR V_contexts;N
+FATTR V_company;N
+FUNC Tree
+FUNC Write
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR First Name;N
+FATTR Middle Name;N
+FATTR Last Name;N
+FATTR Work Phone Number;N
+FATTR Cell Phone Number;N
+FATTR Home Phone Number;N
+FATTR Pager Number;N
+FATTR Fax Number;N
+FATTR Email Address;N
+FATTR Web Site;N
+FATTR Login Type;N
+FATTR Last Login Date;N
+FATTR Host Meetings;N
+FATTR Address;N
+FATTR City;N
+FATTR Postal Code;N
+FATTR Country;N
+FATTR Absence Start Date;N
+FATTR Absence End Date;N
+FATTR Absence Delegate;N
+FATTR JT Viewer Type;N
+FATTR Mail Code;N
+FATTR Title;N
+FATTR IMDS Contact ID;N
+// --------------------------------------------------
+ENTITY PnOProject
+// --------------------------------------------------
+ATTR V_children;N;N;$
+ATTR V_parent;N;N;$
+ATTR Originator;N;N;$
+ATTR PnO Family;N;N;$
+ATTR PnO Solution;N;N;$
+ATTR PnO Visibility;N;Y;$
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Private
+//VALUE Protected
+//VALUE Public
+ATTR Security Level;N;N;$
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR isbestsofar;N;N;false
+ATTR ispublished;N;N;false
+ATTR locked;N;N;false
+ATTR locker;N;N;$
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revindex;N;N;0
+ATTR revision;N;N;$
+FUNC Create
+FATTR name;Y
+FATTR description;Y
+FATTR PnO Solution;Y
+FATTR PnO Family;Y
+FATTR PnO Visibility;Y
+FATTR Security Level;Y
+FUNC EZQuery
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR policy;Y
+FATTR PnO Solution;Y
+FATTR PnO Family;Y
+FATTR PnO Visibility;Y
+FATTR Originator;Y
+FATTR Security Level;Y
+FUNC Query
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR policy;Y
+FATTR PnO Solution;Y
+FATTR PnO Family;Y
+FATTR PnO Visibility;Y
+FATTR Originator;Y
+FATTR Security Level;Y
+FUNC Read
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR policy;N
+FATTR PnO Solution;N
+FATTR PnO Family;N
+FATTR PnO Visibility;N
+FATTR Originator;N
+FATTR Security Level;N
+FATTR V_children;N
+FATTR V_parent;N
+FUNC Tree
+FUNC Write
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR majorrevision;N
+FATTR owner;N
+FATTR policy;N
+FATTR PnO Solution;N
+FATTR PnO Family;N
+FATTR PnO Visibility;N
+FATTR Originator;N
+FATTR Security Level;N
+// --------------------------------------------------
+ENTITY Sub Project
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write
+// --------------------------------------------------
+ENTITY Business Role
+// --------------------------------------------------
+ATTR V_children;N;N;$
+ATTR V_parent;N;N;$
+ATTR Originator;N;N;$
+ATTR PnO Family;N;N;$
+ATTR PnO Solution;N;N;$
+ATTR Security Level;N;N;$
+ATTR current;N;N;$
+ATTR description;N;N;$
+ATTR isbestsofar;N;N;false
+ATTR ispublished;N;N;false
+ATTR locked;N;N;false
+ATTR locker;N;N;$
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR policy;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revindex;N;N;0
+ATTR revision;N;N;$
+FUNC Create
+FATTR name;Y
+FATTR description;Y
+FATTR PnO Solution;Y
+FATTR PnO Family;Y
+FATTR Security Level;Y
+FUNC EZQuery
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR policy;Y
+FATTR PnO Solution;Y
+FATTR PnO Family;Y
+FATTR Originator;Y
+FATTR Security Level;Y
+FUNC Query
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR policy;Y
+FATTR PnO Solution;Y
+FATTR PnO Family;Y
+FATTR Originator;Y
+FATTR Security Level;Y
+FUNC Read
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR policy;N
+FATTR PnO Solution;N
+FATTR PnO Family;N
+FATTR Originator;N
+FATTR Security Level;N
+FATTR V_children;N
+FATTR V_parent;N
+FUNC Tree
+FUNC Write
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR majorrevision;N
+FATTR owner;N
+FATTR policy;N
+FATTR PnO Solution;N
+FATTR PnO Family;N
+FATTR Originator;N
+FATTR Security Level;N
+// --------------------------------------------------
+ENTITY Sub Role
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC Query
+FUNC Read
+FUNC Tree
+FUNC Write

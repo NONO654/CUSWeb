@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+      <Template syp:name="LifecycleHeaders" Target="CATCmdHeadersList">
+            <CATCmdHeadersList>
+                  <!-- Fixed area -->
+                  <CATCommandHeader Behavior="CATAfrHeaderCheck" ID="ActionBar_ActiveBookmarkCmd" ClassName="DS/FolderActive/commands/ActionBar_ActiveBookmarkCmd" ResourceFile="FolderEditor/ENOFolder" Available="1"/>
+                  <!-- EDIT SECTION -->
+                  <CATCommandHeader ID="MaturityHdr" ClassName="DS/LifecycleWidget/LifecycleCmd" ResourceFile="LifecycleWidget/LifecycleCmd" Available="1" />
+                  <CATCommandHeader ID="RevisionHdr" ClassName="DS/LifecycleWidget/LifecycleCmd" ResourceFile="LifecycleWidget/LifecycleCmd" Available="1" />
+                  <CATCommandHeader ID="NewBranchHdr" ClassName="DS/LifecycleWidget/LifecycleCmd" ResourceFile="LifecycleWidget/LifecycleCmd" Available="1" />
+                  <CATCommandHeader ID="ReviseFromHdr" ClassName="DS/LifecycleWidget/LifecycleCmd" ResourceFile="LifecycleWidget/LifecycleCmd" Available="1" />
+                  <CATCommandHeader ID="DeleteHdr" ClassName="DS/LifecycleWidget/LifecycleCmd" ResourceFile="LifecycleWidget/LifecycleCmd" Available="1" />
+                  <CATCommandHeader ID="DuplicateHdr" ClassName="DS/LifecycleWidget/LifecycleCmd" ResourceFile="LifecycleWidget/LifecycleCmd" Available="1" />
+                  <CATCommandHeader ID="CompareHdr" ClassName="DS/CompareCmd/CompareCmd" ResourceFile="CompareCmd/CompareCmd" Available="1" />
+                  <CATCommandHeader ID="IterationsHdr" ClassName="DS/LifecycleWidget/LifecycleCmd" ResourceFile="LifecycleWidget/LifecycleCmd" Available="1" />
+                  <CATCommandHeader ID="HistoryHdr" ClassName="DS/LifecycleWidget/LifecycleCmd" ResourceFile="LifecycleWidget/LifecycleCmd" Available="1" />              
+            </CATCmdHeadersList>
+      </Template>
+
+      <Template syp:name="LifecycleWkbAccess" Target="CATCmdWorkbench">
+            <CATCmdWorkbench Name="LifecycleWkb">
+                  <!-- Fixed area -->
+                  <CATCmdContainer Name="LifecycleFixedArea" RepresentationType="AfrActionBarFixedSection">
+                        <CATCmdStarter Name="Active Bookmark" Command="ActionBar_ActiveBookmarkCmd"/>
+                  </CATCmdContainer>
+                  <CATCmdContainer Name="Lifecycle" RepresentationType="AfrActionBarSection">
+                        <CATCmdStarter Name="Maturity" Command="MaturityHdr" />
+                        <CATCmdStarter Name="Revision" Command="RevisionHdr" />
+                        <CATCmdStarter Name="NewBranch" Command="NewBranchHdr" />
+                        <CATCmdStarter Name="ReviseFrom" Command="ReviseFromHdr" />
+                        <CATCmdStarter Name="Delete" Command="DeleteHdr" />
+                        <CATCmdStarter Name="Duplicate" Command="DuplicateHdr" />
+                        <CATCmdStarter Name="Compare" Command="CompareHdr" />
+                        <CATCmdStarter Name="Iterations" Command="IterationsHdr" />
+                        <CATCmdStarter Name="History" Command="HistoryHdr" />
+                  </CATCmdContainer>
+            </CATCmdWorkbench>
+      </Template>
+</Styles>

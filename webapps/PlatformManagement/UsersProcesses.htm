@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<title>Apps</title>
+<meta name="author" content=""/>
+<meta name="description" content=""/>
+
+<script type="text/javascript">
+    //<![CDATA[
+    /*global widget, require */
+
+
+
+    var CONTEXT_ID = null;
+    widget.addEvent('onContextChange', function(context){
+        'use strict';
+
+        CONTEXT_ID = context;
+        //removeit when received
+    });
+
+    require(
+            [
+                'DS/PlatformManagement/Widgets/UsersProcesses',
+                'css!DS/PlatformManagement/PlatformManagement'
+            ],
+            function (UsersProcesses) {
+
+                'use strict';
+
+                var self = new UsersProcesses({
+                    context: CONTEXT_ID || widget.contextId,
+                    widget: widget
+                });
+                widget.addEvents({
+                    onLoad: self.onBeforeLoad.bind(self),
+                    onRefresh: self.onRefresh.bind(self),
+                    onResize: self.onResize.bind(self),
+                    onSearch: self.onSearch.bind(self),
+                    onViewChange: self.onViewChange.bind(self)
+                });
+            }
+    );
+    //]]>
+</script>
+
+</head>
+<body>
+<div style="height: 300px"></div>
+</body>
+</html>

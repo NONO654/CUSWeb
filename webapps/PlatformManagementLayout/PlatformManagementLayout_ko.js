@@ -1,0 +1,1 @@
+define("DS/PlatformManagementLayout/PlatformManagementLayout_ko",{});define("DS/PlatformManagementLayout/assets/nls/PlatformManagementLayout",{welcome:"시작하기 ",platformManagement:"플랫폼 관리",more:"자세히",less:"간단히"});

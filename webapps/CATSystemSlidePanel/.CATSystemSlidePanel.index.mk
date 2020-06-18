@@ -1,0 +1,10 @@
+m|CATSystemWidgetsUtils\CATSystemSlidePanel.mweb
+b|j|c,m
+b|c|n,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\CATSystemSlidePanel\CATSystemSlidePanel.js|1531943784|8420
+s|CATSystemWidgetsUtils\CATSystemSlidePanel.mweb\src\CATSystemSlidePanel.js|1464196719|1
+s|CATSystemWidgetsUtils\CATSystemSlidePanel.mweb\src\SlidePanel.js|1531386903|39848
+t|win_b64\webapps\CATSystemSlidePanel\SlidePanel.css|1568749488|6837
+s|CATSystemWidgetsUtils\CATSystemSlidePanel.mweb\src\SlidePanel.css|1475157036|8609

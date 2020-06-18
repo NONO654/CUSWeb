@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>3DEXPERIENCE platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <script type="text/javascript" src="<%= webappsPath %>/AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="<%= webappsPath %>/c/UWA/js/UWA_W3C_Alone.js"></script>
+    <script type="text/javascript" src="<%= webappsPath %>/UIKIT/UIKIT.js"></script>
+
+    <link rel="stylesheet" href="<%= webappsPath %>/UIKIT/UIKIT.css">
+	<link rel="stylesheet" href="<%= webappsPath %>/i3DXCompassSynchro/i3DXCompassSynchro.css">
+<style>
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        } to {
+            transform: rotate(360deg);
+        }
+    }
+
+	.spin {
+        animation-name: spin;
+        animation-duration: 4000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+	}
+    .loading {
+        height: 45px
+    }
+	</style>
+	<script type="text/javascript">
+		var ds = {
+			require: {
+            	baseUrl: '<%= webappsPath %>',
+				paths: {
+					'DS': '<%= webappsPath %>'
+				},
+				config: {
+					i18n: {
+						locale: 'en'
+					},
+					'DS/Logger/Logger': {
+						disableLog: !false
+					}
+				},
+            	skipDataMain: true
+        	}
+		},
+
+		//referer = "<%= referer %>",
+
+		//platform = "<%= platform %>",
+
+		user = "<%= user %>",
+
+		isPublic = "<%= isPublic %>",
+
+        logoutUrl = "<%= logoutUrl %>";
+
+            require([
+				'DS/WAFData/WAFData',
+				'DS/UIKIT/Mask',
+				'DS/i3DXCompassSynchro/ErrorSynchroView',
+                'i18n!DS/i3DXCompassSynchro/assets/nls/i3DXCompassSynchro'
+            ],
+            function (WAFData, Mask, ErrorSynchroView, i18n) {
+                'use strict';
+				//var spinner = new Spinner().inject(document.body).show();
+
+				var body = UWA.extendElement(document.body);
+
+				var base64EncodeUrlSafe = function (string) {
+					return UWA.Utils.base64Encode(string)
+						.replace(/\+/g, '-') // Convert '+' to '-'
+						.replace(/\//g, '_') // Convert '/' to '_'
+						.replace(/=+$/, ''); // Remove ending '='
+				};
+
+				var base64DecodeUrlSafe = function (string) {
+					return UWA.Utils.base64Decode((string
+						+ '==='.slice((string.length + 3) % 4)) // restore =
+						.replace(/\-/g, '+')	// Convert '-' to '+'
+						.replace(/\_/g, '/'));	// Convert '_' to '/'
+				};
+
+				var getToken = function () {
+				    return UWA.Utils.getQueryString(window.location, 'token');
+                }, platform = UWA.Utils.getQueryString(window.location, 'platform'),
+                    referer = UWA.Utils.getQueryString(window.location, 'url'),
+                    roles = "<%= roles %>" === "false" ? UWA.Utils.getQueryString(window.location, 'roles') : "<%= roles %>";
+
+				Mask.mask(body, i18n.waiting);
+				document.body.removeClassName('masked');
+
+				var urlWithParams,
+					redirect = function () {
+						if (referer !== '') {
+							window.location = base64DecodeUrlSafe(referer);
+						}
+					},
+					onFailure = function (error, resp) {
+				        var errorMessage = '';
+
+				        if (error && error.code && error.code > 0) {
+                            errorMessage = error.message;
+                        } else if (resp && resp.code && resp.code > 0) {
+                            errorMessage = resp.message;
+                        }
+
+				        Mask.unmask(body);
+						document.body.setContent(new ErrorSynchroView().render(errorMessage, logoutUrl + referer));
+					},
+					onComplete = function (data) {
+						console.log(data);
+						console.log(arguments);
+
+						if (data.code > 0) {
+							onFailure(data);
+						} else {
+							redirect();
+						}
+					},
+					requestSettings = {
+						timeout: 25000,
+						cache: -1,
+						method: 'POST',
+						type: 'json',
+						data: {
+						    platform: platform,
+                            user: user,
+                            roles: roles
+                        },
+						onComplete: onComplete,
+						onFailure: onFailure
+					};
+
+					// by pass for now
+                    if (getToken()) {
+                        // should be managed better :)
+                        requestSettings.data = {
+                            token: getToken()
+                        };
+
+                        urlWithParams = window.location.origin + '/enovia/resources/AppsMngt/business/service';
+                        WAFData.authenticatedRequest(urlWithParams, requestSettings);
+                    } else if (isPublic === "true") {
+						urlWithParams = window.location.origin + '/enovia/resources/AppsMngt/user/public';
+						WAFData.authenticatedRequest(urlWithParams, requestSettings);
+					} else {
+						urlWithParams = window.location.origin + '/enovia/resources/AppsMngt/user/startup';
+						requestSettings.method = 'GET';
+						// do not use the roles for the startup
+                        requestSettings.data.roles = null;
+                        requestSettings.data.user = null;
+						WAFData.authenticatedRequest(urlWithParams, requestSettings);
+						//redirect();
+					}
+            });
+
+	</script>
+	</head>
+	<body></body>
+</html>

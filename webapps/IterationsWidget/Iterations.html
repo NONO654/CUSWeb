@@ -1,0 +1,571 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<!-- Application Metas -->
+<title>Iterations</title>
+ <meta name="autoRefresh" content="0" />
+ <meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+<!-- AMDLoader -->
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<!-- UWA -->
+<!--link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" /-->
+<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+<!-- Web Fundamentals -->
+<script type="text/javascript"
+	src="../WebVisualization/WebVisualization.js"></script>
+<script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+<!-- fullscreen widget :do not use in production -->
+<link rel="stylesheet" type="text/css" href="../Controls/nv-patch.css" />
+<script type="text/javascript">
+	// Use iframe to avoid cross domain problem when using CGRViewer in an iframe. 
+	// We use CGRViewer in an iframe to avoid some of its limitations caused by storing data in window, e.g. two CGRViewers cannot function properly in the same page.
+	require(
+			{
+				baseUrl : '../'
+			},
+			[ 'UWA/Core', 'DS/IterationsWidget/IterationsPlayer',
+					'DS/IterationsWidget/IterationsGrid',
+					'DS/IterationsWidget/Toolbar',
+					'DS/IterationsWidget/IterationsTable',
+					'DS/Controls/Button' ,
+					'DS/Controls/TooltipModel' ,
+					'DS/Controls/LineEditor',
+					'DS/Controls/Expander' ,
+					'DS/WebInWinHelper/WebInWinHelper',
+					'DS/WebappsUtils/WebappsUtils',
+			],
+
+			function(UWA, IterationsPlayer, IterationsGrid, Toolbar,
+					IterationsTable, Button, WUXTooltipModel, LineEditor, Expander,  webinwinHelper, webAppsUtils) {
+				"use strict";
+
+				function getUrlParamVal(variable) {
+					var query = window.location.search.substring(1);
+					var vars = query.split("&");
+					for (var i = 0; i < vars.length; i++) {
+						var pair = vars[i].split("=");
+						if (pair[0] == variable) {
+							return decodeURIComponent(pair[1]);
+						}
+					}
+					return '';
+				}
+
+				var lang = getUrlParamVal('lang');
+				var nlsJsonPath = 'text!DS/IterationsWidget/assets/nls/IterationsWidget_'
+						+ lang + '.json';
+				var NLS = {};
+				require(
+						[ nlsJsonPath ],
+						function(nlsJson) {
+							"use strict";
+							NLS.json = JSON.parse(nlsJson);
+							NLS.get = function(name) {
+								return NLS.json[name];
+							}
+
+							function onLoad() {
+								widget.body.innerHTML = '';
+								var oid = getUrlParamVal("objectId");
+								if (oid == null || oid == '') {
+									widget.body.innerHTML = '<label style="font-family: arial; font-size: 13px;">'
+											+ NLS.get("NoInput") + '</label>';
+									return;
+								}
+								loadIterations(
+										oid,
+										function onIterationsLoaded(iterations) {
+											if (iterations.length == 0) {
+												widget.body.innerHTML = '<label style="font-family: arial; font-size: 13px;">'
+														+ NLS
+																.get("NoIteration")
+														+ '</label>';
+												return;
+											}
+											iterations.sort(function compare(a,
+													b) {
+												if (a.date_ms < b.date_ms) {
+													return -1;
+												}
+												if (a.date_ms > b.date_ms) {
+													return 1;
+												}
+												return 0;
+											});
+											window.iterations = iterations;
+											window.oid = oid;
+											widget.body.innerHTML = '';
+											buildUI();
+											viewEvenly();
+											widget.body.setAttribute('data-rec-id', 'iterationsBody');
+										});
+							}
+
+							function buildUI() {
+								var container = widget.body;
+
+								
+								// get the socket address
+								// if exsists then it is a web-in-win call
+								var webinwinElement = null;
+								var el = null;
+								try {
+									el = window.frameElement;
+								}
+								catch (ex){
+									// ignore ex here from IE when frameElement is access denied which equals to null from other browsers
+								}
+								
+								if ( typeof el !== undefined && el != null )
+									webinwinElement = el.dataset.socket;
+								if (webinwinElement ) window.webinwinSocket = webinwinElement;
+
+								// Toolbar
+								var headToolbarHeight = 30;
+								//if ( !webinwinElement ) buildToolbar(container, headToolbarHeight);
+								buildToolbar(container, headToolbarHeight);
+								
+								if ( !webinwinElement ){
+									// Player View
+									var bwebinwin = false;
+									var isODT = false;
+									var player = new IterationsPlayer(window.iterations, true, NLS, lang, bwebinwin, isODT);
+									window.iterationsPlayer = player;		
+									player.inject(container);
+									//Grid View
+									var grid = new IterationsGrid(
+											window.iterations,
+											headToolbarHeight, NLS, bwebinwin, isODT);
+									
+									window.iterationsGrid = grid;
+									grid.inject(container);									
+								}
+								else {
+									window.webinwinSocket = window.parent._webinwincom_socket;
+									window.oidAlias = window.parent._oidAlias;
+									window._disableCompareBtn = false;
+									var isODT = false;
+									 ( window.parent._isWebInWinODTMode === true ) ? isODT = true : isODT = false;
+									var bwebinwin = true;
+									var licenseList = [];
+									licenseList = window.parent._licenseList;
+									if ( typeof licenseList !== undefined && licenseList.length > 0){
+										licenseList.forEach( function(object) {
+											if ( object.license === 'MES.prd' && object.authorized === '0' ||
+												 object.license === 'HA1.prd' && object.authorized === '0' ){
+												window._disableCompareBtn =  true;
+												
+											}
+										});
+									}
+									// build player container
+									var playerContainer = new UWA.Element('div', {'id': 'iterationPlayerContainer' });
+									playerContainer.style.position = 'absolute';
+									playerContainer.style.width = '100%';
+									playerContainer.style.height = '50%';
+									var player = new IterationsPlayer(window.iterations, true, NLS, lang, bwebinwin, isODT);
+									window.iterationsPlayer = player;		
+									player.inject(playerContainer);
+									playerContainer.inject(container);
+									
+									// build compare view container
+									var compareViewContainer = new UWA.Element('div', {'id': 'iterationCompareViewContainer'});
+									//var compareViewContainer = new UWA.Element('div');
+									compareViewContainer.style.position = 'absolute';
+									compareViewContainer.style.width = '100%';
+									compareViewContainer.style.height = '50%';
+									//compareViewContainer.id = 'iterationCompareViewContainer';
+									compareViewContainer.style.visibility = 'hidden';
+									
+									// Grid View
+									var grid = new IterationsGrid(
+											window.iterations,
+											headToolbarHeight,
+											bwebinwin,
+											isODT);
+									window.iterationsGrid = grid;
+									grid.inject(compareViewContainer);
+									compareViewContainer.inject(container);
+									
+									// build list view container
+									window.NLSObj = NLS;
+									// list view
+									var listContainer = new UWA.Element('div', {'id' : 'iterationslistcontainer'});
+									//listContainer = new UWA.Element('div', {'id' : 'iterationslistcontainer'});
+									listContainer.style.position = 'absolute';
+									listContainer.style.top = '50%';
+									listContainer.style.width = '100%';
+									listContainer.style.height = '50%';
+									
+									// build restore , compare and open button containers
+									buildIterationsButtonContainer(listContainer, NLS, isODT);
+									//D4N 'MES' licesnse disable compare btn
+									//D4N IR-539779-3DExperienceR2018x
+									if ( window._disableCompareBtn === true ){
+										window.compareBtn.disabled = true;
+									}
+									// build list view
+									var options = {
+										'parentContainer' : listContainer,
+										'oid' : window.oid,
+										'iterations' : window.iterations
+									};
+									var listTable = new IterationsTable(NLS,
+											lang, options, isODT);
+									window.listTable = listTable;
+									listTable.inject(listContainer);
+									
+									// build expander to contain list container
+									listContainer.inject(container);
+									// ODT
+									
+									var nodeList = document.getElementsByClassName("wux-layouts-gridengine-poolcontainer-rel");
+				                	for (var i=0 ; i<nodeList.length ; i++) {
+				                   		var node = nodeList.item(i);
+				                   		node.setAttribute('data-rec-id', 'wux-layouts-gridengine-poolcontainer-rel' + "_" + i);
+				                   	}
+									
+				                	var dataNodeList = window.listTable._treeList.getManager().elements.poolContainerRel.querySelectorAll('wux-datagrid-cell wux-layouts-treeview-cell wux-datagrid-cell-even');
+				                	for (var i=0 ; i<dataNodeList.length ; i++) {
+				                   		var node = dataNodeList.item(i);
+				                   		node.setAttribute('data-rec-id', 'wux-datagrid-cell wux-layouts-treeview-cell wux-datagrid-cell-even-' + i);
+				                   	}
+									
+									 
+				                	/*var elementIFrame = document.getElementById('iterationsWidgetIframe');
+				                	var innerDoc = elementIFrame.contentDocument || elementIFrame.contentWindow.document;
+				                	var treeListViewNode = innerDoc.getElementsByTagName("div");
+				                	var alldescendants = [];*/
+				                	
+				                	var tagList = document.getElementsByTagName('body')
+				                	for ( var i=0; i < tagList.length; i++){
+				                		tagList[i].setAttribute('data-rec-id', 'body+'+i);
+				                	}
+				                	var children = widget.body.children;
+				                	for ( var i=0; i < children.length; i++){
+				                		var child = children[i];
+				                		var className = child.className;
+				                		var dataRecId = child.getAttribute('data-rec-id');
+				                		i
+				                		if ( className != ""  && (dataRecId == null || dataRecId == ""))
+				                			children[i].setAttribute('data-rec-id', className+'-'+i);
+				                		else if ( dataRecId == null || dataRecId == "")
+				                			children[i].setAttribute('data-rec-id', child.nodeName+'-'+i);
+				                		recurseAndAdd(child, /*alldescendants,*/ i);
+					                			
+				                	}
+				                	
+				                					        	        	
+				        	
+			        	        	function recurseAndAdd(el,/* descendants,*/ parentLevel) {
+			        	        	
+			        	        		if ( el === null ) return;
+			        	        		var dataRecId = el.getAttribute('data-rec-id');
+			        	        		if ( el.className == "" && (dataRecId == null || dataRecId == "")) {
+			        	        			dataRecId= el.nodeName ; //+'-'+parentLevel;
+			              	        		el.setAttribute('data-rec-id', dataRecId);
+			        	        		}else if ( dataRecId == null || dataRecId == "" ){
+			        	        			dataRecId = el.className ; //+'-'+parentLevel;
+			              	        		el.setAttribute('data-rec-id', dataRecId);
+			           	        		}
+			        	        		
+			        	        	  //el.setAttribute('data-rec-id', el.className+'-'+currentCount+'-'+parentCount);
+			        	        	  //console.log(el.className+'-'+currentCount+'-'+parentCount);
+			        	        	 // descendants.push(dataRecId);
+			        	        	  var children = el.childNodes;//childNodes;
+			        	        	  for( var i=0; i < children.length; i++) {
+			        	        	     if (children[i].nodeType == 1) {
+			        	        	         recurseAndAdd(children[i],/* descendants,*/ i);
+			        	        	     }
+			        	        	  }
+			        	        	}
+				                	
+
+				                	
+				                	
+									//ODT
+									playerContainer.setAttribute('data-rec-id','iterationPlayerContainer');
+									compareViewContainer.setAttribute('data-rec-id', 'iterationcompareViewContainer');
+								 	listContainer.setAttribute('data-rec-id', 'iterationslistContainer');
+								 	//window.restoreBtn.setAttribute('data-rec-id', 'restoreIterationButton');
+								 	//window.openBtn.setAttribute('data-rec-id','openIterationButton');
+								 	//window.compareBtn.setAttribute('data-rec-id','compareIterationButton');
+								}
+				
+							}
+
+							function viewEvenly() {
+								window.evenViewButton.check();
+								window.propotionViewButton.uncheck();
+								window.gridViewButton.uncheck();
+								window.iterationsGrid.hide();
+								window.iterationsPlayer.showEvenly();
+							}
+
+							function viewPropotionally() {
+								window.evenViewButton.uncheck();
+								window.gridViewButton.uncheck();
+								window.propotionViewButton.check();
+								window.iterationsGrid.hide();
+								window.iterationsPlayer.showPropotionally();
+							}
+
+							function viewGrid() {
+								window.gridViewButton.check();
+								window.evenViewButton.uncheck();
+								window.propotionViewButton.uncheck();
+								window.iterationsPlayer.hide();
+								window.iterationsGrid.show();
+							}
+
+							function buildToolbar(container, toolbarHeight) {
+								var headToolbar = new Toolbar(40,
+										toolbarHeight, 'top');
+								headToolbar.inject(container);
+									
+								window.evenViewButton = headToolbar.addButton(
+										'assets/images/seq_view.png', NLS
+												.get("SequentialView"),
+										'assets/images/seq_view_active.png');
+								
+								window.evenViewButton.onclick = viewEvenly;
+								window.propotionViewButton = headToolbar
+										.addButton(
+												'assets/images/timeline_view.png',
+												NLS.get("TimelineView"),
+												'assets/images/timeline_view_active.png');
+								
+								window.propotionViewButton.onclick = viewPropotionally;
+								window.gridViewButton = headToolbar.addButton(
+										'assets/images/grid_view.png', NLS
+												.get("GridView"),
+										'assets/images/grid_view_active.png');
+								
+								window.gridViewButton.hide(); // disable grid view before the webgl context lost problem can be solved
+								window.gridViewButton.onclick = viewGrid;
+								
+								return headToolbar;
+							}
+
+							function loadIterations(oid, onloaded) {
+								var href = window.location.href; // https://vdevpril258am.ux.dsone.3ds.com/3DSpace/webapps/IterationsWidget/Iterations.html?objectId=D72B9B561F5B00006DA579552D570E00
+								var i = href.indexOf('webapps');
+								var root = href.substring(0, i); // https://vdevpril258am.ux.dsone.3ds.com/3DSpace/
+								var webServiceUrl = root
+										+ 'resources/iteration/list/iterationlist?objectId=';
+								var url = webServiceUrl + oid;
+								var headers = {
+									Accept : 'application/ds-json'
+								};
+								headers['Content-Type'] = 'application/ds-json';
+								if ( _isWebInWinODTMode == '' ) headers['SecurityContext'] = getUrlParamVal('SecurityContext');
+								
+								var _isWebInWinODTMode = getUrlParamVal('_isWebInWinODTMode');
+								if ( _isWebInWinODTMode == '' ) // not ODT mode
+									
+								UWA.Data
+										.request(
+												url,
+												{
+													type : 'json',
+													method : 'GET',
+													// proxy: 'passport',
+													headers : headers,
+													/*
+													   [{
+													   cgr: "https://vdevpril258am.ux.dsone.3ds.com:453/fcs/servlet/fcs/media?arg=0sO36...3D%3D"
+													   date: "4/24/2015 3:54:36 PM"
+													   date_ms: "1429905276000"
+													   id: "8000.1359.16384.21844"
+													},{...}]
+													 */
+													onComplete : function(obj) {
+														onloaded(obj.results);
+													},
+													onFailure : function(e) {
+														widget.body.innerHTML = '<label style="font-family: arial; font-size: 13px;">'
+																+ NLS
+																		.get("LoadFail")
+																+ '</label>';
+														console
+																.log('loadIterations failed: '
+																		+ e);
+													},
+													onTimeout : function() {
+														widget.body.innerHTML = '<label style="font-family: arial; font-size: 13px;">'
+																+ NLS
+																		.get("Timeout")
+																+ '</label>';
+														console
+																.log('loadIterations failed: A connection timeout occured.');
+													}
+												});
+								else {
+									// ODT
+									var obj = window.parent.IterationsWebInWinPayload;
+									if ( undefined !== typeof(obj ) && null != obj ){
+										var objectsArray = JSON.parse(obj);
+										
+										if( objectsArray.hasOwnProperty("results") ){
+											var iterations = objectsArray.results;
+											onloaded(iterations);
+										}
+									}
+								}
+								
+							}
+							
+							// build webinwin iteration buttons bar
+							function buildIterationsButtonContainer(parentContainer, NLS, isODT){
+
+								var label = window.oidAlias;
+								var buttonContainer = new UWA.Element('div',{
+									'id': 'iterationsbuttoncontainer',
+									'class': 'iterationsbuttoncontainer',
+									'html': label,
+									styles : 
+											{'top' : '10%',
+											 'width' : '100%'
+											 }
+								}).inject(parentContainer);
+								
+								//ODT
+								buttonContainer.setAttribute('data-rec-id', 'iterationsButtonContainer');
+								
+								// create the lineEditor, and initialize properties
+								// set current object name and rev in button container
+								//setObjNameRev(buttonContainer);
+								
+								
+								// Get the module path
+								 var path = webAppsUtils.getWebappsBaseUrl();
+								// build restore btn
+								 var restoreBtn = new Button({ label: '', icon: path + 'IterationsWidget/assets/images/I_ManageAccess_NothingToCommit.png', displayStyle: 'lite', type: 'standard',  disabled: true,attributes: {'data-rec-id': 'restoreButton'} }).inject(buttonContainer);
+								 restoreBtn.addEventListener('buttonclick', function (event){
+									  // recover the Button object.
+									  restoreIterations();
+									  
+									});
+								// This requires the following module: DS/Controls/TooltipModel (here mapped to the variable WUXTooltipModel)
+								var restoreLabel = window.NLSObj.get("RestoreIteration");
+								 restoreBtn.tooltipInfos = new WUXTooltipModel({ shortHelp: restoreLabel });
+								 restoreBtn.className = 'lite';
+								 window.restoreBtn = restoreBtn;
+							
+								// open button
+								var openBtn = new Button({ label: '', icon: path + 'IterationsWidget/assets/images/I_OpenIteration.png', displayStyle: 'lite', type: 'standard', disabled : true, attributes: {'data-rec-id': 'openButton'} }).inject(buttonContainer);
+								openBtn.addEventListener('buttonclick', function (event){
+									  // recover the Button object.
+									  openIterations();
+									  
+									});
+								var openLabel = window.NLSObj.get("OpenIteration");
+								openBtn.tooltipInfos = new WUXTooltipModel({ shortHelp: openLabel });
+								openBtn.className = 'lite';
+								window.openBtn = openBtn;
+
+								// compare button
+								
+								 var compareBtn = new Button({ label: '', icon: path + 'IterationsWidget/assets/images/I_PartComparison.png',  displayStyle: 'lite', type: 'standard', disabled: true, attributes: {'data-rec-id': 'compareButton'} }).inject(buttonContainer);
+								 compareBtn.addEventListener('buttonclick', function (event){
+									  // recover the Button object.
+									  compareIterations();
+									  
+									});
+								 var compareLabel = window.NLSObj.get("CompareIteration");
+								 compareBtn.tooltipInfos = new WUXTooltipModel({ shortHelp: compareLabel });
+								 compareBtn.className = 'lite';
+								window.compareBtn = compareBtn;
+								
+							}
+							
+							function setObjNameRev(parentContainer){
+								
+								if ( typeof window.oidAlias !== undefined && window.oidAlias != null ){
+									
+									var  label = new UWA.Element('div', { 'class': 'DMU3DCompareText DMU3DCompareRightLabel', html: window.oidAlias }); 
+									label.inject(parentContainer);
+									
+								}
+								
+							}
+							
+							// restore iterations 
+							function restoreIterations(){
+									var table = window.listTable;
+									var sel = [];
+									sel = window.listTable.selectedObjects;
+									if (sel.length != 1) return;
+									var iteration = null;
+									iteration = window.listTable.list[sel[0]];
+									//WebInWinHelper
+									var currentObj = { 'physicalid': window.oid}; 
+									var socket = window.webinwinSocket;
+									webinwinHelper.launchWinRestoreIterations(socket, currentObj, iteration);
+							}
+							
+							// open iterations
+							function openIterations(){
+									var table = window.listTable;
+									var sel = [];
+									sel = window.listTable.selectedObjects;
+									var currString = window.NLSObj.get("LastSavedModelString");
+									var iterations = [];
+									if (sel.length == 0) return;
+									
+									for ( var j=0; j < sel.length; j++){
+											var name = window.listTable.list[sel[j]].name;
+											if ( name.indexOf(currString) === -1 ) 
+											iterations.push(window.listTable.list[sel[j]]);
+									}
+								
+									//WebInWinHelper
+									var socket = window.webinwinSocket;
+									webinwinHelper.launchWinOpenIterations(socket, iterations);
+							}
+							
+							
+							// compare iterations
+							function compareIterations(){
+									var table = window.listTable;
+									var sel = [];
+									sel = window.listTable.selectedObjects;
+									if (sel.length != 2) return;
+									var iterations = [];
+									for (var i=0; i<sel.length; i++){
+											iterations.push(window.listTable.list[sel[i]]);
+									}
+									
+									//WebInWinHelper
+									var socket = window.webinwinSocket;
+									webinwinHelper.launchWinCompareIterations(socket, iterations[0], iterations[1]);
+							}
+							
+							// set ODT variables
+							function setODTVariables(){
+								
+							}
+
+							if (widget.launched) {
+								onLoad();
+							} else {
+								widget.onLoad = onLoad;
+							}
+						});
+			});
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,1 @@
+define("DS/SMAProcWebAuthoringUI/SMAProcWebAuthoringUI_ja",{});define("DS/SMAProcWebAuthoringUI/assets/nls/AdapterEditor",{Loading:"読み込み中..."});define("DS/SMAProcWebAuthoringUI/assets/nls/CustomAdapterList",{NoAdaptersAvailable:"使用可能なアダプタがありません。",ErrorFetchingAdapter:"1 つまたは複数のアダプタ記述子を取得する際にエラーが発生しました。"});

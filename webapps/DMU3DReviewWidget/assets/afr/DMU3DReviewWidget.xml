@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+  
+  <Template syp:name="DMU3DReviewWidgetHdr" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID="CATWebUXSlideShowHdr" ClassName="DS/CATWebUXSlideShow/CATWebUXSlideShowCmd" ResourceFile="CATWebUXSlideShow/CATWebUXSlideShow" HelpResourceFile="CATWebUXSlideShow/CATWebUXSlideShow" Behavior="CATAfrHeaderCheck">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="ControllerID" Value="DMU3DMarkupSlideShow" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID="markerTextCmdHdr"               ClassName="DS/DMUMarker/DMUMarkerTextCreateCmd"       ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUMarker/DMUMarker"  />
+      <CATCommandHeader ID="markerCircleCmdHdr"             ClassName="DS/DMUMarker/DMUMarkerCircleCreateCmd"     ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUMarker/DMUMarker"  />
+      <CATCommandHeader ID="markerArrowCmdHdr"              ClassName="DS/DMUMarker/DMUMarkerArrowCreateCmd"      ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUMarker/DMUMarker"  />
+      <CATCommandHeader ID="markerPictureCmdHdr"            ClassName="DS/DMUMarker/DMUMarkerPictureCreateCmd"    ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUMarker/DMUMarker"  />
+      <CATCommandHeader ID="marker2DTextCmdHdr"             ClassName="DS/DMUMarker/DMUMarkerTextCreateCmd"       ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUMarker/DMUMarker"  />
+      <CATCommandHeader ID="marker2DPictureCmdHdr"          ClassName="DS/DMUMarker/DMUMarkerPictureCreateCmd"    ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUMarker/DMUMarker"  />
+      <CATCommandHeader ID="normalViewCmdHdr"               ClassName="DS/DMUCommands/DMUNormalViewCmd"           ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUCommands/DMUCommands" />
+      <CATCommandHeader ID="3DcompareCmdHdr"                ClassName="DS/DMUCommands/DMU3DCompareCmd"            ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUCommands/DMUCommands" />
+      <CATCommandHeader ID="slideCmdHdr"                    ClassName="DS/DMUSlideEdition/DMUCreateSlideCmd"      ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUSlideEdition/DMUSlideEdition" />
+      <CATCommandHeader ID="LockUnlockSectionHdr"           ClassName="DS/DMUSection/DMULockUnlockSection"        ResourceFile="DMUBaseCommands/3DPlayPro" Behavior="CATAfrHeaderCheck" HelpResourceFile = "DMUSection/DMUSection" />
+      <CATCommandHeader ID="slidePlayCmdHdr"                ClassName="DS/DMUPlaySlide/commands/DMUPlaySlideCmd"  ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUPlaySlide/DMUPlaySlide" Behavior="CATAfrHeaderCheck"/>
+      <CATCommandHeader ID="saveCmdHdr"                     ClassName="DS/DMUPersistence/DMUSaveCmd"              ResourceFile="DMUPersistence/DMUPersistence" HelpResourceFile = "DMUPersistence/DMUPersistence" />
+      <CATCommandHeader ID="measureCmdHdr"                  ClassName="DS/DMUMeasure/DMUCreateMeasureCmd"         ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUMeasure/DMUMeasure" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="3dPlayPro" Value="3dPlayPro" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="thicknessCmdHdr"                ClassName="DS/DMUMeasure/DMUCreateMeasureCmd"         ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile ="DMUMeasure/DMUMeasure" >
+      <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="Thickness" Value="Thickness" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="sectionCmdHdr"                  ClassName="DS/DMUSection/DMUCreateSectionCmd"         ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUSection/DMUSection" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="3dReview" Value="3dReview" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="loadCmdHdr"                     ClassName="DS/DMUPersistence/DMULoadCmd"              ResourceFile="DMUPersistence/DMUPersistence" HelpResourceFile = "DMUPersistence/DMUPersistence" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="3dReview" Value="3dReview" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <!-- Debug command used to load JSON models DO NOT ADD STARTER OF THIS CMD -->
+      <CATCommandHeader ID="LoadJSONCmdHdr"                 ClassName="DS/DMUReadPersistence/CAT3DReviewTestLoadCmd" />
+    </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="3DDesignReviewAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DDesignReviewWorkbench">
+      <CATCmdContainer Name="PADFixedArea" RepresentationType="AfrActionBarFixedSection">
+        <CATCmdStarter Name="CATWebUXSlideShowHdrStr" Command="CATWebUXSlideShowHdr" />
+      </CATCmdContainer>
+      <CATCmdContainer     Name="Review" Visibility="1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter     Name="Load"                Command="loadCmdHdr"/>
+        <CATCmdStarter     Name="Save"                Command="saveCmdHdr"/>
+        <CATCmdContainer Name="Measure" Visibility="1" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter Name="Measure"             Command="measureCmdHdr"/>
+          <CATCmdStarter Name="Thickness"           Command="thicknessCmdHdr"/>
+        </CATCmdContainer>
+        <CATCmdStarter     Name="Section"             Command="sectionCmdHdr"/>
+        <CATCmdStarter     Name="LockUnlockSection"   Command="LockUnlockSectionHdr" />
+        <CATCmdContainer Name="Marker3D" Visibility="1" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter     Name="MarkerText"          Command="markerTextCmdHdr"/>
+          <CATCmdStarter     Name="MarkerCircle"        Command="markerCircleCmdHdr"/>
+          <CATCmdStarter     Name="MarkerArrow"         Command="markerArrowCmdHdr"/>
+          <CATCmdStarter     Name="MarkerPicture"       Command="markerPictureCmdHdr"/>
+        </CATCmdContainer>
+        <CATCmdContainer Name="Marker2D" Visibility="1" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter     Name="Marker2DText"        Command="marker2DTextCmdHdr" />
+          <CATCmdStarter     Name="Marker2DPicture"     Command="marker2DPictureCmdHdr" />
+        </CATCmdContainer>
+        <CATCmdStarter Name="Slide" Command="slideCmdHdr" />
+        <CATCmdStarter Name="PlaySlide" Command="slidePlayCmdHdr" />
+        <CATCmdStarter Name="3DCompare" Command="3DcompareCmdHdr" />
+      </CATCmdContainer>
+      <CATCmdContainer     Name="PADView" Visibility="1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter     Name="NormalView"          Command="normalViewCmdHdr"     />
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+  
+</Styles>

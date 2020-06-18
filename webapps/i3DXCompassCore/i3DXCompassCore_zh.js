@@ -1,0 +1,1 @@
+define("DS/i3DXCompassCore/i3DXCompassCore_zh",{});define("DS/i3DXCompassCore/assets/nls/i3DXCompassCore",{"Action is still pending... Please wait a few seconds and refresh your widget":"操作仍处于待定状态...请等待几秒后再刷新 Widget"});

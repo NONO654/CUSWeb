@@ -1,0 +1,141 @@
+<dom-module id="cmp-loop-parameter-mapper">
+    <template>
+        <style>
+            :host {
+                display: inline-block;
+            }
+            :host([hidden]) {
+                display: none;
+            }
+            div {
+                display: flex;
+            }
+            
+            select, option {
+                -webkit-appearance: none; /* WebKit/Chromium */
+                -moz-appearance: none; /* Gecko */
+            }
+            /* Internet Explorer 10–11 and Edge */
+            select::-ms-expand {
+                display: none;
+            }
+            select, input {
+                padding: 0 0 0 10px;
+                border-radius:5px;
+                border: 1px solid #b4b6ba;
+                height: 22px;
+            }
+            select {
+                width: auto;
+                margin-right: 5px;
+                padding-right: 1em;
+                background: no-repeat right center url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAGCAQAAAC7znxOAAAAFklEQVQI12NgwAr+o0AMQQyVGNpxAwBCaA/x9bix8gAAAABJRU5ErkJggg==);
+                background-position-x: calc(100% - 3px);
+            }
+            select[disabled], input[disabled] {
+                background-color: rgb(235, 235, 228);
+            }
+            input, pcw-parameter-chooser { flex:auto; width:auto;}
+        </style>
+        <div id="control">
+            <select id="type" on-change="_typeChanged" disabled$="[[disabled]]" >
+                    <option value="C">Constant</option>
+                    <option value="P">Parameter</option>
+            </select>
+            <input type="text" id="constantInput" on-change="_constantChanged" disabled$="[[disabled]]" />
+            <pcw-parameter-chooser id="paramChooser" on-pcw-parameter-selected="_parameterSelected" create autoselect disabled$="[[disabled]]" hidden></pcw-parameter-chooser>
+        </div>
+    </template>
+    <script>
+        require(['DS/SMAProcWebCommonControls/ParameterChooser']);
+        Polymer({
+            is: 'cmp-loop-parameter-mapper',
+            properties: {
+                value: {
+                    //Constant -> C8, C34, C1
+                    //Parameter -> PItr, Px, PP1
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_valueChanged'
+                },
+                disabled: {
+                    type: Boolean,
+                    value: false,
+                    reflectToAttribute: true
+                },
+                _dataContainer: { type: Object, readOnly: true, observer: '_cascadeDataContainer' },
+            },
+            listeners: {
+                change: '_stopEvent'
+            },
+            setDataContainer: function (dataContainer) {
+                if (!this._dataContainer && dataContainer) {
+                    this._set_dataContainer(dataContainer);
+                }
+            },
+            _cascadeDataContainer: function () {
+                if ( this._dataContainer) {
+                    if (this.$.paramChooser && this.$.paramChooser.setDataContainer) {
+                        this.$.paramChooser.setDataContainer(this._dataContainer);
+                    } else {
+                        console.warn('Parameter Chooser is not ready yet');
+                    }
+                }
+            },
+            _stopEvent: function (e) {
+                if (e && e.stopPropagation) {
+                    e.stopPropagation();
+                }
+            },
+            _valueChanged: function (newValue) {
+                // update UI
+                var newValueString = newValue || '';
+                var type = newValueString.charAt(0);
+                var value = newValueString.substring(1);
+                if (type === 'P') {
+                    this.$.type.value = type;
+                    this.$.paramChooser.selectParameterByName(value);
+                } else if (type === 'C') {
+                    this.$.type.value = type;
+                    this.$.constantInput.value = value;
+                } else {
+                    console.warn('Invalid value:', newValue)
+                }
+                this._updateVisibility(type);
+            },
+            _updateVisibility: function(type) {
+                if (type === 'P') {
+                    this.$.paramChooser.removeAttribute('hidden');
+                    this.$.constantInput.setAttribute('hidden', '');
+                } else if (type === 'C') {
+                    this.$.constantInput.removeAttribute('hidden');
+                    this.$.paramChooser.setAttribute('hidden', '');
+                } else {
+                    console.warn('Invalid type:', type)
+                }
+            },
+            _typeChanged: function (e) {
+                var type = e.target.value;
+                if (type === 'P') {
+                    this._parameterSelected();
+                } else if (type === 'C') {
+                    this._constantChanged();
+                } else {
+                    console.warn('Invalid value:', newValue)
+                }
+                this._updateVisibility(e.target.value);
+            },
+            _constantChanged: function (e) {
+                this.value = 'C' + this.$.constantInput.value;
+                this._stopEvent(e);
+            },
+            _parameterSelected: function (e) {
+                var selectedParameter = this.$.paramChooser.getSelectedParameter();
+                var parameterName = selectedParameter && selectedParameter.parameter ? selectedParameter.parameter.getName() : '';
+                this.value = 'P' + parameterName;
+                this._stopEvent(e);
+            }
+
+        })
+    </script>
+</dom-module>

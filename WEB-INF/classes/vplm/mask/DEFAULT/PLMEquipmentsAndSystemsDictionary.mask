@@ -1,0 +1,200 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY SectionRoutingPort
+// --------------------------------------------------
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR V_discipline;N;N;$
+ATTR V_nature;N;Y;Definition
+ATTR V_usage;N;N;$
+VALUE Definition
+VALUE Presentation
+VALUE Specification
+ATTR V_FunctionalName;Y;N;$
+ATTR V_Shape;N;Y;Circle
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Circle
+//VALUE Rectangle
+ATTR V_Height;N;N;0
+ATTR V_Width;N;N;0
+ATTR V_Depth;N;N;0
+ATTR V_SectionArrangement;N;Y;Standard
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Retainer
+//VALUE Standard
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR reservedby;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;$
+FUNC Create
+FATTR V_FunctionalName;Y
+FATTR V_Shape;N
+FATTR V_Height;N
+FATTR V_Width;N
+FATTR V_Depth;N
+FATTR V_SectionArrangement;N
+FUNC EZQuery
+FATTR V_FunctionalName;Y
+FATTR V_Shape;Y
+FATTR V_Height;Y
+FATTR V_Width;Y
+FATTR V_Depth;Y
+FATTR V_SectionArrangement;Y
+FUNC List
+FATTR V_Shape;N
+FATTR V_Height;N
+FATTR V_Width;N
+FATTR V_Depth;N
+FATTR V_SectionArrangement;N
+FUNC Query
+FATTR V_description;Y
+FATTR V_FunctionalName;Y
+FATTR V_Shape;Y
+FATTR V_Height;Y
+FATTR V_Width;Y
+FATTR V_Depth;Y
+FATTR V_SectionArrangement;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FUNC Read
+FATTR V_description;N
+FATTR V_FunctionalName;N
+FATTR V_Shape;N
+FATTR V_Height;N
+FATTR V_Width;N
+FATTR V_Depth;N
+FATTR V_SectionArrangement;N
+FATTR originated;N
+FATTR modified;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FUNC Tree
+FATTR V_FunctionalName;N
+FUNC Write
+FATTR V_description;Y
+FATTR V_FunctionalName;N
+FATTR V_Shape;N
+FATTR V_Height;N
+FATTR V_Width;N
+FATTR V_Depth;N
+FATTR V_SectionArrangement;N
+FATTR originated;N
+FATTR modified;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// --------------------------------------------------
+ENTITY PLMEnsRefEquipment
+// --------------------------------------------------
+ATTR V_Ens_SubType;N;N;$
+FUNC Create
+FATTR V_Ens_SubType;Y
+FUNC EZQuery
+FATTR V_Ens_SubType;Y
+FUNC List
+FATTR V_Ens_SubType;N
+FUNC Query
+FATTR V_Ens_SubType;Y
+FUNC Read
+FATTR V_Ens_SubType;N
+FUNC Tree
+FUNC Write
+FATTR V_Ens_SubType;Y
+// --------------------------------------------------
+ENTITY PLMEnsRefSupport
+// --------------------------------------------------
+ATTR V_Ens_SubType;N;N;$
+ATTR V_Ens_SupportType;N;N;$
+FUNC Create
+FATTR V_Ens_SubType;Y
+FATTR V_Ens_SupportType;N
+FUNC EZQuery
+FATTR V_Ens_SubType;Y
+FATTR V_Ens_SupportType;Y
+FUNC List
+FATTR V_Ens_SubType;N
+FATTR V_Ens_SupportType;N
+FUNC Query
+FATTR V_Ens_SubType;Y
+FATTR V_Ens_SupportType;Y
+FUNC Read
+FATTR V_Ens_SubType;N
+FATTR V_Ens_SupportType;N
+FUNC Tree
+FUNC Write
+FATTR V_Ens_SubType;Y
+FATTR V_Ens_SupportType;N
+// --------------------------------------------------
+ENTITY SharedEquipmentPart
+// --------------------------------------------------
+ATTR V_Ens_SubType;N;N;$
+FUNC Create
+FATTR V_Ens_SubType;Y
+FUNC EZQuery
+FATTR V_Ens_SubType;Y
+FUNC List
+FATTR V_Ens_SubType;N
+FUNC Query
+FATTR V_Ens_SubType;Y
+FUNC Read
+FATTR V_Ens_SubType;N
+FUNC Tree
+FUNC Write
+FATTR V_Ens_SubType;Y
+// --------------------------------------------------
+ENTITY SharedSupportPart
+// --------------------------------------------------
+ATTR V_Ens_SubType;N;N;$
+ATTR V_Ens_SupportType;N;N;$
+FUNC Create
+FATTR V_Ens_SubType;Y
+FATTR V_Ens_SupportType;N
+FUNC EZQuery
+FATTR V_Ens_SubType;Y
+FATTR V_Ens_SupportType;Y
+FUNC List
+FATTR V_Ens_SubType;N
+FATTR V_Ens_SupportType;N
+FUNC Query
+FATTR V_Ens_SubType;Y
+FATTR V_Ens_SupportType;Y
+FUNC Read
+FATTR V_Ens_SubType;N
+FATTR V_Ens_SupportType;N
+FUNC Tree
+FUNC Write
+FATTR V_Ens_SubType;Y
+FATTR V_Ens_SupportType;N

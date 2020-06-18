@@ -1,0 +1,40 @@
+<link rel="import" href="./mft-process-chooser/mft-process-chooser.html">
+<link rel="import" href="./mft-process-tabs/mft-process-tabs.html">
+<link rel="import" href="./mft-advanced/mft-advanced.html">
+<link rel="import" href="./mft-login/mft-login.html">
+<link rel="import" href="./mft-validation/mft-validation.html">
+<link rel="stylesheet" href="../UIKIT/UIKIT.css" />
+
+<dom-module id="pcw-mft-adapter">
+
+    <!-- <script src="../../common/scripts/jquery-latest.js"></script> -->
+
+    <link rel="import" type="css" href="./cmp-mft.css">
+
+    <template>
+        <div id="mftMessage" class="mftMessage">
+            <div class="mftMessagePane">
+                <div id="mftMessageClose" class="mftMessageClose">
+                    <img id="mftMessageCloseImage" src="./assets/icons/iconClose.png" class="imgBtn" />
+                </div>
+                <div id="mftMessageText" class="mftMessageText">No Messages</div>
+            </div>
+        </div>
+        <mft-process-chooser id="processChooser"></mft-process-chooser>
+        <div id="processTitlePane" class="processTitlePane">
+            <div id="processTitlePaneExpand" class="processTitlePaneExpand" title="Expand Process Chooser">
+                <img id="processTitlePaneExpandImage" src="./assets/icons/iconExpandArrow.png" class="imgBtn" />
+            </div>
+            <div id="processTitlePaneText" class="processTitlePaneText">No Remote Process Selected</div>
+            <div id="processTitlePaneValidate" class="mftActionButton" title="Validate Remote Process">
+                <img id="processTitlePaneValidateImage" src="./assets/icons/iconValidate.png" class="imgBtn" />
+            </div>
+        </div>
+        <mft-process-tabs id="processTabs"></mft-process-tabs>
+        <mft-validation class="processFillPane" id="processValidation"></mft-validation>
+        <mft-login id="mftLogin"></mft-login>
+    </template>
+
+    <script type="text/javascript" src="./cmp-mft.js"></script>
+
+</dom-module>

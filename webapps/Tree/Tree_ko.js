@@ -1,0 +1,1 @@
+define("DS/Tree/Tree_ko",{});define("DS/Tree/assets/nls/carousel",{close:"닫기",next:"다음",previous:"이전"});

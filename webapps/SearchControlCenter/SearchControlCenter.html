@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2018 , Dassault Systemes. All rights reserved. -->
+<head>
+
+    <title>3DSearch & 6WTags Control Center</title>
+
+    <!-- Application Metas Start -->
+    <meta name="description" content="Search control center settings " />
+    <!-- Prevent autoRefresh -->
+    <meta name="autoRefresh" content="0" />
+    <!-- Application Metas End -->
+
+    <!-- Application Standalone emulation files -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+    <!-- Application JS Start -->
+    <script type="text/javascript">
+        /* global widget */
+        'use strict';
+        require([
+            'DS/SearchControlCenter/scripts/SearchControlCenterInfra',
+            'UWA/Promise', 
+            'i18n!DS/SearchControlCenter/assets/nls/SearchControlCenter.json',
+            'DS/SearchControlCenter/scripts/SearchControlCenterServices'], 
+            function (SearchControlCenterInfra, Promise, nlsKeys, SearchControlCenterServices)
+        {
+            widget.addEvents(
+        	{
+        	    onLoad: function () {
+        	        widget.body.empty();
+                    SearchControlCenterInfra.check3DSpaceAvailablity()
+                        .then(function (resolved) {
+                            SearchControlCenterInfra.checkCSVAvailability()
+                                .then(function (resolved) {
+                                    SearchControlCenterInfra.init();
+                                },
+                                function(rejected_error) {
+                                    displayAlert(nlsKeys.get('html.license'));
+                                });
+                        },
+                        function(rejected_error) {
+                            displayAlert(nlsKeys.get('html.platform'));
+                        });
+
+                    function displayAlert(alertMessage) {
+                        var alert = SearchControlCenterServices.createWdgAlert();
+                        alert.options.autoHide = false;
+                        alert.inject(widget.body);
+                        alert.add({ className: "warning", message: alertMessage});
+                    }
+        	    },
+        	    onRefresh: function () {
+        	        SearchControlCenterInfra.uiRefresh();
+        	    }
+
+        	});
+        });
+
+    </script>
+    <!-- Application JS End -->
+</head>
+<body>
+    <p>Loading...</p>
+</body>
+
+</html>

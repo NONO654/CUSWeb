@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<meta name="author" content="Dassault Systèmes" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="debugMode" content="true" />
+<meta name="autoRefresh" content="0" />
+<title>3DSpace</title>
+<widget:preferences>
+    <preference name="collab-storage" type="list" label="storage_label" defaultValue="">
+        <option value="" label="loading_label" />
+    </preference>
+    <preference name="main-view" type="list" label="view_label" defaultValue="list">
+        <option value="list" label="list_label" />
+        <option value="channel" label="channel_label" />
+    </preference>
+    <preference name="id-card-view" type="boolean" label="minimized_label" defaultValue="true"></preference>
+    <preference name="nb-items" type="range" label="nb_label" defaultValue="20" step="10" min="10" max="100"></preference>
+</widget:preferences>
+
+<script>
+    widget.addEvents({
+        onViewChange : function(event) {
+            require([ 'DS/W3DSpace/W3DSpaceCreateCSWidget' ], function (W3DSpaceCreateCSWidget) {
+                W3DSpaceCreateCSWidget.onViewChange.call(null, event);
+            });
+        },
+
+        onLoad : function(event) {
+            require([ 'DS/W3DSpace/W3DSpaceCreateCSWidget' ], function(W3DSpaceCreateCSWidget) {
+                W3DSpaceCreateCSWidget.onLoad.call(null, event);
+            });
+        },
+
+        onRefresh : function() {
+            require('DS/W3DSpace/W3DSpaceCreateCSWidget').onRefresh.call(null, arguments);
+        },
+
+        onStorageChange : function() {
+            require('DS/W3DSpace/W3DSpaceCreateCSWidget').onStorageChange.apply(null, arguments);
+        },
+        onEdit : function(event) {
+            require('DS/W3DSpace/W3DSpaceCreateCSWidget').onEdit.apply(null, arguments);
+        },
+        endEdit : function(event) {
+            require('DS/W3DSpace/W3DSpaceCreateCSWidget').endEdit.apply(null, arguments);
+        }
+    });
+</script>
+
+</head>
+<body></body>
+</html>

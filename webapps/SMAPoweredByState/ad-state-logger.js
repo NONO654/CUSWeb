@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define(["DS/SMAPoweredByState/ad-state-app-logging/selectors"],function(c){var a={};function b(d){return function(e){return function(h){var g=c.isReduxLoggingEnabled(),f=null;if(g){window.console.debug("****** PoweredBy Redux Action: "+h.type)}f=e(h);if(g){window.console.debug("****** PoweredBy Redux State after "+h.type);window.console.debug(d.getState())}return f}}}a["default"]=b;return a});

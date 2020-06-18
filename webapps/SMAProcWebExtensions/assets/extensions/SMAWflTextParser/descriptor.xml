@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="com.dassault_systemes.sma.adapter.TextParser" version="3DX.0" extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflTextParserAdapter" nlsID="dispname">Text Parser</DisplayName>
+	<Description nlsFile="SMAWflTextParserAdapter" nlsID="desc">Read/write data between text sources and parameters</Description>
+	<LongDescription>
+    Text Parser
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.sma.adapter.TextParser</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>1000</Value>
+			<Value>700</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="I_SMAWflTextParser16.png" targetFilename="small/I_SMAWflTextParser16.png"/>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflTextParser.png" targetFilename="large/I_SMAWflTextParser.png"/>
+		<Stream name="ButtonIcon1" streamKind="image" sourceFilename="I_SMAWflTextParserMapBoth.png" targetFilename="I_SMAWflTextParserMapBoth.png"/>
+		<Stream name="ButtonIcon2" streamKind="image" sourceFilename="I_SMAWflTextParserMapFrom.png" targetFilename="I_SMAWflTextParserMapFrom.png"/>
+		<Stream name="ButtonIcon3" streamKind="image" sourceFilename="I_SMAWflTextParserMapTo.png" targetFilename="I_SMAWflTextParserMapTo.png"/>
+		<Stream name="EditorNLS" streamKind="NLS" sourceFilename="SMAWflTextParserAdapter.CATNls" targetFilename="SMAWflTextParserAdapter.CATNls"/>
+		<Stream name="OtherNLS1" streamKind="NLS" sourceFilename="SMAWflTextParserAddTextSource.CATNls" targetFilename="SMAWflTextParserAdapter.CATNls"/>
+		<Stream name="OtherNLS2" streamKind="NLS" sourceFilename="SMAWflTextParserDesignTextCtl.CATNls" targetFilename="SMAWflTextParserAdapter.CATNls"/>
+		<Stream name="OtherNLS3" streamKind="NLS" sourceFilename="SMAWflTextParserIntroTab.CATNls" targetFilename="SMAWflTextParserAdapter.CATNls"/>
+		<Stream name="OtherNLS4" streamKind="NLS" sourceFilename="SMAWflTextParserParameterPanel.CATNls" targetFilename="SMAWflTextParserAdapter.CATNls"/>
+		<Stream name="OtherNLS5" streamKind="NLS" sourceFilename="SMAWflTextParserSourceSpecPanel.CATNls" targetFilename="SMAWflTextParserAdapter.CATNls"/>
+		<Stream name="OtherNLS6" streamKind="NLS" sourceFilename="SMAWflTextParserMappingConfig.CATNls" targetFilename="SMAWflTextParserMappingConfig.CATNls"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflTextParser.dll" targetFilename="win_b64/SMAWflTextParser.dll" />
+		<Stream name="EditorStylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflTextParserAdapter.sypstyle" targetFilename="SMAWflTextParserAdapter.sypstyle"/>
+		<Stream name="OtherStylesheet1" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflTextParserAddTextSource.sypstyle" targetFilename="SMAWflTextParserEditTextSource.sypstyle"/>
+		<Stream name="OtherStylesheet2" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflTextParserDesignTextCtl.sypstyle" targetFilename="SMAWflTextParserSourceTextCtl.sypstyle"/>
+		<Stream name="OtherStylesheet3" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflTextParserIntroTab.sypstyle" targetFilename="SMAWflTextParserIntroTab.sypstyle"/>
+		<Stream name="OtherStylesheet4" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflTextParserParameterPanel.sypstyle" targetFilename="SMAWflTextParserParameterPanel.sypstyle"/>
+		<Stream name="OtherStylesheet5" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflTextParserSourceSpecPanel.sypstyle" targetFilename="SMAWflTextParserSourceSpecCtl.sypstyle"/>
+		<Stream name="OtherStylesheet5" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflTextParserMappingConfig.sypstyle" targetFilename="SMAWflTextParserMappingConfig.sypstyle"/>
+		<Stream name="OtherStylesheet5" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflTextParserFindText.sypstyle" targetFilename="SMAWflTextParserFindText.sypstyle"/>
+		<Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebTextParser/cmp-textparser/cmp-textparser.html" targetFilename="SMAProcWebTextParser/cmp-textparser/cmp-textparser.html"/>
+
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-textparser</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflTextParserAdapterEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="ButtonIcon1"/>
+						<StreamRef refStreamName="ButtonIcon2"/>
+						<StreamRef refStreamName="ButtonIcon3"/>
+						<StreamRef refStreamName="ToolbarButtonIcon1"/>
+						<StreamRef refStreamName="EditorStylesheet"/>
+						<StreamRef refStreamName="OtherStylesheet1"/>
+						<StreamRef refStreamName="OtherStylesheet2"/>
+						<StreamRef refStreamName="OtherStylesheet3"/>
+						<StreamRef refStreamName="OtherStylesheet4"/>
+						<StreamRef refStreamName="OtherStylesheet5"/>
+						<StreamRef refStreamName="EditorNLS"/>
+						<StreamRef refStreamName="OtherNLS1"/>
+						<StreamRef refStreamName="OtherNLS2"/>
+						<StreamRef refStreamName="OtherNLS3"/>
+						<StreamRef refStreamName="OtherNLS4"/>
+						<StreamRef refStreamName="OtherNLS5"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflTextParserHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="actions" type="string" valuetype="array" arraydim="[1]" sizable="true">
+		</Property>
+	</Properties>
+
+
+</wfext:Extension>

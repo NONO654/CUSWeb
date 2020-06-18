@@ -1,0 +1,235 @@
+<meta charset="UTF-8"/>
+CATPLMBusinessLogic.Alias="Реализация бизнес-логики PLM";
+CATPLMBusinessLogic.Description="Определение возможностей настройки системы PLM с помощью бизнес-правил.";
+
+PLMInstanceAggregationCheck.Alias="Проверка агрегирования экземпляров";
+PLMInstanceAggregationCheck.Description="Позволяет интегрировать бизнес-логику для проверки агрегирования ссылок в другие посредством экземпляров.";
+
+PLMInstanceAggregationCheck.ThisObject.Alias="Ссылка на агрегирование";
+PLMInstanceAggregationCheck.ThisObject.Description="Основной этой бизнес-логики является ссылка, в которой необходимо агрегировать экземпляр.";
+
+PLMInstanceAggregationCheck.ReferenceToInstantiate.Alias="Ссылка для создания экземпляра";
+PLMInstanceAggregationCheck.ReferenceToInstantiate.Description="Этот параметр содержит ссылку, которую необходимо агрегировать с другой ссылкой";
+
+PLMIdentificationInitialization.Alias="Инициализация атрибутов";
+PLMIdentificationInitialization.Description="Позволяет интегрировать бизнес-логику для предварительной оценки атрибутов PLM объекта во время создания.";
+
+PLMIdentificationInitialization.ThisObject.Alias="Ссылка для создания.";
+PLMIdentificationInitialization.ThisObject.Description="Основой этой бизнес-логики является создаваемая ссылка. Она пока не является объектом PLM. Это прокси PLM.";
+
+PLMIdentificationInitialization.OperationId.Alias="Операция, выполняемая на объекте.";
+PLMIdentificationInitialization.OperationId.Description="Точный контекст создания объекта: новый для новой команды PLM, клонирование при дублировании, неявный при создании объекта приложением, по умолчанию для всех других случаев.";
+
+PLMIdentificationInitialization.IdString.Alias="Предложенный префикс.";
+PLMIdentificationInitialization.IdString.Description="Содержит префикс, предложенный для оценки атрибутов идентификатора.";
+
+PLMIdentificationInitialization.IdCloningString.Alias="Префикс, предложенный в режиме дублирования.";
+PLMIdentificationInitialization.IdCloningString.Description="Содержит префикс, предложенный для оценки атрибутов идентификатора в контексте дублирования.";
+
+PLMIdentificationInitialization.CopyFrom.Alias="Скопированный объект.";
+PLMIdentificationInitialization.CopyFrom.Description="Содержит исходный объект, дублированный в контексте дублирования. Удобно во время чтения некоторых его атрибутов.";
+
+PLMIdentificationInitialization.CoupledRef.Alias="Связанная ссылка.";
+PLMIdentificationInitialization.CoupledRef.Description="Содержит ссылку, которая дублируется при дублировании представления.";
+
+PLMIdentificationInitialization.AggregatingReference.Alias="Ссылка на агрегирование.";
+PLMIdentificationInitialization.AggregatingReference.Description="Ссылка на агрегирование создаваемого экземпляра (в случае инициализации экземпляра).";
+
+PLMIdentificationInitialization.Reference.Alias="Ссылка на экземпляр.";
+PLMIdentificationInitialization.Reference.Description="Ссылка на инициализируемый экземпляр (в случае инициализации экземпляра).";
+
+PLMIdentificationInitialization.IncSessionId.Alias="Увеличение в сеансе.";
+PLMIdentificationInitialization.IncSessionId.Description="Целое число, увеличивающееся в сеансе для облегчения оценки идентифицируемых атрибутов.";
+
+PLMAttributesValuationCheck.Alias="Проверка оценки атрибутов";
+PLMAttributesValuationCheck.Description="Позволяет интегрировать бизнес-логику после изменения атрибута конечным пользователем.";
+
+PLMAttributesValuationCheck.ThisObject.Alias="Объект изменен.";
+PLMAttributesValuationCheck.ErrorAttributes.Description="Основой этой бизнес-логики является объект PLM, на котором выполняется изменение атрибута.";
+
+PLMAttributesValuationCheck.ErrorAttributes.Alias="Ошибка атрибутов.";
+PLMAttributesValuationCheck.ErrorAttributes.Description="Содержит список ошибочных атрибутов после изменения.";
+
+PLMAttributesValuationCheck.WarningAttributes.Alias="Предупреждение для атрибутов.";
+PLMAttributesValuationCheck.ErrorAttributes.Description="Содержит список атрибутов, для которых было создано предупреждение после изменения.";
+
+PLMAttributesValuationCheck.ErrorMessages.Alias="Сообщения об ошибке.";
+PLMAttributesValuationCheck.ErrorMessages.Description="Содержит список созданных сообщений об ошибках.";
+
+PLMAttributesValuationCheck.WarningMessages.Alias="Предупреждающие сообщения.";
+PLMAttributesValuationCheck.WarningMessages.Description="Содержит список созданных предупреждающих сообщений.";
+
+PLMAttributesValuationFinalization.Alias="Проверка завершения оценки атрибутов";
+PLMAttributesValuationFinalization.Description="Позволяет интегрировать бизнес-логику после изменения атрибута конечным пользователем.";
+
+PLMAttributesValuationFinalization.ThisObject.Alias="Объект изменен.";
+PLMAttributesValuationFinalization.ErrorAttributes.Description="Основой этой бизнес-логики является объект PLM, на котором выполняется изменение атрибута.";
+
+PLMAttributesValuationFinalization.ErrorAttributes.Alias="Ошибка атрибутов.";
+PLMAttributesValuationFinalization.ErrorAttributes.Description="Содержит список ошибочных атрибутов после изменения.";
+
+PLMAttributesValuationFinalization.WarningAttributes.Alias="Предупреждение для атрибутов.";
+PLMAttributesValuationFinalization.ErrorAttributes.Description="Содержит список атрибутов, для которых было создано предупреждение после изменения.";
+
+PLMAttributesValuationFinalization.ErrorMessages.Alias="Сообщения об ошибке.";
+PLMAttributesValuationFinalization.ErrorMessages.Description="Содержит список созданных сообщений об ошибках.";
+
+PLMAttributesValuationFinalization.WarningMessages.Alias="Предупреждающие сообщения.";
+PLMAttributesValuationFinalization.WarningMessages.Description="Содержит список созданных предупреждающих сообщений.";
+
+PLMAttributesPropagation.Alias="Распространение оценки атрибутов";
+PLMAttributesPropagation.Description="Позволяет интегрировать бизнес-логику после изменения конечным пользователем атрибута для распространения информации: изменение атрибута или видимость атрибута.";
+
+PLMAttributesPropagation.ThisObject.Alias="Объект изменен.";
+PLMAttributesPropagation.ThisObject.Description="Основой этой бизнес-логики является объект PLM, на котором выполняется изменение атрибута.";
+
+PLMAttributesPropagation.PropagationMode.Alias="Режим распространения.";
+PLMAttributesPropagation.PropagationMode.Description="Указывает, должна ли бизнес-логика распространить значения атрибутов (оценка) или видимость атрибутов (редактирование).";
+
+PLMAttributesPropagation.EditAttributeId.Alias="Атрибут изменен.";
+PLMAttributesPropagation.EditAttributeId.Description="Имя измененного атрибута.";
+
+PLMImportExportAttributesValuation.Alias="Импорт/экспорт распространения оценки";
+PLMImportExportAttributesValuation.Description="Позволяет интегрировать бизнес-логику при импорте (для оценки атрибутов PLM) или при экспорте (для извлечения информации из атрибутов PLM).";
+
+PLMImportExportAttributesValuation.ThisObject.Alias="Объект для экспорта или прокси PLM для оценки при импорте.";
+PLMImportExportAttributesValuation.ThisObject.Description="В основе этой бизнес-логики лежит либо экспортируемый объект PLM, либо объект, который будет создан при импорте (прокси PLM).";
+
+PLMImportExportAttributesValuation.OperationId.Alias="Операция, выполняемая на объекте.";
+PLMImportExportAttributesValuation.OperationId.Description="Точный контекст использования этой бизнес-логики: DataExchangeExport во время экспорта на основе файлов, DataExchangeImport во время импорта на основе файлов, BriefcaseImport для импорта портфеля.";
+
+PLMImportExportAttributesValuation.IdString.Alias="Предложенный префикс.";
+PLMImportExportAttributesValuation.IdString.Description="Содержит префикс, предложенный для оценки атрибутов идентификатора.";
+
+PLMImportExportAttributesValuation.iFileId.Alias="Имя файла";
+PLMImportExportAttributesValuation.iFileId.Description="Имя импортируемого файла.";
+
+PLMImportExportAttributesValuation.oReferenceId.Alias="Имя создаваемого файла";
+PLMImportExportAttributesValuation.oReferenceId.Description="Имя экспортируемого файла.";
+
+PLMImportExportAttributesValuation.IncSessionId.Alias="Увеличение в сеансе.";
+PLMImportExportAttributesValuation.IncSessionId.Description="Целое число, увеличивающееся в сеансе для облегчения оценки идентифицируемых атрибутов.";
+
+PLMImportExportAttributesValuation.GlobalWarningMessage.ComponentType="для типа компонента: /p1. \n";
+PLMImportExportAttributesValuation.WarningMessage.Truncation="Атрибут /p1 усечен до /p2 симв.\n";
+
+PLMRelationEstablishmentCheck.Alias="Проверка установления взаимосвязей.";
+PLMRelationEstablishmentCheck.Description="Позволяет интегрировать бизнес-логику для проверки установления взаимосвязей между 2 объектами.";
+
+PLMRelationEstablishmentCheck.RelationType.Alias="Тип взаимосвязи.";
+PLMRelationEstablishmentCheck.RelationType.Description="Тип взаимосвязи. В PLM все взаимосвязи имеют определенный тип";
+
+PLMRelationEstablishmentCheck.Target.Alias="Целевой элемент.";
+PLMRelationEstablishmentCheck.RelationType.Description="Объект, на который будет ссылаться связь";
+
+PLMCustoTypeMapping.Alias="Вычисление сопоставления типа настройки";
+PLMCustoTypeMapping.Description="Позволяет интегрировать бизнес-логику в сценарии сосуществования, чтобы задать целевой тип пользователя объектов в зависимости от типа и атрибутов исходного пользователя.";
+
+PLMCustoTypeMapping.ThisObject.Alias="Объект.";
+PLMCustoTypeMapping.ThisObject.Description="Основой этой бизнес-логики является целевой объект, создаваемый без типа пользователя (не используется).";
+
+PLMCustoTypeMapping.OperationId.Alias="Операция, выполняемая на объекте.";
+PLMCustoTypeMapping.OperationId.Description="Точный контекст использования этой бизнес-логики: сосуществование при обмене сосуществования";
+
+PLMCustoTypeMapping.SourceObject.Alias="Исходный объект.";
+PLMCustoTypeMapping.SourceObject.Description="PLMProxy представляет исходный объект со своим типом и атрибутами пользователя.";
+
+PLMCustoTypeMapping.SourceProvider.Alias="Имя исходного поставщика";
+PLMCustoTypeMapping.SourceProvider.Description="Имя поставщика исходного объекта.";
+
+PLMCustoTypeMapping.TargetProvider.Alias="Имя целевого поставщика";
+PLMCustoTypeMapping.TargetProvider.Description="Имя поставщика целевого объекта.";
+
+PLMAttributesMapping.Alias="Выполнение сопоставления атрибутов";
+PLMAttributesMapping.Description="Позволяет интегрировать бизнес-логику в сценарии сосуществования для сопоставления внешних атрибутов.";
+
+PLMAttributesMapping.ThisObject.Alias="Целевой объект.";
+PLMAttributesMapping.ThisObject.Description="Основой этой бизнес-логики является прокси целевого объекта, на котором выполняется настройка атрибутов.";
+
+PLMAttributesMapping.OperationId.Alias="Операция, выполняемая на объекте.";
+PLMAttributesMapping.OperationId.Description="Точный контекст использования этой бизнес-логики: сосуществование при обмене сосуществования";
+
+PLMAttributesMapping.SourceObject.Alias="Исходный объект.";
+PLMAttributesMapping.SourceObject.Description="PLMProxy представляет исходный объект со своим типом и атрибутами пользователя.";
+
+PLMAttributesMapping.SourceProvider.Alias="Имя исходного поставщика";
+PLMAttributesMapping.SourceProvider.Description="Имя поставщика исходного объекта.";
+
+PLMAttributesMapping.TargetProvider.Alias="Имя целевого поставщика";
+PLMAttributesMapping.TargetProvider.Description="Имя поставщика целевого объекта.";
+
+ContactAdministrator="Обратитесь к администратору для решения следующей проблемы.";
+
+PLMRelationSuppressionCheck.Alias="Проверка отключения взаимосвязей";
+PLMRelationSuppressionCheck.Description="Позволяет интегрировать бизнес-логику для проверки отключения взаимосвязей между 2 объектами.";
+
+PLMRelationSuppressionCheck.RelationType.Alias="Тип взаимосвязи.";
+PLMRelationSuppressionCheck.RelationType.Description="Тип взаимосвязи. В PLM все взаимосвязи имеют определенный тип";
+
+PLMRelationSuppressionCheck.Target.Alias="Целевой элемент.";
+PLMRelationSuppressionCheck.RelationType.Description="Объект, на который ссылаются взаимосвязи и который необходимо отключить";
+
+PLMFinalizationForOffline.Alias="Завершение автономных атрибутов";
+PLMFinalizationForOffline.Description="Позволяет завершить значения атрибутов вновь созданных объектов при повторном подключении автономного сеанса.";
+
+PLMFinalizationForOffline.ThisObject.Alias="Ссылка создана.";
+PLMFinalizationForOffline.ThisObject.Description="Основой этой бизнес-логики является ссылка, которая была создана во время автономного сеанса.";
+
+PLMFinalizationForOffline.OperationId.Alias="Операция, выполняемая на объекте.";
+PLMFinalizationForOffline.OperationId.Description="В этом режиме можно завершить только новую операцию";
+
+PLMFinalizationForOffline.IdString.Alias="Предложенный префикс.";
+PLMFinalizationForOffline.IdString.Description="Содержит префикс, предложенный для оценки атрибутов идентификатора.";
+
+PLMFinalizationForOffline.AggregatingReference.Alias="Ссылка на агрегирование.";
+PLMFinalizationForOffline.AggregatingReference.Description="Ссылка на агрегирование созданного экземпляра (в случае завершения экземпляра).";
+
+PLMFinalizationForOffline.Reference.Alias="Ссылка на экземпляр.";
+PLMFinalizationForOffline.Reference.Description="Ссылка на инициализируемый экземпляр (в случае завершения экземпляра).";
+
+PLMCoexDelete.Alias="Проверка удаления сосуществования";
+PLMCoexDelete.Description="Проверяет необходимость удаления экземпляра ввода в целевом репозитории.";
+
+PLMCoexDelete.ThisObject.Alias="Экземпляр.";
+PLMCoexDelete.ThisObject.Description="Экземпляр для проверки";
+
+PLMCoexDelete.AggregatingReference.Alias="Родительский объект.";
+PLMCoexDelete.AggregatingReference.Description="Родительская ссылка экземпляра.";
+
+PLMCoexDelete.AggregatedReference.Alias="Дочерний объект.";
+PLMCoexDelete.AggregatedReference.Description="Дочерняя ссылка экземпляра.";
+
+PLMMigrationAttributesValuation.Alias="Оценка атрибутов миграции";
+PLMMigrationAttributesValuation.Description="Позволяет интегрировать бизнес-логику в контекст BatchV4V6";
+PLMMigrationAttributesValuation.ThisObject.Alias="Объект изменен";
+PLMMigrationAttributesValuation.ThisObject.Description="Основой этой бизнес-логики является объект PLM, на котором выполняется изменение атрибута";
+PLMMigrationAttributesValuation.OperationId.Alias="Операция, выполняемая на объекте";
+PLMMigrationAttributesValuation.OperationId.Description="Точный контекст использования этой бизнес-логики: только BatchV4V6 на данный момент";
+PLMMigrationAttributesValuation.IdString.Alias="Предложенный префикс";
+PLMMigrationAttributesValuation.IdString.Description="Содержит префикс, предложенный для оценки атрибутов идентификатора";
+PLMMigrationAttributesValuation.CustoType.Alias="Тип настройки";
+PLMMigrationAttributesValuation.CustoType.Description="Указывает на тип настройки объекта";
+PLMMigrationAttributesValuation.OriginalRepRefPropertiesModel.Alias="Список атрибутов ссылки представления";
+PLMMigrationAttributesValuation.OriginalRepRefPropertiesModel.Description="Извлекает список атрибутов исходной ссылки представления с моделью V4";
+PLMMigrationAttributesValuation.MigrationProperties.Alias="Список свойств миграции пользователя";
+PLMMigrationAttributesValuation.MigrationProperties.Description="Извлечение списка свойств миграции пользователя";
+
+PLMAuthoringDefaultPropagationScope.Alias="Операция распространения";
+PLMAuthoringDefaultPropagationScope.Description="Позволяет распространить или не распространять операцию";
+PLMAuthoringDefaultPropagationScope.ThisObject.Alias="Объект изменен";
+PLMAuthoringDefaultPropagationScope.ThisObject.Description="Основой этой бизнес-логики является объект PLM, на котором выполняется изменение атрибута";
+PLMAuthoringDefaultPropagationScope.OperationId.Alias="Операция, выполняемая на объекте";
+PLMAuthoringDefaultPropagationScope.OperationId.Description="Точный контекст использования этой бизнес-логики: только клонирование на данный момент";
+PLMAuthoringDefaultPropagationScope.OperationDetail.Alias="Сведения об операции";
+PLMAuthoringDefaultPropagationScope.OperationDetail.Description="Содержит сведения об операции";
+PLMAuthoringDefaultPropagationScope.RootContext.Alias="Контекст операции";
+PLMAuthoringDefaultPropagationScope.RootContext.Description="Указывает на контекст операции";
+PLMAuthoringDefaultPropagationScope.Propagate.Alias="Индикация продолжения работы";
+PLMAuthoringDefaultPropagationScope.Propagate.Description="Содержит решение о необходимости продолжения операции";
+
+PLMDeleteCheck.Alias="Удалить проверку операции";
+PLMDeleteCheck.Description="Позволяет интегрировать бизнес-логику для проверки удаления объекта";
+PLMDeleteCheck.ThisObject.alias="объект для удаления";
+PLMDeleteCheck.ThisObjectDescription="Основой этой бизнес логики является объект, на котором запускается удаление.";
+PLMDeleteCheck.OperationId.Alias="Операция, выполняемая на объекте";
+PLMDeleteCheck.OperationId.Description="Точный контекст использования этой бизнес-логики: во время удаления объекта.";

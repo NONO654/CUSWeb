@@ -1,0 +1,1 @@
+define("DS/ENORIPE/ENORIPE_Search_en",{});define("DS/ENORIPE_Search/assets/nls/Enoripe_Search",{whereused_title:"Related objects"});

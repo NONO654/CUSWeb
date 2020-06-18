@@ -1,0 +1,375 @@
+<dom-module is="xs-wg-refrence-manager-style">
+  <template>
+    <style>
+    :host {
+      height: auto;
+      max-height: 400px;
+      max-width: 500px;
+      display: block;
+      min-height: 100px;
+    }
+
+    .top-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .inline-label {
+      width: calc(100% - 120px);
+    }
+
+    .main {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+    }
+
+    .files-container {
+      min-height: 100px;
+      height: auto;
+      max-height: 350px;
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+
+    .ioinput, .iooutput, .ioinputoutput {
+      display: none;
+    }
+
+    .io-mode {
+      height: 16px;
+      width: 16px;
+      padding-top: 4px;
+    }
+    .io-mode[data-iomode="Input"] .ioinput, .io-mode[data-iomode="Output"] .iooutput, .io-mode[data-iomode="InputOutput"] .ioinputoutput {
+      display: block;
+    }
+
+    .files-container[data-page="multi"] {
+      height: 285px;
+    }
+
+    .file-container {
+      display: flex;
+      padding-right: 5px;
+    }
+    .file-container:hover {
+      background-color: #e2e4e3;
+    }
+
+    /* #container[data-state="is-updating"] .page-bar-container {
+          pointer-events: none; } */
+    .page-bar-container {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .page-button {
+      padding: 1px;
+    }
+
+    .previous {
+      margin-right: 5px;
+    }
+
+    .next {
+      margin-left: 5px;
+    }
+
+    .current-page-info {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .block-display {
+      display: block;
+    }
+
+    .file-action {
+      cursor: pointer;
+    }
+
+    .file-actions .no-action {
+      pointer-events: none;
+      opacity: 0.2;
+    }
+
+    .progressbar {
+      padding-right: 2px;
+      padding-top: 2px;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .file-title {
+      width: calc(100% - 120px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: '3DS-Light';
+      line-height: 1.8;
+    }
+
+    .revision-info {
+      font-size: 10px;
+    }
+
+
+    #container[data-state="no-data"] .dropZone {
+      display: none;
+    }
+    #container[data-state="no-data"] .no-data-present {
+      display: block;
+    }
+    #container[data-state="no-files"] .new-file {
+      display: flex;
+    }
+    #container[data-state="no-files"] .no-files-present {
+      display: block;
+      position: absolute;
+      top: 80px;
+      left: 10%;
+    }
+    #container[data-state="is-loading"] .loading-files {
+      display: block;
+      position: absolute;
+      top: 80px;
+      left: 10%;
+    }
+    #container[data-state="is-error"] .error {
+      display: block;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      -webkit-transform: translate(-50%, -50%);
+    }
+    #container[data-state="files-available"] .new-file, #container[data-state="is-updating"] .new-file {
+      display: flex;
+    }
+    #container[data-stateread] .new-file, #container[data-stateread] .doc-actions, #container[data-stateread] .update-operation {
+      display: none;
+    }
+    #container[data-stateread] .file-title {
+      width: calc(100% - 40px) !important;
+    }
+
+    .update-operation {
+      display: inline-block;
+    }
+
+    .no-data-present {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      -webkit-transform: translate(-50%, -50%);
+      display: none;
+    }
+
+    .no-files-present, .loading-files, .error {
+      display: none;
+    }
+
+    .new-file {
+      display: none;
+      flex-direction: row-reverse;
+      width: 120px;
+      height: 100%;
+      padding-top: 5px;
+    }
+    .new-file .fonticon-upload {
+      font-size: 14px;
+    }
+    .new-file .fonticon-search {
+      font-size: 14px;
+      padding-left: 2px;
+      cursor: pointer;
+    }
+
+    .hyperlink {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .add-button {
+      padding: 3px 6px;
+      float: right;
+      right: 2px;
+    }
+    .add-button:hover .upload-new-file {
+      opacity: 1;
+    }
+    .add-button div {
+      display: inline-block;
+    }
+
+    .file-icon-container {
+      height: 28px;
+      width: 28px;
+      position: relative;
+    }
+    .file-icon-container span {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+    }
+    .file-icon-container .lock, .file-icon-container .lock-user {
+      display: none;
+      font-size: 12px;
+      color: #636363;
+      opacity: 1;
+    }
+    .file-icon-container span.image-container {
+      bottom: 6px;
+      right: 2px;
+    }
+
+    .icon-image {
+      display: none;
+    }
+
+    .image-container .icon-image, .lock-self .lock-user, .lock-other .lock {
+      display: block;
+    }
+
+    .is-disabled .doc-actions, .is-disabled .new-file {
+      pointer-events: none;
+    }
+
+    .center {
+      color: #b4b6ba;
+      font-size: 14px;
+      text-align: center;
+      cursor: pointer;
+      pointer-events: none;
+    }
+
+    .fonticon {
+      color: #77797c;
+      font-size: 16px;
+      opacity: 0.6;
+    }
+    .fonticon:hover, .fonticon:focus {
+      opacity: 1;
+    }
+
+    .dropZone {
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+    }
+    .dropZone .dropOverlay {
+      opacity: 0;
+      max-width: 500px;
+      position: absolute;
+      padding: 6px 0;
+      font-size: 1.5em;
+      line-height: 1.42857;
+      text-align: center;
+      border: 2px dashed transparent;
+      transition: opacity .2s ease-out;
+      z-index: -1;
+    }
+    .dropZone .dropOverlay .dropZone-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .dropZone .dropOverlay.is-dropping {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      background-color: #fff;
+      border-color: #368ec4;
+      color: #368ec4;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    @media only screen and (max-width: 250px) {
+      .file-container {
+        padding-right: 0px !important;
+      }
+
+      .file-action {
+        margin: 0.0;
+        font-size: 15px !important;
+      }
+
+      .file-title {
+        width: calc(100% - 55px) !important;
+      }
+
+      .file-icon-container, .add-button div {
+        display: none;
+      }
+    }
+    .docviewer-container {
+      height: 27px;
+    }
+
+    .no-display {
+      display: none;
+    }
+
+    .doc-entry {
+      display: inline-block;
+      width: 100%;
+      border-bottom: 1px #e2e4e3 solid;
+      height: 26px;
+      vertical-align: middle;
+    }
+    .doc-entry:hover {
+      background-color: #e2e4e3;
+    }
+
+    .doc-info {
+      display: inline-block;
+      width: calc(100% - 30px);
+    }
+
+    .doc-actions {
+      display: inline-block;
+      width: 25px;
+    }
+
+    .doc-title {
+      display: inline-block;
+      max-width: calc(100% - 30px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: '3DS-Light';
+      vertical-align: middle;
+    }
+
+    .doc-actions div {
+      cursor: pointer;
+    }
+
+    .doc-entry div {
+      display: inline-block;
+    }
+
+    .doc-info div {
+      display: inline-block;
+      cursor: default;
+    }
+
+    .doc-popup {
+      font-size: 14px;
+      display: inline-block;
+      cursor: pointer !important;
+      vertical-align: middle;
+    }
+
+    .no-edit {
+      color: #EA4F37;
+      display: block;
+    }
+    </style>
+  </template>
+</dom-module>

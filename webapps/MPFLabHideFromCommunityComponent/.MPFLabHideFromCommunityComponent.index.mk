@@ -1,0 +1,12 @@
+m|MPFComponents\MPFLabHideFromCommunityComponent.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19096
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFLabHideFromCommunityComponent\assets\nls\LabHideFromCommunityComponent_en.json|1554530789|261
+s|MPFComponents\MPFLabHideFromCommunityComponent.mweb\src\assets\nls\LabHideFromCommunityComponent_en.json|1551353270|261
+t|win_b64\webapps\MPFLabHideFromCommunityComponent\MPFLabHideFromCommunityComponent_en.js|1554530790|408
+s|MPFComponents\MPFLabHideFromCommunityComponent.mweb\src\assets\nls\LabHideFromCommunityComponent_en.json|1551353270|261
+t|win_b64\webapps\MPFLabHideFromCommunityComponent\MPFLabHideFromCommunityComponent.js|1540605182|1427
+s|MPFComponents\MPFLabHideFromCommunityComponent.mweb\src\MPFLabHideFromCommunityComponent.js|1535625160|0
+s|MPFComponents\MPFLabHideFromCommunityComponent.mweb\src\LabHideFromCommunityComponent.js|1538751773|4204

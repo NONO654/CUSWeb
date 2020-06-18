@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<head>
+
+	<title>My Simulations</title>
+
+	<!-- Application Metas Start -->
+	<meta name="description" content="Simulation Details Widget" />
+	<meta name="author" content="Dassault Systèmes" />
+	<meta name="apiVersion" content="1.3" />
+	<meta name="debugMode" content="false" />
+	<meta name="autoRefresh" content="0" />
+	<!-- Application Metas End -->
+
+	<!-- Load the web components polyfill -->
+	<script type="text/javascript" src="../Polymer-1.6.1/webcomponents-lite.min.js"></script>
+
+	<!-- Load AmdLoader -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+	<!-- Load the UWA framework -->
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+
+	<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+	<script type="text/javascript" src="../W3DXComponents/W3DXComponents.js"></script>
+
+	<!-- Load any external JS or CSS file -->
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+	<link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+
+	<!-- Load Polymer web components -->
+
+	<link rel="import" href="../SMAProcSP/sp-dashboard/sp-dashboard.html"/>
+	<link rel="import" href="./ps-list-view/ps-list-view.html"/>
+	<link rel="import" href="../SMAProcSP/sp-font/sp-entypo.html">
+	<link rel="import" href="../SMAProcSP/sp-webservice/sp-webservice.html">
+	<link rel="import" href="../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+	<!--  Widget preferences -->
+	<widget:preferences>
+	<widget:preference name="filter" type="list" label="Filter" defaultValue="Owned">
+	<option value="Owned" label="Owned" />
+	<option value="All" label="All" />
+</widget:preference>
+<widget:preference type="range" name="limit" step="50" min="50" max="1000" defaultValue="200" label="Maximum Number of simulations to display">
+</widget:preference>
+</widget:preferences>
+<style>
+.errorDiv {
+	height: 100%;
+	width: 100%;
+	border: 2px dashed #b4b6ba;
+	display: flex;
+	text-align: center;
+}
+.errorText {
+	align-self: center;
+	width: 100%;
+}
+</style>
+<script type="text/javascript">
+
+function onReady () {
+	appData = {};
+	require(
+		['SMAProcSimListingUI/SimulationListWidget'],
+		function (SimulationListWidget) {
+			'use strict';
+			if (!SimulationListWidget) {
+				alert('SimulationListWidget object not found.');
+			}
+		},
+		function ( /* err */) {
+			'use strict';
+			alert('Failed to load SimulationListWidget.');
+		});
+	}
+
+	if (document.createElement('sp-dashboard').isInDashboard) {
+		onReady();
+	} else {
+		window.addEventListener('WebComponentsReady', onReady);
+	}
+	</script>
+
+</head>
+
+<body>
+	<p>Loading....</p>
+</body>
+</html>

@@ -1,0 +1,1 @@
+define("DS/MPFMyProfileComponent/MPFMyProfileComponent_fr",{});define("DS/MPFMyProfileComponent/assets/nls/MyProfileComponent",{myProfile:"Mon profil"});

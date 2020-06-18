@@ -1,0 +1,9 @@
+m|WebUX\Panels.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\Panels\Panels.js|1540605190|2804
+s|WebUX\Panels.mweb\src\PanelBase.js|1454666055|3010
+s|WebUX\Panels.mweb\src\Panels.js|1427881365|0
+s|WebUX\Panels.mweb\src\SidePanel.js|1538471145|5627

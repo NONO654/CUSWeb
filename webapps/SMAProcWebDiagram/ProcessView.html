@@ -1,0 +1,84 @@
+<dom-module id="cmp-process-view">
+    <template>
+        <style>
+            :host {
+                display: inline-block;
+                position: absolute;
+                box-sizing: border-box;
+                height: 80px;
+                width: 80px;
+            }
+
+            :host([hidden]) {
+                display: none;
+            }
+
+            :host([selected]) #nodeView {
+                border: thick solid #78befa;
+            }
+
+            :host([disabled]) #nodeView {
+                /* background-color: #787878;
+                border-color: #787878; */
+                opacity: .7;
+                pointer-events: none;
+            }
+
+            :host([disabled]) #nodeView:hover {
+                border: thick solid #787878;
+            }
+
+            .viewContainer {
+                width: inherit;
+            }
+
+            #nodeView {
+                display: block;
+                position: relative;
+                background-color: #064151;
+                border: thick solid #064151;
+                border-radius: 10px;
+                height: 60px;
+                top: 10px;
+                width: inherit;
+                cursor: grab;
+            }
+
+            #nodeView:hover {
+                border: thick dashed #78befa;
+            }
+
+            #nodeView.highlighteddf {
+                border: thick solid #8ED2CA;
+            }
+
+            #processTitle {
+                position: absolute;
+                top: 80px;
+                font: 15px Arial;
+                width: 180%;
+                transform: translateX(-22%);
+                display: block;
+                text-align: center;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: pre;
+            }
+
+            .icon {
+                height: 32px;
+                width: unset;
+                display: block;
+                position: relative;
+                margin: 0 auto;
+                top: calc(50% - 16px);
+            }
+        </style>
+        <div class="viewContainer">
+            <div id="nodeView" draggable="true" title="Click to drag this process onto other widgets">
+                <img src="[[icon]]" class="icon" />
+            </div>
+            <label id="processTitle" title="[[processTitle]]">[[processTitle]]</label>
+        </div>
+    </template>
+</dom-module>

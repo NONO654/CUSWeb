@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+
+  <!-- Application Metas -->
+  <!-- <title>3DSearch</title> -->
+
+  <meta name="author" content="Dassault Systemes" />
+  <meta name="description" content="Universal Search results presentation widget" />
+
+  <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+  <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+  <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+  <!--<script type="text/javascript" src="../WebUX/WebUX.js"></script>-->
+  <!--<script type="text/javascript" src="SNResultUX.js"></script>-->
+
+  <link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+  <link rel="stylesheet" href="../Core/wux.css" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+  <link rel="stylesheet" type="text/css" href="SNResultUX.css" />
+
+  <widget:preferences>
+    <widget:preference type="hidden" name="search_ressources" defaultValue="" />
+    <widget:preference type="hidden" name="activeTenant" defaultValue="" />
+    <widget:preference type="hidden" name="searchWidgetPreferences" defaultValue="" />
+    <widget:preference type="hidden" name="transient_context" defaultValue="false" />
+    <widget:preference type="hidden" name="settings_topbar" defaultValue="" />
+    <widget:preference type="hidden" name="search_criteria" defaultValue="" />
+    <widget:preference type="hidden" name="tag_filter" defaultValue="" />
+    <widget:preference type="hidden" name="recent_filter" defaultValue="*" />
+  </widget:preferences>
+
+  <style type="text/css">
+  </style>
+
+  <!-- Application JavaScript Source -->
+  <script type="text/javascript">
+    //<![CDATA[
+    /*global widget, require, define*/
+    require([
+          // UWA
+          'UWA/Core',
+          // WebApps
+          'WebappsUtils/WebappsUtils',
+          //'WebUX/WebUX', DO NOT LOAD, FUN061818
+          'DS/SNResultUX/SNResultUX',
+    ], function (UWACore,
+          WebappsUtils,
+          //WebUX, DO NOT LOAD, FUN061818.
+          SNResultUX
+    ) {
+      'use strict';
+      var snresultuxMgt = new SNResultMgt_Wdg({
+        'widget': widget
+      });
+      widget.onDestroy = function () {
+        snresultuxMgt.onDestroy();
+        snresultuxMgt = null;
+      };
+    });
+    //]]>
+  </script>
+
+</head>
+
+<body>
+  <p>Loading...</p>
+</body>
+
+</html>

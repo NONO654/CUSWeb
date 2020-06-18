@@ -1,0 +1,12 @@
+m|MPFComponents\MPFShopSubmitComponent.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19096
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFShopSubmitComponent\assets\nls\ShopSubmitComponent_en.json|1545169471|268
+s|MPFComponents\MPFShopSubmitComponent.mweb\src\assets\nls\ShopSubmitComponent_en.json|1544629987|268
+t|win_b64\webapps\MPFShopSubmitComponent\MPFShopSubmitComponent.js|1554530792|2337
+s|MPFComponents\MPFShopSubmitComponent.mweb\src\MPFShopSubmitComponent.js|1544543545|0
+s|MPFComponents\MPFShopSubmitComponent.mweb\src\ShopSubmitComponent.js|1550833703|4724
+t|win_b64\webapps\MPFShopSubmitComponent\MPFShopSubmitComponent_en.js|1545169473|381
+s|MPFComponents\MPFShopSubmitComponent.mweb\src\assets\nls\ShopSubmitComponent_en.json|1544629987|268

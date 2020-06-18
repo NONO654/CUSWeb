@@ -1,0 +1,1 @@
+define("DS/W3DDriveWrapper/W3DDriveWrapper_es",{});define("DS/W3DDriveWrapper/assets/nls/saveToMyDrive",{loading_tree:"Cargando árbol...",loading_tenants:"Cargando clientes...",select_tenant:"Seleccione un cliente",publish:"Publicar",cancel:"Cancelar",title:"Título",select_platform:"Seleccionar una plataforma",save_to_my_drive:"Guardar en mi unidad"});

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.DownhillSimplex" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationDownhillSimplex" nlsID="dispname">Downhill Simplex</DisplayName>
+	<Description nlsFile="SMAWflOptimizationDownhillSimplex" nlsID="desc">Downhill Simplex optimization algorithm</Description>
+	<LongDescription nlsFile="SMAWflOptimizationDownhillSimplex" nlsID="longdesc">
+		<![CDATA[Downhill Simplex
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Exploratory Technique
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for discontinuous design spaces
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>No
+
+</span><span style="font-weight:bold">Features:
+</span><span>Samples the space across a sub-region and moves from the worst point in the direction of the opposite face of the simplex toward better solutions. 
+
+The downhill simplex method is a geometrically intuitive algorithm. A simplex is defined as a body in n dimensions consisting of n+1 vertices. Specifying the location of each vertex fully defines the simplex. In two dimensions, the simplex is a triangle. In three dimensions, it is a tetrahedron. As the algorithm proceeds, the simplex makes way downward toward the location of the minimum through series of steps. These steps can be divided into reflections, which consist of moving the vertex of the simplex where the objective function is largest(worst) through the opposite face of the simplex to a lower(better) point. Reflections maintain the volume of the simplex. When possible, an expansion can accompany the reflection in order to increase the size of the simplex and speed convergence by allowing larger steps. Conversely, contractions "shrink" the simplex, allowing it to settle into a minimum or pass through a small opening like the neck of an hourglass. 
+
+This method has the highest probability of finding the global minimum when it is started with big initial steps. The initial simplex will then span a greater fraction of the design space and the chances of getting trapped in a local minimum are smaller. However, for complex hyperdimensional topographies, the method can break down. 
+
+</span><span style="font-weight:bold">Basic Tuning Parameters:
+</span><span>   &#8226; Max Iterations:
+         This parameter sets the maximum number of design iterations that you want the optimizer to run. The type of value is integer. The default value is 40.
+   
+   &#8226; Initial Simplex size:
+         This is the size of the starting simplex as a fraction of your domain. It should be a real value greater than zero and less than or equal to one. It has the highest probability of finding a global optimum when started with a bigger initial size. Since it spans a larger fraction of the design space, the chances of getting trapped in a local minimum are smaller. The default value is 0.1 which is equivalent to 10% of the domain.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.DownhillSimplex</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationDownhillSimplex.CATNls" targetFilename="SMAWflOptimizationDownhillSimplex.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationDownhillSimplex_Japanese.CATNls" targetFilename="SMAWflOptimizationDownhillSimplex_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.downhillSimplex.DownhillSimplex</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Simplex Count" type="integer" valuetype="single">
+				<Value>1</Value>
+			</Property>
+			<Property name="Initial Simplex Size" type="real" valuetype="single">
+				<Value>0.1</Value>
+			</Property>
+			<Property name="Max Iterations" type="integer" valuetype="single">
+				<Value>40</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

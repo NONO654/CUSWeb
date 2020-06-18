@@ -1,0 +1,1 @@
+define("DS/ENOXCADCATIAV5UI/ENOXCADCATIAV5UI_ja",{});define("DS/ENOXCADCATIAV5UI/assets/nls/ENOXCADFileNameValidationNls",{Size_error:"ファイル名は最大 {maxSupportedLength} 文字までです",Unsupported_char:"ファイル名に無効な文字が含まれます: {char}",Space_Leading_Trailing:"先頭または最後に不要なスペースがあります",Space_Leading:"先頭に不要なスペースがあります",Space_Trailing:"最後に不要なスペースがあります"});

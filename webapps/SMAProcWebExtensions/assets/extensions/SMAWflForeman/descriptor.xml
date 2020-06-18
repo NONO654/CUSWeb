@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.Foreman" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflForeman" nlsID="displayname">Abaqus Execution</DisplayName>
+	<Description nlsFile="SMAWflForeman" nlsID="description">>Abaqus Execution</Description>
+	<LongDescription nlsFile="SMAWflForeman" nlsID="longdesc">Abaqus Execution</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>600</Value>
+			<Value>500</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflForeman32.png" targetFilename="large/SMAWflForeman32.png" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebGenericEditor/cmp-generic.html" targetFilename="SMAProcWebGenericEditor/cmp-generic.html"/>
+		<Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-generic</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>SMAWflWebExtensionEditor</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_stylesheet"/>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+	<Properties>
+		<!--  Foreman Execute properties -->
+		<Property name="simFileName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="BehaviorPath" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="jobName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="cpus" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="foremanType" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="Co-simulation" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+		<Property name="spec" type="file" valuetype="single" mode="input">
+			<Value/>
+		</Property>
+		<Property name="doublePrecision" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+		<Property name="interaction" type="string" valuetype="single">
+			<Value/>
+		</Property>
+	</Properties>
+</wfext:Extension>

@@ -1,0 +1,11 @@
+m|WebUX\Decorator.mweb
+b|j|c,m
+b|c|n,m
+v|6.421.9.19291
+r|G:\R421\BSF\.
+t|win_b64\webapps\Decorator\Decorator.js|1571438725|12176
+s|WebUX\Decorator.mweb\src\SpinBoxDecorator.js|1557900182|9976
+s|WebUX\Decorator.mweb\src\AbstractDecorator.js|1570786872|2771
+s|WebUX\Decorator.mweb\src\Decorator.js|1441958956|0
+s|WebUX\Decorator.mweb\src\OldSpinBoxDecorator.js|1563256718|10223
+s|WebUX\Decorator.mweb\src\DecoratorManager.js|1557910035|5078

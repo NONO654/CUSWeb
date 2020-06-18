@@ -1,0 +1,12 @@
+m|WAfrUI\WAfrUIStandardComponents.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.5.19078
+r|G:\R421\BSF\.
+t|win_b64\webapps\WAfrUIStandardComponents\WAfrUIStandardComponents.js|1553029528|16858
+s|WAfrUI\WAfrUIStandardComponents.mweb\src\WAfrUIStandardComponents.js|1499703924|3
+s|WAfrUI\WAfrUIStandardComponents.mweb\src\UIFrame.js|1552653230|7724
+s|WAfrUI\WAfrUIStandardComponents.mweb\src\mod_UIComponent.js|1552317233|17880
+s|WAfrUI\WAfrUIStandardComponents.mweb\src\mod_HandlerProxyUtilities.js|1552401883|5119
+s|WAfrUI\WAfrUIStandardComponents.mweb\src\mod_UIInterpreter.js|1535985534|7827
+s|WAfrUI\WAfrUIStandardComponents.mweb\src\NotificationManager.js|1531734255|3169

@@ -1,0 +1,521 @@
+<html>
+<head>
+<!-- D3 -->
+<script type="text/javascript" src="../../simulationcentral/smaAdvise3rdPartyJS/d3-latest.min.js"></script>
+		
+<!-- Amd Loader before UWA -->
+<script	type="text/javascript" src="../AmdLoader/AmdLoader.js" ></script>
+
+<!-- jQuery and jQuery UI -->
+<script type="text/javascript" src="../../plugins/libs/jquery/2.0.0/jquery.min.js"></script>
+<!-- Application scripts -->
+<script type="text/javascript" src="../SMAAnalyticsDataTable/SMAAnalyticsDataTable.js"></script>
+<!-- Application CSS -->
+<link rel="stylesheet" type="text/css" href="../SMAAnalyticsDataTable/SMAAnalyticsDataTable.css" ></link>
+<style type="text/css">
+/*  =====================================================================
+FONT-FACES
+====================================================================== */
+
+/** 3ds light */
+@font-face {
+    font-family: '3ds';
+    src: url('..UIKIT/assets/fonts/3dslight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+/** 3ds regular */
+@font-face {
+    font-family: '3ds';
+    src: url('..UIKIT/assets/fonts/3dsregular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/** 3ds bold */
+@font-face {
+    font-family: '3ds';
+    src: url('..UIKIT/assets/fonts/3dsbold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.font-3dslight {
+  font-family: '3ds';
+  font-weight: 300;
+}
+
+.font-3dsregular {
+  font-family: '3ds';
+  font-weight: normal;
+}
+
+.font-3dsbold {
+  font-family: '3ds';
+  font-weight: bold;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 10pt;
+    vertical-align: baseline;
+    font-family: '3ds';
+}
+
+.TableContentDiv{
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0px;
+    position: absolute;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    background: #fff;
+    overflow: hidden;
+}
+
+</style>
+
+<script type="text/javascript">
+//<![CDATA[
+//*******************************************************************************************************
+
+require.config(
+      // paths
+      {
+          baseUrl : '../'
+      }
+);
+//*******************************************************************************************************
+	//fix for IE which does not have "console" defined unless debugger is opened
+	if(!window.console) {
+       window.console = {
+           log : function(){},
+           warn : function(){},
+           error : function(){},
+           time : function(){},
+           timeEnd : function(){},
+           info: function(){}
+       }
+   }
+   
+   //Setup the locale so that NLS can work
+   var userLang = sessionStorage.userLang;
+   console.log('Target Language is: ' + userLang);
+   var f = "../webapps";
+   var requirejs = {config:{ i18n:{ locale:userLang}},
+		   paths: {DS: f,UWA: f + "/UWA2/js",qwery: f + "/lib/qwery"}};
+   
+   //sd4 - this is needed unfortunately
+   //FIXME: GLOBAL!
+   var sessionInfo = {noServant: false};
+   var NO_OP = function () {};
+   function loadView(payload) {
+		// need to update the locale
+		requirejs.config.i18n.locale = payload.language || "en";
+		// FIXME: GLOBAL!
+	   window.adviseLaunchInfo =  payload;
+	   
+		require(['DS/SMAAnalyticsUI/SMAAnalyticsJQuery', 
+	         'DS/SMAAnalyticsUI/SMAAnalyticsProxy',
+	         'text!DS/SMAAnalyticsUI/assets/ResultsAnalyticsConstants.json',
+	         'DS/SMAAnalyticsNLS/SMAAnalyticsNLSUtils',
+	         // Data table
+	         'DS/SMAAnalyticsDataTable/SMAAnalyticsServantDataHandler',
+	 		 'DS/SMAAnalyticsDataTable/SMAAnalyticsDataTable2',
+	 		 'DS/SMAAnalyticsUI/SMAAnalyticsDTContextMenu',
+	 		 'DS/SMAAnalyticsUI/SMAAnalyticsMarkers',
+			 'DS/SMAAnalyticsUI/SMAAnalyticsDataTableSupportFns',
+			 'DS/SMAAnalyticsUI/SMAAnalyticsCssEditor'
+	         ], 
+		function(
+				$simjq, proxy, AdviseConstants,	NLSUtils,
+				DTDataHandler, ShopDataTable, ContextMenu, DatasetMarkers, DTSupport, CssEditor){
+			'use strict';
+			AdviseConstants = JSON.parse(AdviseConstants);
+			
+			window.proxy = proxy; //FIXME:global
+			//FIXME: There is UI code in proxy
+			proxy.updateBasketUI = NO_OP;
+			proxy.spinnerControlShow = NO_OP;
+			proxy.spinnerControlHide = NO_OP;
+			
+			DTSupport.setProxy(proxy);
+			
+			var TableWrapper = {
+					// Copies the group, but pushes all parameters and groups into a
+					// children array. D3 likes children arrays.
+					// Ids are stored in groupIDs and paramIDs
+					makeD3GroupCopy : function(group, parentID) {
+						var newGroup = {};
+
+						newGroup.children = [];
+						newGroup.groupIDs = [];
+						newGroup.paramIDs = [];
+					newGroup.parentID = (typeof parentID !== 'undefined' ? parentID : undefined);
+
+						// Add non-child attributes
+						for ( var key in group) {
+						if (key !== 'parameters' && key !== 'groups') {
+								newGroup[key] = group[key];
+							}
+						}
+						var i = 0;
+						// Add params
+					if (typeof group.parameters !== 'undefined') {
+							for (i = 0; i < group.parameters.length; i++) {
+								newGroup.children.push(AdviseUtils.prototype.makeD3ParameterCopy(group.parameters[i], group.ID));
+								newGroup.paramIDs.push(group.parameters[i].ID);
+							}
+						}
+
+						// Add groups
+					if (typeof group.groups !== 'undefined') {
+							for (i = 0; i < group.groups.length; i++) {
+								newGroup.children.push(AdviseUtils.prototype.makeD3GroupCopy(group.groups[i], group.ID));
+								newGroup.groupIDs.push(group.groups[i].ID);
+							}
+						}
+
+						return newGroup;
+					},
+					dataHandlerState : 'inactive',
+					dataTableState : 'inactive',
+					dataHandlerDeferred : new $simjq.Deferred(),
+					// this is same as the "createShopPage" and "enteringShopPage" combined
+					initialize : function () {
+						TableWrapper.cssEditor = new CssEditor();
+						for(var i = 0; i < document.styleSheets.length; i++){
+							if(typeof document.styleSheets[i].href === 'string' && document.styleSheets[i].href.indexOf('DataTable') > -1){
+								TableWrapper.cssEditor.setStyleSheet(document.styleSheets[i]);
+								break;
+							}
+						}
+						TableWrapper.dataTableContext = new ContextMenu($simjq);
+						TableWrapper.dataTableInterface = DTSupport.createTableAdviseInterface(TableWrapper.dataTableContext,
+								proxy.dataTableProxy, 
+								TableWrapper.refreshShopTable,
+								NO_OP);
+						
+						//We need the data handler
+						if(TableWrapper.dataHandlerState === 'inactive'){
+							console.log('Creating and initializing data handler.');
+							TableWrapper.createDataHandler();
+						} 
+						TableWrapper.initializeDataHandler();
+					},
+					createDataHandler : function () {
+						TableWrapper.dataHandler = new DTDataHandler({}, TableWrapper.dataTableInterface, proxy.dataTableProxy, TableWrapper.makeD3GroupCopy);
+					},
+					initializeDataHandler : function(){
+						
+						TableWrapper.dataHandlerState = 'updating';
+						
+						//var dataHandlerDeferred = new $simjq.Deferred();
+						
+						var dataHandlerDeferred = TableWrapper.dataHandlerDeferred;// = dataHandlerDeferred;
+						
+						TableWrapper.dataHandler.importVarGroup();
+						
+						//save order only if the user is in control (for collaboration)
+						if(proxy.caseInfo.userList[proxy.caseInfo.CurrentUser.userID].isInControl){
+							TableWrapper.dataHandler.saveOrder();
+						}
+
+						TableWrapper.dataHandler.addFunctionColumn(DTSupport.basketFunction, DTSupport.getBasketColumnObject(), true);
+						TableWrapper.dataHandler.addFunctionColumn(DTSupport.dataSourceFunction, DTSupport.getDataSourceColumnObject(), true);
+						TableWrapper.dataHandler.updateFixedColumn('Rank',{
+							compareFn : function(rowA, rowB){
+								/*jshint camelcase: false */
+								var a = rowA.fixedData.auto_rank;
+								var b = rowB.fixedData.auto_rank;
+								
+								if(+b === 0 && +a === 0){
+									return 0;
+								} else if (+a === 0) {
+									return 1;
+								} else if (+b === 0) {
+									return -1;
+								} else {
+									return +a - b;
+								}
+							}
+						});
+						
+						//TableWrapper.timers.initializeData.getAndResetInterval('Data handler setup: ');
+						
+						//Add array columns
+						var paramFlatList = proxy.getAllParametersAsFlatList();
+						for(var i=0; i<paramFlatList.length;i++){
+							if(proxy.findParameter(paramFlatList[i]).structure === 'ARRAY'){
+								TableWrapper.dataHandler.addFunctionColumn(DTSupport.arrayFunction,{ID:paramFlatList[i]}, false);
+							}
+						}
+						
+						TableWrapper.dataHandler.initializeTableData().done(function(){
+							TableWrapper.dataHandler.setFixedColumns(5, true);
+							
+							TableWrapper.dataHandlerDeferred.resolve();
+							TableWrapper.dataHandlerState = 'done';
+						});
+						
+						return dataHandlerDeferred;
+					},
+					updateDataHandler: function(options){
+						options = options || {};
+						var dataHandlerDeferred;
+						if (TableWrapper.dataHandlerState === 'done') {
+							TableWrapper.dataHandlerState = 'updating';
+							
+							TableWrapper.dataHandlerDeferred = new $simjq.Deferred();
+							
+							//console.log('REDEFINING DATA HANDLER DEFERRED!!!');
+							var dataHandlerDeferred = TableWrapper.dataHandlerDeferred;
+							
+							if(options.deleteNode === true){
+								TableWrapper.dataHandler.importVarGroup({garbageCollect : true});
+							} else {
+								TableWrapper.dataHandler.importVarGroup();
+							}
+							//Update array columns
+							var paramFlatList = proxy.getAllParametersAsFlatList();
+							for(var i=0; i<paramFlatList.length;i++){
+								if(proxy.findParameter(paramFlatList[i]).structure === 'ARRAY'){
+									TableWrapper.dataHandler.addFunctionColumn(DTSupport.arrayFunction,{ID:paramFlatList[i]}, false);
+								}
+							}
+							var moveDeferred = new $simjq.Deferred();
+							if(options && options.moveNode){
+								var targetOrder = TableWrapper.dataHandler.data.columns[options.lastColumnID].order + 1,
+									newParameter = proxy.findParameter(options.newColumnID);
+								TableWrapper.dataHandler.insertParameter(newParameter, targetOrder);
+								TableWrapper.dataHandler.saveOrder().done(function(){
+									if(TableWrapper.dataTableState === 'rendered'){
+										TableWrapper.dataTable.updateHeader();
+										TableWrapper.dataHandler.updateColumnPositions();
+									}
+									moveDeferred.resolve();
+								});
+							} else {
+								moveDeferred.resolve();
+							}
+							$simjq.when(moveDeferred).done(function(){
+								TableWrapper.dataHandlerState = 'done';
+								TableWrapper.dataHandlerDeferred.resolve();
+							});
+						}
+						return dataHandlerDeferred;
+					},  // end updateDataHandler
+					initializeDataTable : function() {
+						if (TableWrapper.dataTableState === 'inactive') {
+							TableWrapper.dataTableState = 'rendering';
+							TableWrapper.tableInitializing = true;
+							TableWrapper.tableInitializeListener = TableWrapper.dataHandlerDeferred;
+							TableWrapper.tableInitializeListener.done(function(){
+								// Fetch table data and build table
+								var deferredTracker = new $simjq.Deferred();
+								//Should not assume initialization.
+								//Check and initialize/refresh accordingly.
+								var dataHandlerDeferred = TableWrapper.dataHandlerDeferred;
+								TableWrapper.dataHandler.importVarGroup({garbageCollect : true, initializing: true});
+								var tableDataDeferred = TableWrapper.dataHandler.initializeTableData();
+								
+								//sd4 - allow users to specify custom colors
+								//
+								var options = {pareto_color: AdviseConstants.PARETO_COLORS, feasible_color:AdviseConstants.DOMINATED_COLORS, infeasible_color:AdviseConstants.INFEASIBLE_COLORS, excluded_color:AdviseConstants.EXCLUDED_COLORS }; 
+								TableWrapper.dataTable = new ShopDataTable(options, TableWrapper.dataTableInterface);
+								TableWrapper.dataTable.setCssEditor(TableWrapper.cssEditor);
+								TableWrapper.dataTable.setContainer(document.getElementById('tableView'));
+								TableWrapper.dataTable.setStartEditCallback(TableWrapper.startEditMode);
+								TableWrapper.dataTable.setEndEditCallback(TableWrapper.endEditMode);
+								
+								dataHandlerDeferred.done(function(){
+									TableWrapper.dataTable.setDataHandler(TableWrapper.dataHandler);
+									TableWrapper.dataTable.initializeHeader();
+									TableWrapper.dataHandler.updateColumnPositions();
+									TableWrapper.dataTable.initializeBody();
+									tableDataDeferred.done(function(){
+										TableWrapper.dataTable.updateBodySize();
+									});
+									deferredTracker.resolve();
+								});
+								dataHandlerDeferred.fail(function(){
+									deferredTracker.reject();
+								});
+								$simjq.when(deferredTracker).always(function() {
+									TableWrapper.dataTableState = 'rendered';
+								});
+							});
+
+							TableWrapper.tableInitializeListener.fail(function(){
+								TableWrapper.dataTableState = 'rendered';
+							});
+							
+						} else if (TableWrapper.dataTableState === 'rendered') {
+							// Table is initialized, and not rendering, so refresh it
+							// instead.
+							TableWrapper.refreshShopTable();
+						}
+					}, // end initializeDataTable
+					refreshShopTable: function () {
+						// This will rebuild the data object for the shop table and then refresh the content
+						// refreshShopTable rebuilds both the parameters (i.e. varGroup) and the rows.
+						if (typeof event === 'undefined') {
+							event = {};
+						}
+						if(!(event instanceof Array)){
+							event = [event];
+						}
+						//Ignore events with these sources
+						var ignoreEventSource = {
+							'dataHandler-moveColumn' : true
+						};
+						if(ignoreEventSource[event[0].iaEventUISource] === true){
+							return;
+						}
+						if(event[0].iaEventUISource === 'dataTable-ContextMenu'){
+							return;
+						}
+						// This responds to the full refresh, so for now this will catch
+						// everything.
+						console.log('Table refresh requested. Data table state: ' + TableWrapper.dataTableState);
+						if (TableWrapper.dataTableState === 'rendered') {
+							TableWrapper.dataTableState = 'rendering';
+							var dataHandlerDeferred;
+							//TableWrapper.timers.dataTable.resetInterval();
+							if(TableWrapper.dataHandlerState === 'inactive'){
+								TableWrapper.createDataHandler();
+								dataHandlerDeferred = TableWrapper.initializeDataHandler();
+							} else if(TableWrapper.dataHandlerState === 'created'){
+								dataHandlerDeferred = TableWrapper.initializeDataHandler();
+							} else if (TableWrapper.dataHandlerState === 'updating'){
+								dataHandlerDeferred = TableWrapper.dataHandlerDeferred;
+							} else {
+								dataHandlerDeferred = TableWrapper.dataHandlerDeferred;
+							}
+							//TableWrapper.timers.dataTable.getAndResetInterval(NLSUtils.translate('Data table initializing') + ': ');
+							
+							if(event[0].iaEventType === 'hierarchyChanged' || event[0].iaEventType === 'parameterChanged'){
+								TableWrapper.dataHandler.importVarGroup({garbageCollect : true});
+								
+								//FIXME: ImportVarGroup currently un-arrays all array functions. This needs to be fixed.
+								//Temporary fix: re-declare the array functions
+								var paramFlatList = proxy.getAllParametersAsFlatList();
+								for(var i=0; i<paramFlatList.length;i++){
+									if(proxy.findParameter(paramFlatList[i]).structure === 'ARRAY'){
+										TableWrapper.dataHandler.addFunctionColumn(DTSupport.arrayFunction,{ID:paramFlatList[i]}, false);
+									}
+								}
+								
+								//TableWrapper.timers.dataTable.getAndResetInterval(NLSUtils.translate('Import vargroup') + ': ');
+							}
+
+							// For full refresh, we want to update the data, then update the table
+							var deferredTracker = new $simjq.Deferred();
+
+							dataHandlerDeferred.done(function(){
+								//TableWrapper.timers.dataTable.getAndResetInterval(NLSUtils.translate('Data ready') + ': ');
+								
+								TableWrapper.dataTable.eventController('refreshTable', true);
+								//TableWrapper.timers.dataTable.getAndResetInterval(NLSUtils.translate('Table refreshed') + ': ');
+								deferredTracker.resolve();
+							});
+
+							$simjq.when(deferredTracker).always(function() {
+								//TableWrapper.timers.dataTable.getTotalTime(NLSUtils.translate('TT_REFRESH_TIME') + ': ');
+								TableWrapper.dataTableState = 'rendered';
+							});
+						} else if (TableWrapper.dataTableState === 'inactive'){
+							TableWrapper.initializeDataTable();
+						}
+					},
+					startEditMode : function () {
+						
+					},
+					endEditMode : function () {
+						
+					}
+			};
+			proxy.connectTo(payload.caseId, '', payload.servantURL, true);
+			proxy.initialize(function() {
+				
+				// If RA is in widget mode set the widget ID to the 
+				// proxy.
+				proxy.setWidgetID(payload.widgetId);
+				proxy.setDashboardURL(payload.dashboardURL);
+				proxy.removeAllEventListeners();
+				// sd4 - Data set markers
+				DatasetMarkers.initializeDataSetMarkers(proxy);
+				TableWrapper.initialize();
+				TableWrapper.refreshShopTable();
+				setTimeout(function() {
+					TableWrapper.initializeDataTable();
+				}, 100)
+			});
+		});
+   }
+   
+	//========================================================
+    /**
+     * Event handler to process messages received from the
+     * 3DDashboard widget frame
+     *
+     */
+    //========================================================
+		function analyticsMessageHandler(msg){
+			var analyticsFrame = document.getElementById('widgetframe');
+			if (typeof msg !== 'undefined' && msg !== null){
+				var msgTxt = msg.data || '';
+				if (msgTxt.length > 0){
+					if (msgTxt.indexOf('SERVANT_STARTED') > -1){
+						var payload = JSON.parse(msgTxt).SERVANT_STARTED;
+						loadView(payload);
+						
+					} else if(e.data.indexOf('TRIGGER_RA_SAVE')>-1){
+						console.log('RA Frame - received save request from dashboard');
+						var event = {};
+						event.eventID = 'save';
+						proxy.propagateEvent(event);
+					} else if(e.data.indexOf('WIDGET_RESIZE')>-1){
+						if(e.data.indexOf(':') > -1){
+							sessionInfo.widgetViewType = e.data.split(':')[1];
+							console.log('widgetResizeCallback()');
+						}
+					} else if(e.data.indexOf('CLOSE_RA_SERVANT')>-1){
+						if(e.data.indexOf(':') > -1){
+							var caseID = e.data.split(':')[1];
+							console.log('closeRAServantFrom3DD(caseID)');
+						}
+					}
+				}
+			}
+		};
+
+		//========================================================
+		/**
+		 * Onload event
+		 */
+		//========================================================
+		function load(){
+			window.addEventListener('message', analyticsMessageHandler);
+		};
+
+		window.onload = load;
+//]]>
+</script>
+</head>
+
+
+
+
+
+<body>
+<div id='outerContentFrame'>
+	<div id='tableView' class='TableContentDiv'></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+define("DS/CAT3DAnnotationBaseUI/CAT3DAnnotationBaseUI_ja",{});define("DS/CAT3DAnnotationBaseUI/assets/nls/CAT3DAnnotationBaseUI",{MoreLbl:"詳細を表示...",FailureModes:{"0":"重要性が最低","1":"低","2":"中","3":"高","4":"非常に高"}});

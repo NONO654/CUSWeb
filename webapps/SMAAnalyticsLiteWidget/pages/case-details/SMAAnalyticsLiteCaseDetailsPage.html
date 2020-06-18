@@ -1,0 +1,136 @@
+<div class="flexrow dsfont" id="dataset-details-top-container">
+		
+	<!-- Check if this template is being used for dataset details
+		or something else. Modify it accordingly -->
+	<!-- Dataset Details -->
+	
+	{{#if requirementname}}
+		<div class="datasets-details-row" id="dataset-details-title">
+			<div class="datasets-details-label">{{raTranslate "Title"}}</div>
+			<div class="datasets-details-value">
+				<input type="text" id="ra-reqtitle" placeholder="Title..." class="datasets-details-input" value="{{title}}"/>
+			</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-name">
+			<div class="datasets-details-label">{{raTranslate "Name"}}</div>
+			<div class="datasets-details-value" title="{{requirementname}}">{{requirementname}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-rev">
+			<div class="datasets-details-label">{{raTranslate "Revision"}}</div>
+			<div class="datasets-details-value" title="{{revision}}">{{revision}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-type">
+			<div class="datasets-details-label">{{raTranslate "Type"}}</div>
+			<div class="datasets-details-value" title="{{type}}">{{type}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-desc">
+			<div class="datasets-details-label dataset-details-desc">{{raTranslate "Description"}}</div>
+			<div class="datasets-details-value dataset-details-desc">
+				<textarea placeholder="Description..." id="ra-reqdescription" class="datasets-details-input">{{description}}</textarea>
+			</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-collabspace">
+			<div class="datasets-details-label">{{raTranslate "collab_space"}}</div>
+			<div class="datasets-details-value" title="{{project}}">{{project}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-vault">
+			<div class="datasets-details-label">{{raTranslate "Vault"}}</div>
+			<div class="datasets-details-value" title="{{vault}}">{{vault}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-state">
+			<div class="datasets-details-label">{{raTranslate "State"}}</div>
+			<div class="datasets-details-value" title="{{state}}">{{state}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-owner">
+			<div class="datasets-details-label">{{raTranslate "owner"}}</div>
+			<div class="datasets-details-value" title="{{owner}}">{{owner}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-orig">
+			<div class="datasets-details-label">{{raTranslate "Originated"}}</div>
+			<div class="datasets-details-value" title="{{originated}}">{{originated}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-modif">
+			<div class="datasets-details-label">{{raTranslate "Modified"}}</div>
+			<div class="datasets-details-value" title="{{modified}}">{{modified}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-policy">
+			<div class="datasets-details-label">{{raTranslate "Policy"}}</div>
+			<div class="datasets-details-value" title="{{policy}}">{{policy}}</div>
+		</div>
+	{{else}}
+		<!-- Minimized Case Details -->
+		<div class="datasets-details-row" id="dataset-details-title">
+			<div class="datasets-details-label">{{raTranslate "Title"}}</div>
+			<div class="datasets-details-value">
+				<input type="text" id="ra-casetitle" placeholder="Title..." class="datasets-details-input" title="{{title}}" value="{{title}}"/>
+			</div>
+		</div>
+		{{#if id}}
+		<div class="datasets-details-row" id="dataset-details-name">
+			<div class="datasets-details-label">{{raTranslate "Name"}}</div>
+				<div class="datasets-details-value" title="{{casename}}">{{casename}}</div>
+		</div>
+		{{/if}}
+		<div class="datasets-details-row" id="dataset-details-type">
+			<div class="datasets-details-label">{{raTranslate "owner"}}</div>
+			<div class="datasets-details-value" title="{{owner}}">
+				<span class="dataset-details-value-textspan">{{owner}}</span>
+			</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-type">
+			<div class="datasets-details-label">{{raTranslate "Author"}}</div>
+			<div class="datasets-details-value" title="{{author}}">{{author}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-desc">
+			<div class="datasets-details-label dataset-details-desc">{{raTranslate "Description"}}</div>
+			<div class="datasets-details-value dataset-details-desc">
+				<textarea placeholder="Description..." id="ra-casedescription" class="datasets-details-input">{{description}}</textarea>
+			</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-collabspace">
+			<div class="datasets-details-label">{{raTranslate "collab_space"}}</div>
+			<div class="datasets-details-value" title="{{project}}">{{project}}</div>
+		</div>		
+		<div class="datasets-details-row" id="dataset-details-state">
+			<div class="datasets-details-label">{{raTranslate "Maturity"}}</div>
+			<div class="datasets-details-value" title="{{state}}">
+				<span class="dataset-details-value-textspan">{{state}}</span>
+			</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-orig">
+			<div class="datasets-details-label">{{raTranslate "Last_Modified"}}</div>
+			<div class="datasets-details-value">{{updatedInterval}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-modif">
+			<div class="datasets-details-label">{{raTranslate "Up_To_Date"}}</div>
+			<div class="datasets-details-value" title="{{up_to_date}}">{{up_to_date}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-policy">
+			<div class="datasets-details-label">{{raTranslate "Recommended_Alternatives"}}</div>
+			<div class="datasets-details-value" title="{{downselected}}">
+				<span class="dataset-details-value-textspan">{{downselected}}</span>
+				{{#if downselected}}
+					<span class="fonticon fonticon-download minimized-maturity-btn" id="dataset-details-recommended-download"></span>
+				{{/if}}
+			</div>
+		</div>
+		{{#if datasetsList}}
+			{{#each datasetsList}}
+				<div class="datasets-details-row">
+					<div class="datasets-details-label">{{#unless @index}}{{raTranslate "Datasets"}}{{/unless}}</div>
+					<div class="datasets-details-value" id="{{id}}" title="{{title}}">
+						<span class="dataset-details-value-textspan">{{title}}</span>
+						<span class="fonticon fonticon-minus-circled minimized-rem-btn" id="dataset-details-dsmin-remove"></span>
+					</div>	
+				</div>	
+			{{/each}}
+		{{/if}}
+		<!--div class="datasets-details-row" id="dataset-details-drop-zone">
+			<div id="dataset-drop-box">
+				Drop datasets here.
+			</div>
+		</div-->
+	{{/if}}
+</div>
+
+

@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<OOTBParameterization regSuite="Requirements">
+<Domain id="LifecycleTopology">
+		<Family id="Chapter" collabApps="StrategicCustomerRelationship">
+			<Constant id="policyID" value="Chapter"/>
+			<Constant id="modifyTopology" value="true"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="appType" value="CBP"/>
+			<Constant id="NLSStateFileName" value="emxFrameworkStringResource.properties"/>
+			<Constant id="lang" value="en,fr"/>
+
+			<GovernedType id="Chapter">
+				<Constant id="typeId" value="Chapter"/>
+				<Constant id="supportedRules" value="RejectOnExperimenter,RejectOnCreator,RejectOnStandardData"/>
+			</GovernedType>
+
+			<State id="Private">
+				<Constant id="sysName" value="Private"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Chapter.Private"/>
+			</State>
+			<State id="InWork">
+				<Constant id="sysName" value="InWork"/>
+				<Constant id="isRemovable" value="true"/>
+				<Constant id="NLSKey" value="emxFramework.State.Chapter.InWork"/>
+			</State>	
+			<State id="Frozen">
+				<Constant id="sysName" value="Frozen"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Chapter.Frozen"/>
+			</State>
+			<State id="Release">
+				<Constant id="sysName" value="Release"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Chapter.Release"/>
+			</State>
+			<State id="Obsolete">
+				<Constant id="sysName" value="Obsolete"/>
+				<Constant id="isRemovable" value="true"/>
+				<Constant id="NLSKey" value="emxFramework.State.Chapter.Obsolete"/>
+			</State>
+			
+			<Transition id="PrivatetoInWork">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Private"/>
+				<Constant id="targetState" value="InWork"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="InWorktoFrozen">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="InWork"/>
+				<Constant id="targetState" value="Frozen"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="PrivatetoRelease">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Private"/>
+				<Constant id="targetState" value="Release"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="InWorktoRelease">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="InWork"/>
+				<Constant id="targetState" value="Release"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="FrozentoRelease">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Frozen"/>
+				<Constant id="targetState" value="Release"/>
+				<Constant id="removal" value="false"/>
+			</Transition>
+			<Transition id="ReleasetoObsolete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Release"/>
+				<Constant id="targetState" value="Obsolete"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			
+		</Family>
+	</Domain>
+</OOTBParameterization>
+
+
+

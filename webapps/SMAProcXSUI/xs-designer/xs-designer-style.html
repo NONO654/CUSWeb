@@ -1,0 +1,483 @@
+<dom-module id="xs-designer-style">
+	<template>
+		<style>
+			@font-face {
+			  font-family: Arial;
+			  /* src: url("../../UIKIT/assets/fonts/3dslight.eot");
+			  src: url("../../UIKIT/assets/fonts/3dslight.eot") format("eot"), url("../../UIKIT/assets/fonts/3dslight.svg") format("svg"), url("../../UIKIT/assets/fonts/3dslight.woff") format("woff"), url("../../UIKIT/assets/fonts/3dslight.ttf") format("truetype"); */
+			  font-weight: normal;
+			  font-style: normal; }
+
+			@font-face {
+			  font-family: "entypo";
+			  src: url("../../UIKIT/assets/fonts/entypo.eot") format("embedded-opentype"), url("../../WebUX/assets/fonts/entypo.woff") format("woff"), url("../../WebUX/assets/fonts/entypo.ttf") format("truetype"), url("../../WebUX/assets/fonts/entypo.svg") format("svg");
+			  font-weight: normal;
+			  font-style: normal; }
+
+			* {
+			  font-family: Arial; }
+
+			:host {
+			  /* Display & Box Model */
+			  display: block;
+			  height: 100%;
+			  width: 100%;
+			  position: relative;
+			  overflow: hidden;
+			}
+
+			.fonticon {
+			  font-family: entypo;
+			  font-style: normal;
+			  font-weight: normal;
+			  speak: none;
+			  display: inline-block;
+			  text-decoration: inherit;
+			  width: 1em;
+			  margin: 0 0.2em;
+			  text-align: center;
+			  /* For safety - reset parent styles, that can break glyph codes*/
+			  font-variant: normal;
+			  text-transform: none;
+			  color: #77797c;
+			  font-size: 20px;
+			}
+
+			.uibuilder {
+			  height: calc(100% - 40px);
+			  width: 100%;
+			  margin-top: 3px;
+			  position: relative;
+			  display: block;
+			  display: flex;
+			  overflow: hidden;
+			  transition: all 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+			  left: 0;
+			}
+
+			.sidebar {
+			  height: 100%;
+			  min-width: 300px;
+			  /* Display & Box Model */
+			  display: block;
+			  overflow: auto;
+			  background: #fafafa;
+			  overflow-x: hidden;
+			}
+
+			.sidebar::-webkit-scrollbar {
+			  width: 8px;
+			  margin-left: 10px;
+			  margin-bottom: 10px;
+			}
+
+			.sidebar::-webkit-scrollbar-thumb {
+			  background-color: #E2E4E3;
+			  border-radius: 3px;
+			  background-clip: padding-box;
+			}
+
+			.sidebar::-webkit-scrollbar-thumb:hover {
+			  background-color: #B4B6BA;
+			}
+
+
+			/* .sidebar.is-ready {
+			  display: block;
+			  min-width: 300px; }
+			   */
+
+			.sidebar.is-collapsed {
+			  display: none;
+			  /*   visibility: hidden;  */
+			  min-width: 0px;
+			}
+
+			.full-width {
+			  width: 100%;
+			  height: 100%;
+			}
+
+			.property-panel-message {
+			  color: #898b8e;
+			}
+
+			.property-panel-message.is-hidden {
+			  display: none;
+			}
+
+			.prop-insp-empty-text {
+			  width: 250px;
+			}
+
+			.propertyInspector.is-active {
+			  display: block;
+			}
+
+			.processdialog {
+			  display: none;
+			  /*Positioning*/
+			  position: absolute;
+			  left: 30%;
+			  right: 30%;
+			  top: 25%;
+			  bottom: 25%;
+			  width: 100%;
+			  height: 100%;
+			  z-index: 10;
+			}
+
+			.processdialog.is-active {
+			  display: block;
+			}
+
+			.processbrowser {
+			  display: none;
+			}
+
+			.processbrowser.is-active {
+			  display: block;
+			}
+
+			.workbench {
+			  /* Display & Box Model */
+			  width: 100%;
+			  height: 100%;
+			  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAACRJREFUKFNjeP/+w8dPn7EioBQDkPry9RtWBJQavtL4guX9BwAI/R3INY1DBQAAAABJRU5ErkJggg==);
+			  box-sizing: border-box;
+			  -moz-box-sizing: border-box;
+			}
+
+			.xs-designer-tools {
+			  display: block;
+			}
+
+
+			/* Topbar */
+
+			.workbenchToolbar {
+			  height: 40px;
+			  padding: 5px;
+			  position: relative;
+			  left: 0;
+			  right: 0;
+			  top: 0;
+			  display: flex;
+			  justify-content: space-between;
+			  align-items: center;
+			  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+			  background-color: #F1F1F1;
+			  color: #368EC4;
+			}
+
+			.workbenchToolbar-XS_BETA {
+				height: 60px !important;
+			}
+			.workbenchToolbar .mode-switch {
+			  display: inline-block;
+				visibility: hidden;
+				width: 140px;
+				margin-left: 10px;
+				margin-right: 10px;
+			}
+
+			.workbenchToolbar .toolbar-item {
+				width: calc(50% - 80px);
+			}
+			.workbenchToolbar .mode-switch.is-ready {
+			  visibility: visible;
+			}
+
+			.workbenchToolbar .main-title {
+				display: block;
+			  padding-left: 10px;
+			  font-size: 1.5em;
+			  color: #368EC4;
+			  font-weight: 700;
+				word-wrap: break-word;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				word-break: break-all;
+				text-align: left;
+				white-space: nowrap;
+			}
+
+			.workbenchToolbar .edit-actionbar {
+				max-width: fit-content;
+				position: relative;
+				float: right;
+			  margin-right: 20px;
+			  visibility: hidden;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+			}
+
+			.workbenchToolbar .edit-actionbar .save-button {
+			  display: inline-block;
+			  vertical-align: middle;
+			}
+
+			.workbenchToolbar .edit-actionbar .save-button.is-hidden {
+			  visibility: hidden;
+			}
+
+			.workbenchToolbar .edit-actionbar.is-ready {
+			  visibility: visible;
+			}
+
+			.workbenchToolbar .info-summary {
+			  display: inline-block;
+			  margin-right: 10px;
+			}
+
+
+			.workbenchToolbar .edit-actionbar #editButton, .workbenchToolbar .edit-actionbar #editLifeCycle, .workbenchToolbar .edit-actionbar #attrGrpButton {
+		    width: 65px;
+		    display: inline-block;
+		    text-align: center;
+		    font-size: 11px;
+				cursor:pointer;
+				color:#000;
+				vertical-align: middle;
+				line-height: 1em;
+			}
+
+			/*End topbar*/
+
+
+			/** If its the rule builder view  */
+
+			.rulebuilder {
+			  position: absolute;
+			  left: 100%;
+			  transition: all 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+			}
+
+			:host(.is-rulebuilder) .uibuilder {
+			  left: -100%;
+			}
+
+			:host(.is-rulebuilder) .rulebuilder {
+			  left: 0;
+			}
+
+			.rulebuilder {
+			  height: 100%;
+			  width: 100%;
+			  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAIAAAACUFjqAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAACRJREFUKFNjeP/+w8dPn7EioBQDkPry9RtWBJQavtL4guX9BwAI/R3INY1DBQAAAABJRU5ErkJggg==);
+			}
+
+			.rulebuilder xs-rule-builder {
+			  margin: 30px;
+			  margin-top: 0;
+			  top: 30px;
+			  min-width: 600px;
+			}
+
+			.rulebuilder .container {
+			  padding: 10px;
+			  position: relative;
+			}
+
+			.rulebuilder .back-button {
+			  position: absolute;
+			}
+
+			.back-button {
+			  z-index: 1;
+			  position: absolute;
+			  top: 10px;
+			  right: -100px;
+			  transition: all 0.5s;
+			}
+
+			.back-button.is-visible {
+			  right: 50px;
+			}
+
+			.back-button:before {
+			  content: 'Rules';
+			  position: absolute;
+			  right: 50px;
+			  top: 7px;
+			}
+
+			.back {
+			  height: 32px;
+			  width: 32px;
+			  border: thin solid #2980b9;
+			  border-radius: 30px;
+			  background-color: #2980b9;
+			  outline: 1px solid transparent;
+			  -webkit-backface-visibility: hidden;
+			  cursor: pointer;
+			  color: white;
+			  transition: all 0.3s;
+			}
+
+			.back:hover {
+			  background-color: #3498db;
+			}
+
+			.back span {
+			  font-size: 1.3em;
+			  position: absolute;
+			  left: 13px;
+			  -webkit-user-select: none;
+			}
+
+			:host(.is-rulebuilder) .back {
+			  transform: rotate(180deg);
+			  -ms-transform: rotate(180deg);
+			  /* IE 9 */
+			  -webkit-transform: rotate(180deg);
+			  /* Opera, Chrome, and Safari */
+			}
+
+			:host(.is-rulebuilder) .back-button:before {
+			  content: 'Layout';
+			}
+
+
+			/* End of rule builder view */
+
+
+			/*Show this when the user doesnt have required license to view the app*/
+
+			.license-error-message {
+			  display: none;
+			  color: red;
+			  position: absolute;
+			  top: 100px;
+			  left: 20%;
+			}
+
+			.license-error-message.is-visible {
+			  display: block;
+			}
+
+			.xs-designer-updatepanel {
+			  display: flex;
+			  flex-direction: column;
+			  height: 100%;
+			  overflow: hidden;
+			}
+
+			/*.xs-designer-updatepanel::-webkit-scrollbar {
+			  width: 8px;
+			  margin-top: 10px;
+			  margin-bottom: 10px;
+			}
+
+			.xs-designer-updatepanel::-webkit-scrollbar-thumb {
+			  background-color: #E2E4E3;
+			  border-radius: 3px;
+			  background-clip: padding-box;
+			}
+
+			.xs-designer-updatepanel::-webkit-scrollbar-thumb:hover{
+			  background-color: #B4B6BA;
+			}*/
+
+			@media only screen and (max-width: 800px) {
+			  .sidebar {
+			    display: none;
+			  }
+			}
+
+			.tools-container {
+			  display: flex;
+			  flex-wrap: wrap;
+			}
+
+			.savemessage {
+			  color: #737679;
+			  position: relative;
+			  justify-content: flex-end;
+			  left: 0;
+			  right: 0;
+			  top: 0;
+			  display: flex;
+			  width: fit-content;
+			}
+
+			.hiddenText {
+			  visibility: hidden;
+			}
+
+			.undo-redo {
+			    display: inline-block;
+					min-width: 60px;
+			}
+			.action-icon {
+			  opacity: 0.5;
+			}
+			.action-icon:hover {
+			  opacity: 1;
+			  cursor: pointer;
+			}
+			.disable-action-icon {
+			  pointer-events: none;
+			  opacity: 0.3;
+			}
+			.icon {
+				height: 20px;
+				width: 20px;
+				margin-right: 8px;
+				box-sizing: border-box;
+				display: inline-block;
+				vertical-align: top;
+				background-color: #f9f9f9;
+				border: 1px solid #d1d4d4;
+				border-radius: 4px;
+			}
+			.navigate{
+				display: flex;
+				justify-content: space-between;
+				flex-direction: row;
+				align-items: center;
+			}
+			.process-title {
+				max-width: fit-content;
+				cursor: grab;
+				position: relative;
+				padding-left: 16px;
+				padding-right: 10px;
+				display: flex;
+				flex-direction: row;
+			}
+			.actionBarMenus{
+				max-width: fit-content;
+				cursor: grab;
+				position: relative;
+				padding-left: 16px;
+				padding-right: 10px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+				box-sizing: border-box;
+				border-radius: 4px;
+			}
+			.process-title:active{
+				cursor: grabbing;
+			}
+			.process-title > span {
+				word-wrap: break-word;
+				font-size: 1em;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				word-break: break-all;
+				text-align: left;
+				white-space: nowrap;
+			}
+			.template-title {
+				cursor: grab;
+			}
+			.template-title:active {
+				cursor: grabbing;
+			}
+		</style>
+	</template>
+</dom-module>

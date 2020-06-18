@@ -1,0 +1,286 @@
+// ===========================================================
+// PACKAGE   : ENOSTProdSysExecBufferOpDS
+// ===========================================================
+// Created : Wed Nov 20 2008
+// Updated: Wed Jul 18 02:54:00 2011   Adding Organisation logic (Query, Read, Write)
+// -----------------------------------------------------------
+//For SMB this is the sub-class of attribute, they have to be always presented to user in that order
+//a) ident
+//b) description 
+//c) state of dev
+//d) ownership
+//
+//******** V_discipline is currently unpublished, When published it must expose VALUE ******* Will transform in real dictionary type with Unicorn
+//******** V_usage must not be published (soon internal - 3DPart R206 exception)
+//******** V_nature is published if really used, and in RO only
+//******** ATTR V_ApplicabilityDate;N;N;$ is unused in SMB deployment
+//******** ATTR reserved;N;N;$ is "useless" as long as SMB uses optimistic locking and do not lock explicitely info... & reservedby not NULL is equivalent
+//******** FATTR reservedby;N should not be provided in Write Mask (as long as it is not updated in session)/ Compass reflect latest info and MUST be prefered
+//
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// ===========================================================
+ENTITY ENOSTExecBufferOpRefCusto
+// ===========================================================
+// --- attributes: 
+//a) ident
+ATTR V_Name;Y;N;$
+ATTR majorrevision;N;N;$
+ATTR PLM_ExternalID;Y;N;$
+//b) description
+//ATTR V_usage;N;N;$
+//VALUE 3DPart
+//ATTR V_discipline;N;N;$
+ATTR E_versionComment;N;N;$
+ATTR V_description;N;N;$
+ATTR originated;N;N;$
+ATTR E_fromExternalId;N;N;$
+ATTR V_EstimatedTime;N;N;10.0
+ATTR V_MeasuredTime;N;N;0.0
+ATTR V_TimeMode;N;Y;EstimatedTime
+ATTR V_ActualStartDate;N;N;$
+ATTR V_ActualEndDate;N;N;$
+ATTR V_PlannedStartDate;N;N;$
+ATTR V_PlannedEndDate;N;N;$
+ATTR V_Capacity;N;N;0
+ATTR V_InitialStock;N;N;0
+ATTR V_RecorderLevel;N;N;0
+//c) state of dev
+ATTR modified;N;N;$
+ATTR current;N;N;$
+ATTR reservedby;N;N;$
+//d) ownership
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+//
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_description;Y
+// - unordered
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+//a) ident
+FATTR V_Name;Y
+FATTR majorrevision;Y
+//b) description
+//FATTR V_usage;Y
+//FATTR V_discipline;Y
+//c) state of dev
+FATTR modified;Y
+//FATTR reservedby;Y
+//d) owner
+//FATTR owner;Y
+//FATTR organization;Y
+FATTR project;Y
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+FATTR majorrevision;N
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+//a) ident
+FATTR V_Name;Y
+FATTR majorrevision;Y
+FATTR PLM_ExternalID;Y
+//b) description
+//FATTR V_discipline;Y
+//FATTR V_usage;Y
+FATTR E_versionComment;Y
+FATTR V_description;Y
+FATTR originated;Y
+FATTR E_fromExternalId;Y
+FATTR V_EstimatedTime;Y
+FATTR V_MeasuredTime;Y
+FATTR V_ActualStartDate;Y
+FATTR V_ActualEndDate;Y
+FATTR V_PlannedStartDate;Y
+FATTR V_PlannedEndDate;Y
+FATTR V_Capacity;Y
+FATTR V_InitialStock;Y
+FATTR V_RecorderLevel;Y
+//c) state of dev
+FATTR modified;Y
+FATTR current;Y
+FATTR reservedby;Y
+//d) owner
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+//a) ident (used for Properties Read & List) Innaceptable as first in List Mode... so removed.
+FATTR V_Name;N
+FATTR majorrevision;N
+FATTR PLM_ExternalID;N
+//b) description
+//FATTR V_discipline;N
+FATTR E_versionComment;N
+FATTR V_description;N
+FATTR originated;N
+FATTR E_fromExternalId;N
+FATTR V_EstimatedTime;N
+FATTR V_MeasuredTime;N
+FATTR V_TimeMode;N
+FATTR V_ActualStartDate;N
+FATTR V_ActualEndDate;N
+FATTR V_PlannedStartDate;N
+FATTR V_PlannedEndDate;N
+FATTR V_Capacity;N
+FATTR V_InitialStock;N
+FATTR V_RecorderLevel;N
+//c) state of dev
+FATTR modified;N
+FATTR current;N
+FATTR reservedby;N
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+//a) ident
+FATTR V_Name;Y
+FATTR majorrevision;N
+FATTR PLM_ExternalID;N
+//b) description
+//FATTR V_discipline;N
+FATTR E_versionComment;Y
+FATTR V_description;Y
+FATTR originated;N
+FATTR E_fromExternalId;N
+FATTR V_EstimatedTime;Y
+FATTR V_MeasuredTime;Y
+FATTR V_TimeMode;Y
+FATTR V_ActualStartDate;N
+FATTR V_ActualEndDate;N
+FATTR V_PlannedStartDate;Y
+FATTR V_PlannedEndDate;Y
+FATTR V_Capacity;Y
+FATTR V_InitialStock;Y
+FATTR V_RecorderLevel;Y
+//c) state of dev
+FATTR modified;N
+FATTR current;N
+//FATTR reservedby;N
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// - unordered
+
+// ===========================================================
+ENTITY ENOSTExecBufferOpInstCusto
+// ===========================================================
+ATTR PLM_ExternalID;N;N;$
+ATTR originated;N;N;$
+ATTR reservedby;N;N;$
+ATTR modified;N;N;$
+//d) ownership
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR reservedby;Y
+FATTR modified;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR originated;N
+FATTR reservedby;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR originated;N
+//FATTR reservedby;N
+FATTR modified;N
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// - unordered
+
+// ===========================================================
+// End of ENOSTProdSysExecBufferOpDS package's DEFAULT mask file
+// ===========================================================

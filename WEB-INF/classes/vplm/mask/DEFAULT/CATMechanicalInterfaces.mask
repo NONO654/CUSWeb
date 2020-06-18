@@ -1,0 +1,400 @@
+// ===========================================================
+// PACKAGE   : CATMechanicalInterfaces Model
+// ===========================================================
+// Generated : Fri Jun  28 12:05:13 2013
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value
+//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 3 entities :
+// - MechanicalInterfaceTemplate (PLMCoreRepReference)
+// - CATASMMECA
+// - CATASMTTRS
+
+// ===========================================================
+ENTITY MechanicalInterfaceTemplate 
+// ===========================================================
+//
+// --- attributes: 
+
+//a) naming
+ATTR V_Name;Y;N;$
+ATTR PLM_ExternalID;Y;N;$
+ATTR revision;N;N;$   
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+ATTR V_Scale;N;Y;$
+VALUE NormalScale
+VALUE LargeScale
+VALUE SmallScale 
+VALUE ExtraLargeScale
+
+//b) description
+//ATTR V_usage;N;N;$ forbidden, but for rep which are not 3DPart
+//by-pass drafting
+//ATTR V_nature;N;N;$
+//ATTR V_discipline;N;N;$
+//VALUE Design
+//VALUE Drafting
+ATTR V_description;N;N;$
+//Was RACE generic Custo Attribute
+ATTR V_versionComment;N;N;$
+//for filtering rep which are not 3DPart rep element
+//ATTR V_usage;N;N;$
+ATTR V_MIType;N;N;$
+ATTR V_MINature;N;N;$
+ATTR V_KinType;N;N;$
+ATTR V_MIIdentifier;N;N;$
+ATTR V_MIFor_Features;N;N;$
+
+//c) development status
+ATTR originated;N;N;$
+//Was RACE generic Custo Attribute
+ATTR V_fromExternalID;N;N;$
+ATTR current;N;N;$
+ATTR reservedby;N;N;$
+ATTR modified;N;N;$
+
+//d) collaborative security set-up
+ATTR policy;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;N;N;$
+ATTR project;N;N;$
+
+//
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_description;Y
+FATTR V_Scale;Y
+FATTR policy;N
+// - unordered
+//
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+//when BL manage do not manage default V_Name, addition of PLM_ExternalID in Tree is needed 
+//FATTR PLM_ExternalID;N
+FATTR revision;N
+// - unordered
+//
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+//a) ident
+FATTR V_Name;Y
+FATTR PLM_ExternalID;Y
+FATTR revision;Y
+
+//b) description
+//FATTR V_discipline;Y
+FATTR V_MIType;Y
+FATTR V_MINature;Y
+FATTR V_KinType;Y
+FATTR V_MIIdentifier;Y
+FATTR V_MIFor_Features;Y
+
+//c) development status
+FATTR modified;Y
+//FATTR current;Y
+//FATTR reservedby;Y
+
+//d) owner
+//FATTR owner;Y
+//FATTR organization;Y
+FATTR project;Y
+
+// - unordered
+//
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+
+//a) naming
+FATTR V_Name;Y
+FATTR PLM_ExternalID;Y
+FATTR revision;Y 
+ 
+//b) description
+//FATTR V_discipline;Y
+FATTR V_description;Y
+//Was RACE generic Custo Attribute
+FATTR V_versionComment;Y
+//FATTR V_usage;Y
+FATTR V_MIType;Y
+FATTR V_MINature;Y
+FATTR V_KinType;Y
+FATTR V_MIIdentifier;Y
+FATTR V_MIFor_Features;Y
+
+//c) development status
+FATTR originated;Y
+//Was RACE generic Custo Attribute
+FATTR V_fromExternalID;Y
+FATTR V_Scale;Y
+FATTR modified;Y
+FATTR current;Y
+FATTR reservedby;Y
+
+//d) collaborative security set-up
+FATTR policy;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+
+// - unordered
+//
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+//a) naming: (used for Properties Read & List) Innaceptable as first in List Mode... so removed.
+FATTR V_Name;N
+FATTR PLM_ExternalID;N
+FATTR revision;N
+
+//b) description
+//FATTR V_discipline;N
+FATTR V_description;N
+FATTR V_Scale;N
+//Was RACE generic Custo Attribute
+FATTR V_versionComment;N
+FATTR V_MIType;Y
+FATTR V_MINature;Y
+FATTR V_KinType;Y
+FATTR V_MIIdentifier;Y
+FATTR V_MIFor_Features;Y
+
+//c) development status
+FATTR originated;N
+//Was RACE generic Custo Attribute
+FATTR V_fromExternalID;N
+FATTR modified;N
+FATTR current;N
+FATTR reservedby;N
+
+//d) collaborative security set-up
+FATTR policy;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// - unordered
+//
+//
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+//a) ident
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR revision;N  
+
+//b) description
+//FATTR V_discipline;N
+//FATTR V_nature;N
+FATTR V_description;Y
+//Was RACE generic Custo Attribute
+FATTR V_versionComment;Y
+FATTR V_MIType;N
+FATTR V_MINature;N
+FATTR V_KinType;N
+FATTR V_MIIdentifier;N
+FATTR V_MIFor_Features;N
+
+//c) development status
+FATTR originated;N
+//Was RACE generic Custo Attribute
+FATTR V_fromExternalID;N
+FATTR V_Scale;N
+FATTR modified;N
+FATTR current;N
+//FATTR reservedby;N
+
+//d) collaborative security set-up
+FATTR policy;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+//
+// - unordered
+//
+
+
+// ===========================================================
+// End of MechanicalInterfaceTemplate (PLMCoreRepReference)
+// ===========================================================
+
+
+// ===========================================================
+ENTITY CATAsmMECA
+// ===========================================================
+// --- attributes: 4
+ATTR V_ITFType;N;N;$
+ATTR V_ITFNature;N;N;$
+ATTR V_ITFComsum;N;N;$
+ATTR V_ITFMaxComsum;N;N;$
+ATTR V_ITFValidity;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_ITFType;Y
+FATTR V_ITFNature;Y
+FATTR V_ITFComsum;Y
+FATTR V_ITFMaxComsum;Y
+FATTR V_ITFValidity;Y
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_ITFType;N
+FATTR V_ITFNature;N
+FATTR V_ITFComsum;N
+FATTR V_ITFMaxComsum;N
+FATTR V_ITFValidity;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_ITFType;Y
+FATTR V_ITFNature;Y
+FATTR V_ITFComsum;Y
+FATTR V_ITFMaxComsum;Y
+FATTR V_ITFValidity;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_ITFType;N
+FATTR V_ITFNature;N
+FATTR V_ITFComsum;N
+FATTR V_ITFMaxComsum;N
+FATTR V_ITFValidity;N
+// ===========================================================
+ENTITY CATAsmTTRS
+// ===========================================================
+// --- attributes: 13
+ATTR V_NbTTRS;Y;N;$
+ATTR V_TTRSStruct;Y;N;$
+ATTR V_TTRSIdent;Y;N;$
+ATTR V_TTRSClass;Y;N;$
+ATTR V_TTRSType;Y;N;$
+ATTR V_NBComp;Y;N;$
+ATTR V_AssocCase;Y;N;$
+ATTR V_Canoncity;Y;N;$
+ATTR V_MatSense;Y;N;$
+ATTR V_GeomCar;Y;N;$
+ATTR V_CanonSCar;Y;N;$
+ATTR V_CanonICar;Y;N;$
+ATTR V_CanonVal;Y;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_NbTTRS;Y
+FATTR V_TTRSStruct;Y
+FATTR V_TTRSIdent;Y
+FATTR V_TTRSClass;Y
+FATTR V_TTRSType;Y
+FATTR V_NBComp;Y
+FATTR V_AssocCase;Y
+FATTR V_Canoncity;Y
+FATTR V_MatSense;Y
+FATTR V_GeomCar;Y
+FATTR V_CanonSCar;Y
+FATTR V_CanonICar;Y
+FATTR V_CanonVal;Y
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_NbTTRS;N
+FATTR V_TTRSStruct;N
+FATTR V_TTRSIdent;N
+FATTR V_TTRSClass;N
+FATTR V_TTRSType;N
+FATTR V_NBComp;N
+FATTR V_AssocCase;N
+FATTR V_Canoncity;N
+FATTR V_MatSense;N
+FATTR V_GeomCar;N
+FATTR V_CanonSCar;N
+FATTR V_CanonICar;N
+FATTR V_CanonVal;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_NbTTRS;Y
+FATTR V_TTRSStruct;Y
+FATTR V_TTRSIdent;Y
+FATTR V_TTRSClass;Y
+FATTR V_TTRSType;Y
+FATTR V_NBComp;Y
+FATTR V_AssocCase;Y
+FATTR V_Canoncity;Y
+FATTR V_MatSense;Y
+FATTR V_GeomCar;Y
+FATTR V_CanonSCar;Y
+FATTR V_CanonICar;Y
+FATTR V_CanonVal;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_NbTTRS;N
+FATTR V_TTRSStruct;N
+FATTR V_TTRSIdent;N
+FATTR V_TTRSClass;N
+FATTR V_TTRSType;N
+FATTR V_NBComp;N
+FATTR V_AssocCase;N
+FATTR V_Canoncity;N
+FATTR V_MatSense;N
+FATTR V_GeomCar;N
+FATTR V_CanonSCar;N
+FATTR V_CanonICar;N
+FATTR V_CanonVal;N
+// ===========================================================
+// End of DEFAULT mask file
+// ===========================================================

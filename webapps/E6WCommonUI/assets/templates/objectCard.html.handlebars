@@ -1,0 +1,120 @@
+{{!--
+    template for object fields
+
+   for a config like
+   {
+            name: 'references',
+            attributeToDisplay: 'name',
+            imageAttribute: 'image'
+            label: i18n('emxCollaborativeTasks.Label.reference', 'Reference'),
+            type: 'object',
+            W: 'why',
+            cssClass: ''
+    }
+   this template accept values of the form
+   1) a single object with an attribute name the same as attributeToDisplay
+   {
+    references:{name:'Project1'}
+   }
+   2) an array of objects with an attribute name the same as attributeToDisplay
+   {
+    references:[{name:'Project1'}, {name:'Project2'}]
+   }
+
+ --}}
+{{#if label }}<label>{{label}}
+    {{~#if required~}}
+          <sup class="required-field">*</sup>
+      {{~/if~}}
+  {{~#if readWrite~}}
+            \{{#if canEdit}}
+              <span class="actions">
+                {{~#if customButtons~}}
+                   {{~#each customButtons~}}
+                      <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                          <span class="fonticon {{iconClass}}"></span>
+                      </button>
+                   {{~/each~}}
+
+                {{~/if~}}
+              {{~#if allowFileManagement~}}
+                      <button class="btn ds-group-upload">
+                          <span class="fonticon fonticon-upload"></span>
+                      </button>
+              {{~/if~}}
+          {{~#if singleObjectOnly~}}
+          {{~else~}}
+              {{~#if isThumbnail~}}
+                {{~else~}}
+                  <button class="btn ds-group-plus">
+                      <span class="fonticon fonticon-plus"></span>
+                  </button>
+                {{~/if~}}
+         {{~/if~}}
+         </span>
+         \{{else}}
+         {{~#if customButtons~}}
+         <span class="actions">
+            {{~#each customButtons~}}
+               <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                   <span class="fonticon {{iconClass}}"></span>
+               </button>
+            {{~/each~}}
+         </span>
+         {{~/if~}}
+          \{{/if}}
+          {{else}}
+          {{~#if customButtons~}}
+          <span class="actions">
+             {{~#each customButtons~}}
+                <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                    <span class="fonticon {{iconClass}}"></span>
+                </button>
+             {{~/each~}}
+          </span>
+          {{~/if~}}
+        {{~/if~}}
+  </label>
+{{/if}}
+{{!--input and button should only be there if this field is editable--}}
+<ul class="object-list {{#if readWrite~}}\{{#if canEdit}}drop-target\{{/if}}{{~/if~}}">
+    {{~#if readWrite~}}
+        \{{#if canEdit}}
+        <li class="chooser ds-group-add" >
+          <input type="text" class="form-control" placeholder="{{placeHolder}}"/>
+      {{~#if isThumbnail~}}
+      {{~else~}}
+              <button class="btn"><span class="fonticon fonticon-search"></span></button>
+      {{~/if~}}
+        </li>
+        \{{/if}}
+    {{~/if~}}
+
+      \{{#eachLimit {{name}} -1 }}                               {{!-- eachLimit with a -1 limit doesn't
+                                                                       actually take a limit (maybe we should),
+                                                                       but it can deal with arrays or
+                                                                       individual objects--}}
+        <li class="object-card{{#if imageAttribute}} has-image{{/if}}"data-field-name="{{name}}-item" \{{#if busType}} data-type="\{{busType}}" \{{/if}} \{{#if type}} data-type="\{{type}}" \{{/if}} \{{#if physicalId}} data-id="\{{physicalId}}"\{{/if}} \{{#E6Wif hasfiles 'TRUE'}} data-hasfiles="\{{hasfiles}}" \{{/E6Wif}}>
+             <span class="draggable-item" \{{#if physicalId}}draggable="true"\{{/if}}>
+
+						{{#if imageAttribute}}
+                <span class="thumbnail object-image">
+                   <img draggable="false" oncontextmenu="return false" src="\{{#if {{imageAttribute}}.imageValue}}\{{ {{imageAttribute}}.imageValue}}\{{else}}\{{ {{imageAttribute}} }}\{{/if}}" title="\{{ {{attributeToDisplay}} }}"/>
+                </span>
+              {{/if}}
+              {{!--the display value span should not contain any extraneous \n  make sure not to add any or it will break drag and drop--}}
+              <span data-field-name="display-value"><span class="object-card-value" oncontextmenu="return false" title="\{{ {{attributeToDisplay}} }}">\{{ {{attributeToDisplay}} }}</span></span>
+            </span>
+            <span class="actions">
+                <button class="btn">
+                    <span class="fonticon fonticon-down-open" data-field-name="{{name}}"></span>
+                </button>
+            </span>
+        </li>
+      \{{/eachLimit}}
+      {{~#if readWrite}}
+        \{{#if canEdit}}\{{else}}\{{#if {{name}} }}\{{else}}<li class="read-only">--</li>\{{/if}}\{{/if}}
+      {{~else}}
+        \{{#if {{name}} }}\{{else}}<li class="read-only">--</li>\{{/if}}
+      {{~/if}}
+    </ul>

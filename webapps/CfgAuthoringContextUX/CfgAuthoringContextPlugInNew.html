@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!--  Copyright XXXX --> 
+    <head>
+    <title>Authoring Context</title>
+	 <link rel="stylesheet" type="text/css"
+            href="//uwa.netvibes.com/lib/c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script> 
+	
+	<!--<script src="scripts/CallToInit.js"></script>-->	
+	<meta name="description" content="CAA Web Apps basic use case" />
+<meta name="keywords" content="CAA Use Case" />
+
+<script>
+
+   require([
+             'DS/CfgAuthoringContextUX/scripts/CfgAuthoringContext',
+              			 
+], function (CfgAuthoringContext) {
+
+
+    var myWidget = {
+	
+		
+		onLoadAuthoringContext: function () {
+		                             var contentAppdiv=document.getElementById( "contentAppdiv1" );
+							  /*CfgAuthoringContext.initialize(contentAppdiv,"Test","show","top-right",true);*/
+							   var dataArg='{"version":"1.0","change":{"id":"EA33B156E4790000223CF85936560500","name":"ca-60392384-00000031","title":"CA","description":"Description","severity":"High"}}';
+							  var dataJSON = JSON.parse(dataArg);
+                             
+				 var options = {
+                        'isEditable': true,
+						'isEvolution':true,
+						'isChange':true,
+						'isChangeConfguired':false,
+						'isMovable':true,
+						'resetDefault':true
+                       
+                    };
+							  CfgAuthoringContext.initialize2(contentAppdiv,"Test","show","top-right",function(callback){
+							     console.log("calling set call back");
+								 console.log("********************************* "+callback);
+							  },options);
+												
+								     //CfgAuthoringContext.initialize2(contentAppdiv,null,"show","top-right",true);
+		                        }				
+        };
+		
+		
+    widget.addEvent('onLoad', myWidget.onLoadAuthoringContext);
+	
+});
+</script>
+
+    </head>
+    <body>
+<div id='contentAppdiv1' style="height: 100%; width:100%;"></div>
+    </body>
+ </html>

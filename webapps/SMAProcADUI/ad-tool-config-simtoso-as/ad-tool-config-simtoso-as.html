@@ -1,0 +1,56 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../ad-mdata-view/ad-mdata-view.html">
+
+<dom-module id="ad-tool-config-simtoso-as">
+  <link rel="import" type="css" href="ad-tool-config-simtoso-as.css">
+  <template>
+      <style include="sp-uikit-styles"></style>
+
+        <div class="content-section-heading chrome-pull-fix">
+		    <div class="pull-left content-section-title">SIM file name</div>
+        </div>
+        <div class="clearfix"></div>
+       	<div class="content-section-body">
+       		<div id="optionsSection" class="hidden">	       		
+	       		<input type="text" id="simFileName" name="simFileName" class="form-control" placeholder="Select SIM file" readonly>
+	       		<sp-access id="access" group="process" data-has-no-write-then="hide">
+		       		<button class="btn btn-xs btn-default searchButton" id="searchButton" title="Browse Content">
+			       		<span class="fonticon fonticon-dot-3"></span>
+			       	</button>
+		       	</sp-access>
+       		</div>
+       		<div>
+                </br>
+       		    <span>Note: Import Simulation Results can only be executed on Windows stations</span>
+       		</div>
+		 	<!-- The alert messages need to have the relative position declared inline in order to work in Firefox and IE -->
+       		<div id="configurationErrorNone" class="hidden">
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				No tool is currently selected.
+				</div>
+       		</div>
+       		<div id="configurationErrorMultiple" class="hidden">
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				This configuration section can only be edited for a single tool.
+				</div>
+       		</div>
+        </div>        
+        <sp-modal id="searchContent" heading="Add/Select Content" height="70%" width="80%">
+                <section>
+                    <div>
+                        <ad-mdata-view id="mdataView" view-mode="icon" on-select="onSimFileSelect"></ad-mdata-view>
+                    </div> 
+                </section>
+                <footer>
+                    <button id="addOkButton" type="button" class="btn btn-primary" on-click="onAddSimAccept">OK</button>
+                    <button id="addCancelButton" type="button" class="btn btn-default" on-click="onAddSimCancel">Cancel</button>
+                </footer>
+        </sp-modal>        
+	</template>
+  <script src="ad-tool-config-simtoso-as.js"></script>
+</dom-module>
+
+

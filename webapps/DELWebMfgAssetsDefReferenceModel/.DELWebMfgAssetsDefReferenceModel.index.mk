@@ -1,0 +1,10 @@
+m|DELWebMfgAssetsDefModel\DELWebMfgAssetsDefReferenceModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELWebMfgAssetsDefReferenceModel\DELWebMfgAssetsDefReferenceModel.js|1542230733|6484
+s|DELWebMfgAssetsDefModel\DELWebMfgAssetsDefReferenceModel.mweb\src\ReferenceModel.js|1538557685|6218
+s|DELWebMfgAssetsDefModel\DELWebMfgAssetsDefReferenceModel.mweb\src\AbstractReferenceDisplayModel.js|1535982743|2981
+s|DELWebMfgAssetsDefModel\DELWebMfgAssetsDefReferenceModel.mweb\src\ReferenceDisplayModel.js|1540906052|8960
+s|DELWebMfgAssetsDefModel\DELWebMfgAssetsDefReferenceModel.mweb\src\ReferenceCollection.js|1536938967|2396

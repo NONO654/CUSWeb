@@ -1,0 +1,1 @@
+define("DS/ENOXPageToolBar/ENOXPageToolBar_zh",{});define("DS/ENOXPageToolBar/assets/nls/PageToolBar",{collapse:"折叠",expand:"展开",information:"信息"});

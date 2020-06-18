@@ -1,0 +1,10 @@
+m|CATCreaDesWebUIServices\CATCreaDesWebUIManipulators.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\CATCreaDesWebUIManipulators\CATCreaDesWebUIManipulators.js|1531551078|19284
+s|CATCreaDesWebUIServices\CATCreaDesWebUIManipulators.mweb\src\CATCrDWebPencilManipulator.js|1482318195|17647
+s|CATCreaDesWebUIServices\CATCreaDesWebUIManipulators.mweb\src\CATCrDWebPlaneManipulator.js|1464792342|25430
+s|CATCreaDesWebUIServices\CATCreaDesWebUIManipulators.mweb\src\CATCrDWebEventsRouter.js|1459242802|12911
+s|CATCreaDesWebUIServices\CATCreaDesWebUIManipulators.mweb\src\CATCrDWebManipulatorBase.js|1458052516|5201

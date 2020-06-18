@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; chrome=1" charset="UTF-8">
+        <title>Coachmark</title>
+        <link rel="stylesheet" type="text/css" href="../UWA2/assets/css/inline.css"/>
+        <link rel="stylesheet" type="text/css" href="Coachmark.css"/>
+        <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css"/>
+
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+        <style TYPE="text/css">
+            .ds-coachmark.uwa-overlay {
+                zoom: 1 !important;
+                margin: 0 !important;
+                top: 0 !important;
+                left: 0 !important;
+            }
+            html, body {
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
+            }
+
+        </style>
+        <script type="text/javascript">
+            function sendNotification(name, message) {
+                "use strict";
+                var textarea = document.createElement("textarea");
+                textarea.setAttribute("name", name);
+                textarea.appendChild(document.createTextNode(message));
+
+                var form = document.createElement("form");
+                form.setAttribute("method", "POST");
+                form.setAttribute("action", "jsnotif://");
+                form.appendChild(textarea);
+
+                document.documentElement.appendChild(form);
+
+                form.submit();
+
+                form.parentNode.removeChild(form);
+                form = null;
+            }
+            document.oncontextmenu = function(){"use strict"; return false;};
+        </script>
+
+        <script type="text/javascript">
+        // Fallback method to close the coachmark in case of issue.
+        /*jshint unused: false*/
+        function closeWindow() {
+            "use strict";
+
+            sendNotification('dnsa', false);
+        }
+        /*jshint unused: true*/
+        </script>
+
+    </head>
+
+    <body>
+        <div class="pagebody">
+            <script>
+            /*global require*/
+            (function () {
+                "use strict";
+
+                window.getDNAStatus = null;
+
+                require(['UWA/Utils', 'DS/Coachmark/Coachmark', 'UWA/Drivers/Alone'], function(Utils, i3DXCoachmark){
+                    i3DXCoachmark.init({
+                        myAppsBaseURL: 'none',
+                        parentEltSelector: 'body',
+                        forceDisplay: true,
+                        dnsaStatus: Utils.getQueryString(window.location.href,'dnsa')==='true',
+                        lang: Utils.getQueryString(window.location.href,'lang'),
+                        fullscreen: true,
+                        events: {
+                            closeAndNotify: function (event) {
+                                var dnsa = i3DXCoachmark.getDNSAStatus();
+                                sendNotification ('dnsa', dnsa);
+                                // No need to keep the close button fallback in this case
+                                document.getElementById('closeFallBack').remove();
+                            }
+                        }
+                    });
+                    window.getDNAStatus = function () {
+                        var dnsa = i3DXCoachmark.getDNSAStatus();
+                        sendNotification ('dnsa', dnsa);
+                    };
+                });
+
+                // If not loaded in x sec, show the fallback to close
+                setTimeout(function () {
+                    var fallback = document.getElementById('closeFallBack');
+                    if(fallback) {
+                        fallback.style.display='block';
+                    }
+                }, 2000);
+            }());
+
+            </script>
+        </div>
+        <div id="closeFallBack" style="display:none;">
+            <div class="ds-coachmark-close" onclick="closeWindow();"></div>
+        </div>
+    </body>
+
+</html>

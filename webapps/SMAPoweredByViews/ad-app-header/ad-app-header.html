@@ -1,0 +1,43 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+
+<dom-module id="ad-app-header">
+	<link rel="import" type="css" href="ad-app-header.css">
+	<template>
+		<div class="appHeaderContainer">
+			<div class="titleSection">
+				<h3 class="study-title ad-hidden-xxs">
+					<span id="title">[[study.title]]</span>
+				</h3>
+				<div id="description" class="description ad-hidden-xxs">[[_getStudyDescription(study.description)]]</div>
+			</div>
+
+			<div class="buttonContainer">
+				<!-- Toggle between Jobs | Files, styled to mimic skeleton facets -->
+				<div class="ad-facet selected" id="jobs" on-click="collectionFacetClicked">
+					<span class="fonticon fonticon-progress-2 ad-facet-icon"></span>
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADAppHeader" nlskey="Jobs" value={{Jobs}} no-view></sp-nls>
+					<span class="ad-facet-label ad-hidden-xxs">[[Jobs]]</span>
+				</div>
+				<div class="ad-facet" id="files" on-click="collectionFacetClicked">
+					<span class="fonticon fonticon-docs ad-facet-icon"></span>
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADAppHeader" nlskey="Files" value={{Files}} no-view></sp-nls>
+					<span class="ad-facet-label ad-hidden-xxs">[[Files]]</span>
+				</div>
+				<!-- separator -->
+				<span id="separator" class="separator"></span>
+				<!-- Additional buttons -->
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADAppHeader" nlskey="CreateJob" value={{createJobTitle}} no-view></sp-nls>
+					<button id="createJob" title="[[createJobTitle]]" on-click="createJob" class="btn btn-default btn-root btn-with-icon" disabled="[[isReadOnly]]">
+						<span class="fonticon fonticon-plus"></span>
+						<span>[[createJobTitle]]</span>
+					</button>
+				<span id="menu" class="fonticon fonticon-menu-dot fonticon-2x button"></span>
+			</div>
+		</div>
+		<sp-search id="spSearch"></sp-search>
+	</template>
+	<script type="text/javascript" src="ad-app-header.js"></script>
+</dom-module>

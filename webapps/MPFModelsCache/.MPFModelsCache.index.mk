@@ -1,0 +1,10 @@
+m|MPFModels\MPFModelsCache.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.0.18209
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFModelsCache\MPFModelsCache.js|1531550863|466
+s|win_b64\code\toolcmds\mkwebconcat.bat|1531520632|287
+s|MPFModels\MPFModelsCache.mweb\src\MPFModelsCache.js|1483688386|0
+s|MPFModels\MPFModelsCache.mweb\src\MPFCollectionCache.js|1493892347|1055
+s|win_b64\code\toolcmds\jscompressor.bat|1531520632|41

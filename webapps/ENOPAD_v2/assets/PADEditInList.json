@@ -1,0 +1,34 @@
+{
+    "editableColumnsDataIndex": ["tree","instanceName", "ds6w:description", "ds6w:responsible", "ds6w:reserved"],
+    "editableColumnsAttribute": ["V_Name", "instanceName.PLM_ExternalID", "V_description", "owner","reserved"],
+    "editBehavior": {
+        "tree": {
+            "mode": "inline",
+            "attribute": "V_Name"
+        },
+        "instanceName": {
+            "mode": "inline",
+            "attribute": "instanceName.PLM_ExternalID"
+        },
+        "ds6w:description": {
+            "mode": "inline",
+            "attribute": "V_description"
+        },
+        "ds6w:responsible": {
+            "mode": "command",
+            "command": "ActionBar_ChangeOwner"
+        },
+        "ds6w:reserved": {
+            "mode": "commandByValue",
+            "commands": [{
+                    "name": "ActionBar_UnreserveCmd",
+                    "value": "TRUE"
+                },
+                {
+                    "name": "ActionBar_ReserveCmd",
+                    "value": "FALSE"
+                }
+            ]
+        }
+    }
+}

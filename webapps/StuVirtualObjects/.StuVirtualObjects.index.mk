@@ -1,0 +1,11 @@
+m|VIAIdeaExperienceModelRTWeb\StuVirtualObjects.mweb
+b|j|n,u
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\StuVirtualObjects\StuVirtualObjectsDefine.js|1498659511|313
+s|VIAIdeaExperienceModelRTWeb\StuVirtualObjects.mweb\src\StuVirtualObjectsDefine.js|1498659511|313
+t|win_b64\webapps\StuVirtualObjects\StuPointActor.js|1503582601|3278
+s|VIAIdeaExperienceModelRTWeb\StuVirtualObjects.mweb\src\StuPointActor.js|1503582601|3278
+t|win_b64\webapps\StuVirtualObjects\StuPathActor.js|1534777976|9018
+s|VIAIdeaExperienceModelRTWeb\StuVirtualObjects.mweb\src\StuPathActor.js|1534777976|9018

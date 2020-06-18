@@ -1,0 +1,1 @@
+define("DS/DMUBaseCommands/DMUBaseCommands_ru",{});define("DS/DMUBaseCommands/assets/nls/DMUBaseCommands",{defaultSelectLabel:"Выберите объект"});

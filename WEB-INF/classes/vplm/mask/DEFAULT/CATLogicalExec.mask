@@ -1,0 +1,81 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY LExecRef
+// --------------------------------------------------
+ATTR V_CycleTime;N;N;0.0
+ATTR V_Offset;N;N;0.0
+ATTR V_ReactionTime;N;N;0.0
+FUNC Create
+FUNC EZQuery
+FATTR V_CycleTime;Y
+FATTR V_Offset;Y
+FATTR V_ReactionTime;Y
+FUNC List
+FATTR V_CycleTime;N
+FATTR V_Offset;N
+FATTR V_ReactionTime;N
+FUNC Query
+FATTR V_CycleTime;Y
+FATTR V_Offset;Y
+FATTR V_ReactionTime;Y
+FUNC Read
+FATTR V_CycleTime;N
+FATTR V_Offset;N
+FATTR V_ReactionTime;N
+FUNC Write
+FATTR V_CycleTime;N
+FATTR V_Offset;N
+FATTR V_ReactionTime;N
+// --------------------------------------------------
+ENTITY LExecInst
+// --------------------------------------------------
+ATTR V_CycleTime;N;N;0.0
+ATTR V_Offset;N;N;0.0
+ATTR V_ReactionTime;N;N;0.0
+FUNC Create
+FUNC EZQuery
+FATTR V_CycleTime;Y
+FATTR V_Offset;Y
+FATTR V_ReactionTime;Y
+FUNC List
+FATTR V_CycleTime;N
+FATTR V_Offset;N
+FATTR V_ReactionTime;N
+FUNC Query
+FATTR V_CycleTime;Y
+FATTR V_Offset;Y
+FATTR V_ReactionTime;Y
+FUNC Read
+FATTR V_CycleTime;N
+FATTR V_Offset;N
+FATTR V_ReactionTime;N
+FUNC Write
+FATTR V_CycleTime;N
+FATTR V_Offset;N
+FATTR V_ReactionTime;N

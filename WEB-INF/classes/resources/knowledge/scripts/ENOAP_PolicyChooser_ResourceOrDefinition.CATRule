@@ -1,0 +1,84 @@
+/* Rule ENOAP_PolicyChooser_ResourceOrDefinition (ThisObject: PLMEntity, Parameters: RuleContext)                 */
+/* NOT CONTRACTUAL and PROPERTY OF TE (TEAM ENVIRONMENT) DEFINITION, ANY CHANGE MAY HAPPEN WITHOUT NOTICE         */
+/* Parameters contains many information such as name, user, security ... depending on Operation                   */
+/* Notice this BL operates OpeningID INFRAAuthorizedPolicies                                                      */
+
+/*
+/*tempo code : the list of policies should be provided from server kernel dictionnary                             */
+/*                    default policy                                                                              */
+/*Provide resource policy for anyone                                                                              */  
+/*but also provide specific Management for 3 specific Creator, Experiementer, Viewer role                         */
+
+Let DefaultPolicyName(STRING) 
+Let listOtherPolicies(List)
+
+Let PrimaryType(Type)
+Let PrimaryTypeName(String)
+Let PrimaryTypeNlsName(String)
+
+Let RuleName(String)
+
+Let LoginRole(STRING) 
+
+LoginRole=""
+DefaultPolicyName=""
+
+PrimaryTypeName=""
+PrimaryTypeNlsName=""
+/********* Using PrimaryType (not ModelingType) which is the custom type of a modeling type ********/
+if (ThisObject.HasAttribute("PrimaryType")){
+	/* PrimaryType cannot eval on server */ 
+	PrimaryType=ThisObject.PrimaryType
+	if (PrimaryType<>NULL){
+	   PrimaryTypeName=PrimaryType.Name 
+	   PrimaryTypeNlsName=PrimaryType.UserName 
+    }
+}
+
+RuleName="ENOAP_PolicyChooser_ResourceOrDefinition"
+
+/*********** Applicability of the policy ********/
+if ((ThisObject->IsSupporting("PLMCoreReference") == false) and (ThisObject->IsSupporting("PLMCoreRepReference") == false) ) {
+    Trace (1, RuleName + ": Invalid Object type " + PrimaryTypeName )  
+    Parameters.Severity=3 
+
+	/*Differed resolution of NLS - if needed */   
+	Parameters.NLSMessage = BuildDeferredMessageNLS("PLMPolicyChooser", "DeploymentErrorDefinition", PrimaryTypeNlsName) 
+
+    /*Immediate resolution of NLS */
+    Parameters.Message = BuildMessageNLS("PLMPolicyChooser", "DeploymentErrorDefinition", PrimaryTypeNlsName) 
+    Report("Error",Parameters.Message, Parameters.Message)      
+}
+
+/*********** Business Role ********/
+if ( Parameters->HasAttribute("Role") == true ) {
+   LoginRole=Parameters->GetAttributeString("Role")
+}
+
+/***********Default Policy **************/
+if ( (LoginRole == "VPLMCreator") ) {  
+	DefaultPolicyName="VPLM_SMB_Definition"
+} else {
+	DefaultPolicyName="VPLM_SMB_Resource"
+}
+
+/*********** Protect Safe Save some OCDX roles********/
+if ((LoginRole == "VPLMExperimenter") or (LoginRole == "VPLMViewer")) {
+    Trace (1, RuleName + ": Invalid Role " + LoginRole + " for Object type " + PrimaryTypeName )    
+    Parameters.Severity=2 
+
+	/*Differed resolution of NLS - if needed */   
+	Parameters.NLSMessage = BuildDeferredMessageNLS("PLMPolicyChooser", "PolicyRoleWarning", PrimaryTypeNlsName) 
+
+    /*Immediate resolution of NLS */
+    Parameters.Message = BuildMessageNLS("PLMPolicyChooser", "PolicyRoleWarning", PrimaryTypeNlsName) 
+    Report("Warning",Parameters.Message, Parameters.Message)     	    
+}
+
+Trace (1, RuleName + ": Allocating default policy "+ DefaultPolicyName + " from role " + LoginRole + " on type "+ PrimaryTypeName)
+   
+Parameters->SetAttributeString("PolicyName",DefaultPolicyName)
+
+/***********Other Policy Applicable**************/
+listOtherPolicies.Append("VPLM_SMB_Definition")
+Parameters->SetAttributeObject("OtherPolicies",listOtherPolicies)

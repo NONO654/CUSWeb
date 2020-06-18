@@ -1,0 +1,1 @@
+define("DS/CfgDictionary/CfgDictionary_ru",{});define("DS/CfgDictionary/assets/nls/CfgDictionary",{option:"параметр",rule:"правило",value:"значение",variability_group:"группа изменчивости",variant:"вариант"});

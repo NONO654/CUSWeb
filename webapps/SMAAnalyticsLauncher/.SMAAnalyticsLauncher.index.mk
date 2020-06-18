@@ -1,0 +1,10 @@
+m|SMAAnalyticsComponents\SMAAnalyticsLauncher.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.7.19159
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAAnalyticsLauncher\SMAAnalyticsLauncher.js|1559958502|47010
+s|SMAAnalyticsComponents\SMAAnalyticsLauncher.mweb\src\SMAAnalyticsServantCache.js|1520377512|12589
+s|SMAAnalyticsComponents\SMAAnalyticsLauncher.mweb\src\SMAAnalyticsWidgetEERWrapper.js|1528829518|38207
+s|SMAAnalyticsComponents\SMAAnalyticsLauncher.mweb\src\SMAAnalyticsWidgetLaunchModule.js|1559461924|113317
+s|SMAAnalyticsComponents\SMAAnalyticsLauncher.mweb\src\SMAAnalyticsWidgetLoadModule.js|1554491245|17069

@@ -1,0 +1,1 @@
+define("DS/SPYUI/SPYUI_fr",{});define("DS/SPYUI/assets/nls/CATSimNavDataCameraSelector",{"static":"Caméra statique",tracking:"Caméra mobile",focus:"Mise au point"});define("DS/SPYUI/assets/nls/CATSimNavDataOverlaysManager",{title:"Lignes de courant",nameAttr:"Nom"});define("DS/SPYUI/assets/nls/CATSimNavDataSpeedControl",{title:"Vitesse:"});

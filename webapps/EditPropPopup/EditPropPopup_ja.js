@@ -1,0 +1,1 @@
+define("DS/EditPropPopup/EditPropPopup_ja",{});define("DS/EditPropPopup/assets/nls/editPropPopup",{Properties:"プロパティ",PinWidget:"ウィジェットを固定",Loading:"ロード中...",CloseOverlay:"ポップアップを閉じる"});

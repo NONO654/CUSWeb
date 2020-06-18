@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Handlebars</title>
+        <script src="../AmdLoader/AmdLoader.js"></script>
+        <style>
+        div.entry1 {
+            color: blue;
+        }
+        div.entry2 {
+            color: grey;
+        }
+        div.entry3 {
+            color: red;
+        }
+        </style>
+    </head>
+    <body>
+        <!-- Such a template declared within a body>div tag is OK if used in the 3DD -->
+        <!-- platform ! -->
+        <div id="entry-template-4" style="display:none;">
+            <div class="entry4">
+              <h1>{{title}}</h1>
+              <div class="body">
+                {{body}}
+              </div>
+            </div>
+        </div>
+    </body>
+    <!-- Warning: Such a template declared within a script tag cannot currently be -->
+    <!-- used in the 3DD platform ! Please declare your template in a div tag with a display:none style -->
+    <script id="entry-template" type="text/x-handlebars-template">
+        <div class="entry1">
+          <h1>{{title}}</h1>
+          <div class="body">
+            {{body}}
+          </div>
+        </div>
+    </script>
+    <script type="text/javascript">
+        require([
+            'DS/Handlebars/Handlebars',
+            'text!DS/Handlebars/assets/templates/entry2.html'
+        ], function (Handlebars, entry2Template) {
+            'use strict';
+
+            var i, templates, contexts, sources = [];
+            templates = [];
+            
+            // First way to get a template : by getting the content
+            // of a <script id="foo" type="text/x-handlebars-template"> element :
+            sources.push(document.getElementById("entry-template").innerHTML);
+
+            // Second way to get a template : from a required AMD module :
+            sources.push(entry2Template);
+
+            // And eventually third way to get a template : "inlined" as a
+            // string in your Javascript code :
+            sources.push(
+                '<div class="entry3">'+
+                    '<h1>{{title}}</h1>'+
+                    '<div class="body">'+
+                        '{{body}}'+
+                    '</div>'+
+                '</div>'
+            );
+
+            sources.push(document.getElementById("entry-template-4").innerHTML);
+
+            // Let's compile the templates :
+            i = sources.length;
+            while (i--) {
+                templates[i] = Handlebars.compile(sources[i]);
+            }
+
+            contexts = [{
+                title: "Handlebars!",
+                body: "Gotta love the mustache!"
+            }, {
+                title: "Handlebars!",
+                body: "Grab the DOM by the stash!"
+            }, {
+                title: "Handlebars!",
+                body: "Navigate through the HTML jungle!"
+            }, {
+                title: "Handlebars!",
+                body: "Drops, Bulls or Risers?"
+            }];
+
+            i = templates.length;
+            while (i--) {
+                document.body.innerHTML += templates[i].call(null, contexts[i]);
+            }
+        });
+    </script>
+</html>

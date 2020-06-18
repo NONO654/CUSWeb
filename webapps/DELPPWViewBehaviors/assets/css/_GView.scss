@@ -1,0 +1,214 @@
+/*
+_GraphView.scss
+Partial scss file - ex GraphView.css
+*/
+
+$ProcessColor: rgb(255, 188, 157) !important;
+$SystemColor:  rgb(255, 251, 165) !important;
+$OperationColor: rgb(255, 251, 165) !important;
+$ResourceColor:  rgb(225, 255, 195) !important;
+$toolbarColor:  rgb(255, 255, 255) !important;
+
+.my-first-edge-view{
+    stroke: #b3b3b3;
+    stroke-width: 1.5;
+    fill: none;
+    cursor:crosshair;
+    marker-end: url(#arrow-edge-end-marker);
+}
+
+.my-sec-edge-view{
+    stroke: #b3b3b3;
+    stroke-width: 3;
+    fill: none;
+    cursor:crosshair;
+    marker-end: url(#arrow-edge-end-marker);
+}
+
+.GraphViewBar{
+	position: relative;
+	right: 0px;
+	padding: 10px;
+	z-index : 100;
+  float : left;
+}
+
+.button-refresh {
+    background-color:#65A6C4;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    position: absolute;
+    right: 0px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    right:5px;
+    top:5px;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.EGraph_obj_PROCESS{
+    background: $ProcessColor;
+}
+
+.arrow-edge {
+    stroke: #777;
+    stroke-width: 0.5px;
+    marker-end: url(#arrow-edge-end-marker);
+}
+
+.EGraph_obj_SYSTEM{
+    background: $SystemColor;
+}
+
+.EGraph_obj_OPERATION{
+    background: $OperationColor;
+}
+
+.EGraph_obj_RESOURCE{
+    background: $ResourceColor;
+}
+
+.canvas {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    cursor: move;
+}
+
+.my-node {
+    display: inline-block;
+    position: absolute;
+    border-radius: 8px;
+ 	//box-shadow: 5px 5px 5px #aaa;
+    //cursor: not-allowed;
+}
+
+
+.my-node-header {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 30px;
+    background: #4D4D4D;
+    border-bottom-width: 0;
+    color: #fff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 5px 15px;
+    font-weight: bold;
+    //box-sizing: border-box;
+    z-index : 1;
+    -moz-box-sizing: border-box;
+    vertical-align:middle;
+    font-size: 0.5vw;
+     white-space: nowrap;
+}
+
+.my-node-header img{
+  vertical-align:middle;
+  width: 23px;
+}
+.my-node-container {
+    display: inline-block;
+    position: absolute;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #eee;
+    font-size: 100%;
+    //border-top-left-radius: 8px;
+    //border-bottom-right-radius: 8px;
+    padding: 0 15px;
+    border: #424242 solid 1px;
+    border-top-width: 2px;
+    border-top-color: #4D4D4D;
+    //font-weight: normal;
+    //text-align: center;
+    display: table-cell;
+    vertical-align: bottom;
+    overflow-x:hidden;
+    overflow-y: auto;
+     word-wrap: break-word;
+    margin-top: 2cm;
+    //resize: both;
+    //overflow: auto;
+    position: absolute;
+    top: -50px;
+}
+
+.my-node.selected  .my-node-container {
+    border-color: #4D4D4D;
+    background: #FAFCF5!important;
+    border-top-color: #4D4D4D;
+}
+
+.my-node-col {
+    display: inline-block;
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    top: 17px;
+    bottom:0;
+
+}
+
+.my-node-col.left {
+    text-align: left;
+}
+
+.my-node-col.right {
+    text-align: right;
+}
+
+.my-node-col.left > div.my-node-text {
+    left: 0;
+}
+
+.my-node-col.right > div.my-node-text {
+    right: 0;
+}
+
+div.my-node-text {
+    display: inline-block;
+    position: absolute;
+    line-height: 15px;
+}
+
+.egraph_views_SVGConnView.empty {
+    fill: #eee;
+    stroke: #aaa;
+    stroke-dasharray: 3, 2;
+}
+
+.egraph_views_mySVGConnView
+{
+    fill: rgba(0, 0, 0, 0.1);
+    stroke: #424242;
+    r : 7;
+    cursor:crosshair;
+}
+
+.egraph_views_mySVGConnView_invisible{
+    fill: rgba(0, 0, 0, 0);
+    stroke: rgba(0, 0, 0, 0);
+    r : 0;
+}
+
+.myNodeLinkEdit{
+    width: 155px;
+    top: 45px;
+    left: -20px;
+    position: relative;
+  	display: block;
+ 	width: 0px;
+ 	height: 0px;
+ 	cursor: pointer;
+}

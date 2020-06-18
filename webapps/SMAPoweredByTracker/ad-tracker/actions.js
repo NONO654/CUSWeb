@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define(["DS/SMAPoweredByTracker/ad-tracker/action-types"],function(b){var a={};a.enableStudyTracker=function(){return{type:b.ENABLE_STUDY_TRACKER}};a.disableStudyTracker=function(){return{type:b.DISABLE_STUDY_TRACKER}};return a});

@@ -1,0 +1,9 @@
+m|MPFModels\MPFProductModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFProductModel\MPFProductModel.js|1542748047|1762
+s|MPFModels\MPFProductModel.mweb\src\ProductModel.js|1540894054|4793
+s|MPFModels\MPFProductModel.mweb\src\ProductCollection.js|1529933899|1465
+s|MPFModels\MPFProductModel.mweb\src\MPFProductModel.js|1513939496|0

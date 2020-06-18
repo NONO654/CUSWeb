@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+<link href="http://web3dinfra/WUXShowRoom/i_framed_sample.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../UIKIT/UIKIT.css">
+<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+<script>
+	require(['UWA/Drivers/Alone', 'DS/RTCollaborateAPI/RTCollaborateAPI', 'DS/RTShareAPI/RTShareAPI', 'DS/UIKIT/Input/Button', 'DS/MessageBus/MessageBus'], function (UWA, RTCollabAPI, RTShareAPI, Button, justHereToLoadMessageBus) {		
+	
+		var coreviewStatus = document.getElementById("coreviewStatus");
+		var coreviewDashboard = document.getElementById("coreviewDashboard");
+		var btnShareWith = new Button({ value: "Start coreview with ..." });
+		btnShareWith.inject(coreviewStatus,'before');
+		
+		var removeConfettis = function () {
+			var confettis = document.getElementsByClassName('confetti');
+			while (confettis[0])
+				confettis[0].destroy();
+		};		
+		var coreview = new RTCollabAPI({
+			collabType : "coreview",
+			onCollabStart : function(data) {
+				coreviewStatus.innerText = "Coreview ON. "+(data.isMaster ? "Master" : "Slave");
+				coreviewStatus.style.background = "green";
+				btnShareWith.hide();
+				coreviewDashboard.style.border="2px dashed darkred";
+			},
+			onCollabStop : function() {
+				coreviewStatus.innerText = "Coreview OFF";
+				coreviewStatus.style.background = "red";
+				btnShareWith.show();
+				removeConfettis();
+			},
+			onDataReceived : function(data) {
+				if (!data) return UWA.log("onDataReceived : bad data format");
+				if (data.text)
+					coreviewDashboard.value = data.text;
+				if (data.newdiv)
+				{
+					var style = JSON.parse(data.newdiv);
+					var newdiv = new UWA.createElement('div',{'styles':style, "class":'confetti'});
+					newdiv.inject(document.getElementById('collabAPIdemo'));
+				}
+			}
+		});
+
+		coreviewDashboard.onkeyup = function(evt) {
+			if (coreview.isCollabStarted) {
+				/*if (coreview.isMaster) */coreview.sendData({text : coreviewDashboard.value});
+				//else alert('You are editing the dashboard but you are not the master of the coreview !');
+			}
+		};
+		
+		coreviewDashboard.onclick = function(evt) {
+			var style = {
+				'position':'absolute',
+				'top':evt.pageY-32+'px',
+				'left':evt.pageX-32+'px',
+				"width":"64px",
+				"height":"64px",
+				"border-radius":"50%",
+				'background':'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+')'
+				};
+			var randomdiv = new UWA.createElement('div', {'styles':style, "class":'confetti'});
+			randomdiv.inject(document.getElementById('collabAPIdemo'));
+			coreview.sendData({newdiv : JSON.stringify(style)});
+		};	
+		
+		var share = new RTShareAPI({content : {type : "coreview", channel:coreview.channel}});		
+		
+		btnShareWith.addEvent('onClick', share.item.handler);
+//		btnShareWith.inject(document.getElementById('coreviewStatus'),'before');
+	});
+</script>
+</head>
+<body>
+	<article id="collabAPIdemo"><center><h3>Co-Review API</h3></center>
+		<span id="coreviewStatus" style="display:none;background:red">Coreview OFF</span>
+		<br>
+		<textarea id="coreviewDashboard" style="width:100%; height:200px; background:white; color:black;"></textarea>
+	</article>
+</body>
+</html>

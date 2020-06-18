@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.grid.ssh.SSHGridPlugin" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOSCmdPISSHGrid" nlsID="dispname">SSH</DisplayName>
+	<Description nlsFile="SMAWflOSCmdPISSHGrid" nlsID="desc">Create new SSH Grid Connector</Description>
+	<LongDescription nlsFile="SMAWflOSCmdPISSHGrid" nlsID="longdesc">Create new SSH Grid Connector</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Grid</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.grid.ssh.SshGridPlugin</Value>
+		</Attribute>
+	</Attributes>
+
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOSCmdPISSHGrid.CATNls" targetFilename="SMAWflOSCmdPISSHGrid.CATNls"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflOSCmdPISSHGrid.dll" targetFilename="win_b64/SMAWflOSCmdPISSHGrid.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflOSCmdPISSHGrid.sypstyle" targetFilename="SMAWflOSCmdPISSHGrid.sypstyle"/>
+	</Streams>
+
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.plugin.grid.ssh.SshGridPlugin</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="javaEditor" language="java">
+					<Class>com.engineous.plugin.grid.ssh.SshGridPlugin</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflOSCmdPISSHGrid_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.plugin.grid.ssh.SshGridPlugin</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[Grid]]>
+			</Value>
+		</Property>
+
+		<!--  SSHGridConnector properties -->
+		<Property name="options" type="aggregate" valuetype="single">
+
+			<Property name="type" type="string" valuetype="single">
+				<Value/>
+			</Property>
+
+			<Property name="args" type="string" valuetype="single">
+				<Value/>
+			</Property>
+
+			<Property name="host" type="string" valuetype="single">
+				<Value/>
+			</Property>
+
+			<Property name="workingDir" type="string" valuetype="single">
+				<Value/>
+			</Property>
+
+			<Property name="makeScratchDirs" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[true]]>
+				</Value>
+			</Property>
+
+			<Property name="keepdirtype" type="integer" valuetype="single">
+				<Value>
+					<![CDATA[0]]>
+				</Value>
+			</Property>
+
+		</Property>
+
+	</Properties>
+</wfext:Extension>

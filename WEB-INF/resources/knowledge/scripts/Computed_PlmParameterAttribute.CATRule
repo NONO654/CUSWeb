@@ -1,0 +1,169 @@
+/* Check created by CSI 4/1/2014 */ 
+
+let intParam(IntegerParameter)
+let booleanParam (BooleanParameter)
+let stringParam (StringParameter)
+let realParam(RealParameter)
+let magnitudeParam( String )
+Let attrNames(List)
+Let i = 1
+Let size = 0
+Let index = 0
+Let attr_i(String)
+Let dimension(String)
+
+let sAttr(String)
+sAttr = Parameters.GetAttributeString("AttributeName")
+
+
+if (sAttr == "PlmParamIntegerValue")
+{
+    set intParam = ThisObject
+    Parameters.SetAttributeInteger("ComputedValue", intParam.IntegerParameterValue)
+}
+else if (sAttr == "PlmParamBooleanValue")
+{
+	set booleanParam=ThisObject
+	Parameters.SetAttributeBoolean("ComputedValue",booleanParam.BooleanParameterValue)
+}
+else if (sAttr == "PlmParamStringValue")
+{
+	set stringParam=ThisObject
+	Parameters.SetAttributeString("ComputedValue",stringParam.StringParameterValue)
+}
+if (sAttr == "PlmParamIntegerMin")
+{
+    set intParam = ThisObject
+    Parameters.SetAttributeInteger("ComputedValue", intParam.IntegerMinValue)
+}
+if (sAttr == "PlmParamIntegerMax")
+{
+    set intParam = ThisObject
+    Parameters.SetAttributeInteger("ComputedValue", intParam.IntegerMaxValue)
+}
+if ( sAttr== "PlmParamRealValue")
+{
+	set realParam=ThisObject
+	if ( realParam <> NULL )
+		Parameters.SetAttributeReal("ComputedValue",realParam.RealParameterValue)
+	else
+	{
+		attrNames = ThisObject->ListAttributeNames("", FALSE)
+		size = attrNames->Size()
+		dimension = ""
+		for i while i<=size
+		{
+			attr_i = attrNames->GetItem(i)
+			index = attr_i->Search("ParameterValue")
+			if (index > 0)
+			{
+				dimension = attr_i->Extract(0, index)
+			}
+			i = i+1
+		}
+		magnitudeParam=dimension + "ParameterValue"
+		Parameters.SetAttributeReal("ComputedValue",ThisObject.GetAttributeReal(magnitudeParam))
+	}
+}
+if (sAttr== "PlmParamRealMax")
+{
+	set realParam=ThisObject
+	if ( realParam <> NULL )
+		Parameters.SetAttributeReal("ComputedValue",realParam.RealMaxValue)
+	else
+	{
+		attrNames = ThisObject->ListAttributeNames("", FALSE)
+		size = attrNames->Size()
+		dimension = ""
+		for i while i<=size
+		{
+			attr_i = attrNames->GetItem(i)
+			index = attr_i->Search("ParameterValue")
+			if (index > 0)
+			{
+				dimension = attr_i->Extract(0, index)
+			}
+			i = i+1
+		}
+		magnitudeParam=dimension + "MaxValue"
+		Parameters.SetAttributeReal("ComputedValue",ThisObject.GetAttributeReal(magnitudeParam))
+	}
+}
+else if ( sAttr== "PlmParamRealMin")
+{
+	set realParam=ThisObject
+	if ( realParam <> NULL )
+		Parameters.SetAttributeReal("ComputedValue",realParam.RealMinValue)
+	else
+	{
+		attrNames = ThisObject->ListAttributeNames("", FALSE)
+		size = attrNames->Size()
+		dimension = ""
+		for i while i<=size
+		{
+			attr_i = attrNames->GetItem(i)
+			index = attr_i->Search("ParameterValue")
+			if (index > 0)
+			{
+				dimension = attr_i->Extract(0, index)
+			}
+			i = i+1
+		}
+		magnitudeParam=dimension + "MinValue"
+		Parameters.SetAttributeReal("ComputedValue",ThisObject.GetAttributeReal(magnitudeParam))
+	}
+}
+else if ( sAttr== "PlmParamStringMultiValue")
+{
+    set stringParam = ThisObject
+    Parameters.SetAttributeObject("ComputedValue", stringParam.StringMultiValue)
+}
+else if ( sAttr== "PlmParamIntegerMultiValue")
+{
+    set intParam = ThisObject
+    Parameters.SetAttributeObject("ComputedValue", intParam.IntegerMultiValue)
+}
+else if ( sAttr== "PlmParamRealMultiValue")
+{
+    set realParam = ThisObject
+	if ( realParam <> NULL )
+    	Parameters.SetAttributeObject("ComputedValue", realParam.RealMultiValue)
+	else
+	{
+		attrNames = ThisObject->ListAttributeNames("", FALSE)
+		size = attrNames->Size()
+		dimension = ""
+		for i while i<=size
+		{
+			attr_i = attrNames->GetItem(i)
+			index = attr_i->Search("ParameterValue")
+			if (index > 0)
+			{
+				dimension = attr_i->Extract(0, index)
+			}
+			i = i+1
+		}
+		magnitudeParam=dimension + "MultiValue"
+		Parameters.SetAttributeObject("ComputedValue",ThisObject.GetAttributeObject(magnitudeParam))
+	}
+}
+else if ( sAttr== "PlmParamType")
+{
+	attrNames = ThisObject->ListAttributeNames("", FALSE)
+	size = attrNames->Size()
+	dimension = ""
+	for i while i<=size
+	{
+		attr_i = attrNames->GetItem(i)
+		index = attr_i->Search("ParameterValue")
+		if (index > 0)
+		{
+			dimension = attr_i->Extract(0, index)
+		}
+		i = i+1
+	}
+	
+	Parameters.SetAttributeString("ComputedValue", dimension)
+}
+
+

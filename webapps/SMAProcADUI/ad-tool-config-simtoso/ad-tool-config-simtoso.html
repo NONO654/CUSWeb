@@ -1,0 +1,49 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="ad-tool-config-simtoso">
+  <link rel="import" type="css" href="ad-tool-config-simtoso.css">
+  <template>
+      <style include="sp-uikit-styles"></style>
+
+        <div class="content-section-heading chrome-pull-fix">
+		    <div class="pull-left content-section-title">Tool Configuration</div>
+        </div>
+        <div class="clearfix"></div>
+       	<div class="content-section-body">
+       		<div id="optionsSection" class="hidden">
+		      <table>
+		          <tbody><tr>
+		              <td>
+		                  <span class="content-label">Input SIM Database:</span>
+		              </td>
+		              <td>
+		                  <span class="content-field"><input id="simFileName" name="simFileName" type="text" size="40" on-keyup="onSimFileNameChange" on-change="onSimFileNameChange" on-input="onSimFileNameChange" on-drop="onSimFileNameDrop"></span>
+		              </td>
+		          </tr>
+		          <tr>
+		              <td colspan="2">
+		                  <span class="content-label">*This tool can only be executed on Windows stations</span>
+		              </td>
+		          </tr>
+		       </tbody></table>
+       		</div>
+		 	<!-- The alert messages need to have the relative position declared inline in order to work in Firefox and IE -->
+       		<div id="configurationErrorNone" class="hidden">
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				No tool is currently selected.
+				</div>
+       		</div>
+       		<div id="configurationErrorMultiple" class="hidden">
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				This configuration section can only be edited for a single tool.
+				</div>
+       		</div>
+        </div>
+                
+	</template>
+  <script src="ad-tool-config-simtoso.js"></script>
+</dom-module>
+
+

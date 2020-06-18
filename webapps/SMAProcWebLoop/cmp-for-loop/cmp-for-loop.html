@@ -1,0 +1,83 @@
+<!---------------------------------------------------------------------------------------------------------------
+    [cmp-for-loop HTML Document]
+    
+    Project:        cmp
+    Version:		1.0
+    Last change:    Thu, 19 Nov 2015 20:03:24 GMT
+    Assigned to:    Vishakha Motwani
+    Primary use:	For loop adapter editor
+    Description:    To be used with cmp-loop
+    ----------------------------------------------------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-checkbox/sp-checkbox.html">
+<link rel="import" href="../cmp-loop-parameter-mapper.html">
+
+<dom-module id="cmp-for-loop">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+            :host([hidden]) {
+                display: none;
+            }
+            .inline {
+                width: 100%;
+                display: inline-flex;
+                margin-top: 5px;
+            }
+            .inline > label {
+                width: 5.5em;
+                font-weight: normal;
+            }
+            .inline > pcw-parameter-chooser,
+            .inline > cmp-loop-parameter-mapper {
+                flex: auto;
+                width: auto;
+            }
+            .inline > label.longlabel {
+                width: 100%;
+            }
+            sp-checkbox{
+                margin-right: 5px;
+            }
+        </style>
+        <div class="inline">
+            <label>Parameter:</label>
+            <pcw-parameter-chooser
+                id="paramchooser"
+                autoselect create
+                datatype="Real Integer"
+                structure="Scalar"
+                on-pcw-parameter-selected="onSelectConditionParam"
+                required>
+            </pcw-parameter-chooser>
+        </div>
+        <div class="inline">
+            <label>From:</label>
+            <cmp-loop-parameter-mapper id="from" disabled></cmp-loop-parameter-mapper>
+        </div>
+        <div class="inline">
+            <label>To:</label>
+            <cmp-loop-parameter-mapper id="to" disabled></cmp-loop-parameter-mapper>
+        </div>
+        <div class="inline">
+            <label>Increment:</label>
+            <cmp-loop-parameter-mapper id="increment" disabled></cmp-loop-parameter-mapper>
+        </div>
+        <!--Loop fail conditions-->
+        <div class="inline">
+            <sp-checkbox id="failrunpolicy"></sp-checkbox>
+            <label class="longlabel">Ignore and continue if iteration fails.</label>
+        </div>
+        
+        <!--Sequential or parallel execution of iterations-->
+        <div class="inline">
+            <sp-checkbox id="parallel"></sp-checkbox>
+            <label class="longlabel">Execute all iterations in parallel</label>
+        </div>
+    </template>
+    <script type="text/javascript" src="cmp-for-loop.js"></script>
+    
+</dom-module>

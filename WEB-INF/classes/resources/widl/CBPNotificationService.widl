@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="urn:com:dassault_systemes:widl"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd"
+	xmlns:tns="http://cbp.enovia.ws/common"
+	xmlns:err="http://www.3ds.com/wserror"
+	xmlns:q1="http://cbp.enovia.ws/CBPXML">
+	<entities
+		targetNamespace="http://cbp.enovia.ws/common">
+		<schemaImports>
+			<schemaImport location="wserrors.xsd" />
+			<schemaImport location="CBPXML.xsd" />
+		</schemaImports>
+		<interfaces>
+			<interface name="IPLMNotificationService" scope="public">
+				<documentation>
+					Interface for Notification operations.
+				</documentation>
+
+				<method name="listNotifications">
+					<documentation>Get a list of notification names.</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="notificationNames" type="q1:ListOfString" direction="out">
+						<documentation>The resulting list of notification names.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="sendNotification">
+					<documentation>Send a notification.</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="notificationName" type="xs:string" direction="in">
+						<documentation>Name of the notification object.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object related to the notification.</documentation>
+					</param>
+					<param name="payload" type="q1:ListOfNameValue" direction="in">
+						<documentation>Additional data passed to the notification object.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+			</interface>
+		</interfaces>
+		<implementations>
+			<implementation name="PLMNotificationService" serviceid="notificationService"
+				implements="tns:IPLMNotificationService">
+				<documentation>
+					A service to provide Notification operations.
+				</documentation>
+			</implementation>
+		</implementations>
+	</entities>
+</description>

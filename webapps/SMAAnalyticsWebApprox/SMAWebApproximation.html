@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2015 , Dassault Systemes. All rights reserved. -->
+<head>
+
+<title>SIMULIA Predictive Analytics</title>
+
+<!-- Application Metas Start -->
+
+<meta name="description" content="Approximation 3D widget" />
+<meta name="keywords" content="Approximation" />
+<meta name="author" content="Srikanth Devanathan" />
+
+<!-- Application Metas End -->
+<script src="./assets/three.min.js"></script>
+<script src="./assets/TrackballControls.js"></script>
+<script src="./assets/OrbitControls.js"></script>
+<script src="./assets/CanvasRenderer.js"></script>
+<script src="./assets/Projector.js"></script>
+
+<script src="./SMAAnalyticsWebApprox.js"></script>
+<script src="./smaApproxRSMEvaluator.js"></script>
+
+<!-- Application JS Start -->
+<script>
+	/* global widget */
+	if (window.widget) {
+
+		(function() {
+			'use strict';
+
+			var myWidget = {
+
+				//The onLoad() function is the first one,
+				//it will be triggered by widget "onLoad" event.            
+				onLoad : function() {
+
+					startApp();
+				}
+			};
+
+			//The "onLoad" event is the very first event triggered when
+			// the widget is fully loaded.         
+			widget.addEvent('onLoad', myWidget.onLoad);
+		}());
+	}
+
+	function startApp() {
+		// alert('app started');
+
+		var myRSM = new RSMmodule();
+
+		document.getElementById('approxFileInput').addEventListener('change',
+				function(evt) {
+					readAndRenderApproximation(evt, myRSM);
+				}, false);
+		document
+				.getElementById('redrawButton')
+				.addEventListener(
+						'click',
+						function() {
+							createGraph(
+									setup,
+									myRSM,
+									document.getElementById('outputSelect').selectedIndex,
+									document.getElementById('xSelect').selectedIndex,
+									document.getElementById('ySelect').selectedIndex);
+							render(setup);
+							update(setup);
+						}, false);
+
+		readTextFile('./assets/coefficients.txt', function(data) {
+			myRSM.parseFile(data);
+		});
+		initThreeJS(setup, 'chartContainer');
+		createGraph(setup);
+		animateWrapper(setup);
+
+		initThreeJS(setup2, 'chartContainer2');
+		createGraph(setup2);
+		animateWrapper(setup2);
+
+	}
+
+	function readAndRenderApproximation(evt, approx) {
+		var f = evt.target.files[0];
+
+		if (f) {
+			var r = new FileReader();
+			r.onload = function(e) {
+				var contents = e.target.result;
+				approx.clear();
+				approx.parseFile(contents);
+				populateDropDowns(approx);
+			};
+			r.readAsText(f);
+		} else {
+			alert("Failed to load file");
+		}
+	}
+
+	function readTextFile(file, callback) {
+		var rawFile = new XMLHttpRequest();
+		rawFile.open("GET", file, false);
+		rawFile.onreadystatechange = function() {
+			if (rawFile.readyState === 4) {
+				if (rawFile.status === 200 || rawFile.status == 0) {
+					callback(rawFile.responseText);
+
+				}
+			}
+		}
+		rawFile.send(null);
+	}
+	function populateDropDowns(approx) {
+		var outputDropDown = document.getElementById('outputSelect');
+		var xDropDown = document.getElementById('xSelect');
+		var yDropDown = document.getElementById('ySelect');
+		outputDropDown.innerHTML = '';
+		xDropDown.innerHTML = '';
+		yDropDown.innerHTML = '';
+
+		for (i in approx.inputParams) {
+			var opt1 = document.createElement('option');
+			opt1.text = approx.inputParams[i].name;
+			var opt2 = document.createElement('option');
+			opt2.text = approx.inputParams[i].name;
+			xDropDown.appendChild(opt1);
+			yDropDown.appendChild(opt2);
+		}
+
+		for (i in approx.outputParams) {
+			var opt1 = document.createElement('option');
+			opt1.text = approx.outputParams[i].name;
+			outputDropDown.appendChild(opt1);
+		}
+	}
+	function ThreeJSSetup (){};
+	ThreeJSSetup.prototype = {
+		containerWidth : 300,
+		containerHeight : 300,
+		segments : 20,
+		graphGeometry : null,
+		gridMaterial : null,
+		wireMaterial : null,
+		vertexColorMaterial : null,
+		graphMesh : null,
+		container : null,
+		scene : null,
+		camera : null,
+		renderer : null,
+		controls : null,
+		xAxisLables : null,
+		yAxisLables : null,
+		zAxisLables : null
+	}
+	
+	var setup = new ThreeJSSetup();
+	var setup2 = new ThreeJSSetup();
+	
+	function initThreeJS(setup, chartContainerId) {
+		// SCENE
+		setup.scene = new THREE.Scene();
+		// CAMERA
+		var SCREEN_WIDTH = setup.containerWidth, SCREEN_HEIGHT = setup.containerHeight;
+
+		var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 10;
+		setup.camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR,
+				FAR);
+		//setup.camera = new THREE.OrthographicCamera(-1.1, 1.1, 1.1, -1.1, NEAR, FAR);
+		setup.scene.add(setup.camera);
+		setup.camera.position.set(-0.5, 2.0, 2.0);
+		//setup.camera.position.set(0.5, 2.0, 0.5);
+		
+		// RENDERER
+		//if ( Detector.webgl )
+		setup.renderer = new THREE.WebGLRenderer({
+			antialias : false,
+			alpha : true
+		});
+		//else
+		//	setup.renderer = new THREE.CanvasRenderer(); 
+		setup.renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+		setup.container = document.getElementById(chartContainerId);//'chartContainer');
+		setup.container.appendChild(setup.renderer.domElement);
+
+		// CONTROLS
+		setup.controls = new THREE.TrackballControls(setup.camera,
+				setup.renderer.domElement);
+		setup.controls.target = new THREE.Vector3(0.5, 0.5, 0.5);
+
+		setup.controls.addEventListener('change', render);
+
+		// LIGHT
+		var light = new THREE.PointLight(0xffffff);
+		light.position.set(0, 2.50, 0);
+		setup.scene.add(light);
+
+		var ambient = new THREE.AmbientLight(0xffffff); // soft white light
+		setup.scene.add(light);
+
+		////////////
+		// CUSTOM //
+		////////////
+
+		var gridXZ = new THREE.GridHelper(0.5, 0.1);
+		gridXZ.setColors(new THREE.Color(0x006600), new THREE.Color(0x006600));
+		gridXZ.position.set(0.50, 0, 0.5);
+		setup.scene.add(gridXZ);
+
+		var gridXZ2 = new THREE.GridHelper(0.5, 0.1);
+		gridXZ2.setColors(new THREE.Color(0x006600), new THREE.Color(0x006600));
+		gridXZ2.position.set(0.5, 1.0, 0.5);
+		setup.scene.add(gridXZ2);
+
+		var gridXY = new THREE.GridHelper(0.5, 0.1);
+		gridXY.position.set(0.5, 0.5, 0);
+		gridXY.rotation.x = Math.PI / 2;
+		gridXY.setColors(new THREE.Color(0x000066), new THREE.Color(0x000066));
+		setup.scene.add(gridXY);
+
+		var gridXY2 = new THREE.GridHelper(0.5, 0.1);
+		gridXY2.position.set(0.5, 0.5, 1);
+		gridXY2.rotation.x = Math.PI / 2;
+		gridXY2.setColors(new THREE.Color(0x000066), new THREE.Color(0x000066));
+		setup.scene.add(gridXY2);
+
+		var gridYZ = new THREE.GridHelper(0.5, 0.1);
+		gridYZ.position.set(0, 0.5, 0.5);
+		gridYZ.rotation.z = Math.PI / 2;
+		gridYZ.setColors(new THREE.Color(0x660000), new THREE.Color(0x660000));
+		setup.scene.add(gridYZ);
+
+		var gridYZ2 = new THREE.GridHelper(0.5, 0.1);
+		gridYZ2.position.set(1.00, 0.5, 0.5);
+		gridYZ2.rotation.z = Math.PI / 2;
+		gridYZ2.setColors(new THREE.Color(0x660000), new THREE.Color(0x660000));
+		setup.scene.add(gridYZ2);
+
+		//AXES
+		var dirX = new THREE.Vector3(1, 0, 0),
+			dirY = new THREE.Vector3(0, 1, 0),
+			dirZ = new THREE.Vector3(0, 0, -1);
+		var origin = new THREE.Vector3(0, 0, 1);
+		var length = 1.1;
+		var hex = 0x000000;
+		var headLength = 0.1, headWidth = 0.1;
+
+		var arrowHelperX = new THREE.ArrowHelper(dirX, origin, length, 0xff0000, headLength, headWidth),
+			arrowHelperY = new THREE.ArrowHelper(dirY, origin, length, 0x00ff00, headLength, headWidth),
+			arrowHelperZ = new THREE.ArrowHelper(dirZ, origin, length, 0x0000ff, headLength, headWidth);
+		setup.scene.add(arrowHelperX);
+		setup.scene.add(arrowHelperY);
+		setup.scene.add(arrowHelperZ);
+		
+		var normMaterial = new THREE.MeshNormalMaterial;
+		var shadeMaterial = new THREE.MeshLambertMaterial({
+			color : 0xff0000
+		});
+
+		// "wireframe texture"
+		var wireTexture = new THREE.ImageUtils.loadTexture('assets/square.png');
+		wireTexture.wrapS = wireTexture.wrapT = THREE.RepeatWrapping;
+		wireTexture.repeat.set(40, 40);
+		setup.wireMaterial = new THREE.MeshBasicMaterial({
+			map : wireTexture,
+			vertexColors : THREE.VertexColors,
+			side : THREE.DoubleSide
+		});
+
+		var vertexColorMaterial = new THREE.MeshBasicMaterial({
+			vertexColors : THREE.VertexColors
+		});
+
+		// bgcolor
+		setup.renderer.setClearColor(0x000000, 0);
+	}
+	function createGraph(setup, approx, outputParamIndex, uParamIndex, vParamIndex) {
+		var segments = 20, xMin = 0, xMax = 1, xRange = xMax - xMin, yMin = 0, yMax = 1, yRange = yMax
+				- yMin, zMin = -10, zMax = 10, zRange = zMax - zMin;
+		var uVar, vVar, outputVar;
+		xRange = xMax - xMin;
+		yRange = yMax - yMin;
+		//zFunc = Parser.parse(zFuncText).toJSFunction( ['x','y'] );
+		var meshFunction = function(x, y) {
+			x = xRange * x + xMin;
+			y = yRange * y + yMin;
+			var z = x;//(x + y*y) / 2; //= Math.cos(x) * Math.sqrt(y);
+			if (isNaN(z))
+				return new THREE.Vector3(0, 0, 0); // TODO: better fix
+			else
+				return new THREE.Vector3(x, y, z);
+		};
+
+		zMin = 0;
+		zMax = 1;
+		zRange = zMax - zMin;
+
+		if (approx != null) {
+			uVar = approx.inputParams[uParamIndex];
+			vVar = approx.inputParams[vParamIndex];
+			outputVar = approx.outputParams[outputParamIndex];
+
+			zMin = Infinity;
+			zMax = -Infinity;
+
+			var meshFunction1 = function(u, v) {
+				var newVal = approx.nominalInputValues.slice();
+				newVal[uParamIndex] = uVar.min + u * (uVar.max - uVar.min);
+				newVal[vParamIndex] = vVar.min + v * (vVar.max - vVar.min);
+				var outputs = approx.evaluate(newVal);
+				var wVal = outputs[outputParamIndex];
+
+				if (wVal < zMin)
+					zMin = wVal;
+				if (wVal > zMax)
+					zMax = wVal;
+
+				return new THREE.Vector3(u, v, wVal);
+			}
+			//temp
+			new THREE.ParametricGeometry(meshFunction1, segments, segments,
+					false);
+
+			if (zMax === zMin) {
+				zMax = outputVar.max;
+				zMin = outputVar.min;
+			}
+			meshFunction = function(u, v) {
+				var newVal = approx.nominalInputValues.slice();
+				newVal[uParamIndex] = uVar.min + u * (uVar.max - uVar.min);
+				newVal[vParamIndex] = vVar.max - v * (vVar.max - vVar.min); // The 'V' axis is into the screen
+				var outputs = approx.evaluate(newVal);
+				var wVal = (outputs[outputParamIndex] - zMin) / (zMax - zMin);
+				//console.log(outputs);
+				if (isNaN(wVal)) {
+					console.error('NaN');
+					wVal = -1.0;
+				}
+
+				return new THREE.Vector3(u, v, wVal);
+			}
+			zRange = outputVar.max - outputVar.min;
+
+		}
+		// true => sensible image tile repeat...
+		setup.graphGeometry = new THREE.ParametricGeometry(meshFunction,
+				segments, segments, false);
+		setup.graphGeometry.computeFaceNormals();
+		///////////////////////////////////////////////
+		// calculate vertex colors based on Z values //
+		///////////////////////////////////////////////
+
+		//ignore the bbox since we scale from 0-1
+		//setup.graphGeometry.computeBoundingBox();
+		var color, point, face, numberOfSides, vertexIndex;
+		// faces are indexed using characters
+		var faceIndices = [ 'a', 'b', 'c', 'd' ];
+		// first, assign colors to vertices as desired
+		for ( var i = 0; i < setup.graphGeometry.vertices.length; i++) {
+			point = setup.graphGeometry.vertices[i];
+			color = new THREE.Color(0x0000ff);
+			//color.setHSL(0.7 * (zMax - point.z) / zRange, 1, 0.5);
+			color.setHSL(0.7 * (1 - point.z), 1, 0.5);
+			setup.graphGeometry.colors[i] = color; // use this array for convenience
+		}
+		// copy the colors as necessary to the face's vertexColors array.
+		for ( var i = 0; i < setup.graphGeometry.faces.length; i++) {
+			face = setup.graphGeometry.faces[i];
+			numberOfSides = (face instanceof THREE.Face3) ? 3 : 4;
+			for ( var j = 0; j < numberOfSides; j++) {
+				vertexIndex = face[faceIndices[j]];
+				face.vertexColors[j] = setup.graphGeometry.colors[vertexIndex];
+			}
+		}
+
+		if (setup.graphMesh) {
+			setup.scene.remove(setup.graphMesh);
+		}
+
+		setup.wireMaterial.map.repeat.set(segments, segments);
+
+		setup.graphMesh = new THREE.Mesh(setup.graphGeometry,
+				setup.wireMaterial);
+		setup.graphMesh.doubleSided = true;
+		// x ->x, y->z, z->-y
+		setup.graphMesh.rotateX(-1 * Math.PI / 2)
+		setup.graphMesh.translateY(-1);
+		setup.scene.add(setup.graphMesh);
+
+		if (approx != null) {
+			createUAxisTickMarkLabels(10, uVar.min, uVar.max, uVar.name);
+			createVAxisTickMarkLabels(10, vVar.min, vVar.max, vVar.name);
+			createWAxisTickMarkLabels(10, zMin, zMax, outputVar.name);
+		} else {
+			createUAxisTickMarkLabels(10, 1, 11 , 'X');
+			createVAxisTickMarkLabels(10, 1, 11, 'Y');
+			createWAxisTickMarkLabels(10, 1, 11, 'Z');
+		}
+	}
+	function createUAxisTickMarkLabels(count, lb, ub, paramName) {
+		if (setup.xAxisLables != null) {
+			setup.scene.remove(setup.xAxisLables);
+		}
+		var labels = new THREE.Group();
+		for ( var i = 0; i < count - 1; i++) {
+			var val = lb + i * (ub - lb) / count;
+			var sprite = makeTextSprite('' + val);
+			sprite.position.set((i + 1) / count, (i % 2 - 0.5) * 0.07, 1);
+			labels.add(sprite);
+		}
+		if(paramName && paramName.length>0) {
+			var sprite = makeTextSprite(paramName);
+			sprite.position.set(1.1, 0, 1.0);
+			labels.add(sprite);
+		}
+		
+		setup.xAxisLables = labels;
+		setup.scene.add(setup.xAxisLables);
+
+	}
+	function createVAxisTickMarkLabels(count, lb, ub, paramName) {
+		if (setup.yAxisLables != null) {
+			setup.scene.remove(setup.yAxisLables);
+		}
+		var labels = new THREE.Group();
+		for ( var i = 0; i < count - 1; i++) {
+			var val = lb + i * (ub - lb) / count;
+			var sprite = makeTextSprite('' + val);
+			sprite.position.set(1.1, 0, (count - i - 1) / count); // V axis is into the screen
+			labels.add(sprite);
+		}
+		if(paramName && paramName.length>0) {
+			var sprite = makeTextSprite(paramName);
+			sprite.position.set(-0.1, 0, 0.5);
+			labels.add(sprite);
+		}
+		
+		setup.yAxisLables = labels;
+		setup.scene.add(setup.yAxisLables);
+
+	}
+	function createWAxisTickMarkLabels(count, lb, ub, paramName) {
+		if (setup.zAxisLables != null) {
+			setup.scene.remove(setup.zAxisLables);
+		}
+		var labels = new THREE.Group();
+		for ( var i = 0; i < count - 1; i++) {
+			var val = lb + i * (ub - lb) / count;
+			var sprite = makeTextSprite('' + val);
+			sprite.position.set(1.1, (i + 1) / count, 0);
+			labels.add(sprite);
+		}
+
+		if(paramName && paramName.length>0) {
+			var sprite = makeTextSprite(paramName);
+			sprite.position.set(0.0, 1.1, 1.0);
+			labels.add(sprite);
+		}
+		
+		setup.zAxisLables = labels;
+		setup.scene.add(setup.zAxisLables);
+
+	}
+	function makeTextSprite(message, parameters) {
+		if (parameters === undefined)
+			parameters = {};
+
+		var fontface = parameters.hasOwnProperty("fontface") ? parameters["fontface"]
+				: "Arial";
+
+		var fontsize = parameters.hasOwnProperty("fontsize") ? parameters["fontsize"]
+				: 30;
+
+		var backgroundColor = parameters.hasOwnProperty("backgroundColor") ? parameters["backgroundColor"]
+				: {
+					r : 255,
+					g : 255,
+					b : 255,
+					a : 1.0
+				};
+
+		var borderThickness = 0;
+		//var spriteAlignment = THREE.SpriteAlignment.topLeft;
+
+		var canvas = document.createElement('canvas');
+		var context = canvas.getContext('2d');
+		context.font = "Bold " + fontsize + "px " + fontface;
+
+		// get size data (height depends only on font size)
+		var metrics = context.measureText(message);
+		var textWidth = metrics.width;
+
+		//canvas.width = textWidth + borderThickness;
+		//canvas.height = fontsize + borderThickness;
+
+		// background color
+		context.fillStyle = "rgba(" + backgroundColor.r + ","
+				+ backgroundColor.g + "," + backgroundColor.b + ","
+				+ backgroundColor.a + ")";
+		// 		context.beginPath();
+		// 		context.lineWidth="2";
+		// 		context.strokeStyle="blue";
+		// 		context.rect(0, 0, textWidth, fontsize );
+		// 		context.stroke();
+		context.fill();
+
+		// text color
+		context.fillStyle = "rgba(0, 0, 0, 1.0)";
+
+		//context.fillText(message, canvas.width - textWidth, canvas.height - fontsize);
+
+		context.fillText(message, canvas.width / 2,
+				(canvas.height + fontsize) / 2);
+
+		// canvas contents will be used for a texture
+		var texture = new THREE.Texture(canvas, textWidth, fontsize)
+		texture.needsUpdate = true;
+
+		var spriteMaterial = new THREE.SpriteMaterial({
+			map : texture,
+			useScreenCoordinates : false
+		});
+		//debug
+		//document.querySelector('body').appendChild(canvas);
+		//spriteMaterial.map.offset.x=-1;
+		var sprite = new THREE.Sprite(spriteMaterial);
+		sprite.scale.set(0.5, 0.5, 1.0);
+		return sprite;
+	}
+
+	function animateWrapper(setup) {
+		function animate(){
+			if(!setup.ctr) {
+				setup.ctr = 0;
+			}
+			requestAnimationFrame(animate);
+			if((setup.ctr++)% 3 ==0) {
+				render(setup);
+				update(setup);
+			}
+		}
+		animate(setup);
+	}
+	function render(setup) {
+		if(setup && setup.renderer)
+			setup.renderer.render(setup.scene, setup.camera);
+	}
+	function update(setup) {
+		setup.controls.update();
+		//updateXAxisLabelPos(10,0,11);
+	}
+	function enablePick() {
+		document.querySelector('#chartContainer').querySelector('canvas')
+				.addEventListener('mousemove', function(e) {
+					if (e.button === 0) {
+						// do picking
+						//e.stopPropagation();
+						pickPoint(e);
+					}
+				}, true) // we should handle this in the capturing phase
+	}
+	function pickPoint(e) {
+		return;
+		var projector = new THREE.Projector();
+		var mouseVector = new THREE.Vector3();
+		mouseVector.x = 2 * (e.clientX / setup.containerWidth) - 1;
+		mouseVector.y = 1 - 2 * (e.clientY / setup.containerHeight);
+
+		var vector = new THREE.Vector3();
+		var raycaster = new THREE.Raycaster();
+
+		raycaster.setFromCamera(mouseVector, setup.camera);
+
+		var intersects = raycaster.intersectObjects(setup.scene.children);
+
+		if (intersects.length > 0) {
+			if (setup.cube) {
+				setup.scene.remove(setup.cube);
+			}
+			setup.cube = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.1, 0.1),
+					new THREE.MeshNormalMaterial());
+			setup.cube.position = intersects[0].point;
+			console.log(setup.cube.position);
+			setup.scene.add(setup.cube);
+		} else {
+			if (setup.cube) {
+				setup.scene.remove(setup.cube);
+			}
+			setup.cube = null;
+		}
+
+		setup.renderer.render(setup.scene, setup.camera);
+	}
+</script>
+<!-- Application JS End -->
+</head>
+<body onload="startApp()">
+	<div style="width: 300px; height: 450px">
+		<div style="width: 100%; height: 150px; position: relative; top: 0;">
+			<input id="approxFileInput" type="file"></input> <br></br> Output: <select
+				id="outputSelect">
+			</select> <br /> X: <select id="xSelect">
+			</select> <br /> Y: <select id="ySelect">
+			</select> <br />
+			<button id="redrawButton">Redraw</button>
+		</div>
+		<div id="chartContainer"
+			style="width: 100%; top: 0px; bottom: 0; left: 0; right: 0; position: relative"></div>
+	</div>
+
+	<div id="chartContainer2"
+			style="width: 400px; height: 400px; top: 0px; bottom: 0; left: 300px; right: 0; position: absolute"></div>
+
+</body>
+</html>

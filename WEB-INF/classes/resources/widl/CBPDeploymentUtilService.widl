@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="urn:com:dassault_systemes:widl"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd"
+	xmlns:tns="http://cbp.enovia.ws/common"
+	xmlns:err="http://www.3ds.com/wserror"
+	xmlns:q1="http://cbp.enovia.ws/CBPXML">
+	<entities
+		targetNamespace="http://cbp.enovia.ws/common">
+		<schemaImports>
+			<schemaImport location="wserrors.xsd" />
+			<schemaImport location="CBPXML.xsd" />
+		</schemaImports>
+		<interfaces>
+			<interface name="IPLMDeploymentUtilService" scope="private">
+				<documentation>
+					Interface for Web Service deployment operations between the master application server and target application servers.
+				</documentation>
+
+				<method name="deployService">
+					<documentation>Deploy a web service.</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the deployment instance object.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="undeployService">
+					<documentation>Undeploy a web service.</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the deployment instance object.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+			</interface>
+		</interfaces>
+		<implementations>
+			<implementation name="PLMDeploymentUtilService" serviceid="deploymentUtilService"
+				implements="tns:IPLMDeploymentUtilService">
+				<documentation>
+					A service utility to provide Web Service deployment operations between the master application server and target application servers.
+				</documentation>
+			</implementation>
+		</implementations>
+	</entities>
+</description>

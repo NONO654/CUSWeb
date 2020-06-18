@@ -1,0 +1,63 @@
+.sketchsettingsview .checkboxContainer
+{
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 1.2em;
+    width: 0;
+}
+
+/* Hide the browser's default checkbox */
+.sketchsettingsview .checkboxContainer input
+{
+    position: absolute;
+    opacity: 0;
+}
+
+/* Create a custom checkbox */
+.sketchsettingsview .checkmark
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: lightgray;
+}
+
+/* When the checkbox is checked, add a blue background */
+.sketchsettingsview .checkboxContainer input:checked ~ .checkmark
+{
+    background-color: #239de8;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.sketchsettingsview .checkmark:after
+{
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.sketchsettingsview .checkboxContainer input:checked ~ .checkmark:after
+{
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.sketchsettingsview .checkboxContainer .checkmark:after
+{
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

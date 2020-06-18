@@ -1,0 +1,38 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<link rel="import" href="../ps-file-download-icon/ps-file-download-icon.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+
+<dom-module id="ps-job-list">
+
+<link rel="import" type="css" href="ps-job-list.css">
+    <template>
+    	<sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL"></sp-variable>
+        <sp-mcsservice id="deleteJob" data="" wait="0" on-response="onDeleteResponse" >
+        </sp-mcsservice>
+        <sp-dashboard id ="spDashboard"> </sp-dashboard>
+        <ps-file-download-icon id="psFileDownld"></ps-file-download-icon>
+    <div class="big-modal">
+
+            <div class="modal">
+              <div class="modal-wrap">
+                <div class="modal-content">
+                    <sp-notification id="notificationMessages" position="TR" width="400"></sp-notification>
+                  <div class="modal-header">
+                    <span class="close fonticon fonticon-cancel" on-click="hideJobList" title="Close"></span>
+                    <h4>Jobs</h4>
+                  </div>
+                  <div class="toolbarOuter">
+                  </div>
+                  <div class="modal-body">
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+</template>
+  <script type="text/javascript" src="ps-job-list.js"></script>
+</dom-module>

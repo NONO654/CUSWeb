@@ -1,0 +1,1432 @@
+<?xml version="1.0" ?>
+<OOTBParameterization regSuite="VPLMAdministration">
+	<Domain id="DataAccessRight">
+		<Family id="ReadAccess" icon="iconParameterizationDataAccess.gif">
+			<Parameter id="ExtendViewer" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.viewerrights.impl.TeamEngineeringParameter_ViewerRights" />
+				<Constant id="valueChecked" value="EnableViewerInWorkDataAbility"/>
+				<Constant id="valueUnchecked" value="DisableViewerInWorkDataAbility"/>
+			</Parameter>
+			<Parameter id="StrictExternalPublicAccess" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.strictextpubaccess.impl.TeamEngineeringParameter_StrictExtPubAccess" />
+				<Constant id="valueChecked" value="EnableOrganizationPublicAccessAbility"/>
+				<Constant id="valueUnchecked" value="DisableOrganizationPublicAccessAbility"/>
+			</Parameter>
+			<Parameter id="MultiCxtPrivateReadAccess" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.privatereadaccess.impl.TeamEngineeringParameter_MultiCxtPrivateReadAccess" />
+				<Constant id="valueChecked" value="EnableMultiCxtPrivateReadAccessAbility"/>
+				<Constant id="valueUnchecked" value="DisableMultiCxtPrivateReadAccessAbility"/>
+			</Parameter>
+		</Family>
+
+		<Family id="ModifyAccess" icon="iconParameterizationDataAccess.gif">
+			<Parameter id="AllowFrozenContentMod" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.evpparameters.impl.TeamEngineeringParameter_AllowFrozenContentMod" />
+				<Constant id="valueChecked" value="EnableAllowFrozenContentMod"/>
+				<Constant id="valueUnchecked" value="DisableAllowFrozenContentMod"/>
+			</Parameter>
+			<Parameter id="AllowReleasedContentMod" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.evpparameters.impl.TeamEngineeringParameter_AllowReleasedContentMod" />
+				<Constant id="valueChecked" value="EnableAllowReleasedContentMod"/>
+				<Constant id="valueUnchecked" value="DisableAllowReleasedContentMod"/>
+			</Parameter>
+			<Parameter id="StrictOwnershipOnDefinition" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+				<Constant id="className" value="com.matrixone.vplm.strictownership.impl.TeamEngineeringParameter_StrictOwnershipOnDefinition" />
+				<Constant id="valueChecked" value="EnableStrictOwnershipAbility"/>
+				<Constant id="valueUnchecked" value="DisableStrictOwnershipAbility"/>
+			</Parameter>
+			<Parameter id="StrictOwnershipOnEvaluation" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+				<Constant id="className" value="com.matrixone.vplm.strictownership.impl.TeamEngineeringParameter_StrictOwnershipOnEvaluation" />
+				<Constant id="valueChecked" value="EnableStrictOwnershipAbility"/>
+				<Constant id="valueUnchecked" value="DisableStrictOwnershipAbility"/>
+			</Parameter>
+			<Parameter id="AutoReserveOnDefinition" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="string" input="combobox" default="None">
+					<Value id="None"/>
+					<Value id="Reference"/>
+					<Value id="Instance"/>
+					<Value id="Both"/>
+				</Argument>
+				<Constant id="className" value="com.matrixone.vplm.evpparameters.impl.TeamEngineeringParameter_AutoReserveOnDefinition"/>
+			</Parameter>
+			<Parameter id="StrictLocking" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+				<Constant id="className" value="com.matrixone.vplm.strictlocking.impl.TeamEngineeringParameter_StrictLockingOnDefinition" />
+				<Constant id="valueChecked" value="EnableStrictLockingAbility"/>
+				<Constant id="valueUnchecked" value="DisableStrictLockingAbility"/>
+			</Parameter>
+			<Parameter id="ExtendExperimenter" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.experimentrights.impl.TeamEngineeringParameter_ExperimentRights" />
+				<Constant id="valueChecked" value="EnableExperimenterReleaseDataAbility"/>
+				<Constant id="valueUnchecked" value="DisableExperimenterReleaseDataAbility"/>
+			</Parameter>
+			<Parameter id="StrictOrganizationOwnership" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.strictorgownership.impl.TeamEngineeringParameter_StrictOrgOwnership" />
+				<Constant id="valueChecked" value="EnableStrictOrgOwnershipAbility"/>
+				<Constant id="valueUnchecked" value="DisableStrictOrgOwnershipAbility"/>
+			</Parameter>
+			<Parameter id="StrictOrganizationOwnershipOnContentCategory" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Definition,Evaluation,Resource,Management">
+					<Value id="Definition"/>
+					<Value id="Evaluation"/>
+					<Value id="Resource"/>
+					<Value id="Management"/>
+				</Argument>
+				<Constant id="className" value="com.matrixone.vplm.strictorgownership.impl.TeamEngineeringParameter_StrictOrgOwnershipOnContentCategory"/>
+			</Parameter>
+			<Parameter id="StrictOrganizationOwnershipOnDefinition" processes="ObsoleteHiddenParam" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper" packaging="OnPremise">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.strictorgownership.impl.TeamEngineeringParameter_StrictOrgOwnershipOnDefinition" />
+				<Constant id="valueChecked" value="EnableStrictOrgOwnershipAbility"/>
+				<Constant id="valueUnchecked" value="DisableStrictOrgOwnershipAbility"/>
+			</Parameter>
+			<Parameter id="StrictOrganizationOwnershipOnEvaluation" processes="ObsoleteHiddenParam" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper" packaging="OnPremise">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.strictorgownership.impl.TeamEngineeringParameter_StrictOrgOwnershipOnEvaluation" />
+				<Constant id="valueChecked" value="EnableStrictOrgOwnershipAbility"/>
+				<Constant id="valueUnchecked" value="DisableStrictOrgOwnershipAbility"/>
+			</Parameter>
+			<Parameter id="StrictOrganizationOwnershipOnResource" processes="ObsoleteHiddenParam" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper" packaging="OnPremise">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.strictorgownership.impl.TeamEngineeringParameter_StrictOrgOwnershipOnResource" />
+				<Constant id="valueChecked" value="EnableStrictOrgOwnershipAbility"/>
+				<Constant id="valueUnchecked" value="DisableStrictOrgOwnershipAbility"/>
+			</Parameter>
+			<Parameter id="StrictOrganizationOwnershipOnManagement" processes="ObsoleteHiddenParam" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper" packaging="OnPremise">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.strictorgownership.impl.TeamEngineeringParameter_StrictOrgOwnershipOnManagement" />
+				<Constant id="valueChecked" value="EnableStrictOrgOwnershipAbility"/>
+				<Constant id="valueUnchecked" value="DisableStrictOrgOwnershipAbility"/>
+			</Parameter>
+			<Parameter id="MultiCxtModifyAccess" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.modifyaccess.impl.TeamEngineeringParameter_MultiCxtModifyAccess" />
+				<Constant id="valueChecked" value="EnableMultiCxtModifyAccessAbility"/>
+				<Constant id="valueUnchecked" value="DisableMultiCxtModifyAccessAbility"/>
+			</Parameter>
+			<Parameter id="MultiCxtPrivateConnectAccess" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.privateconnectaccess.impl.TeamEngineeringParameter_MultiCxtPrivateConnectAccess" />
+				<Constant id="valueChecked" value="EnableMultiCxtPrivateConnectAccessAbility"/>
+				<Constant id="valueUnchecked" value="DisableMultiCxtPrivateConnectAccessAbility"/>
+			</Parameter>
+		</Family>
+
+		<Family id="LifecycleRules" icon="iconParameterizationDataAccess.gif">
+			<Parameter id="StrictVersioning" processes="ObsoleteHiddenParam" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+				<Constant id="className" value="com.matrixone.vplm.strictversioning.impl.TeamEngineeringParameter_StrictVersioning" />
+				<Constant id="valueChecked" value="EnableStrictVersioningAbility"/>
+				<Constant id="valueUnchecked" value="DisableStrictVersioningAbility"/>
+			</Parameter>
+			<Parameter id="AllowReviseIfNoEntityOnMaturityStates" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="">
+					<Value id="Inwork"/>
+					<Value id="Frozen"/>
+				</Argument>
+				<Constant id="className" value="com.matrixone.vplm.evpparameters.impl.TeamEngineeringParameter_AllowReviseIfNoEntityOnMaturityStates"/>
+			</Parameter>
+			<Parameter id="AllowReviseOfReservedContent" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+				<Constant id="className" value="com.matrixone.vplm.evpparameters.impl.TeamEngineeringParameter_AllowReviseOfReservedContent" />
+				<Constant id="valueChecked" value="EnableAllowReviseOfReservedContent"/>
+				<Constant id="valueUnchecked" value="DisableAllowReviseOfReservedContent"/>
+			</Parameter>
+			<Parameter id="MinorRevisionAuthoringCommands" processes="ObsoleteHiddenParam" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+				<Constant id="className" value="com.matrixone.vplm.evpparameters.impl.TeamEngineeringParameter_MinorRevisionAuthoringCommands" />
+				<Constant id="valueChecked" value="EnableMinorRevisionAuthoringCommands"/>
+				<Constant id="valueUnchecked" value="DisableMinorRevisionAuthoringCommands"/>
+			</Parameter>
+			<Parameter id="AutoPromoteFirstMinorRev" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.autopromote.impl.TeamEngineeringParameter_AutoPromoteFirstMinorRev" />
+				<Constant id="valueChecked" value="EnableAutoPromoteFirstMinorRevAbility"/>
+				<Constant id="valueUnchecked" value="DisableAutoPromoteFirstMinorRevAbility"/>
+			</Parameter>
+			<Parameter id="AutoPromoteNextMinorRev" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.matrixone.vplm.autopromote.impl.TeamEngineeringParameter_AutoPromoteNextMinorRev" />
+				<Constant id="valueChecked" value="EnableAutoPromoteNextMinorRevAbility"/>
+				<Constant id="valueUnchecked" value="DisableAutoPromoteNextMinorRevAbility"/>
+			</Parameter>
+		</Family>
+		<Family id="OwnershipRules" icon="iconParameterizationDataAccess.gif">
+			<Parameter id="AuthorizedRolesChangingResponsible" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="string" input="combobox" default="Administrator_Owner_Leader_Author_Contributor_Reader">
+					<Value id="Administrator"/>
+					<Value id="Administrator_Owner"/>
+					<Value id="Administrator_Owner_Leader"/>
+					<Value id="Administrator_Owner_Leader_Author"/>
+					<Value id="Administrator_Owner_Leader_Author_Contributor"/>
+					<Value id="Administrator_Owner_Leader_Author_Contributor_Reader"/>
+				</Argument>
+				<Constant id="className" value="com.matrixone.vplm.evpparameters.impl.TeamEngineeringParameter_AuthorizedRolesChangingResponsible"/>
+			</Parameter>
+			<Parameter id="AuthorizedRolesChangingOrganization" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="string" input="combobox" default="Administrator_Owner_Leader_Author_Contributor_Reader">
+					<Value id="Administrator"/>
+					<Value id="Administrator_Owner"/>
+					<Value id="Administrator_Owner_Leader"/>
+					<Value id="Administrator_Owner_Leader_Author"/>
+					<Value id="Administrator_Owner_Leader_Author_Contributor"/>
+					<Value id="Administrator_Owner_Leader_Author_Contributor_Reader"/>
+				</Argument>
+				<Constant id="className" value="com.matrixone.vplm.evpparameters.impl.TeamEngineeringParameter_AuthorizedRolesChangingOrganization"/>
+			</Parameter>
+			<Parameter id="AuthorizedRolesChangingProject" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="string" input="combobox" default="Administrator_Owner_Leader_Author_Contributor_Reader">
+					<Value id="Administrator"/>
+					<Value id="Administrator_Owner"/>
+					<Value id="Administrator_Owner_Leader"/>
+					<Value id="Administrator_Owner_Leader_Author"/>
+					<Value id="Administrator_Owner_Leader_Author_Contributor"/>
+					<Value id="Administrator_Owner_Leader_Author_Contributor_Reader"/>
+				</Argument>
+				<Constant id="className" value="com.matrixone.vplm.evpparameters.impl.TeamEngineeringParameter_AuthorizedRolesChangingProject"/>
+			</Parameter>
+			<Parameter id="RestrictTransferToResponsible" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+				<Constant id="className" value="com.matrixone.vplm.evpparameters.impl.TeamEngineeringParameter_RestrictTransferToResponsible" />
+				<Constant id="valueChecked" value="EnableRestrictTransferToResponsible"/>
+				<Constant id="valueUnchecked" value="DisableRestrictTransferToResponsible"/>
+			</Parameter>
+			<Parameter id="AuthoringPrivilegesOnTargetOwnership" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+				<Constant id="className" value="com.matrixone.vplm.evpparameters.impl.TeamEngineeringParameter_AuthoringPrivilegesOnTargetOwnership" />
+				<Constant id="valueChecked" value="EnableAuthoringPrivilegesOnTargetOwnership"/>
+				<Constant id="valueUnchecked" value="DisableAuthoringPrivilegesOnTargetOwnership"/>
+			</Parameter>
+			<Parameter id="RestrictTransfer" processes="ObsoleteHiddenParam" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+				<Constant id="className" value="com.matrixone.vplm.stricttransfer.impl.TeamEngineeringParameter_StrictTransfer" />
+				<Constant id="valueChecked" value="EnableStrictTransferAbility"/>
+				<Constant id="valueUnchecked" value="DisableStrictTransferAbility"/>
+			</Parameter>
+		</Family>
+	</Domain>
+
+	<Domain id="AttributeDef">
+		<Family id="VPMReference" regSuite="Framework" collabApps="GlobalDesign" nlsKey="emxFramework.Type.VPMReference">
+			<Constant id="appType" value="VPM"/>
+			<Constant id="package" value="PRODUCTCFG"/>
+			<Constant id="type" value="VPMReference"/>
+		</Family>
+		<Family id="VPMRepReference" regSuite="Framework" collabApps="GlobalDesign" nlsKey="emxFramework.Type.VPMRepReference">
+			<Constant id="appType" value="VPM"/>
+			<Constant id="package" value="PRODUCTCFG"/>
+			<Constant id="type" value="VPMRepReference"/>
+		</Family>
+	</Domain>
+	<Domain id="ObjectIdentification">
+		<Family id="ObjectIdentifier" icon="iconParameterizationIdentification.gif">
+			<Parameter id="IdentifierAffix" implementation="com.matrixone.vplm.RaceIdentifierAffix.RaceIdentifierAffixParameter">
+				<Argument id="AffixArg" type="string" input="textfield" default="TBD"/>
+				<Argument id="SeparatorArg" type="string" input="textfield" default="-">
+					<Value id="Dash"/>
+					<Value id="Under_Score"/>			
+					<Value id="Dot"/>	
+					<Value id="Plus"/>
+					<Value id="Slash"/>
+					<Value id="Empty"/>	
+				</Argument>					
+				<Constant id="className" value="com.matrixone.vplm.siteaffix.impl.TeamEngineeringParameter_SiteAffix"/>
+				
+				<Constant id="Dash" value="-"/>
+				<Constant id="Under_Score" value="_"/>
+			    <Constant id="Dot" value="."/>
+				<Constant id="Plus" value="+"/>
+				<Constant id="Slash" value="/"/>
+				<Constant id="Empty" value=""/>	
+				
+			</Parameter>
+			
+			<Parameter id="IDVPMRepReference" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.VPMRepReference">
+				<Argument id="PrefixArg" type="string" default="rep"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="VPMRepReference"/>
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+					
+			<Parameter id="IDDrawing" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.Drawing">
+				<Argument id="PrefixArg" type="string" default="drw"/>
+				<Argument id="SuffixArg" type="string" default=""/>			
+				<Constant id="type" value="Drawing"/>	
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+			<Parameter id="IDShape3D" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.Shape3D">
+				<Argument id="PrefixArg" type="string" default="3sh"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="3DShape"/>
+				<Constant id="appType" value="VPM"/>				
+			</Parameter>
+			<Parameter id="IDReview" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.Review">	
+				<Argument id="PrefixArg" type="string" default="mkp"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="Review"/>
+				<Constant id="appType" value="VPM"/>				
+			</Parameter>											
+			<Parameter id="IDVPMReference" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.VPMReference">	
+				<Argument id="PrefixArg" type="string" default="prd"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="VPMReference"/>
+				<Constant id="appType" value="VPM"/>				
+			</Parameter>						
+			<Parameter id="IDRFLPLMFunctionalReference" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.RFLPLMFunctionalReference">
+				<Argument id="PrefixArg" type="string" default="fct"/>
+				<Argument id="SuffixArg" type="string" default=""/>			
+				<Constant id="type" value="RFLPLMFunctionalReference"/>
+				<Constant id="appType" value="VPM"/>				
+			</Parameter>			
+			<Parameter id="IDRFLPLMFunctionalRepReference" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.RFLPLMFunctionalRepReference">
+				<Argument id="PrefixArg" type="string" default="fctrep"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="RFLPLMFunctionalRepReference"/>				
+				<Constant id="appType" value="VPM"/>
+			</Parameter>					
+			<Parameter id="IDSchema" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.Schema">
+				<Argument id="PrefixArg" type="string" default="f2d"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="Schema"/>				
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+			<Parameter id="IDPicture" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.Picture">
+				<Argument id="PrefixArg" type="string" default="fpi"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="Picture"/>
+				<Constant id="appType" value="VPM"/>				
+			</Parameter>
+			
+			<Parameter id="IDSchema_Snapshot" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.Schema_Snapshot">
+				<Argument id="PrefixArg" type="string" default="f2s"/>
+				<Argument id="SuffixArg" type="string" default=""/>			
+				<Constant id="type" value="Schema_Snapshot"/>
+				<Constant id="appType" value="VPM"/>				
+			</Parameter>
+					
+			<Parameter id="IDRFLVPMLogical3DRepReference" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.RFLVPMLogical3DRepReference">
+				<Argument id="PrefixArg" type="string" default="log3drep"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="RFLVPMLogical3DRepReference"/>				
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+						
+			<Parameter id="IDRFLVPMLogicalReference" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.RFLVPMLogicalReference">
+				<Argument id="PrefixArg" type="string" default="log"/>
+				<Argument id="SuffixArg" type="string" default=""/>			
+				<Constant id="type" value="RFLVPMLogicalReference"/>				
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+					
+			<Parameter id="IDEleLogicalConnectorComp" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.EleLogicalConnectorComp">	
+				<Argument id="PrefixArg" type="string" default="leleconcmp"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="EleLogicalConnectorComp"/>				
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+			
+			<Parameter id="IDEleLogicalHarness" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.EleLogicalHarness">
+				<Argument id="PrefixArg" type="string" default="lelehar"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="EleLogicalHarness"/>				
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+			
+			<Parameter id="IDEleLogicalNet" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.EleLogicalNet">	
+				<Argument id="PrefixArg" type="string" default="lelenet"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="EleLogicalNet"/>				
+				<Constant id="appType" value="VPM"/>
+			</Parameter>		
+			
+			<Parameter id="IDEleLogicalNetGroup" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.EleLogicalNetGroup">	
+				<Argument id="PrefixArg" type="string" default="lelenetgrp"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="EleLogicalNetGroup"/>
+				<Constant id="appType" value="VPM"/>
+			</Parameter>	
+			
+			<Parameter id="IDEleLogicalWire" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.EleLogicalWire">	
+				<Argument id="PrefixArg" type="string" default="lelewire"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="EleLogicalWire"/>
+				<Constant id="appType" value="VPM"/>				
+			</Parameter>
+		
+			<Parameter id="IDEleLogicalCable" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.EleLogicalCable">
+				<Argument id="PrefixArg" type="string" default="lelecable"/>
+				<Argument id="SuffixArg" type="string" default=""/>			
+				<Constant id="type" value="EleLogicalCable"/>				
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+			
+			<Parameter id="IDEnsLogicalEquipment" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.EnsLogicalEquipment">
+				<Argument id="PrefixArg" type="string" default="leqt"/>
+				<Argument id="SuffixArg" type="string" default=""/>			
+				<Constant id="type" value="EnsLogicalEquipment"/>				
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+			
+			<Parameter id="IDPiping_Line" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.Piping_Line">
+				<Argument id="PrefixArg" type="string" default="pipline"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="Piping_Line"/>
+				<Constant id="appType" value="VPM"/>
+			</Parameter>	
+
+			<Parameter id="IDPiping_Logical_Part" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.Piping_Logical_Part">
+				<Argument id="PrefixArg" type="string" default="lpipart"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="Piping_Logical_Part"/>
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+			
+			<Parameter id="IDPiping_Logical_Pipe" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="VPLMAdministration" nlsKey="OOTBParameterization.LifecycleTopology.VPLM_SMB_Definition.Piping_Logical_Pipe">
+				<Argument id="PrefixArg" type="string" default="lpippipe"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="Piping_Logical_Pipe"/>				
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+		
+			<Parameter id="IDRFLVPMLogicalRepReference" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.RFLVPMLogicalRepReference">	
+				<Argument id="PrefixArg" type="string" default="logrep"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="RFLVPMLogicalRepReference"/>				
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+			
+			<Parameter id="IDSchema_Log" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.Schema_Log">	
+				<Argument id="PrefixArg" type="string" default="l2d"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="Schema_Log"/>
+				<Constant id="appType" value="VPM"/>				
+			</Parameter>
+			
+			<Parameter id="IDPicture_Log" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.Picture_Log">
+				<Argument id="PrefixArg" type="string" default="lpi"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="Picture_Log"/>
+				<Constant id="appType" value="VPM"/>				
+			</Parameter>
+			
+			<Parameter id="IDSchema_Snapshot_Log" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat" regSuite="Framework" nlsKey="emxFramework.Type.Schema_Snapshot_Log">
+				<Argument id="PrefixArg" type="string" default="l2s"/>
+				<Argument id="SuffixArg" type="string" default=""/>
+				<Constant id="type" value="Schema_Snapshot_Log"/>
+				<Constant id="appType" value="VPM"/>				
+			</Parameter>
+		
+		</Family>	
+		<Family id="VersionNaming" icon="iconParameterizationVersionNaming.gif">
+			<Parameter id="VNaming_VPLM_SMB_Definition" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationRevisionId">
+				<Argument id="Argument" type="string" input="combobox" default="AlphabeticalRev">
+					<Value id="DashedRev" packaging="OnPremise"/>
+					<Value id="NumericalRev"/>
+					<Value id="AlphabeticalRev"/>
+					<Value id="RomanRev" packaging="OnPremise"/>
+					<Value id="NthRev" packaging="OnPremise"/>
+				</Argument>
+				<Constant id="policy" value="VPLM_SMB_Definition"/>
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+			<Parameter id="VNaming_VPLM_SMB_Evaluation" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationRevisionId">
+				<Argument id="Argument" type="string" input="combobox" default="AlphabeticalRev">
+					<Value id="DashedRev" packaging="OnPremise"/>
+					<Value id="NumericalRev"/>
+					<Value id="AlphabeticalRev"/>
+					<Value id="RomanRev" packaging="OnPremise"/>
+					<Value id="NthRev" packaging="OnPremise"/>
+				</Argument>
+				<Constant id="policy" value="VPLM_SMB_Evaluation"/>
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+			<Parameter id="VNaming_VPLM_SMB_Resource" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationRevisionId">
+				<Argument id="Argument" type="string" input="combobox" default="AlphabeticalRev">
+					<Value id="DashedRev" packaging="OnPremise"/>
+					<Value id="NumericalRev"/>
+					<Value id="AlphabeticalRev"/>
+					<Value id="RomanRev" packaging="OnPremise"/>
+					<Value id="NthRev" packaging="OnPremise"/>
+				</Argument>
+				<Constant id="policy" value="VPLM_SMB_Resource"/>
+				<Constant id="appType" value="VPM"/>
+			</Parameter>
+		</Family>
+	</Domain>
+	
+	<Domain id="LifecycleTopology" regSuite="VPLMAdministration">
+	
+		<Family id="VPLM_SMB_Definition" collabApps="GlobalDesign">
+			<Constant id="policyID" value="VPLM_SMB_Definition"/>
+			<Constant id="modifyTopology" value="true"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="NLSStateFileName" value="PLMAttrValueVPMReference.CATNls"/>
+			<Constant id="complementaryPropFiles" value="emxFrameworkStringResource.properties,TeamCompassLegend_TeamCustom.CATNls,PLMAttrValueRFLPLMFunctionalReference.CATNls,PLMAttrValueRFLPLMFunctionalRepReference.CATNls,PLMAttrValueSchema.CATNls,PLMAttrValuePicture.CATNls,PLMAttrValueSchema_Snapshot.CATNls,PLMAttrValueRFLVPMLogical3DRepReference.CATNls,PLMAttrValueRFLVPMLogicalReference.CATNls,PLMAttrValueRFLVPMLogicalRepReference.CATNls,PLMAttrValueSchema_Log.CATNls,PLMAttrValuePicture_Log.CATNls,PLMAttrValueSchema_Snapshot_Log.CATNls,PLMAttrValueDrawing.CATNls,PLMAttrValue3DShape.CATNls,PLMAttrValueEleLogicalConnectorComp.CATNls,PLMAttrValueEleLogicalHarness.CATNls,PLMAttrValueEleLogicalNet.CATNls,PLMAttrValueEleLogicalNetGroup.CATNls,PLMAttrValueEleLogicalWire.CATNls,PLMAttrValueEleLogicalCable.CATNls,PLMAttrValueEnsLogicalEquipment.CATNls,PLMAttrValuePiping_Line.CATNls,PLMAttrValuePiping_Logical_Part.CATNls,PLMAttrValuePiping_Logical_Pipe.CATNls"/>
+			<Constant id="lang" value="en,fr"/>	
+			<Constant id="appType" value="VPM"/>
+			<Constant id="approvalRolesForNewTransitions" value="VPLMProjectLeader,VPLMCreator"/>
+
+			<GovernedType id="VPMRepReference" regSuite="Framework" nlsKey="emxFramework.Type.VPMRepReference">	
+				<Constant id="typeId" value="VPMRepReference"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			<GovernedType id="Drawing">	
+				<Constant id="typeId" value="Drawing"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			<GovernedType id="Shape3D">	
+				<Constant id="typeId" value="3DShape"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			<GovernedType id="VPMReference" regSuite="Framework" nlsKey="emxFramework.Type.VPMReference">	
+				<Constant id="typeId" value="VPMReference"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated,RejectIfAnyOfTheCommonlyGovernedChildNotOnTargetState"/>
+			</GovernedType>			
+			<GovernedType id="RFLPLMFunctionalReference" regSuite="Framework" nlsKey="emxFramework.Type.RFLPLMFunctionalReference">	
+				<Constant id="typeId" value="RFLPLMFunctionalReference"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAnyOfTheCommonlyGovernedChildNotOnTargetState"/>
+			</GovernedType>
+			<GovernedType id="RFLPLMFunctionalRepReference" regSuite="Framework" nlsKey="emxFramework.Type.RFLPLMFunctionalRepReference">	
+				<Constant id="typeId" value="RFLPLMFunctionalRepReference"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="Schema" regSuite="Framework" nlsKey="emxFramework.Type.Schema">	
+				<Constant id="typeId" value="Schema"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="Picture" regSuite="Framework" nlsKey="emxFramework.Type.Picture">	
+				<Constant id="typeId" value="Picture"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="Schema_Snapshot" regSuite="Framework" nlsKey="emxFramework.Type.Schema_Snapshot">	
+				<Constant id="typeId" value="Schema_Snapshot"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="RFLVPMLogical3DRepReference" regSuite="Framework" nlsKey="emxFramework.Type.RFLVPMLogical3DRepReference">	
+				<Constant id="typeId" value="RFLVPMLogical3DRepReference"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="RFLVPMLogicalReference" regSuite="Framework" nlsKey="emxFramework.Type.RFLVPMLogicalReference">	
+				<Constant id="typeId" value="RFLVPMLogicalReference"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAnyOfTheCommonlyGovernedChildNotOnTargetState"/>
+			</GovernedType>
+			<GovernedType id="EleLogicalConnectorComp">	
+				<Constant id="typeId" value="EleLogicalConnectorComp"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="EleLogicalHarness">	
+				<Constant id="typeId" value="EleLogicalHarness"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="EleLogicalNet">	
+				<Constant id="typeId" value="EleLogicalNet"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="EleLogicalNetGroup">	
+				<Constant id="typeId" value="EleLogicalNetGroup"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="EleLogicalWire">	
+				<Constant id="typeId" value="EleLogicalWire"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="EleLogicalCable">	
+				<Constant id="typeId" value="EleLogicalCable"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="EnsLogicalEquipment">	
+				<Constant id="typeId" value="EnsLogicalEquipment"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="Piping_Line">	
+				<Constant id="typeId" value="Piping_Line"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="Piping_Logical_Part">	
+				<Constant id="typeId" value="Piping_Logical_Part"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="Piping_Logical_Pipe">	
+				<Constant id="typeId" value="Piping_Logical_Pipe"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="RFLVPMLogicalRepReference" regSuite="Framework" nlsKey="emxFramework.Type.RFLVPMLogicalRepReference">	
+				<Constant id="typeId" value="RFLVPMLogicalRepReference"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="Schema_Log" regSuite="Framework" nlsKey="emxFramework.Type.Schema_Log">	
+				<Constant id="typeId" value="Schema_Log"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="Picture_Log" regSuite="Framework" nlsKey="emxFramework.Type.Picture_Log">	
+				<Constant id="typeId" value="Picture_Log"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="Schema_Snapshot_Log" regSuite="Framework" nlsKey="emxFramework.Type.Schema_Snapshot_Log">
+				<Constant id="typeId" value="Schema_Snapshot_Log"/>				
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<!--Ajout Custo PPR Objects-->
+			<!--abstract Type are not authorized-->
+			<!--Manuf Item-->
+			<GovernedType id="DELFmiFunctionPPRContinuousReference" regSuite="PPRObjects" >
+				<Constant id="typeId" value="DELFmiFunctionPPRContinuousReference"/>
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			<GovernedType id="DELFmiFunctionPPRCreateReference" regSuite="PPRObjects" >
+				<Constant id="typeId" value="DELFmiFunctionPPRCreateReference"/>
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			<GovernedType id="Transform" regSuite="PPRObjects" >
+				<Constant id="typeId" value="Transform"/>
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			<!--Operations -->
+			<GovernedType id="DELLmiOperationPPRReference" regSuite="PPRObjects">
+				<Constant id="typeId" value="DELLmiOperationPPRReference"/>
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			<!--general System -->
+			<GovernedType id="DELLmiGeneralSystemReference" regSuite="PPRObjects">
+				<Constant id="typeId" value="DELLmiGeneralSystemReference"/>
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			<!--Workplan -->
+			<GovernedType id="DELLmiWorkPlanSystemReference" regSuite="PPRObjects" >
+				<Constant id="typeId" value="DELLmiWorkPlanSystemReference"/>
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			<!--Work Instruction -->
+			<GovernedType id="DELWkiPPRReference" regSuite="PPRObjects" >
+				<Constant id="typeId" value="DELWkiPPRReference"/>
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			<!--end of PPR Objects-->
+						
+			<State id="PRIVATE">
+				<Constant id="sysName" value="PRIVATE"/>	
+				<Constant id="isRemovable" value="false"/>				
+				<Constant id="NLSKey" value="current.PRIVATE"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Definition.PRIVATE,PRIVATE"/>
+			</State>
+			<State id="IN_WORK">
+				<Constant id="sysName" value="IN_WORK"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.IN_WORK"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Definition.IN_WORK,IN_WORK"/> <!--for Projection like issues  -->
+			</State>				
+			<State id="FROZEN">
+				<Constant id="sysName" value="FROZEN"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.FROZEN"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Definition.FROZEN,FROZEN"/> 
+			</State>			
+			<State id="RELEASED">
+				<Constant id="sysName" value="RELEASED"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.RELEASED"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Definition.RELEASED,RELEASED"/> 
+			</State>
+			<State id="OBSOLETE">
+				<Constant id="sysName" value="OBSOLETE"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.OBSOLETE"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Definition.OBSOLETE,OBSOLETE"/> 
+			</State>
+
+			<Transition id="InWorkToFrozen">
+				<Constant id="transName" value="ToFreeze"/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>				
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMAdmin"/>
+			</Transition>
+			<Transition id="InWorkToRelease">
+				<Constant id="transName" value="ToRelease"/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="RELEASED"/>	
+				<Constant id="removal" value="true"/>		
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMReleaseManager"/>
+			</Transition>
+			<Transition id="InWorkToPrivate">
+				<Constant id="transName" value="Isolate"/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMAdmin"/>
+			</Transition>
+			<Transition id="PrivateToInWork">
+				<Constant id="transName" value="ShareWithinProject"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="removal" value="true"/>	
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMAdmin"/>
+			</Transition>			
+			<Transition id="FrozenToRelease">
+				<Constant id="transName" value="ToRelease"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMReleaseManager"/>
+			</Transition>			
+			<Transition id="FrozenToInWork">
+				<Constant id="transName" value="UnFreeze"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="removal" value="true"/>			
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMCreator"/>
+			</Transition>
+			<Transition id="ReleasedToObsolete">
+				<Constant id="transName" value="OutDated"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="removal" value="true"/>				
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin"/>
+			</Transition>
+
+			<Transition id="nPrivatetoFrozen">
+				<Constant id="transName" value="toFROZEN"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>	
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMAdmin"/>
+			</Transition>
+			<Transition id="nPrivatetoReleased">
+				<Constant id="transName" value="toRELEASED"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMAdmin,VPLMReleaseManager"/>
+			</Transition>
+			<Transition id="nPrivatetoObsolete">
+				<Constant id="transName" value="toOBSOLETE"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin"/>	
+			</Transition>
+			<Transition id="nIn_worktoObsolete">
+				<Constant id="transName" value="toOBSOLETE"/>
+				<Constant id="sourceState" value="IN_WORK"/>	
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="addition" value="true"/>				
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator"/>	
+			</Transition>
+			<Transition id="nFrozentoPrivate">
+				<Constant id="transName" value="toPRIVATE"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin"/>
+			</Transition>
+			<Transition id="nFrozentoObsolete">
+				<Constant id="transName" value="toOBSOLETE"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator"/>
+			</Transition>
+			<Transition id="nReleasedtoPrivate">
+				<Constant id="transName" value="toPRIVATE"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator"/>
+			</Transition>
+			<Transition id="nReleasedtoIn_work">
+				<Constant id="transName" value="toIN_WORK"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMAdmin"/>
+			</Transition>
+			<Transition id ="nReleasedtoFrozen">
+				<Constant id="transName" value="toFROZEN"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin"/>
+			</Transition>
+			<Transition id="nObsoletetoPrivate">
+				<Constant id="transName" value="toPRIVATE"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator"/>
+			</Transition>
+			<Transition id="nObsoletetoIn_work">
+				<Constant id="transName" value="toIN_WORK"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin"/>
+			</Transition>
+			<Transition id ="nObsoletetoFrozen">
+				<Constant id="transName" value="toFROZEN"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="true"/>>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMCreator"/>
+			</Transition>
+			<Transition id ="nObsoletetoReleased">
+				<Constant id="transName" value="toRELEASED"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMCreator,VPLMReleaseManager"/>
+			</Transition>									
+		</Family>
+		
+		<Family id="VPLM_SMB_Evaluation" collabApps="GlobalDesign">
+			<Constant id="policyID" value="VPLM_SMB_Evaluation"/>
+			<Constant id="modifyTopology" value="true"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="NLSStateFileName" value="PLMAttrValueFEM.CATNls"/>
+			<Constant id="complementaryPropFiles" value="emxFrameworkStringResource.properties,TeamCompassLegend_TeamCustom.CATNls,PLMAttrValuePLMPIMMetricReference.CATNls,PLMAttrValueSIMItfSimulation.CATNls,PLMAttrValueErgoHuman.CATNls,PLMAttrValueXRep.CATNls,PLMAttrValueCAT_Distiller_Ref.CATNls,PLMAttrValueCAT_Distiller_RepRef.CATNls,PLMAttrValuedsc_matref_ref_CoveringVector.CATNls,PLMAttrValuedsc_matref_ref_CoreVector.CATNls,PLMAttrValueDMUValidationValidation.CATNls,PLMAttrValueSIMObjSimulationObjectGeneric.CATNls,PLMAttrValue3DExperience.CATNls,PLMAttrValueBehavior.CATNls,PLMAttrValueCATANIMDISCIPLINE.CATNls,PLMAttrValueSimulationLogic.CATNls,PLMAttrValueSnapshotReference.CATNls,PLMAttrValueHumanRepReference.CATNls"/>
+			<Constant id="lang" value="en,fr"/>	
+			<Constant id="appType" value="VPM"/>
+			<Constant id="approvalRolesForNewTransitions" value="VPLMProjectLeader,VPLMCreator,VPLMExperimenter"/>
+
+			<GovernedType id="Review">	
+				<Constant id="typeId" value="Review"/>		
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			<GovernedType id="PLMPIMMetricReference" regSuite="Framework" nlsKey="emxFramework.Type.PLMPIMMetricReference">	
+				<Constant id="typeId" value="PLMPIMMetricReference"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="SIMItfSimulation" regSuite="Framework" nlsKey="emxFramework.Type.SIMItfSimulation">	
+				<Constant id="typeId" value="SIMItfSimulation"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="ErgoHuman" regSuite="Framework" nlsKey="emxFramework.Type.ErgoHuman">	
+				<Constant id="typeId" value="ErgoHuman"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="FEM" regSuite="Framework" nlsKey="emxFramework.Type.FEM">	
+				<Constant id="typeId" value="FEM"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="XRep" regSuite="Framework" nlsKey="emxFramework.Type.XRep">	
+				<Constant id="typeId" value="XRep"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="CAT_Distiller_Ref" regSuite="Framework" nlsKey="emxFramework.Type.CAT_Distiller_Ref">	
+				<Constant id="typeId" value="CAT_Distiller_Ref"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="CAT_Distiller_RepRef" regSuite="Framework" nlsKey="emxFramework.Type.CAT_Distiller_RepRef">	
+				<Constant id="typeId" value="CAT_Distiller_RepRef"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="dsc_matref_ref_CoveringVector" regSuite="Framework" nlsKey="emxFramework.Type.dsc_matref_ref_CoveringVector">	
+				<Constant id="typeId" value="dsc_matref_ref_CoveringVector"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="dsc_matref_ref_CoreVector" regSuite="Framework" nlsKey="emxFramework.Type.dsc_matref_ref_CoreVector">	
+				<Constant id="typeId" value="dsc_matref_ref_CoreVector"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="DMUValidationValidation" regSuite="Framework" nlsKey="emxFramework.Type.DMUValidationValidation">	
+				<Constant id="typeId" value="DMUValidationValidation"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="DELRDYSimulation" regSuite="Framework" nlsKey="emxFramework.Type.DELRDYSimulation">	
+				<Constant id="typeId" value="DELRDYSimulation"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="ProductionSystem" regSuite="Framework" nlsKey="emxFramework.Type.ProductionSystem">	
+				<Constant id="typeId" value="ProductionSystem"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="SystemBehaviorLibSimulation" regSuite="Framework" nlsKey="emxFramework.Type.SystemBehaviorLibSimulation">	
+				<Constant id="typeId" value="SystemBehaviorLibSimulation"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="ManufacturingSimulation" regSuite="Framework" nlsKey="emxFramework.Type.ManufacturingSimulation">	
+				<Constant id="typeId" value="ManufacturingSimulation"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="LogicalSimulation" regSuite="Framework" nlsKey="emxFramework.Type.LogicalSimulation">	
+				<Constant id="typeId" value="LogicalSimulation"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="Kinematics" regSuite="Framework" nlsKey="emxFramework.Type.Kinematics">	
+				<Constant id="typeId" value="Kinematics"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="GenerativeStress" regSuite="Framework" nlsKey="emxFramework.Type.GenerativeStress">	
+				<Constant id="typeId" value="GenerativeStress"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="FunctionalSimulation" regSuite="Framework" nlsKey="emxFramework.Type.FunctionalSimulation">	
+				<Constant id="typeId" value="FunctionalSimulation"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="DesignSight" regSuite="Framework" nlsKey="emxFramework.Type.DesignSight">	
+				<Constant id="typeId" value="DesignSight"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="3DExperience" regSuite="Framework" nlsKey="emxFramework.Type.3DExperience">	
+				<Constant id="typeId" value="3DExperience"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="Behavior" regSuite="Framework" nlsKey="emxFramework.Type.Behavior">	
+				<Constant id="typeId" value="Behavior"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="CATANIMDISCIPLINE" regSuite="Framework" nlsKey="emxFramework.Type.CATANIMDISCIPLINE">	
+				<Constant id="typeId" value="CATANIMDISCIPLINE"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="SimulationLogic" regSuite="Framework" nlsKey="emxFramework.Type.SimulationLogic">	
+				<Constant id="typeId" value="SimulationLogic"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="SnapshotReference" regSuite="Framework" nlsKey="emxFramework.Type.SnapshotReference">	
+				<Constant id="typeId" value="SnapshotReference"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="HumanRepReference" regSuite="Framework" nlsKey="emxFramework.Type.HumanRepReference">	
+				<Constant id="typeId" value="HumanRepReference"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+
+			<State id="PRIVATE">
+				<Constant id="sysName" value="PRIVATE"/>	
+				<Constant id="isRemovable" value="false"/>				
+				<Constant id="NLSKey" value="current.PRIVATE"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Evaluation.PRIVATE,PRIVATE"/>
+			</State>
+			<State id="IN_WORK">
+				<Constant id="sysName" value="IN_WORK"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.IN_WORK"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Evaluation.IN_WORK,IN_WORK"/> <!--for Projection like issues  -->
+			</State>				
+			<State id="FROZEN">
+				<Constant id="sysName" value="FROZEN"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.FROZEN"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Evaluation.FROZEN,FROZEN"/> 
+			</State>			
+			<State id="RELEASED">
+				<Constant id="sysName" value="RELEASED"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.RELEASED"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Evaluation.RELEASED,RELEASED"/> 
+			</State>
+			<State id="OBSOLETE">
+				<Constant id="sysName" value="OBSOLETE"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.OBSOLETE"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Evaluation.OBSOLETE,OBSOLETE"/> 
+			</State>
+
+			<Transition id="InWorkToFrozen">
+				<Constant id="transName" value="ToFreeze"/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>				
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMExperimenter,VPLMAdmin"/>
+			</Transition>
+			<Transition id="InWorkToRelease">
+				<Constant id="transName" value="ToRelease"/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="RELEASED"/>	
+				<Constant id="removal" value="true"/>		
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMReleaseManager"/>
+			</Transition>
+			<Transition id="InWorkToPrivate">
+				<Constant id="transName" value="Isolate"/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMExperimenter,VPLMAdmin"/>
+			</Transition>
+			<Transition id="PrivateToInWork">
+				<Constant id="transName" value="ShareWithinProject"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="removal" value="true"/>	
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMExperimenter,VPLMAdmin"/>
+			</Transition>			
+			<Transition id="FrozenToRelease">
+				<Constant id="transName" value="ToRelease"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMReleaseManager"/>
+			</Transition>			
+			<Transition id="FrozenToInWork">
+				<Constant id="transName" value="UnFreeze"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="removal" value="true"/>			
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMExperimenter,VPLMCreator"/>
+			</Transition>
+			<Transition id="ReleasedToObsolete">
+				<Constant id="transName" value="OutDated"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="removal" value="true"/>				
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin"/>
+			</Transition>
+
+			<Transition id="nPrivatetoFrozen">
+				<Constant id="transName" value="toFROZEN"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>	
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMExperimenter,VPLMAdmin"/>
+			</Transition>
+			<Transition id="nPrivatetoReleased">
+				<Constant id="transName" value="toRELEASED"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMExperimenter,VPLMAdmin,VPLMReleaseManager"/>
+			</Transition>
+			<Transition id="nPrivatetoObsolete">
+				<Constant id="transName" value="toOBSOLETE"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin"/>	
+			</Transition>
+			<Transition id="nIn_worktoObsolete">
+				<Constant id="transName" value="toOBSOLETE"/>
+				<Constant id="sourceState" value="IN_WORK"/>	
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="addition" value="true"/>				
+				<Constant id="approve" value="VPLMProjectLeader,VPLMExperimenter,VPLMCreator"/>	
+			</Transition>
+			<Transition id="nFrozentoPrivate">
+				<Constant id="transName" value="toPRIVATE"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin"/>
+			</Transition>
+			<Transition id="nFrozentoObsolete">
+				<Constant id="transName" value="toOBSOLETE"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMExperimenter,VPLMCreator"/>
+			</Transition>
+			<Transition id="nReleasedtoPrivate">
+				<Constant id="transName" value="toPRIVATE"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMExperimenter,VPLMCreator"/>
+			</Transition>
+			<Transition id="nReleasedtoIn_work">
+				<Constant id="transName" value="toIN_WORK"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMCreator,VPLMExperimenter,VPLMAdmin"/>
+			</Transition>
+			<Transition id ="nReleasedtoFrozen">
+				<Constant id="transName" value="toFROZEN"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin"/>
+			</Transition>
+			<Transition id="nObsoletetoPrivate">
+				<Constant id="transName" value="toPRIVATE"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMExperimenter,VPLMCreator"/>
+			</Transition>
+			<Transition id="nObsoletetoIn_work">
+				<Constant id="transName" value="toIN_WORK"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin"/>
+			</Transition>
+			<Transition id ="nObsoletetoFrozen">
+				<Constant id="transName" value="toFROZEN"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="true"/>>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMExperimenter,VPLMCreator"/>
+			</Transition>
+			<Transition id ="nObsoletetoReleased">
+				<Constant id="transName" value="toRELEASED"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMExperimenter,VPLMCreator,VPLMReleaseManager"/>
+			</Transition>									
+		</Family>
+		
+		<Family id="VPLM_SMB_Resource" collabApps="GlobalDesign">
+			<Constant id="policyID" value="VPLM_SMB_Resource"/>
+			<Constant id="modifyTopology" value="true"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="NLSStateFileName" value="CATComponentsFamilyReference.CATNls"/>
+			<Constant id="complementaryPropFiles" value="emxFrameworkStringResource.properties,TeamCompassLegend_TeamCustom.CATNls,PLMAttrValueRFLPLMPLMTemplateRepReference.CATNls,PLMAttrValueRFLPLMCATComponentsFamilyReference.CATNls,PLMAttrValueRFLPLMAecArchitecturalElementType.CATNls,PLMAttrValueRFLPLMAecElementComponentType.CATNls,PLMAttrValueRFLPLMAecReinforcingElementType.CATNls,PLMAttrValueRFLPLMAecObjectType.CATNls,PLMAttrValueRFLPLMAecStructuralElementType.CATNls,PLMAttrValueRFLPLMBuildingSpatialStructureElementType.CATNls,PLMAttrValueRFLPLMBridgePartType.CATNls,PLMAttrValueRFLPLMBridgeSpatialStructureElementType.CATNls,PLMAttrValueRFLPLMBridgeStructuralElementType.CATNls,PLMAttrValueRFLPLMBridgeCableType.CATNls,PLMAttrValueRFLPLMBridgeArchitecturalElementType.CATNls,PLMAttrValueRFLPLMDamSpatialStructureElementType.CATNls,PLMAttrValueRFLPLMDamPartType.CATNls,PLMAttrValueRFLPLMDamElementType.CATNls,PLMAttrValueRFLPLMRailwaySpatialStructureElementType.CATNls,PLMAttrValueRFLPLMRailwayPartType.CATNls,PLMAttrValueRFLPLMRailwayElementType.CATNls,PLMAttrValueRFLPLMRoadPartType.CATNls,PLMAttrValueRFLPLMRoadElementType.CATNls,PLMAttrValueRFLPLMTunnelSpatialStructureElementType.CATNls,PLMAttrValueRFLPLMTunnelPartType.CATNls,PLMAttrValueRFLPLMTunnelSpaceType.CATNls,PLMAttrValueRFLPLMTunnelElementType.CATNls,PLMAttrValueRFLPLMCATMatReference.CATNls,PLMAttrValueRFLPLMMaterialDomain.CATNls,PLMAttrValueRFLPLMDIFStandardRep.CATNls,PLMAttrValueRFLPLMENOCLG_LibraryReference.CATNls,PLMAttrValueRFLPLMENOCLG_ClassReference.CATNls,PLMAttrValueRFLPLMPLMCheck.CATNls,PLMAttrValueRFLPLMPLMResourceSetRepReference.CATNls,PLMAttrValueRFLPLMCATSysBehaviorLibReference.CATNls,PLMAttrValueRFLPLMCATSysBehaviorLibRepReference.CATNls"/>
+			<Constant id="lang" value="en,fr"/>	
+			<Constant id="appType" value="VPM"/>
+			<Constant id="approvalRolesForNewTransitions" value="VPLMProjectLeader,VPLMProjectAdministrator"/>
+
+			<GovernedType id="PLMTemplateRepReference" regSuite="Framework" nlsKey="emxFramework.Type.PLMTemplateRepReference">	
+				<Constant id="typeId" value="PLMTemplateRepReference"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="CATComponentsFamilyReference" regSuite="Framework" nlsKey="emxFramework.Type.CATComponentsFamilyReference">	
+				<Constant id="typeId" value="CATComponentsFamilyReference"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="AecArchitecturalElementType" regSuite="Framework" nlsKey="emxFramework.Type.AecArchitecturalElementType">	
+				<Constant id="typeId" value="AecArchitecturalElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="AecElementComponentType" regSuite="Framework" nlsKey="emxFramework.Type.AecElementComponentType">	
+				<Constant id="typeId" value="AecElementComponentType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="AecReinforcingElementType" regSuite="Framework" nlsKey="emxFramework.Type.AecReinforcingElementType">	
+				<Constant id="typeId" value="AecReinforcingElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="AecObjectType" regSuite="Framework" nlsKey="emxFramework.Type.AecObjectType">	
+				<Constant id="typeId" value="AecObjectType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData,RejectIfAnyOfTheCommonlyGovernedChildNotOnTargetState"/>
+			</GovernedType>
+			<GovernedType id="AecStructuralElementType" regSuite="Framework" nlsKey="emxFramework.Type.AecStructuralElementType">	
+				<Constant id="typeId" value="AecStructuralElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="BuildingSpatialStructureElementType" regSuite="Framework" nlsKey="emxFramework.Type.BuildingSpatialStructureElementType">	
+				<Constant id="typeId" value="BuildingSpatialStructureElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="BridgePartType" regSuite="Framework" nlsKey="emxFramework.Type.BridgePartType">	
+				<Constant id="typeId" value="BridgePartType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="BridgeSpatialStructureElementType" regSuite="Framework" nlsKey="emxFramework.Type.BridgeSpatialStructureElementType">	
+				<Constant id="typeId" value="BridgeSpatialStructureElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="BridgeStructuralElementType" regSuite="Framework" nlsKey="emxFramework.Type.BridgeStructuralElementType">	
+				<Constant id="typeId" value="BridgeStructuralElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="BridgeCableType" regSuite="Framework" nlsKey="emxFramework.Type.BridgeCableType">	
+				<Constant id="typeId" value="BridgeCableType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="BridgeArchitecturalElementType" regSuite="Framework" nlsKey="emxFramework.Type.BridgeArchitecturalElementType">	
+				<Constant id="typeId" value="BridgeArchitecturalElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="DamSpatialStructureElementType" regSuite="Framework" nlsKey="emxFramework.Type.DamSpatialStructureElementType">	
+				<Constant id="typeId" value="DamSpatialStructureElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="DamPartType" regSuite="Framework" nlsKey="emxFramework.Type.DamPartType">	
+				<Constant id="typeId" value="DamPartType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="DamElementType" regSuite="Framework" nlsKey="emxFramework.Type.DamElementType">	
+				<Constant id="typeId" value="DamElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="RailwaySpatialStructureElementType" regSuite="Framework" nlsKey="emxFramework.Type.RailwaySpatialStructureElementType">	
+				<Constant id="typeId" value="RailwaySpatialStructureElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="RailwayPartType" regSuite="Framework" nlsKey="emxFramework.Type.RailwayPartType">	
+				<Constant id="typeId" value="RailwayPartType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="RailwayElementType" regSuite="Framework" nlsKey="emxFramework.Type.RailwayElementType">	
+				<Constant id="typeId" value="RailwayElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="RoadPartType" regSuite="Framework" nlsKey="emxFramework.Type.RoadPartType">	
+				<Constant id="typeId" value="RoadPartType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="RoadElementType" regSuite="Framework" nlsKey="emxFramework.Type.RoadElementType">	
+				<Constant id="typeId" value="RoadElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="TunnelSpatialStructureElementType" regSuite="Framework" nlsKey="emxFramework.Type.TunnelSpatialStructureElementType">	
+				<Constant id="typeId" value="TunnelSpatialStructureElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="TunnelPartType" regSuite="Framework" nlsKey="emxFramework.Type.TunnelPartType">	
+				<Constant id="typeId" value="TunnelPartType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="TunnelSpaceType" regSuite="Framework" nlsKey="emxFramework.Type.TunnelSpaceType">	
+				<Constant id="typeId" value="TunnelSpaceType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="TunnelElementType" regSuite="Framework" nlsKey="emxFramework.Type.TunnelElementType">
+				<Constant id="typeId" value="TunnelElementType"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="dsc_matref_ref_Covering" regSuite="Framework" nlsKey="emxFramework.Type.dsc_matref_ref_Covering">	
+				<Constant id="typeId" value="dsc_matref_ref_Covering"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="dsc_matref_ref_Core" regSuite="Framework" nlsKey="emxFramework.Type.dsc_matref_ref_Core">	
+				<Constant id="typeId" value="dsc_matref_ref_Core"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="dsc_matref_ref_All" regSuite="Framework" nlsKey="emxFramework.Type.dsc_matref_ref_All">	
+				<Constant id="typeId" value="dsc_matref_ref_All"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="MaterialDomain" regSuite="Framework" nlsKey="emxFramework.Type.MaterialDomain">	
+				<Constant id="typeId" value="MaterialDomain"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="DIFStandardRep" regSuite="Framework" nlsKey="emxFramework.Type.DIFStandardRep">	
+				<Constant id="typeId" value="DIFStandardRep"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="ENOCLG_LibraryReference" regSuite="Framework" nlsKey="emxFramework.Type.ENOCLG_LibraryReference">	
+				<Constant id="typeId" value="ENOCLG_LibraryReference"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData,RejectIfAnyOfTheCommonlyGovernedChildNotOnTargetState"/>
+			</GovernedType>
+			<GovernedType id="ENOCLG_ClassReference" regSuite="Framework" nlsKey="emxFramework.Type.ENOCLG_ClassReference">	
+				<Constant id="typeId" value="ENOCLG_ClassReference"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="PLMCheck" regSuite="Framework" nlsKey="emxFramework.Type.PLMCheck">	
+				<Constant id="typeId" value="PLMCheck"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+			<GovernedType id="PLMResourceSetRepReference" regSuite="Framework" nlsKey="emxFramework.Type.PLMResourceSetRepReference">	
+				<Constant id="typeId" value="PLMResourceSetRepReference"/>	
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnLeader,RejectOnStandardData"/>
+			</GovernedType>
+
+			<State id="PRIVATE">
+				<Constant id="sysName" value="PRIVATE"/>	
+				<Constant id="isRemovable" value="false"/>				
+				<Constant id="NLSKey" value="current.PRIVATE"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Resource.PRIVATE,PRIVATE"/>
+			</State>
+			<State id="IN_WORK">
+				<Constant id="sysName" value="IN_WORK"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.IN_WORK"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Resource.IN_WORK,IN_WORK"/> <!--for Projection like issues  -->
+			</State>				
+			<State id="FROZEN">
+				<Constant id="sysName" value="FROZEN"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.FROZEN"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Resource.FROZEN,FROZEN"/> 
+			</State>			
+			<State id="RELEASED">
+				<Constant id="sysName" value="RELEASED"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.RELEASED"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Resource.RELEASED,RELEASED"/> 
+			</State>
+			<State id="OBSOLETE">
+				<Constant id="sysName" value="OBSOLETE"/>	
+				<Constant id="isRemovable" value="true"/>				
+				<Constant id="NLSKey" value="current.OBSOLETE"/> 
+				<Constant id="complementaryNLSKeys" value="emxFramework.State.VPLM_SMB_Resource.OBSOLETE,OBSOLETE"/> 
+			</State>
+
+			<Transition id="InWorkToFrozen">
+				<Constant id="transName" value="ToFreeze"/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>				
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin"/>
+			</Transition>
+			<Transition id="InWorkToRelease">
+				<Constant id="transName" value="ToRelease"/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="RELEASED"/>	
+				<Constant id="removal" value="true"/>		
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin,VPLMReleaseManager"/>
+			</Transition>
+			<Transition id="InWorkToPrivate">
+				<Constant id="transName" value="Isolate"/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin"/>
+			</Transition>
+			<Transition id="PrivateToInWork">
+				<Constant id="transName" value="ShareWithinProject"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="removal" value="true"/>	
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin"/>
+			</Transition>			
+			<Transition id="FrozenToRelease">
+				<Constant id="transName" value="ToRelease"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin,VPLMReleaseManager"/>
+			</Transition>			
+			<Transition id="FrozenToInWork">
+				<Constant id="transName" value="UnFreeze"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="removal" value="true"/>			
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMProjectAdministrator"/>
+			</Transition>
+			<Transition id="ReleasedToObsolete">
+				<Constant id="transName" value="OutDated"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="removal" value="true"/>				
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin"/>
+			</Transition>
+			
+			<Transition id="nPrivatetoFrozen">
+				<Constant id="transName" value="toFROZEN"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>	
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin"/>
+			</Transition>
+			<Transition id="nPrivatetoReleased">
+				<Constant id="transName" value="toRELEASED"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin,VPLMReleaseManager"/>
+			</Transition>
+			<Transition id="nPrivatetoObsolete">
+				<Constant id="transName" value="toOBSOLETE"/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin"/>	
+			</Transition>
+			<Transition id="nIn_worktoObsolete">
+				<Constant id="transName" value="toOBSOLETE"/>
+				<Constant id="sourceState" value="IN_WORK"/>	
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="addition" value="true"/>				
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMCreator"/>	
+			</Transition>
+			<Transition id="nFrozentoPrivate">
+				<Constant id="transName" value="toPRIVATE"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin"/>
+			</Transition>
+			<Transition id="nFrozentoObsolete">
+				<Constant id="transName" value="toOBSOLETE"/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMCreator"/>
+			</Transition>
+			<Transition id="nReleasedtoPrivate">
+				<Constant id="transName" value="toPRIVATE"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMCreator"/>
+			</Transition>
+			<Transition id="nReleasedtoIn_work">
+				<Constant id="transName" value="toIN_WORK"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin"/>
+			</Transition>
+			<Transition id ="nReleasedtoFrozen">
+				<Constant id="transName" value="toFROZEN"/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin"/>
+			</Transition>
+			<Transition id="nObsoletetoPrivate">
+				<Constant id="transName" value="toPRIVATE"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMCreator"/>
+			</Transition>
+			<Transition id="nObsoletetoIn_work">
+				<Constant id="transName" value="toIN_WORK"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="removal" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMProjectAdministrator,VPLMAdmin"/>
+			</Transition>
+			<Transition id ="nObsoletetoFrozen">
+				<Constant id="transName" value="toFROZEN"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="true"/>>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMProjectAdministrator"/>
+			</Transition>
+			<Transition id ="nObsoletetoReleased">
+				<Constant id="transName" value="toRELEASED"/>
+				<Constant id="sourceState" value="OBSOLETE"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="addition" value="true"/>
+				<Constant id="approve" value="VPLMProjectLeader,VPLMAdmin,VPLMProjectAdministrator,VPLMReleaseManager"/>
+			</Transition>									
+		</Family>
+	</Domain>
+</OOTBParameterization>

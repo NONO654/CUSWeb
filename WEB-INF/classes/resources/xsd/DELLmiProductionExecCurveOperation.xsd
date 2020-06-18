@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2006. All rights reserved. -->
+<xs:schema targetNamespace="http://www.3ds.com/xsd/DELUPRBase" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.3ds.com/xsd/DELUPRBase" xmlns:opbase="http://www.3ds.com/xsd/DELUPROperationBase" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+                <xs:appinfo>
+                        <webserviceSchema/>
+                </xs:appinfo>
+        </xs:annotation>
+  <xs:import namespace="http://www.3ds.com/xsd/DELUPROperationBase" schemaLocation="DELLmiProductionOperation.xsd"/>
+  <xs:complexType name="DELLmiExecCurveOperationReferenceType">
+    <xs:annotation>
+      <xs:documentation>Exec Curve Operation Reference definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="opbase:DELLmiOperationReferenceType">
+        <xs:sequence>
+          <xs:element name="V_PlannedStartDate" type="xs:date" minOccurs="0" />
+          <xs:element name="V_PlannedEndDate" type="xs:date" minOccurs="0" />
+          <xs:element name="V_ActualStartDate" type="xs:date" minOccurs="0" />
+          <xs:element name="V_ActualEndDate" type="xs:date" minOccurs="0" />
+          <xs:element name="V_FasteningRate" type="xs:double" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DELLmiExecCurveOperationInstanceType">
+    <xs:annotation>
+      <xs:documentation>Exec Curve Operation Instance definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="opbase:DELLmiOperationInstanceType">
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

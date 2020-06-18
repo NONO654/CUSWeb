@@ -1,0 +1,34 @@
+
+<Scripts>
+
+  <!-- provide implementation of common infrastructure Business Logic Openess for the modeler PRODUCTCFG -->
+  <!-- types provided with dedicated implementation: VPMReference, VPMRepReference, VPMInstance -->
+
+  <!--Attribute initialization when Creating online data on modeler type VPMReference-->
+  <Script OpeningID="PLMIdentificationInitialization" Type="VPMReference"    ScriptName="ENONT_VPMReference_BLInitialization" >
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+
+  <!-- WARNING: THIS CHECK MAY OPERATE BOTH IN FORMER TYPING AND NEW TYPING -->
+  <!--Adding Instance inside the structure: control that Standard data is only made of Standard data-->
+  <Script OpeningID="PLMInstanceAggregationCheck"     Type="VPMReference"    ScriptName="ENONT_StandardAggregation" >
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+
+  <!-- WARNING: THIS CHECK MAY OPERATE BOTH IN FORMER TYPING AND NEW TYPING --> 
+  <!--Adding Instance inside the structure: control that a data is made of Applicable Data-->
+  <Script OpeningID="PLMInstanceAggregationCheck"     Type="VPMReference"    ScriptName="ENONT_CrossProjectApplicability" >
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+
+  <!--Attribute initialization when Creating online data on modeler type VPMRepReference-->
+  <Script OpeningID="PLMIdentificationInitialization" Type="VPMRepReference"    ScriptName="ENONT_VPMReference_BLInitialization" >
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+
+  <!--Attribute initialization when Creating online data on modeler type VPMInstance -->
+
+  <!-- CANNOT BE DELIVERED Because it impacts V1 -->
+  <!--Script OpeningID="PLMIdentificationInitialization" Type="VPMInstance"    ScriptName="ENONT_VPMReference_BLInitialization" /-->
+
+</Scripts>

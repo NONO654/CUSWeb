@@ -1,0 +1,131 @@
+{{#each Box}}
+<div  class='outline'  
+style=" "  {{#if drop.message}} message='{{drop.message}}'{{/if}}   {{#if appurl}} myAppsURL={{appurl}} {{/if}} {{#if drop.draggable}}draggable='true'{{/if}}  {{#if drop.draggable}}droppable='true'{{/if}}  
+{{#if drop.types}} droptypes={{drop.types}} {{/if}}  
+{{#if drop.relationship}}droprelationship={{drop.relationship}}{{/if}} 
+{{#if drop.typedirection}}droptypedirection={{drop.typedirection}}{{/if}}
+{{#if drop.program}} dropprogram={{drop.program}}{{/if}}
+id='{{identifier.objectDetails.id}}'>
+<div class="hvrbox-layer_top" >
+   <div class="hvrbox-text">{{drop.tooltip}}</div>
+</div>
+<div class='border-container' >
+   <div class='id-container'>
+      <span class='title-image'><img   style='height:30px' src='{{identifier.typeIcon.image}}' title='{{identifier.typeIcon.tooltip}}' alt='{{identifier.typeIcon.tooltip}}'></img></span>
+      <span class='box-title'><a class='title-link' href='{{identifier.objectDetails.href}}' title='{{identifier.objectDetails.tooltip}}'>{{identifier.objectDetails.name}}</a></span>
+   </div>
+   <div class='hr-separator'></div>
+   <div class='cmd-workbench'>
+      {{#if toolbars.1.group1}}
+      <div class='cmd-slider-halo cmd-slider-halo-left' ></div>
+      <div class='cmd-slider-left' id='leftslider_{{identifier.objectDetails.name}}'>&laquo;</div>
+      {{/if}}
+      {{#each toolbars}}
+      {{#ifeq @index "0"}}
+{{setIndex @index}}
+      <div class='cmd-toolbar' id='{{../../identifier.objectDetails.name}}{{@index}}'>
+         {{/ifeq}}
+         {{#ifnoteq @index "0"}}
+{{setIndex @index}}
+         <div class='cmd-toolbar' id='{{../../identifier.objectDetails.name}}{{@index}}' style='display:none'>
+            {{/ifnoteq}}
+			
+			
+            {{#each this.group1}}
+
+            {{#if dropdownarrow}}
+            <div id='Dropdown_Group1{{../../../identifier.objectDetails.name}}{{../../index}}@{{@index}}' class='cmd-container-dropdown'>
+               <div  class='dropdown-arrow'>
+                  <div  style="background: url('{{../../../appurl}}/webapps/Controls/assets/arrow-b.png') center center / 5px no-repeat; width: 8px; height: 100%;">
+                  </div>
+               </div>
+            </div>
+            {{/if}}
+            {{#if dropdown}}
+            <div class='Dropdown_Group1{{../../../identifier.objectDetails.name}}{{../../index}}_child-element' style='display:none' {{#ifContains href "javascript"}} href="{{href}}" {{/ifContains}} {{#ifNotContains  href "javascript" }}href="javascript:showNonModalDialog('{{href}}', '930', '650', 'true')"  {{/ifNotContains}}   src='{{image}}' title='{{tooltip}}'></div>
+            {{else}}
+            {{#if personimage}}
+            <div class='cmd-container'>
+               <div class='cmd-starter' style='margin-right:2px;'><img src='{{image}}' title='{{tooltip}}'  onclick="location.href='mailTo:{{personemailid}}?subject={{../../../identifier.objectDetails.name}}'"  ></img></div>
+            </div>
+            {{else}}
+            <div class='cmd-container'>
+               <div class='cmd-starter' style='margin-right:2px;'><a  {{#ifContains href "javascript"}} href="{{href}}" {{/ifContains}} {{#ifNotContains  href "javascript" }}href="javascript:showNonModalDialog('{{href}}', '930', '650', 'true')"  {{/ifNotContains}}  target='_blank' ><img src='{{image}}' title='{{tooltip}}'></img></a></div>
+            </div>
+            {{/if}}
+            {{/if}}
+            {{/each}}
+            {{#if this.group1.0.image}}
+            <div class='cmd-separator'></div>
+            {{/if}}
+			
+			
+			
+            {{#each this.group2}}
+            {{#if dropdownarrow}}
+            <div id='Dropdown_Group2{{../../../identifier.objectDetails.name}}{{../../index}}@{{@index}}' class='cmd-container-dropdown'>
+               <div  class='dropdown-arrow'>
+                  <div  style="background: url('{{../../../appurl}}/webapps/Controls/assets/arrow-b.png') center center / 5px no-repeat; width: 8px; height: 100%;">
+                  </div>
+               </div>
+            </div>
+            {{/if}}
+            {{#if dropdown}}
+            <div class='Dropdown_Group2{{../../../identifier.objectDetails.name}}{{../../index}}_child-element' style='display:none' {{#ifContains href "javascript"}} href="{{href}}" {{/ifContains}} {{#ifNotContains  href "javascript" }}href="javascript:showNonModalDialog('{{href}}', '930', '650', 'true')"  {{/ifNotContains}}  src='{{image}}' title='{{tooltip}}'></div>
+            {{else}}
+            {{#if personimage}}
+            <div class='cmd-container'>
+               <div class='cmd-starter' style='margin-right:2px;'><img src='{{image}}' title='{{tooltip}}'  onclick="location.href='mailTo:{{personemailid}}?subject={{../../../identifier.objectDetails.name}}'"  ></img></div>
+            </div>
+            {{else}}
+            <div class='cmd-container'>
+               <div class='cmd-starter' style='margin-right:2px;'><a {{#ifContains href "javascript"}} href="{{href}}" {{/ifContains}} {{#ifNotContains  href "javascript" }}href="javascript:showNonModalDialog('{{href}}', '930', '650', 'true')"  {{/ifNotContains}}  target='_blank' ><img src='{{image}}' title='{{tooltip}}'></img></a></div>
+            </div>
+            {{/if}}
+            {{/if}}
+            {{/each}}
+            {{#if this.group2.0.image}}
+            <div class='cmd-separator'></div>
+            {{/if}}
+			
+			
+			
+            {{#each this.group3}}
+           {{#if dropdownarrow}}
+            <div id='Dropdown_Group3{{../../../identifier.objectDetails.name}}{{../../index}}@{{@index}}' class='cmd-container-dropdown'>
+               <div  class='dropdown-arrow'>
+                  <div  style="background: url('{{../../../appurl}}/webapps/Controls/assets/arrow-b.png') center center / 5px no-repeat; width: 8px; height: 100%;">
+                  </div>
+               </div>
+            </div>
+            {{/if}}
+            {{#if dropdown}}
+            <div class='Dropdown_Group3{{../../../identifier.objectDetails.name}}{{../../index}}_child-element' style='display:none' {{#ifContains href "javascript"}} href="{{href}}" {{/ifContains}} {{#ifNotContains  href "javascript" }}href="javascript:showNonModalDialog('{{href}}', '930', '650', 'true')"  {{/ifNotContains}}  src='{{image}}' title='{{tooltip}}'></div>
+            {{else}}
+            {{#if personimage}}
+            <div class='cmd-container'>
+               <div class='cmd-starter' style='margin-right:2px;'><img src='{{image}}' title='{{tooltip}}'  onclick="location.href='mailTo:{{personemailid}}?subject={{../../../identifier.objectDetails.name}}'"  ></img></div>
+            </div>
+            {{else}}
+            <div class='cmd-container'>
+               <div class='cmd-starter' style='margin-right:2px;'><a {{#ifContains href "javascript"}} href="{{href}}" {{/ifContains}} {{#ifNotContains  href "javascript" }}href="javascript:showNonModalDialog('{{href}}', '930', '650', 'true')"  {{/ifNotContains}}  target='_blank' ><img src='{{image}}' title='{{tooltip}}'></img></a></div>
+            </div>
+            {{/if}}
+            {{/if}}
+            {{/each}}
+         </div>
+         {{/each}}
+         {{#if toolbars.1.group1}}
+         <div class='cmd-slider-halo cmd-slider-halo-right'></div>
+         <span class='cmd-slider-right' id='rightslider_{{identifier.objectDetails.name}}'>&raquo;</span>
+         {{/if}}
+      </div>
+   </div>
+   <div id='callout{{identifier.objectDetails.id}}' class="visible-balloon" style='display:none'  >
+      <p>{{ondroptittle}}</p>
+   </div>
+</div>
+{{/each}}
+</br>
+
+

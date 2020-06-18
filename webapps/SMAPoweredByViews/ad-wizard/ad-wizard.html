@@ -1,0 +1,63 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+
+<dom-module id="ad-wizard">
+	<link rel="import" type="css" href="ad-wizard.css">
+		<template>
+				<style include="sp-uikit-styles"></style>
+				<div id="wizard">
+						<div id="wizardModal" class="modal fade" on-dragover="disableDrag">
+							<div class="modal-wrap" on-dragover="disableDrag">
+									<div id="wizardModalContent" class="modal-content">
+											<div class="modal-header">
+													<button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onClosewizard"><span class="fonticon fonticon-close"></span></button>
+													<h4>
+														<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADWizard" nlskey="NewJob"></sp-nls>
+														<span> - </span>
+														<span>{{dialogTitle}}</span>
+													</h4>
+											</div>
+											<div id="dialogContent" class="modal-body">
+													<div id="header" class="wizard-header">
+															<template is="dom-repeat" items="[[headersList]]">
+																<div class="wizard-header-item" title="{{item}}" class$="{{_computeInitClass(item)}}" on-click="onWizardHeaderItemClick">
+																	<span class="wizard-header-item-tick fonticon fonticon-check"></span>
+																	<span class="wizard-header-item-counter">{{_computeCount(item)}}</span>
+																	<span class="wizard-header-item-text">{{item}}</span>
+																</div>
+															</template>
+													</div>
+													<div class="main-content">
+														<hr id="wizardSeparator">
+														<div id="wizardContentTitle" class="wizard-heading"></div>
+														<hr id="wizardSeparator2">
+														<div id="wizardContent" class="wizard-content">
+																<content id="myContent"></content>
+														</div>
+													</div>
+											</div>
+											<div id="modalFooter" class="modal-footer">
+													<button id="backButton" type="button" class="btn btn-default" on-click="onClickBack">
+														<span class="fonticon fonticon-chevron-left"></span>
+														<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADWizard" nlskey="Back"></sp-nls>
+													</button>
+													<button id="nextButton" type="button" class="btn btn-default" on-click="onClickNext">
+														<span class="fonticon fonticon-chevron-right"></span>
+														<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADWizard" nlskey="Next"></sp-nls>														
+													</button>
+
+													<template is="dom-if" if="{{_computeIf(customButton)}}">
+														<button id="customButton" type="button" class="btn btn-primary" on-click="onCustomButtonClick">{{customButton}}</button>
+													</template>
+											</div>
+									</div>
+							</div>
+						</div>
+						<div id="myModalOverlay" class="modal-overlay fade hidden" on-dragover="disableDrag"></div>
+						<div id="spinnerContainer" class="spinner-container"></div>
+				</div>
+		</template>
+		<script type="text/javascript" src="ad-wizard.js"></script>
+</dom-module>

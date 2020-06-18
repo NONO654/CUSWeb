@@ -1,0 +1,64 @@
+<!--------------------------------------------------------------------
+[xs-wg-document-chooser HTML Document]
+
+Project:		xs-wg
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:46:38 GMT
+Assigned to:	Thomas Esterle (TEE1)
+Primary use:	TODO: Write where this component is being used
+Description:    TODO: Description about the component
+--------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+<link rel="import" href="../../SMAProcSPUI/sp-content-chooser/sp-content-chooser.html">
+
+<!-- Import base component common to all widgets-->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+
+<dom-module id="xs-wg-document-chooser">
+  <!-- <link rel="import" type="css" href="xs-wg-document-chooser.css"> -->
+  <template>
+	  	<!-- Including the base widget style -->
+	  	<style include="xs-wg-base"></style>
+      <style>
+      :host {
+        display: inline;
+      }
+
+      .docviewer-container {
+
+        --sp-content-chooser-link-itm: {
+          height: 34px;
+          line-height: 34px;
+        };
+        --sp-content-chooser-link-itm-img: {
+          min-height: 2em;
+        };
+        --sp-content-chooser-link-itm-icon: {
+          top: .5em;
+        };
+        --sp-content-chooser-link-itm-drop-target: {
+          padding: 1px 0;
+        };
+        --sp-content-chooser-link-itm-tag: {
+          min-width: 3.5em;
+        }
+      }
+      </style>
+
+      <sp-nls id="noSearchMsg" nlspath="DS/SMAProcXSWidgets/assets/nls/SMAProcXSWidgets" nlskey="xs-wg-document-chooser.Error.TransientMode.3DSearchWidget" no-view></sp-nls>
+        <sp-dashboard id="dashboard"></sp-dashboard>
+        <label class="xs-wg-label">{{label}}</label>
+        <!--Owned content.Show button with Owned document name-->
+
+        <sp-content-chooser id="chooser" class="docviewer-container" object-id="{{rawvalue.chooser_physicalid}}"
+                            object-title="{{contenttitle}}" accept="[[accept]]"
+                            read-only="{{_isReadonly(rawvalue.datatype, readonly)}}"
+                            object-type="[[rawvalue.DummyDocType]]"
+                            on-change="_onSelect"
+                            on-sp-error="spError"></sp-content-chooser>
+
+    </template>
+  <script type="text/javascript" src="xs-wg-document-chooser.js"></script>
+</dom-module>

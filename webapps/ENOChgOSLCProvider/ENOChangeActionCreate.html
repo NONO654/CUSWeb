@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?> 
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/"> 
+ <!-- Copyright 2016 , Dassault Systemes. All rights reserved. -->
+<head>
+
+    <title>Create Change Action</title>
+
+	<!-- Application Metas End -->
+	<script src="../AmdLoader/AmdLoader.js"></script>
+	
+	
+	<!-- Application JS Start -->
+    <script >
+	   /* global widget */
+	   ( function () {
+        'use strict';
+			require([
+				'UWA/Drivers/Alone',
+				'DS/ENOChgOSLCProvider/scripts/ChangeObjectCreate'
+			    ],function(Alone, ChangeObjectCreate){
+            var options = { 'Entity': 'ChangeAction' }
+            var changeObjectCreate = new ChangeObjectCreate(options);
+            changeObjectCreate.render().inject(document.body);
+        });
+			
+
+	   	}() ) ;
+    </script>
+	<!-- Application JS End -->
+</head>
+<body>
+</body>
+</html>

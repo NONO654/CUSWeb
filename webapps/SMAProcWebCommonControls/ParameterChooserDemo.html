@@ -1,0 +1,58 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>SMAProcWebCommonControls ParameterChooser showpage</title>
+  <link rel="stylesheet" href="../UIKIT/UIKIT.css" />
+  <script src="../AmdLoader/AmdLoader.js"></script>
+  <script>
+      function logEvent (event) {
+          console.log('Received:', event);
+          var serializedDetail = null;
+          try {
+              serializedDetail = JSON.stringify(event && event.detail);
+          } catch (e) {
+              console.error('Could not serialize due to error:', e);
+              serializedDetail = 'Error while serializing, see console for event details.'
+          }
+          document.getElementById('eventLog').textContent += 'Received: "' + event.type + '", details: ' + serializedDetail + '\n';
+      }
+      // Parameter chooser demo usage
+      require(['DS/SMAProcWebCommonControls/ParameterChooser'], function (ParameterChooser) {
+          console.log('ParameterChooser loaded: ', ParameterChooser);
+          document.addEventListener('pcw-parameter-selected', logEvent);
+          document.addEventListener('pcw-parameter-created', logEvent);
+          require(['DS/JSCMM/SMAJSCMMActivity'],
+                  function (JSCMMActivity) {
+              [].forEach.call(document.querySelectorAll('pcw-parameter-chooser'), function (paramChooser) {
+                  var activity = new JSCMMActivity();
+                  paramChooser.setActivity(activity);
+              });
+          });
+      });
+  </script>
+</head>
+<body>
+    <h1>SMAProcWebCommonControls showpage</h1>
+    <h2>pcw-parameter-chooser</h2>
+    Default:<br/><pcw-parameter-chooser></pcw-parameter-chooser>
+    <hr />
+    Create:<br/><pcw-parameter-chooser create></pcw-parameter-chooser>
+    <hr/>
+    Create with type "string integer boolean":<br/><pcw-parameter-chooser create datatype="string integer boolean"></pcw-parameter-chooser>
+    <hr />
+    Autoselect:<br/><pcw-parameter-chooser autoselect></pcw-parameter-chooser>
+    <hr />
+    Create and Autoselect:<br/><pcw-parameter-chooser create autoselect></pcw-parameter-chooser>
+    <hr />
+    Fixed width 350px:<br/><pcw-parameter-chooser create autoselect style="width:350px"></pcw-parameter-chooser>
+    <hr />
+    Flexible width 90%:<br/><pcw-parameter-chooser create autoselect style="width:90%"></pcw-parameter-chooser>
+    <hr />
+
+    Event log:
+    <pre id="eventLog"></pre>
+
+</body>
+</html>

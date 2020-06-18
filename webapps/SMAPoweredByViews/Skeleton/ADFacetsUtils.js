@@ -1,0 +1,1 @@
+define([],function(){var a={};a.getFacet=function(d,c,b){return{text:d,icon:c,handler:b}};return a});

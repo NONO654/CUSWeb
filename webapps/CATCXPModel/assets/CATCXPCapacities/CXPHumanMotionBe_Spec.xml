@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IdeaExperienceCapacities>
+  <Header>
+    <Version>0.1</Version>
+  </Header>
+
+  <ExperienceObject>
+
+    <CXPService id="goTo" mode="task" fctStart="goTo" >
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPointActor_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="goes to" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPFunction id="isGoingTo" body="isGoingTo" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPointActor_Spec"/>
+      <NaturalLanguageInfo capacityType="SensorState" alias="is going to" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPFunction>
+    
+    <CXPEvent id="HumanReachEvent" targetParam="loc">
+        <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPointActor_Spec"/>
+        <NaturalLanguageInfo capacityType="SensorEvent" alias="has reached" icon="icons/caps/I_CXPMoveReach.png" exposedVariable="target"/>
+    </CXPEvent>
+
+
+    <CXPService id="followPath" mode="task" fctStart="followPath" >
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="follows" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPFunction id="isFollowingPath" body="isFollowingPath" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="SensorState" alias="is following" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPFunction>
+    
+    <CXPEvent id="HumanPathCompletedEvent" targetParam="path">
+        <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+        <NaturalLanguageInfo capacityType="SensorEvent" alias="has completed" icon="icons/caps/I_CXPMoveComplete.png" exposedVariable="target"/>
+    </CXPEvent>
+
+
+    <CXPFunction id="idle" body="idle" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="DriverState" alias="stands" icon="icons/caps/I_CXPHumanStanding.png"/>
+    </CXPFunction>
+
+    <CXPFunction id="isIdle" body="isIdle" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="SensorState" alias="is standing" icon="icons/caps/I_CXPHumanStanding.png"/>
+    </CXPFunction>
+
+
+    <CXPFunction id="animateNLDriver" body="animateNLDriver" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="DriverState" alias="comes alive" icon="icons/caps/I_CXPHumanAnimate.png"/>
+    </CXPFunction>
+
+    <CXPFunction id="unanimateNLDriver" body="unanimateNLDriver" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="DriverState" alias="comes motionless" icon="icons/caps/I_CXPHumanImmobilize.png"/>
+    </CXPFunction>
+
+    <CXPFunction id="animateNLSensor" body="animateNLSensor" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="SensorState" alias="is alive" icon="icons/caps/I_CXPHumanAnimate.png"/>
+    </CXPFunction>
+
+    <CXPFunction id="unanimateNLSensor" body="unanimateNLSensor" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="SensorState" alias="is motionless" icon="icons/caps/I_CXPHumanImmobilize.png"/>
+    </CXPFunction>
+
+
+
+  </ExperienceObject>
+
+</IdeaExperienceCapacities> 

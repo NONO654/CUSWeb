@@ -1,0 +1,162 @@
+<!--------------------------------------------------------------------
+[xs-left-pane HTML Document]
+
+Project:		Experience Studio
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:45:59 GMT
+Assigned to:	zb8, d6u, tee1
+Primary use:	Designer with tools to build an experience
+Description:    The Editor
+------------------------------------------------------------------- -->
+
+<!-- Importing base -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<!-- Importing SP UIless elements -->
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-data/sp-data.html">
+
+<!--Importing SP UI elements-->
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html" async>
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<link rel="import" href="../../SMAProcSPUI/sp-radio-buttons/sp-radio-buttons.html" async>
+<link rel="import" href="../../SMAProcSPUI/sp-sidebar/sp-sidebar.html" async>
+<link rel="import" href="../../SMAProcSPUI/sp-tab/sp-tab.html" async>
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html" async>
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<!-- <link rel="import" href="../xs-auto-create/xs-auto-create.html" async> -->
+
+<!--Importing project specific elements-->
+<link rel="import" href="../xs-canvas/xs-canvas.html">
+<link rel="import" href="../xs-property-inspector/xs-property-inspector.html">
+<link rel="import" href="../xs-components/xs-components.html">
+<link rel="import" href="xs-designer-style.html">
+
+
+<dom-module id="xs-designer">
+  <template>
+    <style include="xs-designer-style"></style>
+		<!-- License Check -->
+		<sp-mcsservice id="ws_license" data="{{license}}" on-dataready="_fetchMeta" getasap="" uri="license?appNames=Experience_Studio"></sp-mcsservice>
+
+		<sp-notification id="notification" position="TR" width="400"></sp-notification>
+
+		<sp-updatepanel updateswhen="is-getting" state="{{view.$state}}">
+			<div class$="{{_computeClass(license)}}">
+                <h1>You do not have the appropriate license for this application.  Please contact your system administrator.</h1>
+            </div>
+        </sp-updatepanel>
+
+        <sp-modal id="closeDialog"  width="500px" heading="Confirm Close">
+            <section id="dialogText">
+                <span>This will close this Experience. Are you sure ?</span>
+            </section>
+            <footer>
+                <button id="okButton" is="sp-button-type" on-click="closeTemplate">Yes</button>
+                <button id="dismissButton" is="sp-button-type" primary="" on-click="_hideCloseConfirmation">No</button>
+            </footer>
+        </sp-modal>
+
+        <!--License check before showing any UI-->
+        <template is="dom-if" bind="" if="{{_computeIf(license)}}">
+            <!-- Get the current view -->
+            <sp-mcsservice id="viewWebService" data="{{view}}" getasap="" on-dataready="onViewReady" on-error="onError"
+						   wait="0" on-sessiontimeout="onSessionTimeout" checktimeout="" uri="{{_computeUri(viewid)}}">
+                <sp-data id="viewData" model="{{view}}"></sp-data>
+            </sp-mcsservice>
+
+            <!--Top bar-->
+            <div id="workbenchtoolbar" class$="{{_computeClassToolbar()}}">
+              <div class="toolbar-item">
+                <!--Show default icon if there is no image assigned to simulation-->
+                <template is="dom-if" bind="" if="{{_draggableTitles()}}">
+                  <div id="templateItem" class="template-title" title="{{templatetitle}}" draggable="true" on-dragstart="templateDragStart">
+                    <span class="main-title"><span>{{templatetitle}}</span> Template</span>
+                  </div>
+                  <div id="simItem" class$="{{_computeClassProcessTitle()}}" draggable="true" title="{{simtitle}}" on-dragstart="simDragStart">
+                      <img id="simimage" class="icon" src="{{defaultSimIcon}}">
+                      <span>{{simtitle}}</span>
+                  </div>
+                </template>
+                <template is="dom-if" bind="" if="{{!_draggableTitles()}}">
+                  <span class="main-title" title="{{templatetitle}}"><span>{{templatetitle}}</span> Template</span>
+                </template>
+              </div>
+              <sp-radio-buttons id="editMode" optionsicon="palette,eye" options="Design,Preview" selectedindex="0" on-optionselect="onDesignmodeChange" class$="{{_computeClass2(loadstatus)}}"></sp-radio-buttons>
+              <div class="toolbar-item">
+                <div id="editActionbar" class$="{{_computeClass3(loadstatus)}}">
+                  <sp-access group="simulation" data-has-no-write-then="hide" basic="" read="" accesses="{{accesses}}">
+                    <span data-message="Read Only" data-has-no-write-then="show"></span>
+                    <div id="savemessage" class$="{{_computeClass8(designmode)}}">{{lastsaved}}</div>
+                  </sp-access>
+                  <template is="dom-if" bind="" if="{{inDashBoard}}">
+                    <div class="navigate">
+                      <span id="editButton" title="Edit Properties" class$="{{_computeClassActionBarMenu()}}" on-click="_showEditPropertiesPopup">
+                        <img src="../../SMAProcWebApp/assets/icons/32/I_Properties.png" alt="Properties"/>
+                      </span>
+                      <span id="editLifeCycle" title="Edit Lifecycle" class$="{{_computeClassActionBarMenu()}}" on-click="_showEditLifecyclePopup">
+                        <img src="../../SMAProcWebApp/assets/icons/32/I_Lifecycle.png" alt="Lifecycle"/>
+                      </span>
+                      <span id="attrGrpButton" title="Attribute Group" class$="{{_computeClassProcessTitle()}}" on-click="_showAttributeGroups">
+                        <img src="../../SMAProcWebApp/assets/icons/32/I_SMAAttributeGroups.png" alt="Attribute Groups"/>                      
+                      </span>
+                    </div>
+                  </template>
+
+                  <template is="dom-if" bind="" if="{{ _shouldShowSupportTool() }}">
+                      <span id="supportbutton" title="Open the support tool" class="action-icon fonticon fonticon-help" on-click="_openSupportTool"></span>
+                  </template>
+
+                  <sp-access data-has-no-write-then="hide" accesses="{{accesses}}">
+                    <!-- <span id="autodesign" class$="{{_computeAutoCreateClass(designmode,disabled)}}" title="Auto Create Template" on-click="onAutoCreate"></span> -->
+                    <div class$="{{_computeClass9()}}">
+                      <span id="undo" class$="{{_computeUndoClass(viewPosition,designmode,disabled)}}" on-click="_undoAction" title="Undo"></span>
+                      <span id="redo" class$="{{_computeRedoClass(viewPosition,designmode,disabled)}}" on-click="_redoAction" title="Redo"></span>
+                    </div>
+                  </sp-access>
+                  <template is="dom-if" bind="" if="{{inDashBoard}}">
+                      <span id="closebutton" title="Close this template" class="action-icon fonticon fonticon-wrong" on-click="_showCloseConfirmation"></span>
+                  </template>
+                </div>
+              </div>
+            </div>
+
+            <!--Designer for Experience-->
+            <div class="uibuilder">
+                <!--Left Sidebar with tools required to build the experience-->
+                <sp-sidebar id="sidebar" heading="Experience Studio" enabled="{{designmode}}" hideheader="true" data-left="-10%" class$="{{_computeClass5(loadstatus)}}">
+                    <!--Sidebar with 2 tabs.-->
+                    <sp-tab id="tab" tab="{{tab}}">
+                        <!--Tab section with UI elements listed-->
+                        <section id="tools"  data-header="Components" data-selected="true">
+                            <sp-updatepanel state="{{meta.$state}}">
+								<div class="tools-container">
+                                    <xs-components meta={{meta}} on-toolclick="onToolClick" disabled="{{disabled}}"></xs-components>
+								</div>
+                            </sp-updatepanel>
+                        </section>
+
+                        <!--Properties for each UI element-->
+                        <section id="properties" data-header="Properties">
+                                <xs-property-inspector id="propertyinspector" class="propertyInspector" disabled="{{disabled}}">
+                                    <div class="prop-insp-empty-text">Select an item on the right to view/edit its properties here</div>
+                                </xs-property-inspector>
+                        </section>
+                    </sp-tab>
+                </sp-sidebar>
+
+                <!--Workbench area to build the experience-->
+                <div class$="{{_computeClass6(tab)}}">
+                    <sp-updatepanel id="updatepanelCanvas" class="xs-designer-updatepanel" updateswhen="is-getting" state="{{view.$state}}">
+						<xs-canvas id="canvas" uid="{{simid}}" infos="{{infos}}" meta="{{meta}}" ignoredatachange="" on-itemselect="onItemSelect"
+							on-itemremove="onItemRemove"  on-canvasready="onCanvasReady" disabled="{{disabled}}" class$="{{_computeClass7(designmode)}}">
+						</xs-canvas>
+                    </sp-updatepanel>
+                </div>
+            </div>
+		</template>
+    <!-- <xs-auto-create id="autocreate" on-createitem="onCreateItem"></xs-auto-create> -->
+    </template>
+  <script src="xs-designer.js"></script>
+</dom-module>

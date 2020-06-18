@@ -1,0 +1,13 @@
+m|VCXWebKernel\VCXWebQueryEngine.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\VCXWebQueryEngine\VCXWebQueryEngine.js|1541452343|9514
+s|VCXWebKernel\VCXWebQueryEngine.mweb\src\VCXQueryEngineNonMatchingActions.js|1499239286|4424
+s|VCXWebKernel\VCXWebQueryEngine.mweb\src\VCXQueryEngine.js|1495200221|14120
+s|VCXWebKernel\VCXWebQueryEngine.mweb\src\VCXQueryOperator.js|1487933884|4916
+s|VCXWebKernel\VCXWebQueryEngine.mweb\src\VCXQueryEngineInputData.js|1487933884|3629
+s|VCXWebKernel\VCXWebQueryEngine.mweb\src\VCXQueryPropertyOperator.js|1497271293|2508
+s|VCXWebKernel\VCXWebQueryEngine.mweb\src\VCXQueryEngineMatchingActions.js|1540974993|5600
+s|VCXWebKernel\VCXWebQueryEngine.mweb\src\VCXQueryPropertyOperatorSet.js|1497271293|4048

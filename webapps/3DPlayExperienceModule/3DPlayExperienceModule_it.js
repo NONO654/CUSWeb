@@ -1,0 +1,1 @@
+define("DS/3DPlayExperienceModule/3DPlayExperienceModule_it",{});define("DS/3DPlayExperienceModule/assets/nls/3DPlayExperienceModule",{DROP_MSG_LP:"Rilascia il contenuto qui",Label:"Qualità preferita per la geometria 3DSpace",auto:"Automatica",base:"Alta qualità",index:"Bassa qualità"});

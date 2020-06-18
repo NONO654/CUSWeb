@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+  <head>
+    <!-- Application Metas -->
+	<!-- These information will be displayed in the widget preferences -->
+    <title>Edit Properties</title>
+    <meta name="author" content="LHX" />
+    <meta name="description" content="Edit Properties popup" />
+
+    <!-- UWA Environment -->
+	
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<!-- Load UWA environment --> 
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+	<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+
+    
+    <script type="text/javascript">
+        var dependencies = dependencies || [];
+        require(
+            // dependencies
+            [
+                'DS/UIKIT/Input/Button',
+
+                'DS/WidgetServices/WidgetServices',
+                'DS/EditPropPopup/EditPropPopup',
+                'DS/UIKIT/DropdownMenu',
+                'DS/UIKIT/Input/Text'
+            ].concat(dependencies),
+
+            // execute this callback, passing all dependencies as params
+
+            function (UIButton, widgetServices, WidgetCore, DropdownMenu, TextUI) {
+
+                var WIWI = {
+                    onLoad: function () { //Needed to be sure to have a widget.body
+                        var that = this;
+                        var readOnly = false;
+                        //widgetServices.setODTComment(true);
+
+                        that.myOverlay = null;
+
+                        //widgetServices.setReplayODT(true);
+ 
+                        
+                        var ServerArea = UWA.createElement('div', {
+                                'name':'ServerArea',
+                                'class': 'ServerArea'
+                        }).inject(widget.body);
+
+
+                        that.ServerName = new TextUI({
+                            value: "https://vdevpril541dsy.ux.dsone.3ds.com",
+                            name: 'ARP_ServerName',
+                            className: 'ARP_ServerName',
+                            id: 'ARP_ServerName',
+                            attributes: {
+                                placeholder: "Server name",
+                            }
+                        }).inject(ServerArea);
+
+                        that.ServerUri = new TextUI({
+                            value: "3dexperience",
+                            name: 'ARP_ServerUri',
+                            className: 'ARP_ServerUri',
+                            id: 'ARP_ServerUri',
+                            attributes: {
+                                placeholder: "Server Uri",
+                            }
+                        }).inject(ServerArea);
+
+                        var Bouton = new UIButton({
+                            value: "clear",
+                            name: "toOpenButton"
+                        }).inject(ServerArea);
+                        Bouton.addEvent('onClick', function () {
+                            that.ServerName.setValue("");
+                            that.ServerUri.setValue("");
+                            that.PhysicalID.setValue("");
+                            that.InstPhysicalID.setValue("");
+                        });
+
+
+                        var Bouton3 = new UIButton({
+                            value: "R418 server",
+                            name: "toOpenButton"
+                        }).inject(ServerArea);
+                        Bouton3.addEvent('onClick', function () {
+                            that.ServerName.setValue("https://vdevpril810dsy.ux.dsone.3ds.com");
+                            that.ServerUri.setValue("3DSpace");
+                            that.PhysicalID.setValue("C466B556F44200002A75F854FD340E00");
+                            that.InstPhysicalID.setValue("C466B5566E270000857DD454B9970600");
+                        });
+
+                        that.PhysicalID = new TextUI({
+                            value: "C466B556F44200002A75F854FD340E00",
+                            name: 'ARP_PhysicalID',
+                            className: 'ARP_PhysicalID',
+                            id: 'ARP_PhysicalID',
+                            attributes: {
+                                placeholder: "Reference physicalID",
+                            }
+                        }).inject(widget.body);
+
+                        that.InstPhysicalID = new TextUI({
+                            value: "2C49B556DB590000A453205497940301",
+                            name: 'ARP_InstPhysicalID',
+                            className: 'ARP_InstPhysicalID',
+                            id: 'ARP_PhysicalID',
+                            attributes: {
+                                placeholder: "Instance physicalID",
+                            }
+                        }).inject(widget.body);
+
+                        var Bouton = new UIButton({
+                            value: "edit",
+                            name: "toOpenButton"
+                        });
+                        Bouton.addEvent('onClick', function () {
+                            var physicalId;
+                            var InstphysicalId;
+                            if (that.PhysicalID.getValue() != "") {
+                                physicalId = that.PhysicalID.getValue();
+                            }
+                            var InstphysicalId;
+                            if (that.InstPhysicalID.getValue() != "") {
+                                InstphysicalId = that.InstPhysicalID.getValue();
+                            }
+
+
+                            if (that.myOverlay == null) {
+                                that.myOverlay = new WidgetCore( document.body, {
+                                    'readOnly': readOnly,
+                                    'serverName': that.ServerName.getValue(),
+                                    'serverUri': that.ServerUri.getValue()
+                                });
+                            }
+
+                            that.myOverlay.show([{
+                                'physicalId': physicalId,
+                                'metadata': 'businessobject',
+                                'name': 'lhx_Product',
+                                'urlIcon': widgetServices.getRealPath("./assets/defaultProd.png", widget, true)
+                            },
+                            {
+                                'physicalId': InstphysicalId,
+                                'metadata': 'connection',
+                                'name': 'lhx_Product',
+                                'urlIcon': widgetServices.getRealPath("assets/defaultProds.png", widget)
+                            }]);
+                            //myOverlay.fx.element.setStyle('height',test.height);
+                        });
+                        Bouton.inject(widget.body);
+
+ 
+                        widget.body.setStyle("height", "900px");
+                        /*
+                        var myButton = new UIButton({ value: "Click me" }).inject(widget.body);
+                        var myDropdownMenu = new DropdownMenu({
+                            target: myButton.getContent(),
+                            items: [
+                                { text: "Rastapopulos haris maisn fr�d�ric zoafhnzvze", icon: "fonticon fonticon-user" },
+                                { text: "Another action", icon: "fonticon fonticon-user" },
+                                { text: "Rastapopulos haris maisn fezoa zoafhnzvze", icon: "fonticon fonticon-user" },
+                                { text: "Another action", icon: "fonticon fonticon-user" },
+                                { text: "Rastapopulos haris maisn fezoa zoafhnzvze", icon: "fonticon fonticon-user" },
+                                { text: "Another action", icon: "fonticon fonticon-user" },
+                                { className: "divider" },
+                                { text: "Header example", className: "header" },
+                                { text: "Action", icon: "fonticon fonticon-users" }
+                            ]
+                        });
+                        */
+
+
+                        new UIButton({
+                            value: "edit lhx_Product",
+                            name: "lhx_Product"
+                        }).inject(new UWA.createElement("div").inject(widget.body)).addEvent('onClick', function () {
+                            if (that.myOverlay == null) {
+                                that.myOverlay = new WidgetCore( document.body, {
+                                    'readOnly': readOnly,
+                                    'serverName': "https://vdevpril810dsy.ux.dsone.3ds.com",
+                                    'serverUri': "3DSpace"
+                                });
+                            }
+                            that.myOverlay.show([{
+                                'physicalId': "A90A2FA100001EE455350B4B00018C7E",
+                                'metadata': 'businessobject',
+                                'name': 'lhx_Product',                           
+                                'urlIcon': widgetServices.getRealPath("./assets/defaultProd.png", widget, true)
+                            }]);
+                        });
+
+
+                        new UIButton({
+                            value: "edit lhx_Req",
+                            name: "lhx_Robot"
+                        }).inject(new UWA.createElement("div").inject(widget.body)).addEvent('onClick', function () {
+                            if (that.myOverlay == null) {
+                                that.myOverlay = new WidgetCore( document.body, {
+                                    'readOnly': readOnly,
+                                    'serverName': "https://vdevpril810dsy.ux.dsone.3ds.com",
+                                    'serverUri': "3DSpace"
+                                });
+                            }
+                            that.myOverlay.show([{
+                                'physicalId': "0E6FB556AB1E000055462655B26A0A00",
+                                'metadata': 'businessobject',
+                                'name': 'lhx_Robot',
+                                'urlIcon': widgetServices.getRealPath("./assets/defaultProd.png", widget, true)
+                            }]);
+                        });
+
+ 
+                        new UIButton({
+                            value: "edit lhxwall",
+                            name: "lhxwall"
+                        }).inject(new UWA.createElement("div").inject(widget.body)).addEvent('onClick', function () {
+                            if (that.myOverlay == null) {
+                                that.myOverlay = new WidgetCore( document.body, {
+                                    'readOnly': readOnly,
+                                    'serverName': "https://vdevpril810dsy.ux.dsone.3ds.com",
+                                    'serverUri': "3DSpace"
+                                });
+                            }
+                            that.myOverlay.show([{
+                                'physicalId': "A90A2FA100001C3C54D8ACE400018E62",
+                                'metadata': 'businessobject',
+                                'name': 'lhxwall',
+                                'urlIcon': widgetServices.getRealPath("./assets/defaultProd.png", widget, true)
+                            }]);
+                        });
+
+
+                    },
+                    onRefresh: function () {
+                    	if (this.myOverlay != null) {
+                        	this.myOverlay.onRefresh();
+                    	}
+                    },
+                    onResize: function () {
+                    	if (this.myOverlay != null) {
+                        	this.myOverlay.onResize();
+                    	}
+                    }
+                };
+                widget.addEvent('onLoad', WIWI.onLoad);
+                widget.addEvent('onRefresh', WIWI.onRefresh);
+                widget.addEvent('onResize', WIWI.onResize);
+            });
+    </script>
+  </head>
+  <body>
+      <div>
+      </div>
+   </body>
+</html>

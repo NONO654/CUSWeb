@@ -1,0 +1,1 @@
+define("DS/MobilePairing/MobilePairing_de",{});define("DS/MobilePairing/assets/nls/mobilePairing",{description:"Verwenden Sie den folgenden Code, um Ihre mobile App mit der 3DEXPERIENCE Platform zu koppeln."});

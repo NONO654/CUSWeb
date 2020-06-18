@@ -1,0 +1,126 @@
+/*
+This file is only dedicated to simulation Extensions, cause of lack of system in R1.X+1.
+*/
+
+Let Prefixtmp(String)
+Let Prefix(String)
+Let cgrFilename(String)
+Let iconFilename(String)
+
+if  (ThisObject.HasAttribute("V_usage")  ==  true) 
+{
+	if  (ThisObject.HasAttribute("V_DocExtension")  ==  true) 
+	{
+		Prefixtmp = ThisObject.GetAttributeString("V_DocExtension")
+		if (Prefixtmp == NULL) Prefixtmp = ""
+		if (Prefixtmp  <>  "" ) 
+		{
+			/*  
+			*  This  method (GetNavRepForSimulationDocument)
+			*  will  take  the  mimetype  and  find  the  appropriate  CGR  to  be  displayed  in  the  UI  
+			*  
+			*  INPUT:  
+			*  -------  
+			*  Prefixtmp = Mimetype  
+			*  
+			*  OUTPUT:  
+			*  -------  
+			*  cgrFilename = file  name  of  CGR
+			*  Search for
+			*  "PSM_SIMREP_3DNAVREP_" + Mimetype + ".cgr"
+			*  If a valid path is retrieved, then we know that the file was found, if not, then use default CGR
+			*  "PSM_SIMREP_3DNAVREP.cgr"
+			*/  
+			cgrFilename  =  GetNavRepForSimulationDocument(Prefixtmp)
+			Parameters->SetAttributeString("NavRepName",cgrFilename)
+			/*  
+			*  This  method (GetIconForSimulationDocument)
+			*  will  take  the  mimetype  and  find  the  appropriate  CGR  to  be  displayed  in  the  UI  
+			*  
+			*  INPUT:  
+			*  -------  
+			*  Prefixtmp = Mimetype  
+			*  
+			*  OUTPUT:  
+			*  -------  
+			*  iconFilename = name  of  BMP
+			*  Search for
+			*  I_Simulation_Prefixtmp
+			*  If a valid path is retrieved, then we know that the file was found, if not,
+			*  Search for 
+			*  "MimeType:" + Prefixtmp
+			*  If a valid path is retrieved, then we know that the file was found, if not,
+			*  then use default BMP
+			*  "I_SimulationRep"
+			*/
+			iconFilename  =  GetIconForSimulationDocument(Prefixtmp)
+			Parameters->SetAttributeString("IconName",iconFilename)					
+		}
+		else
+		{
+			Parameters->SetAttributeString("NavRepName","PSM_SIMREP_3DNAVREP.cgr")				
+			Parameters->SetAttributeString("IconName","I_SimulationRep")
+		}
+	}
+	else
+	{
+		Parameters->SetAttributeString("NavRepName","PSM_REPGEN_3DNAVREP.cgr")
+		Parameters->SetAttributeString("IconName","I_SimulationExternalRep")
+	}
+}
+else
+{
+	Parameters->SetAttributeString("NavRepName","PSM_REPGEN_3DNAVREP.cgr")
+	Parameters->SetAttributeString("IconName","I_SimulationRep")
+}
+
+
+/*
+Let Prefixtmp(String)
+Let Prefix(String)
+
+if  (ThisObject.HasAttribute("V_usage")  ==  true) 
+{
+
+	if       (ThisObject.GetAttributeString("V_usage")  ==  "SIMRESULTS" ) 
+	{
+		Parameters->SetAttributeString("NavRepName","PSM_SIMREP_3DNAVREP_SIMRESULTS.cgr")
+		Parameters->SetAttributeString("IconName","I_SimulationExternalRep")
+	}
+	else if  (ThisObject.GetAttributeString("V_usage")  ==  "SIMComputations" ) 
+	{
+		Parameters->SetAttributeString("NavRepName","PSM_SIMREP_3DNAVREP_SIMComputations.cgr")
+		Parameters->SetAttributeString("IconName","I_SimulationExternalRep")
+	}
+	else
+	{
+		if  (ThisObject.HasAttribute("V_DocExtension")  ==  true) 
+		{
+			Prefixtmp = ThisObject.GetAttributeString("V_DocExtension")
+			if (Prefixtmp == NULL) Prefixtmp = ""
+			if (Prefixtmp  <>  "" ) 
+			{
+				Prefix = "MimeType:" + Prefixtmp 
+				Parameters->SetAttributeString("NavRepName","PLMDMTDocument.cgr")				
+				Parameters->SetAttributeString("IconName",Prefix)
+			}
+			else
+			{
+				Parameters->SetAttributeString("NavRepName","PSM_SIMREP_3DNAVREP_SIMRep.cgr")				
+				Parameters->SetAttributeString("IconName","I_SimulationRep")
+			}
+		}
+		else
+		{
+			Parameters->SetAttributeString("NavRepName","PSM_REPGEN_3DNAVREP.cgr")
+			Parameters->SetAttributeString("IconName","I_SimulationExternalRep")
+		}
+	}
+}
+else
+{
+	Parameters->SetAttributeString("NavRepName","PSM_REPGEN_3DNAVREP.cgr")
+	Parameters->SetAttributeString("IconName","I_SimulationRep")
+}
+*/
+

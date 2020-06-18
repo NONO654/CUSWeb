@@ -1,0 +1,33 @@
+
+{{!--
+   non escaped mustaches will be templated using the config field element with format
+   {
+            readWrite: 'true', //optional, note that any value defined here (including false) means that the field is readWrite.  The template only tests the existence of the field
+            name: 'assignees',
+            label: i18n('emxCollaborativeTasks.Label.TaskAssignedTo', 'Assigned To'),
+            type: 'person',
+            W: 'who',
+            cssClass: ''
+   }
+
+   escaped mustaches will be templated using the actual data object
+
+   insertFields will retrieve the subtemplate from its hash and will instantiate it there
+
+ --}}
+
+<div class="form form-vertical ddv-main" onsubmit="return false">
+  {{#if required}}
+    <div class="required-field"><sup class="required-field">*</sup>{{requiredLegend}}</div>
+  {{/if}}
+  {{~#if groupNames~}}
+     {{~#each groupNames~}}
+     <div class="form-section accordion {{#if openedGroups.[{{this.displayValue}}] }} expanded{{/if}}" id="{{../viewid}}{{this.actualValue}}">
+               <div class="form-section-title">{{this.displayValue}}</div>
+               <div class="form-section-body">
+                 <!-- insert fields here -->
+               </div><!-- /.form-section-body -->
+     </div><!-- /.form-section -->
+     {{~/each~}}
+  {{~/if~}}
+</div>

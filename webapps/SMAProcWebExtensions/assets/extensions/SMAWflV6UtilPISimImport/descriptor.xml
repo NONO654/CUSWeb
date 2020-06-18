@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.V6UtilPIsimImport" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAHvxCheckin" nlsID="SMAHvxCheckin.Title">Import Simulation Results</DisplayName>
+	<Description nlsFile="SMAHvxCheckin" nlsID="SMAHvxCheckin.Description">Import the results of a simulation from a SIM database file (.sim) to a Simulation object.</Description>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>V6Utility</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.sma.plugin.V6UtilPIsimImport</Value>
+		</Attribute>
+		<!--<Attribute name="PRIVATE">
+		  <Value>SMAHVC_ALLOW_RESULTSIMPORT</Value>
+	  </Attribute>-->
+	</Attributes>
+
+	<Interfaces>
+
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflV6UtilPISimImportEditor_VLT</LateType>
+				</Implementation>
+			</Implementations>
+		</Interface>
+
+	</Interfaces>
+	<Properties>
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[V6Utility]]>
+			</Value>
+		</Property>
+		<Property name="PLMBatchName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[Import Simulation Results]]>
+			</Value>
+		</Property>
+
+		<Property name="PLMObjectType" type="string" valuetype="single">
+			<Value>
+				<![CDATA[SIMObjSimulationObjectGeneric]]>
+			</Value>
+		</Property>
+
+		<!--Value of this property is ID of PLM content which it refers to.-->
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="PLMBatchArguments" type="aggregate" valuetype="single">
+			<Property name="Simulation_Prefix" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="Simulation_Title" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="SequenceName" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="NewSimulation_Results" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="UpdateSimulation_Results" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="UpdateSimulation_Sequence" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="OutputObjectFile" type="string" valuetype="single">
+				<Value>
+					<![CDATA[SMAHvxCheckin_OutputObjectFile.xml]]>
+				</Value>
+			</Property>
+			<Property name="ImportUnits" type="string" valuetype="single">
+				<Value>MASS=KILOGRAM:TIME=SECOND:LENGTH=METER:TEMPRTRE=KELVIN:COURANT=AMPER:LUMEN=CANDELA:MOLE=MOL</Value>
+			</Property>
+			<Property name="VisuSpecCatalog" type="string" valuetype="single">
+				<Value/>
+			</Property>
+		</Property>
+
+		<Property name="outputObjectParam" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<!--Value of this property is input file name which it refers to.-->
+		<!--<Property name="FileToProcess" type="string" valuetype="single">
+		  <Value/>
+	  </Property>-->
+
+	</Properties>
+</wfext:Extension>

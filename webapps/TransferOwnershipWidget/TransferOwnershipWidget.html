@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+  <head>
+    <!-- Application Metas -->
+	<!-- These information will be displayed in the widget preferences -->
+    <title>Transfer ownership</title>
+    <meta name="author" content="G5C" />
+    <meta name="description" content="Transfer ownership" />
+    <!-- UWA Environment -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<!-- Load UWA environment --> 
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+	<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+   
+    
+    <script type="text/javascript">
+        /*
+          We create the global MyWidget object.
+          This object will be used to store variables and functions.
+        */
+        var dependencies = dependencies || [];
+
+        require(
+            // dependencies
+            [
+                'DS/TransferOwnershipWidget/TransferOwnershipWidget',
+                'DS/WidgetServices/WidgetServices',
+            ].concat(dependencies),
+
+            // execute this callback, passing all dependencies as params
+
+            function (WidgetCore, widgetServices) {
+                var WIWI = {
+                    onLoad: function () { //Needed to be sure to have a widget.body
+                        var that = this;
+                        widgetServices.setODTComment(true);
+                        that.mySecondDiv = new WidgetCore(widget, widget.body, {
+                        });
+
+                        widget.body.setContent(that.mySecondDiv);
+                        that.mySecondDiv.initData([{
+                            'physicalId': 1,
+                            'name': 'g5c_Product'
+                        }, {
+                            'physicalId': 2,
+                            'name': 'g5c_Product2'
+                        }]);
+                        //WidgetCore.helloWorld(widget);
+                    },
+                    onRefresh: function () {
+                        //this.mySecondDiv.onRefresh();
+                    },
+                    onResize: function () {
+                        //this.mySecondDiv.onResize();
+                    }
+                };
+                widget.addEvent('onLoad', WIWI.onLoad);
+                widget.addEvent('onRefresh', WIWI.onRefresh);
+                widget.addEvent('onResize', WIWI.onResize);
+            });
+
+    </script>
+  </head>
+  <body>
+   </body>
+</html>

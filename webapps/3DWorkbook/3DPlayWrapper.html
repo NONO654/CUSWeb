@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+      
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+        
+        <script type="text/javascript">
+        //<![CDATA[
+            // Any script tag contains a "var UWA" declaration will be executed
+            // only in standalone mode
+            var UWA = {},
+            // Give another name to define/require for the curl AMD loader.
+                curl = {
+                    defineName: 'curl_define',
+                    requireName: 'curl_require'
+                },
+                dependencies = ['UWA/Drivers/Alone', 'widget'];
+
+            require.config(
+            // paths
+                      {
+                      baseUrl: '../',
+                      UWA: 'http://uwa.netvibes.com/lib/UWA/js/'
+                  }
+            	);
+        //]]>
+        </script>
+        
+
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+
+		<script type="text/javascript">
+        //<![CDATA[
+			
+			function getParameterByName(name) {
+			    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+			    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			        results = regex.exec(location.search);
+			    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+			}
+		//]]>
+	    </script>
+
+
+		<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>     
+        <script type="text/javascript" src="../WebUX/WebUX.js"></script>                        
+        <script type="text/javascript" src="../WebVisualization/WebVisualization.js"></script>        
+        <script type="text/javascript" src="../3DPlay/3DPlay.js"></script>              
+        <script type="text/javascript" src="../3DPlayHelper/3DPlayHelper.js"></script> 
+        <link rel="stylesheet" type="text/css" href="../Controls/nv-patch.css" />
+                <style type="text/css" media="screen">
+        html {
+            height: 100%;
+        }
+
+        #canvas-div {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        </style>
+    
+    <script type="text/javascript">
+	    function getParameterByName(name) {
+		    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		        results = regex.exec(location.search);
+		    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+	    
+	    var dependencies = dependencies || [];
+	    var p = undefined;
+	    var filename = "../.." + getParameterByName('file3DPath');
+	    require(dependencies, function () { p = new Player3DShare('canvas-div', filename, { mode: 'simple', loading: 'autoplay' }, widget); });
+	    
+	    
+	    
+    </script>
+    
+    </head>
+    <body>
+        <div id='canvas-div'/>
+    </body>
+</html>

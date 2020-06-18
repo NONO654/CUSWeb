@@ -1,0 +1,1 @@
+define("DS/ENOXEnhancers/ENOXEnhancers_ko",{});define("DS/ENOXEnhancers/assets/nls/ENOXEnhancers",{"message.undefined":"메시지를 사용할 수 없음","message.callback":"콜백 기능이 정의되지 않음","message.callback.notfunction":"보낸 콜백이 기능이 아님","message.invalidinput":"올바르지 않은 입력이 제공됨: ","message.missingtype":"입력 패턴이 누락됨: "});

@@ -1,0 +1,1 @@
+define("DS/3DPlayWidgetModel/3DPlayWidgetModel_ja",{});define("DS/3DPlayWidgetModel/assets/nls/prefs",{Label:"3DSpace 形状の優先品質",Label_External_App:"3DPlay 組み込み : 3DSpace 形状の優先品質",auto:"自動",base:"高品質",index:"低品質"});

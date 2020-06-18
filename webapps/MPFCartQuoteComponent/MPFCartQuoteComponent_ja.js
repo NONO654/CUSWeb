@@ -1,0 +1,1 @@
+define("DS/MPFCartQuoteComponent/MPFCartQuoteComponent_ja",{});define("DS/MPFCartQuoteComponent/assets/nls/CartQuoteComponent",{downloadQuote:"見積をダウンロード"});

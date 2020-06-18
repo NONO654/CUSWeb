@@ -1,0 +1,861 @@
+{{!--
+    template file for details display widget
+    version: 0.9  SCM 22
+       history:
+     TODO=>http://dsxproj.matrixone.net/twiki/bin/view/SIXWGOV/WebHome
+
+     This file contains subtemplates separated by a handlebar comment {{!comment}} with comment being: ++subtemplate++
+     then the next line is {{!++id:subtemplateId}}
+
+
+
+   non escaped mustaches will be templated using the config field element with format
+   {
+            readWrite: 'true', //optional, note that any value defined here (including false) means that the field is readWrite.  The template only tests the existence of the field
+            name: 'assignees',
+            label: i18n('emxCollaborativeTasks.Label.TaskAssignedTo', 'Assigned To'),
+            type: 'person',
+            W: 'who',
+            cssClass: ''
+   }
+
+   escaped mustaches will be templated using the actual data object
+
+   insertFields will retrieve the subtemplate from its hash and will instantiate it there
+ --}}
+
+
+{{#if groupName}}
+	<div class="form-section accordion\{{#if openedGroups.[{{groupName}}] }} expanded\{{/if}}">
+            <div class="form-section-title" id="{{groupName}}{{viewId}}{">{{groupName}}</div>
+            <div class="form-section-body">
+{{/if}}
+
+    {{~#eachLimit this.fields -1 }}   {{!-- -1 means no actual limit --}}
+    <div class="ddv-field form-group {{#if className}}{{className}}{{/if}} {{#if readWrite}} \{{#if canEdit}} editable \{{/if}} {{/if}}{{#if W }}sixdub {{W}}{{/if}}"
+    		{{#if fieldHTMLId}}id="{{fieldHTMLId}}Property{{viewId}}"{{else}}id="{{name}}Property{{viewId}}"{{/if}}
+    		data-field-type="{{type}}" data-field-name="{{name}}" data-field-index="{{index}}">
+        {{~insertField type~}}
+    </div>
+    {{/eachLimit~}}
+
+{{#if groupName}}
+		</div><!-- /.form-section-body -->
+        </div><!-- /.form-section -->
+{{/if}}
+
+
+
+{{!++subtemplate++}}
+{{!++id:imageUpload++}}
+{{!--
+    template for image upload fields
+
+   for a config like
+   {
+            name: 'image',
+            label: i18n('emxCollaborativeTasks.Label.Image', 'Image'),
+            type: 'imageUpload',
+            W: 'what',
+            cssClass: ''
+    }
+   this template accept values of the form
+   {
+    data: <file drop data>
+   }
+ --}}
+
+   {{#if label}}
+        <label>{{label}}</label>
+   {{/if}}
+   <div class="field-group">
+     <div class="input-group-wrapper">
+       <div class="input-group">
+         <div class="input-element">
+           <div class="form-control object-image ds-drop-target drop-target idle"><!-- add class at this level to change messaging: waiting/dropping/uploading/replacing -->
+             <img src=""/>
+             <div class="ds-drop-target-overlay">
+
+               <div class="ds-drop-target-message drop">
+                   <span class="fonticon fonticon-drag-drop"></span>
+                   <span class="ds-drop-target-label">Drop image here...</span>
+               </div>
+
+               <div class="ds-drop-target-message upload">
+                   <span>{inject spinner here}</span>
+                   <span class="ds-drop-target-label">Uploading image...</span>
+               </div>
+
+               <div class="ds-drop-target-message replace">
+                   <span class="fonticon fonticon-replace"></span>
+                   <span class="ds-drop-target-label">Replace image...</span>
+               </div>
+
+             </div>
+           </div>
+         </div>
+      </div>
+    </div>
+  </div>
+
+    {{!++subtemplate++}}
+    {{!++id:text++}}
+    {{!--
+        template for text fields
+
+       for a config like
+       {
+                name: 'description',
+                label: i18n('emxCollaborativeTasks.Label.Description', 'Description'),
+                type: 'text',
+                W: 'why',
+                cssClass: ''
+        }
+       this template accept values of the form
+       {
+        description:'my very nice and interesting description to display'
+       }
+     --}}
+
+
+        <style>
+	        #{{name}}TextArea {
+	            height:20px;
+	        }
+        </style>
+        {{#if label}}
+        	<label>{{label}}
+       		{{~#if required~}}
+            		<sup class="required-field">*</sup>
+            {{~/if~}}
+            {{~#if customButtons~}}
+            <span class="actions">
+               {{~#each customButtons~}}
+                  <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                      <span class="fonticon {{iconClass}}"></span>
+                  </button>
+               {{~/each~}}
+            </span>
+            {{~/if~}}
+         </label>
+        {{/if}}
+  <div class="field-group">
+    <div class="input-group-wrapper">
+      <div class="input-group">
+        <div class="input-element">
+        {{~#if readWrite~}}
+            \{{~#if canEdit~}}
+               <textarea class="form-control short content" {{#if fieldHTMLId}}id="{{fieldHTMLId}}TextArea{{viewId}}"{{else}}id="{{name}}TextArea{{viewId}}"{{/if}} {{#if maxLength}}maxlength="{{maxLength}}"{{/if}}>\{{ {{name}} }}</textarea>
+               <textarea class="form-control short  height-calculator" >\{{ {{name}} }}</textarea>
+            \{{~else~}}
+               <span class="content read-only">\{{~ {{name}} ~}}</span>
+            \{{~/if~}}
+        {{~else~}}
+               <span class="content read-only">\{{~ {{name}} ~}}</span>
+        {{~/if~}}
+      </div>
+    </div>
+  </div>
+</div>
+
+		{{!++subtemplate++}}
+	    {{!++id:checkbox++}}
+	    {{!--
+	        template for checkbox fields
+		       for a config like
+		       {
+		                readWrite: 'true',
+			    		name: 'dsBPM:isMandatory',
+			    		//this is the name of the attribute in the value/model object which will be sent to the form for display
+			    		label: i18n('emxBusinessProcessManagement.Label.parameterValue', 'Mandatory'),
+			    		type: 'checkbox',
+			    		fieldHTMLId:'isMandatory'
+		       }
+		--}}
+
+
+    		 <div class="toggle toggle-primary">
+	             <input class="data-entry" {{#if fieldHTMLId}}id="{{fieldHTMLId}}Checkbox{{viewId}}"{{else}}id="{{name}}Checkbox{{viewId}}"{{/if}} type="checkbox" \{{#E6Wif {{name}} 'TRUE'}} checked \{{/E6Wif}} value = "\{{ {{name}} }}"
+	                   {{~#if readWrite~}}
+            		\{{~#if canEdit~}}
+            		\{{~else~}}
+            		disabled
+            		\{{~/if~}}
+            		{{~else~}}
+            		disabled
+        	      {{~/if}}
+        	      >
+	             <label class="control-label" for="{{#if fieldHTMLId}}{{fieldHTMLId}}Checkbox{{viewId}}{{else}}{{name}}Checkbox{{viewId}}{{/if}}">{{label}}</label>
+             </div>
+
+		{{!++subtemplate++}}
+	    {{!++id:range++}}
+	    {{!--
+	        template for range fields
+
+		--}}
+
+    	{{#if label}}
+        	<label>{{label}}
+       		{{~#if required~}}
+            		<sup class="required-field">*</sup>
+            {{~/if~}}
+            {{~#if customButtons~}}
+            <span class="actions">
+               {{~#each customButtons~}}
+                  <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                      <span class="fonticon {{iconClass}}"></span>
+                  </button>
+               {{~/each~}}
+            </span>
+            {{~/if~}}
+         </label>
+        {{/if}}
+    		 <div class="range"  {{#if fieldHTMLId}}id="{{fieldHTMLId}}Range{{viewId}}"{{else}}id="{{name}}Range{{viewId}}"{{/if}} >
+
+             </div>
+
+
+	    {{!++subtemplate++}}
+	    {{!++id:textarea++}}
+
+
+        <style>
+
+	        #{{name}}TextArea {
+	            height:auto
+	        }
+
+        </style>
+        {{#if label}}
+        	<label>{{label}}
+       		{{~#if required~}}
+            		<sup class="required-field">*</sup>
+            {{~/if~}}
+            {{~#if customButtons~}}
+            <span class="actions">
+               {{~#each customButtons~}}
+                  <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                      <span class="fonticon {{iconClass}}"></span>
+                  </button>
+               {{~/each~}}
+            </span>
+            {{~/if~}}
+         </label>
+        {{/if}}
+<div class="field-group">
+  <div class="input-group-wrapper">
+    <div class="input-group">
+      <div class="input-element">
+        {{~#if readWrite~}}
+            \{{~#if canEdit~}}
+                <textarea class="form-control content" {{#if fieldHTMLId}}id="{{fieldHTMLId}}TextArea{{viewId}}"{{else}}id="{{name}}TextArea{{viewId}}"{{/if}}>\{{ {{name}} }}</textarea>
+                <textarea class="form-control height-calculator" >\{{ {{name}} }}</textarea>
+	        \{{~else~}}
+	            <span class="content read-only">\{{~ {{name}} ~}}</span>
+              <span class="height-calculator">\{{~ {{name}} ~}}</span>
+	        \{{~/if~}}
+        {{~else~}}
+               <span class="content read-only">\{{~ {{name}} ~}}</span>
+               <span class="height-calculator">\{{~ {{name}} ~}}</span>
+        {{~/if~}}
+        <span class="link">
+        	<a class="show-more">{{i18n "emxFoundation.Label.showMore" "Show More"}}</a>
+            <a class="show-less">{{i18n "emxFoundation.Label.showLess" "Show Less"}}</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    {{!++subtemplate++}}
+    {{!++id:date++}}
+    {{!--
+        template for date fields
+        This template accepts date fields as input
+        this is made editable based on a canEdit field on the input being true
+        {
+            "displayValue": "Oct 1, 2014",
+            "actualValue": "1412178608000"
+        }
+     --}}
+
+	{{#if label}}
+        	<label>{{label}}
+       		{{~#if required~}}
+            		<sup class="required-field">*</sup>
+            {{~/if~}}
+            {{~#if customButtons~}}
+            <span class="actions">
+               {{~#each customButtons~}}
+                  <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                      <span class="fonticon {{iconClass}}"></span>
+                  </button>
+               {{~/each~}}
+            </span>
+            {{~/if~}}
+         </label>
+    {{/if}}
+<div class="field-group">
+     <div class="input-group-wrapper">
+       <div class="input-group start">
+	{{~#if readWrite~}}
+	    \{{~#if canEdit~}}
+      <span class="input-element">
+	        <input type="date" class="form-control data-entry" {{#if fieldHTMLId}}id="{{fieldHTMLId}}{{viewId}}"{{else}}id="{{name}}{{viewId}}"{{/if}} value="\{{makeHTML5Date {{name}}.actualValue }}" />
+      </span>
+      \{{~else~}}
+	        <span class="read-only">\{{ {{name}}.displayValue }}</span>
+	    \{{~/if~}}
+	{{~else~}}
+	        <span class="read-only">\{{ {{name}}.displayValue }}</span>
+	{{~/if~}}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+    {{!++subtemplate++}}
+    {{!++id:uom++}}
+
+
+
+      <div class="field-group primary">
+        {{#if label}}
+        	<label>{{label}}
+       		{{~#if required~}}
+            		<sup class="required-field">*</sup>
+            {{~/if~}}
+            {{~#if customButtons~}}
+            <span class="actions">
+               {{~#each customButtons~}}
+                  <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                      <span class="fonticon {{iconClass}}"></span>
+                  </button>
+               {{~/each~}}
+            </span>
+            {{~/if~}}
+         </label>
+        {{/if}}
+         {{~#if toleranceName~}}
+             <label>{{fieldLabel}}
+   				        {{~#if required~}}
+   		        		    <sup class="required-field">*</sup>
+                   {{~/if~}}
+             </label>
+         {{/if~}}
+         <div class="input-group-wrapper">
+        {{~#if readWrite~}}
+            \{{~#if canEdit~}}
+	            <div class="input-group">
+                    <span class="input-element">
+                        <input class="form-control data-entry" type="number-as-text" inputmode="numeric" pattern="[0-9]*" {{#if minimumValue}}min="{{minimumValue}}" {{/if}} value="\{{~ {{name}} ~}}"/>
+                    </span>
+              </div>
+              <div class="input-group">
+                    <span class="input-element">
+                        <select class="form-control">
+        	                 {{#each uomValues}}
+                               <option value="{{@index}}">{{.}}</option>
+                            {{/each}}
+                        </select>
+                    </span>
+	            </div>
+            \{{~else~}}
+	          <div class="input-group">
+              <span class="input-element">
+                <span class="read-only">\{{~ {{name}} ~}}&nbsp;{{uomValues.[0]}}{{#if toleranceName}}&nbsp;{{toleranceLabel}}&nbsp;\{{~ {{toleranceName}} ~}}{{/if}}</span>
+              </span>
+            </div>
+            \{{~/if~}}
+        {{~else~}}
+        <div class="input-group">
+          <span class="input-element">
+            <span class="read-only">\{{~ {{name}} ~}}&nbsp;{{uomValues.[0]}}{{#if toleranceName}}&nbsp;{{toleranceLabel}}&nbsp;\{{~ {{toleranceName}} ~}}{{/if}}</span>
+          </span>
+        </div>
+        {{/if~}}
+          </div>
+      </div>
+
+      {{~#if toleranceName~}}
+
+          {{~#if readWrite~}}
+          \{{~#if canEdit~}}
+              <div class="field-group tolerance">
+                  <label>{{toleranceLabel}}
+        				        {{~#if required~}}
+        		        		    <sup class="required-field">*</sup>
+                        {{~/if~}}
+                  </label>
+                  <div class="input-group-wrapper">
+                        <div class="input-group">
+                               <span class="input-element">
+                                   <input class="form-control data-entry" type="number-as-text" inputmode="numeric" pattern="[0-9]*" value="\{{~ {{toleranceName}} ~}}"/>
+                               </span>
+                        </div>
+                  </div>
+              </div>
+        \{{~/if~}}
+        {{~/if~}}
+      {{~/if~}}
+
+
+
+
+    {{!++subtemplate++}}
+    {{!++id:select++}}
+        {{#if label}}
+        	<label>{{label}}
+       		{{~#if required~}}
+            		<sup class="required-field">*</sup>
+            {{~/if~}}
+            {{~#if customButtons~}}
+            <span class="actions">
+               {{~#each customButtons~}}
+                  <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                      <span class="fonticon {{iconClass}}"></span>
+                  </button>
+               {{~/each~}}
+            </span>
+            {{~/if~}}
+         </label>
+        {{/if}}
+  <div class="field-group">
+       <div class="input-group-wrapper">
+         <div class="input-group">
+        {{~#if readWrite~}}
+            \{{~#if canEdit~}}
+            <select class="form-control data-entry" value="\{{ {{name}}.actualValue }}">
+                    {{#each values}}
+	                   <option value="{{actualValue}}">{{displayValue}}</option>
+	                {{/each}}
+            </select>
+	       \{{~else~}}
+	           <span class="read-only">\{{~ {{name}}.displayValue ~}}</span>
+	       \{{~/if~}}
+        {{~else~}}
+            <span class="read-only">\{{~ {{name}}.displayValue ~}}</span>
+        {{~/if~}}
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+    {{!++subtemplate++}}
+    {{!++id:person++}}
+    {{!--
+        template for person fields
+        for a config like:
+           {
+                name: 'assignees',
+                label: i18n('emxCollaborativeTasks.Label.TaskAssignedTo', 'Assigned To'),
+                type: 'person',
+                W: 'who',
+                cssClass: ''
+       }
+        This template accepts 4 different types of inputs:
+       1) array of person objects
+       { assignees:[
+        {
+            name:'bcc',
+            firstname: 'Benoit',
+            lastname: 'CERRINA',
+            physicalId: 'xasasa009'
+        }
+        ,
+        {
+            name:'tws',
+            firstname: 'John',
+            lastname: 'WILLIAMS',
+            physicalId: 'xasasa010'
+        }
+       ]
+       }
+       2) individual person object
+        {assignees: {
+            name:'tws',
+            firstname: 'John',
+            lastname: 'WILLIAMS',
+            physicalId: 'xasasa010'
+        }
+        }
+       3) array of person field
+       {assignees: {
+       [
+        {
+            actualValue:'bcc',
+            displayValue: 'Benoit CERRINA',
+        }
+        ,
+        {
+            actualValue:'tws',
+            displayValue: 'John  WILLIAMS',
+        }
+       ]
+       }
+       4) individual person field
+       {assignees:
+       {
+            actualValue:'tws',
+            displayValue: 'John  WILLIAMS',
+        }
+        }
+     --}}
+
+    	{{#if label }}
+    		<label>{{label}}
+				{{~#if required~}}
+		        		<sup class="required-field">*</sup>
+		        {{~/if~}}
+				{{~#if readWrite~}}
+	                \{{#if canEdit}}
+	                	<span class="actions">
+                      {{~#if customButtons~}}
+                         {{~#each customButtons~}}
+                            <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                                <span class="fonticon {{iconClass}}"></span>
+                            </button>
+                         {{~/each~}}
+
+                      {{~/if~}}
+
+							      <button class="btn ds-group-plus">
+				                <span class="fonticon fonticon-plus"></span>
+				            </button>
+
+					    </span>
+              \{{else}}
+              {{~#if customButtons~}}
+              <span class="actions">
+                 {{~#each customButtons~}}
+                    <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                        <span class="fonticon {{iconClass}}"></span>
+                    </button>
+                 {{~/each~}}
+              </span>
+              {{~/if~}}
+		            \{{/if}}
+              {{else}}
+              {{~#if customButtons~}}
+              <span class="actions">
+                 {{~#each customButtons~}}
+                    <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                        <span class="fonticon {{iconClass}}"></span>
+                    </button>
+                 {{~/each~}}
+              </span>
+              {{~/if~}}
+	            {{~/if~}}
+
+			</label>
+		{{/if}}
+
+        {{!--input and button should only be there if this field is editable--}}
+
+    <ul class="object-list {{#if readWrite~}}\{{#if canEdit}}drop-target\{{/if}}{{~/if~}}">
+        {{~#if readWrite~}}
+            \{{#if canEdit}}
+                <li class="chooser ds-group-add" >
+	                <input type="text" class="form-control"/>
+	                <button class="btn"><span class="fonticon fonticon-search"></span></button>
+                </li>
+             \{{/if}}
+        {{~/if~}}
+        \{{#eachLimit {{name}} -1 }}                               {{!-- eachLimit with a -1 limit doesn't
+                                                                         actually take a limit (maybe we should),
+                                                                         but it can deal with arrays or
+                                                                         individual objects--}}
+        <li data-field-name="{{name}}-item"         \{{#if physicalId}} data-id="\{{physicalId}}"\{{/if}}>
+        <span class="draggable-item" \{{#if physicalId}}draggable="true"\{{/if}}>
+            <span class="thumbnail profile-image">
+            \{{#if actualValue}}                       {{!-- case of field --}}
+                <img draggable="false" oncontextmenu="return false" src="\{{userPictureUrl actualValue}}"
+                 title="\{{ displayValue }}" data-actualvalue="\{{actualValue}}"/>
+            </span>
+            <span data-field-name="display-value">
+              \{{~#if physicalId}}<a  draggable="false" oncontextmenu="return false" title="\{{ displayValue }}">\{{/if~}}
+                    \{{ displayValue }}
+              \{{~#if physicalId}}</a>\{{/if~}}
+            </span>
+            \{{else}}                                  {{!-- case of person objects --}}
+                <img draggable="false" oncontextmenu="return false" src="\{{userPictureUrl name}}"
+                     title="\{{ firstname }} \{{ lastname }}"  data-actualvalue="\{{name}}"/>
+            </span>
+            <span data-field-name="display-value">
+            \{{~#if physicalId}}<a  draggable="false" oncontextmenu="return false" title="\{{ firstname }} \{{ lastname }}">\{{/if~}}
+                \{{ firstname }} \{{ lastname }}
+            \{{~#if physicalId}}</a>\{{/if~}}
+            </span>
+            \{{/if}}
+            </span>
+            <span class="actions">
+              {{~#if readWrite~}}
+                 \{{#if ../canEdit}}
+                      <button class="btn"><span class="fonticon fonticon-cancel-circled ds-group-remove" data-field-name="{{name}}"></span></button>
+                  \{{/if}}
+              {{~/if~}}
+            </span>
+        </li>
+        \{{/eachLimit}}
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+    {{!++subtemplate++}}
+    {{!++id:object++}}
+    {{!--
+        template for object fields
+
+       for a config like
+       {
+                name: 'references',
+                attributeToDisplay: 'name',
+                imageAttribute: 'image'
+                label: i18n('emxCollaborativeTasks.Label.reference', 'Reference'),
+                type: 'object',
+                W: 'why',
+                cssClass: ''
+        }
+       this template accept values of the form
+       1) a single object with an attribute name the same as attributeToDisplay
+       {
+        references:{name:'Project1'}
+       }
+       2) an array of objects with an attribute name the same as attributeToDisplay
+       {
+        references:[{name:'Project1'}, {name:'Project2'}]
+       }
+
+     --}}
+
+		{{#if label }}<label>{{label}}
+	   		{{~#if required~}}
+	        		<sup class="required-field">*</sup>
+	        {{~/if~}}
+			{{~#if readWrite~}}
+                \{{#if canEdit}}
+                	<span class="actions">
+                    {{~#if customButtons~}}
+                       {{~#each customButtons~}}
+                          <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                              <span class="fonticon {{iconClass}}"></span>
+                          </button>
+                       {{~/each~}}
+
+                    {{~/if~}}
+      					  {{~#if allowFileManagement~}}
+      				            <button class="btn ds-group-upload">
+      				                <span class="fonticon fonticon-upload"></span>
+      				            </button>
+      				    {{~/if~}}
+	         		{{~#if singleObjectOnly~}}
+	         		{{~else~}}
+	         		 		{{~#if isThumbnail~}}
+			             	{{~else~}}
+					            <button class="btn ds-group-plus">
+					                <span class="fonticon fonticon-plus"></span>
+					            </button>
+				            {{~/if~}}
+				     {{~/if~}}
+				     </span>
+             \{{else}}
+             {{~#if customButtons~}}
+             <span class="actions">
+                {{~#each customButtons~}}
+                   <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                       <span class="fonticon {{iconClass}}"></span>
+                   </button>
+                {{~/each~}}
+             </span>
+             {{~/if~}}
+	            \{{/if}}
+              {{else}}
+              {{~#if customButtons~}}
+              <span class="actions">
+                 {{~#each customButtons~}}
+                    <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                        <span class="fonticon {{iconClass}}"></span>
+                    </button>
+                 {{~/each~}}
+              </span>
+              {{~/if~}}
+            {{~/if~}}
+			</label>
+		{{/if}}
+		{{!--input and button should only be there if this field is editable--}}
+		<ul class="object-list {{#if readWrite~}}\{{#if canEdit}}drop-target\{{/if}}{{~/if~}}">
+
+        {{~#if readWrite~}}
+            \{{#if canEdit}}
+		        <li class="chooser ds-group-add" >
+		            <input type="text" class="form-control"/>
+		            {{~#if isThumbnail~}}
+					{{~else~}}
+		            	<button class="btn"><span class="fonticon fonticon-search"></span></button>
+					{{~/if~}}
+		        </li>
+            \{{/if}}
+        {{~/if~}}
+
+	        \{{#eachLimit {{name}} -1 }}                               {{!-- eachLimit with a -1 limit doesn't
+	                                                                         actually take a limit (maybe we should),
+	                                                                         but it can deal with arrays or
+	                                                                         individual objects--}}
+		        <li {{#if imageAttribute}}class="has-image" {{/if}}data-field-name="{{name}}-item" \{{#if bob}} bobo \{{/if}} \{{#if busType}} data-type="\{{busType}}" \{{/if}} \{{#if type}} data-type="\{{type}}" \{{/if}} \{{#if physicalId}} data-id="\{{physicalId}}"\{{/if}} \{{#E6Wif hasfiles 'TRUE'}} data-hasfiles="\{{hasfiles}}" \{{/E6Wif}}>
+	               <span class="draggable-item" \{{#if physicalId}}draggable="true"\{{/if}}>
+	                {{#if imageAttribute}}
+  	                <span class="thumbnail object-image">
+  	                   <img draggable="false" src="\{{#if {{imageAttribute}}.imageValue}}\{{ {{imageAttribute}}.imageValue}}\{{else}}\{{ {{imageAttribute}} }}\{{/if}}" oncontextmenu="return false"
+  	                     title="\{{ {{attributeToDisplay}} }}"/>
+  	                </span>
+                  {{/if}}
+  		            <span data-field-name="display-value">
+  		                      \{{~#if physicalId}}<a  draggable="false" oncontextmenu="return false" title="\{{ {{attributeToDisplay}} }}">\{{/if~}}
+  		                      \{{ {{attributeToDisplay}} }}
+  		                      \{{~#if physicalId}}</a>\{{/if~}}
+  		            </span>
+		            </span>
+		            <span class="actions">
+                        \{{#E6Wif hasfiles 'TRUE'}}
+                                <button class="btn"><span class="fonticon fonticon-download" data-field-name="{{name}}"></span></button>
+                        \{{/E6Wif}}
+			            {{~#if readWrite~}}
+			               \{{#if ../canEdit}}
+			                    <button class="btn"><span class="fonticon fonticon-cancel-circled ds-group-remove" data-field-name="{{name}}"></span></button>
+			                    {{~#if isThumbnail~}}
+			                    {{~else~}}
+				                    {{~#if singleObjectOnly~}}
+						            	      <button class="btn ds-group-search"><span class="fonticon fonticon-search"></span></button>
+					     			        {{~/if~}}
+				     			        {{~/if~}}
+			               \{{/if}}
+			            {{~/if~}}
+                </span>
+		        </li>
+	        \{{/eachLimit}}
+        </ul>
+
+
+
+
+
+
+
+
+
+{{!++subtemplate++}}
+    {{!++id:number++}}
+        {{#if label}}
+        	<label>{{label}}
+       		{{~#if required~}}
+            		<sup class="required-field">*</sup>
+            {{~/if~}}
+            {{~#if customButtons~}}
+            <span class="actions">
+               {{~#each customButtons~}}
+                  <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                      <span class="fonticon {{iconClass}}"></span>
+                  </button>
+               {{~/each~}}
+            </span>
+            {{~/if~}}
+         </label>
+        {{/if}}
+        {{~#if readWrite~}}
+            \{{~#if canEdit~}}
+                <div class="input-group">
+                    <input class="form-control data-entry" type="number-as-text" inputmode="numeric" pattern="[0-9]*" value="\{{~ {{name}} ~}}" min="{{minimumValue}}" {{#if integerOnly}}step="1"{{else}}step="any"{{/if}}/>
+                </div>
+            \{{~else~}}
+                <span>\{{~ {{name}} ~}}</span>
+            \{{~/if~}}
+        {{~else~}}
+            <span>\{{~ {{name}} ~}}</span>
+        {{/if~}}
+
+{{!++subtemplate++}}
+    {{!++id:startStop++}}
+
+           {{#if label}}
+        	<label>{{label}}
+       		{{~#if required~}}
+            		<sup class="required-field">*</sup>
+            {{~/if~}}
+            {{~#if customButtons~}}
+            <span class="actions">
+               {{~#each customButtons~}}
+                  <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                      <span class="fonticon {{iconClass}}"></span>
+                  </button>
+               {{~/each~}}
+            </span>
+            {{~/if~}}
+         </label>
+        {{/if}}
+    <div class="field-group">
+         <div class="input-group-wrapper">
+           <div class="input-group start">
+      {{~#if readWrite~}}
+            	\{{~#if canEdit~}}
+              <span class="input-element">
+           			<input type="date" class="form-control data-entry editable" value="\{{makeHTML5Date {{name}}.actualValue }}"/>
+              </span>
+            	\{{~else~}}
+	        		<span class="read-only">\{{ {{name}}.displayValue }}</span>
+	    		\{{~/if~}}
+			{{~else~}}
+	        	<span class="read-only">\{{ {{name}}.displayValue }}</span>
+			{{~/if~}}
+			{{#if startDateLabel }}<label>{{startDateLabel}}
+				{{~#if required~}}
+		        		<sup class="required-field">*</sup>
+		        {{~/if~}}
+				</label>
+			{{/if}}
+
+       </div>
+
+       <div class="input-group stop">
+      {{~#if readWrite~}}
+          \{{~#if canEdit~}}
+              <span class="input-element">
+           			<input type="date" class="form-control data-entry editable" value="\{{makeHTML5Date {{endDateAttribute}}.actualValue }}"/>
+              </span>
+          \{{~else~}}
+	        		<span class="read-only">\{{ {{endDateAttribute}}.displayValue }}</span>
+	    		\{{~/if~}}
+			{{~else~}}
+	        	<span class="read-only">\{{ {{endDateAttribute}}.displayValue }}</span>
+			{{~/if~}}
+			{{#if endDateLabel}}<label>{{endDateLabel }}
+				{{~#if required~}}
+		        		<sup class="required-field">*</sup>
+		        {{~/if~}}
+				</label>
+			{{/if}}
+       </div>
+     </div>
+   </div>

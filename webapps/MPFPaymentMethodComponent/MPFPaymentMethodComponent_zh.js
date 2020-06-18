@@ -1,0 +1,1 @@
+define("DS/MPFPaymentMethodComponent/MPFPaymentMethodComponent_zh",{});define("DS/MPFPaymentMethodComponent/assets/nls/PaymentMethod",{payementInformation:"付款信息",directDebit:"直接借记",creditCard:"信用卡",wireTransfer:"电汇",allowDirectDebit:"允许公司成员通过直接借记支付",allowCreditCard:"允许公司成员通过信用卡支付",allowWireTransfer:"允许公司成员通过电汇支付"});

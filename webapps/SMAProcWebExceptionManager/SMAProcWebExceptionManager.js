@@ -1,0 +1,2 @@
+/*!  Copyright 2015 Dassault Systemes. All rights reserved. */
+define("DS/SMAProcWebExceptionManager/SMAProcWebErrorManager",["DS/SMAProcWebAuthoringUtils/SMAProcWebAuthoringServices"],function(a){var b={notifyError:function(e,d){if(d&&d.target&&d.target.logMessage){d.target.logMessage({type:"error",text:e.message,autoRemove:d.autoRemove})}else{var c={messageType:"error"};a.displayNotification(e.message,c)}}};return b});

@@ -1,0 +1,40 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-queryparams/sp-queryparams.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+
+<dom-module id="ad-tail-view">
+  	<link rel="import" type="css" href="ad-tail-view.css">
+  	<template>
+	
+	<sp-webservice id="isDash"></sp-webservice>
+	
+	<div id="top">
+	    <div id="fileTitle">{{_computeFileTitleText(model)}}</div>
+	    <div id="lineSelection">
+	    	<button id="selectNbLines" type="button" title="Select lines number" class="btn btn-xs btn-default" on-click="onSelectNbLines">
+	 	        <span>{{_computeButtonLabel(linesDisplayed)}}</span><span class="caret">
+	 	    </span></button>
+	        <div id="selectNbLinesMenu">
+		        <sp-dropdown-menu id="selectNbLinesddMenu" on-itemclick="onSetViewLines">
+			        <sp-dropdown-menu-item id="nbLines10" label="10 lines" class="command-menu-item"></sp-dropdown-menu-item>
+			        <sp-dropdown-menu-item id="nbLines20" label="20 lines" class="command-menu-item"></sp-dropdown-menu-item> 
+			        <sp-dropdown-menu-item id="nbLines40" label="40 lines" class="command-menu-item"></sp-dropdown-menu-item>
+			        <sp-dropdown-menu-item id="nbLinesFull" label="Full" class="command-menu-item"></sp-dropdown-menu-item>
+		        </sp-dropdown-menu>
+	        </div>
+	    </div>
+	</div>
+	
+	<div id="content">
+		<textarea id="tailContent" class="tail-view-content" rows="12" wrap="off" readonly=""></textarea>
+	    <a id="vm" href="javascript:;" on-click="onViewMore" display="none">view more</a>
+	</div>
+	
+	</template>
+  	<script src="ad-tail-view.js"></script>
+</dom-module>
+
+

@@ -1,0 +1,9 @@
+m|SMAProcWebExtensionEditors\SMAProcWebOptimization.mweb
+b|j|n,m
+b|c|n,m
+v|6.421.7.19159
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAProcWebOptimization\cmp-optimization.html|1559958509|6188
+s|SMAProcWebExtensionEditors\SMAProcWebOptimization.mweb\src\cmp-optimization.html|1557849888|6188
+t|win_b64\webapps\SMAProcWebOptimization\SMAProcWebOptimizationAPI.js|1555721302|6970
+s|SMAProcWebExtensionEditors\SMAProcWebOptimization.mweb\src\SMAProcWebOptimizationAPI.js|1554756962|13936

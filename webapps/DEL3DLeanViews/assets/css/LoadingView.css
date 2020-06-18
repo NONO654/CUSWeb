@@ -1,0 +1,164 @@
+.loadingView
+{
+  width: 100%;
+  height: 100%;
+  background: rgb(216, 225, 235);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  font-size: 0.75vw;
+  font-family: '3ds', sans-serif;
+}
+.mainLoadingButtons
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 18em;
+}
+.mainLoadingText
+{
+  margin-top: -1em;
+  font-size: 2em;
+  text-transform: capitalize;
+  transition: color .7s ease-out;
+  min-height: 0.7em;
+  position: absolute;
+}
+.mainLoadingText.loading
+{
+  color: #239de8;
+}
+.mainLoadingText.error
+{
+  color: indianred;
+}
+.mainLoadingText.success
+{
+  color: limegreen;
+}
+.mainLoadingButton
+{
+  margin-top: 5em;
+  margin-left: 1em;
+  margin-right: 1em;
+  width: 13em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainLoadingButton img
+{
+  height: 75%;
+  width: 75%;
+  opacity: 0;
+}
+.mainLoadingReloadContainer, 
+.mainLoadingReportContainer
+{
+  pointer-events: none;
+}
+.mainLoadingReloadContainer.show, 
+.mainLoadingReportContainer.show
+{
+  pointer-events: all;
+}
+.mainLoadingReloadContainer.show .mainLoadingButton img
+{
+  animation: showLoadingReload .6s ease-out forwards;
+}
+.mainLoadingReportContainer.show .mainLoadingButton img
+{
+  animation: showLoadingReport .6s ease-out forwards;
+  animation-delay: .4s;
+}
+.mainLoadingReloadContainer.show .mainLoadingButton, 
+.mainLoadingReportContainer.show .mainLoadingButton
+{
+  cursor: pointer;
+}
+.mainLoadingButtonText, .mainLoadingVersion
+{
+  color: #239de8;
+  font-size: 1.7em;
+  transition: opacity .6s ease-out;
+  text-align: center;
+  padding-bottom: 0.5em;
+}
+.mainLoadingButtonText
+{
+  opacity: 0;
+}
+.mainLoadingSpacer
+{
+  flex-grow: 1;
+}
+.mainLoadingReloadContainer.show .mainLoadingButtonText, 
+.mainLoadingReportContainer.show .mainLoadingButtonText
+{
+  opacity: 1;
+  cursor: pointer;
+}
+.loaderSpinnerContent
+{
+    position: absolute;
+    width: 22em;
+    height: 22em;
+    margin-top: -4.5em;
+    display: none;
+}
+.loaderSpinner
+{
+  border: 2em solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 2em solid #3498db;
+  width: 18em;
+  height: 18em;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+.mainLoadingTitle
+{
+    margin-top: -1.5em;
+    font-size: 3.5em;
+    min-height: 0.7em;
+    position: absolute;
+    color: #239de8;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes showLoadingReload {
+  0% {
+    opacity: 0;
+    transform: rotate(-360deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes showLoadingReport {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}

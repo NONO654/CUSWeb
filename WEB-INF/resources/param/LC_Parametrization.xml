@@ -1,0 +1,186 @@
+<?xml version="1.0" ?>
+<OOTBParameterization regSuite="VPLMAdministration">
+     <Domain id="LifecycleAndCollaboration">
+		<Family id="Lifecycle" icon="iconParameterizationDataAccess.gif">
+		    <Parameter id="DuplicateAuthoringCommand" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader,Author,Contributor" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+					<Value id="Author"/>
+					<Value id="Contributor"/>
+					<Value id="Reader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::Duplicate"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Contributor" value="VPLMExperimenter"/>
+				<Constant id="Reader" value="VPLMViewer"/>
+			</Parameter>
+			<Parameter id="IterationAuthoringCommand" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader,Author" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+					<Value id="Author"/>
+					<Value id="Contributor"/>
+					<Value id="Reader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::ENOVIA_Lifecycle_RestoreIteration"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Contributor" value="VPLMExperimenter"/>
+				<Constant id="Reader" value="VPLMViewer"/>
+			</Parameter>
+			<Parameter id="NewEvolutionAuthoringCommand" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Leader,Author,Contributor" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+					<Value id="Author"/>
+					<Value id="Contributor"/>
+					<Value id="Reader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::NewEvolution"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Contributor" value="VPLMExperimenter"/>
+				<Constant id="Reader" value="VPLMViewer"/>
+			</Parameter>
+			<Parameter id="NewRevisionFromAuthoringCommand" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Leader,Author" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+					<Value id="Author"/>
+					<Value id="Contributor"/>
+					<Value id="Reader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::NewVersionUsingDistantData"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Contributor" value="VPLMExperimenter"/>
+				<Constant id="Reader" value="VPLMViewer"/>
+			</Parameter>
+			<Parameter id="MinorRevisionAuthoringCommands" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Disabled"/>
+				<Constant id="className" value="com.dassault_systemes.collaborative.TeamEngineeringParameter_MinorRevisionAuthoringCommands" />
+				<Constant id="valueChecked" value="EnableMinorRevisionAuthoringCommands"/>
+				<Constant id="valueUnchecked" value="DisableMinorRevisionAuthoringCommands"/>
+			</Parameter>
+			<Parameter id="NewRevisionAuthoringCommands" implementation="com.matrixone.vplm.applicationsIntegrationInfra.impl.TeamEngineeringParameterMapper">
+				<Argument id="Argument" type="boolean" input="checkbox" default="Enabled"/>
+				<Constant id="className" value="com.dassault_systemes.collaborative.TeamEngineeringParameter_NewRevisionAuthoringCommands" />
+				<Constant id="valueChecked" value="EnableNewRevisionAuthoringCommands"/>
+				<Constant id="valueUnchecked" value="DisableNewRevisionAuthoringCommands"/>
+			</Parameter>
+		</Family>
+		<Family id="Collaboration" icon="iconParameterizationDataAccess.gif">
+			<Parameter id="AccessRightsAuthoringCommand" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader,Author,Contributor,Reader" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+					<Value id="Author"/>
+					<Value id="Contributor"/>
+					<Value id="Reader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::ENOVIA_Ownership_ManageAccess"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Contributor" value="VPLMExperimenter"/>
+				<Constant id="Reader" value="VPLMViewer"/>
+			</Parameter>
+			<Parameter id="TransferOwnershipAuthoringCommand" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader,Author,Contributor,Reader" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+					<Value id="Author"/>
+					<Value id="Contributor"/>
+					<Value id="Reader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::TransferOwnership"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Contributor" value="VPLMExperimenter"/>
+				<Constant id="Reader" value="VPLMViewer"/>
+			</Parameter>
+			<Parameter id="ChangeResponsibleAuthoringCommand" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader,Author,Contributor,Reader" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+					<Value id="Author"/>
+					<Value id="Contributor"/>
+					<Value id="Reader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::TransferUser"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Contributor" value="VPLMExperimenter"/>
+				<Constant id="Reader" value="VPLMViewer"/>
+			</Parameter>
+			<Parameter id="SwitchToEditionAuthoringCommand" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader,Author,Contributor,Reader" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+					<Value id="Author"/>
+					<Value id="Contributor"/>
+					<Value id="Reader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::ENOVIA_Editability_SwitchToEdition"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Contributor" value="VPLMExperimenter"/>
+				<Constant id="Reader" value="VPLMViewer"/>
+			</Parameter>
+			<Parameter id="SwitchToReadOnlyAuthoringCommand" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader,Author,Contributor,Reader" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+					<Value id="Author"/>
+					<Value id="Contributor"/>
+					<Value id="Reader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::ENOVIA_Editability_SwitchToReadOnly"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Contributor" value="VPLMExperimenter"/>
+				<Constant id="Reader" value="VPLMViewer"/>
+			</Parameter>
+			<Parameter id="ReserveAuthoringCommand" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader,Author,Contributor,Reader" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+					<Value id="Author"/>
+					<Value id="Contributor"/>
+					<Value id="Reader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::ENOVIA_Reservation_Lock"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Contributor" value="VPLMExperimenter"/>
+				<Constant id="Reader" value="VPLMViewer"/>
+			</Parameter>
+			<Parameter id="UnreserveAuthoringCommand" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationCommand">
+				<Argument id="Argument" type="string" input="comboboxmultiselect" default="Owner,Leader,Author,Contributor,Reader" maxLength="123">
+					<Value id="Owner"/>
+					<Value id="Leader"/>
+					<Value id="Author"/>
+					<Value id="Contributor"/>
+					<Value id="Reader"/>
+				</Argument>
+				<Constant id="Command" value="vplm::ENOVIA_Reservation_Unlock"/>
+				<Constant id="Owner" value="VPLMProjectAdministrator"/>
+				<Constant id="Leader" value="VPLMProjectLeader"/>
+				<Constant id="Author" value="VPLMCreator"/>
+				<Constant id="Contributor" value="VPLMExperimenter"/>
+				<Constant id="Reader" value="VPLMViewer"/>
+			</Parameter>
+		</Family> 
+    </Domain>
+</OOTBParameterization>

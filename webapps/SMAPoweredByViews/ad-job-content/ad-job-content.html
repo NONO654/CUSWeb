@@ -1,0 +1,62 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+<link rel="import" href="../ad-ace-editor/ad-ace-editor.html">
+<link rel="import" href="../ad-tail-log-view/ad-tail-log-view.html">
+
+<dom-module id="ad-job-content">
+	<link rel="stylesheet" href="ad-job-content.css">
+	<template>
+		<style>
+			.no-content-message{
+				display: table;
+				margin: 100px auto;
+				font-size: 2.0em;
+				color : #e2e2e2;
+				}
+		</style>
+		<div class="main-container">
+			<div id="actionsRow" class='content-actions-row'>
+				<div class='action-filler'></div>
+				<div id="batchIterationRow" class='action-iterations hidden'>
+					<ad-batch-iteration-chooser id="batchIterationList" on-change="onBatchIterationSelect"></ad-batch-iteration-chooser> 
+				</div>
+				<div class="action-items">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobContent" nlskey="DownloadZip" value={{downloadAsZip}} no-view></sp-nls>
+					<button id="downloadDoc" title="[[downloadAsZip]]" on-click="downloadMutipleFiles" class="btn btn-default btn-root btn-with-icon">
+						<span class="fonticon fonticon-archive"></span>
+						<span>[[downloadAsZip]]</span>
+					</button>
+				</div>
+			</div>
+			<div id="contentContainer" class="content-container">
+				<div id="tableContainer">
+					<table id="contentTable" class="table table-condensed table-responsive content-table">
+						<thead id="tableHead">
+							<tr id="tableHeaderRow" class="table-head-row"></tr>
+						</thead>
+						<tbody id="tableBody">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="errorMessageContent" class="no-content-message hidden">
+				<sp-nls nlspath="{{nlspath}}" nlskey="NoInputFilesFound"></sp-nls>
+			</div>
+			<div class="message-container">
+				<div id="workDirLoading" class="loading-message hidden">
+					<span><sp-nls nlspath="{{nlspath}}" nlskey="LoadingWorkDir"></sp-nls></span>
+				</div>
+				<div id="loadingContent" class="loading-message hidden">
+						<sp-nls nlspath="{{nlspath}}" nlskey="LoadingContent"></sp-nls>
+				</div>
+				<div id="lastRefreshed" class="loading-message hidden">
+					<sp-nls nlspath="{{nlspath}}" nlskey="LastRefreshed"></sp-nls>
+					<span>[[lastRefreshed]]</span>
+				</div>
+			</div>
+		</div>
+	</template>
+	<script type="text/javascript" src="ad-job-content.js"></script>
+</dom-module>

@@ -1,0 +1,169 @@
+PACKAGE Effectivity;
+CLASS Model -doc : Entity_ LABEL I18N("Type.Model");
+CLASS Feature -doc : Entity_ LABEL I18N("emxRGN.Label.Feature");
+CLASS Option -doc : Entity_ LABEL I18N("emxRGN.Label.Option");
+CLASS Parser : Entity_;
+CLASS Combination -doc : Entity_ LABEL I18N("Type.Combination");
+
+ATTRIBUTE Model.name -doc : String CATEGORY I18N("Type.Effectivity") LABEL I18N("emxRGN.Common.Name");
+ATTRIBUTE Model.features -doc : Feature CATEGORY I18N("Type.Effectivity") LABEL I18N("emxRGN.Label.Features");
+
+ATTRIBUTE Feature.name -doc : String CATEGORY I18N("Type.Effectivity") LABEL I18N("emxRGN.Common.Name");
+ATTRIBUTE Feature.display -doc : String CATEGORY I18N("Type.Effectivity") LABEL I18N("emxRGN.Common.Display");
+ATTRIBUTE Feature.context -doc : Model CATEGORY I18N("Type.Effectivity") LABEL I18N("emxRGN.Label.Context");
+ATTRIBUTE Feature.options -doc : Option CATEGORY I18N("Type.Effectivity") LABEL I18N("emxRGN.Label.Options");
+
+ATTRIBUTE Option.name -doc : String CATEGORY I18N("Type.Effectivity") LABEL I18N("emxRGN.Common.Name");
+ATTRIBUTE Option.display -doc : String CATEGORY I18N("Type.Effectivity") LABEL I18N("emxRGN.Common.Display");
+ATTRIBUTE Option.feature -doc : Feature CATEGORY I18N("Type.Effectivity") LABEL I18N("emxRGN.Label.Feature");
+
+ATTRIBUTE Parser.combinations : Combination;
+
+ATTRIBUTE Combination.includedOptions -doc : Option CATEGORY I18N("Type.Effectivity") LABEL I18N("emxRGN.Label.IncludedOptions");
+ATTRIBUTE Combination.excludedOptions -doc : Option CATEGORY I18N("Type.Effectivity") LABEL I18N("emxRGN.Label.ExcludedOptions");
+
+METHOD Parser.addCombination(combinationNode : XmlNode, contexts : String, modelsOptions : Option) : {
+    TMP combination := NEW(Combination);
+    combinationNode.getElementsByName("Feature")[$NO(elementNodes)].{
+        TMP optNode := EACH;
+        TMP currentOption := modelsOptions[name = optNode.getAttribute("Name") AND feature.name = optNode.parent.getAttribute("Name") AND feature.context.name $< contexts];
+        $SOME(currentOption) IF TRUE : {
+            ("NOT" $< EACH.*(parent).tagName) IF TRUE : {
+                combination.excludedOptions += currentOption;
+            } ELSE: {
+                combination.includedOptions += currentOption;
+            }
+        }
+    };
+    combinations += combination;
+};
+
+METHOD Parser.parseEffectivity(xml : String, modelsOptions : Option) : {
+    TMP root := XMLPARSE(xml);
+    TMP contexts := root.getElementsByName("Context").getAttribute("HolderName");
+    (root.getElementsByName("OR").getElementsByName("AND") DEFAULT root).{
+       THIS.addCombination(EACH, contexts, modelsOptions);
+    }
+};
+
+METHOD Feature.putTableCell() : {
+    PUTF("<th style=""text-align:center; border-style: solid; border-width: 1px; background: darkgray"" colspan=""$1"">$2</th>", $CNT(options), display);   
+};
+
+METHOD Option.putTableCell() : {
+	PUTF("<th style=""text-align:center; border-style: solid; border-width: 1px; background: lightgray"">$1</th>", display /*+ " (" + name + ")"*/);   
+};
+
+METHOD Option.putEffectivityCell(combi : Combination) : {
+    THIS.name $< combi.includedOptions.name IF TRUE : {
+        PUT("<td style=""text-align:center; border-style: solid; border-width: 1px"">&#10003;</td>");
+    } IF FALSE : {
+        THIS $< combi.excludedOptions IF TRUE : {
+            PUT("<td style=""text-align:center; border-style: solid; border-width: 1px"">X</td>");
+        } IF FALSE : {
+            PUT("<td style=""text-align:center; border-style: solid; border-width: 1px""></td>");
+        }
+    }
+};
+
+PACKAGE PLM;
+
+METHOD RGNEffectivity.getCombinations(models : Effectivity.Model) -doc : {
+    TMP parser := NEW(Effectivity.Parser);
+    parser.parseEffectivity(variantXMLExpression, models.features.options);
+    parser.combinations;
+} CATEGORY I18N("Type.Effectivity")
+LABEL I18N("Method.Extension.Combinations")
+HELPTEXT I18N("Method.Extension.Combinations_Description");
+
+METHOD PLMCoreReference.getModels() -doc : {
+	TMP models : Effectivity.Model;
+    TMP root := XMLPARSE(attachedModelsDefinition);
+    root.getElementsByName("model").{
+        TMP model := NEW(Effectivity.Model);
+        model.name := getAttribute("name");
+        EACH.elementNodes.{ //Features
+            TMP feat := NEW(Effectivity.Feature);
+            feat.name := getAttribute("name");
+            feat.display := getAttribute("display");
+            feat.context := model;
+            EACH.elementNodes.{ //Options
+                TMP opt := NEW(Effectivity.Option);
+                opt.name := getAttribute("name");
+                opt.display := getAttribute("display");
+                opt.feature := feat;
+                feat.options += opt;
+            };
+            model.features += feat;
+        };
+        models += model;
+    };
+    models;
+} CATEGORY I18N("Type.Effectivity")
+LABEL I18N("Method.Extension.AttachedModels")
+HELPTEXT I18N("Method.Extension.AttachedModels_Description");
+
+METHOD PLMCoreReference.startEffectivityTable() : {
+  	TMP models := getModels().SELECTUNIQUE(name);
+    OPENBUFF();
+    FUTF8();
+    PUTN("<table>");
+    //Features Line
+    PUTN("<tr><td/>");
+    models.features.putTableCell();
+    PUTN("</tr>");
+    //Options line
+    PUTN("<tr><td/>");
+    models.features.options.putTableCell();
+    PUTN("</tr>");    
+    models;
+};
+
+METHOD rel_PLMCoreInstance.addEffectivityRow(models : Effectivity.Model) : {
+    TMP instName := PLM_ExternalID;
+    TMP combinations := effectivity.getCombinations(models);
+    combinations.{
+        PUT("<tr>");
+        EACHINDEX = 1 IF TRUE : {
+            PUTF("<td style=""text-align:center; border-style: solid; border-width: 1px; background: lightblue"" rowspan=""$1"">$2</td>", $CNT(combinations), (EACHINDEX = 1 IF TRUE : instName ELSE : ""));
+        };
+        models.features.options.putEffectivityCell(EACH);
+        PUT("</tr>")
+    }
+};
+
+METHOD rel_PLMCoreInstance.EffectivityExpression() -doc : {
+    effectivity.effectivityExpression(FALSE);
+} CATEGORY I18N("Category.Attributes")
+LABEL I18N("Method.Effectivity_Expression")
+HELPTEXT I18N("Method.Effectivity_Expression_Description");
+
+
+METHOD PLMCoreReference.closeEffectivityTable() : {
+	PUTN("</table>");
+    CLOSE();
+};
+
+METHOD PLMCoreReference.printInstancesEffectivity(instances : rel_PLMCoreInstance) : {
+    TMP models := startEffectivityTable();
+    instances.addEffectivityRow(models);
+  	RICHTEXT(closeEffectivityTable(), "HTML");
+};
+
+METHOD VPMReference.effectivityTableView() -doc : {
+	printInstancesEffectivity(SubProducts);
+} CATEGORY I18N("Type.Effectivity")
+LABEL I18N("Method.Extension.EffectivityTable")
+HELPTEXT I18N("Method.Extension.EffectivityTable_Description");
+
+METHOD RFLPLMFunctionalReference.effectivityTableView() -doc : {
+	printInstancesEffectivity(SubFunctions);
+} CATEGORY I18N("Type.Effectivity")
+LABEL I18N("Method.Extension.EffectivityTable")
+HELPTEXT I18N("Method.Extension.EffectivityTable_Description");
+
+METHOD RFLVPMLogicalReference.effectivityTableView() -doc : {
+	printInstancesEffectivity(SubComponents);
+} CATEGORY I18N("Type.Effectivity")
+LABEL I18N("Method.Extension.EffectivityTable")
+HELPTEXT I18N("Method.Extension.EffectivityTable_Description");

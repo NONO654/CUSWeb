@@ -1,0 +1,88 @@
+<dom-module id="pcw-sdk-calculator-editor">
+    <style>
+        * { box-sizing: border-box; }
+        :host {
+            display:block;
+            width: 100%;
+            height: 100%;
+        }
+
+        :host([hidden]) {
+            display: none;
+        }
+
+        #flexContainer {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        #editor {
+            width: 100%;
+            height: initial;
+            flex: 1;
+        }
+        #evaluator {
+            margin-top:5px;
+            display:flex;
+            width:100%;
+        }
+
+        #validator{
+            font-family: Monaco, Menlo, "Ubuntu Mono", Consolas, source-code-pro, monospace;
+            font-size: 12px;
+            line-height: 20px;
+            user-select: all;
+            border: 1px solid #b4b6ba;
+            border-radius: 4px;
+        }
+
+        #controls {
+            margin-top:5px;
+            display:flex;
+            width:100%;
+            justify-content: space-between;
+        }
+
+        .valid {
+            border: 1px solid #b4b6ba;
+        }
+
+        .invalid {
+            border: 1px solid #fcc;
+        }
+    </style>
+    <template>
+        <div id="flexContainer">
+            <pcw-code-editor id="editor" expression="{{expression}}" max-lines="[[maxLines]]" autocomplete></pcw-code-editor>
+
+            <div id="evaluator">
+                <div id="validator" class="valid" style="flex:2;display:inline-block">[[output]]</div>
+                <button id="calc" class="btn btn-default btn-xs" style="margin-left:5px;max-height:22px;" on-click="calculate" title="Run">Calculate</button>
+                <button class="btn btn-default btn-xs" style="margin-left:5px;max-height:22px;min-width: 20px;padding: 2px;" on-click="validate" title="Check syntax">
+                    <span class="fonticon fonticon-check" style="margin:0px;"></span>
+                </button>
+            </div>
+
+            <div id="controls">
+                <div>
+                    <label>Parameters:</label>
+                    <pcw-sdk-parameter-chooser id="paramChooser" name="paramChooser"
+                    source="{{source}}" 
+                    datatype="Boolean, Integer, Real, String"
+                    on-pcw-parameter-selected="_selectParameter" display-type></pcw-sdk-parameter-chooser>
+                </div>
+
+                <div>
+                    <label>Operators:</label>
+                    <div id="operatorsChooser"></div>
+                </div>
+
+                <div>
+                    <label>Functions:</label>
+                    <div id="functionsChooser"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+</dom-module>

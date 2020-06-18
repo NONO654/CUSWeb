@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.v6application" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAExeV6ApplicationConnector" nlsID="dispname">V6 Application</DisplayName>
+	<Description nlsFile="SMAExeV6ApplicationConnector" nlsID="desc">Create new V6 Application</Description>
+	<LongDescription nlsFile="SMAExeV6ApplicationConnector" nlsID="longdesc">Create new V6 Application</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="interactiveType">
+			<Value>V6</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>1000</Value>
+			<Value>600</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="I_SMAExeV6ApplicationConnector16.png" targetFilename="small/I_SMAExeV6ApplicationConnector16.png" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAExeV6ApplicationConnector.png" targetFilename="large/I_SMAExeV6ApplicationConnector.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeV6ApplicationConnector.CATNls" targetFilename="SMAExeV6ApplicationConnector.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeV6ApplicationConnector_Japanese.CATNls" targetFilename="SMAExeV6ApplicationConnector_Japanese.CATNls" locale="Japanese" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflConnV6Application.dll" targetFilename="win_b64/SMAWflConnV6Application.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflV6Application.sypstyle" targetFilename="SMAWflV6Application.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflV6ApplicationEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflV6ApplicationHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>	
+	<Properties>
+		<Property name="showallwbs" type="boolean" valuetype="single">
+			<Value>FALSE</Value>
+		</Property>
+
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="workbench" type="string" valuetype="single">
+			<Value/>
+		</Property>
+	</Properties>
+
+</wfext:Extension>

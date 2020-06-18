@@ -1,0 +1,34 @@
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DPlayUDLExperiencePreviewAfrInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DPlayUDLExperiencePreviewAfrInterface"/>
+  </Template>
+
+  <Template syp:name="3DPlayUDLExperiencePreviewAfrHeaderList" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID = "Zoom" ClassName = "DS/ViewerCommands/VisuZoomViewCmd" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Pan" ClassName = "DS/ViewerCommands/VisuPanViewCmd" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Reframe" ClassName = "DS/ViewerCommands/VisuReframeViewCmd" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Previous" ClassName = "DS/3DPlayUDLExperience/CmdScrollUDL" ResourceFile = "3DPlayUDLExperience/3DPlayUDLExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "ScrollSheet" Value = "Previous" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "Next" ClassName = "DS/3DPlayUDLExperience/CmdScrollUDL"  ResourceFile = "3DPlayUDLExperience/3DPlayUDLExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "ScrollSheet" Value = "Next" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+    </CATCmdHeadersList>
+  </Template>
+  <Template syp:name="3DPlayUDLExperiencePreviewAfrWorkbench" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DPlayUDLExperiencePreview">
+      <CATCmdStarter Name = "Zoom" Command = "Zoom" />
+      <CATCmdStarter Name = "Pan" Command = "Pan" />
+      <CATCmdStarter Name = "Reframe" Command = "Reframe" />
+      <CATCmdStarter Name = "Previous" Command = "Previous" />
+      <CATCmdStarter Name = "Next" Command = "Next" />
+
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

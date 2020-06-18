@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="urn:com:dassault_systemes:widl"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd"
+	xmlns:tns="http://cbp.enovia.ws/common"
+	xmlns:err="http://www.3ds.com/wserror"
+	xmlns:q1="http://cbp.enovia.ws/CBPXML">
+	<entities
+		targetNamespace="http://cbp.enovia.ws/common">
+		<schemaImports>
+			<schemaImport location="wserrors.xsd" />
+			<schemaImport location="CBPXML.xsd" />
+		</schemaImports>
+		<interfaces>
+			<interface name="IPLMDeploymentService" scope="private">
+				<documentation>
+					Interface for Web Service deployment operations.
+				</documentation>
+
+				<method name="listDeployments">
+					<documentation>Get the list of deployment targets.</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="deploymentNames" type="q1:ListOfString" direction="out">
+						<documentation>The resulting list of deployment (definition) target names.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="listServices">
+					<documentation>Get the list of web services related to the given deployment target.</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="deploymentName" type="xs:string" direction="in">
+						<documentation>The name of the deployment (definition) target. The empty string defaults to all deployment targets.</documentation>
+					</param>
+					<param name="returnFilter" type="xs:string" direction="in">
+						<documentation>The filter to apply to the returned list. Available filter strings: DEPLOYED, UNDEPLOYED, ALL.</documentation>  
+					</param>
+					<param name="serviceNames" type="q1:ListOfString" direction="out">
+						<documentation>The resulting list of web service names.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="deployService">
+					<documentation>Deploy a web service.</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="deploymentName" type="xs:string" direction="in">
+						<documentation>The name of the deployment (definition) target.</documentation>
+					</param>
+					<param name="serviceName" type="xs:string" direction="in">
+						<documentation>The name of the service to be deployed to the given deployment target.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="undeployService">
+					<documentation>Undeploy a web service.</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="deploymentName" type="xs:string" direction="in">
+						<documentation>The name of the deployment (definition) target.</documentation>
+					</param>
+					<param name="serviceName" type="xs:string" direction="in">
+						<documentation>The name of the service to be undeployed from the given deployment target.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+			</interface>
+		</interfaces>
+		<implementations>
+			<implementation name="PLMDeploymentService" serviceid="deploymentService"
+				implements="tns:IPLMDeploymentService">
+				<documentation>
+					A service to provide Web Service deployment operations.
+				</documentation>
+			</implementation>
+		</implementations>
+	</entities>
+</description>

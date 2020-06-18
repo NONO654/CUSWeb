@@ -1,0 +1,62 @@
+<!--------------------------------------------------------------------
+[xs-wg-content-viewer HTML Document]
+Description:    TODO: Description about the component
+------------------------------------------------------------------- -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<!-- Import base component common to all widgets-->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+<link rel="import" href="../../SMAProcSPUI/sp-document-content-ui/sp-document-content-ui.html">
+
+
+<dom-module id="xs-wg-content-viewer">
+	<template>
+		<!-- Including the base widget style -->
+		<style>
+			.msg {
+				color: #EA4F37;
+				display: block;
+			}
+
+			.content-viewer {
+
+			    --sp-document-content-ui-main: {
+			        height: 250px;
+			        max-height: 250px;
+			    };
+
+			    --sp-document-content-ui-files-container: {
+			        height: 200px;
+			        max-height: 200px;
+			    };
+			}
+		</style>
+
+		<!-- <link rel="import" type="css" href="xs-wg-content-viewer.css"> -->
+		<style include="xs-wg-base"></style>
+		<label class="xs-wg-label">{{label}}</label>
+		<!--Owned content.Show button with Owned document name-->
+		<div class="doc-container">
+			<sp-document-content-ui class="content-viewer" id="document" contentid="{{_getContentId(rawvalue,value)}}"
+			read-only="{{_isReadOnly(readonly, rawvalue)}}" disabled="{{_isDisabled(rawvalue)}}" type="{{rawvalue.DummyDocType}}" show-upload-progress on-sp-document-content-ui-update="notifyCanvas"></sp-document-content-ui>
+		</div>
+
+
+		<!--
+	 With respect to IR-635266-3DEXPERIENCER2019x, UI modification is made, it now will show on hovering on component about "No interaction",
+				 instead of component. 
+	<template is="dom-if" if="{{_hasNoAccessDuetoPreviewMode(rawvalue, _isValidDataType)}}">
+			<sp-nls class="msg" nlspath="DS/SMAProcXSWidgets/assets/nls/SMAProcXSWidgets" nlskey="xs-wg-content-viewer.PreviewMode.NoAccess"></sp-nls>
+		</template>
+-->
+
+
+		<template is="dom-if" if="{{_isNotValidType(rawvalue, _isValidDataType)}}">
+			<sp-nls class="msg" nlspath="DS/SMAProcXSWidgets/assets/nls/SMAProcXSWidgets" nlskey="xs-wg-content-viewer.ERROR.UnSupportedType"></sp-nls>
+		</template>
+
+	</template>
+	<script type="text/javascript" src="xs-wg-content-viewer.js"></script>
+</dom-module>

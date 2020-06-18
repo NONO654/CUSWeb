@@ -1,0 +1,56 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../ad-tool-config-where/ad-tool-config-where.html">
+<link rel="import" href="../ad-tool-config-how/ad-tool-config-how.html">
+<link rel="import" href="../ad-tool-config-input-files/ad-tool-config-input-files.html">
+<link rel="import" href="../ad-tool-config-output-files/ad-tool-config-output-files.html">
+<link rel="import" href="../ad-tool-config-how/ad-tool-config-how.html">
+<link rel="import" href="../ad-tool-config-simtoso/ad-tool-config-simtoso.html">
+
+<dom-module id="ad-tool-config-panel">
+  <link rel="import" type="css" href="ad-tool-config-panel.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+    	<div id="panelOverlay" class="hidden">
+    	   	<div id="loadingSection"></div>
+    	</div>
+        <div id="whereSection" class="content-section">
+			<ad-tool-config-where id="wherePanel" session="{{session}}" tools="{{tools}}"></ad-tool-config-where>
+        </div>
+        
+        <div id="inputFilesSection" class="content-section">
+			<ad-tool-config-input-files id="inputFilesPanel" tools="{{tools}}"></ad-tool-config-input-files>
+        </div>
+           
+        <div id="toolConfigSection" class="content-section hidden">
+        </div>
+           
+        <div id="toolConfigErrorSection" class="content-section hidden">
+	        <div class="content-section-heading chrome-pull-fix">
+			    <div class="pull-left content-section-title">Tool Configuration</div>
+	        </div>
+	        <div class="clearfix"></div>
+	       	<div class="content-section-body">
+			 	<!-- The alert messages need to have the relative position declared inline in order to work in Firefox and IE -->
+	       		<div id="configurationErrorNone" class="hidden">
+					<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+					No tool is currently selected.
+					</div>
+	       		</div>
+	       		<div id="configurationErrorMultiple" class="hidden">
+					<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+					This configuration section can only be edited for a single tool.
+					</div>
+	       		</div>
+	        </div>
+        </div>
+        
+        <div id="outputFilesSection" class="content-section">
+			<ad-tool-config-output-files id="outputFilesPanel" tools="{{tools}}"></ad-tool-config-output-files>
+        </div>        
+	</template>
+  <script src="ad-tool-config-panel.js"></script>
+</dom-module>
+
+

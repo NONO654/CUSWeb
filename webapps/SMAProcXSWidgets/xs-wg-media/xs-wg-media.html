@@ -1,0 +1,262 @@
+<!--Copyright 2016 Dassault Systemes Simulia Corp.-->
+<!-- Import base component common to all widgets-->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../../SMAProcSP/sp-file-content/sp-file-content.html">
+
+<dom-module id="xs-wg-media">
+	<!-- <link rel="import" type="css" href="xs-wg-media.css"> -->
+	<style include="xs-wg-base"></style>
+	<template>
+		<style>
+		div.media-body {
+		    padding: 5px;
+		    height: auto;
+		}
+
+		.media-container {
+		    height: 140px;
+			width: 100%;
+		    position: relative;
+		    display: block;
+		    width: 100%;
+		    top: 0px;
+		    left: 0px;
+		    bottom: 0px;
+		    top: 0px;
+		    cursor: default;
+		    will-change: background-color, height;
+		    transition: background-color 0.3s cubic-bezier(0,0,0.3,1) , height 0.3s cubic-bezier(0.02, 0.83, 0.6, 1.12);
+		}
+
+		.no-media-info:before {
+		    content: '\e009';
+		    font-size: 24px;
+		    display: inline-block;
+		}
+
+		.no-media-info {
+		    color: #b4b6ba;
+		    font-size: 20px;
+		    padding-bottom: 4px;
+		    display: none;
+		    position: absolute;
+		    top: 50%;
+		    left: 50%;
+		    -webkit-transform: translate(-50%,-50%);
+		    -moz-transform: translate(-50%,-50%);
+		    transform: translate(-50%,-50%);
+		}
+
+		span.no-media-text {
+		    display: block;
+		    font-family: Arial;
+		}
+
+		.hidden {
+		    display: none;
+		}
+
+		.media-body[data-size="Small"] .media-container{
+		    height: 140px;
+		}
+
+		.media-body[data-size="Medium"] .media-container{
+		    height: 240px;
+		}
+
+		.media-body[data-size="Large"] .media-container{
+		    height: 340px;
+		}
+
+		.no-media > .no-media-info {
+		    display: block;
+		}
+
+		.show-navigate > .navigate {
+		    display: block;
+		}
+
+		.no-media > .maximize {
+		    display: none;
+		}
+
+		.maximized > .maximize {
+		    display: none;
+		}
+
+		.maximized > .restore {
+		    display: block;
+		}
+
+		.media-container:hover > .navigate {
+		    opacity: 1;
+		}
+
+		.media-container:hover > .maximize {
+		    opacity: 0.8;
+		}
+
+		.media-container:hover > .restore {
+		    opacity: 0.8;
+		}
+
+		.update-container:hover > .maximize {
+		    opacity: 0.8;
+		}
+
+		.navigate:hover{
+		    opacity: 1;
+		}
+
+		.navigate-icon {
+		    position: absolute;
+		    left: 0;
+		    right: 0;
+		    top: 0;
+		    bottom: 0;
+		    margin: auto;
+		    width: 24px;
+		    height: 24px;
+		    display: inline-block;
+		    fill: currentColor;
+		    line-height: 24px;
+		}
+
+		.navigate {
+		    display: none;
+		    width: 50px;
+		    height: 50px;
+		    opacity: 0.5;
+		    color: #757575;
+		    background-color: #fff;
+		    border-radius: 50%;
+		    text-align: center;
+		    vertical-align: middle;
+		    padding: 0;
+		    margin: 0;
+		    position: absolute;
+		    top: 50%;
+		    transform: translateY(-50%);
+		    cursor: pointer;
+		    transition: opacity 0.3s cubic-bezier(0,0,0.3,1);
+		    z-index: 2;
+		    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.12),0 0 1px 0 rgba(0,0,0,0.24),inset 0 0 0 0 rgba(0,0,0,0.10),inset 0 0 0 0 rgba(255,255,255,0.50);
+		}
+
+		.navigate.next {
+		    right: 1px;
+		    left: initial;
+		}
+
+		.maximize:before {
+		    content: '\e133';
+		}
+
+		.restore:before {
+		    content: '\e134';
+		}
+
+		.maximize {
+		    position: absolute;
+		    right: 0;
+		    top: 0;
+		    font-size: 20px;
+		    opacity: 0.1;
+		    cursor: pointer;
+		    z-index: 16;
+		}
+
+		.restore {
+		    position: absolute;
+		    right: 0;
+		    display: none;
+		    color: #368ec4;
+		    top: 0;
+		    font-size: 25px;
+		    opacity: 0.1;
+		    cursor: pointer;
+		    z-index: 2;
+		}
+
+		:host-context(.design) .maximize {
+		  z-index: 0; }
+
+		:host-context(.design) .restore  {
+		  z-index: 0; }
+
+		.maximized {
+		    position: fixed;
+		    height: 100% !important;
+		    background-color: white;
+		    transition: height 0.3s cubic-bezier(1, 0.38, 1, 0.19);
+		    z-index: 21;
+		}
+
+		.content {
+			position: absolute;
+		    top: 0px;
+		    left: 0px;
+		    will-change: opacity;
+		    opacity: 0;
+		    transition: opacity 0.3s cubic-bezier(0,0,0.3,1);
+		    height: auto;
+		    width: auto;
+		    text-align: center;
+		    vertical-align: middle;
+		    margin: 0 auto;
+		    overflow: hidden;
+		    max-width: 95%;
+		    max-height: 95%;
+		    left: 50%;
+		    top: 50%;
+		    transform: translateY(-50%);
+		    transform: translate(50%);
+		    -webkit-transform: translate(-50%,-50%);
+		    -moz-transform: translate(-50%,-50%);
+		    -ms-transform: translate(-50%, -50%);
+		    transition: height 0.5s cubic-bezier(0,0,0.3,1);
+		}
+
+		:host-context(.design) .restore .maximize .navigate {
+		  z-index: 0; }
+
+		.content-active {
+			opacity: 1;
+		    z-index: 1;
+			transition: opacity 0.3s cubic-bezier(0,0,0.3,1);
+		}
+		</style>
+
+
+		<div class="media-body" data-size$="{{size}}">
+			<sp-updatepanel id="updpnl" class="update-container no-media">
+				<label class="xs-wg-label">{{label}}</label>
+				<div class="maximize fonticon" title="Maximize" on-click="maximize"></div>
+				<sp-dashboard id="spdashboard"></sp-dashboard>
+				<sp-file-content id="fileContent"></sp-file-content>
+				<div id="container" class="media-container no-media">
+					<div class="no-media-info fonticon xs-wg-placeholder-icon">
+						<span class="no-media-text xs-wg-placeholder-text" id="errormsg">No Media Present</span>
+					</div>
+					<div class="restore fonticon" title="Restore" on-click="restore"></div>
+					<div class="navigate" title="Previous" on-click="previous">
+						<span class="navigate-icon">
+							<svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+							</svg>
+						</span>
+					</div>
+					<div class="navigate next" title="Next" on-click="next">
+						<span class="navigate-icon">
+							<svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+							</svg>
+						</span>
+					</div>
+				</div>
+			</sp-updatepanel>
+		</div>
+	</template>
+	<script src="xs-wg-media.js"></script>
+</dom-module>

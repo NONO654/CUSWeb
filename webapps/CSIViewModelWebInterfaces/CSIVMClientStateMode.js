@@ -1,0 +1,1 @@
+define("DS/CSIViewModelWebInterfaces/CSIVMClientStateMode",[],function(){var a={Unknown:1,Tempo:2,Permanent:3,TempoOrPermanent:4};return a});

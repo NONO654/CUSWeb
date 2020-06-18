@@ -1,0 +1,14 @@
+m|SMAAnalyticsComponents\SMAAnalyticsDataTable.mweb
+b|j|c,u
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAAnalyticsDataTable\SMAAnalyticsDataTable.css|1568749458|6355
+s|SMAAnalyticsComponents\SMAAnalyticsDataTable.mweb\src\SMAAnalyticsDataTable.css|1508788772|7755
+t|win_b64\webapps\SMAAnalyticsDataTable\SMAAnalyticsDataTable.js|1559958501|248395
+s|SMAAnalyticsComponents\SMAAnalyticsDataTable.mweb\src\SMAAnalyticsDataTable2.js|1508791553|15677
+s|SMAAnalyticsComponents\SMAAnalyticsDataTable.mweb\src\SMAAnalyticsServantDataHandler.js|1508791553|47144
+s|SMAAnalyticsComponents\SMAAnalyticsDataTable.mweb\src\SMAAnalyticsDataTableHeader.js|1508791553|33984
+s|SMAAnalyticsComponents\SMAAnalyticsDataTable.mweb\src\SMAAnalyticsDataTableUtils.js|1508790947|6353
+s|SMAAnalyticsComponents\SMAAnalyticsDataTable.mweb\src\SMAAnalyticsDataTableSVGHeader.js|1513187718|37327
+s|SMAAnalyticsComponents\SMAAnalyticsDataTable.mweb\src\SMAAnalyticsBodyForServant.js|1557878235|107898

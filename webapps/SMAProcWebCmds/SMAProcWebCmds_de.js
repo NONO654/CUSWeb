@@ -1,0 +1,1 @@
+define("DS/SMAProcWebCmds/SMAProcWebCmds_de",{});define("DS/SMAProcWebCmds/assets/nls/SMAProcExtensionEditorCmd",{StepCanOnlyBeEditedInPCN:"Dieser Schritt kann nur in der nativen App 'Process Composer' bearbeitet werden",OpenProcessInPCN:"Diesen Prozess in der nativen App 'Process Composer' öffnen"});

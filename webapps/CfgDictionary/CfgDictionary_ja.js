@@ -1,0 +1,1 @@
+define("DS/CfgDictionary/CfgDictionary_ja",{});define("DS/CfgDictionary/assets/nls/CfgDictionary",{option:"オプション",rule:"ルール",value:"値",variability_group:"バリアビリティ グループ",variant:"バリアント"});

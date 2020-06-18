@@ -1,0 +1,33 @@
+<dom-module id="cmp-customadapter-list">
+<template>
+    <style>
+        :host {
+            display: block;
+            font-family: sans-serif;
+        }
+        :host([hidden]) {
+            display: none;
+        }
+        .adapter {
+            margin: 1%;
+            width: 98%;
+            text-align: left;
+            display: block;
+        }
+        .adaptericon {
+            margin: 5px;
+            height: 32px;
+            width: 32px;
+            vertical-align: middle;
+        }
+        #custom-librec {
+            color: #368ec4;
+        }
+    </style>
+    <p hidden$="{{_areAdaptersAvailable(customadapters.*)}}">[[_i18n.NoAdaptersAvailable]]</p>
+    <div id="adapter-error"  hidden="true">
+        <p id="error-message">[[_i18n.ErrorFetchingAdapter]]</p>
+        <a href="{{_getLibRecURL()}}" id="custom-librec">Check Custom Lib Rec XML here</a>
+</div>
+</template>
+</dom-module>

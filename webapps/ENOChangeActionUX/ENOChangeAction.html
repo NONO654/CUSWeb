@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+    <title></title>
+    <link rel="icon" type="image/png" href="assets/images/ENOVIA_WIDGET_Favicon.png"/>
+    <meta charset="ISO-8859-1">
+        <meta name="author" content="Dassault Systèmes" />
+        <meta name="brand" content="ENOVIA" />
+        <meta name="description" content="Change Actions Management" />
+        <meta name="autoRefresh" content="-1" />
+    
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+        <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+        <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+
+         <style type="text/css">
+        .tile-title{
+        font-size: 15px;
+        font-family: '3dsregular' tahoma,serif;
+        color: #368ec4;
+        }
+        .module{
+        width:100%;
+        height:100%;
+         margin: 0;
+        }
+        .moduleWrapper {
+            z-index: inherit;
+            zoom: 1;
+        }
+
+            .module > .moduleHeader {
+                display: none;
+            }
+
+            .moduleFooter {
+                display: none;
+            }
+
+
+        </style>
+
+        <script type="text/javascript">
+        //<![CDATA[
+'use strict';
+require(['DS/ENOChangeActionUX/scripts/CAUtility','DS/ENOChgActionGridUX/scripts/View/ChgChangeActionHome','DS/ENOChgServices/scripts/services/ChgInfraService','DS/PlatformAPI/PlatformAPI','DS/ENOChangeActionUX/scripts/ChangeAction'], function (CAUtility,ChgChangeActionHome, ChgInfraService,PlatformAPI,ChangeAction)
+        {
+            widget.addEvents(
+            {
+                onLoad : function()
+                {
+                    var contentAppdiv=widget.body;
+                    var options=null;
+                    if (typeof (dscef) !== 'undefined') {
+                        ChangeAction.init();
+                    } else {
+                        // call to set up the widget infra
+                        ChgInfraService.updateWidgetTitle();
+                        ChgInfraService.init();
+                        ChgInfraService.setInfraValue(function (callback, options) {
+                            if (enoviaServerCAWidget.ViewPref == "Tile") {
+                                ChangeAction.init();
+                            } else if (enoviaServerCAWidget.ViewPref == "Grid" || enoviaServerCAWidget.ViewPref == undefined) {
+                                if (callback == "LoadSummary") {
+                                    ChgChangeActionHome.init(contentAppdiv, options);
+                                } else {
+                                    ChangeAction.getCAIDCard(options);
+                                }
+                            }
+                        });
+                    }
+                },
+                onRefresh: function () {
+                    CAUtility.refreshTaggerProxies();
+                },
+                onSearch: function () {
+                    CAUtility.filterInCurrentDashboard(arguments[0]);
+                },
+                onResetSearch: function () {
+                    var emptyString = "";
+                    CAUtility.filterInCurrentDashboard(emptyString);
+                }
+    });
+    widget.setAutoRefresh(-1);
+});
+        //]>
+        </script>
+      </head>
+      <body>
+            <p>Loading...</p>
+      </body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+    <Template syp:name="RGRHeaders" Target="CATCmdHeadersList">
+        <CATCmdHeadersList>
+            <CATCommandHeader Behavior="CATAfrHeaderCheck" ID="DisplayReportsCmd" ClassName="DS/RGR/commands/DisplayReportsCmd" ResourceFile="RGR/RGR" Available="1"/>
+            <CATCommandHeader Behavior="CATAfrHeaderCheck" ID="DisplayOFCmd" ClassName="DS/RGR/commands/DisplayOFCmd" ResourceFile="RGR/RGR" Available="1"/>
+            <CATCommandHeader ID="NewCmd" ClassName="DS/RGR/commands/NewCmd" ResourceFile="RGR/RGR" Available="1"/>
+            <CATCommandHeader ID="TilesViewCmd" ClassName="DS/RGR/commands/TilesViewCmd" ResourceFile="RGR/RGR" Available="1"/>
+            <CATCommandHeader ID="TreeListViewCmd" ClassName="DS/RGR/commands/TreeListViewCmd" ResourceFile="RGR/RGR" Available="1"/>
+        </CATCmdHeadersList>
+    </Template>
+    <Template syp:name="RGRWkbAccess" Target="CATCmdWorkbench">
+        <CATCmdWorkbench Name="RGRWkb" RepresentationType="AfrActionBar">
+            <CATCmdContainer Name="TypeSwitch" RepresentationType="AfrActionBarFixedSection">
+                    <CATCmdStarter Name="Report" Command="DisplayReportsCmd"/>
+                    <CATCmdStarter Name="Output Format" Command="DisplayOFCmd"/>
+            </CATCmdContainer>
+            <CATCmdContainer Name="Actions" RepresentationType="AfrActionBarSection">
+                <CATCmdStarter Name="New Data" Command="NewCmd"/>
+                <CATCmdContainer Name="SwitchView" RepresentationType="AfrActionBarDropDown">
+                    <CATCmdStarter Name="TileView" Command="TilesViewCmd"/>
+                    <CATCmdStarter Name="TreeListView" Command="TreeListViewCmd"/>
+                </CATCmdContainer>
+            </CATCmdContainer>
+        </CATCmdWorkbench>
+    </Template>
+</Styles>
+
+            

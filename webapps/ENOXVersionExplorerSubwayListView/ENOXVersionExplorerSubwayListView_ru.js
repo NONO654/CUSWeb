@@ -1,0 +1,1 @@
+define("DS/ENOXVersionExplorerSubwayListView/ENOXVersionExplorerSubwayListView_ru",{});define("DS/ENOXVersionExplorerSubwayListView/assets/nls/SubwayColumnsTitles",{colAuthor:"Автор",colCreated:"Создано",colDescription:"Описание",colGraph:"График",colMaturity:"Готовность",colModified:"Изменен",colRevision:"Редакция",colTitle:"Заголовок "});

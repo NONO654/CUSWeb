@@ -1,0 +1,300 @@
+/* -------------------------------------------------------------------------
+	Default Stylesheet for Windows/Mac Platforms
+	emxUILayerDialog.css
+	Version:2.0
+	
+    Copyright (c) 1992-2018 Dassault Systemes ENOVIA Corp. All Rights Reserved.
+    This program contains proprietary and trade secret information 
+    of Dassault Systemes ENOVIA Corp. Copyright notice is precautionary only
+    and does not evidence any actual or intended publication of such program
+   ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+   Overall Appearance
+   ------------------------------------------------------------------------- */
+
+/* outer div styling */
+div#mx_divLayerDialog {
+	position:absolute;
+	z-index:99;
+	width:300px;
+	background-color:#E6E6E6;
+	padding:0;
+	font-family:Verdana, Arial, Helvetica;
+	font-size:12px;
+	border:1px solid #424242;
+	border-top:1px solid #747474;
+	border-left:1px solid #747474;
+}
+
+/* ------------------------------
+   Header
+   ------------------------------ */
+
+div#mx_divLayerDialog div#mx_divLayerDialogHeader {
+	margin:0;
+	padding:0;
+	background-color:#555;
+	border-bottom:1px solid #0143CF;
+	overflow:hidden;
+	padding:0 0 0 6px;
+	border:none;
+}
+div#mx_divLayerDialog div#mx_divLayerDialogHeader table {
+	width:100%;
+}
+div#mx_divLayerDialog div#mx_divLayerDialogHeader table tr td.title {
+	color:#FFF;
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+	line-height:13px;
+	padding:2px 0 3px 0;
+	text-shadow:#555 2px 1px;
+}
+div#mx_divLayerDialog div#mx_divLayerDialogHeader table tr td.buttons {
+	width:15%;
+	padding-top:1px;
+	text-align:right;
+	vertical-align:top;
+}
+div#mx_divLayerDialog div#mx_divLayerDialogHeader table tr td.buttons a.button {
+	display:block;
+	float:right;
+	height:12px;
+	margin:1px 0 0 4px;
+	text-indent:-4000px;
+	width:12px;
+}
+div#mx_divLayerDialog div#mx_divLayerDialogHeader table tr td.buttons a.button.done {
+	background:transparent url(../../common/images/buttonMiniDone.gif) no-repeat scroll left top;
+}
+div#mx_divLayerDialog div#mx_divLayerDialogHeader table tr td.buttons a.button.cancel {
+	background:transparent url(../../common/images/buttonMiniCancel.gif) no-repeat scroll left top;
+}
+
+/* ------------------------------
+   Body
+   ------------------------------ */
+
+div#mx_divLayerDialog div#mx_divLayerDialogBody {
+	padding:4px 0 0 0;
+}
+div#mx_divLayerDialog div#mx_divLayerDialogBody table {
+	width:auto;
+}
+div#mx_divLayerDialog div#mx_divLayerDialogBody table tr td.label {
+	font-weight:bold;
+	padding:0 5px 0 5px;
+}
+div#mx_divLayerDialogBody div[class^="mx"] div[class^="mx"] table tr td.mx_spacer-cell {
+	padding:0;
+	font-size:1pt;
+	line-height:1pt;
+}
+
+/* ------------------------------
+   Footer
+   ------------------------------ */
+
+div#mx_divLayerDialog div#mx_divLayerDialogFooter {
+	display:none;
+}
+	
+/* --------------------------------------------------------------------
+   Configurator Option Details Conflict Dialog Appearance
+   -------------------------------------------------------------------- */
+
+/* ------------------------------
+   Body
+   ------------------------------ */
+
+div#mx_divLayerDialog div#mx_divLayerDialogBody table tr td p {
+	font-size:11px;
+	height:39px;
+	margin:0 6px;
+}
+div#mx_divLayerDialogBody div.mx_all_option_detail {
+	background-color:#F7F7F7;
+	border:1px solid #C8C8C8;
+	height:162px;
+	margin:6px 3px 4px;
+	overflow-x:hidden;
+	overflow-y:scroll;
+	padding:2px;
+	}
+
+div#mx_divLayerDialogBody div.mx_all_option_detail div.mx_option-detail {
+	border-top:1px solid #999;
+	margin:0 4px 0 4px;
+	padding:2px 2px 8px 2px;
+}
+
+div#mx_divLayerDialogBody div.mx_all_option_detail div.mx_option-detail table tr td {
+	font-size:11px;
+	line-height:14px;
+	vertical-align:top;
+}
+	
+.context {
+	background-image:url(../../common/images/utilConfiguratorInfoBackground.gif);
+}
+
+span.mx_field-headName,
+span.mx_field-value,
+span.mx_new-value {
+	font-weight:bold;
+}
+
+	
+div#mx_divLayerDialog.mx_option-details div#mx_divLayerDialogFooter {
+	display:none;
+}
+
+
+/* --------------------------------------------------------------------
+   Configurator Filterable List Dialog Appearance
+   -------------------------------------------------------------------- */
+
+/* ------------------------------
+   Body
+   ------------------------------ */
+
+div#mx_divLayerDialog div#mx_divLayerDialogBody ul {
+	background-color:#F7F7F7;
+	overflow:scroll;
+	overflow-x:hidden;
+	margin:6px 3px 4px 3px;
+	padding:2px;
+	height:180px; /* override the height with JS to resize layer */
+	border:1px solid #C8C8C8;
+}
+
+div#mx_divLayerDialog div#mx_divLayerDialogBody ul li {
+	/* line-height:15px; */
+	padding:1px 3px;
+}
+
+div#mx_divLayerDialog div#mx_divLayerDialogBody ul li.selected {
+	background-color:#DDD;
+}
+	
+/* --------------------------------------------------------------------
+   Mask
+   -------------------------------------------------------------------- */
+
+.mx_divLayerDialogMask{
+    position:absolute;
+    left:0;
+    width:110%;
+    bottom:0;
+    top:0;
+    background-color:#000;
+    z-index:100;
+    opacity:.5;
+    filter:alpha(opacity=50);
+    height:100%;
+}
+	
+	
+/* --------------------------------------------------------------------
+   Alert In Mask
+   -------------------------------------------------------------------- */
+
+/* outer div styling */
+div#mx_divLayerMaskDialog {
+	position:absolute;
+	right:10px;
+	z-index:101;
+	width:300px;
+	background-color:#E6E6E6;
+	padding:0;
+	font-family:Verdana, Arial, Helvetica;
+	font-size:12px;
+	border:1px solid #424242;
+	border-top:1px solid #747474;
+	border-left:1px solid #747474;
+	}
+
+/* dialog header default appearance */ 
+div#mx_divLayerMaskDialog div#mx_divLayerMaskDialogHeader {	
+	height:40px;
+	padding:0;
+	}
+
+div#mx_divLayerMaskDialog div#mx_divLayerMaskDialogHeader p {
+	#padding:0;
+	#margin:0;
+	}
+
+/* dialog body default appearance */
+div#mx_divLayerMaskDialog div#mx_divLayerMaskDialogBody {
+	border:none;
+}
+
+/* dialog footer default appearance */ 
+div#mx_divLayerMaskDialog div#mx_divLayerMaskDialogFooter {
+	min-height:20px;
+	border:none;
+	margin:0;
+}
+
+/* --------------------------------------------------------------------
+   Alert Dialog Appearance In Mask
+   -------------------------------------------------------------------- */
+
+div#mx_divLayerMaskDialog.mx_alert {
+	width:280px;
+	#width:250px;
+}
+
+div#mx_divLayerMaskDialog.mx_alert div#mx_divLayerMaskDialogHeader {
+	background-color:#0053E1;
+	color:#FFF;
+	height:18px;
+	font-family:Arial;
+	font-weight:bold;
+	font-size:13px;
+	text-shadow:#333 2px 2px;
+	padding:4px 4px 2px 4px;
+	border:none;
+	border-bottom:1px solid #0143CF;
+	z-index:101;
+}
+
+div#mx_divLayerMaskDialog.mx_alert div#mx_divLayerMaskDialogBody {
+	min-height:50px;
+	padding:10px 10px 4px 10px;
+}
+
+div#mx_divLayerMaskDialog.mx_alert div#mx_divLayerMaskDialogFooter {
+	padding:0 0 4px 0;
+}
+
+div#mx_divLayerMaskDialog.mx_alert div#mx_divLayerMaskDialogFooter table {
+	margin:0;
+	width:100%;
+}
+
+div#mx_divLayerMaskDialog.mx_alert div#mx_divLayerMaskDialogFooter table tr td {
+	text-align:center;
+}
+
+div#mx_divLayerMaskDialog.mx_alert div#mx_divLayerMaskDialogBody p {
+	margin:2px 0 12px 0;
+}
+
+div#mx_divLayerMaskDialog.mx_alert div#mx_divLayerMaskDialogBody p span.mx_rows-retrieved {
+	font-weight:bold;
+}
+
+div#mx_divLayerDialog.mx_alert div#mx_divLayerMaskDialogFooter p.mx_processing-message {
+	margin:20px 0 20px 0;
+	text-align:center;
+}
+
+div#mx_divLayerDialog.mx_alert div#mx_divLayerMaskDialogFooter table tr td input {
+	padding:1px 10px 2px 10px;
+	font-family:Verdana;
+	font-size:11px;
+}

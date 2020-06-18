@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.doe.FullFactorial" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAExeDOEFullFactorialPlugin" nlsID="dispname">Full Factorial</DisplayName>
+	<Description nlsFile="SMAExeDOEFullFactorialPlugin" nlsID="desc">Full Factorial</Description>
+	<LongDescription nlsFile="SMAExeDOEFullFactorialPlugin" nlsID="longdesc">
+		<![CDATA[Number of levels for each factor is specified and all combinations of all factors at all levels are studied.
+
+</span><span style="font-weight:bold">Advantages:
+</span><span>   + For p levels, all p-1 order effects can be evaluated.
+   + All possible factor interactions can be evaluated.
+
+</span><span style="font-weight:bold">Disadvantages:
+</span><span>   - Can be very expensive for multiple factors at multiple levels. For example, 5 factors studied at 5 levels requires 3125 design points.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DOE_Technique</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.doe.FullFactorial</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeDOEFullFactorialPlugin32.gif" targetFilename="SMAExeDOEFullFactorialPlugin32.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeDOEFullFactorialPlugin.CATNls" targetFilename="SMAExeDOEFullFactorialPlugin.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeDOEFullFactorialPlugin_ja.CATNls" targetFilename="SMAExeDOEFullFactorialPlugin_ja.CATNls" locale="Japanese" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-full-factorial/cmp-doe-full-factorial.html" targetFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-full-factorial/cmp-doe-full-factorial.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-doe-full-factorial</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.doe.fullfactorial.FullFactorial</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<Property name="Auto-Assign Factors" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[True]]>
+			</Value>
+		</Property>
+
+		<Property name="factor attributes" type="aggregate" valuetype="single">
+			<Property name="# Levels" type="integer" valuetype="single">
+				<Value>
+					<![CDATA[2]]>
+				</Value>
+			</Property>
+			<Property name="Levels" type="string" valuetype="single">
+				<Value>
+					<![CDATA[-25 25]]>
+				</Value>
+			</Property>
+			<Property name="Relation" type="string" valuetype="single">
+				<Value>
+					<![CDATA[%]]>
+				</Value>
+			</Property>
+			<Property name="Baseline" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

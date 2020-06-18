@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("quicktable","ja",{more:"詳細を表示..."});

@@ -1,0 +1,13 @@
+m|DELWeb3DViewer\DELWeb3DViewer.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19217
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELWeb3DViewer\index.html|1565034914|2237
+s|DELWeb3DViewer\DELWeb3DViewer.mweb\src\index.html|1563277017|2237
+t|win_b64\webapps\DELWeb3DViewer\assets\json\3DViewerConfigurations.json|1565034912|489
+s|DELWeb3DViewer\DELWeb3DViewer.mweb\src\assets\json\3DViewerConfigurations.json|1563975560|489
+t|win_b64\webapps\DELWeb3DViewer\DELWeb3DViewer.js|1565034914|7961
+s|DELWeb3DViewer\DELWeb3DViewer.mweb\src\App3D.js|1564123663|3883
+s|DELWeb3DViewer\DELWeb3DViewer.mweb\src\ViewManager.js|1564464127|13368
+s|DELWeb3DViewer\DELWeb3DViewer.mweb\src\init.js|1547648566|13764

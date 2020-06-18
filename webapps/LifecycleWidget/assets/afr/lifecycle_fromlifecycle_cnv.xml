@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+<!-- This is NOT for PAR role use. These commands will appear when used without PAR role!! -->
+
+      <Template syp:name="LifecycleHeaders" Target="CATCmdHeadersList">
+            <CATCmdHeadersList>
+                  <!-- Fixed area -->
+                  <CATCommandHeader Behavior="CATAfrHeaderCheck" ID="ActionBar_ActiveBookmarkCmd" ClassName="DS/FolderActive/commands/ActionBar_ActiveBookmarkCmd" ResourceFile="FolderEditor/ENOFolder" Available="1"/>
+                  <!-- EDIT SECTION -->
+                  <CATCommandHeader ID="RevisionHdr" ClassName="DS/LifecycleCmd/ReviseCmd" ResourceFile="LifecycleCmd/ReviseCmd" Available="1" />
+                  <CATCommandHeader ID="NewBranchHdr" ClassName="DS/LifecycleCmd/NewBranchCmd" ResourceFile="LifecycleCmd/NewBranchCmd" Available="1" />
+                  <CATCommandHeader ID="DeleteHdr" ClassName="DS/LifecycleCmd/DeleteCmd" ResourceFile="LifecycleCmd/DeleteCmd" Available="1" />
+                  <CATCommandHeader ID="DuplicateHdr" ClassName="DS/LifecycleCmd/DuplicateCmd" ResourceFile="LifecycleCmd/DuplicateCmd" Available="1" />
+                  <CATCommandHeader ID="CompareHdr" ClassName="DS/CompareCmd/CompareCmd" ResourceFile="CompareCmd/CompareCmd" Available="1" />
+<!--  e82 - for testing / please leave for now (3.31.2016)...................................-->                  
+<!--                    <CATCommandHeader ID="CompareJSONHdr" ClassName="DS/CompareCmd/CompareCmd" ResourceFile="CompareCmd/CompareCmd" Available="1" /> -->
+<!--  ...................................................................................... -->                  
+                  <CATCommandHeader ID="IterationsHdr" ClassName="DS/LifecycleCmd/IterationsCmd" ResourceFile="LifecycleCmd/IterationsCmd" Available="1" />
+                  <CATCommandHeader ID="ActionBar_Attributes" ClassName="DS/ENOCollabSharingCmds/commands/EditPropCmd/ActionBar_EditPropCmd" ResourceFile="ENOCollabSharingCmds/CollabSharing_Workbench" Available="1" />
+                  <CATCommandHeader ID="ActionBar_ReserveCmd" ClassName="DS/ENOCollabSharingCmds/commands/ReserveCmd/ActionBar_ReserveCmd" ResourceFile="ENOCollabSharingCmds/CollabSharing_Workbench" Available="1" />
+				  <CATCommandHeader ID="ActionBar_UnreserveCmd" ClassName="DS/ENOCollabSharingCmds/commands/UnreserveCmd/ActionBar_UnreserveCmd" ResourceFile="ENOCollabSharingCmds/CollabSharing_Workbench" Available="1" />
+				  <CATCommandHeader ID="ActionBar_ChangeOwner" ClassName="DS/ENOCollabSharingCmds/commands/TransferOwnershipCmd/ActionBar_ChangeOwnerCmd" ResourceFile="ENOCollabSharingCmds/CollabSharing_Workbench" Available="1" />
+				  <CATCommandHeader ID="ActionBar_AccessRightCmd" ClassName="DS/ENOCollabSharingCmds/commands/AccessRightCmd/ActionBar_AccessRightCmd" ResourceFile="ENOCollabSharingCmds/CollabSharing_Workbench" Available="1"/>			  
+				  <CATCommandHeader ID="SubscribeHdr" ClassName="DS/ENOSubscriptionMgmt/Commands/Subscribe" ResourceFile="ENOSubscriptionMgmt/ENOSubscriptionMgmt" Available="1"/>
+				  <CATCommandHeader ID="UnSubscribeHdr" ClassName="DS/ENOSubscriptionMgmt/Commands/UnSubscribe" ResourceFile="ENOSubscriptionMgmt/ENOSubscriptionMgmt" Available="1"/>
+				  <CATCommandHeader ID="EditSubscribeHdr" ClassName="DS/ENOSubscriptionMgmt/Commands/EditSubscribe" ResourceFile="ENOSubscriptionMgmt/ENOSubscriptionMgmt" Available="1"/>
+				  <CATCommandHeader ID="MySubscriptionsHdr" ClassName="DS/ENOSubscriptionMgmt/Commands/MySubscriptions" ResourceFile="ENOSubscriptionMgmt/ENOSubscriptionMgmt" Available="1"/>
+				   
+            </CATCmdHeadersList>
+      </Template>
+
+      <Template syp:name="LifecycleWkbAccess" Target="CATCmdWorkbench">
+            <CATCmdWorkbench Name="LifecycleWkb">
+            	  <!-- Fixed area -->
+                  <CATCmdContainer Name="LifecycleFixedArea" RepresentationType="AfrActionBarFixedSection">
+                        <CATCmdStarter Name="Active Bookmark" Command="ActionBar_ActiveBookmarkCmd"/>
+                  </CATCmdContainer>
+                  <CATCmdContainer Name="Lifecycle" RepresentationType="AfrActionBarSection">
+                        <CATCmdStarter Name="Revision" Command="RevisionHdr" />
+                        <CATCmdStarter Name="NewBranch" Command="NewBranchHdr" />
+                        <CATCmdStarter Name="DeleteRecycleBinCmd" Command="DeleteHdr" />
+                        <CATCmdStarter Name="Duplicate" Command="DuplicateHdr" />
+                        <CATCmdStarter Name="Compare" Command="CompareHdr" />
+
+<!--  e82 - for testing / please leave for now (3.31.2016)................................. -->                                          
+<!--                         <CATCmdStarter Name="CompareJSON" Command="CompareJSONHdr" />  -->
+<!--  ......................................................................................-->                  
+                        
+                        <CATCmdStarter Name="Iterations" Command="IterationsHdr" />                       
+                        <CATCmdStarter Name="Attributes" Command="ActionBar_Attributes"/>                         
+                  </CATCmdContainer>
+                  <CATCmdContainer Name="Collaboration" RepresentationType="AfrActionBarSection">
+                  		<CATCmdStarter Name="Access Rights" Command="ActionBar_AccessRightCmd"/>
+                        <CATCmdStarter Name="Transfer Ownership" Command="ActionBar_ChangeOwner"/>
+                        <CATCmdContainer Name="ENOSubscribe" RepresentationType="AfrActionBarDropDown">
+	                        <CATCmdStarter Name="Subscribe" Command="SubscribeHdr"/>
+	                        <CATCmdStarter Name="Un Subscribe" Command="UnSubscribeHdr"/>
+	                        <CATCmdStarter Name="Edit Subscriptions" Command="EditSubscribeHdr"/>
+	                        <CATCmdStarter Name="My Subscriptions" Command="MySubscriptionsHdr"/>
+	                    </CATCmdContainer>
+                        <CATCmdStarter Name="Reserve" Command="ActionBar_ReserveCmd"/>
+                        <CATCmdStarter Name="Unreserve" Command="ActionBar_UnreserveCmd"/>
+                  </CATCmdContainer>
+            </CATCmdWorkbench>
+      </Template>
+</Styles>

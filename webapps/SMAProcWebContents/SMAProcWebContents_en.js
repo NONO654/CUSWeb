@@ -1,0 +1,1 @@
+define("DS/SMAProcWebContents/SMAProcWebContents_en",{});define("DS/SMAProcWebContents/assets/nls/SMAProcWebContentsNLS",{"SortableDNDListMgr.tooltip.title":"Delete","SortableDNDListMgr.tooltip.deleteIcon":"Click to delete selected row"});

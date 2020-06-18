@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.PhysicsSimulation" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflPhysicsSimulation" nlsID="dispname">PhysicsSimulation</DisplayName>
+	<Description nlsFile="SMAWflPhysicsSimulation" nlsID="desc">Create new PhysicsSimulation</Description>
+	<LongDescription nlsFile="SMAWflPhysicsSimulation" nlsID="longdesc">Create new PhysicsSimulation</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.adapter.PhysicsSimulation</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>300</Value>
+			<Value>300</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAWflPhysicsSimulation16.png" targetFilename="SMAWflPhysicsSimulation16.png" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflPhysicsSimulation32.png" targetFilename="SMAWflPhysicsSimulation32.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflPhysicsSimulation.CATNls" targetFilename="SMAWflPhysicsSimulation.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflPhysicsSimulation_Japanese.CATNls" targetFilename="SMAWflPhysicsSimulation_Japanese.CATNls" locale="Japanese" />   
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflPhysicsSimulation.dll" targetFilename="win_b64/SMAWflPhysicsSimulation.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflPhysicsSimulation.sypstyle" targetFilename="SMAWflPhysicsSimulation.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflPhysicsSimulationEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<!--<Property name="Report" type="file" valuetype="single" mode="output">
+		  <Value/>
+	  </Property>-->
+		<Property name="plugin_order" type="string" valuetype="array" arraydim="[1]" sizable="true">
+		</Property>
+		<Property name="plugin_state" type="int" valuetype="array" arraydim="[1]" sizable="true">
+		</Property>
+	</Properties>
+</wfext:Extension>

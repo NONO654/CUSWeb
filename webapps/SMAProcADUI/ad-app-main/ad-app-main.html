@@ -1,0 +1,139 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-queryparams/sp-queryparams.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-cos-filemonitor/sp-cos-filemonitor.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<link rel="import" href="../../SMAProcSPUI/sp-coachmark/sp-coachmark.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../ad-session/ad-session.html">
+<link rel="import" href="../ad-toolkit-view/ad-toolkit-view.html">
+<link rel="import" href="../ad-jobs-view/ad-jobs-view.html">
+<link rel="import" href="../ad-data-view/ad-data-view.html">
+
+<dom-module id="ad-app-main">
+  <link rel="import" type="css" href="panel.css">
+  <link rel="import" type="css" href="ad-app-main.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+    	        
+        <!-- COMMON CONFIGURATION PROPERTIES --> 
+		<sp-variable id="mcsBaseURL" name="mcsBaseURL" on-valuechange="onVariableValueChange"></sp-variable>
+		<sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL" on-valuechange="onVariableValueChange"></sp-variable>
+		<sp-variable id="eedBaseURL" name="eedBaseURL" on-valuechange="onVariableValueChange"></sp-variable>
+		<sp-variable id="securityContext" name="securityContext" on-valuechange="onVariableValueChange"></sp-variable>
+		<sp-variable id="inDash" name="inDash" on-valuechange="onVariableValueChange"></sp-variable>
+		
+		<sp-webservice id="isDash"></sp-webservice>
+
+		<!-- WEB SERVICES -->
+		<sp-mcsservice id="eedurlWS" name="eedurlWS" fire-timeout="true" on-sessiontimeout="onSessionTimeout" uri="{{_computeEedUrlUri(globals.mcsWSBaseURL)}}"></sp-mcsservice>
+        <template is="dom-if" bind="" if="{{_computeWSInclude(jspLaunch)}}">
+			<sp-mcsservice id="licenseWS" name="licenseWS" data="{{licenseData}}" uri="license?appNames=Performance_Study,Simulation_Companion" on-dataready="onLicenseReady" on-error="onLicenseError" getasap="" on-sessiontimeout="onSessionTimeout"></sp-mcsservice>
+		</template>
+				
+		<!--  OTHER WEB COMPONENTS -->
+		<sp-queryparams id="queryparams"></sp-queryparams>
+		<ad-session id="session" on-sessionloaded="onSessionLoaded" on-error="onSessionError" on-execdirremoved="onExecDirRemoved" on-mdataremoved="onManagedDataRemoved" on-sessiontimeout="onSessionTimeout"></ad-session>
+		<sp-cos-filemonitor id="fileMonitor"></sp-cos-filemonitor>
+		
+		<!-- MAIN UI -->
+		<div id="mainUI" class="container-fluid hidden">
+			<div class="row">
+				<div class="col-xs-12">
+				    <div id="simDashTitle" class="simDashInfo">					
+					   <sp-access id="processAccess" group="process">		
+							<span class="accessMessage" data-message="Read only" data-has-no-write-then="show"></span>         
+			           </sp-access>
+					</div>				
+					<h4 id="enoviaTitle">
+						<img class="img-thumbnail" src="../../SMAProcPSUI/assets/images/process.png" style="width: 85px; height: 85px; margin: 5px">						
+						<span id="sessionName" style="color: #368ec4;font-size: 1.5em;"></span>
+					
+					<!-- Display a read only message if no write access is present -->
+					<sp-access group="process">
+							<span data-message="Read Only" data-has-no-write-then="show"></span>
+						</sp-access>
+						<span id="openInPS" class="pull-right">
+	                        <template is="dom-if" bind="" if="{{_computePerfStudyButton(psl)}}">
+								<span title="Open in Performance Study">
+									<button class="btn btn-default" type="button" on-click="onOpeninPerfStudy"><span class="fonticon fonticon-export"></span>Open in Performance Study</button>				
+								</span>
+							</template>
+							<span title="Help">
+								<button class="btn btn-default" style="min-width: 0" type="button" on-click="onHelp"><span class="fonticon fonticon-help" style="margin: 0"></span></button>				
+							</span>
+						</span>						
+					</h4>		
+					<sp-notification id="notificationMessages" position="TR" width="400" fixed="true"></sp-notification>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="panel-group" id="leftAccordion">
+		 				<section class="panel panel-default">
+							<div class="panel-heading" style="cursor:pointer">
+								<div id="toolsTitle" class="panel-title" on-click="onCollapseTools">Tools</div>
+								<span id="toolsArrow" class="panel-arrow fonticon fonticon-down-dir"></span>
+							</div>
+							<div id="collapseTools" class="panel-collapse collapse in">
+								<div id="toolkitViewContainer" class="panel-body">
+ 									<div id="toolkitProgressIndicator" class="loading-indicator hidden"></div>
+								</div>
+							</div>
+						</section>
+		 				<section class="panel panel-default">
+							<div class="panel-heading" style="cursor:pointer">
+								<div id="jobsTitle" class="panel-title" on-click="onCollapseJobs">Jobs</div>
+								<span id="jobsArrow" class="panel-arrow fonticon fonticon-down-dir"></span>
+							</div>
+							<div id="collapseJobs" class="panel-collapse collapse in">
+								<div id="jobsViewContainer" class="panel-body">
+ 									<div id="jobsProgressIndicator" class="loading-indicator hidden"></div>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+				<div class="col-md-6">
+	 				<section class="panel panel-default">
+						<div class="panel-heading" style="cursor:pointer">
+							<div id="dataTitle" class="panel-title" on-click="onCollapseData">Data</div>
+							<span id="dataArrow" class="panel-arrow fonticon fonticon-down-dir"></span>
+						</div>
+						<div id="collapseData" class="panel-collapse collapse in">
+							<div id="dataViewContainer" class="panel-body">
+								<div id="dataProgressIndicator" class="loading-indicator hidden"></div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+ 		</div>
+
+		<sp-coachmark id="coachMark" modal-width="562" modal-height=""> 
+                   <article><img style="height:100%;width:100%" src="../../SMAProcADUI/assets/images/companion1.png" alt="coach mark 1"></article>
+                   <article><img style="height:100%;width:100%" src="../../SMAProcADUI/assets/images/companion2.png" alt="coach mark 2"></article>
+                   <article><img style="height:100%;width:100%" src="../../SMAProcADUI/assets/images/companion3.png" alt="coach mark 3"></article>
+                   <article><img style="height:100%;width:100%" src="../../SMAProcADUI/assets/images/companion4.png" alt="coach mark 4"></article>
+		</sp-coachmark>
+<!-- TODO: make sure the replacement above works
+         <sp-coachmark id="coachMark">
+            <div style="width:562px;height:auto;max-width:100%">
+	            <article><img style="height:100%;width:100%" src="../../SMAProcADUI/assets/images/companion1.png" alt="coach mark 1"></article>
+	            <article><img style="height:100%;width:100%" src="../../SMAProcADUI/assets/images/companion2.png" alt="coach mark 2"></article>
+	            <article><img style="height:100%;width:100%" src="../../SMAProcADUI/assets/images/companion3.png" alt="coach mark 3"></article>
+	            <article><img style="height:100%;width:100%" src="../../SMAProcADUI/assets/images/companion4.png" alt="coach mark 4"></article>
+            </div>
+		</sp-coachmark>
+ -->		
+		<div id="licenseErrorMessage" class="alert-message alert-error hidden">You do not have the appropriate license for this application.  Please contact your system administrator.</div>
+
+ 	</template>
+  <script src="ad-app-main.js"></script>
+</dom-module>
+
+

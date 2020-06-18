@@ -1,0 +1,67 @@
+<div class="drive__management__settings__content">
+    <div class="quota-container form form-inline settings-section">
+        <h4>{{NLS.quota}}</h4>
+        <label class="settings-section__block-label">{{NLS.quotaPerUser}}</label>
+
+        <!-- The pattern on the following input only accepts positive integer ()>0) -->
+        <input type="text" class="quota-input form-control" placeholder="{{NLS.quotaPerUser}}" pattern="^\d*[1-9]\d*$" required>
+
+        <button class="save-button-quota btn btn-primary" type="submit" disabled>{{NLS.save}}</button>
+        <button class="cancel-button-quota btn btn-default" type="button" disabled>{{NLS.cancel}}</button>
+
+        <span class="input-error-message">{{NLS.quotaWrongValue}}</span>
+    </div>
+
+    <div class="form form-inline settings-section">
+        <h4>{{NLS.iterationsPolicy}}</h4>
+        <div class="input-control iterations-number">
+            <label class="settings-section__block-label">{{NLS.iterationsNumber}}</label>
+
+            <input class="form-control" type="text" name="iteration-number" placeholder="{{NLS.iterationsNumber}}" value="{{iterationsNumber}}" pattern="^\d*[1-9]\d*$" required>
+
+            <button class="save-button btn btn-primary" type="submit" disabled>{{NLS.save}}</button>
+            <button class="cancel-button btn btn-default" type="button" disabled>{{NLS.cancel}}</button>
+
+            <span class="input-error-message">{{NLS.iterationsWrongValue}}</span>
+        </div>
+
+        <div class="input-control iterations-days">
+            <label class="settings-section__block-label">{{NLS.iterationsDays}}</label>
+
+            <input class="form-control" type="text" name="iterations-days" placeholder="{{NLS.iterationsDays}}" value="{{iterationsDaysCount}}" pattern="^\d*[1-9]\d*$" required>
+
+            <button class="save-button btn btn-primary" type="submit" disabled>{{NLS.save}}</button>
+            <button class="cancel-button btn btn-default" type="button" disabled>{{NLS.cancel}}</button>
+
+            <span class="input-error-message">{{NLS.iterationsWrongValue}}</span>
+        </div>
+    </div>
+
+
+    <div class="sharebylink__section settings-section">
+        <h4>{{NLS.shareByLink}}</h4>
+
+        <div class="shareaccess">
+            <div class="toggle-switch shareaccess__toggle">
+                <input type="checkbox" name="radios" id="checkbox-sharebylink" value="option2">
+                <label class="control-label shareaccess__label" for="checkbox-sharebylink">{{NLS.enableShareableLink}}</label>
+            </div>
+        </div>
+
+        <div class="accesscapacity">
+            <h5>{{NLS.shareUsage}}</h5>
+            <div class="accesscapacity__progress progress  w-0-percent">
+                <div class="progress-bar">0%</div>
+            </div>
+
+            <div class="accesscapacity__total"></div>
+        </div>
+
+        <div class="drive__share__table drive__share__table--hidden">
+            <label class="settings-section__block-label">{{NLS.sharedByLinkContents}}</label>
+            <div class="drive__sharetable"></div>
+            <div class="pager"></div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,1 @@
+define("DS/XCT3DPlayIntegratability/XCT3DPlayIntegratability_ru",{});define("DS/XCT3DPlayIntegratability/assets/nls/XCT3DPlayIntegratability",{warning_objectTypeNotSupported_title:"Тип объекта не поддерживается",error_loadingMultipleFiles_title:"Загрузка нескольких файлов невозможна. Будет загружен только первый."});

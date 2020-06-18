@@ -1,0 +1,9 @@
+m|WAfrFoundation\WAfrUtils.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\WAfrUtils\WAfrUtils.js|1531551009|755
+s|WAfrFoundation\WAfrUtils.mweb\src\Logger.js|1513250742|876
+s|WAfrFoundation\WAfrUtils.mweb\src\WAfrUtils.js|1516291163|0
+s|WAfrFoundation\WAfrUtils.mweb\src\PerformanceHelper.js|1513250740|1038

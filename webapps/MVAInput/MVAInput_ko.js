@@ -1,0 +1,1 @@
+define("DS/MVAInput/MVAInput_ko",{});define("DS/MVAInput/assets/nls/MVAInput",{MVA_input_Placeholder:"값 추가","The item already exists":"이 항목은 이미 있음"});

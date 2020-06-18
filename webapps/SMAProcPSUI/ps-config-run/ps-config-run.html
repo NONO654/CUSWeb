@@ -1,0 +1,49 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-run/sp-run.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-encryption/sp-encryption.html">
+
+
+<dom-module id="ps-config-run">
+	<link rel="import" type="css" href="ps-config-run.css">
+
+    <template>
+    	<sp-variable id="credentials" name="credentials"></sp-variable>
+        <sp-variable id="mcsBaseURL" name="mcsBaseURL" ></sp-variable>
+        <sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL" ></sp-variable>
+        <sp-variable id="eedBaseURL" name="eedBaseURL"></sp-variable>
+        <sp-dashboard id="dashboard"></sp-dashboard>
+        <sp-mcsservice id="simOptionsWs" on-dataready="useSimOptionsLogLevel" on-dataready="useSimOptionsLogLevel"></sp-mcsservice>
+        <sp-encryption id="spEncryption"></sp-encryption>
+            <!-- Get COS URL -->
+        <sp-webservice id="ws" uri="cos/url" getasap on-dataready="cosURLReady"></sp-webservice>
+
+        <sp-modal class="ConfigureAndRun" id="ConfigureAndRun" heading="{{modalHeader}}" height="80%" width="400px">
+            <section>
+            	<template is="dom-repeat" items="{{credFields}}" as="field">
+                    <div class="form-group">
+                        <div class="control-label">
+                            <label class="label">{{ field.label }}</label>
+                        </div>
+                        <div class="controls">
+                             <sp-input type="{{field.type}}" class="option-text" id="{{ field.name }}" credential on-click="onFocusRunAsTextField"></sp-input>
+                        </div>
+                    </div>
+               </template>
+            </section>
+            <footer>
+                <div id="errorMsgContent" class="errorMsgContent">{{errorText}}</div>
+                <button id="runAs" is="sp-button-type" primary on-click="configureAndRun" primary>Run</button>
+            </footer>
+        </sp-modal>
+
+    </template>
+
+    <script type="text/javascript" src="ps-config-run.js"></script>
+</dom-module>

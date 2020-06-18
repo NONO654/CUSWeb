@@ -1,0 +1,38 @@
+<!-- Copyright 2015 , Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="sp-content-chooser">
+  <link rel="import" type="css" href="sp-content-chooser.css">
+  <template>
+    <sp-search id="spSearch" on-change="onSearch" multi-select="false" plm-types="[[accept]]"></sp-search>
+    <sp-dashboard id="dashboard"></sp-dashboard>
+    <sp-webservice id="vocabularyclasses"></sp-webservice>
+    <sp-webservice id="compatibleObject" on-response="retrieveParentType"></sp-webservice>
+    <div class="link-itm" data-readonly$="{{readOnly}}" on-dragstart="onDragStart" on-dragenter="onDragEnter" on-dragover="onDragOver" on-drop="onDrop"  on-dragleave="onDragLeave" on-dragend="onDragEnd" draggable="true" data-disableprop$="{{disableprop}}">
+      <div class="link-itm-drop-target">
+        <span>Drop Content here </span>
+        <span class="fonticon fonticon-popup"></span>
+      </div>
+
+      <span class="link-el link-itm-img">
+        <img class="link-itm-icon" src="{{displayIcon}}" on-error="onInvalidIcon" title="{{displayType}}">
+      </span>
+      <span class="link-el link-itm-tag" title="{{objectTitle}}" on-click="showProperties">
+        <div class="link-tag-text">{{objectTitle}}</div>
+      </span>
+      <span class="link-el link-itm-actions action-card"  title="Change Reference" on-click="onBrowse">
+          <div class="fonticon fonticon-search icon"></div>
+      </span>
+      <template is="dom-if" if="{{_computeShowClear(showclear, readOnly)}}">
+        <span class="link-el link-itm-actions action-card"  title="Clear Reference" on-click="onClear">
+          <div class="fonticon fonticon-close icon"></div>
+        </span>
+      </template>
+    </div>
+  </template>
+  <script type="text/javascript" src="sp-content-chooser.js"></script>
+</dom-module>

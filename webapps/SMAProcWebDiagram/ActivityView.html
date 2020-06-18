@@ -1,0 +1,185 @@
+<dom-module id="cmp-activity-view">
+  <template>
+        <style>
+        :host {
+            display: inline-block;
+            position: absolute;
+            box-sizing: border-box;
+            height: 80px;
+            width: 80px;
+        }
+        :host([hidden]) {
+            display: none;
+        }
+        :host([selected]) #nodeView {
+            border: thick solid #78befa;
+        }
+
+        :host([disabled]) #nodeView {
+            /* background-color:#787878;
+            border: thick solid #787878; */
+            opacity: .7;
+            pointer-events: none;
+        }
+        :host([disabled]) #nodeView:hover {
+            border: thick solid #787878;
+        }
+
+        :host([loading]) #loaderIcon {
+            display: block;
+            position: relative;
+            top: -50px;
+            left: 27px;
+            width: 30px;
+            height: 30px;
+            pointer-events: none;
+        }
+
+        #loaderIcon /deep/ .spinner-bar {
+          background-color: white;
+        }
+
+        .viewContainer {
+            width: inherit;
+        }
+
+        #nodeView {
+            display: block;
+            position: relative;
+            background-color: #3D6680;
+            border: thick solid #3D6680;
+            border-radius: 10px;
+            height: 80px;
+            width: inherit;
+        }
+
+        #nodeView:hover {
+            border: thick dashed #78befa;
+        }
+
+        #nodeView.highlighteddf {
+            border: thick solid #8ED2CA;
+        }
+        #activityTitle {
+            position: absolute;
+            top: 95px;
+            font: 15px Arial;
+            width: 180%;
+            transform: translateX(-22%);
+            display: block;
+            text-align: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: pre;
+        }
+
+        .mainStep {
+            height: 50%;
+            width:50%;
+            display:inherit;
+            position:inherit;
+            margin-left:25%;
+            margin-top:25%;
+        }
+        #MainStepIcon {
+            opacity: .5;
+        }
+        #MainStepIcon.editable {
+            opacity: 1;
+        }
+
+        #loaderIcon, .hidden {
+            display: none;
+        }
+
+        #expandCollapseControl {
+            display: block;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 0px;
+            height: 0px;
+        }
+
+        #expandCollapseControl.collapsed {
+            border-left: 10px solid transparent;
+            border-top: 10px solid #D3D3D3;
+        }
+
+        #expandCollapseControl.expanded {
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #D3D3D3;
+        }
+
+        #subflowControl{
+            display: block;
+            position: relative;
+            top: 7px;
+            width: 0px;
+            height: 0px;
+            margin: 0 auto;
+        }
+
+        #subflowControl.collapsed {
+            border-top: 8px solid #636363;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-radius: 10px;
+        }
+
+        #subflowControl.expanded {
+            border-bottom: 8px solid #636363;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-radius: 10px;
+        }
+
+        #subflowControl:hover{
+            stroke-width: 3px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke: rgb(116,180,228);
+        }
+
+        #subflowControl.hidden {
+            visibility: hidden;
+        }
+
+        .subflowIndicator {
+              stroke: white;
+              stroke-dasharray:1px,5px;
+              stroke-width:2;
+              stroke-linecap : round;
+        }
+        #svg {
+            position:absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        #warningIcon {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 16px;
+            height:16px;
+        }
+
+        </style>
+        <!---ondragstart seems to be needed for mozilla that shows additional ghost image while dragging-->
+        <div class="viewContainer" ondragstart="return false;">
+          <div id="nodeView" class="activity">
+            <div id="expandCollapseControl" on-tap="toggleActivityState" class$="{{CurrentState}}"></div>
+            <img id="MainStepIcon" class="hidden" />
+          </div>
+          <div id="subflowControl" on-tap="toggleSubflowState" class$="{{SubflowState}}" title$="{{subFlowTitle}}"></div>
+          <svg id="svg" width="100%" height="100%" class="egraph_views_SVGLayer">
+           <line id="subflowIndicator" class="hidden"/>
+          </svg>
+          <label id="activityTitle" title="[[activityTitle]]">{{activityTitle}}</label>
+          <div id="loaderIcon"></div>
+          <img id="warningIcon" src="{{_getIconUrl('ELEWarning_small.png')}}" title="[[statusMessage]]" hidden$="{{!statusMessage}}"/>
+        </div>
+    </template>
+</dom-module>

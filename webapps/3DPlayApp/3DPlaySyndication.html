@@ -1,0 +1,128 @@
+﻿<!--
+
+3DPLAY SAMPLE usage :
+    Arguments need to be passed encoded such as these samples :
+
+    http://.../3DPlayHelper/3DPlaySyndication.html?autoplay=true&params=%7B%22input%22:%7B%22experience%22:%22MyExperienceID%22%7D%7D
+    or
+    http://.../3DPlayHelper/3DPlaySyndication.html?params=%7B%22input%22:%7B%22asset%22:%22MyFile.3dxml%22%7D%7D
+
+    where http://.../3DPlayHelper/3DPlaySyndication.html is the path of this current page
+    autoplay=true is the boolean to activate autoplay
+    params is the input json object as requested by 3DPlay
+
+-->
+
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8"/>
+            <title>3DPlaySyndication</title>
+            <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css"/>
+            <style type:"text/css">
+            html,body,#canvas-div{
+                background-color: #368ec4;
+                height:100%;
+                top:0px;
+                left:0px;
+            }
+            .moduleFooter {
+                display: none;
+            }
+            .module {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                min-width:unset;
+                border: none;
+            }
+            .module > .moduleHeader {
+                display: none;
+            }
+            .module .moduleContent {
+                padding: 0;
+                background: none;
+                height: 100%;
+            }
+            .module .moduleWrapper {
+                height: 100%;
+            }
+            html, body {
+                margin: 0;
+                padding: 0;
+                background: transparent;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+            }
+            body {
+                background-size: 50% 100%;
+            }
+            </style>
+            <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+            <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+        </head>
+        <body>
+            <div id='canvas-div'>
+                <script type="text/javascript">
+                    require(['DS/3DPlayHelper/3DPlayHelper'], function (_3DPlayHelper) {
+                        require(['DS/WebSystem/UrlTools'],function(UrlTools){
+                            var urlParams = UrlTools.getURLParameters();
+                            var params = {}
+                            if (urlParams.params) {
+                                params = JSON.parse(decodeURIComponent(urlParams.params));
+                            }
+                            params.container = 'canvas-div';
+                            params.options = params.options || {};
+                            if (urlParams.autoplay === "true")
+                                params.options.loading = "autoplay";
+
+                            if (params.debugplayer) {
+                                delete params.debugplayer
+
+                                params.options.callbacks = {
+                                    experience: {
+                                        ExperienceSplashScreen: function (e) {
+                                            console.log('ExperienceSplashScreen:', e);
+                                        },
+                                        ExperienceReady: function (e) {
+                                            console.log('ExperienceReady:', e);
+                                        },
+                                        Dispose: function (e) {
+                                            console.log('Dispose:', e);
+                                        },
+                                        Error: function (error) {
+                                            console.error('Error', error);
+                                        },
+                                        Notif: function (data) {
+                                            switch (data.event) {
+                                                case 'fatal': console.error('Notif', data.msg); break;
+                                                case 'error': console.error('Notif', data.msg); break;
+                                                case 'warning': console.warn('Notif', data.msg); break;
+                                                default: console.log('Notif', data.msg); break;
+                                            }
+                                        }
+                                    },
+                                    asset: {
+                                        LoadingStarted: function (name) {
+                                            console.log('LoadingStarted', name);
+                                        },
+                                        LoadingProgress: function (data) {
+                                            console.log('LoadingProgress', data.model, '->', data.progress);
+                                        },
+                                        LoadingFinished: function (data) {
+                                            console.log('LoadingFinished', data.model, ' in ', data.time);
+                                        },
+                                        LoadingError: function (error) {
+                                            console.log('LoadingError', error);
+                                        }
+                                    }
+                                };
+                            }
+                            var p = new _3DPlayHelper(params);
+                        });
+                    });
+                </script>
+            </div>
+        </body>
+    </html>

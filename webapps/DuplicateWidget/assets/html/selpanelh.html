@@ -1,0 +1,76 @@
+<div class="lcm-selectionpanel-main-container-h is-mobile">
+  <div style="display:inline-block">
+    <div style="vertical-align:top; display:inline-block">
+      <span>[[panel-title]]</span>
+      <input
+        id="titleEditH"
+        data-wuxcontrol="LineEditor"
+        data-wuxstyle="height: 24px: margin-right: 5px"
+        data-bind="event=keydown, key=13, function=addSelection;attribute=value, property=title"
+      />
+    </div>
+    <div style="display:inline-block">
+      <label data-delete-element="true">[[panel-contains]]</label>
+      <input
+        id="containsRadioH"
+        type="radio"
+        name="incOrExH"
+        checked
+        data-wuxcontrol="Radio"
+        data-wuxlabel="[[panel-contains]]"
+        data-wuxchecked="true"
+        data-bind="event=change, function=onChangeContains"
+      />
+      <label data-delete-element="true">[[panel-notContains]]</label>
+      <input
+        id="notContainsRadioH"
+        type="radio"
+        name="incOrExH"
+        data-wuxcontrol="Radio"
+        data-wuxlabel="[[panel-notContains]]"
+        data-bind="event=change, function=onChangeNotContains"
+      />
+    </div>
+    <br />
+    <hr style="margin-top:0px; margin-bottom:6px" />
+    <button
+      id="addSelBtnH"
+      class="enolcm-dup-btn"
+      data-wuxcontrol="Button"
+      data-wuxlabel="[[panel-add]]"
+      data-wuxstyle="display:inline-block"
+      data-bind="event=click, function=addSelection"
+    >
+      [[panel-add]]
+    </button>
+    <button
+      id="removeSelBtnH"
+      class="enolcm-dup-btn"
+      data-wuxcontrol="Button"
+      data-wuxlabel="[[panel-remove]]"
+      data-wuxstyle="display:inline-block"
+      data-bind="event=click, function=removeSelection"
+    >
+      [[panel-remove]]
+    </button>
+    <button
+      id="clearSelBtnH"
+      class="enolcm-dup-btn"
+      data-wuxcontrol="Button"
+      data-wuxlabel="[[panel-clear]]"
+      data-wuxstyle="display:inline-block"
+      data-bind="event=click, function=clearSelection"
+    >
+      [[panel-clear]]
+    </button>
+
+    <select
+      id="dropdownGrouplistPlaceholder"
+      data-wuxcontrol="Combo"
+      data-wuxDisplayStyle="lite"
+      data-wuxstyle="margin-left:50px"
+    >
+      <option>[[panel-tags]]</option>
+    </select>
+  </div>
+</div>

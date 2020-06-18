@@ -1,0 +1,1 @@
+define("DS/HomePage/HomePage_en",{});define("DS/HomePage/assets/nls/HomePage",{HomePage_SearchContent:"Search For Content",HomePage_CreateRequirementSpecification:"Create Requirement Specification",HomePage_CreateSpecificationFolder:"Create Specification Folder",HomePage_Or:"or"});

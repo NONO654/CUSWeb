@@ -1,0 +1,262 @@
+{
+	"scenarios": [
+		{
+			"name": "cos_AdminCheck",
+			"sequence": [
+				"sp_FetchDefaults", "systemInfo", "status", "isRunAsEnabled", "getRequiredCredentials",
+				"stations", "getEventLog", "getDrmList", "getDrmQueuesList",
+				"ping"
+			],
+			"odt": {
+				"odt_enabled": true,
+				"odt_skip": ["sp_FetchDefaults"]
+			}
+		}
+	],
+  
+  "mcs": [		
+		{
+			"name": "getCollabSpaces",
+			"caption": "gets the list of security contexts",
+			"url": "${ctx.mcs.mcsurl}/resources/bps/cspaces",
+			"method": "GET",
+			"$afterReceive": "sp:getCollabSpaces_$afterReceive"
+		},
+		{
+			"name": "serviceRequest",
+			"caption": "generic placeholder for ${this._method}",
+			"url": "${this._root}/${this._url}",
+			"_root": "ctx.mcs.mcsurl",
+			"_url": "resources/bps/cspaces",
+			"_method": "GET",
+			"_headers": "{'DS-Client-Step-Name': this._method}",
+			"_payload": "",
+			"method": "this._method",
+			"$beforeSend": {
+				"headers": "this._headers",
+				"payload": "this._payload"
+			}
+		},
+		{
+			"name": "getPlatforms",
+			"caption": "gets the environment information",
+			"url": "${ctx.mcs.mcsurl}/resources/AppsMngt/environment/list",
+			"method": "GET"
+		},
+		{
+			"name": "license",
+			"caption": "checks for the license",
+			"url": "${ctx.mcs.rooturl}/license?appNames=Experience_Studio,Performance_Study",
+			"method": "GET",
+			"backend_id": "LicenseEntity:checkLicense",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec"
+				}
+			},
+			"$assertions": [
+        "this.response.data.Performance_Study === 'true'",			
+        "this.response.data.Experience_Studio === 'true'"
+      ]
+		},
+		
+		{
+			"name": "getCOSConfig",
+			"caption": "gets the COS configuration",
+			"url": "${ctx.mcs.eepurl}/cos/configurations",
+			"method": "GET",
+			"$afterReceive": "sp:getCOSConfig_$afterReceive"
+		},
+
+		{
+			"name": "getCSRFToken",
+			"caption": "gets a csrf token",
+			"url": "${ctx.mcs.rooturl}/token/CSRF?tenant=${ctx.mcs.platform}",
+			"method": "GET",
+			"$afterReceive": {
+				"ctx.mcs.csrf": "this.response.data"
+			}
+		},
+
+		{
+			"name": "updateJobDescriptor",
+			"caption": "deletes the jobs",
+			"url": "${ctx.mcs.rooturl}/jobinfo/job/${ctx.job.id}/{${ctx.job.id}}/state",
+			"method": "POST",
+			"backend_id": "SimulationJobEntity:updateJobDescriptor",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"content-type": "application/json",
+					"eno_csrf_token": "ctx.mcs.csrf"
+				}
+			}
+		},
+		{
+			"name": "cosURL",
+			"caption": "returns the cos url",
+			"url": "${ctx.mcs.rooturl}/cos/url?tenant=${ctx.mcs.platform}",
+			"method": "GET",
+			"backend_id": "COSEntity:getCOSURL",
+			"$beforeSend": {
+				"headers": {
+					"SecurityContext": "ctx.mcs.sec",
+					"accept": "application/json"
+				}
+			},
+			"$afterReceive": {
+				"ctx.cos.rooturl": "this.response.data.url"
+			}
+		}
+	],
+
+  "cos": [
+		{
+			"name": "profile",
+			"caption": "returns the profile information about COS server",
+			"url": "${ctx.cos.rooturl}/admin/profile?xrequestedwith=xmlhttprequest",
+			"method": "GET",
+			"group": "Admin",
+			"credentials": "omit",
+			"$beforeSend": {
+				"headers": {
+					"accept": "application/json"
+				}
+			}
+		},
+		{
+			"name": "systemInfo",
+			"caption": "returns the build information about COS server",
+			"url": "${ctx.cos.rooturl}/admin",
+			"method": "GET",
+			"group": "Admin",
+			"credentials": "omit"
+		},
+		{
+			"name": "status",
+			"caption": "returns the status of COS server",
+			"url": "${ctx.cos.rooturl}/admin/status",
+			"method": "GET",
+			"group": "Admin",
+			"credentials": "omit"
+		},
+		{
+			"name": "isRunAsEnabled",
+			"caption": "returns if run as is enabled on this COS server",
+			"url": "${ctx.cos.rooturl}/admin/runAsEnabled",
+			"method": "GET",
+			"group": "Admin",
+			"credentials": "omit",
+			"$beforeSend": {
+				"headers": {
+					"EEDTicket": "Test Ticket"
+				}
+			}
+		},
+		{
+			"name": "getRequiredCredentials",
+			"caption": "TODO",
+			"url": "${ctx.cos.rooturl}/admin/protectedResources?ActiveOnly=True",
+			"method": "GET",
+			"group": "Admin",
+			"credentials": "omit",
+			"$beforeSend": {
+				"headers": {
+					"EEDTicket": "Test Ticket"
+				}
+			}
+		},
+		{
+			"name": "stations",
+			"caption": "returns the list of stations that are available",
+			"url": "${ctx.cos.rooturl}/admin/station/query?ActiveOnly=False",
+			"method": "GET",
+			"group": "Admin",
+			"credentials": "omit"
+		},
+		{
+			"name": "getEventLog",
+			"caption": "TODO",
+			"url": "${ctx.cos.rooturl}/admin/protectedResources?ActiveOnly=True",
+			"method": "GET",
+			"group": "Admin",
+			"credentials": "omit",
+			"$beforeSend": {
+				"headers": {
+					"EEDTicket": "Test Ticket"
+				}
+			}
+		},
+		{
+			"name": "getDrmList",
+			"caption": "returns the list of DRM",
+			"url": "${ctx.cos.rooturl}/admin/drm",
+			"method": "GET",
+			"group": "Admin",
+			"credentials": "omit"
+		},
+		{
+			"name": "getDrmQueuesList",
+			"caption": "TODO",
+			"url": "${ctx.cos.rooturl}/admin/drm/{{drmType}}/queues",
+			"method": "GET",
+			"group": "Admin",
+			"credentials": "omit"
+		},
+		{
+			"name": "ping",
+			"caption": "returns 'Hello from COS' text",
+			"url": "${ctx.cos.rooturl}/execution",
+			"method": "GET",
+			"group": "Execution",
+			"credentials": "omit"
+		},
+		{
+			"name": "privateStationInfo",
+			"caption": "returns information about private station",
+			"url": "${ctx.cos.pvt_stn_url}/info",
+			"method": "GET",
+			"group": "Execution",
+			"description": "This service would fail if you are not running a local private station or if there are multiple private stations that are running. You could check for the port number or the COS to which your station is connected to",
+			"credentials": "omit"
+		},
+		{
+			"name": "totalRuns",
+			"caption": "returns total number of times the job was run",
+			"url": "${ctx.cos.rooturl}/job/${ctx.job.id}/totalruns",
+			"method": "GET",
+			"credentials": "omit",
+			"$beforeSend": {
+				"headers": {
+					"EEDTicket": "${ctx.job.ticket}"
+				}
+			}
+		},
+		{
+			"name": "SummaryFull",
+			"caption": "returns full job summary",
+			"url": "${ctx.cos.rooturl}/job/${ctx.job.eedJobId}/summary/full",
+			"method": "GET",
+			"credentials": "omit",
+			"$beforeSend": {
+				"headers": {
+					"EEDTicket": "${ctx.job.ticket}"
+				}
+			},
+			"$afterReceive": {
+				"ctx.activityInternal.id": "this.response.parsedData.JobInfo.JobSummary.WorkItemSummaries.WorkItemSummary[0][\"@attributes\"].path.replace(\"#\",\"%23\")"
+			}
+		}
+	],
+
+	"sensors": [
+		{
+			"name": "$recordConsole",
+			"caption": "records console"
+		},
+		{
+			"name": "$recordXMLHTTPRequests",
+			"caption": "records server requests"
+		}
+	]
+}

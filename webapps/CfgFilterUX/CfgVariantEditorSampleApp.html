@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<title>Variants Configuration Panel App</title>
+<meta charset="ISO-8859-1">
+<meta name="author" content="Dassault Syst?mes" />
+<meta name="description" content="Portfolio ProductLine" />
+<meta name="apiVersion" content="1.3" />
+<meta name="debugMode" content="false" />
+<meta name="strictMode" content="false" />
+
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../c/UWA/assets/css/standalone.css" />
+<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+<script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+
+<widget:preferences>
+	<preference name="view" type="list" label="View" defaultValue="Normal">
+	<option value="normal" label="Normal" />
+	<option value="channel" label="Channel" />
+	</preference>
+</widget:preferences>
+
+<script type="text/javascript">
+	//<![CDATA[
+	require([ 'DS/CfgFilterUX/CfgVariantEditor' ], function(CfgVariantEditor) {
+		 var modalView = new CfgVariantEditor({
+             parentContainer : widget.body,
+             PCId : "6843B156025C0000D1414159B5640000",
+//           PCId : "6843B156C532000096552559C9E30600", //Required*, physical id :: should not be xxxx.xxxx.xxxx.xxxx format
+             //productId : ''    //Optional, if not provided, the product id is calculated internally
+             onOK : function(data) {
+                 console.log('On OK Data : ' + data.xml);
+                 alert("On OK Data : " + data.xml);
+             },
+             onCancel : function(data) {
+                 console.log('On Cancel Data : ' + data.xml);
+                 alert("On Cancel Data : " + data.xml);
+             },
+             //Optional button. If back button not required, do not provide the function
+             onBack : function(data) {
+                 console.log('On Back Data : ' + data.xml);
+                 alert("On Back Data : " + data.xml);
+
+             }
+         });
+	});
+
+	//]>
+</script>
+</head>
+<body>
+	<p></p>
+</body>
+</html>
+

@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define(["DS/SMAPoweredByState/ad-state-domain-study-templates/action-types","DS/SMAPoweredByState/ad-state-domain-study-templates/action-impls","UWA/Class/Promise"],function(e,c,b){var d=window.Promise||b;var a={};a.refreshStudyTemplates=function(){return{type:e.REFRESH_STUDY_TEMPLATES,payload:{promise:c.getStudyTemplates().then(function(f){return d.all(f.map(function(g){return c.getTemplateOptions({studyTemplate:g})}))})}}};return a});

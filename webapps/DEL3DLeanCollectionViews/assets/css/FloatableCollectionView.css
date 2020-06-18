@@ -1,0 +1,104 @@
+.floatableCollectionView
+{
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  width: 100%;
+}
+.pageView > .pageFloatableCollectionView
+{
+    top: 0;
+    height: 100%;
+}
+.infraView .floatableCollectionView
+{
+    top: 1em;
+    height: calc(100% - 1em);
+}
+.pageView .infraView .floatableCollectionView
+{
+    top: 0.5em;
+    height: calc(100% - 0.5em);
+}
+.infraView.maximize .floatableCollectionView,
+.pageView.maximize .infraView .floatableCollectionView
+{
+    top: 2em;
+    height: calc(100% - 2em);
+}
+.pageView .infraView .stickyNoteViewContent
+{
+    display: none;
+}
+.pageView.maximize .infraView > .floatableCollectionView
+{
+    display: block;
+}
+.pageView.maximize .infraView .stickyNoteViewContent
+{
+    display: block;
+}
+.infraView .floatableCollectionView.onCaptureContext .stickyNoteView:not(.floatableContext)
+{
+    display: none !important;
+}
+.floatableDropZone
+{
+    display: none;
+}
+.infraView.focused .floatableDropZone,
+.pageView.focused .pageFloatableCollectionView .floatableDropZone
+{
+    display: block;
+}
+.infraView.onSketch .floatableCollectionView
+{
+    z-index: 11;
+}
+.infraView.onSketch .floatableCollectionView .circleMenuView .editFloatableElement,
+.infraView.onSketch .floatableCollectionView .circleMenuView .captureFloatableElement
+{
+    background-color: #b3bdc6;
+    pointer-events: none;
+}
+.minMaxTransition .floatableCollectionView > *,
+.customizeMenuOpened .floatableCollectionView > *,
+.floatableCollectionView.layoutEditable > *,
+.floatableCollectionView.settingsEditable > *
+{
+    display: none !important;
+}
+.pageView > .pageFloatableCollectionView > *,
+.infraView > .floatableCollectionView > *
+{
+    font-size: 0.23vw;
+}
+.infraView.maximize > .floatableCollectionView > *,
+.pageView.maximize > .pageFloatableCollectionView > *
+{
+    font-size: 0.75vw;
+}
+.onGuidedMeeting .infraView > .floatableCollectionView > *
+{
+    font-size: 0.64vw;
+}
+.pageView .infraView[data-sizex="1"] .floatableCollectionView > *
+{
+    font-size: 0.074vw;
+}
+.pageView .infraView[data-sizex="2"] .floatableCollectionView > *
+{
+    font-size: 0.148vw;
+}
+.pageView.maximize .infraView[data-sizex="1"] .floatableCollectionView > *
+{
+    font-size: 0.23vw;
+}
+.pageView.maximize .infraView[data-sizex="2"] .floatableCollectionView > *
+{
+    font-size: 0.46vw;
+}
+.pageView.maximize .infraView.maximize > .floatableCollectionView > *
+{
+    font-size: 0.71vw;
+}

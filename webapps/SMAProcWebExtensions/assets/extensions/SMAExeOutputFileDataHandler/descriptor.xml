@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.datahandler.DataHandlerFile-Out" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="DataHandler">
+	<DisplayName nlsFile="SMAWflRuntimeFileHandler" nlsID="dispname">File</DisplayName>
+	<Description nlsFile="SMAWflRuntimeFileHandler" nlsID="desc">File</Description>
+	<LongDescription>File</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DataHandler</Value>
+		</Attribute>
+		<Attribute name="DataHandlerKind">
+			<Value>Output</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.DataHandlerFile</Value>
+		</Attribute>
+		<Attribute name="HandlerType">
+			<Value>com.dassault_systemes.sma.datahandler.DataHandlerFile</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAExeOutputFileDataHandler16.gif" targetFilename="SMAExeOutputFileDataHandler16.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeOutputFileDataHandler.CATNls" targetFilename="SMAExeOutputFileDataHandler.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeOutputFileDataHandler_Japanese.CATNls" targetFilename="SMAExeOutputFileDataHandler.CATNls" locale="Japanese" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflRuntimeFileHandler.dll" targetFilename="win_b64/SMAWflRuntimeFileHandler.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflRuntimeFileHandler.sypstyle" targetFilename="SMAWflRuntimeFileHandler.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflRuntimeFileHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="XMLTransformer">
+			<Implementations>
+				<Implementation name="XMLTransformer" language="cpp" platform="win_b64">
+					<LateType>SMAWflOutputFileXMLTransformer_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<!--  File Data Handler properties -->
+
+		<!-- origin folder path -->
+		<Property name="origFname" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<!-- origin file name -->
+		<Property name="file" type="string" valuetype="single">
+			<Value>
+				<![CDATA[{rundir}]]>
+			</Value>
+		</Property>
+
+		<!-- destination file path -->
+		<Property name="rawFN" type="string" valuetype="single">
+			<Value>
+				<![CDATA[{rundir}]]>
+			</Value>
+		</Property>
+
+		<Property name="pattern" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<!--Destination option selection 10 = Automatic 12 = specified location -->
+		<Property name="toOption" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[10]]>
+			</Value>
+		</Property>
+
+		<!--del option constant-->
+		<Property name="del" type="string" valuetype="single">
+			<Value>
+				<![CDATA[N]]>
+			</Value>
+		</Property>
+
+		<!--file type options constant-->
+		<Property name="type" type="string" valuetype="single">
+			<Value>
+				<![CDATA[text/plain]]>
+			</Value>
+		</Property>
+
+		<!--line ending encoding constant-->
+		<Property name="rwEnc" type="string" valuetype="single">
+			<Value>
+				<![CDATA[(Automatic Local)]]>
+			</Value>
+		</Property>
+
+		<!--data encoding constant-->
+		<Property name="dataEnc" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<!--handler type constant-->
+		<Property name="handlerType" type="string" valuetype="single">
+			<Value>
+				<![CDATA[com.dassault_systemes.sma.datahandler.DataHandlerFile]]>
+			</Value>
+		</Property>
+
+	</Properties>
+</wfext:Extension>

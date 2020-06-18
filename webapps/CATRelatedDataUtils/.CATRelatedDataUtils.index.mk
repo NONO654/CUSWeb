@@ -1,0 +1,14 @@
+m|CATRelatedDataWebUX\CATRelatedDataUtils.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|CATRelatedDataWebUX\CATRelatedDataUtils.mweb\LocalGenerated\win_b64\CATRelatedDataUtils.css|1531550746|0
+s|CATRelatedDataWebUX\CATRelatedDataUtils.mweb\src\CATRelatedDataUtils.scss|1491555207|0
+t|win_b64\webapps\CATRelatedDataUtils\CATRelatedDataUtils.js|1531551087|432
+s|CATRelatedDataWebUX\CATRelatedDataUtils.mweb\src\_copyright.js|1475050414|63
+s|CATRelatedDataWebUX\CATRelatedDataUtils.mweb\src\CATRelatedDataUtils.js|1491555223|95
+s|CATRelatedDataWebUX\CATRelatedDataUtils.mweb\src\CATRelatedDataTransientWidget.js|1493033999|826
+t|win_b64\webapps\CATRelatedDataUtils\CATRelatedDataUtils.css|1568749487|62
+s|CATRelatedDataWebUX\CATRelatedDataUtils.mweb\src\_copyright.css|1476090098|63
+g|CATRelatedDataWebUX\CATRelatedDataUtils.mweb\LocalGenerated\win_b64\CATRelatedDataUtils.css|1531550746|0

@@ -1,0 +1,98 @@
+<dom-module id="cmp-step-view">
+    <template>
+        <style>
+        :host {
+            display: inline-block;
+            position: absolute;
+            box-sizing: border-box;
+        }
+        :host([hidden]) {
+            display: none;
+        }
+        :host([selected]) #stepIcon {
+            border: medium solid #78befa;
+        }
+        :host([loading]) #loaderIcon {
+            display: block;
+            position: relative;
+            top: -28px;
+            left: 2px;
+            width: 30px;
+            height: 30px;
+            pointer-events: none;
+        }
+        #loaderIcon {
+            display: none;
+        }
+        :host([readonly]) #stepIcon, :host([disabled]) #stepIcon {
+            opacity: .5;
+        }
+        :host([disabled]) #stepIcon:hover {
+            border: medium solid transparent;
+        }
+
+        #stepIcon {
+          height: 32px;
+          width: 32px;
+          border: medium solid transparent;
+        }
+        #stepIcon:hover {
+            border: medium dashed #78befa;
+        }
+
+        #stepName {
+          color: #D1D4D4;
+          font: 10px Arial;
+          text-align: center;
+          text-overflow: ellipsis;
+          width: calc(100% + 40px);
+          margin-left: -20px;
+          margin-top: 2px;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        #warningIcon {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 16px;
+            height:16px;
+        }
+
+        .showMainStepIcon{
+             position: absolute;
+             left: 11px;
+             bottom: -5px;
+             width: 10px;
+             height: 10px;
+        }
+
+        .highlightBorder {
+             border: medium solid #47D1FF !important;
+        }
+
+        .showpauseBefore{
+             position: absolute;
+             left: -22px;
+             bottom: 19px;
+             width: 12px;
+             height: 12px;
+        }
+        .showpauseAfter{
+             position: absolute;
+             right: -18px;
+             bottom: 19px;
+             width: 12px;
+             height: 12px;
+        }
+        </style>
+        <img id="stepIcon" src="[[icon]]" on-error="getDefaultIcon" alt="" />
+        <img id ="showMainStep" class="hidden" src="{{_getIconUrl('Main_step_indicator.png')}}" title ="This is the main step." alt="" />
+        <img id ="showpauseBefore" class="hidden" src="{{_getIconUrl('SMAStep_PauseBeforeAndAfter.png')}}" title ="Execution will pause before this step" alt="" />
+        <img id ="showpauseAfter" class="hidden" src="{{_getIconUrl('SMAStep_PauseBeforeAndAfter.png')}}" title ="Execution will pause after this step" alt="" />
+        <div id="loaderIcon"></div>
+        <div id="stepName" title="[[label]]">[[label]]</div>
+        <img id="warningIcon" src="{{_getIconUrl('ELEWarning_small.png')}}" title="[[statusMessage]]" hidden$="{{!statusMessage}}"/>
+    </template>
+</dom-module>

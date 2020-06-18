@@ -1,0 +1,41 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-run/sp-run.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-cos/sp-cos.html">
+<link rel="import" href="../../SMAProcPSUI/ps-simulation-list/ps-simulation-list.html">
+<link rel="import" href="../ps-list-view-properties/ps-list-view-properties.html">
+<title>Performance Study</title>
+
+<dom-module id="ps-list-view">
+  <link rel="import" type="css" href="ps-list-view.css">
+  <template>
+
+        <!-- COMMON CONFIGURATION PROPERTIES -->
+        <sp-variable id="mcsBaseURL" name="mcsBaseURL"></sp-variable>
+        <sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL"></sp-variable>
+        <sp-variable id="eedBaseURL" name="eedBaseURL"></sp-variable>
+        <sp-variable id="licenseData" name="licenseData"></sp-variable>
+        <sp-variable id="platformid" name="platformid"></sp-variable>
+        <sp-variable id="_3DSpaceServiceURL" name="_3DSpaceServiceURL"></sp-variable>
+        <sp-variable id="inDashBoard" name="inDashBoard"></sp-variable>
+        <sp-cos id="cosServer"></sp-cos>
+        <sp-webservice uri="../AppsMngt/user/startup" on-dataready="initStorages" getasap=""></sp-webservice>
+        <sp-webservice id="eedTicketWs"  data="{{ eedTicketData }}"  uri="{{_computeEEDTicketUri()}}" on-dataready="setEEDTicket">
+        </sp-webservice>
+        <sp-dashboard id="dashboard"></sp-dashboard>
+            <div class="main" id="main">
+            <!--Sidebar-->
+                <ps-simulation-list id="psSimulationList" activeitem="{{activeitem}}" sidebarmode="simList" on-comparesimulations="onSimlistCompare" simulation-factory="{{simulationFactory}}" class="simList de-featured">
+                </ps-simulation-list>
+
+                <ps-list-view-properties class="simProp" id="psSimulationProp" activeitem="{{activeitem}}">
+                </ps-list-view-properties>
+            </div>
+    </template>
+  <script type="text/javascript" src="ps-list-view.js"></script>
+</dom-module>

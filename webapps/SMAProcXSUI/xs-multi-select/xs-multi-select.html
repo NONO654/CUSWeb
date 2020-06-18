@@ -1,0 +1,114 @@
+<!--------------------------------------------------------------------
+[xs-multi-select HTML Document]
+Project:    xs
+------------------------------------------------------------------- -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+
+<dom-module id="xs-multi-select">
+  <!-- <link rel="import" type="css" href="xs-multi-select.css"> -->
+  <template>
+    <style>
+    :host {
+        display: flex;
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 100px;
+        height: 150px;
+      }
+
+    .available-choices, .selected-choices {
+        width: calc(50% - 22px);
+        height: 100%;
+        display: inline-block;
+        text-align: left;
+    }
+
+    .seprator-action {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 34px;
+        padding-top: 30px;
+    }
+
+    .seprator-action > button {
+        padding: 5px;
+        display: inline-block;
+        margin-top: 5px;
+        font-size: 14px;
+        width: auto;
+    }
+
+    .all-choices-list, .selected-choices-list {
+        height: calc(100% - 28px);
+        border: 1px solid #e2e4e3;
+        overflow-y: auto;
+        background-color: #ffffff;
+    }
+
+    .is-required {
+        border-color: #d0432b;
+    }
+
+    .all-choices-list > div, .selected-choices-list > div {
+        width: 100%;
+        height: 24px;
+        font-size: 14px;
+        font-family: '3ds-Light';
+        padding: 0px 5px 0px 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .choices-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .selected-choices > .choices-label {
+        font-weight: bold;
+    }
+
+    .is-selected {
+        color: white;
+        background-color: #368ec4;
+    }
+
+    .fonticon-left:before {
+        content: '\e140';
+    }
+
+    .fonticon-right:before {
+        content: '\e141';
+    }
+    </style>
+
+
+    <div class="available-choices">
+        <div class="choices-label">Available Choices</div>
+        <div class="all-choices-list">
+            <template is="dom-repeat" id="availablechoices" items="{{options}}" filter="filterAvailableOptions" as="opt">
+                <div  title$="{{_computeLabel(opt.value)}}" data-value$="{{opt.value}}" on-click="toogleSelectedOption">{{_computeLabel(opt.value)}}</div>
+            </template>
+        </div>
+    </div>
+    <div class="seprator-action">
+        <button is="sp-button-type" title="Add choices" id="select" class="fonticon fonticon-right" on-click="select" disabled></button>
+        <button is="sp-button-type" title="Remove choices" id="deselect" class="fonticon fonticon-left" on-click="deselect" disabled></button>
+    </div>
+    <div class="selected-choices">
+        <div class="choices-label">Selected Choices</div>
+        <div class$="{{_computeSelectChoiceListClass(_value,required)}}">
+            <template is="dom-repeat" items="{{_value}}"  as="val">
+                <div title$="{{_computeLabel(opt.value)}}" data-value$="{{val}}" on-click="toogleSelectedValue">{{_computeLabel(val)}}</div>
+            </template>
+        </div>
+    </div>
+  </template>
+  <script type="text/javascript" src="xs-multi-select.js"></script>
+</dom-module>

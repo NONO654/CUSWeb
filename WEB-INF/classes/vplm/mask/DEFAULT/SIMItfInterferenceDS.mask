@@ -1,0 +1,242 @@
+// ===========================================================
+// PACKAGE   : SIMItfInterferenceDS
+// ===========================================================
+// Generated : Thu May  4 11:29:14 2006
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+// CREATE: controls the creation time attribute list
+// QUERY: controls list of attributes available for queries 
+// READ: controls the displayable attribute list (result list, properties); it is used both for presenting the results of a search, and also when browsing a single item of information (attributes in lines) 
+// WRITE: controls the modifiable attribute list (property editor, etc.)
+// EZQUERY: some applications (VPM Navigator) use the EZQUERY mask to define the "standard query" panel (the most-used list of attributes for query) whereas the QUERY mask is used for the "advanced query" panel (all queryable attributes)
+// TREE: LCA Navigator uses the tree mask to define the set of focal data attributes displayed in the notebook view. The focal data is displayed at the top of the page; the attributes in the read mask but not in the tree mask are displayed in the "General attributes" tab.
+// LIST: LCA Navigator uses the list mask to define the set of attributes used as column in list results for that object type (for query results and the related object lists)<package>  
+// ===========================================================
+// personal documentation
+// 
+// $ : no default value, all value are authorized
+// <required> = requires attr logical flag (Y or N) attr mandatory or not in the metadata
+// required c est comme mandatory mais au niveau UI
+// on peut mettre a required un attribut nom mandatory
+// exemple: on a L'IdentifierSet sur notre objet qui est: PLM_ExternalID majorrevision
+// si on a un panel d edition comme l edit properties où PLM_ExternalID et majorrevision apparaissent
+// il faut PLM_ExternalID a Y et majorrevision a Y
+//
+// TREE: c est le nom qui apparait dans l arbre
+// ===========================================================
+
+MASK DEFAULT
+
+// 2 entities :
+// - SIMItfInterferenceDS
+// - SIMItfSimulationDS
+
+// ===========================================================
+ENTITY SIMItfSimulationDS
+// ===========================================================
+// --- attributes: 13
+ATTR PLM_ExternalID;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR V_description;N;N;$
+ATTR current;N;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR owner;Y;N;$
+ATTR majorrevision;N;N;$
+ATTR V_Itf_ExecutionStatus;Y;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR V_description;Y
+FATTR current;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR majorrevision;Y
+FATTR V_Itf_ExecutionStatus;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR originated;N
+FATTR modified;N
+FATTR V_description;N
+FATTR current;N
+FATTR organization;N
+FATTR project;N
+FATTR owner;N
+FATTR majorrevision;N
+FATTR V_Itf_ExecutionStatus;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR originated;N
+FATTR modified;N
+FATTR V_description;Y
+FATTR current;N
+FATTR organization;N
+FATTR project;N
+FATTR owner;N
+FATTR majorrevision;N
+FATTR V_Itf_ExecutionStatus;N
+
+// ===========================================================
+ENTITY SIMItfInterferenceDS
+// ===========================================================
+// --- attributes: 15
+// 2008_11_04 required N ->Y ---------
+ATTR PLM_ExternalID;Y;N;$
+// -----------------------------------
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR V_description;N;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR owner;Y;N;$
+ATTR V_discipline;Y;N;$
+ATTR V_Itf_Status;N;N;$
+ATTR V_Itf_Type;Y;N;$
+ATTR V_ItfCusto_Relevancy;N;N;$
+ATTR V_Itf_Quant1;N;N;$
+ATTR V_Itf_Quant2;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;Y
+FATTR V_Itf_Type;Y
+FATTR V_ItfCusto_Relevancy;Y
+FATTR V_Itf_Quant1;Y
+FATTR V_Itf_Quant2;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR V_description;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR V_discipline;Y
+FATTR V_Itf_Status;Y
+FATTR V_Itf_Type;Y
+FATTR V_ItfCusto_Relevancy;Y
+FATTR V_Itf_Quant1;Y
+FATTR V_Itf_Quant2;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR originated;N
+FATTR modified;N
+FATTR V_description;N
+FATTR organization;N
+FATTR project;N
+FATTR owner;N
+FATTR V_discipline;N
+FATTR V_Itf_Status;N
+FATTR V_Itf_Type;N
+FATTR V_ItfCusto_Relevancy;N
+FATTR V_Itf_Quant1;N
+FATTR V_Itf_Quant2;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR originated;N
+FATTR modified;N
+FATTR V_description;Y
+FATTR organization;N
+FATTR project;N
+FATTR owner;N
+FATTR V_discipline;N
+FATTR V_Itf_Status;N
+FATTR V_Itf_Type;N
+FATTR V_ItfCusto_Relevancy;Y
+FATTR V_Itf_Quant1;N
+FATTR V_Itf_Quant2;N
+
+// ===========================================================
+// End of SIMItfInterferenceDS package's DEFAULT mask file
+// ===========================================================

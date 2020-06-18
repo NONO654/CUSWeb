@@ -1,0 +1,1 @@
+define("DS/ENOXVersionExplorerController/ENOXVersionExplorerController_zh",{});define("DS/ENOXVersionExplorerController/assets/nls/NodeDropdownMenuNLS",{branch:"新分支",compare:"比较",deleteVersion:"删除",newRevision:"新修订版",newEvolution:"创建衍生",newBranch:"创建分支",newVersion:"创建版本",noActions:"无操作",open:"打开",properties:"特性",version:"版本"});

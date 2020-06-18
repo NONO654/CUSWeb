@@ -1,0 +1,2 @@
+/*! Copyright 2016 Dassault Systèmes */
+if(typeof Highcharts!=="undefined"){define("DS/SMAHighcharts/Highcharts",function(){return Highcharts})}else{(function(){var a=require.toUrl("../SMAVenHighcharts/6.0.7/highcharts");if(a.indexOf("?")>-1){a=a.substring(0,a.indexOf("?"))}require.config({paths:{"DS/SMAVenHighcharts":a},shim:{"DS/SMAVenHighcharts":{exports:"Highcharts"}}})})()}define("DS/SMAHighcharts/Highcharts",["../SMAVenHighcharts/6.0.7/highcharts"],function(a){return a});

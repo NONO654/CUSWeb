@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html>
+<html style="height:100%" lang="en">
+<head>
+    <title>HTML TABLE Test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="assets/styles/wrappedController.css">
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <!-- <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>  this is not the good filepath location-->
+	<script type="text/javascript">
+
+	function loadExpressionRulePage(){	
+		require([
+            'DS/WebappsUtils/WebappsUtils',
+            "DS/UIKIT/Mask",
+            "DS/CfgRules/scripts/CfgMatrixRulesWebServices",
+            "DS/CfgRules/scripts/CfgRuleUtility",
+            "DS/UIKIT/Alert",
+			"DS/CfgXRules/RuleExpressionComponent/Presenter/RuleExpressionPresenter",
+			"DS/CfgXRules/Commons/Presenters/VariabilityCriteriaSelector",
+			"DS/CfgXRules/Commons/Utils/dictionaryCfgConverter",
+	        "DS/CfgXRules/RuleExpressionComponent/LanguageInformationComponent/Model/LanguageInformationModelFTR",
+	        "DS/CfgXRules/RuleExpressionComponent/Presenter/RuleExpressionComponentExpressionGenerator",
+	        "DS/CfgXRules/RuleExpressionComponent/Presenter/RuleExpressionComponentWrappedExpressionGenerator",	        
+	        "i18n!DS/CfgRules/assets/nls/ExpressionRule",
+	        "css!DS/CfgXRules/Commons/Utils/SolverDebug.css"
+				], function (
+						dummy_WebappsUtils,//DO NOT REMOVE THIS- REQUIRE TO LOAD UX
+						Mask,
+						WebServices,
+						CfgRuleUtility,
+						Alert,
+						RuleExpressionPresenter,
+		                VariabilityCriteriaSelector,
+		                dictionaryCfgConverter,
+		                LanguageInformationModelNextGen,
+		                RuleExpressionComponentExpressionGenerator,
+		                RuleExpressionComponentWrappedExpressionGenerator,
+		                ER_NLS)
+		        {
+			var divMessage = null;
+			divMessage = new Alert({ visible: false, autoHide: true, hideDelay: 3000, closeOnClick: true, maximumVisibleMessages: 3, className: "MRAlert" });
+            var wrapperdiv = document.getElementById("content");
+            divMessage.inject(wrapperdiv);
+            var displayAlertMessage = function (classNames, message){
+                var allClass = "";
+                var i = 0;
+                for (i = 0; i < classNames.length; i += 1)
+                {
+                    allClass += classNames[i] + " ";
+                }
+                divMessage.add({ className: allClass, message: message });
+                divMessage.show();
+            }
+			var getParameterEncoded = function(attributeToRetrieve){
+			        var sPageURL = window.location.search.substring(1);
+			        var splitChar = "&";
+			        var sURLVariables = sPageURL.split(splitChar);
+
+			        if (sURLVariables.length <= 1){
+			            splitChar = "%26"; // code hexa for '&'
+			            sURLVariables = sPageURL.split(splitChar);
+			        }
+
+			        for (var i = 0; i < sURLVariables.length; i += 1){
+			            var sParameterName = sURLVariables[i].split('=');
+			            if (sParameterName[0] === attributeToRetrieve){
+			                return decodeURIComponent(sParameterName[1]);
+			            }
+			        }
+			        return null;
+			 }            
+			var onDictionaryLoadSuccess = function (fullDictionary, params){
+				var editLink = getParameterEncoded("editLink");
+				
+				var ruleId = getParameterEncoded("objectId"); // this is the ruleid
+                //---------------------------------------
+				//START- GET AND POPULATE EXPRESSION-----
+                //---------------------------------------				
+				var rule = WebServices.getRule(ruleId);
+			    var jsonRule = JSON.parse(rule);
+			    var currentExpressionToLoad = jsonRule.configurationRule.attributes.LayoutData;
+			    var isEditable = false;
+ 			    if (jsonRule.configurationRule.isModifiable === "TRUE")
+			    {
+			        isEditable = true;
+			    }
+			    var urlEditable = WebServices.getObjectIDFromURL("editLink"); // mobile purpose ? if on a mobile, the editLink will be false
+			    if (urlEditable == "false" || urlEditable == false)
+			    {
+			        isEditable = false;
+			    }
+				var currentExpression = {};
+                currentExpression.items = [];
+			    if (currentExpressionToLoad != null && currentExpressionToLoad!="") {
+			     currentExpression = JSON.parse(currentExpressionToLoad);
+			    }
+                //---------------------------------------			    
+			    //END- GET AND POPULATE EXPRESSION-------
+                //---------------------------------------			    
+                var autoCompletePartialRuleModel = {
+                    currentExpression: currentExpression
+                };
+                //refering Matrix Rule
+                fullDictionary = fullDictionary.replace(/pid:/g, '');
+                fullDictionary = fullDictionary.replace(/lid:/g, '');
+
+                var dictionaryParsed = JSON.parse(fullDictionary);
+			    //solverKey retrieved -Similar to Matrix Rule case
+                var solverKey = null;
+			    if (dictionaryParsed.solverToken != null) {
+			        solverKey = dictionaryParsed.solverToken;
+			        window.addEventListener("beforeunload", function () {
+			            WebServices.releaseSolver(solverKey);
+			        });
+			        var isSolverActivated = window.localStorage.DS_ExpressionRuleCookie_DebugActivated;
+			        //isSolverActivated=true;
+                    if (isSolverActivated === true
+                            || isSolverActivated === "yes"
+                            || isSolverActivated === "true"){
+	                    console.log("activating solver traces");
+	                    require( // loads library only if isSolverActivated is true
+	                    [
+	                        "DS/CfgXRules/Commons/Utils/SolverDebug"
+	                    ],
+	                    function(
+	                        SolverDebug)
+	                    {
+	                        var debuggerTool = new SolverDebug();
+	                        var obj = { 'solverKey': solverKey };
+	                        debuggerTool.init("ruleEditor", obj);
+	                        debuggerTool.injectIn(wrapperdiv);
+	                    });
+			       }
+			    } 
+			    if (solverKey)
+			    {
+			        WebServices.setRuleActivationOnSolver(ruleId, false, solverKey); // deactivate current rule in Solver
+			    }
+                var dicoV0 = dictionaryCfgConverter.convertFromPhysicalToLogical16X(dictionaryParsed);
+                var ruleExprModel = {
+                    fullDictionary: dicoV0,
+                    autoCompleteRuleModel: autoCompletePartialRuleModel,
+                    languageInformation: LanguageInformationModelNextGen,
+                    solverKey: solverKey,
+                    editable:isEditable
+                };
+                
+                var slideInAction = {
+                    text: ER_NLS.ER_OPEN_DICTIONARY,
+                    title: ER_NLS.ER_OPEN_DICTIONARY,
+                    icon: "plus",
+                    selected: false,
+                    handler: function (that)
+                    {
+                        if (!this.criteriaSelector)
+                        {
+                            this.criteriaSelector = new VariabilityCriteriaSelector({
+                                parentContainer: that.container,
+                                actionView: this,
+                                dictionaryJSON: dicoV0
+                            });
+
+                            this.criteriaSelector.subscribe('changeView', function () { });
+
+                            this.criteriaSelector.subscribe('onAddAction', function (subDictionary)
+                            {
+                                console.log('onSelectCriteria');
+                                //that._localModelEvent.subscribe({ event: "onPlus" }, respondToPlus);
+                                mRuleExpressionPresenter.publish("onPlus", subDictionary);
+                            });
+                        }
+
+                        this.criteriaSelector.toggle();
+                    }
+                };
+             
+                var mRuleExpressionPresenter = new RuleExpressionPresenter(ruleExprModel);
+                mRuleExpressionPresenter.inject(wrapperdiv);
+                if(isEditable){
+                 mRuleExpressionPresenter.addAction(slideInAction);
+                }
+                mRuleExpressionPresenter.render();
+                var acallback = function ()
+                {
+                    console.log("listening to change.. Here you are!");
+                };
+                var asavecallback = function(expression)
+                {
+                    console.log(expression);
+                    var nbError = mRuleExpressionPresenter.getErrorsCount();
+                    var boolConflict = mRuleExpressionPresenter.isInConflict();
+                    var varFullExpForModeler;
+                    if(nbError===0){//if has syntax error- will not call API generateFullExpressionForExpressionModeler
+                    	varFullExpForModeler=RuleExpressionComponentWrappedExpressionGenerator.generateFullExpressionForExpressionModeler(expression, dictionaryParsed);
+                    }else{
+        				var expression2 = {};
+        				expression2.items = [];
+                    	varFullExpForModeler=RuleExpressionComponentWrappedExpressionGenerator.generateFullExpressionForExpressionModeler(expression2, dictionaryParsed);
+                    }
+                    //construct final JSON
+                    var jsonExpNDep = {};
+                    jsonExpNDep = JSON.stringify(varFullExpForModeler);
+                    var onCompleteCallback = function (returnedSave){
+                        if(nbError>0){//if has syntax error- warning will be shown
+                            var i = 0;
+                            var addMsg = true;
+                            for (i = 0; i < divMessage.getMessages().length; i += 1){
+                                if (CfgRuleUtility.hasClass(divMessage.elements.container.childNodes[i], "mrsaved_syntaxError")){
+                                    addMsg = false;
+                                    break;
+                                }
+                            }
+                            if (addMsg){
+                                	divMessage.add({ className: "warning " + "mrsaved_syntaxError " + "MR_message", message: ER_NLS.ER_SAVE_SYNTAX_ERROR });
+                            }
+                        }
+                        if(nbError===0 && boolConflict){//if has syntax error- warning will be shown
+                            var i = 0;
+                            var addMsg = true;
+                            for (i = 0; i < divMessage.getMessages().length; i += 1){
+                                if (CfgRuleUtility.hasClass(divMessage.elements.container.childNodes[i], "mrsaved_conflict")){
+                                    addMsg = false;
+                                    break;
+                                }
+                            }
+                            if (addMsg){
+                                	divMessage.add({ className: "warning " + "mrsaved_conflict " + "MR_message", message: ER_NLS.ER_SAVE_CONFLICT });
+                            }                        	
+                        	
+                        }
+                        var i = 0;
+                        var addMsg = true;
+                        for (i = 0; i < divMessage.getMessages().length; i += 1){
+                            if (CfgRuleUtility.hasClass(divMessage.elements.container.childNodes[i], "mrsaved")){
+                                addMsg = false;
+                                break;
+                            }
+                        }
+                        if (addMsg){
+                           	if (returnedSave === null){//if save complete but no result - error Message //Conflict Case to be handled coming from solver?
+                                divMessage.add({ className: "error " + "mrsaved " + "MR_message", message: ER_NLS.ER_SAVE_ERROR });
+                            }else{
+                                divMessage.add({ className: "success " + "mrsaved " + "MR_message", message: ER_NLS.ER_SAVE_OK });
+                            }
+
+                        }                           
+                        //start   88837 : redirect in case of new Rule create
+                        var getObjectId = function(url){
+                        	if(url == null || url == "undefined"){
+                        		url = window.location.search;
+                        	}
+                        	var startIndex =url.indexOf("objectId=");
+                        	if(startIndex != -1){
+                        		startIndex += 9 ; //length of "objectId="
+                        		var endIndex = url.indexOf("&",startIndex);
+                        		if(endIndex == -1){endIndex = url.length; }
+                        		return url.substring(startIndex , endIndex);
+                        	}else{
+                        		return null;
+                        	}                       		
+                        }
+                        var objPid = getObjectId();
+                        var respData = JSON.parse(returnedSave);
+                        if(respData.details){
+                        	var id = respData.details.id ;
+                        	id = id.substring(4);
+                        	if(objPid != id){ //check if new rule is created
+                        		var newURL = window.location.search ;
+                        		if(window.parent.parent.name == "content"){
+                        			objPid = getObjectId(window.parent.parent.location.search);
+                        			newURL = window.parent.parent.location.search;
+                        		
+                        			newURL = newURL.replace(objPid , id );
+                        			var topWindow = window.parent.parent.getTopWindow();
+                        			topWindow.bclist.setPosition(topWindow.bclist.currentPosition()-1);
+                        			window.parent.parent.location.href = "../../common/emxTree.jsp"+newURL+"&AppendParameters=true&";
+                        		}
+                        	}
+                        }
+                        //end   88837
+                        mRuleExpressionPresenter.publish("onDone", null);// on sucess will hide action buttons
+                        divMessage.show();
+                    };
+                    var onFailureCallback = function (){
+                        var i = 0;
+                        var addMsg = true;
+                        for (i = 0; i < divMessage.getMessages().length; i += 1){
+                            if (CfgRuleUtility.hasClass(divMessage.elements.container.childNodes[i], "mrsaved")){
+                                addMsg = false;
+                                break;
+                            }
+                        }
+                        if (addMsg){                    	
+                          divMessage.add({ className: "error " + "mrsaved " + "MR_message", message: ER_NLS.ER_SAVE_ERROR });
+                        }
+                        divMessage.show();        
+                    };
+                    //"expression" will go in layoutData irrespective of error in syntax
+                    //"jsonExpNDep" will go in mathematicalExpression and dependency - empty in case of erro in syntax
+                    var currentVersion="1.0.1";
+                    var pidProduct = getParameterEncoded("productPID");
+                    CfgRuleUtility.updateRuleExpression(ruleId, currentVersion, expression, jsonExpNDep, onCompleteCallback, onFailureCallback, pidProduct);                   
+                }
+                //mRuleExpressionPresenter.subscribe("onChangeExpression", acallback);
+                mRuleExpressionPresenter.subscribe("onSave", asavecallback);	
+			};
+
+			var pidModel = getParameterEncoded("modelPID");
+			var pidProduct = getParameterEncoded("productPID");
+			//var evolutionExpressionAsString = WebServices.createEvolutionExpressionAsJson(modelname, productName, prodRevision);
+			var evolutionExpressionAsString = {};
+    		evolutionExpressionAsString = JSON.stringify({
+    		    "version":"1.0.0",
+    		    "criteria":{
+    		    	"ProductRevision":{
+    		    		"id": "pid:" + pidProduct
+    		    		}
+    		    	}
+    		    });
+			WebServices.getDictionary(pidModel, onDictionaryLoadSuccess, null, evolutionExpressionAsString);
+		  });
+	    }
+        document.addEventListener("DOMContentLoaded", function (e) // for some reasons, this needs to be outside of the require..
+        {   
+   	    loadExpressionRulePage(); 
+        });
+    </script> 
+</head>
+<body style="height:99%; width:99%; margin:0px; overflow-y:hidden; overflow-x:auto">
+	<div id="content" style="height:100%; width:100%"> <!-- just need the 'content' now -->
+    </div>
+</body>
+</html>
+

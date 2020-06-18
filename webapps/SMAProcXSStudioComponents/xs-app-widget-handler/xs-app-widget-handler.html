@@ -1,0 +1,88 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uwawidget/sp-uwawidget.html">
+<link rel="import" href="../../SMAProcXSUI/xs-designer/xs-designer.html" />
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<link rel="import" href="../../SMAProcXSStudioComponents/xs-create-template/xs-create-template.html" />
+<link rel="import" href="../../SMAProcXSStudioComponents/xs-one-click/xs-one-click.html" />
+
+<title>Process Experience Studio</title>
+
+<dom-module id="xs-app-widget-handler">
+  <!-- <link rel="import" type="css" href="xs-app-widget-handler.css"> -->
+  <template>
+    <style>
+    .construction {
+          text-align: center;
+          font-weight: bold;
+          background-color: #FEE000;
+          font-family: sans-serif;
+        }
+    .licensecheck {
+          text-align: center;
+          font-weight: bold;
+          background-color: #FFFCD6;
+          font-family: sans-serif;
+    }
+
+    .xs-container {
+      height: 100%;
+    }
+
+    .uwa-widget {
+      display: none;
+      height: 100%;
+    }
+
+    .loading-msg {
+      display: none;
+    }
+
+    .xs-container[data-state="is-loading"] .loading-msg {
+        display: block;
+    }
+
+    .xs-container[data-state="is-init"] .uwa-widget {
+       display: block;
+    }
+    </style>
+
+      <div id="container" class="xs-container" data-state$="{{state}}">
+        <sp-notification id="notification" position="TR" width="400"></sp-notification>
+        <div id="alertmsg" style="width=100%"></div>
+
+        <!-- Get platform data-->
+        <sp-webservice id="platform_ws" uri="../AppsMngt/user/startup" on-dataready="checkIfCloud" on-error="onSevereError"></sp-webservice>
+
+        <!--Get Policy info and create access-->
+         <sp-mcsservice id="fetchMandData" on-response="onMandDataReady"></sp-mcsservice>
+
+     		<!--Takes care of boilerplate code for preferences, security context etc. and sets up a drop zone-->
+	    	<sp-uwawidget id="uwawidget" class="uwa-widget" enabledrop enablesearch
+        	 preferences="{{preferences}}" drop-note-text="Simulation Template" add-note-text="Simulation Template" on-spuwawidgetinit="loadPolicyInfo">
+       	</sp-uwawidget>
+
+        <div class="loading-msg">
+          Loading...
+        </div>
+      	<!--Web service to get Experience details based on Experience Id-->
+      	<sp-mcsservice id="templateWS" on-dataready="onGetExperienceSuccess" on-error="onGetExperienceError"></sp-mcsservice>
+
+
+        <!--Web service to get template properties based on template Id-->
+      	<sp-mcsservice id="SMAtemplateWS" on-dataready="onTemplateDataSuccess" on-error="onTemplateDataError"></sp-mcsservice>
+
+      	<!--Component to Create New Simulation Template-->
+      	<xs-create-template id="xsCreateTemplate" on-create="onTemplateCreate" on-close="onCreateFormClose" ></xs-create-template>
+
+  		<!-- </template> -->
+
+      <sp-dashboard id="dashboard"></sp-dashboard>
+    </div>
+    </template>
+  <script type="text/javascript" src="xs-app-widget-handler.js"></script>
+</dom-module>

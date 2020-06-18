@@ -1,0 +1,52 @@
+/*
+ *	Functional Connector Customization
+ */
+
+// PACKAGE <ConnectorQualicationPrefix>;
+PACKAGE PLM;
+/*
+ *	Compatibility method
+ */
+
+METHOD RFLPLMFunctionalReference.name() : {
+	PLM_ExternalID;
+};
+
+METHOD rel_RFLPLMFunctionalInstance.name() : {
+	PLM_ExternalID;
+};
+
+/*
+ *	Functional Extensions
+ */
+
+METHOD rel_RFLPLMFunctionalInstance.SnapshotReferences() -doc :
+	GetReference().SnapshotReferences()
+CATEGORY I18N("Category.Navigation")
+LABEL I18N("Method.Navigation.Snapshots")
+HELPTEXT I18N("Method.Snapshots_Description");
+ 
+METHOD rel_RFLPLMFunctionalInstance.SubFunctions() -doc :
+	GetReference().SubFunctions()
+CATEGORY I18N("Category.Navigation")
+LABEL I18N("Method.Navigation.Sub_Functions")
+HELPTEXT I18N("Method.Sub_Functions_Description");
+
+METHOD RFLPLMFunctionalReference.getPNGDiagrams() -doc :
+	FunctionalRepresentations.`2DPicture`
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.Get2DDiagram")
+HELPTEXT I18N("Method.Tooltip.Get2DDiagram");
+
+METHOD RFLPLMFunctionalReference.getAllSubFunctions() -doc :
+	SubFunctions.*(SubFunctions)
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.GetAllSubFunctions")
+HELPTEXT I18N("Method.Tooltip.GetAllSubFunctions");
+
+METHOD RFLPLMFunctionalReference.getAllFlows() -doc :
+	AllFlows $+ getAllSubFunctions.AllFlows
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.GetAllFlows")
+HELPTEXT I18N("Method.Tooltip.GetAllFlows");
+

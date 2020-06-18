@@ -1,0 +1,71 @@
+<!--------------------------------------------------------------------
+[xs-process-browser HTML Document]
+
+------------------------------------------------------------------- -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<!-- <script src="../../WebappsUtils/WebappsUtils.js"></script> -->
+<!--Common UI-->
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html" async>
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html" async>
+<!--Project internal-->
+<link rel="import" href="../../SMAProcXSWidgets/xs-wg-plm-data/xs-wg-plm-data.html">
+<link rel="import" href="../xs-data-tree-view/xs-data-tree-view.html" async>
+
+<dom-module id="xs-process-browser">
+    <!-- <link rel="import" type="css" href="xs-process-browser.css"> -->
+    <template>
+      <style>
+      :host {
+        display: block;
+      }
+
+      .browsewindow {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: -15px -10px;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .valid-flag {
+        text-align: left;
+      }
+
+      .heading {
+        padding: 10px;
+        font-size: large;
+        font-weight: bold;
+        width: 500px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: inline-block;
+      }
+      </style>
+
+        <xs-wg-plm-data id="plmdata"></xs-wg-plm-data>
+        <sp-modal id="modalcontainer" class="mediummodal" heading="" width="700px" height="600px" on-close="onDismiss">
+            <header>
+                <span class="heading">{{_computeHeading(heading)}}</span>
+            </header>
+            <section class="browsewindow">
+                <xs-data-tree-view id="treeview" is-valid-selection="{{treeIsValidSelection}}" data-filter-key="{{treeDataFilterKey}}" on-xs-data-tree-view-dataselected="onOkay" on-xs-data-tree-view-attached="treeViewAttached"></xs-data-tree-view>
+            </section>
+            <footer class="footer">
+                <div>
+                    <div class="supported-types">Supported Types: <span>{{_listSupportedTypes(treeDataFilterKey)}}</span></div>
+                </div>
+                <div class="actionButton">
+                    <button is="sp-button-type" id="confirmbutton" primary on-click="onOkay" disabled$="{{_computeDisabled(treeIsValidSelection,disabled)}}" >Ok</button>
+                    <button is="sp-button-type" id="dismissbutton" on-click="onDismiss">Cancel</button>
+                </div>
+
+            </footer>
+        </sp-modal>
+    </template>
+    <script src="xs-process-browser.js"></script>
+</dom-module>

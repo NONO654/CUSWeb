@@ -1,0 +1,1 @@
+define("DS/MPFMenuComponent/MPFMenuComponent_en",{});define("DS/MPFMenuComponent/assets/nls/MenuComponent",{back:"Back",finish:"Finish",loading:"Loading",next:"Next"});

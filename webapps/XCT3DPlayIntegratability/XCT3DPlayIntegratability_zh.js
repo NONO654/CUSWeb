@@ -1,0 +1,1 @@
+define("DS/XCT3DPlayIntegratability/XCT3DPlayIntegratability_zh",{});define("DS/XCT3DPlayIntegratability/assets/nls/XCT3DPlayIntegratability",{warning_objectTypeNotSupported_title:"对象类型不受支持",error_loadingMultipleFiles_title:"无法加载多个体验，只可加载第一个体验。"});

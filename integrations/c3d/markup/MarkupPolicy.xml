@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MarkupPolicy>
+
+<Action name="SaveNewMarkup" default="true">
+</Action>
+
+<!-- Only allow owner to modify master markup  -->
+<Action name="SaveExistingMarkup" default="true">
+</Action>
+
+<Action name="EditMarkup" default="true">
+</Action>
+
+<!-- Only allow owner to delete master markups -->
+<Action name="DeleteMarkup" default="true">
+</Action>
+
+<!-- Only open master markups automatically -->
+<Action name="AutoOpenMarkup" default="false">
+  <ExConditions>
+      <OrOperator>
+        <MarkupFileCondition name="CSI_MarkupType" value="normal"/>
+      </OrOperator>
+  </ExConditions>
+</Action>
+
+</MarkupPolicy>

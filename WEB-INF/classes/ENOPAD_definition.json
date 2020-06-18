@@ -1,0 +1,207 @@
+{
+    "includes": ["ENOLifeCycle_definition"],
+    "intents": {
+	"explore_2D": [
+	    "pad:id",
+	    "pad:icon",
+	    "pad:columns",
+	    "pad:thumbnail_2d",
+	    "pad:tree_order",
+		"pad:child_count"
+	],
+	"explore_3D": [
+	    "pad:id",
+	    "pad:tags",
+	    "pad:thumbnail_3d",
+	    "pad:stream",
+	    "pad:position",
+	    "pad:stream_2d",
+	    "pad:tree_order"
+	],
+    "fetch_3D": [
+        "pad:id",
+        "pad:fetch_3D",
+        "pad:thumbnail_3d",
+        "pad:stream",
+        "pad:icon",
+        "pad:position"
+	],
+	"expandCAA": [
+		"pad:id",
+		"pad:iterations"
+	]
+    },
+    "properties": {
+	"pad:id": ["physicalid"],
+	"pad:icon": ["type_icon_url"],
+	"pad:columns": ["ds6w:label", "ds6w:reserved", "ds6wg:revision", "ds6w:description", "ds6w:modified", "ds6w:created", "ds6w:responsible","ds6w:type", "ds6w:policy", "ds6w:organizationResponsible", "ds6w:project", "isDuplicated", "isLastMinorRevision", "svg","ds6w:reservedBy"],
+	"pad:tree_index": {
+						"ds6w:label":"tree",
+						"ds6w:reserved":"ds6w:reserved",
+						"ds6wg:revision":"ds6wg:revision",
+						"ds6w:description":"ds6w:description", 
+						"ds6w:modified":"ds6w:modified", 
+						"ds6w:created":"ds6w:created",
+						"ds6w:responsible":"ds6w:responsible",
+						"ds6w:type":"ds6w:type",  
+						"ds6w:policy":"ds6w:policy",
+						"ds6w:organizationResponsible":"ds6w:organizationResponsible",
+						"ds6w:project":"ds6w:project",
+						"isDuplicated":"isDuplicated",
+						"isLastMinorRevision":"isLastMinorRevision",
+						"svg":"svg",
+						"ds6w:reservedBy":"ds6w:reservedBy"
+					   },
+	"pad:fetch_3D": ["ds6w:label", "ds6w:reserved", "ds6w:modified", "ds6w:created", "ds6w:responsible", "ds6w:type", "svg"],
+	"pad:tags": ["ds6w:type", "type"],
+	"pad:thumbnail_2d": ["thumbnail_2d"],
+	"pad:thumbnail_3d": ["thumbnail_3d"],
+	"pad:stream": ["cgr"],
+	"pad:position": ["matrixtxt"],
+	"pad:stream_2d": ["svg"],
+	"pad:tree_order": ["TreeOrder"],
+	"pad:child_count":["relcount"],
+	"pad:iterations": ["lastIteration"]
+    },
+    "mappings": {
+	"cv": {
+	    "ds6wg:revision": ["bo", "select_bo", "dec_select_bo"],
+	    "ds6w:label": ["bo", "select_bo", "dec_select_bo", "dec_select_rel"],
+	    "ds6w:description": ["bo", "select_bo", "dec_select_bo"],
+	    "ds6w:modified": ["bo", "select_bo", "dec_select_bo"],
+	    "ds6w:created": ["bo", "select_bo", "dec_select_bo"],
+	    "ds6w:responsible": ["bo", "select_bo", "dec_select_bo"],
+	    "ds6w:reserved": ["bo", "select_bo", "dec_select_bo"],
+	    "ds6w:type": ["bo", "rel", "select_bo", "dec_select_bo", "select_rel", "dec_select_rel"],
+	    "type": ["rel", "select_rel", "dec_select_rel"],
+	    "physicalid": ["bo", "rel", "select_bo", "dec_select_bo", "select_rel", "dec_select_rel"],
+	    "ds6w:policy": ["bo", "select_bo", "dec_select_bo"],
+	    "ds6w:organizationResponsible": ["bo", "select_bo", "dec_select_bo"],
+	    "ds6w:project": ["bo", "select_bo", "dec_select_bo"],
+	    "thumbnail_2d": ["bo", "select_file", "compute_select_bo", "dec_compute_bo"],
+	    "thumbnail_3d": ["bo", "select_file", "compute_select_bo", "dec_compute_bo"],
+	    "cgr": ["bo", "select_file", "compute_select_bo", "dec_compute_bo"],
+	    "matrixtxt": ["rel", "select_rel", "dec_select_rel"],
+	    "svg": ["bo", "select_file", "compute_select_bo", "dec_compute_bo"],
+	    "isDuplicated": ["bo", "select_bo", "dec_compute_bo"],
+	    "isLastMinorRevision": ["bo", "select_bo", "dec_compute_bo"],
+	    "TreeOrder": ["select_rel"],
+		"relcount": ["bo", "select_bo", "dec_compute_bo"],
+	    "ds6w:reservedBy": ["bo", "select_bo", "dec_select_bo"],
+		"lastIteration": ["bo", "dec_select_bo"],
+		"type_icon_url": ["select_file"]
+	},
+	"db": {
+		"lastIteration": "from[Latest Version].to.physicalid",
+	    "isDuplicated": "Has_duplicate/is_duplicated",
+	    "isLastMinorRevision": {
+		"list": {
+		    "CATProduct": ["Is_uptodate"],
+            "CATDrawing": ["Is_uptodate"],
+		    "CATProcess": ["Is_uptodate"],
+		    "CATAnalysis": ["Is_uptodate"],
+            "CATPart": ["Is_uptodate"],
+		    "default":["Is_uptodate"]
+		}
+	    },
+	    "ds6wg:revision": "revision",
+	    "ds6w:label": {
+		"list": {
+		    "CATProduct": ["attribute[Reference Designator]", "attribute[Title]", "name", "attribute[PLMEntity.V_Name]", "attribute[PLMEntity.PLM_ExternalID]"],
+            "CATDrawing": ["attribute[Reference Designator]", "attribute[Title]", "name", "attribute[PLMEntity.V_Name]", "attribute[PLMEntity.PLM_ExternalID]"],
+            "CATProcess": ["attribute[Reference Designator]", "attribute[Title]", "name", "attribute[PLMEntity.V_Name]", "attribute[PLMEntity.PLM_ExternalID]"],
+            "CATAnalysis": ["attribute[Reference Designator]", "attribute[Title]", "name", "attribute[PLMEntity.V_Name]", "attribute[PLMEntity.PLM_ExternalID]"],
+            "CATPart": ["attribute[Reference Designator]", "attribute[Title]", "name", "attribute[PLMEntity.V_Name]", "attribute[PLMEntity.PLM_ExternalID]"],
+		    "VPMReference": ["attribute[PLMEntity.V_Name]"],
+			"CAD SubComponent":["attribute[Reference Designator]"],
+		    "default": ["attribute[Reference Designator]", "attribute[Title]", "name", "attribute[PLMEntity.V_Name]", "attribute[PLMEntity.PLM_ExternalID]"]
+		}
+	    },
+	    "type_icon_url": "type",
+	    "ds6w:description": {
+		"list": {
+		    "CATProduct": ["description"],
+            "CATDrawing": ["description"],
+            "CATProcess": ["description"],
+            "CATAnalysis": ["description"],
+            "CATPart": ["description"],
+		    "VPMReference": ["attribute[PLMEntity.V_description]"],
+		    "default": ["description","attribute[PLMEntity.V_description]"]
+		}
+	    },
+	    "ds6w:modified": "modified.generic",
+	    "ds6w:reserved": {
+		"list": {
+		    "CATProduct": ["locked"],
+		    "CATProcess": ["locked"],
+		    "CATAnalysis": ["locked"],
+            "CATPart": ["locked"],
+		    "VPMReference": ["reserved"],
+		    "default": ["locked","reserved"]
+		}
+	    },
+	    "ds6w:created": "originated.generic",
+	    "ds6w:responsible": "owner",
+	    "ds6w:type": "type",
+	    "physicalid": "physicalid",
+	    "type": "type",
+	    "ds6w:policy": "policy",
+	    "ds6w:organizationResponsible": "organization",
+	    "ds6w:project": "project",
+	    "thumbnail_2d": {
+		"list": {
+		    "CATProduct": ["THUMBNAIL"],
+            "CATDrawing": ["THUMBNAIL"],
+            "CATProcess": ["THUMBNAIL"],
+            "CATAnalysis": ["THUMBNAIL"],
+            "CATPart": ["THUMBNAIL"],
+		    "VPMReference": ["attribute[StreamDescriptors]"],
+		    "default": ["THUMBNAIL","attribute[StreamDescriptors]"]
+		}
+	    },
+	    "thumbnail_3d": {
+		"list": {
+            "CATProduct": [""],
+            "CATDrawing": [""],
+            "CATProcess": [""],
+            "CATAnalysis": [""],
+            "CATPart": [""],
+		    "VPMReference": ["attribute[StreamDescriptors]"]
+		}
+	    },
+	    "cgr": {
+		"list": {
+		    "CATProduct": ["CGR"],
+            "CATDrawing": ["CGR"],
+            "CATProcess": ["CGR"],
+            "CATAnalysis": ["CGR"],
+            "CATPart": ["CGR"],
+		    "VPMReference": ["attribute[StreamDescriptors]"],
+		    "default": ["CGR","attribute[StreamDescriptors]"]
+		}
+	    },
+	    "matrixtxt": {
+		"list": {
+		    "CATProduct": ["attribute[Spatial Location]"],
+            "CATDrawing": ["attribute[Spatial Location]"],
+            "CATProcess": ["attribute[Spatial Location]"],
+            "CATAnalysis": ["attribute[Spatial Location]"],
+            "CATPart": ["attribute[Spatial Location]"],
+		    "VPMReference": ["attribute[LPAbstractInstance.V_matrix_1]", "attribute[LPAbstractInstance.V_matrix_2]", "attribute[LPAbstractInstance.V_matrix_3]", "attribute[LPAbstractInstance.V_matrix_4]", "attribute[LPAbstractInstance.V_matrix_5]", "attribute[LPAbstractInstance.V_matrix_6]", "attribute[LPAbstractInstance.V_matrix_7]", "attribute[LPAbstractInstance.V_matrix_8]", "attribute[LPAbstractInstance.V_matrix_9]", "attribute[LPAbstractInstance.V_matrix_10]", "attribute[LPAbstractInstance.V_matrix_11]", "attribute[LPAbstractInstance.V_matrix_12]"],
+		    "default": ["attribute[Spatial Location]"]
+		}
+	    },
+        "svg": {
+        "list": {
+            "CATProduct": ["SVG"],
+            "CATDrawing": ["SVG"],
+            "CATPart": ["SVG"],
+            "default": ["SVG"]
+        }
+        },
+        "TreeOrder": "attribute[TreeOrder]",
+        "ds6w:reservedBy": "locker",
+        "relcount": "count"
+	}
+    }
+}

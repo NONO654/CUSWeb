@@ -1,0 +1,18 @@
+Let myObject(Feature)
+Let maturity(Feature)
+Let title(Feature)
+Let maturityValue(List)
+Let maturityVal(String)
+
+Let test(String)
+
+Trace(1,"Begin CATPart BL")
+set myObject = ThisObject
+
+set maturity = (myObject.GetAttributeObject("attr_current"): Feature)
+set title = (myObject.GetAttributeObject("attr_Title"): Feature)
+set maturityValue = (maturity.GetAttributeObject("value"): List)
+set maturityVal = maturityValue.GetItem(1)
+
+
+title.SetAttributeBoolean("readOnly",true)

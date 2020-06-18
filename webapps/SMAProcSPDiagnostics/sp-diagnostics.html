@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Diagnostics Page</title>
+
+    <style>
+        body {
+            background-color: #fafafa;
+        }
+
+        .loader,
+        .loader:before,
+        .loader:after {
+          background: #2196f3;
+          animation: load1 1s infinite ease-in-out;
+          width: 1em;
+          height: 4em;
+        }
+        .loader {
+          color: #2196f3;
+          text-indent: -9999em;
+          margin: 88px auto;
+          position: relative;
+          font-size: 11px;
+          transform: translateZ(0);
+          animation-delay: -0.16s;
+        }
+        .loader:before,
+        .loader:after {
+          position: absolute;
+          top: 0;
+          content: '';
+        }
+        .loader:before {
+          left: -1.5em;
+          animation-delay: -0.32s;
+        }
+        .loader:after {
+          left: 1.5em;
+        }
+        @-webkit-keyframes load1 {
+          0%,
+          80%,
+          100% {
+            box-shadow: 0 0;
+            height: 4em;
+          }
+          40% {
+            box-shadow: 0 -2em;
+            height: 5em;
+          }
+        }
+        @keyframes load1 {
+          0%,
+          80%,
+          100% {
+            box-shadow: 0 0;
+            height: 4em;
+          }
+          40% {
+            box-shadow: 0 -2em;
+            height: 5em;
+          }
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner -->
+    <div id="loader" class="loader">Loading...</div>
+
+    <!-- Include the platform library for polyfill -->
+    <script src="../Polymer-1.11.3/webcomponents-lite.min.js"></script>
+    <script src="../AmdLoader/AmdLoader.js"></script>
+
+
+    <!-- The actual UI -->
+    <dg-main id="main" class="hidden"></dg-main>
+
+    <script>
+        const main = document.getElementById('main');
+        main.addEventListener('ready', () => {
+            main.classList.remove('hidden');
+            document.getElementById('loader').classList.add('hidden');
+        });
+    </script>
+
+    <!-- Importing the components -->
+    <link rel="import" href="components/dg-main.html">
+</body>
+
+</html>

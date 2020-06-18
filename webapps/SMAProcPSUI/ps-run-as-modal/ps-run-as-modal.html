@@ -1,0 +1,114 @@
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-run/sp-run.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-encryption/sp-encryption.html">
+<link rel="import" href="../../SMAProcSPUI/sp-checkbox/sp-checkbox.html">
+
+<dom-module id="ps-run-as-modal">
+  <link rel="import" type="css" href="ps-run-as-modal.css">
+
+  <template>
+    <sp-mcsservice id="simOptionsWs" on-dataready="useSimOptionsLogLevel"></sp-mcsservice>
+    <sp-mcsservice id="SMAProcess" ></sp-mcsservice>
+    <sp-mcsservice id="modSimOptionsWs"></sp-mcsservice>
+    <sp-variable id="mcsBaseURL" name="mcsBaseURL" ></sp-variable>
+    <sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL" ></sp-variable>
+    <sp-variable id="eedBaseURL" name="eedBaseURL"></sp-variable>
+    <sp-dashboard id="dashboard"></sp-dashboard>
+    <sp-encryption id="spEncryption"></sp-encryption>
+    <sp-mcsservice id="eedTicket_ws" data="{{eedTicket_data}}"></sp-mcsservice>
+    <sp-modal id="configAndRun" heading="Configure job" height="60%" width="650px">
+        <section class="modal-body">
+            <div class="general-info">
+                <div>
+                    <label class="label">Job Title</label>
+                    <sp-input class="" id="jobTitle" type="text"></sp-input>
+                </div>
+                <div>
+                    <label class="label">Job Description</label>
+                    <textarea id="jobDescription"></textarea>
+                </div>
+                <div class="station-details">
+                    <span class="label">Stations <span class="fonticon warning-icon fonticon-attention"></span></span>
+                    <div class="station-info">
+                        <p class="message">Running on Multiple stations/stationTitle</p>
+                        <p class="warn-station">
+                            <span class="warn-message"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="credentials-section">
+              <p class="creds">
+                  Credentials
+                  <span class="fonticon fonticon-attention " title="Credentials required"></span>
+              </p>
+              <p class="saveCheck">
+                  <sp-checkbox class="saveCredsCheck" checked="true" ></sp-checkbox>
+                  <span>Save Credentials for this session</span>
+              </p>
+              <div class="reveal-content">
+                <p class="validation-error">Enter credentials to run the job.</p>
+                <div class="windows credFieldsWrap">
+                  <p class="station-title">Windows</p>
+                  <div class="credFields">
+                      <div class="editWrap windowsEdit hide">
+                          <span class="fonticon fonticon-pencil" on-click="editCredentials"></span>
+                      </div>
+                      <span>
+                          <label class="label">Domain\Username</label>
+                          <sp-input id="windowsUser" class="user-input" type="text"></sp-input>
+                          <span id="errMsgWindowsUser" class="hide">Enter a valid format (<i>MyDomain\MyUsername</i>).</span>
+                      </span>
+                      <span>
+                          <label class="label">Password</label>
+                          <sp-input id="windowsPass" class="user-input" type="password"></sp-input>
+                      </span>
+                  </div>
+                </div>
+                <div class="linux credFieldsWrap">
+                  <p class="station-title">Linux</p>
+                  <div class="credFields">
+                      <div class="editWrap linuxEdit hide">
+                          <span class="fonticon fonticon-pencil" on-click="editCredentials"></span>
+                      </div>
+                      <span>
+                          <label class="label">User</label>
+                          <sp-input id="linuxUser" class="user-input" type="text"></sp-input>
+                      </span>
+                      <span>
+                          <label class="label">Password</label>
+                          <sp-input id="linuxPass" class="user-input" type="password"></sp-input>
+                      </span>
+                  </div>
+                </div>
+                <div class="isight credFieldsWrap">
+                  <p class="station-title">Isight</p>
+                  <div class="credFields">
+                      <div class="editWrap isightEdit hide">
+                          <span class="fonticon fonticon-pencil" on-click="editCredentials"></span>
+                      </div>
+                      <span>
+                          <label class="label">User</label>
+                          <sp-input id="isightV5User" class="user-input" type="text"></sp-input>
+                      </span>
+                      <span>
+                          <label class="label">Password</label>
+                          <sp-input id="isightV5Password" class="user-input" type="password"></sp-input>
+                      </span>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </section>
+        <footer>
+              <button is="sp-button-type" id="runAs" on-click="configAndRun" primary>Ok</button>
+              <button is="sp-button-type" id="cancelRunAs" on-click="closeModal" >Cancel</button>
+        </footer>
+    </sp-modal>
+  </template>
+  <script type="text/javascript" src="ps-run-as-modal.js"></script>
+</dom-module>

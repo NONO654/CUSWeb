@@ -1,0 +1,1 @@
+define("DS/W3DDashboardSearchActions/W3DDashboardSearchActions_ru",{});define("DS/W3DDashboardSearchActions/assets/nls/main",{goToDashboard:"Открыть",type:"Тип",typeValue:"Информационная панель",title:"Название",creationDate:"Дата создания",modificationDate:"Дата изменения",responsible:"Ответственный",propertiesFacet:"Свойства",membersFacet:"Участники"});

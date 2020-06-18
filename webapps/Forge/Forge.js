@@ -1,0 +1,2 @@
+/*! Copyright 2016 Dassault Systèmes */
+if(typeof forge!=="undefined"){define("DS/Forge/Forge",[],function(){return forge})}else{if(require.toUrl("DS/VENForge").indexOf("Forge-0.6.34")===-1){(function(){var a=require.toUrl("DS/Forge-0.6.34/forge.min");if(a.indexOf("?")>-1){a=a.substring(0,a.indexOf("?"))}require.config({paths:{"DS/VENForge":a},shim:{"DS/VENForge":{exports:"forge"}}})})()}}define("DS/Forge/Forge",["DS/VENForge"],function(a){return a});

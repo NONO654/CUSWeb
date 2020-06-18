@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="DS_DELMIAMFNConfiguration" xmlns:tns="DS_DELMIAMFNConfiguration"  xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Config">
+	  <xs:complexType>
+	    <xs:sequence>
+	      <xs:element name ="Preferences" type="tns:Preferences" maxOccurs="1" minOccurs="1"/>
+	    </xs:sequence>
+	    <xs:attribute type="xs:string" name="Title"/>
+	    <xs:attribute type="xs:string" name="Description"/>
+	  </xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="Preferences">
+	  <xs:sequence>
+	    <xs:element name="BOMView" type="tns:BOMView" maxOccurs="1" minOccurs="1" />
+	  </xs:sequence>	  
+	</xs:complexType>  
+   
+	<xs:complexType name="BOMView">
+	  <xs:sequence>
+	    <xs:element name="Color" type="tns:Color" maxOccurs="1" minOccurs="0" />
+	     <xs:element name="Content" type="tns:Content" maxOccurs="1" minOccurs="0" />
+	  </xs:sequence>	  
+	</xs:complexType>  
+	
+	<xs:complexType name="Color">
+	  <xs:sequence>
+	    <xs:element name="AttributeDefinition" type="tns:AttributeDefinition" maxOccurs="1" minOccurs="1" />
+	    <xs:element name="ColorDefinition" type="tns:ColorDefinition" maxOccurs="unbounded" minOccurs="1" />
+	  </xs:sequence>	  
+	</xs:complexType>  
+	
+	<xs:complexType name="AttributeDefinition">
+	  <xs:simpleContent>
+	    <xs:extension base="xs:string">
+	      <xs:attribute type="xs:string" name="dicoType" use="required"/>
+	      <xs:attribute type="xs:string" name="dataIndex" use="required"/>
+	    </xs:extension>
+	  </xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ColorDefinition">
+	  <xs:simpleContent>
+	    <xs:extension base="xs:string">
+	      <xs:attribute type="xs:string" name="code" use="required"/>
+	      <xs:attribute type="xs:string" name="value" use="required"/>
+	      <xs:attribute type="xs:string" name="name" use="required"/>
+	    </xs:extension>
+	  </xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="Content">
+	  <xs:sequence>
+	    <xs:element name="Type" type="tns:Type" maxOccurs="unbounded" minOccurs="1" />
+	  </xs:sequence>	  
+	</xs:complexType> 
+	
+	<xs:complexType name="Type">
+	  <xs:sequence>
+	    <xs:element name="Row" type="tns:Row" maxOccurs="unbounded" minOccurs="1" />
+	  </xs:sequence>
+	   <xs:attribute type="xs:string" name="name"/>	  
+	</xs:complexType>  
+  
+	<xs:complexType name="Row">
+	  <xs:simpleContent>
+	    <xs:extension base="xs:string">
+	      <xs:attribute type="xs:string" name="dicoType" use="required"/>
+	      <xs:attribute type="xs:string" name="dataIndex" use="required"/>
+	    </xs:extension>
+	  </xs:simpleContent>
+	</xs:complexType>
+</xs:schema>

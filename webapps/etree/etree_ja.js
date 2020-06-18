@@ -1,0 +1,1 @@
+define("DS/etree/etree_ja",{});define("DS/etree/assets/nls/overviewui",{zoom_in:"拡大",zoom_out:"縮小",zoom_default:"デフォルトの拡大縮小の復元",zoom_fit:"全表示"});

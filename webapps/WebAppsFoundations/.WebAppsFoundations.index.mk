@@ -1,0 +1,11 @@
+m|WebAppsFoundations\WebAppsFoundations.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\WebAppsFoundations\WebAppsFoundations.js|1531551019|22085
+s|WebAppsFoundations\WebAppsFoundations.mweb\src\Views\CollectionView.js|1479284080|32072
+s|WebAppsFoundations\WebAppsFoundations.mweb\src\Router.js|1479284079|3973
+s|WebAppsFoundations\WebAppsFoundations.mweb\src\AbstractHistory.js|1479284078|2622
+s|WebAppsFoundations\WebAppsFoundations.mweb\src\Collections\PageableCollection.js|1506514422|29107
+s|WebAppsFoundations\WebAppsFoundations.mweb\src\Views\Plugins\Set.js|1479284081|96839

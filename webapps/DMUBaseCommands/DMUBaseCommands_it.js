@@ -1,0 +1,1 @@
+define("DS/DMUBaseCommands/DMUBaseCommands_it",{});define("DS/DMUBaseCommands/assets/nls/DMUBaseCommands",{defaultSelectLabel:"Selezionare un'entità"});

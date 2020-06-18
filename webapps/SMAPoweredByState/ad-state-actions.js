@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define(["DS/SMAPoweredByState/ad-state-action-types"],function(b){var a={};a.setStateItem=function(d,c){return{type:b.SET_STATE_ITEM,path:d,value:c}};return a});

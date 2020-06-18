@@ -1,0 +1,100 @@
+<head>
+	<title>Results Analytics Essentials</title>
+
+	<!-- Changes the default refresh from auto-refreshing every 20 minutes to never -->
+	<meta name="autoRefresh" content="0" />
+
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+
+	<script type="text/javascript" src="../UWA2/js/Class/Model.js"></script>
+	<script type="text/javascript" src="../UWA2/js/Class/Collection.js"></script>
+	<script type="text/javascript" src="../UWA2/js/Class/View.js"></script>
+
+	<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+	<script type="text/javascript" src="../W3DXComponents/W3DXComponents.js"></script>
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+	<!-- Importing all webcomponents needed-->
+	<script type="text/javascript" src="../Polymer-1.1.4/webcomponents-lite.js"></script>
+	<link rel="import" href="../Polymer-1.1.4/polymer.html">
+
+	<!-- SP - Components -->
+	<link rel="import" href="../SMAProcSP/sp-base/sp-base.html" />
+	<link rel="import" href="../SMAProcSP/sp-dashboard/sp-dashboard.html" />
+	<link rel="import" href="../SMAProcSP/sp-serviceurl/sp-serviceurl.html" />
+	<link rel="import" href="../SMAProcSP/sp-mcsservice/sp-mcsservice.html" />
+	<link rel="import" href="../SMAProcSP/sp-run/sp-run.html">
+	<link rel="import" href="../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+	<link rel="import" href="../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+
+	<script type="text/javascript" src="../WebVisualization/WebVisualization.js"></script>
+    <script type="text/javascript" src="../3DPlay/3DPlay.js"></script>
+    <script type="text/javascript" src="../SimReviewHelper/SimReviewHelper.js"></script>
+
+	<!-- RA Components-->
+	<link rel="import" href="../SMAAnalyticsElements/ra-compare-page/ra-compare-page.html">
+	<link rel="import" href="../SMAAnalyticsElements/ra-table-framework/ra-table-framework.html">
+	<!-- link rel="import" href="../SMAAnalyticsElements/ra-requirements-map/ra-requirements-map.html" />
+	<link rel="import" href="../SMAAnalyticsElements/ra-parameter-map/ra-parameter-map.html" / -->
+
+	<link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="../SMAAnalyticsLiteWidget/SMAAnalyticsLiteWidget.css" />
+	<link rel="stylesheet" type="text/css" href="../SMAAnalyticsLiteWidget/pages/case-details/SMAAnalyticsLiteCaseDetailsPage.css" />
+	<link rel="stylesheet" type="text/css" href="../SMAAnalyticsLiteWidget/pages/compare/SMAAnalyticsLiteComparePage.css" />
+
+	<!-- Application JavaScript Source -->
+	<script type="text/javascript">
+		var onReady = function() {
+			require([
+				'DS/SMAAnalyticsLiteWidget/SMAAnalyticsLiteLoad',
+				'i18n!DS/SMAAnalyticsLiteWidget/assets/nls/adviseLiteWidget'
+			], function(LoadModule, NLS){
+				widget.addEvents({
+					'onLoad': function(){
+						// Create the widget loading message
+						widget.body.empty();
+			            var loadMsg = UWA.createElement('p', { 'id': 'loading-message' });
+			            loadMsg.textContent =  NLS.get('LOADING');
+			            loadMsg.inject(widget.body);
+
+						LoadModule.loadLiteWidget()
+							['catch'](function(err){
+								var msg = err.message || '';
+								if (msg.length == 0){
+									msg = NLS.get('GENERIC_LOAD_FAIL');
+								}
+								document.querySelector('#loading-message').textContent = msg;
+							});
+					}
+				});
+			});
+		};
+
+		var lsFlag = localStorage.getItem('_ESSENTIALS_MODE_ON_') || false;
+		if (lsFlag === true || lsFlag === 'true') {
+			// modified from checking for functions on sp-dashboard to
+			if (document.createElement('ra-table-framework').resetHeaders) {
+				onReady();
+			} else {
+				window.addEventListener('WebComponentsReady', onReady);
+			}
+		}else{
+			widget.body.textContent = '';
+			var message = document.createElement('div');
+			message.style.backgroundColor = '#fee000';
+			message.style.fontWeight = 'bold';
+			message.style.textAlign = 'center';
+			message.style.marginTop = '1.5em';
+			message.appendChild(document.createTextNode('Widget'));
+			message.appendChild(document.createElement('br'));
+			message.appendChild(document.createTextNode('Under construction'));
+			widget.body.appendChild(message);
+		}
+	</script>
+</head>
+<body>
+</body>

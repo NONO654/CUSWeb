@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+    <meta charset="utf-8">
+         <link rel="stylesheet" type="text/css" href="../webapps/SNResultUX/SNResultUX.css" />
+        <link rel="stylesheet" type="text/css" href="../webapps/W3DXComponents/W3DXComponents.css" />
+        <link rel="stylesheet" type="text/css" href="../webapps/TagNavigator/TagNavigator.css" />
+		<link rel="stylesheet" type="text/css" href="../webapps/TopFrame/TopFrame.css" />
+        <link rel="stylesheet" type="text/css" href="../webapps/UIKIT/UIKIT.css" />
+        <link rel="stylesheet" type="text/css" href="../common/styles/emxUINavigator.css" />
+		<script type="text/javascript" src="../common/scripts/jquery-latest.js"></script> 
+		<script type="text/javascript" src="../common/scripts/emxUIConstants.js"></script>
+		<script type="text/javascript" src="../common/scripts/emxUICore.js"></script>
+		<script type="text/javascript" src="../common/scripts/emxUIModal.js"></script>
+		<script type="text/javascript" src="../common/scripts/emxNavigatorHelp.js"></script>
+		<script type="text/javascript" src="../common/scripts/emxQuery.js"></script>
+		<script type="text/javascript" src="../common/scripts/emxSnN.js"></script>
+		<script>
+			//IR-459941-3DEXPERIENCER2017x - NLS
+			 var require = {
+                    		config: {
+                        		i18n: {
+                            		locale: emxUIConstants.BROWSER_LANGUAGE
+                        		}
+                    		}
+                	};
+		</script>
+		<script src="../webapps/AmdLoader/AmdLoader.js"></script>
+		<script type="text/javascript">window.dsDefaultWebappsBaseUrl = "../webapps/";</script>
+		<script src="../webapps/WebappsUtils/WebappsUtils.js"></script>
+		<script>
+			require(['DS/WebappsUtils/WebappsUtils'], function (WebappsUtils){WebappsUtils._setWebappsBaseUrl('../webapps/');});
+		</script>
+		<script src="../webapps/c/UWA/js/UWA_W3C_Alone.js"></script>
+		<script>
+		var spinner;
+		require(['DS/UIKIT/Spinner'], function(Spinner){
+			var loadingDiv = jQuery("#loadingDiv")[0];
+			spinner = new Spinner({className: 'large fade in'}).inject(loadingDiv).show();
+		});
+		require(['UWA/Core',
+		 		'DS/ENOFrameworkSearch/TopFrameInitLite'], 
+		 		function (Core, 
+		 				TopFrameInit) {
+		 		    'use strict';
+		 			var path = window.location.pathname.split('/')[1];
+		 			var url;// = window.location.protocol + "//" + window.location.host;
+		 			var completeURL = window.location.protocol + "//" + window.location.host + "/" +  path;
+					var appendPath = "/" + path + "/";
+					var clntbaseHtmlPath = appendPath + "webapps/i3DXCompass/assets/images/";
+					var crossProxy = appendPath + "common/emxCrossDomainProxy.jsp";
+					UWA.Data.proxies.passport = crossProxy;
+					var passprotURL;
+					var myAppsURL;
+					var proxyTicketURL;
+					var curTenant;
+					var fedsearchURL;
+					var extractURLs = function extractURLs (data){
+						passprotURL = data.passprotURL;
+						myAppsURL = data.myAppsURL;
+						proxyTicketURL = data.myAppsURL + '/resources/bps/proxyticket';
+						url = data.searchURL;
+						curTenant = data.curTenant;
+					}
+					$.ajax({
+   		   				url: '../resources/bps/menu/passport',
+   		   				dataType: 'json',
+          				success: extractURLs,
+						async:false
+            		});
+					var searchInitCallBack = function (){
+						var searchURLWindow = getTopWindow().getWindowOpener().getTopWindow();
+						var strData = searchURLWindow.searchURL.substring(searchURLWindow.searchURL.indexOf('?')+1, searchURLWindow.searchURL.length);
+						var strURL = searchURLWindow.searchURL.substring(0, searchURLWindow.searchURL.indexOf('?'));
+						var searchData = searchURLWindow.searchInfo;
+							getTopWindow().SnN.loadSnN(searchData, searchURLWindow.searchURL);
+							return true;
+					}
+						if(curTenant != null && curTenant != "" ){
+							fedsearchURL = (window.location.protocol + "//" + window.location.host).replace("space.", "fedsearch.");
+						}
+						url = fedsearchURL != undefined && fedsearchURL != "" ? fedsearchURL : url;
+						var topFrameInit = new TopFrameInit(completeURL, clntbaseHtmlPath, passprotURL, proxyTicketURL, url, false, searchInitCallBack, curTenant, myAppsURL);
+						if(localStorage.getItem("isMobile")){
+					    	topFrameInit.showTaggerOnPopup();
+					    }
+					    console.log("TopFrame Loaded");
+					if(getTopWindow().location.href.indexOf("targetLocation=popup") == -1){
+						//jQuery('#topbar').hide();
+						}
+					    spinner.destroy();
+					    jQuery('.tagger-close').hide();
+
+		 		});
+					
+		 		
+				
+		</script>
+    </head>
+    <body id="targeted-search">
+	<div id="loadingDiv" style="position: fixed;top: 50%;left: 50%;"></div>
+    </body>
+</html>

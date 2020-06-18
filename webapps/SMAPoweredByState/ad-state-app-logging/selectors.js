@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define([],function(){var a={};a.REDUXLOGGING_LS_KEY="SMAPoweredBy.enableReduxLogging";a.REDUXLOGGING_ENABLED_LS_VALUE="yes";a.isReduxLoggingEnabled=function(){return(window.localStorage.getItem(a.REDUXLOGGING_LS_KEY)===a.REDUXLOGGING_ENABLED_LS_VALUE)};return a});

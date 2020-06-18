@@ -1,0 +1,1 @@
+define("DS/RunYourApp/RunYourApp_ko",{});define("DS/RunYourApp/assets/nls/RunYourApp",{urlLabel:"Widget URL",insertUrl:"URL을 입력하십시오.",submitURLBtn:"실행"});

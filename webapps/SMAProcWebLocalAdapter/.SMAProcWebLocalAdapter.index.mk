@@ -1,0 +1,9 @@
+m|SMAProcWebExtensionEditors\SMAProcWebLocalAdapter.mweb
+b|j|n,u
+b|c|n,u
+v|6.421.6.19096
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAProcWebLocalAdapter\LocalAdapter.js|1552695149|7668
+s|SMAProcWebExtensionEditors\SMAProcWebLocalAdapter.mweb\src\LocalAdapter.js|1552695149|7668
+t|win_b64\webapps\SMAProcWebLocalAdapter\LocalAdapter.html|1554530806|2365
+s|SMAProcWebExtensionEditors\SMAProcWebLocalAdapter.mweb\src\LocalAdapter.html|1552688145|2365

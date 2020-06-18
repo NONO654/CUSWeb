@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMGAConfiguration" xmlns:tns="DS_DELMIAMGAConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  
+  <xs:element name="DisplayAttributeDescriptionList">
+    <xs:complexType>
+      <xs:sequence>        
+        <xs:element maxOccurs="unbounded" name="Type" type="tns:Type"/>
+      </xs:sequence>
+      <xs:attribute name="Title" type="xs:string" use="required"/>
+      <xs:attribute name="Description" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="Type">
+    <xs:sequence>        
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Relation" type="tns:Relation"/>   
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="display_attribute" type="xs:string" use="required"/>            
+  </xs:complexType>
+
+  <xs:complexType name="Relation">
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="direction" type="tns:direction" use="required"/>
+    <xs:attribute name="display_attribute" type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <xs:simpleType name="direction">
+    <xs:restriction base="xs:string">
+     <xs:enumeration value="to"/>
+     <xs:enumeration value="from"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>

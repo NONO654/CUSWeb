@@ -1,0 +1,208 @@
+/*=================================================================
+ *  Product Configurator Appearance for Windows/Mac Platforms
+ *  emxUIConfigurator.css
+ *  Version 1.0 (25-Jun-2007)
+ *  Requires: (nothing)
+ *
+ *  Copyright (c) 2007-2018 ENOVIA Dassault Systemes. All Rights Reserved.
+ *  This program contains proprietary and trade secret information 
+ *  of ENOVIA MatrixOne. Copyright notice is precautionary only
+ *  and does not evidence any actual or intended publication of such program
+ * 
+ *=================================================================
+ */
+
+/* handle box model consistently across browsers */
+body, div {
+	box-sizing: border-box
+	-moz-box-sizing: border-box;
+	}
+
+
+/* --------------------------------------------------------------------
+// Overall Appearance
+// -------------------------------------------------------------------- */
+
+/* hide scroll bars on the viewport */
+html {
+	overflow: hidden;
+	}
+
+body {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	width: 100%;
+	height: 100%;
+	max-height: 100%;
+	overflow: hidden;
+	}
+
+* html body {
+	padding: 53px 10px 36px 10px;
+	}
+
+body, th, td {
+	font-family: Verdana, Arial;
+	font-size: 11px;
+	}
+
+table {
+	width: 100%;
+	border: 1px solid rgb(200,200,200);
+	border: none;
+	}
+
+table th,
+table td {
+	padding: 2px;
+	}
+
+input {
+	font-family: Verdana;
+	font-size: 11px;
+	}
+
+* html div#mx_divBody {
+	position: relative;
+	padding: 0;
+	height: 100%;
+	border: none;
+	}
+
+
+div#mx_divBasePrice {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    margin: 0;
+    padding: 0 19px 0 0;
+    background-color: rgb(215,215,215);
+    text-align: right;
+    overflow: hidden;
+    border: 1px solid rgb(147,147,147);
+    background-image: url(../../common/images/utilConfiguratorHeaderBackground.gif);
+    }
+
+div#mx_divBasePrice table thead tr th.mx_name,
+div#mx_divBasePrice table tbody tr td.mx_name {
+	text-align: left;
+	font-weight: bold;
+	}
+
+
+	
+div#mx_divBasePrice table tr th.mx_usage,
+div#mx_divBasePrice table tr td.mx_usage,
+div#mx_divConfiguratorBody table thead tr th.mx_usage,
+div#mx_divConfiguratorBody table tbody tr td.mx_usage,
+div#mx_divTotalPrice table tr td.mx_usage {
+	width: 100px;
+	white-space: nowrap;
+	text-align: left;
+	}
+	
+
+
+div#mx_divBasePrice table tbody tr td.mx_usage {
+	background: url(../../common/images/utilConfiguratorColumnSeparator.gif) no-repeat;
+	}
+
+
+
+td.mx_usage input {
+	width: 85px;
+	text-align: center;
+	border: 1px solid rgb(210,210,210);
+	padding: 1px 4px 2px 2px;
+	}
+
+
+
+div#mx_divConfiguratorBody {
+	position: fixed;
+	top: 52px;
+	left: 10px;
+	bottom: 35px;
+	right: 10px;
+	margin: 0;
+	padding: 0;
+	background-color: rgb(247,247,247);
+	text-align: right;
+	overflow: scroll;
+	overflow-x: hidden;
+	border: 1px solid rgb(147,147,147);
+	}
+
+/* for IE6[WIN] ONLY: reset body div attributes for correct positioning */
+* html div#mx_divBody div#mx_divConfiguratorBody {
+	position: relative;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	}
+
+/* for IE7[WIN] ONLY: set the right padding of the body div so vertical scrollbar does not overlap content */
+* +html div#mx_divBody div#mx_divConfiguratorBody {
+	padding: 0 17px 0 0;
+	}
+
+div#mx_divConfiguratorBody table tr td {
+	text-align: left;
+	border: none;
+	border-bottom: 1px solid rgb(216,216,216);
+	height: 22px;
+	}
+
+div#mx_divConfiguratorBody table tr td table tr td {
+	border: none;
+	padding: 0 2px 0 0;
+	height: 18px;
+	}
+
+td.mx_spacer-cell {
+	padding: 0;
+	width: 0;
+	}
+
+table.mx_feature-option {
+	width: auto;
+	}
+
+table.mx_feature-option tr td {
+	text-align: left;
+	}
+
+table.mx_feature-option tr td.mx_icon {
+	padding: 1px 2px 1px 2px;
+	width: 1em;
+	}
+
+/* the following sibling selector does not work in IE */
+table.mx_feature-option tr td.mx_icon + td.mx_feature-option {
+	font-weight: bold;
+	}
+
+td.mx_feature-option {
+	font-weight: bold;
+	}
+
+
+
+
+td.level-1 {
+	width: 1em;
+	}
+
+td.level-2 {
+	width: 3em;
+	}
+

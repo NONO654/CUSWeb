@@ -1,0 +1,87 @@
+{{!--
+    template for individual task
+    version: R418 SCM.42
+    class of the parent div is 'task'
+--}}
+{{!-- sample data handled
+{
+    "typeicon":{"imageSize":"ICON","imageValue":"CollaborativeTasksTst/assets/iconSmallTask.gif"},
+    "state":{displayValue:"Create", actualValue:"Create"},"objectId":"28224.58372.53248.48011","physicalId":"10389B56A2240000B0222C5459970A00",
+    "deleteAccess":"TRUE","modifyAccess":"TRUE",
+    "originated":{"displayValue":"Oct 1, 2014","actualValue":"1412178608000"}, "modified":{"displayValue":"Oct 1, 2014","actualValue":"1412178616000"},
+    "project":"3DS Collab Space",
+    "title":"T-0000100","description":"my first task","owner":{"displayValue":"Benoit_CERRINA","actualValue":"bcc"},
+    "dueDate":{"displayValue":"Oct 1, 2014","actualValue":"1412197200000"}, "dueDateCategory":"Due Today",
+    "originator":{"displayValue":"Benoit_CERRINA","actualValue":"bcc"},
+    "assignees":[
+                {"name":"bcc","lastname":"CERRINA","firstname":"Benoit","objectId":"56032.15516.22848.52973","physicalId":"A5799B566B1100001B7A8B54B70D0300","relId":"56032.15516.63104.57656","cestamp":"A5799B56F879000054339354D5FC0D00"},
+                {"name":"gqh","lastname":"KASIR","firstname":"David","objectId":"56032.15516.22849.12092","physicalId":"A5799B566B1100001D7A8B54001F0700","relId":"56032.15516.4000.26764","cestamp":"A5799B56F8790000E5359354A8330200"}
+                ]
+    }" --}}
+
+{{!-- <div class="card-checkbox fonticon"></div> --}}
+<div class="card-content" data-id="{{id}}" oncontextmenu="return false">
+      <div class="card-title">{{title}}</div>
+      <div class="card-properties">
+            <div class="card-details type">
+                  <div class="thumbnail task-type">
+                        <span class="fonticon fonticon-bpa "></span>
+                  </div>
+            </div>
+            <div class="card-details">
+                  {{!-- kzz does not want owner to show anymore. I'll keep the code in there in case he changes his mind
+           <div class="thumbnail profile-image card-owner"><img src="{{userPictureUrl owner.actualValue}}"  /></div>
+        --}}
+                  <div class="card-date">
+                        <span>{{date.displayValue}}</span>
+                  </div>
+                  <div class="thumbnail card-badge fixed">
+                        <span class="fonticon fonticon-pin"></span>
+                  </div>
+                  <div class="thumbnail card-badge attachments">
+                        <span class="fonticon fonticon-attach"></span>
+                  </div>
+                  <div class="thumbnail card-badge subscriptions">
+                        <span class="fonticon fonticon-rss"></span>
+                  </div>
+                  {{#eachLimit assignees 2}}
+                        <div class="thumbnail profile-image card-assignee">
+                              <img src="{{image}}" title="{{firstname}} {{lastname}}" />
+                              <span class="fonticon fonticon-user"></span>
+                        </div>
+                        {{else}}
+                              {{#if ../assignees.[3]}}
+
+                              {{else}}
+                                    <div class="thumbnail profile-image card-assignee">
+                                          <img src="{{assignees.[2].image}}" title="{{assignees.[2].firstname}} {{assignees.[2].lastname}}" />
+                                          <span class="fonticon fonticon-user"></span>
+                                    </div>
+                              {{/if}}
+                  {{/eachLimit}}
+                  <div class="thumbnail card-badge assignees">
+                    <span class="fonticon fonticon-users"></span>
+                  </div>
+                  <div class="card-status">
+                        <span class="{{state}}">{{i18n state}}</span>
+                  </div>
+                  <div class="card-stateForDisplay">
+                        <span class="{{stateForDisplay}}">{{i18n stateForDisplay}}</span>
+                  </div>
+            </div>
+
+      </div>
+</div>
+<div class="card-menu">
+      {{!-- menu is created with JS --}}
+</div>
+<div class="busy-mask">
+
+      <div class="spinner spinning fade in" style="-webkit-transform: translate3d(0px, 0px, 0px);">
+            <span class="spinner-bar"></span>
+            <span class="spinner-bar spinner-bar1"></span>
+            <span class="spinner-bar spinner-bar2"></span>
+            <span class="spinner-bar spinner-bar3"></span>
+      </div>
+
+</div>

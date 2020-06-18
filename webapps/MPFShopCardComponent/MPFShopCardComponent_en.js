@@ -1,0 +1,1 @@
+define("DS/MPFShopCardComponent/MPFShopCardComponent_en",{});define("DS/MPFShopCardComponent/assets/nls/ShopCardComponent",{requestAPart:"Request a part",moreInformation:"More information",getAQuote:"Get a quote",reviews:"reviews",directPurchase:"direct purchase",viewMore:"View more",buyNow:"Buy now",selectForQuote:"Select for quote",deselect:"Deselect"});

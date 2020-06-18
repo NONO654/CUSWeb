@@ -1,0 +1,681 @@
+/*li {
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  line-height: 2em;
+  border-radius: 1em;
+  background: dodgerblue;
+  margin: 0 1em;
+  display: inline-block;
+  color: white;
+  position: relative;
+}
+
+li::before{
+  content: '';
+  position: absolute;
+  top: .9em;
+  left: -4em;
+  width: 4em;
+  height: .2em;
+  background: dodgerblue;
+  z-index: -1;
+}
+
+
+li:first-child::before {
+  display: none;
+}
+
+.active {
+  background: dodgerblue;
+}
+
+.active ~ li {
+  background: lightblue;
+}
+
+.active ~ li::before {
+  background: lightblue;
+}*/
+
+/*
+Ratio
+Circle diamenter = d
+title text width = w
+connector line height = h
+
+width:dpx;
+height:dpx;
+line-height: dpx;
+border-radius:(d*0.5)px;
+margin:0 (0.93*d)px; [here, 0.93 ~= 65/70]
+
+margin = w*0.5-d*0.5
+
+
+working values
+width: 70px;
+  height: 70px;
+  text-align: center;
+  line-height: 70px;
+  border-radius: 35px;
+  background: #56BDEA;
+  margin: 0 65px;
+  display: inline-block;
+  color: white;
+  position: relative;
+  font-weight: bold;
+
+  .graph::before{
+
+    top: d * 0.5 - h * 0.5
+    height: h;
+    left : w *0.5 - d * 0.5;
+
+    }
+*/
+
+.graph {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  background: #EBEBEB;
+  margin: 0 75px;
+  display: inline-block;
+  color: white;
+  position: relative;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.loaded {
+
+  cursor: auto;
+}
+
+.active {
+	
+	background: #56BDEA;
+}
+
+.stopped {
+	
+	background: #ff944d;
+}
+
+.activegraphring {
+    
+    box-shadow: inset 0 0 0 3px #005685;
+  color: #005685;
+}
+
+.stoppedgraphring {
+ 
+	box-shadow: inset 0 0 0 3px #CD0200;
+  	color: #CD0200;
+}
+
+.completegraphring {
+ 
+  box-shadow: inset 0 0 0 3px #6e821e;
+  color: #6e821e;
+}
+    
+.futuregraphring {
+ 
+  box-shadow: inset 0 0 0 3px #b8b8b8;
+  color: #b8b8b8;
+}
+
+.titletext {
+  width: 200px;
+  height: 35px;
+  text-align: center;
+  display: inline-block;
+  color: black;
+  position: relative;
+  background: transparent;
+  white-space: normal;
+  padding-top: 5px;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.complete {
+
+  background: #35d173;
+}
+
+.textcomplete {
+
+  color: #35d173;
+}
+
+.textfuture {
+
+  color: lightgrey;
+}
+
+.textactive {
+
+  color: #56BDEA;
+}
+
+.textstopped {
+
+  color: #ff944d;
+}
+
+.graph::before{
+  content: '';
+  position: absolute;
+  top: 21.5px;
+  /*left: -40.25px;
+  width: 40.25px;*/
+  left: -75px;
+  width: 75px;
+  height: 7px;
+  background: inherit;
+  z-index: -1;
+}
+
+.graph::after{
+  content: '';
+  position: absolute;
+  top: 21.5px;
+  /*right: -40.25px;
+  width: 40.25px;*/
+  right: -75px;
+  width: 75px;
+  height: 7px;
+  background: inherit;
+  z-index: -1;
+}
+
+.graph:last-child::after {
+    display: none;
+}
+
+.graph:first-child {
+  margin-left: none;
+}
+
+.graph:first-child::before {
+  display: none;
+}
+
+/*.active ~ .graph {
+  background: #EBEBEB;
+}*/
+
+.title {
+
+  height: 15px;
+}
+
+.summary {
+
+    font-weight: normal;
+    font-style: italic;
+    padding-top: 9px;
+}
+
+.table td, .table tr {
+
+    font-size: 14px;
+}
+
+.slider {
+    border: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    min-height: 125px;
+    text-align: center;
+
+  transition: all 2s ease-in-out;
+  -webkit-transition: all 2s ease-in-out; /** Chrome & Safari **/
+  -moz-transition: all 2s ease-in-out; /** Firefox **/
+  -o-transition: all 2s ease-in-out; /** Opera **/
+}
+
+.carousel {
+   
+   padding-top: 25px;
+   position:relative;
+}
+
+.tablebanner {
+
+    font-size: medium;
+    font-weight: bold;
+    color: white;
+    background: #56BDEA;
+    text-align: left;
+    padding: 5px;
+  border-top-style: solid;
+  clear:both;
+  width:99.4%;
+  float:left;
+}
+
+.tasktable {
+    
+    border-left-style: solid;
+    border-bottom-style: solid;
+    border-right-style: solid;
+}
+
+.tasktablecomplete {
+    
+    border-left-color: #35d173;
+    border-bottom-color: #35d173;
+    border-right-color: #35d173;
+}
+
+.tasktableactive {
+    
+    border-left-color: #56BDEA;
+    border-bottom-color: #56BDEA;
+    border-right-color: #56BDEA;
+}
+
+.tasktablefuture {
+    
+	border-left-color: #EBEBEB;
+	border-bottom-color: #EBEBEB;
+	border-right-color: #EBEBEB;
+}
+
+.tasktablestopped {
+	
+	border-left-color: #ff944d;
+	border-bottom-color: #ff944d;
+	border-right-color: #ff944d;
+}
+
+.tablebanneractive {
+
+  border-top-color: #005685;
+  color: #005685;
+}
+
+.tablebannercomplete {
+
+  border-top-color: #6e821e;
+  color: #6e821e;
+  background: #35d173;
+}
+
+.tablebannerfuture {
+
+  border-top-color: #b8b8b8;
+  color: #b8b8b8;
+  background: #EBEBEB;
+}
+
+.tablebannerstopped {
+
+  border-top-color: #CD0200;
+  color: #CD0200;
+  background: #ff944d;
+}
+
+.tableborder {
+    
+  border: 1px;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-color: #EBEBEB;
+}
+
+.thead {
+    
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.move-right{
+    transform: translateX(10%);
+    -webkit-transform: translateX(10%); /** Chrome & Safari **/
+    -o-transform: translateX(10%); /** Opera **/
+    -moz-transform: translateX(10%); /** Firefox **/
+}
+
+.move-left{
+    transform: translateX(-200px);
+    -webkit-transform: translateX(-600px); /** Safari & Chrome **/
+    -o-transform: translateX(-200px); /** Opera **/
+    -moz-transform: translateX(-200px); /** Firefox **/
+}
+
+.alignleft {
+  float: left;
+}
+.alignright {
+  float: right;
+}
+
+.pointright {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid rgba(255, 255, 255, 0.5);
+    float: right;
+}
+
+.pointright:hover {
+  border-left: 15px solid #fff !important;
+}
+
+.pointleft:hover {
+  border-right: 15px solid #fff !important;
+}
+
+.pointrightinactive {
+    border-left: 15px solid rgba(255, 255, 255, 0.25);
+}
+
+.pointleft {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 15px solid rgba(255, 255, 255, 0.75);
+    float: right;
+}
+
+.pointleftinactive {
+    border-right: 15px solid rgba(255, 255, 255, 0.25);
+}
+
+.sliderarrows {
+   width: 18px;
+   height: 18px;
+   border-color: #000;
+   position: absolute;
+   top: 45%;
+   margin-top: -31px;
+   z-index: 10;
+   visibility: hidden;
+
+}
+.prev:hover, .next:hover{
+    border-color:#005685;
+    cursor:pointer;
+}
+
+.prev {
+   border-bottom: 6px solid;
+   border-left: 6px solid;
+   transform: rotate(45deg);
+   left:20px;
+   border-color:#EBEBEB;
+
+}
+   
+.next {
+   border-bottom: 6px solid;
+   border-left: 6px solid;
+   transform: rotate(-135deg);
+   border-color:#EBEBEB;
+   right:20px;
+}
+
+.prosactionlauncher {
+  z-index:2;
+/*  position:absolute;*/
+  /*width:100px;*/
+  background: white;
+  color: black;
+  display: none;
+/*  top: 400px;
+  left: 1100px;*/
+  border-style: solid;
+  border-width: thin;
+  border-color: lightgrey;
+}
+
+a.button {
+
+  display: block;
+  width: 23px;
+  height: 23px;
+  background: #4E9CAF;
+  padding: 1px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+.launcherbtn {
+
+  padding: 1.25px 6px;
+}
+
+.launchersubmitbtn {
+  
+    margin-left: 4px;
+  }
+
+  .stp-sign-inner {
+    width: 16px;
+    height: 16px;
+    background: #ff4040;
+    position: absolute;
+    z-index: 2;
+    left:29px;
+    bottom: 29px;
+    opacity: 1;
+   }
+
+   .stp-sign-inner:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 4px solid #ff4040;
+    border-left: 4px solid #fff;
+    border-right: 4px solid #fff;
+    width: 7px;
+    height: 0;
+    opacity: 1;
+   }
+
+   .stp-sign-inner:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 4px solid #ff4040;
+    border-left: 4px solid #56BDEA;
+    border-right: 4px solid #7e0202;
+    width: 7px;
+    height: 0;
+    opacity: 1;
+   }
+
+  .stop-sign {
+    width: 20px;
+    height: 20px;
+    background: #7e0202;
+    position: absolute;
+    z-index: 1;
+    left:35px;
+    bottom: 35px;
+    opacity: 1;
+   }
+
+   .stop-sign:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 5.78px solid #7e0202;
+    border-left: 5.78px solid #fff;
+    border-right: 5.78px solid #fff;
+    width: 8.5px;
+    height: 0;
+    opacity: 1;
+   }
+
+   .stop-sign:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 5.78px solid #7e0202;
+    border-left: 5.78px solid #56BDEA;
+    border-right: 5.78px solid #fff;
+    width: 8.5px;
+    height: 0;
+    opacity: 1;
+   }
+
+   .stop-sign-task-status {
+    width: 20px;
+    height: 20px;
+    background: #ff4040;
+    position: relative;
+    z-index: 1;
+    left:0px;
+    bottom: 0px;
+    opacity: 1;
+   }
+
+   .stop-sign-task-status:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 5.78px solid #ff4040;
+    border-left: 5.78px solid #fff;
+    border-right: 5.78px solid #fff;
+    width: 8.5px;
+    height: 0;
+    opacity: 1;
+   }
+
+   .stop-sign-task-status:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 5.78px solid #7e0303;
+    border-left: 5.78px solid #fff;
+    border-right: 5.78px solid #fff;
+    width: 8.5px;
+    height: 0;
+    opacity: 1;
+   }
+
+   .octagonBadge {
+    width:20px;
+    height:20px;
+    float: left;
+    position: absolute;
+    overflow: hidden;
+    bottom: 35px;
+    right: 0px;
+   }
+
+   .octagonStatus {
+    width:20px;
+    height:20px;
+    float: left;
+    position: relative;
+    overflow: hidden;
+   }
+
+.octagon {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    overflow: hidden;
+    transform: rotate(45deg);
+    background: #ff4040;
+    border: 3px solid #7e0303;
+}
+.octagon:before {
+    position: absolute;
+    /* There needs to be a negative value here to cancel
+     * out the width of the border. It's currently -3px,
+     * but if the border were 5px, then it'd be -5px.
+     */
+    top: -3px; right: -3px; bottom: -3px; left: -3px;
+    transform: rotate(45deg);
+    content: '';
+    border: inherit;
+}
+
+ .person-image {
+    
+    line-height: 31px;
+    width: 25px;
+    height: 25px;
+    top: 9px;
+    left: 9px;
+    border-radius: 100px;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    float: left;
+}
+
+.person-image:hover {
+
+  cursor: pointer;
+}
+
+.owner-name {
+
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 4px;
+  padding-left: 6px;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.loading-bar {
+  display: inline-block;
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+  margin-right: 5px;
+  animation: loading 1s ease-in-out infinite;
+}
+.loading-bar:nth-child(1) {
+  background-color: #3d6680;
+  animation-delay: 0;
+}
+.loading-bar:nth-child(2) {
+  background-color: #3d6680;
+  animation-delay: 0.15s;
+}
+.loading-bar:nth-child(3) {
+  background-color: #3d6680;
+  animation-delay: .25s;
+}
+.loading-bar:nth-child(4) {
+  background-color: #3d6680;
+  animation-delay: .35s;
+}
+
+@keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1, 2.2);
+  }
+  40% {
+    transform: scale(1);
+  }
+}

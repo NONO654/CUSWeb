@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>Enovia Widget</title>
+
+<script type="text/javascript" src="../../common/scripts/jquery-latest.js"></script>
+<script type="text/javascript" src="../../common/scripts/jquery-ui.js"></script>
+<script src="../AmdLoader/AmdLoader.js"></script>
+<script>
+require.config({
+    //baseUrl: ".."
+   /* paths: {
+        "some": "some/v1.0"
+    },
+    waitSeconds: 15*/
+  });
+</script>
+
+
+<script src="../c/UWA/js/UWA_W3C_Alone.js"></script>
+<script src="../../common/scripts/bpsUWAUtils.js" type="text/javascript"></script>
+<script src="../ENO6WPlugins/ENO6WPlugins.js" type="text/javascript"></script>
+<script src="../Foundation/Foundation.js" type="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="../../common/styles/emxUIDefault.css">
+<link rel="stylesheet" type="text/css" href="../../common/styles/emxUINavigator.css">
+<link rel="stylesheet" href="../../common/styles/emxUIFancyTree.css"/>
+<link rel="stylesheet" href="../VENENOFrameworkPlugins/plugins/fancytree/latest/jquery.contextMenu.css"/>
+
+<script type="text/javascript" src="../../common/scripts/emxUICore.js" ></script>
+<script type="text/javascript" src="../../common/scripts/emxUIConstants.js" ></script>
+
+
+
+<script type="text/javascript">
+//Params to Used
+var globalData;
+var wsDragTypes;
+var fdDragTypes;
+var isIFWE = getTopWindow().isfromIFWE;
+var e6wUrl = location.href,
+e6wUrl = e6wUrl.substring(0, e6wUrl.indexOf('/webapps'));
+window.enoviaServer = {
+  params: location.search.substring(1),
+  getUrl: function() {
+	return e6wUrl;
+  },
+  getParams: function() {
+    return this.params;
+  },
+  computeUrl: function (suffix) {
+      return this.getUrl() + suffix;
+  }
+};
+
+function loadScript(url, callBackFunction)
+{
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+    script.onreadystatechange = callBackFunction;
+    script.onload = callBackFunction;
+    head.appendChild(script);
+}
+var callBackFunction = function() {
+	};
+
+function loadGenericFancyTree(){
+	var service_name = location.search.match(/[?&]serviceName=([^&]*)?/);
+	service_name = (service_name == null?"":service_name[1] || "");
+	var querystr = location.href.split("?")[1];
+	require(['DS/Foundation/WidgetAPIs'],  
+	        function(WidgetAPIs) {
+	WidgetAPIs.loadWidget(service_name + "?" + querystr,callBackInitialLoad);
+
+	});
+
+	function callBackInitialLoad(serviceData){
+		globalData = serviceData;
+		require(['DS/ENOFrameworkStructureView/ENOFrameworkStructureView'
+			        ],
+				function (ENOFrameworkStructureView){
+				   ENOFrameworkStructureView.init(serviceData);
+				}
+		);
+
+		var validationPath = WidgetAPIs.getField(serviceData, 'validationPath').range.item;
+		if(validationPath != "" && validationPath[0].value != ""){
+			loadScript(validationPath[0].value,callBackFunction);
+		}
+	}
+}
+
+function unLoadGenericFancyTree(){
+	//To Unload any events/tree Need to add the code
+}
+
+</script>
+</head>
+
+<body id="fancyTreeMainBody" class="" onload="loadGenericFancyTree()" onBeforeunload="unLoadGenericFancyTree()">
+
+<div id="FancyTree-loading" class="folders-loading" style="display: block;">
+	<div class="spinner folder-spinner spinning fade in" style="-webkit-transform: translate3d(0px, 0px, 0px); display: inline-block;">
+		<span class="spinner-bar"></span>
+		<span class="spinner-bar spinner-bar1"></span>
+		<span class="spinner-bar spinner-bar2"></span>
+		<span class="spinner-bar spinner-bar3"></span>
+	</div>
+</div>
+
+
+<div>
+<div class="" id="genericFancyTree" >
+
+</div>
+
+</div>
+
+</body>
+</html>

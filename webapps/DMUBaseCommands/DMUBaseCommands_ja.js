@@ -1,0 +1,1 @@
+define("DS/DMUBaseCommands/DMUBaseCommands_ja",{});define("DS/DMUBaseCommands/assets/nls/DMUBaseCommands",{defaultSelectLabel:"エンティティを選択してください"});

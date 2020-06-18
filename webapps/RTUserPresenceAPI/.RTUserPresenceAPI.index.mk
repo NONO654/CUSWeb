@@ -1,0 +1,16 @@
+m|InstantMessagingAPI\RTUserPresenceAPI.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\RTUserPresenceAPI\assets\avatarDefault.png|1536610376|1980
+s|InstantMessagingAPI\RTUserPresenceAPI.mweb\src\assets\avatarDefault.png|1442491192|1980
+t|InstantMessagingAPI\RTUserPresenceAPI.mweb\LocalGenerated\win_b64\RTUserPresenceAPI.css|1555721268|1104
+s|InstantMessagingAPI\RTUserPresenceAPI.mweb\src\RTUserPresenceAPI.scss|1555417492|1111
+t|win_b64\webapps\RTUserPresenceAPI\RTUserPresenceAPI.css|1568749457|819
+g|InstantMessagingAPI\RTUserPresenceAPI.mweb\LocalGenerated\win_b64\RTUserPresenceAPI.css|1555721268|1104
+t|win_b64\webapps\RTUserPresenceAPI\RTUserPresenceAPI.js|1559958501|4424
+s|InstantMessagingAPI\RTUserPresenceAPI.mweb\src\RTUPavatar.js|1536226867|578
+s|InstantMessagingAPI\RTUserPresenceAPI.mweb\src\RTUPbadge.js|1555088010|1588
+s|InstantMessagingAPI\RTUserPresenceAPI.mweb\src\RTUPuser.js|1555087869|322
+s|InstantMessagingAPI\RTUserPresenceAPI.mweb\src\RTUserPresenceAPI.js|1559640985|4127

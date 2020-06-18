@@ -1,0 +1,181 @@
+/* -------------------------------------------------------------------------
+	List Printer-Friendly Stylesheet for Windows/Mac Platforms
+	emxUIListPF.css
+
+	Release: 2018x
+	Version: 1.2
+	
+	Requires:emxUIDefaultPF.css
+	
+	Copyright (c) 1992-2018 Dassault Systemes ENOVIA Corp. All Rights Reserved.
+	This program contains proprietary and trade secret information 
+	of Dassault Systemes ENOVIA Corp. Copyright notice is precautionary only
+	and does not evidence any actual or intended publication of such program
+   ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+   Default 
+   ------------------------------------------------------------------------- */
+
+table {
+	width:100%;
+	border-collapse:collapse;
+}
+
+tr.page-head {border: none;}
+
+table tr td table {width:auto;}
+
+table.list tr td, table.list tr th {border: 1px solid #b4b6ba;}
+
+td.listCell table td {border: none;}
+
+td.listCell {
+	border: 1px solid #b4b6ba;
+	padding: 6px 8px;
+	color: #3d3d3d;
+}
+
+th {
+	background-color: #eee;
+	text-align: left;
+	color: #3d3d3d;
+	border:1px solid #b4b6ba;
+	padding: 8px; 
+}
+
+/* Horizontal Rule Appearance */
+hr {color:#000; display: none;}
+
+/* Table Header Column Group Header */
+tr.groupheader th {border:none;}
+
+th.groupheader,
+th.mx_group-header,
+td.mx_group-header {
+	padding:6px 8px;
+	border:1px solid #b4b6ba;
+	background-color: #d1d4d4;
+	color: #3d3d3d;
+}
+
+/* Table Header Column Group Header Rule */
+tr.rule, th.rule {background-color:#b4b6ba;}
+
+/* Table Separator Column */
+td.separator {
+	background-color:white;
+	border:none;
+}
+
+/* -------------------------------------------------------------------------
+   Main Table 
+   ------------------------------------------------------------------------- */
+
+/* Odd Table Row Appearance */
+td {border-bottom:1px solid #b4b6ba}
+
+#pageHeadDiv td,
+th table tr td,
+td table tr td {
+	background-color:none;
+	border:none;
+	padding:0;
+}
+
+/* -------------------------------------------------------------------------
+   Compare Report 
+   ------------------------------------------------------------------------- */
+
+td.mx_compare-column, th.mx_compare-column {
+	background-color:#77797c;
+	color:white;
+	border-right:2px solid white;
+}
+	
+td.mx_unique-row{
+	background-color: #d5e8f2;
+	background-repeat:repeat;
+	border-bottom:1px solid #b4b6ba;
+	font-weight:bold;
+	font-style:italic;
+	text-align:left;
+}
+
+td.mx_common-attribute-change{
+	background-color: #F2F5F7;	
+	background-repeat:repeat;	
+	border-bottom:1px solid #b4b6ba;
+	border-left:1px solid #b4b6ba;
+	font-weight:bold;
+	font-style:italic;
+	text-align:left;
+}
+
+
+/* -------------------------------------------------------------------------
+   Edit Visual 
+   ------------------------------------------------------------------------- */
+
+td.mx_add {color:#393;}
+
+td.mx_cut{
+	color:#F00;
+	text-decoration:line-through;
+}
+
+td.mx_resequence {color:#C90;}
+
+span.original-value {
+	color:#F30;
+	text-decoration:line-through;
+	font-weight:normal;
+	font-style:normal;
+}
+
+/*to remove the borders from nested tables*/
+td.mx_change table td.mx_change,
+td.mx_add table td.mx_add,
+td.mx_cut table td.mx_cut,
+td.mx_resequence table td.mx_resequence {
+	border: none;
+	padding: 0;
+}
+td.mx_change, td.mx_add, td.mx_cut, td.mx_resequence {	
+	border: solid 1px #b4b6ba;
+	padding: 6px 8px;
+}
+
+
+/* -------------------------------------------------------------------------
+   Row Grouping
+   ------------------------------------------------------------------------- */
+
+tr.heading td {font-weight:bold;}
+
+.rg1.heading td {
+	background-color:#333;
+	color:#FFF;
+}
+
+.rg1 td:first-child table {margin-left:0em;}
+
+.rg2.heading td {
+	background-color:#999;
+	color:#000;
+}
+
+.rg2 td:first-child table {margin-left:1.5em;}
+
+.rg3.heading td {
+	background-color:#ccc;
+	color:#000;
+}
+
+.rg3 td:first-child table {margin-left:3em;}
+
+/* ++VMA10 ZUD: IR-693748-3DEXPERIENCER2019x -fix suggested by ixk   */
+tr#calc_RichTextEditor td table td {    
+    border: solid 1px #000000;
+    padding: 4px;
+}

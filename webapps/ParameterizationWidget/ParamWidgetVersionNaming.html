@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<!-- @fullReview  ZUR 14/10/11 2015x HL Param Widgetization-->
+<title>Revision Naming Rules</title>
+
+<meta name="description" content="Param Version Naming Widget"/>
+<meta name="author" content="ZUR" />
+<meta name="apiVersion" content="1.3" />
+<meta name="debugMode" content="false" />
+<meta name="strictMode" content="false" />
+
+<!-- UWA Environment -->
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+<script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+<script type="text/javascript" src="../PlatformAPI/PlatformAPI.js"></script>
+<script type="text/javascript" src="../ParameterizationWidget/ParameterizationWidget.js"></script>
+              
+<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+<link rel="stylesheet" type="text/css" href="../ParameterizationWidget/ParameterizationWidget.css" ></link>
+
+<!-- Application Preferences -->
+<widget:preferences>
+</widget:preferences>
+
+<!-- Application Styles -->
+<style type="text/css">
+</style>
+
+<!-- Application Source -->
+<script type="text/javascript">
+
+var paramWidget;
+
+require([
+         'UWA/Core',
+    	 'UWA/Data',
+    	 'UWA/Fx',
+    	 'UWA/Controls/Accordion',        
+    	 'UWA/Utils/InterCom',
+    	 'DS/UIKIT/Core',
+    	 'DS/UIKIT/Input/Text',
+    	 'DS/UIKIT/Input/Select',
+    	 'DS/UIKIT/Input/Button',
+    	 'DS/UIKIT/Alert',
+    	 'DS/UIKIT/Spinner',
+    	 'DS/UIKIT/Modal',
+    	 'DS/UIKIT/Popover',
+    	 'DS/UIKIT/Mask',
+         'DS/Param/CommonUtilities',
+         'DS/Param/UIUtilities',
+    	 'DS/PlatformAPI/PlatformAPI',
+    	 'i18n!DS/ParameterizationWidget/assets/nls/ParamWdgNLS'
+    	  ],
+    	 function (UWA, Data, Fx, Accordion, InterCom, 
+    			   Core, Text, Select, Button,
+    			   Alert, Spinner, Modal, Popover, Mask,
+    			   CommonUtilities, UIUtilities, PlatformAPI, ParamWdgNLS) 
+	 	 {	
+    		var wdgAccordion;
+    		var selectArray = [];
+    		var deployAlert, paramScroller, globalDiv, subDiv; //loadingSpinner; samePartModal, samePartSuperModal, timerconn;  
+            var firsttime = true;
+            var wdgResetModal = null;
+        	var widgetprop;
+			var wdgproperties = CommonUtilities.paramStructBuilder("domainName,socketID,tenantID,env_url,socket,refreshDate,lastAlertDate,isAccordionadded");
+                		
+			function processFamily(iFamilyID, iFamilyNLS, iFamilyToolTip, iFamilyIcon) {		                     			    
+				var familyDiv =  UWA.createElement('div');//.inject(myAccordion);//myContent  	            			   
+  		 	    var paramTable = UWA.createElement('table', {
+  		 	    	'class' : 'table table-hover', 
+    	     		 'id'	: iFamilyID+'ParamTable'
+				}).inject(familyDiv);
+  	     		  
+  		 		var tbody =  UWA.createElement('tbody', {
+  		           'class': 'fparamtbody'}).inject(paramTable); 
+ 
+    			var dataConfig = {};
+    			dataConfig.pinned = true;
+   				dataConfig.text = iFamilyNLS;
+   		
+   				if (widgetprop.isAccordionadded) {
+ 					wdgAccordion.addItem('option'+iFamilyID,dataConfig );                   
+  					wdgAccordion.updateContent('option'+iFamilyID, familyDiv, true);
+  				} else {				
+  					iFamilyToolTip = ParamWdgNLS.Revisioning_Intro;;  
+  					subDiv = UIUtilities.createSubParamDiv(iFamilyToolTip);  					
+  					subDiv.inject(globalDiv);
+  					familyDiv.inject(subDiv);//globalDiv
+  				}    
+			}			  
+        
+        	function platformChanged() {          		
+				UWA.log("platform Chg tenantVN = "+widgetprop.tenantID+" : "+new Date());
+
+    			if (subDiv) { UIUtilities.clearDivContent(subDiv); }
+
+    			selectArray = [];
+    			Mask.mask(widget.body);//loadingSpinner.show(); 
+      			requestDataFromServer_Rev();   
+        	}      	       	
+        	
+        	function onApplyFailure(json, theImageCell) {    		   
+				UWA.log(json);
+				Mask.unmask(widget.body);//Rb0afx
+     			deployAlert.add({ className: "error", message: ParamWdgNLS.deployFailureMsg });
+     			UIUtilities.updateIcon(false,theImageCell);  					
+			}
+			
+			function onApplySuccess(json, theImageCell) {
+		       	//Rb0afx
+		       	Mask.unmask(widget.body);
+				UWA.log(json);                                   	
+	     		var currDate, currTime, diffDate;
+				
+				currDate = new Date();
+				currTime = currDate.getTime();    	 	
+				diffDate = currTime - widgetprop.lastAlertDate;    	 	
+				widgetprop.lastAlertDate = currTime;
+ 	
+				if (diffDate >= 2000) { 
+					deployAlert.add({ className: "success", message: ParamWdgNLS.deploySuccessMsg });			
+				}
+				UIUtilities.updateIcon(true,theImageCell); 
+			}
+			
+			//Rb0afx
+			function resetAndDeloyParams() {
+				Mask.mask(widget.body);
+				var i, j, datacell, dataStruct, tbodyref, iLines;
+				var tbodyreflist = globalDiv.getElements('.fparamtbody');
+                var nboffamilies = tbodyreflist.length;
+                var wasAParamModified = false;
+                var wasmodified = true;
+
+                for (i = 0; i<nboffamilies; i++) {
+                    tbodyref = tbodyreflist[i];                    
+                    iLines = tbodyref.children;
+                    for (j = 0; j < iLines.length; j++) {                      
+                      datacell = iLines[j].cells[2];
+                      dataStruct = datacell.getData('argumentNode');
+                      wasmodified = resetInput(dataStruct);
+                      
+                      if (wasmodified) { wasAParamModified = true;}                      
+					 }
+				}
+                
+                if (!wasAParamModified) {//noparamReset, the current vals are basically the OOTB ones
+                	Mask.unmask(widget.body);
+                	deployAlert.add({ className: "success", message: ParamWdgNLS.deploySuccessMsg });               	
+                }
+                
+			}
+			
+			//Rb0afx
+			function resetInput(idataStruct) {
+				var j, optionValue, currSelectedOpt, currSelectedValue,
+					paramModified = true; 
+					defaultval = idataStruct.defaultval,
+					paramID = idataStruct.paramid;		
+
+				if (paramID != "VNaming_DevelopmentPart") {
+					//if : éviter le bas de blocage mutuel
+					selectArray.forEach(function (iInput) {    						
+						if (iInput.elements.input.id == paramID) {								
+							currSelectedOpt = iInput.getSelection();
+							currSelectedValue = currSelectedOpt[0].value;				
+							if (defaultval == currSelectedValue) {
+								paramModified = false;
+							}
+							
+							for (j = 0; j < iInput.elements.input.length; j++) {
+	    						optionValue = iInput.elements.input[j].value;
+	    							
+    							if  (optionValue == defaultval) {		
+    								iInput.select(j, true, false);
+    							}					 
+							}
+							//iInput.dispatchEvent('onClick',this);
+						}
+					});	
+				} else {
+					paramModified = false;
+				}			
+				return paramModified;
+			} 
+        	
+        	function requestDataFromServer_Rev() { 
+            	var url = widgetprop.env_url+'/resources/ParamWS/access/DomainInfo';  
+            	console.log("requestDataFromServer::"+url);
+             		
+            	var myGetRequest = UWA.Data.request(url, {
+        			data: {
+	 					domainid: widgetprop.domainName,
+	 					familyid: "VersionNaming",
+	 					tenant : widgetprop.tenantID
+ 					},
+        			headers: {
+	                 	'Accept': 'application/ds-json',
+	                 	'Content-Type':'application/ds-json',
+	               		'Accept-Language': widget.lang
+             		},
+        			method: 'get', 
+        			type: 'json',//application/ds-json
+        			proxy: 'passport',					
+        			//cache: 0,
+        			onComplete: function(json){onCompleteRequestData(json);},
+             		onFailure: function(json){onFailureRequestData(json);}
+        		});
+        	}//of Function requestDataFromServer_Rev           
+        
+        	function onFailureRequestData(iMsg) {
+        		UWA.log(iMsg);
+        		Mask.unmask(widget.body);//loadingSpinner.hide();
+        	}        
+    	
+    		function onCompleteRequestData (responseObjectJson) {          		
+    			var i,j,
+    				shownParam = false,
+    				nbofFamilies = responseObjectJson.family.length,
+    				sendSignalDeploy = false;
+				
+    			widgetprop.isAccordionadded = false;
+			
+				if (nbofFamilies >1) {
+					wdgAccordion = UIUtilities.createParamAccordion();
+					wdgAccordion.inject(globalDiv);
+					widgetprop.isAccordionadded = true;	
+				}					            					
+  
+				for (i = 0; i < nbofFamilies; i++) {            					
+					var currFamilyID = responseObjectJson.family[i].id;				
+					if (currFamilyID == "VersionNaming")
+					{					
+						processFamily(currFamilyID,
+								responseObjectJson.family[i].nlsKey,
+								responseObjectJson.family[i].tooltipNlsKey,
+								responseObjectJson.family[i].icon);
+					
+						var	nbofParamofFamilies = responseObjectJson.family[i].parameter.length;						
+					
+						for (j = 0; j < nbofParamofFamilies; j++) {									
+							shownParam = true;
+							var iParam = responseObjectJson.family[i].parameter[j];
+							processParameter(currFamilyID, iParam);	
+							
+							if (iParam.isDeployed == "false")
+								sendSignalDeploy = true;
+						}
+					}												 
+				}	
+				if (sendSignalDeploy == true) { CommonUtilities.dispatchNeedDeployEvt(widgetprop);}
+						
+				Mask.unmask(widget.body);//loadingSpinner.hide();
+				if ((nbofFamilies == 0) || (shownParam == false)) { parent.document.body.getElement('.module .wi-'+widget.id).hide();}//Remove Wdg if no params
+			}
+    		
+    		function updateParameterOnChange(inputElement, ctrlObjectCell, imageCell) {     			
+    			var i,j,
+    				ParamID = ctrlObjectCell.getData('argumentNode').paramid; 
+	    		var SetValueArray = inputElement.getValue();
+	    		var currSetValue =  SetValueArray[0];// SetValue[0];
+	    		
+	    		UIUtilities.beingDeployed(imageCell, ParamWdgNLS.Under_Deploy);
+    		
+    			var toChangeValue = "NumericalRev";    		
+	    		if (currSetValue =="NumericalRev")
+	    			toChangeValue = "AlphabeticalRev";
+	    	
+	    		var ParamToTest = "VNaming_DevelopmentPart";	    	
+	    		if (ParamID == "VNaming_DevelopmentPart")
+	    			ParamToTest="VNaming_ProductionPart";
+	    	   		    		
+    			if ( ("VNaming_DevelopmentPart"==ParamID ) ||
+    					("VNaming_ProductionPart"==ParamID ))
+    			{
+    				for (i = 0; i<selectArray.length;i++)
+    				{    				    				
+    					if (selectArray[i].elements.input.id == ParamToTest)
+    					{
+    						//Find the Selected option/value for other policy to Change (currSelectedValue)
+    						var currSelOpt= selectArray[i].getSelection();
+    						console.log("currSelOpt = "+currSelOpt);
+    						//var currSelectedValue = selectArray[i].elements.input[currSelOpt].value;
+    						var currSelectedValue = currSelOpt[0].value;
+    					    					
+    						//if this option matches the new value set () for 
+    						if (currSelectedValue == currSetValue) {	
+    							for (j = 0; j<selectArray[i].elements.input.length; j++)
+    							{
+		    						var	optionValue = selectArray[i].elements.input[j].value;    												
+        							if  (optionValue == toChangeValue) {	
+        		          				/*if (timerconn) 
+     										clearTimeout(timerconn);        		          			 
+    	    		          			 	timerconn = setTimeout(function() {        		          		
+	     									selectArray[i].setSelection([j]);}, 40); */
+     									
+     									selectArray[i].select(j, true, false);     								
+     									deployAlert.add({ className: "info", message: ParamWdgNLS.partSameSequence});        
+        								break;
+        							}
+    							}
+    							break;    					
+    						}//of  (currSelectedValue == currSetValue)					
+    					}
+    				}//of for  selectArray  				
+    			}//of VNaming_DevelopmentPart == VNaming_ProductionPart
+
+   				CommonUtilities.ApplySingleParamModifOnServer(widgetprop, ctrlObjectCell, currSetValue, imageCell,
+						onApplySuccess, onApplyFailure);//Send the POST Req  
+      		}
+    	
+    		function processParameter(iFamilyID, iParamObj) {	   	 
+    			var matchingFamily = iFamilyID+'ParamTable';
+    			var familyparamarray = globalDiv.getElements('table');    		
+    			var familyparamtable = familyparamarray[0];//initialization
+    		
+    			if (familyparamarray) {
+    			 familyparamarray.forEach(function (trackedElement) {
+
+                    if (matchingFamily == trackedElement.id) {
+                    	 familyparamtable = trackedElement;                    	 
+                    	 //break;
+                   	}
+                   });
+             	}    		
+    		  
+      			var familyparamtbody = familyparamtable.getElements('tbody'); 
+            	var currtbody = familyparamtbody[0];     		
+    		
+            	var tablesize=familyparamtable.rows.length;
+          		var newParamline = UWA.createElement('tr', {title: ''});
+       	    		
+          		iArgument = iParamObj.argument[0];
+          		
+          		var imgCell = UIUtilities.buildDeployStsCell(iParamObj.isDeployed,'15%');
+   	    					
+           	 	var ParamTextCell = UWA.createElement('td',{
+           	 		'width':'60%',
+            	});//'class':'paramtd', //iArgument.tooltipNlsKey 
+            	ParamTextCell.setStyle("vertical-align", "text-bottom");
+                                   		
+           		UWA.createElement('p', {text: iParamObj.nlsKey, 'class': ''}).inject(ParamTextCell);      	
+      	   
+      	   		var ParamInfoCell = UWA.createElement('td',{
+      	   			'width':'5%', 
+        			'align':'right'
+         		});
+      	   		ParamInfoCell.setStyle("vertical-align", "text-bottom");
+   		  			
+   				var imgInfoSpan = UWA.createElement('span', {
+                	'class' : 'fonticon fonticon-info'     	  
+          		}).inject(ParamInfoCell);
+   			   			
+   		   		imgInfoSpan.setStyle("color", "black") ;     		   
+   		   
+   		   		new Popover({
+               		target: imgInfoSpan,
+               		trigger : "hover",
+               		animate:"true",
+               		position: "right",
+               		body: iArgument.tooltipNlsKey,
+               		title: ''//iParamObj.nlsKey
+           		});  		   		   
+  
+	            var controlObjectCell = UIUtilities.buildControlCell(iParamObj.id, iArgument.id, iArgument.defaultValue, '20%');
+           
+          		var selectControler;           
+          		if (iArgument.input == "combobox") {  
+          			selectControler = new Select({
+ 					placeholder: false,
+ 					nativeSelect: true,     
+            		attributes: {
+          	  		 	id : iParamObj.id,
+          	  	 	 	name:iParamObj.id,
+          	  	     	disabled: false, 
+                	},
+                	events: {
+ 	  					onChange: function () {
+ 	  						UIUtilities.beingModified(imgCell, ParamWdgNLS.Being_Modified);
+ 	  						updateParameterOnChange(this,controlObjectCell,imgCell); 	  				
+ 	          				},
+                		//onMouseDown:function (){ }, onClick:function(){ }               
+                		}//of events          
+	           		});//of selectControler                              
+          		
+                	selectControler.getContent().setStyle("width", 270);               				
+          			//controlObjectCell.set({'title' : iArgument.tooltipNlsKey});//  change it       	   
+          			nbofValuesForArg = iArgument.value.length; 
+         			for (var i = 0; i < nbofValuesForArg; i++) {       							
+           				var isSelected = false;            
+            
+            			if (iArgument.argValue == iArgument.value[i].id) 
+            				isSelected = true;
+    	
+           	 			selectControler.add([{
+						label: iArgument.value[i].nlsKey,	
+     					value: iArgument.value[i].id,     
+     					selected: isSelected
+     					}],false);  
+          			}          			
+					selectControler.inject(controlObjectCell);                				
+					selectArray.push(selectControler);
+          		} // of  else if (iArgument.input == "combobox")                   				
+               			         			               		
+          		ParamTextCell.inject(newParamline);
+          		ParamInfoCell.inject(newParamline);
+          		controlObjectCell.inject(newParamline);
+          		imgCell.inject(newParamline);          
+          		newParamline.inject(currtbody);//familyparamtable 
+        	}// of function processParameter
+        
+        	function dispatchNeedTenantEvt() {        	
+				console.log("Do i Need a tenantID ?::"+widgetprop.socketID);		
+				firsttime = false;
+        	
+        		if (!widgetprop.tenantID) {
+        			console.log("No Tenant has been received, calling back::"+widgetprop.socketID);
+        			widgetprop.socket.dispatchEvent('needTenant', {callerSocketID:widgetprop.socketID});
+        		}			
+        	} 
+            
+       		paramWidget = {
+            	
+				onLoad: function () {
+    	
+					widget.body.empty(); // Clear widget content         			
+        			widgetprop = new wdgproperties("ObjectIdentification", "versionNamingListenSocket","","","","","","");
+        			
+        			UWA.log("Defining listening Socket::"+widgetprop.socketID);
+					widgetprop.socket = new InterCom.Socket(widgetprop.socketID);        
+					widgetprop.socket.subscribeServer('uwa.embedded'); ////tenant-server// window'tenant-server'
+			    	
+					globalDiv =  UWA.createElement('div', {
+						'id' : 'mainParamWdgsDiv'
+					}).inject(widget.body); 	
+	
+					Mask.mask(widget.body);
+					deployAlert = UIUtilities.createWdgAlert();
+					deployAlert.inject(widget.body);
+					
+					var resetTool = UIUtilities.createResetToolbar(wdgResetModal, widget.body, resetAndDeloyParams);//Rb0afx
+					resetTool.inject(widget.body);
+		
+					var initDate =  new Date();
+					widgetprop.refreshDate =  initDate.getTime();
+					widgetprop.lastAlertDate = widgetprop.refreshDate;//Rb0afx
+		
+	 				widgetprop.socket.addListener('onPlatformChange', function (data) {           
+        				console.log("onPlatformChange Event Received, launching ...!"+data);        	
+        				widgetprop.tenantID = data.selectedTenant;
+        				widgetprop.env_url	= data.url3DSpace;
+        				
+        				if (data.selectedTenant == "OnPremise") {//Rb0afx
+        					widgetprop.env_url = PlatformAPI.getApplicationConfiguration('app.urls.myapps');
+        				}
+        				platformChanged();
+       				});          
+
+       				if (firsttime) {
+    					setTimeout(function() {
+							dispatchNeedTenantEvt();}, 10000);
+    				}
+         
+    			},//of onload    	
+    
+    			onRefresh: function () {
+    				console.log("onRefresh!!... VersionNaming");    		
+    	 			var currDate = new Date();
+    	 			var currTime = currDate.getTime();    	 	
+    	 			var diffDate = currTime - widgetprop.refreshDate;    	 	
+    	 			widgetprop.refreshDate = currTime;    	 			
+    	 	
+    	 			if (diffDate >= 1500) { 	
+						platformChanged();
+    	 			} else {
+						UWA.log("the last refresh was less than 1.5 seconds ... VN : no action");
+    	 			}
+    			}// of onRefresh
+        
+        	};// of paramWidget        
+        
+        	widget.addEvents({
+               	'onLoad': paramWidget.onLoad,
+                'onRefresh': paramWidget.onRefresh});        
+		
+	 	 });//of require
+        
+        </script>
+</head>
+<body>
+	<p>Loading ...</p>
+</body>
+</html>

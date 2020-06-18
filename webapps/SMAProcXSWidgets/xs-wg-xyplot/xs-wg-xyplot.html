@@ -1,0 +1,264 @@
+<!-- ------------------------------------------------------------------
+[xs-wg-xyplot HTML Document]
+
+Project:    xs
+Version:    1.0
+Last change:   
+Assigned to:  apk2
+Primary use:  xs-canvas
+Description:    plot widget which wraps xy-pot. Accepts
+                association of parameter of Array type
+------------------------------------------------------------------- -->
+
+<!-- ------------------------------------------------------------------
+
+[Table of contents]
++ xs-plot
+
+------------------------------------------------------------------- -->
+<!-- Import base component common to all widgets -->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+<link rel="import" href="../../SMAProcWebXYPlot/xy-plot/xy-plot.html">
+
+<dom-module id="xs-wg-xyplot">
+  <!-- <link rel="import" type="css" href="xs-wg-xyplot.css"> -->
+  <style include="xs-wg-base"></style>
+  <template>
+    <style>
+    :host {
+      height: auto;}
+
+    .plot-container{
+        height: auto;
+    }
+
+    .xy-plot-container {
+      min-height: 150px;
+      position: relative;
+      width: 100%;
+      display: block;
+    }
+
+    .no-data-info:before {
+        content: '\e186';
+        font-size: 24px;
+        display: inline-block;
+    }
+
+    .no-data-info {
+        z-index: 1;
+        color: #b4b6ba;
+        font-size: 20px;
+        padding-bottom: 4px;
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        -moz-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    }
+
+    span.no-data-text {
+        display: block;
+        font-family: Arial;
+    }
+
+    .no-data > .no-data-info {
+        display: block;
+    }
+
+    .no-data > .plot {
+      --xy-plot:{
+        background-color: transparent;
+      };
+    }
+
+    .maximize:before {
+        content: '\e133';
+    }
+
+    .restore:before {
+        content: '\e134';
+    }
+
+    .maximize {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 20px;
+        opacity: 0.1;
+        cursor: pointer;
+        z-index: 16;
+    }
+
+    .restore {
+        position: absolute;
+        right: 0;
+        display: none;
+        color: #368ec4;
+        top: 0;
+        font-size: 25px;
+        opacity: 0.1;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .maximized {
+        position: fixed;
+        height: 100% !important;
+        max-height: 100% !important;
+        background-color: #fafafa;
+        top:0;
+        bottom: 0;
+        left: 0;
+        right:0;
+        transition: height 0.3s cubic-bezier(1, 0.38, 1, 0.19);
+        transition: width 0.3s cubic-bezier(1, 0.38, 1, 0.19);
+        z-index: 21;
+    }
+
+    :host-context(.design) .maximize {
+      z-index: 0; }
+
+    :host-context(.design) .restore  {
+      z-index: 0; }
+
+    .no-data > .maximize {
+        display: none;
+    }
+
+    .maximized > .maximize {
+        display: none;
+    }
+
+    .maximized > .restore {
+        display: block;
+    }
+
+    .xy-plot-container:hover > .maximize {
+        opacity: 0.8;
+    }
+
+    .plot-container:hover > .maximize {
+        opacity: 0.8;
+    }
+
+    .xy-plot-container:hover > .restore {
+        opacity: 0.8;
+    }
+
+    .plot{
+          position: relative;
+        /* height: 150px; */
+        box-sizing: border-box;
+        /* padding: 2px; */
+        width: 100%;
+        display: block;
+        height: 100%;
+    }
+
+    .plot {
+      --xy-line: {
+        stroke-width: 1px;
+      };
+
+      --xy-plot: {
+        width: calc(100% - 25px);
+        margin-right: 3px;
+        margin-left: 3px;
+        box-sizing: border-box;
+        background-color: transparent;
+      };
+
+      --xy-plot-title: {
+        stroke: none;
+        font-family: Arial;
+        fill: #2980b9;
+        display: none;
+      };
+
+      --x-axis-path:{
+        display: none;
+      }
+
+      --y-axis-path:{
+        display: none;
+      }
+
+      --x-axis-line:{
+        stroke: #e2e4e3;
+        stroke-width: 0px;
+      };
+
+      --y-axis-line:{
+      stroke: #e2e4e3;
+      stroke-width: 0px;
+      };
+
+      --x-axis-text:{
+        stroke: none;
+        fill: #3d3d3d;
+      };
+
+      --y-axis-text:{
+      stroke: none;
+        fill: #3d3d3d;
+      };
+
+     --x-grid-line: {
+      stroke: #e2e4e3;
+      stroke-width: 0.5px;
+     };
+
+     --y-grid-line: {
+      stroke: #e2e4e3;
+      stroke-width: 0.5px;
+     };
+
+     --y-coordinate-text: {
+      stroke: none;
+        fill: #005686 !important;
+     };
+
+     --x-coordinate-text: {
+      stroke: none;
+        fill: #005686 !important;
+
+     };
+
+     --x-coordinate-value: {
+      stroke: none;
+        fill: #005686 !important;
+     };
+
+      --y-coordinate-value: {
+        stroke: none;
+        fill: #005686 !important;
+     };
+
+     --xy-zoom: {
+      display: none;
+     };
+
+     --xy-zoom-brush: {
+      display: none;
+     }
+    }
+    </style>
+
+  	<div class="plot-container no-data" id="container" data-size$={{size}}>
+	    <label class="xs-wg-label">{{label}}</label>
+	      <!--plot control-->
+	      <div class="maximize fonticon" title="Maximize" on-click="maximize"></div>
+	      <div id="xycontainer" class="xy-plot-container no-data">
+		    <div class="no-data-info fonticon xs-wg-placeholder-icon">
+				<span class="no-data-text xs-wg-placeholder-text">No Data Present</span>
+			</div>
+			<div class="restore fonticon" title="Restore" on-click="restore"></div>
+	       	<xy-plot id="plot" class="plot" on-xyplotattached="_applyData"></xy-plot>
+	      </div>  
+    </div>
+  </template>
+  <script type="text/javascript" src="xs-wg-xyplot.js"></script>
+</dom-module>

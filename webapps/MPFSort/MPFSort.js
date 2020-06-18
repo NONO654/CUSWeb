@@ -1,0 +1,1 @@
+define("DS/MPFSort/SortDirection",[],function(){var a=Object.freeze({ASCENDING:"ascending",DESCENDING:"descending",UNSORTED:"unsorted"});return a});define("DS/MPFSort/SortOrder",[],function(){var a=Object.freeze({NUMERICAL:"numerial",ALPHA_NUMERICAL:"alphaNumercial"});return a});

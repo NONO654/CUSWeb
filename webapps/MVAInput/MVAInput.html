@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+
+        <!-- Application Metas -->
+        <title>Title of the App</title>
+        <meta name="author" content="John Doe" />
+        <meta name="description" content="A descriptive description" />
+
+<!-- UWA Environment -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<!-- Load UWA environment --> 
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+	<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+     
+     
+    <script type="text/javascript">
+    require(
+        // dependencies
+        [
+			'DS/MVAInput/selectInput/MVASelectInput',
+			'DS/MVAInput/dateInput/MVADateInput'			
+        ],
+
+        // execute this callback, passing all dependencies as params
+
+        function(MVAInput, MVADateInput) {
+            var WIWI = {
+                onLoad: function() { //Needed to be sure to have a widget.body
+					var that= this;
+					that.myInput=new MVAInput({
+						options:  [
+						           { value: '1' },
+						           { value: '2' },
+						           { value: '3', label: 'Option 3' },
+						           { value: 'disabled', label: 'Option disabled', disabled: true }
+						       ]
+					});
+					
+					widget.body.setContent(that.myInput);
+					
+					that.myDateInput=new MVADateInput({
+					}).inject(widget.body);
+					var listDate = [new Date(2005,5,15,20,20,20,20),new Date(2005,8,15,20,20,20,20)]
+					that.myDateInput.addItems(listDate);
+					
+					widget.body.setStyle("Height",500);
+                },
+                onRefresh: function(){
+					var that= this;
+					that.myInput.onRefresh();
+                }
+            };
+            widget.addEvent('onLoad', WIWI.onLoad);
+            widget.addEvent('onRefresh', WIWI.onRefresh);
+        });
+   
+        </script>
+      </head>
+      <body>
+            <p>Loading...</p>
+      </body>
+</html>

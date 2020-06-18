@@ -1,0 +1,44 @@
+let TypeExtension (Type)
+
+if (ThisObject.IsASortOf("Project Space"))
+{
+	TypeExtension = FindType("XP_Project_Space_Ext")
+	if (TypeExtension->HasAttribute("ParamActive") == true)
+	{
+		Parameters->SetAttributeString("DeploymentExtensionName","XP_Project_Space_Ext")
+	}
+}
+else if (ThisObject.IsASortOf("Milestone"))
+{
+	TypeExtension = FindType("XP_Milestone_Ext")
+	if (TypeExtension->HasAttribute("ParamActive") == true)
+	{
+		Parameters->SetAttributeString("DeploymentExtensionName","XP_Milestone_Ext")
+	}
+}
+else if (ThisObject.IsASortOf("Gate"))
+{
+	TypeExtension = FindType("XP_Gate_Ext")
+	if (TypeExtension->HasAttribute("ParamActive") == true)
+	{
+		Parameters->SetAttributeString("DeploymentExtensionName","XP_Gate_Ext")
+	}
+}
+else if (ThisObject.IsASortOf("Phase"))
+{
+	TypeExtension = FindType("XP_Phase_Ext")
+	if (TypeExtension->HasAttribute("ParamActive") == true)
+	{
+		Parameters->SetAttributeString("DeploymentExtensionName","XP_Phase_Ext")
+	}
+}
+else if (ThisObject.IsASortOf("Task"))
+{
+	TypeExtension = FindType("XP_Task_Ext")
+	if (TypeExtension->HasAttribute("ParamActive") == true)
+	{
+		Parameters->SetAttributeString("DeploymentExtensionName","XP_Task_Ext")
+	}
+}
+
+

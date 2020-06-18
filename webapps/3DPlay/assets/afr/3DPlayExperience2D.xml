@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  /*
+  * @Quickreview  NWL 13:11:07 IR-266698V6R2014x
+  * @Quickreview  NWL 13:10:28 remove FS commande For v6r2014x
+  */
+  -->
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DSHAREAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DSHAREAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="3DSHAREAfrWorkshopHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID = "Reframe" ClassName = "DS/3DPlayDocumentViewer/CmdReframe" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+      <CATCommandHeader ID = "RealSize" ClassName = "DS/3DPlayDocumentViewer/CmdRealSize" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+    </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="3DSHAREAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DSHAREWorkbench">
+      <CATCmdContainer Name = "SectionViews" Visibility = "1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name = "Reframe"       Command = "Reframe" />
+        <CATCmdStarter Name = "RealSize"      Command = "RealSize" />
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

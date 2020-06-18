@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Support Tool</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apiVersion" content="1.3" />
+    <meta name="autoRefresh" content="0" />
+
+    <script src="../webcomponentsjs-2.2.7/bundles/webcomponents-ce.js"></script>
+    <script type="text/javascript" src="../webcomponentsjs-2.2.7/custom-elements-es5-adapter.js"></script>
+
+    <script type="text/javascript" src="../Polymer-1.11.3/webcomponents-lite.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+
+    <widget:preferences>
+        <preference type="text" name="samplePref" label="Some sample preference" defaultValue="A default value"/>
+    </widget:preferences>
+
+    <script>
+        var UWA;
+        define('DS/i3DXCompassPlatformServices/i3DXCompassPlatformServices', function() {
+            return {
+                getServiceUrl: function (opts){
+
+                    var THREEDSPACE_URL_OVERRIDE_KEY = 'SMA_3DSPACE_URL';
+                    var serviceUrl = localStorage.getItem(THREEDSPACE_URL_OVERRIDE_KEY);
+                    console.warn('Overriding i3DXCompassPlatformServices.getServiceUrl with:' + serviceUrl +
+                        '\nUse localStorage.setItem("'+THREEDSPACE_URL_OVERRIDE_KEY+'", "...") to set a different URL.');
+                    setTimeout(function(){ opts.onComplete(serviceUrl);}, 0);
+                }
+            };
+        });
+        require(['UWA/Core', 'DS/UWPClientCode/PublicAPI'], function(UWACore, PublicAPI) {
+            var oldSetvalue = widget.setValue;
+            var oldGetvalue = widget.getValue;
+            widget.setValue = function(name, value) {
+                console.warn('Overriding widget.setValue for: ' + name);
+                sessionStorage.setItem('smaPreferenceCache' + name, value);
+                return oldSetvalue.call(widget, name, value);
+            };
+            widget.getValue = function(name) {
+                console.warn('Overriding widget.getValue for: ' + name);
+                if (!oldGetvalue.call(widget, name)) {
+                    oldSetvalue.call(widget, name, sessionStorage.getItem('smaPreferenceCache' + name));
+                }
+                return oldGetvalue.call(widget, name);
+            };
+        });
+    </script>
+
+
+    <!-- Application JS Start -->
+    <script>
+        require(["DS/SMAProcWebSupportabilityUI/WidgetLoader"], function(WidgetLoader){
+             WidgetLoader.load();
+        });
+    </script>
+    <!-- Application JS End -->
+</head>
+
+<body class="col-sm-12">
+</body>
+
+</html>

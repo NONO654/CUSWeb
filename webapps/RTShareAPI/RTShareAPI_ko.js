@@ -1,0 +1,1 @@
+define("DS/RTShareAPI/RTShareAPI_ko",{});define("DS/RTShareAPI/assets/nls/feed",{ShareWith:"공유 대상..."});

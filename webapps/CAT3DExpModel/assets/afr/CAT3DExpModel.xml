@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="CAT3DExpModelAfr" Target="CATCmdInterface">
+	<CATCmdInterface WkbInterface="CAT3DExpModelAfrWorkshopConfiguration" />
+  </Template>
+
+  <Template syp:name="CAT3DExpModelAfrWorkshopHeaders" Target="CATCmdHeadersList">
+	<CATCmdHeadersList>
+
+    <!--<CATCommandHeader ID="SaveLSHdr" ClassName="DS/CAT3DExpModel/commands/CAT3DXSaveLSCmd"  ResourceFile="CAT3DExpModel/CAT3DExpModel" />
+    <CATCommandHeader ID="SaveHdr" ClassName="DS/CAT3DExpModel/commands/CAT3DXSaveCmd"  ResourceFile="CAT3DExpModel/CAT3DExpModel" />-->
+    <CATCommandHeader ID="SaveExpHdr" ClassName="DS/CAT3DExpModel/commands/CAT3DXSaveExperienceCmd"  ResourceFile="CAT3DExpModel/CAT3DExpModel" />
+    <CATCommandHeader ID="CreateExpHdr" ClassName="DS/CAT3DExpModel/commands/CAT3DXCreateExperienceCmd"  ResourceFile="CAT3DExpModel/CAT3DExpModel" />
+    <CATCommandHeader ID="CloseExpHdr" ClassName="DS/CAT3DExpModel/commands/CAT3DXCloseExperienceCmd"  ResourceFile="CAT3DExpModel/CAT3DExpModel" />
+    <CATCommandHeader ID="CreateActorHdr" ClassName="DS/CAT3DExpModel/commands/CAT3DXCreateActorCmd"  ResourceFile="CAT3DExpModel/CAT3DExpModel" />
+    <CATCommandHeader ID="DeleteActorHdr" ClassName="DS/CAT3DExpModel/commands/CAT3DXDeleteActorCmd"  ResourceFile="CAT3DExpModel/CAT3DExpModel" />
+    <CATCommandHeader ID="CreateBehaviorHdr" ClassName="DS/CAT3DExpModel/commands/CAT3DXCreateBehaviorCmd"  ResourceFile="CAT3DExpModel/CAT3DExpModel" />
+    <CATCommandHeader ID="DeleteBehaviorHdr" ClassName="DS/CAT3DExpModel/commands/CAT3DXDeleteBehaviorCmd"  ResourceFile="CAT3DExpModel/CAT3DExpModel" />
+    <CATCommandHeader ID="SetValueHdr" ClassName="DS/CAT3DExpModel/commands/CAT3DXSetValueCmd"  ResourceFile="CAT3DExpModel/CAT3DExpModel" />
+    <CATCommandHeader ID="LoadExpHdr" ClassName="DS/CAT3DExpModel/commands/CAT3DXLoadExperienceCmd"  ResourceFile="CAT3DExpModel/CAT3DExpModel" />
+
+	</CATCmdHeadersList>
+  </Template>
+  
+  <Template syp:name="CAT3DExpModelAfrWorkshopAccess" Target="CATCmdWorkbench">
+	<CATCmdWorkbench Name="CAT3DExpModelWorkbench">
+
+	  <CATCmdContainer Name="Debug" Visibility="1" RepresentationType="AfrActionBarSection">
+		<!--<CATCmdStarter Name = "Save"		Command = "SaveHdr" />
+		<CATCmdStarter Name = "SaveLS"		Command = "SaveLSHdr" />
+    -->
+      <CATCmdStarter Name = "SaveExp"		Command = "SaveExpHdr" />
+	  </CATCmdContainer>
+
+	</CATCmdWorkbench>
+  </Template>
+</Styles>

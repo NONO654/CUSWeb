@@ -1,0 +1,1 @@
+define("DS/DMU3DCompareAPI/DMU3DCompareAPI_fr",{});define("DS/DMU3DCompareAPI/assets/nls/DMU3DCompareAPI",{compareNotify_onemodel:"Impossible de comparer un seul modèle",compareNotify_nomodel:"Aucun produit à comparer"});

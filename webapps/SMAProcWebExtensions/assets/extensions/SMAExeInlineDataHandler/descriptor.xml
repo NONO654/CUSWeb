@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.datahandler.DataHandlerInline" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="DataHandler">
+	<DisplayName nlsFile="SMAExeInlineDataHandler" nlsID="dispname">inmodel</DisplayName>
+	<Description nlsFile="SMAExeInlineDataHandler" nlsID="desc">inmodel</Description>
+	<LongDescription>Reads and writes data stored in the model</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DataHandler</Value>
+		</Attribute>
+		<Attribute name="DataHandlerKind">
+			<Value>Input</Value>
+			<Value>Output</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.DataHandlerInline</Value>
+		</Attribute>
+		<Attribute name="HandlerType">
+			<Value>com.dassault_systemes.sma.datahandler.DataHandlerInline</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAExeInlineDataHandler16.gif" targetFilename="SMAExeInlineDataHandler16.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeInlineDataHandler.CATNls" targetFilename="SMAExeInlineDataHandler.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeInlineDataHandler_Japanese.CATNls" targetFilename="SMAExeInlineDataHandler.CATNls" locale="Japanese" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflInlineDataHandler.dll" targetFilename="win_b64/SMAWflInlineDataHandler.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflInlineDataHandler.sypstyle" targetFilename="SMAWflInlineDataHandler.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflInlineDataHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopPreview">
+			<Implementations>
+				<Implementation name="PreviewObject" language="cpp" platform="win_b64">
+					<LateType>SMAWflInlineHandlerPreview_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="XMLTransformer">
+			<Implementations>
+				<Implementation name="XMLTransformer" language="cpp" platform="win_b64">
+					<LateType>SMAWflInlineHandlerXMLTransformer_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<!--  File Data Handler properties -->
+
+		<!-- file original name -->
+		<Property name="origFname" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<!-- file originally loaded from -->
+		<Property name="from" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<!-- time when last loaded (if known) -->
+		<Property name="at" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[0]]>
+			</Value>
+		</Property>
+
+		<!-- length of stored file data (Base-64 encoded) -->
+		<Property name="dlen" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[0]]>
+			</Value>
+		</Property>
+
+		<!-- stored file data (Base-64 encoded) -->
+		<Property name="zdata" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<!-- encoding version of stored file data (for back.comp.) -->
+		<Property name="encVer" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[1]]>
+			</Value>
+		</Property>
+
+
+		<!-- destination file path -->
+		<Property name="rawFN" type="string" valuetype="single">
+			<Value>
+				<![CDATA[{rundir}]]>
+			</Value>
+		</Property>
+
+		<!--Destination option selection (not used, 'inline' is for input files only) -->
+		<Property name="toOption" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[0]]>
+			</Value>
+		</Property>
+
+		<!--del option constant-->
+		<Property name="del" type="string" valuetype="single">
+			<Value>
+				<![CDATA[N]]>
+			</Value>
+		</Property>
+
+		<!--file type options constant-->
+		<Property name="type" type="string" valuetype="single">
+			<Value>
+				<![CDATA[application/octet-stream]]>
+			</Value>
+		</Property>
+
+		<!--line ending encoding constant-->
+		<Property name="rwEnc" type="string" valuetype="single">
+			<Value>
+				<![CDATA[(Automatic Local)]]>
+			</Value>
+		</Property>
+
+		<!--data encoding constant-->
+		<Property name="dataEnc" type="string" valuetype="single">
+			<Value>
+				<![CDATA[Cp1252]]>
+			</Value>
+		</Property>
+
+		<!--sig encoding constant-->
+		<Property name="SigEnc" type="string" valuetype="single">
+			<Value>
+				<![CDATA[-56524704]]>
+			</Value>
+		</Property>
+
+		<!--handler type constant-->
+		<Property name="handlerType" type="string" valuetype="single">
+			<Value>
+				<![CDATA[com.dassault_systemes.sma.datahandler.DataHandlerInline]]>
+			</Value>
+		</Property>
+
+	</Properties>
+</wfext:Extension>

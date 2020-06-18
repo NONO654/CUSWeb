@@ -1,0 +1,1 @@
+define("DS/CAT3DAnnotationBaseUI/CAT3DAnnotationBaseUI_fr",{});define("DS/CAT3DAnnotationBaseUI/assets/nls/CAT3DAnnotationBaseUI",{MoreLbl:"Plus d'infos...",FailureModes:{"0":"La moins importante","1":"Basse","2":"Moyenne","3":"Elevée","4":"Très élevée"}});

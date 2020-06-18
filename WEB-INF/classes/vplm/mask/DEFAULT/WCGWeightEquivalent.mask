@@ -1,0 +1,149 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+// Specific W And CoG
+// The corresponding extensions should not be visible in query or easy query
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY WCGEquivalentComputedExt
+// --------------------------------------------------
+ATTR V_WCG_COGx;N;N;0.0
+ATTR V_WCG_COGy;N;N;0.0
+ATTR V_WCG_COGz;N;N;0.0
+ATTR V_WCG_Mass;N;N;0.0
+ATTR V_WCG_Moment_X_axis;N;N;0.0
+ATTR V_WCG_Moment_Y_axis;N;N;0.0
+ATTR V_WCG_Moment_Z_axis;N;N;0.0
+ATTR V_WCG_Product_Inertia_X_Y_axis;N;N;0.0
+ATTR V_WCG_Product_Inertia_X_Z_axis;N;N;0.0
+ATTR V_WCG_Product_Inertia_Y_Z_axis;N;N;0.0
+ATTR V_WCG_Surface;N;N;0.0
+ATTR V_WCG_Volume;N;N;0.0
+FUNC Create
+FUNC List
+FATTR V_WCG_COGx;N
+FATTR V_WCG_COGy;N
+FATTR V_WCG_COGz;N
+FATTR V_WCG_Mass;N
+FATTR V_WCG_Moment_X_axis;N
+FATTR V_WCG_Moment_Y_axis;N
+FATTR V_WCG_Moment_Z_axis;N
+FATTR V_WCG_Product_Inertia_X_Y_axis;N
+FATTR V_WCG_Product_Inertia_X_Z_axis;N
+FATTR V_WCG_Product_Inertia_Y_Z_axis;N
+FATTR V_WCG_Surface;N
+FATTR V_WCG_Volume;N
+FUNC Read
+FATTR V_WCG_COGx;N
+FATTR V_WCG_COGy;N
+FATTR V_WCG_COGz;N
+FATTR V_WCG_Mass;N
+FATTR V_WCG_Moment_X_axis;N
+FATTR V_WCG_Moment_Y_axis;N
+FATTR V_WCG_Moment_Z_axis;N
+FATTR V_WCG_Product_Inertia_X_Y_axis;N
+FATTR V_WCG_Product_Inertia_X_Z_axis;N
+FATTR V_WCG_Product_Inertia_Y_Z_axis;N
+FATTR V_WCG_Surface;N
+FATTR V_WCG_Volume;N
+FUNC Write
+FATTR V_WCG_COGx;N
+FATTR V_WCG_COGy;N
+FATTR V_WCG_COGz;N
+FATTR V_WCG_Mass;N
+FATTR V_WCG_Moment_X_axis;N
+FATTR V_WCG_Moment_Y_axis;N
+FATTR V_WCG_Moment_Z_axis;N
+FATTR V_WCG_Product_Inertia_X_Y_axis;N
+FATTR V_WCG_Product_Inertia_X_Z_axis;N
+FATTR V_WCG_Product_Inertia_Y_Z_axis;N
+FATTR V_WCG_Surface;N
+FATTR V_WCG_Volume;N
+
+// --------------------------------------------------
+ENTITY WCGEquivalentDeclaredWeightExt
+// --------------------------------------------------
+ATTR V_WCG_Declared_Mass;N;N;0.0
+FUNC Create
+FUNC List
+FATTR V_WCG_Declared_Mass;N
+FUNC Read
+FATTR V_WCG_Declared_Mass;N
+FUNC Write
+FATTR V_WCG_Declared_Mass;N
+
+// --------------------------------------------------
+ENTITY WCGEquivalentDeclaredInertiaExt
+// --------------------------------------------------
+ATTR V_WCG_Declared_COGx;N;N;0.0
+ATTR V_WCG_Declared_COGy;N;N;0.0
+ATTR V_WCG_Declared_COGz;N;N;0.0
+ATTR V_WCG_Declared_Moment_X_axis;N;N;0.0
+ATTR V_WCG_Declared_Moment_Y_axis;N;N;0.0
+ATTR V_WCG_Declared_Moment_Z_axis;N;N;0.0
+ATTR V_WCG_Declared_Product_Inertia_X_Y_axis;N;N;0.0
+ATTR V_WCG_Declared_Product_Inertia_X_Z_axis;N;N;0.0
+ATTR V_WCG_Declared_Product_Inertia_Y_Z_axis;N;N;0.0
+ATTR V_WCG_Declared_Surface;N;N;0.0
+ATTR V_WCG_Declared_Volume;N;N;0.0
+FUNC Create
+FUNC List
+FATTR V_WCG_Declared_COGx;N
+FATTR V_WCG_Declared_COGy;N
+FATTR V_WCG_Declared_COGz;N
+FATTR V_WCG_Declared_Moment_X_axis;N
+FATTR V_WCG_Declared_Moment_Y_axis;N
+FATTR V_WCG_Declared_Moment_Z_axis;N
+FATTR V_WCG_Declared_Product_Inertia_X_Y_axis;N
+FATTR V_WCG_Declared_Product_Inertia_X_Z_axis;N
+FATTR V_WCG_Declared_Product_Inertia_Y_Z_axis;N
+FATTR V_WCG_Declared_Surface;N
+FATTR V_WCG_Declared_Volume;N
+FUNC Read
+FATTR V_WCG_Declared_COGx;N
+FATTR V_WCG_Declared_COGy;N
+FATTR V_WCG_Declared_COGz;N
+FATTR V_WCG_Declared_Moment_X_axis;N
+FATTR V_WCG_Declared_Moment_Y_axis;N
+FATTR V_WCG_Declared_Moment_Z_axis;N
+FATTR V_WCG_Declared_Product_Inertia_X_Y_axis;N
+FATTR V_WCG_Declared_Product_Inertia_X_Z_axis;N
+FATTR V_WCG_Declared_Product_Inertia_Y_Z_axis;N
+FATTR V_WCG_Declared_Surface;N
+FATTR V_WCG_Declared_Volume;N
+FUNC Write
+FATTR V_WCG_Declared_COGx;N
+FATTR V_WCG_Declared_COGy;N
+FATTR V_WCG_Declared_COGz;N
+FATTR V_WCG_Declared_Moment_X_axis;N
+FATTR V_WCG_Declared_Moment_Y_axis;N
+FATTR V_WCG_Declared_Moment_Z_axis;N
+FATTR V_WCG_Declared_Product_Inertia_X_Y_axis;N
+FATTR V_WCG_Declared_Product_Inertia_X_Z_axis;N
+FATTR V_WCG_Declared_Product_Inertia_Y_Z_axis;N
+FATTR V_WCG_Declared_Surface;N
+FATTR V_WCG_Declared_Volume;N

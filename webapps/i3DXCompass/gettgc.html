@@ -1,0 +1,20 @@
+<html>
+<head>
+</head>
+<body>
+<script type="text/javascript">
+var tgc = window.location.hash.substring(8);
+var origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+if (!tgc) {
+    tgc = 'notgc';
+}
+// Using InterCom like this doesn't work anymore in IE10
+/*var InterCom = window.parent.parent.UWA.Utils.InterCom;
+var socket = new InterCom.Socket('getTgcSocket');
+socket.subscribeServer('com.ds.compass', window.parent.parent);
+socket.dispatchEvent('onSetTgc', {castgc: tgc}, 'getTgcSocket');*/
+// We use window.postMessage directly
+window.parent.parent.postMessage(JSON.stringify({target: 'com.ds.compass', castgc: tgc}), origin);
+</script>
+</body>
+</html>

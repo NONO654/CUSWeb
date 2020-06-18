@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.smacomponent.Reference" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflPhysicsSimulation" nlsID="dispname">Physics Simulation</DisplayName>
+	<Description nlsFile="SMAWflPhysicsSimulation" nlsID="desc">Create new Physics Simulation</Description>
+	<LongDescription nlsFile="SMAWflPhysicsSimulation" nlsID="longdesc">Create new Physics Simulation</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.sma.adapter.Reference</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>500</Value>
+			<Value>500</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflPhysicsSimReference.png" targetFilename="normal/I_SMAWflPhysicsSimReference.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflPhysicsSimulation.CATNls" targetFilename="SMAWflPhysicsSimulation.CATNls"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflPhysicsSimulationReferenceEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="ExtensionUpdater">
+			<Implementations>
+				<Implementation name="cppUpdater" language="cpp" platform="win_b64">
+					<LateType>SMAWflPhysicsSimUpdater_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="modelname" type="string" valuetype="single">
+			<Value>PhysicSimulation</Value>
+		</Property>
+		<Property name="modelverstr" type="string" valuetype="single">
+			<Value>*.*.*</Value>
+		</Property>
+	</Properties>
+	<ParameterList>
+		<Parameter name="PLMObj" type="plmobject" mode="input" valuetype="single">
+			<Value/>
+		</Parameter>
+		<Parameter name="EXEC_PARAM" type="string" mode="input" valuetype="single">
+			<Value/>
+			<AppData key="ProcessComposer.VisibleFlag">0</AppData>
+		</Parameter>
+		<Parameter name="BATCH_DRM" type="string" mode="input" valuetype="single">
+			<Value/>
+			<AppData key="ProcessComposer.VisibleFlag">0</AppData>
+		</Parameter>
+		<Parameter name="SOLVE_DRM" type="string" mode="input" valuetype="single">
+			<Value/>
+			<AppData key="ProcessComposer.VisibleFlag">0</AppData>
+		</Parameter>
+		<Parameter name="BATCH_HOST" type="string" mode="input" valuetype="single">
+			<Value/>
+			<AppData key="ProcessComposer.VisibleFlag">0</AppData>
+		</Parameter>
+		<Parameter name="SOLVE_HOST" type="string" mode="input" valuetype="single">
+			<Value/>
+			<AppData key="ProcessComposer.VisibleFlag">0</AppData>
+		</Parameter>
+		<Parameter name="BATCH_LSF_GROUP" type="string" mode="input" valuetype="single">
+			<Value/>
+			<AppData key="ProcessComposer.VisibleFlag">0</AppData>
+		</Parameter>
+		<Parameter name="BATCH_LSF_QUEUE" type="string" mode="input" valuetype="single">
+			<Value/>
+			<AppData key="ProcessComposer.VisibleFlag">0</AppData>
+		</Parameter>
+		<Parameter name="BATCH_LSF_OPTIONS" type="string" mode="input" valuetype="single">
+			<Value/>
+			<AppData key="ProcessComposer.VisibleFlag">0</AppData>
+		</Parameter>
+		<Parameter name="SOLVE_LSF_GROUP" type="string" mode="input" valuetype="single">
+			<Value/>
+			<AppData key="ProcessComposer.VisibleFlag">0</AppData>
+		</Parameter>
+		<Parameter name="SOLVE_LSF_OPTIONS" type="string" mode="input" valuetype="single">
+			<Value/>
+			<AppData key="ProcessComposer.VisibleFlag">0</AppData>
+		</Parameter>
+		<Parameter name="SOLVE_LSF_QUEUE" type="string" mode="input" valuetype="single">
+			<Value/>
+			<AppData key="ProcessComposer.VisibleFlag">0</AppData>
+		</Parameter>
+	</ParameterList>
+	<reference name="PhysicSimulation" ver="*.*.*" type="1" fetchMode="0"/>
+</wfext:Extension>

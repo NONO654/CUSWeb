@@ -1,0 +1,1 @@
+define("DS/MPFStripeComponent/MPFStripeComponent_en",{});define("DS/MPFStripeComponent/assets/nls/MPFStripeComponent",{merchant:"Merchant",order:"Order",amount:"Amount",cardHolder:"Card holder",cardNumber:"Card number",expiryDate:"Expiry date",cardHolderEmpty:"The card holder name is invalid.",pay:"Pay"});

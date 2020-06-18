@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Helper for visualizing RA chart customization JSON</title>
+<style>
+.map {
+	width:100px;
+	height:20px;
+}
+.mapEnd {
+	width:50px;
+	height:20px;
+}
+</style>
+<script>
+function readFile() {
+	var fileEntry = document.getElementById("fileEntry");
+	var file = fileEntry.files[0];
+	var read = new FileReader();
+	
+	read.onload = function(e) {
+	
+		var mapsJSON = JSON.parse(read.result);
+	
+	var c = document.getElementById("container");
+	c.innerHTML = "";
+	
+	for(var i=0;i<mapsJSON.linearColorMaps.length;i++) {
+		m = mapsJSON.linearColorMaps[i];
+		
+		g = document.createElement('div');
+		g.setAttribute("id", m.guid);
+		c.appendChild(g);
+		
+		dn = document.createElement('div');
+		dn.textContent= m.displayName
+		g.appendChild(dn);
+		
+		if(m.type === "linear") {
+			map = document.createElement('div');
+			map.setAttribute("class", "mapEnd");
+			map.style["background-color"] = m.colors[0];
+			g.appendChild(map);
+
+			map = document.createElement('div');
+			map.setAttribute("class", "mapEnd");
+			map.style["background-color"] = m.colors[1];
+			g.appendChild(map);
+
+			map = document.createElement('div');
+			map.setAttribute("class", "map");
+			map.style["background-image"] = "linear-gradient(to right,"+m.colors[0]+","+m.colors[1]+")";
+			g.appendChild(map);
+		}
+		
+		
+	}
+	}
+	read.readAsText(file);
+
+}
+</script>
+</head>
+<body>
+<input type="file" id="fileEntry">
+<button onclick="readFile()">Read</button>
+<div id="container"></div>
+</body>
+</html>

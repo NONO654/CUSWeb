@@ -1,0 +1,514 @@
+// ===========================================================
+// PACKAGE   : PLMStructureDesign
+// ===========================================================
+// Generated : May 2009
+// Owner     : AWG (R208)
+// Modified  : USV (R212) June 2011 - new attribute Sync_ID, new PLM extension SFE
+// Modified  : K3M (R418) May 2015 - new attribute PositionNumber
+// Modified  : S95 (R419) June 2016 - new attribute for Structure_Section
+// Modified  : ssn13 (R421) Feb 2018 - new extensions for Structure_Member(StrColumn, StrBeam)
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+// 5 entity :
+// - StrPlate
+// - StrStiffener
+// - StrMember
+// - StrBeam
+// - StrColumn
+// - StrStiffenerOnFreeEdge
+
+// ===========================================================
+ENTITY StrPlate
+// ===========================================================
+// --- attributes: 3
+ATTR V_StrCategory;N;N;$
+ATTR V_StrThickness;N;N;$
+ATTR V_StrMaterial;N;N;$
+ATTR V_StrSync_ID;N;N;$
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;Y
+FATTR V_StrThickness;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;Y
+FATTR V_StrThickness;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;N
+FATTR V_StrThickness;N
+FATTR V_StrMaterial;N
+FATTR V_StrSync_ID;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;N
+FATTR V_StrThickness;Y
+FATTR V_StrMaterial;N
+
+
+// ===========================================================
+ENTITY StrStiffener
+// ===========================================================
+// --- attributes: 3
+ATTR V_StrCategory;N;N;$
+ATTR V_StrSection;N;N;$
+ATTR V_StrMaterial;N;N;$
+ATTR V_StrSync_ID;N;N;$
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+FATTR V_StrSync_ID;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+
+
+// ===========================================================
+ENTITY StrMember
+// ===========================================================
+// --- attributes: 3
+ATTR V_StrCategory;N;N;$
+ATTR V_StrSection;N;N;$
+ATTR V_StrMaterial;N;N;$
+ATTR V_StrSync_ID;N;N;$
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+FATTR V_StrSync_ID;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+
+// ===========================================================
+ENTITY StrBeam
+// ===========================================================
+
+// ===========================================================
+ENTITY StrColumn
+// ===========================================================
+
+// ===========================================================
+ENTITY StrStiffenerOnFreeEdge
+// ===========================================================
+// --- attributes: 3
+ATTR V_StrCategory;N;N;$
+ATTR V_StrSection;N;N;$
+ATTR V_StrMaterial;N;N;$
+ATTR V_StrSync_ID;N;N;$
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+FATTR V_StrSync_ID;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+
+// ===========================================================
+ENTITY Structure_System @Inherits
+// ===========================================================
+
+// ===========================================================
+ENTITY Structure_Design_Unit @Inherits
+// ===========================================================
+
+// ===========================================================
+ENTITY Structure_Panel @Inherits
+// ===========================================================
+ATTR V_StrCategory;N;N;$
+ATTR V_StrThickness;N;N;$
+ATTR V_StrMaterial;N;N;$
+ATTR V_StrSync_ID;N;N;$
+ATTR V_StrPositionNumber;N;N;$
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_StrCategory;Y
+FATTR V_StrThickness;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrPositionNumber;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_StrCategory;Y
+FATTR V_StrThickness;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;N
+FATTR V_StrPositionNumber;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_StrCategory;N
+FATTR V_StrThickness;N
+FATTR V_StrMaterial;N
+FATTR V_StrSync_ID;N
+FATTR V_StrPositionNumber;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_StrCategory;N
+FATTR V_StrThickness;N
+FATTR V_StrMaterial;N
+FATTR V_StrPositionNumber;Y
+
+
+// ===========================================================
+ENTITY Structure_Plate @Inherits
+// ===========================================================
+ATTR V_StrCategory;N;N;$
+ATTR V_StrThickness;N;N;$
+ATTR V_StrMaterial;N;N;$
+ATTR V_StrSync_ID;N;N;$
+ATTR V_StrPositionNumber;N;N;$
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_StrCategory;Y
+FATTR V_StrThickness;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrPositionNumber;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_StrCategory;Y
+FATTR V_StrThickness;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;N
+FATTR V_StrPositionNumber;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_StrCategory;N
+FATTR V_StrThickness;N
+FATTR V_StrMaterial;N
+FATTR V_StrSync_ID;N
+FATTR V_StrPositionNumber;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_StrCategory;N
+FATTR V_StrThickness;N
+FATTR V_StrMaterial;N
+FATTR V_StrPositionNumber;Y
+
+
+// ===========================================================
+ENTITY Structure_Stiffener @Inherits
+// ===========================================================
+ATTR V_StrCategory;N;N;$
+ATTR V_StrSection;N;N;$
+ATTR V_StrMaterial;N;N;$
+ATTR V_StrSync_ID;N;N;$
+ATTR V_StrPositionNumber;N;N;$
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrPositionNumber;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;N
+FATTR V_StrPositionNumber;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+FATTR V_StrSync_ID;N
+FATTR V_StrPositionNumber;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+FATTR V_StrPositionNumber;Y
+
+// ===========================================================
+ENTITY Structure_StiffenerOnFreeEdge @Inherits
+// ===========================================================
+ATTR V_StrCategory;N;N;$
+ATTR V_StrSection;N;N;$
+ATTR V_StrMaterial;N;N;$
+ATTR V_StrSync_ID;N;N;$
+ATTR V_StrPositionNumber;N;N;$
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrPositionNumber;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;N
+FATTR V_StrPositionNumber;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+FATTR V_StrSync_ID;N
+FATTR V_StrPositionNumber;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+FATTR V_StrPositionNumber;Y
+
+
+// ===========================================================
+ENTITY Structure_Member @Inherits
+// ===========================================================
+ATTR V_StrCategory;N;N;$
+ATTR V_StrSection;N;N;$
+ATTR V_StrMaterial;N;N;$
+ATTR V_StrSync_ID;N;N;$
+ATTR V_StrPositionNumber;N;N;$
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrPositionNumber;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_StrCategory;Y
+FATTR V_StrSection;Y
+FATTR V_StrMaterial;Y
+FATTR V_StrSync_ID;N
+FATTR V_StrPositionNumber;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+FATTR V_StrSync_ID;N
+FATTR V_StrPositionNumber;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_StrCategory;N
+FATTR V_StrSection;N
+FATTR V_StrMaterial;N
+FATTR V_StrPositionNumber;Y
+
+
+// ===========================================================
+ENTITY Structure_Section @Inherits
+// ===========================================================
+ATTR V_StrStandard;N;N;$
+ATTR V_StrSize;N;N;$
+ATTR V_StrShape;N;N;$
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_StrStandard;Y
+FATTR V_StrSize;Y
+FATTR V_StrShape;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_StrStandard;Y
+FATTR V_StrSize;Y
+FATTR V_StrShape;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_StrStandard;N
+FATTR V_StrSize;N
+FATTR V_StrShape;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_StrStandard;Y
+FATTR V_StrSize;Y
+FATTR V_StrShape;Y
+
+
+// ===========================================================
+ENTITY Structure_Opening @Inherits
+// ===========================================================
+
+// ===========================================================
+ENTITY Structure_Endcut @Inherits
+// ===========================================================
+
+// ===========================================================
+ENTITY Structure_Slot @Inherits
+// ===========================================================
+
+// ===========================================================
+ENTITY Structure_Contour @Inherits
+// ===========================================================
+
+// ===========================================================
+// End of PLMStructureDesign package's DEFAULT mask file
+// ===========================================================

@@ -1,0 +1,9 @@
+m|DELPPWModules\DELPPWAuthorLinksModule.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19217
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELPPWAuthorLinksModule\DELPPWAuthorLinksModule.js|1565034913|14272
+s|DELPPWModules\DELPPWAuthorLinksModule.mweb\src\AuthorLinksUIManager.js|1563962697|29323
+s|DELPPWModules\DELPPWAuthorLinksModule.mweb\src\AuthorLinksModule.js|1562136131|8959
+s|DELPPWModules\DELPPWAuthorLinksModule.mweb\src\AuthorLinksUI.js|1561377713|13593

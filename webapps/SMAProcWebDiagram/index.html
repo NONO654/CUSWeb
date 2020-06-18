@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SMAProcWebDiagram showpage</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="../UIKIT/UIKIT.css" />
+  <style>
+    body {
+        padding-left: 1em;
+    }
+    table, tr { height: 100%; border: 1px #ccc inset;}
+    th, td {
+        padding: .5em;
+    }
+    /* for table display*/
+    cmp-process-view,
+    cmp-activity-view,
+    cmp-step-view,
+    cmp-gateway-view,
+    cmp-startnode-view,
+    cmp-endnode-view {
+        position:relative;
+    }
+    cmp-diagram {
+        border: red dashed 1px;
+    }
+  </style>
+  <script src="../AmdLoader/AmdLoader.js"></script>
+  <script type="text/javascript" src="../c/UWA/js/UWA_W3C_Alone.js"></script>
+  <script>
+      require([
+          'DS/SMAProcWebDiagram/ActivityView',
+          'DS/SMAProcWebDiagram/GatewayView',
+          'DS/SMAProcWebDiagram/StepView',
+          'DS/SMAProcWebDiagram/ProcessView',
+          'DS/SMAProcWebDiagram/StartnodeView',
+          'DS/SMAProcWebDiagram/EndnodeView'
+      ], function (ActivityView, GatewayView, StepView, ProcessView, StartnodeView, EndnodeView) {
+          console.log('Views loaded: ', ActivityView, GatewayView, StepView, ProcessView, StartnodeView, EndnodeView);
+      });
+      require(['DS/SMAProcWebDiagram/Diagram', 'DS/JSCMM/SMAJSCMMProcess'], function(Diagram, Process) {
+          document.querySelectorAll('cmp-diagram').forEach(function(diagram) {
+              diagram.setRoot(new Process());
+          });
+      });
+  </script>
+</head>
+<body>
+    <h1>SMAProcWebDiagram showpage</h1>
+    <h2>Views</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>State</th>
+                <th>Process</th>
+                <th>Activity</th>
+                <th>Step</th>
+                <th>Gateway</th>
+                <th>StartNode</th>
+                <th>EndNode</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Default</td>
+                <td><cmp-process-view></cmp-process-view></td>
+                <td><cmp-activity-view></cmp-activity-view></td>
+                <td><cmp-step-view></cmp-step-view></td>
+                <td><cmp-gateway-view></cmp-gateway-view></td>
+                <td><cmp-startnode-view></cmp-startnode-view></td>
+                <td><cmp-endnode-view></cmp-endnode-view></td>
+            </tr>
+            <tr>
+                <td>Hidden</td>
+                <td><cmp-process-view hidden></cmp-process-view></td>
+                <td><cmp-activity-view hidden></cmp-activity-view></td>
+                <td><cmp-step-view hidden></cmp-step-view></td>
+                <td><cmp-gateway-view hidden></cmp-gateway-view></td>
+                <td><cmp-startnode-view hidden></cmp-startnode-view></td>
+                <td><cmp-endnode-view hidden></cmp-endnode-view></td>
+            </tr>
+            <tr>
+                <td>Selected</td>
+                <td><cmp-process-view selected></cmp-process-view></td>
+                <td><cmp-activity-view selected></cmp-activity-view></td>
+                <td><cmp-step-view selected></cmp-step-view></td>
+                <td><cmp-gateway-view selected></cmp-gateway-view></td>
+                <td>N/A</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Loading</td>
+                <td><cmp-process-view loading></cmp-process-view></td>
+                <td><cmp-activity-view loading></cmp-activity-view></td>
+                <td><cmp-step-view loading></cmp-step-view></td>
+                <td><cmp-gateway-view loading></cmp-gateway-view></td>
+                <td>N/A</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Disabled</td>
+                <td><cmp-process-view disabled></cmp-process-view></td>
+                <td><cmp-activity-view disabled></cmp-activity-view></td>
+                <td><cmp-step-view disabled></cmp-step-view></td>
+                <td><cmp-gateway-view disabled></cmp-gateway-view></td>
+                <td>N/A</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Read Only</td>
+                <td><cmp-process-view readonly></cmp-process-view></td>
+                <td><cmp-activity-view readonly></cmp-activity-view></td>
+                <td><cmp-step-view readonly></cmp-step-view></td>
+                <td><cmp-gateway-view readonly></cmp-gateway-view></td>
+                <td>N/A</td>
+                <td>N/A</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Diagram</h2>
+    <h3>Default</h3>
+    <cmp-diagram></cmp-diagram>
+    <h3>Disabled</h3>
+    <cmp-diagram disabled></cmp-diagram>
+    <h3>Read only</h3>
+    <cmp-diagram readonly></cmp-diagram>
+    <h3>Show steps</h3>
+    <cmp-diagram show-steps></cmp-diagram>
+</body>
+</html>

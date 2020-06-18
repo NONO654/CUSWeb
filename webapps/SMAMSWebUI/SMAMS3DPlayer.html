@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<html>
+<head>
+
+
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+<style type="text/css">
+html, body, #canvas {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	overflow: hidden;
+}
+</style>
+
+<!-- Application JS Start -->
+
+<script type="text/javascript">
+	var listToLoad = [];
+	var experience = null;
+	var opened = false;
+	
+	function loadBlob(blob){
+		listToLoad.push(blob);
+		open();
+	}
+
+	function onload(){
+		require(['DS/3DPlayHelper/3DPlayHelper', 'UWA/Drivers/Alone'],function(player3DPlayWeb){
+			var playerDiv = document.getElementById('canvas');
+			var player = new player3DPlayWeb({container:playerDiv,input:{experience:'3DPlayModelViewer'},
+				options:{loading:'autoplay',
+					callbacks:{
+                        asset: {
+                            LoadingFinished: function (data) { //callback to wait for loading of logo
+                            	if(!opened){
+    	 				            experience.clearView();
+    	 				            open(); opened = true;                            		
+                            	}
+ 				            }
+ 			            },
+						experience:{
+							play:function(data){
+								experience = data.experience;
+							}
+						}
+					}
+				}
+			});							
+		});
+	}
+	
+	function open(){
+		if(listToLoad.length !=2 || !experience) return;
+		require(['DS/Visualization/Node3D','DS/Visualization/ThreeJS_R57','DS/Visualization/PathElement','DS/SceneGraphOverrides/SceneGraphOverrideSet'],
+		function(Node3D,THREE,PathElement,sceneGraphOverrideSet){
+			var ml = experience.frmWindow.getModelLoader();
+			var viewer = experience.frmWindow.getViewer();
+			viewer.getRootNode().removeChildren();
+			var sceneGraph = new Node3D();
+            viewer.addNode(sceneGraph);
+
+            var sgos = new sceneGraphOverrideSet(sceneGraph);
+            var sgosManager = viewer.getSceneGraphOverrideSetManager();
+            sgosManager.pushSceneGraphOverrideSet(sgos);
+			
+
+			ml.setFileType('cgr');
+	        var arrayBuffer;
+	        var fileReader1 = new FileReader();
+	        var fileReader2 = new FileReader();
+	        var colors = ['#EA4F37','#368ec4'];
+	        var createNode = function() {
+	            var node = new Node3D();
+	            arrayBuffer = this.result;
+	            ml.loadModelFromBuffer(arrayBuffer, node);
+	            sceneGraph.addChild(node);
+	            
+	            var aPath = new PathElement();
+	            aPath.setFromArray([sceneGraph, node]);
+                var aOverride = sgos.createOverride(aPath);
+                aOverride.setColor(colors.pop(), true);
+
+
+	        };
+	        fileReader1.onload = createNode;
+	        fileReader2.onload = createNode;
+	        if(listToLoad[0]!=null){
+	            fileReader1.readAsArrayBuffer(listToLoad[0]);								                	
+	        }
+	        if(listToLoad[1]!=null){
+	            fileReader2.readAsArrayBuffer(listToLoad[1]);							                
+	        }
+		});
+	}
+
+
+</script>
+
+</head>
+
+<body onload="onload()">
+	<div id='canvas'></div>
+</body>
+</html>

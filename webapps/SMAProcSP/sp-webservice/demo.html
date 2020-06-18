@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+			 	      
+		<title>Web Service Demo</title>
+		 
+		 
+        <!-- Include the platform library for polyfill -->
+        <script src="../../SMAProcSPlib/polymer/platform.js"></script>
+		
+        
+        <!-- Importing the components -->
+			<link rel="import" href="sp-webservice.html">			
+		
+		<style>
+			.simulation {
+				padding: 10px;
+				margin: 10px;
+				background-color: crimson;
+				color: white;
+				width: 300px;
+				height: 30px;
+			}			
+		</style>
+	</head>
+	<body>		 
+		<h1>Web Service Demo</h1>
+		
+		<template is="auto-binding">
+			<!-- Get the simulations -->
+			<sp-webservice uri="simulations?fields=id" getasap 
+										 data="{{simulations}}"></sp-webservice>	
+
+			<!-- Display the simulations -->			
+			<template repeat="{{ simulation in simulations }}">				
+				<div class="simulation">
+					{{simulation.id}}
+				</div>
+			</template>			
+		</template>							
+	</body>		
+</html>
+

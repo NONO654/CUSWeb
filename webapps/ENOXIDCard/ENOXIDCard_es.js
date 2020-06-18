@@ -1,0 +1,1 @@
+define("DS/ENOXIDCard/ENOXIDCard_es",{});define("DS/ENOXIDCard/assets/nls/ENOXIDCard",{back:"Atrás",collapse:"Contraer",expand:"Expandir",home:"Inicio",info:"Información",menu:"Menú"});

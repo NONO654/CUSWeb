@@ -1,0 +1,319 @@
+{
+	"MBOM": {
+		"moduleIcon": "CreateAssembly",
+		"moduleTitle": "",
+		"isAuthoringAllowed" : true,
+		"registerRoots": true,
+		"pprTypes": ["PROCESS"],
+		"implementing": true,
+		"implemented": false,
+		"enableCrossHighlight": true,
+		"displayBadge": {
+			"linkType": "ProductImplementLink",
+			"badgeIcon": "Scope"
+		},
+		"linkTypes": ["ProductImplementLink", "ProductImplementLinkOcc", "ProcessImplementLink", "MfgProcessAlternate", "HistorizationLinkRefRef", "DELAsmProcessCanUseCnx", "PLMDocConnection"],
+		"views": {
+			"treeListView": {
+				"enableDragAndDrop": true,
+				"showTagger": true,
+				"headerContextualCommands": ["SizeColumnToFit", "SortAToZ", "SortZToA", "HideColumn", "ToggleGraphView"],
+				"contextualCommands": [
+                    "InsertCreateAssembly", "InsertProvide", "InsertCreateMaterial", "InsertCreateKit",
+                    "SEPARATOR",
+                    "CreateScopeLink",
+                    "SEPARATOR",
+					"EditAttribute", "ActionBar_Attributes", "Relations",
+					"SEPARATOR",
+					"ExpandAll", "Hide", "Refresh", "ExploreInWebApp"
+				],
+				"toolTipConfigXML" : "toolTipConfigXML"
+
+			},
+			"graphView": {
+				"contextualCommands": ["ToggleGraphView", "ToggleOverview", "ToggleOrientation", "Reframe", "ReframeOn", "ExpandAll", "ExploreInWebApp"],
+				"configXML":"MBOM.bomViewXML"
+			}
+		},
+		"columnConfigName": "MBOM.columnConfigPath",
+		"exportCSVPreferencesXML": "exportCSVPreferencesXML",
+		"exportCSVFileName": "ManufactuirngItems",
+		"registerViewPreference": true,
+		"registerLayoutPreference": true
+	},
+	"EBOM": {
+		"moduleIcon": "PRODUCT",
+		"moduleTitle": "",
+		"registerRoots": true,
+		"pprTypes": ["PRODUCT", "PART"],
+		"implementing": false,
+		"implemented": true,
+		"enableCrossHighlight": true,
+		"linkTypes": ["ProductImplementLink", "ProductImplementLinkOcc", "PLMDocConnection"],
+		"views": {
+			"treeListView": {
+				"enableDragAndDrop": true,
+				"showTagger": true,
+				"headerContextualCommands": ["SizeColumnToFit", "SortAToZ", "SortZToA", "HideColumn", "ToggleGraphView"],
+				"contextualCommands": [
+                    "CreateAssemblyAndScope",
+                    "SEPARATOR",
+					"ActionBar_Attributes", "Relations",
+					"SEPARATOR",
+					"ExpandAll", "Hide", "Refresh", "ExploreInWebApp"
+				],
+				"toolTipConfigXML" : "toolTipConfigXML"
+
+			},
+			"graphView": {
+				"contextualCommands": ["ToggleGraphView", "ToggleOverview", "ToggleOrientation", "Reframe", "ReframeOn", "ExpandAll", "ExploreInWebApp"]
+			}
+		},
+		"columnConfigName": "EBOM.columnConfigPath",
+		"registerViewPreference": true,
+		"registerLayoutPreference": true
+	},
+
+	"LINKS": {
+		"relatedCmdId": "Relations",
+		"relationsDialogDisplayAttributeConfigXML": "relationsDialogDisplayAttributeConfigXML",
+		"editLinkAttrsConfigXML": "editLinkAttrsConfigXML",
+		"pprTypes": {
+				"PROCESS": {
+						"icon":"PROCESS",
+						"view":"PPRTYPE.PROCESS"
+				},
+				"PART":{
+						"icon":"PART",
+						"view":"PPRTYPE.PART"
+				},
+				"PRODUCT":{
+						"icon":"PRODUCT",
+						"view":"PPRTYPE.PRODUCT"
+				}
+		}
+	},
+
+	"MIL": {
+		"pprTypes": [],
+		"linkTypes": [],
+		"views": {
+			"treeListView": {
+				"contextualCommands": []
+			}
+		},
+		"columnConfigName": "MIL.columnConfigPath",
+		"manageInconsistentLinksCmdId": "ManageInconsistentLinks"
+	},
+
+	"INSTCMDMOD": {
+		"insertFormAttributeXML": "insertFormAttributeXML"
+	},
+
+	"CAPRESOURCE": {
+		"moduleIcon": "ActionCapableResource",
+		"relatedCmdId": "CapableResource",
+		"pprTypes": ["RESOURCE"],
+		"linkTypes": ["DELAsmProcessCanUseCnx"],
+		"dragDropManager": "WUXActionDragDrop",
+		"views": {
+			"treeListView": {
+				"enableDragAndDrop": true,
+				"showTagger": true,
+				"headerContextualCommands": [
+					"SizeColumnToFit", "SortAToZ", "SortZToA",
+					{
+						"text":"EditViewPreferences",
+						"command":"EditViewPreferencesCmd"
+					},
+					{
+						"text": "CapableResourceAdd",
+						"command": "SearchAndAddCommand"
+					},
+					{
+						"text": "CapableResourceBL",
+						"command": "CapableResourceBL"
+					}
+				],
+				"contextualCommands": [
+					{
+						"text": "Relations",
+						"command": "Relations"
+					},
+					"SEPARATOR",
+					{
+						"text": "CapableResourceAdd",
+						"command": "SearchAndAddCommand"
+					},
+					{
+						"text": "CapableResourceBL",
+						"command": "CapableResourceBL"
+					},
+					{
+						"text": "CapableResourceRemove",
+						"command": "ActionRemove"
+					}
+				],
+				"toolTipConfigXML" : "toolTipConfigXML"
+			}
+		},
+		"columnConfigName": "CAPRESOURCE.columnConfigPath",
+		"registerViewPreference": true
+	},
+
+	"ORIGIN": {
+		"moduleIcon": "ActionOrigin",
+		"relatedCmdId": "Origin",
+		"pprTypes": ["PROCESS"],
+		"linkTypes": ["HistorizationLinkRefRef"],
+		"dragDropManager": "WUXActionDragDrop",
+		"views": {
+			"treeListView": {
+				"enableDragAndDrop": true,
+				"showTagger": true,
+				"headerContextualCommands": [
+					"SizeColumnToFit", "SortAToZ", "SortZToA",
+					{
+						"text":"EditViewPreferences",
+						"command":"EditViewPreferencesCmd"
+					},
+					{
+						"text": "OriginAdd",
+						"command": "SearchAndAddCommand"
+					}
+				],
+				"contextualCommands": [
+					{
+						"text": "Relations",
+						"command": "Relations"
+					},
+					"SEPARATOR",
+					{
+						"text": "OriginAdd",
+						"command": "SearchAndAddCommand"
+					},
+					{
+						"text": "OriginRemove",
+						"command": "ActionRemove"
+					}
+				],
+				"toolTipConfigXML" : "toolTipConfigXML"
+			}
+		},
+		"columnConfigName": "ORIGIN.columnConfigPath",
+		"registerViewPreference": true
+	},
+
+	"ALTERNATE": {
+		"moduleIcon": "ActionAlternates",
+		"relatedCmdId": "Alternates",
+		"pprTypes": ["PROCESS"],
+		"linkTypes": ["MfgProcessAlternate"],
+		"dragDropManager": "WUXActionDragDrop",
+		"views": {
+			"treeListView": {
+				"enableDragAndDrop": true,
+				"showTagger": true,
+				"headerContextualCommands": [
+					"SizeColumnToFit", "SortAToZ", "SortZToA",
+					{
+						"text":"EditViewPreferences",
+						"command":"EditViewPreferencesCmd"
+					},
+					{
+						"text": "AlternateAdd",
+						"command": "SearchAndAddCommand"
+					},
+					{
+						"text": "AlternateBL",
+						"command": "AlternateBL"
+					}
+				],
+				"contextualCommands": [
+					{
+						"text": "Relations",
+						"command": "Relations"
+					},
+					"SEPARATOR",
+					{
+						"text": "AlternateAdd",
+						"command": "SearchAndAddCommand"
+					},
+					{
+						"text": "AlternateBL",
+						"command": "AlternateBL"
+					},
+					{
+						"text": "AlternateRemove",
+						"command": "ActionRemove"
+					}
+				],
+				"toolTipConfigXML" : "toolTipConfigXML"
+			}
+		},
+		"columnConfigName": "ALTERNATE.columnConfigPath",
+		"registerViewPreference": true
+	},
+
+	"AUXILIARY": {
+		"withLinksResolved": false,
+		"registerRoots": true,
+		"addToAuxIfNotAcceptedType": true,
+		"pprTypes": ["PROCESS", "PRODUCT", "PART"],
+		"linkTypes": ["ProductImplementLink", "ProcessImplementLink"],
+		"displayBadge": {
+			"linkType": "ProductImplementLink",
+			"badgeIcon": "Scope"
+		},
+		"views": {
+			"treeListView": {
+				"enableDragAndDrop": true,
+				"showTagger": true,
+				"showSelection": true,
+				"headerContextualCommands": [ "SizeColumnToFit", "SortAToZ", "SortZToA"],
+				"contextualCommands": [
+					"ActionBar_Attributes", "Relations",
+					"SEPARATOR",
+					"ExpandAll", "Hide", "Refresh", "ExploreInWebApp"
+				]
+			}
+		},
+		"columnConfigName": "AUXILIARY.columnConfigPath"
+	},
+
+	"IMPLEMENTMOD" : {
+		"pprTypes" : [],
+		"linkTypes": [],
+		"views": {
+			"treeListView": {
+				"showSelection": false,
+				"selection": {
+					"canMultiSelect": false,
+					"enableListSelection": false
+				},
+				"contextualCommands": []
+			}
+		},
+		"columnConfigName": "IMPLEMENTMOD.columnConfigPath"
+	},
+
+	"MFGSTRUCTUREMOD": {
+		"pprTypes" : [],
+		"linkTypes": [],
+		"views": {
+			"treeListView": {
+				"showSelection": false,
+				"selection": {
+					"canMultiSelect": false,
+					"enableListSelection": false
+				},
+				"contextualCommands": []
+			}
+		},
+		"columnConfigName": "MFGSTRUCTUREMOD.columnConfigPath"
+	},
+
+	"DOCUMENTSMOD" : {
+		"pprTypes": ["PROCESS"]
+	}
+}

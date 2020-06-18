@@ -1,0 +1,13 @@
+m|MPFComponents\MPFTooltip.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFTooltip\MPFTooltip.js|1540605189|339
+s|MPFComponents\MPFTooltip.mweb\src\MPFTooltip.js|1510323010|0
+s|MPFComponents\MPFTooltip.mweb\src\Tooltip.js|1531215440|692
+t|win_b64\webapps\MPFTooltip\MPFTooltip.css|1568749453|59
+g|MPFComponents\MPFTooltip.mweb\LocalGenerated\win_b64\MPFTooltip.css|1531550742|1451
+t|MPFComponents\MPFTooltip.mweb\LocalGenerated\win_b64\MPFTooltip.css|1531550742|1451
+s|MPFComponents\MPFTooltip.mweb\src\MPFTooltip.scss|1510323202|103
+s|WebUiAssets\ProtectedInterfaces\_variables.uikit.scss|1513852502|5361

@@ -1,0 +1,1 @@
+define("DS/MPFNoticeComponent/MPFNoticeComponent_zh",{});define("DS/MPFNoticeComponent/assets/nls/NoticeComponent",{importantNotice:"重要通知"});

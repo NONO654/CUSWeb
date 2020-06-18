@@ -1,0 +1,18 @@
+<probe unplug="true">
+  <name>MySampleDotnetProbe</name>
+ <parameters>
+    <parameter name="url" optional="false" multiple="false">
+      <param-description>URL which the probe will try to connect to</param-description>
+    </parameter>
+    <parameter name="pattern" optional="false" multiple="false">
+      <param-description>
+        A pattern the probe will use to check the result.
+        If the content of the URL matches the pattern then the test is considered successful.
+      </param-description>
+    </parameter>
+  </parameters>
+  <implementation type="dotnet">
+	<class>MySampleProbe.MySampleProbeClass</class>
+	<dll>MySampleProbe</dll>
+  </implementation>
+</probe>

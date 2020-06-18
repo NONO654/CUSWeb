@@ -1,0 +1,1 @@
+define("DS/DELMOMWKIExperience/DELMOMWKIExperience_de",{});define("DS/DELMOMWKIExperience/assets/nls/DELMOMWKIExperience",{ViewsLbl:"Ansichten",NoViewsLbl:"Keine Anzeigen",NoViewsOperLbl:"Keine Anzeigen zur Operation"});

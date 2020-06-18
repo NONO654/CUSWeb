@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2017 , Dassault Systemes. All rights reserved. -->
+  <head>
+    <title>Company Addresses</title>
+    <meta name="description" content="Form to create the company for the private Marketplace" />
+    <meta name="keywords" content="Marketplace Enterprise" />
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+    <link rel="stylesheet" type="text/css" href="../MP3DPWAPConfig/assets/css/MP3DPWAP.css" />
+    <script>
+      require([
+        'DS/MPFCompanyComponent/CompanyAddressesWidget'
+      ], function (CompanyAddressesWidget) {
+        'use strict';
+
+        var companyAddressesWidget;
+
+        widget.addEvent('onLoad', function () {
+          companyAddressesWidget = new CompanyAddressesWidget({
+            container: widget.body,
+            displayBack: widget.getValue('displayBack'),
+            displayFinish: widget.getValue('displayFinish'),
+            displayNext: widget.getValue('displayNext'),
+            topic: widget.getValue('companyTopic')
+          });
+        });
+
+        widget.addEvent('onShow', function () {
+          companyAddressesWidget.onShow();
+        });
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

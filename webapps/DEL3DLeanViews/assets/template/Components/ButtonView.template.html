@@ -1,0 +1,13 @@
+<% if (typeof(icon) !== 'undefined' || typeof(iconChecked) !== 'undefined') { %>
+  <div class="buttonIcon">
+    <% if (typeof(icon) !== 'undefined') { %>
+    <img class="buttonIconImage <% if (typeof(iconChecked) === 'undefined' && mode !== 'button' && autoStyle === true) { %>autoStyle<% } %>" src="<%- buttonIconPath %>/<%- icon %>">
+    <% } if (typeof(iconChecked) !== 'undefined') { %>
+    <img class="buttonIconImage checked" src="<%- buttonIconPath %>/<%- iconChecked %>" >
+    <% } %>
+  </div>
+<% } if (typeof(title) !== 'undefined') { %>
+  <div class="buttonTitle">
+    <%- title %>
+  </div>
+<% } %>

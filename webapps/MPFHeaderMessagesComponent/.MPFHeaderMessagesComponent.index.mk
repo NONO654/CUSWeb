@@ -1,0 +1,10 @@
+m|MPFComponents\MPFHeaderMessagesComponent.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.0.18209
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFHeaderMessagesComponent\MPFHeaderMessagesComponent.js|1531550866|461
+s|MPFComponents\MPFHeaderMessagesComponent.mweb\src\MPFHeaderMessagesComponent.js|1508490149|0
+s|win_b64\code\toolcmds\jscompressor.bat|1531520632|41
+s|MPFComponents\MPFHeaderMessagesComponent.mweb\src\HeaderErrorMessagesComponent.js|1508489898|817
+s|win_b64\code\toolcmds\mkwebconcat.bat|1531520632|287

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="PLMHVACLogical" />
+    <m1.package name="PLMHVACLogical" />
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="HVAC_Line_Extension" />
+      <m1.interface name="HVAC_Line_Extension" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_DuctSpecification" />
+        <m1.attribute name="HVAC_Line_Extension.V_DuctSpecification" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_EquivalentDiameter" />
+        <m1.attribute name="HVAC_Line_Extension.V_EquivalentDiameter" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Fluid" />
+        <m1.attribute name="HVAC_Line_Extension.V_Fluid" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_InsulationSpecification" />
+        <m1.attribute name="HVAC_Line_Extension.V_InsulationSpecification" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_OperationPressure" />
+        <m1.attribute name="HVAC_Line_Extension.V_OperationPressure" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_OperationTemperature" />
+        <m1.attribute name="HVAC_Line_Extension.V_OperationTemperature" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Standard" />
+        <m1.attribute name="HVAC_Line_Extension.V_Standard" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_SubType" />
+        <m1.attribute name="HVAC_Line_Extension.V_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="HVAC_Logical_Duct_Extension" />
+      <m1.interface name="HVAC_Logical_Duct_Extension" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_IsFlexible" />
+        <m1.attribute name="HVAC_Logical_Duct_Extension.V_IsFlexible" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_SubType" />
+        <m1.attribute name="HVAC_Logical_Duct_Extension.V_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="HVAC_Logical_Part_Extension" />
+      <m1.interface name="HVAC_Logical_Part_Extension" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_HvaLog_PartType" />
+        <m1.attribute name="HVAC_Logical_Part_Extension.V_HvaLog_PartType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_SubType" />
+        <m1.attribute name="HVAC_Logical_Part_Extension.V_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="HVAC_Logical_Port_Extension" />
+      <m1.interface name="HVAC_Logical_Port_Extension" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_EquivalentDiameter" />
+        <m1.attribute name="HVAC_Logical_Port_Extension.V_EquivalentDiameter" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_SubType" />
+        <m1.attribute name="HVAC_Logical_Port_Extension.V_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="HVAC_Logical_Port_Entity" />
+      <m1.type name="HVAC_Logical_Port_Entity" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="HVAC_Logical_Instance_Entity" />
+      <m1.relationship name="HVAC_Logical_Instance_Entity" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_HLE_TagNumber" />
+        <m1.attribute name="HVAC_Logical_Instance_Entity.V_HLE_TagNumber" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="HVAC_Logical_Port" />
+      <m1.type name="HVAC_Logical_Port" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_EquivalentDiameter" />
+        <m1.attribute name="HVAC_Logical_Port.V_EquivalentDiameter" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_SubType" />
+        <m1.attribute name="HVAC_Logical_Port.V_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="HVAC_Logical_Port_End1" />
+      <m1.type name="HVAC_Logical_Port_End1" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMPort name="HVAC_Logical_Port_End2" />
+      <m1.type name="HVAC_Logical_Port_End2" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="HVAC_Line_Inst" />
+      <m1.relationship name="HVAC_Line_Inst" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="HVAC_Logical_Duct_Inst" />
+      <m1.relationship name="HVAC_Logical_Duct_Inst" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_DuctSpecification" />
+        <m1.attribute name="HVAC_Logical_Duct_Inst.V_DuctSpecification" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_EquivalentDiameter" />
+        <m1.attribute name="HVAC_Logical_Duct_Inst.V_EquivalentDiameter" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_PredefinedPartNumber" />
+        <m1.attribute name="HVAC_Logical_Duct_Inst.V_PredefinedPartNumber" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_PredefinedPartType" />
+        <m1.attribute name="HVAC_Logical_Duct_Inst.V_PredefinedPartType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Standard" />
+        <m1.attribute name="HVAC_Logical_Duct_Inst.V_Standard" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="HVAC_Logical_Part_Inst" />
+      <m1.relationship name="HVAC_Logical_Part_Inst" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_DuctSpecification" />
+        <m1.attribute name="HVAC_Logical_Part_Inst.V_DuctSpecification" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_EquivalentDiameter" />
+        <m1.attribute name="HVAC_Logical_Part_Inst.V_EquivalentDiameter" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_PredefinedPartNumber" />
+        <m1.attribute name="HVAC_Logical_Part_Inst.V_PredefinedPartNumber" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_PredefinedPartType" />
+        <m1.attribute name="HVAC_Logical_Part_Inst.V_PredefinedPartType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Standard" />
+        <m1.attribute name="HVAC_Logical_Part_Inst.V_Standard" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="HVAC_Logical_Reference_Entity" />
+      <m1.type name="HVAC_Logical_Reference_Entity" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="HVAC_Logical_Branch_Inst" />
+      <m1.relationship name="HVAC_Logical_Branch_Inst" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="HVAC_Logical_Damper_Inst" />
+      <m1.relationship name="HVAC_Logical_Damper_Inst" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="HVAC_Logical_Instrument_Inst" />
+      <m1.relationship name="HVAC_Logical_Instrument_Inst" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="HVAC_Logical_Miscellaneous_Inst" />
+      <m1.relationship name="HVAC_Logical_Miscellaneous_Inst" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="HVAC_Logical_Reducer_Inst" />
+      <m1.relationship name="HVAC_Logical_Reducer_Inst" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="HVAC_Line" />
+      <m1.type name="HVAC_Line" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_DuctSpecification" />
+        <m1.attribute name="HVAC_Line.V_DuctSpecification" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_EquivalentDiameter" />
+        <m1.attribute name="HVAC_Line.V_EquivalentDiameter" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Fluid" />
+        <m1.attribute name="HVAC_Line.V_Fluid" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_InsulationSpecification" />
+        <m1.attribute name="HVAC_Line.V_InsulationSpecification" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_OperationPressure" />
+        <m1.attribute name="HVAC_Line.V_OperationPressure" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_OperationTemperature" />
+        <m1.attribute name="HVAC_Line.V_OperationTemperature" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Standard" />
+        <m1.attribute name="HVAC_Line.V_Standard" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_SubType" />
+        <m1.attribute name="HVAC_Line.V_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="HVAC_Logical_Duct" />
+      <m1.type name="HVAC_Logical_Duct" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_IsFlexible" />
+        <m1.attribute name="HVAC_Logical_Duct.V_IsFlexible" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_SubType" />
+        <m1.attribute name="HVAC_Logical_Duct.V_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="HVAC_Logical_Part" />
+      <m1.type name="HVAC_Logical_Part" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_SubType" />
+        <m1.attribute name="HVAC_Logical_Part.V_SubType" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="HVAC_Logical_Branch" />
+      <m1.type name="HVAC_Logical_Branch" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="HVAC_Logical_Damper" />
+      <m1.type name="HVAC_Logical_Damper" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="HVAC_Logical_Instrument" />
+      <m1.type name="HVAC_Logical_Instrument" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_HLE_Location" />
+        <m1.attribute name="HVAC_Logical_Instrument.V_HLE_Location" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_HLE_MeasuredMagnitude" />
+        <m1.attribute name="HVAC_Logical_Instrument.V_HLE_MeasuredMagnitude" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_HLE_MeasuredModifier" />
+        <m1.attribute name="HVAC_Logical_Instrument.V_HLE_MeasuredModifier" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_HLE_OutputFunction" />
+        <m1.attribute name="HVAC_Logical_Instrument.V_HLE_OutputFunction" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_HLE_ReadoutFunction" />
+        <m1.attribute name="HVAC_Logical_Instrument.V_HLE_ReadoutFunction" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_HLE_ReadoutModifier" />
+        <m1.attribute name="HVAC_Logical_Instrument.V_HLE_ReadoutModifier" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="HVAC_Logical_Miscellaneous" />
+      <m1.type name="HVAC_Logical_Miscellaneous" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="HVAC_Logical_Reducer" />
+      <m1.type name="HVAC_Logical_Reducer" />
+
+    </pattern.VPLM_CLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

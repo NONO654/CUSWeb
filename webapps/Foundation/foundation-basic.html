@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <title>Enovia Widget</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--  Libraries -->
+    <link rel="stylesheet" type="text/css" href="../VENENO6WPlugins/plugins/jqueryui/latest/css/cupertino/jquery.ui.custom.min.css">
+    <link href="../VENENO6WPlugins/plugins/dynatree/latest/skin-vista/ui.dynatree.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../VENENO6WPlugins/plugins/contextmenu/latest/jquery.contextMenu.css" />
+    <script src="../VENENO6WPlugins/plugins/jquery/latest/jquery.js"></script>
+    <script src="../VENENO6WPlugins/plugins/jqueryui/latest/js/jquery.ui.custom.min.js"></script>
+    <script src="../VENENO6WPlugins/plugins/dynatree/latest/jquery.dynatree.min.js"></script>
+    <script src="../VENENO6WPlugins/plugins/highchart/latest/js/highcharts.js"></script>
+    <script src="../VENENO6WPlugins/plugins/contextmenu/latest/jquery.contextMenu.js"></script>
+
+    <!-- UWA 2 Libraries  -->
+    <script src="../AmdLoader/AmdLoader.js"></script>
+    <!-- This must not be included as it impacts list widget styling. -->
+    <!-- <script src="../c/UWA/js/UWA_Standalone_Alone.js"></script>  -->
+
+    <!--  Our code -->
+    <link rel="stylesheet" type="text/css" href="./Foundation.css" />
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+</head>
+
+<body>
+    <div id="widgetPageBody">
+        <div id="widgetContent"></div>
+        <script type="text/javascript">
+        /*global require*/
+        /*global WidgetConstants*/
+
+        /* WidgetPreferences must be included here as it cant be added in WidgetTemplate due to circular dependency on widget apis. */
+        require(['DS/UIKIT/UIKIT', 'DS/Foundation/WidgetUwaUtils', 'DS/Foundation/WidgetEngine', 'DS/Foundation/WidgetAPIs','DS/Foundation/WidgetUtils', 'DS/ENO6WPlugins/jQuery', 'DS/Foundation/WidgetPreferences'],   //required modules 
+                function(UIKit, WidgetUwaUtils, WidgetEngine, WidgetAPIs, WidgetUtils, jQuery, WidgetPreferences) {
+        	'use strict';
+            jQuery.noConflict();
+            window.isIFWE = false;
+            var e6wUrl = location.href,
+                widgetName = location.search.match(/[?&]e6w-widget=([^&]*)?/);
+
+            widgetName = (widgetName ? widgetName[1] || "" : "");
+            e6wUrl = e6wUrl.substring(0, e6wUrl.indexOf('/webapps'));
+            var date =  new Date();
+            var timezone = date.getTimezoneOffset();
+            window.enoviaServer = {
+                params: location.search.substring(1),
+                timezone: timezone,
+                _getUrl: function() {
+                    return e6wUrl;
+                },
+                getParams: function() {
+                    return this.params;
+                },
+                computeUrl: function(suffix) { //bcc: for better testing please do not access getUrl directly but use this method
+                    return this._getUrl() + suffix;
+                }
+            };
+
+            function load() {
+                var initObj = {
+                    name: widgetName,
+                    div: "widgetContent",
+                    params: window.enoviaServer.getParams()
+                };
+                WidgetEngine.widget(initObj).init();
+                /*commented as this is setting a fixed  width for the widget, channel UI Homepage incase of ios12*/
+                /* if (WidgetUtils.getTopWindow().isMobile) {
+                    jQuery('#widgetPageBody').width(jQuery('#widgetPageBody').width() - 2);
+
+                } */
+            }
+            if (typeof window.WidgetConstants === "object") {
+                load();
+            } else {
+                window.WidgetConstants = {
+                    str: {
+                        language: navigator.language || navigator.userLanguage
+                    }
+                };
+                if (widgetName === "DPG_DeliverablesPlanning") {
+                    //for now, just check widget name; perhaps should be unique html.
+                    WidgetAPIs.getWidgetConstants("DPG_WIDGET_CONSTANTS", load);
+                } else {
+                    WidgetAPIs.getWidgetConstants("E6W_WIDGET_CONSTANTS", load);
+                }
+            }
+        });
+        </script>
+    </div>
+</body>
+
+</html>

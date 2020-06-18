@@ -1,0 +1,31 @@
+Let myObject(Feature)
+Let maturity(Feature)
+Let title(Feature)
+Let priority(Feature)
+
+Let reportMaturity(Feature)
+
+Let maturityValue(List)
+Let authorizedForPriority(List)
+Let maturityVal(String)
+
+
+Trace(1,"Begin requirement prop BL")
+
+Parameters.Message = "ça fonctionne !!"
+Parameters.Severity = 3
+
+set maturity = ThisObject.GetAttributeObject("attr_current")
+set title = ThisObject.GetAttributeObject("attr_Title")
+set priority = ThisObject.GetAttributeObject("attr_Priority")
+set maturityVal = ThisObject.GetAttributeString("current")
+
+
+set reportMaturity = title.GetAttributeObject("report")
+reportMaturity.SetAttributeString("message", "informa") 
+reportMaturity.SetAttributeInteger("severity", 3) 
+
+ThisObject.Title= "ahah" + ThisObject.Title
+
+
+Trace(1,"Maturity : " + maturityVal)

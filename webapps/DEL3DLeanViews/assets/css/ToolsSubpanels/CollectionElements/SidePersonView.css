@@ -1,0 +1,126 @@
+.sidePersonView
+{
+    height: 8%;
+    width: 98%;
+    position: absolute;
+}
+.sidePersonView.animateScroll
+{
+    transition: top .3s ease-out;
+}
+.sidePersonView.canDrag
+{
+    z-index: 60;
+}
+.sidePersonContainer {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 5em;
+
+    /* Because we can toggle availability by clicking this div */
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.sidePersonThumbnailContainer {
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    float: left;
+}
+
+/**
+*	Availability indicator
+*/
+.sidePersonThumbnailContainer:before {
+    content: ' ';
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+}
+
+/**
+*	Available
+*/
+.sidePersonContainer.available .sidePersonThumbnailContainer:before {
+    background:  #60a545;
+}
+
+/**
+*	Unavailable
+*/
+.sidePersonContainer.unavailable .sidePersonThumbnailContainer:before {
+    background:  #d25732;
+}
+
+.sidePersonContainer > .sidePersonThumbnailContainer > img.sidePersonThumbnail {
+    height: 100%;
+    float: left;
+    margin-right: 0;
+    transition: margin .3s ease-in-out;
+    border-radius: 50%;
+    background: white;
+    max-width: 5.7em;
+    min-width: 4.2em;
+    position: relative;
+
+    /*	Prevent drag and select of this image */
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.sidePersonContainer > .sidePersonInfoContainer {
+    height: 100%;
+    margin-left: 5%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidePersonContainer > .sidePersonInfoContainer > .sidePersonFullName {
+    font-weight: bold;
+    margin-top: 3%;
+    margin-left: 5%;
+}
+
+.sidePersonContainer > .sidePersonInfoContainer > .sidePersonEmployment {
+    color: gray;
+    font-size: smaller;
+    line-height: 200%;
+    margin-left: 5%;
+    min-height: 40%;
+}
+
+/** Person **/
+.sidePersonContainer.person > .sidePersonInfoContainer > .sidePersonFullName {
+    color: #005685;
+}
+
+.sidePersonView .person {
+    background-color: #c1c8d4;
+}
+
+/** Session **/
+.sidePersonContainer.session > .sidePersonInfoContainer > .sidePersonFullName {
+    color: #585858;
+}
+
+.sidePersonView .session {
+    background-color: #c7c7c7;
+}
+
+/** To remove when availability implemented on sessions **/
+.session .sidePersonThumbnailContainer:before
+{
+    content: none;
+}

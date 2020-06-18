@@ -1,0 +1,375 @@
+// ===========================================================
+// PACKAGE   : CATSysBehaviorLibrary Model
+// ===========================================================
+// Generated : Fri Dev  12 11:59:13 2008
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value
+//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+
+// WARNING : this modeler can not be customized, so this mask is used for both VPM and SMB env.
+//For SMB this is the sub-class of attribute, they have to be always presented to user in that order
+
+MASK DEFAULT
+
+// 3 entities :
+// - CATSysBehaviorLibReference
+// - CATSysBehaviorLibRepReference
+// - CATSysBehaviorLibRepInstance
+
+// ===========================================================
+ENTITY CATSysBehaviorLibReference
+// ===========================================================
+// --- attributes: 16
+ATTR V_Name;N;N;$
+ATTR E_fromExternalId;N;N;$
+ATTR E_versionComment;N;N;$
+ATTR PLM_ExternalID;N;N;$
+ATTR V_LibraryId;N;N;$
+ATTR V_LibraryVersion;N;N;$
+ATTR V_description;N;N;$
+ATTR majorrevision;N;N;$
+ATTR current;N;N;$
+ATTR owner;Y;N;$
+//ATTR V_discipline;Y;Y;$
+ATTR V_discipline;Y;N;$
+//VALUE Behavior_Continuous
+//VALUE Behavior_Discrete
+//VALUE Picture
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_description;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR V_LibraryId;Y
+FATTR V_LibraryVersion;Y
+FATTR E_versionComment;Y
+FATTR V_description;Y
+FATTR V_discipline;Y
+FATTR reservedby;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR PLM_ExternalID;Y
+FATTR E_fromExternalId;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR V_LibraryId;Y
+FATTR V_LibraryVersion;Y
+FATTR V_description;Y
+FATTR V_discipline;Y
+FATTR majorrevision;Y
+FATTR E_versionComment;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR reservedby;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR PLM_ExternalID;Y
+FATTR E_fromExternalId;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+FATTR PLM_ExternalID;N
+FATTR V_LibraryId;N
+FATTR V_LibraryVersion;N
+FATTR V_description;N
+FATTR V_discipline;N
+FATTR majorrevision;N
+FATTR E_versionComment;N
+FATTR current;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+FATTR E_fromExternalId;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+//FATTR PLM_ExternalID;N
+FATTR V_Name;N
+FATTR V_LibraryId;N
+FATTR V_LibraryVersion;N
+FATTR majorrevision;N
+FATTR current;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_LibraryId;N
+FATTR V_LibraryVersion;N
+FATTR V_description;Y
+FATTR V_discipline;N
+FATTR majorrevision;N
+FATTR E_versionComment;Y
+FATTR current;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+FATTR E_fromExternalId;N
+// - unordered
+
+// ===========================================================
+ENTITY CATSysBehaviorLibRepReference
+// ===========================================================
+// --- attributes: 14
+ATTR V_Name;N;N;$
+ATTR E_fromExternalId;N;N;$
+ATTR E_versionComment;N;N;$
+ATTR PLM_ExternalID;N;N;$
+ATTR V_LibraryId;N;N;$
+ATTR V_LibraryVersion;N;N;$
+ATTR V_description;N;N;$
+ATTR majorrevision;N;N;$
+ATTR current;N;N;$
+ATTR owner;Y;N;$
+//ATTR V_discipline;Y;Y;$
+ATTR V_discipline;Y;N;$
+//VALUE Behavior_Continuous
+//VALUE Behavior_Discrete
+//VALUE Picture
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_description;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR V_LibraryId;Y
+FATTR V_LibraryVersion;Y
+FATTR V_description;Y
+FATTR V_discipline;Y
+FATTR reservedby;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR PLM_ExternalID;Y
+FATTR E_fromExternalId;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR V_LibraryId;Y
+FATTR V_LibraryVersion;Y
+FATTR V_description;Y
+FATTR V_discipline;Y
+FATTR majorrevision;Y
+FATTR E_versionComment;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR reservedby;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR PLM_ExternalID;Y
+FATTR E_fromExternalId;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+FATTR PLM_ExternalID;N
+FATTR V_LibraryId;N
+FATTR V_LibraryVersion;N
+FATTR V_description;N
+FATTR V_discipline;N
+FATTR majorrevision;N
+FATTR E_versionComment;N
+FATTR current;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+FATTR E_fromExternalId;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+//FATTR PLM_ExternalID;N
+FATTR V_Name;N
+FATTR V_LibraryId;N
+FATTR V_LibraryVersion;N
+FATTR majorrevision;N
+FATTR current;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_LibraryId;N
+FATTR V_LibraryVersion;N
+FATTR V_description;Y
+FATTR V_discipline;N
+FATTR majorrevision;N
+FATTR E_versionComment;Y
+FATTR current;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+FATTR E_fromExternalId;N
+// - unordered
+
+// ===========================================================
+ENTITY CATSysBehaviorLibRepInstance
+// ===========================================================
+// --- attributes: 9
+ATTR V_Name;N;N;$
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_description;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR reservedby;Y
+FATTR originated;Y
+FATTR modified;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+FATTR reservedby;Y
+FATTR originated;Y
+FATTR modified;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_description;Y
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+
+// ===========================================================
+// End of CATSysBehaviorLibrary Model package's DEFAULT mask file
+// ===========================================================

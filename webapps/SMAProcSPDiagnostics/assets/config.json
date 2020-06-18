@@ -1,0 +1,63 @@
+{
+	"$include": ["sp", "cmp", "ps", "xs", "ra"],
+	"$about": {
+		"name": "about",
+		"version": "0.1.5",
+		"title": "Diagnostics and Test Widget - Alpha",
+		"date": "8/27/2018",
+		"notes": "Alpha - Milestone-1 (2018x FD06)",
+		"comments": "ODTs added"
+	},
+
+	"settings": [
+		{
+			"name": "recordConsole_ignoreContent",
+			"caption": "ignore content in recordConsole",
+			"on": "false"
+		}
+	],
+
+	"context": [
+		{
+			"name": "mcs",
+			"$onLoad": {
+				"mcsurl": "${widget.uwaUrl.match(/https?:\\/\\/[\\w-.:]*\\/[\\w]*/)[0]}",
+				"rooturl": "${ctx.mcs.mcsurl}/resources/slmservices",
+				"e6w": "${ctx.mcs.mcsurl}/resources/e6w/service",
+				"eepurl": "${ctx.mcs.mcsurl}/resources/eepservices",
+				"server": "${window.location.origin.split(/\\/\\//)[1].split(/\\./)[0]}",
+				"platform": "${widget.data.x3dPlatformId}"
+			}
+		},
+		{
+			"name": "cos",
+			"$onLoad": {
+				"rooturl": "this.rooturl || ctx.mcs.mcsurl + '/SMAExeServer-REST'",
+				"pvtStnPort": "this.pvtStnPort || '35125'",
+				"pvt_stn_url": "this.pvt_stn_url || `https://localhost:${this.pvtStnPort}/SMAExeStation-REST/station`",
+				"id": "3DOrchestrate.Server"
+			}
+		}
+	],
+
+	"scenarios": [
+		{
+			"name": "sp_FetchDefaults",
+			"sequence": [
+				"getCollabSpaces", "getCOSConfig", "getCSRFToken"
+			],
+			"odt": {
+				"odt_enabled": true
+			}
+		}
+	],
+
+	"mcs": [],
+
+	"cos":[],
+
+	"experiments": [],
+
+	"sensors": []
+
+}

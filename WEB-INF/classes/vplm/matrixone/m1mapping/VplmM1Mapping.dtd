@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!ELEMENT  mapping (pattern.VPLM_PACKAGE|((pattern.VPLM_CLASS|pattern.VPLM_EXTENSION|pattern.VPLM_REL|pattern.VPLM_RELATIONCLASS|pattern.VPLM_RELATIONSHIP|pattern.VPLM_RELATIONSHIP_END|pattern.VPLM_CLASS_EXTERNAL|pattern.VPLM_DISCIPLINE_CLASS|pattern.VPLM_DISCIPLINE_EXTENSION|pattern.VPLM_DISCIPLINE_REL|pattern.VPLM_UNIQUEKEY|pattern.VPLM_DIMENSION|pattern.VPLM_PATHTYPE|pattern.VPLM_FLATTABLE)*))>
+<!ELEMENT  pattern.VPLM_PACKAGE   (vplm.Package,m1.package,(pattern.VPLM_CLASS|pattern.VPLM_EXTENSION|pattern.VPLM_REL|pattern.VPLM_RELATIONCLASS|pattern.VPLM_RELATIONSHIP|pattern.VPLM_RELATIONSHIP_END|pattern.VPLM_CLASS_EXTERNAL|pattern.VPLM_DISCIPLINE_CLASS|pattern.VPLM_DISCIPLINE_EXTENSION|pattern.VPLM_DISCIPLINE_REL|pattern.VPLM_UNIQUEKEY|pattern.VPLM_DIMENSION|pattern.VPLM_PATHTYPE|pattern.VPLM_FLATTABLE)*)>
+<!ELEMENT  pattern.VPLM_CLASS     ((vplm.Class|vplm.PLMConnection|vplm.PLMCoreInstance|vplm.PLMCoreReference|vplm.PLMCoreRepInstance|vplm.PLMCoreRepReference|vplm.PLMPort),m1.type,pubsub?,(pattern.VPLM_BASIC_CONCAT|pattern.VPLM_SIMPLE|pattern.VPLM_SIMPLE_BASIC|pattern.VPLM_SIMPLE_MULTIVALUATED|pattern.VPLM_SIMPLE_CONSTANT|pattern.VPLM_VOLATILE|pattern.VPLM_RELATIONSHIP|pattern.VPLM_PATHTYPE|external)*)>
+<!ELEMENT  pattern.VPLM_EXTENSION (vplm.Extension,m1.interface,(pattern.VPLM_BASIC_CONCAT|pattern.VPLM_SIMPLE|pattern.VPLM_SIMPLE_BASIC|pattern.VPLM_SIMPLE_MULTIVALUATED|pattern.VPLM_SIMPLE_CONSTANT|pattern.VPLM_VOLATILE|external)*)>
+<!ELEMENT  pattern.VPLM_REL       ((vplm.Class|vplm.PLMConnection|vplm.PLMCoreInstance|vplm.PLMCoreReference|vplm.PLMCoreRepInstance|vplm.PLMCoreRepReference|vplm.PLMPort),m1.relationship,pubsub?,(pattern.VPLM_BASIC_CONCAT|pattern.VPLM_SIMPLE|pattern.VPLM_SIMPLE_BASIC|pattern.VPLM_SIMPLE_MULTIVALUATED|pattern.VPLM_SIMPLE_CONSTANT|pattern.VPLM_VOLATILE|pattern.VPLM_RELATIONSHIP|pattern.VPLM_RELATIONSHIP_END|pattern.VPLM_CBP_SR|pattern.VPLM_PATHTYPE|external)*)>
+<!ELEMENT  pattern.VPLM_RELATIONCLASS ((vplm.RelationClass|vplm.PLMConnection|vplm.PLMCoreInstance|vplm.PLMCoreReference|vplm.PLMCoreRepInstance|vplm.PLMCoreRepReference|vplm.PLMPort),m1.relationship,pubsub?,(pattern.VPLM_BASIC_CONCAT|pattern.VPLM_SIMPLE|pattern.VPLM_SIMPLE_BASIC|pattern.VPLM_SIMPLE_MULTIVALUATED|pattern.VPLM_SIMPLE_CONSTANT|pattern.VPLM_VOLATILE|pattern.VPLM_RELATIONSHIP|pattern.VPLM_RELATIONSHIP_END|pattern.VPLM_CBP_SR|pattern.VPLM_PATHTYPE|external)*)>
+<!ELEMENT  pattern.VPLM_PATHTYPE             (vplm.PathType,m1.pathtype,(pattern.VPLM_SIMPLE|pattern.VPLM_SIMPLE_BASIC)*)>
+<!ELEMENT  pattern.VPLM_CLASS_EXTERNAL ((vplm.Class|vplm.PLMConnection|vplm.PLMCoreInstance|vplm.PLMCoreReference|vplm.PLMCoreRepInstance|vplm.PLMCoreRepReference|vplm.PLMPort),(external)*)>
+<!ELEMENT  pattern.VPLM_RELATIONSHIP     (vplm.Relationship,m1.relationship)>
+<!ELEMENT  pattern.VPLM_RELATIONSHIP_END (vplm.Relationship,m1.relationship)>
+<!ELEMENT  pattern.VPLM_CBP_SR (vplm.SubRelationship,m1.relationship)>
+<!ELEMENT  pattern.VPLM_SIMPLE (vplm.Simple,m1.attribute,conversion?)>
+<!ELEMENT  pattern.VPLM_SIMPLE_MULTIVALUATED (vplm.Simple,m1.attribute,m1.relationship,conversion?)>
+<!ELEMENT  pattern.VPLM_SIMPLE_BASIC (vplm.Simple,m1.basic,conversion?)>
+<!ELEMENT  pattern.VPLM_BASIC_CONCAT (vplm.Context.Simple*,vplm.Simple+,m1.basic)>
+<!ELEMENT  pattern.VPLM_SIMPLE_CONSTANT (vplm.Simple,m1.constant)>
+<!ELEMENT  pattern.VPLM_VOLATILE (vplm.Volatile,m1.attribute)>
+<!ELEMENT  pattern.VPLM_DISCIPLINE_CLASS     (vplm.Discipline,m1.type)>
+<!ELEMENT  pattern.VPLM_DISCIPLINE_EXTENSION (vplm.Discipline,m1.interface)>
+<!ELEMENT  pattern.VPLM_DISCIPLINE_REL       (vplm.Discipline,m1.relationship)>
+<!ELEMENT  pattern.VPLM_UNIQUEKEY            (vplm.UniqueKey,m1.uniquekey)>
+<!ELEMENT  pattern.VPLM_DIMENSION            (vplm.Dimension,m1.dimension,(pattern.VPLM_UNIT)*)>
+<!ELEMENT  pattern.VPLM_UNIT                 (vplm.Unit,m1.unit)>
+<!ELEMENT  pattern.VPLM_FLATTABLE            (vplm.FlatTable,m1.flattabletype,(pattern.VPLM_COLUMN)*,(pattern.VPLM_INDEX)*)>
+<!ELEMENT  pattern.VPLM_COLUMN               (vplm.Column,m1.column)>
+<!ELEMENT  pattern.VPLM_INDEX                (vplm.Index,m1.index)>
+
+<!ATTLIST  mapping
+           version CDATA #IMPLIED >
+
+<!ELEMENT  vplm.Package EMPTY >
+<!ATTLIST  vplm.Package
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.Class EMPTY >
+<!ATTLIST  vplm.Class
+           name CDATA #REQUIRED
+           keep_inheritance (no|yes) #IMPLIED
+           read_only (no|yes) #IMPLIED >
+<!ELEMENT  vplm.RelationClass EMPTY >
+<!ATTLIST  vplm.RelationClass
+           name CDATA #REQUIRED
+           keep_inheritance (no|yes) #IMPLIED
+           read_only (no|yes) #IMPLIED >
+<!ELEMENT  vplm.PathType EMPTY >
+<!ATTLIST  vplm.PathType
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.PLMConnection EMPTY >
+<!ATTLIST  vplm.PLMConnection
+           name CDATA #REQUIRED
+           keep_inheritance (no|yes) #IMPLIED
+           read_only (no|yes) #IMPLIED
+           sd_format (0|1) #IMPLIED >
+<!ELEMENT  vplm.PLMCoreInstance EMPTY >
+<!ATTLIST  vplm.PLMCoreInstance
+           name CDATA #REQUIRED
+           keep_inheritance (no|yes) #IMPLIED
+           read_only (no|yes) #IMPLIED >
+<!ELEMENT  vplm.PLMCoreReference EMPTY >
+<!ATTLIST  vplm.PLMCoreReference
+           name CDATA #REQUIRED
+           keep_inheritance (no|yes) #IMPLIED
+           read_only (no|yes) #IMPLIED >
+<!ELEMENT  vplm.PLMCoreRepInstance EMPTY >
+<!ATTLIST  vplm.PLMCoreRepInstance
+           name CDATA #REQUIRED
+           keep_inheritance (no|yes) #IMPLIED
+           read_only (no|yes) #IMPLIED >
+<!ELEMENT  vplm.PLMCoreRepReference EMPTY >
+<!ATTLIST  vplm.PLMCoreRepReference
+           name CDATA #REQUIRED
+           keep_inheritance (no|yes) #IMPLIED
+           read_only (no|yes) #IMPLIED
+           sd_format (0|1) #IMPLIED >
+<!ELEMENT  vplm.PLMPort EMPTY >
+<!ATTLIST  vplm.PLMPort
+           name CDATA #REQUIRED
+           keep_inheritance (no|yes) #IMPLIED
+           read_only (no|yes) #IMPLIED
+           sd_format (0|1) #IMPLIED >
+<!ELEMENT  vplm.Extension EMPTY >
+<!ATTLIST  vplm.Extension
+           name CDATA #REQUIRED
+           read_only (no|yes) #IMPLIED >
+<!ELEMENT  vplm.Relationship EMPTY >
+<!ATTLIST  vplm.Relationship
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.SubRelationship EMPTY >
+<!ATTLIST  vplm.SubRelationship
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.Simple EMPTY >
+<!ATTLIST  vplm.Simple
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.Context.Simple EMPTY >
+<!ATTLIST  vplm.Context.Simple
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.Volatile EMPTY >
+<!ATTLIST  vplm.Volatile
+           name CDATA #REQUIRED >
+<!ELEMENT  m1.package EMPTY >
+<!ATTLIST  m1.package
+           name CDATA #REQUIRED >
+<!ELEMENT  m1.attribute EMPTY >
+<!ATTLIST  m1.attribute
+           name CDATA #REQUIRED
+           local (no|yes) #IMPLIED >
+<!ELEMENT  m1.basic EMPTY >
+<!ATTLIST  m1.basic
+           name CDATA #REQUIRED >
+<!ELEMENT  m1.interface EMPTY >
+<!ATTLIST  m1.interface
+           name CDATA #REQUIRED >
+<!ELEMENT  m1.relationship EMPTY >
+<!ATTLIST  m1.relationship
+           name CDATA #REQUIRED
+           direction (from-to|to-from) #IMPLIED
+           end       (from|to)         #IMPLIED >
+<!ELEMENT  m1.pathtype EMPTY >
+<!ATTLIST  m1.pathtype
+           name CDATA #REQUIRED
+           local (no|yes) #IMPLIED >
+<!ELEMENT  m1.type EMPTY >
+<!ATTLIST  m1.type
+           name CDATA #REQUIRED
+           where_clause CDATA #IMPLIED >
+<!ELEMENT  external EMPTY >
+<!ATTLIST  external
+           key       CDATA #REQUIRED
+           classname CDATA #REQUIRED >
+<!ELEMENT  pubsub EMPTY >
+<!ATTLIST  pubsub
+           version        CDATA #REQUIRED
+           suiteName      CDATA #REQUIRED
+           suiteShortName CDATA #REQUIRED>
+<!ELEMENT  conversion EMPTY >
+<!ATTLIST  conversion
+           method_alias   CDATA #REQUIRED>
+<!ELEMENT  vplm.Discipline EMPTY >
+<!ATTLIST  vplm.Discipline
+           name CDATA #REQUIRED
+           keep_inheritance (no|yes) #IMPLIED
+           read_only (no|yes) #IMPLIED >
+<!ELEMENT  m1.constant EMPTY >
+<!ATTLIST  m1.constant
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.UniqueKey EMPTY >
+<!ATTLIST  vplm.UniqueKey
+           name CDATA #REQUIRED >
+<!ELEMENT  m1.uniquekey EMPTY >
+<!ATTLIST  m1.uniquekey
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.Dimension EMPTY >
+<!ATTLIST  vplm.Dimension
+           name CDATA #REQUIRED >
+<!ELEMENT  m1.dimension EMPTY >
+<!ATTLIST  m1.dimension
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.Unit EMPTY >
+<!ATTLIST  vplm.Unit
+           name CDATA #REQUIRED >
+<!ELEMENT  m1.unit EMPTY >
+<!ATTLIST  m1.unit
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.FlatTable EMPTY >
+<!ATTLIST  vplm.FlatTable
+           name CDATA #REQUIRED >
+<!ELEMENT  m1.flattabletype EMPTY >
+<!ATTLIST  m1.flattabletype
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.Column EMPTY >
+<!ATTLIST  vplm.Column
+           name CDATA #REQUIRED >
+<!ELEMENT  m1.column EMPTY >
+<!ATTLIST  m1.column
+           name CDATA #REQUIRED >
+<!ELEMENT  vplm.Index EMPTY >
+<!ATTLIST  vplm.Index
+           name CDATA #REQUIRED >
+<!ELEMENT  m1.index EMPTY >
+<!ATTLIST  m1.index
+           name CDATA #REQUIRED >

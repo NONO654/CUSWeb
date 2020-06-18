@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="_layoutDmcHelp.css" rel="stylesheet" type="text/css"
+				media="all" />
+<script type="text/javascript" src="dmcscript.js"></script>
+<title>DMC tools - first steps</title>
+</head>
+<body onload="initialize(1, 9);">
+<h1>Generate files for customization and Deploy</h1>
+<div id='step1'>
+	<div class='leftColumn'>
+		<img alt='status' id='status1' />
+	</div>
+	<div class='middleColumn'>
+		<div class='title' onclick='displayStep(1);'>
+			<img alt='collapseArrow' id='arrow1' />
+			<span>0. Introduction</span>
+		</div>
+		<div class='description'>
+			<p>
+				This help sheet describes how to generate all files requested for a new customization, and how to prepare the customization deployment to the Enovia 
+				VPM Server.
+			</p>
+			<p>
+				At this starting point, you are supposed to have created a new customization and declared it in an environment.
+			</p>
+			<a onclick='nextStep(1);'>Click to restart</a>
+		</div>
+	</div>
+	<div class='rightColumn'>
+		<a class='help'>&nbsp;</a>	
+	</div>
+	<div class='clear'>&nbsp;</div>
+</div>
+
+<div id='step2'>
+	<div class='leftColumn'>
+		<img alt='status' id='status2' />
+	</div>
+	<div class='middleColumn'>
+		<div class='title' onclick='displayStep(2);'>
+			<img alt='collapseArrow' id='arrow2' />
+			<span> 1. Generate all files associated to the customization</span>
+		</div>
+		<div class='description'>
+			<p>
+				Select "Tools/Generate..." command. A list displays all the customization located in your Working folder (the Working folder 
+				is specified in the Tools/Options (General 
+				tab page) parameters).
+
+			</p>
+			<p>
+				Select one or more customization from the list.
+			</p>
+			<a onclick='nextStep(2);'>Click to complete</a>
+		</div>
+	</div>
+	<div class='rightColumn'>
+		<a class='help'>&nbsp;</a>	
+	</div>
+	<div class='clear'>&nbsp;</div>
+</div>
+
+<div id='step3'>
+	<div class='leftColumn'>
+		<img alt='status' id='status3' />
+	</div>
+	<div class='middleColumn'>
+		<div class='title' onclick='displayStep(3);'>
+			<img alt='collapseArrow' id='arrow3' />
+			<span>2. Files for updating server database with the new customization data model</span>
+		</div>
+		<div class='description'>
+			<p>
+				Select Generate MQL files checkbox.
+			</p>
+			<a onclick='nextStep(3);'>Click to complete</a>
+		</div>
+	</div>
+	<div class='rightColumn'>
+		<a class='help'>&nbsp;</a>	
+	</div>
+	<div class='clear'>&nbsp;</div>
+</div>
+
+<div id='step4'>
+	<div class='leftColumn'>
+		<img alt='status' id='status4' />
+	</div>
+	<div class='middleColumn'>
+		<div class='title' onclick='displayStep(4);'>
+			<img alt='collapseArrow' id='arrow4' />
+			<span>3. Files for P&O access to the customization</span>
+		</div>
+		<div class='description'>
+			<p>
+				Select Generate Default Mask checkbox: A mask file with default access right to the customization types and attributes is generated. 				
+			</p>
+			<p>
+				Select Compilation checkbox: a compilation files with all the masks, including the default one for the new customization is generated.				
+			</p>
+			<p>
+				Click on Generate.				
+				Messages and errors are displayed in the traces zone.				
+			</p>
+			<a onclick='nextStep(4);'>Click to complete</a>
+		</div>
+	</div>
+	<div class='rightColumn'>
+		<a class='help'>&nbsp;</a>	
+	</div>
+	<div class='clear'>&nbsp;</div>
+</div>
+
+<div id='step5'>
+	<div class='leftColumn'>
+		<img alt='status' id='status5' />
+	</div>
+	<div class='middleColumn'>
+		<div class='title' onclick='displayStep(5);'>
+			<img alt='collapseArrow' id='arrow5' />
+			<span>4. Backup before publication on server</span>
+		</div>
+		<div class='description'>
+			<p>
+				This step is optional but recommended: it will copy in your DMC 
+				Working Folder files that are going to be modified during the 
+				next publication step.</p>
+			<p>
+				Select "Tools/Backup...&quot; command.</p>
+			<p>
+				Click on Backup. 			
+			</p>
+			<a onclick='nextStep(5);'>Click to complete</a>
+		</div>
+	</div>
+	<div class='rightColumn'>
+		<a class='help'>&nbsp;</a>	
+	</div>
+	<div class='clear'>&nbsp;</div>
+</div>
+
+<div id='step6'>
+	<div class='leftColumn'>
+		<img alt='status' id='status6' />
+	</div>
+	<div class='middleColumn'>
+		<div class='title' onclick='displayStep(6);'>
+			<img alt='collapseArrow' id='arrow6' />
+			<span>5. Publish a customization</span>
+		</div>
+		<div class='description'>
+			<p>
+				Select "Tools/Publish..." command. A list displays all the customization located in your Working folder (the Working folder 
+				is specified in the Tools/Options (General tab page) parameters).
+			</p>
+			<p>
+				Select one or more customization from the list.
+			</p>
+			<p>
+				Click on Publish. Messages and errors are displayed in the traces zone.
+			</p>
+			<a onclick='nextStep(6);'>Click to complete</a>
+		</div>
+	</div>
+	<div class='rightColumn'>
+		<a class='help'>&nbsp;</a>	
+	</div>
+	<div class='clear'>&nbsp;</div>
+</div>
+<div id='step7'>
+	<div class='leftColumn'>
+		<img alt='status' id='status7' />
+	</div>
+	<div class='middleColumn'>
+		<div class='title' onclick='displayStep(7);'>
+			<img alt='collapseArrow' id='arrow7' />
+			<span>6. Launch Warutil</span>
+			<p>&nbsp;</div>
+		<div class='description'>
+			<p>
+				Select &quot;Tools/Warutil...&quot;</p>
+			<p>
+				Click on Launch. 
+			</p>
+			<p>
+				On Windows platform, warutil interactive application is 
+				launched. Follow steps of the tool.</p>
+			<p>
+				On Unix platform, warutil batch tool is launched in DMC panel. 
+				Enter response of all the warutil questions in the dedicated 
+				text field and validate with Enter button. Messages and errors are displayed in the traces zone.
+			</p>
+			<p>
+				At the end of this step, new .war and .ear files are generated 
+				the distrib directory.
+			</p>
+			<a onclick='nextStep(7);'>Click to complete</a>
+		</div>
+	</div>
+	<div class='rightColumn'>
+		<a class='help'>&nbsp;</a>	
+	</div>
+	<div class='clear'>&nbsp;</div>
+</div>
+<div id='step8'>
+	<div class='leftColumn'>
+		<img alt='status' id='status8' />
+	</div>
+	<div class='middleColumn'>
+		<div class='title' onclick='displayStep(8);'>
+			<img alt='collapseArrow' id='arrow8' />
+			<span>7. Deploy on Server</span>
+		</div>
+		<div class='description'>
+			<p>
+				&nbsp;</p>
+			<p>
+				Select &quot;Tools/Deploy on Server...&quot;</p>
+			<p>
+				This is only an information step in DMC tool, and deployment has 
+				to be done manually with 2 steps:</p>
+			<p>1. use the appropriate Application Server administration console 
+			to deploy the .war file created in the previous step.</p>
+			<p>2.use the MQL console from MatrixOne to execute all mql files located in ENOVIA Collaboration Platform Server
+				(matrixRmi)/DMCmql directory</p>
+			<p>Click on OK when done. </p>
+			<a onclick='nextStep(8);'>Click to complete</a>
+		</div>
+	</div>
+	<div class='rightColumn'>
+		<a class='help'>&nbsp;</a>	
+	</div>
+	<div class='clear'>&nbsp;</div>
+</div>
+<div id='step9'>
+	<div class='leftColumn'>
+		<img alt='status' id='status9' />
+	</div>
+	<div class='middleColumn'>
+		<div class='title' onclick='displayStep(9);'>
+			<img alt='collapseArrow' id='arrow9' />
+			<span>8. Commit deployment</span>
+		</div>
+		<div class='description'>
+			<p>
+				&nbsp;</p>
+			<p>
+				Select &quot;Tools/Commit...&quot;</p>
+			<p>
+				This step is mandatory in DMC tool after manual deployment of 
+				.war file and mql scripts execution. </p>
+			<p>Click on Commit. </p>
+			<a onclick='nextStep(9);'>Click to complete</a>
+		</div>
+	</div>
+	<div class='rightColumn'>
+		<a class='help'>&nbsp;</a>	
+	</div>
+	<div class='clear'>&nbsp;</div>
+</div>
+
+<div id='finished'>
+	You have successfully finished this tutorial.
+</div>
+</body>
+</html>

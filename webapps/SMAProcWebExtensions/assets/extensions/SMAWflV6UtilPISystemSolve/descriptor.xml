@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.V6UtilPISystemSolve" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="CATSymExecuteBatch" nlsID="CATSymExecuteBatch.Title">System Experiment Batch</DisplayName>
+	<Description nlsFile="CATSymExecuteBatch" nlsID="CATSymExecuteBatch.Description">System Experiment Batch</Description>
+	<LongDescription/>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>V6Utility</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.sma.plugin.V6UtilPISystemSolve</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+
+	</Streams>
+	<Interfaces>
+
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflV6UtilPISystemSimEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+
+	</Interfaces>
+	<Properties>
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[V6Utility]]>
+			</Value>
+		</Property>
+		<Property name="PLMBatchName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[CATSymBatchExecuter]]>
+			</Value>
+		</Property>
+
+		<Property name="PLMBatchArguments" type="aggregate" valuetype="single">
+    <Property name="PLMBatchArguments" type="aggregate" valuetype="single">
+		<Property name="MCA_SCRIPT" type="string" valuetype="single">
+			<Value><![CDATA[]]></Value>
+		</Property>
+      <Property name="MCA_FUNCTION" type="string" valuetype="single">
+        <Value><![CDATA[]]></Value>
+      </Property>
+    </Property>
+		</Property>
+
+		<Property name="PLMObjectType" type="string" valuetype="single">
+			<Value>
+				<![CDATA[LogicalSimulation,FunctionalSimulation,SystemBehaviorLibSimulation,CATSysBehaviorLibReference]]>
+			</Value>
+		</Property>
+
+		<!--Value of this property is ID of PLM content which it refers to.-->
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Value/>
+		</Property>
+	</Properties>
+</wfext:Extension>

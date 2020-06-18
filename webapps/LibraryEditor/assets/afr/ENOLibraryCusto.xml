@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+      <Template syp:name="ENOLibrariesHeaders" Target="CATCmdHeadersList">
+            <CATCmdHeadersList>
+				  <CATCommandHeader ID="AddExistingContent" ClassName="DS/LibraryEditor/commands/ActionBar_AddExistingContentCmd" ResourceFile="LibraryEditor/ENOLibrary" Available="1"/>
+                  <CATCommandHeader ID="RemoveContent" ClassName="DS/LibraryEditor/commands/ActionBar_RemoveContentCmd" ResourceFile="LibraryEditor/ENOLibrary" Available="1"/>
+                  <CATCommandHeader ID="AddToFavorites" ClassName="DS/LibraryEditor/commands/ActionBar_AddToFavoritesCmd" ResourceFile="LibraryEditor/ENOLibrary" Available="1" Behavior="CATAfrHeaderCheck" />
+                  <CATCommandHeader ID="ActionBar_Attributes" ClassName="DS/ENOCollabSharingCmds/commands/EditPropCmd/ActionBar_EditPropCmd" ResourceFile="ENOCollabSharingCmds/CollabSharing_Workbench" Available="1" />
+                  <CATCommandHeader ID="treelistview" ClassName="DS/ENXNav/commands/xNavActionBarCmds" ResourceFile="ENXNav/ENXNav" Available="1"/>
+                  <CATCommandHeader ID="tileview" ClassName="DS/ENXNav/commands/xNavActionBarCmds" ResourceFile="ENXNav/ENXNav" Available="1"/>
+                  <CATCommandHeader ID="thumbnailview" ClassName="DS/ENXNav/commands/xNavActionBarCmds" ResourceFile="ENXNav/ENXNav" Available="1"/>
+                  <CATCommandHeader ID="ExpandAll" ClassName="DS/LibraryEditor/commands/ActionBar_ExpandAllCmd" ResourceFile="LibraryEditor/ENOLibrary" Available="1" />
+                  <CATCommandHeader ID="ExpandN" ClassName="DS/LibraryEditor/commands/ActionBar_ExpandNCmd" ResourceFile="LibraryEditor/ENOLibrary" Available="1" />
+                  <CATCommandHeader ID="CollapseAll" ClassName="DS/LibraryEditor/commands/ActionBar_CollapseAllCmd" ResourceFile="LibraryEditor/ENOLibrary" Available="1" />
+                  <CATCommandHeader ID="SelectAll" ClassName="DS/ENXNav/commands/xNavActionBarCmds" ResourceFile="ENXNav/ENXNav" Available="1"/>
+                  <CATCommandHeader ID="SelectInversion" ClassName="DS/ENXNav/commands/xNavActionBarCmds" ResourceFile="ENXNav/ENXNav" Available="1"/>
+                  <CATCommandHeader ID="SelectSiblings" ClassName="DS/ENXNav/commands/xNavActionBarCmds" ResourceFile="ENXNav/ENXNav" Available="1"/>
+                  <CATCommandHeader ID="ColumnVisibility" ClassName="DS/ENXNav/commands/xNavActionBarCmds" ResourceFile="ENXNav/ENXNav"/>
+			</CATCmdHeadersList>
+      </Template>
+
+      <Template syp:name="ENOLibrariesWkbAccess" Target="CATCmdWorkbench">
+            <CATCmdWorkbench Name="ENOLibrariesWkb">
+                  <CATCmdContainer Name="Library" RepresentationType="AfrActionBarSection">
+                        <CATCmdStarter Name="Add Existing Content" Command="AddExistingContent"/>
+                        <CATCmdStarter Name="Remove Content" Command="RemoveContent"/>
+                        <CATCmdStarter Name="Add to Favorites" Command="AddToFavorites" />
+                        <CATCmdStarter Name="Attributes" Command="ActionBar_Attributes" />
+                  </CATCmdContainer>
+          		  <CATCmdContainer Name="View" RepresentationType="AfrActionBarSection">
+						<CATCmdContainer Name="SwitchView" RepresentationType="AfrActionBarDropDown">
+							<CATCmdStarter Name="Grid View" Command="treelistview" />
+							<CATCmdStarter Name="Tile View" Command="tileview" />
+							<CATCmdStarter Name="Thumbnail View" Command="thumbnailview" />
+						</CATCmdContainer>
+						<CATCmdContainer Name="PADExpand" RepresentationType="AfrActionBarDropDown">
+							<CATCmdStarter Name="Expand All" Command="ExpandAll" />
+							<CATCmdStarter Name="Expand N Levels" Command="ExpandN" />
+							<CATCmdStarter Name="Collapse All" Command="CollapseAll" />
+						</CATCmdContainer>
+						<CATCmdContainer Name="PADSelect" RepresentationType="AfrActionBarDropDown">
+							<CATCmdStarter Name="Select All" Command="SelectAll" />
+							<CATCmdStarter Name="Select Inversion" Command="SelectInversion" />
+							<CATCmdStarter Name="Select Siblings" Command="SelectSiblings" />
+						</CATCmdContainer>
+                  </CATCmdContainer>
+                  <CATCmdContainer Name="LibraryTools" RepresentationType="AfrActionBarSection">
+						<CATCmdStarter Name="Tree List View Options" Command="ColumnVisibility" />
+                  </CATCmdContainer>
+            </CATCmdWorkbench>
+      </Template>
+</Styles>

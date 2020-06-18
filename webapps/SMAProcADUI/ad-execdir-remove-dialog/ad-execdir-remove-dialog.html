@@ -1,0 +1,52 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="ad-execdir-remove-dialog">
+  <link rel="import" type="css" href="ad-execdir-remove-dialog.css">
+  <template>
+      <style include="sp-uikit-styles"></style>
+        
+ 		<div id="myModal" class="modal fade">	   
+			<div class="modal-wrap">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onCancel">&times;</button>
+			        <h4>Remove Selected Execution <span class="singular">Directory</span><span class="plural">Directories</span></h4>
+			      </div>
+			      <div id="dialogContent" class="modal-body">
+					<div class="content-text">
+						Are you sure you want to remove the following execution <span class="singular">directory</span><span class="plural">directories</span>:
+					</div>
+					<div id="listContainer">
+                        <ul>
+				            <template is="dom-repeat" items="{{selectedExecDirs}}" as="execDir">
+				                <li class="content-text" title="{{execDir.name}}">{{execDir.name}}</li>               
+				            </template>   
+			            </ul>
+					</div>
+					<div class="content-text">&nbsp;</div>
+					<div class="content-text">
+						This will only remove the directory information from the process, 
+						it will not remove the actual <span class="singular">directory</span><span class="plural">directories</span> from the file system.
+					</div>
+			      </div>
+			      <div class="modal-footer">
+                   	<div id="showAgainSection" class="toggle toggle-primary">
+			      		<input type="checkbox" id="execDirShowAgainCheckbox">
+			      		<label class="control-label" for="execDirShowAgainCheckbox">Do not show this dialog again</label>
+                   	</div>
+			        <button id="okButton" type="button" class="btn btn-primary" on-click="onAccept">OK</button>
+			        <button id="cancelButton" type="button" class="btn btn-default" on-click="onCancel">Cancel</button>
+			      </div>
+	 		    </div>
+ 		    </div>
+ 		</div>
+ 		<div id="myModalOverlay" class="modal-overlay fade hidden"></div>
+ 		
+
+ 	</template>
+  <script src="ad-execdir-remove-dialog.js"></script>
+</dom-module>
+
+

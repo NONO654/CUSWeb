@@ -1,0 +1,133 @@
+<DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="author" content="MXZ" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>TimeLine test page</title>
+<!-- Definition of require :  -->
+
+<!-- Definition of require : -->
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+<!-- This is required to configure RequireJS with the appropriate pathes : -->
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+
+
+<link rel="stylesheet" href="../UIKIT/UIKIT.css">
+
+<script>
+
+	//require(['UWA/Drivers/Alone','DS/InstantMessaging/InstantMessaging', 'DS/MessengerShareAdapter/MessengerShareAdapter','DS/MessageBus/MessageBus'], function (UWA, InstantMessaging, MessengerShareAdapter, MessageBus) {
+	require(['UWA/Drivers/Alone','UWA/Class/Collection','UWA/Class/Model','DS/W3DXTimeline/Timeline'], function (UWA, Collection, Model, Timeline) {
+
+		var coll = new UWA.Class.Collection();
+
+		var timelineRow = UWA.Class.Model.extend({
+		    validate: function(attributes) {
+		        // Here some validation code of the attributes
+		        // so that we make sure data is valid before save()...
+		    },
+
+		    defaults: {
+		        'date': '2016-06-14T11:19:05.000Z', // ok, this is obvious :)
+		        'img': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+		        'text': 'Once upon a midnight dreary, while I % pondered weak and weary, over many a quaint and curious volume',
+		        'url': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/LXM\/width\/128\/height\/128',
+		    }
+		});
+
+		var vvv = UWA.createElement('div', {});
+
+
+		var timeline = new Timeline({
+			collection : coll
+			//title : 'My Network'
+		});
+
+		var mainView = UWA.createElement('div', {
+			styles:{
+				width:'100%',
+				height:'100%'
+			}
+		}).inject(document.body);
+
+		
+
+		timeline.inject(mainView);
+
+		coll.add(new timelineRow());
+
+		coll.add(new timelineRow({
+				'pictureSize' : '32px',
+				'removeTime' : true,
+				'removeCircle' : true,
+		        'date' : '2016-06-13T10:19:05.000Z', // ok, this is obvious :)
+		        'img' : 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+		        'text' : 'Once upon a midnight dreary, while I pondered weak and weary Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume',
+		        'url' : 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+		    }));
+
+		
+		coll.add(new timelineRow({
+		        'date': '2016-06-13T12:19:05.000Z', // ok, this is obvious :)
+		        'img': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+		        'text': 'Once upon a midnight dreary, while I pondered weak and weary',
+		        'url': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+		    }));
+		
+		coll.add(new timelineRow({
+		        'date': '2016-06-13T11:19:05.000Z', // ok, this is obvious :)
+		        'img': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+		        'text': 'Once upon a midnight dreary, while I pondered weak and weary',
+		        'url': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+		    }));
+		coll.add(new timelineRow({
+				'pictureSize' : '48px',
+		        'date': '2016-06-14T09:19:05.000Z', // ok, this is obvious :)
+		        'img': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+		        'text': 'Once upon a midnight dreary, while I pondered weak and weary Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume',
+		        'url': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/LXM\/width\/128\/height\/128',
+		    }));
+		/*
+		coll.add(new timelineRow({
+		        'date': '2016-06-13T10:19:05.000Z', // ok, this is obvious :)
+		        'img': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+		        'text': 'Once upon a midnight dreary, while I pondered weak and weary',
+		        'url': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+		    }));
+		    */
+		
+
+		var button = UWA.createElement('div', {
+			styles:{
+				width:'300px',
+				height:'50px',
+				background:'green',
+				position:'fixed',
+				right : '0px',
+				top:'0px'
+			},
+			events:{
+				click: function(evt){
+					coll.add(new timelineRow({
+				        'date': '2016-06-14T14:19:05.000Z',
+				        'img': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+				        'text': 'Once upon a midnight dreary, while I pondered weak and weary Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume',
+		        		'url': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/LXM\/width\/128\/height\/128',
+				    }));
+				}
+			}
+		}).inject(document.body);
+
+
+	});
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,2541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<meta name="author" content="Julien EDMOND"/>
+<meta name="description" content="A descriptive description"/>
+
+<link rel="icon" type="image/x-icon" href="#MYAPPSBASEURL#/widget/appslist/favicon.png"/>
+<link rel="stylesheet" type="text/css" href="#MYAPPSBASEURL#/widget/appslist/apps.css"/>
+
+<widget:preferences>
+    <preference name="limit" type="hidden" defaultValue="464"/>
+</widget:preferences>
+<style type="text/css">
+
+.moduleContent {
+    padding: 0;
+}
+
+.sortable {
+    cursor: pointer
+}
+
+.sort.sort-asc {
+    background: rgba(0, 0, 0, 0) url(img/grid-sort.png) no-repeat 0 2px;
+}
+
+.sort.sort-desc {
+    background: rgba(0, 0, 0, 0) url(img/grid-sort.png) no-repeat 0 -29px;
+}
+
+.sort {
+    width: 16px;
+    height: 16px;
+    background: rgba(0, 0, 0, 0) url(img/grid-sort.png) no-repeat 0 -14px;
+}
+
+.adminrole {
+    /*padding:10px 0;*/
+    cursor: pointer;
+}
+
+img.member-picture {
+    /*height:40px;*/
+    vertical-align: middle; /*width:40px*/
+}
+
+table.member-platform-list tbody .state-pending td {
+    font-weight: 700
+}
+
+.edit-role-panel {
+    list-style: none;
+    /*background-color: #F2F2F2;*/
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    /*        padding: 14px;*/
+    position: absolute;
+    right: 5px;
+    text-align: left;
+    /*width: 90px;*/
+    z-index: 10;
+    width: 170px;
+}
+
+.edit-role-panel a {
+    cursor: pointer;
+    color: #333;
+    /*margin-left: 20px*/
+}
+
+.edit-role-panel a.current {
+    font-weight: bold;
+    cursor: default;
+    margin-left: 0px
+}
+
+    /**/
+.edit-role-panel ul {
+    padding: 5px 0;
+    margin: 2px 0 0;
+}
+
+.edit-role-panel ul li {
+    list-style: none;
+    padding-left: 0px;
+    background: none;
+}
+
+    /*
+    .edit-role-panel ul li > a {
+        padding: 3px 35px 3px 20px;
+    }*/
+
+.edit-role-panel ul li.remove-role a {
+    color: white;
+    padding: 3px 13px;
+}
+
+.edit-role-panel ul li.remove-role {
+    background-color: #777;
+    border-radius: 6px;
+    margin: 0px 3px;
+    padding: 5px;
+    opacity: 0.9;
+}
+
+.edit-role-panel ul li.remove-role:hover {
+    opacity: 1;
+}
+
+.edit-role-panel ul li.divider {
+    height: 1px;
+    margin: 9px 1px;
+    overflow: hidden;
+    background-color: #e5e5e5;
+    border-bottom: 1px solid #ffffff;
+}
+
+    /**/
+.edit-role-panel.panel-bottom {
+    top: -8px;
+}
+
+.edit-role-panel.panel-top {
+    bottom: -8px;
+}
+
+.edit-role-panel a.current:hover {
+    text-decoration: none
+}
+
+    /*
+        .edit-role-panel div {
+            padding: 3px 0
+        }
+    */
+
+.administration-role {
+    position: relative
+}
+
+    /*.img-disable-user{cursor:pointer;height:16px;vertical-align:middle;width:16px}*/
+table.member-platform-list td,
+table.member-platform-list th {
+    text-align: left
+}
+
+table.member-platform-list td {
+    /*height: 30px;*/
+}
+
+table.member-platform-list {
+    border-collapse: collapse; /*width:100%*/
+}
+
+table.member-platform-list tbody tr {
+    /*height:47px !important;*/
+    /*TEMP*/
+}
+
+table.member-platform-list tr.table-people-header td {
+    font-weight: 700
+}
+
+table.member-platform-list tr.table-people-header td:first-child {
+    padding-left: 5px;
+    text-align: left
+}
+
+.checkbox-label {
+    display: inline
+}
+
+table.member-platform-list tr.even {
+    background-color: #F9F9F9
+}
+
+table.member-platform-list tr.odd {
+    background: #fff
+}
+
+.unsaved {
+    color: red
+}
+
+.close-panel {
+
+    position: absolute;
+    right: 5px;
+    top: 0
+}
+
+.normal-mode .normal-cell,
+.edit-mode .edit-cell {
+    display: block
+}
+
+.normal-mode .edit-cell,
+.edit-mode .normal-cell {
+    display: none
+}
+
+.invite-user-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 7px
+}
+
+#add-user {
+    vertical-align: middle;
+    width: 30%
+}
+
+#invite-user {
+    display: none
+}
+
+table.member-platform-list tr.state-pending td,
+table.member-platform-list tbody tr.state-pending {
+    /*height:20px*/
+}
+
+.column-environment span {
+    white-space: nowrap;
+}
+
+table.member-platform-list th,
+table.member-platform-list td {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.adminrole img, .environment-name img {
+    float: right;
+}
+
+table.member-platform-list td.invite-user {
+    text-align: left
+}
+
+.invite-user-img {
+    cursor: pointer;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    opacity: 0.3;
+    transition: all 0.3s ease 0s;
+    width: 20px;
+    vertical-align: middle;
+}
+
+.table.member-platform-list td.invite-user div {
+    line-height: 20px;
+    vertical-align: middle;
+}
+
+td.invite-user #add-user-wrapper .invite-user-img:hover,
+td.invite-user a:hover .invite-user-img,
+    /*.edit-role-panel a.current:hover .check-img */
+{
+    opacity: 0.8;
+}
+
+.img-remove-user-disable,
+.img-remove-user,
+.edit-img,
+.remove-user-img,
+.check-img {
+    vertical-align: middle;
+    cursor: pointer;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 20px;
+    opacity: 0.3;
+    transition: all 0.3s ease 0s;
+    width: 20px;
+}
+
+.edit-role-panel .check-img {
+    margin: 0 1em;
+    width: 15px;
+    height: 15px;
+    vertical-align: top;
+    padding-top: 3px;
+}
+
+img.img-remove-user-disable {
+    opacity: 0.1;
+    cursor: default;
+}
+
+.platform-help-img {
+    cursor: pointer;
+    vertical-align: middle;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    opacity: 0.3;
+    transition: all 0.3s ease 0s;
+    width: 20px;
+}
+
+.img-remove-user:hover,
+.adminrole:hover .edit-img,
+.environment-name:hover .edit-img,
+.edit-img:hover,
+.platform-help-img:hover,
+.remove-user-img:hover {
+    opacity: 0.8;
+}
+
+.environment-name {
+    cursor: pointer;
+}
+
+#invite-user,
+table.member-platform-list tr th:first-child,
+table.member-platform-list tr td:first-child {
+    text-align: left;
+    padding-left: 25px;
+}
+
+.edit-environment-name {
+    width: 90%
+}
+
+    /*.column-environment{width: 15%}*/
+#platform-help-button {
+    text-align: right;
+}
+
+.platform-help-element {
+    background: none;
+    padding: 0;
+}
+
+.platform-help-container,
+.platform-help-list,
+.platform-help {
+    padding: 0;
+    overflow: hidden;
+}
+
+.table-header {
+    margin: 0;
+}
+
+table.member-platform-list tr td.platform-help {
+    height: auto;
+    text-align: justify;
+    padding: 10px 25px;
+}
+
+    /* TEMP CODE W8 widget for platform */
+.small16 {
+    height: 16px;
+    width: 16px;
+}
+
+.small16.uwa-radio.checked .uwa-radio-content {
+    height: 10px;
+    width: 10px;
+    top: 2px;
+    left: 2px;
+}
+
+.small16.uwa-checkbox.checked .uwa-checkbox-content {
+    height: 16px;
+    width: 16px;
+}
+
+</style>
+<script type="text/javascript">
+//<![CDATA[
+require([
+    'UWA/Core',
+    'UWA/Data',
+    'UWA/Fx',
+    'UWA/Controls/Lightbox',
+    'UWA/Controls/Input'
+],
+        /**
+         *
+         * @param UWA
+         * @param Data
+         * @param Fx
+         * @param Lightbox
+         * @param Input
+         */
+        function (UWA, Data, Fx, Lightbox, Input) {
+            'use strict';
+
+            var tools = {
+                /**
+                 * Retrieve all params url
+                 */
+                getUrlParams: function () {
+                    var prmstr = window.location.search.substr(1),
+                            prmarr = prmstr.split('&'),
+                            params = {};
+
+                    for (var i = 0; i < prmarr.length; i++) {
+                        var tmparr = prmarr[i].split('=');
+
+                        params[tmparr[0]] = tmparr[1];
+                    }
+
+                    return params;
+                },
+
+                /**
+                 *    Retrieve the token from uri
+                 *    (Suppose that token is allways in last position)
+                 */
+                getToken: function () {
+                    var params = tools.getUrlParams();
+                    return (params.platform_token) ? params.platform_token : false;
+                }
+            };
+
+            /**
+             * Manage error
+             *
+             */
+            tools.error = {
+                /**
+                 * Check if the error is a passport forbidden (cas session lost)
+                 *
+                 */
+                isPassportForbiden: function (error) {
+                    return error.match(/.*passport_forbidden*/i) !== null;
+                },
+
+                /**
+                 * Check if the error is a curl error timeout
+                 *
+                 */
+                isCurlTimeout: function (error) {
+                    UWA.log(error);
+                    //Error in cURL request: Operation timed out after 10001 milliseconds with 0 bytes received
+                    return error.match(/.*curl.*.*operation.*timed out.*/i) !== null;
+                }
+            };
+
+            tools.getValue = function (variable) {
+                if (variable) {
+                    return variable;
+                } else {
+                    return '';
+                }
+            };
+            tools.getValueFromPx = function (str) {
+                return parseInt(str.slice(0, -2), 10);
+            };
+            /**
+             *    Display custom alert message
+             */
+            tools.message = function (message, type) {
+                var content = document.body.getElement('#divTabs .uwa-scroller-wrapper, #divTabs .uwa-scroller .-wrapper');
+                var customMessadeDiv = document.body.getElement('#custom-message');
+                if (!customMessadeDiv) {
+                    var customMessadeDiv = UWA.createElement('div', {
+                        'id': 'custom-message',
+                        'class': 'alert'
+                    });
+                    content.grab(customMessadeDiv, 'top');
+                } else {
+                    //Div exist remove alert class
+                    customMessadeDiv.removeClassName('alert-success');
+                    customMessadeDiv.removeClassName('alert-error');
+                }
+
+                //Set css alert class + set text
+                customMessadeDiv.setText(message);
+                customMessadeDiv.addClassName('alert-' + type);
+
+                var divTabsPaddingLeft = parseInt(document.getElementById('divTabs').getStyle('padding-left'), 10);
+                var left = ((document.body.getWidth() - customMessadeDiv.getWidth()) / 2) - divTabsPaddingLeft;
+                customMessadeDiv.setStyles({
+                    'left': left + 'px'
+                });
+
+                //show
+                var fx = new Fx(customMessadeDiv, {
+                    duration: 450,
+                    transition: 'linear',
+                    events: {
+                        onStart: function () {
+                            // Callback trigered when Animation Start
+                        },
+                        onComplete: function () {
+                            // Callback trigered when Animation End
+                        }
+                    }
+                });
+
+                var customMessadeDivOpacity = document.body.getElement('#custom-message').getOpacity();
+                //isNaN because of UWA regression
+                if (isNaN(customMessadeDivOpacity) || customMessadeDivOpacity < 1) {
+                    // Run Show Fx
+                    fx.start({
+                        opacity: [0, 1]
+                    });
+                }
+
+                //hide
+                var fx = new Fx(customMessadeDiv, {
+                    duration: 450,
+                    transition: 'linear',
+                    events: {
+                        onStart: function () {
+                            // Callback trigered when Animation Start
+                        },
+                        onComplete: function () {
+                            // Callback trigered when Animation End
+                        }
+                    }
+                });
+
+
+                //hide after 5sc
+                setTimeout(function () {
+                    var customMessadeDivOpacity = document.body.getElement('#custom-message').getOpacity();
+                    if (customMessadeDivOpacity === 1) {
+                        // Run Hide Fx
+                        fx.start({
+                            opacity: [1, 0]
+                        });
+                    }
+                }, 3000);
+
+            };
+
+            /**
+             *    Success alert
+             */
+            tools.message.success = function (message) {
+                tools.message(message, 'success');
+            };
+
+            /**
+             *    Error alert
+             */
+            tools.message.alert = function (message) {
+                tools.message(message, 'error');
+            };
+
+            /**
+             * Ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             * @param method
+             */
+            tools.request = function (url, params, callbacks, method) {
+                method = method || 'GET';
+                var headers = {
+                    Accept: 'application/ds-json',
+                    'Accept-Language': MyWidget.getLang()
+                }, formData;
+                if (method === 'POST' || method === 'PUT') {
+                    formData = params;
+                    params = '';
+                    headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                } else {
+                    params = UWA.Utils.toQueryString(params);
+                    params = (params.length > 0) ? '?' + params : '';
+                }
+                var requestSettings = {
+                            timeout: 15000,
+                            method: method,
+                            type: 'json',
+                            headers: headers,
+                            proxy: 'passport',
+                            data: formData,
+                            onComplete: function (data) {
+                                var RowData = data,
+                                        error;
+                                if (data) {
+                                    if ((data.code && data.code !== '0') || data.error) {
+                                        error = (data.message && data.message !== '') ? data.message : data.error;
+                                        if (tools.error.isPassportForbiden(error)) {
+                                            location.reload();
+                                        } else if (tools.error.isCurlTimeout(error)) {
+                                            //if curl timeout error
+                                            //no problem its normal.... reload widgets....
+                                            MyWidget.onLoad();
+                                        } else {
+                                            widget.unmask();
+                                            tools.message.alert(error);
+                                            if (typeof callbacks.onFailure === 'function') {
+                                                callbacks.onFailure(data);
+                                            }
+                                        }
+                                    } else {
+                                        if (typeof callbacks.onComplete === 'function') {
+                                            callbacks.onComplete(data);
+                                        }
+                                    }
+                                } else {
+                                    tools.message.alert(RowData);
+                                }
+                            },
+                            onFailure: function (data) {
+                                if (typeof callbacks.onFailure === 'function') {
+                                    callbacks.onFailure(data);
+                                } else {
+                                    UWA.log(data.error);
+                                }
+                            }
+                        },
+                        urlWithParams;
+
+                UWA.log('Send with method ' + requestSettings.method);
+                urlWithParams = url + params;
+                Data.request(urlWithParams, requestSettings);
+            };
+
+            /**
+             * GET ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.get = function (url, params, callbacks) {
+                tools.request(url, params, callbacks, 'GET');
+            };
+
+            /**
+             * PUT ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.put = function (url, params, callbacks) {
+                tools.request(url, params, callbacks, 'GET');
+            };
+
+            /**
+             * POST ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.post = function (url, params, callbacks) {
+                tools.request(url, params, callbacks, 'POST');
+            };
+
+            /**
+             * Widget unmask
+             */
+            widget.unmask = function () {
+                var loadingDiv = widget.getElement('.widget-loading');
+                if (loadingDiv) {
+                    loadingDiv.setStyles({
+                        display: 'none'
+                    });
+                }
+            };
+
+            /**
+             * Widget mask
+             */
+            widget.mask = function () {
+                var loadingDiv = widget.getElement('.widget-loading'),
+                        widgetSize = widget.body.getSize();
+                if (!loadingDiv) {
+                    widget.body.grab(UWA.createElement('div', {
+                        'class': 'widget-loading'
+                    }), 'top');
+
+                    loadingDiv = widget.getElement('.widget-loading');
+                }
+
+                //sync size of loader
+                loadingDiv.setStyles({
+                    height: widgetSize.height + 'px',
+                    width: widgetSize.width + 'px',
+                    display: 'block'
+                });
+            };
+
+            /*
+             * Javascript RFC2822 Email Validation
+             */
+            tools.validateEmail = function (email) {
+                var re = /^[_A-z0-9-]+(\.[_A-z0-9-]+)*@[A-z0-9-]+(\.[A-z0-9-]+)*(\.[A-z]{2,4})$/;
+                return re.test(email);
+            };
+
+            tools.syncOverlay = function () {
+                var overlays = document.body.getElements('.uwa-overlay');
+                if (overlays.length > 0) {
+                    var winH = window.innerHeight || document.documentElement.clientHeight,
+                            scrH = document.body.scrollHeight;
+                    var size = (scrH > winH) ? scrH : winH;
+                    overlays.invoke('setStyle', 'height', size);
+                }
+            };
+
+
+            /**
+             * PROXYS
+             */
+            tools.proxy = {};
+            tools.proxy.baseUrl = '#MYAPPSBASEURL#' + '/';
+            tools.proxy.baseUrlBackend = tools.proxy.baseUrl + 'resources/AppsMngt/';
+            tools.proxy.addfirstmanager = tools.proxy.baseUrlBackend + 'environment/addfirstmanager';
+            tools.proxy.inviteuser = tools.proxy.baseUrlBackend + 'user/invite';
+            tools.proxy.listrole = tools.proxy.baseUrlBackend + 'environment/listroles';
+            tools.proxy.getroles = tools.proxy.baseUrlBackend + 'environment/getroles';
+            tools.proxy.environmentupdate = tools.proxy.baseUrlBackend + 'environment/update';
+            tools.proxy.userupdaterole = tools.proxy.baseUrlBackend + 'user/updaterole';
+            tools.proxy.usergrantplatform = tools.proxy.baseUrlBackend + 'user/grantplatform';
+            tools.proxy.memberslist = tools.proxy.baseUrlBackend + 'user/memberslist';
+            tools.proxy.removeuser = tools.proxy.baseUrlBackend + 'user/delete';
+            tools.proxy.removeuserrole = tools.proxy.baseUrlBackend + 'user/removeplatform';
+            tools.proxy.removeuserlicence = tools.proxy.baseUrlBackend + 'user/removelicenses';
+            tools.proxy.environmentadduser = tools.proxy.baseUrlBackend + 'environment/adduser';
+            tools.proxy.userlicenses = tools.proxy.baseUrlBackend + 'user/licenses';
+            tools.proxy.listlicenses = tools.proxy.baseUrlBackend + 'licenses/all';
+            tools.proxy.usergrantlicenses = tools.proxy.baseUrlBackend + 'user/grantlicenses';
+            tools.proxy.deleteinvitation = tools.proxy.baseUrlBackend + 'user/invitationdelete';
+            tools.proxy.userlegal = tools.proxy.baseUrlBackend + 'user/getlegal';
+            tools.proxy.updateVisibility = tools.proxy.baseUrlBackend + 'user/updatevisibility';
+            var userAppsLightbox = {
+                _table: null,
+                _tbody: null,
+                _addHeader: function () {
+                    var rowHead = UWA.createElement('thead'),
+                            row = UWA.createElement('tr', {'class': 'table-people-header'});
+
+                    UWA.createElement('th', {text: UWA.i18n('User Experiences name')}).inject(row);
+
+                    UWA.createElement('th', {text: UWA.i18n('ID')}).inject(row);
+
+                    // IR-240814V6R2014
+                    UWA.createElement('th', {text: UWA.i18n('3DEXPERIENCE platform')}).inject(row);
+
+                    UWA.createElement('th', {text: UWA.i18n('Type')}).inject(row);
+
+                    UWA.createElement('th', {text: UWA.i18n('Start date')}).inject(row);
+
+                    UWA.createElement('th', {text: UWA.i18n('Status')}).inject(row);
+                    row.inject(rowHead);
+                    rowHead.inject(this._table);
+
+                    this._tbody = UWA.createElement('tbody').inject(this._table);
+
+                    return this._tbody;
+                },
+                _addRow: function (data) {
+                    var licenses = data.licenses,
+                            env = data.env;
+                    for (var i = 0 , len = licenses.length; i < len; i++) {
+                        var isEven = this._tbody.childNodes.length % 2,
+                                row = UWA.createElement('tr', {'class': isEven ? 'even' : 'odd' }),
+                                license = licenses[i];
+                        UWA.createElement('td', {text: license.name || ''}).inject(row);
+
+                        UWA.createElement('td', {text: env.id === 'CustomEnvironment' ? '' : license.id}).inject(row);
+
+                        // IR-240814V6R2014
+                        UWA.createElement('td', {text: MyWidget.environment[env.id] ? MyWidget.environment[env.id] : (env.id === 'CustomEnvironment' ? env.displayName : UWA.i18n(UWA.i18n('All Platforms User Experiences'))) }).inject(row);
+
+                        UWA.createElement('td', {text: license.type || ''}).inject(row);
+
+                        UWA.createElement('td', {text: license.startDate || ''}).inject(row);
+
+                        //Remove column
+                        UWA.createElement('td', {
+                            html: license.state ? {
+                                tag: 'img',
+                                'class': 'remove-license-img',
+                                src: tools.proxy.baseUrl + 'widget/userslist/img/' + 'trash.png',
+                                title: 'Remove this license',
+                                events: {
+                                    click: function (license, userInfo) {
+                                        confirmLightbox.show(
+                                                UWA.i18n('Are you sure you want to delete the license {0} ?').format(license.name),
+                                                {
+                                                    yes: function () {
+                                                        widget.mask();
+                                                        var onComplete = function () {
+                                                            tools.message.success(UWA.i18n('{0} has been removed').format(license.name));
+                                                            //reopen view details
+                                                            var onComplete = function (data) {
+                                                                widget.unmask();
+                                                                userAppsLightbox.show(data.envlic, userInfo);
+                                                            };
+
+                                                            widget.mask();
+                                                            var params = {userid: userInfo.id};
+                                                            tools.request.get(tools.proxy.userlicenses, params, {
+                                                                onComplete: onComplete
+                                                            });
+                                                        };
+                                                        var params = {
+                                                            userid: userInfo.id,
+                                                            licenses: env.id + ':' + license.id
+                                                        };
+                                                        tools.request.put(tools.proxy.removeuserlicence, params, {
+                                                            onComplete: onComplete
+                                                        });
+                                                    },
+                                                    no: function () {
+                                                    }
+                                                });
+                                    }.bind(this, license, userAppsLightbox._userInfo)
+                                }
+                            } : {
+                                tag: 'span',
+                                text: UWA.i18n('Locked')
+                            }
+                        }).inject(row);
+                        row.inject(this._tbody);
+                    }
+                },
+                _getTable: function (data) {
+                    this._table = UWA.createElement('table', {'class': 'table'});
+                    this._addHeader();
+
+                    for (var i = 0 , len = data.length; i < len; i++) {
+                        this._addRow(data[i]);
+                    }
+
+                    return this._table;
+                },
+                _getDescription: function () {
+                    return '<div class="license-description">' + this._userInfo.lastName.ucfirst() + ' ' + this._userInfo.firstName.ucfirst() + '</div>';
+                },
+                _userInfo: null,
+                _getContent: function (data) {
+                    return {
+                        tag: 'div',
+                        'class': 'lightbox license-lightbox',
+                        styles: {
+                            borderRadius: '5px'
+                        },
+                        html: [
+                            {
+                                tag: 'div',
+                                'class': 'close-panel',
+                                html: {
+                                    tag: 'a',
+                                    html: '<img alt="close" title="close" src="' + tools.proxy.baseUrl + 'widget/appslist/img/cancel_app.png" />',
+                                    events: {
+                                        'click': function () {
+                                            MyWidget.lightbox.close();
+                                        }
+                                    }
+                                }
+                            },
+                            this._getDescription() ,
+                            this._getTable(data)
+                        ]
+                    };
+                },
+                show: function (data, userInfo) {
+                    this._userInfo = userInfo;
+                    MyWidget.lightbox = new Lightbox({
+                        closeable: false
+                    });
+                    MyWidget.lightbox.setContent(this._getContent(data)).inject(document.body);
+                    MyWidget.lightbox.open();
+                    tools.syncOverlay();
+                },
+                refresh: function (data) {
+                    MyWidget.lightbox.setContent(this._getContent(data));
+                }
+            };
+
+            var confirmLightbox = {
+                _getMessage: function (message) {
+                    return {
+                        tag: 'div',
+                        'class': 'confirm-message',
+                        text: message
+                    };
+                },
+                _getButtons: function (callbacks) {
+                    return {
+                        tag: 'div',
+                        'class': 'confirm-button-container',
+                        html: [
+                            {
+                                tag: 'div',
+                                'class': 'confirm-button',
+                                text: UWA.i18n('Yes'),
+                                events: {
+                                    click: function () {
+                                        confirmLightbox._oldContent = false;
+                                        MyWidget.lightbox.close();
+                                        callbacks.yes();
+                                    }
+                                }
+                            },
+                            {
+                                tag: 'div',
+                                'class': 'confirm-button',
+                                text: UWA.i18n('No'),
+                                events: {
+                                    click: function () {
+                                        confirmLightbox._close();
+                                        if (callbacks.no) {
+                                            callbacks.no();
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    };
+                },
+                _getContent: function (message, callbacks) {
+                    return {
+                        tag: 'div',
+                        'class': 'lightbox confirm-lightbox',
+                        styles: {
+                            borderRadius: '5px'
+                        },
+                        html: [
+                            {
+                                tag: 'div',
+                                'class': 'close-panel',
+                                html: {
+                                    tag: 'a',
+                                    html: '<img alt="close" title="close" src="' + tools.proxy.baseUrl + 'widget/appslist/img/cancel_app.png" />',
+                                    events: {
+                                        'click': function () {
+                                            confirmLightbox._close();
+                                        }
+                                    }
+                                }
+                            },
+                            this._getMessage(message),
+                            this._getButtons(callbacks)
+                        ]
+                    };
+                },
+                _close: function () {
+                    MyWidget.lightbox.close();
+                    if (confirmLightbox._oldContent) {
+                        UWA.log('has old content');
+                        MyWidget.lightbox = new Lightbox({
+                            closeable: false
+                        });
+
+                        MyWidget.lightbox.setContent(confirmLightbox._oldContent).inject(document.body);
+                        MyWidget.lightbox.open();
+                        tools.syncOverlay();
+                    }
+                    confirmLightbox._oldContent = false;
+                },
+                show: function (message, callbacks) {
+                    if (document.getElementsByClassName('"uwa-overlay')[0]) {
+                        confirmLightbox._oldContent = document.getElementsByClassName('uwa-overlay')[0].getChildren();
+                    }
+
+                    MyWidget.lightbox = new Lightbox({
+                        closeable: false
+                    });
+
+                    MyWidget.lightbox.setContent(this._getContent(message, callbacks)).inject(document.body);
+                    MyWidget.lightbox.open();
+                    tools.syncOverlay();
+
+                },
+                _oldContent: false
+            };
+
+            /**
+             * We create the global MyWidget object (it could be any other name).
+             * This object will be used to store variables and functions.
+             */
+            var MyWidget = {
+                /**
+                 * The count of data for user list
+                 */
+                offset: 0,
+                count: 0,
+                limit: 10,
+                query : '',
+                /**
+                 * Build the pager
+                 * @param count
+                 * @param offset
+                 */
+                buildPager: function (count, offset) {
+                    //return;//FIXME : hack for function
+                    MyWidget.count = count;
+                    MyWidget.offset = offset;
+                    //rebuild only if count change?
+                    //need offset
+                    var pager = new UWA.Controls.Pager({
+                        limit: MyWidget.limit,
+                        offset: offset,
+                        type: 1,
+                        pageLinks: 10,
+                        max: count,
+                        showPageLinks: true,
+                        length: count,
+                        events: {
+                            onOffsetChange: function (offset) {
+                                widget.mask();
+                                var params = {query:MyWidget.query, sort_direction: MyWidget.sorter.direction, sort: MyWidget.sorter.field, limit: MyWidget.limit, offset: offset};
+                                tools.request.get(tools.proxy.memberslist, params, {
+                                    onComplete: function (data) {
+                                        main(data);
+                                        MyWidget.buildPager(data.usersresults, offset);
+                                    }
+                                });
+                            }
+                        }
+                    });
+                    var pagerWrapper = UWA.createElement('div', {
+                        id: 'pager-' + widget.id,
+                        html: pager
+                    });
+                    var pagerWrapperDom = widget.getElement('#pager-' + widget.id);
+                    if (pagerWrapperDom) {
+                        pagerWrapperDom.destroy();
+                    }
+                    pagerWrapper.inject(widget.body, 'bottom');
+                },
+                sorter: {
+                    field: 'Last Name',
+                    direction: 'asc',
+                    /**
+                     * Set the value for the sort and refresh
+                     * @param fieldName
+                     */
+                    sort: function (fieldName) {
+                        MyWidget.offset = 0;
+                        if (fieldName === MyWidget.sorter.field && MyWidget.sorter.direction === 'asc') {
+                            MyWidget.sorter.direction = 'desc';
+                        } else {
+                            MyWidget.sorter.direction = 'asc';
+                        }
+                        MyWidget.sorter.field = fieldName;
+                        MyWidget.onRefresh();
+                    },
+                    /**
+                     * Return the class name of current sort direction
+                     * @param fieldName
+                     * @returns {string}
+                     */
+                    getClass: function (fieldName) {
+                        return (fieldName === MyWidget.sorter.field) ? 'sort sort-' + MyWidget.sorter.direction : 'sort';
+                    }
+                },
+                userList: {
+                    data: null,
+
+                    build: function () {
+
+                    },
+                    helpRow: {
+                        row: null,
+                        cell: null,
+                        list: null,
+                        isOpen: true,
+                        intId: null,
+                        step: 10,
+                        hide: function () {
+                            var margin = tools.getValueFromPx(this.list.getStyle('margin-top')),
+                                    size = this.list.getSize().height;
+                            if (margin > -size) {
+                                this.list.setStyle('margin-top', Math.max(margin - this.step, -size));
+                            } else {
+                                this.cell.hide();
+                                window.clearInterval(this.intId);
+                            }
+                        },
+                        show: function () {
+                            var margin = tools.getValueFromPx(this.list.getStyle('margin-top'));
+                            if (margin < 0) {
+                                this.list.setStyle('margin-top', Math.min(margin + this.step, 0));
+                            } else {
+                                window.clearInterval(this.intId);
+                            }
+                        },
+                        toggle: function () {
+                            this.isOpen = !this.isOpen;
+                            if (this.isOpen) {
+                                window.clearInterval(this.intId);
+                                this.cell.show();
+                                this.intId = window.setInterval(this.show.bind(this), 500 * this.step / this.list.getSize().height);
+                            } else {
+                                window.clearInterval(this.intId);
+                                this.intId = window.setInterval(this.hide.bind(this), 500 * this.step / this.list.getSize().height);
+                            }
+                        },
+                        initHide: function () {
+                            this.list.setStyle('margin-top', -this.list.getSize().height);
+                            this.cell.hide();
+                            this.isOpen = false;
+                        },
+                        add: function () {
+                            if (this.row === null) {
+                                this.row = UWA.createElement('tr', {'class': 'even' });
+                                UWA.createElement('td', {
+                                    id: 'platform-help',
+                                    colspan: MyWidget.userList.data.env.length + 5,
+                                    'class': 'platform-help',
+                                    html: {
+                                        tag: 'ul',
+                                        'class': 'platform-help-list',
+                                        id: 'platform-help-list',
+                                        html: [
+                                            {
+                                                tag: 'li',
+                                                'class': 'platform-help-element',
+                                                text: UWA.i18n('The Platform Management dashboard lets you add members to your 3DEXPERIENCE platforms and manage member access to apps and storage.')
+                                            },
+                                            {
+                                                tag: 'li',
+                                                'class': 'platform-help-element',
+                                                text: UWA.i18n('1. Invite users to the 3DEXPERIENCE platform in the People Management widget. Users vill receive an email invitation to create a DSPassport or sign in with one they already have.*')
+                                            },
+                                            {
+                                                tag: 'li',
+                                                'class': 'platform-help-element',
+                                                text: UWA.i18n('2. After the user signs in with a DSPassport in response to the email, use the Apps Management widget to give access to licenses and apps to the members.')
+                                            },
+                                            {
+                                                tag: 'li',
+                                                'class': 'platform-help-element',
+                                                text: UWA.i18n('3. Use the IFWE Compass medallion at the top of the page to go to the Collaborative Space Management app to give users access to content storage.')
+                                            },
+                                            {
+                                                tag: 'li',
+                                                'class': 'platform-help-element',
+                                                text: UWA.i18n('* New members will appear with the status \"Pending\" until they use the emailed link to sign in with a DSPassport. If necessary, you can refresh your screen to update member status.')
+                                            }
+                                        ]
+                                    }
+                                }).inject(this.row);
+                            }
+                            this.row.inject(MyWidget.userList.rowHead, 'top');
+                            this.cell = this.row.getElement('#platform-help');
+                            this.list = this.row.getElement('#platform-help-list');
+
+                        }
+
+                    },
+                    addHeader: function (environments) {
+                        var row = UWA.createElement('tr', {'class': 'table-people-header'});
+
+                        //Removed
+                        //UWA.createElement('th', {text : 'Picture'}).inject(row);
+
+                        //lastname
+                        UWA.createElement('th', {
+                            'class': 'sortable',
+                            html: '<img src="' + tools.proxy.baseUrl + 'widget/userslist/img/s.gif" class="' + MyWidget.sorter.getClass('Last Name') + '"/>' + UWA.i18n('Last Name'),
+                            events: {
+                                click: function () {
+                                    MyWidget.sorter.sort('Last Name');
+                                }
+                            }
+                        }).inject(row);
+
+                        //firstname
+                        UWA.createElement('th', {
+                            'class': 'sortable',
+                            html: '<img src="' + tools.proxy.baseUrl + 'widget/userslist/img/s.gif" class="' + MyWidget.sorter.getClass('First Name') + '"/>' + UWA.i18n('First Name'),
+                            events: {
+                                click: function () {
+                                    MyWidget.sorter.sort('First Name');
+                                }
+                            }
+                        }).inject(row);
+
+                        //email
+                        UWA.createElement('th', {
+                            'class': 'sortable',
+                            html: '<img src="' + tools.proxy.baseUrl + 'widget/userslist/img/s.gif" class="' + MyWidget.sorter.getClass('Email Address') + '"/>' + UWA.i18n('Email'),
+                            events: {
+                                click: function () {
+                                    MyWidget.sorter.sort('Email Address');
+                                }
+                            }
+                        }).inject(row);
+
+                        MyWidget.environment = [];
+                        //environments
+                        for (var i = 0 , len = environments.length; i < len; i++) {
+                            MyWidget.environment[environments[i].id] = environments[i].displayName !== '' ? environments[i].displayName + '' : environments[i].id;
+                            UWA.createElement('th',
+                                    {
+                                        'id': 'th-platform-' + environments[i].id,
+                                        'class': 'normal-mode column-environment',
+                                        html: [
+                                            //Environment view cell
+                                            {
+                                                tag: 'div',
+                                                'class': 'normal-cell environment-name',
+                                                title: 'availability : ' + tools.getValue(environments[i].freeLicenses) + '/' + tools.getValue(environments[i].totalLicenses),
+                                                html: [
+                                                    {
+                                                        tag: 'span',
+                                                        text: environments[i].displayName !== '' ? environments[i].displayName + '' : environments[i].id
+                                                    },
+                                                    {
+                                                        tag: 'img',
+                                                        src: tools.proxy.baseUrl + 'widget/userslist/img/edit.png',
+                                                        title: UWA.i18n('Edit 3DEXPERIENCE platform Name'),
+                                                        'class': 'edit-img'
+                                                    }
+                                                ], events: {
+                                                click: function (envid, event) {
+                                                    var th = widget.getElement('#th-platform-' + envid);
+                                                    th.className = 'edit-mode column-environment';
+
+                                                    document.getElementById('edit-oid-name-' + envid).focus();
+                                                    document.getElementById('edit-oid-name-' + envid).select();
+                                                    MyWidget.EditEnvironmentNameId = envid;
+                                                    UWA.Event.stop(event);
+                                                }.bind(this, environments[i].id)
+                                            }
+                                            },
+                                            //Environment edit cells
+                                            {
+                                                tag: 'div',
+                                                'class': 'edit-cell',
+                                                html: [
+                                                    {
+                                                        tag: 'input',
+                                                        id: 'edit-oid-name-' + environments[i].id,
+                                                        'class': 'edit-environment-name',
+                                                        value: environments[i].displayName !== '' ? environments[i].displayName : environments[i].id,
+                                                        oldvalue: environments[i].displayName,
+                                                        events: {
+                                                            //on enter save
+                                                            keypress: function (envid, event) {
+                                                                if (event.keyCode === 13) {
+                                                                    widget.mask();
+                                                                    var editedOid = widget.getElement('#edit-oid-name-' + envid);
+
+                                                                    //call to environmentupdate
+                                                                    var onComplete = function () {
+                                                                        tools.message.success(UWA.i18n('Your environment name has been updated'));
+                                                                        MyWidget.onRefresh(true);
+                                                                    };
+
+                                                                    var params = {id: envid, name: editedOid.value};
+                                                                    tools.request.put(tools.proxy.environmentupdate, params, {
+                                                                        onComplete: onComplete
+                                                                    });
+                                                                }
+                                                            }.bind(this, environments[i].id),
+                                                            click: function (event) {
+                                                                UWA.Event.stop(event);
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }).inject(row);
+                        }
+                        //Apps
+                        UWA.createElement('th', {text: UWA.i18n('Granted User Experiences')}).inject(row);
+
+                        //remove
+                        UWA.createElement('th', {text: UWA.i18n('Remove')}).inject(row);
+
+                        row.inject(MyWidget.userList.rowHead);
+                        MyWidget.userList.rowHead.inject(MyWidget.userList.tableHeader);
+
+                        var tbody = UWA.createElement('tbody').inject(MyWidget.userList.tableWrapper);
+                        return tbody;
+                    },
+                    addInviteRow: function () {
+                        var row = UWA.createElement('tr', {
+                                    'class': 'odd' }
+                        );
+
+                        //invite
+                        UWA.createElement('td', {
+                            id: 'invite-user-view',
+                            colspan: MyWidget.userList.data.env.length + 4,
+                            'class': 'invite-user',
+                            html: {
+                                tag: 'a',
+                                html: [
+                                    {
+                                        tag: 'span',
+                                        text: UWA.i18n('Invite member')
+                                    },
+                                    {
+                                        tag: 'img',
+                                        'class': 'invite-user-img',
+                                        src: tools.proxy.baseUrl + 'widget/userslist/img/inviteuser.png'
+                                    }
+                                ],
+                                events: {
+                                    click: function () {
+                                        widget.getElement('#invite-user-view').hide();
+                                        widget.getElement('#invite-user').show();
+                                    }
+                                }
+                            }
+                        }).inject(row);
+
+
+                        //invite user
+                        UWA.createElement('td', {
+                            id: 'invite-user',
+                            colspan: MyWidget.userList.data.env.length + 4,
+                            'class': 'invite-user',
+                            html: {
+                                tag: 'div',
+                                id: 'add-user-wrapper',
+                                html: [
+                                    {
+                                        id: 'add-user',
+                                        tag: 'input',
+                                        title: 'Enter user email',
+                                        events: {
+                                            //on enter save
+                                            keypress: function (event) {
+                                                if (event.keyCode === 13) {
+                                                    var email = document.getElementById('add-user').value;
+                                                    //Call inviteuser
+                                                    if (!tools.validateEmail(email)) {
+                                                        tools.message.alert(UWA.i18n('Your email is invalid'));
+                                                    } else {
+                                                        widget.mask();
+                                                        var onComplete = function () {
+                                                            tools.message.success(UWA.i18n('Your invitation has been sent'));
+                                                            MyWidget.onRefresh();
+                                                        }.bind(this);
+
+                                                        var params = {email: email};
+                                                        tools.request.put(tools.proxy.inviteuser, params, {
+                                                            onComplete: onComplete
+                                                        });
+                                                    }
+                                                }
+                                            }.bind(this)
+                                        }
+                                    },
+                                    {
+                                        tag: 'img',
+                                        title: 'Invite user',
+                                        'class': 'invite-user-img',
+                                        src: tools.proxy.baseUrl + 'widget/userslist/img/' + 'inviteuser.png',
+                                        events: {
+                                            click: function () {
+                                                //same as key press on add-user - should try todo add-user.presskey('enter')
+                                                var email = document.getElementById('add-user').value;
+                                                //Call inviteuser
+                                                if (!tools.validateEmail(email)) {
+                                                    tools.message.alert(UWA.i18n('Your email is invalid'));
+                                                } else {
+                                                    widget.mask();
+                                                    var onComplete = function () {
+                                                        tools.message.success(UWA.i18n('Your invitation has been sent'));
+                                                        MyWidget.onRefresh();
+                                                    }.bind(this);
+
+                                                    var params = {email: email};
+                                                    tools.request.put(tools.proxy.inviteuser, params, {
+                                                        onComplete: onComplete
+                                                    });
+                                                }
+                                            }.bind(this)
+                                        }
+                                    },
+                                    {
+                                        tag: 'a',
+                                        text: UWA.i18n('Cancel'),
+                                        events: {
+                                            click: function () {
+                                                widget.getElement('#invite-user-view').show();
+                                                widget.getElement('#invite-user').hide();
+                                                widget.getElement('#add-user').value = '';
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }).inject(row);
+
+                        UWA.createElement('td', {
+                            id: 'platform-help-button',
+                            'class': 'platform-help-button',
+                            html: {
+                                tag: 'img',
+                                'class': 'platform-help-img',
+                                src: tools.proxy.baseUrl + 'widget/userslist/img/help.png',
+                                events: {
+                                    click: MyWidget.userList.helpRow.toggle.bind(MyWidget.userList.helpRow)
+                                }
+                            }
+                        }).inject(row);
+
+
+                        row.inject(MyWidget.userList.rowHead, 'top');
+                    },
+                    addRow: function (data, tbody, environments) {
+                        var displayWhenPending = true;
+                        var isEven = tbody.childNodes.length % 2;
+                        var rowClass = isEven ? 'even' : 'odd';
+                        rowClass += data.state === 1 ? ' state-pending' : '';
+                        var row = UWA.createElement('tr', {
+                                    'class': rowClass }
+                        );
+                        // remove @ from id in case it is an email
+                        var userid = data.id.replace(/@/g, '__at__');
+
+                        //lastname
+                        UWA.createElement('td', {
+                            text: data.state === '1' ? UWA.i18n('Pending') : data.lastName.ucfirst()
+                        }).inject(row);
+
+                        //firstname
+                        UWA.createElement('td', {
+                            text: data.state === '1' ? '' : data.firstName.ucfirst()
+                        }).inject(row);
+
+                        //email
+                        UWA.createElement('td', {
+                            //'class'	: data.state == 1 ? 'state-pending' : '' ,
+                            text: data.email
+                        }).inject(row);
+
+                        //Removed
+                        //picturepath
+                        /*UWA.createElement('td', {
+                         html : data.state == 1 ? {} : {
+                         tag : 'img',
+                         src : (data.picturePath) ? data.picturePath : tools.proxy.baseUrl + 'widget/userslist/img/' + 'default-user.png',
+                         'class' : 'member-picture'
+                         }
+                         }).inject(row);*/
+
+                        //user environment
+                        for (var x = 0 , xlen = environments.length; x < xlen; x++) {
+                            if (displayWhenPending || data.state === '0') {
+                                var envOid = environments[x].id;
+                                var found = false;
+                                for (var i = 0 , len = data.env.length; i < len; i++) {
+                                    var userEnv = data.env[i];
+                                    var oid = userEnv.id;
+                                    if (oid === environments[x].id) {
+                                        var data2 = {visibilityId: userEnv.visibilityId, role: userEnv.role, roleId: userEnv.roleId, userInfo: data},
+                                                cellId = 'administration-role-' + userid + oid;
+
+                                        UWA.createElement('td', {
+                                            id: cellId,
+                                            html: MyWidget.editRolePanel.getRow(data2, oid)
+                                        }).inject(row);
+                                        found = true;
+                                        break;
+                                    }
+                                }
+
+                                //
+                                if (found === false) {
+                                    var data2 = {role: null, roleId: null, userInfo: data},
+                                            cellId = 'administration-role-' + userid + envOid;
+
+                                    UWA.createElement('td', {
+                                        id: cellId,
+                                        html: MyWidget.editRolePanel.getRow(data2, envOid)
+                                    }).inject(row);
+                                }
+
+                            } else {
+                                UWA.createElement('td', {
+                                    text: ''
+                                }).inject(row);
+                            }
+                        }
+
+                        //Apps collumn
+                        var userAppsCountBtn = {
+                            tag: 'a',
+                            text: UWA.i18n('View details'),
+                            events: {
+                                click: function (userInfo) {
+                                    //call to userlicenses
+                                    var onComplete = function (data) {
+                                        widget.unmask();
+                                        userAppsLightbox.show(data.envlic, userInfo);
+                                    };
+
+                                    widget.mask();
+                                    var params = {userid: userInfo.id || userInfo.email};
+                                    tools.request.get(tools.proxy.userlicenses, params, {
+                                        onComplete: onComplete
+                                    });
+
+
+                                }.bind(this, data)
+                            }
+                        };
+                        UWA.createElement('td', !displayWhenPending && data.state === '1' ? {} : {
+                            html: [userAppsCountBtn]
+                        }).inject(row);
+
+                        //remove
+                        if (data.state === '1') {
+                            //remove pending should be here?
+                            UWA.createElement('td', {
+                                // Remove pending user: uncomment it when backend code is available
+                                html: {
+                                    tag: 'img',
+                                    'class': 'remove-user-img',
+                                    src: tools.proxy.baseUrl + 'widget/userslist/img/trash.png',
+                                    title: 'Delete this user',
+                                    events: {
+                                        click: function () {
+                                            confirmLightbox.show(
+                                                    UWA.i18n('Are you sure you want to delete the user {0} ?').format(data.email),
+                                                    {yes: function () {
+                                                        widget.mask();
+                                                        var onComplete = function () {
+                                                            tools.message.success(UWA.i18n('{0} has been removed').format(data.email));
+                                                            MyWidget.onRefresh();
+                                                        };
+
+                                                        var params = {email: data.email};
+                                                        tools.request.put(tools.proxy.deleteinvitation, params, {
+                                                            onComplete: onComplete
+                                                        });
+                                                    }});
+                                        }
+                                    }
+                                }}).inject(row);
+                        } else if (data.isRemovable) {
+                            //remove user is not pending and if we can
+                            UWA.createElement('td', {
+                                html: {
+                                    tag: 'img',
+                                    src: tools.proxy.baseUrl + 'widget/userslist/img/trash.png',
+                                    'class': 'img-remove-user',
+                                    events: {
+                                        click: function () {
+                                            confirmLightbox.show(
+                                                    UWA.i18n('Are you sure you want to delete the user {0} ?').format(data.email),
+                                                    {yes: function () {
+                                                        widget.mask();
+                                                        var onComplete = function () {
+                                                            tools.message.success(UWA.i18n('{0} has been removed').format(data.email));
+                                                            MyWidget.onRefresh();
+                                                        };
+
+                                                        var params = {id: data.id};
+                                                        tools.request.put(tools.proxy.removeuser, params, {
+                                                            onComplete: onComplete
+                                                        });
+                                                    }});
+                                        }
+                                    }
+                                }
+                            }).inject(row);
+                        } else {
+                            UWA.createElement('td', {
+                                /*
+                                 html: {
+                                 tag: 'img',
+                                 src: tools.proxy.baseUrl + 'widget/userslist/img/' + 'trash.png',
+                                 'class': 'img-remove-user-disable',
+                                 title: 'This user can\'t be removed.'
+                                 }
+                                 */
+                            }).inject(row);
+
+                        }
+
+                        row.inject(tbody);
+                    }
+                },
+                /**
+                 * Legal sync
+                 * @param fatherId
+                 * @param oid
+                 */
+                syncLegal: function (fatherId, oid, userid) {
+
+                    tools.request.get(tools.proxy.userlegal, {userid: userid}, {
+                        onComplete: function (data) {
+                            data = data.tos;
+                            for (var i = data.length - 1; i >= 0; i--) {
+                                if (data[i].id === oid) {
+                                    var tosCheckbox = new Input.Checkbox({
+                                        'className': 'small16',
+                                        attributes: {
+                                            checked: data[i].accepted === "true"
+                                        },
+                                        events: {
+                                            'onClick': function (e) {
+                                                //FIXME : hack for readonly...
+                                                this.check(!this.isChecked());
+                                            }
+                                        }
+                                    });
+                                    var dpCheckbox = new Input.Checkbox({
+                                        'className': 'small16',
+                                        attributes: {
+                                            checked: data[i].accepted === "true"
+                                        },
+                                        events: {
+                                            'onClick': function (e) {
+                                                //FIXME : hack for readonly...
+                                                this.check(!this.isChecked());
+                                            }
+                                        }
+                                    });
+                                    var tos = widget.getElement('#' + fatherId + ' .tos ');
+                                    tosCheckbox.inject(tos, 'top');
+                                    widget.getElement('#' + fatherId + ' .tos img').destroy();
+                                    var dp = widget.getElement('#' + fatherId + ' .dp ');
+                                    dpCheckbox.inject(dp, 'top');
+                                    widget.getElement('#' + fatherId + ' .dp img').destroy();
+                                    break;
+                                }
+                            }
+                        }
+                    });
+
+                },
+                userid: null,
+                editRolePanel: {
+                    _roles: null,
+                    show: function (containerId, userInfo, oid, currentRoleId, data, y, visibility) {
+                        var userid = userInfo.id || userInfo.email;
+                        this.data.oid = oid;
+                        this.data.userid = userid;
+                        this.data.roleid = currentRoleId;
+                        this.close();
+
+                        var rolesPanel = UWA.createElement('div', {
+                            'class': 'edit-role-panel' + (y > (widget.getInt('limit') / 2) ? ' panel-top' : ' panel-bottom'),
+                            id: this.id
+                        });
+                        var currentData = '';
+                        var role = UWA.createElement('div', {
+                            'class': 'close-panel',
+                            html: {
+                                tag: 'a',
+                                html: '<img alt="close" title="close" src="' + tools.proxy.baseUrl + 'widget/appslist/img/cancel_app.png" />',
+                                events: {
+                                    'click': function () {
+                                        MyWidget.editRolePanel.close();
+                                    }
+                                }
+                            }
+                        }).inject(rolesPanel);
+                        var rolesPanelList = UWA.createElement('ul', {
+
+                        });
+                        var isCurrentRole = false;
+                        //list all roles for rolelist
+                        for (var i = 0 , len = data.rolelist.roles.length; i < len; i++) {
+                            currentData = data.rolelist.roles[i];
+                            isCurrentRole = currentRoleId === currentData.id;
+                            if (MyWidget.userid !== userInfo.id || isCurrentRole) {
+                                var currentRoleRadio = new UWA.Controls.Input.Radio({
+                                    'className': 'small16',
+                                    attributes: {
+                                        checked: isCurrentRole
+                                    }
+                                });
+                                var role = UWA.createElement('li', {
+                                    html: [
+                                        {
+                                            tag: 'a',
+                                            html: [
+                                                currentRoleRadio,
+                                                {
+                                                    tag: 'div',
+                                                    'class': 'checkbox-label',
+                                                    text: currentData.name
+                                                }
+                                            ],
+                                            'class': isCurrentRole ? 'current' : '',
+                                            title: isCurrentRole ? 'Current role of selected user' : ''
+                                        }
+                                    ]
+                                });
+
+                                if (!isCurrentRole) {
+                                    role.addEvent('click', function (roleid, userid, oid, selectedValue) {
+                                        MyWidget.editRolePanel.data.userid = userid;
+                                        MyWidget.editRolePanel.data.roleid = roleid;
+                                        MyWidget.editRolePanel.data.oid = oid;
+                                        MyWidget.editRolePanel.data.selectedValue = selectedValue;
+                                        MyWidget.editRolePanel.data.action = 'save';
+                                        MyWidget.editRolePanel.close();
+                                        MyWidget.editRolePanel.save();
+                                    }.bind(role, currentData.id, userid, oid, currentData.name, currentData));
+                                }
+                                role.inject(rolesPanelList);
+                            }
+                        }
+
+                        //isInternal
+                        if (false && visibility) {
+                            UWA.createElement('li', {
+                                'class': 'divider'
+                            }).inject(rolesPanelList);
+                            for (var i = 0 , len = data.visibilitylist.visibilities.length; i < len; i++) {
+                                var currentVisibility = data.visibilitylist.visibilities[i];
+                                var isCurrentVisibility = currentVisibility.id === visibility;
+
+                                // isInternal
+                                var radio = new UWA.Controls.Input.Radio({
+                                    'className': 'small16',
+                                    attributes: {
+                                        checked: isCurrentVisibility,
+                                        id: 'visibility-radio' + currentVisibility.id + widget.id
+                                    }
+                                });
+
+                                UWA.createElement('li', {
+                                    html: [
+                                        {
+                                            tag: 'a',
+                                            id: 'visibility-' + currentVisibility.id + widget.id,
+                                            html: [
+                                                radio,
+                                                {
+                                                    tag: 'div',
+                                                    'class': 'checkbox-label',
+                                                    text: currentVisibility.name
+                                                }
+                                            ],
+                                            'class': isCurrentVisibility ? 'current' : '',
+                                            events: {
+                                                click: function () {
+                                                    for (var i = 0 , len = data.visibilitylist.visibilities.length; i < len; i++) {
+
+                                                        var currentVisibility = data.visibilitylist.visibilities[i];
+                                                        var loadInternal = UWA.createElement('img', {
+                                                            'class': 'check-img',
+                                                            src: tools.proxy.baseUrl + 'widget/userslist/img/loader-legal.gif'
+                                                        });
+                                                        loadInternal.inject(widget.getElement('#visibility-' + currentVisibility.id + widget.id), 'top');
+                                                        var radio = widget.getElement('#visibility-radio' + currentVisibility.id + widget.id).getParent();
+                                                        radio.hide();
+                                                        tools.request.put(tools.proxy.updateVisibility, {userid: userid, visibility: 1}, {
+                                                            onComplete: function () {
+                                                                loadInternal.destroy();
+                                                                radio.show();
+                                                                tools.message.success(UWA.i18n('Visibility has been updated'));
+                                                                if (this.id === currentVisibility.id) {
+                                                                    widget.getElement('#visibility-' + currentVisibility.id + widget.id).addClass('current');
+                                                                    radio.addClass('checked');
+                                                                } else {
+                                                                    widget.getElement('#visibility-' + currentVisibility.id + widget.id).removeClass('current');
+                                                                    radio.removeClass('checked');
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                }.bind(currentVisibility)
+                                            }
+                                        }
+                                    ]
+                                }).inject(rolesPanelList);
+                                /*
+                                 // isExternal
+                                 UWA.createElement('li', {
+                                 html: [
+                                 {
+                                 tag: 'a',
+                                 id: 'external-' + widget.id,
+                                 html: [
+                                 externalRadio,
+                                 {
+                                 tag: 'div',
+                                 'class': 'checkbox-label',
+                                 text: UWA.i18n('External')
+                                 }
+                                 ],
+                                 'class': isInternal === false ? 'current' : '',
+                                 events: {
+                                 click: function () {
+                                 var loadInternal = UWA.createElement('img', {
+                                 'class': 'check-img',
+                                 src: tools.proxy.baseUrl + 'widget/userslist/img/loader-legal.gif'
+                                 });
+                                 externalRadio.hide();
+                                 internalRadio.hide();
+                                 loadInternal.inject(widget.getElement('#internal-' + widget.id), 'top');
+                                 var loadExternal = UWA.createElement('img', {
+                                 'class': 'check-img',
+                                 src: tools.proxy.baseUrl + 'widget/userslist/img/loader-legal.gif'
+                                 });
+                                 loadExternal.inject(widget.getElement('#external-' + widget.id), 'top')
+                                 tools.request.put(tools.proxy.updateVisibility, {userid: userid, visibility: 1}, {
+                                 onComplete: function () {
+                                 loadInternal.destroy();
+                                 loadExternal.destroy();
+                                 externalRadio.show();
+                                 internalRadio.show();
+                                 tools.message.success(UWA.i18n('Visibility has been updated'));
+                                 widget.getElement('#external-' + widget.id).addClass('current');
+                                 widget.getElement('#internal-' + widget.id).removeClass('current');
+                                 externalRadio.check(true);
+                                 internalRadio.check(false);
+                                 }
+                                 });
+                                 }
+                                 }
+                                 }
+                                 ]
+                                 }).inject(rolesPanelList);
+                                 */
+                            }
+                        }
+
+                        //DP + TOS
+                        UWA.createElement('li', {
+                            'class': 'divider'
+                        }).inject(rolesPanelList);
+
+                        // TOS
+                        UWA.createElement('li', {
+                            html: [
+                                {
+                                    tag: 'a',
+                                    'class': 'current tos',
+                                    html: [
+                                        {
+                                            tag: 'img',
+                                            'class': 'check-img',
+                                            'src': tools.proxy.baseUrl + 'widget/userslist/img/loader-legal.gif'
+                                        },
+                                        {
+                                            tag: 'span',
+                                            html: 'Term of service'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }).inject(rolesPanelList);
+
+                        // DP
+                        UWA.createElement('li', {
+                            html: [
+                                {
+                                    tag: 'a',
+                                    'class': 'current dp',
+                                    html: [
+                                        {
+                                            tag: 'img',
+                                            'class': 'check-img',
+                                            'src': tools.proxy.baseUrl + 'widget/userslist/img/loader-legal.gif'
+                                        },
+                                        {
+                                            tag: 'span',
+                                            html: 'Data Privacy'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }).inject(rolesPanelList);
+
+                        if (MyWidget.userid !== userInfo.id) {
+                            UWA.createElement('li', {
+                                'class': 'divider'
+                            }).inject(rolesPanelList);
+                            //remove Action
+                            UWA.createElement('li', {
+                                'class': 'remove-role',
+                                html: {
+                                    tag: 'a',
+                                    text: UWA.i18n('Remove'),
+                                    events: {
+                                        click: function (userInfo, oid, selectedValue) {
+                                            confirmLightbox.show(
+                                                    UWA.i18n('Are you sure you want to remove the user {0} ?').format(userInfo.email),
+                                                    {
+                                                        yes: function () {
+                                                            MyWidget.editRolePanel.close();
+                                                            widget.mask();
+                                                            var onComplete = function () {
+                                                                tools.message.success(UWA.i18n('{0} has been removed').format(selectedValue));
+                                                                MyWidget.onRefresh();
+                                                            };
+                                                            var params = {userid: userInfo.id, envid: oid};
+                                                            tools.request.put(tools.proxy.removeuserrole, params, {
+                                                                onComplete: onComplete
+                                                            });
+                                                        }
+                                                    }
+                                            );
+                                        }.bind(role, userInfo, oid, currentData.name)
+                                    }
+                                }
+                            }).inject(rolesPanelList);
+                        }
+                        rolesPanelList.inject(rolesPanel);
+                        // IR-228333V6R2014 -> Escape dots in ID
+                        // HF-239277V6R2014 ->  Escape multiple dots in ID
+                        var containerPanel = widget.getElement('#' + containerId.replace(/\./g, '\\.')).getChildren()[0];
+                        this.row = containerPanel;
+                        rolesPanel.inject(containerPanel);
+
+                        //
+                        MyWidget.syncLegal(this.id, oid, userid);
+                    },
+                    id: 'edit-role-panel',
+                    row: null,
+                    close: function () {
+                        var mainPanel = widget.getElement('#' + this.id);
+                        if (mainPanel) {
+                            mainPanel.destroy();
+                        }
+                    },
+                    updateRow: function () {
+                        //clean the row
+                        this.row.empty();
+                        //update
+                        var editModeRow = [
+                            {
+                                tag: 'div',
+                                text: this.data.selectedValue,
+                                'class': 'adminrole unsaved'
+                            },
+                            {
+                                tag: 'div',
+                                html: [
+                                    {
+                                        tag: 'a',
+                                        text: UWA.i18n('Save'),
+                                        events: {
+                                            click: function (event) {
+                                                MyWidget.editRolePanel.save();
+                                                UWA.Event.stop(event);
+                                            }
+                                        }
+                                    },
+                                    {
+                                        html: '&nbsp;'
+                                    },
+                                    {
+                                        tag: 'a',
+                                        text: UWA.i18n('Cancel'),
+                                        events: {
+                                            click: function (event) {
+                                                //need to get the old data how?
+                                                var cmp = MyWidget.editRolePanel;
+                                                var row = cmp.getRow(
+                                                        {
+                                                            userInfo: cmp.dataBeforeChange.userInfo,
+                                                            role: cmp.dataBeforeChange.selectedValue,
+                                                            roleId: cmp.dataBeforeChange.roleid
+                                                        },
+                                                        cmp.dataBeforeChange.oid);
+                                                cmp.row.setHTML(row);
+                                                UWA.Event.stop(event);
+                                            }
+                                        }
+                                    }
+                                ]
+
+                            }
+                        ];
+                        //inject didnt work.... so use setHTML
+                        this.row.setHTML(editModeRow);
+                    },
+                    rowBeforeEdition: null,
+                    getRow: function (data, oid) {
+                        var userInfo = data.userInfo;
+                        var userid = userInfo.id || userInfo.email;
+                        var role = data.role;
+                        var roleid = data.roleId;
+                        var caseId = 'administration-role-' + userid.replace(/@/g, '__at__') + oid;
+                        var normalRow;
+                        //no role
+                        if (roleid === null) {
+                            //Cell when no role
+                            normalRow = {
+                                tag: 'div',
+                                'class': 'administration-role',
+                                html: [
+                                    {
+                                        tag: 'a',
+                                        text: UWA.i18n('Grant access'),
+                                        events: {
+                                            click: function (envid, userid) {
+                                                widget.mask();
+                                                var onComplete = function () {
+                                                    tools.message.success(UWA.i18n('Member role has been updated'));
+                                                    MyWidget.onRefresh();
+                                                };
+
+                                                //call to usergrantplatform
+                                                var params = {userid: userid, envid: envid};
+                                                tools.request.put(tools.proxy.usergrantplatform, params, {
+                                                    onComplete: onComplete
+                                                });
+
+                                            }.bind(this, oid, userid)
+                                        }
+                                    }
+                                ]};
+                        } else {
+                            normalRow = {
+                                tag: 'div',
+                                'class': 'administration-role',
+                                html: {
+                                    tag: 'div',
+                                    'class': 'edit-role-link',
+                                    html: [
+                                        {
+                                            tag: 'div',
+                                            'class': 'adminrole',
+                                            html: [
+                                                {
+                                                    tag: 'span',
+                                                    text: role
+                                                },
+                                                {
+                                                    tag: 'img',
+                                                    src: tools.proxy.baseUrl + 'widget/userslist/img/edit.png',
+                                                    'class': 'edit-img',
+                                                    title: UWA.i18n('Edit this role')
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    events: {
+                                        click: function (caseId, roleid, oid, role, visibilityId, e) {
+                                            // Get click position relative to scroller to determine edit role panel position
+                                            var y = UWA.Event.getPosition(e).y - widget.getElement('.uwa-scroller').getOffsets().y;
+                                            UWA.log(y);
+                                            MyWidget.editRolePanel.dataBeforeChange.oid = oid;
+                                            MyWidget.editRolePanel.dataBeforeChange.userInfo = userInfo;
+                                            MyWidget.editRolePanel.dataBeforeChange.userid = userid;
+                                            MyWidget.editRolePanel.dataBeforeChange.roleid = roleid;
+                                            MyWidget.editRolePanel.dataBeforeChange.selectedValue = role;
+                                            MyWidget.editRolePanel.dataBeforeChange.caseId = caseId;
+                                            //
+                                            if (MyWidget.userid === null) {
+                                                widget.mask();
+                                                var baseUrl = window.location.protocol + '//' + window.location.host + '/';
+                                                var requestSettings = {
+                                                    timeout: 15000,
+                                                    method: 'GET',
+                                                    type: 'json',
+                                                    onFailure: function (error) {
+                                                        UWA.log(error);
+                                                    }
+
+                                                };
+
+                                                requestSettings.onComplete = function (data) {
+                                                    MyWidget.userid = data.result;
+                                                    //load role list from backend
+                                                    tools.request.get(tools.proxy.listrole, {}, {
+                                                        onComplete: function (data) {
+                                                            widget.unmask();
+                                                            var d = MyWidget.editRolePanel.dataBeforeChange;
+                                                            MyWidget.editRolePanel._roles = data;
+                                                            // internal vs external
+                                                            // data.visibility : 0 = internal, 1 = external
+                                                            //tools.request.get(tools.proxy.getroles, {userid : userid},{
+                                                            //    onComplete: function (data) {
+                                                            MyWidget.editRolePanel.show(d.caseId, d.userInfo, d.oid, d.roleid, MyWidget.editRolePanel._roles, y, visibilityId);
+                                                            //    }
+                                                            //);
+                                                        }
+                                                    });
+                                                };
+                                                //call ifwe backend to get current user id
+                                                UWA.Data.request(baseUrl + 'api/passport/trigram', requestSettings);
+                                            } else {
+                                                var d = MyWidget.editRolePanel.dataBeforeChange;
+                                                // internal vs external
+                                                // data.visibility : 0 = internal, 1 = external
+                                                //tools.request.get(tools.proxy.getroles, {userid : userid},{
+                                                //    onComplete: function (data) {
+                                                MyWidget.editRolePanel.show(d.caseId, d.userInfo, d.oid, d.roleid, MyWidget.editRolePanel._roles, y, visibilityId);
+                                                //    }
+                                                //});
+                                            }
+                                        }.bind(this, caseId, roleid, oid, role, data.visibilityId)
+                                    }
+                                }
+                            };
+                        }
+
+                        return normalRow;
+                    },
+                    data: {
+                        oid: null,
+                        userid: null,
+                        roleid: null,
+                        action: null,
+                        selectedValue: null
+                    },
+                    dataBeforeChange: {
+                        oid: null,
+                        userid: null,
+                        roleid: null,
+                        selectedValue: null
+                    },
+                    resetData: function () {
+                        this.data.oid = null;
+                        this.data.userid = null;
+                        this.data.roleid = null;
+                        this.data.action = null;
+                        this.data.selectedValue = null;
+                        this.dataBeforeChange.oid = null;
+                        this.dataBeforeChange.userid = null;
+                        this.dataBeforeChange.roleid = null;
+                        this.dataBeforeChange.selectedValue = null;
+                    },
+                    save: function () {
+                        widget.mask();
+                        //call to userupdaterole
+                        var onComplete = function () {
+                            tools.message.success(UWA.i18n('Member role has been updated'));
+                            MyWidget.onRefresh();
+                        };
+
+                        //call to updateuserrole
+                        var params = {userid: this.data.userid, roleid: this.data.roleid, envid: this.data.oid};
+                        tools.request.put(tools.proxy.userupdaterole, params, {
+                            onComplete: onComplete
+                        });
+                    }
+                },
+                /**
+                 * Get the user lang
+                 * @returns {string}
+                 */
+                getLang: function () {
+                    return widget.lang.substr(0, 2);
+                },
+                /**
+                 * Load I18n
+                 * @param callback - the callback function
+                 */
+                loadI18n: function (callback) {
+                    if (MyWidget.getLang() != 'en') {
+                        var params = {};
+                        tools.proxy.i18n = tools.proxy.baseUrl + 'widget/userslist/lang/' + MyWidget.getLang() + '.json';
+                        tools.request.get(tools.proxy.i18n, params, {
+                            onFailure: function () {
+                                //no trad
+                                callback();
+                            },
+                            onComplete: function (data) {
+                                UWA.i18n(data);
+                                callback();
+                            }
+                        });
+                    } else {
+                        callback();
+                    }
+
+                },
+                /**
+                 * Load i18n and load widget
+                 */
+                // TODO remove when on WP (see bottom)
+                isInit: false,
+                onInit: function () {
+                    if (!MyWidget.isInit) {
+                        MyWidget.isInit = true;
+                        MyWidget.loadI18n(MyWidget.onLoad);
+                    }
+                },
+                /*
+                 The onLoad() function is the first one,
+                 it will be triggered by widget "onLoad" event.
+                 */
+                onLoad: function () {
+                    widget.setTitle(UWA.i18n('People Management - Members'));
+
+                    var firstManagerToken = tools.getToken();
+                    if (firstManagerToken) {
+                        widget.mask();
+                        var onComplete = function () {
+                            tools.message.success(UWA.i18n('Your have been set as first manager'));
+                            MyWidget.onRefresh(true);
+                        };
+
+                        var requestSettings = {};
+                        requestSettings.timeout = 15000;
+                        requestSettings.method = 'GET';
+                        requestSettings.type = 'json';
+                        requestSettings.onFailure = function (error) {
+                            UWA.log(error);
+                        };
+
+                        requestSettings.onComplete = function (data) {
+                            var userid = data.result;
+
+                            //call to addfirstmanager
+                            var params = {token: firstManagerToken, userid: userid};
+                            tools.request.put(tools.proxy.addfirstmanager, params, {
+                                onComplete: onComplete
+                            });
+                        };
+                        var baseUrl = window.location.protocol + '//' + window.location.host + '/';
+                        UWA.Data.request(baseUrl + 'api/passport/trigram', requestSettings);
+                    } else {
+                        MyWidget.onRefresh();
+                    }
+
+                    //manage cancel on edit evironment
+                    document.body.addEvent('click', function (event) {
+                        // TODO change onblur event on input
+                        //fix for ie event is undefined
+                        event = event || window.event;
+                        var target = event.target || event.srcElement;
+
+                        //check if click outside column-environment
+                        if (target.className !== 'column-environment') {
+                            if (MyWidget.EditEnvironmentNameId) {
+                                var edit = widget.getElement('#edit-oid-name-' + MyWidget.EditEnvironmentNameId);
+                                if (edit.value !== edit.getAttribute('oldvalue')) {
+
+                                    widget.mask();
+
+                                    //call to environmentupdate
+                                    var onComplete = function () {
+                                        tools.message.success(UWA.i18n('Your environment name has been updated'));
+                                        MyWidget.onRefresh(true);
+                                    };
+
+                                    var params = {id: MyWidget.EditEnvironmentNameId, name: edit.value};
+                                    tools.request.put(tools.proxy.environmentupdate, params, {
+                                        onComplete: onComplete
+                                    });
+                                } else {
+                                    //close edit platform name
+                                    var th = widget.getElement('#th-platform-' + MyWidget.EditEnvironmentNameId);
+                                    th.className = 'normal-mode column-environment';
+                                    MyWidget.EditEnvironmentNameId = null;
+                                }
+                            }
+                        }
+                    });
+                    /*
+                     //TODO l77 - Test and rewrite it pretty
+
+                     */
+                    //TODO l77 - do it !
+                    //manage "responsive" scroll size
+                    /*
+                     //manage size
+                     var a =
+                     var b = a.height - 250;
+                     var userListMaxHeight = document.getElement('#m_255 .member-platform-list.table-wrapper').getSize().height + 250;
+                     scroller.setSize({height:b});
+                     var minHeight = "";
+                     var userListHeight = "";
+
+                     if(wiewportHeight > userListHeight){
+                     //scrollheight == userlistheight
+                     }
+                     var scrollHeight = "";
+                     UWA.Utils.Client.getSize();
+                     */
+                    /*
+
+                     syncScroller();
+                     */
+                },
+                refreshAllWidgets: function () {
+                    MyWidget.onRefresh(true);
+                },
+                onRefresh: function (refreshLicensesListWidget) {
+                    if (refreshLicensesListWidget) {
+                        //send event to refres licenses list
+                        var InterCom = UWA.Utils.InterCom;
+                        var socketB = new InterCom.Socket();
+                        socketB.subscribeServer('licenses-server', window, 'http://');
+                        socketB.dispatchEvent('userlist-refresh', {}, 'userlist-refresh-socket');
+                    }
+
+                    //call to memberslist
+                    var onComplete = function (data) {
+                        widget.unmask();
+                        widget.data = data;
+                        if (data.user.length > 0) {
+                            main(data);
+                            MyWidget.buildPager(data.usersresults, MyWidget.offset);
+                        } else {
+                            widget.body.empty();
+                        }
+                        if (widget.eventsInit === false) {
+                            //try only one time
+                            widget.showHideScroller();
+                            widget.syncScroller();
+                            widget.eventsInit = true;
+                        }
+                    };
+                    widget.mask();
+                    var params = {query:MyWidget.query, sort_direction: MyWidget.sorter.direction, sort: MyWidget.sorter.field, limit: MyWidget.limit, offset: MyWidget.offset};
+                    tools.request.get(tools.proxy.memberslist, params, {
+                        onComplete: onComplete
+                    });
+                },
+                onResize: function () {
+                    var firstRow = widget.getElement('.table-wrapper tr'), i,
+                            rowHead = widget.getElement('.table-people-header'),
+                            firstRowChildren, rowHeadChildren, sizes, sum = 0, ratio;
+                    if (firstRow && rowHead) {
+                        firstRowChildren = firstRow.getChildren();
+                        rowHeadChildren = rowHead.getChildren();
+                        sizes = new Array(firstRowChildren.length);
+                        for (i = 0; i < firstRowChildren.length; i++) {
+                            sizes[i] = Math.max(firstRowChildren[i].getSize().width, rowHeadChildren[i].getSize().width);
+                            sum += sizes[i];
+                        }
+                        ratio = sum > 0 ? widget.getElement('.table-header').getSize().width / sum : 0;
+                        for (i = 0; i < firstRowChildren.length; i++) {
+                            rowHeadChildren[i].setStyle('width', Math.ceil(
+                                    sizes[i] * ratio - tools.getValueFromPx(rowHeadChildren[i].getStyle('padding-left')) - tools.getValueFromPx(rowHeadChildren[i].getStyle('padding-right'))
+                            ));
+                            firstRowChildren[i].setStyle('width', Math.ceil(
+                                    sizes[i] * ratio - tools.getValueFromPx(firstRowChildren[i].getStyle('padding-left')) - tools.getValueFromPx(firstRowChildren[i].getStyle('padding-right'))
+                            ));
+                        }
+                    }
+                }
+            };
+            /*
+             $(window).addEvent('resize', function () {
+             widget.syncScroller();
+             });
+             */
+            var main = function (data) {
+
+                MyWidget.userList.tableWrapper = UWA.createElement('table', {'class': 'table member-platform-list table-wrapper'});
+                MyWidget.userList.tableHeader = UWA.createElement('table', {'class': 'table member-platform-list table-header'});
+                MyWidget.userList.rowHead = UWA.createElement('thead');
+                MyWidget.userList.data = data;
+                //build member (data)
+                var tbody = MyWidget.userList.addHeader(data.env);
+                for (var i = 0 , len = data.user.length; i < len; i++) {
+                    MyWidget.userList.addRow(data.user[i], tbody, data.env);
+                }
+
+                //invite user
+                if (data && data.env && data.env.length > 0) {
+                    MyWidget.userList.helpRow.add();
+                    MyWidget.userList.addInviteRow();
+                }
+
+                widget.body.empty();
+                MyWidget.userList.tableWrapper.inject(widget.body);
+
+                MyWidget.userList.tableHeader.inject(widget.body, 'top');
+                MyWidget.userList.helpRow.initHide();
+                //TODO l77 - assign to wiget
+                widget.scroller = new UWA.Controls.Scroller(MyWidget.userList.tableWrapper, {
+                    scrollableX: false,
+                    height: widget.getInt('limit')
+                });
+                widget.syncScroller();
+                //BuildpageeR?
+            };
+            widget.eventsInit = false;
+            widget.showHideScroller = function () {
+                if (!UWA.Utils.Client.Engine.ie) {
+                    if(widget.getElement('.member-platform-list.table-wrapper')){
+                        widget.getElement('.member-platform-list.table-wrapper').addEvent('mouseenter', function () {
+                            var customMessadeDiv = widget.getElement('.uwa-scrollbar-vertical>div');
+                            //show
+                            var fx = new Fx(customMessadeDiv, {
+                                duration: 450,
+                                transition: 'linear',
+                                events: {
+                                    onStart: function () {
+                                        // Callback trigered when Animation Start
+                                    },
+                                    onComplete: function () {
+                                        customMessadeDiv.setStyle('opacity', '0.7');
+                                        // Callback trigered when Animation End
+                                    }
+                                }
+                            });
+
+                            fx.start({
+                                opacity: [0, 1]
+                            });
+
+
+                            //hide
+                            var fx = new Fx(customMessadeDiv, {
+                                duration: 450,
+                                transition: 'linear',
+                                events: {
+                                    onStart: function () {
+                                        // Callback trigered when Animation Start
+                                    },
+                                    onComplete: function () {
+
+                                        // Callback trigered when Animation End
+                                    }
+                                }
+                            });
+
+
+                            //hide after 5sc
+                            setTimeout(function () {
+                                // var customMessadeDivOpacity = document.body.getElement('#custom-message').getOpacity();
+                                //if (customMessadeDivOpacity == 1) {
+                                // Run Hide Fx
+                                fx.start({
+                                    opacity: [1, 0]
+                                });
+                                //}
+                            }, 3000);
+                            //.setStyle('opacity' , '0.7');
+                        });
+                    }
+                }
+            };
+
+            widget.syncScroller = function () {
+                var wiewportHeight = UWA.Utils.Client.getSize().height;
+                if (widget.getElement('.member-platform-list.table-wrapper')) {
+                    var userListHeight = widget.getElement('.member-platform-list.table-wrapper').getSize().height;
+                    var othersSize = 245;
+                    var userListMaxHeight = userListHeight + othersSize;
+                    var minScrollerHeight = 228;
+                    var scrollerHeight = wiewportHeight - othersSize;
+
+                    if (userListMaxHeight < wiewportHeight) {
+                        //no scroller needed
+                        widget.scroller.setSize({height: userListHeight});
+                    } else if (scrollerHeight < minScrollerHeight) {
+                        //little window set scroller to min height
+                        widget.scroller.setSize({height: minScrollerHeight });
+                    } else {
+                        //sync scroll to wiewport
+                        widget.scroller.setSize({height: scrollerHeight});
+                    }
+                }
+            };
+
+            widget.addEvents({
+                /**
+                 * Triggered when a search is performed from within the platform.
+                 * @param query String
+                 */
+                onSearch: function (query) {
+                    /*
+                     var filteredData = {},
+                     filteredUser = [],
+                     i = 0,
+                     len = widget.data.user.length;
+
+                     query = query.toLowerCase();
+                     for (; i < len; i++) {
+                     if (
+                     widget.data.user[i].id.toLowerCase().match(query, 'g') ||
+                     widget.data.user[i].lastName.toLowerCase().match(query, 'g') ||
+                     widget.data.user[i].firstName.toLowerCase().match(query, 'g') ||
+                     widget.data.user[i].email.toLowerCase().match(query, 'g')
+                     ) {
+                     //check user data
+                     filteredUser[filteredUser.length] = widget.data.user[i];
+                     } else {
+                     //check Role
+                     var userEnv = widget.data.user[i].env,
+                     uEv = 0,
+                     uEvLen = widget.data.user[i].env.length;
+                     for (; uEv < uEvLen; uEv++) {
+                     if (userEnv[uEv].role.toLowerCase().match(query, 'g')) {
+                     filteredUser[filteredUser.length] = widget.data.user[i];
+                     }
+                     }
+
+                     }
+                     }
+
+                     //rebuild object
+                     filteredData.success = widget.data.success;
+                     filteredData.envsresults = widget.data.envsresults;
+                     filteredData.usersresults = widget.data.usersresults;
+                     filteredData.env = widget.data.env;
+                     filteredData.user = filteredUser;
+                     //set counter
+                     widget.setCounter(0, 'search');
+                     widget.setCounter(filteredUser.length, 'search');
+                     //render
+                     main(filteredData);
+                     widget.syncScroller();
+                     */
+                    widget.mask();
+                    MyWidget.query = query;
+                    var params = {query:MyWidget.query, sort_direction: MyWidget.sorter.direction, sort: MyWidget.sorter.field, limit: MyWidget.limit, offset: 0};
+                    tools.request.get(tools.proxy.memberslist, params, {
+                        onComplete: function (data) {
+                            widget.setCounter(data.user.length, 'search');
+                            main(data);
+                            MyWidget.buildPager(data.user.length, 0);
+                            widget.unmask();
+                        }
+                    });
+                },
+                /**
+                 * Triggered when a search is performed from within the platform.
+                 */
+                onResetSearch: function () {
+                    MyWidget.query = '';
+                    widget.setCounter(0, 'search');
+                    widget.mask();
+                    var params = {query:MyWidget.query, sort_direction: MyWidget.sorter.direction, sort: MyWidget.sorter.field, limit: MyWidget.limit, offset: 0};
+                    tools.request.get(tools.proxy.memberslist, params, {
+                        onComplete: function (data) {
+                            widget.setCounter(data.user.length, 'search');
+                            main(data);
+                            MyWidget.buildPager(data.user.length, 0);
+                            widget.unmask();
+                        }
+                    });
+                    widget.syncScroller();
+                },
+                'onLoad': MyWidget.onInit,
+                'onRefresh': MyWidget.refreshAllWidgets,
+                'onResize': MyWidget.onResize
+            });
+            // TODO remove when only on WP 14x (onInit() not called due to require Input)
+            MyWidget.onInit();
+        });
+
+//]]>
+</script>
+</head>
+<body>
+<div style="height: 300px"></div>
+</body>
+</html>

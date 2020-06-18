@@ -1,0 +1,113 @@
+<!--Copyright 2016 Dassault Systemes Simulia Corp.-->
+<!-- -------------------------------------------------------
+[sp-document-content-ui]
+		Description: 	The component has following features:
+				1. View the document contents
+				2. One-part checkin of files to the same document
+				3. Download/check-out files
+------------------------------------------------------- -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-file-content/sp-file-content.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+
+<dom-module id="sp-document-content-ui">
+
+	<link rel="import" type="css" href="sp-document-content-ui.css">
+	<template>
+		<sp-dashboard id="dashboard"></sp-dashboard>
+		<sp-file-content id="spFileContent" on-sp-file-upload-progress="updateProgress"></sp-file-content>
+		<div class$="{{_computeMainClass(disabled)}}" data-stateread$="{{readOnly}}"  data-state$="{{state}}" id="container">
+			<div class="dropZone" on-dragenter="onDragEnter" on-dragover="onDragOver"
+				on-drop="onDrop" on-dragleave="onDragLeave" draggable="false">
+				<div class="dropOverlay" id="dropOverlay">
+					<div class="dropZone-text" id="dropZone-text">
+						<span class="fonticon fonticon fonticon-popup"></span><br>
+						<span>Drop Your File Here</span>
+					</div>
+				</div>
+				<div class="new-file">
+					<button is="sp-button-type" class="add-button" title="Upload Files" on-click="upload"><span class="upload-new-file fonticon fonticon-upload"></span><div>Upload Files</div></button>
+				</div>
+				<sp-updatepanel state="{{state}}" updateswhen="is-loading,is-updating">
+				<input type="file" id="uploadBtn" class="checkin" on-change="_fetchFileFromDisk" style="display:none">
+				<input type="file" id="uploadBtnMultiple" multiple  class="checkin" on-change="_fetchMultipleFileFromDisk" style="display:none">
+				<div class="files-container" id="filesContainer" data-page$="{{_getFileContainerPage(showPagebar)}}">
+					<template id="fileList" is="dom-repeat" items="{{_filteredfiles}}" as="file" observe="uploaded">
+					<div class="file-container" data-filename$="{{file.basics.name}}" style$="{{getStyleForProgress(file.uploaded)}}">
+						<div class$="{{_computeFileIconContainer(file.basics.isLocked,file.basics.fileLockedForCheckin)}}">
+							<span class$="{{_computeFileIcon(file.basics.name)}}" title$="{{_computeFileType(file.basics.name)}}">
+								<img class="icon-image" src$={{_computeIconImageSrc(file.basics.name)}}></imag>
+							</span>
+							<span class="lock fonticon fonticon-lock" title="No modify access"></span>
+							<span class="lock-user fonticon fonticon-lock-user" title="Locked by you"></span>
+
+						</div>
+						<div class="file-title" title$="{{_getFileTitleOnHover(file.basics)}}"> <span>{{file.basics.name}}</span> <span class="revision-info">{{_getFileRevision(file.basics.revision)}}</span></div>
+						<div class="file-actions">
+							<div class="file-visible-icon">
+								<span title="Download" class="file-action fonticon fonticon-download" on-click="download"></span>
+								<span title="Checkout" class$="{{_computeCheckOutClass(file.basics.isLocked,file.basics.fileLockedForCheckin)}}" on-click="checkout"></span>
+								<span title="Checkin" class$="{{_computeUploadClass(file.basics.fileLockedForCheckin)}}" on-click="update"></span>
+								<span title="Delete" class$="{{_computeDeleteClass(file.basics.isLocked,file.basics.fileLockedForCheckin)}}" on-click="deletefile"></span>
+							</div>
+						</div>
+
+					</div>
+
+					</template>
+				</div>
+				<template is="dom-if" if="{{showPagebar}}">
+					<div class="page-bar-container">
+
+						<button is="sp-button-type" class="page-button previous" title="Previous" disabled$="{{_isPreviousDisabled(currentPage)}}" on-click="previousPage">
+							<span class="fonticon fonticon-open-left"></span>
+						</button>
+
+						<span class="current-page-info">{{_getCurrentPageInfo(_files,pageSize,currentPage)}}</span>
+
+						<button is="sp-button-type" class="page-button next" title="Next" disabled$="{{_isNextDisabled(lastPage)}}" on-click="nextPage">
+							<span class="fonticon fonticon-open-right"></span>
+						</button>
+
+					</div>
+				</template>
+				</sp-updatepanel>
+			</div>
+
+			<div class="no-data-present center">
+				<span class="fonticon fonticon-select-none"></span><br>
+				<span>No Data Present</span>
+			</div>
+			<div class="no-files-present center">
+				<span class="fonticon fonticon-select-none"></span><br>
+				<span>No Files Present</span>
+			</div>
+			<div class="loading-files center" >
+				<span class="fonticon fonticon-progress-2"></span><br>
+				<span>Loading Content ...</span>
+			</div>
+			<div class="error center">
+				<span class="fonticon fonticon-wrong site-icon"></span><br>
+				<span>Something Went Wrong. Unable to load files</span>
+			</div>
+			<!--Delete confirmation-->
+			<sp-modal id="deleteConfirmation" class="warning-dialog" width="500px" heading="Remove Selected File" on-close="discardDelete">
+				<section id="dialogText">
+					<span>Are you sure you want to remove the following file?</span>
+					<br/>
+					<li>{{deleteFileName}}</li>
+				</section>
+				<footer class="deleteConfirmationFooter">
+					<span style="padding-right: 50px;">Note: All versions of the file will be deleted.</span>
+					<div>
+						<button id="proceedDelete" is="sp-button-type" on-click="proceedDelete">OK</button>
+						<button id="discardDelete" is="sp-button-type" primary="" on-click="discardDelete">Cancel</button>
+					</div>
+				</footer>
+			</sp-modal>
+		</div>
+	</template>
+	<script type="text/javascript" src="sp-document-content-ui.js"></script>
+</dom-module>

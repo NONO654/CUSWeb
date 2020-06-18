@@ -1,0 +1,407 @@
+/* -------------------------------------------------------------------------
+	Full Text Search Stylesheet for Windows/Mac Platforms
+	emxUIFullSearch.css
+
+	Release: 2015x
+	Version: 1.0
+	
+	Requires:emxUIDefault.css
+
+    Copyright (c) 1992-2018 Dassault Systemes ENOVIA Corp. All Rights Reserved.
+    This program contains proprietary and trade secret information 
+    of Dassault Systemes ENOVIA Corp. Copyright notice is precautionary only
+    and does not evidence any actual or intended publication of such program
+   ------------------------------------------------------------------------- */
+
+@import url(emxUIDefault.css);
+
+/* -------------------------------------------------------------------------
+	Default
+   ------------------------------------------------------------------------- */
+
+html, body {overflow:hidden;}
+
+body,
+body.dialog {
+	background:#fff;
+	}
+
+div#full_mask  {
+	display:block;
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background-color:#cccccc;
+	z-index:100;
+}
+
+body img[src*="utilSpacer.gif"] {
+	margin:0 !important;
+	padding:0 !important;
+}
+
+/* ---------------------------------
+    Head
+   --------------------------------- */
+
+/* full-text search */
+body.full-text #pageHeadDiv table tr td.page-title,
+body.full-text #pageHeadDiv table tr td.functions {
+	width:1%;
+}
+
+body.full-text #pageHeadDiv table tr td.buttons {width:98%;}
+
+/* real-time search */
+#pageHeadDiv table tr td.page-title {width:98%;}
+	
+#pageHeadDiv table tr td.functions,
+#pageHeadDiv table tr td.buttons {
+	width:1%;
+}
+
+#pageHeadDiv table tr td table tr td {
+	white-space:nowrap !important;
+	padding-top:4px;
+}
+
+h2 input[type="text"] {font-weight:normal;}
+
+input[type="text"] {margin:0 3px 0 0;}
+
+input[type="checkbox"] {
+	margin:0 3px 0 5px;
+	vertical-align:middle;
+	#vertical-align:top;
+}
+
+input.mx_btn-toggle {
+	background:url("../images/iconSmallLifecycle.gif") no-repeat;
+	background-color:#FFF;
+}
+
+
+/* ---------------------------------
+    Body
+   --------------------------------- */
+
+div#bd {
+	position:absolute;
+	top:200px;
+	left:0;
+	right:0;
+	bottom:0;
+	overflow:hidden;
+}
+
+div#bd iframe {
+	width:100%;
+	height:100%;
+}
+
+
+/* ---------------------------------
+    Form
+   --------------------------------- */
+
+div#mx_formView {
+	position:relative;
+	background-color:#dadada;
+	overflow:auto;
+}   
+
+div#mx_formViewSuggestions {
+	position:relative;
+	background-color:#7c8b7f;
+	overflow-y:auto;
+	overflow-x:hidden;
+	height:150px;
+	overflow:-moz-scrollbars-vertical;
+}
+
+div.container {display:block;}
+
+div.container table {
+	width:100%;
+	border-collapse:separate;
+	border-spacing:3px;
+}
+
+div.container table tr td {
+	padding:0 5px;
+	vertical-align:top;
+}
+
+
+/* ---------------------------------
+    Guided Search
+   --------------------------------- */
+
+div#left_nav {
+	position:absolute;
+	top:40px;
+	bottom:0;
+	left:0;
+	width:200px;
+	background:#ecf1ef;
+	border-top:1px solid #959595;
+	border-right:1px solid #4b4b4b;
+	overflow:auto;
+}
+
+div.left_nav_section {
+	display:block; 
+	height:auto; 
+	width:100%;
+}
+
+div.left_nav_section a {color:#000;}
+
+div#left_nav img {vertical-align:middle;}
+
+div#left_nav img.link {cursor:pointer;}
+
+div.title {
+	text-transform:capitalize;
+	width:100%;
+	/* border-top:none; */
+	border-bottom:1px solid #cdcdcd;
+	padding:4px 0 3px 4px;
+	color:#000;
+	background:#fff;
+    background:-moz-linear-gradient(center top, #ffffff 0%, #f3f3f3 100%) repeat scroll 0 0 transparent;
+}
+
+div#types div.title {border-bottom:1px solid #cdcdcd;}
+
+div#attributes div.title {
+	border-bottom:1px solid #cdcdcd;
+	padding:6px 0 0 6px;
+}
+
+div#attributes div.container div {
+	padding-bottom:1px;
+	padding-left:3px;
+}
+
+div.selectedAttribute {
+	padding-top:1px;
+	background-color:#C0C0C0;
+	border-top:1px solid #7c7c7c;
+}
+
+div.show {
+	position:relative;
+	display:block;
+	cursor:pointer;
+	white-space:nowrap;
+}
+
+div.hide {display:none;}
+
+div#types div.selected a {padding-left:10px;}
+
+div#types div.selected a img {margin-left:-12px;}
+
+div.selected a {
+	color:#000;
+	text-decoration:none;
+}
+
+div#types div.selected a {text-decoration:underline;}
+
+div.selected img {margin-right:2px;}
+
+div hr {
+	color:#566F8B;
+	margin:8px 6px 6px 6px;
+}
+
+/* ---------------------------------
+    Attribute Option Layers
+   --------------------------------- */
+
+div#control-outer {
+	position:absolute;
+	background-color:#E5E8EB;
+	border:1px solid #7C7C7C;
+	border-left:0;
+}
+
+div#control-outer img {vertical-align:middle;}
+
+div#control-outer div#content {padding:5px;}
+
+div#control-outer div#content table tr td {padding:1px;}
+
+div#control-outer div#content input[type="text"] {margin:0 3px 2px 0;}
+
+div#control-outer div#content select {width:auto;}
+
+div#control-header {
+	background-color:#C0C0C0;
+	valign:middle;
+	text-align:right;
+}
+
+div#header-control {
+	height:20px;
+	display:inline;
+}
+
+
+/* ---------------------------------
+    Type Selection Layer
+   --------------------------------- */
+
+div#typeHierarchy {
+	position:absolute;
+	height:180px;
+	width:200px;
+	background-color:#E5E8EB;
+	border:1px solid #7C7C7C;
+	overflow:hidden;
+}
+
+div#typeHierarchy div.title {
+	border-top:1px solid #7c7c7c;
+	border-bottom:1px solid #7c7c7c;
+	padding:2px 0 0 4px;
+}
+
+div#typeHierarchy div#imgdiv {
+	background-color:#C0C0C0;
+	padding:2px;
+	text-align:right;
+}
+
+div#typeHierarchy div#formTypes {
+	position:absolute;
+	top:16px;
+	bottom:0;
+	left:0;
+	right:0;
+}
+
+div#typeHierarchy div#formTypes div.container {
+	position:absolute;
+	top:24px;
+	bottom:0;
+	width:100%;
+	overflow:auto;
+}
+
+div#typeHierarchy div#formTypes div.container div div img {vertical-align:middle;}
+
+div#typeHierarchy div#formTypes div.container div div a {color:#000;}
+
+/* ---------------------------------
+    Search Suggestions
+   --------------------------------- */
+
+div#Suggestions {
+	position:absolute;
+	width:440px;
+	height:180px;
+	top:50%;
+	left:50%;
+	margin-left:-220px;
+	margin-top:-90px;
+	padding:5px;
+	background-color:#5B63A0;
+}
+
+div#Suggestions div#SuggestionsContainer {
+	background-color:#DADFE7;
+	height:100%;
+	width:100%;
+}
+
+div#Suggestions div#SuggestionsContainer div#SuggestionsContent {
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-left:-190px;
+	margin-top:-60px;
+	width:380px;
+	height:120px;
+}
+
+div#Suggestions h2 {
+	color:#314270;
+	font-size:15px;
+	font-weight:bold;
+	margin-bottom:0.5em;
+}
+
+div#Suggestions p {
+	font-size:13px;
+	margin-bottom:1.5em;
+}
+
+/* ---------------------------------
+    Splash
+   --------------------------------- */
+
+div#splashWrapper {
+	position:absolute;
+	top:50%;
+	left:50%;
+	height:200px;
+	width:590px;
+	margin-top:-100px;
+	margin-left:-295px;
+	background:url("../images/autonomySplashScreen.png") 0 0 no-repeat;
+}
+	
+div#splashArea {
+	position:absolute;
+	top:50px;
+	left:220px;
+	width:320px;
+	color:#FFF;
+	line-height:15px;
+}
+
+/* ---------------------------------
+    Alignment fixes for legacy search panel
+   --------------------------------- */
+/*--Changing the height/position of the checkbox inthe form--*/
+
+div#searchBody input[type="checkbox"] {
+margin: 0 3px 0 5px;
+height: 16px;
+width: 16px;
+}
+
+/*--Changing the height/position of the checkbox in the options above the form--*/
+
+#searchOptions.options [type="checkbox"] {
+margin: 5px 3px 0 5px;
+height: 16px;
+width: 16px;
+}
+
+/*--aligning the label text in the options above the search form--*/
+
+span.input.tiny.inline label {
+margin-top: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

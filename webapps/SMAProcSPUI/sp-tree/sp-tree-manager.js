@@ -1,0 +1,1 @@
+window.console&&window.console.log("sp-tree-manager is deprecated since R418");

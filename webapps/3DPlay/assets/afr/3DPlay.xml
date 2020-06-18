@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  /*
+  * @Quickreview  NWL 13:11:07 IR-266698V6R2014x
+  * @Quickreview  NWL 13:10:28 remove FS commande For v6r2014x
+  * @quickreview CNI1 15:02:20 Change in modules
+  * @quickreview T9N  16:07:19 Cleaning action bar of the first separator in views.
+  * @quickreview  MMA2 17:02:14 IR-493993 : Scenario Chooser command is available during the conversion of content
+  */
+  -->
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DSHAREAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DSHAREFixedAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="3DSHAREAfrWorkshopHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID="Scenario" Available="0" ClassName="DS/3DPlayCommands/CmdScenario" HelpResourceFile = "3DPlay/3DPlayHelpForCommands" ResourceFile="3DPlay/3DPlay"  />
+</CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="3DSHAREAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DSHAREFixedWorkbench">
+      <CATCmdContainer Name="Fixed Area" RepresentationType="AfrActionBarFixedSection">
+        <CATCmdStarter Name="Scenario" Command="Scenario" />
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

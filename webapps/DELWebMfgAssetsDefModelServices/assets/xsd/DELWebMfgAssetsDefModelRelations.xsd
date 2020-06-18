@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAPPRRelations" xmlns:tns="DS_DELMIAPPRRelations" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="RelationsList">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="PROCESS">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="PRODUCT">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationProcessProductType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="PROCESS">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationProcessProcessType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="SYSTEM">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationProcessSystemType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="OPERATION">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationProcessOperationType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="RESOURCE">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationProcessResourceType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SYSTEM">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="PROCESS">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationSystemProcessType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="SYSTEM">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationSystemSystemType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="RESOURCE">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationSystemResourceType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="OPERATION">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="PROCESS">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationOperationProcessType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="OPERATION">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationOperationOperationType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="RESOURCE">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationOperationResourceType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="RESOURCE">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="SYSTEM">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationResourceSystemType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="RESOURCE">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationResourceResourceType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PRODUCT">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="PROCESS">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationProductProcessType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PART">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="PROCESS">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Relation" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="type" type="tns:RelationPartProcessType" use="required"/>
+                        <xs:attribute name="read" type="xs:boolean" use="required"/>
+                        <xs:attribute name="write" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+      <xs:attribute name="Title" type="xs:string" use="required"/>
+      <xs:attribute name="Description" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="RelationProcessProductType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ProductImplementLink"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationProcessProcessType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HistorizationLinkRefRef"/>
+      <xs:enumeration value="HistorizationLinkRefRef_inverse"/>
+      <xs:enumeration value="MfgProcessAlternate"/>
+      <xs:enumeration value="MfgProcessAlternate_inverse"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationProcessSystemType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ProcessImplementLink_inverse"/>
+      <xs:enumeration value="DELLmiProductionSystemOutputCnxToMBOM_inverse"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationProcessOperationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DELLmiProductionSystemOutputCnxToMBOM_inverse"/>
+      <xs:enumeration value="ProcessImplementLinkOcc_inverse"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationProcessResourceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DELAsmProcessCanUseCnx"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationSystemProcessType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ProcessImplementLink"/>
+      <xs:enumeration value="ProcessImplementLinkOcc"/>
+      <xs:enumeration value="DELLmiProductionSystemOutputCnxToMBOM"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationSystemSystemType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HistorizationLinkRefRef"/>
+      <xs:enumeration value="HistorizationLinkRefRef_inverse"/>
+      <xs:enumeration value="DELLmiMaterialPathCnxCust"/>
+      <xs:enumeration value="DELLmiMaterialPathCnxCust_inverse"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationSystemResourceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SystemImplementLink_inverse"/>
+      <xs:enumeration value="DELAsmProcessCanUseCnx"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationOperationProcessType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DELLmiProductionSystemOutputCnxToMBOM"/>
+      <xs:enumeration value="ProcessImplementLinkOcc"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationOperationOperationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HistorizationLinkRefRef"/>
+      <xs:enumeration value="HistorizationLinkRefRef_inverse"/>
+      <xs:enumeration value="DELLmiTimeConstraintCnx"/>
+      <xs:enumeration value="DELLmiTimeConstraintCnx_inverse"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationOperationResourceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DELAsmProcessCanUseCnx"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationResourceSystemType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DELAsmProcessCanUseCnx_inverse"/>
+      <xs:enumeration value="SystemImplementLink"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationResourceResourceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HistorizationLinkRefRef"/>
+      <xs:enumeration value="HistorizationLinkRefRef_inverse"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationProductProcessType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ProductImplementLink_inverse"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RelationPartProcessType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ProductImplementLink_inverse"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

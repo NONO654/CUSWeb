@@ -1,0 +1,44 @@
+<dom-module id="cmp-rename-editor">
+  <template>
+    <style>
+        :host {
+            display: block;
+            padding: 1em;
+        }
+
+        label {
+            display: flex;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+        label > span {
+            display: inline-block;
+            width: 80px;
+            text-align: left;
+        }
+        input, textarea {
+            flex: auto;
+            border-radius:5px;
+            border: 1px solid #b4b6ba;
+            min-width: 50px;
+            height:22px;
+            padding-left: 5px;
+        }
+        textarea {
+            height: 5em;
+            resize: vertical;
+        }
+        </style>
+        <cmp-wux-dialog id="mainContainer" title="[[editorTitle]]" height="auto" width="425px" my-position="center" at-position="center" ok-button-flag cancel-button-flag modal-flag>
+            <dialogcontent>
+                    <label id="titlelabel"><span>Title:</span>
+                    <input type="text" id="title" placeholder="Enter title here" required="true" value="{{itemTitle::input}}"></input>
+                    </label>
+
+                    <label id="desclabel"><span>Description:</span>
+                    <textarea id="description" placeholder="Enter description here" value="{{itemDescription::input}}"></textarea>
+                    </label>
+            </dialogcontent>
+        </cmp-wux-dialog>
+    </template>
+</dom-module>

@@ -1,0 +1,16 @@
+m|DELPPWModels\DELPPWIRPCModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.9.19287
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELPPWIRPCModel\DELPPWIRPCModel.js|1571083738|11073
+s|DELPPWModels\DELPPWIRPCModel.mweb\src\Collections\InstanceCollection.js|1532440436|2046
+s|DELPPWModels\DELPPWIRPCModel.mweb\src\Model\ReferenceModel.js|1560151033|4749
+s|DELPPWModels\DELPPWIRPCModel.mweb\src\Model\InstanceModel.js|1562857305|3843
+s|DELPPWModels\DELPPWIRPCModel.mweb\src\Collections\ReferenceCollection.js|1532440436|730
+s|DELPPWModels\DELPPWIRPCModel.mweb\src\Collections\AbstractIRPCCollection.js|1532440436|4402
+s|DELPPWModels\DELPPWIRPCModel.mweb\src\Collections\ConnectionCollection.js|1532440436|1817
+s|DELPPWModels\DELPPWIRPCModel.mweb\src\Model\AbstractIRPCModel.js|1570034591|13484
+s|DELPPWModels\DELPPWIRPCModel.mweb\src\Model\ConnectionModel.js|1563271592|4221
+s|DELPPWModels\DELPPWIRPCModel.mweb\src\Model\BIModel.js|1532440436|344
+s|DELPPWModels\DELPPWIRPCModel.mweb\src\Collections\BIModelCollection.js|1532440436|489

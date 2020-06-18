@@ -1,0 +1,37 @@
+/* Rule ENONT_PolicyChooser (ThisObject: PLMEntity, Parameters: RuleContext)                                      */
+/* NOT CONTRACTUAL and PROPERTY OF TE (TEAM ENVIRONMENT) DEFINITION, ANY CHANGE MAY HAPPEN WITHOUT NOTICE         */
+/* Parameters contains many information such as name, user, security ... depending on Operation                   */
+/* Notice this BL operates OpeningID INFRAAuthorizedPolicies                                                      */
+
+/*
+/*tempo code : the list of policies should be provided from server kernel dictionnary                             */
+/*                    default policy                                                                              */
+/*                                                                                                                */
+
+Let DefaultPolicyName(STRING) 
+Let listOtherPolicies(List)
+
+Let ModelingType(Type)
+Let ModelingTypeName(String)
+
+let LoginRole(STRING) 
+LoginRole=""
+
+if ( Parameters->HasAttribute("Role") == true ) {
+   LoginRole=Parameters->GetAttributeString("Role")
+}
+
+/* PrimaryType is the custom type of a DS Modeling type */
+ModelingTypeName=""
+ModelingType = ThisObject.ModelerType
+if (ModelingType<>NULL){
+   ModelingTypeName=ModelingType.Name 
+}
+
+Trace (1, "ENOAP_PolicyChooser: ERROR, No Policy Allocated for type"+ModelingTypeName  )    
+Parameters.Message="Policy Configuration ERROR for " + ModelingTypeName
+Parameters.Severity=3
+Report("Error",Parameters.Message, Parameters.Message)      
+
+
+

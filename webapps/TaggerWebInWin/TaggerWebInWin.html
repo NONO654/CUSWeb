@@ -1,0 +1,281 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Definition of require : -->
+
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <!-- Load UWA environment -->
+    <!-- Application Standalone emulation files -->
+    <!--
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    -->
+    <!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+
+    <!-- This is required to configure RequireJS with the appropriate pathes : -->
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+    <script type="text/javascript" src="../VEN3DXHighcharts/4.0.3/highcharts-all.js"></script>
+
+    <!-- Hide proxy focus btn in web in win context as if it's pressed we can't restore it, waiting new behavior from TagNavigator planned for V6R2016x Beta 2-->
+    <style type="text/css">
+      html, body {
+        height: 100%;
+      }
+      #proxyFocusedButton
+      {
+        visibility: hidden;
+      }
+      #div_context {
+        display: block;
+        position: absolute;
+        top: -4px;
+        width: 100%;
+      }
+    </style>
+
+    <script type="text/javascript">
+        var query = location.search.substr(1);
+        var result = {};
+        query.split('&').forEach(function (part) {
+            if (!part) return;
+            part = part.split('+').join(' '); // replace every + with space, regexp-free version
+            var eq = part.indexOf('=');
+            var key = eq > -1 ? part.substr(0, eq) : part;
+            var val = eq > -1 ? decodeURIComponent(part.substr(eq + 1)) : '';
+            var from = key.indexOf('[');
+            if (from == -1) result[decodeURIComponent(key)] = val;
+            else {
+                var to = key.indexOf(']');
+                var index = decodeURIComponent(key.substring(from + 1, to));
+                key = decodeURIComponent(key.substring(0, from));
+                if (!result[key]) result[key] = [];
+                if (!index) result[key].push(val);
+                else result[key][index] = val;
+            }
+        });
+        console.log("building COMPASS_CONFIG");
+        COMPASS_CONFIG = {};
+
+        if (result) {
+            if (result.userid) {
+                COMPASS_CONFIG['userId'] = result.userid;
+                console.log("COMPASS_CONFIG.userId=" + COMPASS_CONFIG.userId);
+            }
+            if (result.myAppsURL) {
+                COMPASS_CONFIG['myAppsBaseUrl'] = result.myAppsURL;
+                console.log("COMPASS_CONFIG.myAppsBaseUrl=" + COMPASS_CONFIG.myAppsBaseUrl);
+            }
+            if (result.lang) {
+                COMPASS_CONFIG['lang'] = result.lang;
+                console.log("COMPASS_CONFIG.lang=" + COMPASS_CONFIG.lang);
+            }
+        }
+    </script>
+
+    <script>
+      function sendNotification(name, message) {
+        if (typeof dscef !== 'undefined') {
+          dscef.sendString(name + '=' + message);
+        }
+        else if (typeof CATCefSendString !== 'undefined') {
+          CATCefSendString(name + '=' + message);
+        } else {
+          var textarea = document.createElement("textarea");
+          textarea.setAttribute("name", name);
+          textarea.appendChild(document.createTextNode(message));
+
+          var form = document.createElement("form");
+          form.setAttribute("method", "POST");
+          form.setAttribute("action", "jsnotif://");
+          form.appendChild(textarea);
+
+          document.documentElement.appendChild(form);
+
+          form.submit();
+
+          form.parentNode.removeChild(form);
+          form = null;
+        }
+      }
+    </script>
+
+    <script type="text/javascript" src="TaggerWebInWin.js"></script>
+
+    <!-- Include CSS for styling of the elements we are testing in that page : -->
+    <link rel="stylesheet" type="text/css" href="../UWA2/assets/css/inline.css" />
+    <link rel="stylesheet" type="text/css" href="../TagNavigator/TagNavigator.css" />
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+    <script>
+
+    var myTaggerWebinWin = {
+        tagger_manager_obj: null,
+        launch: function(options) {
+            require(['UWA/Core',
+                'UWA/Drivers/Alone',
+                'DS/TaggerWebInWin/TaggerWebInWin'
+            ], function(UWACore,
+                UWAAlone,
+                TaggerWebInWin) {
+                var that = this;
+
+                options.onReady = function() {
+                  //sendNotification('taggerEventMethodEnded', 'Init');
+                  dscef.sendString('taggerInitEnded=true');
+                };
+
+                myTaggerWebinWin.tagger_manager_obj = new TaggerWebInWin(options);
+            });
+        },
+
+        bypass: function () {
+          require([
+            'DS/SNInfraUX/SearchSettings'
+          ], function (
+            SearchSettings
+            ) {
+            var query = window.location.search.substring(1);
+            if (query.indexOf('bypass_login=true') >= 0 || !SearchSettings.getOption('cors')) {
+              var url = window.location.origin + '/3dexperience/snresources/images/icons/small/I_Action_22.png';
+              var bypassiframe = window.document.getElementById('iframe_bypass');
+              if (undefined !== bypassiframe)
+                bypassiframe.src = url;
+            }
+          });
+        }
+    };
+
+    function Init(parameter) {
+      //myTaggerWebinWin.bypass();
+
+      require(['UWA/Core'], function(UWACore) {
+        if (!UWACore.is(parameter)) {
+          //debugger;
+          throw('No parameter given to Init method !');
+        }
+        if (!UWACore.is(parameter.url)) {
+          //debugger;
+          throw('No parameter.url given to Init method !');
+        }
+        if (!UWACore.is(parameter.tenant)) {
+          //debugger;
+          throw('No parameter.tenant given to Init method !');
+        }
+        if (!UWACore.is(parameter.lang)) {
+          //debugger;
+          throw('No parameter.lang given to Init method !');
+        }
+        if (!UWACore.is(parameter.contextId)) {
+          //debugger;
+          throw('No parameter.contextId given to Init method !');
+        }
+
+        var options = {
+          tagsServerUrl: parameter.url,
+          tenant: parameter.tenant,
+          lang: parameter.lang,
+          taggercontent: 'tagger-content',
+          contextId: parameter.contextId
+        };
+        myTaggerWebinWin.launch(options);
+      });
+    }
+
+    function ActionOnTaggerProxy(parameters) {
+        require([
+            'UWA/Core',
+            'DS/TaggerWebInWin/TaggerWebInWin',
+        ], function(UWACore, SearchWebInWin) {
+          console.log('ActionOnTaggerProxy');
+          console.log(parameters);
+          if (!UWACore.is(parameters)) {
+            //debugger;
+            throw('No parameters in ActionOnTaggerProxy !');
+          }
+          if (!UWACore.is(parameters.param)) {
+            //debugger;
+            throw('No parameters.param in ActionOnTaggerProxy !');
+          }
+          if (!UWACore.is(parameters.param.event_id)) {
+            //debugger;
+            throw('No parameters.param.event_id in ActionOnTaggerProxy !');
+          }
+          if (!UWACore.is(myTaggerWebinWin)) {
+            //debugger;
+            throw('No myTaggerWebinWin in ActionOnTaggerProxy !');
+          }
+          if (!UWACore.is(myTaggerWebinWin.tagger_manager_obj)) {
+            //debugger;
+            throw('No myTaggerWebinWin.tagger_manager_obj in ActionOnTaggerProxy !');
+          }
+          if (!UWACore.is(myTaggerWebinWin.tagger_manager_obj.proxy)) {
+            //debugger;
+            throw('No myTaggerWebinWin.tagger_manager_obj.proxy in ActionOnTaggerProxy !');
+          }
+
+          if (UWACore.is(myTaggerWebinWin.tagger_manager_obj.proxy[parameters.param.event_id], 'function'))
+            myTaggerWebinWin.tagger_manager_obj.proxy[parameters.param.event_id](parameters);
+          else {
+            console.error('Trying to call undefined function', parameters);
+            myTaggerWebinWin.tagger_manager_obj._dispatchEndMethod(parameters);
+          }
+        });
+    }
+
+    function ActionOnTagger(parameters) {
+      require([
+        'UWA/Core',
+        'DS/TaggerWebInWin/TaggerWebInWin',
+        ], function(UWACore, SearchWebInWin) {
+          console.log('ActionOnTagger');
+          console.log(parameters);
+          if (!UWACore.is(parameters)) {
+            //debugger;
+            throw('No parameters in ActionOnTaggerProxy !');
+          }
+          if (!UWACore.is(parameters.param)) {
+            //debugger;
+            throw('No parameters.param in ActionOnTaggerProxy !');
+          }
+          if (!UWACore.is(parameters.param.method)) {
+            //debugger;
+            throw('No parameters.param.event_id in ActionOnTaggerProxy !');
+          }
+          if (!UWACore.is(myTaggerWebinWin)) {
+            //debugger;
+            throw('No myTaggerWebinWin in ActionOnTaggerProxy !');
+          }
+          if (!UWACore.is(myTaggerWebinWin.tagger_manager_obj)) {
+            //debugger;
+            throw('No myTaggerWebinWin.tagger_manager_obj in ActionOnTaggerProxy !');
+          }
+          if (!UWACore.is(myTaggerWebinWin.tagger_manager_obj.tagger)) {
+            //debugger;
+            throw('No myTaggerWebinWin.tagger_manager_obj.tagger in ActionOnTaggerProxy !');
+          }
+          if (UWACore.is(myTaggerWebinWin.tagger_manager_obj.tagger[parameters.param.method], 'function'))
+            myTaggerWebinWin.tagger_manager_obj.tagger[parameters.param.method](parameters);
+          else {
+            console.error('Trying to call undefined function', parameters);
+            myTaggerWebinWin.tagger_manager_obj._dispatchEndMethod(parameters);
+          }
+        });
+    }
+
+    //myTaggerWebinWin.bypass();
+    </script>
+</head>
+
+<body>
+  <!--
+    <div class="bypass" style="display:none;">
+        <iframe id="iframe_bypass"></iframe>
+    </div>
+  -->
+    <div id="tagger-content"></div>
+</body>
+
+</html>

@@ -1,0 +1,385 @@
+/* -------------------------------------------------------------------------
+    Effectivity Dialog Stylesheet for Windows/Mac Platforms
+    emxUIEffectivityDialog.css
+
+    Release: 2014
+    Version: 1.0
+    
+    Copyright (c) 1992-2015 Dassault Systemes ENOVIA Corp. All Rights Reserved.
+    This program contains proprietary and trade secret information 
+    of Dassault Systemes ENOVIA Corp. Copyright notice is precautionary only
+    and does not evidence any actual or intended publication of such program
+   ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+   Default
+   ------------------------------------------------------------------------- */
+
+#mx_divFilter,
+#mx_divSourceList,
+#mx_divExpression,
+#mx_divCompletedRule {
+    position:absolute;
+    overflow:hidden;
+    outline:1px solid #c8c8c8;
+    background:#f8f8f8;
+}
+
+#mx_divFilter {
+    top:40px;
+    left:4px;
+    bottom:4px;
+}
+
+#mx_divSourceList {
+    top:40px;
+    right:308px;
+    bottom:148px;
+}
+
+#mx_divExpression {
+    top:40px;
+    right:4px;
+    bottom:148px;
+    width:300px;
+}
+
+#mx_divCompletedRule {
+    bottom:4px;
+    height:140px;
+    right:4px;
+}
+
+/* filter panel open */
+#mx_divContent.open #mx_divFilter {width:200px;}
+
+#mx_divContent.open #mx_divSourceList,
+#mx_divContent.open #mx_divCompletedRule {left:208px;}
+
+/* filter panel closed */
+#mx_divContent.closed #mx_divFilter {width:20px;}
+
+#mx_divContent.closed #mx_divSourceList,
+#mx_divContent.closed #mx_divCompletedRule {left:28px;}
+
+#mx_divContent.closed #mx_divFilter .panel-head .title,
+#mx_divContent.closed #mx_divFilter .panel-head .toolbar,
+#mx_divContent.closed #mx_divFilter .panel-body {
+    display:none;
+}
+
+ul li {display:inline;}
+
+/* ---------------------------------
+    Common Panel Styling
+   --------------------------------- */
+
+.panel-head {
+    height:20px;
+}
+
+.panel-head .title,
+.panel-head .functions,
+.panel-head .actions {
+    position:absolute;
+    top:0;
+    left:3px;
+    height:21px;
+}
+
+.panel-head .actions {
+    right:3px;
+    left:auto;
+}
+
+.panel-head .title {
+    padding:2px 0 0 0;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.panel-head .toolbar {
+    position:absolute;
+    top:21px;
+    left:0;
+    right:0;
+    height:24px;
+    margin:0;
+    padding:0;
+    border:none;
+}
+
+.panel-head .functions,
+.panel-head .actions {display:table;}
+
+.panel-head .functions ul,
+.panel-head .actions ul {display:table-row;}
+
+.panel-head .functions ul li,
+.panel-head .actions ul li {
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.panel-head .actions ul li {
+    padding-left:5px;
+}
+
+.panel-head input[type="checkbox"],
+.panel-head input[type="radio"] {
+    width:13px;
+    height:13px;
+    margin-top:5px;
+    margin-right:2px;
+} 
+
+.panel-head input[type="button"],
+.panel-head input[type="submit"] {
+    display:inline-block;
+    margin-left:-4px;
+}
+
+.panel-head label {
+    display:inline-block;
+    padding-top:3px;
+}
+
+.panel-body {
+    position:absolute;
+    top:21px;
+    left:0;
+    right:0;
+    bottom:0;
+}
+
+
+
+/* ---------------------------------
+    Filter Panel
+   --------------------------------- */
+
+#mx_divFilter .panel-head .title {left:20px;}
+
+#mx_divFilter .panel-head .button-toggle,
+#mx_divFilter .panel-head .button-toggle a {
+    position:absolute;
+    top:0;
+    left:0;
+    height:16px;
+    width:16px;   
+}
+
+#mx_divFilter .panel-head .button-toggle {
+    top:2px;
+    left:2px;
+}
+
+.open #mx_divFilter .panel-head .button-toggle a {background:url("../../common/images/iconActionClosePanel.gif") 0 0 no-repeat;}
+.closed #mx_divFilter .panel-head .button-toggle a {background:url("../../common/images/iconActionOpenPanel.gif") 0 0 no-repeat;}
+
+#mx_divFilter .panel-body {
+    position:absolute;
+    top:44px;
+    left:4px;
+    bottom:4px;
+    right:4px;
+    padding:4px;
+    border:1px solid #c8c8c8;
+    background:white;
+    overflow:auto;
+}
+
+#mx_divFilter .panel-body ul li {
+    position:relative;
+    display:block;
+    margin-bottom:6px;
+    padding:0 0 0 30px;
+}
+
+#mx_divFilter .panel-body ul li .input {
+	/*
+    position:absolute;
+    height:13px;
+    width:13px;
+    top:1px;
+    left:0;
+    */
+    position:absolute;
+    top:0px;
+    left:10px;
+    width:16px;
+    height:16px;
+}
+
+#mx_divFilter .panel-body ul li .icon {
+    position:absolute;
+    top:0px;
+    left:10px;
+    width:16px;
+    height:16px;
+}
+
+#mx_divFilter .panel-body ul li label {
+    line-height:14px;
+ }
+
+/* ---------------------------------
+    Source Panel
+   --------------------------------- */
+
+#mx_divSourceList .source-panel {
+    position:relative;
+}
+
+#mx_divSourceList .source-panel .panel-head {
+    height:24px;
+    border-top:1px solid #f3f3f3;
+    border-bottom:1px solid #aaa;
+    background: #eeeeee; /* Old browsers */
+    background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+}
+
+#mx_divSourceList .source-panel .panel-head .title {top:3px;}
+#mx_divSourceList .source-panel .panel-head .actions {top:3px;}
+
+#mx_divSourceList .source-panel .button-toggle a {
+    position:absolute;
+    left:0;
+    top:5px;
+    height:16px;
+    width:16px;
+}
+
+#mx_divSourceList .source-panel.open .button-toggle a {background:url("../../common/images/utilTreeMinus.gif") 0 1px no-repeat;}
+#mx_divSourceList .source-panel.closed .button-toggle a {background:url("../../common/images/utilTreePlus.gif") 0 0 no-repeat;}
+
+#mx_divSourceList .source-panel .title {left:16px;}
+
+#mx_divFilter .panel-body,
+#mx_divExpression .panel-body {top:44px;}
+
+#mx_divSourceList .source-panel .panel-body {
+    position:relative;
+    top:0;
+    min-height:120;
+    background:#fff;
+}
+
+#mx_divSourceList .source-panel.closed .panel-body {display:none;}
+
+/* ---------------------------------
+    Expression Builder
+   --------------------------------- */
+
+#mx_divExpression #mx_divObjectManipulation,
+#mx_divExpression #divSelect {
+    position:absolute;
+    top:4px;
+    bottom:4px;
+ }
+
+#mx_divExpression #mx_divObjectManipulation {
+    left:4px;
+    width:52px;
+    border:1px solid #c8c8c8;
+}
+
+#mx_divExpression #mx_divObjectManipulation li {
+    display:block;
+    float:left;
+}
+
+#mx_divExpression #mx_divObjectManipulation li a {
+    display:block;
+    width:26px;
+    height:26px;
+    background:url(../../common/images/utilExpressionBuilderButtons.png) 0 0 no-repeat;
+}
+
+
+
+#mx_default_operator {
+	margin-top:50px;
+}
+
+
+
+#mx_divExpression #mx_divObjectManipulation li.mx_button a.mx_button-move-up {background-position:0 -26px;}
+#mx_divExpression #mx_divObjectManipulation li.mx_button a:hover.mx_button-move-up {background-position:0 0;}
+#mx_divExpression #mx_divObjectManipulation li.mx_button a.mx_button-move-down {background-position:-26px -26px;}
+#mx_divExpression #mx_divObjectManipulation li.mx_button a:hover.mx_button-move-down {background-position:-26px 0;}
+#mx_divExpression #mx_divObjectManipulation li.mx_button a.mx_button-remove {background-position:-52px -26px;}
+#mx_divExpression #mx_divObjectManipulation li.mx_button a:hover.mx_button-remove {background-position:-52px 0;}
+#mx_divExpression #mx_divObjectManipulation li.mx_button a.mx_button-insert {background-position:-78px -26px;}
+#mx_divExpression #mx_divObjectManipulation li.mx_button a:hover.mx_button-insert {background-position:-78px 0;}
+#mx_divExpression #mx_divObjectManipulation li.mx_button a.mx_button-clear {background-position:-104px -26px;}
+#mx_divExpression #mx_divObjectManipulation li.mx_button a:hover.mx_button-clear {background-position:-104px 0;}
+
+#mx_divExpression #divSelect {
+    left:62px;
+    width:234px;
+    overflow:auto;
+}
+    
+#mx_divExpression #divSelect select {
+    border:1px solid #c8c8c8;
+    min-width:100%;
+    height:100%;
+    max-height:94%
+}
+
+/* ---------------------------------
+    Completed Expression
+   --------------------------------- */
+
+#mx_divCompletedRule #mx_divRuleText {
+    position:absolute;
+    top:0;
+    right:4px;
+    bottom:4px;
+    left:4px;
+    line-height:14px;
+    word-wrap: break-word;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    padding:4px;
+    background:#fff;
+    border:1px solid #c8c8c8;
+}
+
+.on { 
+    border: 1px solid black;
+    border-radius: 5px;
+    color: black;
+	background:#35b128 ; 
+	font-size:11px;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	
+}
+
+.off {
+	background: none repeat scroll 0 0 #d3d3d3;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: black;
+	font-size:11px;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+    
+}
+
+input[type="button"] {padding:2px; background-color: #d3d3d3;}
+
+
+
+.completeExprOptions:hover { 
+    background-color: lightgrey;
+    cursor:pointer;
+}
+

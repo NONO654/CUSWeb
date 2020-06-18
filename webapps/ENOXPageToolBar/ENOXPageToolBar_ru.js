@@ -1,0 +1,1 @@
+define("DS/ENOXPageToolBar/ENOXPageToolBar_ru",{});define("DS/ENOXPageToolBar/assets/nls/PageToolBar",{collapse:"Свернуть",expand:"Развернуть",information:"Информация"});

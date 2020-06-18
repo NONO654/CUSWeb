@@ -1,0 +1,66 @@
+{
+    "version": "1.0",
+    "settings": {
+        "WSAccessV2": {
+            "value": false
+        }
+    },
+    "webapiDefaults": {
+        "fetch2d": {
+            "config": {
+                "select_file": ["icon", "thumbnail_2d"],
+                "fcs_url_mode": "REDIRECT"
+            },
+            "mandatoryAttr": {
+                "select_predicate": ["ds6w:label", "ds6w:cadMaster", "ds6w:reserved", "ds6w:reservedBy", "ds6w:modified", "ds6w:globalType"]
+            }
+        },
+        "fetch3d": {
+            "config": {},
+            "mandatoryAttr": {
+                "select_predicate": ["ds6w:label"],
+                "select_file": []
+            }
+        },
+        "expand": {
+            "config": {
+                "select_rel": ["physicalid", "ds6w:type", "ds6w:label", "ro.plminstance.V_treeorder"],
+                "compute_select_bo": ["icon", "thumbnail_2d"],
+                "q.iterative_filter_query_bo": "[ds6w:globalType]:\"ds6w:Document\" OR [ds6w:globalType]:\"ds6w:Part\"",
+                "no_type_filter_rel": ["XCADBaseDependency"],
+                "fcs_url_mode": "REDIRECT"
+            },
+            "mandatoryAttr": {
+                "select_bo": ["physicalid", "ds6w:label", "ds6w:cadMaster", "ds6w:reserved", "ds6w:reservedBy", "ds6w:globalType"]
+            }
+        },
+        "expand3d": {
+            "config": {
+                "select_rel": ["physicalid", "ds6w:type", "type", "ds6w:globalType", "matrixtxt", "TreeOrder", "ro.plminstance.V_treeorder"],
+                "compute_select_bo": ["thumbnail_3d", "cgr"]
+            },
+            "mandatoryAttr": {
+                "select_bo": ["physicalid", "ds6w:type", "ds6w:globalType"]
+            }
+        },
+        "multiexpand2d": {
+            "config": {
+                "select_rel": ["physicalid", "ds6w:type", "ds6w:label", "ro.plminstance.V_treeorder"],
+                "compute_select_bo": ["icon"],
+                "fcs_url_mode": "REDIRECT"
+            },
+            "mandatoryAttr": {
+                "select_bo": ["physicalid", "ds6w:label", "ds6w:cadMaster", "ds6w:reserved", "ds6w:reservedBy"]
+            }
+        },
+        "multiexpand3d": {
+            "config": {
+                "select_rel": ["physicalid", "ds6w:type", "type", "ds6w:globalType", "matrixtxt", "TreeOrder", "ro.plminstance.V_treeorder"],
+                "compute_select_bo": ["thumbnail_3d", "cgr"]
+            },
+            "mandatoryAttr": {
+                "select_bo": ["physicalid", "ds6w:type", "ds6w:globalType"]
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2017 , Dassault Systemes. All rights reserved. -->
+  <head>
+    <title>Enterprise Internal Lab Menu</title>
+    <meta name="description" content="Form to create the company for the private Marketplace" />
+    <meta name="keywords" content="Marketplace Enterprise" />
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+    <link rel="stylesheet" type="text/css" href="../MP3DPWAPConfig/assets/css/MP3DPWAP.css" />
+    <script>
+      require([
+        'DS/MPFMenuComponent/MenuComponent',
+        'i18n!DS/MPFPrivateMarketplaceComponent/assets/nls/PrivateMarketplaceComponent'
+      ], function (MenuComponent, I18N) {
+        'use strict';
+
+        var steps = [{ label: I18N.get('service-information'), name: 'service-information', saveNeeded: true },
+          { complete: false, label: I18N.get('printers'), name: 'printers', saveNeeded: false },
+          { complete: false, label: I18N.get('finish'), name: 'finish', saveNeeded: false },
+          { complete: false, label: I18N.get('services'), name: 'services', saveNeeded: false },
+          { complete: false, label: I18N.get('showroom'), name: 'showroom', saveNeeded: false },
+          { complete: false, label: I18N.get('members'), name: 'members', saveNeeded: false }];
+
+        var isCostingActivated = window.location.search.indexOf('Pricing') > -1;
+        if (isCostingActivated) {
+          steps.splice(4, 0, { complete: false, label: I18N.get('pricing'), name: 'pricing', saveNeeded: false });
+        }
+        var menuComponent = new MenuComponent({ baseURL: 'my-private-lab', container: widget.body, steps: steps, topic: widget.getValue('mpTopic') });
+        widget.addEvent('onLoad', menuComponent.load.bind(menuComponent));
+        widget.addEvent('onShow', menuComponent.show.bind(menuComponent));
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

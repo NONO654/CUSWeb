@@ -1,0 +1,332 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+
+<link rel="import" href="dg-details.html">
+<link rel="import" href="dg-item-style.html">
+
+<dom-module id="dg-service">  
+  <template>
+    <style include="dg-item-style"></style>
+    <style>
+      .override-checkbox-container {
+        display: none;
+      }
+      :host([has-parameters]) .override-checkbox-container {
+        display: block;
+      }
+    </style>
+    <div class="container">
+      
+      <!-- Header -->
+      <section class="heading" on-click="toggleDetails" data-status$="{{status}}">
+        <button class="method label" data-method$="{{request.method}}" on-click="run">{{lastRequest.method}}</button>
+        <label class="name label">{{lastRequest.name}}</label>
+        <label class="caption label">{{lastRequest.caption}}</label>
+        <label class="response" data-status$="{{status}}">
+          <span class="status label">{{status}}</span>
+          <span class="timetaken label">{{response.timetaken}}</span>
+          <div class="loadingspinner"></div>
+        </label>
+      </section>
+      
+      <dg-details value="{{lastRequest}}" ctx="{{ctx}}"
+                  visible="{{showdetails}}" readonly="{{isDetailsReadonly}}">
+         <div class="override-checkbox-container">
+            <input type="checkbox" class="regular-checkbox" on-change="_toggleOverride"/>
+            <span class="override-label">Override</span>
+         </div>
+      </dg-details>
+    </div>
+  </template>  
+  <script>
+    (function () {
+      const APPLICATION_JSON = 'application/json';
+      const APPLICATION_XML = 'application/xml';
+      const CONTENT_TYPE = 'content-type'
+
+      //Adapted from: https://gist.github.com/chinchang/8106a82c56ad007e27b1
+      function xmlToJson(xml) {
+        let obj = {};
+
+        if (xml.nodeType === 1) {
+          if (xml.attributes.length > 0) {
+          obj["@attributes"] = {};
+            for (let j = 0; j < xml.attributes.length; j++) {
+              const attribute = xml.attributes.item(j);
+              obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+            }
+          }
+        } else if (xml.nodeType === 3) {
+          obj = xml.nodeValue;
+        }
+
+        if (xml.hasChildNodes() && xml.childNodes.length === 1 && 
+            xml.childNodes[0].nodeType === 3) {
+          obj = xml.childNodes[0].nodeValue;
+        }
+        else if (xml.hasChildNodes()) {
+          for(let i = 0; i < xml.childNodes.length; i++) {
+            const item = xml.childNodes.item(i);
+            const nodeName = item.nodeName;
+            if (obj[nodeName] === undefined) {
+              obj[nodeName] = xmlToJson(item);
+            } else {
+              if (obj[nodeName].push === undefined) {
+                const old = obj[nodeName];
+                obj[nodeName] = [];
+                obj[nodeName].push(old);
+              }
+              obj[nodeName].push(xmlToJson(item));
+            }
+          }
+        }
+        return obj;
+      }
+
+      // checks if the string is a json or not
+      // returns the parsed json if it is else null
+      function parseJSON(str) {
+          try {
+              return JSON.parse(str);
+          } catch (ex) {
+              return null;
+          }
+      }
+
+
+      async function makeRequest(url, method, payload, credentials, headers) {
+        let status, data, ok, timetaken, parsedData, error;
+
+        try {
+          // for timing
+          const t0 = performance.now();
+
+          const body = payload && headers[CONTENT_TYPE].search('json') > -1 ? JSON.stringify(payload) : payload;
+
+          // Make a call to this web service
+          const resp = await fetch(url, {
+            credentials,
+            method,
+            headers,
+            body
+          });
+
+          // prepare the server response status
+          status = resp.status + ' ' + resp.statusText;
+          ok = resp.ok;
+
+          // if it is success then convert to json
+          data = resp.ok && await resp.text();
+          const json = parseJSON(data);
+          data = resp.ok && json ? json : data;
+
+          // check if its an xml response then parse and convert to json
+          const isXMLResp = resp.headers.get(CONTENT_TYPE) === APPLICATION_XML;
+          parsedData = data && isXMLResp ? xmlToJson((new window.DOMParser()).parseFromString(data, "text/xml")) : data;
+
+          const t1 = performance.now();
+          timetaken = Math.round((t1-t0) * 1/10)/100 + 's';          
+        } catch(ex) {
+          console.error('Error making request ' + url, ex);
+          error = ex.toString();
+        } finally {
+          return {status, data, ok, timetaken, parsedData, error};
+        }
+      }
+
+      Polymer({
+        is: 'dg-service',
+        
+        properties: {
+          request: {
+            type: Object,
+            notify: true
+          },
+          lastRequest: {
+            type: Object,
+            notify: true
+          },
+          status: {
+            type: String,
+            reflectToAttribute: true
+          },
+          response: {
+            type: Object
+          },
+          ctx: {
+            type: Object
+          },
+          showdetails: {
+            type: Boolean
+          },
+          override: {
+            type: Boolean
+          },
+          isDetailsReadonly: {
+            type: Boolean,
+            value: true
+          },
+          hasParameters: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true
+          },
+          _cb: {
+            type: Object
+          }
+        },
+        attached: function () {
+          this.refresh();
+          this.hasParameters = Object.keys(this.request).some(attr => !!attr.match(/^_/));
+          this._cb = new ContextBuilder(this.ctx, this.request.name);
+        },
+        refresh: function () {
+          let params_expr = {};
+          
+          // check if we are overriding
+          if (this.override) {
+            params_expr = Object.keys(this.request).reduce((params, key) => {
+              if (key.match(/^_\w*/)) {
+                params[key] = this.lastRequest[key];
+              }
+              return params;
+            }, {});
+          }
+          
+          // update the last request
+          this.lastRequest = Object.assign({}, this.request);
+          this.lastRequest = {...this.lastRequest, ...params_expr};
+        },
+        run: async function (event) {
+          event && event.stopPropagation();
+
+          // refresh the last request
+          this.refresh();
+
+          this.status = 'pending';
+
+          // BEFORE making the request
+          await this._beforeSend();
+
+          // construct the endpoint
+          let {url, method, name, credentials} = this.lastRequest;
+          this.response = {};
+          const service = this.ctx[name] = this.ctx[name] || {};
+           
+          // include or omit the credentials based on configuration
+          credentials = credentials || 'include';
+
+          // get the headers from configuration else default to empty
+          let headers = service.headers || {};
+
+          // make the web service request
+          this.response = await makeRequest(url, method, service.payload, credentials, headers);
+
+          // update the status
+          this.status = this.response && this.response.ok ? 'success' : 'failed';
+
+          // AFTER receiving the response
+          this.response && await this._afterReceive();
+        },
+        _updateParams: async function () {
+          let {name} = this.lastRequest;
+
+          // build the parameters for this service
+          const params_expr = Object.keys(this.lastRequest).reduce((params, key) => {
+            if (key.match(/^_\w*/)) {
+              params[key] = this.lastRequest[key];
+            }
+            return params;
+          }, {});
+
+          params_expr && await this._cb.addContext(params_expr);
+
+          // update all the other attributes that may depend on parameters
+          Object.keys(this.lastRequest).forEach(attr => {
+            if (!attr.match(/name|^\$|^_/)) {
+              const val = this.lastRequest[attr];
+              this.lastRequest[attr] = this._cb.evaluate(val);
+            }
+          });
+
+          // to trigger update on UI
+          this.lastRequest = Object.assign({}, this.lastRequest);
+
+          // refresh details
+          this.buildContext();
+        },
+        _beforeSend: async function () {
+          this.hasParameters && await this._updateParams();
+
+          let {name, url} = this.lastRequest;
+          const expressions = this.lastRequest.$beforeSend;
+          expressions && await this._cb.addContext(expressions);
+
+          // update the URL with the context details
+          url = this._cb.evaluate(url);
+          this.lastRequest.url = url ? url : this.lastRequest.url;
+        },
+        _afterReceive: async function () {
+          const {name} = this.lastRequest;
+          const expressions = this.lastRequest.$afterReceive || {};
+          const response = this.response;
+
+          if (response.ok) {
+            await this._cb.addContext(expressions, response);
+
+            // rebuild the context (to refresh the details)
+            this.buildContext();
+
+            // do the assertions if exists
+            const assertions = this.lastRequest.$assertions;
+            if (assertions) {
+              const passed = assertions.some(this._cb.evaluate.bind(this._cb));
+            
+              // update the status
+              this.status = passed ? 'success' : 'failed';
+            }          
+          }
+
+          // fire the received event
+          // This is commented since it was slowing things down
+          // this.fire('response-received', {expressions});
+        },
+        toggleDetails: function () {
+          this.showdetails = !this.showdetails;
+        },
+        buildContext: function () {
+          this.querySelector('dg-details').refresh();
+        },
+        _toggleOverride: function () {
+          this.override = !this.override;
+          this.isDetailsReadonly = !this.override;
+        },
+        serializeData: function () {
+          let serialized = null;
+
+          try {
+            // add request info.
+            const url = this.lastRequest.url;
+            const method = this.lastRequest.method; 
+
+            // add response info.
+            if (this.response) {
+              const {data, ok, status, timetaken, error} = this.response;
+              serialized = {url, method, data, ok, status, timetaken, error};
+            }            
+          } catch (error) {
+            console.warn(`Error while trying to serialize service ${this.name}`, error);
+          }                    
+          
+          return serialized;
+        }
+      });
+    })();
+  </script>
+</dom-module>
+
+
+
+
+

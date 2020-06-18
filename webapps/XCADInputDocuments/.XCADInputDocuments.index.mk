@@ -1,0 +1,14 @@
+m|XCADParserWeb\XCADInputDocuments.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\XCADInputDocuments\XCADInputDocuments.js|1531551032|6676
+s|XCADParserWeb\XCADInputDocuments.mweb\src\XCADProduct.js|1491914630|3690
+s|XCADParserWeb\XCADInputDocuments.mweb\src\XCADFaceData.js|1493304450|2900
+s|XCADParserWeb\XCADInputDocuments.mweb\src\XCADRepresentation.js|1491914663|1753
+s|XCADParserWeb\XCADInputDocuments.mweb\src\XCADTessellatedRepresentation.js|1491914674|10470
+s|XCADParserWeb\XCADInputDocuments.mweb\src\XCADInputDocuments.js|1456325436|12
+s|XCADParserWeb\XCADInputDocuments.mweb\src\XCADInputDocument.js|1491914619|7913
+s|XCADParserWeb\XCADInputDocuments.mweb\src\XCADProductInstance.js|1491914642|2410
+s|XCADParserWeb\XCADInputDocuments.mweb\src\XCADProductRepresentation.js|1491914651|997

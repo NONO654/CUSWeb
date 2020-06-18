@@ -1,0 +1,327 @@
+// ===========================================================
+// PACKAGE   : ENOSTProdSysExecStorageSysDS
+// ===========================================================
+// Created : Wed Nov 20 2008
+// Updated: Wed Jul 18 02:54:00 2011   Adding Organisation logic (Query, Read, Write)
+// -----------------------------------------------------------
+//For SMB this is the sub-class of attribute, they have to be always presented to user in that order
+//a) ident
+//b) description 
+//c) state of dev
+//d) ownership
+//
+//******** V_discipline is currently unpublished, When published it must expose VALUE ******* Will transform in real dictionary type with Unicorn
+//******** V_usage must not be published (soon internal - 3DPart R206 exception)
+//******** V_nature is published if really used, and in RO only
+//******** ATTR V_ApplicabilityDate;N;N;$ is unused in SMB deployment
+//******** ATTR reserved;N;N;$ is "useless" as long as SMB uses optimistic locking and do not lock explicitely info... & reservedby not NULL is equivalent
+//******** FATTR reservedby;N should not be provided in Write Mask (as long as it is not updated in session)/ Compass reflect latest info and MUST be prefered
+//
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// ===========================================================
+ENTITY ENOSTExecStorageSysRefCusto
+// ===========================================================
+// --- attributes: 
+//a) ident
+ATTR V_Name;Y;N;$
+ATTR majorrevision;N;N;$
+ATTR PLM_ExternalID;Y;N;$
+//b) description
+//ATTR V_usage;N;N;$
+//VALUE 3DPart
+//ATTR V_discipline;N;N;$
+ATTR E_versionComment;N;N;$
+ATTR V_description;N;N;$
+ATTR originated;N;N;$
+ATTR E_fromExternalId;N;N;$
+ATTR V_ActualEndDate;N;N;$
+ATTR V_ActualStartDate;N;N;$
+ATTR V_ArrivalMode;N;Y;$
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Sequential
+//VALUE Any
+//VALUE AllTogether
+ATTR V_ArrivalTimeMode;N;Y;$
+// note: uncomment VALUEs below ONLY if you need to restrict the list of metadata enumerated values
+//VALUE Random
+//VALUE Schedule
+//VALUE OnSignal
+ATTR V_Capacity;N;N;0
+ATTR V_CycleTime;N;N;0.0
+ATTR V_InitialDelay;N;N;0.0
+ATTR V_MeanTimeBetweenFailure;N;N;0.0
+ATTR V_MeanTimeToRepair;N;N;0.0
+ATTR V_PlannedEndDate;N;N;$
+ATTR V_PlannedStartDate;N;N;$
+ATTR V_TotalProductionTime;N;N;0.0
+ATTR V_QueuingModeOUT;N;N;LIFO
+ATTR V_QueuingModeIN;N;N;LIFO
+ATTR V_FlowModeOUT;N;N;FirstAllowed
+ATTR V_FlowModeIN;N;N;FirstAllowed
+ATTR V_OperationMode;Y;Y;PUSH
+//c) state of dev
+ATTR modified;N;N;$
+ATTR current;N;N;$
+ATTR reservedby;N;N;$
+//d) ownership
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+//
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_description;Y
+// - unordered
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+//a) ident
+FATTR V_Name;Y
+FATTR majorrevision;Y
+//b) description
+//FATTR V_usage;Y
+//FATTR V_discipline;Y
+//c) state of dev
+FATTR modified;Y
+//FATTR reservedby;Y
+//d) owner
+//FATTR owner;Y
+//FATTR organization;Y
+FATTR project;Y
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+FATTR majorrevision;N
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+//a) ident
+FATTR V_Name;Y
+FATTR majorrevision;Y
+FATTR PLM_ExternalID;Y
+//b) description
+//FATTR V_discipline;Y
+//FATTR V_usage;Y
+FATTR E_versionComment;Y
+FATTR V_description;Y
+FATTR originated;Y
+FATTR E_fromExternalId;Y
+FATTR V_Capacity;Y
+FATTR V_MeanTimeBetweenFailure;Y
+FATTR V_MeanTimeToRepair;Y
+FATTR V_TotalProductionTime;Y
+FATTR V_CycleTime;Y
+FATTR V_InitialDelay;Y
+FATTR V_PlannedEndDate;Y
+FATTR V_ArrivalTimeMode;Y
+FATTR V_ArrivalMode;Y
+FATTR V_PlannedStartDate;Y
+FATTR V_ActualEndDate;Y
+FATTR V_ActualStartDate;Y
+FATTR V_QueuingModeOUT;Y
+FATTR V_QueuingModeIN;Y
+FATTR V_FlowModeOUT;Y
+FATTR V_FlowModeIN;Y
+FATTR V_OperationMode;Y
+//c) state of dev
+FATTR modified;Y
+FATTR current;Y
+FATTR reservedby;Y
+//d) owner
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+//a) ident (used for Properties Read & List) Innaceptable as first in List Mode... so removed.
+FATTR V_Name;N
+FATTR majorrevision;N
+FATTR PLM_ExternalID;N
+//b) description
+//FATTR V_discipline;N
+FATTR E_versionComment;N
+FATTR V_description;N
+FATTR originated;N
+FATTR E_fromExternalId;N
+FATTR V_Capacity;N
+FATTR V_MeanTimeBetweenFailure;N
+FATTR V_MeanTimeToRepair;N
+FATTR V_TotalProductionTime;N
+FATTR V_CycleTime;N
+FATTR V_InitialDelay;N
+FATTR V_PlannedEndDate;N
+FATTR V_ArrivalTimeMode;N
+FATTR V_ArrivalMode;N
+FATTR V_PlannedStartDate;N
+FATTR V_ActualEndDate;N
+FATTR V_ActualStartDate;N
+FATTR V_QueuingModeOUT;N
+FATTR V_QueuingModeIN;N
+FATTR V_FlowModeOUT;N
+FATTR V_FlowModeIN;N
+FATTR V_OperationMode;N
+//c) state of dev
+FATTR modified;N
+FATTR current;N
+FATTR reservedby;N
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+//a) ident
+FATTR V_Name;Y
+FATTR majorrevision;N
+FATTR PLM_ExternalID;N
+//b) description
+//FATTR V_discipline;N
+FATTR E_versionComment;Y
+FATTR V_description;Y
+FATTR originated;N
+FATTR E_fromExternalId;N
+FATTR V_Capacity;Y
+FATTR V_MeanTimeBetweenFailure;Y
+FATTR V_MeanTimeToRepair;Y
+FATTR V_TotalProductionTime;Y
+FATTR V_CycleTime;Y
+FATTR V_InitialDelay;Y
+FATTR V_PlannedEndDate;Y
+FATTR V_ArrivalTimeMode;Y
+FATTR V_ArrivalMode;Y
+FATTR V_PlannedStartDate;Y
+FATTR V_ActualEndDate;N
+FATTR V_ActualStartDate;N
+FATTR V_QueuingModeOUT;Y
+FATTR V_QueuingModeIN;Y
+FATTR V_FlowModeOUT;Y
+FATTR V_FlowModeIN;Y
+FATTR V_OperationMode;Y
+//c) state of dev
+FATTR modified;N
+FATTR current;N
+//FATTR reservedby;N
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// - unordered
+
+// ===========================================================
+ENTITY ENOSTExecStorageSysInstCusto
+// ===========================================================
+ATTR PLM_ExternalID;N;N;$
+ATTR originated;N;N;$
+ATTR V_X2DPos;N;N;0.0
+ATTR V_Y2DPos;N;N;0.0
+ATTR reservedby;N;N;$
+ATTR modified;N;N;$
+//d) ownership
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR reservedby;Y
+FATTR modified;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR originated;N
+FATTR reservedby;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR originated;N
+FATTR V_X2DPos;Y
+FATTR V_Y2DPos;Y
+//FATTR reservedby;N
+FATTR modified;N
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// - unordered
+
+// ===========================================================
+// End of ENOSTProdSysExecStorageSysDS package's DEFAULT mask file
+// ===========================================================

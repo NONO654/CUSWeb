@@ -1,0 +1,2 @@
+/*!  Copyright 2016 Dassault Systemes. All rights reserved. */
+(function(b){var a=b.Polymer,c=b.DS;c.SMAProcADUI=c.SMAProcADUI||{};c.SMAProcADUI.ADPropertiesExecFolder=a({is:"ad-properties-execfolder",properties:{model:{type:Object,value:null,observer:"modelChanged"}},modelChanged:function(){if(this.model){a.dom(this.$.lastModifiedDate).textContent=this.formatDate(this.model.lastModified)}else{a.dom(this.$.lastModifiedDate).textContent=""}},behaviors:[c.SMAProcSP.SPBase,c.SMAProcADUI.FormatUtilities]})}(this));

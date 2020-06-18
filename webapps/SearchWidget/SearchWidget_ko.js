@@ -1,0 +1,1 @@
+define("DS/SearchWidget/SearchWidget_ko",{});define("DS/SearchWidget/assets/nls/langSW",{hintSearch:"검색...",peopleTile:"사람",CSTitle:"협업 공간",OrgTitle:"조직",UserGrpTitle:"사용자 그룹",MoreButton:"자세히",ErrorTimeOut:"시간 초과: 검색을 계속할 수 없음",UnknownError:"오류가 발생했습니다.","This character is forbidden : {0}":"이 문자는 금지됨: {0}",WarningNotFound:"결과가 없음",AR_SearchButton:"검색"});

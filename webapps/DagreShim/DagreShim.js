@@ -1,0 +1,2 @@
+/*! Copyright 2014 Dassault Systèmes */
+if(typeof layout==="object"){define("DS/LayoutLib",layout)}else{if(require.toUrl("DS/LayoutLib").indexOf("1.0.0/layout.min")===-1){LAYOUTLIB_BASEPATH=require.toUrl("DS/LayoutLib/1.0.0/");if(LAYOUTLIB_BASEPATH.indexOf("?")>-1){LAYOUTLIB_BASEPATH=LAYOUTLIB_BASEPATH.substring(0,LAYOUTLIB_BASEPATH.indexOf("?"))}require.config({paths:{"DS/LayoutLib":LAYOUTLIB_BASEPATH+"layout.min"},shim:{"DS/LayoutLib":{exports:"layout"}}})}}define("DS/DagreShim/DagreShim",["DS/LayoutLib"],function(a){return a});

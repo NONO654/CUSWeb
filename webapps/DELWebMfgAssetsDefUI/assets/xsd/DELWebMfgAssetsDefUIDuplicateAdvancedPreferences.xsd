@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMGAConfiguration" xmlns:tns="DS_DELMIAMGAConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="Config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Preferences">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DuplicateAdvanced">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="PrefixOption" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:attribute name="isDisplayed" type="xs:boolean" use="required"/>
+                        <xs:attribute name="defaultValue" type="xs:string" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="LinkOption" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="name" type="tns:LinkOptionNameType" use="required"/>
+                        <xs:attribute name="isDisplayed" type="xs:boolean" use="required"/>
+                        <xs:attribute name="defaultValue" type="xs:boolean" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="showOptionPanel" type="xs:boolean" use="required"/>
+                </xs:complexType>
+                <xs:unique name="uniqueLinkOptionName">
+                  <xs:selector xpath="tns:LinkOption"/>
+                  <xs:field xpath="@name"/>
+                </xs:unique>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="Title"/>
+      <xs:attribute type="xs:string" name="Description"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="LinkOptionNameType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="KeepImplementLinksOnProcess"/>
+      <xs:enumeration value="KeepOutputLinksOnProcess"/>
+      <xs:enumeration value="KeepCapableResourceLinksOnProcess"/>
+      <xs:enumeration value="KeepHowToLinksOnProcess"/>
+      <xs:enumeration value="KeepImplementLinksOnSystem"/>
+      <xs:enumeration value="KeepOutputLinksToPrdOnSystem"/>
+      <xs:enumeration value="KeepOutputLinksToMBOMOnSystem"/>
+      <xs:enumeration value="KeepCapableResourceLinksOnSystem"/>
+      <xs:enumeration value="KeepHowToLinksOnSystem"/>
+      <xs:enumeration value="KeepCandidateResourceLinksOnSystem"/>
+      <xs:enumeration value="KeepImplementLinksOnResource"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

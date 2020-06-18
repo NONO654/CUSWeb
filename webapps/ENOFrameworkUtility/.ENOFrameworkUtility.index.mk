@@ -1,0 +1,9 @@
+m|ENOFramework\ENOFrameworkUtility.mweb
+b|j|n,u
+b|c|n,u
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\ENOFrameworkUtility\ENOFrameworkUtility.js|1535449524|8
+s|ENOFramework\ENOFrameworkUtility.mweb\src\ENOFrameworkUtility.js|1535449524|8
+t|win_b64\webapps\ENOFrameworkUtility\WebUtility.js|1473228318|1121
+s|ENOFramework\ENOFrameworkUtility.mweb\src\WebUtility.js|1473228318|1121

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.V6UtilPIExtSimExport" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflV6UtilPIExtSimExport" nlsID="dispname">Export External Simulation Representation</DisplayName>
+	<Description nlsFile="SMAWflV6UtilPIExtSimExport" nlsID="desc">Export External Simulation Representation</Description>
+	<LongDescription/>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>V6Utility</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.plugin.v6utility.extsimexport</Value>
+		</Attribute>
+		<!--<Attribute name="PRIVATE">
+		  <Value>SIMULIA_EXTENSIONS_LA_14X</Value>
+	  </Attribute>-->
+	</Attributes>
+
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflV6UtilPIExtSimExport.CATNls" targetFilename="SMAWflV6UtilPIExtSimExport.CATNls"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflV6UtilPIExtSimExport.dll" targetFilename="win_b64/SMAWflV6UtilPIExtSimExport.dll"/>
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflV6UtilPIExtSimExport.sypstyle" targetFilename="SMAWflV6UtilPIExtSimExport.sypstyle"/>
+	</Streams>
+
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflV6UtilPIExtSimExportEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[V6Utility]]>
+			</Value>
+		</Property>	 
+		<Property name="PLMBatchName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[ExternalSimulationExport]]>
+			</Value>
+		</Property>
+		<Property name="PLMObjectType" type="string" valuetype="single">
+			<Value>
+				<![CDATA[VPMReference,XRep]]>
+			</Value>
+		</Property>
+		<!--Value of this property is ID of PLM content which it refers to.-->
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="PLMBatchArguments" type="aggregate" valuetype="single">
+			<Property name="SMAMDLBatch_IncludeAssociatedRep" type="boolean" valuetype="single">
+				<Value>true</Value>
+			</Property>
+			<Property name="SMAMDLBatch_GenerateSpec" type="boolean" valuetype="single">
+				<Value>true</Value>
+			</Property>
+			<Property name="SMAMDLBatch_GenerateSpecFile" type="string" valuetype="single">
+				<Value/>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

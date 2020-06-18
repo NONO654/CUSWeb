@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?> 
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/"> 
+ <!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<head>   
+    
+    <title>COS Sever Administration</title>
+	
+	<!-- Application Metas Start -->
+	
+    <meta name="description" content="COS Server Admininstration Widget" />
+   	<meta name="author" content="Dassault Syst�mes" />
+    <meta name="description" content="Administers the COS servers" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="autoRefresh" content="0" />
+
+   	
+	<!-- Application Metas End -->
+
+	<!-- Load AmdLoader -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	
+	<!-- Application JS Start -->
+    <script >
+    function onReady () {
+        require(
+                ['DS/SMAExeCOSAdmin/SMAExeCOSAdmin',
+                 'DS/SMAExeCOSAdmin/SMAExeCOSAdminInfo'],
+                function (SMAExeCOSAdmin,COSInfo) {
+                    'use strict';
+                    if (!SMAExeCOSAdmin) {
+                        alert('SMAExeCOSAdmin object not found.');
+                    }
+                    else {
+                    	// empty the widget and set it in the info
+                    	widget.body.empty();
+                    	COSInfo.setWidget(widget);
+                    	
+                    	// add the onLoad call to kick off admin processing
+					    widget.addEvent('onLoad', SMAExeCOSAdmin.onLoad);
+					    widget.addEvent('endEdit', SMAExeCOSAdmin.endEdit);   
+					    widget.addEvent('onRefresh', SMAExeCOSAdmin.onRefresh);   
+                    }
+                },
+                function ( err ) {
+                    'use strict';
+                    alert('Failed to load SMAExeCOSAdmin. ' + err);
+                });
+    }
+
+    onReady();
+	</script>
+	<!-- Application JS End -->
+
+</head>
+<body>
+
+</body>
+</html>

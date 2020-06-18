@@ -1,0 +1,11 @@
+m|WebFoundation\Selection.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.5.19061
+r|G:\R421\BSF\.
+t|win_b64\webapps\Selection\Selection.js|1551492186|8806
+s|WebFoundation\Selection.mweb\src\HSOManager.js|1510828396|945
+s|WebFoundation\Selection.mweb\src\PSOManager.js|1510828422|1019
+s|WebFoundation\Selection.mweb\src\XSO.js|1550497573|32524
+s|WebFoundation\Selection.mweb\src\CSOManager.js|1510828493|1421
+s|WebFoundation\Selection.mweb\src\Selection.js|1427881326|0

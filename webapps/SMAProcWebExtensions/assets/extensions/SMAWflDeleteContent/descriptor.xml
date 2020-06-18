@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.DeleteContent" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflDeleteContent" nlsID="dispname">Delete Content</DisplayName>
+	<Description nlsFile="SMAWflDeleteContent" nlsID="desc">Delete Content</Description>
+	<LongDescription nlsFile="SMAWflDeleteContent" nlsID="longdesc">Delete Content</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>900</Value>
+			<Value>350</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="I_SMAWflDeleteContent16.png" targetFilename="small/I_SMAWflDeleteContent16.png" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflDeleteContent.png" targetFilename="large/I_SMAWflDeleteContent.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflDeleteContent.CATNls" targetFilename="SMAWflDeleteContent.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflDeleteContent_ja.CATNls" targetFilename="SMAWflDeleteContent_ja.CATNls" locale="Japanese" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflDeleteContent.dll" targetFilename="win_b64/SMAWflDeleteContent.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflDeleteContentUI.sypstyle" targetFilename="SMAWflDeleteContentUI.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflDeleteContentEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>    
+			</Implementations>
+		</Interface>
+
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflDeleteContentHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="ExtensionUpdater">
+			<Implementations>
+				<Implementation name="Updater" language="cpp" platform="win_b64">
+					<LateType>SMAWflDeleteContentUpdater_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="rules" type="string" valuetype="single">
+			<Value>
+				<![CDATA[<DeleteRules lastId="0"/>]]>
+			</Value>
+		</Property>
+	</Properties>
+</wfext:Extension>

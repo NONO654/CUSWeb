@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+
+        <!-- Application Metas -->
+        <title></title>
+		<widget:preferences>
+            <widget:preference name="widgetName" type="hidden"></widget:preference>
+            <widget:preference name="params" type="hidden"></widget:preference>
+			<widget:preference name="objectId" type="hidden"></widget:preference>
+        </widget:preferences>
+        <meta name="author" content="Dassault Systemes" />
+        <meta name="brand" content="ENOVIA" />
+        <meta name="autoRefresh" content="0" />
+        <meta name="description" content="ENOVIA Configurable Widget" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <!--  Libraries -->
+        <link rel="stylesheet" type="text/css" href="../VENENO6WPlugins/plugins/jqueryui/latest/css/cupertino/jquery.ui.custom.min.css" />
+        <link rel="stylesheet" type="text/css" href="../VENENO6WPlugins/plugins/dynatree/latest/skin-vista/ui.dynatree.css" />
+        <link rel="stylesheet" type="text/css" href="../VENENO6WPlugins/plugins/contextmenu/latest/jquery.contextMenu.css" />
+        <script type="text/javascript" src="../VENENO6WPlugins/plugins/jquery/latest/jquery.js"></script>
+        <script type="text/javascript" src="../VENENO6WPlugins/plugins/jqueryui/latest/js/jquery.ui.custom.js"></script>
+        <script type="text/javascript" src="../VENENO6WPlugins/plugins/dynatree/latest/jquery.dynatree.min.js"></script>
+        <script type="text/javascript" src="../VENENO6WPlugins/plugins/highchart/latest/js/highcharts.js"></script>
+        <script type="text/javascript" src="../VENENO6WPlugins/plugins/contextmenu/latest/jquery.contextMenu.js"></script>
+
+        <!-- Enovia Specific Files -->
+
+        <link rel="stylesheet" type="text/css" href="./Foundation.css" />
+
+        <!-- Application JavaScript Source  -->
+        <script type="text/javascript">
+            //<![CDATA[
+            //defining constants, IFWE & enoviaServer as global.
+            /*global require*/
+            /*global widget, enoviaServer*/
+            require(['UWA/Core',
+                     'DS/PlatformAPI/PlatformAPI',
+                     'DS/Foundation/WidgetEngine',
+                     'DS/Foundation/WidgetUwaUtils',
+                     'DS/ENO6WPlugins/jQuery'
+                    ],
+            function (UWA, PlatformAPI, WidgetEngine, WidgetUwaUtils, jQuery) {
+                'use strict';  
+                jQuery.noConflict(); // this IS needed
+                window.isIFWE = true;
+                var e6wUrl = widget.getUrl(),
+                runYourApp = widget.getUrl().match(/[?&]runYourApp=([^&]*)?/),  //override myapps url.
+                myAppsUrl = PlatformAPI.getApplicationConfiguration('app.urls.myapps');
+
+                e6wUrl = e6wUrl.substring(0, e6wUrl.indexOf('/webapps'));
+                if (myAppsUrl === null || runYourApp !== null) {
+                    myAppsUrl = e6wUrl;
+                }
+                window.WidgetConstants = {str:{}};
+                WidgetUwaUtils.setupEnoviaServer();
+
+                var showSpace = enoviaServer.showSpace;
+                var objectId = enoviaServer.objectId;
+
+                /*
+                We create the global MyWidget object (it could be any other name).
+                This object will be used to store variables and functions.
+                */
+                var randomName = "wdg_" + new Date().getTime(),
+                WU = WidgetUwaUtils,
+                MyWidget = {
+                    InterCom: UWA.Utils.InterCom,
+                    compassSocket: null,
+                    prefIntercomServer: null,
+                    compassSocketName: "",
+                    prefSocketName: "",
+                    arrOid: [],
+                    spaceNames: {},
+                    myAppsStorages: null,
+                    onLoad: function() {
+                        enoviaServer.widgetName = widget.getValue('widgetName');
+                        if (enoviaServer.widgetName === null) {
+                            enoviaServer.widgetName = "";
+                        }
+                        enoviaServer.params = widget.getValue('params');
+                        enoviaServer.widgetId = widget.id;
+                        enoviaServer.objectId = widget.getValue('objectId');
+                        enoviaServer.targetOrigin = document.location.origin;
+                        if (enoviaServer.widgetName === "" || widget.getValue('interactive') === "true") {
+                            widget.addPreference({
+                                name: "widgetName",
+                                type: "text",
+                                defaultValue: enoviaServer.widgetName,
+                                label: "widgetName"
+                            });
+                            widget.addPreference({
+                                name: "params",
+                                type: "text",
+                                defaultValue: enoviaServer.params,
+                                label: "params"
+                            });
+                            widget.setValue("interactive", "true");
+                        }
+
+                        WU.onLoad.call(this, widget, MyWidget);
+                    },
+                    setupIntercomConnections: function() {
+                        WU.setupIntercomConnections.call(this, widget, MyWidget, randomName);
+                    },
+                    loadBPS: function() {
+                        WU.loadBPS.call(MyWidget, widget, showSpace, "E6W_WIDGET_CONSTANTS");
+                    },
+                    setRowPref: function() {
+                        WU.setRowPref.call(this, widget);
+                    },
+                    setSizePref: function() {
+                        WU.setSizePref.call(this, widget);
+                    },
+                    setTitlePref: function() {
+                        WU.setTitlePref.call(this, widget);
+                    },
+                    setPref: function(name, label, data, changeEvent, isSortPref) {
+                        WU.setPref.call(MyWidget, name, label, data, changeEvent, isSortPref, widget);
+                    },
+                    onAfterLoad: function() {
+                        WU.onAfterLoad.call(MyWidget, randomName);
+                    },
+                    setDimensions: function() {
+                        WU.setDimensions.call(null, widget);
+                    },
+                    draw: function() {
+                        WU.draw.call(this, widget, showSpace, randomName, objectId, MyWidget);
+                    },
+                    searchWidgets: function(searchStr) {
+                        WU.searchWidgets.call(MyWidget, searchStr);
+                    },
+                    clearData: function() {
+                        WU.clearData.call(MyWidget);
+                    },
+                    onStorageChange: function() {
+                        WU.onStorageChange.call(MyWidget);
+                    },
+                    onSpaceChange: function() {
+                        WU.onSpaceChange.call(MyWidget);
+                    },
+                    onRowChange: function() {
+                        WU.onRowChange.call(MyWidget);
+                    },
+                    onSizeChange: function() {
+                        WU.onSizeChange.call(MyWidget);
+                    },
+                    onTitleChange: function() {
+                        WU.onTitleChange.call(MyWidget, widget);
+                    },
+                    processStorageChange: function(storageUrl) {
+                        WU.processStorageChange.call(MyWidget, storageUrl);
+                    },
+                    onRefresh: function() {
+                        WU.onRefresh.call(MyWidget, widget);
+                    },
+                    onForceRefresh: function(doReload) {
+                        WU.onForceRefresh.call(MyWidget, doReload);
+                    },
+                    onEditPrefChange: function() {
+                        WU.onEditPrefChange.call(MyWidget);
+                    },
+                    onEdit: function() {
+                        WU.onEdit.call(MyWidget, widget);
+                    },
+                    onViewChange: function(conf) {
+                        WU.onViewChange.call(MyWidget, widget, conf);
+                    },
+                    onClickItem: function() {
+                        WU.onClickItem.call(this, MyWidget, widget, randomName);
+                    }
+                };
+
+                widget.MyWidget = MyWidget;
+
+                /*
+                The "onLoad" event is the very first event triggered when the widget is loaded.
+                Here, we make it trigger the MyWidget.onLoad() function as listener.
+                */
+                widget.addEvents({
+                    onLoad: MyWidget.onLoad,
+                    onResize: MyWidget.setDimensions,
+                    onViewChange: MyWidget.onViewChange,
+                    onStorageChange: MyWidget.onStorageChange,
+                    onSpaceChange: MyWidget.onSpaceChange,
+                    onRowChange: MyWidget.onRowChange,
+                    onSizeChange: MyWidget.onSizeChange,
+                    onTitleChange: MyWidget.onTitleChange,
+                    onEditPrefChange: MyWidget.onEditPrefChange,
+                    onRefresh: MyWidget.onRefresh,
+                    onForceRefresh: MyWidget.onForceRefresh,
+                    onSearch: MyWidget.searchWidgets,
+                    onResetSearch: MyWidget.searchWidgets,
+                    onEdit: MyWidget.onEdit
+                });
+
+            });
+        //]]>
+        </script>
+</head>
+<body/>
+</html>

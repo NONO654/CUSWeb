@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMGAConfiguration" xmlns:tns="DS_DELMIAMGAConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="DisplayAttributeDescriptionList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Document" type="tns:DocumentType" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="Title" type="xs:string" use="required" />
+      <xs:attribute name="Description" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="DocumentType">
+    <xs:sequence>
+      <xs:element name="Attribute" type="tns:AttributeType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="coloumnName" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="AttributeType">
+      <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:schema>
+

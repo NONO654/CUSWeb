@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.Pointer2" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationPointer2" nlsID="dispname">Pointer-2</DisplayName>
+	<Description nlsFile="SMAWflOptimizationPointer2" nlsID="desc">Pointer-2 Automatic Optimizer</Description>
+	<LongDescription nlsFile="SMAWflOptimizationPointer2" nlsID="longdesc">
+		<![CDATA[POINTER2 - Pointer-2 Automatic Optimizer
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Combination Numerical and Exploratory Technique
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for linear and nonlinear design spaces
+   &#8226; Well-suited for continuous and discontinuous design spaces
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>Partially
+
+</span><span style="font-weight:bold">Features:
+</span><span>Automatically controls a complementary set of standard algorithms to solve an optimization problem. 
+
+Pointer-2 is an automatic optimization engine that controls a set of standard optimization techniques. It currently controls six optimization methods: Sequential Quadratic Programming (NLPQL),  Nelder and Mead Downhill Simplex, Particle Swarm, Evol, Hooke-Jeeves, and MOST. This complementary set of algorithms was selected because each succeeds and fails for different topography features. It has been found that a hybrid combination of these methods solves a broad range of design optimization problems. The Pointer-2 Automatic Optimizer can control one algorithm at a time or all four at once. As the optimization is proceeding, the technique determines which algorithms are most successful as well as optimal internal control parameters (step sizes, numbers of iterations, number of restarts, etc). This procedure is hidden from the user. Pointer-2 also provides a manual mode of operation where the user can prescribe any single algorithm by name to be controlled. The goal of Pointer-2 is to enable the non-optimization expert to successfully utilize these methods.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.Pointer2</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationPointer2.CATNls" targetFilename="SMAWflOptimizationPointer2.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationPointer2_Japanese.CATNls" targetFilename="SMAWflOptimizationPointer2_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.pointer2.POINTER2</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="maxConcurrent" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="reusePolicy" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+		<Property name="LogMessagesFileName" type="string" valuetype="single">
+			<Value>POINTER2-output.txt</Value>
+		</Property>
+		<Property name="ExecutesInParallel" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Maximum Subflow Runs" type="integer" valuetype="single">
+				<Value>1000</Value>
+			</Property>
+			<Property name="Subflow Batch Size" type="integer" valuetype="single">
+				<Value>4</Value>
+			</Property>
+			<Property name="Topography Type" type="string" valuetype="single">
+				<Value>unknown</Value>
+			</Property>
+			<Property name="Optimizer" type="string" valuetype="single">
+				<Value>Nlpql</Value>
+			</Property>
+			<Property name="Running Automatic" type="boolean" valuetype="single">
+				<Value>true</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>0</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Random Seed Value" type="integer" valuetype="single">
+				<Value>-1</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

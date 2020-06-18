@@ -1,0 +1,70 @@
+/* Rule ENONT_StandardAggregation (ThisObject: PLMEntity, Parameters: RuleContext)        */
+/* NOT CONTRACTUAL and PROPERTY OF TE (TEAM ENVIRONMENT) DEFINITION, ANY CHANGE MAY HAPPEN WITHOUT NOTICE       */
+/* Parameters contains many information such as name, user, security ... depending on Operation                 */
+
+Let ConnectedProjectUsage (STRING)
+
+Let ThisObjectProject (String)
+
+Let InstanciatingProject (String)
+Let InstanciatingObject(PLMEntity)
+
+Let LoginRole(String)
+
+/* parameter to be adpated */ 
+LoginRole=""
+ConnectedProjectUsage = ""
+Validation = true
+
+/*********** Business Role ********/
+if ( Parameters->HasAttribute("Role") == true ) {
+   LoginRole=Parameters->GetAttributeString("Role")
+}
+
+if ( Parameters->HasAttribute("Project") == true ) {
+   ConnectedProjectUsage=Parameters->GetAttributeString("Project")
+}
+
+if (ConnectedProjectUsage == NULL) {
+   ConnectedProjectUsage = ""
+}
+
+ThisObjectProject = ""
+if (ThisObject->HasAttribute("V_project") == true) {
+   ThisObjectProject=ThisObject->GetAttributeString("V_project")
+}
+
+/* newly created object will be set with the connected project */ 
+if (ThisObjectProject==NULL) { ThisObjectProject=""}
+if (ThisObjectProject == "") { ThisObjectProject=ConnectedProjectUsage } 
+
+/* notice when creating an object and not saving it, the created object is with no project defined*/
+set InstanciatingObject = Parameters->GetAttributeObject("ReferenceToInstantiate")
+InstanciatingProject=""
+if ((InstanciatingObject <> NULL) and (InstanciatingObject->HasAttribute("V_project") == true)) {
+   InstanciatingProject=InstanciatingObject->GetAttributeString("V_project")
+}
+if (InstanciatingProject==NULL) { InstanciatingProject=""}
+if (InstanciatingProject == "") { InstanciatingProject=ConnectedProjectUsage } 
+
+/*INSERT ONLY STANDARD OBJECT INTO A STANDARD OBJECT*/ 
+if ( (LoginRole <> "VPLMAdmin") and ( ThisObjectProject <> "" ) and ( STStandardProject(ThisObjectProject) == true ) ) {
+
+   /* only a standard object can be edited, so  can only happend in a standard team connection */
+   if ((InstanciatingProject <> "") and (STStandardProject(InstanciatingProject) == false ) ) {
+    Trace (1, "Incompatible standard instanciation"  )    
+    Validation = false
+    Parameters.NLSMessage = BuildDeferredMessageNLS("ENONT_AggregationControls", "TeamStandardCheck.Title")
+    Parameters.Message=BuildMessageNLS("ENONT_AggregationControls","TeamStandardCheck.Title")
+ }   
+}
+
+/*INSERT RULE FROM LOGIN PROJECT ONLY - but when ModifyMultiContext*/ 
+if ( (LoginRole <> "VPLMAdmin") and (ThisObjectProject <> "") and ( ThisObjectProject <> ConnectedProjectUsage) ) {
+    Trace (1, "Inserted in an object which is not related to the login Collaborative Space"  )    
+	if ( STMultiContextModification(ThisObjectProject) == false ) {
+	    Validation = false
+	    Parameters.NLSMessage = BuildDeferredMessageNLS("ENONT_AggregationControls", "TeamLoginCheck.Title")
+	    Parameters.Message=BuildMessageNLS("ENONT_AggregationControls","TeamLoginCheck.Title")
+	}
+}

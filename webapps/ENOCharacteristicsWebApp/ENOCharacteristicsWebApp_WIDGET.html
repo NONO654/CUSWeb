@@ -1,0 +1,78 @@
+
+<html>
+<head>
+		<meta http-equiv="Cache-control" content="no-cache">
+		<title>Characteristics</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+
+        <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+        <preferences>
+            <preference name="Tenant" type="list" label="Tenant Enovia" defaultValue="">
+                <option value="" label="" />
+            </preference>
+        </preferences>
+
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+
+        <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+		<!-- <link rel="stylesheet" type="text/css" href="../../common/styles/emxUIDefault.css" /> -->
+        <link rel="stylesheet" type="text/css" href="../ENOCharacteristicsWebApp/ENOCharacteristicsWebApp.css" />
+		<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+        <link rel="stylesheet" type="text/css" href="../W3DXComponents/W3DXComponents.css" />
+        <!-- plugins\treetable\vendor\underscore.js -->
+
+</head>
+
+<body>
+<div id="pageHeadDiv" class="pageHead">
+    <table id="contentHeader">
+        <tbody>
+            <tr>
+                <td class="page-title">
+                    <h2>Characteristics| Filter:All</h2>
+                    <!-- <h3 id="pageSubHeader">Filter:All</h3> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+ </div>
+</body>
+
+
+<script type="text/javascript">
+
+   var targetDiv = widget.body.getElement("#" + "pageHeadDiv");
+    
+    require(
+            ["DS/ENOCharacteristicsWebApp/utils/WidgetShell"],
+            function(WidgetShell){
+                var shell = new WidgetShell({
+                	"target" : targetDiv,
+                	"app" : {
+                		"module" : "DS/ENOCharacteristicsWebApp/ENOCharacteristicsWebApp"
+                	}
+                });
+                shell.runApp();
+            }
+            
+        );
+    
+
+	/*
+	require([ "DS/ENOCharacteristicsWebApp/CharacteristicsWebApp" ], function(App) {
+		var query = window.location.search.substring(1);
+		var objectId=query.split("=");
+		var app		= new App(objectId[1]);
+		
+		//objectId[1];
+		app.inject(document.body);
+	}); */
+</script>
+
+</html>

@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>OSLC Provider test engine</title>
+<!-- <script language="JavaScript" src="http://localhost:8080/enovia/common/scripts/jquery-latest.js"></script> -->
+<script type="text/javascript">
+	function launchDUI() {
+		var url = document.getElementById("url").value;
+		var authorization = document.getElementById("authorization").value;
+		localStorage.setItem('oslc-url', url);
+		localStorage.setItem('oslc-authorization', authorization);
+
+		var xhr = new XMLHttpRequest();
+
+		xhr.open('GET', url, true);
+		xhr.onreadystatechange = handler;
+		xhr.responseType = 'document';//'text/html';
+		xhr.setRequestHeader('Authorization', authorization);
+		xhr.setRequestHeader('Access-Control-Allow-Origin', "*");
+
+		xhr.send();
+
+		function handler() {
+			if (this.readyState === this.DONE) {
+				if (this.status === 200) {
+					document.querySelector('#output-frame-id').src = this.response.URL;
+				} else {
+					console.log('error');
+				}
+			}
+		}
+	}
+	function receiveMessage(evt) {
+		console.log("recieving Post message...");
+		console.log("I got '" + evt.data + "' from " + evt.origin);
+		if (evt.data.indexOf("oslc:results") != -1
+				|| evt.data.indexOf("oslc:message") != -1) {
+			// 			document.getElementById("rest-iframe").innerHTML = "<h2>Response:</h2>"
+			// 				+ evt.data;
+			document.getElementById("response-text").innerHTML = evt.data;
+
+		}
+	}
+	function loadRestClient() {
+		window.addEventListener("message", receiveMessage, false);
+		
+		var url = localStorage.getItem('oslc-url');
+		var authorization = localStorage.getItem('oslc-authorization');
+
+		document.getElementById("url").value = url;
+		document.getElementById("authorization").value = authorization;
+	}
+</script>
+</head>
+<body onload="loadRestClient()">
+	<table>
+		<tr>
+			<td>URL :</td>
+			<td><input type="text" id="url" size="200" /></td>
+		</tr>
+		<tr>
+			<td>Authorization :</td>
+			<td><input type="text" id="authorization" size="200" /></td>
+		</tr>
+		<tr>
+			<td><button id="launch-DUI" onclick="launchDUI()">Launch
+					Delegated UI</button></td>
+		</tr>
+	</table>
+
+
+	<!-- <h1>Consumer</h1> -->
+	<div id="rest-iframe">
+		<h2>Delegated UI iframe:</h2>
+		<iframe style="height: 70%; width: 70%;" name="containerFrame"
+			id="output-frame-id"></iframe>
+	</div>
+	<h2>Response:</h2>
+	<textarea id="response-text" style="height: 10%; width: 40%;"></textarea>
+</body>
+</html>

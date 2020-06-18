@@ -1,0 +1,148 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+
+<dom-module id="ad-tool-config-output-files">
+  <link rel="import" type="css" href="ad-tool-config-output-files.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+    	<sp-notification id="notificationMessages" position="TR" width="400"></sp-notification>
+		<!--  WEB SERVICES -->
+		<div id="mainContentSection">
+	        <div class="content-section-heading">Files to be Uploaded</div>
+	        <div class="content-section-body">
+		        <div id="configurationSection" class="container-fluid">
+		        	<div class="row output-file-container">
+		        		<div class="upload-files">
+						    <div class="toggle toggle-primary">
+						    	<input id="uploadOptionDefault" type="radio" value="defaultFiles" name="uploadOption" on-change="onUploadOptionChanged">
+						    	<label for="uploadOptionDefault" class="control-label">Upload these files: </label>
+						    	<input id="fileSpecsEdit" name="fileSpecsEdit" type="text" class="form-control upload-filespec-edit" placeholder="<Enter file type(s), e.g., *.inp,*.txt>" on-change="onUploadFileSpecsChanged" on-drop="onUploadFileSpecsChanged" on-blur="onUploadFileSpecsBlur" on-keyup="onUploadFileSpecsInput" on-input="onUploadFileSpecsInput">	
+						    </div>
+						    <div id="uploadPreferenceContainer" class="hidden">
+						    	<span id="uploadPreference" title="The default list of files to be uploaded can be set as a widget preference." on-click="onUploadPreferenceClick" class="message-icon fonticon fonticon-info"></span>
+						    	<div id="uploadPreferencePopover" class="popover bottom in hidden" on-click="onUploadPreferencePopover" style="min-width:200px;">
+									<h3 class="popover-title">Information</h3>
+								  	<div class="popover-body">The default list of files to be uploaded can be set as a widget preference.</div>
+								</div>
+							</div>
+						</div>
+					    <div class="toggle toggle-primary upload-none">
+					    	<input id="uploadOptionNone" type="radio" value="noFiles" name="uploadOption" on-change="onUploadOptionChanged">
+					    	<label for="uploadOptionNone" class="control-label">Don't upload any files <span id="nofileNote" class="nofileNote fonticon fonticon-info-circled" title="Any files set to be uploaded by administrator will also be deactivated"></span></label>
+					    </div>	                
+		        	</div>
+		        </div>
+		       	<div id="monitorFilesInfo" class="hidden">
+       			    <div id="monitorFilesNote1" class="monitorFilesNote">
+						<span class="alert-message alert-primary">							
+							Output files can be viewed in the Content section.
+						</span>
+					</div>
+ 		       	</div>
+		       	<div id="uploadFileWarnings" class="hidden">
+       			    <div id="uploadFileNote1" class="uploadFileNote">
+						<span class="alert-message alert-warning">							
+							The execution directory will be automatically deleted on job completion.  Only the files specified in 'Upload these files' will be saved.
+						</span>
+					</div>
+<!-- 					<div id="uploadFileNote2" class="uploadFileNote">
+						<span class="alert-message alert-primary">
+							The default list of files to be uploaded can be set as a widget preference.
+						</span>
+					</div> -->	
+		       	</div>
+			 	<!-- The alert messages need to have the relative position declared inline in order to work in Firefox and IE -->
+	       		<div id="configurationErrorNone" class="hidden">
+					<div id="statusMessageNone" class="alert-message alert-warning" style="position:relative">
+					No tool is currently selected.
+					</div>
+	       		</div>
+	       		<div id="configurationErrorMultiple" class="hidden">
+					<div id="statusMessageMultiple" class="alert-message alert-warning" style="position:relative">
+					This configuration section can only be edited for a single tool.
+					</div>
+	       		</div>
+	        </div>
+	        <div id="genPhyRes">
+	        	<div class="content-section-heading">3DEXPERIENCE Results</div>
+		        <div class="content-section-body">
+		        	<div class="container-fluid">
+				        <div class="row output-file-container">	
+					        <div class="toggle toggle-primary">
+							  <input type="checkbox" id="physicsResultsGen" on-change="onPhysicsResultsGenChanged">
+							  <label class="control-label" for="physicsResultsGen">Generate 3DEXPERIENCE Results</label>							  						  
+							</div>	
+							<div id="physicsResultsGenWarning" class="alert-message alert-warning hidden" style="position:relative">
+								<span><span class="text-warning fonticon fonticon-attention"></span>This option is not supported for the selected operating system</span>
+							</div>
+							<div id="physicsResultsFormatNotSupported" class="alert-message alert-warning hidden" style="position:relative">
+								<span><span class="text-warning fonticon fonticon-attention"></span>This option is not supported for the selected results format</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id='unitsSection'>
+					<div class="content-section-heading">Results Units</div>
+					<div id="unitsContainer" class="row output-file-container">
+						<div class="content-section-body">
+							<div class="container-fluid">
+								<table>
+			                       <tbody>
+			                       		<tr>
+			                                <td class="content-cell">
+			                                    <label for="massSelection" class="content-label">Mass:</label>
+			                                </td>
+			                                <td class="content-cell">
+			                                    <div id="massContainer" class="content-field"></div>
+			                                </td>
+			                                <td>&nbsp;</td>
+			                            </tr>
+			                            <tr>
+			                                <td class="content-cell">
+			                                    <label for="timeSelection" class="content-label">Time:</label>
+			                                </td>
+			                                <td class="content-cell">
+			                                    <div id="timeContainer" class="content-field"></div>
+			                                </td>
+			                                <td>&nbsp;</td>
+			                            </tr>
+			                            <tr>
+			                                <td class="content-cell">
+			                                    <label for="lengthSelection" class="content-label">Length:</label>
+			                                </td>
+			                                <td class="content-cell">
+			                                    <div id="lengthContainer" class="content-field"></div>
+			                                </td>
+			                                <td>&nbsp;</td>
+			                            </tr>
+			                            <tr>
+			                                <td class="content-cell">
+			                                    <label for="tempSelection" class="content-label">Temperature:</label>
+			                                </td>
+			                                <td class="content-cell">
+			                                    <div id="tempContainer" class="content-field"></div>
+			                                </td>
+			                                <td>&nbsp;</td>
+			                            </tr>
+			                        </tbody>
+			                     </table>
+			                </div>
+		                </div>					
+					</div>			
+				</div>         
+			</div>
+        </div>
+        <div id="noDownloadSupportNote" class="hidden">
+		    <div class="content-section-title">Files to be Uploaded</div>
+			<div class="alert-message alert-warning" style="position:relative">
+			This tool does not support upload.
+			</div>
+       	</div>
+ 
+	</template>
+  <script src="ad-tool-config-output-files.js"></script>
+</dom-module>
+
+

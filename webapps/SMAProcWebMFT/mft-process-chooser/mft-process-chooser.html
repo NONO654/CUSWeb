@@ -1,0 +1,68 @@
+<link rel="import" href="./mft-process-list/mft-process-list.html">
+
+<dom-module id="mft-process-chooser">
+
+    <link rel="import" type="css" href="./mft-process-chooser.css">
+
+    <template>
+
+        <div class="processChooserTitle">Select a Remote Process ...</div>
+        <div id="processMftChooser" class="processMftChooser">
+            <div class="processMftOption">
+                <div class="processMftOptionLabel">
+                    <span class="processMftOptionLabelText">MFT Plugin:</span>
+                </div>
+                <div class="processMftOptionEntry">
+                    <pcw-extension-chooser id="pluginchooser" plugin-type="MFT_Solution"
+                        selected-extension="{{selectedExtension}}" chooserlabel="">
+                    </pcw-extension-chooser>
+                </div>
+            </div>
+            <div class="processMftOption" id="mftUrlContainer">
+                <div class="processMftOptionLabel">
+                    <span class="processMftOptionLabelText">MFT URL:</span>
+                </div>
+                <div class="processMftOptionEntry">
+                    <input class="processMftOptionEntryInput" value="" id="processChooserMftUrl" type="text" />
+                </div>
+                <div id="processChooserMftLoadButton" class="processChooserActionButton" title="Load Remote Processes">
+                    <img id="processChooserMftLoadButtonImage" src="../assets/icons/iconLoad.png" border="0px" />
+                </div>
+            </div>
+            <div class="processMftOptionBordered">
+                <div class="processMftOptionBorderedTitle">
+                    <span class="processMftOptionBorderedTitleText">Remote Processes</span>
+                </div>
+                <div class="processMftOptionBorderedContent processSelectionPane" id="processChooserSelectionPane">
+                    <mft-process-list class="processSelectionPaneItem" style="padding-right: 5px;"
+                        id="processChooserProcessList"></mft-process-list>
+                    <div class="processSelectionPaneItem processSelectionDetailsPane" id="processSelectionDetailsPane">
+                        <div class="processSelectionDetailsPaneLabel">Publisher:</div>
+                        <div class="processSelectionDetailsPaneEntry"><input class="processMftOptionEntryInput" value=""
+                                id="processChooserProcessPublisher" type="text" readonly /></div>
+                        <div class="processSelectionDetailsPaneLabel" style="padding-top: 5px;">Publish Date:</div>
+                        <div class="processSelectionDetailsPaneEntry"><input class="processMftOptionEntryInput" value=""
+                                id="processChooserProcessPublishDate" type="text" readonly /></div>
+                        <div class="processSelectionDetailsPaneLabel" style="padding-top: 5px;">Description:</div>
+                        <div class="processSelectionDetailsPaneEntryFill"><textarea
+                                class="processMftOptionEntryInput processSelectionDetailsPaneEntryFill"
+                                style="resize: none;" id="processChooserProcessDescription" readonly></textarea></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="processControlPane" id="processControlPane">
+            <div id="processControlPaneCollapse" class="processControlPaneCollapse" title="Collapse Process Chooser">
+                <img id="processControlPaneCollapseImage" src="../assets/icons/iconCollapseArrow.png" border="0px" />
+            </div>
+            <div id="processControlPaneLoad" class="processControlPaneLoad">
+                <span id="processControlPaneSelectButton" class="processControlPaneSelectButton">Select</span>
+            </div>
+        </div>
+        <div id="mftPlugin"> </div>
+
+    </template>
+
+    <script type="text/javascript" src="./mft-process-chooser.js"></script>
+
+</dom-module>

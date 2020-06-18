@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DPlayUDLExperienceAfrInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DSHAREUDLExperienceAfrInterface"/>
+  </Template>
+
+  <Template syp:name="3DPlayUDLExperienceAfrHeaderList" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID="ShareDownload" ClassName="DS/3DPlayCommands/CmdShareDownload" HelpResourceFile = "3DPlay/3DPlayHelpForCommands" ResourceFile="3DPlay/3DPlay"  />
+      <CATCommandHeader ID = "Zoom" ClassName = "DS/ViewerCommands/VisuZoomViewCmd" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Pan" ClassName = "DS/ViewerCommands/VisuPanViewCmd" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Reframe" ClassName = "DS/ViewerCommands/VisuReframeViewCmd" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "ScaleP" ClassName = "DS/3DPlayUDLExperience/CmdScaleUDL" ResourceFile = "3DPlayUDLExperience/3DPlayUDLExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "Scale" Value = "+" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "ScaleM" ClassName = "DS/3DPlayUDLExperience/CmdScaleUDL" ResourceFile = "3DPlayUDLExperience/3DPlayUDLExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "Scale" Value = "-" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "Previous" ClassName = "DS/3DPlayUDLExperience/CmdScrollUDL" ResourceFile = "3DPlayUDLExperience/3DPlayUDLExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "ScrollSheet" Value = "Previous" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "Next" ClassName = "DS/3DPlayUDLExperience/CmdScrollUDL"  ResourceFile = "3DPlayUDLExperience/3DPlayUDLExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "ScrollSheet" Value = "Next" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+    </CATCmdHeadersList>
+  </Template>
+  <Template syp:name="3DPlayUDLExperienceAfrWorkbench" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DPlayUDLExperienceWorkbench">
+    <CATCmdContainer Name = "SectionViews" Visibility = "1" RepresentationType="AfrActionBarSection">
+      <CATCmdStarter Name = "ShareDownload"  Command = "ShareDownload" />
+      <CATCmdStarter Name = "Pan" Command = "Pan" />
+      <CATCmdStarter Name = "Zoom" Command = "Zoom" />
+      <CATCmdStarter Name = "Reframe" Command = "Reframe" />
+      <CATCmdSeparator Name = "BasicManip_Separator"/>
+      <CATCmdStarter Name = "ScaleP" Command = "ScaleP" />
+      <CATCmdStarter Name = "ScaleM" Command = "ScaleM"  />
+      <CATCmdSeparator Name = "BasicManip_Separator"/>
+      <CATCmdStarter Name = "Previous" Command = "Previous" />
+      <CATCmdStarter Name = "Next" Command = "Next" />
+    </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

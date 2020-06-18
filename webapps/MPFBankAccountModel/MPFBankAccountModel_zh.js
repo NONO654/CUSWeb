@@ -1,0 +1,1 @@
+define("DS/MPFBankAccountModel/MPFBankAccountModel_zh",{});define("DS/MPFBankAccountModel/assets/nls/BankAccountModel",{isNotValid:"无效",isRequired:"必填",ibanSwiftNotConsistent:"IBAN 和 SWIFT 不在同一国家/地区"});

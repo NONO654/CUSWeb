@@ -1,0 +1,1 @@
+define("DS/3DPlayExperienceModule/3DPlayExperienceModule_ru",{});define("DS/3DPlayExperienceModule/assets/nls/3DPlayExperienceModule",{DROP_MSG_LP:"Перетащите содержимое сюда",Label:"Предпочтительное качество для геометрии 3DSpace",auto:"Автоматически",base:"Высокое качество",index:"Низкое качество"});

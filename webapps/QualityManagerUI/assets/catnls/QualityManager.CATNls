@@ -1,0 +1,150 @@
+
+PostProcessAALabel.Text="Anti-aliasing post process";
+PostProcessAAControl.Tooltip="NoAA: 
+FXAA: Fast Approximate Anti-Aliasing 
+SMAA: ";
+
+AASettingLabel.Text="IterativeAntiAliasing";
+AASettingControl.Tooltip="Activates anti-aliasing on the whole scene.
+Anti-aliasing makes staircases effect disappear.";
+
+TranspModeLabel.Text="Transparency mode";
+TranspModeControl.Tooltip=
+"Default (Alpha Blending Without Sort),
+Low (Alpha Blending),
+Medium (Alpha Blending),
+High (Order Independent Transparency)";
+
+AllowOutlineLabel.Text="Allow outline viewmode";
+AllowOutlineControl.Tooltip="Enable/disable outline edge rendering";
+
+CullMinPixelSizeLabel.Text="Minimum object size (in pixels)";
+CullMinPixelSizeControl.Tooltip=
+"Adds or removes display quality for objects.
+Even if you do not want to remove geometry, it is often 
+useful to remove details you do not need to see. 
+Set a low value if you want to see all the details, 
+or a high value to remove details.";
+
+OcclusionLabel.Text="Allow ambient occlusion";
+OcclusionControl.Tooltip="Enable/disable the ambient occlusion algorithm.";
+
+AllowGroundShadowLabel.Text="Allow ground shadows";
+AllowGroundShadowControl.Tooltip="Permit ground shadow computation whenever it is not costly.";
+
+AllowInterObjShadowLabel.Text="Allow inter-object shadows";
+AllowInterObjShadowControl.Tooltip="Activate/deactivate inter-object shadow.";
+
+ShadowFilteringLabel.Text="Filtering to use";
+ShadowFilteringControl.Tooltip=
+"PCFOptimized (Percentage Closer Filtering)
+ESM (Exponential shadow map)
+Poisson ()";
+
+ShadowFilteringQualityLabel.Text="Filtering quality";
+ShadowFilteringQualityControl.Tooltip="";
+
+AllowAOLabel.Text="Allow ambient occlusion";
+AllowAOControl.Tooltip="";
+
+AllowBloomLabel.Text="Allow Bloom";
+AllowBloomControl.Tooltip="Sometimes referred to as light bloom or glow.";
+
+AllowDoFLabel.Text="Allow depth of field";
+AllowDoFControl.Tooltip="";
+
+GroundReflModeLabel.Text="Allow reflections on ground";
+GroundReflModeControl.Tooltip="If the selected reflection mode is not activated in ambiance, this option won't force it.";
+
+ReflectionsLabel.Text="Reflections on ground";
+ReflectionsLabel.Tooltip=
+"None()
+Mirror()";
+
+Default="Default";
+High="High";
+Low="Low";
+Medium="Medium";
+Ultra="Ultra";
+
+
+MaxSamplePerPixelLabel.Text="Max samples per pixel";
+MaxSamplePerPixelControl.Tooltip="Maximum number of samples cast per pixel before convergence stops";
+MinSamplePerPixelLabel.Text="Min samples per frame";
+MinSamplePerPixelControl.Tooltip="Minimum number of samples cast per pixel between frame updates.Values larger than 1 are recommended for cluster rendering.";
+ClammpingMaxLumLabel.Text="Clamping/Max Luminance";
+ClammpingMaxLumControl.Tooltip="Maximum luminance a sample can contribute to a pixel.Lower values result in faster convergence but darken bright effects like highlights or emissive objects.";
+GaussFilterLabel.Text="   Gauss Filter";
+GaussFilterControl.Tooltip="Activate Gauss anti-aliasing filter";
+SizeLabel.Text="     Size";
+SizeControl.Tooltip="Size of Gauss filter in pixels.Large values increase smoothing.";
+CenterWeightLabel.Text="   Center Weight";
+CenterWeightControl.Tooltip="Defines the Gauss filter curve.Higher values reduce smoothing.";
+
+MaxTraceDepthLabel.Text="Max trace depth";
+MaxTraceDepthControl.Tooltip="Specifies how often a light ray/path can bounce from diffuse/reflective or transmit between transparent surfaces.Setting it to 1 computes only direct illumination and no refraction. Higher values can result in more realistic results at a potential slight performance decrease.";
+GlossyThresholdLabel.Text="Glossy threshold";
+GlossyThresholdControl.Tooltip="Specifies from which glossiness value an interaction of a ray with a material is interpreted as a caustic path.Handling of caustic paths can explicitly be chosen via CAUSTICS. Non-caustic paths can be handled by final gathering, which improves convergence time.";
+RenderRefractiveShadowsLabel.Text="Render refractive shadows";
+RenderRefractiveShadowsControl.Tooltip="Enables physically plausible shadows for refractive surfaces (e.g. volumetric glass).If disabled refraction for shadows is ignored, which leads to faster convergence, but also physically implausible results.Required for correct caustic evaluation.";
+LocationBasedImportanceSamplingLabel.Text="Location based importance sampling";
+LocationBasedImportanceSamplingControl.Tooltip="Optimize sampling of light emitting surfaces in a scene.Recommended for scenes with many localized mesh lights (e.g. glowing instruments inside a car.)";
+EmissiveObjectsImportanceSamplingLabel.Text="Emissive objects importance sampling";
+EmissiveObjectsImportanceSamplingControl.Tooltip="Specify how mesh lights are samples compared to other light sources.Values below 1.0 generate most samples from ambiences and virtual lights per render step.";
+ImportanceDistributionMethodLabel.Text="       Distribution";
+ImportanceDistributionMethodControl.Tooltip="Choose sampling scheme for light sources.EQUAL: Samples are divided equally between light sources.PROPORTIONAL TO POWER: Attributes more samples to light sources that emit more energy.";
+ImportanceSamplingFactorLabel.Text="       Factor";
+ImportanceSamplingFactorControl.Tooltip="Specify if light emitting surfaces are sampled more (value > 1) or less (value < 1) frequently than other light sources.Use a small value for scenes with mesh lights with negligible energy.";
+PathTerminationStartDepthLabel.Text="Path termination start depth";
+PathTerminationStartDepthControl.Tooltip="Specifies after which ray-trace depth rays/paths may be terminated stochastically.Higher values reduce noise in images with few samples per pixel but significantly increase frame time and often overall convergence time.";
+
+EnableFinalGatheringLabel.Text="Enable final gathering";
+EnableFinalGatheringControl.Tooltip="Enable final gathering to speed up indirect illumination convergence.Especially helpful in scenes with diffuse materials.";
+PhotonNumberLabel.Text="       Photon number";
+PhotonNumberControl.Tooltip="Specify a global amount of photons traced for Final Gathering.Higher values may lead to more accurate results at the expense of higher computation time and increased memory consumption.";
+PathDepthLabel.Text="       Path depth";
+PathDepthControl.Tooltip="Specify the amount of bounces considered for photon tracing.Higher values result in more realistic results at the cost of a slight performance impact.";
+PhotonRadiusLabel.Text="       Photon radius (mm)";
+PhotonRadiusControl.Tooltip="Specifies the radius in mm of the area which is affected by one photon.A small radius can increase the correctness while a larger radius leads to quicker image convergence. To inspect the final gather photons, set PHOTON MAP VISUALIZATION MODE to FINAL GATHERING.";
+RefineFinalGatheringMapLabel.Text="       Refine final gather map";
+RefineFinalGatheringMapControl.Tooltip="If enabled, each rendering step generates the specified amount of photons again and accumulates them.Leads to fast rendering in combination with lower number of photons, but requires more rendering iterations. This can increase the quality / smoothness of indirect illumination at the cost of higher computation times.";
+PrecalculateIrradianceLabel.Text="       Precalculate irradiance";
+PrecalculateIrradianceControl.Tooltip="Pre-calculate final gathering operations to optimize frame times at the cost of reduced accuracy of indirect illumination. May reduce performance in combination with REFINE FINAL GATHER MAP.";
+
+CausticsLabel.Text="Caustics";
+CausticsControl.Tooltip="Choose the mode for computing caustics.NONE suppresses caustics for faster convergence.PATHTRACER is recommended for large light sources and unbiased results.CAUSTIC PHOTONS provides better results for small light sources.";
+CausticPhotonNumberLabel.Text="       Photon Number";
+CausticPhotonNumberControl.Tooltip="Specify a global amount of photons for caustics.Higher values may lead to more accurate results at the expense of higher computation time and increased memory consumption. It is recommended to use lower amounts in combination with REFINE CAUSTICS PHOTON MAP.";
+CausticPathDepthLabel.Text="       Path depth";
+CausticPathDepthControl.Tooltip="Specify the amount of bounces considered for caustics photon tracing.Higher values result in more realistic results at the cost of a slight performance impact.";
+CausticRadiusLabel.Text="       Caustic radius (mm)";
+CausticRadiusControl.Tooltip="Specifies the radius of the caustic area which is affected by one photon.A large radius may increase convergence speed, but leads to more blurry results.";
+RefineCausticMapLabel.Text="       Refine caustic photon map";
+RefineCausticMapControl.Tooltip="If enabled, each rendering step generates the specified amount of photons again and accumulates them.If enabled, CAUSTICS PHOTON NUMBER can be set to a low value while still achieving a higher quality result over time.";
+
+RayOffsetLabel.Text="Ray offset (mm)";
+RayOffsetControl.Tooltip="Specifies the offset from a ray hitpoint at which new rays are started.Should be set roughly to the minimum distance between surfaces in the scene. Too small values can result in black artefacts. Too large values will reduce rendering precision.";
+
+LODLabel.Text="Level of details";
+LODControl.Tooltip="Level of details";
+
+GIAllowGroundReflLabel.Text="Allow reflections on ground";
+GIAllowGroundReflControl.Tooltip="Allow reflections on ground";
+
+GIAllowGroundShadowLabel.Text="Allow ground shadows";
+GIAllowGroundShadowControl.Tooltip="Permit ground shadow computation whenever it is not costly.";
+
+GIAllowOutlineLabel.Text="Allow outline viewmode";
+GIAllowOutlineControl.Tooltip="Enable/disable outline edge rendering";
+
+GIAllowBloomLabel.Text="Allow Bloom";
+GIAllowBloomControl.Tooltip="Allow Bloom";
+
+GIAllowDoFLabel.Text="Allow depth of field";
+GIAllowDoFControl.Tooltip="Allow depth of field";
+
+GIDownsamplingFactorLabel.Text="Downsampling factor";
+GIDownsamplingFactorControl.Tooltip="Specify that the image shall be rendered at lower resolution to improve frame rates.At a value of 1, the image is computed at original resolution. At a value of 0.5, the image is compute at half resolution in width and height each.";
+
+PhotonMapVisualizationModeLabel.Text="Photon Map visualization mode";
+PhotonMapVisualizationModeControl.Tooltip="Enable direction visualization of photons to tune photon parameters.NONE disables direct photon visualization and shows the original rendered image.FINAL GATHERING shows the final gather photons. For optimal results, final gather photons should overlap and cover the entire area of interest.CAUSTICS shows the caustic photons. For optimal results, caustic photons should be small enough to replicate fine caustics but dense enough to cover the caustic area.";

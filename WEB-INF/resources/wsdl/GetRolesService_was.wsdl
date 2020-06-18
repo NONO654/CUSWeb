@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="urn:com:dassault_systemes:webservice" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<types>
+ <xs:schema targetNamespace="urn:com:dassault_systemes:webservice:messages">
+  <xs:import namespace="urn:com:dassault_systemes:webservice" schemaLocation="../xsd/IGetRolesService.xsd"/>
+ </xs:schema>
+</types>
+<message name="getRolesInput">
+ <part element="tns:getRoles" name="parameters"/>
+</message>
+<message name="getRolesOutput">
+ <part element="tns:getRolesResponse" name="parameters"/>
+</message>
+<message name="getRolesErrorType">
+ <part element="tns:getRolesErrorType" name="details"/>
+</message>
+<portType name="IGetRolesService">
+ <documentation>Interface for getting all user Roles (Security contexts)</documentation>
+ <operation name="getRoles">
+  <documentation>Get User Roles</documentation>
+  <input message="tns:getRolesInput"/>
+  <output message="tns:getRolesOutput"/>
+  <fault message="tns:getRolesErrorType" name="getRolesErrorType"/>
+ </operation>
+</portType>
+<binding name="IGetRolesServiceBinding" type="tns:IGetRolesService">
+ <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+ <operation name="getRoles">
+  <soap:operation soapAction="" style="document"/>
+  <input>
+   <soap:body use="literal"/>
+  </input>
+  <output>
+   <soap:body use="literal"/>
+  </output>
+  <fault name="getRolesErrorType">
+   <soap:fault name="getRolesErrorType" use="literal"/>
+  </fault>
+ </operation>
+</binding>
+ <service name="GetRolesService">
+  <port binding="tns:IGetRolesServiceBinding" name="GetRolesServicePort">
+   <soap:address location="http://localhost:9080/rooturi/GetRolesService"/>
+  </port>
+ </service>
+</definitions>

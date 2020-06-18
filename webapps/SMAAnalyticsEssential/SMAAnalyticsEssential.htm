@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+	<head>
+		<!-- Application Metas -->
+		<title>Results Analytics Essential</title>
+		<meta name="description" content="Results Analytics Essential" />
+    	<meta name="keywords" content="Results Analytics Essential" />
+    	<meta name="autoRefresh" content="0" />
+    	
+    	<!-- Load the web components polyfill -->
+    	<script type="text/javascript" src="../Polymer-1.1.4/webcomponents-lite.min.js"></script>
+    	
+    	<!-- Load the UWA framework -->
+	    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+		<script type="text/javascript" src="../W3DXComponents/W3DXComponents.js"></script>
+		<!-- UIKIT -->
+		<script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+		
+		<!-- Load Polymer and any other web components -->
+    	<link rel="import" href="../Polymer-1.1.4/polymer.html"/>
+    	<link rel="import" href="../SMAProcSP/sp-base/sp-base.html" />
+		<link rel="import" href="../SMAProcSP/sp-dashboard/sp-dashboard.html" />
+		<link rel="import" href="../SMAProcSP/sp-serviceurl/sp-serviceurl.html" />
+		<link rel="import" href="../SMAProcSP/sp-mcsservice/sp-mcsservice.html" />
+		<link rel="import" href="../SMAProcSP/sp-search/sp-search.html"/>
+		
+		<link rel="import" href="../SMAAnalyticsCommon/components/ra-input-dropbox/ra-input-dropbox.html" />
+		<link rel="import" href="../SMAAnalyticsElements/ra-case-container/ra-case-container.html"/>
+		<!-- CSS -->
+		<link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+		<link rel="stylesheet" href="SMAAnalyticsEssential.css" />
+		
+		<!-- WIDGET PREFERENCES -->
+		<widget:preference type="hidden" name="raecaseid" defaultValue="" ></widget:preference>
+		<widget:preference type="hidden" name="recentcaseids" defaultValue="" ></widget:preference>
+		<script>
+		require([
+			'UWA/Core',
+			'DS/UIKIT/Mask',
+			'DS/SMAAnalyticsCommon/SMAAnalyticsLoadUtils',
+			'DS/SMAAnalyticsEssential/SMAAnalyticsEssentialInit',
+			'i18n!DS/SMAAnalyticsEssential/assets/nls/SMAAnalyticsEssential'
+		],function(UWA, Mask, LoadUtils, EssentialInit, NLS){
+			var myWidget = {
+				onLoad: function(){
+					var currentPlatformId = widget.getValue('x3dPlatformId') || '';
+					if(currentPlatformId.length > 0 && currentPlatformId !== 'OnPremise'){
+						widget.addPreference({
+	                		type:'list',
+	                		name:'platform',
+	                		label:NLS.get('PLATFORM'),
+	                		defaultValue: currentPlatformId,
+	                		options: [{
+	                			value: currentPlatformId,
+	                			label: currentPlatformId
+	                		}]
+	               		});
+					}
+					var raCaseId = widget.getValue('raecaseid');
+					if(UWA.is(widget.data.caseID)){
+						raCaseId = widget.data.caseID;
+						widget.setValue('raecaseid', raCaseId);
+					}
+                	if(raCaseId && raCaseId.length>0){
+                	}else if(UWA.is(widget.data.AnalyticsData)){
+                		var analyticsData = widget.data.AnalyticsData;
+                		try{
+                			analyticsData = JSON.parse(analyticsData);
+                			var objectsToConnect = analyticsData.objects;
+                			if(objectsToConnect.length > 0){
+                				var selectedObjects = {
+                                  	validObjects : [],
+                                  	invalidObjects : []
+                               	},
+                                allowedPLMObjects = EssentialInit.allowedPlmTypes.split(',');
+                				objectsToConnect.forEach(function(obj){
+                                	if(allowedPLMObjects.indexOf(obj.objectType)!== -1){
+                                		selectedObjects.validObjects.push(obj);
+                                	}else{
+                                		selectedObjects.invalidObjects.push(obj);
+                                	}
+                                });
+                                EssentialInit.analyticsCreateData = {
+                                	title: UWA.is(analyticsData.title)?analyticsData.title:'Analytics Case',
+                                	description: UWA.is(analyticsData.description)?analyticsData.description:'',
+                             		validObjects: selectedObjects.validObjects,
+                             		invalidObjects: selectedObjects.invalidObjects,
+                                }
+                			}
+                		}catch(e){}
+                	}else{
+                		var x3dContentId = widget.getValue('X3DContentId');
+                      	if (x3dContentId) {
+                      		var x3dContent = UWA.is(x3dContentId, 'string') ? JSON.parse(x3dContentId) : x3dContentId;
+                           	var x3dContents = x3dContent && x3dContent.data && x3dContent.data.items;
+                           	if (x3dContents && x3dContents.length > 0) {
+                               	var raCase = x3dContents[0];
+                               	if (raCase && raCase.objectId && raCase.objectType === 'Analytics Case') {
+                               		raCaseId = raCase.objectId;
+                                   	widget.setValue('raecaseid', raCaseId);
+                               	}else{
+                               		var selectedObjects = {
+                               			validObjects : [],
+                               			invalidObjects : []
+                               		},
+                               		allowedPLMObjects = EssentialInit.allowedPlmTypes.split(',');
+                               		x3dContents.forEach(function(obj){
+                               			if(allowedPLMObjects.indexOf(obj.objectType)!== -1){
+                               				selectedObjects.validObjects.push(obj);
+                               			}else{
+                               				selectedObjects.invalidObjects.push(obj);
+                               			}
+                               			
+                               		})
+                               		EssentialInit.x3dContentObjects = selectedObjects;
+                               	}
+                           	}
+                       	}
+                	}
+                	//Set collabspace
+                	widget.addPreference({
+                		type: 'list',
+                		name: 'createcollabspaces',
+                		label: NLS.get('COLLABSPACES')
+                	});
+                	widget.addPreference({
+                		type: 'hidden',
+                		name: 'collabspaces'                		
+                	});
+                	//Set Scientific/Engineering preference
+                	widget.addPreference({
+                		type:'list',
+                		name:'notation',
+                		label:NLS.get('NOTATION'), 
+                		defaultValue: 'engineering',
+                		options: [{
+                			value: 'fixed',
+                			label: NLS.get('FIXED')
+                		}, {
+                			value: 'exponential',
+                			label: NLS.get('SCIENTIFIC')
+                		}, {
+                			value: 'engineering',
+                			label: NLS.get('ENGINEERING')
+                		}]
+               		});
+                	
+                	widget.addPreference({
+                		type:'range',
+                		name:'precision',
+                		label:NLS.get('PRECISION'), 
+                		defaultValue: 4,
+                		step: 1,
+                		min: 1,
+                		max: 16
+               		});
+					if (EssentialInit.frmWindow !== null){
+						EssentialInit.clear();
+					}
+					widget.body.empty();
+					Mask.mask(widget.body, NLS.get('LOADING_RAE'));
+					LoadUtils.initialize(currentPlatformId, 'Results_Analytics_Essentials').then(function(){
+						Mask.unmask(widget.body);
+						EssentialInit.createFrameWindow();
+					}, function(error){
+						var div = new UWA.createElement('div', {
+							id: 'errorMessage',
+			                style: 'text-align: center;',
+			                html: '<div>'+NLS.get('LOADING_RAE_ERROR1')+'<br>'+NLS.get('LOADING_RAE_ERROR2')+'</div>'
+			            });
+			            div.inject(widget.body);
+			            if (widget.body) {
+			                Mask.unmask(widget.body);
+			            }
+					});
+				}
+			}
+			widget.addEvent('onLoad', myWidget.onLoad);
+            widget.addEvent('onRefresh', myWidget.onLoad);
+		});
+		</script>
+	</head>
+</html>

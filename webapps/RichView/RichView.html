@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+    <!-- Copyright 2016, Dassault Systemes. All rights reserved. --> 
+
+    <head>
+
+        <title>Traceable Requirements Management</title>
+        <meta name="author" content="Dassault Systèmes" />
+        <meta name="brand" content="ENOVIA" />
+        <meta name="autoRefresh" content="0" />
+        <meta name="description" content="ENOVIA Requirements Rich View Widget" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+            
+        <widget:preferences>
+            <widget:preference name="isStandAlone" type="hidden"></widget:preference>
+        </widget:preferences>
+        
+
+        <!-- UWA Libraries  -->
+        <script src="../AmdLoader/AmdLoader.js"></script>
+        <script src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+        <!--  CSS -->
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/iframe.css" />
+        <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+        <!-- Application JavaScript Source  -->
+        <script type="text/javascript">
+            //<![CDATA[
+            /* global require */
+            /* global widget */
+            require([
+                    'DS/TraceableRequirementsUtils/Utils',
+                    'DS/RichView/RichView',
+                    'DS/RichView/ActionBar'
+                ],
+                function( Utils, RichView, ActionBar) {
+                    'use strict';
+                    
+                    jQuery.noConflict(); // this IS needed
+
+                    // For internal communication
+                    var mediator = {};
+
+                    //To keep hand on the richView object
+                    var richView = null;
+
+                    // Initialize a communication pipe for the children
+                    Utils.mediator.installTo(mediator);
+
+                    /*
+                    The "onLoad" event is the very first event triggered when the widget is loaded.
+                    Here, we make it trigger the MyWidget.onLoad() function as listener.
+                    */
+                    widget.addEvents({
+                        onLoad: function() {
+
+                            // Action bar is the main container
+                            var id = new ActionBar({
+                                mediator: mediator
+                            }).inject();
+                            
+                         	// Launch Rich View	
+                            richView = new RichView({
+                                mediator: mediator // To communicate
+                            }).inject('#' + id);
+                            
+                            // One richView object by widget
+                            window.richView = richView;
+
+                        }
+                    });
+
+                });
+            //]]>
+        </script>
+    </head>
+
+    <body>
+        <div id="richView"></div>
+    </body>
+
+    </html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMFNConfiguration" xmlns:tns="DS_DELMIAMFNConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="Tooltips">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="Tooltip" type="tns:Tooltip"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="Tooltip">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="Attribute" type="tns:Attribute"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Attribute">
+    <xs:attribute name="dataIndex" type="xs:string" use="required"/>
+    <xs:attribute name="dicoType" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:schema>

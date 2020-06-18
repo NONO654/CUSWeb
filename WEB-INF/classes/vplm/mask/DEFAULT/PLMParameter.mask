@@ -1,0 +1,461 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY PlmParameter
+// --------------------------------------------------
+ATTR Title;Y;N;$
+ATTR name;Y;N;$
+ATTR description;N;N;$
+ATTR current;N;N;$
+//ATTR isbestsofar;N;N;false
+//ATTR ispublished;N;N;false
+//ATTR locked;N;N;false
+//ATTR locker;N;N;$
+ATTR modified;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revision;N;N;$
+// --------------------------------------------------
+FUNC Create
+// --------------------------------------------------
+FATTR Title;Y
+FATTR name;N
+FATTR description;Y
+// --------------------------------------------------
+FUNC EZQuery
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC List
+// --------------------------------------------------
+FATTR Title;N
+FATTR name;N
+FATTR description;N
+//FATTR ispublished;N
+FATTR reservedby;N
+FATTR revision;N
+FATTR organization;N
+FATTR current;N
+//FATTR isbestsofar;N
+//FATTR locker;N
+FATTR reserved;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+//FATTR locked;N
+
+// --------------------------------------------------
+FUNC Query
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC Read
+// --------------------------------------------------
+FATTR Title;N
+FATTR name;N
+FATTR description;N
+//FATTR ispublished;N
+FATTR reservedby;N
+FATTR revision;N
+FATTR organization;N
+FATTR current;N
+//FATTR isbestsofar;N
+//FATTR locker;N
+FATTR reserved;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+//FATTR locked;N
+
+// --------------------------------------------------
+FUNC Write
+// --------------------------------------------------
+FATTR Title;Y
+FATTR name;N
+FATTR description;Y
+//FATTR ispublished;N
+FATTR reservedby;N
+FATTR revision;N
+FATTR organization;N
+FATTR current;N
+//FATTR isbestsofar;N
+//FATTR locker;N
+FATTR reserved;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+//FATTR locked;N
+
+// --------------------------------------------------
+FUNC Tree
+// --------------------------------------------------
+FATTR Title;N
+
+// --------------------------------------------------
+ENTITY ComputedParameter
+// --------------------------------------------------
+
+ATTR Title;Y;N;$
+ATTR name;Y;N;$
+ATTR description;N;N;$
+ATTR current;N;N;$
+//ATTR isbestsofar;N;N;false
+//ATTR ispublished;N;N;false
+//ATTR locked;N;N;false
+//ATTR locker;N;N;$
+ATTR modified;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revision;N;N;$
+// --------------------------------------------------
+FUNC Create
+// --------------------------------------------------
+FATTR Title;Y
+FATTR name;N
+FATTR description;Y
+
+// --------------------------------------------------
+FUNC EZQuery
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC List
+// --------------------------------------------------
+FATTR Title;N
+FATTR name;N
+FATTR description;N
+//FATTR ispublished;N
+FATTR reservedby;N
+FATTR revision;N
+FATTR organization;N
+FATTR current;N
+//FATTR isbestsofar;N
+//FATTR locker;N
+FATTR reserved;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+//FATTR locked;N
+
+// --------------------------------------------------
+FUNC Query
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC Read
+// --------------------------------------------------
+FATTR Title;N
+FATTR name;N
+FATTR description;N
+//FATTR ispublished;N
+FATTR reservedby;N
+FATTR revision;N
+FATTR organization;N
+FATTR current;N
+//FATTR isbestsofar;N
+//FATTR locker;N
+FATTR reserved;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+//FATTR locked;N
+
+// --------------------------------------------------
+FUNC Write
+// --------------------------------------------------
+FATTR Title;Y
+FATTR name;N
+FATTR description;Y
+//FATTR ispublished;N
+FATTR reservedby;N
+FATTR revision;N
+FATTR organization;N
+FATTR current;N
+//FATTR isbestsofar;N
+//FATTR locker;N
+FATTR reserved;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+//FATTR locked;N
+
+// --------------------------------------------------
+FUNC Tree
+// --------------------------------------------------
+FATTR Title;N
+
+// --------------------------------------------------
+ENTITY PlmParameterMagnitude
+// --------------------------------------------------
+ATTR PlmParamRole;N;N;$
+ATTR PlmParamValuationType;N;N;$
+// --------------------------------------------------
+FUNC Create
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC EZQuery
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC List
+// --------------------------------------------------
+FATTR PlmParamRole;N
+FATTR PlmParamValuationType;N
+
+// --------------------------------------------------
+FUNC Query
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC Read
+// --------------------------------------------------
+FATTR PlmParamRole;N
+FATTR PlmParamValuationType;N
+
+// --------------------------------------------------
+FUNC Write
+// --------------------------------------------------
+FATTR PlmParamRole;Y
+FATTR PlmParamValuationType;N
+
+// --------------------------------------------------
+FUNC Tree
+// --------------------------------------------------
+FATTR PlmParamRole;N
+FATTR PlmParamValuationType;N
+
+// --------------------------------------------------
+ENTITY PlmParameterWithRange
+// --------------------------------------------------
+ATTR PlmParamRole;N;N;$
+ATTR PlmParamValuationType;N;N;$
+ATTR MaxRangeProperty;Y;N;$
+ATTR MinRangeProperty;Y;N;$
+// --------------------------------------------------
+FUNC Create
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC EZQuery
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC List
+// --------------------------------------------------
+FATTR MaxRangeProperty;N
+FATTR MinRangeProperty;N
+FATTR PlmParamRole;N
+FATTR PlmParamValuationType;N
+
+// --------------------------------------------------
+FUNC Query
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC Read
+// --------------------------------------------------
+FATTR MaxRangeProperty;N
+FATTR MinRangeProperty;N
+FATTR PlmParamRole;N
+FATTR PlmParamValuationType;N
+
+// --------------------------------------------------
+FUNC Write
+// --------------------------------------------------
+FATTR MaxRangeProperty;N
+FATTR MinRangeProperty;N
+FATTR PlmParamRole;Y
+FATTR PlmParamValuationType;N
+
+
+// --------------------------------------------------
+FUNC Tree
+// --------------------------------------------------
+FATTR MaxRangeProperty;N
+FATTR MinRangeProperty;N
+FATTR PlmParamRole;N
+FATTR PlmParamValuationType;N
+
+
+// --------------------------------------------------
+ENTITY PlmParameterDimensionned
+// --------------------------------------------------
+ATTR PlmParamRole;N;N;$
+ATTR PlmParamValuationType;N;N;$
+ATTR MaxRangeProperty;Y;N;$
+ATTR MinRangeProperty;Y;N;$
+ATTR PlmParamDisplayUnit;N;N;$
+ATTR PlmParamToleranceSet;Y;N;$
+ATTR PlmParamToleranceMin;N;N;$
+ATTR PlmParamToleranceMax;N;N;$
+ATTR PlmParamPrecisionSet;Y;N;$
+ATTR PlmParamPrecisionMin;N;N;$
+ATTR PlmParamPrecisionMax;N;N;$
+// --------------------------------------------------
+FUNC Create
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC EZQuery
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC List
+// --------------------------------------------------
+FATTR MaxRangeProperty;N
+FATTR MinRangeProperty;N
+FATTR PlmParamRole;N
+FATTR PlmParamValuationType;N
+FATTR PlmParamDisplayUnit;N
+FATTR PlmParamToleranceSet;N
+FATTR PlmParamToleranceMin;N
+FATTR PlmParamToleranceMax;N
+FATTR PlmParamPrecisionSet;N
+FATTR PlmParamPrecisionMin;N
+FATTR PlmParamPrecisionMax;N
+
+// --------------------------------------------------
+FUNC Query
+// --------------------------------------------------
+
+// --------------------------------------------------
+FUNC Read
+// --------------------------------------------------
+FATTR MaxRangeProperty;N
+FATTR MinRangeProperty;N
+FATTR PlmParamRole;N
+FATTR PlmParamValuationType;N
+FATTR PlmParamDisplayUnit;N
+FATTR PlmParamToleranceSet;N
+FATTR PlmParamToleranceMin;N
+FATTR PlmParamToleranceMax;N
+FATTR PlmParamPrecisionSet;N
+FATTR PlmParamPrecisionMin;N
+FATTR PlmParamPrecisionMax;N
+
+// --------------------------------------------------
+FUNC Write
+// --------------------------------------------------
+FATTR MaxRangeProperty;N
+FATTR MinRangeProperty;N
+FATTR PlmParamRole;Y
+FATTR PlmParamValuationType;N
+FATTR PlmParamDisplayUnit;Y
+FATTR PlmParamToleranceSet;N
+FATTR PlmParamToleranceMin;N
+FATTR PlmParamToleranceMax;N
+FATTR PlmParamPrecisionSet;N
+FATTR PlmParamPrecisionMin;N
+FATTR PlmParamPrecisionMax;N
+
+// --------------------------------------------------
+FUNC Tree
+// --------------------------------------------------
+FATTR MaxRangeProperty;N
+FATTR MinRangeProperty;N
+FATTR PlmParamRole;N
+FATTR PlmParamValuationType;N
+FATTR PlmParamDisplayUnit;N
+FATTR PlmParamToleranceSet;N
+FATTR PlmParamToleranceMin;N
+FATTR PlmParamToleranceMax;N
+FATTR PlmParamPrecisionSet;N
+FATTR PlmParamPrecisionMin;N
+FATTR PlmParamPrecisionMax;N
+
+// --------------------------------------------------
+ENTITY ParameterUsage
+// --------------------------------------------------
+//ATTR ParameterUsageDescription;N;N;$
+//ATTR Sequence Order;N;N;1
+ATTR TreeOrder;N;N;1
+FUNC Create
+//FATTR Sequence Order;Y
+FATTR TreeOrder;Y
+FUNC EZQuery
+//FATTR ParameterUsageDescription;Y
+//FATTR Sequence Order;Y
+FATTR TreeOrder;Y
+FUNC List
+//FATTR ParameterUsageDescription;N
+//FATTR Sequence Order;N
+FATTR TreeOrder;N
+FUNC Query
+//FATTR ParameterUsageDescription;Y
+//FATTR Sequence Order;Y
+FATTR TreeOrder;Y
+FUNC Read
+//FATTR ParameterUsageDescription;N
+//FATTR Sequence Order;N
+FATTR TreeOrder;N
+FUNC Write
+//FATTR ParameterUsageDescription;N
+//FATTR Sequence Order;Y
+FATTR TreeOrder;Y
+
+// --------------------------------------------------
+ENTITY ParameterAggregation
+// --------------------------------------------------
+ATTR TreeOrder;N;N;1
+FUNC Create
+FATTR TreeOrder;Y
+FUNC EZQuery
+FATTR TreeOrder;Y
+FUNC List
+FATTR TreeOrder;N
+FUNC Query
+FATTR TreeOrder;Y
+FUNC Read
+FATTR TreeOrder;N
+FUNC Write
+FATTR TreeOrder;Y
+
+// --------------------------------------------------
+ENTITY PlmParamVolatileItf
+// --------------------------------------------------
+FUNC Create
+FUNC EZQuery
+FUNC List
+FUNC Query
+FUNC Read
+FUNC Write

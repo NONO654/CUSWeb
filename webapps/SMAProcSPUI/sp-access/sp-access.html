@@ -1,0 +1,38 @@
+<!--------------------------------------------------------------------
+[sp-access HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:	13-08-2014 
+Assigned to:	Aravind Mohan
+Primary use:	This component can be used to wrap HTMl content which depends upon
+				a configured access group. To use this you need to have one or
+				more sp-access-group defined.
+Description:    Note: Do not use this inside a conditional Template
+--------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-access-group/sp-access-group.html">
+
+<dom-module id="sp-access">
+	<link rel="import" type="css" href="sp-access.css">		
+	<template>
+		
+		<sp-access-group id="grp" name="{{ group }}" accesses="{{ accesses }}"></sp-access-group>
+
+		<content select="[data-message]"></content>
+		<div class="access-container">
+			<div class="access-overlay"></div>
+			<div class="access-content">
+				<!-- 
+					TODO: Think of not binding the content altogether if 
+					 user has no access
+				-->
+				<content></content> 
+			</div> 	       
+		</div>
+		<div class="message"></div>
+    </template>
+		
+    <script type="text/javascript" src="sp-access.js"></script>    
+</dom-module>

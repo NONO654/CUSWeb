@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright DASSAULT SYSTEMES 2013 -->
+<Config xmlns="DS_DELMIAMGAConfiguration" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="DS_DELMIAMGAConfiguration ../xsd/DELWebMfgAssetsDefUIConfig.xsd" Title="UI Config" Description="Sample configuration file delivered by DS.">
+  <Preferences>
+    <TableView>
+      <Label dataIndex="V_Name.reference" dicoType="PLMEntity"/>
+      <Columns>
+        <!-- <Column dataIndex="originated.reference"          displayType="DateTime" dicoType="BusinessType"/> -->
+        <!-- <Column dataIndex="V_ApplicabilityDate.reference" displayType="DateTime" dicoType="DELLmiProductionSystemReference"/> -->
+        <Column dataIndex="V_Balanceable.instance"             dicoType="DELLmiOperationPPRInstance"/>
+        <!-- <Column dataIndex="V_QueuingModeIN.reference"     dicoType="DELLmiProductionSystemReference"/> -->
+        <Column dataIndex="documents.document"                 displayType="DocMgmt"    minWidth="50"/>
+        <Column dataIndex="current.reference"                  dicoType="BusinessType"  minWidth="50"/>
+        <Column dataIndex="Routings_Items.relation"            displayType="Relation"   minWidth="50"/>
+        <Column dataIndex="Routings_Resources.relation"        displayType="Relation"   minWidth="50"/>
+        <!-- <Column dataIndex="Effectivity" displayType="CFG"/> -->
+        <!-- <Column dataIndex="CurrentEvolutionEffectivity" displayType="CFG"/> -->
+        <!-- <Column dataIndex="ProjectedEvolutionEffectivity" displayType="CFG"/> -->
+        <!-- <Column dataIndex="VariantEffectivity" displayType="CFG"/> -->
+      </Columns>
+    </TableView>
+    <LeftBloc>
+      <Label dataIndex="V_Name.reference" dicoType="PLMEntity"/>
+      <Columns>
+        <Column dataIndex="V_Name.reference"        dicoType="PLMEntity" />
+        <Column dataIndex="V_description.reference" dicoType="PLMEntity" Tooltip="NameRevisionOwner.tooltip"/>
+        <Column dataIndex="revision.reference"      dicoType="BusinessType"/>
+        <Column dataIndex="owner.reference"         dicoType="BusinessType" minWidth="50"/>
+        <Column dataIndex="Items_Routings.relation" displayType="Relation" />
+      </Columns>
+    </LeftBloc>
+    <RightBloc>
+      <Label dataIndex="V_Name.reference" dicoType="PLMEntity"/>
+      <Columns>
+        <Column dataIndex="V_MTBF.reference"                  dicoType="Resource"/>
+        <Column dataIndex="V_DELRmi_MountingMethod.reference" dicoType="Robot"/>
+        <Column dataIndex="V_DELRmi_NbDOFs.reference"         dicoType="Robot"/>
+        <Column dataIndex="Resources_Routings.relation"       displayType="Relation"/>
+      </Columns>
+    </RightBloc>
+    <AuxiliaryView>
+        <Label dataIndex="V_Name.reference" dicoType="PLMEntity"/>
+    </AuxiliaryView>
+  </Preferences>
+</Config>

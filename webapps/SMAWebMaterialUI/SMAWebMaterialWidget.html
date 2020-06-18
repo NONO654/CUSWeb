@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+    <!-- Application Metas -->
+    <title>Material Widget</title>
+    <meta name="description" content="Example Application" />
+	
+    <!-- Compass Mock -->
+    <link rel="stylesheet" type="text/css" href="../i3DXCompass/i3DXCompass.css" media="all"/>
+
+    <!-- Topbar Proxy-->
+    <link rel="stylesheet" type="text/css" href="../UWA2/assets/css/inline.css" media="all"/>
+   
+    
+    <!-- Load the web components polyfill -->
+    <script type="text/javascript" src="../Polymer-1.1.4/webcomponents-lite.min.js"></script>
+
+    <!-- AMDLoader -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script> 
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+    <!-- Web Fundamentals -->
+    <script type="text/javascript" src="../WebVisualization/WebVisualization.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="../Layouts/Layouts.js"></script>
+
+    <!-- UI Kit -->
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css"/>
+	
+    <link rel="stylesheet" type="text/css" href="../TagNavigator/TagNavigator.css" media="all" />
+	
+    <!-- Web components -->
+    <link rel="import" href="../SMAProcSP/sp-base/sp-base.html" />
+    <link rel="import" href="../SMAProcSP/sp-serviceurl/sp-serviceurl.html" />
+    <link rel="import" href="../SMAProcSP/sp-dashboard/sp-dashboard.html" />
+    <link rel="import" href="../SMAProcSP/sp-webservice/sp-webservice.html" />
+    
+    <!-- UWA -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css"/>
+    <link rel="stylesheet" type="text/css" href="../3DPlay/3DPlay.css"/>
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+    <script type="text/javascript" >
+
+    var widgetContents;
+
+    function onReady () {
+        require([
+            'DS/SMAWebMaterialUI/SMAWebMaterialManager',
+            'DS/SMAWebMaterialUI/SMAWebMaterialTagger',
+            'DS/SMAWebMaterialUI/SMAWebMaterialPanel'
+        ], function (
+            MaterialManager,
+            MaterialTagger,
+            MaterialPanel
+        ) {
+    
+           MaterialManager.init({
+               events: {
+                   onDragStart: function(material) {
+                       console.log ("Begin drag of material " + material.title + " id " + material.matid);
+                   },
+                   onDragEnd: function(material) {
+                       console.log ("End drag of material " + material.title + " id " + material.matid);
+                   },
+                   onPreDrop: function (path, material, callback) {
+                       Session.showDialog('Material',
+                           'Do you want to apply material ' + material.name + '?',
+                           callback);
+                   },
+                   onPostDrop: function (code, message) {
+                       console.log('on post');
+                       Session.showDialog('Message',
+                           message,
+                           function () { });
+                   },
+                   onApply: function(material) {
+                       console.log ('Apply material '+ material.title + ' ' + material.id);
+                   },
+               }
+           });
+    
+           MaterialTagger.initialize();
+           MaterialManager.addIdentityCard ({
+              tag:       'dsc_matref_rep_SmaOptions',
+              renderer:  UWA.Class.View.extend({
+                  tagname: 'div',
+                  render: function () {
+                      var idCard        = this.container;
+                      var materialID    = this.model.get('id');
+                      var materialTitle = this.model.get('title');
+                      var materialName  = this.model.get('name');
+                      // Use the materialID to call a web service or CSI-based server to get data here
+                      // Draw the data, table, graph, etc. to the identity card container idCard
+                      UWA.createElement('h4', {
+                               html: 'Custom content for the simulation domain goes here' +
+                                     '<br>Material ID: '    + materialID +
+                                     '<br>Material title: ' + materialTitle +
+                                     '<br>Material name: '  + materialName,
+                      }).inject(idCard);
+                      return this;
+                  }
+              })
+           });
+           var options = {};
+           var url = widget.getUrl().toLowerCase();
+           if (UWA.Utils.getQueryString(url, 'singleselect') === 'true')  { 
+               options.singleSelect = true; 
+           }
+           widgetContents = new MaterialPanel(options);
+           document.body.innerHTML = '';
+           document.body.style['background-color'] = '#f1f1f1';
+           widgetContents.inject(document.body);
+    
+           widget.addEvent('onLoad', function () {
+               console.log ('Loaded');
+               window.addEventListener('resize',function () {
+                   widgetContents.onResize();
+               });
+           });
+    
+        });
+    }
+
+    if (document.createElement('sp-dashboard').isInDashboard) {
+        onReady();
+    } else {
+        window.addEventListener('WebComponentsReady', onReady);
+    }
+
+    </script>
+</head>
+<body>
+</body>
+</html>
+

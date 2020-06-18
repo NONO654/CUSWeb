@@ -1,0 +1,9 @@
+m|SMAProcWebCMM\SMAProcWebAdapterSDK.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19214
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAProcWebAdapterSDK\EditorInterfaces.d.ts|1564791432|4774
+s|SMAProcWebCMM\SMAProcWebAdapterSDK.mweb\src\EditorInterfaces.d.ts|1563898300|4774
+t|win_b64\typings\SMAProcWebAdapterSDK\EditorInterfaces.d.ts|1563898300|4774
+s|SMAProcWebCMM\SMAProcWebAdapterSDK.mweb\src\EditorInterfaces.d.ts|1563898300|4774

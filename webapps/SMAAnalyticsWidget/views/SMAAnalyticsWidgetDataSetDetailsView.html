@@ -1,0 +1,206 @@
+<div class="flexrow dsfont" id="dataset-details-top-container">
+		
+	<!-- Check if this template is being used for dataset details
+		or something else. Modify it accordingly -->
+	<!-- Dataset Details -->
+	
+	{{#if requirementname}}
+		<div class="datasets-details-row" id="dataset-details-title">
+			<div class="datasets-details-label">{{raTranslate "TITLE"}}</div>
+			<div class="datasets-details-value">
+				<input type="text" id="ra-reqtitle" title="{{raSanitize title}}" placeholder="{{raTranslate 'PL_TITLE'}}" class="datasets-details-input" value="{{raSanitize title}}"/>
+			</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-name">
+			<div class="datasets-details-label">{{raTranslate "NAME"}}</div>
+			<div class="datasets-details-value" title="{{raSanitize requirementname}}">{{raSanitize requirementname}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-rev">
+			<div class="datasets-details-label">{{raTranslate "REVISION"}}</div>
+			<div class="datasets-details-value" title="{{raSanitize revision}}">{{raSanitize revision}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-type">
+			<div class="datasets-details-label">{{raTranslate "TYPE"}}</div>
+			<div class="datasets-details-value" title="{{raSanitize type}}">{{raSanitize type}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-desc">
+			<div class="datasets-details-label dataset-details-desc">{{raTranslate "DESCRIPTION"}}</div>
+			<div class="datasets-details-value dataset-details-desc">
+				<textarea placeholder="{{raTranslate 'PL_DESC'}}" id="ra-reqdescription" class="datasets-details-input">{{raSanitize description}}</textarea>
+			</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-collabspace">
+			<div class="datasets-details-label">{{raTranslate "COLLAB_SPACE"}}</div>
+			<div class="datasets-details-value" title="{{raSanitize project}}">{{raSanitize project}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-state">
+			<div class="datasets-details-label">{{raTranslate "STATE"}}</div>
+			<div class="datasets-details-value" title="{{raSanitize state}}">{{raSanitize state}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-owner">
+			<div class="datasets-details-label">{{raTranslate "OWNER"}}</div>
+			<div class="datasets-details-value" title="{{raSanitize owner}}">{{raSanitize owner}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-orig">
+			<div class="datasets-details-label">{{raTranslate "ORIGINATED"}}</div>
+			<div class="datasets-details-value" title="{{raSanitize originated}}">{{raSanitize originated}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-modif">
+			<div class="datasets-details-label">{{raTranslate "MODIFIED"}}</div>
+			<div class="datasets-details-value" title="{{raSanitize modified}}">{{raSanitize modified}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-policy">
+			<div class="datasets-details-label">{{raTranslate "POLICY"}}</div>
+			<div class="datasets-details-value" title="{{raSanitize policy}}">{{raSanitize policy}}</div>
+		</div>
+	{{else}}
+		<!-- Minimized Case Details -->
+		<div class="datasets-details-row" id="dataset-details-title">
+			<div class="datasets-details-label">{{raTranslate "TITLE"}}</div>
+			<div class="datasets-details-value">
+				<input type="text" id="ra-casetitle" placeholder="{{raTranslate 'PL_TITLE'}}" class="datasets-details-input" title="{{raSanitize title}}" value="{{raSanitize title}}"/>
+			</div>
+		</div>
+		{{#if id}}
+		<div class="datasets-details-row" id="dataset-details-name">
+			<div class="datasets-details-label">{{raTranslate "NAME"}}</div>
+				<div class="datasets-details-value" title="{{raSanitize casename}}">{{raSanitize casename}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-name">
+			<div class="datasets-details-label">{{raTranslate "REVISION"}}</div>
+				<div class="datasets-details-value" title="{{raSanitize revision}}">{{raSanitize revision}}</div>
+		</div>
+		{{/if}}
+		<div class="datasets-details-row" id="dataset-details-type">
+			<div class="datasets-details-label">{{raTranslate "OWNER"}}
+            </div>
+			<div class="datasets-details-value" title="{{raSanitize owner}}">
+				<span class="dataset-details-value-textspan">{{raSanitize ownerFullName}}</span>
+			</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-type">
+			<div class="datasets-details-label">{{raTranslate "AUTHOR"}}</div>
+			<div class="datasets-details-value" title="{{raSanitize author}}">{{raSanitize authorFullName}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-desc">
+			<div class="datasets-details-label dataset-details-desc">{{raTranslate "DESCRIPTION"}}</div>
+			<div class="datasets-details-value dataset-details-desc">
+				<textarea placeholder="{{raTranslate 'PL_DESC'}}" id="ra-casedescription" class="datasets-details-input">{{raSanitize description}}</textarea>
+			</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-collabspace">
+			<div class="datasets-details-label">{{raTranslate "COLLAB_SPACE"}}</div>
+			<div class="datasets-details-value" title="{{project}}">{{raSanitize project}}</div>
+		</div>		
+		<div class="datasets-details-row" id="dataset-details-state">
+			<div class="datasets-details-label">{{raTranslate "MATURITY"}}
+				<!-- <span class="fonticon fonticon-link minimized-maturity-btn" id="dataset-details-state-href"></span> -->
+				<span class="fonticon fonticon-link minimized-maturity-btn" id="dataset-details-maturity-href" title="{{raTranslate 'LINK_MATURITY'}}"></span>
+            </div>
+			<div class="datasets-details-value" title="{{raSanitize state}}">
+				<span class="dataset-details-value-textspan">{{raSanitize state}}</span>
+			    <i class= "wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-left minimized-rem-btn minimized-rem-btn-left" title="{{raTranslate 'DEMOTE'}}" id="ra-demote-button"></i>
+				<i class= "wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-right minimized-rem-btn" title="{{raTranslate 'PROMOTE'}}" id="ra-promote-button"></i>
+			</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-originated">
+			<div class="datasets-details-label">{{raTranslate "ORIGINATED"}}</div>
+			<div class="datasets-details-value">{{raSanitize originated}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-history">
+			<div class="datasets-details-label">{{raTranslate "LAST_MOD"}}</div>
+			<div class="datasets-details-value case-detail-link" title="{{raTranslate 'CLICK_HISTORY'}}">{{raSanitize updatedInterval}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-modif">
+			<div class="datasets-details-label">{{raTranslate "U_T_D"}}</div>
+			<div class="datasets-details-value" title="{{raSanitize up_to_date}}">{{raSanitize up_to_date}}</div>
+		</div>
+		<div class="datasets-details-row" id="dataset-details-policy">
+			<div class="datasets-details-label">{{raTranslate "REC_DESIGNS"}}
+				{{#if downselected}}
+					<span class="fonticon fonticon-download minimized-maturity-btn" id="dataset-details-recommended-download"></span>
+				{{/if}}                
+            </div>
+			<div class="datasets-details-value" title="{{raSanitize downselected}}">
+				<span class="dataset-details-value-textspan">{{raSanitize downselected}}</span>
+			</div>
+		</div>
+        <div class="datasets-details-row" id="dataset-details-basketpts">
+			<div class="datasets-details-label">{{raTranslate "BASKET_DESIGNS"}}
+				{{#if basketPointCount}}
+					<span class="fonticon fonticon-download minimized-maturity-btn" id="dataset-details-basketpoint-download"></span>
+				{{/if}}
+            </div>
+			<div class="datasets-details-value" title="{{raSanitize basketPointCount}}">
+				<span class="dataset-details-value-textspan">{{raSanitize basketPointCount}}</span>
+			</div>
+		</div>
+		{{#if approximationList}}
+			{{#each approximationList}}
+			<div class="datasets-details-row" id="dataset-details-approximation">
+				<div class="datasets-details-label">{{#unless @index}}{{raTranslate "APPROX_USED"}}{{/unless}}</div>
+           		<div class="datasets-details-value case-approximation" id="{{raSanitize id}}" title="{{raSanitize title}}">
+					<span class="dataset-details-value-textspan case-detail-link" id="{{raSanitize id}}">{{raSanitize title}}</span>
+				</div>
+			</div>
+			{{/each}}
+		{{else}}
+			<div class="datasets-details-row" id="dataset-details-attributes">
+				<div class="datasets-details-label">{{raTranslate "APPROX_USED"}}</div>
+	         	<div class="datasets-details-value"></div>
+			</div>	
+		{{/if}}
+		{{#if attributeList}}
+			{{#each attributeList}}
+			<div class="datasets-details-row" id="dataset-details-attributes">
+				<div class="datasets-details-label">{{#unless @index}}{{raTranslate "ATTR_GROUP"}}{{/unless}}
+					{{#unless @index}}
+					<i class= "wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-plus minimized-maturity-btn" id="dataset-details-add-attributes" title="{{raTranslate 'ADD_ATTR_GROUP'}}"></i>
+					{{/unless}}
+	            </div>
+           		<div class="datasets-details-value" id="{{id}}" title="{{raSanitize title}}">
+					<span class="dataset-details-value-textspan case-detail-link case-attribute-group" id="{{raSanitize id}}">{{raSanitize title}}</span>
+					<i class= "wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-wrong minimized-rem-btn" id="dataset-attributes-dsmin-remove" title="{{raTranslate 'DELETE'}}"></i>
+				</div>
+			</div>
+			{{/each}}
+		{{else}}
+			<div class="datasets-details-row" id="dataset-details-attributes">
+				<div class="datasets-details-label">{{raTranslate "ATTR_GROUP"}}
+					<span class="fonticon fonticon-plus minimized-maturity-btn" id="dataset-details-add-attributes"></span>
+	            </div>
+	         	<div class="datasets-details-value">
+				</div>
+			</div>	
+		{{/if}}
+		{{#if datasetsList}}
+			{{#each datasetsList}}
+				<div class="datasets-details-row">
+					<div class="datasets-details-label">{{#unless @index}}{{raTranslate "DATASETS"}}{{/unless}}
+                    {{#if enableDownload}}
+                        <span class="fonticon fonticon-download minimized-maturity-btn" id="dataset-details-dsmin-download"></span>
+                    {{/if}}
+                    
+                    </div>
+					<div class="datasets-details-value" id="{{id}}" title="{{raSanitize title}}">
+						<span class="dataset-details-value-textspan">{{raSanitize title}}</span>
+						<i class= "wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-wrong minimized-rem-btn" id="dataset-details-dsmin-remove" title="{{raTranslate 'DELETE'}}"></i>
+					</div>	
+				</div>	
+			{{/each}}
+		{{else}}
+			<div class="datasets-details-row">
+				<div class="datasets-details-label">{{raTranslate "DATASETS"}}</div>
+				<div class="datasets-details-value">
+					<span class="dataset-details-value-textspan"></span>
+				</div>	
+			</div>	
+		{{/if}}
+		
+		<div class="datasets-details-row" id="dataset-details-drop-zone" >
+		  <div id="dataset-drop-box" class="ra-create-input-page-container">
+	      </div>
+		</div>
+		<sp-search id="spSearchAttributes" plm-types="Simulation Attribute Group, Simulation Attribute" stay-on-search="false" new-search-context-always="true"  multi-select="true" on-sp-error="onSpError"></sp-search>
+	{{/if}}
+</div>

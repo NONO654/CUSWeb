@@ -1,0 +1,37 @@
+<!--------------------------------------------------------------------
+[cmp-dataflow-editor HTML Document]
+
+Project:
+Version:        1.0
+Last change:    Mon, 24 May 2018
+Primary use:    TODO: Write where this component is being used
+Description:    TODO: Description about the component
+------------------------------------------------------------------- -->
+
+<dom-module id="cmp-dataflow-editor-modal">
+    <template>
+          <style>
+              :host {
+                  display:block;
+              }
+  
+              .full-width {
+                  height: 100%;
+                  width: 100%;
+              }
+  
+          </style>
+          <cmp-wux-dialog id="dataflowDialog" my-position="right" at-position="right" title="Data Mapping" height="700" width="700" min-width="700" min-height="600"
+              ok-button-flag cancel-button-flag movable-flag resizable-flag maximize-button-flag apply-button-flag
+              on-cmp-wux-closed="onClose"
+              on-cmp-wux-ok-clicked="onOK"
+              on-cmp-wux-cancel-clicked="onCancel"
+              on-cmp-wux-apply-clicked ="onApply"
+              on-cmp-wux-dialog-resized="onResize">
+  
+              <dialogcontent id="dataflowDialogContent">
+                  <div id="dialogcontent" class="full-width">Loading...</div>
+              </dialogcontent>
+          </cmp-wux-dialog>
+      </template>
+  </dom-module>

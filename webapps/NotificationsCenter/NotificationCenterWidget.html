@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+ <!-- Copyright 2016 , Dassault Systemes. All rights reserved. -->
+<head>
+    <title>3DNotification Center</title>
+
+	<!-- Application Metas Start -->
+    <meta name="description" content="3DNotification Center" />
+    <meta name="keywords" content="3DNotification Center" />
+    <meta name="autoRefresh" content="0" />
+
+	<!-- Application Preferences Start -->
+
+	<!-- Application Metas End -->
+
+    <link rel="stylesheet" href="../UIKIT/UIKIT.css">
+
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+    
+</head>
+
+	<!-- Application JS Start -->
+    <script >
+
+
+        widget.addEvent('onLoad', function() {
+            console.log('Onload Widget NotifCenter P8D');
+            require(['DS/NotificationsCenter/js/controller/NotificationCenterController','DS/PlatformAPI/PlatformAPI'],
+                function (NotificationCenterController,PlatformAPI) {
+                    "use strict";
+                    widget.body.innerHTML = '';
+                    widget.initFlag=false;
+                    widget.counterRequest=0;
+                    widget.maxRequest = 5;
+                    PlatformAPI.publish('3dNotifCenterInit', true);
+                    PlatformAPI.subscribe('3dNotifManagerInit',function(data){
+                      console.log('Inside Widget NotifCenter 3dNotifManagerInit '+data);
+                      if(data){
+                        //console.log('Inside Widget NotifCenter DATAOK ');
+                        NotificationCenterController.getInstance(widget);    
+                      }else {              
+                        widget.counterRequest++;  
+                        //console.log('Inside Widget NotifCenter DATANO ');
+        
+                        widget.timerId= window.setTimeout(function(){
+                          widget.initFlag=true;
+                          //console.log('Inside Widget NotifCenter TIMER '+widget.maxRequest+'/'+widget.counterRequest);
+                  				if(widget.counterRequest<widget.maxRequest){
+                  					PlatformAPI.publish('3dNotifCenterInit', true);
+                  				}else {
+                  				  window.clearTimeout(widget.timerId);
+                  				}
+                  			}, 2000);
+                        
+                        
+                      }
+                      
+                    
+                        
+                    });
+                  
+                }
+            );
+        });
+
+
+
+    </script>
+	<!-- Application JS End -->
+</head>
+<body>
+</body>
+</html>

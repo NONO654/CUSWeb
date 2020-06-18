@@ -1,0 +1,352 @@
+/* -------------------------------------------------------------------------
+	Program Central Phase/Gate Dashboard
+	emxUIProgramCentralGateDashboard.css Version: 1.0
+   ------------------------------------------------------------------------- */
+
+body {
+	background-color:#EEE;
+	}
+
+
+h1 {
+	margin:12px 0 12px 12px;
+	font-size:22px;
+	color:#555;
+}
+
+h2 {
+	margin:24px 0 6px 6px;
+	font-size:14px;
+	font-weight:bold;
+	color:#555;
+}
+
+/* -------------------------------------------------------------------------
+	Dashboard
+   ------------------------------------------------------------------------- */
+
+div#gateDashboard {
+	padding:10px;
+	background-color:#fcfcfc;
+	-moz-border-radius:6px;
+	overflow-x: scroll;		
+	}
+
+div#gateDashboard table {
+	border-collapse:separate;
+	border-spacing:2px;
+	}
+
+div#gateDashboard table tr {
+	min-height:20px;
+	}
+
+div#gateDashboard table tr th {
+	padding:10px 5px;
+	text-align:center;
+	background-color:#AAA;
+	color:#000;
+	font-weight:bold;
+	}
+
+div#gateDashboard table tr th.gate {
+	white-space:nowrap;
+	}
+
+table.list{
+    width:auto;
+}
+div#gateDashboard th td {
+    width:500px;
+}
+
+/* ------------------------------------
+	Milestone Progress
+   ------------------------------------ */
+
+div#gateDashboard table tr td {
+	padding:2px 3px;
+	}
+
+div#gateDashboard table tr.progress td.beginning {
+	text-align:left;
+	}
+
+div#gateDashboard table tr.progress td.middle {
+	text-align:center;
+	}
+
+div#gateDashboard table tr.progress td.end {
+	text-align:right;
+	}
+
+
+/* ------------------------------------
+	Phases & Gates
+   ------------------------------------ */
+
+div#gateDashboard table tr.phase-gate td {
+	padding:0 5px 10px 5px;
+	text-align:center;
+	}
+
+/* inactive phase */
+a.phase {
+	display:block;
+	background:url("../images/utilPhaseGateBackgrounds.png") -395px 0 repeat-x;
+	padding-left:5px;
+	text-decoration:none;
+	}
+
+a.phase span {
+	display:block;
+	background:url("../images/utilPhaseGateBackgrounds.png") right -120px no-repeat;
+	padding: 6px 10px 6px 3px;
+	padding-right:10px;
+	color:#333;
+	font-weight:bold;
+	white-space:nowrap !important;
+
+	}
+
+a:hover.phase span {
+	text-decoration:underline;
+	color:#000;
+	}
+
+/* late phase */
+a.phase.late {
+	background-position:-395px -60px;
+}
+
+a.phase.late span {
+	background-position:right -180px;
+	color:#FFF;
+	}
+
+a:hover.phase.late span {
+	text-decoration:underline;
+	color:#FFF;
+	}
+
+/* delayed phase */
+a.phase.delayed {
+	background-position:-395px -90px;
+	}
+
+a.phase.delayed span {
+	background-position:right -210px;
+	color:#333;
+	}
+
+a:hover.phase.delayed span {
+	text-decoration:underline;
+	color:#000;
+	}
+
+/* completed phase */
+a.phase.completed {
+	background-position:-395px -30px;
+	}
+
+a.phase.completed span {
+	background-position:right -150px;
+	color:#FFF;
+	}
+
+a:hover.phase.completed span {
+	text-decoration:underline;
+	color:#FFF;
+	}
+
+/* gates */
+a.gate {
+	display:block;
+	height:31px;
+	width:30px;
+	margin:0 auto;
+	background:url("../images/iconBigDiamondGray.png") center center no-repeat;
+	}
+
+a.gate.conditional {
+	background:url("../images/iconBigDiamondYellowConditional.png") center center no-repeat;
+	}
+
+a.gate.hold {
+	background:url("../images/iconBigDiamondGrayHold.png") center center no-repeat;
+	}
+
+a.gate.approved {
+	background:url("../images/iconBigDiamondGreenApprove.png") center center no-repeat;
+	}
+
+a.gate.canceled {
+	background:url("../images/iconBigDiamondRedCancel.png") center center no-repeat;
+	}
+
+
+/* ------------------------------------
+	Milestones & Related Objects
+   ------------------------------------ */
+
+/* milestone list */
+div.milestones {
+	padding:5px;
+	background-color:#efefef;
+	-moz-border-radius:5px;
+	}
+
+div.milestones p {
+	margin:2px 2px 6px 0;
+	padding:0;
+	font-weight:bold;
+	text-align:left;
+	color:#555;
+	}
+
+div.milestones ul {
+	margin:0;
+	padding:0;
+	width:auto;
+	}
+
+div.milestones ul li {
+	margin-bottom:4px;
+	list-style-type:none;
+	zoom:1;
+	}
+
+div.milestones ul li a {
+	display:block;
+	padding:2px 0 2px 13px;
+	white-space:nowrap;
+	text-align:left;
+	}
+
+/* milestone status */
+div.milestones ul li a.completed {
+	background:url("../images/iconMilestoneCompleted.png") 0 3px no-repeat;
+}
+
+div.milestones ul li a.delayed {
+	background:url("../images/iconMilestoneDelayed.png") 0 3px no-repeat;
+}
+
+div.milestones ul li a.late {
+	background:url("../images/iconMilestoneLate.png") 0 3px no-repeat;
+}
+
+div.milestones ul li a.inactive {
+	background:url("../images/iconMilestoneInactive.png") 0 3px no-repeat;
+}
+
+div#gateDashboard table tr.phase-gate-details td {
+	vertical-align:top;
+	text-align:center;
+	}
+
+
+/* related objects */
+div#gateDashboard table tr.phase-gate-details td div.objects {
+	margin:0 auto;
+	padding:5px 0px 3px 5px;
+	#padding-bottom:4px;
+	width:52px;
+	background-color:#efefef;
+	-moz-border-radius:5px;
+	}
+
+div.objects a {
+	display:block;
+	float:left;
+	height:20px;
+	width:20px;
+	margin:0 2px 2px 0;
+	padding:2px 1px 0 1px;
+	background-color:#bfbfbf;
+	-moz-border-radius:2px;
+	}
+
+div.objects:after {
+	content:".";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+	}
+
+a img {
+	border:none;
+	}
+
+
+/* -------------------------------------------------------------------------
+	Legend
+   ------------------------------------------------------------------------- */
+
+div#legend {
+	float:left;
+	padding:5px;
+	background-color:#fcfcfc;
+	-moz-border-radius:3px;
+	}
+
+div#legend table {
+	border-collapse:collapse;
+	/* border-top:1px solid #DDD;
+	border-left:1px solid #DDD;*/
+	background-color:#c9c9c9;
+	}
+
+div#legend table th,
+div#legend table td {
+	border-right:1px solid #DDD;
+	padding:3px 5px;
+	font-size:10px;
+	background-color:#f7f7f7;
+	color:#555;
+	}
+
+div#legend table th {
+	padding:7px;
+	background-color:#b7b7b7;
+	color:#EEE;
+	}
+
+div#legend table td {
+	border-bottom:1px dotted #DDD;
+	}
+
+div#legend table tr.canceled td {
+	background-color:#FF9994;
+	color:#000;
+	border-bottom:none;
+}
+
+div#legend table tr.conditional td {
+	background-color:#FFD18E;
+	color:#000;
+	border-bottom:none;
+}
+
+div#legend table tr.hold td {
+	background-color:#A4CAF2;
+	color:#000;
+	border-bottom:none;
+}
+
+div#legend table tr.approved td {
+	background-color:#94D9A3;
+	color:#000;
+	border-bottom:none;
+}
+
+.xstooltip 
+{
+   
+    font: Bold 5pt sans-sarif; 
+    padding: 3px; 
+    border: solid 2px !important;
+    border-color: orange !important;
+    background: #FCF6CF !important;
+}

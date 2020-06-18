@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../../Polymer-1.11.3/webcomponents-lite.min.js"></script>
+<link rel="import" href="cmp-editor.html">
+<title>ACE Editor</title>
+
+</head>
+
+<body id="aceWrapperid">
+	<div id="fileChooser">
+
+		<input type="file" id="filesinput" multiple="multiple">
+		<button id="selectionbutton">Add Selection</button>
+		<button id="highlightbutton">HighLight Selection</button>
+		<button id="getselectbutton">ON/OFF Editor</button>
+		<cmp-editor id="cmpEditorID"> </cmp-editor>
+	</div>
+	<script>
+			var editor = document.getElementById("cmpEditorID");
+			document.addEventListener('WebComponentsReady', function(e) {
+			//alert("Editor:" + editor);
+			editor.editorInitialisation("first");
+			editor.registerEvents();
+			//var editorCustom = document.createElement('cmp-editor');
+			//editorCustom.editorInitialisation("second");
+
+			var selectionEditor = document.getElementById("selectionbutton");
+			selectionEditor.addEventListener("click", function(e) {
+				//var selection = [{start:{row:10, column:10}}, {end:{row:20, column:10}}];
+				var selection = editor.getEditorSelection();
+				//alert("selection TextType:" + selection.textType );
+				//alert("selection selectionType:" + selection.selectionType);
+				editor.setEditorSelection(selection);
+				alert("Adding in selection:" + selection.location + selection.locationID);
+				//editor.removeEditorSelection(selection);
+			}, false);
+
+			var bEditor = document.getElementById("getselectbutton");
+			bEditor.addEventListener("click", function(e) {
+				//var selection = editor.getEditorSelection();
+				if(!editor){
+					editor = document.createElement('cmp-editor');
+					editor.editorInitialisation("first1");
+					editor.registerEvents();
+				}
+				else
+				{
+					editor.editorRelease();
+					editor = null;
+				}
+			}, false);
+
+			var selectionEditor = document.getElementById("highlightbutton");
+			selectionEditor.addEventListener("click", function(e) {
+				//var selection = [{start:{row:10, column:10}}, {end:{row:20, column:10}}];
+
+				var selection = editor.getEditorSelection();
+
+				editor.setEditorSelection(selection);
+			}, false);
+
+			var files = document.getElementById("filesinput");
+			files.addEventListener("change", function(e) {
+				var files = e.target.files;
+				for (i = 0; i < files.length; i++) {
+					var file = files[i];
+					if (file) {
+						filepath = document.getElementById('filesinput').value;
+						editor.processFileWithMode(file, filepath);
+						//editorCustom.processFileWithMode(file, filepath);
+						break;
+					}
+					;
+				}
+			}, false);
+		});
+	</script>
+</body>
+</html>

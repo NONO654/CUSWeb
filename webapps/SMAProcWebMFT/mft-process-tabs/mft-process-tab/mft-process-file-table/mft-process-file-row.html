@@ -1,0 +1,31 @@
+<dom-module id="mft-process-file-row">
+
+    <link rel="import" type="css" href="./mft-process-file-row.css">
+
+    <template>
+        <td class="processFileRowCell" id="fileName"></td>
+        <td class="processFileRowCell" id="filePath"></td>
+        <td class="processFileRowCell" style="width:250px;" id="fileMapping">
+            <div class="processFileMapping" id="processFileMappingExpanded">
+                <div id="processFileCollapseButton" class="processFileActionButton">
+                    <img id="processFileCollapseButtonImage" src="../../../assets/icons/iconCollapseArrowSmall.png"
+                        border="0px" />
+                </div>
+                <pcw-sdk-file-chooser class="processFileMappingChooser" id="processFileMappingChooser"
+                    file-types="" plm-types="DOCUMENT"></pcw-sdk-file-chooser>
+            </div>
+            <div class="processFileMapping" id="processFileMappingCollapsed">
+                <div id="processFileExpandButton" class="processFileActionButton">
+                    <img id="processFileExpandButtonImage" src="../../../assets/icons/iconExpandArrowSmall.png"
+                        border="0px" />
+                </div>
+                <div class="processFileMappingLabel">
+                    <span class="processFileMappingLabelText" id="processFileMappingLabel">(None)</span>
+                </div>
+            </div>
+        </td>
+    </template>
+
+    <script type="text/javascript" src="./mft-process-file-row.js"></script>
+
+</dom-module>

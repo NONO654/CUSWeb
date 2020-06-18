@@ -1,0 +1,247 @@
+<!--------------------------------------------------------------------
+    [cmp-do-until-loop HTML Document]
+    
+    Project:        cmp
+    Version:        1.0
+    Last change:    Thu, 19 Nov 2015 20:03:20 GMT
+    Assigned to:    Vishakha Motwani
+    Primary use:    Do until loop adapter editor
+    Description:    To be used with cmp-loop
+    --------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-checkbox/sp-checkbox.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+<link rel="import" href="../../SMAProcSPUI/sp-tree-table/sp-tree-table.html" />
+<link rel="import" href="../cmp-loop-parameter-mapper.html">
+
+
+<dom-module id="cmp-do-until-loop">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+            :host([hidden]) {
+                display: none;
+            }
+            .inline {
+                width: 100%;
+                display: inline-flex;
+                margin-top: 5px;
+            }
+            .inline > label {
+                width: 5.5em;
+                font-weight: normal;
+            }
+            .inline > pcw-parameter-chooser,
+            .inline > cmp-loop-parameter-mapper {
+                flex: auto;
+                width: auto;
+            }
+            .inline > label.longlabel {
+                width: auto;
+                margin-right: 5px;
+            }
+            sp-checkbox{
+                margin-right: 5px;
+            }
+
+            button {
+                margin-top: auto;
+                margin-bottom: auto;
+                height: 30px;
+            }
+            sp-input {
+                margin-top: auto;
+                margin-bottom: auto;
+                height: 30px;
+                width: 300px;
+            }
+            
+            sp-input::shadow .input {
+                text-align: right;
+                height: 30px;
+            }
+            
+            .paramLabel {
+                width: 65px;
+                margin-right: 5px;
+                margin-top: 5px;
+            }
+            .dropBtn {
+                width: 200px;
+            }
+            .dropCBtn {
+                width: 150px;
+                background: url(../../SMAProcWebAuthoringUtils/assets/images/I_SMAWflScrollDown.png) #F1F1F1 130px no-repeat;
+            }
+            .dropContainer {
+                position: relative;
+                margin-top: auto;
+                margin-bottom: auto;
+                height: 30px;
+            }
+            .dropItemContainer {
+                display: block;
+                position: absolute;
+                top: 30px;
+                left: 0px;
+                width: 200px;
+            }
+            .dropItem {
+                position: relative;
+                z-index: 2000;
+            }
+            
+            .cmd {
+                display: none;
+            }
+            .cmd.is-visible {
+                display: inline-flex;
+                position: relative;
+                margin-left: 5px;
+            }
+
+            
+            .longlabel{
+                margin-right: 10px;
+            }
+            
+            #sptable {
+                display: block;
+                flex: 1;
+                margin: 0;
+                padding: 0;
+            }
+            
+            .btn {
+                display: block;
+                min-width: 50px;
+                position: relative;
+                padding: 5px 5px 10px 15px;
+                margin-bottom: 5px;
+                margin-left: 5px;
+                border-color: #b4b6ba;
+                text-align: center;
+            }
+            
+            .tablecontainer {
+                display: flex;
+                width: 100%;
+                height:170px;
+                padding: 0;
+                margin: 5px 0 0 0;
+            }
+            
+            .button-wrapper {
+                margin: 0;
+            }
+
+            #iterations {
+                margin-top: -.5em;
+                width: 57px;
+            }
+            
+            .fonticon-plus:before {
+                content: '\e815';
+                font-family: entypo;
+            }
+            
+            .fonticon-minus:before {
+                content: '\e818';
+                font-family: entypo;
+            }
+            
+            .fonticon-up:before {
+                content: '\e881';
+                font-family: entypo;
+            }
+            
+            .fonticon-down:before {
+                content: '\e87e';
+                font-family: entypo;
+            }
+
+            select, option {
+                -webkit-appearance: none; /* WebKit/Chromium */
+                -moz-appearance: none; /* Gecko */
+            }
+            select::-ms-expand {
+                display: none;
+            }
+            select, input {
+                padding: 0 0 0 10px;
+                border-radius:5px;
+                border: 1px solid #b4b6ba;
+                height: 22px;
+            }
+            select {
+                padding: 0 20px 0 10px;
+                background: no-repeat right center url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAGCAQAAAC7znxOAAAAFklEQVQI12NgwAr+o0AMQQyVGNpxAwBCaA/x9bix8gAAAABJRU5ErkJggg==);
+                background-position-x: calc(100% - 3px);
+            }
+            select[disabled] {
+                background-color: rgb(235, 235, 228);
+            }
+        </style>
+
+            <!--Parameter chooser-->
+            <div class="inline">
+                <label>Parameter:</label>
+                <pcw-parameter-chooser id="vardiv" autoselect create on-pcw-parameter-selected="onSelectLHSParam">
+                </pcw-parameter-chooser>
+            </div>
+            
+            <div class="inline">
+                <label>Condition:</label>
+                <select id="condition" disabled>
+                    <option value="==">==</option>
+                    <option value="!=">!=</option>
+                    <option value="<">&lt;</option>
+                    <option value="<=">&lt;=</option>
+                    <option value=">">&gt;</option>
+                    <option value=">=">&gt;=</option>
+                </select>
+            </div>
+            
+
+            <div class="inline">
+                <cmp-loop-parameter-mapper id="rhsparam" disabled></cmp-loop-parameter-mapper>
+            </div>
+
+            
+            <!--Div for the list of values-->
+            <div class="tablecontainer">
+                <sp-tree-table id="sptable" columns="[[columns]]" width="[[tablewidth]]" height="[[tableheight]]" fixed-width></sp-tree-table>
+
+                <!--'+', '-', up arrow and down arrow buttons-->
+                <div class="button-wrapper">
+                    <button id="add" is="sp-button-type" class="btn" on-click="onAddRow" disabled>
+                        <span class="fonticon fonticon-plus"></span>
+                    </button>
+                    <button id="remove" is="sp-button-type" class="btn" on-click="onRemoveRow" disabled>
+                        <span class="fonticon fonticon-minus"></span>
+                    </button>
+                    <button id="moveup" is="sp-button-type" class="btn" on-click="onMoveRowUp" disabled>
+                        <span class="fonticon fonticon-up"></span>
+                    </button>
+                    <button id="movedown" is="sp-button-type" class="btn" on-click="onMoveRowDown" disabled>
+                        <span class="fonticon fonticon-down"></span>
+                    </button>
+                </div>
+            </div>
+            
+            <!--Maximum number of iterations-->
+            <div class="inline">
+                <sp-checkbox id="isItrEnabled" type="range" on-click="onIterationEnable" checked="{{isItrEnabled}}"></sp-checkbox>
+                <label class="longlabel">Maximum number of iterations: </label>
+                <sp-input id="iterations" type="number" value="{{iterations}}"></sp-input>
+            </div>
+
+    </template>
+    <script type="text/javascript" src="cmp-do-until-loop.js"></script>
+</dom-module>

@@ -1,0 +1,69 @@
+.buttonView
+{
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.buttonView.disabled .buttonIcon
+{
+    color: white !important;
+}
+.buttonView.disabled .buttonIconImage
+{
+    filter: grayscale(70%) brightness(140%) !important;
+}
+.buttonTitle
+{
+  text-align: center;
+  line-height: 3em;
+  font-size: 1.2em;
+  color: #239de8;
+  background-color: #FFFFFF;
+  border-radius: 0.5em;
+  transition: color .3s linear, background-color .3s linear;
+}
+.buttonIcon
+{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.buttonIconImage
+{
+  height: 50%;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  opacity:1;
+  transition:opacity 0.3s linear;
+}
+.buttonIconImage.checked
+{
+    opacity:0;
+    transition:opacity 0.3s linear;
+}
+.buttonView.checked .buttonIconImage
+{
+    opacity:0;
+}
+.buttonView.checked .buttonIconImage.autoStyle
+{
+    opacity:1;
+}
+.buttonView .buttonIconImage.autoStyle
+{
+    opacity:0.4;
+}
+.buttonView.checked .buttonIconImage.checked
+{
+    opacity:1;
+}
+.buttonView.buttonActive .buttonTitle
+{
+  background-color: #428bca;
+  color: white;
+}

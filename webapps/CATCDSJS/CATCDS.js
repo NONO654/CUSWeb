@@ -1,0 +1,1 @@
+define("CATCDSJS/CATCDS",[navigator.userAgent&&navigator.userAgent.search("Chrome")!=-1?"DS/CATCDSJSImp/CATCDSJSWithoutAsm":"DS/CATCDSJSImp/CATCDSJSWithAsm"],function(a){return a});define("DS/CATCDSJS/CATCDS",[navigator.userAgent&&navigator.userAgent.search("Chrome")!=-1?"DS/CATCDSJSImp/CATCDSJSWithoutAsm":"DS/CATCDSJSImp/CATCDSJSWithAsm"],function(a){return a});

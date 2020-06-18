@@ -1,0 +1,1 @@
+define("DS/ENOFilterBIUX/ENOFilterBIUX_zh",{});define("DS/ENOFilterBIUX/assets/nls/ENOFilterBIUX",{hugeNumberodfObjects:"该结构拥有超过 10 000 个对象。性能将受到影响。",validProceedforFetch:"是否要继续订阅该附加项？ ",DoNotAskAgain:"不再询问",invalidRoot:"已检测到与此过滤器相关联的根",multiFiltersDrop:"不支持放置多个过滤器。请一次放置一个"});

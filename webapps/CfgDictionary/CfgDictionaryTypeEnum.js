@@ -1,0 +1,1 @@
+define("DS/CfgDictionary/CfgDictionaryTypeEnum",[],function(){var a={};a.VARIANT="variant";a.VALUE="value";a.OPTION="option";a.VARIABILITY_GROUP="variability_group";a.RULE="rule";return a});

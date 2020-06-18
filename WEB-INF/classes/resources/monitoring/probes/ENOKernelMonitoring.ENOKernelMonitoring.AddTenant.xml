@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<probe name="AddTenant" kind="default" unplug="true" needs_key_store="true">
+	<option name="addtenant" shortname="addtenant" optional="true" hidden="false">
+		<description>
+			Check the if the FCS URL are not empty, identical for each store and valid
+		</description>
+		
+		<parameter name="MatrixRMI" optional="false" multiple="false">
+			<short-description>
+				MatrixRMI directory path
+			</short-description>
+			<description>
+				Path of the server
+			</description>
+		</parameter>
+	</option>
+	
+	<implementation>
+		<class>
+			com.dassault_systemes.infra.monitoring.mcs.AddTenantProbe
+		</class>
+	</implementation>
+	
+	<period minutes="5"/>
+</probe>

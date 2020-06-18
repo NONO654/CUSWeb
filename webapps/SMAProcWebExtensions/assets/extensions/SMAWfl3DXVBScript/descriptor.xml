@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.3DXVBScript" version="418.1"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWfl3DXVBScript" nlsID="dispname">3DX Script</DisplayName>
+	<Description nlsFile="SMAWfl3DXVBScript" nlsID="desc">3DX Script</Description>
+	<LongDescription/>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>1000</Value>
+			<Value>600</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWfl3DXVBScript.png" targetFilename="large/I_SMAWfl3DXVBScript.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWfl3DXVBScript.CATNls" targetFilename="SMAWfl3DXVBScript.CATNls"/>   
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWfl3DXVBScript.dll" targetFilename="win_b64/SMAWfl3DXVBScript.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWfl3DXVBScriptUI.sypstyle" targetFilename="SMAWfl3DXVBScriptUI.sypstyle"/>
+	</Streams>
+	<Interfaces>
+
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWfl3DXVBScriptEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.sma.adapter.3DXVBScript.3DXVBScriptHandler</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWfl3DXVBScriptHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="ScriptType" type="string" valuetype="single">
+			<Value>VBScript</Value>
+		</Property>
+		<Property name="PLMBatchArguments" type="aggregate" valuetype="single">
+			<Property name="MacroLib" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="MacroType" type="string" valuetype="single">
+				<Value>MacroLibraryVBA</Value>
+			</Property>
+			<Property name="ProgramName" type="string" valuetype="single">
+				<Value>Module1</Value>
+			</Property>
+			<Property name="FunctionName" type="string" valuetype="single">
+				<Value>CATMain</Value>
+			</Property>          
+			<Property name="FunctionArgs" type="string" valuetype="array" arraydim="[1]" sizable="true">
+			</Property>         
+		</Property>
+
+		<!--Value of this property is ID of PLM content which it refers to.-->
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Value/>
+		</Property>     
+		<Property name="Workbench" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="outputObjectParam" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="ScriptFileConfig" type="file" valuetype="single" mode="input">
+			<Value/>
+		</Property>
+		<Property name="PyFileDisplayName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="reusePolicy" tag="reusePolicy" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+		<Property name="maxConcurrent" tag="maxConcurrent" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="executionMode" tag="executionMode" type="integer" valuetype="single">
+			<Value>0</Value>
+		</Property>
+		<!-- Properties for execution options -->
+		<Property name="maxrcSuccess" type="aggregate" valuetype="single">
+			<Property name="success" type="string" valuetype="array" arraydim="[1]" sizable="true">
+				<Value index="[0]">0</Value>
+			</Property>
+		</Property>
+		<Property name="stdOutVal" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[false]]>
+			</Value>
+		</Property>
+		<Property name="stdErrVal" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[false]]>
+			</Value>
+		</Property>
+		<Property name="logStderr" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[true]]>
+			</Value>
+		</Property>
+		<Property name="logStdout" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[false]]>
+			</Value>
+		</Property>
+		<Property name="linesToLog" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[10]]>
+			</Value>
+		</Property>      
+	</Properties>
+</wfext:Extension>

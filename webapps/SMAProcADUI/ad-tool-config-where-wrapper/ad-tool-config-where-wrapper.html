@@ -1,0 +1,53 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcADUI/ad-tool-config-where/ad-tool-config-where.html">
+<link rel="import" href="../../SMAProcADUI/ad-tool-config-where-cloud/ad-tool-config-where-cloud.html">
+
+<dom-module id="ad-tool-config-where-wrapper">
+  <link rel="import" type="css" href="ad-tool-config-where-wrapper.css">
+  <template>
+      <style include="sp-uikit-styles"></style> 
+      <div class="content-section-heading">Where to Run</div>     
+      <div class="content-section-body">      
+          <table class="whereTable">
+           <tbody>
+	            <tr>
+	                <td class="content-cell">
+	                    <label for="location" class="content-label">Location:</label>
+	                </td>
+	                <td class="content-cell">
+	                 	<div id="locationContainer" class="content-field"></div>
+					</td>
+	               	<td>&nbsp;</td>
+	            </tr>   
+            </tbody>
+         </table>
+      
+<!--         <form class="form-horizontal">
+            <div class="form-group row">
+              <label for="location" class="col-sm-2 control-label">Location</label>
+              <div id="locationContainer" class="col-sm-10">
+                  <select name="location" id="location" class="form-control mySelections" on-change="onLocationChange">
+                  <option id="oncloudOption" value="oncloud">On-Cloud</option>
+                  <option id="onpremiseOption" value="onpremise">On-Premise</option>
+                 </select> 
+              </div>
+            </div>
+        </form> -->
+    </div>
+    <ad-tool-config-where-cloud id="onCloudWhere" class="hidden" session="{{session}}"></ad-tool-config-where-cloud>
+    <ad-tool-config-where id="onPremiseWhere" class="hidden" session="{{session}}" abaqus-study-mode=true></ad-tool-config-where>
+<!--     <template is="dom-if" if="{{onCloud}}">
+        <ad-tool-config-where-cloud session="{{session}}" tools="{{tools}}"></ad-tool-config-where-cloud>
+	</template>
+    <template is="dom-if" if="{{!onCloud}">
+        <ad-tool-config-where session="{{session}}" tools="{{tools}}"></ad-tool-config-where>
+	</template> 
+	    <template is="dom-if" if="{{onCloud && onCloudPremise}}">
+        <ad-tool-config-where session="{{session}}" tools="{{tools}}"></ad-tool-config-where>
+	</template>  --> 
+  </template> 
+  	<script type="text/javascript" src="../../UIKIT/UIKIT.js"></script>   
+  	<script src="ad-tool-config-where-wrapper.js"></script>
+</dom-module>

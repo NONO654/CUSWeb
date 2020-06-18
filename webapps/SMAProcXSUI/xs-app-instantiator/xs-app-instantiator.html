@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Process Experience Studio</title>
+    
+    <!-- Include the platform library for polyfill -->
+    <script src="../../Polymer-1.6.1/webcomponents-lite.min.js"></script>    
+    
+    <!--ENOVIA specific scripts for accessing global utilities.This is specially
+    required for launching JSPs-->
+    <script src="../../../common/scripts/emxUICore.js" data-merge-ignore="true"></script>
+    <script src="../../../common/scripts/emxUIModal.js" data-merge-ignore="true"></script>
+    <script src="../../../common/scripts/emxUIPopups.js" data-merge-ignore="true"></script>
+    <script src="../../../common/scripts/emxUIConstants.js" data-merge-ignore="true"></script>
+    
+    <!--Amd loader-->
+    <script src="../../AmdLoader/AmdLoader.js"></script>
+
+    <!-- Importing the components -->
+    <link rel="import" href="../../SMAProcSP/sp-queryparams/sp-queryparams.html">
+
+    <link rel="import" href="../xs-instantiator/xs-instantiator.html">
+</head>
+
+<body>        
+    <link rel="stylesheet" type="text/css" href="../xs-app-instantiator/xs-app-instantiator.css">
+    
+    <!--Parse the page query params on load-->
+    <sp-queryparams id="querystringParser" params="{{ params }}"></sp-queryparams>
+
+    <!--Instantiation page-->
+    <xs-instantiator unresolved id="instantiator">
+         <!--Display this till the components are ready -->
+        <div class="loading">
+            <div class="spinner">
+                <div class="spinner spinner-lg spinning fade in">
+                    <span class="spinner-bar"></span>
+                    <span class="spinner-bar spinner-bar1"></span>
+                    <span class="spinner-bar spinner-bar2"></span>
+                    <span class="spinner-bar spinner-bar3"></span>
+                </div>
+            </div>
+        </div>
+    </xs-instantiator>
+    
+    <script src="xs-app-instantiator.js"></script>
+</body>
+
+</html>

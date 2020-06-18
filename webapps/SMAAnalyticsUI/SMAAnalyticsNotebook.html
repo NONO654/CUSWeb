@@ -1,0 +1,324 @@
+<html>
+<head>
+<script src="../CodeMirror/lib/codemirror.js"></script>
+<link rel="stylesheet" href="../CodeMirror/lib/codemirror.css">
+<script src="../CodeMirror/mode/javascript/javascript.js"></script>
+<script src="../SMAVenHighcharts/6.0.7/highcharts.js"></script>
+<script src="../SMAAnalyticsPreview/AnalyticsReport.js"></script>
+<script src="../SMAVenMuuri/muuri.min.js"></script>
+
+<link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+<title>Results Analytics Notebook</title>
+</head>
+<style>
+body {
+font-family:sans-serif;
+}
+.BlockContainer {
+    position: relative;
+    top: 40px;
+}
+.ReportTitle{
+	height:2rem;
+	padding:10px;
+	text-align:center;
+	background-color:#eee;
+	color:#121;
+	border-radius:10px;
+	font-size:2rem;
+	font-family:sans-serif;
+}
+.SectionContainer {
+	position:relative;
+	margin:10px;
+	border-style: solid;
+    border-width: 1px;
+    border-color: #ccc;
+}
+.SectionTitle {
+	background-color: #ddd;
+	color: #333;
+	padding:10px;
+	border-radius:2px;
+	font-family:sans-serif;
+}
+.ImageContainer {
+	position:absolute;
+	/*padding:5px;*/
+	margin:5px;
+	border:1px solid lightgrey;
+}
+.ImageTitle {
+	background-color: #888;
+	/*width:100%;*/
+	color:#fff;
+	text-align:center;
+	padding:5px;
+	font-family:sans-serif;
+}
+.muuri {
+	position:relative;
+}
+.CodeContainer {
+	margin:10px;
+	height: 10rem;
+	border: #333 solid 1px;
+}
+.RunButton{
+	/*width:30px;*/
+	/*height:30px;*/
+	/*background-color:green;*/
+	position: relative;
+    left: calc(50% - 30px);
+    bottom: 0;
+    cursor:pointer;
+    padding:5px;
+    margin:10px;
+}
+</style>
+<body id="body">
+<!-- <h1>Results Analytics Notebook</h1> -->
+<div id="download" style="
+    position: relative;
+	float: right;
+    cursor:pointer;
+    top:-5px;
+"></div>
+<div id="container"></div>
+<script>
+function getUrlArgs() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+var args = getUrlArgs();
+var completeText = '';
+
+//========================================================
+function analyticsMessageHandler(msg){
+    //var analyticsFrame = document.getElementById('widgetframe');
+    if (typeof msg !== 'undefined' && msg !== null){
+        var msgTxt = msg.data || '';
+        if (msgTxt.length > 0){
+
+            if (msgTxt.indexOf('SERVANT_STARTED') > -1){
+
+                loadAnalyticsHTML(JSON.parse(msgTxt).SERVANT_STARTED);
+
+            } else if (msgTxt.indexOf('WIDGET_RESIZE') > -1){
+
+                widgetResizeHandler(JSON.parse(msgTxt), analyticsFrame);
+
+            } else if (msgTxt.indexOf('GET_SESS_DEF') > -1){
+            	
+            	getSessionData(analyticsFrame);
+           	
+            }
+        }
+    }
+};
+
+var previousVisuals = [];
+window.onload = function () {
+    window.addEventListener('message', analyticsMessageHandler);
+    if(args["standalone"]) {
+        window.adviseLaunchInfo = {"servantURL" : "http://localhost:8080/Advise"};
+        loadAnalyticsHTML();
+    }
+
+}
+
+function loadAnalyticsHTML(payload) {
+    if (typeof payload !== 'undefined' && payload !== null){
+        sessionStorage.userLang = payload.language;
+
+        window.adviseLaunchInfo = {
+            'platformId': payload.platformId,
+        	'dashboardURL': payload.dashboardURL || '',
+            'mcsUri': payload.mcsUri || '',
+            'widgetID': payload.widgetId || '',
+            'secCtx':  payload.secCtx,
+            'widgetViewType': payload.viewType || 'maximized',
+            'caseID': payload.caseId || '',
+            'userId': payload.userId,
+            'eedServerID': payload.eedServerId,
+            'eedJobID': payload.eedJobId,
+            'eerName': payload.eerName || '',
+            'stationDisplayName': payload.stationDisplayName|| '',
+            'stationIP': payload.stationIP || '',
+            'servantURL': payload.servantURL,
+            'token': payload.token,
+            'noServant': false,
+            'timeout' : payload.timeout,
+            'secureStation' : payload.secureStation,
+            'platformServices' : payload.platformServices
+        };
+        
+        // User list for joining collaborate session
+        if (typeof payload.collaborationUser !== 'undefined' && 
+                payload.collaborationUser !== null){
+            window.adviseLaunchInfo.isJoiningSession = true;
+            window.adviseLaunchInfo.collaborationUser = payload.collaborationUser;
+        }
+        if (typeof payload.userList !== 'undefined' &&
+                payload.userList !== null){
+            window.adviseLaunchInfo.userList = payload.userList;
+        }
+
+        var container = document.getElementById("container");
+        try {
+        	renderPrevious(container);
+        } catch (e) {
+	        addBlock(container);
+        }
+        var downloadButton = document.getElementById("download");
+        downloadButton.classList.add('fonticon');
+        downloadButton.classList.add('fonticon-2x');
+        downloadButton.classList.add('fonticon-download');
+        downloadButton.setAttribute('title','Download');
+        downloadButton.onclick = function() {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(completeText));
+            element.setAttribute('download', 'template.js');
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+          }
+        
+    }
+
+}
+
+function renderPrevious(container) {
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function(){
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            if (httpRequest.status === 200) {
+                try {
+                	response = JSON.parse(httpRequest.responseText);
+                	if(response && response.constructor === Array) {
+	                	response.forEach(function(map) {
+	                		console.log(map);
+	                		var cb = addBlock(container, true);
+	                		var cm = cb.codeContainer;
+	                		var resultContainer = cb.resultContainer;
+	                		completeText += "\n//============================================\n" + map.code;
+	                		cm.setValue(map.code);
+	                		if(map.report) {
+	                     		previousVisuals = renderReport(map.report, resultContainer, previousVisuals);
+	                     	}
+	                		
+	                     	if(map.error) {
+	                     		renderError(map.error, resultContainer);
+	                     	}
+	                	});
+                	}
+                } catch (e) {
+                	console.error(e);
+                }
+            }
+            addBlock(container);
+        }
+    };
+    
+    var url = window.adviseLaunchInfo.servantURL+'executeCommand?commandName=getPriorCommands&commandGroup=template';
+    httpRequest.open('GET', url, true);
+    
+    httpRequest.setRequestHeader("X-CSRFToken", window.adviseLaunchInfo.token);
+    httpRequest.send();
+}
+
+function addBlock(container, hideRunButton) {
+    var wrapper = document.createElement("div");
+    wrapper.classList.add("BlockContainer");
+    var cmContainer = document.createElement("div");
+    cmContainer.classList.add("CodeContainer");
+    
+    var ta = document.createElement("textarea");
+    ta.classList.add("ImageContainer");
+    var runButton = document.createElement("button");
+    //runButton.textContent="Run";
+    runButton.classList.add("RunButton");
+    runButton.classList.add("fonticon");
+    runButton.classList.add("fonticon-play");
+	runButton.setAttribute("title", "Run");
+    
+    var resultContainer = document.createElement("div");
+    resultContainer.classList.add("ResultContainer");
+    
+    cmContainer.appendChild(ta);
+    wrapper.appendChild(cmContainer);
+    if(!hideRunButton) {
+    	wrapper.appendChild(runButton);
+    }
+    wrapper.appendChild(resultContainer);
+    container.appendChild(wrapper);
+    var cm = CodeMirror.fromTextArea(ta, {
+        lineNumbers: true,
+        mode: "javascript"
+      });
+    
+    runButton.onclick = function() {
+        var textContent = cm.getValue();
+        textContent = textContent.trim();
+        if(textContent.length === 0) {
+            resultContainer.textContent = "No script to execute!"
+            return;
+        }
+        completeText += "\n//============================================\n"+textContent;
+        textContent= encodeURIComponent(textContent);
+        // make ajax call
+        // when the call returns, post the "report section" in the result block
+        
+         var httpRequest = new XMLHttpRequest();
+         httpRequest.onreadystatechange = function(){
+             if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                 if (httpRequest.status === 200) {
+                     //console.log(httpRequest.responseText);
+                     //prevSections = renderReport(report, resultContainer, prevSections);
+                     try {
+                     	response = JSON.parse(httpRequest.responseText);
+                     	console.log(response.report);
+                     	//bubbleUpEvents(response.events);
+                     	if(response.report) {
+                     		previousVisuals = renderReport(response.report, resultContainer, previousVisuals);
+                     	}
+                     	if(response.error) {
+                     		renderError(response.error, resultContainer);
+                     	}
+                     	runButton.style.display = 'none';
+                     } catch (e) {
+                    	 console.error(e);
+                         //resultContainer.textContent = e;
+                    	 runButton.style.display = 'none';
+                     }
+                     addBlock(container);
+                 } else {
+                     resultContainer.textContent = 'Status : '+httpRequest.status;
+                 }
+             }
+         };
+         
+         var url = window.adviseLaunchInfo.servantURL+'executeCommand?commandName=executeScript&commandGroup=template&script='+encodeURIComponent(textContent);
+         httpRequest.open('GET', url, true);
+         
+         httpRequest.setRequestHeader("X-CSRFToken", window.adviseLaunchInfo.token);
+         httpRequest.send();
+//         runButton.textContent = "..."
+		 runButton.classList.remove("fonticon-play");
+		 runButton.classList.add("fonticon-hourglass");
+         runButton.disabled = true;
+    }
+	return {"codeContainer": cm, "resultContainer": resultContainer};
+}
+
+</script>
+</body>
+</html>

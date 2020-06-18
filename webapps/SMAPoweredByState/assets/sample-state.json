@@ -1,0 +1,374 @@
+{
+	"domain": {
+		"jobTypes": {
+			"objects": [{
+				"id": "JobType1234567890",
+				"title": "Abaqus 2016",
+				"description": "Abaqus",
+				"lifecycleState": "Released",
+				"revision": "2",
+				"revisionComments": "The latest Abaqus job type",
+				"isLatestRevision": true
+			}]
+		},
+		"editorTypes": {
+			"objects": [{
+				"id": "EditorType1234567890",
+				"title": "Abaqus/CAE",
+				"description": "This is Abaqus/CAE."
+			}]
+		},
+		"connectorDefinitions": {
+			"objects": [{
+				"id": "D4259B5613720000047C045975030100",
+				"title": "Abaqus/Standard_3DX",
+				"connectorKind": "application",
+				"appName": "Abaqus/Standard",
+				"appVersion": "3DX",
+				"options": [{
+					"optionType": "Option-Value",
+					"name": "job",
+					"description": "The name of all files generated during the run and the name of files that are read in the continue, convert, and recover phases.",
+					"defaultValues": null,
+					"id": "1",
+					"required": "True",
+					"separatorValue": "="
+				}]
+			}]
+		},
+		"studyTemplates": {
+			"objects": [{
+				"id": "Template1234567890",
+				"title": "Abaqus 2016",
+				"description": "This study has the default set of Abaqus tools.",
+				"lifecycleState": "Released",
+				"revision": "2",
+				"revisionComments": "The latest Abaqus study type",
+				"isLatestRevision": true,
+				"options": [{
+					"RowEditable": "view",
+					"action": "view",
+					"datatype": "string",
+					"editableInPS": "false",
+					"id": "0",
+					"level": "0",
+					"syncAssist": "basic",
+					"title": "Title",
+					"title_display": "Title",
+					"value": "Simulation Companion Process"
+				}]
+			}]
+		},
+		"study": {
+			"persistenceStatus": "CLEAN",
+			"id": "Study1234567890",
+			"title": "My study",
+			"description": "My study description",
+			"created": "1/1/2017 4:20:00 PM",
+			"modified": "1/2/2017 4:26:00 PM",
+			"owner": "ABC1",
+			"managedDataRootID": "Category1234567890",
+			"cloudEnabled": true,
+			"masks": {
+				"fromconnectMask" : "TRUE",
+				"fromdisconnectMask" : "TRUE",
+				"locked": "FALSE",
+				"lockedByCurrentUser": "FALSE",
+				"modifyMask" : "TRUE"
+			}
+		},
+		"jobs": {
+			"objects": [{
+					"persistenceStatus": "CLEAN",
+					"id": "Job1234567890",
+					"eedJobID": "12345678980",
+					"jobType": "JobType1234567890",
+					"title": "Tube Crush",
+					"description": "Runs the tube crush analysis",
+					"ready": true,
+					"started": "1/1/2017 4:22:00 PM",
+					"ended": "1/1/2017 4:22:01 PM",
+					"status": "Failed",
+					"progress": {
+						"claimed": true,
+						"totalSteps": 5,
+						"stepsCompleted": 3,
+						"currentStepProgress": 0,
+						"overallProgress": 60
+					},
+					"inputs": [
+						"FileVer1234567890"
+					],
+					"mainInputFile": "FileVer1234567890",
+					"outputs": [],
+					"configuration": {
+						"arguments": [{
+								"name": "job",
+								"value": "Tube Crush"
+							},
+							{
+								"name": "resultsformat",
+								"value": "both"
+							}
+						],
+						"outputFileSpecs": ["*.odb", "*.sim", "*.sta", "*.log"],
+						"outputFileSpecsEnabled": true
+					},
+					"resultsOptions": {
+						"generateResults": true,
+						"generateResultsUnitsDefault": "MASS=KILOGRAM:TIME=SECOND:LENGTH=METER:TEMPRTRE=KELVIN:COURANT=AMPER:LUMEN=CANDELA:MOLE=MOL",
+						"generateResultsUnits": "MASS=KILOGRAM:TIME=SECOND:LENGTH=METER:TEMPRTRE=KELVIN:COURANT=AMPER:LUMEN=CANDELA:MOLE=MOL",
+						"generateResultsUnitsEnabled": false,
+						"generateResultsSourceFilename": "test.sim",
+						"generateResultsTitle": "test SO"
+					},
+					"executionOptions": {
+						"server": "Server2",
+						"drmMode": "Cloud",
+						"os": "linux",
+						"numProcs": 4,
+						"licenseOptions": {
+							"licenseType": "tokens",
+							"features": "2",
+							"modelSize": "2",
+							"performance": "2"
+						},
+						"workDirectory": null,
+						"removeWorkDir": false
+					}
+				},
+				{
+					"persistenceStatus": "CLEAN",
+					"id": "Job1234567891",
+					"eedJobID": "12345678981",
+					"jobType": "JobType1234567890",
+					"title": "Tube Crush",
+					"description": "Runs the tube crush analysis",
+					"ready": true,
+					"started": "1/1/2017 4:23:00 PM",
+					"ended": 0,
+					"status": "Running",
+					"progress": {
+						"claimed": true,
+						"totalSteps": 5,
+						"stepsCompleted": 1,
+						"currentStepProgress": 0,
+						"overallProgress": 20
+					},
+					"inputs": [
+						"FileVer1234567891"
+					],
+					"mainInputFile": "FileVer1234567891",
+					"outputs": [],
+					"configuration": {
+						"arguments": [{
+								"name": "job",
+								"value": "Tube Crush"
+							},
+							{
+								"name": "resultsformat",
+								"value": "both"
+							}
+						],
+						"environmentVariables": [{
+								"name": "env1",
+								"value": "value1"
+							},
+							{
+								"name": "env2",
+								"value": "value2"
+							}
+						],
+						"outputFileSpecsEnabled": true,
+						"outputFileSpecs": ["*.odb", "*.sim", "*.sta", "*.log"]
+					},
+					"resultsOptions": {
+						"generateResults": true,
+						"generateResultsUnitsDefault": "MASS=KILOGRAM:TIME=SECOND:LENGTH=METER:TEMPRTRE=KELVIN:COURANT=AMPER:LUMEN=CANDELA:MOLE=MOL",
+						"generateResultsUnits": "MASS=KILOGRAM:TIME=SECOND:LENGTH=METER:TEMPRTRE=KELVIN:COURANT=AMPER:LUMEN=CANDELA:MOLE=MOL",
+						"generateResultsUnitsEnabled": false,
+						"generateResultsSourceFilename": "test.sim",
+						"generateResultsTitle": "test SO"
+					},
+					"executionOptions": {
+						"server": "Server2",
+						"drmMode": "fiper",
+						"station": "Station1",
+						"LicenseOptions": {
+							"licenseType": "tokens",
+							"features": "2",
+							"modelSize": "2",
+							"performance": "2"
+						},
+						"workDirectory": "ExecDir1234567890",
+						"removeWorkDir": false
+					}
+				}
+			]
+		},
+		"managedData": {
+			"objects": [{
+					"persistenceStatus": "CLEAN",
+					"id": "Document1234567890",
+					"type": "Simulation Document - Versioned",
+					"title": "tubeCrush.inp",
+					"description": "tube crush .inp file",
+					"created": "1/2/2017 4:21:00 PM",
+					"modified": "1/2/2017 4:21:00 PM",
+					"locked": "FALSE"
+				},
+				{
+					"persistenceStatus": "CLEAN",
+					"id": "File1234567890",
+					"type": "file",
+					"name": "tubeCrush.inp",
+					"created": "1/2/2017 4:21:00 PM",
+					"modified": "1/2/2017 4:21:00 PM",
+					"locked": "FALSE"
+				},
+				{
+					"persistenceStatus": "CLEAN",
+					"id": "FileVer1234567890",
+					"type": "fileversion",
+					"name": "tubeCrush.inp",
+					"version": "1",
+					"versionComments": "Initial version",
+					"created": "1/2/2017 4:21:00 PM",
+					"modified": "1/2/2017 4:21:00 PM"
+				},
+				{
+					"persistenceStatus": "CLEAN",
+					"id": "FileVer1234567891",
+					"type": "fileversion",
+					"name": "tubeCrush.inp",
+					"version": "2",
+					"versionComments": "Changed stuff",
+					"created": "1/2/2017 4:22:00 PM",
+					"modified": "1/2/2017 4:22:00 PM"
+				}
+			],
+			"hierarchy": {
+				"id": "Document1234567890",
+				"parent": null,
+				"children": [{
+					"id": "File1234567890",
+					"parent": "Document1234567890",
+					"children": [{
+							"id": "FileVer1234567890",
+							"parent": "File1234567890",
+							"children": []
+						},
+						{
+							"id": "FileVer1234567891",
+							"parent": "File1234567890",
+							"children": []
+						}
+					]
+				}]
+			}
+		},
+		"workData": {
+			"objects": [{
+					"persistenceStatus": "CLEAN",
+					"id": "ExecDir1234567890",
+					"name": "My ExecDir",
+					"type": "execdir",
+					"server": "Server1",
+					"station": "Station1",
+					"path": "/filesrv/tmp/job1",
+					"modified": "1/2/2017 4:22:00 PM",
+					"eedJobID": "EEDJob1234567890",
+					"mcsJobID": "MCSJob1234567890",
+					"accessDisabled": false,
+					"removeAfterExecution": false
+				},
+				{
+					"persistenceStatus": "CLEAN",
+					"id": "File1234567891",
+					"name": "tubeCrush.odb",
+					"type": "file",
+					"size": 1234,
+					"modified": "1/2/2017 4:25:00 PM"
+				},
+				{
+					"persistenceStatus": "CLEAN",
+					"id": "File1234567892",
+					"name": "tubeCrush.sta",
+					"type": "file",
+					"size": 45678,
+					"modified": "1/2/2017 4:25:00 PM"
+				}
+			],
+			"hierarchy": {
+				"id": "WorkDataRoot",
+				"parent": "",
+				"children": [{
+						"id": "ExecDir1234567890",
+						"parent": "ExecDirRootContainer",
+						"children": [{
+							"id": "File1234567891",
+							"parent": "ExecDir1234567890",
+							"children": []
+						},
+						{
+							"id": "File1234567892",
+							"parent": "ExecDir1234567890",
+							"children": []
+						}]
+					}
+				]
+			}
+		}
+	},
+	"cos": {
+		"servers": {
+			"objects": [{
+					"id": "Server1",
+					"url": "https://server1:446/SMAExeServer-REST/",
+					"isDefault": true,
+					"isRunAsEnabled": false
+				},
+				{
+					"id": "Server2",
+					"url": "https://server2:446/SMAExeServer-REST/",
+					"isDefault": false,
+					"isRunAsEnabled": true
+				}
+			]
+		},
+		"stations": {
+			"objects": [{
+				"id": "Station1",
+				"name": "Station1",
+				"server": "Server2",
+				"isPrivate": false,
+				"isRunAsEnabled": true,
+				"os": "linux",
+				"allowedUsers": [],
+				"domains": [],
+				"status": "RUNNING"
+			}]
+		}
+	},
+	"app": {
+		"cloudEnabled": true,
+		"transientWidget": false,
+		"licenses": ["Abaqus_Study", "Simulation_Companion"],
+		"alerts": [{
+			"id": "Alert1234567890",
+			"code": "CodeXXX",
+			"category": "JOB UPDATE",
+			"level": "info",
+			"text": "The Job is being saved"
+		}],
+		"logging": {
+			"logRedux": true
+		},
+		"preferences": {
+			"defaultJobType": "JobType1234567890"
+		},
+		"appContext": {
+			"currentlySelectedThingOnRHS": "Job1234567890"
+		}
+	}
+}

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+  <title>Where Used</title>
+  <meta name="author" content="Dassault Systèmes" />
+  <meta name="brand" content="ENOVIA" />
+  <meta name="autoRefresh" content="0" />
+  <meta name="description" content="ENOVIA Relational IP Explorer Widget" />
+
+
+  <!-- RequireJS & config to work with wepapp build-->
+  <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+  <!--<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+  <script src="https://use.fontawesome.com/d7a92e2023.js"></script>-->
+  <!-- UWA and UIKit stylesheets -->
+  <!--<link rel="stylesheet" type="text/css" href="../UWA2/assets/css/inline.css" />-->
+  <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+  <widget:preference type="boolean" name="populateTags" label="PopulateTags_lb" defaultValue="true"></widget:preference>
+
+  <script>
+    /* global widget, require */
+    (function() {
+      'use strict';
+      var MapWidget = {
+        onLoad: function() {
+          require(['DS/SNNavigationMap/ENORIPE'],
+            function(NavigationApp) {
+              var contentX3D = null,
+                errorOnParseCompassData = false,
+                widgetViewtype = (widget.getView) ? widget.getView().type : "",
+                stringIDS = '[',
+                currentTenant = null,
+                navApp;
+
+              if (widget.getValue('X3DContentId')) {
+
+                try {
+                  contentX3D = JSON.parse(widget.getValue('X3DContentId'));
+                } catch (e) {
+                  console.log(e);
+                  errorOnParseCompassData = true;
+                }
+              }
+              if (contentX3D !== null && widget.getValue('lastRootNodeID') === undefined && !widget.getValue('clearInPreview')) {
+                var contextX3DData = contentX3D.data;
+                if (contextX3DData !== null && contextX3DData.items.length > 0) {
+                  var selectionArray = contextX3DData.items;
+                  for (var i = 0; i < selectionArray.length; i++) {
+                    stringIDS += '"' + selectionArray[i].objectId + '"';
+                    stringIDS += ((selectionArray.length - 1) === i ? ']' : ',');
+                    if(selectionArray[i].envId) {
+                      currentTenant = selectionArray[i].envId;
+                    }
+                  }
+                  //widget.setValue('lastRootNodeID', stringIDS);
+                  widget.setValue('lastAnchorID', selectionArray[0].objectId);
+                } else {
+                  stringIDS = null;
+                }
+              } else {
+                stringIDS = null;
+              }
+              navApp = new NavigationApp({
+                widget: widget,
+                lang : widget.lang,
+                initWithNodes: stringIDS,
+                initWithTenant: currentTenant,
+                lastAnchorId: widget.getValue('lastAnchorID'),
+                widgetViewtype: widgetViewtype,
+                renderTo: widget.body, // Should be document.body in WebInWin
+                errorOnParseCompassData: errorOnParseCompassData,
+                populateTags: widget.getValue('populateTags')
+              });
+              widget.addEvent('onRefresh', function() {
+                if(!navApp._needToConfirmPlatformChange) {
+                  navApp._refreshCollection({
+                    firedFromWidgetMenu: true
+                  });
+                }
+              }, navApp);
+              widget.addEvent('onResize', navApp.onResize.bind(navApp));
+              widget.addEvent('endEdit', navApp.onEndEditPref.bind(navApp));
+              widget.addEvent('onSearch', navApp.onSearch.bind(navApp));
+              widget.addEvent('onResetSearch', navApp.onResetSearch.bind(navApp));
+            }
+          );
+        }
+      };
+      widget.addEvent('onLoad', MapWidget.onLoad);
+    }());
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>

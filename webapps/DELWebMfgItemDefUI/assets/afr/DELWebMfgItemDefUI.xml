@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="DELWebMfgAssemblyDefHeaders" Target="CATCmdHeadersList">
+
+    <CATCmdHeadersList>
+        <CATCommandHeader ID = "MBOMAddCommand"                 ClassName = "DS/DELWebMfgItemDefCommands/MBOMAddCommand"                         ResourceFile = "DELWebMfgItemDefUI/MBOMAddCommand"         Available = "1"/>
+        <CATCommandHeader ID = "ProductAddCommand"              ClassName = "DS/DELWebMfgItemDefCommands/ProductAddCommand"                      ResourceFile = "DELWebMfgItemDefUI/ProductAddCommand"      Available = "1"/>
+        <CATCommandHeader ID = "ShowCharacteristicsCmd"         ClassName = "DS/ENOCharacteristicsWebApp/commands/ShowCharacteristicsCmd"        ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+        <CATCommandHeader ID = "ShowConsolidatedCharactscsCmd"  ClassName = "DS/ENOCharacteristicsWebApp/commands/ShowConsolidatedCharactscsCmd" ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+
+        <CATCommandHeader ID = "BIEssentials"         ClassName = "DS/DELWebMfgAssetsDefUICommands/BIEssentialsCmd"     ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+        <CATCommandHeader ID = "EditTVColumns"        ClassName = "DS/DELWebMfgAssetsDefUICommands/EditTVColumnsCmd"    ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+        <CATCommandHeader ID = "ExportCSV"            ClassName = "DS/DELWebMfgAssetsDefUICommands/ExportCSVCmd"        ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="Preferences" Value="DELWebMfgItemDefUI/DELWebMfgItemDefUIExportCSVPreferences"/>
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+        <CATCommandHeader ID = "LoadRelations"        ClassName = "DS/DELWebMfgAssetsDefUICommands/LoadRelationsCmd"  ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" HelpResourceFile="DELWebMfgItemDefUI/DELMFNLoadRelationsCommandHelp" Available = "1"/>
+        <CATCommandHeader ID="RelationalExplorerCmd" ClassName="DS/DELWebMfgAssetsDefUICommands/RelationalExplorerCmd"  ResourceFile="DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+        <CATCommandHeader ID="DefineFilter"          ClassName="DS/DELWebMfgAssetsDefUICommands/ExpandFilterCmd"        ResourceFile="ENONextGenFilterCmd/ENONextGenFilterCmd"   Available = "1">
+          <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="AuthorizeFilter" Value="true" Mode="In"/>
+          </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+
+
+        <!--================    FIXED       ================-->
+        <CATCommandHeader ID = "Hide"              ClassName = "DS/DELWebMfgAssetsDefUICommands/HideRootNodeCmd" ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+        <CATCommandHeader ID = "HideAll"           ClassName = "DS/DELWebMfgAssetsDefUICommands/HideRootNodeCmd" ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="Option" Value="All"/>
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+        <CATCommandHeader ID = "Refresh"           ClassName = "DS/DELWebMfgAssetsDefUICommands/RefreshCmd"           ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+        <CATCommandHeader ID = "showAuxiliaryView" ClassName = "DS/DELWebMfgAssetsDefUICommands/ShowAuxiliaryViewCmd" ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+
+        <!--================    AUTHORING   ================-->
+        <!--    Add New:        Create Instance + Reference -->
+        <!--    Add Existing:   Instanciate a Reference     -->
+        <!--    Delete:         Delete the Reference        -->
+        <!--    Remove:         Deletes the Instance        -->
+        <!--================================================-->
+
+        <CATCommandHeader ID = "InsertCreateAssembly" ClassName = "DS/DELWebMfgAssetsDefUICommands/InsertCmd"    ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="ReferenceType"         Value="DELAsmAssemblyModelDisciplines/CreateAssembly" Mode="In" />
+                <CATCommandHeaderArg ID="DisplayedInTableView"  Value="PROCESS" Mode="In" />
+                <CATCommandHeaderArg ID="PPRType"               Value="PROCESS" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+
+        <CATCommandHeader ID = "InsertCreateMaterial" ClassName = "DS/DELWebMfgAssetsDefUICommands/InsertCmd"    ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="ReferenceType"         Value="DELAsmAssemblyModelDisciplines/CreateMaterial" Mode="In" />
+                <CATCommandHeaderArg ID="DisplayedInTableView"  Value="PROCESS" Mode="In" />
+                <CATCommandHeaderArg ID="PPRType"               Value="PROCESS" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+
+        <CATCommandHeader ID = "InsertCreateKit" ClassName = "DS/DELWebMfgAssetsDefUICommands/InsertCmd"    ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="ReferenceType"         Value="DELAsmAssemblyModelDisciplines/CreateKit" Mode="In" />
+                <CATCommandHeaderArg ID="DisplayedInTableView"  Value="PROCESS" Mode="In" />
+                <CATCommandHeaderArg ID="PPRType"               Value="PROCESS" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+
+        <CATCommandHeader ID = "InsertProvide" ClassName = "DS/DELWebMfgAssetsDefUICommands/InsertCmd"    ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="ReferenceType"         Value="DELAsmAssemblyModelDisciplines/Provide" Mode="In" />
+                <CATCommandHeaderArg ID="DisplayedInTableView"  Value="PROCESS" Mode="In" />
+                <CATCommandHeaderArg ID="PPRType"               Value="PROCESS" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+        <CATCommandHeader ID = "InsertInstance" ClassName = "DS/DELWebMfgAssetsDefUICommands/InsertInstanceCmd"    ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+        <CATCommandHeader ID = "PPRReplaceByLatestRevision" ClassName = "DS/DELWebMfgAssetsDefUICommands/PPRReplaceByLatestRevisionCmd"    ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="Restriction" Value="InstancesOnly" />
+            </CATAfrCommandHeaderArgs>
+         </CATCommandHeader>
+         <CATCommandHeader ID = "PPRReplaceByExistingRevision" ClassName = "DS/DELWebMfgAssetsDefUICommands/PPRReplaceByExistingRevisionCmd"    ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="Restriction" Value="InstancesOnly" />
+            </CATAfrCommandHeaderArgs>
+         </CATCommandHeader>
+         <CATCommandHeader ID = "PPRReplaceByNewRevision" ClassName = "DS/DELWebMfgAssetsDefUICommands/PPRReplaceByNewRevisionCmd"    ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="Restriction" Value="InstancesOnly" />
+            </CATAfrCommandHeaderArgs>
+         </CATCommandHeader>
+        <CATCommandHeader ID = "CreateAssemblyAndScope" ClassName = "DS/DELWebMfgItemDefCommands/CreateAssemblyAndScopeCommand" ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!--    Create and Update Mfg Item  -->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+        <CATCommandHeader ID = "CreateMfgItem" ClassName = "DS/DELWebMfgItemDefCommands/CreateOrUpdateMfgItemCommand"  ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                    <CATCommandHeaderArg ID="ReferenceType"         Value="CreateMfgItem" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+
+        <CATCommandHeader ID = "UpdateMfgItem" ClassName = "DS/DELWebMfgItemDefCommands/CreateOrUpdateMfgItemCommand"  ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                    <CATCommandHeaderArg ID="ReferenceType"         Value="UpdateMfgItem" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+
+        <CATCommandHeader ID = "RemoveInstance" ClassName = "DS/DELWebMfgAssetsDefUICommands/DeleteCmd" ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="Restriction" Value="InstancesOnly" />
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+        <!-- <CATCommandHeader ID = "Remove"                        ClassName = "DS/DELWebMfgItemDefCommands/RemoveCommand"                                             ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/> -->
+
+        <CATCommandHeader ID = "ActionBar_Attributes"   ClassName = "DS/ENOCollabSharingCmds/commands/EditPropCmd/ActionBar_EditPropCmd"                    ResourceFile = "ENOCollabSharingCmds/CollabSharing_Workbench" Available = "1"/>
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!--    Scope Link and Imlement Link    -->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+        <CATCommandHeader ID = "CreateScopeLink"                ClassName = "DS/DELWebMfgItemDefCommands/CreateScopeCommand"    ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="LinkType" Value="Scope" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+
+        <CATCommandHeader ID = "ReconnectScope"             ClassName = "DS/DELWebMfgItemDefCommands/ReconnectOrRevReconnectScopeCommand"    ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="LinkType"  Value="ReconnectScope" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+
+        <CATCommandHeader ID = "ReviseAndReconnectScope"    ClassName = "DS/DELWebMfgItemDefCommands/ReconnectOrRevReconnectScopeCommand"    ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="LinkType"  Value="ReviseAndReconnectScope" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+
+        <CATCommandHeader ID = "DeleteScopeLink"        ClassName = "DS/DELWebMfgItemDefCommands/DeleteScopeCommand"    ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"></CATCommandHeader>
+        <CATCommandHeader ID = "ReplaceCapableResourceCmd"        ClassName = "DS/DELWebMfgAssetsDefUICommands/ReplaceCapableResourceCmd"    ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"></CATCommandHeader>
+
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <!--  Product Assignment -->
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+      <CATCommandHeader ID = "AssignAssembly" ClassName = "DS/DELWebMfgItemDefCommands/AssignProductCommand"    ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="ReferenceType"         Value="DELAsmAssemblyModelDisciplines/CreateAssembly" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "AssignMaterial" ClassName = "DS/DELWebMfgItemDefCommands/AssignProductCommand"    ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="ReferenceType"         Value="DELAsmAssemblyModelDisciplines/CreateMaterial" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "AssignKit" ClassName = "DS/DELWebMfgItemDefCommands/AssignProductCommand"    ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="ReferenceType"         Value="DELAsmAssemblyModelDisciplines/CreateKit" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "AssignProvide" ClassName = "DS/DELWebMfgItemDefCommands/AssignProductCommand"    ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="ReferenceType"         Value="DELAsmAssemblyModelDisciplines/Provide" Mode="In" />
+            </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+      <!--  Product Assignment -->
+      <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+        <CATCommandHeader ID = "UnassignProduct"         ClassName = "DS/DELWebMfgItemDefCommands/UnassignProductCommand"     ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+        <!--    Manage Inconsistent Links Command   -->
+        <CATCommandHeader ID = "ManageInconsistentLinks" ClassName = "DS/DELWebMfgItemDefCommands/ManageInconsistentLinksCmd" ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+
+        <!--================    Life cycle  ================-->
+        <!--    Change Maturity:                            -->
+        <!--    New Revision:                               -->
+        <!--    Delete:                                     -->
+        <!--    Duplicate:                                  -->
+        <!--    Duplicate Advanced:                         -->
+        <!--    Compare:                                    -->
+        <!--    History:                                    -->
+        <!--================================================-->
+
+        <CATCommandHeader ID = "MaturityHdr"            ClassName = "DS/LifecycleCmd/MaturityCmd"                       ResourceFile = "LifecycleCmd/MaturityCmd" Available = "1"/>
+        <CATCommandHeader ID = "RevisionHdr"            ClassName = "DS/LifecycleCmd/ReviseCmd"                         ResourceFile = "LifecycleCmd/ReviseCmd"       Available = "1"/>
+        <CATCommandHeader ID = "Delete"                 ClassName = "DS/DELWebMfgAssetsDefUICommands/DeleteCmd"         ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+        <CATCommandHeader ID = "DuplicateHdr"           ClassName=  "DS/LifecycleCmd/DuplicateCmd"                      ResourceFile = "LifecycleCmd/DuplicateCmd"    Available = "1" />
+
+        <CATCommandHeader ID = "DuplicateAdv" ClassName = "DS/DELWebMfgAssetsDefUICommands/DuplicateAdvCmd" ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1">
+            <CATAfrCommandHeaderArgs>
+                <CATCommandHeaderArg ID="Preferences" Value="DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUIDuplicateAdvancedPreferences"/>
+            </CATAfrCommandHeaderArgs>
+        </CATCommandHeader>
+        <!--  CATCommandHeader ID = "CompareHdr"                    ClassName = "DS/CompareCmd/CompareCmd"                      ResourceFile = "CompareCmd/CompareCmd" Available = "1" /-->
+        <CATCommandHeader ID = "HistoryHdr"             ClassName = "DS/LifecycleCmd/HistoryCmd"                                                     ResourceFile = "LifecycleCmd/HistoryCmd" Available = "1" />
+        <CATCommandHeader ID = "ActionBar_ChangeOwner"  ClassName = "DS/ENOCollabSharingCmds/commands/TransferOwnershipCmd/ActionBar_ChangeOwnerCmd" ResourceFile = "ENOCollabSharingCmds/CollabSharing_Workbench" Available = "1"/>
+        <CATCommandHeader ID = "Relations"              ClassName = "DS/DELWebMfgAssetsDefUICommands/RelationsCmd"                                   ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+
+      <CATCommandHeader ID = "ProductsParts" ClassName = "DS/DELWebMfgItemDefCommands/MFNViewCommand" ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+        <CATAfrCommandHeaderArgs>
+            <CATCommandHeaderArg  ID="Name" Value="Products" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "ManufacturingItems" ClassName = "DS/DELWebMfgItemDefCommands/MFNViewCommand" ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1">
+        <CATAfrCommandHeaderArgs>
+            <CATCommandHeaderArg  ID="Name" Value="MBOM" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "Origin"                   ClassName = "DS/DELWebMfgItemDefCommands/OriginCommand"                 ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+      <CATCommandHeader ID = "OriginRemove"             ClassName = "DS/DELWebMfgItemDefCommands/OriginRemoveCommand"           ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+      <CATCommandHeader ID = "OriginAdd"                ClassName = "DS/DELWebMfgItemDefCommands/OriginAddCommand"              ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+
+      <CATCommandHeader ID = "Alternates"               ClassName = "DS/DELWebMfgItemDefCommands/AlternateCommand"              ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+      <CATCommandHeader ID = "AlternateRemove"          ClassName = "DS/DELWebMfgItemDefCommands/AlternateRemoveCommand"        ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+      <CATCommandHeader ID = "AlternateAdd"             ClassName = "DS/DELWebMfgItemDefCommands/AlternateAddCommand"           ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+      <CATCommandHeader ID = "AlternateBL"              ClassName = "DS/DELWebMfgItemDefCommands/AlternateBLCommand"            ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+
+      <CATCommandHeader ID = "CapableResource"          ClassName = "DS/DELWebMfgItemDefCommands/CapableResourceCommand"        ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+      <CATCommandHeader ID = "CapableResourceRemove"    ClassName = "DS/DELWebMfgItemDefCommands/CapableResourceRemoveCommand"  ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+      <CATCommandHeader ID = "CapableResourceAdd"       ClassName = "DS/DELWebMfgItemDefCommands/CapableResourceAddCommand"     ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+      <CATCommandHeader ID = "CapableResourceBL"        ClassName = "DS/DELWebMfgItemDefCommands/CapableResourceBLCommand"      ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+
+      <CATCommandHeader ID = "ActionViewFilter"         ClassName = "DS/DELWebMfgItemDefCommands/ActionViewFilterCommand"       ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+
+        <!--================    DOCUMENT    ================-->
+        <!--    AttachDocument:                             -->
+        <!--    DownloadDocument:                           -->
+        <!--    PurgeDocument:                              -->
+        <!--================================================-->
+        <CATCommandHeader ID = "AttachDocument"         ClassName = "DS/DELWebMfgAssetsDefUICommands/AttachDocumentCmd"         ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+        <CATCommandHeader ID = "SearchDocument"         ClassName = "DS/DELWebMfgAssetsDefUICommands/SearchDocumentCmd"         ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+        <CATCommandHeader ID = "ManageDocuments"        ClassName = "DS/DELWebMfgAssetsDefUICommands/ManageDocumentsCmd"        ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+
+
+        <!--================    EXPLORE IN CBP APPS ========-->
+        <!--    ExploreInWebApp:                            -->
+        <!--================================================-->
+        <CATCommandHeader ID = "ExploreInWebApp"         ClassName = "DS/DELWebMfgAssetsDefUICommands/ExploreInWebAppCmd"       ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+
+        <!--================    VIEW        ================-->
+        <!--    Toggle Product View: Shows EBOM             -->
+        <!--    Toggle Graph View:                          -->
+        <!--    Reframe:                                    -->
+        <!--    ReframeOn:                                  -->
+        <!--================================================-->
+        <CATCommandHeader ID = "ToggleGraphView"        ClassName = "DS/DELWebMfgItemDefCommands/ToggleGraphViewCommand"        ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+        <CATCommandHeader ID = "Reframe"                ClassName = "DS/DELWebMfgItemDefCommands/ReframeCommand"                ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+        <CATCommandHeader ID = "ReframeOn"              ClassName = "DS/DELWebMfgItemDefCommands/ReframeOnCommand"              ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+        <CATCommandHeader ID = "ToggleOrientation"      ClassName = "DS/DELWebMfgItemDefCommands/ToggleOrientationCommand"      ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+        <CATCommandHeader ID = "ToggleOverview"         ClassName = "DS/DELWebMfgItemDefCommands/ToggleOverviewCommand"         ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+
+        <CATCommandHeader ID = "ExpandAll"              ClassName = "DS/DELWebMfgItemDefCommands/ExpandAllCommand"              ResourceFile = "DELWebMfgItemDefUI/DELWebMfgItemDefUI" Available = "1"/>
+        <CATCommandHeader ID = "ShowLogPanel"           ClassName = "DS/DELWebMfgAssetsDefUICommands/LogPanelCmd"               ResourceFile = "DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI" Available = "1"/>
+
+        <!--================    CONFIGURATION   ================-->
+        <!--    EditConfigurationContext:                       -->
+        <!--    EditVariant:                                    -->
+        <!--    EditEvolution:                                  -->
+        <!--====================================================-->
+        <CATCommandHeader ID = "EditConfigurationContext"   ClassName = "DS/DELWebMfgAssetsDefUICommands/EditConfigContextCmd"  ResourceFile = "CfgConfigurationCommands/CfgEditConfigurationContextCmd" Available = "1"/>
+        <CATCommandHeader ID = "EditVariant"                ClassName = "DS/DELWebMfgAssetsDefUICommands/EditVariantCmd"        ResourceFile = "CfgEffectivityCommands/CfgVariantEffectivityCmd" Available = "1"/>
+        <CATCommandHeader ID = "EditEvolution"              ClassName = "DS/DELWebMfgAssetsDefUICommands/EditEvolutionCmd"      ResourceFile = "CfgEffectivityCommands/CfgEvolutionCmd" Available = "1"/>
+
+    </CATCmdHeadersList>
+  </Template>
+
+  <!--======================================================================================================================================-->
+  <!--======================================================================================================================================-->
+  <!--======================================================================================================================================-->
+  <!--======================================================================================================================================-->
+  <!--======================================================================================================================================-->
+
+  <Template syp:name="DELWebMfgAssemblyDefAccess" Target="CATCmdWorkbench">
+      <CATCmdWorkbench Name="DELWebMfgAssemblyDefWorkbench">
+
+          <CATCmdContainer      Name="SWXUiFixedCommands"           RepresentationType="AfrActionBarFixedSection">
+
+              <CATCmdStarter        Name = "Refresh"                    Command = "Refresh" />
+              <CATCmdContainer  Name = "Hide" Visibility = "1"      RepresentationType="AfrActionBarDropDown">
+                  <CATCmdStarter    Name = "Hide"                       Command = "Hide" />
+                  <CATCmdStarter    Name = "HideAll"                    Command = "HideAll" />
+              </CATCmdContainer>
+
+              <CATCmdStarter        Name="showAuxiliaryView"    Command="showAuxiliaryView" />
+              <CATCmdStarter        Name="ProductsParts"        Command="ProductsParts" />
+              <CATCmdStarter        Name="ManufacturingItems"   Command="ManufacturingItems" />
+          </CATCmdContainer>
+
+          <CATCmdContainer      Name = "Authoring" Visibility = "1" RepresentationType="AfrActionBarSection">
+
+              <CATCmdContainer  Name = "Create" Visibility = "1"    RepresentationType="AfrActionBarDropDown">
+                  <CATCmdStarter    Name = "InsertCreateAssembly"       Command = "InsertCreateAssembly" />
+                  <CATCmdStarter    Name = "InsertProvide"              Command = "InsertProvide" />
+                  <CATCmdStarter    Name = "InsertCreateMaterial"       Command = "InsertCreateMaterial" />
+                  <CATCmdStarter    Name = "InsertCreateKit"            Command = "InsertCreateKit" />
+              </CATCmdContainer>
+
+              <CATCmdStarter        Name = "CreateAssemblyAndScope" Command = "CreateAssemblyAndScope" />
+              <CATCmdStarter        Name = "CreateMfgItem"          Command = "CreateMfgItem" />
+              <CATCmdStarter        Name = "UpdateMfgItem"          Command = "UpdateMfgItem" />
+              <CATCmdStarter        Name=  "InsertInstance"         Command = "InsertInstance" />
+
+              <CATCmdContainer  Name = "Create" Visibility = "1"    RepresentationType="AfrActionBarDropDown">
+                <CATCmdStarter      Name=  "PPRReplaceByLatestRevision"         Command = "PPRReplaceByLatestRevision" />
+                <CATCmdStarter      Name=  "PPRReplaceByExistingRevision"       Command = "PPRReplaceByExistingRevision" />
+                <CATCmdStarter      Name=  "PPRReplaceByNewRevision"            Command = "PPRReplaceByNewRevision" />
+              </CATCmdContainer>
+
+              <CATCmdStarter        Name = "RemoveInstance"         Command = "RemoveInstance" />
+
+              <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+              <CATCmdSeparator  Name="BasicManip_Separator" />
+              <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+              <CATCmdContainer  Name = "Scope" Visibility = "1" RepresentationType="AfrActionBarDropDown">
+                  <CATCmdStarter    Name = "CreateScopeLink"            Command = "CreateScopeLink" />
+                  <CATCmdStarter    Name = "ReconnectScope"             Command = "ReconnectScope" />
+                  <!-- <CATCmdStarter   Name = "ReviseAndReconnectScope"    Command = "ReviseAndReconnectScope" /> -->
+                  <CATCmdStarter    Name = "DeleteScopeLink"            Command = "DeleteScopeLink" />
+              </CATCmdContainer>
+              <CATCmdContainer  Name = "ProductAssignation" Visibility = "1" RepresentationType="AfrActionBarDropDown">
+                  <CATCmdStarter    Name = "AssignAssembly"             Command = "AssignAssembly" />
+                  <CATCmdStarter    Name = "AssignMaterial"             Command = "AssignMaterial" />
+                  <CATCmdStarter    Name = "AssignKit"                  Command = "AssignKit" />
+                  <CATCmdStarter    Name = "AssignProvide"            Command = "AssignProvide" />
+                  <!--<CATCmdStarter    Name = "UnassignProduct"            Command = "UnassignProduct" />-->
+              </CATCmdContainer>
+
+              <CATCmdStarter   Name = "ManageInconsistentLinks" Command = "ManageInconsistentLinks" />
+              <CATCmdStarter      Name = "Relations"            Command = "Relations" />
+              <CATCmdStarter      Name = "Properties"               Command = "ActionBar_Attributes" />
+              <CATCmdContainer Name = "Show Characteristics" Visibility = "1" RepresentationType="AfrActionBarDropDown">
+                  <CATCmdStarter Name = "ShowCharacteristicsCmd" Command = "ShowCharacteristicsCmd" />
+                  <CATCmdStarter Name = "ShowConsolidatedCharactscsCmd" Command = "ShowConsolidatedCharactscsCmd" />
+              </CATCmdContainer>
+          </CATCmdContainer>
+
+          <CATCmdContainer      Name = "Lifecycle" Visibility = "1" RepresentationType="AfrActionBarSection">
+              <CATCmdStarter        Name="Maturity"                     Command="MaturityHdr" />
+              <CATCmdStarter        Name="Revision"                     Command="RevisionHdr" />
+              <CATCmdStarter        Name="DeleteMGA"                    Command="Delete" />
+              <CATCmdContainer  Name = "Duplicate"          Visibility = "1" RepresentationType="AfrActionBarDropDown">
+                  <CATCmdStarter    Name = "Duplicate"          Command = "DuplicateHdr" />
+                  <CATCmdStarter    Name = "DuplicateAdv"       Command = "DuplicateAdv" />
+              </CATCmdContainer>
+              <!-- CATCmdStarter        Name="Compare"                      Command="CompareHdr" /-->
+              <CATCmdStarter        Name="History"                      Command="HistoryHdr" />
+              <CATCmdStarter        Name="ChangeOwner"                  Command = "ActionBar_ChangeOwner" />
+
+          </CATCmdContainer>
+
+          <CATCmdContainer Name = "Document" Visibility = "1" RepresentationType="AfrActionBarSection">
+              <CATCmdStarter        Name = "AttachDocument"             Command = "AttachDocument" />
+              <CATCmdStarter        Name = "SearchDocument"             Command = "SearchDocument" />
+              <CATCmdStarter        Name = "ManageDocuments"            Command = "ManageDocuments" />
+          </CATCmdContainer>
+
+          <CATCmdContainer Name="View" Visibility="1" RepresentationType="AfrActionBarSection">
+              <CATCmdStarter Name = "ExpandAll"                 Command = "ExpandAll" />
+
+              <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+              <CATCmdSeparator  Name="BasicManip_Separator" />
+              <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+              <CATCmdStarter    Name="Alternates"      Command="Alternates" />
+              <CATCmdStarter    Name="Origin"          Command="Origin" />
+              <CATCmdStarter    Name="CapableResource" Command="CapableResource" />
+
+              <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+              <CATCmdSeparator Name="BasicManip_Separator" />
+              <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+              <CATCmdStarter Name = "ToggleGraphView"       Command = "ToggleGraphView" />
+
+              <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+              <CATCmdSeparator  Name="BasicManip_Separator" />
+              <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+              <CATCmdStarter Name = "Reframe"                   Command = "Reframe" />
+              <CATCmdStarter Name = "ReframeOn"                 Command = "ReframeOn" />
+              <CATCmdStarter Name = "ToggleOrientation"         Command = "ToggleOrientation" />
+              <CATCmdStarter Name = "ToggleOverview"            Command = "ToggleOverview" />
+
+              <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+              <CATCmdSeparator  Name="BasicManip_Separator" />
+              <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+              <CATCmdStarter Name = "ShowLogPanel"          Command = "ShowLogPanel" />
+          </CATCmdContainer>
+
+          <CATCmdContainer Name="Tools" Visibility="1" RepresentationType="AfrActionBarSection">
+              <CATCmdStarter Name = "BIEssentials" Command = "BIEssentials" />
+              <CATCmdStarter Name = "EditTVColumns" Command = "EditTVColumns" />
+              <CATCmdStarter Name = "ExportCSV"     Command = "ExportCSV" />
+              <CATCmdStarter Name = "LoadRelations"     Command = "LoadRelations" />
+              <CATCmdStarter Name = "RelationalExplorerCmd"     Command = "RelationalExplorerCmd" />
+              <CATCmdStarter Name = "ExpandFilterCmd"     Command = "DefineFilter" />
+          </CATCmdContainer>
+
+          <CATCmdContainer Name="Configuration" Visibility="1" RepresentationType="AfrActionBarSection">
+              <CATCmdStarter          Name = "EditConfigurationContext"   Command = "EditConfigurationContext"/>
+              <CATCmdStarter          Name = "EditVariant"                Command = "EditVariant"/>
+              <CATCmdStarter          Name = "EditEvolution"              Command = "EditEvolution"/>
+          </CATCmdContainer>
+
+      </CATCmdWorkbench>
+  </Template>
+
+</Styles>

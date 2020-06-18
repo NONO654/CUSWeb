@@ -1,0 +1,9 @@
+m|DELPPWModels\DELPPWWebServices.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.7.19198
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELPPWWebServices\DELPPWWebServices.js|1563393710|8351
+s|DELPPWModels\DELPPWWebServices.mweb\src\WebserviceUtils.js|1545894656|12902
+s|DELPPWModels\DELPPWWebServices.mweb\src\CommonService.js|1533222641|7805
+s|DELPPWModels\DELPPWWebServices.mweb\src\WebService.js|1562855439|10065

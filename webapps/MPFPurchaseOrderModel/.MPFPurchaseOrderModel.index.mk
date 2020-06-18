@@ -1,0 +1,11 @@
+m|MPFModels\MPFPurchaseOrderModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19096
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFPurchaseOrderModel\MPFPurchaseOrderModel.js|1554530789|2238
+s|MPFModels\MPFPurchaseOrderModel.mweb\src\CartPurchaseOrderDocumentDataProxy.js|1520939260|1972
+s|MPFModels\MPFPurchaseOrderModel.mweb\src\PurchaseOrderDocumentModel.js|1520869105|1996
+s|MPFModels\MPFPurchaseOrderModel.mweb\src\MPFPurchaseOrderModel.js|1513249374|0
+s|MPFModels\MPFPurchaseOrderModel.mweb\src\PurchaseOrderModel.js|1552470242|3656
+s|MPFModels\MPFPurchaseOrderModel.mweb\src\CartPurchaseOrderDataProxy.js|1521796481|1721

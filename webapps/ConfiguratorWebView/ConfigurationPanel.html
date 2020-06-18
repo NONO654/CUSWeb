@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:widget="http://www.netvibes.com/ns/">
+
+
+    <head>
+
+        <!-- Title -->
+        <title>Configuration Features</title>
+        <!-- Title -->
+
+        <!-- Head Meta Data -->
+        <meta name="author" content="Dassault Systemes (XF3)" />
+        <meta name="description" content="Configurator NextGen Widget" />
+
+        <meta name="apiVersion" content="1.0" /> 
+        <meta name="debugMode" content="true" />
+
+        <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />     <!--To solve Slice issue on IE-->
+        <!-- Head Meta Data -->
+                
+        <!-- AMDLoader -->
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+        <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+        <!-- UWA -->
+         <!-- Application Standalone emulation files -->
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+
+        <script type="text/javascript" src="../UWA2/js/Controls/Accordion.js"></script>
+
+        <!--script type="text/javascript" src="../EKBinaryHelpers/EKBinaryHelpers.js"></script>
+        <script type="text/javascript" src="../ExperienceKernel/ExperienceKernel.js"></script-->
+        <!--script src="../ConfiguratorWebModel/ConfiguratorWebModel.js" type="text/javascript"></!--script>
+		<script src="ConfiguratorWebView.js" type="text/javascript"></script-->
+
+		
+		<!--script type="text/javascript" src="../ConfiguratorWebJQuery/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="../ConfiguratorWebJQueryUI/jquery-ui.js"></script>
+		<link rel="stylesheet" type="text/css" href="../ConfiguratorWebJQueryUI/assets/jquery-ui.css"-->      
+          
+        <link rel="stylesheet" type="text/css" href="ConfiguratorWebView.css">
+        <!--script type="text/javascript" src="../ConfiguratorWebPSTree/PSTree.js"></script-->
+
+		<script type="text/javascript">
+		    require(
+            // dependencies
+            ['DS/ConfiguratorWebView/Utilities', 'DS/ConfiguratorWebView/ConfigurationServices'],
+            // execute this callback, passing all dependencies as params
+            function (Utilities, ConfigurationServices) {
+
+                'use strict';
+
+
+                var myWidget = {
+
+                    /**********************************************************************/
+                    /*onLoad function                                                     */
+                    /**********************************************************************/
+                    onLoad: function () {
+                        Utilities.setLanguageFile(widget.lang);     //Set the language to be used for NLS
+                        
+                        Utilities.checkEnvWithUrl();                //Check if we are on WIN or WEB environment and set the Utilities.onWinEnv variable
+                        
+                        var topPanel = widget.createElement('div');     //Create the skeleton of the configuration panel
+                        topPanel.id = "topPanel";
+                        var configuratorBase = UWA.extendElement(topPanel);
+                        widget.setBody(configuratorBase);
+
+                        // slice is not implemented on IE 11.
+                        if (!ArrayBuffer.prototype.slice)
+                            ArrayBuffer.prototype.slice = function (start, end) {
+                                var that = new Uint8Array(this);
+                                if (end === undefined)
+                                    end = that.length;
+                                var result = new ArrayBuffer(end - start);
+                                var resultArray = new Uint8Array(result);
+                                for (var i = 0; i < resultArray.length; i++)
+                                    resultArray[i] = that[i + start];
+                                return result;
+                            };
+                        
+                        //Add configServices on widget preference for it to be accessible on web environment
+                        widget.addPreference({
+                            name: "configServices",
+                            type: "object",
+                            label: "ConfigServices",
+                            defaultValue: null
+                        });
+
+                        widget.setValue("configServices", ConfigurationServices);
+
+
+                        if (Utilities.onWinEnv())
+                            //setTimeout(function () {
+                                Utilities.send_notif("pageLoaded");     //Send a notification on WIN env to mention that the page is loaded
+                            //}, 300);   
+                        else {
+                            parent.onWidgetLoad();
+                            //parent.callSetServices();
+                        }
+                        
+                    }
+                };
+
+                Utilities.setWidget(widget);
+
+                widget.addEvent('onLoad', myWidget.onLoad);
+
+
+                /**********************************************************************/
+                /*function called on a resize event                                   */
+                /**********************************************************************/
+                window.onresize = function (event) {
+                    if (Utilities.RetrieveElement("content")) {
+                        Utilities.RetrieveElement("content").style.maxWidth = Utilities.getPageSize().x + "px";
+                    }
+
+                    if (Utilities.RetrieveElement("myfeatureOptions")) {
+                        var featureRuleId = Utilities.RetrieveElement("myfeatureOptions").value;
+                        var input = Utilities.RetrieveElement("input" + featureRuleId);
+                        Utilities.RetrieveElement("myfeatureOptions").style.maxWidth = (Utilities.getPageSize().x - input.getBoundingClientRect().left) + "px";
+                    }
+
+                    if (Utilities.RetrieveElement("content") && Utilities.RetrieveElement("content").offsetWidth > 200) {
+                        if (Utilities.RetrieveElement("prodStatesContainer") != null) {
+                            Utilities.RetrieveElement("content").style.height = (Utilities.getPageSize().y - (Utilities.RetrieveElement("prodStatesContainer").offsetHeight + 115)) + "px";
+                            Utilities.RetrieveElement("prodStatePanel").style.width = Utilities.RetrieveElement("content").offsetWidth + "px";
+
+                        } else {
+                        	if (Utilities.onWinEnv()) {
+                        	    Utilities.RetrieveElement("content").style.height = (Utilities.getPageSize().y - 87) + "px";
+                            } else {
+                        	    Utilities.RetrieveElement("content").style.height = (Utilities.getPageSize().y - 57) + "px";
+                        	}
+                        }
+
+                        if (Utilities.onWinEnv()) {
+                      //  $('.accordionHeader').css('width', Utilities.RetrieveElement("content").scrollWidth + "px");                                       	
+                    	
+                   	    var contentWidth = Utilities.RetrieveElement("content").scrollWidth + "px" ;
+                        var accordHeader = Utilities.RetrieveElementByClassName('accordionHeader') ;
+                        for (var i = 0; i < accordHeader.length; i++) {
+                        	accordHeader[i].style.width = "";
+                        	accordHeader[i].style.width = contentWidth ;
+                        }
+                        
+                        } else {
+                        	// $('.accordionHeader').css('width', "100%");
+
+                        	
+                            var accordHeader = Utilities.RetrieveElementByClassName('accordionHeader') ;
+                            for (var i = 0; i < accordHeader.length; i++) {
+                            	accordHeader[i].style.width = "";
+                            	accordHeader[i].style.width = "100%" ;
+                            } 
+                        	
+                        }
+                        var contentSize = Utilities.RetrieveElement("content").style.height.replace("px", "");
+                    }
+                    else {
+                    	if (Utilities.onWinEnv()) {
+                        //$('.accordionHeader').css('width', "455px");
+                          var accordHeader = Utilities.RetrieveElementByClassName('accordionHeader') ;
+                            for (var i = 0; i < accordHeader.length; i++) {
+                            	accordHeader[i].style.width = "";
+                            	accordHeader[i].style.width = "455px" ;
+                            }
+                        
+                        } else {
+                        	//$('.accordionHeader').css('width', "100%");
+                        	var accordHeader = Utilities.RetrieveElementByClassName('accordionHeader') ;
+                            for (var i = 0; i < accordHeader.length; i++) {
+                            	accordHeader[i].style.width = "";
+                            	accordHeader[i].style.width = "100%" ;
+                            }
+                        }
+                        if (Utilities.RetrieveElement("prodStatePanel")) Utilities.RetrieveElement("prodStatePanel").style.width = "455px";
+                    }
+
+                    if (Utilities.RetrieveElement("div_features_table"))
+                        Utilities.RetrieveElement("div_features_table").style.height = (contentSize - 60) + "px";
+						
+                    if (!Utilities.onWinEnv()) Utilities.RemovePanels(); // removed because of the by-pass launching a resize event to refresh the images (IR 317156)
+                }
+                
+            });
+		
+		</script>
+		
+    </head>
+    <body>
+        Loading...
+    </body>
+</html>

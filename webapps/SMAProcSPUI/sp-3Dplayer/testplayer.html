@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Web Component - Demo</title>
+        <script>dsDefaultWebappsBaseUrl = "../../";</script>
+
+		
+		<!-- Include the polyfill for web components -->
+		<script type="text/javascript" src="../../SMAProcSPlib/polymer/platform.js"></script>
+		
+		<!-- Import the required components -->
+		<link rel="import" href="sp-3Dplayer.html">
+		
+		<!-- Import style for this page -->
+		<!--link rel="stylesheet" href="style.css"-->
+        <script>
+            function show() {
+                require(['DS/3DPlay/Settings'], function (SET) {
+                    SET.set('3DPlay.OldScenarioInfra', 1);
+                    document.querySelector("sp-3Dplayer").open({ experience: '3DPlayBasicSimulation', asset: { provider: 'FILE', filename: '../../SPYTest/assets/models/knuckle_seq1.simxml.3dxml' } });
+                });
+            }
+            function hide() {
+                document.querySelector("sp-3Dplayer").close();
+            }
+        </script>
+
+	</head>
+	<body>
+
+		<!-- Use the component -->
+		<sp-3Dplayer></sp-3Dplayer>
+	</body>
+</html>

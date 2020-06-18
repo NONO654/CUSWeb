@@ -1,0 +1,25 @@
+/*
+ *	Requirement Connector Customization
+ */
+
+// PACKAGE <ConnectorQualicationPrefix>;
+PACKAGE PLM;
+
+/*
+ *	Requirement Specification Extensions
+ */
+ 
+METHOD `Requirement Specification`.getAllChapters() -doc :
+	THIS.`rel_Specification Structure`.`to_Chapter`.*(`rel_Specification Structure`.`to_Chapter`)
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.GetAllChapters")
+HELPTEXT I18N("Method.Tooltip.GetAllChapters");
+
+METHOD `Requirement Specification`.getAllRequirements() -doc : {
+	TMP reqSpecReqs := `rel_Specification Structure`.`to_Requirement`;
+	TMP allChapterReqs := getAllChapters().`rel_Specification Structure`.`to_Requirement`;
+	reqSpecReqs $+ allChapterReqs;
+}
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.GetAllRequirements")
+HELPTEXT I18N("Method.Tooltip.GetAllRequirements");

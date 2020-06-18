@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/"> 
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<head>   
+   
+   <title>Template Designer</title>
+   
+   <!-- Application Metas Start -->
+   
+   <meta name="author" content="L1S" />
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta name="description" content="Report Template management" />
+   <meta name="autoRefresh" content="0" />
+   <meta name="debugMode" content="false" />
+   <meta name="viewport" content="width=device-width"/>
+   
+   <!-- Application Metas End -->
+   
+   <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+   <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+   <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+   <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+   <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+   <link rel="stylesheet" href="../UIKIT/UIKIT.css"/>
+   
+    <!-- RGN Libraries Start -->
+    <link type="text/css" rel="stylesheet" href="assets/reportmodeller/style.css">
+    <link type="text/css" rel="stylesheet" href="assets/styles/emxRGNStyle.css"/>
+    <script type="text/javascript" src="assets/reportmodeller/reportmodeller.nocache.js"></script>
+    <script type="text/javascript" src="assets/scripts/previewSearch.js"></script>
+    <!-- RGN Libraries End -->
+
+    <script type="text/javascript" src="RGDUX.js"></script>
+    <link rel="stylesheet" type="text/css" href="../RGNServices/RGN.css" />  
+    <link rel="stylesheet" type="text/css" href="RGD.css" /> 
+
+   <!-- Application JS Start -->
+   <script >
+        /* global widget window */
+        var init = function () {
+                widget.rgnux.refresh();
+            },
+            saveProperty = function (name, value) {
+                widget.SetValue(name, value);
+            };
+        window.ModellerEntryPoint = com.dassault_systemes.catrgn.reportUIModeller.gwt.diagram.ModellerEntryPoint;
+        widget.addEvent('onLoad', function () {
+            require(['DS/RGD/RGDUX', 'DS/i3DXCompassPlatformServices/i3DXCompassPlatformServices'],
+            function(RGDUX, i3DXCompassServices){
+                'use strict';
+                widget.rgnux = new RGDUX(
+                    {
+                        app: document.querySelector('.rgd-app'),
+                        widgetInfo: {
+                            id: widget.id,
+                            getValue: function (key) {
+                                return widget.getValue(key)
+                            },
+                            setValue: function (key, value) {
+                                widget.setValue(key, value)
+                            }
+                        }
+                    }
+                );
+                i3DXCompassServices.getPlatformServices({
+                    onComplete: function (data) {
+                        widget.rgnux.initialize(data);
+                    }
+                });
+            })
+        });
+        widget.addEvent('onRefresh', init)
+   </script>
+   <!-- Application JS End -->
+</head>
+<body>
+    <div class="rgd-app">
+        <div class="rgd-data fixed-width">
+        </div>
+        <div class="layout hidden">
+            <div id="layout-header">
+                <div id="layout-toolbar" class="elorn-controlbar">
+                    <div class=" iconbar iconbar-root">
+                        <ul tabindex="1" class="iconbar-items-wrap iconbar-items-icons">
+                            <li title="" id="itm-8602e3" class="item ">
+                                <span class="fonticon fonticon-open-left "></span>
+                            </li>
+                            <li title="" id="itm-2e1aea" class="divider">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="layout-content">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

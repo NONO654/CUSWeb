@@ -1,0 +1,67 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSPUI/sp-checkbox/sp-checkbox.html">
+
+<dom-module id="ps-simulation-item">
+  <link rel="import" type="css" href="ps-simulation-item.css">
+  <template>
+
+        <div class="main" objectid="{{simitem.id}}" title="{{_computeTitle(simitem.attributes.title, simitem.basics.revision)}}">
+
+            <sp-variable id="eedBaseURL" name="eedBaseURL" on-valuechange="onVariableValueChange"></sp-variable>
+            <sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL" on-valuechange="onVariableValueChange"></sp-variable>
+
+            <sp-webservice id="abortExeWs"
+                uri="{{_computeUri(globals.eedBaseURL, simitem.latestExecution.eedJobId)}}"
+                builduri="false">
+            </sp-webservice>
+
+            <sp-mcsservice id="eedTicketWs"
+                data="{{eedTicket}}"
+                uri="{{_computeUri2(globals.mcsWSBaseURL, simitem.latestExecution.id)}}"
+                on-dataready="onEEDTicketReady"
+                builduri="false">
+            </sp-mcsservice>
+
+            <sp-mcsservice
+	            id="updateSimWS"
+	            uri="{{_computeUri3(simitem.id)}}"
+	            on-error="onUpdateError">
+	            <sp-data id="simData" model="{{simitem}}" uid="id"></sp-data>
+	        </sp-mcsservice>
+
+            <div class$="[[_computeClass(simitem.latestExecution.state)]]"></div>
+
+            <!--Show default icon if there is no image assigned to simulation-->
+            <div class="iconandstatus">
+                <img id="simimage" class="icon" src="{{_computeSrc(defaultSimIcon, simitem)}}" title="{{simitem.description}}">
+            </div>
+            <!--Show read-only icon based on access-->
+            <span class$="[[_computeReadonlyClass(simitem)]]" title="Read only"><span class="fonticon fonticon-pencil"></span></span>
+
+            <div class="simsummary">
+                <!--Title and multi select check box-->
+                <div class="simtitlealign">
+                    <div class="simoverview">
+                        <div class="processtitle">
+                            <span>{{simitem.attributes.title}}</span><span>[[_computeRevision(simitem)]]</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Description and group information-->
+                <div class="simdescription">
+                    <p class="processdescription">{{simitem.attributes.description}}</p>
+                    <span id="simgroup" class$="[[_computeGroupClass(simitem.attributes.Simulation Study)]]">
+                        <span class="groupname">{{simitem.attributes.Simulation Study}}</span>
+                    </span>
+                </div>
+            </div>
+            <!--Multiselect checkbox-->
+            <sp-checkbox id="multiselectcheck" class="multiselectcheck" label="Compare" title="Click to multiselect" on-click="onMultiSelect"></sp-checkbox>
+        </div>
+    </template>
+  <script type="text/javascript" src="ps-simulation-item.js"></script>
+</dom-module>

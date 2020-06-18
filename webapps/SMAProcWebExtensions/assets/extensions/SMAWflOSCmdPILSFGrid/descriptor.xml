@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.grid.lsf.LSFGridPlugin" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOSCmdPILSFGrid" nlsID="dispname">LSF</DisplayName>
+	<Description nlsFile="SMAWflOSCmdPILSFGrid" nlsID="desc">Create new LSF Grid Connector</Description>
+	<LongDescription nlsFile="SMAWflOSCmdPILSFGrid" nlsID="longdesc">Create new LSF Grid Connector</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Grid</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.grid.lsf.LSFGridPlugin</Value>
+		</Attribute>
+	</Attributes>
+
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOSCmdPILSFGrid.CATNls" targetFilename="SMAWflOSCmdPILSFGrid.CATNls"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflOSCmdPILSFGrid.dll" targetFilename="win_b64/SMAWflOSCmdPILSFGrid.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflOSCmdPILSFGrid.sypstyle" targetFilename="SMAWflOSCmdPILSFGrid.sypstyle"/>
+	</Streams>
+
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.plugin.grid.lsf.LSFGridPlugin</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="javaEditor" language="java">
+					<Class>com.engineous.plugin.grid.lsf.LSFGridPlugin</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflOSCmdPILSFGrid_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.plugin.grid.lsf.LSFGridPlugin</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[Grid]]>
+			</Value>
+		</Property>
+
+		<!--  LSFGrid Plugin properties -->
+		<Property name="options" type="aggregate" valuetype="single">
+
+			<Property name="queue" type="string" valuetype="single">
+				<Value/>
+			</Property>
+
+			<Property name="hosts" type="string" valuetype="single">
+				<Value/>
+			</Property>
+
+			<Property name="resources" type="string" valuetype="single">
+				<Value/>
+			</Property>
+
+			<Property name="numprocs" type="string" valuetype="single">
+				<Value/>
+			</Property>
+
+			<Property name="advancedOptions" type="string" valuetype="single">
+				<Value/>
+			</Property>
+
+			<Property name="fromScript" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[false]]>
+				</Value>
+			</Property>
+
+			<Property name="transferFiles" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[false]]>
+				</Value>
+			</Property>
+
+		</Property>
+
+	</Properties>
+</wfext:Extension>

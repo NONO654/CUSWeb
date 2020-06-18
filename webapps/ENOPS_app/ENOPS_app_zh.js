@@ -1,0 +1,1 @@
+define("DS/ENOPS/ENOPS_app_zh",{});define("DS/ENOPS_app/assets/nls/ENOPS_app",{hasNONPS:"拥有链接的 CAD 文档",newProduct:"新产品"});

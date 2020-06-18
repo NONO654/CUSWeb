@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+
+  <!-- Application Metas -->
+  <title>PowerBy - Login</title>
+  <meta name="author" content="Dassault Systèmes" />
+  <meta name="brand" content="ENOVIA" />
+  <meta name="autoRefresh" content="0" />
+  <meta name="description" content="PowerBy - Login" />
+
+  <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+  <link rel="stylesheet" type="text/css" href="PowerByLogin.css" />
+
+  <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+  <script type="text/javascript" src="PowerByLogin.js"></script>
+  <widget:preferences>
+  </widget:preferences>
+
+  <script>
+    require([
+      'DS/PlatformAPI/PlatformAPI',
+      'DS/MessageBus/MessageBus'
+    ], function(PlatformAPI, MessageBus) {
+      // Listen on webinwin:notification from Web and forward to Win
+      function sendNotificationToNative(message) {
+        if (typeof dscef !== 'undefined') {
+          dscef.sendString(message);
+        } else {
+          console.log(message);
+        }
+      }
+
+      PlatformAPI.subscribe(
+        'webinwin:web:notification',
+        sendNotificationToNative
+      );
+      ////////////////////////////////////////////////////////////////////
+
+      // Listen on webinwin:notification from Win and forward to Web
+      function receivedString(message) {
+        PlatformAPI.publish('webinwin:win:notification', JSON.parse(message));
+      }
+      if (window) {
+        window.receivedString = receivedString;
+      }
+    });
+  </script>
+</head>
+
+<body>
+
+</body>
+<!-- Application JavaScript Source -->
+<script type="text/javascript">
+  require([
+    'DS/PowerByLogin/PowerByLogin'
+  ], function(
+    //WebappsUtils,
+    PowerByLogin) {
+    'use strict';
+    var powerbylogin = new PowerByLogin();
+  });
+</script>
+
+</html>

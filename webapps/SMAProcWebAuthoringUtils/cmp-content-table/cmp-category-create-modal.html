@@ -1,0 +1,23 @@
+<link rel="import" href="../../SMAProcSPUI/sp-checkbox/sp-checkbox.html"/>
+
+<dom-module id="cmp-category-create-modal">
+  <template>
+      <style>
+      sp-checkbox {
+          display: inline-block;
+      }
+      </style>
+      <cmp-wux-dialog modal-flag id="dialog" title="Create Category" allowed-dock-areas="none" ok-button-flag cancel-button-flag my-position="center" at-position="center">
+        <dialogcontent>
+            <p>Learn more about Data Categories: <pcw-help-icon path="SceUserMap/sce-c-Dat-Categories.htm"></pcw-help-icon></p>
+            <template is="dom-repeat" items={{_CategoryListCanBeAdded}}>
+                <div class="toggle">
+                    <sp-checkbox id="{{item.Name}}" on-click="addCategory"></sp-checkbox>
+                    <label class="control-label" for="{{item.Name}}">{{item.Name}}</label>
+                </div>
+            </template>
+        </dialogcontent>
+      </cmp-wux-dialog>
+  </template>
+  <script type="text/javascript" src="cmp-category-create-modal.js"></script>
+</dom-module>

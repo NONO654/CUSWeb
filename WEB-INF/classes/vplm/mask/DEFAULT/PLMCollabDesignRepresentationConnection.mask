@@ -1,0 +1,79 @@
+// ===========================================================
+// PACKAGE   : Collab Design Project
+// ===========================================================
+// Generated : Aug 08, 2008
+// Owner     : VVO (R1.X+7)
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+// 1 entity :
+// - PLMCCDProjectDataConnection
+// ===========================================================
+ENTITY PLMCCDProjectDataConnection
+// ===========================================================
+// --- attributes: 3
+ATTR PLM_ExternalID;Y;N;
+ATTR V_Name;N;N;$
+ATTR V_description;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+FATTR V_Name;Y
+FATTR V_description;Y
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+FATTR V_Name;Y
+FATTR V_description;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+FATTR V_Name;Y
+FATTR V_description;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_Name;Y
+FATTR V_description;Y
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_description;Y

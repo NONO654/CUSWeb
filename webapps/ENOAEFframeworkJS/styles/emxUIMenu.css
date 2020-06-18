@@ -1,0 +1,660 @@
+/* --------------------------------------------------------------------------
+    Menu Stylesheet for Windows/Mac Platforms
+    emxUIMenu.css
+
+	Release: 2015x
+	Version: 1.5
+	
+    Copyright (c) 1992-2018 Dassault Systemes ENOVIA Corp. All Rights Reserved.
+    This program contains proprietary and trade secret information 
+    of Dassault Systemes ENOVIA Corp. Copyright notice is precautionary only
+    and does not evidence any actual or intended publication of such program
+   -------------------------------------------------------------------------- */
+ 
+/* -------------------------------------------------------------------------
+    Menu Panels (Global, Search, Category Overflow)
+   ------------------------------------------------------------------------- */
+   
+.menu-panel {
+    position:absolute;
+    width:210px;
+    z-index:1251;
+}
+
+.menu-panel .menu-content {
+    width:auto;
+    height:100%;
+    background:#efefef;
+    border-radius:3px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+    overflow:hidden;
+    overflow-y:auto;
+    cursor:pointer;
+    border: solid 1px #d1d4d4;
+}
+
+.menu-panel.grouped.search ul li a label {
+    font-size: 10pt;
+    line-height: 20px; 
+}
+
+/* ---------------------------------
+    Menu Pointer
+   --------------------------------- */
+
+.menu-panel .menu-pointer {
+    height:6px;
+    background:url("../images/utilMenuPointer.gif") left 0 no-repeat;
+}
+
+.menu-panel.center .menu-pointer {background-position:center 0;}
+
+.menu-panel.center .menu-content {
+    border-radius:0 0 5px 5px;
+    -moz-border-radius:0 0 5px 5px;
+    -webkit-border-radius:0 0 5px 5px;
+}
+
+.menu-panel.right .menu-pointer {background-position:right 0;}
+
+.menu-panel.right .menu-content {
+    border-radius:5px 0 5px 5px;
+    -moz-border-radius:5px 0 5px 5px;
+    -webkit-border-radius:5px 0 5px 5px;
+}
+
+/* ---------------------------------
+    IF WE Menu
+   --------------------------------- */
+
+div.menu-tab {
+    position:absolute;
+    width:38px;
+    height:44px;
+    top:-43px;
+    right:0;
+    background:#efefef;
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+}
+
+div.menu-tab span {
+    display:block;
+    position:absolute;
+    height:26px;
+    width:26px;
+    top:7px;
+    left:7px;
+    background:url("../../plugins/IFWENavigator/images/utilGlobalToolbarMenuIcons.png") 0 -104px no-repeat;
+}
+
+.add div.menu-tab span {background-position:-26px -104px;}
+.share div.menu-tab span {background-position:-52px -104px;}
+.home div.menu-tab span {background-position:-78px -104px;}
+.help div.menu-tab span {background-position:-104px -104px;}
+
+.menu-panel.global .menu-content {border-top-right-radius:0;}
+
+.menu-panel.global .menu-content ul li a span {display:none;}
+
+/* ---------------------------------
+    Menu Panel Items
+   --------------------------------- */
+
+.menu-panel ul li {
+    position:relative;
+    padding:0;
+    line-height:0;
+    width:auto;
+    height:auto;
+}
+
+/* override toolbar [vertical] separator styling */
+.menu-panel ul li.separator {
+    height:1px;
+    background:none;
+    border-top: solid 1px #b4b6ba;
+    margin: 4px 0;
+    cursor: default;
+}
+
+.menu-panel ul li.document-file {
+    padding-left:16px;
+}
+
+.menu-panel ul li.separator:after {
+    display:none;
+    height:1px;
+    position:absolute;
+    border-top:solid 1px transparent;
+    content:" ";
+    line-height:0;
+    font-height:0;
+    top:0;
+    right:6px;
+    left:0;
+}
+
+
+.menu-panel a {
+    display:block;
+    font-size:14px;
+    line-height:15px;
+    text-decoration:none;
+    word-wrap:break-word;
+    cursor:pointer;
+}
+
+.menu-panel a label {color:#0d0d0d;}
+
+.menu-panel ul li a {
+    position:relative;
+    min-height:17px;
+    padding:2px 2px 2px 2px;
+}
+
+.menu-panel ul li a:focus {
+    text-decoration: none;
+}
+
+/* insert an element into the DOM for list bullets and menu arrows */
+.menu-panel .menu-content a:before,
+.menu-panel .menu-content a:after {
+    display:none;
+    position:absolute;
+    content:" ";
+    line-height:0;
+    font-size:0;
+    background:url("../images/utilMenuElements.png") 0 0 no-repeat;
+}
+
+/* ---------------------------------
+    Grouped
+   --------------------------------- */
+
+/* give the first, non-grouped set of items some air */
+.menu-panel .menu-content > ul {
+    padding:4px 0 0 0;
+    margin-bottom: 1px;
+    }
+
+.menu-panel .group {
+    margin:0;
+    padding:0;
+    background:none;
+}
+
+.menu-panel .group-head,
+.menu-panel .group-body {
+    margin:0;
+    position:relative;
+}
+
+.menu-panel .group-head {
+    min-height:24px;
+    height:auto;
+    width:auto;
+    overflow:hidden;
+    background: #f0f0f0;
+}
+
+.menu-panel .group-head a {padding:5px 20px 5px 26px;}
+
+.group.expanded .group-head.no-link {padding-top: 0;}
+
+.menu-panel .group-head.no-link label {
+    display:block;
+    padding:8px 20px 8px 8px;
+    font-size: 10pt;
+    background-color: #d1d4d4;
+}
+
+.menu-panel .group-head label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight:normal;
+    font-size:14px;
+}
+
+/* group expand/collapse indicator */
+.menu-panel .group-head a:before {
+    display:block;
+    width:10px;
+    height:10px;
+    top:9px;
+    left:8px;
+    background-position:-40px -3px;
+}
+
+.group.expanded .group-head {border-bottom: solid 1px transparent;}
+
+.menu-panel .collapsed .group-head a:before {background-position:-58px -3px;}
+
+
+/* disable the grouped menu*/
+.menu-content .group.collapsed.disabled {
+    pointer-events: none;
+    opacity: .5;
+}
+
+/* default icons for actions and search group headers */
+.menu-panel.search .group-head a,
+.menu-panel.actions .group-head a {padding-left:26px;} /* default is now 26px - this might not be needed */
+
+.menu-panel.search .group-head.icon a span,
+.menu-panel.actions .group-head.icon a span {display:none;}
+
+/* .menu-panel.search .group-head a:before {display:block;background-position:-127px 0px;} */
+/* .menu-panel.search .group-head.what a:before {display:block;background-position:-145px 0px;} */
+/* .menu-panel.search .group-head.where a:before {display:block;background-position:-163px 0px;} */
+/* .menu-panel.search .group-head.how a:before {display:block;background-position:-181px 0px;} */
+
+/* .menu-panel.actions .group-head a:before {display:block;background-position:-108px -1px;} */
+
+/* collapsed */
+.menu-panel .group.collapsed .group-head a:after {background-position:-58px -3px;}
+.menu-panel .group.collapsed .group-body {display:none;}
+
+/* custom icons */
+.menu-panel .group-head.icon a {padding-left:26px;}
+
+.menu-panel.global .group-head.icon span {display:none;}
+.menu-panel.global .group-head.icon a {padding-left:8px;}
+
+/* ---------------------------------
+    Submenus
+   --------------------------------- */
+
+.menu-panel ul li.menu > a:after {display:none;}
+
+.menu-panel ul li.menu > a:before {
+    display:block;
+    width:10px;
+    height:16px;
+    top:3px;
+    left:8px;
+}
+
+.menu-panel ul li.menu.expanded > a:before {background-position:-40px 0;}
+.menu-panel ul li.menu.expanded > a:hover:before {background-position:-40px -18px;}
+
+/* collapsed menu */
+.menu-panel ul li.menu.collapsed > ul {display:none;}
+.menu-panel ul li.menu.collapsed > a:before {background-position:-58px 0;}
+.menu-panel ul li.menu.collapsed > a:hover:before {background-position:-58px -18px;}
+
+/* disabled menu */
+.menu-panel ul li.menu.disabled > a label {color:#808080;}
+.menu-panel ul li.menu.disabled > a:before {background-position:-36px -48px;}
+.menu-panel ul li.menu.disabled.collapsed > a:before {background-position:-52px -48px;}
+
+.menu-panel.global .icon span {display:none;} 
+
+
+/* ---------------------------------
+    Indent Levels
+   --------------------------------- */
+
+.menu-panel span {/*outline:1px dotted orange;*/} /* diagnostic */
+
+/* .menu-panel.global ul li a span {display:none;} */
+
+.menu-panel ul li a {padding-left:26px;}
+.menu-panel ul li.menu > a {padding-left:26px;}
+.menu-panel ul li a span {left:6px;top:6px;}
+.menu-panel ul li.menu > a span {left:6px;}
+.menu-panel ul li.separator:after {right:0;}
+
+.menu-panel ul li ul li a {padding-left:42px;}
+.menu-panel ul li ul li.menu > a {padding-left:42px;}
+.menu-panel ul li ul li.menu > a:before {left:27px;}
+.menu-panel ul li ul li.separator:after {left:24px;}
+
+.menu-panel ul li ul li ul li a {padding-left:58px;}
+.menu-panel ul li ul li ul li.menu > a {padding-left:58px;}
+.menu-panel ul li ul li ul li.menu > a:before {left:42px;}
+.menu-panel ul li ul li ul li.separator:after {left:42px;}
+
+.menu-panel ul li ul li ul li ul li a {padding-left:74px;}
+.menu-panel ul li ul li ul li ul li.menu > a:before {left:59px;}
+.menu-panel ul li ul li ul li ul li.separator:after {left:59px;}
+
+
+/* ---------------------------------
+    Selected
+   --------------------------------- */
+
+/* add checkmark to selected/active item */
+.menu-panel.global ul li.selected a span.checked,
+.menu-panel.global ul li.active a span.checked,
+.menu-panel.grouped.search ul li.selected a span.checked,
+.menu-panel.grouped.search ul li.active a span.checked,
+.menu-panel.display-mode ul li.selected a span.checked,
+.menu-panel.display-mode ul li.active a span.checked {
+    left:4px;
+    top:3px;
+    background:url("../images/utilMenuElements.png") -88px -16px no-repeat;
+    display:block;
+}
+
+.menu-panel.grouped.search ul li.selected a span.checked {left: 14px;}
+
+.menu-panel.display-mode ul li.selected a span.checked img,
+.menu-panel.display-mode ul li.active a span.checked img {display: none}
+
+.menu-panel.overflow ul li.active span.checked {left:2px;}
+
+/* ---------------------------------
+    Custom Icons
+   --------------------------------- */
+
+/* remove default icon in favor of custom icon */
+.slide-in-panel.menu ul li.icon > a:before {background:none;}
+
+/* place custom icon */
+.menu-panel span {
+    position:absolute;
+    display:block;
+    top:4px;
+    left:6px;
+    width:16px;
+    height:16px;
+    font-size:0;
+    line-height:0;
+}
+
+/*supress group-header icons*/
+
+.menu-content .group-head.icon span img {visibility: hidden;}
+
+
+/* ---------------------------------
+    Group Body
+   --------------------------------- */
+
+.menu-panel .group-body {
+    max-height:160px;
+    overflow:hidden;
+    overflow-y:auto;
+}
+
+.menu-panel.search .group-body {max-height:none;}
+
+/* ---------------------------------
+    Item Labels
+   --------------------------------- */
+
+.menu-panel ul li a label {
+    display:block;
+    padding:1px 0;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.menu-panel ul li a:hover,
+.menu-panel.overflow ul li.overflow a:hover {
+    background-color:#0d6196;
+    color:#fff;
+    text-decoration: none;
+}
+
+
+.menu-panel a.selected label {
+    cursor:inherit;
+    color:#0d0d0d;
+}
+
+.menu-panel a:hover label {
+    cursor:#fff;
+    color:inherit;
+}
+
+/* disabled menu items */
+.menu-panel ul li.disabled a label {color:#808080;}
+.menu-panel ul li.disabled a:hover {background:none;cursor:default;}
+.menu-panel ul li.disabled a:before {background-position:-66px -35px;}
+.menu-panel ul li.icon.disabled span {opacity:0.35;}
+
+
+/* ---------------------------------
+    My Desk
+   --------------------------------- */
+
+.menu-panel.my-desk {width:300px;}
+
+.menu-panel.my-desk .menu-content {
+    border-top-left-radius:0;
+    border-top-right-radius:0;
+}
+
+.menu-panel.my-desk .group-body {max-height:none;}
+
+.menu-panel.my-desk ul li.menu a span {display:none;}
+
+/* ---------------------------------
+    Global Toolbar Menus
+   --------------------------------- */
+
+.menu-panel.global ul li label,
+.menu-panel.global label{
+    font-family: "3dslight";
+    line-height: 15px;
+    font-size: 11px;
+    padding-top: 5px;
+    padding-bottom: 7px;
+}
+
+.menu-panel.global .group-head a {
+    padding: 0 20px 0 26px;
+}
+
+.menu-panel.global .group-head a:hover {
+    color: #fff;
+    background-color: #0d6196;
+}
+
+.menu-panel.global .collapsed .group-head a:hover::before {background-position: -58px -21px;}
+
+.menu-panel.global .group-head a:hover::before{background-position: -40px -21px;}
+
+.menu-panel.global .group-head label {
+padding-top: 7px;
+padding-bottom: 5px;
+display: inline-block; /*UIKit work-around*/
+}
+
+/* ---------------------------------
+    Overflow/Global/Page
+   --------------------------------- */
+
+/* overflow menu */
+.menu-panel.overflow ul li a {
+    padding:3px 2px 3px 40px;
+    background-image:none;
+}
+
+.menu-panel.overflow ul li a:before {display:none;}
+
+/* highlight the tabs that are actually in overflow */
+.menu-panel.overflow ul li.overflow a {background:#e5e5e5;}
+
+/* insert the tab icon by default */
+.menu-panel.overflow span {
+    left:20px;
+    top:5px;
+    background:url("../images/iconMenuCategoryTab.png") 0 -1px no-repeat;
+}
+
+/* ------------------------------------------------------------------------------------------------------
+    Adjustments made for and due to Restyling of RMB & UIKit collision on latest Structure Browser
+   ---------------------------------------------------------------------------------------------------- */
+
+.menu-panel.global.add .group-head {background-color: #d1d4d4;}
+
+.menu-panel.page label {padding: 4px 0; margin-bottom:0px;}
+
+.menu-panel.page .group-head a {
+    padding: 7px 20px 6px 26px;
+    text-decoration:none;
+    }
+
+.menu-panel .group-head a label {display: inline; margin-bottom:0px;}
+
+.menu-panel .group-head a label {display: inline; margin-bottom:0px;}
+
+.menu-panel.page .group-head a:hover {
+  background: #0d6196;
+  text-decoration: none;
+  color: #fff;
+}
+
+.menu-panel .group-head a:hover::before {background-position: -40px -21px;}
+
+.menu-panel .collapsed .group-head a:hover::before {background-position: -58px -21px;}
+
+.menu-panel .group-body ul {padding-left: 16px;}
+
+.menu-panel.global .group-body ul {padding-left: 0;}
+
+.menu-panel.grouped.search ul {padding-left: 0;}
+
+/* ------------------------------------------------------------------------------------------------------
+    Styling of the "expand-n" levels menu form
+   ---------------------------------------------------------------------------------------------------- */
+
+label div.menu-dialog-head {
+  font-weight: bold;
+  padding: 2px 6px 4px 8px;
+  font-size: 14px;
+  width: 210px;
+}
+
+label div.menu-dialog-body {
+  font-weight: normal;
+  color: #5B5D5E;
+  padding: 6px 0 4px 8px;
+  font-size: 12px;
+  border-top: solid 1px #d8d8d8;
+}
+
+label div.menu-dialog-body select, .menu-dialog-body input {
+  margin-right: 10px;
+}
+
+input.btn-default.custom {
+  padding: 4px 8px;
+  margin-top: -3px;
+  position: absolute;
+  display: inline-block;
+  right: 1px;
+}
+
+/* ------------------------------------------------------------------------------------------------------
+    For the defect assessment dashboard inline form elements when they collapse into a menu-
+   ---------------------------------------------------------------------------------------------------- */
+
+div.menu-panel div.menu-content ul li label select {
+  font-weight: normal;
+  margin-left: 8px;
+}
+
+/* ------------------------------------------------------------------------------------------------------
+    XBOM menu adjustments for "indented", "non-accordion" style menus
+   ---------------------------------------------------------------------------------------------------- */
+
+.menu-panel.nowrap-commands {
+    max-width: 400px;
+    min-width: 235px;
+    width: auto;
+    text-decoration: none;
+}
+
+.menu-panel.nowrap-commands ul li a label,
+.menu-panel.nowrap-commands .group-head label{
+    max-width: 350px;
+    margin-left: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.menu-panel.nowrap-commands .group-head a {
+    padding: 4px 20px 2px 26px;
+    text-decoration:none;
+}
+
+.menu-panel.nowrap-commands .group-head label {display: inline-block;}
+
+/*---Targeting for applying styles to groups and group bodies---*/
+
+.group.nested-indented group-head.icon a label{margin-left: 0;}
+
+.group.nested-indented .group-head a:before,
+.group.nested-indented .collapsed .group-head a:before {background: none;}
+
+.group.nested-indented .group-head a:hover {
+    background: none;
+    text-decoration: none;
+    color: #0d0d0d;
+    cursor: default;
+}
+
+.group.nested-indented .group-head a label {
+    font-weight: bold;
+    margin-left: 4px;
+}
+
+.group.nested-indented.expanded .group-head {border-bottom: none;}
+
+.group.nested-indented .group-body {
+    max-height: none;
+    overflow-y: hidden;
+    display: block !important;
+}
+
+.group.nested-indented .group-body ul {
+    cursor: default;
+    margin-left: 4px;
+}
+
+.menu-content.nested-indented .group-head.icon span img {visibility: visible;}
+
+.menu-content.nested-indented .group-body.icon span img {margin-left: 3px;}
+
+.menu-panel.nested-indented .menu-content .icon.group-head span img {visibility: visible;}
+.group.nested-indented .icon.group-head span img {
+    visibility: visible;
+    margin-top: 4px;
+}
+
+.group.nested-indented .group-body ul li.menu.expanded label,
+.group.nested-indented .group-body ul li.menu.collapsed label{font-weight: bold;}
+
+.group.nested-indented .group-body ul li.menu.expanded a:hover,
+.group.nested-indented .group-body ul li.menu.collapsed a:hover{
+    background: none;
+    text-decoration: none;
+    color: #0d0d0d;
+    cursor: default;
+}
+
+.group.nested-indented .group-body ul li.menu.expanded ul,
+.group.nested-indented .group-body ul li.menu.collapsed ul {
+    max-height: none;
+    overflow-y: hidden;
+    display: block !important;
+}
+
+.group.nested-indented .group-body ul li.menu.expanded > a:before,
+.group.nested-indented .group-body ul li.menu.collapsed > a:before {background: none;}
+
+.group.nested-indented .group-body ul li.menu.expanded ul li label,
+.group.nested-indented .group-body ul li.menu.collapsed ul li label {font-weight: normal;}
+
+.group.nested-indented .group-body ul li.menu.expanded ul li label a:hover,
+.group.nested-indented .group-body ul li.menu.collapsed ul li label a:hover{font-weight: normal;}
+
+.group.nested-indented .group-body ul li.menu.expanded ul li a,
+.group.nested-indented .group-body ul li.menu.collapsed ul li a{padding-left: 24px;}

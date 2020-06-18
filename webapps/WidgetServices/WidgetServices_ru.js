@@ -1,0 +1,1 @@
+define("DS/WidgetServices/WidgetServices_ru",{});define("DS/WidgetServices/assets/nls/SecurityContextNls",{ErrorSecurityContextEmpty:"У пользователя отсутствует предпочтительный контекст безопасности",ErrorSecurityContext:"Ошибка при извлечении контекста безопасности",ErrorTimeOut:"Для извлечения контекста безопасности серверу требуется продолжительное время"});

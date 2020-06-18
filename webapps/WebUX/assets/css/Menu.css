@@ -1,0 +1,439 @@
+@font-face {
+      font-family: "entypo";
+      font-style: normal;
+      font-weight: normal;
+      src: url("../fonts/entypo.eot") format("embedded-opentype"),
+           url("../fonts/entypo.woff") format("woff"),
+           url("../fonts/entypo.ttf") format("truetype"),
+           url("../fonts/entypo.svg") format("svg");
+}
+
+.wux-menu {
+    box-shadow:        0px 1px 2px #B4B6BA;
+    cursor:            default;
+    position:          absolute;
+    overflow:          hidden;
+    text-align:        center;
+    z-index:           100000000;
+}
+
+.wux-menu.wux-menu-with-scroll,
+.wux-menu.wux-menu-replace {
+    display:           flex;
+    flex-direction:    column;
+}
+
+.wux-menu-parent {
+    background-color:  #FFFFFF;
+    border-color:      #E2E4E3;
+    border-style:      solid;
+    border-width:      1px;
+    display:           none;
+    z-index:           100000002;
+}
+
+.wux-menu-replace .wux-menu-parent {
+    display:           block;
+    flex-basis:        26px;
+    flex-shrink:       0;
+    height:            26px;
+    line-height:       26px;
+}
+
+.wux-menu-touch.wux-menu-replace .wux-menu-parent {
+    display:           block;
+    flex-basis:        44px;
+    flex-shrink:       0;
+    height:            44px;
+    line-height:       44px;
+}
+
+.wux-menu-parent-up {
+    border-color:      #E2E4E3;
+    border-right-style: solid;
+    border-width:      1px;
+    display:           inline;
+    left:              0px;
+    position:          absolute;
+    width:             44px;
+}
+
+.wux-menu-parent-up:hover {
+    background-color:  #F1F1F1;
+}
+
+.wux-menu-parent-up:before {
+    content:           '\e873';
+    font-family:       entypo;
+    font-size:         14px;
+    font-weight:       normal;
+}
+
+.wux-menu-parent-title {
+    display:           inline;
+    font-family:       Arial;
+    font-size:         13px;
+    left:              44px;
+    overflow:          hidden;
+    padding-left:      14px;
+    padding-right:     14px;
+    position:          absolute;
+    right:             0px;
+    text-overflow:     ellipsis;
+}
+
+.wux-menu-scroll-up,
+.wux-menu-scroll-down {
+    background-color:  #FFFFFF;
+    border-color:      #E2E4E3;
+    border-style:      solid;
+    border-width:      1px;
+    color:             #3D3D3D;
+    display:           none;
+    font-family:       entypo;
+    font-size:         14px;
+    font-weight:       normal;
+    text-align:        center;
+    z-index:           100000002;
+}
+
+.wux-menu-scroll-up:not(.wux-menu-scroll-disabled):hover,
+.wux-menu-scroll-down:not(.wux-menu-scroll-disabled):hover {
+    background-color:  #F1F1F1;
+}
+
+.wux-menu-scroll-disabled {
+    color:             #B1B1B1;
+}
+
+.wux-menu-scroll-up:before {
+    content:           '\e875';
+}
+
+.wux-menu-scroll-down:before {
+    content:           '\e872';
+}
+
+.wux-menu-with-scroll .wux-menu-scroll-up,
+.wux-menu-with-scroll .wux-menu-scroll-down {
+    display:           block;
+    flex-basis:        26px;
+    flex-shrink:       0;
+    height:            26px;
+    line-height:       26px;
+}
+
+.wux-menu-touch.wux-menu-with-scroll .wux-menu-scroll-up,
+.wux-menu-touch.wux-menu-with-scroll .wux-menu-scroll-down {
+    display:           block;
+    flex-basis:        44px;
+    flex-shrink:       0;
+    height:            44px;
+    line-height:       44px;
+}
+
+.wux-menu-scrollable {
+    overflow:          hidden;
+    position:          relative;
+    z-index:           100000001;
+}
+
+.wux-menu-container {
+    display:           flex;
+    flex-direction:    row;
+    position:          relative;
+}
+
+.wux-menu-column {
+    background-color:  #FFFFFF;
+    display:           inline-flex;
+    flex-direction:    column;
+}
+
+.wux-menu-cell {
+    background-color:  #FFFFFF;
+    border-color:      #E2E4E3;
+    border-width:      1px;
+    position:          relative;
+}
+.wux-menu-column:first-of-type .wux-menu-cell {
+    border-left-style: solid;
+}
+.wux-menu-column:last-of-type .wux-menu-cell {
+    border-right-style: solid;
+}
+.wux-menu-column .wux-menu-cell:first-of-type {
+    border-top-style:  solid;
+}
+/* no border after title except when last item */
+.wux-menu-column .wux-menu-cell:not(.wux-menu-title),
+.wux-menu-column .wux-menu-cell:last-of-type {
+    border-bottom-style: solid;
+}
+.wux-menu-column-submenu .wux-menu-cell.wux-menu-submenu-separator {
+    border-left-style: solid;
+}
+
+.wux-menu-separator {
+  background:        #E2E4E3;
+  height:            1px;
+}
+.wux-menu-mouse .wux-menu-title {
+    height:            18px;
+    line-height:       18px;
+}
+.wux-menu-touch .wux-menu-title {
+    height:            22px;
+    line-height:       22px;
+}
+.wux-menu-mouse .wux-menu-push,
+.wux-menu-mouse .wux-menu-check,
+.wux-menu-mouse .wux-menu-radio {
+    height:            26px;
+    line-height:       26px;
+}
+.wux-menu-touch .wux-menu-push,
+.wux-menu-touch .wux-menu-check,
+.wux-menu-touch .wux-menu-radio {
+    height:            44px;
+    line-height:       44px;
+}
+.wux-menu-check img.wux-ui-genereatedicon-image {
+    position: relative;
+    vertical-align: middle;
+}
+.wux-menu-touch .wux-menu-check img.wux-ui-genereatedicon-image {
+    bottom: 2px;
+}
+.wux-menu-mouse .wux-menu-check img.wux-ui-genereatedicon-image {
+    bottom: 1px;
+}
+.wux-menu-overlap {
+    box-sizing:        border-box; /* allow check/radio selected state to not increase width */
+    /*height:            inherit;*/
+    /*left:              -1px;*/
+    line-height:       inherit;
+    position:          absolute; /* width will be set from JS */
+    /*top:               0;*/
+    z-index:           1; /* to be in front of other columns */
+}
+.wux-menu-column-left .wux-menu-overlap {
+    left:              -1px;
+}
+.wux-menu-column-left .wux-menu-cell:first-of-type .wux-menu-overlap {
+    top:               -1px;
+}
+.wux-menu-column-left .wux-menu-cell:not(:first-of-type) .wux-menu-overlap {
+    top:               0px;
+}
+.wux-menu-column-left .wux-menu-cell.wux-menu-title .wux-menu-overlap/*,
+.wux-menu-column-left .wux-menu-cell:last-of-type:not(.wux-menu-collection) .wux-menu-overlap*/ {
+    bottom:            0px;
+}
+.wux-menu-column-left .wux-menu-cell/*:not(:last-of-type)*/:not(.wux-menu-title):not(.wux-menu-collection) .wux-menu-overlap {
+    bottom:            -1px;
+}
+/*
+.wux-menu-column-left .wux-menu-cell:not(:first-of-type) .wux-menu-overlap {
+    top:               -0.5px;
+}*/
+/*
+.wux-menu-column-left .wux-menu-cell:not(:last-of-type):not(.wux-menu-title) .wux-menu-overlap {
+    bottom:            -0.5px;
+    bottom:            -1px;
+}
+*/
+/*
+.wux-menu-column-left .wux-menu-cell:last-of-type .wux-menu-overlap,
+.wux-menu-column-left .wux-menu-cell.wux-menu-title .wux-menu-overlap {
+    bottom:            0px;
+}
+*/
+
+/*
+.wux-menu-cell-overlap.wux-menu-check,
+.wux-menu-cell-overlap.wux-menu-radio {
+  width:             5px;
+}
+*/
+
+.wux-menu-title .wux-menu-overlap {
+    border-left:       14px solid transparent;
+    border-right:      14px solid transparent;
+    box-sizing:        border-box; /* border is inside */
+    color:             #3D3D3D;
+    font-family:       Arial;
+    font-size:         13px;
+    font-weight:       bold;
+    overflow:          hidden;
+    text-align:        left;
+    /*text-transform:    capitalize;*/
+    text-overflow:     ellipsis;
+}
+.wux-menu-title.wux-menu-disabled .wux-menu-overlap {
+    color:             #B1B1B1;
+}
+
+.wux-menu-collection {
+    box-sizing:        border-box;
+}
+.wux-menu-collection .wux-menu-overlap {
+    align-content:     flex-start; /* to avoid gap between lines */
+    display:           flex;
+    flex-direction:    row;
+    flex-wrap:         wrap;
+}
+.wux-menu-mouse .wux-menu-collection-item {
+    height:            34px;
+    line-height:       34px;
+    width:             34px;
+}
+.wux-menu-touch .wux-menu-collection-item {
+    height:            44px;
+    line-height:       44px;
+    width:             44px;
+}
+.wux-menu-collection-item {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:   20px, 20px, contain;
+    color:             #B4B6BA;
+}
+.wux-menu-collection .wux-menu-overlap.wux-menu-disabled .wux-menu-collection-icon,
+.wux-menu-collection-item.wux-menu-disabled {
+    border-color:      #C5C9C7; /* computed to keep expected border color #E2E4E3 with 50% opacity */
+    color:             #C3C5C7; /* computed to keep expected disabled color #E1E2E3 with 50% opacity */
+    filter:            grayscale(100%) opacity(50%);
+}
+
+.wux-menu-column-title {
+    color:             #3D3D3D;
+    font-family:       Arial;
+    font-size:         13px;
+    text-align:        left;
+    white-space:       nowrap; /* avoid title truncation due to newline split */
+    /*text-transform:    capitalize;*/
+    /*border-left:       14px solid transparent;*/
+    /*border-right:      14px solid transparent;*/
+    /*box-sizing:        border-box;*/ /* border is inside */
+}
+.wux-menu-column-title .wux-menu-cell {
+  overflow:          hidden;
+  text-overflow:     ellipsis;
+}
+.wux-menu-column-title.wux-menu-column-left-margin .wux-menu-cell {
+  padding-left:      14px;
+}
+.wux-menu-column-icon.wux-menu-column-right-margin .wux-menu-cell,
+.wux-menu-column-title.wux-menu-column-right-margin .wux-menu-cell,
+.wux-menu-column-accelerator.wux-menu-column-right-margin .wux-menu-cell {
+  padding-right:      14px;
+}
+
+.wux-menu-column-accelerator {
+    color:             #B4B6BA;
+    font-family:       Arial;
+    font-size:         11px;
+    text-align:        left;
+    /*text-transform:    capitalize;*/
+    /*border-left:       14px solid transparent;*/
+    /*border-right:      14px solid transparent;*/
+    /*box-sizing:        border-box;*/ /* border is inside */
+}
+
+.wux-menu-column-title .wux-menu-disabled,
+.wux-menu-column-accelerator .wux-menu-disabled {
+  color:             #B1B1B1;
+}
+
+/* Check/Radio item */
+.wux-menu-cell.wux-menu-selected {
+    background-color:  #F4F5F6;
+}
+.wux-menu-column-icon .wux-menu-cell.wux-menu-selected.wux-menu-disabled {
+    background-color:  #E9EBED; /* computed to keep expected color with 50% opacity */
+}
+.wux-menu-cell.wux-menu-selected .wux-menu-overlap {
+    border-left:       5px solid #368EC4;
+}
+.wux-menu-check:not(.wux-menu-selected).wux-menu-hover .wux-menu-overlap,
+.wux-menu-radio:not(.wux-menu-selected).wux-menu-hover .wux-menu-overlap {
+    border-left:       5px solid #77797C;
+}
+
+.wux-menu-column-icon .wux-menu-cell {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:   20px, 20px, contain;
+    color:             #B4B6BA;
+    /* font-family:       entypo; */
+    font-size:         14px;
+    font-weight:       normal;
+    text-align:        center;
+    width:             44px;
+}
+.wux-menu-column-icon .wux-menu-cell.wux-menu-disabled {
+    border-color:      #C5C9C7; /* computed to keep expected border color #E2E4E3 with 50% opacity */
+    color:             #C3C5C7; /* computed to keep expected disabled color #E1E2E3 with 50% opacity */
+    filter:            grayscale(100%) opacity(50%);
+}
+
+.wux-menu-column-submenu .wux-menu-submenu {
+    color:             #B4B6BA;
+    text-align:        center;
+    width:             44px;
+}
+.wux-menu-column-submenu .wux-menu-submenu.wux-menu.disabled {
+    color:             #E1E2E3;
+}
+.wux-menu-column-submenu .wux-menu-submenu:before {
+    content:           '\e874';
+    font-family:       entypo;
+    font-size:         14px;
+    font-weight:       normal;
+}
+.wux-menu-column-submenu .wux-menu-submenu-separator {
+    /*border-left:       1px solid #E2E4E3;*/
+    width:             43px; /* border-left is outside, we need to take it into account */
+}
+
+.wux-menu-cell.wux-menu-hover,
+.wux-menu-collection-item.wux-menu-hover {
+    background-color:  #F1F1F1;
+}
+
+.wux-menu-mouse .wux-menu-cell .wux-ui-genereatedicon-image {
+    max-height: 24px;
+    position: relative;
+    bottom: 2px;
+}
+
+.wux-menu-touch .wux-menu-cell .wux-ui-genereatedicon-image {
+    max-height: 44px;
+    position: relative;
+    bottom: 1px;
+}
+
+body.debug {
+    background-color:  lightyellow;
+}
+.debug .wux-menu-column:first-of-type .wux-menu-cell {
+    border-left-color: blue;
+}
+.debug .wux-menu-column:last-of-type .wux-menu-cell {
+    border-right-color: red;
+}
+.debug .wux-menu-column .wux-menu-cell:first-of-type {
+    border-top-color:  violet;
+}
+.debug .wux-menu-column .wux-menu-cell:not(.wux-menu-title),
+.debug .wux-menu-column .wux-menu-cell:last-of-type {
+    border-bottom-color: yellow;
+}
+.debug .wux-menu-column-submenu .wux-menu-cell.wux-menu-submenu-separator {
+    border-left-color: cyan;
+}
+.debug .wux-menu-cell.wux-menu-hover,
+.debug .wux-menu-collection-item.wux-menu-hover {
+    background-color:  orange;
+}

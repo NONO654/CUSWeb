@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="urn:com:dassault_systemes:widl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd" xmlns:tns="http://cbp.enovia.ws/basic" xmlns:err="http://www.3ds.com/wserror" xmlns:q1="http://cbp.enovia.ws/CBPXML">
+	<entities targetNamespace="http://cbp.enovia.ws/basic">
+		<schemaImports>
+			<schemaImport location="wserrors.xsd"/>
+			<schemaImport location="CBPXML.xsd"/>
+		</schemaImports>
+		<interfaces>
+			<interface name="IPLMQueryService" scope="public">
+				<documentation>
+					Interface for Query operations.
+				</documentation>
+
+				<method name="findObjects">
+					<documentation>
+						Find business objects with a given query and return a table of information.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="patterns" type="q1:ListOfNameValue" direction="in">
+						<documentation>The search patterns. Values can be given for the names: type, name, revision, vault.</documentation>
+					</param>					
+					<param name="whereExpression" type="xs:string" direction="in">
+						<documentation>The where expression.</documentation>
+					</param>
+					<param name="limit" type="xs:int" direction="in">
+						<documentation>The maximum number of objects to return.</documentation>
+					</param>
+					<param name="tableName" type="xs:string" direction="in">
+						<documentation>The UI table name.</documentation>
+					</param>
+					<param name="objectIdFlag" type="xs:boolean" direction="in">
+						<documentation>True if a first column holding the business object's id is added to the returned table.</documentation>
+					</param>
+					<param name="objectDetails" type="q1:Table" direction="out">
+						<documentation>The resulting table of business object information.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="expandObject">
+					<documentation>
+						Expand the given business object and return a table of information.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="relationshipPattern" type="xs:string" direction="in">
+						<documentation>Pattern to match relationship types. Empty string means all relationship types.</documentation>
+					</param>
+					<param name="typePattern" type="xs:string" direction="in">
+						<documentation>Pattern to match business object types. Empty string means all business object types.</documentation>
+					</param>
+					<param name="getTo" type="xs:boolean" direction="in">
+						<documentation>True to navigate along To relationships.</documentation>
+					</param>
+					<param name="getFrom" type="xs:boolean" direction="in">
+						<documentation>True to navigate along From relationships.</documentation>
+					</param>
+					<param name="recursionLevel" type="xs:int" direction="in">
+						<documentation>The number of levels to expand. Pass 0 to recurse all levels.</documentation>
+					</param>
+					<param name="limit" type="xs:int" direction="in">
+						<documentation>The maximum number of business objects to return.</documentation>
+					</param>
+					<param name="tableName" type="xs:string" direction="in">
+						<documentation>The UI table name.</documentation>
+					</param>
+					<param name="objectIdFlag" type="xs:boolean" direction="in">
+						<documentation>True if a first column holding the business object's id is added to the returned table.</documentation>
+					</param>
+					<param name="depthFlag" type="xs:boolean" direction="in">
+						<documentation>True if a second column holding the business object's level is added to the returned table.</documentation>
+					</param>
+					<param name="objectDetails" type="q1:Table" direction="out">
+						<documentation>The resulting table of business object information.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+			
+			</interface>
+		</interfaces>
+		<implementations>
+			<implementation name="PLMQueryService" serviceid="queryService" implements="tns:IPLMQueryService">
+				<documentation>
+					A service to provide Query operations.
+				</documentation>
+			</implementation>
+		</implementations>
+	</entities>
+</description>

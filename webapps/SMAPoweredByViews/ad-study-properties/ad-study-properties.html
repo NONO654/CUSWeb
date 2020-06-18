@@ -1,0 +1,82 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+
+<dom-module id="ad-study-properties">
+	<link rel="import" type="css" href="ad-study-properties.css">
+	<template>
+		<div class="studyPropertiesContainer">
+			<div id="propertiesModal" class="modal fade">
+				<div class="modal-wrap">
+
+
+
+					<div class="modal-content">
+						<div id="propertiesHeader" class="modal-header heading">
+							<button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onCloseDialog">
+								<span class="fonticon fonticon-close"></span>
+							</button>
+							<sp-nls class="h4" nlspath="DS/SMAPoweredByViews/assets/nls/ADStudyProperties" nlskey="DialogTitle"></sp-nls>
+						</div>
+
+						<div id="propertiesBody" class="modal-body">
+							<!-- Title -->
+							<div class="form-group">
+								<label for="studyTitle" class="control-label">
+									<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADStudyProperties" nlskey="StudyTitle"></sp-nls>
+								</label>
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADStudyProperties" nlskey="StudyTitlePlaceholder" value={{studyTitlePlaceholder}} no-view></sp-nls>
+								<input type="text" id="studyTitle" class="form-control" readonly$="{{study.readonlyflag}}" placeholder="[[studyTitlePlaceholder]]" value="[[study.title]]" required on-input="validateInput" on-blur="validateBlur"></input>
+							</div>
+							<!-- Description -->
+							<div class="form-group">
+								<label for="studyDescription" class="control-label">
+									<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADStudyProperties" nlskey="StudyDescription"></sp-nls>
+								</label>
+								<!-- NOTE: IE chokes on textarea with sp-nls for placehomder, hardcoding for now -->
+								<!-- <sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADStudyProperties" nlskey="StudyDescriptionPlaceholder" value={{studyDescriptionPlaceholder}} no-view></sp-nls> -->
+								<!-- <textarea id="studyDescription" class="form-control" rows="5" placeholder="[[studyDescriptionPlaceholder]]" value="[[_getStudyDescription(study.description)]]"></textarea> -->
+								<textarea id="studyDescription" class="form-control" readonly$="{{study.readonlyflag}}" rows="5" placeholder="Enter some notes about the study..." value="[[_getStudyDescription(study.description)]]"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="project" class="control-label">
+									<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADStudyProperties" nlskey="Project"></sp-nls>
+								</label>
+								<input type="text" id="project" class="form-control" readonly value="[[study.project]]"></input>
+							</div>
+							<!-- Owner -->
+							<div class="form-group">
+								<label for="studyOwner" class="control-label">
+									<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADStudyProperties" nlskey="StudyOwner"></sp-nls>
+								</label>
+								<input type="text" id="studyOwner" class="form-control" readonly value="[[study.owner]]"></input>
+							</div>
+							<!-- Created -->
+							<div class="form-group">
+								<label for="studyCreated" class="control-label">
+									<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADStudyProperties" nlskey="StudyCreated"></sp-nls>
+								</label>
+								<input type="text" id="studyCreated" class="form-control" readonly value="[[study.created]]"></input>
+							</div>
+							<!-- Modified -->
+							<div class="form-group">
+								<label for="studyModified" class="control-label">
+									<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADStudyProperties" nlskey="StudyModified"></sp-nls>
+								</label>
+								<input type="text" id="studyModified" class="form-control" readonly value="[[study.modified]]"></input>
+							</div>
+						</div>
+
+						<div id="propertiesFooter" class="modal-footer">
+							<button id="okButton" type="button" class="btn btn-primary" on-click="onOk">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADStudyProperties" nlskey="Ok"></sp-nls>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="modalOverlay" class="modal-overlay fade hidden"></div>
+		</div>
+	</template>
+	<script type="text/javascript" src="ad-study-properties.js"></script>
+</dom-module>

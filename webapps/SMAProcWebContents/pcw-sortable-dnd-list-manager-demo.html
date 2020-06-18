@@ -1,0 +1,301 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+   <meta charset="utf-8">
+   <title>SMAProcWebCommonContents - Sortable DND List Manager</title>
+
+   <script src="../webcomponentsjs-2.2.7/bundles/webcomponents-ce.js"></script>
+   <script type="text/javascript" src="../webcomponentsjs-2.2.7/custom-elements-es5-adapter.js"></script>
+   <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+   <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+   <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+   <script>
+      localStorage.setItem('tst-mode', true);
+   </script>
+
+   <style>
+      section {
+         margin-top: 20px;
+         width: 100%;
+         border: 1px solid #000;
+         padding: 10px;
+      }
+      .detail {
+         color: red;
+         font-size: 16px;
+      }
+   </style>
+
+</head>
+
+<body>
+   <template>
+      <h2>Example 1</h2>
+      <section class="section3">
+         <p class='detail'>A sortable list with delete button</p>
+         <pcw-sortable-dnd-list-manager delete></pcw-sortable-dnd-list-manager>
+      </section>
+      <h2>Example 2</h2>
+      <section class="section4">
+         <p class='detail'>A sortable list without delete button</p>
+         <pcw-sortable-dnd-list-manager></pcw-sortable-dnd-list-manager>
+      </section>
+      <h2>Example 3</h2>
+      <section class="section5">
+         <p class='detail'>A sortable list intantiated and created using new keyword</p>
+      </section>
+      <h2>Example 4</h2>
+      <section class="section2">
+         <p class='detail'>A sortable list with read only access and without delete button</p>
+         <pcw-sortable-dnd-list-manager readonly></pcw-sortable-dnd-list-manager>
+      </section>
+      <h2>Example 5</h2>
+      <section class="section6">
+         <p class='detail'>A sortable list with readonly access set using readonly method</p>
+         <pcw-sortable-dnd-list-manager delete></pcw-sortable-dnd-list-manager>
+      </section>
+      <h2>Example 6</h2>
+      <section class="section1">
+         <p class='detail'>A sortable list with read only access and delete button</p>
+         <pcw-sortable-dnd-list-manager readonly delete></pcw-sortable-dnd-list-manager>
+      </section>
+   </template>
+   <script>
+
+      require([
+         'UWA/Core', 'UWA/Data', 'DS/Core/Core', 'UWA/Element',
+         'DS/ApplicationFrame/FrameWindow', 'DS/ApplicationFrame/FrameWindowsManager',
+         'DS/SMAProcWebContents/WUXControlUtil',
+         'DS/SMAProcWebContents/pcw-sortable-dnd-list-manager'
+      ],
+      function (UWA, UWAData, WUXCore, UWAElement,FrameWindow, WUXControlUtil, FrameWindowsManager) {
+         WUXCore.setFullscreen();
+         widget.addEvent('onLoad', function () {
+
+            var frmWindow = new FrameWindow().inject(document.body);
+
+            frmWindow.elements.container.setStyles({ background: 'white', 'overflow-y': 'scroll' });
+
+            var uiFrame = frmWindow.getUIFrame();
+
+            var template = document.querySelector('template');
+
+            var div = UWA.createElement('div', {
+               styles: {
+                  padding: '20px'
+               }
+            });
+            div.innerHTML = template.innerHTML;
+
+            div.inject(uiFrame);
+
+            
+
+            var section1 = document.getElementsByClassName('section1')[0];
+            var section2 = document.getElementsByClassName('section2')[0];
+            var section3 = document.getElementsByClassName('section3')[0];
+            var section4 = document.getElementsByClassName('section4')[0];
+            var section5 = document.getElementsByClassName('section5')[0];
+            var section6 = document.getElementsByClassName('section6')[0];
+            //WUXControlUtil.createControl(undefined,'tab','',{tabs:['Hello','Hi']},{location:section5});
+
+            var dnd1 = section1.getElementsByTagName('pcw-sortable-dnd-list-manager')[0];
+            var dnd2 = section2.getElementsByTagName('pcw-sortable-dnd-list-manager')[0];
+            var dnd3 = section3.getElementsByTagName('pcw-sortable-dnd-list-manager')[0];
+            var dnd4 = section4.getElementsByTagName('pcw-sortable-dnd-list-manager')[0];
+            var dnd6 = section6.getElementsByTagName('pcw-sortable-dnd-list-manager')[0];
+
+            var pField1 = document.createElement('p');
+            pField1.innerText = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,';
+            var pField2 = document.createElement('p');
+            pField2.innerHTML = 'Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles. Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan';
+            var pField3 = document.createElement('p');
+            pField3.innerText = 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself';
+            var pField4 = document.createElement('p');
+            pField4.innerHTML = 'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras vex. Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs! "Now fax quiz Jack!" my brave ghost pled. Five quacking zephyrs jolt my wax bed. Flummoxed by job, kvetching W. zaps Iraq. Cozy sphinx waves quart jug of bad milk. A very bad quack might jinx zippy fowls. Few quips galvanized the mock jury box. Quick brown dogs jump over the lazy fox. The jay, pig, fox, zebra, and my wolves quack! Blowzy red vixens fight for a quick jump. Joaquin Phoenix was gazed by MTV for luck. A wizard’s job is to vex chumps quickly in fog. Watch "Jeopardy!", Alex Trebek\'s fun TV quiz game. Woven silk pyjamas exchanged for blue quartz. Brawny gods just flocked up to quiz and vex him. Adjusting quiver and bow, Zompyc[1] killed the fox. My faxed joke won a pager in the cable TV quiz show. Amazingly few discotheques provide jukeboxes. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz. Big July earthquakes confound zany experimental vow. Foxy parsons quiz and cajole the lovably dim wiki-girl. Have a pick: twenty six letters - no forcing a jumbled quiz! Crazy Fredericka bought many very exquisite opal jewels. Sixty zippers were quickly picked from the woven jute bag. A quick';
+            
+            var dndObj1 = {
+               uiElem : [
+                  {
+                     ui: pField1,
+                  }, 
+                  {
+                     ui: pField2,
+                  }, 
+                  {
+                     ui: pField3,
+                  }, 
+                  {
+                     ui: pField4,
+                  }
+               ],
+               selectedindex: -1
+            }
+
+            var inputField1 = document.createElement('input');
+            inputField1.type = 'text';
+            inputField1.value = 'inputField 1';
+            inputField1.setAttribute('disabled','');
+            var inputField2 = document.createElement('input');
+            inputField2.type = 'text';
+            inputField2.value = 'inputField 2';
+            inputField2.setAttribute('disabled','');
+            var inputField3 = document.createElement('input');
+            inputField3.type = 'text';
+            inputField3.value = 'inputField 3';
+            inputField3.setAttribute('disabled','');
+            var inputField4 = document.createElement('input');
+            inputField4.type = 'text';
+            inputField4.value = 'inputField 4';
+            inputField4.setAttribute('disabled','');
+            
+            var dndObj2 = {
+               uiElem : [
+                  {
+                     ui: inputField1,
+                  }, 
+                  {
+                     ui: inputField2,
+                  }, 
+                  {
+                     ui: inputField3,
+                  }, 
+                  {
+                     ui: inputField4,
+                  }
+               ],
+               selectedindex: -1
+            }
+
+            var h1 = document.createElement('h1');
+            h1.innerText = 'This is heading 1';
+            var h2 = document.createElement('h2');
+            h2.innerText = 'This is heading 2';
+            var h3 = document.createElement('h3');
+            h3.innerText = 'This is heading 3';
+            var h4 = document.createElement('h4');
+            h4.innerText = 'This is heading 4';
+            
+            var dndObj3 = {
+               uiElem : [
+                  {
+                     ui: h1,
+                  }, 
+                  {
+                     ui: h2,
+                  }, 
+                  {
+                     ui: h3,
+                  }, 
+                  {
+                     ui: h4,
+                  }
+               ],
+               selectedindex: 2
+            }
+
+            var numberField1 = document.createElement('input');
+            numberField1.type = 'number';
+            numberField1.value = 10;  
+            var numberField2 = document.createElement('input');
+            numberField2.type = 'number';
+            numberField2.value = 11;  
+            var numberField3 = document.createElement('input');
+            numberField3.type = 'number';
+            numberField3.value = 12;  
+            var numberField4 = document.createElement('input');
+            numberField4.type = 'number';
+            numberField4.value = 13;  
+
+            var dndObj4 = {
+               uiElem : [
+                  {
+                     ui: numberField1,
+                  }, 
+                  {
+                     ui: numberField2,
+                  }, 
+                  {
+                     ui: numberField3,
+                  }, 
+                  {
+                     ui: numberField4,
+                  }
+               ],
+               selectedindex: -1
+            }
+
+            var svgElem1 = document.createElement('div');
+            svgElem1.innerHTML = '<svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg>';
+            var svgElem2 = document.createElement('div');
+            svgElem2.innerHTML = '<svg width="400" height="100"><rect width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)" /></svg>';
+            var svgElem3 = document.createElement('div');
+            svgElem3.innerHTML = '<svg width="400" height="180"><rect x="50" y="20" rx="20" ry="20" width="150" height="150" style="fill:red;stroke:black;stroke-width:5;opacity:0.5" /></svg>';
+            var svgElem4 = document.createElement('div');
+            svgElem4.innerHTML = '<svg width="300" height="200"><polygon points="100,10 40,198 190,78 10,78 160,198" style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;" /></svg>';
+
+            var dndObj5 = {
+               uiElem : [
+                  {
+                     ui: svgElem1,
+                  }, 
+                  {
+                     ui: svgElem2,
+                  }, 
+                  {
+                     ui: svgElem3,
+                  }, 
+                  {
+                     ui: svgElem4,
+                  }
+               ],
+               selectedindex: -1
+            }
+
+            var hh1 = document.createElement('h1');
+            hh1.innerText = 'This is heading 1';
+            var hh2 = document.createElement('h2');
+            hh2.innerText = 'This is heading 2';
+            var hh3 = document.createElement('h3');
+            hh3.innerText = 'This is heading 3';
+            var hh4 = document.createElement('h4');
+            hh4.innerText = 'This is heading 4';
+            
+            var dndObj6 = {
+               uiElem : [
+                  {
+                     ui: hh1,
+                  }, 
+                  {
+                     ui: hh2,
+                  }, 
+                  {
+                     ui: hh3,
+                  }, 
+                  {
+                     ui: hh4,
+                  }
+               ],
+               selectedindex: 2
+            }
+            dnd1.init(dndObj1);
+            dnd2.init(dndObj2);
+            
+            dnd3.init(dndObj3);
+            dnd4.init(dndObj4);
+            dnd6.init(dndObj6);
+            dnd6.setReadOnly(true);
+            //used require for requiring the dnd-list-mgr as named import in order to intantiate using new keyword
+            require(['DS/SMAProcWebContents/pcw-sortable-dnd-list-manager'],function(SortableDNDListManager){
+               var sortableDnd = new SortableDNDListManager(dndObj5);
+               sortableDnd.setDelete(true);
+               section5.appendChild(sortableDnd);
+            });
+         });
+      });
+   </script>
+</body>
+
+</html>

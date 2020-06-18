@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.V6UtilPIPhyResGenerate" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAHvxPostSetup" nlsID="SMAHvxPostSetup.Title">Setup Physics Results Specifications</DisplayName>
+	<Description nlsFile="SMAHvxPostSetup" nlsID="SMAHvxPostSetup.Description">Setup Visualization specifications in a Simulation Object and generate lightweight visualization data to view in 3DPlay</Description>
+	<LongDescription/>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>V6Utility</Value>
+		</Attribute>
+		<Attribute name ="JavaName">
+			<Value>com.dassault_systemes.sma.plugin.V6UtilPIPhyResGenerate</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+
+	</Streams>
+	<Interfaces>
+
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflV6UtilPIPhyResGenEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+
+	</Interfaces>
+	<Properties>
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[V6Utility]]>
+			</Value>
+		</Property>
+		<Property name="PLMBatchName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[Setup Physics Results Specifications]]>
+			</Value>
+		</Property>
+		<!-- property to store types of PLM objects.-->
+		<Property name="PLMObjectType" type="string" valuetype="single">
+			<Value>
+				<![CDATA[SIMObjSimulationObjectGeneric]]>
+			</Value>
+		</Property>
+		<!--Value of this property is ID of PLM content which it refers to.-->
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<!--Aggregate property to save PLM Batch arugments required by this batch -->
+		<Property name="PLMBatchArguments" type="aggregate" valuetype="single">
+			<!--<Property name="VisualizationSpecsCatalog" type="string" valuetype="single">
+        <Value><![CDATA[Default Specifications Catalog File]]></Value>
+      </Property>-->
+			<Property name="AnalysisCase" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="ClearResultsParameters" type="string" valuetype="single">
+				<Value/>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

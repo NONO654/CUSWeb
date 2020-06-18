@@ -1,0 +1,30 @@
+<div class="row">
+    {{#if editable}}
+		<div class="col-sm-6">
+		    <div class="role-block add-role">
+					<span class="fonticon fonticon-3x fonticon-record unchecked">{{ percentage }}({{'%'}})</span>
+					<span>{{ i18n 'rolesTitle' }}</span>
+				</div>
+		</div>
+		<div class="col-sm-6">
+		    <div class="member-block members-info">
+		    	<span class="fonticon fonticon-2x fonticon-info"></span>
+		    </div>
+		</div>
+    {{/if}}
+    {{#each roles}}
+    <div class="col-sm-6">
+        <div class="member-block member" data-id="{{id}}">
+            <div class="image">{{{initialsDot initials}}}</div>
+            <div class="details">
+                <div class="first-line">
+                    {{role}}
+                </div>
+                <div class="second-line">
+                    {{apps}} ({{I18N 'used'}}) {{numberUsed}} ({{'/100'}}) ({{I18N 'expires'}}) {{expirationDate}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>

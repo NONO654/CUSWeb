@@ -1,0 +1,47 @@
+/* Rule ENOAP_PolicyChooser_PosResourceRep (ThisObject: PLMEntity, Parameters: RuleContext)                           */
+/* NOT CONTRACTUAL and PROPERTY OF TE (TEAM ENVIRONMENT) DEFINITION, ANY CHANGE MAY HAPPEN WITHOUT NOTICE         */
+/* Parameters contains many information such as name, user, security ... depending on Operation                   */
+/* Notice this BL operates OpeningID INFRAAuthorizedPolicies                                                      */
+
+/*
+/*tempo code : the list of policies should be provided from server kernel dictionnary                             */
+/*                    default policy                                                                              */
+/*hard coded from the time being will be substituted by a more generic rule implying kernel policy dictionnary    */
+
+Let DefaultPolicyName(STRING) 
+Let listOtherPolicies(List)
+
+Let ModelingType(Type)
+Let ModelingTypeName(String)
+
+Let LoginRole(STRING) 
+
+LoginRole=""
+DefaultPolicyName=""
+
+/********** PrimaryType is the custom type of a DS Modeling type ******/
+/* PrimaryType is the custom type of a DS Modeling type */
+ModelingTypeName=""
+ModelingType = ThisObject.ModelerType
+if (ModelingType<>NULL){
+   ModelingTypeName=ModelingType.Name 
+}
+
+/*********** Applicability of the policy ********/
+/* no test but may applies mostly on some non public types*/
+
+/*********** Business Role ********/
+if ( Parameters->HasAttribute("Role") == true ) {
+   LoginRole=Parameters->GetAttributeString("Role")
+}
+
+/***********Default Policy **************/
+DefaultPolicyName="VPLM_PosResourceRep"
+
+/*********** Protect Safe Save some OCDX roles********/
+
+Trace (1, "ENOAP_PolicyChooser: Allocating default policy "+DefaultPolicyName+" for type "+ModelingTypeName  )    
+Parameters->SetAttributeString("PolicyName",DefaultPolicyName)
+
+/***********Other Policy Applicable**************/
+Parameters->SetAttributeObject("OtherPolicies",listOtherPolicies)

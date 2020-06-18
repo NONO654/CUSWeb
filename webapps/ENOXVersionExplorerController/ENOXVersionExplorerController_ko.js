@@ -1,0 +1,1 @@
+define("DS/ENOXVersionExplorerController/ENOXVersionExplorerController_ko",{});define("DS/ENOXVersionExplorerController/assets/nls/NodeDropdownMenuNLS",{branch:"새 브랜치",compare:"Compare",deleteVersion:"삭제",newRevision:"새 수정본",newEvolution:"전개 생성",newBranch:"브랜치 생성",newVersion:"버전 생성",noActions:"작업 없음",open:"열기",properties:"속성",version:"버전"});

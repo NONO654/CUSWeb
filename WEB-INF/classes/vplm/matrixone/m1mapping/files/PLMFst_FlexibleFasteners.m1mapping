@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="PLMFst_FlexibleFasteners" />
+    <m1.package name="PLMFst_FlexibleFasteners" />
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="PLMFst_FlexibleFastenerReferenceThicknessExt" />
+      <m1.interface name="PLMFst_FlexibleFastenerReferenceThicknessExt" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_FastenerLength" />
+        <m1.attribute name="PLMFst_FlexibleFastenerReferenceThicknessExt.V_FastenerLength" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="PLMFst_FlexibleReferenceToleranceExt" />
+      <m1.interface name="PLMFst_FlexibleReferenceToleranceExt" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Range_Inf" />
+        <m1.attribute name="PLMFst_FlexibleReferenceToleranceExt.V_Range_Inf" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Range_Sup" />
+        <m1.attribute name="PLMFst_FlexibleReferenceToleranceExt.V_Range_Sup" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_Tolerance" />
+        <m1.attribute name="PLMFst_FlexibleReferenceToleranceExt.V_Tolerance" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="PLMFst_FlexibleFastenerInstance" />
+      <m1.relationship name="PLMFst_FlexibleFastenerInstance" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_FastenerLength" />
+        <m1.attribute name="PLMFst_FlexibleFastenerInstance.V_FastenerLength" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="PLMFst_LocatorPatchInstance" />
+      <m1.relationship name="PLMFst_LocatorPatchInstance" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="PLMFst_LocatorPatchReference" />
+      <m1.type name="PLMFst_LocatorPatchReference" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_FstTmpID" />
+        <m1.attribute name="PLMFst_LocatorPatchReference.V_FstTmpID" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="PLMFst_FlexibleFastenerReference" />
+      <m1.type name="PLMFst_FlexibleFastenerReference" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_FstTmpID" />
+        <m1.attribute name="PLMFst_FlexibleFastenerReference.V_FstTmpID" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

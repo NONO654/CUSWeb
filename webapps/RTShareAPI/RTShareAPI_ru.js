@@ -1,0 +1,1 @@
+define("DS/RTShareAPI/RTShareAPI_ru",{});define("DS/RTShareAPI/assets/nls/feed",{ShareWith:"Поделиться с ..."});

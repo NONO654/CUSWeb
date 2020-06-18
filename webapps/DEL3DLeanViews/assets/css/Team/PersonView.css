@@ -1,0 +1,165 @@
+/**	MAXIMIZE	*/
+.searchPersonPanelView .personContainer,
+.infraView.maximize .personContainer
+{
+    margin: 1em;
+    margin-right: 0.5em;
+}
+.searchPersonPanelView .personContainer > .personInfoContainer,
+.infraView.maximize .personContainer > .personInfoContainer
+{
+    width: 15em;
+    height: 5em;
+    min-width: 5em;
+    display: inline-block;
+}
+.searchPersonPanelView .personContainer > .personThumbnailContainer,
+.infraView.maximize .personContainer > .personThumbnailContainer
+{
+    margin-right: 1em;
+    height: 5em;
+    min-width: 5em;
+}
+/**	MINIMIZE	*/
+.personContainer
+{
+    display: inline-block;
+    padding: 0;
+    float: left;
+    position: relative;
+    cursor: pointer;
+    border-bottom-left-radius: 3em;
+    border-top-left-radius: 3em;
+}
+.personThumbnailContainer
+{
+    position: relative;
+    display: inline-block;
+    height: 5em;
+}
+/**
+*	Availability indicator
+*/
+.searchPersonPanelView .personThumbnailContainer:before
+{
+    display: none;
+}
+
+.personThumbnailContainer:before
+{
+    content: ' ';
+    position: absolute;
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 50%;
+    bottom: 0;
+    right: 0;
+}
+/**
+*	Available
+*/
+.personContainer.available .personThumbnailContainer:before
+{
+    background:  #60a545;
+}
+/**
+*	Unavailable
+*/
+.personContainer.unavailable .personThumbnailContainer:before
+{
+    background:  #d25732;
+}
+
+.minMaxTransition .teamView .personThumbnailContainer:before
+{
+    display: none;
+}
+
+.editMember .personContainer.available .personThumbnailContainer:before,
+.editMember .personContainer.unavailable .personThumbnailContainer:before
+{
+    display: none;
+}
+
+.personContainer > .personThumbnailContainer > .personThumbnail
+{
+    opacity: 1;
+}
+.personContainer > .personThumbnailContainer > .personThumbnailTrash
+{
+    opacity: 0;
+    margin-left: -5em;
+}
+.editMember .personContainer > .personThumbnailContainer > .personThumbnail
+{
+    opacity: 0;
+}
+.editMember .personContainer > .personThumbnailContainer > .personThumbnailTrash
+{
+    opacity: 1;
+}
+.personContainer > .personThumbnailContainer > .personThumbnail,
+.personContainer > .personThumbnailContainer > .personThumbnailTrash
+{
+    width: 5em;
+    float: left;
+    margin-right: 0;
+    transition: margin .3s ease-in-out, opacity .3s ease-in-out;
+    border-radius: 50%;
+
+    /*	Prevent drag and select of this image */
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.infraView .addTeamMemberButton,
+.infraView .personThumbnailTrash
+{
+    display: none;
+}
+.infraView.focused .addTeamMemberButton,
+.infraView.focused .personThumbnailTrash
+{
+    display: block;
+}
+.personContainer > .personInfoContainer
+{
+    overflow: hidden;
+    display: none;
+}
+.personContainer > .personInfoContainer > .personFullName
+{
+    font-weight: bold;
+    color: #005685;
+    margin-top: 3%;
+}
+.personContainer > .personInfoContainer > .personEmployment
+{
+    color: gray;
+    font-size: smaller;
+    line-height: 200%;
+}
+.personContainer > .personInfoContainer > .personAddress
+{
+    color: gray;
+    display: inline-block;
+    line-height: 200%;
+}
+.personContainer > .personInfoContainer > .personPhone
+{
+    text-indent: 1em;
+    color: gray;
+    display: inline-block;
+}
+.mapView .mapStaticCollectionView > .infraView:not(.maximize) .leangetPersonListRegion
+{
+    margin-top: 8%;
+}
+.screenshot .personContainer > .personThumbnailContainer
+{
+    background-color: #f0f0f0;
+    border-radius: 50%;
+}

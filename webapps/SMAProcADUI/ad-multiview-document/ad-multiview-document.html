@@ -1,0 +1,56 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../ad-multiview-item/ad-multiview-item.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+
+<dom-module id="ad-multiview-document">
+  <link rel="import" type="css" href="../ad-multiview-item/ad-multiview-item.css">
+  <template>
+
+		<sp-variable id="currentDragObject" name="currentDragObject"></sp-variable>
+		<sp-variable id="currentDropTarget" name="currentDropTarget"></sp-variable>
+		
+        <main id="main" class$="{{_computeItemClass(viewMode, hideDetails)}}" draggable="true">
+            <div title="{{_computeTitle(model)}}" class$="{{_computeIconSectionClass(viewMode, viewState, selected)}}">
+                <div class="item-icon">
+                    <div class$="{{_computeLockedClass(model)}}">
+                    <template is="dom-if" if="{{model.details.versioned}}">
+                        <img height="32" width="32" src="../assets/images/Document32.png" draggable="false" class="image-numbered">
+                    </template>
+                    <template is="dom-if" if="{{!model.details.versioned}}">
+                        <img height="32" width="32" src="../assets/images/NonVersionnedDocument32.png" draggable="false" class="image-numbered">
+                    </template>
+                    <template is="dom-if" if="{{model.details.locked}}">
+                        <p class="lock"></p>
+                    </template>
+                    </div>
+                </div>
+                <div id="iconViewSpinner" class="item-initializing-icon"></div>
+                <div class="item-icon-view-text" draggable="false">{{model.name}}</div>
+            </div>
+            <div title="{{_computeTitle(model)}}" class$="{{_computeListSectionClass(viewMode, viewState, selected)}}">
+                <div class="item-icon">
+                    <div class$="{{_computeLockedClass(model)}}">
+                    <template is="dom-if" if="{{model.details.versioned}}">
+                        <img height="32" width="32" src="../assets/images/Document32.png" draggable="false" class="image-numbered">
+                    </template>
+                    <template is="dom-if" if="{{!model.details.versioned}}">
+                        <img height="32" width="32" src="../assets/images/NonVersionnedDocument32.png" draggable="false" class="image-numbered">
+                    </template>
+                    <template is="dom-if" if="{{model.details.locked}}">
+                        <p class="lock"></p>
+                    </template>
+                    </div>
+                </div>
+                <div id="listViewSpinner" class="item-initializing-icon"></div>
+                <div class="item-list-view-text" draggable="false">
+                    <div class="item-list-view-name" draggable="false">{{model.name}}</div>
+                    <div class="item-list-view-description" draggable="false">Last Modified: <span id="lastModifiedDate"></span></div>
+                    <div class="item-list-view-description" draggable="false">Description: <span>{{model.description}}</span></div>
+                </div>
+            </div>
+        </main>
+	</template>
+  <script src="ad-multiview-document.js"></script>
+</dom-module>
+
+

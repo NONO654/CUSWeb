@@ -1,0 +1,1 @@
+define("DS/Ruler/Ruler_zh",{});define("DS/Ruler/assets/nls/Ruler",{nmLbl:"纳米",micronLbl:"微米",mmLbl:"mm",cmLbl:"厘米",mLbl:"米",hmLbl:"百米",kmLbl:"千米",inLbl:"英寸",ftbl:"英尺",yardLbl:"码",mileLbl:"英里",nmiLbl:"海里",radLbl:"rad",gradLbl:"grad",mradLbl:"mrad",inPerFootLbl:"in_ft",warningBadValueEntered:"输入有效值",warningValueTooSmall:"输入有效值，需大于 ",warningValueTooBig:"输入值，需小于 "});

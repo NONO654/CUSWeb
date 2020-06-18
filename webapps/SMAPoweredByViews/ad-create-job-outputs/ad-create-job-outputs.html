@@ -1,0 +1,241 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+
+<dom-module id="ad-create-job-outputs">
+	<link rel="import" type="css" href="ad-create-job-outputs.css">
+	<template>
+		<div class="outputs-form">
+			<div class="toggle toggle-switch ">
+				<input type="checkbox" id="generateResults" checked="[[!generateResultsOff]]" on-change="generateResultsChanged"></input>
+				<label for="generateResults" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="GenerateResults"></sp-nls>
+				</label>
+
+				<span id="generateResultsPopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleGenerateResultsPopover" on-mouseout="_toggleGenerateResultsPopover" on-click="_toggleGenerateResultsPopover"></span>
+				<div id="generateResultsPopover" class="popover bottom in hidden" on-click="_toggleGenerateResultsPopover">
+					<h3 class="popover-title">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="GenerateResults"></sp-nls>
+					</h3>
+					<div id="generateResultsPopoverBody" class="popover-body">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="GenerateResultsPopover"></sp-nls>
+					</div>
+				</div>
+			</div>
+			<div class="toggle toggle-switch ">
+				<input type="checkbox" id="configureUnits" checked="[[configureUnits]]" on-change="configureUnitsChanged"></input>
+				<label for="configureUnits" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="ConfigureUnits"></sp-nls>
+				</label>
+
+				<span id="configureUnitsPopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleConfigureUnitsPopover" on-mouseout="_toggleConfigureUnitsPopover" on-click="_toggleConfigureUnitsPopover"></span>
+				<div id="configureUnitsPopover" class="popover bottom in hidden" on-click="_toggleConfigureUnitsPopover">
+					<h3 class="popover-title">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="ConfigureUnits"></sp-nls>
+					</h3>
+					<div id="configureUnitsPopoverBody" class="popover-body">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="ConfigureUnitsPopover"></sp-nls>
+					</div>
+				</div>
+			</div>
+			<form id="generateResultsUnitsForm" class="form-horizontal hidden">
+				<div class="form-group">
+					<label for="unitMass" class="col-sm-2 control-label">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Mass"></sp-nls>
+					</label>
+					<div class="col-sm-10">
+						<!-- NLS elements need to be outside of option, bound to label attribute - seem to be stripped out when content of the option -->
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Kilogram" value={{Kilogram}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Gram" value={{Gram}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Milligram" value={{Milligram}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Ton" value={{Ton}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Pound" value={{Pound}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Ounce" value={{Ounce}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Slug" value={{Slug}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Slug12" value={{Slug12}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="GravityTon" value={{GravityTon}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="KGFxS2_M" value={{KGFxS2_M}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="KGFxS2_MM" value={{KGFxS2_MM}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="KGFxS2_CM" value={{KGFxS2_CM}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="LBFxS2_IN" value={{LBFxS2_IN}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="LBFxS2_FT" value={{LBFxS2_FT}} no-view></sp-nls>
+
+						<select id="unitMass" class="form-control" on-change="generateResultsUnitsChanged">
+							<option value="KILOGRAM">[[Kilogram]]</option>
+							<option value="GRAM">[[Gram]]</option>
+							<option value="MG">[[Milligram]]</option>
+							<option value="TONNE">[[Ton]]</option>
+							<option value="POUND">[[Pound]]</option>
+							<option value="OUNCE">[[Ounce]]</option>
+							<option value="SLUG">[[Slug]]</option>
+							<option value="SLUG12">[[Slug12]]</option>
+							<option value="GRAVITY_TON">[[GravityTon]]</option>
+							<option value="KGFxS2_M">[[KGFxS2_M]]</option>
+							<option value="KGFxS2_MM">[[KGFxS2_MM]]</option>
+							<option value="KGFxS2_CM">[[KGFxS2_CM]]</option>
+							<option value="LBFxS2_IN">[[LBFxS2_IN]]</option>
+							<option value="LBFxS2_FT">[[LBFxS2_FT]]</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="unitTime" class="col-sm-2 control-label">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Time"></sp-nls>
+					</label>
+					<div class="col-sm-10">
+						<!-- NLS elements need to be outside of option, bound to label attribute - seem to be stripped out when content of the option -->
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Second" value={{Second}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Millisecond" value={{Millisecond}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Hour" value={{Hour}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Minute" value={{Minute}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Day" value={{Day}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Week" value={{Week}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Year" value={{Year}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="HHMMSS" value={{HHMMSS}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="DECIHOUR" value={{DECIHOUR}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="CENTIHOUR" value={{CENTIHOUR}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="MILLIHOUR" value={{MILLIHOUR}} no-view></sp-nls>
+
+						<select id="unitTime" class="form-control" on-change="generateResultsUnitsChanged">
+							<option value="SECOND">[[Second]]</option>
+							<option value="MS">[[Millisecond]]</option>
+							<option value="HOUR">[[Hour]]</option>
+							<option value="MINUTE">[[Minute]]</option>
+							<option value="day">[[Day]]</option>
+							<option value="WEEK">[[Week]]</option>
+							<option value="YEAR">[[Year]]</option>
+							<option value="HHMMSS">[[HHMMSS]]</option>
+							<option value="DECIHOUR">[[DECIHOUR]]</option>
+							<option value="CENTIHOUR">[[CENTIHOUR]]</option>
+							<option value="MILLIHOUR">[[MILLIHOUR]]</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="unitLength" class="col-sm-2 control-label">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Length"></sp-nls>
+					</label>
+					<div class="col-sm-10">
+						<!-- NLS elements need to be outside of option, bound to label attribute - seem to be stripped out when content of the option -->
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Millimeter" value={{Millimeter}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Meter" value={{Meter}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Centimeter" value={{Centimeter}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Kilometer" value={{Kilometer}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Inch" value={{Inch}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Foot" value={{Foot}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="F_I_F64" value={{F_I_F64}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="F_I_F16" value={{F_I_F16}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="F_I_DEC" value={{F_I_DEC}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Micrometer" value={{Micrometer}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Yard" value={{Yard}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Mile" value={{Mile}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Nanometer" value={{Nanometer}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Hectometer" value={{Hectometer}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="NauticalMile" value={{NauticalMile}} no-view></sp-nls>
+
+						<select id="unitLength" class="form-control" on-change="generateResultsUnitsChanged">
+							<option value="MM">[[Millimeter]]</option>
+							<option value="METER" selected>[[Meter]]</option>
+							<option value="CM">[[Centimeter]]</option>
+							<option value="KM">[[Kilometer]]</option>
+							<option value="INCH">[[Inch]]</option>
+							<option value="FOOT">[[Foot]]</option>
+							<option value="F_I_F64">[[F_I_F64]]</option>
+							<option value="F_I_F16">[[F_I_F16]]</option>
+							<option value="F_I_DEC">[[F_I_DEC]]</option>
+							<option value="micron">[[Micrometer]]</option>
+							<option value="YARD">[[Yard]]</option>
+							<option value="MILE">[[Mile]]</option>
+							<option value="NANOMETER">[[Nanometer]]</option>
+							<option value="HECTOMETER">[[Hectometer]]</option>
+							<option value="NAUTICAL_MILE">[[NauticalMile]]</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="unitTemperature" class="col-sm-2 control-label">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Temperature"></sp-nls>
+					</label>
+					<div class="col-sm-10">
+						<!-- NLS elements need to be outside of option, bound to label attribute - seem to be stripped out when content of the option -->
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Kelvin" value={{Kelvin}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Celsius" value={{Celsius}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="Fahrenheit" value={{Fahrenheit}} no-view></sp-nls>
+
+						<select id="unitTemperature" class="form-control" on-change="generateResultsUnitsChanged">
+							<option value="KELVIN">[[Kelvin]]</option>
+							<option value="CELSIUS">[[Celsius]]</option>
+							<option value="FAHRENHEIT">[[Fahrenheit]]</option>
+						</select>
+					</div>
+				</div>
+			</form>
+			<span id="unknownOSwarning" class="alert-message alert-primary hidden">
+				<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="UnknownOSWarning"></sp-nls>
+			</span>
+			<br>
+			<!-- <div class="toggle toggle-switch">
+				<input type="checkbox" id="saveFiles" checked="[[!saveFilesOff]]" on-change="saveFilesChanged"></input>
+				<label for="saveFiles" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveFiles"></sp-nls>
+				</label>
+
+				<span id="saveFilesPopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleSaveFilesPopover" on-mouseout="_toggleSaveFilesPopover" on-click="_toggleSaveFilesPopover"></span>
+				<div id="saveFilesPopover" class="popover bottom in hidden" on-click="_toggleSaveFilesPopover">
+					<h3 class="popover-title">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveFiles"></sp-nls>
+					</h3>
+					<div id="saveFilesPopoverBody" class="popover-body">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveFilesPopover"></sp-nls>
+					</div>
+				</div>
+			</div> -->
+			<!-- <input type="text" id="filesToSave" class="form-control" placeholder="ex: *.odb, *.sta, *.dat" on-blur="filesToSaveChanged"></input> -->
+
+			<div id="saveFilesSection">
+				<label class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveFiles"></sp-nls>
+				</label>
+				<span id="saveFilesPopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleSaveFilesPopover" on-mouseout="_toggleSaveFilesPopover" on-click="_toggleSaveFilesPopover"></span>
+				<div id="saveFilesPopover" class="popover bottom in hidden" on-click="_toggleSaveFilesPopover">
+					<h3 class="popover-title">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveFiles"></sp-nls>
+					</h3>
+					<div id="saveFilesPopoverBody" class="popover-body">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveFilesPopover"></sp-nls>
+					</div>
+				</div>
+				<!-- Result files -->
+				<div class="toggle toggle-switch">
+					<input type="checkbox" id="saveResultFiles" on-change="filesToSaveChanged"></input>
+					<label for="saveResultFiles" class="control-label">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveResultFiles"></sp-nls>
+						<span class="extensionLabel">[[_getFileExtensionsLabel(resultFileExtensions)]]</span>
+					</label>
+				</div>
+				<!-- Log files -->
+				<div class="toggle toggle-switch">
+					<input type="checkbox" id="saveLogFiles" on-change="filesToSaveChanged"></input>
+					<label for="saveLogFiles" class="control-label">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveLogFiles"></sp-nls>
+						<span class="extensionLabel">[[_getFileExtensionsLabel(logFileExtensions)]]</span>
+					</label>
+				</div>
+				<!-- Additional files -->
+				<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="SaveAdditionalFilesPlaceholder" value={{SaveAdditionalFilesPlaceholder}} no-view></sp-nls>
+				<input type="text" id="saveAdditionalFilesInput" class="form-control" placeholder="[[SaveAdditionalFilesPlaceholder]]" on-blur="filesToSaveChanged"></input>
+
+				<span id="execDirDeleteWarning" class="alert-message alert-warning hidden">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="ExecutionDirectoryDeleteWarning"></sp-nls>
+				</span>
+				<span id="execDirDeleteInfo" class="alert-message alert-primary hidden">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobOutputs" nlskey="ExecutionDirectoryDeleteInfo"></sp-nls>
+				</span>
+			</div>
+
+
+
+		</div>
+	</template>
+	<script type="text/javascript" src="ad-create-job-outputs.js"></script>
+</dom-module>

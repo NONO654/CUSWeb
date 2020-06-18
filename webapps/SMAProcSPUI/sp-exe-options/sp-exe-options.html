@@ -1,0 +1,56 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSP/sp-cos/sp-cos.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+
+<dom-module id="sp-exe-options">
+	<link rel="import" type="css" href="sp-exe-options.css">
+	<template>
+
+		<!-- Actual UI starts from here -->
+		<sp-access group="simulation" nowrap="">
+			<template id="exeOptionRepeat" is="dom-repeat" items="{{data}}" as="option" index-as="indexx" filter="checkLSFOption" observer= "value">
+				<!-- Skip the option which says its an execution option -->
+				<template is="dom-if" if="{{_computeIf(option)}}" restamp>
+					<div class$="{{_computeClass(option)}}">
+						<span class="item-tip">{{_computeExpression3(option)}}</span>
+						<span class="Type">{{filter_category(option, indexx)}}</span>
+						<!-- Text Input -->
+						<template is="dom-if" if="{{_computeIf2(option)}}" restamp>
+							<div class="item">
+								<sp-input class="option-text" type="{{_computeType(option)}}" on-keypress="validateInput" readonly="{{_computeDisabled(option)}}" value="{{option.value::input}}" >
+								</sp-input>
+							</div>
+						</template>
+
+						<!-- Drop down -->
+						<template is="dom-if" if="{{_computeIf3(option)}}" restamp>
+							<div class="item option-button-wrapper">
+								<button is="sp-button-type" on-click="showMenu" data-target$="{{indexx}}" disabled$="{{_computeDisabled(option)}}">
+									<div class="option-button-content">
+										<span>{{filter_choice(option.value, option.choices, option.choices_display)}}</span>
+									</div>
+									<span class="fonticon fonticon-list"></span>
+								</button>
+								<sp-dropdown-menu displayselection on-click="onItemSelect" id="{{option.id}}" data-index$="{{indexx}}">
+									<template is="dom-repeat" items="{{option.choices_display }}" as="choice" index-as="index">
+										<sp-dropdown-menu-item label="{{choice}}" selected="{{_computeSelected(index, option)}}" value="{{_computeValue(index, option)}}">
+										</sp-dropdown-menu-item>
+									</template>
+								</sp-dropdown-menu>
+							</div>
+						</template>
+
+					</div>
+				</template>
+			</template>
+		</sp-access>
+	</template>
+	<script type="text/javascript" src="sp-exe-options.js"></script>
+</dom-module>

@@ -1,0 +1,21 @@
+<div class="sidebar-buttons">
+    {{~#if withHomeButton}}<div class="sidebar-icons sidebar-home-icon" title="{{nls.home}}"><span class="fonticon fonticon-home"></span></div>{{/if~}}
+    <div class="sidebar-icons sidebar-back-icon {{#unless showBackButton}}hidden{{/unless}}" title="{{nls.back}}"><span class="fonticon fonticon-left"></span></div>
+    {{~#if withExpandCollapseButton}}<div class="sidebar-icons sidebar-expand-collapse-icon""><span class="fonticon fonticon-expand-collapse-panel"></span></div>{{/if~}}
+</div><div class="image-placeholder">
+    <img class="thumbnail" src="{{thumbnail}}">
+</div><div class="main-section">
+    <div class="title-section"><section class="name" title="{{name}}">{{name}}</section>&nbsp;<section class="version" title="{{version}}">{{version}}</section>&nbsp;<section class="configuration" title="{{configuration}}">{{configuration}}</section>
+    <section class="attributes-section-when-minified"><section class="attributes-section-when-minified-container">{{> MinifiedAttributes}}</section></section>
+    <div class="title-section-buttons">
+        {{~#if withActionsButton}}<span class="fonticon fonticon-open-down actions-menu-icon" title="{{nls.menu}}"></span>{{/if~}}
+        {{~#if withInformationButton}}<span class="fonticon fonticon-info information-icon" title="{{nls.info}}"></span>{{/if~}}
+        {{~#if withToggleMinifiedButton}}<span class="fonticon {{#if minified}}fonticon-expand-down{{else}}fonticon-expand-up{{/if}} toggle-minified-icon" title="{{#if minified}}{{nls.expand}}{{else}}{{nls.collapse}}{{/if}}"></span>{{/if~}}
+    </div>
+    </div>
+    <div class="lower-main-section">
+        <div class="attributes-placeholder">{{> Attributes}}</div>
+        <div class="free-zone free-zone-0"></div>
+        <div class="free-zone free-zone-1"></div>
+    </div>
+</div>

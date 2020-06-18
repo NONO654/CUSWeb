@@ -1,0 +1,51 @@
+<!-- Copyright 2018 Dassault Systemes. All rights reserved. -->
+<dom-module id="ad-create-job-compute-new">
+	<style>
+		/* Make sure alert-message aligns and wraps correctly */
+		:host .popover-body, :host .alert-message {
+			display: block;
+		}
+	</style>
+	<template>
+		<form class="compute-form">
+			<!-- COMPUTE LOCATION -->
+			<div class="form-group">
+				<label class="control-label">[[NLS.Location]]</label>
+				<div id="drmMode">
+					<div class="toggle toggle-primary">
+						<input type="radio" name="locationRadio" id="onCloudOption" value="Cloud" on-click="_drmModeChanged"
+							disabled$="[[!isCloudEnabled]]"
+							checked="[[isCloudCompute]]">
+						<label class="control-label" for="onCloudOption">[[NLS.ComputeOnCloud]]</label>
+					</div>
+					<div class="toggle toggle-primary">
+						<input type="radio" name="locationRadio" id="onPremisesOption" value="fiper" on-click="_drmModeChanged"
+							checked="[[!isCloudCompute]]">
+						<label class="control-label" for="onPremisesOption">[[NLS.ComputeOnPremises]]</label>
+					</div>
+				</div>
+				<!-- TENANT ALERT -->
+				<div id="tenantIdError" hidden$="[[isCloudLicensingAvailable(currentWhereUsedTenantID)]]">
+					<span class="alert-message alert-warning">[[NLS.TenantIdNotSet]]</span>
+				</div>
+			</div>
+			<!-- LICENSING -->
+			<ad-create-job-license-options id="licenseOptions" handler="[[handler]]" redux></ad-create-job-license-options>
+			<!-- COMPUTE SERVER OPTIONS -->
+			<!-- <ad-create-job-server-options id="serverOptions" handler="[[handler]]" redux></ad-create-job-server-options> -->
+			<!-- WORKING DIRECTORY -->
+			<div id="workDirectorySection" hidden$="[[isCloudCompute]]">
+				<div class="form-group">
+					<label for="workDirectorySelect" class="control-label">[[NLS.ExecutionDirectory]]</label>
+					<select id="workDirectorySelect" class="form-control" value="[[workDirectoryID]]" on-change="_workDirectoryChanged">
+						<!-- OPTIONS CREATED DYNAMICALLY -->
+					</select>
+				</div>
+				<div class="toggle toggle-switch ">
+					<input type="checkbox" id="removeWorkDirCheckbox" checked$="[[removeWorkDir]]" on-change="_removeWorkDirectoryChanged"></input>
+					<label for="removeWorkDirCheckbox" class="control-label">[[NLS.RemoveExecutionDirectory]]</label>
+				</div>
+			</div>
+		</form>
+	</template>
+</dom-module>

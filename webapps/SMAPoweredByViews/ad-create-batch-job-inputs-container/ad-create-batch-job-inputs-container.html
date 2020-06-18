@@ -1,0 +1,53 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../ad-create-job-inputs/ad-create-job-inputs.html">
+<link rel="import" href="../ad-file-chooser/ad-file-chooser.html">
+<link rel="import" href="../ad-redux-behaviour/ad-redux-behaviour.html">
+<link rel="import" href="../ad-delete-prompt/ad-delete-prompt.html">
+
+<dom-module id="ad-create-batch-job-inputs-container">
+	<link rel="import" type="css" href="ad-create-batch-job-inputs-container.css">
+	<template>
+
+		<div>
+		<details open>
+			<summary class="accordianoverride">
+				Input Files
+			</summary>
+			<p>
+				<ad-create-job-inputs id="adCreateJobInputs"  tableId="BatchInputTable" content="[[content]]"
+					on-downloadcontent="onDownloadContent"
+					on-add3dxcontent="onAdd3DXContent"
+					on-inputselect="onInputSelect"
+					on-switchinputversion="onSwitchInputVersion"
+					on-showuploadfiles="onShowUploadFiles"
+					on-previewcontent="onPreviewContent"
+					on-deletecontent="onDeleteContent"
+					on-dragenter="onDragEnter">
+				</ad-create-job-inputs>
+				<ad-file-chooser id="fileChooser" on-filesselected="onRecentFilesChanged"></ad-file-chooser>
+				<ad-delete-prompt id="deletePrompt"></ad-delete-prompt>
+			</p>
+		</details>
+		<details open>
+			<summary class="accordianoverride">
+				Common Files
+			</summary>
+			<p>
+				<ad-create-job-inputs id="adCreateJobInputsCommon" tableId="commonFiles"  content="[[commonFiles]]"
+					on-downloadcontent="onDownloadContent"
+					on-add3dxcontent="onAdd3DXContent"
+					on-inputselectcommon="onInputSelectcommon"
+					on-switchinputversioncommon="onSwitchInputVersionCommon"
+					on-showuploadfilescommon="onShowUploadFilesCommon"
+					on-previewcontent="onPreviewContent"
+					on-deletecontent="onDeleteContent"
+					on-dragenter="onDragEnter">
+				</ad-create-job-inputs>
+				<ad-file-chooser id="fileChooserCommon" on-filesselected="onRecentFilesChangedCommon"></ad-file-chooser>
+				<ad-delete-prompt id="deletePrompt"></ad-delete-prompt>
+			</p>
+		</details>
+		</div>
+	</template>
+	<script type="text/javascript" src="ad-create-batch-job-inputs-container.js"></script>
+</dom-module>

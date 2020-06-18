@@ -1,0 +1,1 @@
+define("DS/ENOXEngineerInfra/ENOXEngineerInfra_ja",{});define("DS/ENOXEngineerInfra/assets/nls/xAppCore",{"error.on.startup":"アプリケーションの起動に問題が発生しました。管理者に問い合わせてください"});

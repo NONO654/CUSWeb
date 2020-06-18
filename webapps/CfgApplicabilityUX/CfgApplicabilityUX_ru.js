@@ -1,0 +1,1 @@
+define("DS/CfgApplicabilityUX/CfgApplicabilityUX_ru",{});define("DS/CfgApplicabilityUX/assets/nls/CfgApplicabilityNLS",{CFG_EmptyApplicability_Expression:"Для этого контекста применимость не определена.",CFG_Applicability_Summary:"Сводка о применимости",Applicability_Title_Edit:"Редактировать",Edit_Denied:"Операция редактирования запрещена"});

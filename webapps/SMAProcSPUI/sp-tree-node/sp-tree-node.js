@@ -1,0 +1,1 @@
+window.console&&window.console.log("sp-tree-node is deprecated since R418");

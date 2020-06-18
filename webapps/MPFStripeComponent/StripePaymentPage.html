@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+  <!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+  <head>
+      <title>Stripe - Payment</title>
+      <meta name="description" content="Stripe Payment Page" />
+      <meta name="keywords" content="Marketplace Enterprise PSP Stripe" />
+
+      <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+      <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+      <script type="text/javascript" src="../c/UWA/js/UWA_W3C_Alone.js"></script>
+      <script src="https://checkout.stripe.com/checkout.js"></script>
+      <script src="https://js.stripe.com/v3/"></script>
+
+  </head>
+
+  <body>
+
+    <script type="text/javascript">
+      require([
+          'UWA/Utils',
+          'DS/MPFStripeComponent/StripePaymentPage',
+          'DS/MPFUrl/UrlUtils',
+          'DS/MPFDataProxy/MarketplaceConnector',
+          'DS/MPFModelFactory/MPFFactoriesV2',
+          'DS/MPFModelFactory/CartFactory',
+          'css!DS/MPFStripeComponent/MPFStripeComponent'
+        ], function (
+          UwaUtils,
+          StripePaymentPage,
+          UrlUtils,
+          MarketplaceConnector,
+          MPFFactoriesV2,
+          CartFactory
+        ) {
+          var stripePaymentPage;
+          var stripeAPIKey;
+          var factories;
+          var cartModel;
+          var creditCardTokenMultiUse;
+          var service;
+          var url= new UrlUtils(window.location.href);
+
+          service = url.getValueParameter('service');
+          MarketplaceConnector.fetchPromise({
+            service: service
+          })
+            .then(function (connector) {
+              factories = MPFFactoriesV2.getInstance(connector)
+              return factories.getFactory(MPFFactoriesV2.Types.CART);
+            })
+            .then(function (cartFactory) {
+              cartModel = cartFactory.createModel(CartFactory.Types.CART);
+              cartModel.id = url.getValueParameter('idCart');
+              return cartModel.fetchPromise()
+            })
+            .then(function () {
+              stripeAPIKey = url.getValueParameter('stripeKey');
+              creditCardTokenMultiUse = url.getValueParameter('CreditCardTokenMultiUse');
+              stripePaymentPage = new StripePaymentPage({
+                locale: UwaUtils.Client.Locale.lang || 'fr-FR',
+                apiKey: stripeAPIKey,
+                creditCardTokenMultiUse: creditCardTokenMultiUse,
+                cart: cartModel
+              });
+              stripePaymentPage.render().inject(document.body);
+              stripePaymentPage.mountCardInputs();
+            });
+      });
+    </script>
+
+  </body>
+
+</html>

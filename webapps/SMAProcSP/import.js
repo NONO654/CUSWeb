@@ -1,0 +1,2 @@
+/*!  Copyright 2018 Dassault Systemes. All rights reserved. */
+define("DS/SMAProcSP/import",["DS/SMAProcSP/WebComponents"],function(){if(typeof window==="undefined"){return{load:function(c,a,b){a([c],b)}}}return{load:function(b,a,d){var c=document.createElement("link");c.rel="import";c.href=require.toUrl(b).replace(/\?debug_me$/,"");c.onload=d;c.onerror=d.error;document.head.appendChild(c)}}});

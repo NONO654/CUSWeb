@@ -1,0 +1,32 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-drop/sp-drop.html">
+<link rel="import" href="../ra-table-framework/ra-table-framework.html" />
+<link rel="import" href="../ra-table-column/ra-table-column.html" />	
+<script type="text/javascript" src="../../SMAAnalyticsLiteWidget/assets/fakeData00.js"></script>
+
+
+<dom-module id="ra-parameter-map">
+	<link rel="import" type="css" href="ra-parameter-map.css">
+	<template>
+		<ra-table-framework id="tableFramework" draggable="false" regions=""
+				data-accessor="{{tableData}}"
+				display-functions="{{commonDisplayFunctions}}">
+			<ra-table-column column-id="rowheader" 
+					row-header
+					region="left"
+					column-width="300"
+					display-functions="[[_getRowHeaderFunctions()]]">
+			</ra-table-column>
+			<ra-table-column column-id="valuerange"
+					region="left"
+					display-functions="[[_getParamValueFunctions()]]">
+			</ra-table-column>
+			<ra-table-column column-id="parameter" 
+					region="left"
+					display-functions="[[_getParameterFunctions()]]">
+			</ra-table-column>
+		</ra-table-framework>
+    </template>
+	<script type="text/javascript" src="ra-parameter-map.js"></script>
+</dom-module>

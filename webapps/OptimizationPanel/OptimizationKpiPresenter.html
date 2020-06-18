@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+        <title>Optim Kpi Configuration </title>
+        <meta charset="ISO-8859-1">
+        <meta name="author" content="Dassault Systemes" />
+        <meta name="brand" content="ENOVIA" />
+        <!-- <link rel="stylesheet" href="../UIKIT/UIKIT.css" /> -->
+        <!-- <script src="../UIKIT/UIKIT.js"></script> -->
+
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+        <link rel="stylesheet" type="text/css" href="../WebUX/WebUX.css" />
+        <!--
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>-->
+
+        <script type="text/javascript">
+            'use strict';
+        
+            //ApplicationChannel ModelEvent
+            //UpdateChannel ModelEvent
+            require(['DS/OptimizationPanel/KPIsettings/OptimKpiPresenter',
+                    'DS/CoreEvents/ModelEvents',
+                     'DS/Controls/Button',
+                    'UWA/Drivers/Alone'],
+
+                    function (OptimKpiPresenter, ModelEvents, WUXButton, _Alone) {
+
+                        // from ext  : list of KPI 
+                        var _listKPI = ['green', 'security', 'confort', 'cost', 'weight', 'performant'];
+                        var modelC0 = {
+                            dicoFormat: {
+                            },
+                            defConfig: {
+                                prodConf: {
+                                    id: 'prodConf',
+                                    name: 'Prod Conf',
+                                    definition: {
+                                        value1: true,
+                                        option1: true
+                                    }
+                                },
+                                /*  config0: {
+                                      name: 'Default',
+                                  },
+                                  config1: {
+                                      name: 'Configuration 1',
+                                  },*/
+
+                            },
+                            tabId: {
+                            }
+                        };
+
+                        var _buttonModel2 = new WUXButton({ label: 'modelc0' });
+                        _buttonModel2.inject(document.body);
+                        _buttonModel2.addEventListener('buttonclick', function () {
+                            console.log(myModel);
+                        });
+                        // from ext  : list of KPI + optimum config 
+                     
+                        var _modelEvents = new ModelEvents();          
+                        //Création de Optimization Component
+                        var _optimKpiPresenter = new OptimKpiPresenter({ listKPI: _listKPI, modelEvents: _modelEvents, modelC0: modelC0 });
+	                    _optimKpiPresenter.inject(document.body);
+
+	                    _modelEvents.subscribe({ event: 'pc-optim-create-config' }, function (data) {
+	                         var _bestCongSolver = 'Configuration ';
+	                        var _tab_id = data;
+	                        //return prodconf + other optim criterias 
+	                        var def = modelC0.defConfig.prodConf.definition;
+	                        def.value2 = true;           //def = def + solver.def;
+	                        _modelEvents.publish({ event: 'pc-optim-conf-to-create', data: { config:_bestCongSolver, id: _tab_id, def: def } });
+
+	                    });
+                        //transfert conf created event with data : 
+	                    _modelEvents.subscribe({ event: 'pc-optim-config-created' }, function (data) {
+	                        _modelEvents.publish({ event: 'pc-graph-config-created', data: data });
+	                    });
+	                    _modelEvents.subscribe({ event: 'pc-graph-config-color' }, function (data) {
+	                        _modelEvents.publish({ event: 'pc-optim-config-color', data: data });
+	                    });
+
+                        //transfert change name event with data : id conf
+	                    _modelEvents.subscribe({ event: 'pc-optim-change-name' }, function (data) {
+	                        _modelEvents.publish({ event: 'pc-graph-change-name', data: data });
+	                    });
+                        //transfert change current event with data : id conf
+	                    _modelEvents.subscribe({ event: 'pc-optim-change-current' }, function (data) {
+	                        _modelEvents.publish({ event: 'pc-graph-change-current', data: data });
+	                       
+	                    });
+
+                        //transfert delete a conf event with data : id conf
+	                    _modelEvents.subscribe({ event: 'pc-optim-delete-config' }, function (data) {
+	                        _modelEvents.publish({ event: 'pc-graph-delete-config', data: data });
+	                    });
+                        //transfert delete tab event with no data 
+	                    _modelEvents.subscribe({ event: 'pc-optim-delete-tab' }, function (data) {
+	                        _modelEvents.publish({ event: 'pc-graph-delete-tab', data: data });
+	                    });
+                        //change current font graph with data : id current
+	                    _modelEvents.subscribe({ event: 'pc-graph-change-current-for-optim' }, function (data) {
+	                        _modelEvents.publish({ event: 'pc-optim-change-current-from-graph', data: data });
+
+	                    });
+
+
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        //configuration buttons interaction listening
+	                    _modelEvents.subscribe({ event: 'get-next-configuration' }, function (id) {
+	                        //triger solver interaction for a new itération for configuration ID
+	                        console.log('next asked');
+	                    });
+
+                        //configuration buttons interaction listening
+	                    _modelEvents.subscribe({ event: 'get-same-config-new-userchoices' }, function (id) {
+	                        //triger solver for a recalculation of configuration ID with new user choices
+	                        //triger  get  user choices
+	                        console.log('nex config with new userchoices');
+	                    });
+
+
+                       /* ////////////////////////////////////////////////////////////////////////////////////////////////
+                        // ON BUTTON GENEREATE CONFIGURATION
+                        ////////////////////////////////////////////////////////////////////////////////////////////////
+                        // get from Optim Component : kpi selected, weight (slider value) and min Max choice
+	                    var _valuesForSolver = {};
+	                    _modelEvents.subscribe({ event: 'kpi-component-values' }, function (data) {
+	                        var that = this;
+	                        _valuesForSolver = data;
+	                    });
+
+                        // get ID of tab active TO CREATE CONFIG in tab(id)
+	                    var _bestCongSolver = 'Configuration ';
+	                    var id;
+	                    _modelEvents.subscribe({ event: 'optim-create-config' }, function (data) {
+	                        id = data;
+	                        console.log(id); 
+	                        _modelEvents.publish({ event: 'best-config', data: { config: _bestCongSolver, id: id } });
+	                        _modelEvents.publish({ event: 'config-created', data: { id: id, data: modelC0.defConfig.config0 } });
+	                    });
+
+                        //get current active config
+	                    var _current = { id: null, name: null };
+	                    _modelEvents.subscribe({ event: 'current-config-active' }, function (data) {
+	                        _current.name = data;
+	                    });
+                        //configuration buttons interaction listening
+	                    _modelEvents.subscribe({ event: 'config-name-change' }, function (data) {
+	                        //triger solver interaction for a new itération for configuration ID
+	                        console.log(data.id, data.name);
+	                    });
+                        //configuration buttons interaction listening
+	                    _modelEvents.subscribe({ event: 'get-next-configuration' }, function (id) {
+	                        //triger solver interaction for a new itération for configuration ID
+	                        console.log('next asked');
+	                    });
+
+                        //configuration buttons interaction listening
+	                    _modelEvents.subscribe({ event: 'get-same-config-new-userchoices' }, function (id) {
+	                        //triger solver for a recalculation of configuration ID with new user choices
+	                        //triger  get  user choices
+	                        console.log('nex config with new userchoices');
+
+	                    });
+	               
+                    */
+
+                    
+       	    });
+        </script>
+    </head>
+    <body>
+  
+    </body>
+</html>

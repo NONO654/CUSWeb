@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta name="author" content="P8D" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Group view</title>
+
+<link rel="stylesheet" href="../UIKIT/UIKIT.css">
+
+<!-- Definition of require : -->
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+<!-- This is required to configure RequireJS with the appropriate pathes : -->
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+
+<!-- Web Fundamentals -->
+<script type="text/javascript" src="../WebUX/WebUX.js"></script>
+<script src="//plus.google.com/hangouts/_/api/dev/hangout.js"></script>
+
+
+<script>
+
+var onStateChange = function(eventObj) {
+  for (var i = 0; i < eventObj.addedKeys.length; ++i) {
+    foo(eventObj.addedKeys[i].key,
+        eventObj.addedKeys[i].value,
+        eventObj.addedKeys[i].timestamp);
+  }
+  for (var j = 0; j < eventObj.removedKeys.length; ++j) {
+    bar(eventObj.removedKeys[j]);
+  }
+  state_ = eventObj.state;
+  metadata_ = eventObj.metadata;
+};
+gapi.hangout.data.onStateChanged.add(onStateChange);
+
+/*
+
+	require(['UWA/Drivers/Alone'], function (UWA ) {
+
+		var canvas = UWA.createElement('canvas', {
+			'class' : 'canvas1',
+			'id':'canvas1',
+			styles:{
+				width:'400',
+				height:'400'
+			}
+		}).inject(document.body);
+
+		var context = canvas.getContext("2d");
+		context.beginPath();
+
+		context.arc(100,75,50,0,2*Math.PI);
+		context.stroke();
+
+	});
+*/
+
+</script>
+</head>
+<body>
+</body>
+</html>

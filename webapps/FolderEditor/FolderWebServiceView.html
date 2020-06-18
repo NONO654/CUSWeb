@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?> 
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/"> 
+ <!-- Copyright 2015 , Dassault Systemes. All rights reserved. -->
+<head>   
+    <title>Folders Web Service View</title>
+	<!-- Application Metas Start -->
+    <meta name="author" content="Dassault Systèmes" />
+    <meta name="brand" content="ENOVIA" />
+    <meta name="description" content="Folders widget" />
+    <meta name="keywords" content="Folders" />
+	
+      <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+      <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+
+      <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+      <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+      <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+      <script type="text/javascript" src="service/FolderEditorWebService.js"></script>
+      <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+	<!-- <widget:preferences>
+		<widget:preference type="text" name="physicalId"
+			label="Physical Id"
+			defaultValue="Hello world">
+		</widget:preference>
+	</widget:preferences> -->
+
+<!-- Application JavaScript Source -->
+      <script type="text/javascript">
+            require([
+                  // UWA
+                  'UWA/Core',
+                  'UWA/Element',
+                  'UWA/Controls/Input',
+                  // WebApps
+                  'WebappsUtils/WebappsUtils' ,
+                  'DS/FolderEditor/service/FolderEditorWebService', 
+                  'DS/PADUtils/PADUtilsServices'
+            ], function(UWACore,
+                  UWAElement,
+                  UWAControlsInput,
+            	  WebappsUtils,
+                  FolderEditorWebService,
+                  PADUtilsServices) {
+                  'use strict';
+                  
+                  function executeWS(options){
+                	  var serviceOptions = options.serviceOptions;
+                	  serviceOptions.onComplete = function(data) {
+                          options.target.setContent("<p style='color:green'>"+data+"</p>");
+                      };
+                      serviceOptions.onFailure = function(err) {
+                    	  options.target.setContent("<p style='color:red'>"+err+"</p>");
+                      };
+                	  options.service(serviceOptions);
+                  };
+                  
+                  var styles = {
+                	  serviceClass : {
+                		  "background-color": "#EEEEEE",
+                          "padding" : "10px",
+                          "margin-bottom" : "10px"
+                      }
+                  }
+                  
+                  widget.addEvent('onLoad', function(){
+                	  var wstemplate = {
+                			tagName : "div",
+                			content : {
+                        		    'class': 'service',
+                        		    html: [
+                        		        {
+                        		            tag: 'H4',
+                        		            'class': 'serviceName',
+                        		            'style': {color:"#123456"}
+                        		        },
+                        		        {
+                        		            tag: 'H5',
+                        		            text: 'Input'
+                        		        },
+                        		        {
+                        		            tag: 'p',
+                        		            'class': 'serviceInput',
+                        		            text: 'serviceInput'
+                        		        },
+                        		        {
+                        		            tag: 'H5',
+                        		            text: 'Output'
+                        		        },
+                        		        {
+                        		            tag: 'p',
+                        		            'class': 'serviceOutput',
+                        		            text: 'Loading....'
+                        		        }
+                        		        
+                        		    ]
+                           }
+                	  };
+                	  PADUtilsServices.app_initialization(function () {
+                		  
+                		  var servicesHtml = widget.body.getDocument().getElementById('services');
+                		  
+                		  /**
+                		   * Content -Start
+                		   */
+                		   
+                		  (function(){
+                			  var webServiceHtml = UWA.createElement(wstemplate.tagName, wstemplate.content).inject(servicesHtml).setStyles(styles.serviceClass);
+                    		  
+                    		  //title
+                    		  webServiceHtml.getElement('.serviceName').setContent('Content');
+                    		  
+                    		  //input
+                    		  var inputHtml = webServiceHtml.getElement('.serviceInput').setContent('/resources/v1/FolderManagement/Folder/');
+                    		  var pidElem = UWA.createElement('input');
+                    		  inputHtml.grab(pidElem);
+                    		  inputHtml.grab(UWA.createElement('span',{html:'/content?Content=All'}));
+                    		  
+                    		  var outputHtml = webServiceHtml.getElement('.serviceOutput');
+                    		  
+                    		  pidElem.addEvent('change',function(){
+                    			  var that = this;
+                    			  executeWS({
+                    				  service : FolderEditorWebService.content,
+                    				  serviceOptions : {
+                    					  pid:that.value
+                    				  },
+                    				  target : outputHtml
+                    			  });
+                    		  });
+                		  })(); 
+                       	  
+                		  /**
+                		   * Content -End
+                		   */
+                		   
+                		   
+                		  /**
+                		   * Folders -Start
+                		   */
+                		   
+                		  (function(){
+                			  var webServiceHtml = UWA.createElement(wstemplate.tagName, wstemplate.content).inject(servicesHtml).setStyles(styles.serviceClass);
+                    		  
+                    		  //title
+                    		  webServiceHtml.getElement('.serviceName').setContent('Folders');
+                    		  
+                    		  //input
+                    		  var inputHtml = webServiceHtml.getElement('.serviceInput').setContent('/resources/v1/FolderManagement/Folder/');
+                    		  var pidElemWrapper = UWA.createElement('span');
+                    		  inputHtml.grab(pidElemWrapper);
+                    		  var pidElem = new UWAControlsInput.Text({events:{onChange:function(){refresh();}}}).inject(pidElemWrapper); 
+                    		  inputHtml.grab(UWA.createElement('span',{html:'/folders?Level='}));
+                    		  var levelElemWrapper = UWA.createElement('span');
+                    		  inputHtml.grab(levelElemWrapper);
+                    		  var levelElem = new UWAControlsInput.Text({events:{onChange:function(){refresh();}}}).inject(levelElemWrapper);
+                    		  
+                    		  var outputHtml = webServiceHtml.getElement('.serviceOutput');
+                    		  
+                    		  var refresh = function(){
+                    			  executeWS({
+                    				  service : FolderEditorWebService.folders,
+                    				  serviceOptions : {
+                    					  pid:pidElem.getValue(),
+                    					  level:levelElem.getValue()
+                    				  },
+                    				  target : outputHtml
+                    			  });
+                    		  };
+                    		  
+                		  })(); 
+                       	  
+                		  /**
+                		   * Folders -End
+                		   */
+
+                		   
+                		  /**
+                		   * Roots -Start
+                		   */
+                		  
+                		  (function(){
+                			  var webServiceHtml = UWA.createElement(wstemplate.tagName, wstemplate.content).inject(servicesHtml).setStyles(styles.serviceClass);
+                     		  
+                     		  //title
+                     		  webServiceHtml.getElement('.serviceName').setContent('Roots');
+                     		  
+                     		  //input
+                     		  var inputHtml = webServiceHtml.getElement('.serviceInput').setContent('/resources/v1/FolderManagement/Folder/roots');
+                     		  
+                     		  var outputHtml = webServiceHtml.getElement('.serviceOutput');
+                     		  
+                   			  executeWS({
+                   				  service : FolderEditorWebService.roots,
+                   				  serviceOptions : {
+                   				  },
+                   				  target : outputHtml
+                   			  });
+                		  })();
+                		   
+                		  /**
+                		   * Roots -End
+                		   */
+
+                	  });
+                  });
+            });
+      </script>
+      
+</head>
+
+<body>
+
+	<h1>Folder Editor WebServices</h1>
+	<h3>This is a sample Page to test weather the Webservices for Folder editor are working</h3>
+
+	<div id="services" style="overflow-y:auto;height:700px">
+	<!-- 
+	SAMPLE Template for each service
+		<div class="service">
+			<h4>Service Name</h4>
+			<h5>Input</h5>
+			<p class="serviceInput">{Input}</p>
+			<h5>Output</h5>
+			<p class="serviceOutput">{output}</p>
+		</div>
+		 -->
+	</div>
+
+</body>
+
+</html>

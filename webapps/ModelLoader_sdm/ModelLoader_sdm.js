@@ -1,0 +1,1 @@
+define("DS/ModelLoader_sdm/loader",["DS/GEOV1Loader/GEOsdmServices"],function(b){var a=function(){this.load=function(f,j,g,c,d,i){var h=new b();var e={multiLoad:false};h.load(f,e,j,g,c,d,i)}};return a});

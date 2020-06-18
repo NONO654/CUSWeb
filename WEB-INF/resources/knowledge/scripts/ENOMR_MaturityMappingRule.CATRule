@@ -1,0 +1,24 @@
+/* Rule MaturityMappingRule (Input: State, Output: MetaStateName)                                                 */
+/* NOT CONTRACTUAL and PROPERTY OF TE (TEAM ENVIRONMENT) DEFINITION, ANY CHANGE MAY HAPPEN WITHOUT NOTICE         */
+/* Notice this BL operates OpeningID INFRAMaturityStateInformation during export and import "as reference"        */
+
+let stateName=""
+let metaName=""
+
+/* Get state for which meta name is searched for */
+stateName=Parameters->GetAttributeString("State")
+
+/* Here we compute the maturity meta name */
+if (stateName=="PRIVATE" or stateName=="Unspec" or stateName=="Unspecified" or stateName=="Create" or stateName=="Private")
+{ metaName = "MS_Private" }
+else if (stateName=="IN_WORK" or stateName=="In_work" or stateName=="WIP_Active" or stateName=="WIP_Suspended" or stateName=="WIP_Run" or stateName=="DesignWork" or stateName=="InWork")
+{ metaName = "MS_InWork" }
+else if (stateName=="FROZEN" or stateName=="WaitApproval" or stateName=="Review" or stateName=="Frozen")
+{ metaName = "MS_Frozen" }
+else if (stateName=="RELEASED" or stateName=="Completed" or stateName=="Release")
+{ metaName = "MS_Released" }
+else if (stateName=="OBSOLETE" or stateName=="Obsolete" or stateName=="Rejected")
+{ metaName = "MS_Obsolete" }
+
+/* Setting meta state */
+Parameters->SetAttributeString("MetaStateName",metaName)

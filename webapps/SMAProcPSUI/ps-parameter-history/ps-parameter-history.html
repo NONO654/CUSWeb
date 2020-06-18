@@ -1,0 +1,168 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-timer/sp-timer.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-costickets/sp-costickets.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-encryption/sp-encryption.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSPUI/sp-tab/sp-tab.html">
+<link rel="import" href="../../SMAProcSPUI/sp-alert-message/sp-alert-message.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+
+<link rel="import" href="../ps-xy-plot/ps-xy-plot.html">
+
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="ps-parameter-history">
+  <link rel="import" type="css" href="ps-parameter-history.css">
+  <template>
+        <style include="sp-uikit-styles"></style>
+        <sp-variable id="eedBaseURL" name="eedBaseURL"></sp-variable>
+        <sp-variable id="mcsBaseURL" name="mcsBaseURL"></sp-variable>
+        <sp-variable id="seeBaseURL" name="seeBaseURL"></sp-variable>
+
+        <sp-timer id="historyTimer" on-tick="onHistoryTimerTick" wait="10000"></sp-timer>
+        <sp-timer id="summaryTimer" on-tick="onSummaryTick" wait="30000"></sp-timer>
+        <sp-timer id="seeCompPathTimer" on-tick="onCompathTimerTk" wait="30000"></sp-timer>
+        <sp-timer id="cosTicketTimer" on-tick="onEEDTicketTimerTick" wait="270000"></sp-timer>
+        <sp-timer id="seeHistoryTimer" on-tick="onSeeHistoryTimerTick" wait="10000"></sp-timer>
+        <sp-timer id="seeJobIdTimer" on-tick="getSEEJobId" wait="2000"></sp-timer>
+        <sp-encryption id="spEncryption"></sp-encryption>
+
+        <sp-costickets id="ticketSvc" ></sp-costickets>
+        <sp-dashboard id="spDashboard"></sp-dashboard>
+        <sp-mcsservice id="eedTicket_ws" data="{{eedTicket_data}}" on-dataready="setEEDTicket" uri="{{_computeUri(jobObjectId)}}">
+        </sp-mcsservice>
+
+        <sp-mcsservice id="SMAProcess" on-dataready="setActivityData" uri="{{_computeSMAProcessUri(simId)}}">
+        </sp-mcsservice>
+
+        <sp-mcsservice id="SMAParameter" on-dataready="setActivityParameterData">
+        </sp-mcsservice>
+
+        <sp-mcsservice id="seeBaseURLWS" uri="data/seeurl" data="{{ SEEBaseURLData }}" on-dataready="setSEEURLData">
+        </sp-mcsservice>
+        <sp-notification id="historyNotification" position="TR" width="400"></sp-notification>
+        <div id="panel" class="dialog-panel containerDiv">
+             <div id="panelBorder" class="dialog-panel-border containerDiv">
+
+		        <div id="custommessage" class="messageDiv">
+		        </div>
+
+		        <div id="gridEngineContainer" class="containerDiv">
+		          <div id="loader" style="display:inline-block; position:fixed"></div>
+		        	<div id="header" class="hide" >
+		                <div class$="{{_computeClassSelectAct(response, jobExecutionStatus)}}">
+		                    <div class="list-button-wrapper">
+		                         <button id="activitiesListButton" is="sp-button-type" on-click="showActivityList" class="select-button" >
+		                            <div class="list-button-content" style="width:120px">
+		                            	<span class="selectedActivity" id="selectActivity">Select Activity</span>
+		                                <span class="selectedActivity" title="{{ selectedActivity}}">{{ selectedActivity}}</span>
+		                            </div>
+		                            <span class="fonticon fonticon-down-open" style="float: right;"></span>
+		                        </button>
+		                        <div class="item">
+		                            <sp-dropdown-menu id="activitiesList" class="historyMenu" displayselection  scrollonoverflow on-click="onItemSelect">
+		                                <template is="dom-repeat" items="{{activityListView}}">
+		                                    <sp-dropdown-menu-item label="{{ item.Title }}" value="{{ item.CompPath }}" data-internalId="{{ item.internalId }}"></sp-dropdown-menu-item>
+		                                </template>
+		                            </sp-dropdown-menu>
+		                        </div>
+		                    </div>
+		                </div>
+	                 <span id="buttonWrapper">
+    	                <div id="refreshbutton" title="Refresh" class$="{{_computeClassRefresh(response ,selectedActivity, jobExecutionStatus)}}" on-click="refreshParamHistory"></div>
+    	                <div id="downloadbutton" title="Export to CSV" class$="{{_computeClassDownload(response , selectedActivity)}}" on-click="downloadParamHistory">
+    	                    <a id="downloadLink" ></a>
+    	                </div>
+
+    	                <div id="filterbutton" title="Filter" class$="{{_computeClassFilter(response ,selectedActivity)}}" on-click="showParamFilter"></div>
+    	                <div id="improvementbutton" title="Show Improvments" class$="{{_computeClassImprovment(response ,selectedActivity, columns)}}" on-click="filterHistory"></div>
+
+    	                <div id="plotbutton" title="Show Graph" class$="{{_computeClassGraph(response ,selectedActivity)}}" on-click="toggleGraph"></div>
+    	                <div id="tablebutton" title="Show Table" class$="{{_computeClassTable(response ,selectedActivity)}}" on-click="toggleTable"></div>
+	                 </span>
+              </div>
+                    <div id="selectmessage" class="messageDiv">
+	        		</div>
+	        		<div id = 'historycontainer' class='historycontainer'>
+	                	<iframe name="paramHistory" id="paramHistory" class="containerDiv paramHistory" src="param-history-grid-table.html" on-load="_onIframeLoad"  ></iframe>
+	                	<ps-xy-plot id="psXYPlot" class="hide containerDiv" style="width:100%;"></ps-xy-plot>
+		            </div>
+		            <iframe id="CsvExpFrame"  class="hide"></iframe>
+		        </div>
+             </div>
+        </div>
+
+        <sp-modal class="isightModel" id="IsightUserPwd" heading="Isight Credentials" height="80%" width="400px">
+            <section>
+                    <div class="form-group">
+                        <div class="control-label">
+                            <label class="label">Isight UserName</label>
+                        </div>
+                        <div class="controls">
+                             <sp-input type="text" class="option-text" id="IsightUserName" credential ></sp-input>
+                        </div>
+                        <div class="control-label">
+                            <label class="label">Isight Password</label>
+                        </div>
+                        <div class="controls">
+                             <sp-input type="password" class="option-text" id="IsightPwd" credential ></sp-input>
+                        </div>
+
+                    </div>
+            </section>
+            <footer>
+                <button id="savePwd" is="sp-button-type" primary on-click="savePasswords" primary>Save</button>
+            </footer>
+        </sp-modal>
+
+        <sp-modal id="filterModal" class="filter-modal" heading="Select Parameters" height="600px" width="500px" on-close="hideFilterModel">
+            <section>
+                <sp-tab id="tab" tab="{{tab}}">
+                    <section id="tableFilter"  data-header="Table" data-selected="true">
+                        <div class="toolbarOuter">
+		                </div>
+		                <div class="spreadsheet-body">
+		                </div>
+                    </section>
+
+                    <section id="plotsFilter" data-header="Plots">
+                     	<div class="toolbarOuter">
+		                </div>
+		                <div class="spreadsheet-body">
+		                </div>
+                    </section>
+                </sp-tab>
+            </section>
+            <footer>
+                <button id="filterparamhistory" type="button" class="btn btn-default btn-primary" on-click="toggleColumns">Ok</button>
+                <button type="button" class="btn btn-default" on-click="hideFilterModel">Cancel</button>
+            </footer>
+
+        </sp-modal>
+        <sp-modal id="filterParameterModal" class="filter-optn-modal" heading="Select Parameters" height="600px" width="500px" on-close="hideParamFilter" style="height:100%;">
+            <section>
+                  <div class="toolbarOuter">
+                  </div>
+                  <div class="spreadsheet-body">
+                  </div>
+            </section>
+            <footer>
+                <button id="filterparamhistory" type="button" class="btn btn-default btn-primary" on-click="toggleColumns">Ok</button>
+                <button type="button" class="btn btn-default" on-click="hideParamFilter">Cancel</button>
+            </footer>
+
+        </sp-modal>
+
+
+    </template>
+  <script type="text/javascript" src="ps-parameter-history.js"></script>
+</dom-module>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright DASSAULT SYSTEMES 2013 -->
+<!--	Mapping between index names and database names -->
+<IndexMapping xmlns="DS_DELMIAMGAConfiguration" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="DS_DELMIAMGAConfiguration ../xsd/DELWebMfgAssetsDefUIIndexMapping.xsd" Title="Mapping between index names and database names" Description="Sample configuration file delivered by DS.">
+  <Relation>
+    <Key index="physicalid"                                  database="PID"/>
+    <Key index="type"                                        database="type"/>
+    <Key index="ro.plminstance.plm_externalid"               database="PLM_ExternalID"/>
+    <Key index="ro.plminstance.v_treeorder"                  database="V_TreeOrder"/>
+    <Key index="ro.DELLmiOperationPPRInstance.V_Balanceable" database="V_Balanceable"/>
+    <Key index="from.physicalid"                             database="isAggregatedBy"/>
+    <Key index="to.physicalid"                               database="isInstanceOf"/>
+  </Relation>
+  <Entity>
+    <Key index="physicalid"                                  database="PID"/>
+    <Key index="type"                                        database="type"/>
+    <Key index="name"                                        database="PLM_ExternalID"/>
+    <Key index="ds6w:label"                                  database="V_Name"/>
+    <Key index="bo.PLMEntity.V_description"                  database="V_description"/>
+    <Key index="bo.PLMEntity.V_discipline"                   database="V_discipline"/>
+    <Key index="bo.PLMReference.V_isLastVersion"             database="V_isLastVersion"/>
+    <Key index="bo.PLMReference.V_TargetReleaseDate"         database="V_TargetReleaseDate"/>
+    <Key index="bo.CreateAssembly.V_NeedDedicatedSystem"     database="V_NeedDedicatedSystem"/>
+    <Key index="bo.Resource.V_MTBF"                          database="V_MTBF"/>
+    <Key index="bo.Robot.V_DELRmi_MountingMethod"            database="V_DELRmi_MountingMethod"/>
+    <Key index="bo.Robot.V_DELRmi_NbDOFs"                    database="V_DELRmi_NbDOFs"/>
+    <Key index="current"                                     database="current"/>
+    <Key index="revision"                                    database="revision"/>
+    <Key index="owner"                                       database="owner"/>
+    <Key index="interface"                                   database="interface"/>
+    <Key index="organization"                                database="organization"/>
+
+    <Key index="resourceid"                                  database="resourceid"/>
+    <Key index="ds6w:what/ds6w:type"                         database="type"/>
+
+    <Key index="DELSysSpecificationLinksDiscipline"          database="SystemImplementLink"/>
+    <Key index="MfgProductionPlanning"                       database="ProcessImplementLink"/>
+    <Key index="DELFmiProcessImplementCnx"                   database="ProductImplementLink"/>
+  </Entity>
+</IndexMapping>

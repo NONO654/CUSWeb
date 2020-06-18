@@ -1,0 +1,61 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../ad-multiview-panel/ad-multiview-panel.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="ad-tool-config-additional-files">
+  <link rel="import" type="css" href="ad-tool-config-additional-files.css">
+  <template>
+      <style include="sp-uikit-styles"></style>
+
+        <!-- COMMON CONFIGURATION PROPERTIES -->		
+		<sp-dashboard id="dashboard"></sp-dashboard>
+		
+		<!--  WEB SERVICES -->
+        <div id="mainContentSection" class="content-section-body">
+	        <div id="configurationSection" class="container-fluid">
+	        	<div id="contentRow" class="row input-file-container hidden" on-click="onContentAreaClick" tabindex="0">                
+		            <ad-multiview-panel id="filesPanel" view-mode="{{viewMode}}" on-select="onInputSelect"></ad-multiview-panel>		        
+	        	</div>
+	        	<div id="placeholderRow" class="row input-file-container hidden">
+					<div class="placeholder" on-dragover="onDragOver" on-drop="onDrop">
+	    				Add additional include or resource files here...
+					</div>
+	        	</div>
+	        	<div class="row input-file-header chrome-pull-fix" draggable="false">
+	        		<div class="pull-right">	        		    
+	        			<div id="removeInputs" class="hidden" on-click="onRemoveInputs" title="Remove Selected">	        			     
+	        			    <span class="fonticon fonticon-trash"></span>
+	        			    <span class="removeInputs">Remove Selected</span>
+	        			</div>
+	        		</div>
+	        	</div>
+	        </div>
+		 	<!-- The alert messages need to have the relative position declared inline in order to work in Firefox and IE -->
+       		<div id="configurationErrorNone" class="hidden">
+			    <div class="content-section-title">Files to be Downloaded</div>
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				No tool is currently selected.
+				</div>
+       		</div>
+       		<div id="configurationErrorMultiple" class="hidden">
+			    <div class="content-section-title">Files to be Downloaded</div>
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				This configuration section can only be edited for a single tool.
+				</div>
+       		</div>
+        </div>
+        <div id="noDownloadSupportNote" class="hidden">
+		   	<div class="content-section-title">Files to be Downloaded</div>
+			<div class="alert-message alert-warning" style="position:relative">
+				This tool does not support download.
+			</div>
+       	</div>
+	</template>
+  <script src="ad-tool-config-additional-files.js"></script>
+</dom-module>
+
+

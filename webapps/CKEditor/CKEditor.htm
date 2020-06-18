@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CKEditor demo</title>
+
+        <script src="../AmdLoader/AmdLoader.js"></script>
+        <!-- Application Standalone emulation files -->
+        <!--  Commented as we do not have a dependency on UWAClient -- uncomment to turn this to a widget
+
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+         -->
+
+    </head>
+    <body>
+
+        <h1>CKEditor demo</h1>
+        <textarea class="ckeditor-sample">Demo text</textarea>
+
+    </body>
+
+    <!-- Script files -->
+    <script type="text/javascript">
+
+
+        require(['DS/CKEditor/CKEditor'], function (CKEditor){
+            CKEditor.replace(document.getElementsByClassName('ckeditor-sample')[0]);
+        });
+
+    </script>
+</html>

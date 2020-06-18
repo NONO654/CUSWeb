@@ -1,0 +1,37 @@
+<form>
+    <div class="form-group">
+        <label for="enox-collectionview-select-primary-attribute">Primary attribute</label>
+        <select class="form-control" id="enox-collectionview-select-primary-attribute">
+            {{#each attributes}}
+            <option data-index="{{@index}}" {{#if this.isPrimaryAttribute}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
+        </select>
+    <div class="toggle">
+        <input type="checkbox" id="checkbox4primary">
+        <label class="control-label" for="checkbox4primary">Hide primary attribute name</label>
+    </div>
+    </div>
+    <div class="form-group">
+        <label for="enox-collectionview-select-secondary-attribute">Secondary attribute</label>
+        <select class="form-control" id="enox-collectionview-select-secondary-attribute">
+            {{#each attributes}}
+            <option data-index="{{@index}}" {{#if this.isSecondaryAttribute}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
+        </select>
+        <div class="toggle">
+            <input type="checkbox" id="checkbox4secondary">
+            <label class="control-label" for="checkbox4secondary">Hide secondary attribute name</label>
+        </div>
+    </div>
+    <div class="form-group other-attributes-selector">
+        <label>Shown attributes</label>
+        <div>
+            {{#each attributes}}
+            <div class="toggle" style="display:inline-block">
+                <input type="checkbox" id="checkbox4attr{{@index}}" {{#if this.isGenericAttribute}}checked{{/if}} data-index="{{@index}}">
+                <label class="control-label" for=checkbox4attr{{@index}}>{{this.name}}</label>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</form>

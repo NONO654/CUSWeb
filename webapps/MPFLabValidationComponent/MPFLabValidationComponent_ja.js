@@ -1,0 +1,1 @@
+define("DS/MPFLabValidationComponent/MPFLabValidationComponent_ja",{});define("DS/MPFLabValidationComponent/assets/nls/LabValidationComponent",{sellerID:"販売者 ID",shopName:"ショップ名",lastUpdate:"最終更新日",kyc:"KYC",showroom:"ショールーム",testOrder:"テスト オーダー",status:"ステータス",reviewshowroom:"ショールームをレビュー",sendTestOrder:"テスト オーダーを送信",draft:"下書き",validated:"検証済み"});

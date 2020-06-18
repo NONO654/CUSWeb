@@ -1,0 +1,44 @@
+<script>
+(function(){
+    'use strict';
+    function CmpDisplayFile() {
+        return Reflect.construct(HTMLElement, [], this.constructor);
+    }
+
+    CmpDisplayFile.prototype = Object.create(HTMLElement.prototype);
+    CmpDisplayFile.prototype.constructor = CmpDisplayFile;
+    Object.setPrototypeOf(CmpDisplayFile, HTMLElement);
+
+    CmpDisplayFile.prototype.connectedCallback = function() {
+      console.log('cmp-display-file connected');
+      // create DOM for <pcw-file-chooser id="fileChooser" disabled filetypes=".xml"></pcw-file-chooser>
+      // var shadow = this.attachShadow({mode: 'open'});
+      // var div = document.createElement('div');
+      // var fileChooser = document.createElement('pcw-file-chooser');
+      // shadow.appendChild(div);
+      // shadow.appendChild(fileChooser);
+      this.innerHTML = 'Display file: <pcw-file-chooser id="fileChooser" disabled filetypes=".xml"></pcw-file-chooser>';
+
+    };
+    CmpDisplayFile.prototype.UpdateUI = function (act, step, extensionConfig) {
+        console.log('cmp-display-file UpdateUI', act, step, extensionConfig);
+        var me = this;
+        var fileProperty = extensionConfig.getPropertyByName('theFile');
+        var fileString = fileProperty ? fileProperty.getValue() : '';
+        require(['DS/SMAProcWebCommonControls/FileChooser'],
+            function (FileChooser) {
+                // new FileChooser();
+                //fileChooser.setActivity(act);
+                //fileChooser.setDataHandlerConfigurationString(fileString);
+            },
+            console.error.bind(console, 'Failed to load filechooser')
+        );
+    };
+    CmpDisplayFile.prototype.Apply = function () {};
+    CmpDisplayFile.prototype.ExtensionEditorImpl = {
+        UpdateUI: CmpDisplayFile.prototype.UpdateUI.bind(CmpDisplayFile.prototype),
+        Apply: CmpDisplayFile.prototype.Apply.bind(CmpDisplayFile.prototype)
+    };
+    customElements.define('cmp-display-file', CmpDisplayFile);
+})();
+</script>

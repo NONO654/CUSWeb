@@ -1,0 +1,1 @@
+define("DS/RunYourApp/RunYourApp_ru",{});define("DS/RunYourApp/assets/nls/RunYourApp",{urlLabel:"URL-адрес виджета",insertUrl:"Введите URL-адрес.",submitURLBtn:"Выполнить"});

@@ -1,0 +1,10 @@
+m|WebUX\CommandRecord.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\CommandRecord\CommandRecord.js|1540847993|2824
+s|WebUX\CommandRecord.mweb\src\DelegateRec.js|1540228495|5542
+s|WebUX\CommandRecord.mweb\src\CommandRecord.js|1493802236|4
+s|WebUX\CommandRecord.mweb\src\ActionBarRecord.js|1537805502|671
+s|WebUX\CommandRecord.mweb\src\ContextualBarRecord.js|1537805790|673

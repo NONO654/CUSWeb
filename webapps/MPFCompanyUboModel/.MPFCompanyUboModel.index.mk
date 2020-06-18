@@ -1,0 +1,11 @@
+m|MPFModels\MPFCompanyUboModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19096
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFCompanyUboModel\MPFCompanyUboModel.js|1554530788|2966
+s|MPFModels\MPFCompanyUboModel.mweb\src\CompanyUboCollection.js|1550153551|672
+s|MPFModels\MPFCompanyUboModel.mweb\src\CompanyUboDataProxy.js|1529916702|514
+s|MPFModels\MPFCompanyUboModel.mweb\src\MPFCompanyUboModel.js|1529487706|0
+s|MPFModels\MPFCompanyUboModel.mweb\src\CompanyCompanyUboDataProxy.js|1530191811|1259
+s|MPFModels\MPFCompanyUboModel.mweb\src\CompanyUboModel.js|1549362233|3137

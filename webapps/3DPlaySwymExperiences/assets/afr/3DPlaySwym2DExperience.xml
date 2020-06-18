@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/*
+* @fullreview   T9N 16:05:17 Creation
+*/
+  -->
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DPlaySwymAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DPlaySwymAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="3DPlaySwymAfrWorkshopHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+    <!-- View -->
+    <CATCommandHeader ID = "Reframe" ClassName = "DS/3DPlayDocumentViewer/CmdReframe" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+    <CATCommandHeader ID = "RealSize" ClassName = "DS/3DPlayDocumentViewer/CmdRealSize" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+    <!-- Tools -->
+    <CATCommandHeader ID = "Previous" ClassName = "DS/3DPlayDocumentViewer/CmdPrevious"  ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+    <CATCommandHeader ID = "Next" ClassName = "DS/3DPlayDocumentViewer/CmdNext" ResourceFile = "3DPlayDocumentViewer/3DPlayDocumentViewer" />
+</CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="3DPlaySwymAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DPlaySwymWorkbench">
+        <CATCmdContainer Name = "SectionViews" Visibility = "1" RepresentationType="AfrActionBarSection">
+            <CATCmdStarter Name = "Reframe"       Command = "Reframe" />
+            <CATCmdStarter Name = "RealSize"      Command = "RealSize" />
+            <CATCmdSeparator Name = "VisuMode_Separator"/>
+            <CATCmdStarter Name = "Previous"      Command = "Previous" />
+            <CATCmdStarter Name = "Next"          Command = "Next" />
+        </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

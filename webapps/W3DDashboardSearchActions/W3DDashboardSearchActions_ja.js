@@ -1,0 +1,1 @@
+define("DS/W3DDashboardSearchActions/W3DDashboardSearchActions_ja",{});define("DS/W3DDashboardSearchActions/assets/nls/main",{goToDashboard:"開く",type:"タイプ",typeValue:"ダッシュボード",title:"タイトル",creationDate:"作成日",modificationDate:"変更日",responsible:"責任者",propertiesFacet:"プロパティ",membersFacet:"メンバー"});

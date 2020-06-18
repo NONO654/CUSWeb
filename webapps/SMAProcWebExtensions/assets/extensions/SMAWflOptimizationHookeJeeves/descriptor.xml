@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.HookeJeeves" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationHookeJeeves" nlsID="dispname">Hooke-Jeeves</DisplayName>
+	<Description nlsFile="SMAWflOptimizationHookeJeeves" nlsID="desc">Hooke-Jeeves optimization algorithm</Description>
+	<LongDescription nlsFile="SMAWflOptimizationHookeJeeves" nlsID="longdesc">
+		<![CDATA[Hooke-Jeeves Direct Search
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Direct Penalty Method
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for linear design spaces
+   &#8226; Well-suited for non-linear design spaces
+   &#8226; Not well-suited for discontinuous design spaces
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>No
+
+</span><span style="font-weight:bold">Features:
+</span><span>Begins with a starting guess and searches for a local minimum. Often used when feasible design has not yet been determined. Uses combined penalty and objective value for optimization. 
+
+This technique uses a combination of objective and constraints penalty as the objective function f(x). This optimization technique does not require the objective function, f(x), to be differentiable, because the algorithm does not use derivatives of f(x). Instead, the algorithm examines points near the current point by perturbing design variables, one axis at a time, until an improved point is found. It then follows the favorable direction until no more design improvement is possible. The size of variable perturbations is determined by the Relative Step Size. It is gradually reduced by applying the Step Size Reduction Factor until convergence is detected.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.HookeJeeves</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationHookeJeeves.CATNls" targetFilename="SMAWflOptimizationHookeJeeves.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationHookeJeeves_Japanese.CATNls" targetFilename="SMAWflOptimizationHookeJeeves_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.hookejeeves.HookeJeeves</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="ExecutesInParallel" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Probe Count" type="integer" valuetype="single">
+				<Value>1</Value>
+			</Property>
+			<Property name="Max Evaluations" type="integer" valuetype="single">
+				<Value>100</Value>
+			</Property>
+			<Property name="Relative Step Size" type="real" valuetype="single">
+				<Value>0.02</Value>
+			</Property>
+			<Property name="Step Size Reduction Factor" type="real" valuetype="single">
+				<Value>0.5</Value>
+			</Property>
+			<Property name="Termination Step Size" type="real" valuetype="single">
+				<Value>1E-6</Value>
+			</Property>
+			<Property name="Penalty Base" type="real" valuetype="single">
+				<Value>0.0</Value>
+			</Property>
+			<Property name="Penalty Multiplier" type="real" valuetype="single">
+				<Value>1000.0</Value>
+			</Property>
+			<Property name="Penalty Exponent" type="integer" valuetype="single">
+				<Value>2</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

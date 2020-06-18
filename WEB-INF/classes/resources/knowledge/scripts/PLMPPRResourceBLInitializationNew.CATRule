@@ -1,0 +1,175 @@
+/* Rule PLMPPRResourceBLInitializationNew (ThisObject: PLMReference + Extension Resource, Parameters: RuleContext)       */
+/* NOT CONTRACTUAL */
+/* Parameters contains many information such as name, user, security ... depending on Operation                   */
+/* Notice this BL operates for Several OpeningID and Many OperationId (New, Cloning, ImportAsNew, ...)            */
+/* PLMIdentificationInitialization,PLMTemplateCloning,PLMImportExportAttributesValuation,ComponentsFamilyNaming   */
+
+Let IsCreatingNewObject (Boolean)
+Let CopyFromObject(PLMEntity)
+
+Let ModelingType(Type)
+Let PrimaryModelingType(Type)
+Let ModelingTypeName(String)
+Let AbbreviatedBaseTypeName(String)
+Let Separator(String) 
+
+Let TypeTitle(STRING)
+Let PrimaryTypeTitle(STRING)
+Let NamingTypePrefix(STRING)
+Let PrimaryNamingTypePrefix(STRING)
+Let SiteAffix(STRING)
+Let NamingTypeSuffix(STRING)
+Let ObjectCustoType=""
+
+Let Name(STRING)
+
+
+Let Operation = ""
+
+         /* variable set-up */ 
+
+/*standard case of this BL is creation of new object*/
+IsCreatingNewObject=true
+
+/* in case of Cloning of this rule  following constant must be defined */ 
+AbbreviatedBaseTypeName="PLMCoreReference" 
+Separator="-"
+SiteAffix=""
+
+/* Search for OperationId */
+if (Parameters->HasAttribute("OperationId") == true){
+     set Operation = Parameters->GetAttributeString("OperationId") 
+}
+
+/* getting information from RuleContext parameters  */ 
+if ( Parameters->HasAttribute("FirstImport") == true ) {  /* BriefcaseImport or FBDIImport */
+  /*synchronization operation only (update) for ThisObject, =>no creation*/
+  IsCreatingNewObject= Parameters.GetAttributeBoolean("FirstImport")
+} 
+
+
+if (Parameters->HasAttribute("CustoType") and (Operation<>"FBDIImport"))
+{
+	ObjectCustoType = Parameters->GetAttributeString("CustoType")
+}
+else
+{
+	PrimaryModelingType = ThisObject.ModelerType
+	PrimaryTypeTitle=PrimaryModelingType.UserName
+
+	AbbreviatedBaseTypeName=PrimaryModelingType.Name
+	RetrieveNamingParametersWithSeparator(AbbreviatedBaseTypeName,PrimaryNamingTypePrefix,SiteAffix,NamingTypeSuffix,Separator,AbbreviatedBaseTypeName)
+
+
+	/* Here SecondaryType is the custom type of a DS Modeling type */
+	if (ThisObject.IsSupporting("Robot") == true)  
+		ModelingType = FindType("Robot")
+	else  if (ThisObject.IsSupporting("WorkCenter") == true)  
+		ModelingType = FindType("WorkCenter")
+	else  if (ThisObject.IsSupporting("Organizational") == true)  
+		ModelingType = FindType("Organizational")
+	else  if (ThisObject.IsSupporting("Worker") == true)  
+		ModelingType = FindType("Worker")
+	else  if (ThisObject.IsSupporting("NCMachine") == true)  
+		ModelingType = FindType("NCMachine")
+	else  if (ThisObject.IsSupporting("Inspect") == true)  
+		ModelingType = FindType("Inspect")
+	else  if (ThisObject.IsSupporting("ToolDevice") == true)  
+		ModelingType = FindType("ToolDevice")
+	else  if (ThisObject.IsSupporting("Storage") == true)  
+		ModelingType = FindType("Storage")
+	else  if (ThisObject.IsSupporting("Transport") == true)  
+		ModelingType = FindType("Transport")
+	else  if (ThisObject.IsSupporting("Conveyor") == true)  
+		ModelingType = FindType("Conveyor")
+	else  if (ThisObject.IsSupporting("ControlDevice") == true)  
+		ModelingType = FindType("ControlDevice")
+	else  if (ThisObject.IsSupporting("UserDefined") == true)  
+		ModelingType = FindType("UserDefined")
+	else  if (ThisObject.IsSupporting("LogicController") == true)  
+		ModelingType = FindType("LogicController")
+	else  if (ThisObject.IsSupporting("IndustrialMachine") == true)  
+		ModelingType = FindType("IndustrialMachine")
+	else  if (ThisObject.IsSupporting("Sensor") == true)  
+		ModelingType = FindType("Sensor")
+	else  if (ThisObject.IsSupporting("ResourceArea") == true)  
+		ModelingType = FindType("ResourceArea")
+	else  if (ThisObject.IsSupporting("ResourceManufacturingSetup") == true)  
+		ModelingType = FindType("ResourceManufacturingSetup")
+	else  if (ThisObject.IsSupporting("DELRmiPathway") == true)  
+		ModelingType = FindType("DELRmiPathway")
+	else  if (ThisObject.IsSupporting("Pool") == true)  
+		ModelingType = FindType("Pool")
+	if (ModelingType<>NULL)
+		ModelingTypeName=ModelingType.Name 
+
+	if (ModelingTypeName == "" and CopyFromObject <> NULL)
+	{
+		if (CopyFromObject.IsSupporting("Robot") == true)  
+			ModelingType = FindType("Robot")
+		else  if (CopyFromObject.IsSupporting("Organizational") == true)  
+			ModelingType = FindType("Organizational")
+		else  if (CopyFromObject.IsSupporting("Worker") == true)  
+			ModelingType = FindType("Worker")
+		else  if (CopyFromObject.IsSupporting("NCMachine") == true)  
+			ModelingType = FindType("NCMachine")
+		else  if (CopyFromObject.IsSupporting("Inspect") == true)  
+			ModelingType = FindType("Inspect")
+		else  if (CopyFromObject.IsSupporting("ToolDevice") == true)  
+			ModelingType = FindType("ToolDevice")
+		else  if (CopyFromObject.IsSupporting("Storage") == true)  
+			ModelingType = FindType("Storage")
+		else  if (CopyFromObject.IsSupporting("Transport") == true)  
+			ModelingType = FindType("Transport")
+		else  if (CopyFromObject.IsSupporting("Conveyor") == true)  
+			ModelingType = FindType("Conveyor")
+		else  if (CopyFromObject.IsSupporting("ControlDevice") == true)  
+			ModelingType = FindType("ControlDevice")
+		else  if (CopyFromObject.IsSupporting("UserDefined") == true)  
+			ModelingType = FindType("UserDefined")
+		else  if (CopyFromObject.IsSupporting("LogicController") == true)  
+			ModelingType = FindType("LogicController")
+		else  if (CopyFromObject.IsSupporting("IndustrialMachine") == true)  
+			ModelingType = FindType("IndustrialMachine")
+		else  if (CopyFromObject.IsSupporting("Sensor") == true)  
+			ModelingType = FindType("Sensor")
+		else  if (CopyFromObject.IsSupporting("ResourceArea") == true)  
+			ModelingType = FindType("ResourceArea")
+		else  if (CopyFromObject.IsSupporting("ResourceManufacturingSetup") == true)  
+			ModelingType = FindType("ResourceManufacturingSetup")
+		else  if (CopyFromObject.IsSupporting("DELRmiPathway") == true)  
+			ModelingType = FindType("DELRmiPathway")
+		else  if (CopyFromObject.IsSupporting("WorkCenter") == true)  
+			ModelingType = FindType("WorkCenter")
+		else  if (CopyFromObject.IsSupporting("Pool") == true)  
+			ModelingType = FindType("Pool")
+		if (ModelingType<>NULL)
+			ModelingTypeName=ModelingType.Name 
+	}
+
+	TypeTitle=ModelingType.UserName
+
+
+	if ((Operation<>"ImportAsNew") and (Operation<>"Cloning"))
+	{
+		if (ThisObject.HasAttribute("V_Name") == true)
+		{
+			Name = ThisObject.V_Name
+			Name = ReplaceSubText(Name,PrimaryTypeTitle,TypeTitle)
+			ThisObject->SetAttributeString("V_Name",Name)
+		}
+	}
+
+	/*new V6R2014x services for typing V2: requires Apps to deliver the property Abbreviation in the metadata*/ 
+	AbbreviatedBaseTypeName=ModelingTypeName
+	RetrieveNamingParametersWithSeparator(ModelingTypeName,NamingTypePrefix,SiteAffix,NamingTypeSuffix,Separator,AbbreviatedBaseTypeName)
+
+	if (IsCreatingNewObject==true) {
+		if (ThisObject.HasAttribute("PLM_ExternalID") == true)
+		{
+			Name = ThisObject.PLM_ExternalID
+			Name = ReplaceSubText(Name,PrimaryNamingTypePrefix,NamingTypePrefix)
+			ThisObject->SetAttributeString("PLM_ExternalID",Name)
+		}
+	}
+}

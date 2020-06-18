@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema elementFormDefault="qualified" targetNamespace="urn:com:dassault_systemes:webservice" xmlns:ns1="http://www.3ds.com/xsd/3DXML/PLM" xmlns:ns2="http://www.3ds.com/xsd/3DXML" xmlns:ns3="http://www.3ds.com/wserror" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <xs:annotation>
+  <xs:appinfo>
+   <webserviceSchema/>
+  </xs:appinfo>
+ </xs:annotation>
+ <xs:import namespace="http://www.3ds.com/xsd/3DXML/PLM" schemaLocation="3DXML_WSCommonTypes.xsd"/>
+ <xs:import namespace="http://www.3ds.com/xsd/3DXML" schemaLocation="3dxml/3DXML.xsd"/>
+ <xs:import namespace="http://www.3ds.com/wserror" schemaLocation="wserrors.xsd"/>
+ <xs:element name="exportWorkplan">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iArticles" nillable="false" type="ns1:ListOfWSIType">
+     <xs:annotation>
+      <xs:documentation>List of processes to export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iUnitNames" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of unit names</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iProductionSystemFilters" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of Production System filters</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iMaturities" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of maturities</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iDateLastExport" nillable="true" type="xs:dateTime">
+     <xs:annotation>
+      <xs:documentation>Date of last export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpHost" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP host name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPort" nillable="true" type="xs:int">
+     <xs:annotation>
+      <xs:documentation>FTP port</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpUser" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP user name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPwd" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP password</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpDir" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP sub-directory</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportWorkplanResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oJobID" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Job ID</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportWorkplanErrorType" type="ns3:ErrorType"/>
+ <xs:element name="exportProcessFlow">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iRootProcesses" nillable="false" type="ns1:ListOfWSIType">
+     <xs:annotation>
+      <xs:documentation>List of root processes to export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iUnitNames" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of unit names</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iMfgFilters" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of Mfg filters</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iDesignFilters" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of Design filters</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iMaturities" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of maturities</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iDateLastExport" nillable="true" type="xs:dateTime">
+     <xs:annotation>
+      <xs:documentation>Date of last export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpHost" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP host name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPort" nillable="true" type="xs:int">
+     <xs:annotation>
+      <xs:documentation>FTP port</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpUser" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP user name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPwd" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP password</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpDir" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP sub-directory</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportProcessFlowResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oJobID" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Job ID</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportProcessFlowErrorType" type="ns3:ErrorType"/>
+ <xs:element name="getExportStatus">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iJobID" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Job ID</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getExportStatusResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oStatus" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Status</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getExportStatusErrorType" type="ns3:ErrorType"/>
+ <xs:element name="exportWorkplanForModel">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iArticles" nillable="false" type="ns1:ListOfWSIType">
+     <xs:annotation>
+      <xs:documentation>List of processes to export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iModelNames" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of model names</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iMaturities" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of maturities</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iDateLastExport" nillable="true" type="xs:dateTime">
+     <xs:annotation>
+      <xs:documentation>Date of last export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpHost" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP host name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPort" nillable="true" type="xs:int">
+     <xs:annotation>
+      <xs:documentation>FTP port</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpUser" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP user name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPwd" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP password</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpDir" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP sub-directory</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportWorkplanForModelResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oJobID" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Job ID</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportWorkplanForModelErrorType" type="ns3:ErrorType"/>
+ <xs:element name="exportProcessFlowForModel">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iRootProcesses" nillable="false" type="ns1:ListOfWSIType">
+     <xs:annotation>
+      <xs:documentation>List of root processes to export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iModelNames" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of model names</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iMaturities" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of maturities</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iDateLastExport" nillable="true" type="xs:dateTime">
+     <xs:annotation>
+      <xs:documentation>Date of last export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpHost" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP host name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPort" nillable="true" type="xs:int">
+     <xs:annotation>
+      <xs:documentation>FTP port</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpUser" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP user name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPwd" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP password</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpDir" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP sub-directory</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportProcessFlowForModelResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oJobID" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Job ID</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportProcessFlowForModelErrorType" type="ns3:ErrorType"/>
+ <xs:element name="exportWorkplanByDeltaForModel">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iWorkplans" nillable="false" type="ns1:ListOfWSIType">
+     <xs:annotation>
+      <xs:documentation>List of workplans to export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iProcesses" nillable="false" type="ns1:ListOfWSIType">
+     <xs:annotation>
+      <xs:documentation>List of processes to export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iModelNames" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of model names</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpHost" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP host name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPort" nillable="true" type="xs:int">
+     <xs:annotation>
+      <xs:documentation>FTP port</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpUser" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP user name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPwd" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP password</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpDir" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP sub-directory</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportWorkplanByDeltaForModelResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oJobID" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Job ID</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportWorkplanByDeltaForModelErrorType" type="ns3:ErrorType"/>
+ <xs:element name="exportWKIByDeltaForModel">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iWKI" nillable="false" type="ns1:ListOfWSIType">
+     <xs:annotation>
+      <xs:documentation>List of WKI to export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iModelNames" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of model names</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpHost" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP host name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPort" nillable="true" type="xs:int">
+     <xs:annotation>
+      <xs:documentation>FTP port</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpUser" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP user name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPwd" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP password</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpDir" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP sub-directory</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportWKIByDeltaForModelResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oJobID" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Job ID</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportWKIByDeltaForModelErrorType" type="ns3:ErrorType"/>
+ <xs:element name="exportProcessFlowByDeltaForModel">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iProcesses" nillable="false" type="ns1:ListOfWSIType">
+     <xs:annotation>
+      <xs:documentation>List of root processes to export</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iModelNames" nillable="true" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of model names</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpHost" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP host name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPort" nillable="true" type="xs:int">
+     <xs:annotation>
+      <xs:documentation>FTP port</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpUser" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP user name</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpPwd" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP password</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFtpDir" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>FTP sub-directory</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportProcessFlowByDeltaForModelResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oJobID" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Job ID</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="exportProcessFlowByDeltaForModelErrorType" type="ns3:ErrorType"/>
+</xs:schema>

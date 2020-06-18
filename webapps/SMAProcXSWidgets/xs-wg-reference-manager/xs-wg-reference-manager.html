@@ -1,0 +1,134 @@
+<!--------------------------------------------------------------------
+[xs-wg-refrence-manager HTML Document]
+
+Project:		xs
+Version:		1.0
+Primary use:	TODO: Write where this component is being used
+Description:    TODO: Description about the component
+--------------------------------------------------------------------->
+
+<!--------------------------------------------------------------------
+
+[Table of contents]
+
+
+--------------------------------------------------------------------->
+<!--Import base component common to all widgets-->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSP/sp-file-content/sp-file-content.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="xs-wg-reference-manager-style.html">
+
+<dom-module id="xs-wg-reference-manager">
+  <style include="xs-wg-base"></style>
+  <template>
+    <style include="xs-wg-refrence-manager-style"></style>
+    <sp-dashboard id="dashboard"></sp-dashboard>
+    <sp-file-content id="spFileContent" on-sp-file-upload-progress="updateProgress"></sp-file-content>
+    <sp-search id="spSearch" on-change="onSearch" multi-select="true" plm-types="[[accept]]" on-sp-error="spError"></sp-search>
+    <div class$="{{_computeMainClass(disabled)}}" data-stateread$="{{readonly}}" data-state$="{{state}}" id="container">
+        <div class="top-container">
+            <label class="xs-wg-label inline-label">{{label}}</label><span> </span>
+            <div class="new-file">
+    					<button is="sp-button-type" class="add-button" title="Browse" on-click="addRefrence"><span on-click="addRefrence" class="upload-new-file fonticon fonticon-search"></span><div>Browse</div></button>
+    				</div>
+        </div>
+        <div class="dropZone" on-dragenter="onDragEnter" on-dragover="onDragOver"
+          on-drop="onDrop" on-dragleave="onDragLeave" draggable="false">
+          <div class="dropOverlay" id="dropOverlay">
+            <div class="dropZone-text" id="dropZone-text">
+              <span class="fonticon fonticon fonticon-popup"></span><br>
+              <span>Drop Your Content Here</span>
+            </div> 
+          </div>
+          <sp-updatepanel state="{{state}}" updateswhen="is-loading,is-updating">
+          <div class="files-container" id="filesContainer" data-page$="{{_getFileContainerPage(showPagebar)}}">
+            <template id="fileList" is="dom-repeat" items="{{_filtereddocumets}}" as="document" observe="busType,ioMode">
+              <div class="doc-entry">
+                <div class="doc-info">
+                  <div class="io-mode" data-iomode$="{{document.ioMode}}" title="{{document.ioMode}}">
+                      <!-- Input  -->
+                      <svg width="16" height="16" class="ioinput">
+                         <line x1="0" y1="4" x2="7" y2="4" style="stroke:#008c00;stroke-width:2" />
+                         <line x1="9" y1="16" x2="9" y2="0" style="stroke:#245bff;stroke-width:2" />
+                         <polygon points="4,0 4,8 8,4" style="fill:#008c00;" />
+                      </svg>
+                      
+                      <!-- Output -->
+                      <svg width="16" height="16" class="iooutput">
+                         <line x1="8" y1="16" x2="8" y2="0" style="stroke:#245bff;stroke-width:2" />
+                         <line x1="7" y1="12" x2="14" y2="12" style="stroke:#cc0033;stroke-width:2" />
+                         <polygon points="12,8 12,16 16,12" style="fill:#cc0033;" />
+                      </svg>
+                      
+                      
+                      <!-- Input Output -->
+                      <svg width="16" height="16" class="ioinputoutput">
+                         <line x1="0" y1="4" x2="6" y2="4" style="stroke:#008c00;stroke-width:2" />
+                         <line x1="8" y1="16" x2="8" y2="0" style="stroke:#245bff;stroke-width:2" />
+                         <polygon points="3,0 3,8 7,4" style="fill:#008c00;" />
+                         <line x1="9" y1="12" x2="14" y2="12" style="stroke:#cc0033;stroke-width:2" />
+                         <polygon points="12,8 12,16 16,12" style="fill:#cc0033;" />
+                      </svg>
+                  </div>
+                  <div class="doc-icon">
+                      <img class="link-itm-icon" src$="{{document.imageURL}}"  title="{{document.busType}}">
+                  </div>
+                  <div style="width: calc(100% - 50px);">
+                      <div class="doc-title" title$="{{document.objectTitle}}">{{document.objectTitle}}</div>
+                      <div class="doc-popup fonticon fonticon-window" on-click="showProperties" title="Show Properties"></div>
+                  </div>
+                </div>
+                <div class="doc-actions">
+                  <div class="remove fonticon fonticon-wrong" on-click="_removeRefrence" title="Remove Reference"></div>
+                </div>
+              </div>
+            </template>
+          </div>
+          <template is="dom-if" if="{{showPagebar}}">
+            <div class="page-bar-container">
+  
+              <button is="sp-button-type" class="page-button previous" title="Previous" disabled$="{{_isPreviousDisabled(currentPage)}}" on-click="previousPage">
+                <span class="fonticon fonticon-open-left"></span>
+              </button>
+  
+              <span class="current-page-info">{{_getCurrentPageInfo(_documentlist,currentPage)}}</span>
+              
+              <button is="sp-button-type" class="page-button next" title="Next" disabled$="{{_isNextDisabled(lastPage)}}" on-click="nextPage">
+                <span class="fonticon fonticon-open-right"></span>
+              </button>
+  
+            </div>	
+          </template>		
+          </sp-updatepanel>
+        </div>
+        
+        <div class="no-data-present center">
+          <span class="fonticon fonticon-select-none xs-wg-placeholder-icon"></span><br>
+          <span class="xs-wg-placeholder-text">Configure a reference to an object</span>
+        </div>
+        <div class="no-files-present center">
+          <span class="fonticon fonticon-select-none"></span><br>
+          <span>No Content Present</span>
+        </div>
+        <div class="loading-files center" >
+          <span class="fonticon fonticon-progress-2"></span><br>
+          <span>Loading Content ...</span>
+        </div>
+        <div class="error center">
+          <span>{{_errorMsg}}</span>
+        </div>
+      </div>
+            <!--
+        With respect to IR-635266-3DEXPERIENCER2019x, UI modification is made, it now will show on hovering on component about "No interaction",
+				 instead of component. 
+          <template is="dom-if" if="{{_isDisabled(rawvalue)}}">
+          <div class="no-edit">All interactions are blocked in Preview mode</div>
+      </template> 
+      -->
+
+  </template>
+  <script type="text/javascript" src="xs-wg-reference-manager.js"></script>
+</dom-module>

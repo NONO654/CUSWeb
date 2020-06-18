@@ -1,0 +1,340 @@
+// ===========================================================
+// PACKAGE   : ENOSTInterferenceDS
+// ===========================================================
+// Created  : Friday, December 2008     DRL
+//            note: unclear V_Itf_Type .vs. V_discipline
+//                  v_itf_status is an integer
+// Updated: Jul 19 2011 Adding Organisation logic (Query, Read, Write) 
+// -----------------------------------------------------------
+//For SMB this is the sub-class of attribute, they have to be always presented to user in that order
+//a) ident
+//b) description 
+//c) state of dev
+//d) ownership
+//
+//******** V_discipline is currently unpublished, When published it must expose VALUE *******
+//******** V_usage must not be published (soon internal - 3DPart R206 exception)
+//******** V_nature is published if really used, and in RO only
+//******** ATTR V_ApplicabilityDate;N;N;$ is unused in SMB deployment
+//******** ATTR organization;Y;N;$ is non signifiant in SMB deployment: everyone in Mycompany organization
+//******** ATTR reserved;N;N;$ is "useless" as long as SMB uses optimistic locking and do not lock explicitely info... & reservedby not NULL is equivalent
+//******** FATTR reservedby;N should not be provided in Write Mask (as long as it is not updated in session)
+//                  
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+// CREATE: controls the creation time attribute list
+// QUERY: controls list of attributes available for queries 
+// READ: controls the displayable attribute list (result list, properties); it is used both for presenting the results of a search, and also when browsing a single item of information (attributes in lines) 
+// WRITE: controls the modifiable attribute list (property editor, etc.)
+// EZQUERY: some applications (VPM Navigator) use the EZQUERY mask to define the "standard query" panel (the most-used list of attributes for query) whereas the QUERY mask is used for the "advanced query" panel (all queryable attributes)
+// TREE: Navigator uses the tree mask to define the set of focal data attributes displayed in the notebook view. The focal data is displayed at the top of the page; the attributes in the read mask but not in the tree mask are displayed in the "General attributes" tab.
+// LIST: LCA Navigator uses the list mask to define the set of attributes used as column in list results for that object type (for query results and the related object lists)<package>  
+// ===========================================================
+//For SMB this is the sub-class of attribute, they have to be always presented to user in that order
+//a) ident
+//b) description 
+//c) state of dev
+//d) owner
+//
+//******** No other exposed subtyping than V_discipline:
+//******** V_discipline is currently unpublished, When published it must expose VALUE)*******
+//******** V_usage must not be published (soon internal - 3DPart R206 exception)
+//******** V_nature is published if really used, and in RO only
+//******** ATTR V_ApplicabilityDate;N;N;$ is unused in SMB deployment
+//******** ATTR organization;Y;N;$ is non signifiant in SMB deployment: everyone in Mycompany organization
+//******** ATTR reserved;N;N;$ is "useless" as long as SMB uses optimistic locking and do not lock explicitely info... & reservedby not NULL is equivalent
+//******** FATTR reservedby;N should not be provided in Write Mask (as long as it is not updated in session)
+//******** FATTR E_experimentStatus;Y should be deployed for any eval modeler in query, read, write 
+//
+//=============================================================
+MASK DEFAULT
+
+// 2 entities :
+// - ENOSTItfSimulationDS   : spec of interference
+// - ENOSTItfInterferenceDS : connection result 
+
+// ===========================================================
+ENTITY ENOSTItfSimulationDS
+// ===========================================================
+// --- attributes: 
+//a) ident
+ATTR V_Name;Y;N;$
+ATTR majorrevision;N;N;$
+ATTR PLM_ExternalID;Y;N;$
+
+//b) description
+//ATTR V_discipline;N;N;$
+//VALUE Clash
+//VALUE Clearance
+//VALUE ...
+
+ATTR E_versionComment;N;N;$
+ATTR V_description;N;N;$
+
+ATTR originated;N;N;$
+ATTR E_fromExternalId;N;N;$
+
+//c) state of dev
+ATTR modified;N;N;$
+ATTR current;N;N;$
+ATTR reservedby;N;N;$
+ATTR E_experimentStatus;N;Y;ExperimentStatusEnum_Undefined
+VALUE ExperimentStatusEnum_Undefined
+VALUE ExperimentStatusEnum_Failed
+VALUE ExperimentStatusEnum_Balancing
+VALUE ExperimentStatusEnum_Passed 
+//from itf modeler
+ATTR V_Itf_ExecutionStatus;Y;N;$
+
+//d) ownership
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_description;Y
+//
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+//a) ident
+FATTR V_Name;Y
+FATTR majorrevision;Y
+//b) description
+//FATTR V_discipline;Y
+//c) state of dev
+FATTR modified;Y
+//FATTR current;Y
+//FATTR reservedby;Y
+//d) ownership
+//FATTR owner;Y
+FATTR project;Y
+
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+FATTR majorrevision;N
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+//
+//a) ident
+FATTR V_Name;Y
+FATTR majorrevision;Y
+FATTR PLM_ExternalID;Y
+
+//b) description
+//FATTR V_discipline;Y
+FATTR E_versionComment;Y
+FATTR V_description;Y
+FATTR E_fromExternalId;Y
+
+//c) state of dev
+FATTR originated;Y
+FATTR modified;Y
+FATTR current;Y
+FATTR reservedby;Y
+FATTR V_Itf_ExecutionStatus;N
+FATTR E_experimentStatus;Y
+
+//d) owner
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+//a) ident (used for Properties Read & List) Innaceptable as first in List Mode... so removed.
+FATTR V_Name;N
+FATTR majorrevision;N
+FATTR PLM_ExternalID;N
+//b) description
+//FATTR V_discipline;N
+FATTR E_versionComment;N
+FATTR V_description;N
+FATTR originated;N
+FATTR E_fromExternalId;N
+
+//c) state of dev
+FATTR modified;N
+FATTR current;N
+FATTR reservedby;N
+FATTR E_experimentStatus;N
+FATTR V_Itf_ExecutionStatus;N
+
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+//a) ident
+FATTR V_Name;Y
+FATTR majorrevision;N
+FATTR PLM_ExternalID;N
+
+//b) description
+//FATTR V_discipline;N
+
+FATTR E_versionComment;Y
+FATTR V_description;Y
+
+FATTR originated;N
+FATTR E_fromExternalId;N
+
+//c) state of dev
+FATTR modified;N
+FATTR current;N
+//FATTR reservedby;N
+FATTR E_experimentStatus;Y
+FATTR V_Itf_ExecutionStatus;N
+
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+
+// ===========================================================
+ENTITY ENOSTItfInterferenceDS
+// ===========================================================
+// --- attributes: 15
+ATTR PLM_ExternalID;Y;N;$
+ATTR V_description;N;N;$
+
+//=> must migrate on V_discipline? with published values as above, and then will be hidden???
+ATTR V_Itf_Type;Y;N;$
+ATTR V_discipline;Y;N;$
+//VALUE Clash
+//VALUE Clearance
+//VALUE ...
+    
+//ATTR V_Itf_Status;N;N;$  => error number is not for the user
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+
+//d) ownership
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+
+//FATTR V_Itf_Type;Y
+//FATTR V_discipline;Y
+
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+
+FATTR V_description;Y
+FATTR V_Itf_Type;Y
+FATTR V_discipline;Y
+
+FATTR originated;Y
+FATTR modified;Y
+//FATTR V_Itf_Status;Y
+
+//FATTR organization;Y
+FATTR project;Y
+FATTR owner;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+
+FATTR V_description;N
+FATTR V_Itf_Type;N
+FATTR V_discipline;N
+
+FATTR originated;N
+FATTR modified;N
+//FATTR V_Itf_Status;N
+
+//FATTR organization;N
+FATTR project;N
+FATTR owner;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+
+FATTR V_description;Y
+FATTR V_Itf_Type;N
+FATTR V_discipline;N
+
+FATTR originated;N
+FATTR modified;N
+//FATTR V_Itf_Status;N
+
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+
+// ===========================================================
+// End of ENOSTInterferenceDS package's DEFAULT mask file
+// ===========================================================

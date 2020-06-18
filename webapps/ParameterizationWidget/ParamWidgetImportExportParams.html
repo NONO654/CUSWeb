@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+        <!-- @fullReview  ZUR 14/10/11 2015x HL Param Widgetization-->
+        <title>Configuration Deployment</title>
+        <meta name="author" content="ZUR" />
+        <meta name="description" content="Import Export and Platform Selector Widget" />
+
+        <!-- Application Standalone emulation files -->
+      	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+        <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+        <script type="text/javascript" src="../PlatformAPI/PlatformAPI.js"></script>
+        <script type="text/javascript" src="../ParameterizationWidget/ParameterizationWidget.js"></script>
+        <script type="text/javascript" src="../PlatformManagementComponents/PlatformManagementComponents.js"></script>
+        <script type="text/javascript" src="../i3DXCompassPlatformServices/i3DXCompassPlatformServices.js"></script> 
+        
+        <link rel="stylesheet" type="text/css" href="../PlatformManagementComponents/PlatformManagementComponents.css"></link>
+                    
+        <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" ></link>
+        <link rel="stylesheet" type="text/css" href="../ParameterizationWidget/ParameterizationWidget.css" ></link>
+            
+         <!-- Application Preferences -->
+        <widget:preferences>        
+        </widget:preferences>
+
+        <!-- Application JavaScript Source -->
+        <script type="text/javascript">
+        
+        var globalParamWidget;
+        
+       	require([
+                 'UWA/Core',
+            	 'UWA/Data',
+            	 'UWA/Fx',
+            	 'UWA/Controls/Input',
+            	 'UWA/Controls/Accordion',        
+            	 'UWA/Controls/Notify',
+            	 'UWA/Utils/InterCom',
+            	 'DS/UIKIT/Core',
+            	 'DS/UIKIT/Input/Text',
+            	 'DS/UIKIT/Alert',
+            	 'DS/UIKIT/Spinner',
+            	 'DS/UIKIT/Input/Button',
+            	 'DS/UIKIT/Input/ButtonGroup',
+                 'DS/Param/CommonUtilities',
+                 'DS/Param/UIUtilities',
+            	 'DS/PlatformAPI/PlatformAPI', 
+         		 'DS/PlatformManagementComponents/Collection/Platform',
+         		 'DS/i3DXCompassPlatformServices/i3DXCompassPlatformServices',
+              	 'i18n!DS/ParameterizationWidget/assets/nls/ParamWdgNLS'
+            	  ],
+                function (UWA, Data, Fx, Input, Accordion, Notify, InterCom, Core,
+                		  Text, Alert, Spinner, Button, ButtonGroup,
+                		  CommonUtilities, UIUtilities, 
+                		  PlatformAPI, PlatformCollection, i3DXCompassPlatformServices,
+                		  ParamWdgNLS) {       		
+       				var importBttn,importBttnGrp;
+       				var deployNotifier, deployAlert;
+       				var importSpinner;
+       				var lineDeployButton;//lineDeploy
+       				var needtoshowdeployline = false;
+       				var globalDiv;
+       			  	//var baseURL = PlatformAPI.getApplicationConfiguration('app.urls.myapps');
+       			  	//DS/PlatformManagementComponents/View/PlatformSelector
+       		
+       				function ImportParamToServer(iStream, iAction)
+        			{  
+       					var url = globalParamWidget.env_url+"/resources/ParamWS/access/importparams?tenant="+globalParamWidget.tenantID+"&importAction="+iAction;
+                                              	
+              	 		UWA.Data.request(url, {
+              	 			timeout: 100000,
+                	  		method: 'POST',             
+                  			data: iStream, //JSON.stringify(datatoSend),
+                 			type: 'text',
+                    		proxy: 'passport',
+                     
+                 			headers: {
+                     			'Content-Type':'application/ds-json',
+                     			'Accept': 'application/ds-json'                                     
+                 			},
+                 	
+                 			onFailure : function (json) {
+                   				console.log("import Failure !!!");
+                	 			console.log(json);                  
+                	 			importSpinner.hide();
+                	 			displayErrorMsg();       	 
+            				},
+                 
+                 			onComplete: function(json){
+                     			console.log(json);  
+                     			importSpinner.hide();   
+                     			var jsParsed = JSON.parse(json); 
+                     			
+                     			globalParamWidget.socket.dispatchEvent('onPlatformChange', 
+	                    		 		{selectedTenant:globalParamWidget.tenantID, 
+    	                	 	  		url3DSpace:globalParamWidget.env_url});
+        	
+                     			if (jsParsed.deployStatus == "S_OK")
+                     			{                     			
+                         			console.log("Dispatching Event, import-refresh!!"); 
+                         			var successmsg = ParamWdgNLS.ImportSuccessMsg;// + ' - ' + new Date();
+                  	 				deployAlert.add({ className: "success", message: successmsg });
+                  	 				
+                  	 				if ("importNdeploy" == iAction)
+                  	 					hideApplylines();
+                     			}
+                     			else
+                     				displayErrorMsg();
+                 			}                    
+                 		});        
+        			}  
+       				       				
+       				function deployParamsOnServer() {       				       	
+       					var url = globalParamWidget.env_url+"/resources/ParamWS/access/deployallparams?tenant="+globalParamWidget.tenantID;               
+       			    	       					
+       					UWA.Data.request(url, {
+               				timeout: 100000,
+                  			method: 'POST',             
+                 			type: 'json',
+                    		proxy: 'passport',
+                     
+                 			headers: {
+                     			'Content-Type':'application/ds-json',
+                     			'Accept': 'application/ds-json'                                        
+                			},
+
+                 			onFailure : function (json) {
+                 				onDeployFailure(json, ParamWdgNLS.ParametersDeplFail);
+                     		},
+                 
+                 			onComplete: function(json){                	 		
+                 				onDeploySuccess(json, ParamWdgNLS.ParametersDeplSucc);
+                     		}                  
+                 		});         					
+       				}    
+       				
+       				function onDeployFailure(json, msg) {      					
+        	 			console.log(json);     
+        	 			deployAlert.add({ className: "error", message: msg });  
+        	 			importSpinner.hide();        	 			
+       				}
+       				
+       				function onDeploySuccess(jsonObj, msg) {
+       					UWA.log(jsonObj); 
+       					importSpinner.hide();
+             	
+             			globalParamWidget.socket.dispatchEvent('onPlatformChange', 
+                		 		{selectedTenant:globalParamWidget.tenantID, 
+                	 	  		url3DSpace:globalParamWidget.env_url});
+                	 
+             			if (jsonObj.deployStatus == "S_OK") {                     			
+                 			console.log("Dispatching Event, import-refresh!!");
+                 			hideApplylines();
+          	 				deployAlert.add({ className: "success", message: msg });
+             			}
+             			else
+             				displayErrorMsg();
+       				}        				
+       				
+       				function hideApplylines() {      					
+            			lineDeployButton.hide();//lineDeploy.hide(); 
+            			needtoshowdeployline = false;
+       				} 
+       				
+       				function showApplylines() {       					
+            			lineDeployButton.show();//lineDeploy.show();         			
+       				}           				
+                
+        			function launchImportProcess (File, iAction) 
+        			{	   
+						var textType = /text.*/;	
+        				var UsersToCreate ; 
+        				console.log("File.type"+File.type);
+	    
+       					if (File.type.match(textType)) 
+       					{
+                			importSpinner.show();
+       						var reader = new FileReader();		 
+		      				reader.onload = function(e) 
+		      				{ 		    	  
+		    	  				ImportParamToServer(reader.result,iAction);
+		      				}    			
+        					reader.readAsText(File);
+        		
+            				reader.onerror = function(){ 
+    	       					var unabletoreadfile = ParamWdgNLS.UnabletoReadMsg+' '+File.fileName;
+    	       					deployAlert.add({ className: "error", message: unabletoreadfile });	
+    	       					importSpinner.hide();
+    	       				};    	
+    						reader.onloadend = function() {   			       
+    			        		 console.log("onloadend !!");// need to do something ?
+                          	};	     		
+						}
+						else 
+						{			  
+							console.log('File not supported!');
+		       				var importerrmsg = ParamWdgNLS.NotAnXMLMsg;
+              				deployAlert.add({ className: "error", message: importerrmsg });	
+              				importSpinner.hide();
+              			}   					   						  
+					}              
+       	  
+  	 	 			function onXMLFileSelected(currAction)
+  	 	 			{        
+            			//fileobject as entry //console.log(' File {0} has been selected', this._ FilePath);
+            			fileInput = document.getElementById('Input_x');		
+            			if (fileInput.files.length == 1)
+    						launchImportProcess (fileInput.files[0],currAction) ;
+            			else
+            				deployAlert.add({ className: "warning", message: ParamWdgNLS.NotSelectedMsg });
+        			}   	
+  	 	 			
+  	 	 			function displayErrorMsg() {
+             			var failuremessage  = ParamWdgNLS.ImportFailureMsg;// + ' - ' + new Date();
+          	 			deployAlert.add({ className: "error", message: failuremessage });  
+  	 	 			}
+	  	
+					function platformChanged(tenant, cstorageURL) {       	
+						console.log("platform Changed ..."+new Date());
+						globalParamWidget.tenantID = tenant;
+    					globalParamWidget.env_url = cstorageURL;
+    					
+    					if (tenant == "OnPremise") {//Rb0afx    						
+    						globalParamWidget.env_url = PlatformAPI.getApplicationConfiguration('app.urls.myapps');
+    						UWA.log("tenant = OnPremise, changing to "+globalParamWidget.env_url);
+        				}
+    					console.log("Received tenant = "+globalParamWidget.tenantID+" env_url = "+globalParamWidget.env_url);       	           		      		     	   
+            			globalParamWidget.socket.dispatchEvent('onPlatformChange', {selectedTenant:tenant, url3DSpace:cstorageURL});//sending Signal
+        			}			
+		
+					function sendTenantToWidget(callerID) {		
+						console.log("dispatching::onPlatformChange::to::"+callerID);
+						globalParamWidget.socket.dispatchEvent('onPlatformChange', 
+								{selectedTenant:globalParamWidget.tenantID, url3DSpace:globalParamWidget.env_url}, callerID);
+					}		
+				
+					/*function activateImportButton() {	
+						importBttn.setDisabled(false);	
+						importBttnGrp.setDisabled(false);
+					}*/	
+					
+					function activateDeployLine() {
+						if (!needtoshowdeployline) {                    			
+                			needtoshowdeployline = true;
+                			UWA.log("Some parameters are not deployed, showing deploy button")
+                			showApplylines();
+                		}
+					}
+					
+					function showPlatformName(tableID) {					
+                		UWA.log("showPlatformName ::");
+                		
+						var lineTenantID = UWA.createElement('tr').inject(tableID);
+                		
+                		var cellTenantTitle = UWA.createElement('td', {
+        					'width':'100%',
+        					'align':'center',
+        					'title': ''
+        				}).inject(lineTenantID);            	
+            		
+                	    var tenantwrapper = new Text({
+                       	 	placeholder: "...",
+                       	  	attributes: {
+                       	  		 id : 'tenantholder',
+                                 value: globalParamWidget.tenantID,
+                                 multiline: false,
+                                 disabled: false,
+                                 readonly:true, 
+                                 }                                   		
+                                 }).inject(cellTenantTitle);  
+                                     
+            			tenantwrapper.getContent().setStyle("width", 320) ;  	
+					}
+					
+					function launchXMLExport() {
+						UWA.log("Download it");
+         				importSpinner.show();
+						CommonUtilities.GetTicketForDownload(globalParamWidget,
+								onCompleteRequestFCSTicket, onFailureRequestFCSTicket);  
+					}	
+					
+					function onCompleteRequestFCSTicket(responseObjectJson) {
+						UWA.log("We have our ticket ... Let's fly... Up, up here we go, go");					
+						postCallFCS(responseObjectJson);								
+					}						
+					
+					function onFailureRequestFCSTicket(jData) {						
+						console.log("Failure to Get a F***** Ticket");//WTF, Why?
+						importSpinner.hide();
+						deployAlert.add({ className: "error", message: ParamWdgNLS.ExportParamFail});
+					}
+					
+					function postCallFCS(responseObjectJson)
+					{						
+						//Content-Disposition: attachment
+						var form = UWA.createElement('form', {
+                             'class': 'form-wrapper hidden',
+                             action: responseObjectJson.fcsxmlurl,
+                             method: 'POST',
+                             enctype: 'application/x-www-form-urlencoded',
+                 
+                           //  target: Utils.detectOs() === 'ios' ||  Utils.detectOs() === 'macos' ? '_blank' : 'uploadFrame' + that.id, //target blank for ios download*
+                        	 target: document.body,//'_blank'
+                             html: [{
+                                 tag: 'input',
+                                 type: 'hidden',
+                                 name: '__fcs__jobTicket',
+                                 id: '__fcs__jobTicket',
+                                 value: responseObjectJson.fcsxmljobTicket
+                             }]
+                         });
+                         form.inject(globalDiv);//that.getBody()
+                         form.submit();
+                         //Clean up  
+                         importSpinner.hide();		
+                         
+                         setTimeout(function () {
+                             form.remove();
+                         }, 5000);
+					}
+					
+					function getPreferences() {
+
+	                    platformCollection = new PlatformCollection({
+	                        includeWu: false,
+	                        lang: 'en'//Utils.getLang()
+	                    });
+
+			      		//Mask.mask(widget.body);
+
+		                platformCollection.fetch({
+		                    onComplete: function (collection) {
+		                        var options = [];
+						        //widget.setTitle(that.getCurrentPlatform().get('displayName'));
+		                        collection.forEach(function (model) {
+		                            options.push({
+		                                label: model.get('displayName'),
+		                                value: model.get('id'),
+		                                id: model.get('id')
+		                            });
+		                        });                  
+		                        UWA.log(options);	
+		                        
+		                        globalParamWidget.tenantID = options[0].id;
+		                    }	
+						   });
+			            }
+					
+       				globalParamWidget = {          
+
+                		onLoad: function() {
+                    
+                    		globalParamWidget.socket = new InterCom.Socket('callerSocket');
+                    		globalParamWidget.socket.subscribeServer('uwa.embedded');                    
+                        			
+                    		widget.body.empty();// Clear widget content                		
+                    		
+                    		globalDiv =  UWA.createElement('div',{
+                    			'id' : 'mainParamWdgsDiv',
+                    			
+                    			html: {  'tag': 'h3',
+                    				 	 'class': 'font-3dslight',
+                                	 	 'text': ''//ParamWdgNLS.Deployment_Intro
+                                	 }                                 
+                    		}).inject(widget.body);  
+                       
+                    		deployAlert = UIUtilities.createWdgAlert();
+                    		deployAlert.inject(globalDiv);
+                                    			
+                			var tableTenant = UWA.createElement('table',{
+                    			'class': '', 
+                    	     	'id':'',
+                    	     	'width':'100%'
+                    	 	}).inject(globalDiv);
+                    
+                    		/*
+                    		var lineTenant = UWA.createElement('tr').inject(tableTenant);
+                    		
+                    		var cellTenantTitle = UWA.createElement('td', {
+            					'width':'30%',
+            					'align':'left',
+            					'title': ParamWdgNLS.Deployment_Intro
+            				}).inject(lineTenant);*
+            				*/
+    
+                    		
+                    		if ( (UWA.is(widget.getValue('x3dPlatformId'))) &&
+                    				(widget.getValue('x3dPlatformId') != '')) {
+                    				globalParamWidget.tenantID = widget.getValue('x3dPlatformId');
+                    				widget.setTitle(globalParamWidget.tenantID);
+                    				
+                    				i3DXCompassPlatformServices.getServiceUrl({
+                       			      serviceName: '3DSpace',
+                       			      platformId: globalParamWidget.tenantID,
+                       			      onComplete: function (urlData) {                       			    	
+                       			    	  platformChanged(globalParamWidget.tenantID, urlData, 1);                         			    	
+                       			    	  UWA.log("i3DXCompassPlatformServices::"+globalParamWidget.tenantID);
+                       			    	  console.log(urlData); 
+                       			        }
+                       			});                		
+                    	
+                    		} else {                    			
+                    			platformCollection = new PlatformCollection({
+        	                        includeWu: false,
+        	                        lang: 'en'//Utils.getLang()
+        	                    });                    			
+
+        		                platformCollection.fetch({
+        		                    onComplete: function (collection) {
+        		                        var options = [];
+        		                        collection.forEach(function (model) {
+        		                            options.push({
+        		                                label: model.get('displayName'),
+        		                                value: model.get('id'),
+        		                                id: model.get('id')
+        		                            });
+        		                        });                  
+        						        //widget.setTitle();        		                        
+        		                        globalParamWidget.tenantID = options[0].id;
+        		                        widget.setTitle(globalParamWidget.tenantID);
+        		                        UWA.log(options);
+        		                        
+        		                        i3DXCompassPlatformServices.getServiceUrl({
+                             			      serviceName: '3DSpace',
+                             			      platformId: globalParamWidget.tenantID,
+                             			      onComplete: function (urlData) {                       			    	
+                             			    	 UWA.log("i3DXCompassPlatformServices::"+globalParamWidget.tenantID);
+                             			    	 platformChanged(globalParamWidget.tenantID, urlData, 1);                         			    	
+                             			    	 UWA.log(urlData); 
+                             			        }
+                             			}); 
+        		           
+        		                    }//platformCollection de platformCollection
+        						   });
+        			            }             			
+
+       				//Mask.mask(widget.body);
+                    			
+                    		
+                    		/*
+                    		UWA.is(widget.getValue('x3dPlatformId'));
+                    		widget.getValue('dashboardPlatformEnabled');
+                    		widget.getValue('platform');
+                    		UWA.log(widget);*/
+                		
+        
+          					/*
+                  			var plSelector = new PlatformSelector({                     
+	                        	events: {
+                            		onPlatformChange: function (platform) {                            	
+                                		var nbofActiveTenants = platform.collection.size();
+                            			UWA.log("list of tenant size = "+nbofActiveTenants);      
+                   
+                                		platformChanged(platform.getId(), platform.getCstorage(), nbofActiveTenants);                                	       		
+                                		console.log("onPlatformChange dispatched");
+                                		        		             			
+                                  		if (nbofActiveTenants == 1)
+                                			showPlatformName(tableTenant);                                		
+                            		}
+                        		}
+                    		}).render().inject(globalDiv); //widget.body
+                    		*/
+                    		
+                    		
+                    		/*
+                    		var nbofActiveTenants = platform.collection.size();
+                            			UWA.log("list of tenant size = "+nbofActiveTenants);      
+                   
+                                		platformChanged(platform.getId(), platform.getCstorage(), nbofActiveTenants);                                	       		
+                                		console.log("onPlatformChange dispatched");
+                                		        		             			
+                                  		if (nbofActiveTenants == 1)
+                                			showPlatformName(tableTenant);    
+                    		
+                    		*/
+                    		                       		
+
+                    		var tableImport = UWA.createElement('table',{  
+                    			'class': 'tableImportExport',                    			
+                    	     	'id':'',
+                    	 	}).inject(globalDiv);                  			 			
+                  			//var tbody = UWA.createElement('tbody');      
+                  			
+                  			/*var lineImportTitle = UWA.createElement('tr').inject(tableImport);                  			
+                  			var cellImportTitle = UWA.createElement('td', {
+            					'colspan':'3',
+            					'width':'90%',
+            					'align':'left',
+            					'title': ParamWdgNLS.ImportExportTitle
+            				}).inject(lineImportTitle);
+                  			
+                  			UWA.createElement('td').inject(lineImportTitle);
+                  			
+                  			UWA.createElement('h3',{
+                				text: ParamWdgNLS.ImportExportTitle,
+                				'class': 'font-3dslight'
+                			}).inject(cellImportTitle);*/   
+       			                  			
+							var lineExport = UWA.createElement('tr').inject(tableImport);  // tbody
+                    		
+                    		var cellExportText = UWA.createElement('td', {
+                    			'colspan':'2',                    			
+                    			'width':'60%',
+            					'align':'left',
+            					'title': ParamWdgNLS.ExportConfiguration
+            				}).inject(lineExport);
+                	
+                			UWA.createElement('p',{
+                				text: ParamWdgNLS.ExportConfiguration, 
+                				'class': ''
+                			}).inject(cellExportText);       
+                    		                			
+                			var buttonExportCell = UWA.createElement('td', {
+    			                'width' : '40%',  
+    			            	'colspan':'2'
+    				        }).inject(lineExport);
+
+                			var exportBttn =  new Button({
+		                     	className: 'primary',
+		                     	id : 'buttonExport',
+		                     	icon:'export',//'download'//value: 'Button',               
+		                     	attributes: {
+		                        	disabled: false,
+		                         	title: ParamWdgNLS.ExportTooltip,
+	                        		text : ParamWdgNLS.ExportTxt
+	                    		},                 
+               					events: {
+               						onClick: function () {              		
+               							launchXMLExport();        			
+               						},
+			                 	}
+                			}).inject(buttonExportCell);                			
+                			exportBttn.getContent().setStyle("width", 120);  
+                			
+                    		var lineImport = UWA.createElement('tr').inject(tableImport);//   //tbody      
+                    
+                    		var cellImportText = UWA.createElement('td', {
+                					'width':'30%',
+                					'align':'left',
+                					'title': ParamWdgNLS.ChooseXMLtooltip
+                			});
+                    	
+                    		UWA.createElement('p',{
+                    				text: ParamWdgNLS.SelectImportFile, 
+                    				'class': ''
+                    		}).inject(cellImportText);          
+                  
+                    		var cellImportContainer = UWA.createElement('td', {
+        						'width':'30%',
+        						'align':'left',
+        						'title': ''
+        					});  
+                    
+                			var fileController = new UWA.Controls.Input.File({
+                        	attributes: {
+                                     'id':'Input_x'
+                                    },       
+                        	className: 'xml-file-input',  
+            				events: {
+                    	       		//onClick: function () { },
+                                	onChange: function() {
+                                		//onXMLFileSelected.bind(this)//onXMLFileSelected(this)
+                                		//activateImportButton();
+                                	}
+                       		}
+                   			}).inject(cellImportContainer);
+                	
+                			fileController.getContent().setStyle("width", 250) ;
+	          
+                			var importBttnCell = UWA.createElement('td', {
+        						'width':'30%',
+        						'align':'left',
+        						'title': ''
+        					});                  			
+                			
+                			importBttnGrp = new Button({
+                			    value: 'Import',
+                			    className: 'primary',
+                			    icon: 'fonticon-upload',
+                				attributes: {        
+                           			title: ParamWdgNLS.ImportFile
+                				},
+                			    dropdown: {
+                			        items: [
+                			            { text: ParamWdgNLS.Importtxt, name : 'Import', title : 'Explain Something' },
+                			            { text: ParamWdgNLS.ImportAndApply, name : 'importNdeploy' },
+                			        ]
+                			    }
+                			}).inject(importBttnCell);
+                			                			
+                			importBttnGrp.addEvent('onDropdownClick', function (e, item) {
+                				onXMLFileSelected(item.name);
+                				//UWA.log(item);
+                			});
+                			
+                			importBttnGrp.getContent().setStyle("width", 120);  
+                			
+                			/*importBttnGrp = new ButtonGroup({
+                				buttons: [   
+								importBttn = new Button({
+                						id : 'buttonImport',
+                               			className: 'primary',//default
+                               			icon:'fonticon-upload',
+                               			value: ParamWdgNLS.Importtxt, 
+                               			disabled: true,
+                               			attributes: {        
+                                   			title: ParamWdgNLS.ImportFile,
+                                   			text : ParamWdgNLS.Importtxt,
+                                   			disabled: true
+                               			},                           
+                           				events: {
+                           					onClick: function () {                           		
+                           						onXMLFileSelected("import");
+                           					},
+                           				}
+                        		}).disable(),
+                				new Button({
+                					dropdown: {
+                						items: [         
+                							{ text: ParamWdgNLS.ImportAndApply },                		
+                							]
+                						},
+                						events: {
+                							onDropdownClick: function (e, item) { 
+                								console.log(item); 
+                	         					onXMLFileSelected("importNdeploy");
+                							}
+                						}
+                					})
+                					],
+                				className: 'primary',
+                				events: {
+                				onClick: function (e, button) { 
+                					//console.log(button);       
+                					}
+                				}
+                			}).setDisabled(true).inject(importBttnCell);*/        
+                			 
+                			var cellSpinnerContainer = UWA.createElement('td', {
+        						'width':'10%',
+        						'align':'center',
+        						'title': ''
+        					});      	
+                	
+                			importSpinner = new Spinner({visible:false}).inject(cellSpinnerContainer);
+                	
+                			cellImportText.inject(lineImport);
+                			cellImportContainer.inject(lineImport);
+                			importBttnCell.inject(lineImport);
+                			cellSpinnerContainer.inject(lineImport);                			
+                			lineImport.inject(tableImport);//tbody 
+                			
+                			lineDeployButton = UWA.createElement('tr').hide();  
+                			
+                			var cellDeployText = UWA.createElement('td', {
+                				'colspan':'2',
+                				'width':'60%',
+            					'align':'left',
+            					'title': ParamWdgNLS.ApplyNonDeployed
+            				}).inject(lineDeployButton);
+                	                			
+                			UWA.createElement('p',{
+                				text: ParamWdgNLS.ApplyNonDeployed, 
+                				'class': ''
+                			}).inject(cellDeployText); 
+                					
+                			var ApplyBttnCell = UWA.createElement('td', {
+                				'colspan':'2',
+                				'width':'40%',
+        						'align':'left',
+        						'title': ''
+        					}).inject(lineDeployButton);
+                			
+                			var ApplyBttn = new Button({
+                				id : 'buttonImport',
+                               	className: 'primary',
+                               	icon:'fonticon-forward',
+                               	value: ParamWdgNLS.Apply, 
+                               	attributes: {        
+                                   title: ParamWdgNLS.ApplyNonDeployed,
+                                   text : ParamWdgNLS.Apply
+                               	},                           
+                           		events: {
+                           			onClick: function () {                           		
+                           				//onXMLFileSelected();
+                           				importSpinner.show();
+                           				deployParamsOnServer();
+                           			},
+                           		}
+                        	}).inject(ApplyBttnCell);  
+                			
+                			ApplyBttn.getContent().setStyle("width", 120);  
+                			         			
+                			lineDeployButton.inject(tableImport);// tbody              
+                				                	                	
+                    		globalParamWidget.socket.addListener('needTenant', function (data) {                        
+                    		var callerID = data.callerSocketID;                    	
+                    		sendTenantToWidget(callerID); 
+                     		});       
+                    		
+                    		globalParamWidget.socket.addListener('needDeploy', function (data) {                        
+                    			activateDeployLine();
+                         	});                     		
+                    		
+                		},
+      
+                		onRefresh: function() {
+                    		console.log("Deploy Widget::On Refresh ...");          
+                		},
+   
+            		};//globalParamWidget
+
+          			widget.addEvents({
+                		onLoad: globalParamWidget.onLoad,
+                		onRefresh: globalParamWidget.onRefresh,
+            		});
+         
+          });// of require
+
+        </script>
+      </head>
+      <body>
+            <p>Loading content...</p>
+      </body>
+</html>

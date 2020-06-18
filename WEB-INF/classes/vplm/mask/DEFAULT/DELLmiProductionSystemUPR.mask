@@ -1,0 +1,338 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY DELLmiUPRSystemReference
+// --------------------------------------------------
+// --- attributes: 
+// --- Attributes: removed from functional type after RACE converversion for typing V2
+//Removed: ATTR majorrevision;N;N;$
+//Removed: ATTR minorrevision;N;N;$
+//Removed: ATTR V_discipline;N;N;$
+//Feb 2013 - connot be removed and have to manage in Query the 3DPart case: ATTR V_usage;N;N;$
+//Removed: ATTR V_ApplicabilityDate;N;N;$
+//Removed: ATTR V_nature;N;Y;Definition
+//VALUE Definition
+//VALUE Specification
+//VALUE Presentation
+//Removed: ATTR reserved;N;N;$
+//Removed: ATTR V_sec_level;N;Y;-1
+
+//a) naming 
+
+//title
+//notice specific modeler may decide not to deploy, or not to deploy it as mandatory
+ATTR V_Name;Y;N;$
+
+//name (aka identifier)
+ATTR PLM_ExternalID;Y;N;$
+
+//to superseed two below attributes (which are not defaulty presented)
+ATTR revision;N;N;$   
+ATTR majorrevision;N;N;$
+ATTR minorrevision;N;N;$
+
+//b) description
+//Suppressed for Typing V2 deployment 
+//list published on 07/04/09, based on JCS consolidation of 3Live visible disciplines
+//list modified on 12/05/09 consolidation with 3DLive (LVT) 
+//ATTR V_discipline;N;N;$
+//VALUE PPRContext
+
+ATTR V_description;N;N;$
+
+//Was RACE generic Custo Attribute (to be used for MajorRevisionnable object)
+ATTR V_versionComment;N;N;$
+
+ATTR V_PlannedStartDate;N;N;$
+ATTR V_PlannedEndDate;N;N;$
+ATTR V_ActualStartDate;N;N;$
+ATTR V_ActualEndDate;N;N;$
+ATTR V_ScheduledStartDate;N;N;$
+ATTR V_ScheduledEndDate;N;N;$
+ATTR V_TargetStartDate;N;N;$
+ATTR V_TargetEndDate;N;N;$
+ATTR V_DueDate;N;N;$
+ATTR V_EarliestStartDate;N;N;$
+ATTR V_Priority;N;N;$
+
+//c) Developement Status
+ATTR originated;N;N;$
+//Was RACE generic Custo Attribute
+ATTR V_fromExternalID;N;N;$
+ATTR modified;N;N;$
+ATTR current;N;N;$
+ATTR reservedby;N;N;$
+
+//d) collaborative security set-up
+ATTR policy;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+
+//
+// -----------------------------------------------------------
+FUNC Create
+//This section must not be completed by Applicative Derivative Information (but on exception of Mandatory information / user must define at create)
+// -----------------------------------------------------------
+//
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_description;Y
+FATTR policy;N
+FATTR V_DueDate;Y
+FATTR V_TargetStartDate;Y
+FATTR V_TargetEndDate;Y
+FATTR V_EarliestStartDate;Y
+FATTR V_Priority;Y
+
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+//This section must not be completed by Applicative Derivative Information 
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+//when BL do not manage default V_Name, addition of PLM_ExternalID in Tree is needed 
+//FATTR PLM_ExternalID;N
+FATTR revision;N
+//This section must not be completed by Derivative information 
+// - unordered
+//
+// -----------------------------------------------------------
+FUNC EZQuery
+//This section must not be completed by Applicative Derivative Information
+// -----------------------------------------------------------
+// - ordered
+//a) naming
+FATTR V_Name;Y
+FATTR PLM_ExternalID;Y
+FATTR revision;Y
+//b) description
+//FATTR V_discipline;Y
+//FATTR V_usage;Y
+//c) state of dev
+FATTR modified;Y
+//FATTR reservedby;Y
+//d) collaborative security set-up
+//FATTR owner;Y
+//FATTR organization;Y
+FATTR project;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+//This section should be completed by Applicative Derivative Information (see completion detail below)
+// -----------------------------------------------------------
+// - ordered
+//a) naming
+FATTR V_Name;Y
+FATTR PLM_ExternalID;Y
+FATTR revision;Y 
+
+//b) description
+//FATTR V_discipline;Y
+FATTR V_description;Y
+FATTR V_versionComment;Y
+//This section may be completed by Applicative Derivative Description
+FATTR V_PlannedStartDate;Y
+FATTR V_PlannedEndDate;Y
+FATTR V_ActualStartDate;Y
+FATTR V_ActualEndDate;Y
+FATTR V_ScheduledStartDate;Y
+FATTR V_ScheduledEndDate;Y
+FATTR V_TargetStartDate;Y
+FATTR V_TargetEndDate;Y
+FATTR V_DueDate;Y
+FATTR V_EarliestStartDate;Y
+FATTR V_Priority;Y
+
+//c) development status
+FATTR originated;Y
+FATTR V_fromExternalID;Y
+FATTR modified;Y
+FATTR current;Y
+FATTR reservedby;Y
+//This section may be completed by Applicative Derivative Development Status
+
+//d) collaborative security set-up
+FATTR policy;Y
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+//This section may be completed by Applicative Derivative information (see addtion detail below)
+// -----------------------------------------------------------
+// - ordered
+//a) naming (used for Properties Read & List) 
+FATTR V_Name;N
+FATTR PLM_ExternalID;N
+FATTR revision;N  
+
+//b) description
+//FATTR V_discipline;N
+FATTR V_description;N
+FATTR V_versionComment;N
+//This section may be completed by Applicative Derivative Description
+FATTR V_PlannedStartDate;N
+FATTR V_PlannedEndDate;N
+FATTR V_ActualStartDate;N
+FATTR V_ActualEndDate;N
+FATTR V_ScheduledStartDate;N
+FATTR V_ScheduledEndDate;N
+FATTR V_TargetStartDate;N
+FATTR V_TargetEndDate;N
+FATTR V_DueDate;N
+FATTR V_EarliestStartDate;N
+FATTR V_Priority;N
+
+//c) development status
+FATTR originated;N
+FATTR V_fromExternalID;N
+FATTR modified;N
+FATTR current;N
+FATTR reservedby;N
+//This section may be completed by Applicative Derivative Development Status
+
+//d) collaborative security set-up
+FATTR policy;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+
+//a) naming
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR revision;N  
+
+//b) description
+//FATTR V_discipline;N
+FATTR V_description;Y
+FATTR V_versionComment;Y
+FATTR V_PlannedStartDate;N
+FATTR V_PlannedEndDate;N
+FATTR V_ActualStartDate;N
+FATTR V_ActualEndDate;N
+FATTR V_ScheduledStartDate;Y
+FATTR V_ScheduledEndDate;Y
+FATTR V_TargetStartDate;Y
+FATTR V_TargetEndDate;Y
+FATTR V_DueDate;Y
+FATTR V_EarliestStartDate;Y
+FATTR V_Priority;Y
+
+
+//c) development status
+FATTR originated;N
+FATTR V_fromExternalID;N
+FATTR modified;N
+FATTR current;N
+//FATTR reservedby;N
+
+//d) collaborative security set-up
+FATTR policy;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+
+// --------------------------------------------------
+ENTITY DELLmiUPRSystemInstance
+// --------------------------------------------------
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR originated;N;N;$
+ATTR reservedby;N;N;$
+ATTR modified;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+//Not available in Query (default behavior)
+//FATTR PLM_ExternalID;Y
+//FATTR modified;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+//Not available in Query (default behavior)
+//FATTR PLM_ExternalID;Y
+//FATTR originated;Y
+//FATTR modified;Y
+//FATTR reservedby;Y
+//FATTR owner;Y
+//FATTR organization;Y
+//FATTR project;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR originated;N
+FATTR modified;N
+FATTR reservedby;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR originated;N
+FATTR modified;N
+//FATTR reservedby;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// -----------------------------------------------------------

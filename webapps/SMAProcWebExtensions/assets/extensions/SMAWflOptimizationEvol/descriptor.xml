@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.Evol" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationEvol" nlsID="dispname">Evol</DisplayName>
+	<Description nlsFile="SMAWflOptimizationEvol" nlsID="desc">Evol optimization plugin</Description>
+	<LongDescription nlsFile="SMAWflOptimizationEvol" nlsID="longdesc">
+		<![CDATA[Evol
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Evolutionary Algorithm
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for non-linear design spaces
+   &#8226; Well-suited for discontinuous design spaces
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>No
+
+</span><span style="font-weight:bold">Features:
+</span><span>Evol is an evolution strategy based on the works of Rechenberg and Schwefel which mutates designs by adding a normally distributed random value to each design variable. The mutation strength (standard deviation of the normal distribution) is self-adaptive and changes during the optimization process.
+
+The algorithm has been calibrated to efficiently solve design problems with low numbers of variables and with some noise in the design space. It possesses the following features:
+   &#8226; Design space discretization - the algorithm only considers discrete design points, controlled via the Minimum Discrete Step technique option (default is 2% of the design variable domain).
+
+   &#8226; Duplicate design point check - the algorithm makes sure that no two design points submitted for evaluation are the same.
+
+   &#8226; Sigma expansion - If only repeat calculations are being found after randomization, then the algorithm increases the standard deviation of the random normal distribution.
+
+   &#8226; Consecutive Variable Search - The algorithm can vary either all design variables simultaneously or one variable at a time.
+
+   &#8226; Parallel execution - The algorithm is parallelized to produce multiple children when parallel resources are available, and to use the best of the children to feed forward to the next iteration. Since the algorithm by its nature does not produce children design points in batches, the size of the batch must be specified externally via the Parallel Batch Size option.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.Evol</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationEvol.CATNls" targetFilename="SMAWflOptimizationEvol.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationEvol_Japanese.CATNls" targetFilename="SMAWflOptimizationEvol_Japanese.CATNls" locale="Japanese"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflOptimizationEvol.dll" targetFilename="win_b64/SMAWflOptimizationEvol.dll" />
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.evol.Evol</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>com.dassault_systemes.sma.plugin.optimization.EvolHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="ExecutesInParallel" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Max Evaluations" type="integer" valuetype="single">
+				<Value>100</Value>
+			</Property>
+			<Property name="Convergence Tolerance" type="real" valuetype="single">
+				<Value>0.01</Value>
+			</Property>
+			<Property name="Minimum Discrete Step" type="real" valuetype="single">
+				<Value>0.02</Value>
+			</Property>
+			<Property name="Consecutive Variable Search" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Parallel Batch Size" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Penalty Base" type="real" valuetype="single">
+				<Value>0.0</Value>
+			</Property>
+			<Property name="Penalty Multiplier" type="real" valuetype="single">
+				<Value>1000.0</Value>
+			</Property>
+			<Property name="Penalty Exponent" type="integer" valuetype="single">
+				<Value>2</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Use fixed random seed" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Random seed value" type="integer" valuetype="single">
+				<Value>-1</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

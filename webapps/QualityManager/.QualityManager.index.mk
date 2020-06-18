@@ -1,0 +1,15 @@
+m|WebVisualization\QualityManager.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19096
+r|G:\R421\BSF\.
+t|win_b64\webapps\QualityManager\QualityManager.js|1554530796|10928
+s|WebVisualization\QualityManager.mweb\src\QMController.js|1543231050|9304
+s|WebVisualization\QualityManager.mweb\src\QMGIController.js|1530709179|9955
+s|WebVisualization\QualityManager.mweb\src\QualityManager.js|1542797608|4
+s|WebVisualization\QualityManager.mweb\src\QMPresetStreamer.js|1540477640|3377
+s|WebVisualization\QualityManager.mweb\src\QMGIPresetStreamer.js|1530709157|3970
+t|win_b64\webapps\QualityManager\assets\mdl_QualityManagerPreset.json|1541626940|12925
+s|WebVisualization\QualityManager.mweb\src\assets\mdl_QualityManagerPreset.json|1540981630|12925
+t|win_b64\webapps\QualityManager\assets\mdl_GIVisualQualityPresets.json|1541210379|11582
+s|WebVisualization\QualityManager.mweb\src\assets\mdl_GIVisualQualityPresets.json|1530709204|11582

@@ -1,0 +1,1 @@
+define("DS/DMUBaseCtxCommands/DMUBaseCtxCommands_zh",{});define("DS/DMUBaseCtxCommands/assets/nls/DMUBaseCtxCommands",{slideNeededLabel:"创建或应用幻灯片以修改产品显示",hideShowTargetLabel:"选择要隐藏的测量、截面、标记或产品",deleteWarningPanel:{title:"删除",message:"是否确定要删除选定元素？",cancelLabel:"取消",okLabel:"确定"},noFill:"无填充",noBorder:"无边框"});

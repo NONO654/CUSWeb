@@ -1,0 +1,1 @@
+define("DS/ENOXTriptych/ENOXTriptych_ru",{});define("DS/ENOXTriptych/assets/nls/ENOXTriptych",{_close:"Закрыть"});

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IdeaExperienceCapacities>
+	<Header>
+		<Version>0.1</Version>
+	</Header>
+
+  <ExperienceObject>
+
+    <CXPService id="sailsTo" mode="task" fctStart="sailsTo" >
+      <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec;CXP3DActorOverride_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="sails to" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPFunction id="isSailingTo" body="isSailingTo" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec;CXP3DActorOverride_Spec"/>
+      <NaturalLanguageInfo capacityType="SensorState" alias="is sailing to" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPFunction>
+
+    <CXPEvent id="BoatHasReachedEvent" targetParam="targetActor">
+        <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec;CXP3DActorOverride_Spec"/>
+        <NaturalLanguageInfo capacityType="SensorEvent" alias="has reached" icon="icons/caps/I_CXPMoveReach.png" exposedVariable="target"/>
+    </CXPEvent>
+
+    <CXPService id="followTrajectory" mode="task" fctStart="followTrajectory" >
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <!--<NaturalLanguageInfo capacityType="DriverTask" alias="follows trajectory" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>-->
+      <NaturalLanguageInfo capacityType="DriverTask" alias="sails along" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPFunction id="isFollowing" body="isFollowing" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <!--<NaturalLanguageInfo capacityType="SensorState" alias="is following" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>-->
+      <NaturalLanguageInfo capacityType="SensorState" alias="is sailing along" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPFunction>
+
+    <CXPEvent id="BoatHasCompletedEvent" targetParam="path">
+        <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+        <NaturalLanguageInfo capacityType="SensorEvent" alias="has completed" icon="icons/caps/I_CXPMoveComplete.png" exposedVariable="target"/>
+    </CXPEvent>
+
+  </ExperienceObject>
+
+</IdeaExperienceCapacities>

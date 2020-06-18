@@ -1,0 +1,13 @@
+m|ENOXAppsFoundationsUX\ENOXIDCardContainer.mweb
+b|j|n,u
+b|c|n,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\ENOXIDCardContainer\html\ENOXIDCardContainer.html|1531550817|284
+s|ENOXAppsFoundationsUX\ENOXIDCardContainer.mweb\src\html\ENOXIDCardContainer.html|1499261353|284
+t|ENOXAppsFoundationsUX\ENOXIDCardContainer.mweb\LocalGenerated\win_b64\css\ENOXIDCardContainer.css|1531550741|676
+s|ENOXAppsFoundationsUX\ENOXIDCardContainer.mweb\src\css\ENOXIDCardContainer.scss|1501143813|658
+t|win_b64\webapps\ENOXIDCardContainer\js\ENOXIDCardContainer.js|1529418485|6393
+s|ENOXAppsFoundationsUX\ENOXIDCardContainer.mweb\src\js\ENOXIDCardContainer.js|1529418485|6393
+t|win_b64\webapps\ENOXIDCardContainer\css\ENOXIDCardContainer.css|1568749442|285
+g|ENOXAppsFoundationsUX\ENOXIDCardContainer.mweb\LocalGenerated\win_b64\css\ENOXIDCardContainer.css|1531550741|676

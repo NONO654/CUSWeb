@@ -1,0 +1,2 @@
+/*! Copyright 2017 Dassault Systèmes */
+if(typeof redux!=="undefined"){define("DS/Redux/Redux",[],function(){return redux})}else{if(require.toUrl("DS/VENRedux").indexOf("Redux-4.0.0")===-1){(function(){var a=(window.localStorage.ReduxDebug==="true")?require.toUrl("DS/Redux-4.0.0/redux"):require.toUrl("DS/Redux-4.0.0/redux.min");if(a.indexOf("?")>-1){a=a.substring(0,a.indexOf("?"))}require.config({paths:{"DS/VENRedux":a},shim:{"DS/VENRedux":{exports:"redux"}}})})()}}define("DS/Redux/Redux",["DS/VENRedux"],function(a){return a});

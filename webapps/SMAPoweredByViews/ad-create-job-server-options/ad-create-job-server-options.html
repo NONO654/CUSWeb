@@ -1,0 +1,79 @@
+<!-- Copyright 2018 Dassault Systemes. All rights reserved. -->
+<dom-module id="ad-create-job-server-options">
+	<style>
+		/* Make sure alert-message aligns and wraps correctly */
+		:host .popover-body, :host .alert-message {
+			display: block;
+		}
+
+		/* Select menus with a refresh button */
+		:host .selectWithIcon {
+			display: flex;
+			flex-direction: row;
+		}
+		:host .selectIcon {
+			margin: 10px 10px 0 10px;
+			color: #b4b6ba; /** icon gray **/
+			cursor: pointer;
+		}
+		:host .selectIcon:hover {
+			color: #3d3d3d; /** dark gray **/
+		}
+		:host .selectIcon:active {
+			color: #368ec4; /** dark blue **/
+		}
+	</style>
+	<template>
+		<!-- CLOUD DRM -->
+		<div id="cloudDRMSection" hidden$="[[!_isCloudCompute(drmMode)]]">
+			<div id="osSelectDiv" class="form-group" hidden$="[[_isOsSelectHidden(supportedOSOptions)]]">
+				<label for="osSelect" class="control-label">[[NLS.OperatingSystem]]</label>
+				<select
+					id="osSelect"
+					is="ad-select-menu"
+					class="form-control"
+					selected="[[os]]"
+					items="[[supportedOSOptions]]"
+					on-change="_onOSChanged">
+				</select>
+			</div>
+		</div>
+		<!-- FIPER AND CUSTOM DRM -->
+		<div id="otherDRMSection" hidden$="[[_isCloudCompute(drmMode)]]">
+			<!-- 3DORCHESTRATE SERVER -->
+			<div class="form-group">
+				<label for="cosServersSelect" class="control-label">[[NLS.COSServer]]</label>
+				<ad-popover title="[[NLS.COSServer]]" body="[[NLS.CosServersSelectPopover]]"></ad-popover>
+				<div class="selectWithIcon">
+					<select
+						id="cosServersSelect"
+						is="ad-select-menu"
+						class="form-control"
+						selected="[[server]]"
+						items="[[supportedServerOptions]]"
+						loading="[[_isLoading(serversPersistenceOperation)]]"
+						on-change="_onServerChanged">
+					</select>
+					<span class="fonticon fonticon-refresh selectIcon" on-click="_refreshServers"></span>
+				</div>
+			</div>
+			<!-- 3DORCHESTRATE STATION -->
+			<div class="form-group">
+				<label for="cosStationsSelect" class="control-label">[[NLS.Station]]</label>
+				<ad-popover title="[[NLS.Station]]" body="[[NLS.StationsSelectPopover]]"></ad-popover>
+				<div class="selectWithIcon">
+					<select
+						id="cosStationsSelect"
+						is="ad-select-menu"
+						class="form-control"
+						selected="[[station]]"
+						items="[[supportedStationOptions]]"
+						loading="[[_isStationsLoading(stationsPersistenceOperation, isAppInitialized)]]"
+						on-change="_onStationChanged">
+					</select>
+					<span class="fonticon fonticon-refresh selectIcon" on-click="_refreshStations"></span>
+				</div>
+			</div>
+		</div>
+	</template>
+</dom-module>

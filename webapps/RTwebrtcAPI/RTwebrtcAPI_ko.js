@@ -1,0 +1,1 @@
+define("DS/RTwebrtcAPI/RTwebrtcAPI_ko",{});define("DS/RTwebrtcAPI/assets/nls/feed",{Call:"호출",notCompatible:"브라우저가 호환되지 않습니다. Chrome 또는 Firefox를 사용하십시오."});

@@ -1,0 +1,386 @@
+<html>
+
+    <head>
+        <link rel="stylesheet" href="../../../c/UWA/assets/css/iframe.css" type="text/css" />
+        <link rel="stylesheet" href="../../../UIKIT/UIKIT.css" type="text/css" />
+        <script type="text/javascript" src="../../../AmdLoader/AmdLoader.js"></script>
+        <script type="text/javascript" src="../../../WebappsUtils/WebappsUtils.js"></script>
+        <!--link rel="stylesheet" type="text/css" href="../../../c/UWA/assets/css/standalone.css" /-->
+        <script type="text/javascript" src="../../../c/UWA/js/UWA_Frame_Alone.js"></script>
+        <!--script type="text/javascript" src="../../../SwymUIComponents/SwymUIComponents.js"></script-->
+        
+        <link rel="stylesheet" href="../../../W3DXComponents/W3DXComponents.css" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="../../../VENCKEditor/4.11.4/contents.css" />        
+        <link rel="stylesheet" href="../../../SwymUIComponents/SwymUIComponents.css" type="text/css" />
+        <link rel="stylesheet" href="../../../SwymUnifiedSearch/SwymUnifiedSearch.css" type="text/css" />
+
+        <script type="text/javascript">
+            'use strict';
+
+            /**
+             * CSS files are loaded at the top of the html with a specific order. Also modules can trigger some css load, which may override css rules and break the order.
+             * So the following css requires allow to cancel the extra css loads done later by the modules to maintain the order.
+            **/
+            (function() {
+                'use strict';                
+                
+                [
+                    'css!DS/UIKIT/UIKIT',
+                    'css!DS/W3DXComponents/W3DXComponents',
+                    'css!DS/SwymUnifiedSearch/SwymUnifiedSearch',
+                ].forEach(function(moduleName) {
+                    define(moduleName, [], function() {
+                        'use strict';
+                        return '';
+                    });
+                });
+            })();
+
+            var oldModelView, receivedData, observer = null,
+                parentWindowOrigin = null,
+                onContentResizeDebounced = null;
+
+            if (typeof(window.ds) !== 'object') {
+                var ds = {};
+            }
+            ds.env = '3DSearch';
+
+            function displayModelView(modelAttributes, viewOptions) {
+                require(
+                    [
+                        'UWA/Core',
+                        'UWA/Element',
+                        'DS/UIKIT/Mask',
+                        'DS/SwymUICore/script/utils/utils',
+                        'DS/SwymUnifiedSearch/script/utils',
+                        'DS/SwymUIComponents/script/feature/community/content/view/content-viewer-view',
+                        'DS/SwymUICore/script/feature/core/user/model/user-model',
+                        'DS/SwymUICore/script/feature/community/community/model/community-model',
+                        'DS/SwymSCI/script/layout/user-app-view-with-scroll',                        
+                        'DS/SwymUnifiedSearch/script/customization/views/community-primary-view',
+                        'DS/SwymUICore/script/feature/core/context/context-model',
+                        'DS/SwymUICore/script/feature/community/media/model/media-model',                        
+                        'DS/SwymUIComponents/script/feature/community/idea/view/idea-status-view',
+                        'DS/SwymUICore/script/feature/community/idea/model/idea-model',
+                        'DS/SwymUICore/script/feature/core/direct-message/model/direct-message-model',
+                        'DS/SwymUnifiedSearch/script/customization/views/conversation-primary-view',
+                        'DS/SwymUICore/script/feature/community/iquestion/model/iquestion-model',
+                        'DS/SwymUIComponents/script/feature/community/question/view/validated-answers-view',
+                        'DS/SwymUnifiedSearch/script/customization/views/media-primary-view'
+                    ],
+                    function (Core, Element, Mask, Utils, UnifiedSearchUtils, ContentViewerView, UserModel, CommunityModel, UserAppViewWithScroll, CommunityPrimaryView,
+                        Context,
+                        MediaModel,                        
+                        IdeaStatusView,
+                        IdeaModel,
+                        DMModel,
+                        ConversationPrimaryView,
+                        QuestionModel,
+                        ValidatedAnswersView,
+                        MediaPrimaryView
+                        ) {
+
+                        Core.extendElement(document);
+                        Core.extendElement(document.body);
+                      
+                        document.body.classList.add('swym-content-preview', 'community-content-wrapper', 'swym-im');
+
+                        /* disable click */
+                        //document.body.addEvent('click', linkBlocker);
+
+                        Mask.mask(document.body);
+
+                        //create a wrapper for the view
+                        var wrapper = Core.createElement('div', {
+                            'class': 'detailed-content'
+                        });
+                        wrapper.inject(document.body);
+
+                        //in the frame, the window.location.href has the following pattern: 
+                        //https://domain[/3dswym]/webapps/SwymUnifiedSearch/assets/html/content.html
+                        var location = window.location,
+                            pathname = location.pathname.split('/webapps')[0],
+                            baseUrl = location.protocol + "//" + location.host + (pathname ? pathname : '');
+                            //removal of terminal /
+                            if (baseUrl.endsWith('/')){
+                                baseUrl = baseUrl.substring(0, baseUrl.length - 1);
+                            }    
+                        Utils.initBaseUrl(baseUrl);
+
+                        UnifiedSearchUtils.fetchSearchResultData(modelAttributes, {
+                            onComplete: function (swymModel) {
+                                var modelView = null,
+                                    addHideButtonsClass = false;
+                                Mask.unmask(document.body);
+
+                                if(swymModel instanceof UserModel){
+                                    document.body.removeClassName('community-content-wrapper');
+                                    document.body.addClassName('swym-app');
+                                    wrapper.removeClassName('detailed-content');
+                                    
+                                    modelView = new UserAppViewWithScroll({
+                                        model: swymModel,
+                                        facet: 0,
+                                        widget: document.body,
+                                        taggingContextManager: null
+                                    });                                   
+                                }
+                                else{
+                                    if(swymModel instanceof DMModel){
+                                        modelView = new ConversationPrimaryView({});                                        
+                                    }
+                                    else{
+                                        if(swymModel instanceof CommunityModel){
+                                            Context.getInstance().reset({
+                                                communityId: swymModel.get('mid'),                                            
+                                                contentType: 'community'});
+                                            modelView = new CommunityPrimaryView({model:swymModel});
+                                        }
+                                        else{
+                                            //For ideas, add the pipeline
+                                            if(swymModel instanceof IdeaModel){
+                                                var pipeline = new IdeaStatusView({
+                                                    model : swymModel,
+                                                    height: 12                                                
+                                                });
+                                                pipeline.render(wrapper);
+                                                addHideButtonsClass = true;
+                                            }
+                                            
+                                            if(swymModel instanceof MediaModel){                                                
+                                                modelView = new MediaPrimaryView({
+                                                    widget: document.body,
+                                                    model: swymModel
+                                                });
+                                                addHideButtonsClass = true;
+                                            }
+                                            else{
+                                                modelView = new ContentViewerView(
+                                                    Core.merge(
+                                                        {                                                            
+                                                            model: swymModel
+                                                        },
+                                                        viewOptions
+                                                    )
+                                                );
+                                                addHideButtonsClass = true;
+                                            }                                            
+                                        }
+                                    }                                                                                                        
+                                }                               
+
+                                if(UnifiedSearchUtils.isBetaEnabled()){
+                                    modelView.getContent().addClassName(' beta-mode');
+                                }
+                                if(addHideButtonsClass){
+                                    modelView.getContent().addClassName(' hide-buttons');
+                                }
+                                modelView.render(wrapper);
+
+                                 //validated questions, add the validated answer view after the content viewer view
+                                 if(swymModel instanceof QuestionModel){                                    
+                                    swymModel.fetchValidatedAnswers({
+                                        onComplete: function(){
+                                            if(swymModel.isValidated()){
+                                                var validatedAnswersView = new ValidatedAnswersView({
+                                                    collection: swymModel.getValidatedAnswerCollection(),
+                                                    Class: 'DS/SwymUIComponents/script/feature/community/question/view/validated-answers-view',
+                                                    modelName: swymModel.getModelName()
+                                                });
+                                                validatedAnswersView.render(wrapper);
+                                            }
+                                        }
+                                    });
+                                }
+
+                                if (oldModelView) {
+                                    oldModelView.destroy();
+                                }
+                                oldModelView = modelView;                           
+                            },
+                            onFailure: function (searchModel, data) {
+                                Mask.unmask(document.body);
+
+                                //case of a private community, the community/get returns a 403 that'w why we end up in the onFailure, but returns some data still
+                                if(searchModel instanceof CommunityModel){
+                                    //instantiation of a cty model
+                                    var ctyModel = new CommunityModel(data.result);
+                                    //the cty/get does not return the creation date, but it is present in the search results. So the ctyModel is completed
+                                    ctyModel.set('crdate', searchModel.get('ds6w:created', { escapeHTML: false }));
+                                    Context.getInstance().reset({
+                                        communityId: ctyModel.get('mid'),                                            
+                                        contentType: 'community'});
+                                    var modelView = new CommunityPrimaryView({model:ctyModel});
+
+                                    modelView.render(wrapper);
+
+                                    if (oldModelView) {
+                                        oldModelView.destroy();
+                                    }
+                                    oldModelView = modelView;   
+                                }
+                                else{
+                                	if (console.error) {
+                                    	console.error('Something went wrong');
+                                	}
+                            	}
+                            }
+                        });
+                    }
+                );
+            }
+
+            //function called when the parent frame sends an event
+            function messageListener(event) {                
+                var result,
+                    data = event.data,
+                    orig = event.origin,                
+                    initRendering = function() {
+                        if (data.modelAttributes) {
+                            if (data.initModule) {
+                                require([data.initModule], function() {
+                                    displayModelView(data.modelAttributes, data.viewOptions);
+                                });
+                            } else {
+                                displayModelView(data.modelAttributes, data.viewOptions);
+                            }
+                        }
+                    };
+
+                //console.log('Message received by frame', data);
+                //console.log('Message received from', orig);
+
+                receivedData = data;                     
+
+                //the iframe receives messages from the parent window which are not all triggered by Swym (swym-content-view.js)
+                //for this reason, we check that the message is the swym one (via properties presence)
+                //this is actually a best practice https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#Security_concerns
+                if (data && (data.isBetaEnabled !== undefined)) {
+                    require([
+                        'DS/UWPClientCode/I18n'
+                    ], function(I18n) {
+                        var lang = data.lang || I18n.getCurrentLanguage();
+                        // /!\ any require to modules must be performed AFTER the lang was set
+                        require.config({
+                            config: {
+                                i18n: {
+                                    locale: lang
+                                }
+                            }
+                        });
+                        window.dsLang = lang;
+
+                        require([                            
+                            'DS/SwymUICore/script/utils/utils',
+                            'DS/SwymUnifiedSearch/script/utils'
+                        ], function(Utils, UnifiedSearchUtils) {
+                            //debounce the onContentResize
+                            onContentResizeDebounced = Utils.debounce(onContentResize, 400);                        
+                            
+                            //swym content previews are rendered in an iframe, and all the js scripts are evaluated again. During that process, calling SearchUtils.isInTheSimpleSearch does
+                            //not return the right value, as execution scope are different. So this function is used to set the beta mode correctly for outside the iframe.                       
+                            UnifiedSearchUtils.setBetaMode(data.isBetaEnabled);   
+                            createMutationObserver();       
+                            initRendering();
+                        });                       
+                    });
+                    //store location to be used by postmessage
+                    parentWindowOrigin = data.parentWindowOrigin;
+                }
+            };
+
+            //var cptResizeInContentHtml = 0;
+
+            //add a listener to listen to events sent by the parent frame
+            if (window.addEventListener) {
+                window.addEventListener("message", messageListener, false);                
+                window.addEventListener('unload', onUnload, false);                
+                window.addEventListener('resize', onResize, false);
+            } else {
+                window.attachEvent("onmessage", messageListener);                
+                window.attachEvent('unload', onUnload, false);                
+                window.attachEvent('resize', onResize, false);
+            }
+
+            function onResize(){
+                //when the resize event is triggered, the set of onContentResizeDebounced may not have occured
+                if(onContentResizeDebounced){
+                    //cptResizeInContentHtml++;
+                    //console.log('--------- onContentResize from resize event!!, cptResizeInContentHtml:', cptResizeInContentHtml);                    
+                    onContentResizeDebounced();
+                }  
+            };
+
+            //when the page is loaded, listens to any dom change to communicate the body height to the parent page to resize the iframe tag
+            function createMutationObserver(){
+                require(['DS/SwymUICore/script/utils/utils'], function(Utils){
+                    //the callback is debounced because some mutations occur whereas the content does not change in height, and then some resizings are useless
+                    //observer = new MutationObserver(Utils.debounce(onContentResize, 200));
+                    observer = new MutationObserver(onContentResizeDebounced);
+                    observer.observe(document.body, {
+                        childList: true,
+                        subtree: true,
+                        attributes: true
+                    });
+                });                
+            };
+
+            //when the page is unloaded, stop observing
+            function onUnload(){                
+                observer.disconnect();
+
+                if (window.removeEventListener) {                    
+                    window.removeEventListener("message", messageListener, false);                    
+                    window.removeEventListener('unload', onUnload, false);                
+                    window.removeEventListener('resize', onContentResizeDebounced, false);                    
+                } else {
+                    window.detachEvent("onmessage", messageListener);                    
+                    window.detachEvent('unload', onUnload, false);                
+                    window.detachEvent('resize', onContentResizeDebounced, false);
+                }
+            };
+
+            function onContentResize(){
+                //I don't use the body height as sometimes the height is higher than the detailed content div (of several hundreds of px).
+                //and this bug is random.
+                //it seems the detailed-content div is more reliable in terms of heights
+                var detailedContent = document.body.getElement('.detailed-content'),                    
+                    contentHeight = null,
+                    userAppContent = null;                
+                
+                if(detailedContent){
+                    contentHeight = detailedContent.scrollHeight;
+                }
+                else{
+                    //in the case of user preview, there is no detailed-content, but the correctly sized tag is the scrollable-body
+                    userAppContent = document.body.getElement('.user-app-view-with-scroll-container .scrollable-body');
+                    if(userAppContent){
+                        contentHeight = userAppContent.scrollHeight;
+                    }
+                    else{
+                        //default case, not sure it is used, still I keep it.
+                        contentHeight = document.body.scrollHeight;
+                    }
+                }
+
+                /*if(detailedContent){                   
+                    console.log('detailed content:', detailedContent);
+                }
+                else{
+                    console.log('document.body.scrollHeight:', document.body.scrollHeight, document.body);
+                }
+                console.log('contentHeight:', contentHeight);*/
+                
+                window.top.postMessage({
+                    //swymContentHeight: document.body.scrollHeight
+                    swymContentHeight: contentHeight
+                }, parentWindowOrigin);
+                //console.log('onContentResize, send height via postMessage', contentHeight + 'px');
+            };                     
+        </script>
+    </head>
+
+    <body>
+    </body>
+
+</html>

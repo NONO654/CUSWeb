@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html style="height:100%">
+<head>
+    <title>HTML TABLE Test</title>
+
+    <!-- style -->
+    <link rel="stylesheet" type="text/css" href="assets/styles/wrappedTable.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles/wrappedController.css">
+
+    <!-- amd for own scripts -->
+    <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/html.sortable.min.js"></script>
+    <script>
+        thisjQuery = $.noConflict(true);
+    </script> -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+    <!-- <script type="text/javascript" src="http://uwa.netvibes.com/lib/c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://uwa.netvibes.com/lib/c/UWA/assets/css/standalone.css" /> -->
+
+	<script type="text/javascript">
+
+	    document.addEventListener("DOMContentLoaded", function (e) // for some reasons, this needs to be outside of the require..
+	    {
+	        require([
+                "DS/CfgRules/scripts/generateCfgMatrixRulesExpression"
+                , "DS/CfgRules/scripts/CfgMatrixRulesHighLevelController"
+                , "DS/CfgRules/scripts/generateCfgMatrixRulesXMLExpression"
+                , "DS/CfgRules/scripts/CfgMatrixRulesWebServices"
+                , "DS/CfgRules/scripts/generateCfgMatrixRulesJSONObj"
+               	, 'text!CfgRulesSpec/assets/MRObject_associatedDico.json'
+                , 'text!CfgRulesSpec/assets/MRObject.json'
+
+	        ], function (
+                        generateCfgMatrixRulesExpressionFunctions
+                        , HighLevelControllerMatrixTable
+                        , generateCfgMatrixRulesXMLExpressionFunctions
+                        , WebServices
+                        , MatrixRulesJsonObj
+                        , textDicoObject
+                        , textMRObject)
+	        {
+
+	            var JSONMRObject = JSON.parse(textMRObject);
+	            var JSONDictionary = JSON.parse(textDicoObject);
+
+	            // json To Be Loaded in matrix
+                /*
+	            var jsonToBeLoaded =
+                {
+                    "drivingFeatures": [
+                        { "id": "pid:idCF1" },
+                        { "id": "pid:idCF2" }
+                    ],
+                    "constrainedFeatures": [
+                        { "id": "pid:idCF4" },
+                        { "id": "pid:idCF5" }
+                    ],
+                    "drivingCombinations": [
+                        
+                        {
+                            "combinationOptions": [
+                            { "optionId": "idO11" },
+                            { "optionId": "idO21" }
+                            ]
+                        },
+                        {
+                            "combinationOptions": [
+                            { "optionId": "idO11" },
+                            { "optionId": "idO22" }
+                            ]
+                        },
+                        {
+                            "combinationOptions": [
+                            { "optionId": "idO11" },
+                            { "optionId": "idO23" }
+                            ]
+                        },
+                        {
+                            "combinationOptions": [
+                            { "optionId": "idO12" },
+                            { "optionId": "idO21" }
+                            ]
+                        },
+                        {
+                            "combinationOptions": [
+                            { "optionId": "idO12" },
+                            { "optionId": "idO22" }
+                            ]
+                        },
+                        {
+                            "combinationOptions": [
+                            { "optionId": "idO12" },
+                            { "optionId": "idO23" }
+                            ]
+                        }
+                        
+                    ],
+                    "constrainedCombinations": [
+                        
+                        {
+                            "combinationOptions": [
+                            { "optionId": "idO41" }
+                            ]
+                        },
+                        {
+                            "combinationOptions": [
+                            { "optionId": "idO42" }
+                            ]
+                        }
+                        
+                    ],
+                    //"states": "ABCDEFGHIJKLMNOPQR",
+                    "states": ""//,"IIIIIIVVVVVV",
+                    //"states": "V_____V___________", // ___V____V______V__
+                    //"states": "___V____V______V__"
+                };
+                */
+                /*
+	            jsonToBeLoaded = JSONMRObject;
+
+	            // dictionary expression
+	            // NB : milestones & features should go in the same dictionary (load in single call from server)
+	            var feature1 = {};
+	            feature1.attributes = { "toto": "totovalue", "coco":"cocovalue" };
+	            feature1.displayValue = "Feature1"; feature1.name = "CF1"; feature1.id = "pid:idCF1"; feature1.options = []; feature1.logicalid = "lidCF1";
+	            var optionFor1 = [
+                    { "displayValue": "DNO11", "name": "nO11", "id": "pid:idO11", "parentRelLogicalId": "lidO11" }, { "displayValue": "DNO12", "name": "nO12", "id": "pid:idO12", "parentRelLogicalId": "lidO12" }, { "displayValue": "DNO13", "name": "nO13", "id": "pid:idO13", "parentRelLogicalId": "lidO13" }, { "displayValue": "DispNameO14 very long but with lots of spaces char ! and again the name is not yet over, will it be a day ?", "name": "nO14", "id": "pid:idO14", "parentRelLogicalId": "lidO14" }];
+	            feature1.options = optionFor1; //feature1.isDriving = true;
+	            feature1.selectionType = "single";
+
+	            var feature2 = {};
+	            feature2.attributes = [];
+	            feature2.displayValue = "Feature2"; feature2.name = "CF2"; feature2.id = "pid:idCF2"; feature2.options = []; feature2.logicalid = "lidCF2";
+	            var optionFor2 = [
+                    { "displayValue": "DNO21", "name": "nO21", "id": "pid:idO21", "parentRelLogicalId": "lidO21" }, { "displayValue": "DNO22", "name": "nO22", "id": "pid:idO22", "parentRelLogicalId": "lidO22" }, { "displayValue": "DNO23", "name": "nO23", "id": "pid:idO23", "parentRelLogicalId": "lidO23" }, ];
+	            feature2.options = optionFor2; //feature2.isDriving = true;
+	            feature2.selectionType = "single";
+
+	            var feature3 = {};
+	            feature3.attributes = [];
+	            feature3.displayValue = "Feature3"; feature3.name = "CF3"; feature3.id = "pid:idCF3"; feature3.options = []; feature3.logicalid = "lidCF3";
+	            var optionFor3 = [
+                    { "displayValue": "DNO31Short", "name": "nO31", "id": "pid:idO31", "parentRelLogicalId": "lidO31" }, { "displayValue": "DNO32Looooooooooooong", "name": "nO32", "id": "pid:idO32", "parentRelLogicalId": "lidO32" }, ];
+	            feature3.options = optionFor3; //feature3.isDriving = false;
+	            feature3.selectionType = "single";
+
+	            var feature4 = {};
+	            feature4.attributes = [];
+	            feature4.displayValue = "Feature4"; feature4.name = "CF4"; feature4.id = "pid:idCF4"; feature4.options = []; feature4.logicalid = "lidCF4";
+	            var optionFor4 = [
+                    { "displayValue": "DNO41", "name": "nO41", "id": "pid:idO41", "parentRelLogicalId": "lidO41" }, { "displayValue": "DNO42", "name": "nO42", "id": "pid:idO42", "parentRelLogicalId": "lidO42" }, { "displayValue": "DNO43", "name": "nO43", "id": "pid:idO43", "parentRelLogicalId": "lidO43" }, ];
+	            feature4.options = optionFor4; //feature1.isDriving = true;
+	            feature4.selectionType = "single";
+
+	            var feature5 = {};
+	            feature5.attributes = [];
+	            feature5.displayValue = "Feature5"; feature5.name = "CF5"; feature5.id = "pid:idCF5"; feature5.options = []; feature5.logicalid = "lidCF5";
+	            var optionFor5 = [
+                    //{ "displayValue": "DNO51Greeeat", "name": "nO51", "id": "idO51" }, { "displayValue": "DNO52Insane", "name": "nO52", "id": "idO52" },
+                    //{ "displayValue": "DNO53Really?", "name": "nO53", "id": "idO53" }, { "displayValue": "DNO54Amazing", "name": "nO54", "id": "idO54" },
+                    //{ "displayValue": "DNO55Unbelievable", "name": "nO55", "id": "idO55" }, { "displayValue": "DNO56Intense", "name": "nO56", "id": "idO56" },
+                    //{ "displayValue": "DNO57Goood", "name": "nO57", "id": "idO57" }, { "displayValue": "DNO58Legend..", "name": "nO58", "id": "idO58" },
+                    //{ "displayValue": "DNO59WaitForIT", "name": "nO59", "id": "idO59" }, { "displayValue": "DNO510..Dary", "name": "nO510", "id": "idO510" },
+                    //{ "displayValue": "DNO511Unthinkable", "name": "nO511", "id": "idO511" }, { "displayValue": "DNO512Awesome", "name": "nO512", "id": "idO512" },
+                    { "displayValue": "DNO51LooooooooongDisplName", "name": "nO51", "id": "pid:idO51", "parentRelLogicalId": "lidO51" }, { "displayValue": "DNO52", "name": "nO52", "id": "pid:idO52", "parentRelLogicalId": "lidO52" },
+                    { "displayValue": "DNO53Short", "name": "nO53", "id": "pid:idO53", "parentRelLogicalId": "lidO53" }, { "displayValue": "DNO54", "name": "nO54", "id": "pid:idO54", "parentRelLogicalId": "lidO54" },
+                    { "displayValue": "DNO55", "name": "nO55", "id": "pid:idO55", "parentRelLogicalId": "lidO55" }, { "displayValue": "DNO56", "name": "nO56", "id": "pid:idO56", "parentRelLogicalId": "lidO56" },
+                    { "displayValue": "DNO57", "name": "nO57", "id": "pid:idO57", "parentRelLogicalId": "lidO57" }, { "displayValue": "DNO58Legend..", "name": "nO58", "id": "pid:idO58", "parentRelLogicalId": "lidO58" },
+                    { "displayValue": "DNO59WaitForIT", "name": "nO59", "id": "pid:idO59", "parentRelLogicalId": "lidO59" }, { "displayValue": "DNO510..Dary", "name": "nO510", "id": "pid:idO510", "parentRelLogicalId": "lidO510" },
+                    { "displayValue": "DNO511", "name": "nO511", "id": "pid:idO511", "parentRelLogicalId": "lidO511" }, { "displayValue": "DNO512", "name": "nO512", "id": "pid:idO512", "parentRelLogicalId": "lidO512" },
+                    /* { "name": "nO53", "id": "idO53" }, *///];
+	            /*feature5.options = optionFor5; //feature1.isDriving = true;
+	            feature5.selectionType = "multiple";
+
+	            var feature6 = {};
+	            feature6.attributes = [];
+	            feature6.displayValue = "YOThisisCF6"; feature6.name = "CF6"; feature6.id = "pid:idCF6"; feature6.options = []; feature1.logicalid = "lidCF6";// no options, no selectionType 
+	            var optionFor6 = [
+                    { "displayValue": "DNO61Greeeat", "name": "nO61", "id": "pid:idO61" }, { "displayValue": "DNO62Insane", "name": "nO62", "id": "pid:idO62" },
+	            ];
+	            feature6.options = optionFor6;*/
+
+
+	            jsonToBeLoaded = JSONMRObject;
+	            /** CREATION REAL DICO  */
+                /*
+	            var dico = {
+	                "name": "toto",
+	            "model": "toto"};
+
+	            dico.features = [];
+	            dico.features.push(feature1);
+	            dico.features.push(feature2);
+	            dico.features.push(feature3);
+	            dico.features.push(feature4);
+	            dico.features.push(feature5);
+	            dico.features.push(feature6);
+
+	            var filteredDico = {};
+	            var realDico = {};
+	            realDico = dico;
+                */
+	            realDico = JSONDictionary;
+	           // realDico.dictionary = dico;
+	           // realDico.dictionary.milestones = [];
+
+                // uncomment to get dico from WS
+	            var pidModel = WebServices.getObjectIDFromURL("parentOID");
+                //var dico = WebServices.getDictionary(pidModel);
+                //dico = JSON.parse(dico);
+                //realDico = dico;
+
+                var ruleId = WebServices.getObjectIDFromURL("objectId"); // this is the ruleid
+                var rule = WebServices.getRule(ruleId);
+
+	            ///////////////////////////////////////////////////
+	            //                                               //
+	            // END INITIALIZING DICTIONARY AND PREVIOUS JSON //
+	            //                                               //
+	            ///////////////////////////////////////////////////
+
+	            var button, divDrivingDrop, divConstDrop, divToto;
+
+                // DOES NOT work to add the ready here !! why ? no idea..
+	            //document.addEventListener("load", function (e)
+	            //document.addEventListener("DOMContentLoaded", function (e)
+	            //$(document).ready(function ()
+	            //{
+	            //console.log("this 1st does'nt work ? or works");
+	            var wrapperdiv = document.getElementById("content");
+
+	            var myController = new HighLevelControllerMatrixTable();
+	            //myController.init("IDTABLE", wrapperdiv, realDico, null, null, ruleId, "version", true);
+	            var withImage = true;
+	            if (window.localStorage.DS_MatrixruleCookie_ImgSetting == "false")
+	            {
+	                withImage = false;
+	            }
+
+	            var editable = true;
+
+	            myController.init("IDTABLE", wrapperdiv, realDico, null, ruleId, "version", withImage, editable);
+  
+	            myController.getMatrixRulesController().showStruct();
+
+	            jsonToBeLoaded = myController.getMatrixRulesController().checkAndRemoveDiscrepancy(jsonToBeLoaded, realDico)._simplifiedModel;
+	            myController.getMatrixRulesController().loadJsonIn(jsonToBeLoaded, realDico, null, null);
+	            myController.setFirstModel(jsonToBeLoaded);
+
+	            myController.getMatrixRulesController().showTable();
+
+
+
+	            //myController.setPidRule("pidrule");
+	            //myController.setVersionRule("versionRule");
+
+
+	                //myController.addInteraction(realDico, null, null);
+
+	                //require(['ConfigurationFeatureCriteria'], function (links)
+	                //{
+	                //    new ConfigurationFeatureCriteria("sliderContentId", "coco", dico, false);
+	                //});
+
+					//dico = JSON.parse(dico);
+					//var newDico = {};
+					//newDico.features = dico.features;
+					//newDico.model = dico.name;
+					//dico.dictionary = dico;
+	            myController.draw();
+	            //thisjQuery(function ()
+	            //{
+	            //    thisjQuery('.js-sortable-connected').sortable({
+	            //        forcePlaceholderSize: true,
+	            //        connectWith: '.js-connected',
+	            //        //handle: '.js-handle',
+	            //        items: 'li',
+	            //        //placeholderClass: 'border border-white bg-orange mb1'
+	            //    });
+	            //});
+	            //var tdsBottom = myController.getMatrixRulesController().getMatrixRulesWrappedTableObj().getBotRightTable().getElementsByTagName("td");
+	            //for (i = 0; i < tdsBottom.length; i++)
+	            //{
+	            //    tdsBottom[i].classList.add("noclic");
+	            //}
+
+	            myController.addInteraction(realDico,  null);
+
+	            var allClosed = document.getElementsByClassName("close");
+	            for (i = 0; i < allClosed.length; i++)
+	            {
+	                allClosed[i].classList.add("open");
+	                allClosed[i].classList.remove("close");
+	                i--;
+	            }
+	            var smallTriangle = document.getElementsByClassName("fonticon-right-dir");
+	            smallTriangle[0].classList.add("fonticon-left-dir");
+	            smallTriangle[0].classList.remove("fonticon-right-dir");
+	                
+
+
+
+	            document.getElementById("button0").addEventListener("click", function ()
+	            {
+	                var model = myController.getMatrixRulesController().getModel();
+	                var jsonModel = model.getJSONObject();
+	                var str = generateCfgMatrixRulesExpressionFunctions.generateBCR(jsonModel, realDico, true);
+	                console.log(str);
+
+	               // var titi = myController.generateRuleFormat();
+	               // console.log(titi);
+
+	                var toto = model.getJSONSimplifiedObject();
+	            });
+
+	            document.getElementById("button1").addEventListener("click", function ()
+	            {
+	                var model = myController.getMatrixRulesController().togglePicture();
+	            });
+
+	            document.getElementById("button2").addEventListener("click", function ()
+	            {
+	                //var titi = generateCfgMatrixRulesXMLExpressionFunctions.generateOptionNode("idO51", realDico);
+	                //console.log("titi = " + titi.outerHTML);
+
+
+	                var model = myController.getMatrixRulesController().getModel();
+	                var jsonModel = model.getJSONObject();
+	                //var tata = generateCfgMatrixRulesXMLExpressionFunctions.generateConditionFromIdx(0, jsonModel, realDico);
+	                //console.log("tata = " + tata.outerHTML);
+
+	                //var toto = generateCfgMatrixRulesXMLExpressionFunctions.generateExpressionDrivenBy(0, jsonModel, realDico);
+	                //console.log("toto = " + toto.outerHTML);
+
+	                var tyty = generateCfgMatrixRulesXMLExpressionFunctions.generateFullExpression(jsonModel, realDico);
+	                console.log("tyty = " + tyty.outerHTML);
+
+
+
+	            //});
+	            });
+	            document.getElementById("button3").addEventListener("click", function ()
+	            {
+	                require( ["DS/CfgRules/scripts/selectionCfgMatrixRulesTable"
+                        , "DS/CfgRules/scripts/generateCfgMatrixRulesJSONObj"
+                        , "DS/CfgRules/scripts/generateCfgMatrixRulesTableObj"
+                        , "DS/CfgRules/scripts/generateCfgMatrixRulesWrappedTableObj"
+	                    , 'text!CfgRulesSpec/assets/MRObject_associatedDico.json'
+                        , 'text!CfgRulesSpec/assets/MRObject.json'
+	                ], function (
+                        selectionCgfMatrixRulesTableFunctions
+                        , CfgMatrixRulesJSONObj
+                        , CfgMatrixRulesTableObj
+                        , CfgMatrixRimesWrappedTableObj
+                        , dico
+                        , MRObject)
+	                {
+	                    var jsonDico = JSON.parse(dico);
+	                    var jsonMR = JSON.parse(MRObject);
+
+	                    var commonId = "coolid";
+
+	                    var matrixRulesJSONObj = null;
+	                    var matrixRulesTableObj = null;
+	                    var matrixRulesWrappedTableObj = null;
+
+	                    matrixRulesJSONObj = new CfgMatrixRulesJSONObj();
+	                    matrixRulesJSONObj.init(commonId);
+	                    matrixRulesJSONObj.createFromJSON(jsonMR, jsonDico, null, null, wrapperdiv);
+
+	                    matrixRulesTableObj = new CfgMatrixRulesTableObj();
+	                    matrixRulesTableObj.init(commonId, "tablename");
+	                    matrixRulesTableObj.createTableFromJSON(matrixRulesJSONObj, jsonDico, false); // prototype is signed by (jsonMRObj, dico, withPicture)
+
+	                    matrixRulesWrappedTableObj = new CfgMatrixRimesWrappedTableObj();
+	                    matrixRulesWrappedTableObj.init(commonId);
+	                    matrixRulesWrappedTableObj.loadTableIn(matrixRulesTableObj);
+
+	                    var listIds = ["pid:idO11"];
+	                    var test = selectionCgfMatrixRulesTableFunctions.getIdxDrivingCombinationInJSONFromIds(listIds, matrixRulesJSONObj.getJSONSimplifiedObject());
+	                });
+	            });
+	            document.getElementById("button4").addEventListener("click", function ()
+	            {
+	                var jsonRuleInput = {};
+	                jsonRuleInput.version = "1.0.1";
+	                jsonRuleInput.configurationRule = {};
+	                jsonRuleInput.configurationRule.type = "ConfigurationRule";
+	                jsonRuleInput.configurationRule.name = "tototest";
+	                jsonRuleInput.configurationRule.revision = "-";
+	                jsonRuleInput.configurationRule.policy = "policy";
+
+	                jsonRuleInput.mathematicalExpression = "";
+	                var bcrAll = generateCfgMatrixRulesExpressionFunctions.generateBCR(myController.getMatrixRulesController().getModel().getJSONSimplifiedObject(), realDico, true);
+
+	                console.log("default = " + bcrAll.defaultExpression);
+	                console.log("JLR Expression = " + bcrAll.rightExpression);
+
+	                //WebServices.createRule(jsonRuleInput, pidModel);
+
+	            });
+	            document.getElementById("button5").addEventListener("click", function ()
+	            {
+	                var simplifiedJSON = myController.getMatrixRulesController().getModel().simplifyJSON();
+	                console.log("Simplified Json = ");
+	                console.log(simplifiedJSON);
+
+	                var jsonWithoutSolve = myController.getMatrixRulesController().getModel().getJSONSimplifiedObject();
+	                console.log("Json without solve = ");
+	                console.log(jsonWithoutSolve);
+
+	            });
+
+	           // var localTd = null;
+	            var displayDropDown = function (tdOrButton, e)
+	            {
+	                
+	                console.log(tdOrButton.getAttribute("id"));
+	                //if (localTd === tdOrButton)
+	                //{
+	                //    divDropDown.classList.add("displaynone"); // the last clicked is the same : hide dropdown
+	                //    localTd = null; // reset
+	                //}
+	                //else
+	                //{
+	                //    divDropDown.classList.remove("displaynone");
+	                //    localTd = tdOrButton;
+	                //}
+	                divDropDown.classList.remove("displaynone");
+	                divDropDown.style.cssLeft = e.x + "px";
+	                divDropDown.style.cssTop = (e.y - 400) + "px";
+	                
+	            }
+
+	            document.getElementById("button5").oncontextmenu = function (e)
+	                //document.getElementById("button5").addEventListener("contextmenu", function (e)
+	            {
+	                console.log("right click on Butn5");
+	                displayDropDown(this, e);
+	                divDropDown.focus();
+	                // e.stopPropagation();
+	                return false;
+	            };//,
+	            //true);
+
+	            document.getElementById("button4").oncontextmenu = function (e)
+	                //document.getElementById("button5").addEventListener("contextmenu", function (e)
+	            {
+	                console.log("right click on Butn4");
+	                displayDropDown(this, e);
+	                // e.stopPropagation();
+	                return false;
+	            };//,
+	            //true);
+
+	            /*document.getElementById("button4").onblur = function (e)
+	                //document.getElementById("button5").addEventListener("contextmenu", function (e)
+	            {
+	                //divDropDown.classList.add("displaynone"); // the last clicked is the same : hide dropdown
+	                localTd = null; // reset
+	                return false;
+	            };//,
+
+	            document.getElementById("button5").onblur = function (e)
+	                //document.getElementById("button5").addEventListener("contextmenu", function (e)
+	            {
+	                //divDropDown.classList.add("displaynone"); // the last clicked is the same : hide dropdown
+	                localTd = null; // reset
+	                return false;
+	            };//, */
+	            
+
+	            var divDropDown = document.createElement("div");
+	            var uldropdown = document.createElement("ul");
+	            uldropdown.classList.add("dropdown-menu-wrap");
+	            divDropDown.setAttribute("tabindex", 0);
+	            divDropDown.onblur = function (e)
+	            {
+	                //divDropDown.classList.add("displaynone"); // the last clicked is the same : hide dropdown
+	                localTd = null; // reset
+	                return false;
+	            };
+	            var li1 = document.createElement("li");
+	            li1.onclick = function (e)
+	            {
+	                console.log("li1 clicked");
+	                divDropDown.classList.add("displaynone");
+	            };
+	            li1.innerHTML = "item1";
+	            li1.classList.add("item");
+	            var li2 = document.createElement("li");
+	            li2.innerHTML = "item2";
+	            li2.classList.add("item");
+	            var li3 = document.createElement("li");
+	            li3.innerHTML = "item3";
+	            li3.classList.add("item");
+	            var li4 = document.createElement("li");
+	            li4.innerHTML = "item4";
+	            li4.classList.add("item");
+
+	            uldropdown.appendChild(li1);
+	            uldropdown.appendChild(li2);
+	            uldropdown.appendChild(li3);
+	            uldropdown.appendChild(li4);
+
+	            divDropDown.appendChild(uldropdown);
+
+	            divDropDown.setAttribute("id", "dropdown");
+	            divDropDown.classList.add("dropdown");
+	            divDropDown.classList.add("dropdown-menu");
+	            divDropDown.classList.add("displaynone");
+
+	            document.body.appendChild(divDropDown);
+
+	            
+	        });
+	    });
+	    document.addEventListener("DOMContentLoaded", function (e)
+	    {
+	        console.log("this 2nd one works");
+	    });
+
+    </script> 
+</head>
+<body style="height:95%; width:95%; margin:0px; overflow-y:hidden; overflow-x:auto">
+    <div id ="defaultExpression"></div>
+	<div id="content" style="height:100%; width:100%">
+    </div>
+    <div>
+        <button id="button0">test0</button>
+        <button id="button1">test1</button>
+        <button id="button2">test2</button>
+        <button id="button3">test3</button>
+        <button id="button4">test4</button>
+        <button id="button5">test5</button>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright DASSAULT SYSTEMES 2013 -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="DS_DELMIAMGAConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Label">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="dataIndex"/>
+                <xs:attribute type="xs:string" name="dicoType"/>
+                <xs:attribute type="xs:string" name="displayType"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Columns">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Column">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="dataIndex"/>
+                      <xs:attribute type="xs:string" name="dicoType"/>
+                      <xs:attribute type="xs:string" name="displayType"/>
+                      <xs:attribute type="xs:byte" name="width"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="name"/>
+      <xs:attribute type="xs:string" name="Title"/>
+      <xs:attribute type="xs:string" name="Description"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

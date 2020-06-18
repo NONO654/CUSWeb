@@ -1,0 +1,1 @@
+define("DS/SocialToolbarCustomization/swym",["DS/SocialToolbarCustomization/script/abstract"],function(a){return a.singleton({getThumbnailUrlFromContentUri:function(b){},getRedirectionUrlFromContentUri:function(b){}})});

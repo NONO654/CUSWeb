@@ -1,0 +1,96 @@
+{
+	"relations": [	
+	{
+		"name" : "DBM_repreplink_from",
+		"queries" :  [
+			{ "definition":	[{"navigationType" : "SR","qualityFilter" : {"role" : "141","semantics" : "5"}, "direction" : "from"}],"keepTypes": ["CATSysBehaviorLibRepReference"]},
+			{ "definition":	[{"navigationType" : "SR","qualityFilter" : {"role" : "142","semantics" : "5"}, "direction" : "from"}],"keepTypes": ["CATSysBehaviorLibRepReference"]}
+				]					
+	},
+	{
+		"name" : "DBM_repreplink_to",
+		"queries" :  [
+			{ "definition":	[{"navigationType" : "SR","qualityFilter" : {"role" : "141","semantics" : "5"}, "direction" : "to"}],"keepTypes": ["CATSysBehaviorLibRepReference"]},
+			{ "definition":	[{"navigationType" : "SR","qualityFilter" : {"role" : "142","semantics" : "5"}, "direction" : "to"}],"keepTypes": ["CATSysBehaviorLibRepReference"]}
+				]					
+	},
+	{
+		"name" : "DBM_lib_import_from",
+		"queries" :  [
+			{ "definition":
+				[
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"},
+					{"navigationType" : "SR","qualityFilter" : {"role" : "141","semantics" : "5"}, "direction" : "from"},
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}
+				]
+			},
+			{ "definition":	[
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"},
+					{"navigationType" : "SR","qualityFilter" : {"role" : "142","semantics" : "5"}, "direction" : "from"},
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}
+				]				
+			}
+		]
+	},
+	{
+		"name" : "DBM_lib_import_to",
+		"queries" :  [
+			{ "definition":
+				[
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"},
+					{"navigationType" : "SR","qualityFilter" : {"role" : "141","semantics" : "5"}, "direction" : "to"},
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}
+				]
+			},
+			{ "definition":
+				[
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"},
+					{"navigationType" : "SR","qualityFilter" : {"role" : "142","semantics" : "5"}, "direction" : "to"},
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}
+				]		
+			}
+		]
+	},
+	{
+		"name" : "DBM_resource_from",
+		"queries" :  [
+			{ "definition":
+				[
+					{"navigationType" : "SR","qualityFilter" : {"role" : "269","semantics" : "5"}, "direction" : "from"},
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}
+				]
+			},
+			{ "definition":	[{"navigationType" : "SR","qualityFilter" : {"role" : "269","semantics" : "5"}, "direction" : "from"}]}
+		]
+	},
+	{
+		"name" : "DBM_resource_to",
+		"queries" :  [
+			{ "definition":
+				[
+					{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"},
+					{"navigationType" : "SR","qualityFilter" : {"role" : "269","semantics" : "5"}, "direction" : "to"}
+				]
+			},
+			{ "definition":	[{"navigationType" : "SR","qualityFilter" : {"role" : "269","semantics" : "5"}, "direction" : "to"}]}
+		]
+	},
+	{
+		"name" : "DBM_structure_from",
+		"queries" :  [
+		{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "from"}],"keepTypes": ["RFLPLMFunctionalAbstractReference","RFLVPMLogicalAbstract" ]},
+        { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}],
+		"keepTypes": ["CATSysBehaviorLibReference","Behavior_Continuous_LogRepRef","Behavior_Continuous_FunRepRef","Behavior_External_LogRepRef","Behavior_External_FunRepRef"]}		
+		]
+	},
+	{
+		"name" : "DBM_structure_to",
+		"queries" :  [
+		{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "to"}],"keepTypes": ["RFLPLMFunctionalAbstractReference","RFLVPMLogicalAbstract" ]},
+        { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"}],
+		"keepTypes": ["CATSysBehaviorLibReference","Behavior_Continuous_LogRepRef","Behavior_Continuous_FunRepRef","Behavior_External_LogRepRef","Behavior_External_FunRepRef"]}		
+		]
+	}
+	]
+}
+

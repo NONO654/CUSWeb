@@ -1,0 +1,12 @@
+m|MPFModels\MPFCountryModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19096
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFCountryModel\MPFCountryModel.js|1554530789|2486
+s|MPFModels\MPFCountryModel.mweb\src\CountryDataProxy.js|1550135822|917
+s|MPFModels\MPFCountryModel.mweb\src\SellerCountryDataProxy.js|1551286700|2573
+s|MPFModels\MPFCountryModel.mweb\src\CountryModel.js|1530179715|1754
+s|MPFModels\MPFCountryModel.mweb\src\MPFCountryModel.js|1483367410|0
+s|MPFModels\MPFCountryModel.mweb\src\BuyerCountryDataProxy.js|1550069532|1003
+s|MPFModels\MPFCountryModel.mweb\src\CountryCollection.js|1548339355|1765

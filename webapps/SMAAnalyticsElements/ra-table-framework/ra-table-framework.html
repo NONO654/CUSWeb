@@ -1,0 +1,129 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html" />
+<link rel="import" href="ra-table-region.html" />
+<link rel="import" href="ra-table-region-bound.html" />
+<link rel="import" href="../ra-table-column-header/ra-table-column-header.html" />
+<link rel="import" href="../ra-table-column/ra-table-column.html" />
+<link rel="import" href="ra-table-row.html" />
+<link rel="import" href="../ra-loading/ra-loading.html" /> 
+<link rel="import" href="ra-table-top-row.html" />
+
+
+<dom-module id="ra-table-framework" attributes="regions header-display row-display table-data">
+	<link rel="import" type="css" href="ra-table-framework.css">
+	<template>
+		<div class="custom-columns">
+			<content select="ra-table-column"></content>
+		</div>
+		<div class="custom-rows">
+			<content select="ra-table-row"></content>
+		</div>
+		
+		<div class="region-container region-container-top">
+			<!-- header templates -->
+			<template is="dom-if" if="[[_topLeftRegionCheck(regions)]]">
+				<ra-table-region region-id="top-left" 
+						size-data="{{sizeData}}"
+						scroll-data="{{scrollData}}">
+					<template is="dom-repeat" items="{{fixedLeftColumns}}">
+						<ra-table-column-header display-functions="[[_getDisplayFunctions(item.id)]]" column-data="{{item}}" column-box-data="{{_getColumnBoxData(item.id,colResizeFlag)}}" header-height="{{headerHeightChanged}}"></ra-table-column-header>
+					</template>	
+				</ra-table-region>
+			</template>
+			<template is="dom-if" if="[[_topRegionCheck(regions)]]">
+				<ra-table-region region-id="top" 
+						size-data="{{sizeData}}"
+						scroll-data="{{scrollData}}">
+					<template is="dom-repeat" items="{{visibleColumns}}">
+						<ra-table-column-header display-functions="[[_getDisplayFunctions(item.id)]]" column-data="{{item}}" column-box-data="{{_getColumnBoxData(item.id,colResizeFlag)}}" header-height="{{headerHeightChanged}}" placeholder-index="[[placeholderIndex]]" column-index="[[_getColumnIndex(item.id)]]"></ra-table-column-header>
+					</template>
+					<ra-table-column-header style="display:none;" id="draghandle" display-functions="[[_getDisplayFunctions(draggedColumn.id)]]" column-data={{draggedColumn}} header-height="{{headerHeightChanged}}"></ra-table-column-header>			
+				</ra-table-region>
+			</template>
+			<template is="dom-if" if="[[_topRightRegionCheck(regions)]]">
+				<ra-table-region region-id="top-right" 
+						size-data="{{sizeData}}">
+					<template is="dom-repeat" items="{{fixedRightColumns}}">
+						<ra-table-column-header display-functions="[[_getDisplayFunctions(item.id)]]" column-data="{{item}}" column-box-data="{{_getColumnBoxData(item.id,colResizeFlag)}}" header-height="{{headerHeightChanged}}"></ra-table-column-header>
+					</template>	
+				</ra-table-region>
+			</template>
+			<ra-table-region-bound scroll-value="{{scrollData.left}}" bound-id="left"></ra-table-region-bound>
+			<ra-table-region-bound scroll-value="{{scrollData.right}}" bound-id="right"></ra-table-region-bound>
+		</div>
+		
+		<div class="region-container region-container-main">
+			<!-- body templates -->
+			<template is="dom-if" if="[[_leftRegionCheck(regions)]]">
+				<ra-table-region region-id="left"
+						size-data="{{sizeData}}"
+						scroll-data="{{scrollData}}">
+					<template is="dom-repeat" items="{{fixedLeftColumns}}">
+						<ra-table-column display-functions="[[_getDisplayFunctions(item.id)]]" row-data="{{visibleRows}}" row-box-data="{{rowBoxData}}" column-data="{{item}}" column-box-data="{{_getColumnBoxData(item.id,colResizeFlag)}}" group-expansion-data="{{groupExpansionData}}" expand-flag="{{expandFlag}}" scroll-data="{{scrollData}}" refresh-cell-box-data="[[refreshCellBoxData]]"></ra-table-column>
+					</template>
+				</ra-table-region>
+			</template>
+			<template is="dom-if" if="[[_middleRegionCheck(regions)]]">
+				<ra-table-region region-id="main" 
+						size-data="{{sizeData}}" 
+						scroll-data="{{scrollData}}">
+					<template is="dom-repeat" items="{{visibleColumns}}">
+						<ra-table-column display-functions="[[_getDisplayFunctions(item.id)]]" row-data="{{visibleRows}}" row-box-data="{{rowBoxData}}" column-data="{{item}}" column-box-data="{{_getColumnBoxData(item.id,colResizeFlag)}}" group-expansion-data="{{groupExpansionData}}" placeholder-index="[[placeholderIndex]]" column-index="[[_getColumnIndex(item.id)]]" expand-flag="{{expandFlag}}" scroll-data="{{scrollData}}" refresh-cell-box-data="[[refreshCellBoxData]]"></ra-table-column>
+					</template>
+				</ra-table-region>
+			</template>
+			<template is="dom-if" if="[[_rightRegionCheck(regions)]]">
+				<ra-table-region region-id="right" 
+						size-data="{{sizeData}}"
+						scroll-data="{{scrollData}}">
+					<template is="dom-repeat" items="{{fixedRightColumns}}">
+						<ra-table-column display-functions="[[_getDisplayFunctions(item.id)]]" row-data="{{visibleRows}}" row-box-data="{{rowBoxData}}" column-data="{{item}}" column-box-data="{{_getColumnBoxData(item.id,colResizeFlag)}}" group-expansion-data="{{groupExpansionData}}" expand-flag="{{expandFlag}}" scroll-data="{{scrollData}}" refresh-cell-box-data="[[refreshCellBoxData]]"></ra-table-column>
+					</template>
+				</ra-table-region>
+			</template>
+				
+			<ra-table-region-bound scroll-value="{{scrollData.left}}" bound-id="left"></ra-table-region-bound>
+			<ra-table-region-bound scroll-value="{{scrollData.right}}" bound-id="right"></ra-table-region-bound>
+			<template is="dom-repeat" items="{{visibleCustomRows}}">
+				<ra-table-row id="row_[[item.id]]" display-functions="[[_getDisplayFunctions(item.type)]]" row-data="[[item]]" row-box-data="[[_getRowBoxData(item.id,rowBoxData)]]" scroll-data="{{scrollData}}" expand-flag="{{expandFlag}}" refresh-cell-box-data="[[refreshCellBoxData]]"></ra-table-row>
+			</template>
+			<!-- uppermost group row and it's parents -->
+			<ra-table-top-row size-data="[[sizeData]]" group-stack="[[groupStack]]" row-box-data="[[_getCurrentGroupBox(currentGroup)]]" row-data="[[currentGroup]]" expand-flag={{expandFlag}}></ra-table-top-row>
+			
+		</div>
+		
+		<div class="region-container region-container-bottom">
+			<!-- footer templates -->
+			<template is="dom-if" if="[[_bottomLeftRegionCheck(regions)]]">		
+				<ra-table-region region-id="bottom-left"
+						size-data="{{sizeData}}"
+						scroll-data="{{scrollData}}">
+					<!-- ra-table-column-footer needs to be implemented -->
+				</ra-table-region>
+			</template>
+			<template is="dom-if" if="[[_bottomRegionCheck(regions)]]">
+				<ra-table-region region-id="bottom"
+						size-data="{{sizeData}}"
+						scroll-data="{{scrollData}}">
+					<!-- ra-table-column-footer needs to be implemented -->
+				</ra-table-region>
+			</template>
+			<template is="dom-if" if="[[_bottomRightRegionCheck(regions)]]">
+				<ra-table-region region-id="bottom-right"
+						size-data="{{sizeData}}">
+					<!-- ra-table-column-footer needs to be implemented -->
+				</ra-table-region>
+			</template>
+			<ra-table-region-bound scroll-value="{{scrollData.left}}" bound-id="left"></ra-table-region-bound>
+			<ra-table-region-bound scroll-value="{{scrollData.right}}" bound-id="right"></ra-table-region-bound>
+		</div>
+		
+		<ra-table-region-bound scroll-value="{{scrollData.top}}" bound-id="top"></ra-table-region-bound>
+		<ra-table-region-bound scroll-value="{{scrollData.bottom}}" bound-id="bottom"></ra-table-region-bound>
+		
+		
+		<ra-loading progress="{{dataProgress}}" message="{{loadingMessage}}"></ra-loading>
+		<!-- /div -->
+    </template>
+	<script type="text/javascript" src="ra-table-framework.js"></script>
+</dom-module>

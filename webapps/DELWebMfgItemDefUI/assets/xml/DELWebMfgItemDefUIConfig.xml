@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright DASSAULT SYSTEMES 2013 -->
+<Config xmlns="DS_DELMIAMGAConfiguration" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="DS_DELMIAMGAConfiguration ../../../../../DELWebMfgAssetsDefUI/DELWebMfgAssetsDefUI.mweb/src/assets/xsd/DELWebMfgAssetsDefUIConfig.xsd" Title="UI Config" Description="Sample configuration file delivered by DS.">
+  <Preferences>
+
+    <!--============================================================-->
+    <!--          MAIN VIEW                                         -->
+    <!--============================================================-->
+
+    <TableView name="Manufacturing">
+      <Label dataIndex="V_Name.reference" dicoType="PLMEntity"/>
+      <Columns>
+        <Column dataIndex="revision.reference" dicoType="BusinessType"/>
+        <Column dataIndex="V_description.reference" dicoType="PLMEntity" Tooltip="NameRevisionOwner.tooltip"/>
+        <Column dataIndex="V_TargetReleaseDate.reference" dicoType="DELFmiFunctionPPRCreateReference"/>
+        <Column dataIndex="V_NeedDedicatedSystem.reference" dicoType="CreateAssembly"/>
+        <Column dataIndex="ManufacturingItemUpdateStatus" displayType="BI"/>
+        <Column dataIndex="current.reference" dicoType="BusinessType"/>
+        <Column dataIndex="owner.reference" dicoType="BusinessType"/>
+        <Column dataIndex="organization.reference" dicoType="BusinessType"/>
+        <Column dataIndex="Scope.relation" displayType="Relation"/>
+        <Column dataIndex="Implement.relation" displayType="Relation"/>
+        <Column dataIndex="All.relation" displayType="Relation"/>
+        <Column dataIndex="documents.document" displayType="DocMgmt"/>
+        <Column dataIndex="V_isLastVersion.reference" dicoType="PLMCoreReference" displayType="NonEditable"/>
+        <!-- <Column dataIndex="Effectivity" displayType="CFG"/> -->
+        <!-- <Column dataIndex="CurrentEvolutionEffectivity" displayType="CFG"/> -->
+        <!-- <Column dataIndex="ProjectedEvolutionEffectivity" displayType="CFG"/> -->
+        <!-- <Column dataIndex="VariantEffectivity" displayType="CFG"/> -->
+      </Columns>
+    </TableView>
+
+    <!--============================================================-->
+    <!--          BODY VIEW                                         -->
+    <!--============================================================-->
+
+    <LeftBloc name="ProductsAndParts">
+        <Label dataIndex="V_Name.reference" dicoType="PLMEntity" displayType="NonEditable"/>
+        <Columns>
+            <Column dataIndex="PLM_ExternalID.instance" dicoType="PLMEntity" displayType="NonEditable"/>
+            <Column dataIndex="revision.reference" dicoType="BusinessType" displayType="NonEditable"/>
+            <Column dataIndex="ProductAssignmentStatus" displayType="BI"/>
+            <Column dataIndex="V_description.reference" dicoType="PLMEntity" displayType="NonEditable" Tooltip="NameRevisionOwner.tooltip"/>
+            <Column dataIndex="owner.reference" dicoType="BusinessType" displayType="NonEditable"/>
+            <Column dataIndex="PLM_ExternalID.reference" dicoType="PLMEntity" displayType="NonEditable"/>
+            <Column dataIndex="V_isLastVersion.reference" dicoType="PLMCoreReference" displayType="NonEditable"/>
+            <Column dataIndex="current.reference" dicoType="BusinessType" displayType="NonEditable"/>
+            <!-- <Column dataIndex="Effectivity" displayType="CFG"/> -->
+            <!-- <Column dataIndex="CurrentEvolutionEffectivity" displayType="CFG"/> -->
+            <!-- <Column dataIndex="ProjectedEvolutionEffectivity" displayType="CFG"/> -->
+            <!-- <Column dataIndex="VariantEffectivity" displayType="CFG"/> -->
+        </Columns>
+    </LeftBloc>
+
+    <!--============================================================-->
+    <!--          ACTION VIEW                                       -->
+    <!--============================================================-->
+
+    <RightBloc name="">
+      <Label dataIndex="V_Name.reference" dicoType="PLMEntity"/>
+      <Columns>
+        <Column dataIndex="revision.reference" dicoType="BusinessType" displayType="NonEditable"/>
+        <Column dataIndex="Alternate.relation" displayType="Relation"/>
+        <Column dataIndex="Origin.relation" displayType="Relation"/>
+        <Column dataIndex="owner.reference" dicoType="BusinessType" displayType="NonEditable"/>
+        <Column dataIndex="V_description.reference" dicoType="PLMEntity" displayType="NonEditable" Tooltip="NameRevisionOwner.tooltip"/>
+        <Column dataIndex="current.reference" dicoType="BusinessType" displayType="NonEditable"/>
+      </Columns>
+    </RightBloc>
+    <AuxiliaryView>
+        <Label dataIndex="V_Name.reference" dicoType="PLMEntity"/>
+    </AuxiliaryView>
+  </Preferences>
+</Config>

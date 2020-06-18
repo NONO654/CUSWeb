@@ -1,0 +1,1 @@
+define("DS/RunYourApp/RunYourApp_de",{});define("DS/RunYourApp/assets/nls/RunYourApp",{urlLabel:"Widget-URL",insertUrl:"Fügen Sie eine URL ein.",submitURLBtn:"Ausführen"});

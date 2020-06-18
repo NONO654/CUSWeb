@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<head>
+
+    <title>Material Widget App</title>
+
+
+    <meta name="description" content="CAA Web Apps basic use case " />
+    <meta name="keywords" content="CAA Use Case" />
+
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+    <script type="text/javascript" src="../Layouts/Layouts.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+   
+</head>
+<body>
+     <script type="text/javascript">
+
+         'use strict';
+         require(['UWA/Core', 'DS/Core/Core', 'DS/SMAWebXMaterialUI/SMAWebXMaterialPalette'],
+             function (UWA, WUXCore, MaterialPalette) {
+
+                 var myWidget = {
+
+                     onLoad: function () {
+                         WUXCore.setFullscreen();
+                         var el = UWA.createElement('div', {
+                             styles: {
+                                 width: '1000px',
+                                 height: '600px',
+                                 margin: '20px auto',
+                                 border: '1px solid black'
+                             }
+                         });
+                         
+                         el.inject(widget.body);
+                         
+                         el.setContent(new MaterialPalette({}).render());
+                     }
+                 };
+
+                 if (widget.launched)
+                     myWidget.onLoad();
+                 else
+                     widget.onLoad = myWidget.onLoad;
+             });
+    </script>
+</body>
+</html>

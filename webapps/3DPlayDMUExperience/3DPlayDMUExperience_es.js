@@ -1,0 +1,1 @@
+define("DS/3DPlayDMUExperience/3DPlayDMUExperience_es",{});define("DS/3DPlayDMUExperience/assets/nls/3DPlayDMUExperience",{loadError:"No se ha podido cargar la revisión",noMarkup:"No se ha podido encontrar ninguna revisión",unauthorizedType:"La aplicación no puede leer las revisiones de dibujo"});

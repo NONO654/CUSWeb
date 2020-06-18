@@ -1,0 +1,319 @@
+{
+    "action_bar": {
+    	"standard": {
+           "file": "ENOREQ.xml",
+        "module": "ENOREQComponent"
+        },
+        "touch": {
+            "file": "ENOREQ.xml",
+        "module": "ENOREQComponent"
+        }
+    },
+    "padsettings": {
+        "enoreq": {
+            "run_options": {
+				"pad_security_ctx": {
+					"value": "",
+					"preference": {
+					  "type": "list",
+					  "label": "pad_security_ctx"
+					},
+					"dispatch": true
+				  },
+                "authorized_root_types": {
+                    "value": ["Requirement Group","Requirement Specification"]
+                },
+                "dnd": {
+                    "value": "MOVE"
+                 
+                },
+                "activateBIFilter": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "activateFilter_label"
+                    },
+                    "dispatch": true
+                },
+                "useIndexAccleration": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "useIndexAccleration_label"
+                    },
+                    "dispatch": true
+                },
+                                
+                "local_preferences": {
+                    "value": true
+                },
+                "local_preferences_file":
+                {
+                "module": "ENOREQComponent", 
+                "file":"ENOREQ.2D.json"
+                },
+                "touchDropInvite": {
+                    "value": true
+                }
+                
+            },
+            "debug_options": {
+                "dynamic_authorized_types": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Use dynamically authorized types"
+                    }
+                },
+                "rootListAsPanel": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Root List V2"
+                    }
+                },
+                "refresh": {
+                    "value": "basic",
+                    "preference": {
+                        "type": "list",
+                        "label": "DEV activation: Refresh behavior",
+                        "options": [{
+                            "value": "basic",
+                            "label": "Refresh & collapse"
+                        }, {
+                            "value": "asresult_basic",
+                            "label": "As Result - Basic"
+                        }, {
+                            "value": "asresult_smart",
+                            "label": "As Result - Smart (with newly inserted & deleted)"
+                        }]
+                    }
+                },
+                "enopad_widget_reload": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Reload widget customization each time"
+                    }
+                },
+                "tree_order_in_label": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Add TreeOrder in Label"
+                    }
+                },
+                "newCtxMenu": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Use new WebUX Ctx Menu"
+                    }
+                }
+            },
+            "webapi_options": {
+                "fetch": {
+                    "intent": "explore_2D",
+                    "select_predicate": ["relcount"]
+                },
+                "navigate": {
+                    "select_bo": ["physicalid", "ds6w:type", "relcount", "ds6w:reservedBy"],
+                    "select_rel": ["physicalid", "ds6w:type"],
+                    "select_ds6w_facet": [],
+                    "compute_select_bo": ["thumbnail_2d", "icon"]
+                }
+            },
+            "layout_options": {}
+        }
+    },
+    "view_settings": {
+        "buildTreeListOpts": {
+            "intent": "explore_2D"
+        },
+        "basic_treelistopts": {
+            "version": "1.0.0",
+            "apiVersion": 2,
+            "defaultCellHeight": 38,
+            "iconsSize": 20,
+            "height": "auto",
+            "useAsyncPreExpand": true,
+            "isEditable": false,
+            "resize": {
+                "columns": true
+            },
+            "headersDimensions": {
+                "height": 38
+            },
+            "performances": {
+                "debounceCellInternalUpdateTimer": 1,
+                "useRequestAnimationFrame": true
+            },
+            "selection": {
+                "unselectAllOnEmptyArea": true,
+                "toggle": false,
+                "enableListSelection":true
+            },
+            "columns": [{
+        "export": {
+            "value": true,
+            "lock": true
+        },
+        "moveable": true,
+        "width": 300,
+        "dataIndex": "tree",
+        "cv_name": "ds6w:label",
+        "isDraggable": true,
+        "isRemovable": false
+    }, {
+        "column_id": "ds6wg:revision",
+        "export": {
+            "value": true,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 75,
+        "dataIndex": "ds6wg:revision",
+        "cv_name": "ds6wg:revision",
+        "isDraggable": false
+    },
+    {
+        "export": {
+            "value": true,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 150,
+        "dataIndex": "ds6w:status",
+        "cv_name": "ds6w:status",
+        "isDraggable": false
+    },
+    {
+        "export": {
+            "value": true,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 100,
+        "dataIndex": "ds6w:refinedInto",
+        "cv_name": "ds6w:refinedInto",
+        "isDraggable": false,
+        "isHidden": true
+    },
+    {
+        "export": {
+            "value": true,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 100,
+        "dataIndex": "ds6w:covers",
+        "cv_name": "ds6w:covers",
+        "isDraggable": false
+    },
+    {
+        "export": {
+            "value": true,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 100,
+        "dataIndex": "paramContent",
+        "cv_name": "paramContent",
+        "isDraggable": false,
+        "isEditable": false
+        
+    },   
+    {
+        "export": {
+            "value": false,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 150,
+        "dataIndex": "ds6w:reserved",
+        "cv_name": "ds6w:reserved",
+        "isDraggable": false
+    }, {
+        "export": {
+            "value": true,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 150,
+        "dataIndex": "ds6w:responsible",
+        "cv_name": "ds6w:responsible",
+        "isDraggable": false
+    }, {
+        "export": {
+            "value": true,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 150,
+        "dataIndex": "ds6w:description",
+        "cv_name": "ds6w:description",
+        "isDraggable": false,
+        "isHidden": true
+    }, {
+        "export": {
+            "value": true,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 150,
+        "dataIndex": "ds6w:modified",
+        "cv_name": "ds6w:modified",
+        "isDraggable": false,
+        "isHidden": false
+    }, {
+        "export": {
+            "value": true,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 150,
+        "dataIndex": "ds6w:created",
+        "cv_name": "ds6w:created",
+        "isDraggable": false,
+        "isHidden": true
+    }, {
+        "export": {
+            "value": false,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 150,
+        "dataIndex": "ds6w:project",
+        "cv_name": "ds6w:project",
+        "isDraggable": false,
+        "isHidden": true
+    }, {
+        "column_id": "ds6w:policy",
+        "export": {
+            "value": true,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 150,
+        "dataIndex": "ds6w:policy",
+        "cv_name": "ds6w:policy",
+        "isDraggable": false,
+        "isHidden": true
+    },
+    {
+        "export": {
+            "value": true,
+            "lock": false
+        },
+        "moveable": true,
+        "width": 150,
+        "dataIndex": "ds6w:type",
+        "cv_name": "ds6w:type",
+        "isDraggable": false,
+    	"isHidden": true
+        
+    }]
+        }
+    }
+}
+

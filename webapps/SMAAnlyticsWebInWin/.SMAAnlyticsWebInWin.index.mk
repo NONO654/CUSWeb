@@ -1,0 +1,10 @@
+m|SMAAnalyticsComponents\SMAAnlyticsWebInWin.mweb
+b|j|c,m
+b|c|n,m
+v|6.421.6.19110
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAAnlyticsWebInWin\SMAAnlyticsWebInWin.js|1555721300|5432
+s|SMAAnalyticsComponents\SMAAnlyticsWebInWin.mweb\src\actions\SMAAnalyticsGetCaseInfo.js|1554496422|3881
+s|SMAAnalyticsComponents\SMAAnlyticsWebInWin.mweb\src\actions\SMAAnalyticsCloseInteractiveSession.js|1554838779|522
+s|SMAAnalyticsComponents\SMAAnlyticsWebInWin.mweb\src\actions\SMAAnalyticsConnectDatasets.js|1553801308|2142
+s|SMAAnalyticsComponents\SMAAnlyticsWebInWin.mweb\src\utils\SMAAnalyticsWebInWinWSUtils.js|1549989450|6279

@@ -1,0 +1,41 @@
+<div class="share-table-layout">
+    {{#if isDataAvailable}}
+
+    <table class="table table-striped table-responsive">
+        <tr>
+            <th title="{{NLS.sharedObjectNameTip}}">{{NLS.sharedObjects}}</th>
+            <th title="{{NLS.sharerFullNameTip}}">{{NLS.sharer}}</th>
+            <th title="{{NLS.modificationDateTip}}">{{NLS.modificationDate}}</th>
+            <th title="{{NLS.expirationDateTip}}">{{NLS.expirationDate}}</th>
+            <th>{{NLS.restrictions}}</th>
+            <th class="revokeAccessHeader" title="{{NLS.revokeAccessTip}}">{{NLS.revokeAccess}}</th>
+        </tr>
+
+        {{#each links}}
+        <tr>
+            <td title="{{sharedObjectName}}">{{sharedObjectName}}</td>
+            <td title="{{../../NLS.sharerFullNameTip}}">{{sharerFullName}}</td>
+            <td title="{{../../NLS.modificationDateTip}}">{{modificationDate}}</td>
+            <td title="{{../../NLS.expirationDateTip}}">{{expirationDate}}</td>
+
+            {{#if restricted}}
+                <td title="{{../../NLS.restrictedLinkTip}}">
+                    <span class="restricted__available" data-model-id="{{id}}">{{../../NLS.yes}}</span>
+                </td>
+            {{else}}
+                <td title="{{../../NLS.publicLinkTip}}">
+                    <span>{{../../NLS.no}}</span>
+                </td>
+            {{/if}}
+
+            <td title="{{../../NLS.revokeAccessTip}}" class="centered revoke__access__icon" data-model-id="{{id}}">
+                <span class="fonticon fonticon-link-off " data-model-id="{{id}}"></span>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+
+    {{else}}
+        <span>{{NLS.emptySharedLinks}}</span>
+    {{/if}}
+</div>

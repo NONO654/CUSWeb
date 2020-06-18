@@ -1,0 +1,1 @@
+define("DS/EditPropPopup/EditPropPopup_ko",{});define("DS/EditPropPopup/assets/nls/editPropPopup",{Properties:"속성",PinWidget:"위젯 고정",Loading:"로드 중...",CloseOverlay:"팝업 닫기"});

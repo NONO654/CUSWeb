@@ -1,0 +1,1 @@
+define("DS/ENOPS/ENOPS_app_ja",{});define("DS/ENOPS_app/assets/nls/ENOPS_app",{hasNONPS:"リンクされている CAD ドキュメントあり",newProduct:"新規プロダクト"});

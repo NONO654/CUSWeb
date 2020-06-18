@@ -1,0 +1,1 @@
+define("DS/i3DXCompassPlatformServices/i3DXCompassPlatformServices_ko",{});define("DS/i3DXCompassPlatformServices/assets/nls/openWith",{OpenWith:"연결 프로그램",no_install_compatible:"먼저 앱을 설치하십시오.",moreApps:"다른 앱"});

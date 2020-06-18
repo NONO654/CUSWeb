@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Copyright 2016 , Dassault Systemes. All rights reserved. -->
+
+        <!-- Widget title -->
+        <title>Frame layout</title>
+
+        <!-- Widget metas -->
+        <meta name="author" content="ddn1" />
+        <meta name="description" content="A layout widget offering a 3DS frame visual environment. It instanciates either a full top frame or only the top bar" />
+        <meta name="charset" content="utf-8" />
+
+        <!-- Special widget metas for layout -->
+        <meta name="header" content="false" />
+        <meta name="border" content="false" />
+
+        <!-- Widget js code -->
+        <script type="text/javascript">
+            // <![CDATA[
+
+            /* jshint curly: false, maxlen: 2000, laxbreak: true */
+            /* globals require, widget, wap, dsLang, dsBaseUrl */
+
+            require(
+                [
+                    // DS
+                    'DS/WebappsUtils/WebappsUtils',
+
+                    // WAP
+                    'DS/UWPClientCode/Data/Widgets',
+                    'DS/UWPClientCode/PublicAPI',
+                    'DS/UWPClientCode/WidgetFactory',
+                    'DS/PubSub/PubSub',
+
+                    // UWA
+                    'UWA/Core',
+                    'UWA/Utils',
+                    'UWA/Element',
+
+                    // Frame
+                    'DS/TopFrame/TopFrame',
+                    'DS/TopBar/TopBar',
+                    'DS/TopBar/model/MainMenuBar',
+                    'DS/TopBarProxy/TopBarProxy',
+
+                    // Utils
+                    'DS/Logger/Logger',
+                    'DS/WAFData/WAFData'
+                ],
+            function (WebappsUtils, WidgetsData, PublicAPI, WFactory, PubSub, UWA, Utils, Element, TopFrame, TopBar, TopBarMenu, TopBarProxy, Logger, WAFData) {
+
+                'use strict';
+
+                var APPS_MNGT_URL = '/resources/AppsMngt/',
+                    STARTUP_URL = 'user/startup?roles=true',
+                    COMPASS_MODULE_NAME = 'i3DXCompass',
+                    COMPASS_TOP_BAR_ID = 'compassMenu',
+                    INSTANT_MSG_TOP_BAR_ID = 'instantMessagingMenu',
+                    SEARCH_TOP_BAR_ID = 'searchMenu',
+                    HELP_MENU_TOP_BAR_ID = 'helpMenu',
+                    self = {},
+                    configuration = [], externalConfiguration = [],
+                    child;
+
+                self.env = widget.environment;
+                self.wp = self.env.wp;
+                self.contextType = self.wp.allowedChildrenContextType;
+
+                self.nonMutatedParent = {
+                    id: self.wp.id,
+                    name: self.wp.name,
+                    isEditable: self.wp.isEditable
+                };
+                /**
+                 * The init method.
+                 * Will first load the actual context, then instanciates the topframe or the topbar. Then load the children widgets.
+                 *
+                 * Applicable widget parameters
+                 * ----------------------------
+                 *
+                 * component="topframe"     - Component to be instanciated. Could be "topbar" or "topframe"
+                 *
+                 * options                  - TopFrame / TopBar module options. See corresponding documentations. Booleans are casted from String
+                 *
+                 * // TopFrame available options.
+                 * options.brand="My Brand"
+                 * options.application="My Web Application"
+                 * options.showWidgetApps=true
+                 *
+                 * // TopFrame available but automagically handled (when web app platform has the proper configuration) options
+                 * options.myAppsBaseUrl
+                 * options.baseAppletPath
+                 * options.baseHtmlPath
+                 * options.baseImgPath
+                 * options.baseNlsPath
+                 * options.passportUrl
+                 * options.proxyTicketUrl
+                 * options.tagsServerUrl
+                 * options.brandAbout
+                 * options.appNameAbout
+                 * options.numberAbout
+                 * options.communityUrl
+                 * options.userId
+                 * options.userName
+                 * options.startupParams
+                 * options.legal
+                 * options.tenant
+                 *
+                 * // TopBar available options
+                 * options.brand="My Brand"
+                 * options.application="My Web Application"
+                 *
+                 * // TopBar automagically handled options
+                 * options.events.search
+                 * options.events.clearSearch
+                 *
+                 * moduleName               - Additional module name to be required to get more complex options.
+                 *                            The module should contains a `getOptions` method.
+                 *                                -> Use it to return as JS Object any below option for Top Frame or Top Bar components.
+                 *                                   Especially if you want to add callbacks.
+                 *                                -> To fill the Top Bar menu, return the `content` parameter as expected by TopBarProxy component.
+                 *
+                 */
+                self.init = function () {
+
+                    self.wp.children = [];
+
+                    if (self.contextType) {
+                        PublicAPI.getActiveContext({
+                            type: self.contextType,
+                            success: self.setup,
+                            failure: self.setup
+                        });
+                    } else {
+                        self.refresh();
+                    }
+                };
+
+                /**
+                 * Refresh the widget only if it is visible.
+                 * @private
+                 */
+                self.refresh = function () {
+                    if (self.wp.isVisible) {
+                        self.display();
+                    }
+                };
+
+                /**
+                 * Get widget context or children and then parse data
+                 * @private
+                 */
+                self.display = function () {
+                    if (self.contextId || self.contextType) {
+                        // Context tree instances
+                        PublicAPI.getContext({
+                            id: self.contextId,
+                            type: self.contextType,
+                            success: function (result) {
+                                WidgetsData.getWidgetInstanceChildren({
+                                    id: self.nonMutatedParent.id,
+                                    contextType: self.contextType,
+                                    contextId: self.contextId,
+                                    cacheId: wap.widgetInstancesCacheId + result.cacheId,
+                                    success: self.parse
+                                });
+                            }, failure: function (error) { throw error; }
+                        });
+                    } else {
+                        // Else public tree instances
+                        WidgetsData.getWidgetInstanceChildren({
+                            id: self.nonMutatedParent.id,
+                            cacheId: wap.widgetInstancesCacheId,
+                            success: self.parse,
+                            failure: function (error) { throw error; }
+                        });
+                    }
+                };
+
+                /**
+                 * Parse widget hierarchy and its json data and then setup the layout
+                 * @private
+                 */
+                self.parse = function (response) {
+                    var children =  response.children || [],
+                        moduleName = widget.getValue('moduleName'),
+                        setupWithConfiguration = function () { return  self.setup(externalConfiguration); };
+
+                    child = children[0];
+
+                    // Bind events now that we have the proper id
+                    if (!PubSub.has('widget-' + widget.id)) {
+                        // TODO: migrate to messagebus
+                        PubSub.add('widget-' + widget.id, function (action, data) {
+                            self[action + 'Widget'].apply(this, Utils.splat(data));
+                        });
+                    }
+
+                    externalConfiguration = widget.getValue('options') || [];
+
+                    if (moduleName) {
+                        require([moduleName], function (Module) {
+                            self.module = UWA.merge(Module, self.module);
+                            if (UWA.is(self.module.getOptions, 'function')) {
+                                externalConfiguration = UWA.merge(externalConfiguration, self.module.getOptions());
+                            }
+                            setupWithConfiguration();
+                        }, setupWithConfiguration);
+                    } else {
+                        setupWithConfiguration();
+                    }
+                };
+
+                /**
+                 * Inject the component and its children recursively
+                 * @param  {Object} child - Current widget data
+                 */
+                self.loadChild = function () {
+                    if (!child) { return; }
+                    child.el.addClassName('module');
+                    child.parent = widget.environment;
+                    WFactory.load(child);
+                };
+
+                /**
+                 * Get layout configuration to setup either the frame ot the top bar
+                 * @param  {Object} externalConfiguration - Configuration from widget json data
+                 * @param  {Object} child                 - Current widget data
+                 * @private
+                 */
+                self.setup = function (externalConfiguration) {
+                    var component = widget.getValue('component') || {},
+                        user = PublicAPI.getUser();
+
+                    // Generic configuration
+                    configuration.brand = 'My Brand';
+                    configuration.application = 'My Web Application';
+
+                    if (user && user.login) {
+                        configuration.userId = user.login;
+                        if (user.firstName && user.lastName) {
+                            configuration.userName = user.firstName + ' ' + user.lastName;
+                        } else if (user.firstName) {
+                            configuration.userName = user.firstName;
+                        } else {
+                            configuration.userName = configuration.userId;
+                        }
+                    }
+
+                    if (component === 'topbar') {
+                        self.setupBar(externalConfiguration);
+                    } else {
+                        self.setupFrame(externalConfiguration);
+                    }
+                };
+
+                /**
+                 * Instanciates a Top Bar and inject it in body
+                 *
+                 * @param  {Object} externalConfiguration - Configuration from widget json data
+                 * @param  {Object} child                 - Current widget data
+                 * @private
+                 */
+                self.setupBar = function (externalConfiguration) {
+
+                    var i,
+                        widgets = UWA.Widgets ? UWA.Widgets.instances : [],
+                        topBarProxy;
+
+                    configuration.events = {
+                        search: function (options) {
+                            for (i = 0; i < widgets.length; i++) {
+                                widgets[i].dispatchEvent('onSearch', options);
+                            }
+                        },
+                        clearSearch: function () {
+                            for (i = 0; i < widgets.length; i++) {
+                                widgets[i].dispatchEvent('onResetSearch');
+                            }
+                        }
+                    };
+                    // Give priority to external configuration
+                    configuration = UWA.merge(externalConfiguration, configuration);
+                    TopBar.init(configuration);
+                    // Adding Top Bar Proxy if necessary
+                    if (externalConfiguration.content) {
+                        // Activating static menus in the TopBar
+                        TopBarMenu.setStaticMenuProviders([
+                            COMPASS_TOP_BAR_ID,
+                            SEARCH_TOP_BAR_ID,
+                            INSTANT_MSG_TOP_BAR_ID,
+                            HELP_MENU_TOP_BAR_ID
+                        ]);
+
+                        topBarProxy = new TopBarProxy({ id: HELP_MENU_TOP_BAR_ID });
+                        topBarProxy.addContent(externalConfiguration.content);
+                    }
+                    child.el = new Element('div', { 'class': 'app-content' }).inject(document.body);
+                    self.loadChild(child);
+                };
+
+                /**
+                 * Instanciates a Top Frame and inject it in body
+                 *
+                 * @param  {Object} externalConfiguration - Configuration from widget json data
+                 * @param  {Object} child                 - Current widget data
+                 * @private
+                 */
+                self.setupFrame = function (externalConfiguration) {
+
+                    var that = this;
+
+                    configuration = UWA.merge(configuration, {
+                        lang: dsLang,
+
+                        // Compass
+                        myAppsBaseUrl: PublicAPI.getApplicationConfiguration('app.urls.myapps') || '',
+                        baseAppletPath: WebappsUtils.getWebappsAssetUrl(COMPASS_MODULE_NAME, 'applet/'),
+                        baseHtmlPath: WebappsUtils.getWebappsBaseUrl() + COMPASS_MODULE_NAME + '/',
+                        baseImgPath: WebappsUtils.getWebappsAssetUrl(COMPASS_MODULE_NAME, 'images/'),
+                        baseNlsPath: WebappsUtils.getWebappsAssetUrl(COMPASS_MODULE_NAME, 'lang/'),
+                        showWidgetApps: true,
+
+                        // Passport
+                        passportUrl: PublicAPI.getApplicationConfiguration('app.urls.passport') || '',
+                        proxyTicketUrl: dsBaseUrl.replace(/\/$/g, '') + '/api/passport/ticket?url=V6',
+
+                        // Tag Navigator
+                        tagsServerUrl: PublicAPI.getApplicationConfiguration('app.urls.tagging_collab') || '',
+
+                        // About
+                        brandAbout: PublicAPI.getApplicationConfiguration('app.build.brand') || '',
+                        appNameAbout: PublicAPI.getApplicationConfiguration('app.build.name') || '',
+                        numberAbout: PublicAPI.getApplicationConfiguration('app.build.number') || '',
+                        communityUrl: PublicAPI.getApplicationConfiguration('app.urls.support_community')
+                    });
+
+                    // Initialize frame if myApps accessible
+                    self.getStartupParameters(function (userStartupParams) {
+                        if (userStartupParams) {
+                            // Legal, SwYm, cstorage, search, hpc, instantMessaging, roles...
+                            configuration.startupParams = userStartupParams;
+                            configuration.legal = userStartupParams.legal;
+
+                            // Required for Tagger
+                            if (userStartupParams.swym && userStartupParams.swym[0] && userStartupParams.swym[0].id) {
+                                configuration.tenant = userStartupParams.swym[0].id;
+                            }
+                        }
+
+                        // Give priority to external configuration
+                        configuration = UWA.merge(externalConfiguration, configuration);
+                        TopFrame.init(configuration);
+                        // We must insert on top of app-content to be on top of the legal footer.
+                        child.el =  new Element('div', { 'class': 'widgets-container' }).inject(TopFrame.getApplicationContainer(), 'top');
+                        that.loadChild(child);
+                    });
+                };
+
+                /**
+                 * Get (init) user params at startup. (admin privileges, swym tenants, etc...)
+                 * @private
+                 */
+                self.getStartupParameters = function (callback) {
+                    // FIXME: prevent replace from being performed on 'undefined'. Ugly fix waiting for a full and proper implementation about getting configuration.
+                    var myAppsServicesBaseURL = (PublicAPI.getApplicationConfiguration('app.urls.myapps') || '').replace(/\/$/g, '') + APPS_MNGT_URL,
+                        myAppsStartupService = myAppsServicesBaseURL + STARTUP_URL,
+                        user = PublicAPI.getUser(),
+                        tenant = PublicAPI.getApplicationConfiguration('app.mp.tenant'),
+                        headers = {
+                            Accept: 'application/ds-json',
+                            'Accept-Language': dsLang
+                        };
+
+                    function isValidResult (result) {
+
+                        var isSuccess = true,
+                            status,
+                            startupParamsErrorMsg;
+
+                        status = result.success ? result.success : result.message;
+
+                        if (!status) {
+                            if (result.error && result.error.message) { // Error received from the platform
+                                Logger.error('Error: ' + result.error.code + ' - ' + result.error.message);
+                            } else { // Error reaching platform
+                                Logger.error('Error reaching platform - ' + result);
+                            }
+                            isSuccess = false;
+                        } else if (['true', 'Success'].indexOf(status.toString()) < 0) {
+                            if (UWA.is(result.code)) {
+                                startupParamsErrorMsg = result.code !== 0 ? result.message : startupParamsErrorMsg;
+                                Logger.error('Error received from MyApps: ' + result.message + '[' + result.code + ']');
+                            } else {
+                                Logger.error('Error received from MyApps. - ' + result);
+                            }
+                            isSuccess = false;
+                        }
+
+                        return isSuccess;
+                    }
+
+                    function onComplete (result) {
+                        if (isValidResult(result)) {
+                            // Returning user startup params
+                            callback(result);
+                        } else {
+                            onFailure();
+                        }
+                    }
+
+                    function onFailure (error) {
+                        if (error && error.message) { // Network error
+                            Logger.error('Error fetching user admin access: ' + error.message);
+                        }
+                        // Call callback anyway
+                        callback();
+                    }
+
+                    // Break if no myApps URL
+                    !myAppsServicesBaseURL && onFailure();
+
+                    if (tenant) {
+                        myAppsStartupService += '&platform=' + tenant;
+                    }
+
+                    if (user && user.login) {
+                        WAFData.authenticatedRequest(myAppsStartupService, {
+                            timeout: 11000,
+                            method: 'GET',
+                            type: 'json',
+                            cache: -1,
+                            headers: headers,
+                            onComplete: onComplete,
+                            onFailure: onFailure
+                        });
+                    } else {
+                        // If no user logged, continue the flow without calling myApps
+                        onComplete({ success: true });
+                    }
+                };
+
+                // Fallback for already launched widgets
+                if (widget.launched) {
+                    self.init();
+                } else {
+                    widget.addEvent('onLoad', self.init);
+                }
+            });
+
+            // ]]>
+        </script>
+    </head>
+
+    <!-- Widget HTML code -->
+    <body></body>
+
+</html>

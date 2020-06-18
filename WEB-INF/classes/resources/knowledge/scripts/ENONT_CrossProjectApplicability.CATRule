@@ -1,0 +1,83 @@
+/* Rule ENONT_CrossProjectPrivateRelation (ThisObject: PLMEntity, Parameters: RuleContext)        */
+/* NOT CONTRACTUAL and PROPERTY OF TE (TEAM ENVIRONMENT) DEFINITION, ANY CHANGE MAY HAPPEN WITHOUT NOTICE       */
+/* Parameters contains many information such as name, user, security ... depending on Operation                 */
+/* WARNING: THIS CHECK MAY OPERATE BOTH IN FORMER TYPING AND NEW TYPING                                        */
+
+Let ConnectedProjectUsage (STRING)
+
+Let ThisObjectProject (String)
+
+Let InstanciatingProject (String)
+Let InstanciatingObject (PLMEntity)
+Let InstanciatingMaturity (String)
+Let IsOffLine (Boolean)
+
+/* parameter to be adpated */ 
+ConnectedProjectUsage = ""
+InstanciatingMaturity = ""
+Validation = true
+IsOffLine=false
+
+if ( Parameters->HasAttribute("IsSessionOffline") == true ) {
+   IsOffLine=Parameters->GetAttributeBoolean("IsSessionOffline")
+}
+
+if ( Parameters->HasAttribute("Project") == true ) {
+   ConnectedProjectUsage=Parameters->GetAttributeString("Project")
+}
+
+ThisObjectProject = ""
+if (ThisObject->HasAttribute("V_project") == true) {
+   ThisObjectProject=ThisObject->GetAttributeString("V_project")
+}
+
+/* newly created object will be set with the connected project */ 
+if (ThisObjectProject==NULL) { ThisObjectProject=""}
+if (ThisObjectProject == "") { ThisObjectProject=ConnectedProjectUsage } 
+
+/* notice when creating an object and not saving it, the created object is with no project defined*/
+set InstanciatingObject = Parameters->GetAttributeObject("ReferenceToInstantiate")
+InstanciatingProject=""
+if ((InstanciatingObject <> NULL) and (InstanciatingObject->HasAttribute("V_project") == true)) {
+   InstanciatingProject=InstanciatingObject->GetAttributeString("V_project")
+   if (InstanciatingProject==NULL) { InstanciatingProject=""}
+}
+
+if (InstanciatingProject == "") { InstanciatingProject=ConnectedProjectUsage } 
+
+/*Notice when Offline the Project is known, but some server applicability condition may be not: on unknowns condition it is managed as forbidden */
+
+/*REGLES DE VALIDATION PROJECT: No control on reuse from Standard Project or PublicProject which only Public data there*/ 
+if ( (ThisObjectProject <> InstanciatingProject) ) {
+   if (  (IsOffLine == true) and (InstanciatingProject <> ConnectedProjectUsage) ) {
+           /*REGLES DE VALIDATION PROJECT: Offline should send a Warnig but not forbid instanciation even with risk */
+		   /*Mais pas sur qu'on ait envie d'avoir des warning desormais */ 
+		   Trace (1, "cross context instanciation cannot be be checked in Offline"  )
+		   Parameters.NLSMessage = BuildDeferredMessageNLS("ENONT_AggregationControls", "TeamCrossContextWarning.Title")
+		   Parameters.Message=BuildMessageNLS("ENONT_AggregationControls","TeamCrossContextWarning.Title")
+		   Parameters.Severity=2 
+   }
+   else if ( (STStandardProject(InstanciatingProject) == false) and (STPublicProject(InstanciatingProject) == false) ) {
+	    /* Establishing a Cross Project Composition Relation (Multi-Project DAG) over non standard data and non public data */ 
+	    /* Should be only allowed for Uniform security (aka Public object). PublicObject are Applicable */
+	    if ( (STMultiContextPrivateReadability(InstanciatingProject) == true) and  (STMultiContextPrivateApplicability(InstanciatingProject) == false) ) {
+		Trace (1, "cross context instanciation need to be checked"  ) 
+	
+		if ((InstanciatingObject <> NULL) and (InstanciatingObject->HasAttribute("V_maturity") == true)) {
+			InstanciatingMaturity=InstanciatingObject->GetAttributeString("V_maturity")
+			if (InstanciatingMaturity==NULL) { InstanciatingMaturity=""}
+		}
+
+		if ((STPublicOrProtectedProject(InstanciatingProject) <> true) or (InstanciatingMaturity <> "RELEASED")) {
+		   /*Private Project or ProtectedProject without object in RELEASE State - costly and non applicable in offline */ 
+		   if (STObjectApplicableToProject(InstanciatingObject, ThisObjectProject) == false ){
+				Validation = false
+				Parameters.NLSMessage = BuildDeferredMessageNLS("ENONT_AggregationControls", "TeamCrossContextCheck.Title")
+				Parameters.Message=BuildMessageNLS("ENONT_AggregationControls","TeamCrossContextCheck.Title")
+				Parameters.Severity=3 
+		   }
+		}
+	}	   
+  }   
+}
+

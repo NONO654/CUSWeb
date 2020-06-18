@@ -1,0 +1,58 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../ad-multiview-panel/ad-multiview-panel.html">
+<link rel="import" href="../ad-breadcrumbs/ad-breadcrumbs.html">
+
+<dom-module id="ad-hierarchy-browser">
+  <link rel="import" type="css" href="ad-hierarchy-browser.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+         
+        <sp-dashboard id="dashboard"></sp-dashboard>
+		
+		<div class="container-fluid">
+			<div class="row chooser-header chrome-pull-fix" draggable="false" on-dragover="onNoDragOver" on-drop="onHBDrop">
+			    <ad-breadcrumbs id="breadcrumbs" class="pull-left" on-select="onBreadcrumbSelect" showrootbreadcrumb="{{showRootBreadcrumb}}"></ad-breadcrumbs>
+	            <div class="pull-right chooser-commands">
+                    <div id="buttons">
+            		    <content select=".tooltip-button-wrapper,sp-access"></content>
+            		    
+				        <div title="Refresh" class$="{{_computeRefreshButtonClass(showRefresh)}}">
+		                    <button id="refresh" type="button" class="btn btn-xs btn-default" on-click="onRefresh"><span class="fonticon fonticon-cw"></span></button>
+		                </div>
+				        <div title="Remove" class$="{{_computeRemoveButtonClass(showRemove)}}">
+							<!-- Hide the button if no write access is present -->
+							<sp-access group="process" data-has-no-write-then="hide">
+								<button id="remove" type="button" class="btn btn-xs btn-default" on-click="onRemove"><span class="fonticon fonticon-trash"></span>							
+								</button>
+							</sp-access>
+		                </div>
+				        <div title="Show icons" class$="{{_computeIconViewButtonClass(showIconView, viewMode)}}">
+		                    <button id="viewIcons" type="button" class="btn btn-xs btn-default" on-click="onViewIcons"><span class="fonticon fonticon-layout"></span></button>
+		                </div>
+				        <div title="Show list" class$="{{_computeListViewButtonClass(showListView, viewMode)}}">
+		                    <button id="viewList" type="button" class="btn btn-xs btn-default" on-click="onViewList"><span class="fonticon fonticon-list"></span></button>
+		                </div>
+	                </div>
+                    <div id="menus">
+            		    <content select="sp-dropdown-menu"></content>
+    			    </div>
+	            </div>
+			</div>
+			<div id="contentRow" class="row chooser-content hidden" on-click="onContentAreaClick" tabindex="0">
+				<ad-multiview-panel id="contentPanel" view-mode="{{viewMode}}" on-select="onSelect" on-drilldown="onDrilldown">
+				</ad-multiview-panel>
+			</div>
+			<div id="placeholderRow" class="row chooser-content hidden">
+				<div class="placeholder">
+	           		<content select="aside"></content>
+				</div>
+			</div>
+			<div id="loadingRow" class="row chooser-content hidden"></div>
+		</div>
+	</template>
+  <script src="ad-hierarchy-browser.js"></script>
+</dom-module>

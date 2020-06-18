@@ -1,0 +1,1257 @@
+{
+	"categories": {
+		"nolist": true,
+		"nodefaultprops": true,
+		"props": [],
+		"norules": true,
+		"value": [
+			{
+				"id": 1,
+				"label": "Layout"
+			},
+			{
+				"id": 2,
+				"label": "Basic"
+			},
+			{
+				"id": 3,
+				"label": "Advanced",
+				"isDefault": true
+			}
+		]
+	},
+	"xs-wg-layout": {
+		"caption": "Panel",
+		"title": "Layout elements in multi column mode with collapsible header",
+		"nohint": true,
+		"nodefaultprops": true,
+		"nowrap": true,
+		"category_id": 1,
+		"norules": true,
+		"props": [
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "vertical",
+				"norules": true,
+				"title": "Maximum number of columns to use",
+				"caption": "Columns",
+				"type": "string",
+				"choices": [
+					1,
+					2,
+					3
+				]
+			},
+			{
+				"caption": "Collapsed",
+				"name": "collapsed",
+				"title": "Maximum number of columns to use",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			},
+			{
+				"caption": "Hidden",
+				"name": "hidden",
+				"title": "Sets the visibility",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-section": {
+		"caption": "Section",
+		"title": "Section to layout elements in multi column mode",
+		"nohint": true,
+		"nodefaultprops": true,
+		"nowrap": true,
+		"category_id": 1,
+		"norules": true,
+		"props": [
+			{
+				"name": "vertical",
+				"norules": true,
+				"title": "Maximum number of columns to use",
+				"caption": "Columns",
+				"type": "string",
+				"choices": [
+					1,
+					2,
+					3
+				]
+			},
+			{
+				"caption": "Hidden",
+				"name": "hidden",
+				"title": "Sets the visibility",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-heading": {
+		"caption": "Label",
+		"title": "Display single line text",
+		"nohint": true,
+		"nodefaultprops": true,
+		"category_id": 2,
+		"norules": true,
+		"props": [
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			}
+		]
+	},
+	"xs-wg-input-text": {
+		"caption": "Input",
+		"title": "Single line text input",
+		"category_id": 2,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "string,multiline,real,int,integer,range",
+				"associates": true,
+				"ruleCondition": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.min = XS.Data.minimum",
+						"force": true
+					},
+					{
+						"expr": "this.max = XS.Data.maximum",
+						"force": true
+					},
+					{
+						"expr": "this.datatype = XS.Data.datatype",
+						"force": true
+					},
+					{
+						"expr": "this.mandatory = (!XS.Data.mandatory || !!XS.Data.mandatory.search('true')) ? null : true",
+						"force": true
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			},
+			{
+				"name": "mandatory",
+				"title": "Makes the value to behave as mandatory",
+				"caption": "Mandatory",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-textarea": {
+		"caption": "Text Area",
+		"title": "Multiline Text Input",
+		"category_id": 2,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "string,multiline",
+				"associates": true,
+				"ruleCondition": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.mandatory = (!XS.Data.mandatory || !!XS.Data.mandatory.search('true')) ? null : true",
+						"force": true
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"defaultValue": "Paragraph Text",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			},
+			{
+				"name": "mandatory",
+				"title": "Makes the value to behave as mandatory",
+				"caption": "Mandatory",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-timestamp": {
+		"caption": "Date",
+		"title": "Calendar for picking Date",
+		"category_id": 2,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "timestamp",
+				"associates": true,
+				"ruleCondition": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.mandatory = (!XS.Data.mandatory || !!XS.Data.mandatory.search('true')) ? null : true",
+						"force": true
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"defaultValue": "Date",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			},
+			{
+				"name": "mandatory",
+				"title": "Makes the value to behave as mandatory",
+				"caption": "Mandatory",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-multi-value-textfield": {
+		"caption": "Multivalue Text",
+		"title": "Multiple value text input",
+		"norules": true,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "multival",
+				"associates": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.mandatory = (!XS.Data.mandatory || !!XS.Data.mandatory.search('true')) ? null : true",
+						"force": true
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true
+					},
+					{
+						"expr": "this.datatype = XS.Data.datatype",
+						"force": true
+					},
+					{
+						"expr": "this.valuetype = XS.Data.valuetype",
+						"force": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			},
+			{
+				"name": "mandatory",
+				"title": "Makes the value to behave as mandatory",
+				"caption": "Mandatory",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-checkbox": {
+		"caption": "Checkbox",
+		"title": "Checkbox to get boolean choices",
+		"category_id": 2,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the checkbox",
+				"caption": "Value",
+				"type": "boolean",
+				"associates": true,
+				"ruleCondition": true,
+				"choices": [
+					true,
+					false
+				],
+				"bindings": [
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-slider": {
+		"caption": "Slider",
+		"title": "Slider to select from a range of values",
+		"category_id": 2,
+		"props": [
+			{
+				"name": "value",
+				"title": "Default value for slider",
+				"caption": "Value",
+				"type": "range,real,int,integer",
+				"associates": true,
+				"ruleCondition": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.min = XS.Data.minimum",
+						"force": true
+					},
+					{
+						"expr": "this.max = XS.Data.maximum",
+						"force": true
+					},
+					{
+						"expr": "this.usermin = XS.Data.minimum || 0",
+						"reflect": true
+					},
+					{
+						"expr": "this.usermax = XS.Data.maximum || 100",
+						"reflect": true
+					},
+					{
+						"expr": "this.datatype = XS.Data.datatype",
+						"force": true
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true,
+						"reflect": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "usermin",
+				"title": "User defined minimum value",
+				"caption": "Minimum",
+				"type": "string"
+			},
+			{
+				"name": "usermax",
+				"title": "User defined maximum value",
+				"caption": "Maximum",
+				"type": "string"
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-dropdown": {
+		"caption": "Dropdown",
+		"title": "Dropdown List to select from a list of values",
+		"category_id": 2,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "choices",
+				"associates": true,
+				"ruleCondition": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.value = XS.Data.value"
+					},
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.choices = XS.Data.choices",
+						"force": true
+					},
+					{
+						"expr": "this.choices_display = XS.Data.choices_display || XS.Data.choices",
+						"force": true
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true,
+						"reflect": true
+					},
+					{
+						"expr": "this.userchoices = !XS.Access.haswrite ? false : null",
+						"force": true
+					},
+					{
+						"expr": "this.mandatory = (!XS.Data.mandatory || !!XS.Data.mandatory.search('true')) ? null : true",
+						"force": true
+					}
+				]
+			},
+			{
+				"name": "userchoices",
+				"caption": "Choices",
+				"placeholder": "Configure choices",
+				"type": "multichoice",
+				"editable": "false"
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			},
+			{
+				"name": "mandatory",
+				"title": "Makes the value to behave as mandatory",
+				"caption": "Mandatory",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-document-chooser": {
+		"caption": "Content",
+		"title": "View or update content",
+		"norules": true,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "owned_chooser,chooser",
+				"associates": true,
+				"bindings": [
+					{
+						"expr": "this.rawvalue = XS.Data",
+						"force": true
+					},
+					{
+						"expr": "this.contentid = XS.Data.chooser_physicalid"
+					},
+					{
+						"expr": "this.contenttitle = XS.Data.value_display || XS.Data.title",
+						"force": true
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true,
+						"reflect": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-media": {
+		"caption": "Media",
+		"title": "View images and videos",
+		"norules": true,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "owned_chooser,chooser",
+				"associates": true,
+				"bindings": [
+					{
+						"expr": "this.value = XS.Data.value"
+					},
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.rawvalue = XS.Data",
+						"force": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			}
+		]
+	},
+	"xs-wg-xyplot": {
+		"caption": "X-Y Plot",
+		"title": "View/Plot Array Parameters in Plot",
+		"norules": true,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "array,int,integer,real,2D",
+				"associates": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "xaxis",
+				"title": "Column for X axis",
+				"caption": "X-Axis Index",
+				"type": "String"
+			},
+			{
+				"name": "yaxis",
+				"title": "Column for Y axis",
+				"caption": "Y-Axis Index (,)",
+				"type": "String",
+				"placeholder": "2,3,..."
+			},
+			{
+				"name": "xname",
+				"title": "Label displayed X Axis",
+				"caption": "X-Axis Name",
+				"type": "string"
+			},
+			{
+				"name": "yname",
+				"title": "Label displayed Y Axis",
+				"caption": "Y-Axis Names (,)",
+				"type": "string",
+				"placeholder": "yaxis1,yaxis2,..."
+			},
+			{
+				"name": "direction",
+				"title": "Data Direction",
+				"caption": "Data Direction",
+				"type": "String",
+				"choices": [
+					"Row",
+					"Column"
+				]
+			}
+		]
+	},
+	"xs-wg-table": {
+		"caption": "Table",
+		"title": "View/Edit Array Parameters in Table",
+		"norules": true,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "array,int,integer,real,2D",
+				"associates": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true,
+						"reflect": true
+					},
+					{
+						"expr": "this.datatype = XS.Data.datatype",
+						"force": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "col",
+				"title": "Column names seprated by comma",
+				"caption": "Column Names (,)",
+				"type": "string",
+				"placeholder": "Col1,Col2,..."
+			},
+			{
+				"name": "row",
+				"title": "Row names seprated by comma",
+				"caption": "Row Names (,)",
+				"type": "string",
+				"placeholder": "Row1,Row2,..."
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-content-viewer": {
+		"caption": "Files",
+		"title": "Upload, download, or checkout the content",
+		"norules": true,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "owned_chooser,chooser",
+				"associates": true,
+				"bindings": [
+					{
+						"expr": "this.rawvalue = XS.Data",
+						"force": true
+					},
+					{
+						"expr": "this.value = XS.Data.value"
+					},
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-run": {
+		"caption": "Run",
+		"title": "Run or monitor selected Activity/Simulation",
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "Activity,Simulation",
+				"associates": true,
+				"placeholder": "Pick Process or Activity",
+				"bindings": [
+					{
+						"expr": "this.rawvalue = XS.Data",
+						"force": true
+					},
+					{
+						"expr": "this.value = XS.Data.objectId"
+					},
+					{
+						"expr": "this.jobstatus = XS.Data.jobstate",
+						"force": true
+					},
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "jobstatus",
+				"title": "Activity Job Status",
+				"caption": "Job Status",
+				"type": "string",
+				"nolist": true,
+				"ruleCondition": true,
+				"choices": [
+					"Not Started",
+					"Running",
+					"Paused",
+					"Waiting",
+					"Completed",
+					"Failed",
+					"Canceled"
+				]
+			}
+		]
+	},
+	"xs-wg-document-manager": {
+		"caption": "Documents",
+		"title": "Configure the document created when uploading files",
+		"norules": true,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the Adapter",
+				"caption": "Value",
+				"type": "Activity,Simulation",
+				"associates": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.rawvalue = XS.Data",
+						"force": true
+					},
+					{
+						"expr": "this.value = XS.Data.objectId"
+					},
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true,
+						"reflect": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "category",
+				"title": "Simulation Category in which files will be uploaded",
+				"caption": "Simulation Category",
+				"type": "string",
+				"choices": [
+					"Product",
+					"Context",
+					"Specifications",
+					"Internal Data",
+					"Results",
+					"Validated Data"
+				]
+			},
+			{
+				"name": "selectattributegroup",
+				"title": "Select attribute group functionality is enabled or not",
+				"caption": "Select Attribute Group",
+				"type": "string",
+				"choices": [
+					"Enable",
+					"Disable"
+				]
+			},
+			{
+				"name": "createtype",
+				"title": "Newly created document are owned or refrenced",
+				"caption": "Document Type",
+				"type": "string",
+				"choices": [
+					"Owned",
+					"Referenced"
+				]
+			},
+			{
+				"name": "isversioned",
+				"title": "Create a versioned document or not",
+				"caption": "Is Versioned",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			},
+			{
+				"name": "iomode",
+				"title": "Create a versioned document or not",
+				"caption": "New Document Mode",
+				"type": "string",
+				"choices": [
+					"Input",
+					"Output",
+					"InputOutput",
+					"None"
+				]
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-reference-manager": {
+		"caption": "References",
+		"title": "Configure a reference to an object",
+		"norules": true,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the Adapter",
+				"caption": "Value",
+				"type": "Activity,Simulation",
+				"associates": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.rawvalue = XS.Data",
+						"force": true
+					},
+					{
+						"expr": "this.value = XS.Data.objectId"
+					},
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true,
+						"reflect": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "category",
+				"title": "Simulation Category in which files will be uploaded",
+				"caption": "Simulation Category",
+				"type": "string",
+				"choices": [
+					"Product",
+					"Context",
+					"Specifications",
+					"Internal Data",
+					"Results",
+					"Validated Data"
+				]
+			},
+			{
+				"name": "iomode",
+				"title": "Create a versioned document or not",
+				"caption": "New Content Mode",
+				"type": "string",
+				"choices": [
+					"Input",
+					"Output",
+					"InputOutput",
+					"None"
+				]
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-navigation": {
+		"caption": "Navigation",
+		"title": "Add multiple steps",
+		"category_id": 1,
+		"props": [
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"norules": true,
+				"type": "string"
+			},
+			{
+				"name": "steps",
+				"title": "Label displayed for the widget",
+				"caption": "Steps",
+				"norules": true,
+				"type": "string",
+				"placeholder": "Step1,Step2,..."
+			},
+			{
+				"name": "selected",
+				"title": "Label displayed for the widget",
+				"caption": "Active Step",
+				"type": "string",
+				"ruleCondition": true
+			}
+		]
+	},
+	"xs-wg-multiselect": {
+		"caption": "Multi Select",
+		"title": "Select multiple values from list of available choices",
+		"norules": true,
+		"category_id": 2,
+		"props": [
+			{
+				"name": "value",
+				"title": "The value of the input",
+				"caption": "Value",
+				"type": "multival,choices",
+				"associates": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.choices = XS.Data.choices",
+						"force": true
+					},
+					{
+						"expr": "this.readonly = !XS.Access.haswrite ? true : null",
+						"force": true,
+						"reflect": true
+					},
+					{
+						"expr": "this.mandatory = (!XS.Data.mandatory || !!XS.Data.mandatory.search('true')) ? null : true",
+						"force": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "readonly",
+				"title": "Makes the value to behave as readonly",
+				"caption": "Read Only",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			},
+			{
+				"name": "mandatory",
+				"title": "Makes the value to behave as mandatory",
+				"caption": "Mandatory",
+				"type": "boolean",
+				"choices": [
+					true,
+					false
+				]
+			}
+		]
+	},
+	"xs-wg-3dplay": {
+		"caption": "3D Play",
+		"title": "Visualize 3D data",
+		"props": [
+			{
+				"name": "value",
+				"title": "Content which needs to be visualized",
+				"caption": "Value",
+				"type": "chooser",
+				"associates": true,
+				"placeholder": "Pick a value",
+				"bindings": [
+					{
+						"expr": "this.label = XS.Data.title_display || XS.Data.title"
+					},
+					{
+						"expr": "this.rawvalue = XS.Data",
+						"force": true
+					},
+					{
+						"expr": "this.physicalid = XS.Data.chooser_physicalid",
+						"force": true
+					},
+					{
+						"expr": "this.dtype = XS.Data.DummyDocType",
+						"force": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for the widget",
+				"defaultValue": "Heading",
+				"caption": "Label",
+				"type": "string"
+			}
+		]
+	},
+	"xs-wg-dynamic-parameters": {
+		"caption": "Parameters",
+		"title": "Dynamically add design variables during template instantiation",
+		"fontIcon": "fonticon-table",
+		"displayFlag": "xs-wg-dynamic-parameters",
+		"props": [
+			{
+				"name": "value",
+				"title": "Selected Activity",
+				"caption": "Activity",
+				"type": "Activity",
+				"associates": true,
+				"placeholder": "Pick Activity",
+				"bindings": [
+					{
+						"expr": "this.rawvalue = XS.Data",
+						"force": true
+					},
+					{
+						"expr": "this.value = XS.Data.objectId",
+						"force": true
+					},
+					{
+						"expr": "this.jobstatus = XS.Data.jobstate",
+						"force": true
+					}
+				]
+			},
+			{
+				"name": "label",
+				"title": "Label displayed for button",
+				"caption": "Label",
+				"type": "string"
+			},
+			{
+				"name": "stepname",
+				"title": "Name of DOE/Optimization step",
+				"caption": "Step Name",
+				"placeholder": "DOE/Optimization step (default: empty)",
+				"type": "string",
+				"bindings":[
+					{
+						"expr": "this.stepname = XS.Data.stepname",
+						"force" : true,
+						"reflect": true
+					}
+				]
+			},
+			{
+				"name": "widgettype",
+				"title": "Select type",
+				"caption": "Type",
+				"type": "string",
+				"choices": [
+					"Design Parameters",
+					"Responses",
+					"Constraints"
+				],
+				"bindings":[
+					{
+						"expr": "this.widgettype = XS.Data.widgettype",
+						"force" : true,
+						"reflect": true
+					}
+				]
+			},
+			{
+				"name": "kwstepname",
+				"title": "3DX Parameter Mappings",
+				"caption": "3DX Mappings",
+				"placeholder": "3DX Step name (default: empty)",
+				"type": "string",
+				"bindings":[
+					{
+						"expr": "this.kwstepname = XS.Data.kwstepname",
+						"force" : true,
+						"reflect": true
+					}
+				]
+			},
+			{
+				"name": "allowfactors",
+				"title": "Allow selecting factors",
+				"caption": "Allow selecting factors",
+				"type": "string",
+				"choices": [
+					"true",
+					"false"
+				],
+				"bindings":[
+					{
+						"expr": "this.allowfactors = XS.Data.allowfactors",
+						"force" : true,
+						"reflect": true
+					}
+				]
+			}]
+	}
+}

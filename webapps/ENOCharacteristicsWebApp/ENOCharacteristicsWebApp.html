@@ -1,0 +1,115 @@
+
+<html>
+<head>
+		<meta http-equiv="Cache-control" content="no-cache">
+		<title>Characteristics</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+        <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+        <script type="text/javascript" src="../c/UWA/js/UWA_W3C_Alone.js"></script>
+
+        <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+        <script type="text/javascript" src="../../common/scripts/emxUICore.js"></script>
+		<script type="text/javascript" src="../../common/scripts/emxUIConstants.js"></script>
+		<script type="text/javascript" src="../../common/scripts/emxUIModal.js"></script>
+        <!-- <link rel="stylesheet" type="text/css" href="../ENOCharacteristicsWebApp/ENOCharacteristicsWebApp.css" />
+		<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+        <link rel="stylesheet" type="text/css" href="../W3DXComponents/W3DXComponents.css" /> -->
+
+</head>
+
+<body>
+
+</body>
+
+
+<script type="text/javascript">
+
+	var app			= null;
+	var objectId	= null;
+require([ "DS/ENOCharacteristicsWebApp/ENOCharacteristicsWebApp" ,
+          'UWA/Core',
+          'i18n!DS/ENOCharacteristicsWebApp/assets/nls/ENOCharacteristicsWebAppNLS'], 
+   function(App, UWA, NLS) {	
+	var query = window.location.search.substring(1);
+	var options = {"ObjectID": this.parent.currObjId, "InstantiatedIn": "3DSpace", "isConsolidatedView": false};
+	app			= new App(options);
+	new UWA.Element('div',{
+		'class':'pageHead',
+		id: 'pageHeadDiv',
+		
+		 html : [{
+				tag : 'table',
+				id : 'contentHeader',
+			 	html :[{
+			 		tag:'tbody',
+			 		html:[{
+						tag : 'tr',
+						'class' : 'page-title',
+						html : [{
+							tag : 'td',
+							'class' : 'page-title',
+							html :[{
+								tag: 'h2',
+								html:[{
+									tag: 'span',
+									html: NLS.Characteristics+' | '+NLS.Filter +' : '
+									},
+									{
+									tag: 'span',
+									id: 'filterText',
+									html:NLS.All }]	
+								}],
+							}],
+			 		}]
+				}] ,
+			}]
+				}).inject(document.body);
+				app.inject(document.body);
+			});
+
+	/*B1R : Below method is being called from CharacteristicMasterAddExistingOnPart.jsp which is the process jsp(submitURL) to the emxFullSearch.jsp */
+	function addFromSelectedObjects(action, object) {
+		if ("AddExistingCMonPart" === action) {
+			require(
+					[ "DS/ENOCharacteristicsWebApp/utils/ComponentUtil" ],
+					function(ComponentUtil) {
+						if (app) {
+							console.log(app);
+							var serverResponse = JSON.parse(object);
+							app.charControl.mRootItem
+									.loadCharacteristics(serverResponse);
+							var options = {
+								rootNode : app.charControl.mRootItem.mTreeNodeModel,
+								reOrderAcrossCategory : false
+							};
+
+							app.charControl.updateSequenceOrder(options);
+							//ComponentUtil.fetchCharacteristicStructure(app.mRootModel,false);
+
+						}
+					});
+		} else if ("AddTestMethodToChar" === action) {
+			app.testMethods = object;
+			if(app.charControl.elements.CharacteristicsToolbarControl.mCreateCharForm && app.charControl.elements.CharacteristicsToolbarControl.mCreateCharForm.mChartcsModalWindow.isVisible){
+				console.log('This case stands true for new characteristics creation');
+				app.charControl.mRootItem.dispatchEvent('DS.GLS.UpdateTestMethodField');
+			}
+			else{
+			 require([ "DS/ENOCharacteristicsWebApp/renderers/TestMethodRenderers"], 
+					 function(TestMethodRenderers) {
+				 TestMethodRenderers.addTestMethods();
+			 });
+			}
+		}
+	}
+</script>
+
+<iframe name="listHidden" id="ENOCharSearchFrame" style="display:none;">
+</iframe>
+
+</html>

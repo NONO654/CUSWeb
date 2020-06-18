@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="VCXWebComposer3DPlayExperienceWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "VCXWebComposer3DPlayExperienceWorkshopInterface"/>
+  </Template>
+  
+    <!-- Command headers -->
+    <Template syp:name="VCXWebComposer3DPlayExperienceCommandHeaders" Target="CATCmdHeadersList">
+        <CATCmdHeadersList>
+
+            <CATCommandHeader ID="VCXOpenCmd" ClassName="DS/VCXWebProducts/VCXOpenCmd" ResourceFile="VCXWebProducts/VCXWebProducts" Available="1" />
+            <CATCommandHeader ID="VCXVolatileGhostingCmd" ClassName="DS/VCXWebVolatileGhosting/VCXVolatileGhostingCmd" ResourceFile="VCXWebVolatileGhosting/VCXWebVolatileGhosting" Available="1" />
+            <CATCommandHeader ID="VCXLevelExploderGUICmd" ClassName="DS/VCXWebLevelExploderGUI/VCXLevelExploderGUICmd" ResourceFile="VCXWebLevelExploderGUI/VCXWebLevelExploderGUI" Available="1" />
+            
+            <!-- Views and Render Options commands -->
+            <CATCommandHeader ID = "Reframe" ClassName = "DS/ViewerCommands/VisuReframeViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "3DPlay/3DPlayExperience3D" />
+            <CATCommandHeader ID = "Pan" ClassName = "DS/ViewerCommands/VisuPanViewCmd"  SharedLibraryName = "ShareUI" ResourceFile = "3DPlay/3DPlayExperience3D" />
+            <CATCommandHeader ID = "Zoom" ClassName = "DS/ViewerCommands/VisuZoomViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "3DPlay/3DPlayExperience3D" />
+            <CATCommandHeader ID = "Rotate" ClassName = "DS/ViewerCommands/VisuRotateViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "3DPlay/3DPlayExperience3D" />
+            <CATCommandHeader ID = "Iso" ClassName = "DS/ViewerCommands/VisuIsoViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "3DPlay/3DPlayExperience3D" />
+            <CATCommandHeader ID = "Front" ClassName = "DS/ViewerCommands/VisuFrontViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "3DPlay/3DPlayExperience3D" />
+            <CATCommandHeader ID = "Back" ClassName = "DS/ViewerCommands/VisuBackViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "3DPlay/3DPlayExperience3D" />
+            <CATCommandHeader ID = "Left" ClassName = "DS/ViewerCommands/VisuLeftViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "3DPlay/3DPlayExperience3D" />
+            <CATCommandHeader ID = "Right" ClassName = "DS/ViewerCommands/VisuRightViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "3DPlay/3DPlayExperience3D" />
+            <CATCommandHeader ID = "Top" ClassName = "DS/ViewerCommands/VisuTopViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "3DPlay/3DPlayExperience3D" />
+            <CATCommandHeader ID = "Bottom" ClassName = "DS/ViewerCommands/VisuBottomViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "3DPlay/3DPlayExperience3D" />
+            
+            <!-- internal commands -->
+            <CATCommandHeader ID="VCXPlayGuidedTourCmd" ClassName="DS/VCXWebProducts/VCXPlayGuidedTourCmd" ResourceFile="VCXWebProducts/VCXWebProducts" Available="1" />
+            <CATCommandHeader ID="VCXUndoCmd" ClassName="DS/VCXWebProducts/VCXUndoCmd" ResourceFile="VCXWebProducts/VCXWebProducts" Available="1" />
+            <CATCommandHeader ID="VCXRedoCmd" ClassName="DS/VCXWebProducts/VCXRedoCmd" ResourceFile="VCXWebProducts/VCXWebProducts" Available="1" />
+            <CATCommandHeader ID="VCXCameraPlayModeCmd" ClassName="DS/VCXWebProducts/VCXCameraPlayModeCmd" ResourceFile="VCXWebProducts/VCXWebProducts" Available="1" />
+
+        </CATCmdHeadersList>
+    </Template>
+
+    <!-- Command Starters -->
+  <Template syp:name="VCXWebComposer3DPlayExperienceWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="VCXWebComposer3DPlayExperienceWorkbench">
+      
+
+      <!-- Tools -->
+      <CATCmdContainer Name="Discover" Visibility="1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="VCXOpenCmd" Command="VCXOpenCmd" />
+        <CATCmdStarter Name="VCXVolatileGhostingCmd" Command="VCXVolatileGhostingCmd" />
+        <CATCmdStarter Name="VCXLevelExploderGUICmd" Command="VCXLevelExploderGUICmd" />
+      </CATCmdContainer>
+
+      
+      <CATCmdContainer Name = "Views" Visibility = "1" Position = "3" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name = "Reframe"       Command = "Reframe" />
+        <CATCmdStarter Name = "Pan"           Command = "Pan" />
+        <CATCmdStarter Name = "Zoom"          Command = "Zoom" />
+        <CATCmdStarter Name = "Rotate"        Command = "Rotate" />
+
+        <CATCmdContainer Name = "CameraViews" Visibility = "1" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter Name = "IsoView"      Command = "Iso" />
+          <CATCmdStarter Name = "FrontView"      Command = "Front" />
+          <CATCmdStarter Name = "BackView"      Command = "Back" />
+          <CATCmdStarter Name = "LeftView"      Command = "Left" />
+          <CATCmdStarter Name = "RightView"     Command = "Right" />
+          <CATCmdStarter Name = "TopView"       Command = "Top" />
+          <CATCmdStarter Name = "BottomView"    Command = "Bottom" />
+        </CATCmdContainer>
+
+      </CATCmdContainer>
+      
+     
+      <!-- Debug -->
+      <CATCmdContainer Name="Debug_VCX" Visibility="1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="VCXPlayGuidedTourCmd" Command="VCXPlayGuidedTourCmd" />
+      </CATCmdContainer>
+      
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

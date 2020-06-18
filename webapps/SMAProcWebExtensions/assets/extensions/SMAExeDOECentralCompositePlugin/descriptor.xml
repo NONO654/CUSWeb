@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.doe.CentralComposite" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAExeDOECentralCompositePlugin" nlsID="dispname">Central Composite</DisplayName>
+	<Description nlsFile="SMAExeDOECentralCompositePlugin" nlsID="desc">Central Composite</Description>
+	<LongDescription nlsFile="SMAExeDOECentralCompositePlugin" nlsID="longdesc">
+		<![CDATA[5-level design: 2-level full-factorial augmented with a center point and two additional star points for each factor, located on the factor axis.
+
+</span><span style="font-weight:bold">Advantages:
+</span><span>   + Although CCD requires a significant number of design point evaluations, it is a popular technique for response surface modeling due to the expanse of design space covered and the higher order information obtained.
+
+</span><span style="font-weight:bold">Disadvantages:
+</span><span>   - Number of design points grows quickly with number of factors. Studying n factors using CCD requires (2^n + 2n + 1) design points.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DOE_Technique</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.doe.CentralComposite</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeDOECentralCompositePlugin32.gif" targetFilename="SMAExeDOECentralCompositePlugin32.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeDOECentralCompositePlugin.CATNls" targetFilename="SMAExeDOECentralCompositePlugin.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeDOECentralCompositePlugin_ja.CATNls" targetFilename="SMAExeDOECentralCompositePlugin_ja.CATNls" locale="Japanese" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-central-composite/cmp-doe-central-composite.html" targetFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-central-composite/cmp-doe-central-composite.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-doe-central-composite</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.doe.centralcomposite.CentralComposite</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<Property name="Auto-Assign Factors" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[true]]>
+			</Value>
+		</Property>
+
+		<Property name="factor attributes" type="aggregate" valuetype="single">
+			<Property name="Lower" type="string" valuetype="single">
+				<Value>
+					<![CDATA[-10]]>
+				</Value>
+			</Property>
+			<Property name="Upper" type="string" valuetype="single">
+				<Value>
+					<![CDATA[10]]>
+				</Value>
+			</Property>
+			<Property name="Levels" type="string" valuetype="single">
+				<Value>
+					<![CDATA[3]]>
+				</Value>
+			</Property>
+			<Property name="Relation" type="string" valuetype="single">
+				<Value>
+					<![CDATA[%]]>
+				</Value>
+			</Property>
+			<Property name="Baseline" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+			<Property name="Alpha" type="real" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+			<Property name="User Alpha" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[false]]>
+				</Value>
+			</Property>
+		</Property>
+
+		<Property name="Level Keys" type="string" valuetype="single">
+			<Value>
+				<![CDATA[-2 -1 0 1 2]]>
+			</Value>
+		</Property>
+
+	</Properties>
+</wfext:Extension>

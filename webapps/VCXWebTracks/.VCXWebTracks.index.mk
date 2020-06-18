@@ -1,0 +1,15 @@
+m|VCXWebKeyFramingEngine\VCXWebTracks.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\VCXWebTracks\VCXWebTracks.js|1531550994|10478
+s|VCXWebKeyFramingEngine\VCXWebTracks.mweb\src\VCXInterpolator.js|1495200364|1758
+s|VCXWebKeyFramingEngine\VCXWebTracks.mweb\src\VCXEasing.js|1487933976|592
+s|VCXWebKeyFramingEngine\VCXWebTracks.mweb\src\VCXInterpolatorLinear.js|1495008959|4021
+s|VCXWebKeyFramingEngine\VCXWebTracks.mweb\src\VCXInterpolatorCubic.js|1495008959|4098
+s|VCXWebKeyFramingEngine\VCXWebTracks.mweb\src\VCXInterpolatorCylindrical.js|1495008959|4908
+s|VCXWebKeyFramingEngine\VCXWebTracks.mweb\src\VCXInterpolatorConstant.js|1495008959|2487
+s|VCXWebKeyFramingEngine\VCXWebTracks.mweb\src\VCXInterpolatorSpherical.js|1495008962|5588
+s|VCXWebKeyFramingEngine\VCXWebTracks.mweb\src\VCXKey.js|1497277078|2291
+s|VCXWebKeyFramingEngine\VCXWebTracks.mweb\src\VCXTrack.js|1518449417|14017

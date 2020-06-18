@@ -1,0 +1,1 @@
+define("DS/MPFCurrencySelectComponent/MPFCurrencySelectComponent_zh",{});define("DS/MPFCurrencySelectComponent/assets/nls/MPFCurrencySelectComponent",{selectCurrency:"选择货币",currency:"货币",currencyRequired:"A currency is required"});

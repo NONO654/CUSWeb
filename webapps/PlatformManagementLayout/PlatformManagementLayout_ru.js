@@ -1,0 +1,1 @@
+define("DS/PlatformManagementLayout/PlatformManagementLayout_ru",{});define("DS/PlatformManagementLayout/assets/nls/PlatformManagementLayout",{welcome:"Добро пожаловать в ",platformManagement:"Управление платформой",more:"Больше",less:"Меньше"});

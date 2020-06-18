@@ -1,0 +1,1 @@
+define("DS/i3DXCompassSynchro/i3DXCompassSynchro_ko",{});define("DS/i3DXCompassSynchro/assets/nls/i3DXCompassSynchro",{waiting:"설정 중입니다. 몇 초만 기다려 주십시오.",logout:"다른 3DPassport 계정 사용",noInvitation:"아직 플랫폼에 초대되지 않았습니다. 플랫폼 관리자에게 초대해줄 것을 요청하십시오.",noAccess:"이 3DEXPERIENCE Platform에 액세스할 수 없습니다.",denied:"죄송합니다. 액세스가 거부되었습니다."});

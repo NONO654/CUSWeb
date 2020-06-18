@@ -1,0 +1,23 @@
+/*
+ *	Generic PLM Dictionary Connector Customization
+ */
+
+// PACKAGE <ConnectorQualicationPrefix>;
+PACKAGE PLM;
+
+/*
+ *	Project Space Extensions
+ */
+ 
+METHOD `Workspace Vault`.`Vaulted Documents Rev2_to_Requirement Specification`() : 
+	`rel_Vaulted Documents Rev2`.`to_Requirement Specification`
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.Vaulted_Requirement_Specification")
+HELPTEXT I18N("Method.Vaulted_Requirement_Specification_Description");
+
+METHOD `Project Space`.getReportDataAdditionalDataComments() -doc :
+	`rel_Data Vaults`.`to_Workspace Vault`.`rel_Sub Vaults`.`to_Workspace Vault`[STRMATCH(name,"Report Data")].`rel_Vaulted Documents Rev2`.`to_Requirement Specification`[STRMATCH(name,"*additional data*")].`rel_Specification Structure`.`to_Comment`
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.GetReportDataAdditionnalDataComments")
+HELPTEXT I18N("Method.Tooltip.GetReportDataAdditionnalDataComments");
+

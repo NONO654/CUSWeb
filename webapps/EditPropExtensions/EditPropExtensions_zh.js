@@ -1,0 +1,1 @@
+define("DS/EditPropExtensions/EditPropExtensions_zh",{});define("DS/EditPropExtensions/assets/nls/AddExtensionsNLS",{failMessage:"失败： ",ok:"确定",cancel:"取消",title:"添加扩展",autoCompPlaceHolder:"输入扩展名",urlNotFound:"找不到请求服务的争取 URL"});

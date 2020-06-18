@@ -1,0 +1,68 @@
+<Scripts>
+  <!--Attribute initialization when Creating online data-->
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFunctionalReference" ScriptName="ENONT_PLMReference_BLInitialization">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" /> 
+  </Script>
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFunctionalCommunicationReference" ScriptName="ENONT_PLMReference_BLInitialization">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" /> 
+  </Script>
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFlowReference" ScriptName="ENONT_PLMReference_BLInitialization">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" /> 
+  </Script>
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFunctionalContract" ScriptName="ENONT_PLMReference_BLInitialization">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Resource" />
+  </Script>
+
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFunctionalRepReference" ScriptName="ENONT_PLMReference_BLInitialization">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" /> 
+  </Script>
+<!-- No Business Logic associated to PLMCoreInstance and PLMCoreRepInstance - The PLM_ExternalID default value is computed by code.
+     But, if a Business Logic is associated, the PLM_ExternalID value will be provided by it.
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFunctionalInstance" ScriptName="ENONT_PLMInstance_BLInitialization"/>
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFunctionalCommunicationInstance" ScriptName="ENONT_PLMInstance_BLInitialization"/>
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFlowInstance" ScriptName="ENONT_PLMInstance_BLInitialization"/>
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFlowExpositionInstance" ScriptName="ENONT_PLMInstance_BLInitialization"/>
+
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFunctionalRepInstance" ScriptName="ENONT_PLMInstance_BLInitialization"/>
+-->
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFunctionalConnector" ScriptName="ENONT_PLMPort_BLInitialization">
+    <Condition Attribute="Policy" Value="VPLM_SMB_PORT_Definition" /> 
+  </Script>
+  <Script OpeningID="PLMIdentificationInitialization" Type="RFLPLMFunctionalConnection" ScriptName="ENONT_PLMConnection_BLInitialization">
+    <Condition Attribute="Policy" Value="VPLM_SMB_CX_Definition" /> 
+  </Script>
+
+  <!--Adding Instance / Representation Instance inside the structure-->
+  <Script OpeningID="PLMInstanceAggregationCheck" Type="RFLPLMFunctionalReference" ScriptName="ENONT_StandardAggregation">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+  <Script OpeningID="PLMInstanceAggregationCheck" Type="RFLPLMFunctionalCommunicationReference" ScriptName="ENONT_StandardAggregation">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+  <Script OpeningID="PLMInstanceAggregationCheck" Type="RFLPLMFlowReference" ScriptName="ENONT_StandardAggregation">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+  <Script OpeningID="PLMInstanceAggregationCheck" Type="RFLPLMFunctionalContract" ScriptName="ENONT_StandardAggregation">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Resource" />
+  </Script>
+  <Script OpeningID="PLMInstanceAggregationCheck" Type="RFLPLMFunctionalRepReference" ScriptName="ENONT_StandardAggregation">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+
+  <!--Adding Instance / Representation Instance inside the structure: control that a data is made of Applicable Data-->
+  <Script OpeningID="PLMInstanceAggregationCheck" Type="RFLPLMFunctionalReference" ScriptName="ENONT_CrossProjectApplicability">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+  <Script OpeningID="PLMInstanceAggregationCheck" Type="RFLPLMFunctionalCommunicationReference" ScriptName="ENONT_CrossProjectApplicability">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+  <Script OpeningID="PLMInstanceAggregationCheck" Type="RFLPLMFlowReference" ScriptName="ENONT_CrossProjectApplicability">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+  <Script OpeningID="PLMInstanceAggregationCheck" Type="RFLPLMFunctionalContract" ScriptName="ENONT_CrossProjectApplicability">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Resource" />
+  </Script>
+  <Script OpeningID="PLMInstanceAggregationCheck" Type="RFLPLMFunctionalRepReference" ScriptName="ENONT_CrossProjectApplicability">
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+</Scripts>

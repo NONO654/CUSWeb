@@ -1,0 +1,1 @@
+define("DS/EditPropExtensions/EditPropExtensions_en",{});define("DS/EditPropExtensions/assets/nls/AddExtensionsNLS",{failMessage:"fail : ",ok:"OK",cancel:"Cancel",title:"Add Extensions",autoCompPlaceHolder:"Enter Extensions name",urlNotFound:"Cannot found correct url for request services"});

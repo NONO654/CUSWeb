@@ -1,0 +1,1 @@
+define("DS/OSLCConsumer/OSLCConsumer_zh",{});define("DS/OSLCConsumer/assets/nls/OSLCConsumerNls",{selectRepository:"资源库：",selectProvider:"提供商：",selectSingleObject:"请仅选择一个工件，之后再提交对话框。",processing:"正在处理..."});

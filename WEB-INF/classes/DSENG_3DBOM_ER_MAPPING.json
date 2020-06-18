@@ -1,0 +1,41 @@
+{
+    "dseng:EngItem": {
+        "erResource": "type_VPMReference",
+        "patchCSRF":true,
+        "contentTypes": ["dseng:EngInstance", "dseng:EnterpriseReference"],
+        "attributeMappingClass": "com.dassault_systemes.enovia.xapps.dseng.dictionaries.dsengEngItemAttributeDictionary",
+        "attributeEditBusinessLogicCheck":"com.dassault_systemes.enovia.xapps.dseng.procedures.dsengAuthoring:engItemModifyChecks",
+        "cestamp":true,
+        "customerAttribute":true,
+        "changeControl":true,
+        "optionCheck" : {
+        	"modify"      : true,
+        	"produce"     : true,
+        	"navigate"    : false
+        }
+    },
+    "dseng:EngInstance": {
+        "erResource": "relationship_VPMInstance",
+        "attributeMappingClass": "com.dassault_systemes.enovia.xapps.dseng.dictionaries.dsengEngInstanceAttributeDictionary",
+        "cestamp":true,
+        "root": false,
+        "optionCheck" : {
+        	"modify"      : true,
+        	"produce"     : true,
+        	"navigate"    : false
+        }
+    },
+    "dseng:EnterpriseReference": {
+        "erResource": "interface_EnterpriseExtension",
+        "defaultMask": "dsmveng:EnterpriseReference.Details",
+        "attributeMappingClass": "com.dassault_systemes.enovia.xapps.dseng.dictionaries.dsengEnterpriseReferenceAttributeDictionary",
+        "root": false,
+        "optionCheck" : {
+        	"modify"      : true,
+        	"produce"     : true,
+        	"navigate"    : false
+        }
+    }
+}
+
+

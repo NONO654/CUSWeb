@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow-y: auto; background: #F0F0F0;">
+
+<head>
+    <!-- Application Metas -->
+    <title>Material Panel</title>
+    <meta name="description" content="Material Panel" />
+
+    <!-- Wait spinner on load, before AMD (watch for UIKIT style changes) -->
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css"/>
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css"/>
+    <script type="text/javascript" >
+    document.write('<br><br><center><div class="spinner spinning fade in" style="transform: translate3d(0px, 0px, 0px);');
+    document.write('display: inline-block; text-align:center; font-family:Arial; font-size:14px; padding:0px;">');
+    document.write('<span class="spinner-bar"></span>');
+    document.write('<span class="spinner-bar spinner-bar1"></span>');
+    document.write('<span class="spinner-bar spinner-bar2"></span>');
+    document.write('<span class="spinner-bar spinner-bar3"></span>');
+    document.write('</div></center>');
+    </script>
+
+    <!-- AMDLoader -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+    <!-- Web Fundamentals -->
+    <script type="text/javascript" src="../WebVisualization/WebVisualization.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="../Layouts/Layouts.js"></script>
+
+    <!-- UI Kit -->
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+
+    <!-- Web components -->
+    <link rel="import" href="../SMAProcSP/sp-base/sp-base.html" />
+    <link rel="import" href="../SMAProcSP/sp-serviceurl/sp-serviceurl.html" />
+    <link rel="import" href="../SMAProcSP/sp-dashboard/sp-dashboard.html" />
+    <link rel="import" href="../SMAProcSP/sp-webservice/sp-webservice.html" />
+
+    <!-- UWA -->
+    <script type="text/javascript" src="../c/UWA/js/UWA_W3C_Alone.js"></script>
+
+    <script type="text/javascript" >
+
+    var widget = null;
+
+    require([
+        'UWA/Utils',
+        'DS/SMAWebMaterialUI/SMAWebMaterialManager',
+        'DS/SMAWebMaterialUI/SMAWebMaterialAuthenticate',
+        'DS/SMAWebMaterialUI/SMAWebMaterialTagger',
+        'DS/SMAWebMaterialUI/SMAWebMaterialSearch',
+        'DS/SMAWebMaterialUI/SMAWebMaterialPanel',
+        'DS/SMAWebMaterialUI/SMAWebMaterialRequest'
+    ], function (
+        UWAUtils,
+        MaterialManager,
+        MaterialAuthenticate,
+        MaterialTagger,
+        MaterialSearch,
+        MaterialPanel,
+        MaterialRequest
+    ) {
+
+       MaterialManager.init({
+           events: {
+               onDragStart: function(material) {
+                   console.log ("Begin drag of material " + material.title + " id " + material.id);
+               },
+               onDragEnd: function(material) {
+                   console.log ("End drag of material " + material.title + " id " + material.id);
+               },
+               onPreDrop: function (path, material, callback) {
+                   Session.showDialog('Material',
+                       'Do you want to apply material ' + material.name + '?',
+                       callback);
+               },
+               onPostDrop: function (code, message) {
+                   console.log('on post');
+                   Session.showDialog('Message',
+                       message,
+                       function () { });
+               },
+               onApply: function(material) {
+                   console.log ('Apply material '+ material.title + ' ' + material.id);
+               },
+           }
+       });
+
+       document.body.style['text-align']='left'; // for some reason the standalone.css default is center...
+
+       var url = window.location.href;
+
+       // Get any URL parameters set
+       var query  = UWAUtils.parseUrl(url).query;
+       if (query) {
+           var params = UWAUtils.parseQuery(query);
+           if (params) {
+               for (var name in params) {
+                   MaterialManager.setEnv(name, params[name]);
+               }
+           }
+       }
+
+       var tenant     = UWAUtils.getQueryString(url, 'tenant');
+       var compatible = UWAUtils.getQueryString(url, 'compatibility');
+       var serviceUrl = UWAUtils.getQueryString(url, 'SearchServiceUrl');
+
+       var buildPalette = function () {
+           MaterialAuthenticate.authenticate(tenant, function(){
+
+               MaterialTagger.initialize();
+               MaterialRequest.initialize();
+
+               var options = {};
+               if (UWAUtils.getQueryString(url, 'singleselect') === 'true')  {
+                   options.singleSelect = true;
+                   MaterialManager.configTreeLevels([ // Core only
+                       { tag: 'ds6w:what/ds6w:type',  refine:{"ds6w:what/ds6w:type":[
+                           {object:["dsc_matref_ref_Core"],"type":"string","field":["implicit"]},
+                         ]}
+                       }, // Core only
+                       { tag: 'ds6w:how/ds6w:classification' }
+                   ]);
+                   MaterialManager.setQuickFilters ([ // No need for type, since Core only
+                       { tag: 'ds6w:classification' } ,
+                       { tag: 'ds6w:identifier' } ,
+                       { tag: 'ds6w:materialDomain' },
+                       //{ tag: 'ds6w:lastModifiedBy' } ,
+                       { tag: 'ds6w:organizationResponsible' },
+                       { tag: 'ds6w:policy' } ,
+                       { tag: 'ds6w:project' },
+                       { tag: 'ds6w:status' },
+                       { tag: 'ds6w:library' },
+                       { tag: 'ds6w:responsible' }
+                   ]);
+               }
+               else {
+                   MaterialManager.setQuickFilters ([
+                       { tag: 'ds6w:type' } ,
+                       { tag: 'ds6w:classification' } ,
+                       { tag: 'ds6w:identifier' } ,
+                       { tag: 'ds6w:materialDomain' },
+                       //{ tag: 'ds6w:lastModifiedBy' } ,
+                       { tag: 'ds6w:organizationResponsible' },
+                       { tag: 'ds6w:policy' } ,
+                       { tag: 'ds6w:project' },
+                       { tag: 'ds6w:status' },
+                       { tag: 'ds6w:library' },
+                       { tag: 'ds6w:responsible' }
+                   ]);
+               }
+               if (tenant)  {
+                   MaterialSearch.setTenant(tenant);
+               }
+               if (serviceUrl && !MaterialManager.getEnv('NO_SMAWMT_SERVICEURL')) {
+                   MaterialSearch.setSearchServiceUrl(serviceUrl);
+               }
+               var panel = new MaterialPanel(options);
+               document.body.innerHTML = "";
+               panel.inject(document.body);
+
+               window.addEventListener("resize", panel.onResize.bind(panel));
+
+           });
+       };
+       if (compatible) {
+           MaterialRequest.send('GetConfigurationJSON', '', {
+               onComplete: function() {
+                   buildPalette();
+               },
+               onError: buildPalette
+           });
+       }
+       else {
+           buildPalette();
+       }
+    });
+
+
+    function NativeCallback(command, params) {
+        require([
+            'DS/SMAWebMaterialUI/SMAWebMaterialSearch',
+            'DS/SMAWebMaterialUI/SMAWebMaterialService',
+            'DS/SMAWebMaterialUI/SMAWebMaterialRequest'
+        ], function (
+            SMAWebMaterialSearch,
+            SMAWebMaterialService,
+            SMAWebMaterialRequest
+        ) {
+        if (!SMAWebMaterialRequest.dispatch (command,params)) { // try standard dispatcher first
+
+        // else... eventually need to refactor these to standard dispatcher
+
+            UWA.log ('Received message ' + command);
+            if (command === 'GetInSessionMaterialsJSON' || command === 'GetRecentMaterialsJSON') {
+              var materialPromise = SMAWebMaterialService.materialPromise;
+              if (materialPromise) {
+                  var paramsJSON;
+                  //UWA.log (params);
+                  if (params) {
+                      paramsJSON = JSON.parse(params);
+                  }
+                  if (paramsJSON) {
+                      var materialsFromParams = SMAWebMaterialService.transform(paramsJSON).materials;
+
+                      SMAWebMaterialSearch.getData({
+                          query: 'in-session',
+                          materialsJSON: materialsFromParams,
+                          onComplete: function (data) {
+
+                              var materialsFromGetData = SMAWebMaterialService.transform(data).materials;
+
+                              for (var paramsIndex in materialsFromParams) {
+
+                                  var paramsMaterial = materialsFromParams[paramsIndex];
+                                  for (var getDataIndex in materialsFromGetData) {
+
+                                      var getDataMaterial = materialsFromGetData[getDataIndex];
+                                      if (paramsMaterial.id == getDataMaterial.id) {
+                                          for (var prop in getDataMaterial) {
+                                              paramsMaterial[prop] = getDataMaterial[prop];
+                                          }
+                                          break;
+                                      }
+                                  }
+
+                                  if (!paramsMaterial.thumbnail) {
+                                      if (paramsMaterial.type == 'dsc_matref_ref_Covering') {
+                                          paramsMaterial.thumbnail = '../SMAWebMaterialUI/assets/icons/I_Material_Nav_covering22x22.png';
+                                      }
+                                      else {
+                                        paramsMaterial.thumbnail = '../SMAWebMaterialUI/assets/icons/I_Material_Nav_core22x22.png';
+                                      }
+                                  }
+                                  if (!paramsMaterial.preview) {
+                                      if (paramsMaterial.type == 'dsc_matref_ref_Covering') {
+                                          paramsMaterial.preview = '../SMAWebMaterialUI/assets/icons/I_Material_Nav_covering108x144.png';
+                                      }
+                                      else {
+                                          paramsMaterial.preview = '../SMAWebMaterialUI/assets/icons/I_Material_Nav_core108x144.png';
+                                      }
+                                  }
+                              }
+                              materialPromise.resolve(materialsFromParams);
+                          },
+                          onError: function (err) {
+                              materialPromise.reject(err);
+                          }
+                      });
+                  }
+                  else {
+                      materialPromise.resolve([]); // show "No materials found"
+                  }
+              }
+            }
+        }
+        });
+    }
+
+    </script>
+</head>
+<body>
+</body>
+</html>
+

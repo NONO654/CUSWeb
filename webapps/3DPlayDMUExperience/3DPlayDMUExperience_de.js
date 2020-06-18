@@ -1,0 +1,1 @@
+define("DS/3DPlayDMUExperience/3DPlayDMUExperience_de",{});define("DS/3DPlayDMUExperience/assets/nls/3DPlayDMUExperience",{loadError:"Die Überprüfung konnte nicht geladen werden",noMarkup:"Keine Überprüfung gefunden",unauthorizedType:"Zeichnungsüberprüfungen können von der App nicht gelesen werden"});

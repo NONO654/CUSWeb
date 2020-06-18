@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+    <title>Graph Presenter </title>
+    <meta charset="ISO-8859-1">
+    <meta name="author" content="Dassault Systemes" />
+    <meta name="brand" content="ENOVIA" />
+    <!-- <link rel="stylesheet" href="../UIKIT/UIKIT.css" /> -->
+    <!-- <script src="../UIKIT/UIKIT.js"></script> -->
+
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <link rel="stylesheet" type="text/css" href="../WebUX/WebUX.css" />
+    <!--
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>-->
+  
+    <!-- allow chart -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- allow area polar chart -->
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+   
+    <!-- high chart
+    <script type="text/javascript" src="../VENENO6WPlugins/plugins/highchart/latest/js/highcharts.js"></script>
+    <script type="text/javascript" src="../VENENO6WPlugins/plugins/highchart/latest/js/highcharts-more.js"></script>
+    <script type="text/javascript" src="../VENENO6WPlugins/plugins/highchart/latest/js/modules/funnel.js"></script>
+    <script type="text/javascript" src="../VENENO6WPlugins/plugins/highchart/latest/js/modules/exporting.js"></script> 
+     -->
+
+    <script type="text/javascript">
+        'use strict';
+        require(['DS/GraphPanel/Graph/GraphPresenter',
+                 'DS/CoreEvents/ModelEvents',
+                  'DS/Controls/Button',
+                 'UWA/Drivers/Alone',
+                 'DS/OptimizationGraphPanel/Panelsettings/DicoFormat'
+        ],
+
+            function (GraphPresenter, ModelEvents, WUXButton,_Alone,DicoFormat) {
+
+
+                          var _dico =  {
+                              "_version":"3.0",
+                              "portfolioClass":{
+                                  "id":"a random ID for now, representing the enterprise or the future PLE",
+                                  "attributes":{
+                                      "_type":{
+                                          "name":"Dummy_Name","value":"Dummy_Value"
+                                      }
+                                  },
+                                  "portfolioComponents":{
+                                      "totalItems":"1",
+                                      "member": [{"id": "0A3AB05655630000A7B3BC5A521F0200","pid": "0A3AB05655630000A7B3BC5A521F0200", "lid": "yyy",
+                                          "attributes":{
+                                              "_type":{ "name":"Dummy_Name", "value":"Dummy_Name_Super"}
+                                          },
+                                          "variabilityGroups": {
+                                              "totalItems": 1,
+                                              "member": [{
+                                                  "id": "aVarGroupId",
+                                                  "isInherited": false,
+                                                  "attributes": {
+                                                      "_sequenceNumber" : {"name": "Sequence Number", "value": 17},
+                                                      "_name": {"name": "name","value" : "VarGroup Name"},
+                                                      "_description" : {
+                                                          "name": "description",
+                                                          "value": "a cool description for a var group"
+                                                      }
+                                                  },
+                                                  "variants": {"totalItems": 0, "member": [] },
+                                                  "options": { "totalItems": 0,"member": [] },
+                                                  "variabilityGroups": { "totalItems": 0, "member": [] }
+                                              }]
+                                          },
+                                          "variants": {
+                                              "totalItems": 2,
+                                              "member": [{"kind": "instance","isInherited": false,"idRef": "43264.64712.55040.51520",
+                                                  "id": "43264.64712.59648.63293",
+                                                  "attributes": {
+                                                      "_name": { "name": "name","value": "USB 3.0" },
+                                                      "_type": {"name": "type","value": "Variant" },
+                                                      "_image": {"name": "image", "value": ""},
+                                                      "_description": {  "name": "description", "value": ""},
+                                                      "_mandatory": {"name": "mandatory", "value": true },
+                                                      "_sequenceNumber": {"name": "Sequence Number","value": 13}
+                                                  },
+                                                  "values": {
+                                                      "totalItems": 2,
+                                                      "member": [{ "isInherited": false, "constraint": "available","id": "value1",
+                                                          "idRef": "43264.64712.42752.5925",
+                                                          "attributes": {
+                                                              "_name": {"name": "name","value": "USB30_Yes"},
+                                                              "_type": { "name": "type", "value": "value" },
+                                                              "_image": { "name": "image", "value": ""},
+                                                              "_description": { "name": "description", "value": ""},
+                                                              "_default": { "name": "default","value": false},
+                                                              "_sequenceNumber": {"name": "Sequence Number", "value": 17},
+                                                              "kpi_security": {  "name": "Security", "value": 10 },
+                                                              "kpi_green": { "name": "Green", "value": 34},
+                                                              "kpi_confort": { "name": "Confort", "value": 20},
+                                                              "kpi_cost": { "name": "Cost", "value": 28},
+                                                              "kpi_weight": {  "name": "Weight","value": 5},
+                                                              "kpi_performant": {"name": "Performant","value": 17}
+
+                                                          }
+                                                      }, {
+                                                          "isInherited": false, "constraint": "available", "id": "value2",
+                                                          "idRef": "43264.64712.42752.5926",
+                                                          "attributes": {
+                                                              "_name": { "name": "name", "value": "USB30_Yes2" },
+                                                              "_type": { "name": "type", "value": "value" },
+                                                              "_image": { "name": "image", "value": "" },
+                                                              "_description": { "name": "description", "value": "" },
+                                                              "_default": { "name": "default", "value": false },
+                                                              "_sequenceNumber": { "name": "Sequence Number", "value": 22 },
+                                                              "kpi_security": { "name": "Security", "value": 30 },
+                                                              "kpi_green": { "name": "Green", "value": 15 },
+                                                              "kpi_confort": { "name": "Confort", "value": 6 },
+                                                              "kpi_cost": { "name": "Cost", "value": 40 },
+                                                              "kpi_weight": { "name": "Weight", "value": 21 },
+                                                              "kpi_performant": { "name": "Performant", "value": 9 }
+                                                          }
+                                                      }]
+                                                  }
+                                              }, {
+                                                  "kind": "instance",
+                                                  "isInherited": false,
+                                                  "id": "acoolid",
+                                                  "attributes": { "_name": { "name": "name", "value": "USB 3.0" },
+                                                      "_type": {"name": "type", "value": "Variant Class" },
+                                                      "_image": {"name": "image", "value": ""},
+                                                      "_description": { "name": "description","value": "" }
+					                  
+                                                  },
+                                                  "values": {
+                                                      "totalItems": 1,
+                                                      "member": [{ "id": "value3","idRef": "43264.64712.42752.5993", "isInherited": false,
+                                                          "attributes": {
+                                                              "_name": { "name": "name", "value": "USB30_Yes" },
+                                                              "_type": { "name": "type", "value": "variant" },
+                                                              "_image": { "name": "image",  "value": "" },
+                                                              "_description": { "name": "description", "value": ""},
+                                                              "kpi_security": { "name": "Security", "value": 6 },
+                                                              "kpi_green": { "name": "Green", "value": 14 },
+                                                              "kpi_confort": { "name": "Confort", "value": 28 },
+                                                              "kpi_cost": { "name": "Cost", "value": 15 },
+                                                              "kpi_weight": { "name": "Weight", "value": 34 },
+                                                              "kpi_performant": { "name": "Performant", "value": 20 }
+                                                          }
+                                                      }]
+                                                  }
+                                              }]
+                                          },
+                                          "options": {
+                                              "totalItems": 1,
+                                              "member": [{
+                                                  "id": "option1",
+                                                  "idRef": "XYZ",
+                                                  "isInherited": false,
+                                                  "attributes": {
+                                                      "_name" : { "name": "name","value": "An Awesome Option Instance" },
+                                                      "_type": { "name": "type", "value": "Option"},
+                                                      "_image" : {},
+                                                      "_description": {},
+                                                      "kpi_security": {"name": "Security", "value":5},
+                                                      "kpi_green": { "name": "Green", "value": 27 },
+                                                      "kpi_confort": { "name": "Confort", "value": 13},
+                                                      "kpi_cost": {"name": "Cost","value": 8},
+                                                      "kpi_weight": { "name": "Weight","value": 30 },
+                                                      "kpi_performant": { "name": "Performant",  "value": 16}
+                                                  }
+						
+                                              }]
+                                          },
+                                          "packs": {
+                                              "totalItems": 0,
+                                              "member": []
+                                          },
+                                          "rules": {
+                                              "totalItems": 1,
+                                              "member": [{
+                                                  "id": "43264.64712.37376.39381",
+                                                  "compiledExpression": "value of the compiled expression",
+                                                  "attributes": {
+                                                      "_name": {
+                                                          "name": "name",
+                                                          "value": "Product Baselines by Market"
+                                                      },	
+                                                      "_type": {
+                                                          "name": "type",
+                                                          "value": "Matrix Rule"
+                                                      },
+                                                      "_description": {
+                                                          "name": "description",
+                                                          "value": "Reduce product complexity by defining target product baselines for the target markets"
+                                                      },
+                                                      "_originator": {
+                                                          "name": "Originator",
+                                                          "value": "VPLMAdminUser"
+                                                      }
+                                                  }
+                                              }]
+                                          },
+                                      }]
+                                  }
+                              }
+                          }
+                       
+                          // from ext  : list of KPI 
+                          var _listKPI = ['green', 'security', 'confort', 'cost', 'weight', 'performant'];
+                          var modelC0 = {
+                              dicoFormat: {
+                              },
+                              defConfig: {
+                                  prodConf: {
+                                      name: 'Prod Conf',
+                                      definition: {
+                                          value1: true,
+                                          value3: true,
+                                          option1: true
+                                      }
+                                  },
+                                  config0: {
+                                      name: 'Default',
+                                      definition: {
+                                          value1: true,
+                                          value2: true,
+                                          option1: true
+                                      }
+                                  },
+                                  config1: {
+                                      name: 'Configuration 1',
+                                      definition: {
+                                          value2: true,
+                                          value3: true,
+                                          option1: true
+                                      }
+                                  },
+
+                              },
+                              tabId: {
+                              }
+                              /* 0: {
+                                   configList: ['config0', 'config1'],
+                                   index: 0,
+                                   kpiList: {
+                                       Green: { button: true, slider: 3, max: false },
+                                       Security: { button: true, slider: 5, max: true },
+                                   }
+                               },
+                           
+                               current: "config1",*/
+                          };
+                          modelC0.dicoFormat = DicoFormat.mergeDicoInMap(_dico);
+                          console.log(modelC0);
+
+             /*   // from ext  : list of KPI 
+                var _listKPI = ['Green', 'Security', 'Confort', 'Cost', 'Weight', 'Performant'];
+              
+                var modelC0 = {
+                    defConfig: {
+                        prodConf: {
+                            id: 'Prod Conf',
+                            name: 'Prod Conf',
+                            definition: {
+                                criteria1: {
+                                    Green: 2,
+                                    Security: 5,
+                                    Confort: 1,
+                                    Cost: 2,
+                                    Weight: 5,
+                                    Performant: 3
+                                },
+                                criteria2: {
+                                    Green: 5,
+                                    Security: 1,
+                                    Confort: 3,
+                                    Cost: 2,
+                                    Weight: 1,
+                                    Performant: 1
+                                },
+                                criteria3: {
+                                    Green: 1,
+                                    Security: 2,
+                                    Confort: 5,
+                                    Cost: 3,
+                                    Weight: 4,
+                                    Performant: 5
+                                },
+                                criteria4: {
+                                    Green: 4,
+                                    Security: 5,
+                                    Confort: 1,
+                                    Cost: 4,
+                                    Weight: 1,
+                                    Performant: 4
+                                },
+                                criteria5: {
+                                    Green: 3,
+                                    Security: 3,
+                                    Confort: 2,
+                                    Cost: 5,
+                                    Weight: 2,
+                                    Performant: 2
+                                }
+                            }
+                        },
+                        config0: {
+                            name: "Default",
+                            id: 'config0',
+                            definition: {
+                                criteria1: {
+                                    Green: Math.floor(Math.random() * Math.floor(20)),
+                                    Security: Math.floor(Math.random() * Math.floor(20)),
+                                    Confort: Math.floor(Math.random() * Math.floor(20)),
+                                    Cost: Math.floor(Math.random() * Math.floor(20)),
+                                    Weight: Math.floor(Math.random() * Math.floor(20)),
+                                    Performant: Math.floor(Math.random() * Math.floor(20))
+                                }
+                            }
+                               
+                        },
+                        config1: {
+                            name: "Configuration 1",
+                            id: 'config1',
+                            definition: {
+                                criteria1: {
+                                    Green: Math.floor(Math.random() * Math.floor(20)),
+                                    Security:  Math.floor(Math.random() * Math.floor(20)),
+                                    Confort:  Math.floor(Math.random() * Math.floor(20)),
+                                    Cost:  Math.floor(Math.random() * Math.floor(20)),
+                                    Weight:  Math.floor(Math.random() * Math.floor(20)),
+                                    Performant:  Math.floor(Math.random() * Math.floor(20))
+                                }
+                            }
+                        },
+                        config2: {
+                            name: "Configuration 2",
+                            id: 'config2'
+                        },
+                        config3: {
+                            name: "Configuration 3"
+                        }
+                    },
+
+                    tabId: {
+                        0: {
+                            configList: ['config0', 'config1'],
+                            index: 0,
+                            kpiList: {
+                                Green: { button: true, slider: 3, switch: false },
+                                Security: { button: true, slider: 5, switch: true },
+                            }
+                        },
+                        3: {
+                            configList: ['config2', 'config3'],
+                            index: 1,
+                            kpiList: {
+                                Confort: { button: true, slider: 3, switch: false },
+                                Cost: { button: true, slider: 3, switch: false },
+                                Weight: { button: true, slider: 3, switch: false }
+                            }
+                        },
+                        4: {
+                            configList: ['config4'],
+                            index: 2,
+                            kpiList: {
+                                Green: { button: true, slider: 3, switch: false },
+                                Weight: { button: true, slider: 3, switch: false },
+                            }
+                        }
+                    },
+                    current:  "config1",
+                    
+                };
+                */
+                var _modelEvents = new ModelEvents();
+
+                var _button = new WUXButton({ label: 'new config' });
+                _button.inject(document.body);
+                _button.addEventListener('buttonclick', function () {
+                    _modelEvents.publish({ event: 'config-created-graph', data:  modelC0.defConfig.config0  });
+                    _modelEvents.publish({ event: 'config-created-graph', data: modelC0.defConfig.config1 });
+                     modelC0.current = 'config1';
+
+                });
+                var _buttonRandom = new WUXButton({ label: 'new random config' });
+                _buttonRandom.inject(document.body);
+                _buttonRandom.addEventListener('buttonclick', function () {
+                    var text = "";
+                    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                    for (var i = 0; i < 5; i++) {
+                        text += possible.charAt(Math.floor(Math.random() * possible.length));
+                    }
+                    var x = Math.floor(Math.random() * Math.floor(20));
+                    modelC0.defConfig.x = {
+                                name: text,
+                                definition: {
+                                    criteria1: {
+                                        Green: Math.floor(Math.random() * Math.floor(20)),
+                                        Security: Math.floor(Math.random() * Math.floor(20)),
+                                        Confort: Math.floor(Math.random() * Math.floor(20)),
+                                        Cost: Math.floor(Math.random() * Math.floor(20)),
+                                        Weight: Math.floor(Math.random() * Math.floor(20)),
+                                        Performant: Math.floor(Math.random() * Math.floor(20))
+                                    },
+                                   
+                                }
+                        }
+                    
+                    _modelEvents.publish({ event: 'config-created-graph', data:  modelC0.defConfig.x  });
+
+                });
+                var _buttonName = new WUXButton({ label: 'change config name' });
+                _buttonName.inject(document.body);
+                _buttonName.addEventListener('buttonclick', function () {
+                    modelC0.defConfig.config0.name = 'Hey';
+                });
+                var _nameChange = new WUXButton({ label: 'change name event' });
+                _nameChange.inject(document.body);
+                _nameChange.addEventListener('buttonclick', function () {
+                    modelC0.defConfig.config0.name = 'Hey';
+                     _modelEvents.publish({ event: 'change-name-graph', data : { id : 'config0' , name : 'hey'}});
+                });
+
+                var _changecurrent = new WUXButton({ label: 'changecurrent' });
+                _changecurrent.inject(document.body);
+                _changecurrent.addEventListener('buttonclick', function () {
+                    _modelEvents.publish({ event: 'change-current-graph', data:  'config0' });
+                });
+
+
+                //Creation of graph component
+                var _graphPresenter = new GraphPresenter({ listKPI: _listKPI, modelEvents: _modelEvents , modelC0 : modelC0});
+                _graphPresenter.inject(document.body);
+	    });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

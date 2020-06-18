@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2017 , Dassault Systemes. All rights reserved. -->
+<head>
+    <title>Manufacturing Issue Management</title>
+    <!-- Application Metas Start -->
+    <meta name="author" content="Dassault Systèmes" />
+    <meta name="brand" content="DELMIA" />
+    <meta name="autoRefresh" content="0" />
+    <meta name="description" content="Manufacturing Issue Management widget" />
+    <meta name="keywords" content="Mfg Issue Management" />
+    <script type="text/javascript" src="../ManufacturingIssueManagement/MfgIssueManagementFunctions.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+    <link rel='stylesheet' type='text/css' href='../c/UWA/assets/css/standalone.css' />
+    <script type='text/javascript' src='../c/UWA/js/UWA_Standalone_Alone.js'></script>
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+    <!--<link rel="manifest" href="/manifest.json" />!-->
+
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        ;
+    </style>
+
+    <widget:preferences>
+    </widget:preferences>
+    <!-- Application JavaScript Source -->
+    <script type="text/javascript">
+
+        var issue = null;
+        _tasks = {
+            subscriberTokens: [],
+            current: null
+        };
+        require(['DS/IssueManagement/IssueManagement',
+            'UWA/Core',
+            'UWA/Widget',
+            'DS/UWPClientCode/PublicAPI',
+            'DS/i3DXCompassPlatformServices/i3DXCompassPlatformServices',
+            'DS/PlatformAPI/PlatformAPI',
+            'DS/MessageBus/MessageBus',
+            'DS/Core/Core',
+            'DS/IssueComponents/create/Attachments'
+
+        ], function (IssueManagement, UWACore, Widget, PublicAPI, i3DXCompassPlatformServices, PlatformAPI, MessageBus, DSCore, CommandsManager, Attachments) {
+            DSCore.setFullscreen();
+            window.widget.id = "preview-8bd4b9";
+
+            var myUrl = location.href;
+            var myUrlres = myUrl.split("?");
+            var myUrlres2 = myUrlres[1].split("=");
+            var myUrlres3 = myUrlres[2].split("=");
+            var userDetails = myUrlres3[1].split(";");
+
+            var FirstName = userDetails[0].split(":");
+            var LastName = userDetails[1].split(":");
+            var address = userDetails[2].split(":");
+            var telephone = userDetails[3].split(":");
+            var email = userDetails[4].split(":");
+            var login = userDetails[5].split(":");
+
+            var user = { firstName: FirstName[1], lastName: LastName[1], address: address[1], telephone: telephone[1], email: email[1], login: login[1] };
+
+            PublicAPI._setUser(user);
+
+            var myServerUrl = myUrlres2[1];
+            myServerUrl = myServerUrl.replace(/#42;/g, "/");
+            var myAppsUrl = myServerUrl;
+            myServerUrl = myServerUrl.replace("com:443/3DSpace", "com");
+            var my3DSwym = myServerUrl;
+            var my3DDashboard = myServerUrl.concat(":444/3DDashboard");
+            var my3DPassport = myServerUrl.concat(":453/iam");
+            var my3DSpace = myServerUrl.concat("/3DSpace");
+            var my3DSearch = myServerUrl.concat("/federated");
+            var myUserID = login;
+            var myEnoviaTenant = 'OnPremise';
+            var myEnvVars;
+
+            i3DXCompassPlatformServices.getPlatformServices = function (params) {
+                params.onComplete([{
+                    "platformId": "OnPremise",
+                    "displayName": "onPremises",
+                    "3DSwym": my3DSwym,
+                    "3DDashboard": my3DDashboard,
+                    "3DPassport": my3DPassport,
+                    "3DSpace": my3DSpace,
+                    "3DSearch": my3DSearch,
+                    "3DMessaging": "undefined:80",
+                    "6WTags": "undefined:80"
+                }]);
+            };
+
+            issue = new IssueManagement({
+                standalone: true
+            });
+
+            _tasks.subscriberTokens.push(PlatformAPI.subscribe('DS/IssueManagementTask/add', function onTaskAdded(data) {
+
+                var id = data.data.paths[0][0],
+                        response = data.data.attributes[id];
+
+                // Publish ready event 'DS/IssueManagementTask/ready'
+                var paths = [],
+                    attributes = {};
+
+                paths.push([id]);
+                attributes[id] = {
+                    taskType: response.taskType,
+                    widgetIdIM: response.widgetIdIM,
+                    widgetId3D: widget.id
+                };
+
+                PlatformAPI.publish('DS/IssueManagementTask/ready', {
+                    metadata: {
+                        appId: widget.id,
+                        appName: widget.name,
+                        timestamp: Math.floor(Date.now()),
+                        options: {}
+                    },
+                    data: {
+                        paths: paths,
+                        attributes: attributes
+                    },
+                    version: '1.0'
+                });
+
+            }));
+
+            _tasks.subscriberTokens.push(PlatformAPI.subscribe('DS/IssueManagementTask/exec', function onRequestTaskExec(data) {
+
+                var id = data.data.paths[0][0],
+                        response = data.data.attributes[id];
+
+                _tasks.current = {
+                    taskId: id,
+                    taskType: response.taskType,
+                    widgetIdIM: response.widgetIdIM,
+                    widgetId3D: widget.id
+                };
+                console.log("Executing Select in 3D, We have to call C++ from here");
+                dscef.sendString('SelectFrom3D' + '=' + '1');
+            }));
+
+            _tasks.subscriberTokens.push(PlatformAPI.subscribe('DS/IssueManagementTask/cancel', function onRequestTaskCancel(data) {
+
+                _tasks.current = null;
+            }));
+
+        });
+        function SelectFrom3DTaskDone(data) {
+            console.log("Inside SelectFrom3DTaskDone");
+            console.log(issue.component);
+            require(['DS/PlatformAPI/PlatformAPI'],
+                function (PlatformAPI) {
+
+                    var paths = [], attributes = {};
+                    var funcdata = {};
+                    funcdata.nodes = [];
+                    funcdata.nodes.push('node');
+                    funcdata.paths = data;
+                    var positions = {};
+                    paths.push([_tasks.current.taskId]);
+                    attributes[_tasks.current.taskId] = {
+                        taskType: _tasks.current.taskType,
+                        widgetIdIM: _tasks.current.widgetIdIM,
+                        widgetId3D: _tasks.current.widgetId3D,
+                        response: {
+                            target: data,
+                            positions: positions,
+                            nodes: funcdata
+                        }
+                    };
+
+                    PlatformAPI.publish('DS/IssueManagementTask/done', {
+                        metadata: {
+                            appId: widget.id,
+                            appName: widget.name,
+                            timestamp: Math.floor(Date.now()),
+                            options: {}
+                        },
+                        data: {
+                            paths: paths,
+                            attributes: attributes
+                        },
+                        version: '1.0'
+                    });
+                });
+        };
+    </script>
+</head>
+<body>
+
+    <div class="spinner spinner-lg spinning fade in" style="transform: translate3d(0px, 0px, 0px); display: inline-block; margin-top: 20%; margin-left: 45%;">
+        <span class="spinner-bar"></span>
+        <span class="spinner-bar spinner-bar1"></span>
+        <span class="spinner-bar spinner-bar2"></span>
+        <span class="spinner-bar spinner-bar3"></span>
+    </div>
+</body>
+</html>

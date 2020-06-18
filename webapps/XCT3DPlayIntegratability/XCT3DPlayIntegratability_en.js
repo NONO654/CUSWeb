@@ -1,0 +1,1 @@
+define("DS/XCT3DPlayIntegratability/XCT3DPlayIntegratability_en",{});define("DS/XCT3DPlayIntegratability/assets/nls/XCT3DPlayIntegratability",{warning_objectTypeNotSupported_title:"Object Type not supported",error_loadingMultipleFiles_title:"Loading of multiple experience is not possible. Only first is loaded."});

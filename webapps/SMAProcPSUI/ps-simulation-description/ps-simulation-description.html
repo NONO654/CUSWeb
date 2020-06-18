@@ -1,0 +1,314 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-run/sp-run.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-timer/sp-timer.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../../SMAProcSP/sp-encryption/sp-encryption.html">
+
+<link rel="import" href="../ps-job-list/ps-job-list.html">
+<link rel="import" href="../ps-process/ps-process.html">
+<link rel="import" href="../../SMAProcSP/sp-cos/sp-cos.html">
+<link rel="import" href="../../SMAProcSP/sp-costickets/sp-costickets.html">
+<link rel="import" href="../ps-event-manager/ps-event-manager.html">
+<link rel="import" href="../ps-run-as-modal/ps-run-as-modal.html">
+
+<dom-module id="ps-simulation-description">
+  <link rel="import" type="css" href="ps-simulation-description.css">
+  <template>
+    <sp-variable id="mcsBaseURL" name="mcsBaseURL"></sp-variable>
+    <sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL"></sp-variable>
+    <sp-variable id="eedBaseURL" name="eedBaseURL"></sp-variable>
+    <sp-variable id="runSimulation" name="runSimulation"></sp-variable>
+    <sp-variable id="runActivity" name="runActivity"></sp-variable>
+
+    <sp-variable id="licenseData" name="licenseData"></sp-variable>
+    <sp-cos id="cosServer"></sp-cos>
+    <ps-event-manager
+        on-event-manager-job-started="callGetJobsData"
+        on-event-manager-update-title="computeHeading">
+    </ps-event-manager>
+    <sp-dashboard id="spDashboard"></sp-dashboard>
+
+    <sp-variable id="credentials" name="credentials"> </sp-variable>
+    <!--<sp-variable id="logLevelRunInfo" name="logLevelRunInfo"></sp-variable>  -->
+    <sp-encryption id="spEncryption"></sp-encryption>
+
+    <sp-timer id="timer" on-tick="onTimerTick"></sp-timer>
+    <sp-timer id="cosTicketTimer" on-tick="onEEDTicketTimerTick" wait="270000"></sp-timer>
+    <sp-timer id="jobListWsTimer" on-tick="jobListWsTimerTick" wait="10000"></sp-timer>
+    <sp-mcsservice id="jobListWs"  uri="{{_computeUri(simOid)}}" data="{{jobsData}}" on-dataready="checkNewJob">
+    </sp-mcsservice>
+
+    <sp-mcsservice id="jobDetailsWs"  on-dataready="jobDetailsReady">
+    </sp-mcsservice>
+
+    <sp-mcsservice id="eedTicket_ws" data="{{eedTicket_data}}" on-dataready="setEEDTicket" uri="{{_computeUri2(globals, selectedJob.objectId)}}">
+    </sp-mcsservice>
+
+    <sp-costickets id="ticketSvc" ></sp-costickets>
+    <sp-mcsservice id="abortJobMCS" on-response="onAbortSuccess" on-error="onAbortError">
+    </sp-mcsservice>
+
+    <sp-mcsservice id="imageurl" on-dataready="setImageUrl">
+    </sp-mcsservice>
+
+    <sp-mcsservice id="exeOptionsWs" uri="{{_computeUri3(simOid)}}" data="{{exe_options}}" >
+    </sp-mcsservice>
+
+    <sp-mcsservice id="simOptionsWs" on-dataready="useSimOptionsLogLevel">
+    </sp-mcsservice>
+
+    <!--  run-info="<RunInfo logLevel='Debug' submissionHost=''></RunInfo>"-->
+    <sp-run
+    id="runner"
+    on-success="onRunStarted"
+    on-error="onRunError"
+    run-u-r-l="{{_computeRunurl()}}"
+    job-x-m-l-u-r-l="{{_computeJobxmlurl(globals.mcsWSBaseURL)}}"
+    cos-pubkey-u-r-l="{{_computeCospubkeyurl()}}"
+    encrypt-u-r-l="{{_computeEncrypturl(globals.mcsWSBaseURL)}}"
+    mcs-ticket-u-r-l="{{_computeMcsticketurl(globals.mcsBaseURL)}}"
+    mcs-u-r-l="{{globals.mcsBaseURL}}"
+    run-info = "<RunInfo logLevel='Debug' submissionHost=''></RunInfo>"
+    timeout="150000">
+  </sp-run>
+
+
+  <div class="simdesc">
+    <div class="desccontainer">
+      <img id="simImage" class="img-thumbnail" on-click="onImageClick">
+      <div class="simdescmain" name="simulation-image">
+        <span title="{{_computeHeadingTitle(simDetails.attributes.title, simDetails.basics.revision)}}"
+        class="simtitle" on-click="_openDevTools">{{_computeHeadingTitle(simDetails.attributes.title, simDetails.basics.revision)}}</span>
+      </div>
+      <div class$="{{_computeClass(selectedJob.status)}}">
+        <button id="listJobs" class="btn btn-default progress-btn" type="button" on-click="onJobsMenuClick">
+          <span class="selectedjob">
+            <span class="selectedjob-content">
+              <span class="selectedjob-description">{{_computeProgressBarLabel(selectedJob, selectedJob.status)}}
+                <span class$="{{_computeClass2(selectedJob.status)}}">&nbsp;(<span>{{finishedRuns}}</span>/<span>{{execTotalRuns}}</span>)</span>
+              </span>
+            </span>
+            &nbsp;
+          </span>
+          <span class="fonticon fonticon-list job-list-icon"></span>
+        </button>
+        <sp-access class="access-job-controls" group="simulation" data-has-no-add-then="hide">
+          <span data-message="Read Only" data-has-no-add-then="show"></span>
+          <template is="dom-if" bind="" if="{{_computeIf(simDetails)}}" restamp>
+            <!-- Job Controls -->
+            <div class="btn-grp">
+              <!-- <template is="dom-if" if="{{!showNewRunAs()}}">
+                <button title="Start a new Job" id="run" type="button" on-click="onRun" class$="{{_computeRunBtnClass(selectedJob.status)}}">
+                  <span class="fonticon fonticon-play"></span>
+                  <span class="runNewJob" >Start a new Job</span>
+                </button>
+                <button type="button" on-click="onRunMenuClick" class$="{{_computeRunAsClass(selectedJob.status)}}">
+                  <i class="fonticon fonticon-tools"></i>
+                  <span class="caret"></span>
+                </button>
+              </template> -->
+              <!-- <template is="dom-if" if="{{showNewRunAs()}}"> -->
+                  
+                <button title="Run" id="runNew" type="button" on-click="onRun" class$="{{_computeRunBtnClass(selectedJob.status)}}">
+                  <span class="fonticon fonticon-play"></span>
+                  <span class="runNewJob" >Run</span>
+                </button>
+                <button id="runAsButton" type="button" title="Configure job and enter credentials" class$="{{_computeRunAsBtnClass(selectedJob.status)}}" on-click="openRunAsModal">
+                  <span class="fonticon fonticon-cog configureRunAs" ></span>
+                  <span class="fonticon fonticon-attention credentialsRequired hide"></span>
+                </button>
+                <button id="supportButton" type="button" title="Run support tool" class$="{{_computeSupportabilityBtnClass(selectedJob.status)}}" on-click="openSupportabilityWidget">
+                  <span class="fonticon fonticon-help" ></span>
+                </button>
+              <!-- </template> -->
+
+              <sp-dropdown-menu id="runMenu" class="runMenu">
+                <sp-dropdown-menu-item on-click="onRun" label="Start a new Job"></sp-dropdown-menu-item>
+                <sp-dropdown-menu-item on-click="checkingRunAs" label="Configure and run"></sp-dropdown-menu-item>
+              </sp-dropdown-menu>
+            </div>
+            <button type="button" on-click="onClaim" class$="{{_computeClass5(selectedJob.status)}}">
+              <span class="fonticon fonticon-user"></span>
+              Claim
+            </button>
+            <button id ="pause" type="button" on-click="onPause" class$="{{_computeClass6(selectedJob.status)}}">
+              <span class="fonticon fonticon-pause"></span>
+              Pause
+            </button>
+            <button id="resume" type="button" on-click="onResume" class$="{{_computeClass7(selectedJob.status)}}">
+              <span class="fonticon fonticon-play"></span>
+              Resume
+            </button>
+            <button id="abort" type="button" on-click="onAbort" class$="{{_computeClass8(selectedJob.status)}}">
+              <span class="fonticon fonticon-stop" style="margin-right:2px;"></span>
+              Abort
+            </button>
+            <!--<span id="abort" on-click="onAbort" title="{{_computeTitle2(latestJob.status)}}" class$="{{_computeClass8(selectedJob.status)}}">Abort
+          </span>-->
+        </template>
+        <template is="dom-if" if="{{_computeIf2(selectedJob.status)}}">
+          <template is="dom-if" if="{{_computeIf5(runningTask.Activity)}}">
+            <div class="executionPathContainer">
+              <span title="{{_computeTooltip(runningTask.Activity,runningTask.Step)}}">
+                Activity : <span class="executionPaths">{{runningTask.Activity}}</span> &gt;
+                Step : <span class="executionPaths">{{runningTask.Step}}</span>
+              </span>
+            </div>
+          </template>
+        </template>
+      </sp-access>
+      <span class="jobQueued hide">Job is Queued</span>
+      <div class="progressandactions">
+        <div class="progress">
+          <div id="progress" class="progress-bar">
+          </div>
+        </div>
+      </div>
+      <!-- JOB RUN Controls -->
+      <sp-dropdown-menu id="jobsMenu" class="jobsMenu">
+        <sp-dropdown-menu-item id="manageJobs" data-manage="true" on-click="onJobsMenuItemClick" label="More Jobs - Manage"></sp-dropdown-menu-item>
+        <sp-dropdown-menu-item labeltype="divider"></sp-dropdown-menu-item>
+        <template is="dom-repeat" items="{{jobsList }}" as="job" index-as="index">
+          <!-- Show only the last 5 jobs -->
+          <template is="dom-if" if="{{_computeIf6(index)}}">
+            <span class$="{{_computeClassOwner(job.owner)}}"></span>
+            <sp-dropdown-menu-item on-click="onJobsMenuItemClick" label="{{_computeLabel(job.title,job.status,job.endDate)}}" data-object-id$="{{job.objectId}}" class$="{{_computeClass9(job.status, job.objectId, selectedJob.objectId)}}">
+            </sp-dropdown-menu-item></template>
+          </template>
+        </sp-dropdown-menu>
+      </div>
+    </div>
+    <!-- Top Right section visible for min-width 850px-->
+    <div class="simactions">
+      <template is="dom-if" bind="" if="{{_computeIf3(hasResultsAnalyticsLic, simDetails)}}" restamp>
+        <div class="btn-grp">
+          <button id="analyze" class="btn btn-default analyze-control-btn" type="button" on-click="openinRA" disabled$="{{_computeDisabled2(jobsList)}}">
+            <div><span class="fonticon fonticon-export"></span> Analyze Results</div>
+          </button>
+          <button id="analyzeDrop" type="button" class="btn btn-default dropdown-toggle analyze-control-btn" on-click="onAnalyzeMenuClick" disabled$="{{_computeDisabled2(jobsList)}}">
+            <span class="caret"></span>
+          </button>
+          <sp-dropdown-menu id="analyzeMenu" class="analyzeMenu">
+            <sp-dropdown-menu-item data-manage="true" on-click="openinRA" label="Analyze Results"></sp-dropdown-menu-item>
+            <sp-dropdown-menu-item data-manage="true" on-click="openinRAAs" label="Analyze Results As"></sp-dropdown-menu-item>
+          </sp-dropdown-menu>
+        </div>
+      </template>
+      <template is="dom-if" bind="" if="{{_computeIf4(simDetails)}}" restamp>
+        <button id="editProcess" is="sp-button-type" on-click="openinCompose">
+          <div><span class="fonticon fonticon-export"></span> Edit Process</div>
+        </button>
+      </template>
+    </div>
+    <!-- Top Right section visible for max-width 850px-->
+    <!-- <span id="menubutton" class="icon" on-click="onAdditionalMenuClick">&#9776</span>  -->
+    <sp-dropdown-menu id="additionalMenu" class="additionalmenu" on-itemclick="onAdditionalMenuItemClick">
+      <template is="dom-if" if="{{_computeIf3(hasResultsAnalyticsLic, simDetails)}}">
+        <sp-dropdown-menu-item label="Analyze Results" on-click="openinRA" disabled="{{_computeDisabled2(jobsList)}}">
+        </sp-dropdown-menu-item>
+      </template>
+      <template is="dom-if" if="{{_computeIf4(simDetails)}}">
+        <sp-dropdown-menu-item label="Edit Process" on-click="openinCompose">
+        </sp-dropdown-menu-item>
+      </template>
+    </sp-dropdown-menu>
+  </div>
+
+  <ps-job-list id="psJobList" job-list="{{jobsList}}" on-jobsdeleted="jobsdeleted" on-openmonitor="openSelectedJob" haslic-ra="{{hasResultsAnalyticsLic}}" sim-oid="{{simDetails.id}}" process-type="{{simDetails.attributes['Simulation Kind']}}" self="{{self}}" ></ps-job-list>
+  <ps-run-as-modal id="runAsModal"  ></ps-run-as-modal>
+  <sp-modal class="ConfigureAndRun" id="ConfigureAndRun" heading="Configure And Run" height="70%" width="375px">
+    <section>
+      <template is="dom-repeat" items="{{exe_options}}" as="option" index-as="index">
+        <template is="dom-if" bind="" if="{{_computeIf7(index, option)}}">
+          <div class$="{{_computeClass10(option)}}">
+            <div class="exe-options-overlay">
+            </div>
+            <div class="control-label">
+              <label class="label">{{option.title_display}}</label>
+            </div>
+            <div>
+              <template is="dom-if" if="{{!option.choices}}">
+
+                <sp-input class="option-text" type="text" readonly="{{_computeDisabled3(option)}}" value="{{ option.value }}">
+                </sp-input>
+
+              </template>
+              <template is="dom-if" if="{{option.choices}}">
+                <div class="item option-button-wrapper">
+                  <button id="option-button" class="option-button" data-target$="{{ option.id }}" on-click="showMenu" is="sp-button-type" disabled$="{{_computeDisabled(option)}}">
+                    <div class="option-button-content">
+                      <span>{{filterChoice(option.value, option.choices, option.choices_display)}}</span>
+                    </div>
+                    <span style="float:right !important;" class="fonticon fonticon-list "></span>
+                  </button>
+                  <sp-dropdown-menu displayselection="" on-click="onItemSelect" id="{{option.id}}" data-id$="{{option.id}}">
+                    <template is="dom-repeat" items="{{option.choices_display }}" as="choice" index-as="index">
+                      <sp-dropdown-menu-item label="{{choice}}" selected="{{_computeSelected(index, option)}}" value="{{_computeValue(index, option)}}">
+                      </sp-dropdown-menu-item></template>
+                    </sp-dropdown-menu>
+                  </div>
+                </template>
+              </div>
+            </div>
+
+          </template>
+        </template>
+
+        <template is="dom-repeat" items="{{credFields}}" as="field">
+          <div class="form-group">
+            <div class="control-label">
+              <label class="label">{{ field.label }}</label>
+            </div>
+            <div>
+              <sp-input class="option-text" credential="" on-click="onFocusRunAsTextField" id="{{field.name}}" type="{{field.type}}"></sp-input>
+            </div>
+          </div>
+        </template>
+      </section>
+      <footer>
+        <sp-updatepanel state="{{exe_options.$state}}">
+          <!-- State messages -->
+          <sp-updatepanel-message class="update-panel-message" to="is-getting" message="Retrieving data...Please wait"></sp-updatepanel-message>
+          <sp-updatepanel-message class="update-panel-message" from="is-getting" to="is-failing" message="Unable to get data"></sp-updatepanel-message>
+          <sp-updatepanel-message class="update-panel-message" to="is-updating" message="Saving changes"></sp-updatepanel-message>
+        </sp-updatepanel>
+        <div id="errorMsgContent" class="errorMsgContent">{{errorText}}</div>
+        <button is="sp-button-type" id="runAs" on-click="configureAndRun" primary disabled$="{{_computeDisabled(exe_options.$state)}}">Run</button>
+      </footer>
+    </sp-modal>
+
+
+    <sp-modal id="executeActivity" heading="" height="40%" width="400px">
+      <section>
+        <span id="executeActivityMessage"></span>
+      </section>
+      <footer>
+        <button is="sp-button-type" on-click="executeActivity">Yes</button>
+        <button is="sp-button-type" primary on-click="hideExecuteActivity">No</button>
+      </footer>
+    </sp-modal>
+
+    <!-- confirmation dialog for run -->
+    <sp-modal id="runConfirmation" heading="Job Run Confirmation" height="50%" widht="60%">
+      <section>
+        <div class="saveDetailsMsg" id="saveDetailsMsg"></div>
+        <br/>
+        <p>Do you want to still start the Job?</p>
+      </section>
+      <footer>
+        <button is="sp-button-type" name="confirm" on-click="confirmRun">Yes</button>
+        <button is="sp-button-type" primary name="no" on-click="cancelRun">No</button>
+      </footer>
+    </sp-modal>
+
+  </template>
+  <script type="text/javascript" src="ps-simulation-description.js"></script>
+</dom-module>

@@ -1,0 +1,9 @@
+m|ENOIssueManagementExt\ManufacturingIssueManagement.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19221
+r|G:\R421\BSF\.
+t|win_b64\webapps\ManufacturingIssueManagement\MfgIssueManagement.html|1565395466|8391
+s|ENOIssueManagementExt\ManufacturingIssueManagement.mweb\src\MfgIssueManagement.html|1565162124|8391
+t|win_b64\webapps\ManufacturingIssueManagement\ManufacturingIssueManagement.js|1561059342|2103
+s|ENOIssueManagementExt\ManufacturingIssueManagement.mweb\src\MfgIssueManagementFunctions.js|1561020449|4925

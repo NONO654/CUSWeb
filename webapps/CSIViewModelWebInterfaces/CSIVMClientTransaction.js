@@ -1,0 +1,1 @@
+define("DS/CSIViewModelWebInterfaces/CSIVMClientTransaction",[],function(){function a(){}a.prototype.doOperation=function(b){return undefined};a.prototype.executeEnd=function(){return undefined};a.prototype.commit=function(){return undefined};a.prototype.abort=function(){return undefined};return a});

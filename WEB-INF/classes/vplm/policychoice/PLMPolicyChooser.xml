@@ -1,0 +1,751 @@
+<?xml version="1.0"?>
+<policyChoice>
+
+<!-- ================================================================== -->
+<!-- POLICY choice cases for COMMON solution                            -->
+<!-- ================================================================== -->
+
+    <!-- ================================================================== -->
+    <!-- SR                                                                 -->
+    <!-- ================================================================== -->
+  
+	<entity name="VPMPathElement">
+		<default>
+			<policy name="VPLM_SR"/>
+		</default>
+	</entity>
+	<entity name="VPMSemanticRelation">
+		<default>
+			<policy name="VPLM_SR"/>
+		</default>
+	</entity>
+
+    <!-- ================================================================== -->
+    <!-- secured ports and connections                                      -->
+    <!-- ================================================================== -->
+  
+	<entity name="PLMPort">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="vplm"/>
+		</default>
+	</entity>
+  
+	<entity name="VPMPort">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="vplm"/>
+		</default>
+	</entity>
+
+	<entity name="PLMConnection">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="vplm"/>
+		</default>
+	</entity>
+
+    <!-- ================================================================== -->
+    <!-- instance                                                           -->
+    <!-- ================================================================== -->
+  
+	<entity name="PLMInstance">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="vplm"/>
+		</default>
+	</entity>
+
+    <!-- ================================================================== -->
+    <!-- system objects                                                     -->
+    <!-- ================================================================== -->
+  
+	<entity name="PLMLOGEntity">
+		<default>
+			<policy name="VPLM_UNSECURED_CX"/>
+			<vault name="vplm"/>
+			<listVaults name="vplm"/>
+		</default>
+	</entity>
+
+	<entity name="PLMDerivedObjRepresentation">
+		<default>
+			<policy name="VPLM_UNSECURED_CX"/>
+		</default>
+	</entity>
+  
+    <!-- ================================================================== -->
+    <!-- unsecured connections                                              -->
+    <!-- ================================================================== -->
+
+	<entity name="PLMPosDeliverableCnx">
+		<default>
+			<policy name="VPLM_UNSECURED_CX"/>
+		</default>
+	</entity>
+  
+	<entity name="PLMPosResourceCnx">
+		<default>
+			<policy name="VPLM_UNSECURED_CX"/>
+		</default>
+	</entity>
+
+    <!-- ================================================================== -->
+    <!-- references                                                         -->
+    <!-- ================================================================== -->
+
+	<entity name="PLMReference">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="vplm"/>
+			<vault name="vplm_archive" operation="correction"/>
+			<listVaults name="vplm_archive" operation="corrections"/>
+		</default>
+	</entity>
+	<entity name="VPMReference">
+		<!-- this block is a copy of 'PLMReference' one to optimize policy retrieval on products -->
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="vplm"/>
+			<vault name="vplm_archive" operation="correction"/>
+			<listVaults name="vplm_archive" operation="corrections"/>
+		</default>
+	</entity>
+
+	<!-- for PandO objects query -->
+    <entity name="PLMPosBaseRef">
+        <default>
+            <listVaults name="eService Production,vplm"/>
+        </default>
+    </entity>
+	<!-- for Resource objects authoring -->
+	<entity name="PLMPosResourceCoreRef">
+		<default>
+			<vault name="vplm"/>
+			<policy name="VPLM_PosResourceRef"/>
+            <listVaults name="vplm"/>
+		</default>
+    </entity>
+	<!-- for Resource objects authoring -->
+	<entity name="PLMPosResourceCoreRepRef">
+		<default>
+			<vault name="vplm"/>
+			<policy name="VPLM_PosResourceRep"/>
+            <listVaults name="vplm"/>
+		</default>
+	</entity>
+  
+    <!-- ================================================================== -->
+    <!-- private references                                                 -->
+    <!-- ================================================================== -->
+  
+	<entity name="LPPrivateRepReference">
+		<default>
+			<policy name="VPLM_PRIVATE"/>
+		</default>
+	</entity>
+	<entity name="PLMKweReplayRepReference">
+		<default>
+			<policy name="VPLM_PRIVATE"/>
+		</default>
+	</entity>
+
+    <!-- ================================================================== -->
+    <!-- Configuration entities                                             -->
+    <!-- ================================================================== -->
+
+	<entity name="Model">
+		<default>
+			<policy name="Model"/>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Manufacturing Plan Master">
+		<default>
+			<policy name="Managed Series"/>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Manufacturing Plan">
+		<default>
+			<policy name="Manufacturing Plan"/>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Builds">
+		<default>
+			<policy name="Build"/>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Products">
+		<default>
+			<policy name="Product"/>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Configuration Feature">
+		<default>
+			<policy name="Configuration Feature"/>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Configuration Option">
+		<default>
+			<policy name="Configuration Option"/>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Series Master">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Managed Series">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Model Build">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Relation.Products">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Product Build">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Associated Manufacturing Plans">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Manufacturing Plan Breakdown">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Model Template">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Logical Features">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Configuration Features">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Configuration Options">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+
+    <!-- ================================================================== -->
+    <!-- Documents entities                                             -->
+    <!-- ================================================================== -->
+
+	<entity name="DOCUMENTS">
+		<default>
+			<policy name="Version"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Document">
+        <!-- JIC 12:07:11 IR IR-176095V6R2013x: Added case for policy "Version" -->
+		<case>
+			<policy name="Version"/>
+			<condition>"Is Version Object" = "True"</condition>
+		</case>
+		<default>
+            <!-- JIC 13:10:11 Changed policy to "Document Release" -->
+			<policy name="Document Release"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Generic Document">
+		<default>
+			<policy name="Controlled Design Release Rev2"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Active Version">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Latest Version">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Workspace Vault">
+		<default>
+			<policy name="Workspace Vaults"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Vaulted Documents Rev2">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Data Vaults">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Sub Vaults">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Vaulted Objects">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Workspace">
+		<default>
+			<policy name="Workspace"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Project Management">
+		<default>
+			<!-- NO POLICY FOR THIS ABSTRACT ENTITY-->
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Task Management">
+		<default>
+			<policy name="Project Task"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Project Space">
+		<default>
+			<policy name="Project Space"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Gate">
+		<default>
+			<policy name="Project Review"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Milestone">
+		<default>
+			<policy name="Project Review"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Phase">
+		<default>
+			<!-- NO POLICY FOR THIS ABSTRACT ENTITY-->
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Task">
+		<default>
+			<policy name="Project Task"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Task Deliverable">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Dependency">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SubTask">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+
+    <!-- ================================================================== -->
+    <!-- Requirements entities                                             -->
+    <!-- ================================================================== -->
+
+	<entity name="Requirement Specification">
+		<default>
+			<policy name="Requirement Specification"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Requirement">
+		<default>
+			<policy name="Requirement"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Chapter">
+		<default>
+			<policy name="Chapter"/>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+  <entity name="Comment">
+    <default>
+      <policy name="Comment"/>
+      <vault name="vplm"/>
+      <listVaults name="*"/>
+    </default>
+  </entity>
+  <!-- PHB 15:12:18 IR-415699-3DEXPERIENCER2017x: Use Case Save KO -->
+  <entity name="Use Case">
+    <default>
+      <policy name="Use Case"/>
+      <vault name="vplm"/>
+      <listVaults name="*"/>
+    </default>
+  </entity>
+  <entity name="Sub Requirement Group">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Requirement Group Content">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Specification Structure">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Sub Requirement">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="Derived Requirement">
+		<default>
+			<vault name="vplm"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+  <!-- PHB 15:12:18 IR-415699-3DEXPERIENCER2017x: Use Case Save KO -->
+  <entity name="Sub Use Case">
+    <default>
+      <vault name="vplm"/>
+      <listVaults name="*"/>
+    </default>
+  </entity>
+
+  <!-- ================================================================== -->
+    <!-- Requirements entities (Polar Bear)                                 -->
+    <!-- ================================================================== -->
+
+	<entity name="VPLMReqProjAbstractReference">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="VPLMReqProjCommonInstance">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="VPLMReqProjSubRequirementInstance">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="VPLMReqProjDerivedRequirementConnection">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+
+    <!-- ================================================================== -->
+    <!-- Designer Central entities (Polar Bear)                             -->
+    <!-- ================================================================== -->
+  
+	<entity name="VPMEBOMAlternateConnection">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="VPMEBOMPartReference">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="VPMEBOMPartInstance">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="VPMEBOMPartCnx">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="VPMDECInstance">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="VPMDECCgrViewable">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="VPMDECCgrViewableInstance">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="VPMDECReference">
+		<!-- Base class for : VPMDECAssembly, VPMDECCT5Assembly, VPMDECCT5Component, VPMDECCT5EmbeddedAssembly, VPMDECComponent,  VPMDECProEAssembly, VPMDECProEAssemblyInstance, VPMDECProEComponent, VPMDECProEComponentInstance, VPMDECProEManufactureAssembly, VPMDECSLWAssembly, VPMDECSLWAssemblyInstance, VPMDECSLWComponent, VPMDECSLWComponentInstance, VPMDECUGAssembly, VPMDECUGComponent -->
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+
+    <!-- ================================================================== -->
+    <!-- SLM entities (Polar Bear)                                          -->
+    <!-- ================================================================== -->
+  
+	<entity name="SLMSimulationAbstract">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SLMSimulationAbstractInstance">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SLMActivityData">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SLMFolders">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SLMFoldersInstance">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SLMFoldersReferenced">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SLMJob">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SLMJobInstance">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SLMTemplate">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SLMTemplateContentInstance">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SLMTemplateInstantiationCnx">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+    <!-- JIC 12:11:27 IR IR-198669V6R2014: Added case for entity "ImageHolder" -->
+	<entity name="ImageHolder">
+		<default>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	<entity name="SLMTemplateInstructionsCnx">
+		<default>
+			<listVaults name="*"/>
+		</default>
+	</entity>
+	
+    <!-- ================================================================== -->
+    <!-- Ontologies                                                         -->
+    <!-- ================================================================== -->
+
+	<entity name="OntoRootType">
+		<default>
+			<policy name="OntoDefaultPolicy"/>
+			<vault name="vplm"/>
+			<listVaults name="vplm"/>
+		</default>
+	</entity> 
+
+    <!-- JIC 12:07:18 Added Material entities                               -->
+    <!-- JIC 13:02:07 Removed entities "Material" and "Internal Material"   -->
+    <!-- JIC 13:02:07 Modified entities "Internal Core Material" and        -->
+    <!--              "Internal Covering Material"                          -->
+    <!-- ================================================================== -->
+    <!-- Material                                                           -->
+    <!-- ================================================================== -->
+
+    <entity name="Internal Core Material">
+        <default>
+            <policy name="Internal Material"/>
+            <vault name="eService Production"/>
+            <listVaults name="eService Production,vplm"/>
+        </default>
+    </entity>
+    <entity name="Internal Covering Material">
+        <default>
+             <policy name="Internal Material"/>
+             <vault name="eService Production"/>
+             <listVaults name="eService Production,vplm"/>
+        </default>
+    </entity>
+
+    <!-- ================================================================== -->
+    <!-- PlmParameter                                                       -->
+    <!-- ================================================================== -->
+
+	<entity name="PlmParameter">
+		<default>
+			<policy name="Parameter"/>
+			<vault name="eService Production"/>
+			<listVaults name="*"/>
+		</default>
+	</entity> 
+
+    <!-- JIC 13:08:20 Added entity "KPIFormula"                             -->
+    <!-- ================================================================== -->
+    <!-- KPIFormula                                                         -->
+    <!-- ================================================================== -->
+
+    <entity name="KPIFormula">
+        <default>
+            <listVaults name="*"/>
+        </default>
+    </entity>
+
+    <!-- JIC 13:09:16 Added entity "KPIConsolidation"                       -->
+    <entity name="KPIConsolidation">
+        <default>
+            <listVaults name="*"/>
+        </default>
+    </entity>
+
+    <!-- JIC 14:01:16 IR IR-271009V6R2014x: Added entities "Test Case" and  -->
+    <!-- "Test Execution"                                                   -->
+    <!-- ================================================================== -->
+    <!-- Test                                                               -->
+    <!-- ================================================================== -->
+    <entity name="Test Case">
+        <default>
+			<policy name="Test Case"/>
+            <vault name="vplm"/>
+            <listVaults name="eService Production,vplm"/>
+        </default>
+    </entity>
+    <entity name="Test Execution">
+        <default>
+			<policy name="Test Execution"/>
+            <vault name="vplm"/>
+            <listVaults name="eService Production,vplm"/>
+        </default>
+    </entity>
+
+    <!-- ================================================================== -->
+    <!-- in other Policy choice cases                                       -->
+    <!-- Note: normally, the object types whose a policy was required       -->
+    <!--       should ALL (or their super-type) be listed above             -->
+    <!-- ================================================================== -->
+
+	<anyOtherEntity>
+		<default>
+			<version format="---"/>
+			<listVaults name="*"/>
+		</default>
+	</anyOtherEntity>
+
+<!-- ================================================================== -->
+<!-- STORES choice cases                                                -->
+<!-- ================================================================== -->
+
+	<stores>
+		<default>
+			<store name="plmx"/>
+		</default>
+	</stores>
+
+</policyChoice>

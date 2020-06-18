@@ -1,0 +1,234 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<title>ENOVIA - 3DConfigurator</title>
+<meta charset="ISO-8859-1">
+	<meta name="author" content="Dassault Syst?mes" />
+	<meta name="description" content="ConfigEditor Component" />
+	<meta name="apiVersion" content="1.3" />
+	<meta name="debugMode" content="false" />
+	<meta name="strictMode" content="false" />
+
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<link rel="stylesheet" type="text/css"
+		href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript"
+		src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+
+	<widget:preferences>
+		<preference name="view" type="list" label="View" defaultValue="Normal">
+		<option value="normal" label="Normal" />
+		<option value="channel" label="Channel" />
+		</preference>
+	</widget:preferences>
+
+	<script type="text/javascript">
+	    //<![CDATA[
+	    'use strict';
+	    require([
+			'DS/ConfiguratorPanel/scripts/Presenters/ConfigEditorPresenter',
+			'DS/Core/ModelEvents',
+			'DS/UIKIT/Input/Button',
+			'DS/ConfiguratorPanel/scripts/Models/ConfiguratorModel',
+			'DS/ConfiguratorPanel/scripts/ConfiguratorSolverFunctions',
+			 'DS/ConfiguratorPanel/scripts/Utilities',
+			 'DS/UIKIT/Autocomplete',
+			 'DS/ConfiguratorPanel/scripts/Presenters/ConfiguratorPanelPresenter'
+
+		], function (ConfigEditorPresenter, ModelEvents, Button, ConfiguratorModel, ConfiguratorSolverFunctions, Utilities, Autocomplete, ConfiguratorPanelPresenter)
+        {
+        	widget.addEvents(
+        	{
+        		onLoad : function()
+        		{
+        			widget.body.setContent("");
+
+					var _modelEvents = new ModelEvents();
+
+
+					var myHardcodedDico = {
+							"basePrice":"0.0",
+							"features":[{
+								"attributes": {
+									"Current": "Preliminary",
+									"Display Name": "Default Selection - Single",
+									"Display Text": "",
+									"Originator": "VPLMAdminUser"
+								},
+								"displayName": "Default Selection - Single",
+								"fileName": "null",
+								"id": "11136.47985.42240.31324",
+								"image": "",
+								"imageId": "null",
+								"keyInType": "Blank",
+								"keyInValue": "",
+								"listPrice": "0.0",
+								"logicalId": "6843B1568403000013951E5AABB40400",
+								"minQuantity": "1.0",
+								"name": "Default Selection - Single",
+								"optionPhysicalIds": ["6843B15684030000D5971E5A29430B00", "6843B15684030000D5971E5A2E6D0B00"],
+								"options": [{
+										"attributes": {
+											"Display Text": "",
+											"Maximum Quantity": "1.0",
+											"Minimum Quantity": "1.0",
+											"Originator": "VPLMAdminUser",
+											"Sequence Order": "1"
+										},
+										"defaultSelection": "Yes",
+										"displayName": "Color Red",
+										"fileName": "null",
+										"id": "6843B15684030000C2971E5AE5AA0B00",
+										"image": "",
+										"imageId": "null",
+										"listPrice": "0.0",
+										"logicalId": "6843B15684030000C2971E5AE6AA0B00",
+										"name": "Color Red13",
+										"relLogicalId": "6843B15684030000D5971E5A2A430B00",
+										"ruleId": "6843B15684030000D5971E5A29430B00",
+										"sequenceNo": "1"
+									}, {
+										"attributes": {
+											"Display Text": "",
+											"Maximum Quantity": "1.0",
+											"Minimum Quantity": "1.0",
+											"Originator": "VPLMAdminUser",
+											"Sequence Order": "1"
+										},
+										"defaultSelection": "No",
+										"displayName": "Color White",
+										"fileName": "null",
+										"id": "6843B15684030000D0971E5A7E6E0C00",
+										"image": "",
+										"imageId": "null",
+										"listPrice": "0.0",
+										"logicalId": "6843B15684030000D0971E5A7F6E0C00",
+										"name": "Color White23",
+										"relLogicalId": "6843B15684030000D5971E5A2E6D0B00",
+										"ruleId": "6843B15684030000D5971E5A2E6D0B00",
+										"sequenceNo": "1"
+									}
+								],
+								"relLogicalId": "6843B15684030000AA951E5AA3610800",
+								"relPhysicalId": "6843B15684030000AA951E5AA2610800",
+								"ruleId": "6843B1568403000013951E5AAAB40400",
+								"selectionCriteria": "Must",
+								"selectionType": "Single",
+								"sequenceNo": "1"
+							}
+						]
+					}
+
+
+							var wsurl, onComplete, onFailure;
+
+					/*  var autocompleteInput = new Autocomplete({
+						id:	"auto",
+						multiSelect: false,
+						showSuggestsOnFocus: true,
+						placeholder : "Type..."
+					}).inject(widget.body);
+
+					autocompleteInput.addDataset({items: [
+						    { value : 'Usual Suspects' },
+						    { value : 'Usual Suspects1' },
+						    { value : 'Usual Suspects2' }]});  */
+
+							//wsurl = "/resources/cfg/configurator/configuration/53504.5860.55040.14893"; //604
+							//wsurl = "/resources/cfg/configurator/configuration/9088.46389.8192.3705"; //604
+							//333
+							//wsurl = "/resources/cfg/configurator/configuration/8896.13181.3072.26057"; //all features
+							//wsurl = "/resources/cfg/configurator/configuration/11136.47985.32000.23839"; //default
+							//wsurl = "/resources/cfg/configurator/configuration/11136.47985.44032.20683"; //user
+							wsurl = '/resources/cfg/configurator/configuration/36480.30858.32256.8500'; // mPC on 053
+							var cfgCriteria = "{}";
+							var appRulesParams = {};
+							onComplete = function (configurationData){
+								var configuration = configurationData.configurationCriteria;
+								appRulesParams = configurationData.appRuleParam;
+								var _configModel = new ConfiguratorModel({
+									configuration:configuration,
+									pcId : configurationData.objectDetails.id,
+									appRulesParams: {
+										multiSelection: 'false',
+										selectionMode: 'selectionMode_Build',
+										rulesMode: 'RulesMode_EnforceRequiredOptions',
+										rulesActivation: 'true',
+										completenessStatus: 'Unknown',
+										rulesCompliancyStatus: 'Unknown'
+									},
+									appFunc: {
+										multiSelection: "no",
+										selectionMode_Build: "yes",
+										selectionMode_Refine: "no",
+										rulesMode_ProposeOptimizedConfiguration: "no",
+										rulesMode_SelectCompleteConfiguration: "yes",
+										rulesMode_EnforceRequiredOptions: "yes",
+										rulesMode_DisableIncompatibleOptions: "yes"
+									},
+									modelEvents: _modelEvents,
+									readOnly: false
+								});
+
+								// ConfiguratorSolverFunctions.initSolver(
+								// 		//"53504.5860.6912.42286",_configModel, _modelEvents, function(dictionary){
+								// 		//"9088.46389.34816.34863",_configModel, _modelEvents, function(dictionary){
+								// 		"8896.13181.61952.30845",_configModel, _modelEvents, function(dictionary){	//all variants
+								// 			//	"11136.47985.49408.23399",_configModel, _modelEvents, function(dictionary){	//user
+								// 			//"11136.47985.21504.18166",_configModel, _modelEvents, function(dictionary){ //only default variants
+								// 			//_configModel.setDictionary(myHardcodedDico);
+								// 			_configModel.setDictionary(dictionary);
+								// 			var myConfigEditor = new ConfigEditorPresenter({
+								// 			//var myConfigEditor = new ConfiguratorPanelPresenter({
+						    //                     parentContainer: widget.body,
+						    //                     configModel: _configModel,
+						    //                     modelEvents: _modelEvents,
+						    //                     add3DButton: 'no',
+								// 										allowSave : 'yes'
+						    //                 });
+								//
+								// 		});
+
+								ConfiguratorSolverFunctions.initSolver("54400.41197.31232.27007", _configModel, _modelEvents).then(function (dictionary) {
+									_configModel.setDictionary(dictionary.dictionary);
+									var myConfigEditor = new ConfigEditorPresenter({
+											parentContainer: widget.body,
+											configModel: _configModel,
+											modelEvents: _modelEvents,
+											add3DButton: 'no',
+											allowSave : 'no'
+									});
+								});
+							}
+							onFailure = function (){
+
+							}
+							// Utilities.sendRequest(wsurl, 'GET', 'json', false, onComplete, onFailure, null, 3000);
+
+							var configurationOptions = {
+								url: wsurl,
+								method: 'GET',
+								responseType: 'json',
+								data: null,
+								// timeout: 3000
+							};
+							Utilities.sendRequestPromise(configurationOptions).then(onComplete, onFailure);
+
+					//PC ID - 11136.47985.10752.62658
+
+
+        		}
+        	});
+       	});
+      	//]>
+    </script>
+</head>
+<body>
+	<p>Loading...</p>
+</body>
+</html>

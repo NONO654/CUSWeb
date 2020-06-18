@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+      <Template syp:name="CollabSharingHeaders" Target="CATCmdHeadersList">
+            <CATCmdHeadersList>
+				<CATCommandHeader ID="ActionBar_ChangeOwner" ClassName="DS/ENOCollabSharingCmds/commands/TransferOwnershipCmd/ActionBar_ChangeOwnerCmd" ResourceFile="ENOCollabSharingCmds/CollabSharing_Workbench" Available="1" />				
+        <CATCommandHeader ID="ActionBar_ReserveCmd" ClassName="DS/ENOCollabSharingCmds/commands/ReserveCmd/ActionBar_ReserveCmd" ResourceFile="ENOCollabSharingCmds/CollabSharing_Workbench" Available="1" />
+				<CATCommandHeader ID="ActionBar_UnreserveCmd" ClassName="DS/ENOCollabSharingCmds/commands/UnreserveCmd/ActionBar_UnreserveCmd" ResourceFile="ENOCollabSharingCmds/CollabSharing_Workbench" Available="1" />				
+				<CATCommandHeader ID="SubscribeHdr" ClassName="DS/ENOSubscriptionMgmt/Commands/Subscribe" ResourceFile="ENOSubscriptionMgmt/ENOSubscriptionMgmt" Available="1"/>
+				<CATCommandHeader ID="UnSubscribeHdr" ClassName="DS/ENOSubscriptionMgmt/Commands/UnSubscribe" ResourceFile="ENOSubscriptionMgmt/ENOSubscriptionMgmt" Available="1"/>
+				<CATCommandHeader ID="EditSubscribeHdr" ClassName="DS/ENOSubscriptionMgmt/Commands/EditSubscribe" ResourceFile="ENOSubscriptionMgmt/ENOSubscriptionMgmt" Available="1"/>
+				<CATCommandHeader ID="MySubscriptionsHdr" ClassName="DS/ENOSubscriptionMgmt/Commands/MySubscriptions" ResourceFile="ENOSubscriptionMgmt/ENOSubscriptionMgmt" Available="1"/>
+	      </CATCmdHeadersList>
+      </Template>
+
+      <Template syp:name="CollabSharingWkbAccess" Target="CATCmdWorkbench">
+            <CATCmdWorkbench Name="CollabSharing_Workbench">
+                 <CATCmdContainer Name="Collaboration" RepresentationType="AfrActionBarSection">
+                         <CATCmdStarter Name="Transfer Ownership" Command="ActionBar_ChangeOwner" /> 
+                          <CATCmdContainer Name="ENOSubscribe" RepresentationType="AfrActionBarDropDown">
+	                        <CATCmdStarter Name="Subscribe" Command="SubscribeHdr"/>
+	                        <CATCmdStarter Name="Un Subscribe" Command="UnSubscribeHdr"/>
+	                        <CATCmdStarter Name="Edit Subscriptions" Command="EditSubscribeHdr"/>
+	                        <CATCmdStarter Name="My Subscriptions" Command="MySubscriptionsHdr"/>
+	                     </CATCmdContainer>
+                         <CATCmdStarter Name="Reserve" Command="ActionBar_ReserveCmd" />
+                         <CATCmdStarter Name="Unreserve" Command="ActionBar_UnreserveCmd" />
+                                                  
+                </CATCmdContainer>
+            </CATCmdWorkbench>
+      </Template>
+</Styles>

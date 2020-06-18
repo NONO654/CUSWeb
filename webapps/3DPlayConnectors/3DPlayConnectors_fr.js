@@ -1,0 +1,1 @@
+define("DS/3DPlayConnectors/3DPlayConnectors_fr",{});define("DS/3DPlayConnectors/assets/nls/3DPlayConnectors",{Preproc_REQUIRE_FAIL:"Impossible d'ouvrir la ressource"});

@@ -1,0 +1,9 @@
+m|ENOXAppsFoundationsUX\ENOXStandardActionbar.mweb
+b|j|c,m
+b|c|n,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\ENOXStandardActionbar\ENOXStandardActionbar.js|1540011488|9363
+s|ENOXAppsFoundationsUX\ENOXStandardActionbar.mweb\src\js\ENOXStandardActionbar.js|1537880187|16258
+t|win_b64\webapps\ENOXStandardActionbar\css\ENOXStandardActionbar.css|1568749443|1559
+s|ENOXAppsFoundationsUX\ENOXStandardActionbar.mweb\src\css\ENOXStandardActionbar.css|1517575691|2082

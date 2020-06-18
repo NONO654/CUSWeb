@@ -1,0 +1,15 @@
+m|SMAProcWebComponentsInfra\SMAProcFetchServices.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.0.18209
+r|G:\R421\BSF\.
+t|SMAProcWebComponentsInfra\SMAProcFetchServices.mweb\LocalGenerated\win_b64\requests.js|1531550745|8352
+s|SMAProcWebComponentsInfra\SMAProcFetchServices.mweb\typings\WAFData\WAFData.d.ts|1529503586|6839
+s|SMAProcWebComponentsInfra\SMAProcFetchServices.mweb\src\requests.ts|1529957491|4100
+t|win_b64\typings\SMAProcFetchServices\requests.d.ts|1531550629|783
+s|SMAProcWebComponentsInfra\SMAProcFetchServices.mweb\typings\WAFData\WAFData.d.ts|1529503586|6839
+s|SMAProcWebComponentsInfra\SMAProcFetchServices.mweb\src\requests.ts|1529957491|4100
+t|win_b64\webapps\SMAProcFetchServices\SMAProcFetchServices.js|1531550929|3939
+s|win_b64\code\toolcmds\jscompressor.bat|1531520632|41
+g|SMAProcWebComponentsInfra\SMAProcFetchServices.mweb\LocalGenerated\win_b64\requests.js|1531550745|8352
+s|win_b64\code\toolcmds\mkwebconcat.bat|1531520632|287

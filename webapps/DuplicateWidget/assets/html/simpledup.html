@@ -1,0 +1,59 @@
+<div id="mainContainer" class="duplicate-main-container" style="height:100%">
+  <div class="simpdup-option">
+    <div
+      class="duplicate_popup_text"
+      id="infotext"
+      style="font-size: 12px"
+    ></div>
+  </div>
+  <div class="simpdup-option" id="addtext-container" style="height: 22px">
+    <div style="display: inline-block;">
+      <div id="addtext-label" style="display: inline-block; font-weight: bold;">
+        [[dlg-prefix]]
+      </div>
+    </div>
+    <div style="display: inline-block; position: relative;">
+      <!-- input validation currently needs this -->
+      <input
+        class="lifecycle-option-prefix"
+        id="addtext-input"
+        data-wuxcontrol="LineEditor"
+        data-wuxstyle="display: inline-block"
+        data-bind="event=change, function=onTextChange;event=keydown, key=13, function=duplicate"
+      />
+    </div>
+  </div>
+  <div class="lcm-dup-mobile-marginy-20 is-mobile"></div>
+  <div class="simpdup-option">
+    <input
+      id="wholestructure"
+      type="checkbox"
+      checked
+      data-wuxcontrol="Checkbox"
+      data-wuxlabel="[[dlg-incChildren]]"
+      data-bind="event=change, function=onIncludeChildrenChange"
+    />
+    <label data-delete-element="true">[[dlg-incChildren]]</label>
+  </div>
+  <div
+    class="advdup-content"
+    id="advanced-content"
+    style="height:100%; display: none"
+  ></div>
+  <div
+    class="advdup-expander"
+    id="expander"
+    style="position:absolute; bottom:0px; right:0px; margin:5px"
+    data-bind="event=click, function=openAdvanced"
+  >
+    [[dlg-advDup]] >
+  </div>
+  <div
+    class="advdup-expander"
+    id="collapser"
+    style="position:absolute; bottom:0px; right:0px; margin:5px; font-size: 12px; display:none"
+    data-bind="event=click, function=closeAdvanced"
+  >
+    [[dlg-basicDup]] >
+  </div>
+</div>

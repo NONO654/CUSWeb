@@ -1,0 +1,91 @@
+<!-- DTD for the OOTB parameterization definition file -->
+
+<!ELEMENT OOTBParameterization (Domain+)>
+<!ATTLIST OOTBParameterization
+	regSuite  CDATA         #REQUIRED
+	packaging (ALL|VPM|SMB) #IMPLIED
+	solution  CDATA         #IMPLIED
+	processes CDATA         #IMPLIED>
+
+<!ELEMENT Domain (Family+)>
+<!ATTLIST Domain
+	id            ID            #REQUIRED
+	regSuite      CDATA         #IMPLIED
+	nlsKey        CDATA         #IMPLIED
+	tooltipNlsKey CDATA         #IMPLIED
+	packaging     (ALL|VPM|SMB) #IMPLIED
+	solution      CDATA         #IMPLIED
+	processes     CDATA         #IMPLIED
+	reloadCache   (true|false)  #IMPLIED>
+
+<!ELEMENT Family (Constant*,Family*,Parameter*,GovernedType*,State*,Transition*)>
+<!ATTLIST Family
+	id             ID            #REQUIRED
+	regSuite       CDATA         #IMPLIED
+	nlsKey         CDATA         #IMPLIED
+	tooltipNlsKey  CDATA         #IMPLIED
+	packaging      (ALL|VPM|SMB) #IMPLIED
+	solution       CDATA         #IMPLIED
+	processes      CDATA         #IMPLIED
+	icon           CDATA         #IMPLIED
+	collabApps     (CollaborationAndApprovals|ProductPlanningAndProgram|Configuration|GlobalDesign|GlobalEngineeringAndManufacturing|StrategicSupplierRelationship|QualityAndCompliance|IPClassificationAndSecurity|StrategicCustomerRelationship) #IMPLIED
+	startCollapsed (true|false)  #IMPLIED>
+
+<!ELEMENT Parameter (Argument+,Constant*)>
+<!ATTLIST Parameter
+	id             ID            #REQUIRED
+	regSuite       CDATA         #IMPLIED
+	nlsKey         CDATA         #IMPLIED
+	tooltipNlsKey  CDATA         #IMPLIED
+	packaging      (ALL|VPM|SMB) #IMPLIED
+	solution       CDATA         #IMPLIED
+	processes      CDATA         #IMPLIED
+	implementation CDATA         #REQUIRED>
+
+<!ELEMENT Constant EMPTY>
+<!ATTLIST Constant
+	id            CDATA #REQUIRED
+	regSuite      CDATA #IMPLIED
+	nlsKey        CDATA #IMPLIED
+	tooltipNlsKey CDATA #IMPLIED
+	value         CDATA #REQUIRED>
+
+<!ELEMENT Argument (Value*)>
+<!ATTLIST Argument
+	id            CDATA                         #REQUIRED
+	regSuite      CDATA                         #IMPLIED
+	nlsKey        CDATA                         #IMPLIED
+	tooltipNlsKey CDATA                         #IMPLIED
+	type          (string|integer|real|boolean) #REQUIRED
+	input         (combobox|textfield|checkbox) #IMPLIED
+	default       CDATA                         #IMPLIED
+	maxLength     CDATA                         #IMPLIED>
+
+<!ELEMENT Value EMPTY>
+<!ATTLIST Value
+	id            CDATA #REQUIRED
+	regSuite      CDATA #IMPLIED
+	nlsKey        CDATA #IMPLIED
+	tooltipNlsKey CDATA #IMPLIED>
+
+<!ELEMENT GovernedType (Constant+)>
+<!ATTLIST GovernedType
+	id            CDATA #REQUIRED
+	regSuite      CDATA #IMPLIED
+	nlsKey        CDATA #IMPLIED
+	tooltipNlsKey CDATA #IMPLIED>
+
+<!ELEMENT State (Constant+)>
+<!ATTLIST State
+	id            CDATA #REQUIRED
+	regSuite      CDATA #IMPLIED
+	nlsKey        CDATA #IMPLIED
+	tooltipNlsKey CDATA #IMPLIED>
+
+<!ELEMENT Transition (Constant+)>
+<!ATTLIST Transition
+	id            CDATA #REQUIRED
+	regSuite      CDATA #IMPLIED
+	nlsKey        CDATA #IMPLIED
+	tooltipNlsKey CDATA #IMPLIED>
+

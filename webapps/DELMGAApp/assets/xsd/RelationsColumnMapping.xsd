@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMGAConfiguration" xmlns:tns="DS_DELMIAMGAConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+<xs:simpleType name="directionValues">
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="To" />
+    <xs:enumeration value="From" />
+    <xs:enumeration value="Both" />
+  </xs:restriction>
+ </xs:simpleType>
+   <xs:element name="RelationsColumnMapping" maxOccurs="unbounded">
+	<xs:complexType>
+      <xs:sequence>
+		  <xs:element name="RelationsColumns">
+			<xs:complexType>
+			  <xs:sequence>
+				<xs:element name="RelationsColumn" maxOccurs="unbounded">
+				  <xs:complexType>
+					<xs:sequence>
+					  <xs:element name="LinkedObjectConstraint" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+						  <xs:sequence>
+							<xs:element name="Attribute" maxOccurs="unbounded" minOccurs="0">
+							  <xs:complexType>
+								<xs:attribute name="name" type="xs:string" use="required"/>
+							  </xs:complexType>
+							</xs:element>
+						  </xs:sequence>
+						  <xs:attribute name="dicoType" type="xs:string" use="required"/>
+						</xs:complexType>
+					  </xs:element>
+					  <xs:element name="Relation" maxOccurs="unbounded">
+						<xs:complexType>
+						  <xs:attribute name="name" type="xs:string" use="required"/>
+						  <xs:attribute name="attribute_source" type="xs:string" use="required"/>
+						  <xs:attribute name="direction" type="tns:directionValues" use="required"/>
+						</xs:complexType>
+					  </xs:element>
+					</xs:sequence>
+					<xs:attribute name="name" type="xs:string" use="required"/>
+				  </xs:complexType>
+				</xs:element>
+			  </xs:sequence>
+			  <xs:attribute name="Title" type="xs:string" use="required"/>
+			  <xs:attribute name="Description" type="xs:string" use="required"/>
+			</xs:complexType>
+		  </xs:element>
+		  <xs:element name="RelationsDisplayAttributes">
+			<xs:complexType>
+			  <xs:sequence>
+				<xs:element name="Type"  maxOccurs="unbounded" minOccurs="0">
+				  <xs:complexType>
+					<xs:sequence>
+					  <xs:element name="Attribute" maxOccurs="unbounded" minOccurs="0">
+						<xs:complexType>
+						  <xs:attribute name="name" type="xs:string" use="required"/>
+						</xs:complexType>
+					  </xs:element>
+					</xs:sequence>
+					<xs:attribute name="name" type="xs:string" use="required"/>
+					<xs:attribute name="display_attribute" type="xs:string" use="required"/>
+					<xs:attribute name="display_icon" type="xs:string"/>
+					<xs:attribute name="separator" type="xs:string"/>
+				  </xs:complexType>
+				</xs:element>
+				<xs:element name="Relation"  maxOccurs="unbounded" minOccurs="0">
+				  <xs:complexType>
+					<xs:sequence>
+					  <xs:element name="Attribute" maxOccurs="unbounded" minOccurs="0">
+						<xs:complexType>
+						  <xs:attribute name="name" type="xs:string" use="required"/>
+						</xs:complexType>
+					  </xs:element>
+					</xs:sequence>
+					<xs:attribute name="name" type="xs:string" use="required"/>
+					<xs:attribute name="display_attribute" type="xs:string" use="required"/>
+					<xs:attribute name="display_icon" type="xs:string"/>
+					<xs:attribute name="separator" type="xs:string"/>
+				  </xs:complexType>
+				</xs:element>
+			  </xs:sequence>
+			  <xs:attribute name="Title" type="xs:string" use="required"/>
+			  <xs:attribute name="Description" type="xs:string" use="required"/>
+			</xs:complexType>
+		  </xs:element>
+	  </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+</xs:schema>

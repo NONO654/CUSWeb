@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="author" content="MXZ" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>NotifAlert test page</title>
+<!-- Definition of require :  -->
+
+<!-- Definition of require : -->
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+<!-- This is required to configure RequireJS with the appropriate pathes : -->
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+<link rel="stylesheet" href="../UIKIT/UIKIT.css">
+
+<script>
+
+	require(['UWA/Drivers/Alone','UWA/Class/Collection','UWA/Class/Model','DS/NotificationManager/notificationManagerView'], function (UWA, Collection, Model, NotifManagerView) {
+
+		var coll = new UWA.Class.Collection();
+
+		var alertRow = UWA.Class.Model.extend({
+				url:'alertboxRow',
+		    validate: function(attributes) {
+		        // Here some validation code of the attributes
+		        // so that we make sure data is valid before save()...
+		    },
+		    defaults: {
+		        'date': '2016-06-14T11:19:05.000Z', // ok, this is obvious :)
+		        'img': '',
+		        'text': 'Once upon a midnight dreary, while I pondered weak and weary, over many a quaint and curious volume',
+		        'url': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/LXM\/width\/128\/height\/128',
+						'readState':false,
+						'appIconBorder':true,
+						'isInNotifCenter':false,
+						'options':{
+							"actions":
+												[
+												{
+												"type":"button",
+												"options":{
+												"label":"send.msg.button",
+												"event":{
+													"type":"bus",
+													"options":{
+														"topic":"im.ds.com",
+														"data": {
+															"action":"startChat",
+															"login" :  "lxm",
+															"tenant": "DSQAL002",
+															"username":"Layal Dergham"
+														}
+													}
+												}
+											}
+										},
+										{
+										"type":"button",
+										"options":{
+										"label":"cancel",
+										"event":{
+											"type":"bus",
+											"options":{
+												"topic":"im.ds.com",
+												"data": {
+													"action":"startChat",
+													"login" :  "lxm",
+													"tenant": "DSQAL002",
+													"username":"Layal Dergham"
+												}
+											}
+										}
+									}
+								}
+								]
+						}
+		    }
+		});
+
+	  var notifalert = new NotifManagerView({
+				collection : coll
+		});
+
+    //coll.add(new alertRow());
+
+		notifalert.inject(document.body);
+
+		var button = UWA.createElement('button', {
+			styles:{
+				width:'100px',
+				height:'50px',
+				background:'green',
+				position:'fixed',
+				left : '0px',
+				top:'0px'
+			},
+      html:'Add AlerBox',
+			events:{
+				click: function(evt){
+					coll.add(new alertRow({
+				        'date': '2016-06-13T10:18:05.000Z', // ok, this is obvious :)
+				        'img': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+				        'text': 'Once upon a midnight dreary, while I pondered ',
+				        'url': 'https:\/\/widgetfactory.extranet.3ds.com\/proxies\/dsxpeoplephoto\/picture\/crop\/login\/P8D\/width\/128\/height\/128',
+				    }));
+				}
+			}
+		}).inject(document.body);
+	});
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

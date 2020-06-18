@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DShare_simpleAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DShare_simpleAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="3DSHARE_Scenario_Explore" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID = "Explode" ClassName = "DS/3DPlayCommands/CmdExplode" ResourceFile = "3DPlay/3DPlayExperience3D" />
+    </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="3DShare_simpleAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DSHARE_Scenario_Explore">
+      <CATCmdContainer Name="Fixed Aera" RepresentationType="AfrActionBarFixedSection">
+      <!--
+      IMPORTANT! : The AFR workbench can't be empty, hence need atleast one command header.
+      But we do NOT need the CmdExplode here because it is already available in the 3DPlay "3DPlayExperience3D.xml" afr.
+      Hence leaving this as empty section, while creating a command header.
+      -->
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+  
+</Styles>

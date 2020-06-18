@@ -1,0 +1,9 @@
+m|WebFoundation\Maths.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\Maths\Maths.js|1531550847|996
+s|WebFoundation\Maths.mweb\src\Maths.js|1427881377|0
+s|WebFoundation\Maths.mweb\src\Vector3.js|1467294729|1513
+s|WebFoundation\Maths.mweb\src\Vector.js|1467294722|477

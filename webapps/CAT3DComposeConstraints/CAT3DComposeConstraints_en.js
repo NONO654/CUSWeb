@@ -1,0 +1,1 @@
+define("DS/CAT3DComposeConstraints/CAT3DComposeConstraints_en",{});define("DS/CAT3DComposeConstraints/assets/nls/CAT3DComposeConstraintsView",{cstCoincidence:"Coincidence",cstContact:"Contact",plane:"Plane",sidePanel:"Snap alternatives"});

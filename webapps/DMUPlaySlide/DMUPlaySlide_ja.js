@@ -1,0 +1,1 @@
+define("DS/DMUPlaySlide/DMUPlaySlide_ja",{});define("DS/DMUPlaySlide/assets/nls/DMUPlaySlide",{nominalSlide:"標準状態"});

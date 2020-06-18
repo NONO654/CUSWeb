@@ -1,0 +1,1 @@
+define("DS/3DPlayWidgetViews/3DPlayWidgetViews_es",{});define("DS/3DPlayWidgetViews/assets/nls/3DPlayWidgetView",{DROP_MSG_LP:"Arrastre su contenido aquí"});

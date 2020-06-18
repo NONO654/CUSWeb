@@ -1,0 +1,74 @@
+    {
+            "Customized_types": ["Requirement","Chapter","Comment","Requirement Specification","Requirement Group"],
+            "authorized_types": ["Requirement Group","Requirement Specification","Chapter","Requirement","Comment","PlmParameter"],
+            "type_filter_bo": ["Requirement Specification","Chapter","Requirement","Comment","PlmParameter"] ,              
+            "type_filter_bo_req_folder":["Requirement Specification","Requirement Group"],
+            "root_type":[ "Requirement Group", "Requirement Specification"],
+            "expand":{
+	             "mql_expand_data":{
+		   	         "select_level": "0",
+		   	         "object_selects": ["type", "name", "revision", "physicalid", "attribute[Title]", "attribute[Content Text]","attribute[Priority]","owner","revision","project","policy","reserved","originated","modified","organization","description","current","interface"],
+		   	         "relationship_selects": ["physicalid[connection]", "level", "attribute[TreeOrder]", "type[connection]"]	
+	            	},
+	              "cv_expand_data":{
+		            "folder_expand":{
+		            				"type_filter_bo":["Requirement Specification","Requirement Group"],
+		            				"select_bo":["name","ds6w:project","ds6wg:revision","physicalid","ds6w:responsible","ds6w:policy","ds6w:organizationResponsible", "ds6w:label","ds6w:reserved", "ds6w:description", "ds6w:modified", "ds6w:created","ds6w:type","ds6w:status"],
+						            "select_rel":["physicalid", "ds6w:type","spec.TreeOrder","ds6w:businessType"],
+						            "type_filter_rel": ["Requirement Group Content","Sub Requirement Group"]
+		            },
+		            "no_folder_expand":{
+		            	           "type_filter_bo": ["Requirement Specification","Chapter","Requirement","Comment","PlmParameter"] ,              
+		            				"type_filter_rel": ["Specification Structure","Sub Requirement","ParameterAggregation"],
+		            			    "select_bo":["name","ds6w:type","ds6w:project","ds6wg:revision","physicalid","ds6w:responsible","ds6w:policy","ds6w:organizationResponsible", "ds6w:label","ds6w:reserved","ds6w:created", "ds6w:description", "ds6w:modified","ds6w:refinedInto","ds6w:covers","ds6w:status"],
+						            "select_rel":["physicalid", "ds6w:type","spec.TreeOrder","ds6w:businessType"]
+		            }
+            }
+            },
+            "fetch":{
+        		"MQL_fetch": "type,name,revision,physicalid,attribute[Title],attribute[Content Text],owner,revision,project,policy,reserved,originated,modified,organization,description,current,type.kindof" ,
+        		"CV_fetch":["name","ds6w:project","ds6wg:revision","physicalid","ds6w:responsible","ds6w:policy","ds6w:organizationResponsible", "ds6w:label","ds6w:reserved", "ds6w:description", "ds6w:modified", "ds6w:created","ds6w:type","ds6wg:Content_Text","ds6w:refinedInto","ds6w:covers","ds6w:status"]
+            },	
+            "Icons":{
+	            "Chapter": "iconReqTypeChapter.png",
+	            "Comment": "iconReqTypeComment.png",
+	            "Requirement": "iconReqTypeRequirement.png",
+	            "Requirement Specification": "iconReqTypeRequirementSpecification.png",
+	            "Requirement Group": "iconReqTypeSpecificationFolder.png",
+	            "Requirement Proxy" : "iconReqTypeRequirementProxy.png",
+	            "PlmParameter" : "I_PLMParameter.png"
+            },
+             "thumbnail":{
+	            "Chapter": "iconLargeDefault.png",
+	            "Comment": "iconLargeDefault.png",
+	            "Requirement": "iconLargeDefault.png",
+	            "Requirement Specification": "I_CDM_Document108x144.png",
+	            "Requirement Group": "iconLargeDefault.png"
+            },
+            "mql_colmuns":{
+            	"attribute[Priority]":"ds6w:fulfillsPriority",
+            	"attribute[User Requirement Importance]":"ds6w:importance",
+            	"attribute[Requirement Classification]":"ds6w:classification",
+            	"attribute[Sponsoring Customer]":"ds6w:customer",
+            	"attribute[Difficulty]":"ds6w:difficulty",
+            	"attribute[Estimated Cost]":"ds6w:estimatedCost",
+            	"attribute[Content Text]":"ds6wg:Content_Text",
+            	"type":"ds6w:type",
+            	"owner":"ds6w:responsible",
+            	"revision":"ds6wg:revision",
+            	"description":"ds6w:description",
+            	"project":"ds6w:project",
+            	"policy":"ds6w:policy",
+            	"reserved":"ds6w:reserved",
+            	"originated":"ds6w:created",
+            	"modified":"ds6w:modified",
+            	"organization":"ds6w:organizationResponsible",
+            	"current":"ds6w:status",
+            	"attribute[CustoAttIntSubReq1]":"CustoAttIntSubReq1"
+            },
+            "commands":{
+                "Requirement Specification":"CreateRequirementSpecification",
+                "Requirement Group":"CreateSpecificationFolder"
+            }
+                   
+    }

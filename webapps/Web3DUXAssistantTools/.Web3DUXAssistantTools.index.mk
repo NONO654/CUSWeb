@@ -1,0 +1,13 @@
+m|Web3DUX\Web3DUXAssistantTools.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\Web3DUXAssistantTools\Web3DUXAssistantTools.css|1568749475|659
+s|Web3DUX\Web3DUXAssistantTools.mweb\src\_copyright.css|1476090098|63
+g|Web3DUX\Web3DUXAssistantTools.mweb\LocalGenerated\win_b64\Web3DUXAssistantTools.css|1531550745|751
+t|Web3DUX\Web3DUXAssistantTools.mweb\LocalGenerated\win_b64\Web3DUXAssistantTools.css|1531550745|751
+s|Web3DUX\Web3DUXAssistantTools.mweb\src\Web3DUXAssistantTools.scss|1508767109|734
+t|win_b64\webapps\Web3DUXAssistantTools\Web3DUXAssistantTools.js|1531551020|5705
+s|Web3DUX\Web3DUXAssistantTools.mweb\src\Web3DUXAssistantTools.js|1527237987|15317
+s|Web3DUX\Web3DUXAssistantTools.mweb\src\_copyright.js|1475050414|63

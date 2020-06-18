@@ -1,0 +1,1 @@
+(function(){window.Polymer({is:"ad-create-job-compute-windows-container",properties:{jobId:{type:String},store:{type:Object}},ready:function(){require(["DS/SMAPoweredByState/ad-state-cos/selectors"],function(a){this.$.child.stationSelector=a.runningWindowsStations}.bind(this))},behaviors:[DS.SMAProcSP.SPBase]})}(this));

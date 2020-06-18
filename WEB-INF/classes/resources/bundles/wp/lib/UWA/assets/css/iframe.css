@@ -1,0 +1,4591 @@
+/*
+  Script: iframe.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+*/
+
+/* uwa base stylesheets */
+/*
+  Script: reset.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+*/
+
+/* Addresses default margin, padding, font-size, border and alignement */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,nav,output,ruby,section,summary,time,mark,audio,video{
+    margin:0;
+    padding:0;
+    border:0;
+    font-size: 100%;
+    font:inherit;
+    vertical-align:baseline;
+}
+body{
+    line-height:1;
+}
+/* HTML5 Element display reset for non supporting browsers*/
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{
+    display:block;
+}
+/* Corrects inline-block display not defined in IE6/7/8/9 & FF3*/
+audio,canvas,video{
+    display:inline-block;
+    *display:inline;
+    *zoom:1;
+}
+/* Prevents modern browsers from displaying 'audio' without controls*/
+audio:not([controls]){
+    display:none;
+}
+/* Addresses styling for 'hidden' attribute not present in IE7/8/9, FF3, S4 Known issue:no IE6 support */
+[hidden]{
+    display:none;
+}
+/* Base
+   1. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
+      http://clagnut.com/blog/348/#c790
+   2. Keeps page centred in all browsers regardless of content height.
+   3. Prevents iOS text size adjust after orientation change, without disabling user zoom.
+      www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/
+*/
+html{
+    font-size:100%; /* 1 */
+    /*overflow-y:scroll;*/ /* 2 */
+    -webkit-text-size-adjust:100%; /* 3 */
+    -ms-text-size-adjust:100%; /* 3 */
+}
+/* Addresses font-family inconsistency between 'textarea' and other form elements */
+body,button,input,select,textarea{
+    font-family:sans-serif;
+}
+/*	Links - Addresses outline displayed oddly in Chrome */
+a:focus{
+    outline:thin dotted;
+}
+/* Improves readability when focused and also mouse hovered in all browsers people.opera.com/patrickl/experiments/keyboard/test */
+a:hover,a:active{
+    outline:0;
+}
+/* Typography - Neutralise smaller font-size in 'section' and 'article' in FF4+, Chrome, S5 */
+h1{
+    font-size:2em;
+}
+/* Addresses styling not present in IE7/8/9, S5, Chrome */
+abbr[title]{
+    border-bottom:1px dotted;
+}
+/* Addresses style set to 'bolder' in FF3+, S4/5, Chrome */
+b,
+strong{
+    font-weight:bold;
+}
+blockquote{
+    margin:1em 20px;
+}
+/* Addresses styling not present in S5, Chrome */
+dfn{
+    font-style:italic;
+}
+/* Addresses styling not present in IE6/7/8/9 */
+mark{
+    background:#ff0;
+    color:#000;
+}
+/* Corrects font family set oddly in IE6, S4/5, Chrome en.wikipedia.org/wiki/User:Davidgothberg/Test59 */
+pre,code,kbd,samp{
+    font-family:monospace,serif;
+    _font-family:'courier new',monospace;
+    font-size:1em;
+}
+/* Improves readability of pre-formatted text in all browsers */
+pre{
+    white-space:pre;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+}
+/*	1. Addresses CSS quotes not supported in IE6/7
+    2. Addresses quote property not supported in S4
+*/
+/* 1 */
+blockquote,q{
+    quotes:none;
+}
+/* 2 */
+blockquote:before,
+blockquote:after,
+q:before,
+q:after{
+    content:'';
+    content:none;
+}
+small{
+    font-size:75%;
+}
+/* Prevents sub and sup affecting line-height in all browsers - gist.github.com/413930 */
+sub,
+sup{
+    font-size:75%;
+    line-height:0;
+    position:relative;
+    vertical-align:baseline;
+}
+sup{
+    top:-0.5em;
+}
+sub{
+    bottom:-0.25em;
+}
+/* Lists */
+ul, ol{
+    margin-left:0;
+    padding:0 0 0 20px;
+}
+dd{
+    margin:0 0 0 20px;
+}
+nav ul,
+nav ol{
+    list-style:none;
+    list-style-image:none;
+}
+ul, ol {
+    list-style-type:none;
+}
+/* Embedded content - Improves image quality when scaled in IE7 */
+img{
+    -ms-interpolation-mode:bicubic;
+}
+/* Corrects overflow displayed oddly in IE9 */
+svg:not(:root){
+    overflow:hidden;
+}
+/* Define consistent border, margin, and padding */
+fieldset{
+    border:1px solid #c0c0c0;
+    margin:0 2px;
+    padding:0.35em 0.625em 0.75em;
+}
+/*	1. Corrects color not being inherited in IE6/7/8/9
+    2. Corrects alignment displayed oddly in IE6/7
+*/
+legend{
+    border:0; /* 1 */
+    *margin-left:-7px; /* 2 */
+}
+/*	1. Corrects font size not being inherited in all browsers
+    2. Addresses margins set differently in IE6/7, FF3+, S5, Chrome
+    3. Improves appearance and consistency in all browsers
+*/
+button,
+input,
+select,
+textarea{
+    font-size:100%; /* 1 */
+    margin:0; /* 2 */
+    vertical-align:baseline; /* 3 */
+    *vertical-align:middle; /* 3 */
+}
+/* Addresses FF3/4 setting line-height on 'input' using !important in the UA stylesheet */
+button,
+input{
+    line-height:normal;
+}
+/*	1. Improves usability and consistency of cursor style between image-type 'input' and others
+    2. Corrects inability to style clickable 'input' types in iOS
+    3. Removes inner spacing in IE7 without affecting normal text inputs. Known issue:inner spacing remains in IE6
+*/
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"]{
+    cursor:pointer; /* 1 */
+    -webkit-appearance:button; /* 2 */
+    *overflow:visible;  /* 3 */
+}
+/*	1. Addresses box sizing set to content-box in IE8/9
+    2. Removes excess padding in IE8/9
+*/
+input[type="checkbox"],
+input[type="radio"]{
+    box-sizing:border-box; /* 1 */
+    padding:0; /* 2*/
+}
+/*  1. Addresses box sizing set to content-box in IE8/9
+    2. Removes excess padding in IE8/9
+    3. Removes excess padding in IE7 - Known issue: excess padding remains in IE6
+*/
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+    *height: 13px; /* 3 */
+    *width: 13px; /* 3 */
+}
+/*	1. Addresses appearance set to searchfield in S5, Chrome
+    2. Addresses box-sizing set to border-box in S5, Chrome (include -moz to future-proof)
+*/
+input[type="search"]{
+    -webkit-appearance:textfield; /* 1 */
+    -moz-box-sizing:content-box;
+    -webkit-box-sizing:content-box; /* 2 */
+    box-sizing:content-box;
+}
+/* Removes inner padding that is displayed in S5, Chrome on OS X */
+input[type="search"]::-webkit-search-decoration{
+    -webkit-appearance:none;
+}
+/* Removes inner padding and border in FF3+ - www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ */
+button::-moz-focus-inner,
+input::-moz-focus-inner{
+    border:0;
+    padding:0;
+}
+/*	1. Removes default vertical scrollbar in IE6/7/8/9
+    2. Improves readability and alignment in all browsers
+*/
+textarea{
+    overflow:auto; /* 1*/
+    vertical-align:top; /* 2*/
+}
+/* Tables - Remove most spacing between table cells */
+table{
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/*
+  Script: typo.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+*/
+
+/* Addresses default font-size */
+html {
+    font-size: 62.5%;
+    text-rendering: optimizeSpeed;
+}
+
+/* Addresses font-family inconsistency between 'textarea' and other form elements. */
+body,
+button,
+input,
+select,
+textarea{
+    font: 1.1em/1.3em Tahoma, Verdana, Arial, Helvetica, "Bitstream Vera Sans", sans-serif;
+}
+
+/* Addresses font sizes and margins set differently in IE6/7
+   Addresses font sizes within 'section' and 'article' in FF4+, Chrome, S5
+*/
+h1 {
+    font-size: 2em;
+    margin: 0 0 0.67em 0;
+    line-height: 1.5em;
+    font-weight: normal;
+}
+
+h2, h3, h4, h5, h6{
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 0.83em 0;
+}
+
+h3 {
+    font-size: 1.17em;
+    margin: 1em 0;
+}
+
+h4 {
+    font-size: 1em;
+    margin: 1.33em 0;
+}
+
+h5 {
+    font-size: 0.83em;
+    margin: 1.67em 0;
+}
+
+h6 {
+    font-size: 0.75em;
+    margin: 2.33em 0;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+ol,
+menu,
+dir {
+    list-style-type: disc;
+}
+ol ol {
+    list-style-type: circle;
+}
+ul,
+ul ul {
+    list-style-type: none;
+}
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate
+::-moz-selection { text-shadow: none; }
+::selection { text-shadow: none; }
+ */
+
+
+/*
+  Script: core.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+      <div class="[module|module[Platform]]">
+          <div class="moduleFrame [white-module|yellow-module|green-module|red-module|blue-module|orange-module]">
+              <div class="moduleHeaderContainer">
+                  <div class="moduleHeader [white|yellow|green|red|blue|orange]">
+              <div class="contentWrapper">
+                  <div class="moduleEdit">
+                  <div class="moduleContent">
+              <div class="moduleFooterContainer">
+                  <div class="moduleFooter">
+    (end code)
+
+  Target IE Version:
+    - background: #00f; for all browsers
+    - *background: #f00; for IE 7 and below
+    - _background: #f60; for IE 6 and below
+*/
+
+/* Module
+*******************************************************************************/
+
+.module {
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    text-size-adjust:none;
+    -webkit-text-size-adjust:none;
+    touch-callout: none;
+    -webkit-touch-callout: none;
+    tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.module a:link, .module a:visited {
+    text-decoration: none;
+    color: #333;
+}
+
+.module a:hover{
+    color: #F60;
+}
+
+
+.rtl .module {
+    text-align: right;
+}
+
+.module code {
+    display: block;
+    margin: 0 0 0 10px;
+    padding: 5px 0;
+}
+
+/* Module header
+*******************************************************************************/
+
+.moduleHeader {
+    margin: 0;
+    padding: 3px 0;
+    overflow: hidden;
+    position: relative;
+    background: #EFF5FF;
+    height: 1.8em;
+}
+
+.moduleHeader .icon {
+    float: left;
+    line-height: 1.8em;
+    padding: 2px 5px 0 3px;
+    border-bottom: none;
+}
+
+.moduleHeader .counter {
+    float: left;
+    padding: 0 5px 0 0;
+    font-size: 1em;
+    line-height: 1.8em;
+    font-weight: bold;
+    color: #900;
+}
+
+.moduleHeader .title {
+    display: block;
+    font-size: 1em;
+    line-height: 1.8em;
+    font-weight: bold;
+    color: #00368F;
+    padding: 0 20px 0 0;
+}
+
+.moduleHeader .title,
+.moduleHeader .title a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.moduleHeader .title a {
+    text-decoration: underline;
+}
+
+.moduleHeader .title a:hover {
+    color: #F60;
+}
+
+.moduleHeader .title em,
+.moduleHeader .title em a {
+    font-style: normal;
+    color: #36C;
+}
+
+/* Module header : links
+*******************************************************************************/
+
+.moduleHeader .share,
+.moduleHeader .edit,
+.moduleHeader .refresh,
+.moduleHeader .close,
+.moduleHeader .maximize,
+.moduleHeader .minimize,
+.moduleHeader .action {
+    cursor: pointer;
+    float: right;
+    padding: 0 1px 0 2px;
+    margin: 0 5px;
+    font-size: 1em;
+    line-height: 1.8em;
+    display: none;
+}
+
+.moduleHeader a {
+    color: #858585;
+    text-decoration: underline;
+}
+
+.moduleHeader a:hover {
+    color: #F60;
+}
+
+/* Edit content
+*******************************************************************************/
+
+.moduleEdit {
+    display: none;
+    padding: 10px;
+    background: #EFF5FF;
+    border-bottom: 1px solid #B9D0ED;
+    border-top: 1px solid #D3E2F4;
+}
+
+.moduleEdit .moduleInfos {
+    padding: 0 10px 10px;
+    text-align: right;
+}
+
+.rtl .moduleEdit .moduleInfos {
+    text-align: left;
+}
+
+.moduleEdit .moduleInfos p {
+    padding: 0;
+    margin: 0;
+}
+
+.onEdit .moduleEdit {
+    display: block;
+}
+
+/* Module content
+*******************************************************************************/
+
+.moduleWrapper {
+    position: relative;
+    clear-after: both;
+    overflow: hidden;
+    z-index:1;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.module.fullscreen-view .moduleWrapper {
+    overflow: auto;
+}
+
+/* Clear */
+/* Contain floats: h5bp.com/q */
+.moduleWrapper:before,
+.moduleWrapper:after {
+    content: "";
+    display: table;
+}
+
+.moduleWrapper:after {
+    clear: both;
+}
+
+.moduleWrapper {
+    zoom: 1;
+}
+
+.moduleLoading {
+    text-align: center;
+}
+
+.moduleContent {
+    padding: 7px;
+    background: #FFF;
+    position: relative;
+}
+
+.onEdit .moduleContent {
+    display: none;
+}
+
+/* Module Footer
+*******************************************************************************/
+
+.moduleFooter {
+    background: #FFF;
+    clear: both;
+    position: relative;
+    padding: 5px;
+    border-top: 1px solid #EEE;
+}
+
+.moduleFooter a {
+    text-decoration: none;
+}
+
+.moduleFooter .share {
+    float: right;
+    height: 14px;
+    background: transparent url(base/img/share.png) no-repeat 2px;
+    padding: 0 0 0 15px;
+}
+
+.moduleFooter .powered {
+    border-bottom: 1px solid #DDD;
+}
+
+
+/* IE Fixes
+*******************************************************************************/
+
+* html .moduleHeader {
+    height: 29px;
+}
+
+* html .moduleHeader .title {
+    position: absolute;
+    width: 70%;
+    top: 3px;
+    left: 25px;
+}
+
+.uwa-font-aa {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.uwa-font-noaa {
+    -webkit-font-smoothing: auto;
+    -moz-osx-font-smoothing: auto;
+}
+
+/*
+  Script: extras.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+    TODO
+    (end code)
+*/
+
+/* Import Controls Stylesheet */
+/*
+  Script: form.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+    <form xmlns="http://www.w3.org/1999/xhtml" class="uwa-form" id="9">
+        <fieldset>
+            <div class="field fieldText">
+                <label for="m_undefined_my_text">My text pref:</label>
+                <span>
+                    <input id="m_undefined_my_text" type="text" class="text" name="my_text" value="" />
+                </span>
+            </div>
+            <div class="field fieldPassword">
+                <label for="m_undefined_my_password">My password pref:</label>
+                <span>
+                    <input id="m_undefined_my_password" type="password" class="password" name="my_password" value="" />
+                </span>
+            </div>
+            <div class="field fieldBoolean">
+                <label for="m_undefined_my_checkbox">My checkbox pref</label>
+                <span>
+                    <input id="m_undefined_my_checkbox" type="checkbox" class="boolean unchecked" name="my_checkbox" />
+                </span>
+            </div>
+            <div class="field fieldRange">
+                <label for="m_undefined_my_range">My range pref:</label>
+                <span>
+                    <select id="m_undefined_my_range" class="range" name="my_range">
+                        <option value="5">5</option>
+                        <option value="10" selected="selected">10</option>
+                        <option value="15">15</option>
+                    </select>
+                </span>
+            </div>
+            <div class="field fieldList">
+                <label for="m_undefined_my_list">My list:</label>
+                <span>
+                    <select id="m_undefined_my_list" class="list" name="my_list">
+                        <option value="Value1" selected="selected">Label1</option>
+                        <option value="Value2">Label2</option>
+                        <option value="Value3">Label3</option>
+                    </select>
+                </span>
+            </div>
+            <div class="field fieldSubmit">
+                <span>
+                    <input id="m_undefined_done" type="submit" class="submit" name="done" value="Done" />
+                </span>
+            </div>
+        </fieldset>
+    </form>
+    (end code)
+*/
+.uwa-form {
+    margin: 0 auto;
+    width: 99%;
+}
+
+    .uwa-form fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .uwa-form .field {
+        position: relative;
+        clear: both;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .uwa-form .field:last-child {
+        margin-bottom: 0;
+    }
+
+    /* Clear */
+    /* Contain floats: h5bp.com/q */
+    .uwa-form .field:before,
+    .uwa-form .field:after {
+        content: "";
+        display: table;
+    }
+    .uwa-form .field:after {
+        clear: both;
+    }
+    .uwa-form .field {
+        zoom: 1;
+    }
+
+        .uwa-form label {
+            float:left;
+            display:block;
+            font-weight:bold;
+            text-align: right;
+            width: 30%;
+            padding: 5px 5px 0 0;
+        }
+
+        .rtl .uwa-form label {
+            float: right;
+            text-align: left;
+        }
+
+        .uwa-form input,
+        .uwa-form select {
+            float:left;
+            padding: 2px;
+            width: 58%;
+        }
+
+        .rtl .uwa-form input,
+        .rtl .uwa-form select {
+            float: right;
+        }
+
+        .uwa-form select {
+            width: 60%;
+            min-width: 155px;
+        }
+
+        .uwa-form .submit,
+        .uwa-form .button,
+        .uwa-form .reset {
+            float: none;
+            width: auto;
+            min-width: 0;
+            font-weight: bold;
+            text-align: center;
+            padding: 2px;
+        }
+
+    .uwa-form .fieldBoolean label {
+        text-align: left;
+        width: auto;
+        margin: 2px 0 0 25px;
+        padding: 0 0 0 30%;
+    }
+
+    .rtl .uwa-form .fieldBoolean label {
+        padding: 0 30% 0 0;
+        margin: 2px 25px 0 0;
+    }
+
+    .uwa-form .fieldBoolean span {
+        position: absolute;
+        vertical-align: middle;
+        left: 30%;
+    }
+
+    .rtl .uwa-form .fieldBoolean span {
+        left: 0;
+        right: 30%;
+    }
+
+    .uwa-form .fieldBoolean span input {
+        margin: 3px 5px 0 7px;
+        width: auto;
+        min-width: 0;
+    }
+
+    /* UIKit only */
+    .uwa-form-uikit .fieldBoolean label {
+        margin-left: 45px;
+    }
+
+    .rtl .uwa-form-uikit .fieldBoolean label {
+        margin-right: 45px;
+    }
+
+    .uwa-form-uikit .fieldBoolean .uwa-toggle {
+        margin: -1px 0 0 18px;
+    }
+
+    .rtl .uwa-form-uikit .fieldBoolean .uwa-toggle {
+        margin: -1px 18px 0 0;
+    }
+
+    .rtl .uwa-form .fieldBoolean span input {
+        margin: 3px 7px 0 5px;
+    }
+
+    .uwa-form .fieldSubmit span,
+    .uwa-form .fieldButton span,
+    .uwa-form .fieldReset span {
+        padding: 0 0 5px 7px;
+        margin-left: 30%;
+    }
+
+    .rtl .uwa-form .fieldSubmit span,
+    .rtl .uwa-form .fieldButton span,
+    .rtl .uwa-form .fieldReset span {
+        padding: 0 7px 5px 0;
+        margin-right: 30%;
+    }
+
+    .uwa-form .fieldHtml div {
+        padding: 5px;
+    }
+
+    .uwa-form .fieldTextarea textarea {
+        margin: 0 0 10px 10px;
+        width: 58%;
+    }
+
+    .uwa-form .fieldImg {
+        line-height: 0px;
+    }
+
+/* IE : fixe */
+.uwa-form .fieldBoolean label {
+    *margin: 5px 0 0 40px;
+    _margin: 5px 0 0 25px;
+    *text-align: right;
+}
+
+.uwa-form .fieldBoolean {
+    *padding: 5px 0 0 0;
+}
+
+.uwa-form select {
+   *width: 59%;
+}
+
+/*
+  Script: pager.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+    <div class="nv-pager">
+        <div class="loading">
+            <a class="prev disabled" href="#prev"><span>prev</span></a>
+            <a class="next" href="#next"><span>next</span></a>
+            <span class="pageLinks">
+                <a class="pageLink selected" href="#page_1">1</a>
+                <a class="pageLink" href="#page_2">2</a>
+                <a class="pageLink" href="#page_5">5</a>
+                <span class="comas"> ... </span>
+                <a class="pageLink" href="#page_17">17</a>
+          </span>
+        </div>
+    </div>
+    (end code)
+*/
+
+/*Pager*/
+.nv-pager {
+    text-align: center;
+    padding: 5px;
+    clear: both;
+}
+
+/* Clear */
+.nv-pager:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.nv-pager a:link,
+.nv-pager a:visited {
+    border: none;
+}
+
+.nv-pager a.disabled {
+    visibility: hidden;
+}
+
+/* Links: Next, Previous, More */
+.nv-pager a.next:hover,
+.nv-pager a.prev:hover {
+    cursor: pointer;
+    text-decoration: none;
+    border-bottom: none;
+    cursor: pointer;
+}
+
+.nv-pager a.prev {
+    float: left;
+    padding: 1px 0 0 20px;
+    background: transparent url(base/img/previous.gif) no-repeat left center;
+}
+
+.nv-pager a.more,
+.nv-pager a.next {
+    float: right;
+    padding: 1px 20px 0 0;
+    background: transparent url(base/img/next.gif) no-repeat right center;
+}
+
+
+/* Links: Rtl */
+.rtl .nv-pager a.more,
+.rtl .nv-pager a.next {
+    float: left;
+    padding: 1px 0 0 20px;
+    background: transparent url(base/img/previous.gif) no-repeat left center;
+}
+
+.rtl .nv-pager a.prev {
+    float: right;
+    padding: 1px 20px 0 0;
+    background: transparent url(base/img/next.gif) no-repeat right center;
+}
+
+/* Links: Loading */
+.nv-pager .loading a,
+.nv-pager .loading a:hover {
+    color: #CCC;
+}
+
+.nv-pager .loading a.next {
+    background: transparent url(base/img/ajax_loader.gif) right no-repeat;
+}
+
+/* Page Links */
+.nv-pager .pageLinks .selected {
+    font-weight:bold;
+    color: #F60;
+}
+
+.nv-pager .pageLinks .pageLink {
+    padding: 2px 5px;
+    margin: 0 3px 0 0;
+    border: 1px solid #EEE;
+    background: #FFF;
+}
+
+.nv-pager .pageLinks .pageLink:hover {
+    background: #EEE;
+}
+
+/* IE7 */
+/* TODO: Check if required */
+/*
+*:first-child+html .nv-pager {
+    display: inline-block;
+}
+
+*:first-child+html .nv-pager {
+    display: block;
+}
+
+* html .nv-pager{
+    height: 1%;
+}
+*/
+
+/*
+  Script: tabview.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  HTML skeleton:
+  (start code)
+    <div class="uwa-tabview">
+      [<div class="uwa-carousel">]
+          <ul class="uwa-tablist">
+              <li class="uwa-tab [uwa-tab-dropdown][selected]"><a href="#tab1"><span class="title">Some text</span></a></li>
+              <li class="uwa-tab [uwa-tab-dropdown]"><a href="#tab2"><span class="title">An image</span></a></li>
+              <li class="uwa-tab [uwa-tab-dropdown]"><a href="#tab3"><span class="title">A feed</span></a></li>
+          </ul>
+          [<a class="uwa-carousel-button-next"><span></span></a>]
+          [<a class="uwa-carousel-button-previous"><span></span></a>]
+      [</div>]
+      <div class="uwa-tabview-panel">
+          <div id="tab1" class="uwa-tab-panel [selected]">Some Content...</div>
+          <div id="tab2" class="uwa-tab-panel [hidden]">Loading...</div>
+          <div id="tab3" class="uwa-tab-panel [hidden]">Loading...</div>
+       </div>
+    </div>
+  (end code)
+*/
+
+.hidden, [hidden] { display: none !important; }
+
+.uwa-tabview {
+    position: relative;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.uwa-tabview .disabled {
+    opacity: 0.3;
+    filter: alpha(opacity=30); /* IE7-IE8 */
+    background-color: transparent;
+    cursor: default;
+}
+
+/*------------------------------------------------------*/
+/* Mode singeline
+/*------------------------------------------------------*/
+
+.uwa-tabview[scrollable] > .uwa-carousel {
+    position: relative;
+    padding: 0;
+}
+.uwa-tabview[scrollable] .uwa-tablist {
+    white-space: nowrap;
+}
+.uwa-tabview > .uwa-carousel[overflow="true"] {
+    padding: 0 20px;
+}
+.uwa-tabview > .uwa-carousel[overflow="true"] > .uwa-carousel-button-next,
+.uwa-tabview > .uwa-carousel[overflow="true"] > .uwa-carousel-button-previous {
+    visibility: visible;
+}
+
+/*------------------------------------------------------*/
+/* Tab list
+/*------------------------------------------------------*/
+
+.uwa-tablist {
+    position: relative;
+    zoom: 1;
+    margin: 0;
+    padding: 0 2px;
+}
+
+.uwa-tabview .scrollable-x .uwa-tablist {
+    padding: 0;
+}
+
+.uwa-tab {
+    display: inline-block;
+    *display: inline; /* IE7 */
+    zoom: 1;
+    padding: 0;
+    margin: 0 1px -1px; /* negative margin to hide double border when there is more than one row of tabs */
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.uwa-tab > a,
+.uwa-tab > a:link,
+.uwa-tab > a:visited {
+    display: inline-block;
+    *display: inline; /* IE7 */
+    zoom: 1;
+    white-space: nowrap;
+    padding: 6px 8px;
+    outline: 0;
+    text-decoration: none;
+    border: 1px solid #CACACA;
+    font-weight: bold;
+    background: #FFF;
+    color: #888;
+}
+
+.uwa-tab.open > a,
+.uwa-tab.open > a:hover,
+.uwa-tab.selected > a {
+    background: #ECECEC;
+    color: #333;
+}
+
+.uwa-tab .icon,
+.uwa-tab .unread,
+.uwa-tab .title,
+.uwa-tab .dropdown {
+    display: inline-block;
+    *display: inline; /* IE7 */
+    zoom: 1;
+}
+
+.uwa-tab.plus img {
+    vertical-align: middle;
+}
+
+.uwa-tab .unread {
+    direction: ltr;
+    unicode-bidi: bidi-override;
+    margin: 0 3px;
+    font-size: 0.8em;
+    color: #990000;
+}
+
+.uwa-tab .icon {
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.uwa-tab .dropdown {
+    width: 14px;
+    height: 14px;
+    margin: 0 0 0 6px;
+    background: transparent url(base/img/menudown.png) no-repeat center left;
+    vertical-align: bottom;
+}
+
+.rtl .uwa-tab .dropdown {
+    background: transparent url(base/img/menudown_rtl.png) no-repeat 100% 50%;
+    padding: 0 0 1px 12px;
+    margin: 0 4px 0 0;
+}
+
+/*------------------------------------------------------*/
+/* Tab panel
+/*------------------------------------------------------*/
+
+.uwa-tab-panel {
+    padding: 5px 10px 10px 10px;
+    border: 1px solid #CACACA;
+    background-color: #fff;
+}
+
+/*------------------------------------------------------*/
+/* Tab scroll buttons
+/*------------------------------------------------------*/
+
+.uwa-tabview .uwa-carousel-button {
+    visibility: hidden;
+    -webkit-box-sizing: border-box; /* iOS4, Android 2.3 */
+       -moz-box-sizing: border-box; /* Firefox 1+ */
+            box-sizing: border-box; /* Chrome, IE8, Opera, Safari 5.1*/
+    position: absolute;
+    background-color: #FFF;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+         -m-user-select: none;
+            user-select: none;
+
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 20px;
+    z-index: 3;
+}
+.uwa-tabview .uwa-carousel-button:hover {
+    background-color: #F1F1F1;
+}
+
+.uwa-tabview .uwa-carousel-button > span {
+    -webkit-box-sizing: border-box; /* iOS4, Android 2.3 */
+       -moz-box-sizing: border-box; /* Firefox 1+ */
+            box-sizing: border-box; /* Chrome, IE8, Opera, Safari 5.1*/
+
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.uwa-tabview .uwa-carousel-button-next {
+    right: 0;
+}
+.uwa-tabview .uwa-carousel-button-next > span {
+    background: transparent url(base/img/next.gif) right center no-repeat;
+}
+
+.uwa-tabview .uwa-carousel-button-previous {
+    left: 0;
+}
+.uwa-tabview .uwa-carousel-button-previous > span {
+    background: transparent url(base/img/previous.gif) left center no-repeat;
+}
+
+
+/*------------------------------------------------------*/
+/* Tab scroll buttons shadows
+/*------------------------------------------------------*/
+
+.uwa-tabview .uwa-carousel-button-previous:after,
+.uwa-tabview .uwa-carousel-button-next:before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    width: 14px;
+    height: 100%;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    opacity: 1;
+    pointer-events: none;
+    -webkit-transition: opacity 0.6s ease-out;
+       -moz-transition: opacity 0.6s ease-out; /* Firefox 4-15 */
+         -o-transition: opacity 0.6s ease-out; /* Opera 10.5–12.00 */
+            transition: opacity 0.6s ease-out; /* Firefox 16+, Opera 12.50+ */
+}
+.uwa-tabview .uwa-carousel-button-previous:after {
+    left: 19px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAjCAYAAACkejs5AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA90lEQVQ4y5VU0Q4CMQgrBU38/w+eL3cGG9g4k8VEV2hLBwF8ALwBOADD8MPrjAEZGBfQnnb06/BpxwzktEC+uNLvR9pM3Vy0rhPwlQwaO5zHoaAtXW4OdnSzq5Y6YWqOJbqY6GTR1USjncZB6czdWFh0PRqjQGvo2SSrWR93OjPQi/fZdr4veVOAO6psLttEo2ZV6XpFFY3GY8hdKIe4bEUk/56UBsCKAqt7VpG+s66l+WUxy5DAe7FCjRJq3UFe6DRdHV0IvApCB/JmM5gC1dlo1iY7czjILXWO9xii0KaUSbHdpUBXaLGIVDR7NofBugXVrZLff19wBQuHPK6xtQAAAABJRU5ErkJggg==);
+}
+.uwa-tabview .uwa-carousel-button-next:before {
+    right: 19px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAjCAYAAACkejs5AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA80lEQVQ4y5VUAQrEMAhb0h73/xfv6DHBuehsQdZBY6KmxdFbuGJc8eWxtxZ4YSY3Qcb62QHSSW0BTR48mA2QYm7V6NnajBG8QPONEQVzyXg6eTFGhxHCOex2NYJTIMTXOso3RorhsytVslXNgTC3ZwWLW2AHI6uUCrFnkFrW+Bi4mdvY2agvJliBmYwA4X/Lq/I6WWIWA/ednCEBsq7aAdVVWI0oZjldN71zbsB4GAE0PCuFW27XR/j00RwIQw/Bxgx4JKCHVCSPrtU34ww9Iwt7qVrBYCu4zCMYwM/xvzkLiXIUvsYzuU5U9Sl/HskDFT2MHzgHBZ8JToh3AAAAAElFTkSuQmCC);
+}
+.uwa-tabview .uwa-carousel-button-next.disabled:before,
+.uwa-tabview .uwa-carousel-button-previous.disabled:after {
+    opacity: 0;
+    filter: alpha(opacity=0); /* IE7-IE8 */
+    -webkit-transition: opacity 0.6s ease-out;
+       -moz-transition: opacity 0.6s ease-out; /* Firefox 4-15 */
+         -o-transition: opacity 0.6s ease-out; /* Opera 10.5–12.00 */
+            transition: opacity 0.6s ease-out; /* Firefox 16+, Opera 12.50+ */
+
+    /* IE7-9 hack: no support for opacity on pseudo-element */
+    visibility: hidden\9;
+}
+
+
+/*------------------------------------------------------*/
+/* Tab dropdown
+/*------------------------------------------------------*/
+
+.uwa-tab-dropdown {
+    position: relative;
+}
+.uwa-tab-dropdown ul {
+    position: absolute;
+    z-index: 2001;
+    display: none;
+}
+.uwa-tab-dropdown.open ul {
+    display: block;
+}
+
+
+/*
+  Script: feedview.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+    TODO
+    (end code)
+*/
+
+/* Common feedview style
+{{{ */
+.uwa-feedview {
+    overflow: hidden;
+    position: relative;
+}
+
+.uwa-feedview a:link,
+.uwa-feedview a:active,
+.uwa-feedview a {
+    text-decoration: none;
+}
+
+.uwa-feedview .scrollarea {
+    overflow: hidden;
+    height: 325px;
+}
+
+/* itemsActions */
+.uwa-feedview .actions {
+    display: none;
+    margin-top: 7px;
+    padding-bottom: 7px;
+    text-align: center;
+}
+
+.uwa-feedview .action {
+    margin: 0 3px 0 3px;
+    padding: 3px;
+    display: inline-block;
+    text-align: center;
+    background-color: #f5f5f5;
+    box-shadow: 1px 1px 3px #ccc;
+    border-radius: 1px;
+    *display: inline;
+    zoom: 1;
+}
+
+/* item infos and top infos*/
+.uwa-feedview .infos .title {
+    text-align: left;
+}
+
+.uwa-feedview .infos .title a {
+    color: #3B3B3B;
+    font-size: 1em;
+    line-height: 1.2em;
+    font-weight: bold;
+}
+
+.uwa-feedview .infos .date {
+    color: #7D7D7D;
+}
+
+
+/* item */
+.uwa-feedview .item {
+    position: relative;
+    cursor:pointer;
+}
+
+.uwa-feedview .item a {
+    display: block;
+}
+
+.uwa-feedview .item .content {
+   overflow: hidden;
+}
+
+.uwa-feedview .item .description div {
+    height: 3.4em;
+    line-height: 1.1em;
+    font-size: 1em;
+    overflow: hidden;
+}
+
+.uwa-feedview .item .image {
+    background-color: #FFF;
+    border: 1px solid #B3B3B3;
+}
+
+
+.uwa-feedview .item .image a {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border: 2px solid #FFF;
+    background-color: #FFF;
+}
+
+.uwa-feedview .active .image a  {
+    border: 1px solid #FFF;
+    width: 58px;
+    height: 58px;
+}
+
+.uwa-feedview .active .image {
+    border: 3px solid #B3B3B3;
+}
+
+/* top */
+.uwa-feedview .top {
+    padding: 5px 5px 0 8px;
+    position: relative;
+}
+
+.uwa-feedview .top .actions {
+    text-align: right;
+}
+
+.uwa-feedview .top .actions {
+    padding: 2px 2px 0 2px;
+}
+
+.uwa-feedview .top .action {
+    background-color: #E7E7E7;
+}
+
+.uwa-feedview .top .item .image {
+    position: relative;
+    margin: 0 0 2px 0;
+}
+
+.uwa-feedview .top .item .image a {
+    height: 170px;
+    width: auto;
+}
+
+.uwa-feedview .top .item {
+    height: auto;
+    padding: 0;
+    border-bottom: none;
+}
+
+.uwa-feedview .top .item .content {
+    padding: 0;
+    height: auto;
+}
+
+.uwa-feedview .top .item .description {
+    padding: 2px 5px;
+}
+
+.uwa-feedview .top .item .description div {
+    height: 3.5em;
+    line-height: 1.2em;
+    font-size: 1.2em;
+}
+
+.uwa-feedview .top .infos {
+    position: absolute;
+    top: 99px;
+    margin: 0 0 0 -6px;
+    width: 100%;
+}
+
+.uwa-feedview .top .infos .title {
+    height: auto;
+}
+
+.uwa-feedview .top .infos .title a,
+.uwa-feedview .top .infos .date span {
+    padding: 2px 2px 2px 10px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+}
+
+.uwa-feedview .top .infos .title a {
+    background-color: #414141;
+    font-size: 1.3em;
+    line-height: 1.3em;
+    color: #FFF;
+    width: 80%;
+}
+
+.uwa-feedview .top .infos .date {
+    margin: 5px 0 0 0;
+}
+
+.uwa-feedview .top .infos .date span {
+    background-color: #6F6F6F;
+    color: #FFF;
+    font-size: 0.9em;
+    line-height: 0.9em;
+    font-weight: bold;
+}
+
+.uwa-feedview .top .separator {
+    background: transparent url(base/img/triangles.png) no-repeat -3px -6px;
+    height: 8px;
+    width: 8px;
+}
+
+.uwa-feedview .top .date .separator {
+    background: transparent url(base/img/triangles.png) no-repeat -3px -19px;
+}
+
+/* Normal
+{{{ */
+
+.uwa-feedview-normal .items .odd {
+    background-color: #E5E5E5;
+}
+
+.uwa-feedview-normal .infos .title {
+    overflow: hidden;
+}
+
+.uwa-feedview-normal .item .image {
+    position: absolute;
+}
+
+.uwa-feedview-normal .item {
+    border-top: 1px solid #FFF;
+    border-bottom: 1px solid #C4C4C4;
+    height: 66px;
+    padding: 5px;
+}
+
+.uwa-feedview-normal .item .content {
+    padding-left: 75px;
+    height: 65px;
+}
+
+.rtl .uwa-feedview-normal .item .content {
+    padding-left: 0;
+    padding-right: 75px;
+}
+
+/*}}}*/
+
+/* Scoop
+{{{ */
+.uwa-feedview-scoop .scrollarea {
+    height: 220px;
+}
+/*}}}*/
+
+/* Simplelist
+{{{ */
+
+.uwa-feedview-simplelist .item {
+    border-bottom: 1px dotted #C4C4C4;
+}
+
+.uwa-feedview-simplelist .infos {
+    position: relative;
+    padding: 2px;
+}
+
+.uwa-feedview-simplelist .active .infos .title a {
+    font-weight: bold;
+}
+
+.uwa-feedview-simplelist .infos .title a,
+.uwa-feedview-simplelist .infos .date {
+    height: 1.6em;
+    font-size: 1em;
+    line-height: 1.4em;
+    font-weight: normal;
+
+}
+
+.uwa-feedview-simplelist .infos .title a {
+    white-space: nowrap;
+    width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.uwa-feedview-simplelist .infos:hover  {
+    background: #E2E2E2;
+}
+
+.uwa-feedview-simplelist .infos .date {
+    position: absolute;
+    padding: 2px 15px 2px;
+    top: 0;
+    right: 0;
+    text-align: right;
+
+    white-space: nowrap;
+    width: 30%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Clear */
+/* Contain floats: h5bp.com/q */
+.uwa-feedview-simplelist .infos:before, .uwa-feedview-simplelist .infos:after { content: ""; display: table; }
+.uwa-feedview-simplelist .infos:after { clear: both; }
+.uwa-feedview-simplelist .infos { zoom: 1; }
+
+/*}}}*/
+
+/* Carousel
+{{{ */
+.uwa-feedview-carousel .scrollarea {
+    height: 80px;
+    padding: 0 5px;
+    margin: 0;
+}
+
+.uwa-feedview-carousel .scrollarea .items {
+    padding: 0;
+}
+
+.uwa-feedview-carousel .items {
+    position: relative;
+}
+
+/* Clear */
+/* Contain floats: h5bp.com/q */
+.uwa-feedview-carousel .items:before, .uwa-feedview-simplelist .infos:after { content: ""; display: table; }
+.uwa-feedview-carousel .items:after { clear: both; }
+.uwa-feedview-carousel .items { zoom: 1; }
+
+.uwa-feedview-carousel .items .item,
+.uwa-feedview-carousel .items .actions {
+    float: left;
+}
+
+.uwa-feedview-carousel .items .item .image {
+    margin: 2px;
+}
+
+.uwa-feedview-carousel .items .item .infos,
+.uwa-feedview-carousel .items .item .description {
+    display: none;
+}
+/*}}}*/
+
+/* Gallery
+{{{ */
+.uwa-feedview-gallery .top .description {
+    display: none;
+}
+
+.uwa-feedview-gallery .top .item .image a {
+    height: 270px;
+}
+
+.uwa-feedview-gallery .top .infos {
+    position: relative;
+    top: auto;
+    margin: 0;
+}
+
+.uwa-feedview-gallery .top .separator {
+    display: none;
+}
+
+.uwa-feedview-gallery .top .infos {
+    padding: 5px;
+}
+
+.uwa-feedview-gallery .top .infos .date  {
+    margin: 0;
+}
+
+.uwa-feedview-gallery .top .infos .title a,
+.uwa-feedview-gallery .top .infos .date span {
+    text-shadow: none;
+    box-shadow: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.uwa-feedview-gallery .top .infos .title a {
+    width: auto;
+    color: #3B3B3B;
+    line-height: 1.2em;
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+.uwa-feedview-gallery .top .infos .date span {
+    color: #7D7D7D;
+    font-weight: normal;
+}
+/*}}}*/
+
+/* Headline
+{{{ */
+
+.uwa-feedview-headline {
+    padding: 5px 0 0 5px;
+}
+
+.uwa-feedview-headline .scrollarea .items {
+    padding: 0 10px 0 0;
+}
+
+.uwa-feedview-headline .infos {
+    padding: 1em;
+}
+
+.uwa-feedview-headline .items .item {
+    margin-top: 5px;
+    background: white;
+}
+
+.uwa-feedview-headline .items .first {
+    margin-top: 0;
+}
+
+.uwa-feedview-headline .infos .title {
+    height: 6em;
+    font-size: 1.4em;
+    overflow: hidden;
+}
+
+.uwa-feedview-headline .infos .title a {
+    color: #FFF;
+}
+
+.uwa-feedview-headline .infos .date {
+    font-weight: bold;
+    color: #BFB3B3;
+}
+
+.uwa-feedview-headline .items .item .description {
+    display: none;
+}
+
+.uwa-feedview-headline .item .image {
+    padding: 2px;
+    border: 1px solid #B3B3B3;
+}
+
+.uwa-feedview-headline .items .content {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    bottom: 0;
+    width: 38.2%;
+    min-width: 130px;
+    height: 130px;
+    background: transparent; /* IE */
+    background: rgba(0, 0, 0, 0.6); /* real browsers */
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);
+    zoom: 1;
+}
+
+.uwa-feedview-headline .item .image a {
+    border: none;
+    width: 100%;
+    height: 130px;
+    overflow: hidden;
+}
+/*}}}*/
+
+
+/* Ticker
+{{{ */
+.uwa-feedview-ticker {
+    height: 80px;
+}
+/*}}}*/
+
+
+/* Channel
+{{{ */
+.uwa-feedview-channel .hentry {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    padding-top: 1px;
+    padding-left: 1px;
+    border: 1px solid  #c4c4c4;
+    z-index: 2;
+    background: #E9E9E9;
+}
+
+.uwa-feedview-channel .items .item .entry-image {
+    width: 179px;
+    height: 179px;
+    overflow: hidden;
+}
+.uwa-feedview-channel .item.read {
+    opacity: 0.65;
+    -moz-opacity: 0.65;
+    filter:alpha(opacity=0.65)
+}
+.uwa-feedview-channel .scrollarea {
+    height: 220px;
+}
+.uwa-feedview-channel .hentry .entry-image .entry-title {
+    padding: 0 5px;
+    height: 25px;
+    line-height: 25px;
+    white-space: nowrap;
+    position: absolute;
+    z-index: 4;
+    bottom: 1px;
+    -webkit-transition: height 500ms;
+    -moz-transition: height 500ms;
+    background: black;
+    color: white;
+    opacity: 0.8;
+    width: 169px;
+    font-family: tahoma, serif;
+    font-weight: bold;
+}
+.uwa-feedview-channel .hentry .entry-image .entry-title.no-image,
+.uwa-feedview-channel .hentry:hover .entry-image .entry-title.no-image {
+    height: 179px;
+    line-height: 1.2em;
+    white-space: normal;
+    overflow: hidden;
+    opacity: 1;
+}
+.uwa-feedview-channel .hentry .entry-image .entry-title .title {
+    display: block;
+    width: 156px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    font-size: 12px;
+}
+.uwa-feedview-channel .hentry:hover .entry-image .entry-title .title,
+.uwa-feedview-channel .hentry .entry-image .entry-title.no-image .title,
+.uwa-feedview-channel .hentry:hover .entry-image .entry-title.no-image .title {
+    line-height: 1.5em;
+    padding-top: 12px;
+    padding-left: 6px;
+    height: 70px;
+}
+.uwa-feedview-channel .hentry:hover .entry-image .entry-title {
+    height: 90px;
+    line-height: 1.2em;
+    white-space: normal;
+    width: 169px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+.uwa-feedview-channel .item.read .hentry .entry-image .entry-title .entry-description {
+    color: #DCDCDC;
+}
+.uwa-feedview-channel .hentry .entry-image .entry-title .entry-description {
+    font-family: tahoma,serif;
+    font-size: 10px;
+    color: #BABABA;
+    display: block;
+    margin-top: 20px;
+    padding-left: 6px;
+    padding-right: 25px;
+    height: 72px;
+    overflow: hidden;
+    line-height: 1.4em;
+}
+.uwa-feedview-channel .hentry .entry-image .entry-share {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: transparent url(base/img/shareicon.png) top no-repeat;
+    right: 5px;
+    bottom: 97px;
+    opacity: 0;
+    background-color: rgba(83,83,83,0.8);
+    border-radius: 2px;
+    -webkit-transition: opacity 500ms;
+    -moz-transition: opacity 500ms;
+}
+.uwa-feedview-channel .hentry .entry-image .entry-share.no-image {
+    bottom: 5px;
+    z-index: 5;
+}
+.uwa-feedview-channel .hentry:hover .entry-image .entry-share {
+    opacity: 1;
+}
+.uwa-feedview-channel .hentry:hover .entry-image .entry-share.no-image {
+    bottom: 5px;
+    opacity: 1;
+}
+.uwa-feedview-channel .active .entry-image {
+    border: none;
+}
+.uwa-feedview-channel  .item {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.uwa-feedview-channel .item-date {
+    color: #898989;
+    float: left;
+    padding: 0 5px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 0.9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+.uwa-feedview-channel  .item-dragAndFollow {
+    float: right;
+    width: 16px;
+    height: 16px;
+    background: transparent url(base/img/dragandfollow.png) top no-repeat;
+    top: 2px;
+    position: relative;
+}
+/*}}}*/
+
+/*
+  Script: accordion.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+    TODO
+    (end code)
+
+  TODO:
+    CSS gradients for all web browsers: http://robertnyman.com/2010/02/15/css-gradients-for-all-web-browsers-without-using-images/
+*/
+
+.uwa-accordion {
+    padding:0;
+    margin:0;
+}
+.uwa-accordion-item .uwa-accordion-content{
+    display:none;
+}
+.uwa-accordion-item.selected .uwa-accordion-content{
+    display: block;
+}
+
+.uwa-accordion .uwa-accordion-item {
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+
+.uwa-accordion .uwa-accordion-item {
+    background: none;
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(210,210,210)),
+        color-stop(1, rgb(240,240,240))
+    );
+
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(210,210,210) 0%,
+        rgb(240,240,240) 100%
+    );
+
+    background-color:#ddd; /* fallback for gradient non compatible browser */
+}
+
+.uwa-accordion-item .uwa-accordion-item-title {
+
+    line-height: 1.5em;
+    display:block;
+    background: url(base/img/open_close_arrow.png) no-repeat 5px 7px;
+    padding:2px 0 2px 18px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    border-top:1px solid #fff;
+    border-bottom:1px solid #aaa;
+}
+
+.uwa-accordion-item .uwa-accordion-item-title:hover {
+    color:#222;
+ }
+
+.uwa-accordion .uwa-accordion-item.selected .uwa-accordion-item-title {
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #666;
+    background-position: 5px -24px;
+    color:white;
+}
+
+.uwa-accordion .uwa-accordion-item.selected {
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(140,140,140)),
+        color-stop(1, rgb(190,190,190))
+    );
+
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(140,140,140) 0%,
+        rgb(190,190,190) 100%
+    );
+
+    background-color:#999; /* fallback for gradient non compatible browser */
+}
+
+.uwa-accordion-content {
+    padding:4px;
+    line-height: 1.3em;
+    border-bottom:1px solid #ddd;
+    background-color:#eee; /* fallback for gradient non compatible browser */
+}
+
+/*
+  Script: segmented.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+    TODO
+    (end code)
+*/
+
+ul.uwa-segmented {
+    padding:0;
+    margin:0;
+    list-style-type: none;
+}
+
+ul.uwa-segmented:after{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+ul.uwa-segmented li {
+    float:left;
+    margin:0;
+    padding:0;
+    background:white;
+}
+
+ul.uwa-segmented .uwa-segmented-item-title {
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(220,220,220)),
+        color-stop(1, rgb(255,255,255))
+    );
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(220,220,220) 0%,
+        rgb(255,255,255) 100%
+    );
+    border: 1px solid #939393;
+    border-left: none;
+
+    background-color:#eee; /* fallback for gradient non compatible browser */
+}
+
+.uwa-segmented .uwa-segmented-item-first a {
+    border: 1px solid #939393;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    -moz-border-radius-topleft : 4px;
+    -moz-border-radius-bottomleft : 4px;
+    -webkit-border-top-left-radius : 4px;
+    -webkit-border-bottom-left-radius : 4px;
+}
+
+.uwa-segmented .uwa-segmented-item-last a {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -moz-border-radius-topright : 4px;
+    -moz-border-radius-bottomright : 4px;
+    -webkit-border-top-right-radius : 4px;
+    -webkit-border-bottom-right-radius : 4px;
+}
+
+.uwa-segmented .uwa-segmented-title,
+.uwa-segmented li a,
+.uwa-segmented li span{
+    display: block;
+    line-height: 21px;
+}
+.uwa-segmented li.uwa-segmented-title {
+    background:none;
+    font-weight:bold;
+}
+
+.uwa-segmented-title span,
+.uwa-segmented li a:hover,
+.uwa-segmented li a {
+    padding: 0 5px 0 5px;
+    color:#666;
+}
+li.uwa-segmented-title{
+    border:none;
+    text-align:left;
+}
+.uwa-segmented li a {
+    border:none;
+    text-align: center;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.uwa-segmented li a:hover {
+    color:#222;
+}
+
+.uwa-segmented li.selected a {
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(200,200,200)),
+        color-stop(1, rgb(120,120,120))
+    );
+
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(200,200,200) 0%,
+        rgb(120,120,120) 100%
+    );
+
+    background-color:#777; /* fallback for gradient non compatible browser */
+}
+
+.uwa-segmented li.selected a {
+    color:white;
+}
+
+/*
+  Script: feedview.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+    TODO
+    (end code)
+*/
+.uwa-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    /* Fallback for web browsers that doesn't support RGBa */
+    background: rgb(0, 0, 0);
+    /* RGBa with 0.8 opacity */
+    background: rgba(0, 0, 0, 0.8);
+    /* For IE 5.5 - 7*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc000000, endColorstr=#cc000000);
+    /* For IE 8*/
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#cc000000, endColorstr=#cc000000)";
+}
+
+/*
+  Script: audioplayer.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+    TODO
+    (end code)
+*/
+
+.uwa-audioplayer {
+    background: #D8D9D6;
+    color: #FFF;
+    margin: 0 auto;
+    padding: 0;
+    height: 36px;
+    clear: both;
+    width: 100%;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #D5D4D4;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.uwa-audioplayer .play-pause {
+    background: transparent url('base/img/audioplayer_play.png') no-repeat scroll center center;
+    cursor: pointer;
+    height: 36px;
+    width: 36px;
+    float: left;
+    border-right: 1px solid #CCCCCB;
+}
+.uwa-audioplayer.playing .play-pause {
+    background-image: url('base/img/audioplayer_pause.png');
+}
+.uwa-audioplayer.waiting .play-pause {
+    background-image: url('base/img/audioplayer_loading.gif');
+}
+.uwa-audioplayer .scrubber-wrapper {
+    margin: 0 110px 0px 37px;
+    height: 36px;
+    border-left: 1px solid #E4E3E3;
+}
+.uwa-audioplayer .scrubber {
+    background: #CCC;
+    height: 8px;
+    top: 13px;
+    margin: 0 15px;
+    position: relative;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    border: 2px solid #E5E4E2;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.uwa-audioplayer .controls-right,
+.uwa-audioplayer .controls-times {
+    padding: 0;
+    float: right;
+    height: 36px;
+    line-height: 36px;
+    margin: 0;
+    padding: 0 6px 0 6px;
+    font-size: 13px;
+    /*text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);*/
+}
+.uwa-audioplayer .played,
+.uwa-audioplayer .duration {
+    padding: 0 4px;
+}
+.uwa-audioplayer .close {
+    width: 20px;
+    height: 36px;
+    background: transparent url('base/img/audioplayer_close.png') center center no-repeat;
+}
+.uwa-audioplayer .played {
+    padding: 0 4px 0 0;
+    border-right: 1px solid #CCCCCB;
+    color: #555;
+}
+.uwa-audioplayer .duration {
+    padding: 0 0 0 4px;
+    border-left: 1px solid #E4E3E3;
+    color: #888;
+}
+
+.uwa-audioplayer .progress,
+.uwa-audioplayer .loaded,
+.uwa-audioplayer .handle {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.uwa-audioplayer .progress {
+    background: #AC0 url('base/img/audioplayer_progress.png') left center repeat-x;
+    z-index: 2;
+    height: 8px;
+}
+.uwa-audioplayer .loaded {
+    background: #9C9D98;
+    height: 8px;
+}
+.uwa-audioplayer.playing .handle,
+.uwa-audioplayer.paused .handle {
+    display: block;
+}
+.uwa-audioplayer .handle {
+    background: transparent url('base/img/audioplayer_handle.png') center center no-repeat;
+    width: 26px;
+    height: 14px;
+    z-index: 3;
+    margin-left: -13px;
+    top: -3px;
+    display: none;
+    cursor: pointer;
+}
+
+/*
+  Script: searchform.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+    <div class="search uwa-searchform">
+        <form>
+            <img class="favicon" src="/lib/c/UWA/assets/css/base/img/s.gif" width="16" height="16" style="display: none;" />
+            <input class="search" type="text" value="" />
+            <img class="clear" alt="Clear" title="Clear" src="/lib/c/UWA/assets/css/base/img/clear.gif" style="display: none;" />
+            <input class="submit" type="submit" value="Search" />
+            <input class="check" type="checkbox" title="" value="" />
+            [<ul class="uwa-popup-menu">]
+                <li class="uwa-popup-menu-item"><a href="#history:France"><span>France</span></a></li>
+                <li class="uwa-popup-menu-item"><a href="#history:Usa"><span>Usa</span></a></li>
+                <li class="uwa-popup-menu-item action"><a>Clear recent searches</a></li>
+            [</ul>]
+        </form>
+    </div>
+    (end code)
+*/
+
+.uwa-searchform {
+    text-align: center;
+    margin-bottom: 5px;
+}
+    .uwa-searchform form {
+        padding: 0 16px;
+        display: block;
+        position: relative;
+    }
+
+    .uwa-searchform img.favicon {
+        vertical-align: bottom;
+        margin: 0 3px 3px 3px;
+        height: 16px;
+    }
+
+    .uwa-searchform img.clear {
+        vertical-align: middle;
+        margin: 0 0 0 -21px;
+        cursor: pointer;
+    }
+
+    * html .uwa-searchform img.clear {
+        margin: -5px 0 0 -20px;
+    }
+
+    .uwa-searchform input.search {
+        background: url('base/img/search.png') no-repeat scroll top left transparent;
+        margin: 0 3px;
+        padding: 3px 3px 3px 18px;
+        border: 1px solid #CCC;
+        text-align: left;
+        display: inline;
+        width: 155px;
+    }
+
+    .uwa-searchform input.check {
+        margin: -1px 0 0 0;
+        border: 0;
+        position: absolute;
+        top: 5px;
+    }
+
+    * html .uwa-searchform input.check {
+        margin: -2px 0 0 0;
+    }
+
+    * html .uwa-searchform input.search {
+        padding: 3px 0 0 18px;
+        height: 21px;
+    }
+
+    .uwa-searchform .submit {
+        margin-left: 2px;
+    }
+
+    .uwa-searchform input.submit {
+        margin-left: 5px;
+    }
+
+    .uwa-searchform .submit.uwa-icon {
+        height: 15px;
+
+        color: #8c8c8c;
+
+        cursor: pointer;
+    }
+
+    .uwa-searchform .submit.uwa-icon:before {
+        top: 26%;
+    }
+
+    .uwa-searchform .submit.uwa-icon:hover {
+        color: #656565;
+    }
+
+    .uwa-searchform .submit.uwa-icon:active {
+        color: #333;
+    }
+
+
+
+/*
+  Script: autocomplete.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+    TODO
+    (end code)
+*/
+
+/* Autocomplete */
+.nv-autocomplete {
+    padding:0;
+    margin:0;
+    position:relative;
+}
+
+.nv-autocomplete .nv-autocomplete-searchbox {
+    border:1px solid #ddd;
+    margin:0;
+    padding:0;
+    width:100%;
+    background:white;
+}
+
+.nv-autocomplete .nv-autocomplete-searchbox input {
+    padding:4px 1%;
+    margin:0;
+    border:0;
+    width:98%;
+}
+
+.nv-autocomplete .nv-autocomplete-suggests {
+    position:absolute;
+    background:white;
+    border:1px solid #ddd;
+    overflow-y: auto;
+    display:none;
+}
+
+.nv-autocomplete .nv-autocomplete-suggests ul {
+    margin:0;
+    padding:0;
+}
+
+    .nv-autocomplete .nv-autocomplete-suggests li {
+        margin:0;
+        padding:0;
+        background:none;
+        list-style:none;
+    }
+
+    .nv-autocomplete .nv-autocomplete-suggests a {
+        padding:3px;
+        margin:0;
+        cursor: pointer;
+        display:block;
+        white-space: nowrap;
+        color: #888;
+    }
+    .nv-autocomplete .nv-autocomplete-suggests a:hover {
+        background:#eee;
+        color: #333;
+    }
+
+.nv-autocomplete-suggestsDisplayed .nv-autocomplete-suggests {
+    display:block;
+}
+
+
+/*
+    UWA calendar
+*/
+
+.uwa-calendar {
+    text-align: center;
+    background-color: #fff;
+    cursor: default;
+    border-bottom: 1px solid #E6E6E6;
+    min-width: 15em;
+}
+.uwa-calendar td,
+.uwa-calendar th {
+    font-weight: normal;
+}
+.uwa-calendar table {
+    border: 1px solid #E6E6E6;
+    border-bottom: 0;
+    border-spacing: 2px;
+    border-collapse: separate;
+    width: 100%;
+}
+.uwa-calendar th {
+    text-align: center;
+}
+.uwa-calendar .day {
+    color: #aaa;
+    cursor: pointer;
+    padding: 6px;
+    border: 1px solid #E5E5E5;
+    text-align: right;
+    background-color: #E5E5E5;
+}
+.uwa-calendar .currentMonth .day {
+    color: #000;
+    background-color: #fff;
+}
+.uwa-calendar .disabled {
+    cursor: default;
+    text-decoration: line-through;
+    color: #aaa;
+    background-color: #E5E5E5;
+}
+.uwa-calendar .today .day {
+    font-weight: bold;
+    background-color: #FFDBC7;
+    border-color: #F8BB99;
+    color: #E35C10;
+}
+.uwa-calendar .selectDate .day {
+    background-color: #F57025;
+    border: 1px solid #E35C10;
+    color: #fff;
+    font-weight: bold;
+    position: relative;
+    cursor: default;
+}
+
+.uwa-calendar .top {
+    background: transparent url('base/img/calendar.png');
+    position: relative;
+    white-space: nowrap;
+}
+    .uwa-calendar .next,
+    .uwa-calendar .previous {
+        display: block;
+        position: absolute;
+        top: 2px;
+        cursor: pointer;
+        text-indent: 10000px;
+        overflow: hidden;
+        width: 19px;
+        height: 19px;
+
+    }
+    .uwa-calendar .next {
+        right: 2px;
+    }
+    .uwa-calendar .previous {
+        left: 2px;
+    }
+    .uwa-calendar .top > .title {
+        display: block;
+        background: transparent url(base/img/calendar.png) top right;
+        height: 23px;
+        line-height: 23px;
+        font-weight: bold;
+        color: white;
+        padding: 0 25px;
+    }
+
+
+/* Black theme for UWA Calendar */
+
+.uwa-calendar.dark {
+    border: 1px solid #252525;
+    background: #1F1F1F;
+    -webkit-border-top-left-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+            border-top-right-radius: 6px;
+            border-top-left-radius: 6px;
+}
+    .uwa-calendar.dark .top {
+        background: none;
+        border-bottom: 1px solid #444;
+    }
+    .uwa-calendar.dark .title {
+        background: none;
+        color: #418912;
+    }
+    .uwa-calendar.dark .previous,
+    .uwa-calendar.dark .next {
+        background-image: url(base/img/tabs_actions.png);
+        background-repeat: no-repeat;
+        top: 0;
+        height: 100%;
+    }
+    .uwa-calendar.dark .previous {
+        background-position: 2px -261px;
+        border-right: 1px solid #444;
+    }
+    .uwa-calendar.dark .next {
+        background-position: 2px -393px;
+        border-left: 1px solid #444;
+    }
+    .uwa-calendar.dark table {
+        border: 0;
+    }
+
+    .uwa-calendar.dark .currentMonth.disabled .day,
+    .uwa-calendar.dark .day {
+        border: 1px solid #333;
+        background-color: #272727;
+        color: #555;
+    }
+    .uwa-calendar.dark .currentMonth .day {
+        border: 1px solid #333;
+        background-color: #333;
+        color: #FFF;
+    }
+    .uwa-calendar.dark .today .day {
+        border: 1px solid #1f4911;
+        background-color: #1f4911;
+    }
+    .uwa-calendar.dark .selectDate .day {
+        border: 1px solid #569941;
+        background-color: #569941;
+    }
+
+/*
+    UWA.Controls.Picker
+*/
+
+/* Input Picker */
+.uwa-picker {
+    -webkit-border-radius: 4px;
+            border-radius: 4px;
+    -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+    width: 15em;
+}
+
+.uwa-picker.button-only {
+    width: auto;
+}
+
+.uwa-picker.value-only .uwa-picker-content {
+    display: table;
+}
+
+    .uwa-picker.value-only .uwa-picker-value,
+    .uwa-picker.button-only .uwa-picker-button {
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+    }
+
+    .uwa-picker-text {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+.uwa-picker.hover,
+.uwa-picker.open {
+    -webkit-box-shadow: 0 0 8px #c4c4c4;
+            box-shadow: 0 0 8px #c4c4c4;
+}
+
+.uwa-picker-navigationlink {
+    display: block;
+    cursor: pointer;
+    padding: 6px;
+    margin: 2px 0;
+    -webkit-border-radius: 6px; /* Safari 3-4, iOS 1-3.2, Android ≤1.6 */
+            border-radius: 6px; /* Opera 10.5, IE9, Safari 5, Chrome, Firefox 4+, iOS 4, Android 2.1+ */
+}
+
+.no-touch .uwa-picker-navigationlink:hover {
+    background-color: #565656;
+    color: #FFF;
+}
+
+
+/* Date Picker specific style */
+
+.uwa-datepicker .uwa-calendar {
+    display: inline-block;
+}
+.uwa-datepicker-time {
+    text-align: center;
+    width: 10em;
+}
+.uwa-datepicker-time .value {
+    margin-bottom: 6px;
+}
+.uwa-datepicker-time .uwa-input-text {
+    width: 3em;
+    text-align: center;
+    font-size: 1.3em;
+    margin: 0 3px;
+}
+
+/*
+  Script: notify.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  XHTML skeleton:
+    (start code)
+    TODO
+    (end code)
+*/
+
+.uwa-notify {
+    position: relative;
+    height: 1px;
+}
+
+.uwa-notify-item {
+    position: absolute;
+    width: 100%;
+}
+
+.uwa-notify-msg {
+    position: relative;
+    padding: 5px;
+    margin: 0 0 5px 0;
+
+    background: #ccc;
+    border:1px solid #505050;
+}
+
+.uwa-notify-close {
+    float: right;
+    text-decoration: none;
+}
+
+
+.uwa-embedToolTip {
+    color: #333333;
+    border: 1px solid #BBBBBB;
+    background: none repeat scroll 0 0 white;
+    padding: 5px;
+}
+
+
+/*------------------------------------------------------*/
+/* Tab popup menu
+/*------------------------------------------------------*/
+
+.uwa-popup-menu {
+    position: absolute;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    border-bottom: 1px solid #EEE;
+    background: #FFF;
+    border: 1px solid #CCC;
+    z-index: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.uwa-popup-menu-item {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    white-space: nowrap;
+    border-bottom: 1px solid #EEE;
+}
+
+.uwa-popup-menu-item > a {
+    text-align: left;
+    display: block;
+    white-space: nowrap;
+    padding: 6px 8px;
+    cursor: pointer;
+}
+
+.uwa-popup-menu-item.action {
+    border: 0;
+    border-top: 1px solid #EEE;
+}
+
+.uwa-popup-menu-item.last {
+    border: 0;
+}
+
+/*
+  Script: datagrid.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+
+  HTML skeleton:
+  (start code)
+    <div class="uwa-datagrid table">
+        <table class="uwa-datagrid-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Users</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2012 07 06</td>
+                    <td>user1</td>
+                </tr>
+                <tr>
+                    <td>2012 07 09</td>
+                    <td>user2</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  (end code)
+*/
+
+.uwa-datagrid .uwa-datagrid-table {
+    width: 100%;
+    border-spacing: 4px;
+    border-collapse: separate;
+}
+
+.uwa-datagrid .fixed-column {
+    position: absolute;
+    table-layout: fixed;
+}
+
+.uwa-datagrid .uwa-datagrid-table td {
+    padding: 8px 5px;
+    background-color: #ECECEC;
+    text-align: center;
+}
+
+.uwa-datagrid .uwa-datagrid-table th {
+    text-align: left;
+    padding: 8px 5px;
+    height: 15px;
+    white-space: nowrap;
+}
+
+.uwa-datagrid .uwa-datagrid-table td.first,
+.uwa-datagrid .uwa-datagrid-table th {
+    background-color: #D8D8D8;
+    font-weight: bold;
+}
+
+.uwa-datagrid .uwa-datagrid-table th.first {
+    background: none;
+}
+
+.uwa-datagrid .sortable th:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.uwa-datagrid .sortable th span {
+    display: inline-block;
+}
+
+.uwa-datagrid .sortable th .sort {
+    width: 8px;
+    margin-left: 5px;
+    font-family: uwa-icons;
+    line-height: 10px;
+}
+
+
+/* Common styles */
+.uwa-input {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
+    height: 32px;
+    vertical-align: middle;
+    color: #666666;
+    margin: 0 1em;
+    outline: none;
+    line-height: 1;
+    transition: box-shadow 0.3s;
+}
+
+.uwa-input.disabled {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+    cursor: default;
+}
+
+    .uwa-input.small {
+        height: 24px;
+    }
+
+    .uwa-input.large {
+        font-size: 1.333em;
+        height: 54px;
+    }
+
+    .uwa-input.focus {
+        -webkit-box-shadow: 0 0 8px #8db480;
+                box-shadow: 0 0 8px #8db480;
+    }
+
+    .uwa-input * {
+        -moz-box-sizing: border-box;
+             box-sizing: border-box;
+    }
+
+    .uwa-input-input {
+        line-height: 100%;
+        color: inherit;
+        font: inherit;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        margin: 0;
+        outline: none;
+    }
+
+        .uwa-input-input.hidden-input {
+            position: absolute;
+            left: -10000px;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+    .uwa-input-split {
+        display: table;
+        border-collapse: separate;
+        width: 100%;
+        height: 32px;
+        border-spacing: 0;
+    }
+        .uwa-input.small .uwa-input-split {
+            height: 24px;
+        }
+        .uwa-input.large .uwa-input-split {
+            height: 54px;
+        }
+
+        .uwa-input-split > * {
+            display: table-cell;
+            vertical-align: middle;
+            height: auto;
+        }
+
+        .uwa-input-split > :first-child {
+            -webkit-border-radius: 4px 0 0 4px;
+                    border-radius: 4px 0 0 4px;
+            -webkit-background-clip: padding-box;
+                    background-clip: padding-box;
+            border-right: none;
+        }
+
+        .uwa-input-split > :last-child {
+            -webkit-border-radius: 0 4px 4px 0;
+                    border-radius: 0 4px 4px 0;
+            -webkit-background-clip: padding-box;
+                    background-clip: padding-box;
+        }
+
+    .uwa-input-text {
+        padding: 4px .8em;
+        -webkit-box-shadow: inset 1px 1px 2px #ccc, inset 0 0 0 1000px white;
+                box-shadow: inset 1px 1px 2px #ccc, inset 0 0 0 1000px white;
+        border: 1px solid #c9c9c9;
+        background-color: #fff;
+    }
+
+    .uwa-input-text:-webkit-autofill {
+        transition: none;
+    }
+
+    .uwa-input-text.small {
+        padding: 0 .4em;
+    }
+    .uwa-input-text.focus {
+        -webkit-box-shadow: inset 1px 1px 2px #ccc, 0 0 8px #8db480, inset 0 0 0 1000px white;
+                box-shadow: inset 1px 1px 2px #ccc, 0 0 8px #8db480, inset 0 0 0 1000px white;
+    }
+    .uwa-input-text.hover {
+        -webkit-box-shadow: inset 1px 1px 2px #ccc, 0 0 8px #c4c4c4, inset 0 0 0 1000px white;
+                box-shadow: inset 1px 1px 2px #ccc, 0 0 8px #c4c4c4, inset 0 0 0 1000px white;
+    }
+    .uwa-input-button {
+        height: 100%;
+        -webkit-box-shadow: inset 0 0 3px #fff;
+                box-shadow: inset 0 0 3px #fff;
+        background-color: #f0f0f0;
+        background-image: -webkit-linear-gradient(top, #f0f0f0, #f0f0f0 49%, #e6e6e6 51%, #e6e6e6);
+        background-image:    -moz-linear-gradient(top, #f0f0f0, #f0f0f0 49%, #e6e6e6 51%, #e6e6e6);
+        background-image:      -o-linear-gradient(top, #f0f0f0, #f0f0f0 49%, #e6e6e6 51%, #e6e6e6);
+        background-image:         linear-gradient(to bottom, #f0f0f0, #f0f0f0 49%, #e6e6e6 51%, #e6e6e6);
+        border: 1px solid #c9c9c9;
+    }
+    .uwa-input-split .uwa-input-button {
+        width: 1%;
+    }
+    .uwa-input-button .uwa-icon {
+        height: 100%;
+    }
+    .uwa-input-button.small .uwa-icon {
+        width: 24px;
+    }
+
+        .uwa-input.hover .uwa-input-button {
+            background-color: #f5f5f5;
+            background-image: -webkit-linear-gradient(top, #f5f5f5, #f5f5f5 49%, #eeeeee 51%, #eeeeee);
+            background-image:    -moz-linear-gradient(top, #f5f5f5, #f5f5f5 49%, #eeeeee 51%, #eeeeee);
+            background-image:      -o-linear-gradient(top, #f5f5f5, #f5f5f5 49%, #eeeeee 51%, #eeeeee);
+            background-image:         linear-gradient(to bottom, #f5f5f5, #f5f5f5 49%, #eeeeee 51%, #eeeeee);
+        }
+        .uwa-input.active .uwa-input-button {
+            background-color: #e2e2e2;
+            background-image: -webkit-linear-gradient(top, #e2e2e2, #e2e2e2 49%, #d8d8d8 51%, #d8d8d8);
+            background-image:    -moz-linear-gradient(top, #e2e2e2, #e2e2e2 49%, #d8d8d8 51%, #d8d8d8);
+            background-image:      -o-linear-gradient(top, #e2e2e2, #e2e2e2 49%, #d8d8d8 51%, #d8d8d8);
+            background-image:         linear-gradient(to bottom, #e2e2e2, #e2e2e2 49%, #d8d8d8 51%, #d8d8d8);
+        }
+
+    .uwa-input-content {
+        height: 100%;
+        width: 100%;
+    }
+
+.uwa-text,
+.uwa-file,
+.uwa-select {
+    width: 15em;
+}
+
+.uwa-file.hover,
+.uwa-select.hover {
+    -webkit-box-shadow: 0 0 8px #c4c4c4;
+            box-shadow: 0 0 8px #c4c4c4;
+}
+
+
+/* Input text */
+.uwa-text {
+    -webkit-border-radius: 4px;
+            border-radius: 4px;
+    -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+    cursor: text;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+    .uwa-text.multiline {
+        height: 5em;
+    }
+
+    .uwa-text-placeholder {
+        position: absolute;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #aaa;
+    }
+
+    input.uwa-text::-webkit-input-placeholder {
+        line-height: 1.33em;
+    }
+
+
+/* Input select */
+.uwa-select.small,
+.uwa-select {
+    -webkit-border-radius: 4px;
+            border-radius: 4px;
+    -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+    background-color: #fff;
+    cursor: pointer;
+    height: auto;
+}
+    .uwa-select .uwa-dropdown {
+        width: 100%;
+        -webkit-border-radius: 4px 4px;
+                border-radius: 4px 4px;
+    }
+    .uwa-select .uwa-scroller {
+        background-color: #fff;
+        border: 1px solid #c9c9c9;
+        border-top: 0;
+        -webkit-border-radius: 0 0 4px 4px;
+                border-radius: 0 0 4px 4px;
+        -webkit-box-shadow: inset 1px 0px 2px #ccc;
+                box-shadow: inset 1px 0px 2px #ccc;
+    }
+    .uwa-select .uwa-dropdown .uwa-input-text {
+        border-bottom-left-radius: 0;
+    }
+    .uwa-select .uwa-dropdown .uwa-input-button {
+        border-bottom-right-radius: 0;
+    }
+    .uwa-select.focus .uwa-dropdown {
+        -webkit-box-shadow: 0 0 8px #8db480;
+                box-shadow: 0 0 8px #8db480;
+    }
+    .uwa-select.hover .uwa-dropdown {
+        -webkit-box-shadow: 0 0 8px #c4c4c4;
+                box-shadow: 0 0 8px #c4c4c4;
+    }
+
+    .uwa-select .selected {
+        background-color: #CACACA;
+    }
+    .uwa-select .selected:after {
+        content: 'r';
+        position: absolute;
+        right: 15px;
+        font-family: uwa-icons;
+        font-size: 20px;
+        line-height: 10px;
+    }
+
+    .uwa-select .option {
+        border-top: 1px solid #c9c9c9;
+    }
+
+    .uwa-select .optgroup {
+        background-color: #E3ECE1;
+        border-bottom: 1px solid #c9c9c9;
+        font-weight: bold;
+    }
+
+        .uwa-select .optgroup.selected {
+            background-color: #569941;
+        }
+        .uwa-select .optgroup.selected:after {
+            font-weight: normal;
+            color: #fff;
+        }
+    .uwa-select .option,
+    .uwa-select .optgroup {
+        line-height: 16px;
+    }
+    .uwa-select-button .uwa-icon:before {
+        content: 'j';
+    }
+    .uwa-select-button.small .uwa-icon:before {
+        content: 'D';
+    }
+
+    .uwa-select-options > * {
+        padding: 5px 18px;
+        border-top: 1px solid #c9c9c9;
+    }
+    .uwa-select-options > :first-child {
+        border-top: 0;
+    }
+    .uwa-select-options .option:hover {
+        background-color: #E6E6E6;
+    }
+    .uwa-select-options .optgroup ~ .option {
+        border-top: 0;
+    }
+    .uwa-select-options .optgroup ~ .option:before {
+        content: '•';
+        color: #CACACA;
+        margin-right: 10px;
+    }
+    .uwa-select-options .optgroup ~ .option.selected:before {
+        color: #FFF;
+    }
+
+
+/* Input radio / checkbox */
+.uwa-toggle {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 20px;
+    height: 20px;
+    -webkit-box-shadow: inset 1px 1px 2px #ccc;
+            box-shadow: inset 1px 1px 2px #ccc;
+    border: 1px solid #c9c9c9;
+    background-color: #fff;
+}
+
+    .uwa-toggle.focus {
+        -webkit-box-shadow: inset 1px 1px 2px #ccc, 0 0 8px #8db480;
+                box-shadow: inset 1px 1px 2px #ccc, 0 0 8px #8db480;
+    }
+    .uwa-toggle.hover {
+        -webkit-box-shadow: inset 1px 1px 2px #ccc, 0 0 8px #c4c4c4;
+                box-shadow: inset 1px 1px 2px #ccc, 0 0 8px #c4c4c4;
+    }
+
+.uwa-radio {
+    -webkit-border-radius: 1000px;
+            border-radius: 1000px;
+}
+
+.uwa-checkbox {
+    -webkit-border-radius: 2px;
+            border-radius: 2px;
+}
+
+    .uwa-radio.hover {
+        cursor: pointer;
+    }
+
+    .uwa-radio.checked .uwa-radio-content {
+        position: absolute;
+        height: 10px;
+        width: 10px;
+        top: 4px;
+        left: 4px;
+        background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABDUlEQVR42q3Uv2qDYBSG8XNHDaUxtEPuJiEUuqkoIiIiMSKiqHdSmv5ZCi0tpYVKh3bqhWiGk1fBEA0hwXzDbzs80+GlLMv2uYA5PMEv5HALHkjNHTO3UJqmXWfwAHzAIwx2gkmSbJtAAXykEiatYBzHjRlwT7NNMIqiygAK4J4KOK+DYRhWXoBP9FoHgyAYAgsike/7c2BBFuR53h2wIEtyXfcbWJCcHMfJgQX5Idu2l8CC3JNlWQtgQXwyTfMSWJArMgyj8g58oo/6sXVdrwxhBdzTCqQ6qGla4xq4p5vNOKiqum0KJfCRSpi25ktRlK4RfAIf8AWjnYGVZXmfMcTwBv/wB88Qw7i56wbXwiHIWslDsxwAAAAASUVORK5CYII=) center center no-repeat; /* Bullet */
+        background-size: 100%;
+    }
+
+    /* IE8 does not support background-size property. Use a small image instead. */
+    .ie8 .uwa-radio.checked .uwa-radio-content {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAiklEQVR42oXQMQ7DIBAEwHtWHCXykxJbiIKCgoaCggLxCuQUflHsIr8wlxUCyY1FMVfsXrXEzEWM8QYJ9irB0PpyQggvOIDPavYuj977AQ7gCxnu5JxLwB0LWWu/wB0bGWM24I6dtNYLcMeHlFIPyMAXMjzLPFLKCTLwWc3mtmMhhBhhhV+1wtj6P0bg+Fju+fGZAAAAAElFTkSuQmCC)\9;
+    }
+
+    .uwa-checkbox.checked .uwa-checkbox-content {
+        position: absolute;
+        height: 19px;
+        width: 19px;
+        left: 3px;
+        top: -4px;
+        background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAACf0lEQVR42sXUz0vTcRzH8bcpQhOaBIKVnbLo0G5JUdShH1AEnSSCLkGXbl02f23+mg5/TOdv6I8IrCAqCiukgxgUeKiDF0EQmiCjEFLo3ZNosWTvz77ad9vhcXzBk/fhLTMzM+V2DJ9wTlUlq9xRZ5GGIoMzf8Omp6fL5Ro2oTkyCP0Om5qaKodmbEHzSCNUjqib2IY6fJDJyclSuowtqMMSjsrExESpnEIG6vAGQVUVGR8fL4V6rEAdZlGtRJUqrArvoA6PUPnPHxsbGyu2FNThGbKXAiCpVKqYbkAdPqJGCdlJRkdHi6UeX6GGNRxRIvKRkZGRYnkMNWzjAsQMSyaTxXAH6hCBwA4bHh7220GsQw2vUAGBHTY0NOS3h1DDBg5DssywwcFBP53GT6jh7s6NGTYwMOCXfViAGl7m2dhhiUTCL/eghh84nmdjh/X39/thP1ahhoSxs8P6+vr8EIYaVhAwdnZYPB7/X7VYhxpuObZ2WG9vb65KhBGAeBSHGhZR4djaYT09PVnVmIViDgcgBdTiG9RwBeJgh3V3dwsCeA7NsYAgxCEGNbyGFGCHdXV1BTEHzWMJdZA8AliHGpogBdhhnZ2d81CHL2iA7PDAsXkB8cAOi8Vil7AJdVhGI+SPKqxADRchHthh0WhUcB4ZqMMqTkLQDDXMQzyywzo6OrKakIY6pBHCPNRwHeKRHdbe3p4rhDWow3eo4TMqIB7ZYW1tbTs1YhW6B/chu+E9DGjA8i6jNlDjW1hra6vlEJagHiUhu2SHtbS0uNRhEerBCcgu2WGRSKSQIN5DHd5C9sBjmC2AOajhtu9h4XDYq2o8xRqeIIqrCEL2yAz7BWlNNgCElsdKAAAAAElFTkSuQmCC) top left no-repeat; /* High resolution check */
+        background-size: 100%;
+    }
+
+    /* IE8 does not support background-size property. Use a small image instead. */
+    .ie8 .uwa-checkbox.checked .uwa-checkbox-content {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAABRElEQVR42qXQP0tCYRTH8WPlHWywwCF6HU0tQRD0CnKICHwDTYoiIiKCiFwUlfaoqSWCoiGQcHIWisZqjIaGRjt9b9zgPBfBPw0fODw/+A6P9Hq9/1hDH0eqKtLtdhe1gREUYxxKp9NZRAojqHEr7XZ7Xh4eoMY5PGm1WvM6hRpniP3+me/78ziAGn3Eg1BAms3mrDbxAQ29IBWGQKzRaMzqEhr6xg7EidXr9VnsQQ0fAjdWq9WmWcEjNPSGVQjcWLVanSYDNdJmc2OVSiWwhS7iEMPDKzQ0RMzsbqxcLm/jE4preJBQBmrsQgw3ViqVhlDjHgks4dm8DyARbqxYLK5jCDUGSEONfUiEGysUCoEk+lBjbO4nxCARbiyfz/9J4A46wQlkAjeWy+UsD1dQ4wtJyARuLJvNRi3jAu+4wbHdo2zsB+1mzQTt2YNrAAAAAElFTkSuQmCC); /* Small check */
+    }
+
+/* Input File */
+.uwa-file {
+    -webkit-border-radius: 4px;
+            border-radius: 4px;
+    -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+    white-space: nowrap;
+}
+    .uwa-file-input.hidden-input {
+        left: 0;
+        /* On Firefox, the width of an input file can't be set through CSS.
+         * Thus, a simple solution is to set the text-align to right in order
+         * to align the input where the button is. */
+        text-align: right;
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    .uwa-file-text {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        background: #fff;
+    }
+
+    .uwa-file-split .uwa-file-button {
+        padding: 0 0.5em;
+        width: 5em;
+    }
+
+    .uwa-file-split {
+        table-layout: fixed;
+    }
+
+
+/* Input button */
+.uwa-button {
+    /* Override default user agent style: -webkit-small-control */
+    font: inherit;
+    -webkit-border-radius: 4px;
+            border-radius: 4px;
+    -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+    line-height: 28px;
+    padding: 0 14px;
+    text-align: center;
+    border: 0;
+    text-decoration: none;
+}
+    .uwa-button::-moz-focus-inner {
+        border: 0;
+    }
+
+    .uwa-button.small {
+        line-height: 20px;
+        padding: 0 12px;
+    }
+
+    .uwa-button.large {
+        line-height: 50px;
+        padding: 0 21px;
+    }
+
+    /* Icons */
+    .uwa-button:before {
+        line-height: 28px;
+        width: 32px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-border-radius: 4px;
+                border-radius: 4px;
+        -webkit-background-clip: padding-box;
+                background-clip: padding-box;
+        -moz-box-sizing: border-box;
+             box-sizing: border-box;
+    }
+
+    .uwa-button.small:before {
+        width: 24px;
+        line-height: 20px;
+    }
+
+    .uwa-button.large:before {
+        width: 54px;
+        font-size: 40px;
+        line-height: 46px;
+    }
+
+    .uwa-button.iconr:before {
+        right: 0;
+        left: auto;
+        -webkit-border-radius: 0 4px 4px 0;
+                border-radius: 0 4px 4px 0;
+    }
+    .uwa-button.iconl:before {
+        -webkit-border-radius: 4px 0 0 4px;
+                border-radius: 4px 0 0 4px;
+    }
+
+    /* default icon sizes, button padding + height */
+    .uwa-button.iconr { padding-right: 46px; /* 32 + 14 */ }
+    .uwa-button.iconl { padding-left: 46px; /* 32 + 14 */ }
+    .uwa-button.icon-only { width: 32px; }
+    .uwa-button.small.iconr { padding-right: 36px; /* 24 + 12 */ }
+    .uwa-button.small.iconl { padding-left: 36px; /* 24 + 12 */ }
+    .uwa-button.small.icon-only { width: 24px; }
+    .uwa-button.large.iconr { padding-right: 75px; /* 54 + 21 */ }
+    .uwa-button.large.iconl { padding-left: 75px; /* 54 + 21 */ }
+    .uwa-button.large.icon-only { width: 54px; }
+
+    .uwa-button.icon-only {
+        padding: 0;
+    }
+
+    /* All glossy buttons have a 1px border, which shift the icon a little bit.
+     * Realign this here */
+    .uwa-button.glossy.icon-only:before {
+        top: -1px;
+    }
+
+    /* glossy icon sizes, 2 * button padding */
+    .uwa-button.iconr.glossy:before,
+    .uwa-button.iconl.glossy:before {
+        top: -1px;
+        width: 28px;
+    }
+    .uwa-button.iconr.glossy { padding-right: 28px; /* 2 * 14 */ }
+    .uwa-button.iconl.glossy { padding-left: 28px; /* 2 * 14 */ }
+
+    .uwa-button.iconr.small.glossy:before,
+    .uwa-button.iconl.small.glossy:before { width: 24px; }
+    .uwa-button.iconr.small.glossy { padding-right: 24px; /* 2 * 12 */ }
+    .uwa-button.iconl.small.glossy { padding-left: 24px; /* 2 * 12 */ }
+
+    .uwa-button.iconr.large.glossy:before,
+    .uwa-button.iconl.large.glossy:before { width: 42px; }
+    .uwa-button.iconr.large.glossy { padding-right: 42px; /* 2 * 21 */ }
+    .uwa-button.iconl.large.glossy { padding-left: 42px; /* 2 * 21 */ }
+
+    /* Common themes styles */
+    .uwa-button.green,
+    .uwa-button.dark-grey,
+    .uwa-button.black {
+        color: white;
+        font-weight: bold;
+        -webkit-font-smoothing: antialiased;
+                font-smoothing: antialiased;
+    }
+
+    /* Green theme */
+    .uwa-button.green {
+        border: 1px solid #218c00;
+        background-color: #8ce930;
+        background-image: -webkit-linear-gradient(top, #8ce930, #128f08);
+        background-image:    -moz-linear-gradient(top, #8ce930, #128f08);
+        background-image:      -o-linear-gradient(top, #8ce930, #128f08);
+        background-image:         linear-gradient(to bottom, #8ce930, #128f08);
+        -webkit-box-shadow: inset 0 0 3px #ffffbe;
+                box-shadow: inset 0 0 3px #ffffbe;
+    }
+
+        .uwa-button.green.focus {
+            -webkit-box-shadow: 0 0 8px #8db480, inset 0 0 3px #ffffbe;
+                    box-shadow: 0 0 8px #8db480, inset 0 0 3px #ffffbe;
+        }
+
+        .uwa-button.green.hover {
+            background-color: #98ee43;
+            background-image: -webkit-linear-gradient(top, #98ee43, #1ba511);
+            background-image:    -moz-linear-gradient(top, #98ee43, #1ba511);
+            background-image:      -o-linear-gradient(top, #98ee43, #1ba511);
+            background-image:         linear-gradient(to bottom, #98ee43, #1ba511);
+        }
+
+        .uwa-button.green.active {
+            background-color: #76d11e;
+            background-image: -webkit-linear-gradient(top, #76d11e, #097a00);
+            background-image:    -moz-linear-gradient(top, #76d11e, #097a00);
+            background-image:      -o-linear-gradient(top, #76d11e, #097a00);
+            background-image:         linear-gradient(to bottom, #76d11e, #097a00);
+        }
+
+    /* Black theme */
+    .uwa-button.black {
+        border: 1px solid #101010;
+        background-color: #5f5f5f;
+        background-image: -webkit-linear-gradient(top, #5f5f5f, #232323);
+        background-image:    -moz-linear-gradient(top, #5f5f5f, #232323);
+        background-image:      -o-linear-gradient(top, #5f5f5f, #232323);
+        background-image:         linear-gradient(to bottom, #5f5f5f, #232323);
+        -webkit-box-shadow: inset 0 0 3px #626262;
+                box-shadow: inset 0 0 3px #626262;
+    }
+
+        .uwa-button.black.focus {
+            -webkit-box-shadow: 0 0 8px #8db480, inset 0 0 3px #626262;
+                    box-shadow: 0 0 8px #8db480, inset 0 0 3px #626262;
+        }
+
+        .uwa-button.black.hover {
+            background-color: #6a6a6a;
+            background-image: -webkit-linear-gradient(top, #6a6a6a, #313131);
+            background-image:    -moz-linear-gradient(top, #6a6a6a, #313131);
+            background-image:      -o-linear-gradient(top, #6a6a6a, #313131);
+            background-image:         linear-gradient(to bottom, #6a6a6a, #313131);
+        }
+
+        .uwa-button.black.active {
+            background-color: #525252;
+            background-image: -webkit-linear-gradient(top, #525252, #121212);
+            background-image:    -moz-linear-gradient(top, #525252, #121212);
+            background-image:      -o-linear-gradient(top, #525252, #121212);
+            background-image:         linear-gradient(to bottom, #525252, #121212);
+        }
+
+    .uwa-button.green.disabled,
+    .uwa-button.black.disabled {
+        opacity: 1;
+        filter: alpha(opacity=100);
+        border: 1px solid #bebebe;
+        background-color: #e4e4e4;
+        background-image: -webkit-linear-gradient(top, #e4e4e4, #b5b5b5);
+        background-image:    -moz-linear-gradient(top, #e4e4e4, #b5b5b5);
+        background-image:      -o-linear-gradient(top, #e4e4e4, #b5b5b5);
+        background-image:         linear-gradient(to bottom, #e4e4e4, #b5b5b5);
+        -webkit-box-shadow: inset 0 0 3px #e0e0e0;
+                box-shadow: inset 0 0 3px #e0e0e0;
+    }
+
+
+    /* Light grey theme */
+    .uwa-button.light-grey {
+        border: 1px solid #c9c9c9;
+        background-color: #f0f0f0;
+        background-image: -webkit-linear-gradient(top, #f0f0f0, #f0f0f0 49%, #e6e6e6 51%, #e6e6e6);
+        background-image:    -moz-linear-gradient(top, #f0f0f0, #f0f0f0 49%, #e6e6e6 51%, #e6e6e6);
+        background-image:      -o-linear-gradient(top, #f0f0f0, #f0f0f0 49%, #e6e6e6 51%, #e6e6e6);
+        background-image:         linear-gradient(to bottom, #f0f0f0, #f0f0f0 49%, #e6e6e6 51%, #e6e6e6);
+        -webkit-box-shadow: inset 0 0 3px #fff;
+                box-shadow: inset 0 0 3px #fff;
+    }
+
+        .uwa-button.light-grey.focus {
+            -webkit-box-shadow: 0 0 8px #8db480, inset 0 0 3px #fff;
+                    box-shadow: 0 0 8px #8db480, inset 0 0 3px #fff;
+        }
+
+        .uwa-button.light-grey.hover {
+            background-color: #f5f5f5;
+            background-image: -webkit-linear-gradient(top, #f5f5f5, #f5f5f5 49%, #eeeeee 51%, #eeeeee);
+            background-image:    -moz-linear-gradient(top, #f5f5f5, #f5f5f5 49%, #eeeeee 51%, #eeeeee);
+            background-image:      -o-linear-gradient(top, #f5f5f5, #f5f5f5 49%, #eeeeee 51%, #eeeeee);
+            background-image:         linear-gradient(to bottom, #f5f5f5, #f5f5f5 49%, #eeeeee 51%, #eeeeee);
+        }
+
+        .uwa-button.light-grey.active {
+            background-color: #e2e2e2;
+            background-image: -webkit-linear-gradient(top, #e2e2e2, #e2e2e2 49%, #d8d8d8 51%, #d8d8d8);
+            background-image:    -moz-linear-gradient(top, #e2e2e2, #e2e2e2 49%, #d8d8d8 51%, #d8d8d8);
+            background-image:      -o-linear-gradient(top, #e2e2e2, #e2e2e2 49%, #d8d8d8 51%, #d8d8d8);
+            background-image:         linear-gradient(to bottom, #e2e2e2, #e2e2e2 49%, #d8d8d8 51%, #d8d8d8);
+        }
+
+
+    /* Dark grey theme */
+    .uwa-button.dark-grey {
+        background: #444444;
+    }
+
+        .uwa-button.dark-grey.hover {
+            background: #4c4c4c;
+        }
+
+        .uwa-button.dark-grey.active {
+            background: #333333;
+        }
+
+        .uwa-button.dark-grey:before {
+            background-color: #333333;
+        }
+            .uwa-button.dark-grey.hover:before {
+                background-color: #3b3b3b;
+            }
+            .uwa-button.dark-grey.active:before {
+                background-color: #272727;
+            }
+
+    .uwa-button.delete:before {
+        background-color: #883431;
+    }
+        .uwa-button.delete.hover:before {
+            background-color: #893936;
+        }
+        .uwa-button.delete.active:before {
+            background-color: #B50F0D;
+        }
+
+
+/*
+  Script: messages.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2013 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+*/
+
+/*
+  Base classes to display a message in UWA.
+
+  Use the uwa-message base class for a basic display. You can then style it however you
+  want to. In addition to this class, you can use one of .{alert|simple|notice|error|warning}
+  predefined stylings
+
+  background-image are base64 encoded SVG. To modify one or create a new one, decode the base64 string.
+
+  You can generate this file with the following bash script
+
+svg='
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="s" x1="0" y1="0" x2="0" y2="100%">
+<stop offset="0" style="stop-color:#555;stop-opacity:0.2"/>
+<stop offset="100%" style="stop-color:#555;stop-opacity:0"/>
+</linearGradient>
+</defs>
+<rect x="16" y="0" width="100%" height="100%" style="fill:#{{background}}"/>
+<rect x="0" y="16" width="16" height="100%" style="fill:#{{background}}"/>
+<path d="m 0,16 19,3 -3,-3 z" style="fill:url(#s);"/>
+<path d="m 0,0 -3,3 19,-3 z" style="fill:url(#s);" transform="rotate(-90 16 0)"/>
+<path d="m 0,16 16,0 0,-16 z" style="fill:#{{highlight}};"/>
+</svg>
+'
+
+b64 () {
+    background=$3
+    highlight=$2
+    class=$1
+    color=$4
+
+    echo -n "
+.uwa-message$class {"
+
+    if [ -z "$class" ]; then
+        echo -n "
+    padding: 12px 12px 12px 24px;
+    margin: 4px 0;
+    color: #FFF;"
+    fi
+
+    if [ -n "$color" ]; then
+    echo -n "
+    color: #$color;"
+    fi
+
+    echo -n "
+    background-image: url('data:image/svg+xml;charset=utf-8;base64,"
+    echo "$svg" | tr -d '\n' | sed 's/{{highlight}}/'$highlight'/g' | sed 's/{{background}}/'$background'/g' | base64 -w 0
+    echo -n "');
+}
+
+.ie6 .uwa-message$class,
+.ie7 .uwa-message$class,
+.ie8 .uwa-message$class {
+    background: #$background;
+}"
+}
+
+b64 ''       666    444
+b64 .simple  BCBCBC ECECEC 666
+b64 .notice  96BCDE 2F7BBD
+b64 .error   CB9594 972C2B
+b64 .warning FFCF99 F80
+b64 .success BBD6B3 569941
+*/
+
+
+.uwa-message {
+    padding: 12px 12px 12px 24px;
+    margin: 4px 0;
+    color: #FFF;
+    background-image: url('data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJzIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojNTU1O3N0b3Atb3BhY2l0eTowLjIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM1NTU7c3RvcC1vcGFjaXR5OjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxNiIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6IzQ0NCIvPjxyZWN0IHg9IjAiIHk9IjE2IiB3aWR0aD0iMTYiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6IzQ0NCIvPjxwYXRoIGQ9Im0gMCwxNiAxOSwzIC0zLC0zIHoiIHN0eWxlPSJmaWxsOnVybCgjcyk7Ii8+PHBhdGggZD0ibSAwLDAgLTMsMyAxOSwtMyB6IiBzdHlsZT0iZmlsbDp1cmwoI3MpOyIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDE2IDApIi8+PHBhdGggZD0ibSAwLDE2IDE2LDAgMCwtMTYgeiIgc3R5bGU9ImZpbGw6IzY2NjsiLz48L3N2Zz4=');
+}
+
+/* targetting only IE 8 7 & 6 */
+.ie6 .uwa-message,
+.ie7 .uwa-message,
+.ie8 .uwa-message {
+    background: #444;
+}
+.uwa-message.simple {
+    color: #666;
+    background-image: url('data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJzIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojNTU1O3N0b3Atb3BhY2l0eTowLjIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM1NTU7c3RvcC1vcGFjaXR5OjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxNiIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6I0VDRUNFQyIvPjxyZWN0IHg9IjAiIHk9IjE2IiB3aWR0aD0iMTYiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6I0VDRUNFQyIvPjxwYXRoIGQ9Im0gMCwxNiAxOSwzIC0zLC0zIHoiIHN0eWxlPSJmaWxsOnVybCgjcyk7Ii8+PHBhdGggZD0ibSAwLDAgLTMsMyAxOSwtMyB6IiBzdHlsZT0iZmlsbDp1cmwoI3MpOyIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDE2IDApIi8+PHBhdGggZD0ibSAwLDE2IDE2LDAgMCwtMTYgeiIgc3R5bGU9ImZpbGw6I0JDQkNCQzsiLz48L3N2Zz4=');
+}
+
+/* targetting only IE 8 7 & 6 */
+.ie6 .uwa-message.simple,
+.ie7 .uwa-message.simple,
+.ie8 .uwa-message.simple {
+    background: #ECECEC;
+}
+.uwa-message.notice {
+    background-image: url('data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJzIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojNTU1O3N0b3Atb3BhY2l0eTowLjIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM1NTU7c3RvcC1vcGFjaXR5OjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxNiIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6IzJGN0JCRCIvPjxyZWN0IHg9IjAiIHk9IjE2IiB3aWR0aD0iMTYiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6IzJGN0JCRCIvPjxwYXRoIGQ9Im0gMCwxNiAxOSwzIC0zLC0zIHoiIHN0eWxlPSJmaWxsOnVybCgjcyk7Ii8+PHBhdGggZD0ibSAwLDAgLTMsMyAxOSwtMyB6IiBzdHlsZT0iZmlsbDp1cmwoI3MpOyIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDE2IDApIi8+PHBhdGggZD0ibSAwLDE2IDE2LDAgMCwtMTYgeiIgc3R5bGU9ImZpbGw6Izk2QkNERTsiLz48L3N2Zz4=');
+}
+
+/* targetting only IE 8 7 & 6 */
+.ie6 .uwa-message.notice,
+.ie7 .uwa-message.notice,
+.ie8 .uwa-message.notice {
+    background: #2F7BBD;
+}
+.uwa-message.error {
+    background-image: url('data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJzIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojNTU1O3N0b3Atb3BhY2l0eTowLjIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM1NTU7c3RvcC1vcGFjaXR5OjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxNiIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6Izk3MkMyQiIvPjxyZWN0IHg9IjAiIHk9IjE2IiB3aWR0aD0iMTYiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6Izk3MkMyQiIvPjxwYXRoIGQ9Im0gMCwxNiAxOSwzIC0zLC0zIHoiIHN0eWxlPSJmaWxsOnVybCgjcyk7Ii8+PHBhdGggZD0ibSAwLDAgLTMsMyAxOSwtMyB6IiBzdHlsZT0iZmlsbDp1cmwoI3MpOyIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDE2IDApIi8+PHBhdGggZD0ibSAwLDE2IDE2LDAgMCwtMTYgeiIgc3R5bGU9ImZpbGw6I0NCOTU5NDsiLz48L3N2Zz4=');
+}
+
+/* targetting only IE 8 7 & 6 */
+.ie6 .uwa-message.error,
+.ie7 .uwa-message.error,
+.ie8 .uwa-message.error {
+    background: #972C2B;
+}
+.uwa-message.warning {
+    background-image: url('data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJzIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojNTU1O3N0b3Atb3BhY2l0eTowLjIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM1NTU7c3RvcC1vcGFjaXR5OjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxNiIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6I0Y4MCIvPjxyZWN0IHg9IjAiIHk9IjE2IiB3aWR0aD0iMTYiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6I0Y4MCIvPjxwYXRoIGQ9Im0gMCwxNiAxOSwzIC0zLC0zIHoiIHN0eWxlPSJmaWxsOnVybCgjcyk7Ii8+PHBhdGggZD0ibSAwLDAgLTMsMyAxOSwtMyB6IiBzdHlsZT0iZmlsbDp1cmwoI3MpOyIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDE2IDApIi8+PHBhdGggZD0ibSAwLDE2IDE2LDAgMCwtMTYgeiIgc3R5bGU9ImZpbGw6I0ZGQ0Y5OTsiLz48L3N2Zz4=');
+}
+
+/* targetting only IE 8 7 & 6 */
+.ie6 .uwa-message.warning,
+.ie7 .uwa-message.warning,
+.ie8 .uwa-message.warning {
+    background: #F80;
+}
+.uwa-message.success {
+    background-image: url('data:image/svg+xml;charset=utf-8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJzIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojNTU1O3N0b3Atb3BhY2l0eTowLjIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM1NTU7c3RvcC1vcGFjaXR5OjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIxNiIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6IzU2OTk0MSIvPjxyZWN0IHg9IjAiIHk9IjE2IiB3aWR0aD0iMTYiIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGw6IzU2OTk0MSIvPjxwYXRoIGQ9Im0gMCwxNiAxOSwzIC0zLC0zIHoiIHN0eWxlPSJmaWxsOnVybCgjcyk7Ii8+PHBhdGggZD0ibSAwLDAgLTMsMyAxOSwtMyB6IiBzdHlsZT0iZmlsbDp1cmwoI3MpOyIgdHJhbnNmb3JtPSJyb3RhdGUoLTkwIDE2IDApIi8+PHBhdGggZD0ibSAwLDE2IDE2LDAgMCwtMTYgeiIgc3R5bGU9ImZpbGw6I0JCRDZCMzsiLz48L3N2Zz4=');
+}
+
+/* targetting only IE 8 7 & 6 */
+.ie6 .uwa-message.success,
+.ie7 .uwa-message.success,
+.ie8 .uwa-message.success {
+    background: #569941;
+}
+
+.uwa-dropdown {
+    position: absolute;
+    overflow: hidden;
+    z-index: 1001;
+}
+
+.uwa-dropdown.uwa-pointydropdown {
+    overflow: visible;
+}
+
+.uwa-pointydropdown-point {
+    position: absolute;
+    z-index: 1;
+
+    font-family: 'uwa-icons';
+    line-height: 0;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+
+    margin: -11px -20px;
+    padding: 6px 0 0 0;
+
+    /* We have to set a box here, so the character won't overflow the container
+     * and leak on the targeted element */
+    width: 40px;
+    height: 14px;
+
+    cursor: default;
+
+    /* Fix box-sizing to content-box, in the case we have a box-sizing:
+     * border-box everywhere */
+    box-sizing: content-box;
+}
+
+.uwa-pointydropdown-point.side {
+    margin: -4px 17px 0 -15px;
+    padding: 0;
+    width: 0;
+    height: 0;
+}
+
+.uwa-pointydropdown-inner {
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+.uwa-pointydropdown {
+    -webkit-box-shadow: 0 0 8px #c4c4c4;
+            box-shadow: 0 0 8px #c4c4c4;
+}
+
+.uwa-pointydropdown,
+.uwa-pointydropdown > .uwa-pointydropdown-inner {
+    -webkit-border-radius: 4px;
+            border-radius: 4px;
+}
+
+.uwa-pointydropdown .uwa-pointydropdown-point {
+    text-shadow: 0 0 8px #c4c4c4;
+    color: #CACACA;
+}
+
+.uwa-pointydropdown > .uwa-pointydropdown-inner {
+    padding: 6px;
+    background-color: #CACACA;
+}
+
+.uwa-pointydropdown.dark .uwa-pointydropdown-point {
+    color: #444;
+}
+
+.uwa-pointydropdown.dark .uwa-pointydropdown-inner {
+    color: #FFF;
+    background-color: #444;
+}
+
+
+/**
+ * Widget: dropdown menu
+ */
+.uwa-widget-popup-menu {
+    min-width: 160px;
+    padding: 0;
+    margin: 0;
+    background-color: #5F5F5F;
+    border-bottom-left-radius: 4px;
+    z-index: 14;
+    text-align: left;
+}
+
+.uwa-widget-popup-menu > menu {
+    padding: 0;
+    margin: 0;
+}
+
+.uwa-widget-popup-menu-item {
+    display: block;
+    padding: 8px 10px;
+    color: #FFF;
+    border-bottom: 1px dotted #4A4A4A;
+    cursor: pointer;
+}
+
+.uwa-widget-popup-menu-item > .uwa-icon.uwa-icon-only {
+    width: 20px;
+    height: 16px;
+    margin-right: 10px;
+}
+
+.uwa-widget-popup-menu-item:hover {
+    background-color: #4A4A4A;
+}
+
+.uwa-widget-popup-menu-item:last-child {
+    border-bottom: none;
+}
+
+
+/**
+ * Widget header: menu button
+ *
+ * Dark icons have color: #AAA;
+ * Light icons have color: #FFF;
+ */
+.uwa-widget-menu-button {
+    -moz-box-sizing: border-box; /* Firefox 1+ */
+         box-sizing: border-box; /* Chrome, IE 8+, Opera, Safari 5.1 */
+    display: table;
+
+    display: -ms-grid; /* IE 10+ */
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 1fr;
+
+    width: 26px;
+    height: 100%;
+    margin: 0;
+    color: #FFF;
+    text-align: center;
+    cursor: pointer;
+    filter:alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.uwa-widget-menu-button:before {
+    display: table-cell;
+
+    /* display: table-cell on generated content not supported by IE 10+ */
+    display: -ms-grid;
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 1fr;
+    -ms-grid-column-align: center;
+    -ms-grid-row-align: center;
+
+    vertical-align: middle;
+    text-align: center;
+    padding-bottom: 1px;
+}
+
+.uwa-widget-menu-button:hover,
+.uwa-widget-menu-button.active {
+    filter:alpha(opacity=100);
+    opacity: 1;
+}
+
+.uwa-widget-menu-button.active {
+    background-color: #5F5F5F;
+    color: #FFF;
+}
+
+.rtl .uwa-widget-menu-button {
+    float: left;
+}
+
+
+/**
+ * Widget header: menus container
+ */
+.moduleHeader > menu {
+    -moz-box-sizing: border-box; /* Firefox 1+ */
+         box-sizing: border-box; /* Chrome, IE 8+, Opera, Safari 5.1 */
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.moduleHeader .uwa-widget-menu-button {
+    float: right;
+}
+.moduleHeader .uwa-widget-menu-button.active {
+    color: #FFF;
+}
+.moduleHeader[data-menus-items="1"] {
+    padding-right: 40px;
+}
+.moduleHeader[data-menus-items="2"] {
+    padding-right: 80px;
+}
+.moduleHeader[data-menus-items="3"] {
+    padding-right: 100px;
+}
+.moduleHeader[data-menus-items="4"] {
+    padding-right: 120px;
+}
+.moduleHeader[data-menus-items="5"] {
+    padding-right: 140px;
+}
+.moduleHeader[data-menus-items="6"] {
+    padding-right: 160px;
+}
+
+
+/*
+  Script: icons.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2013 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+*/
+
+/* http://www.paulirish.com/2010/font-face-gotchas/#smiley */
+@font-face {
+    font-family: 'uwa-icons';
+    src: url('base/font/icons.eot');
+    src: local('uwa_icons'),
+         url('base/font/icons.woff') format('woff'),
+         url('base/font/icons.ttf') format('truetype');
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*
+  Base classes to display a named icon in UWA.
+
+  Use the class uwa-icon to basic icon display. You can then style it how you
+  want. In addition to the class uwa-icon, use the class uwa-icon-only on an
+  empty element to display an icon like if it was an image.
+
+  See the widget /apps/Samples/Examples/Icons/index.xhtml for examples.
+*/
+
+.uwa-icon:before {
+    content: attr(data-icon);
+    font-family: uwa-icons;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.uwa-icon-only {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    width: 32px;
+    height: 32px;
+}
+
+.uwa-icon-only.small {
+    width: 24px;
+    height: 24px;
+}
+
+.uwa-icon-only.large {
+    width: 54px;
+    height: 54px;
+}
+
+.uwa-icon-only:before {
+    position: absolute;
+    top: 44%; /* Magic number, so the icons are vertically aligned independently of their height */
+    left: 0;
+    right: 0;
+    text-align: center;
+    line-height: 0;
+}
+
+.uwa-icon-only.large:before {
+    font-size: 40px;
+}
+
+.uwa-icon-unicode:before {
+    font-family: inherit;
+}
+
+.uwa-icon.previous:before        { content: 'l'; }
+.uwa-icon.previous.small :before { content: 'F'; }
+
+.uwa-icon.next:before            { content: 'm'; }
+.uwa-icon.next.small:before      { content: 'G'; }
+
+.uwa-icon.arrow-down.small:before { content: 'D'; }
+.uwa-icon.arrow-down:before       { content: 'j'; }
+
+.uwa-icon.arrow-up.small:before  { content: 'E'; }
+.uwa-icon.arrow-up:before        { content: 'k'; }
+
+.uwa-icon.delete:before          { content: 'p'; }
+.uwa-icon.delete.small:before    { content: ','; }
+
+.uwa-icon.plus:before            { content: 'A'; }
+.uwa-icon.plus.small:before      { content: 'h'; }
+
+.uwa-icon.refresh:before         { content: 'Q'; }
+
+.uwa-icon.cogwheel:before        { content: 'ç'; }
+
+.uwa-icon.calendar:before        { content: 'u'; }
+
+.uwa-icon.double-arrow:before    { content: 'H'; }
+
+.uwa-icon.facet:before           { content: '5'; }
+
+.uwa-icon.tooltip:before         { content: 'T'; }
+
+.uwa-icon.rss:before             { content: '7'; }
+
+.uwa-icon.whirlwind:before       { content: 'è'; }
+
+.uwa-icon.star:before            { content: '8'; }
+
+.uwa-icon.circle-crossed:before  { content: '¼'; }
+
+.uwa-icon.pin-point:before       { content: '~'; }
+
+.uwa-icon.curvy-next:before      { content: 'q'; }
+
+.uwa-icon.play:before            { content: 'M'; }
+
+.uwa-icon.download:before        { content: 'Y'; }
+
+.uwa-icon.lock:before            { content: 'Á'; }
+
+.uwa-icon.book:before            { content: 'À'; }
+
+.uwa-icon.forbidden:before       { content: 'O'; }
+
+.uwa-icon.list:before            { content: 'w'; }
+
+.uwa-icon.expanded-list:before   { content: 'y'; }
+
+.uwa-icon.mosaic:before          { content: 'z'; }
+
+.uwa-icon.bug:before             { content: 'é'; }
+
+.uwa-icon.charts:before          { content: 'B'; }
+
+.uwa-icon.options:before         { content: 'W'; }
+
+.uwa-icon.single-window:before   { content: 'n'; }
+
+.uwa-icon.double-window:before   { content: 'o'; }
+
+.uwa-icon.edit:before            { content: 'X'; }
+
+/* Graph views icons */
+.uwa-icon.lines:before           { content: 'ų'; }
+
+.uwa-icon.stacked-lines:before   { content: 'ŷ'; }
+
+.uwa-icon.vbar:before            { content: 'ŵ'; }
+
+.uwa-icon.stacked-vbar:before    { content: 'ž'; }
+
+.uwa-icon.hbar:before            { content: 'ů'; }
+
+.uwa-icon.stacked-hbar:before    { content: 'ſ'; }
+
+.uwa-icon.pie:before             { content: 'ź'; }
+
+.uwa-icon.table:before           { content: 'ű'; }
+
+.uwa-icon.cloud:before           { content: 'ż'; }
+
+.uwa-icon.menu:before            { content: '$'; }
+
+.uwa-icon.checked:before         { content: 'r'; }
+
+.uwa-icon.funnel:before          { content: '6'; }
+
+
+/* Following class is for cache manifest only */
+.UWAmanifest {
+   background: url(base/img/logout.png);
+   background: url(base/img/download.png);
+   background: url(base/img/play.png);
+   background: url(base/img/play_overlay.png);
+   background: url(base/img/s.gif);
+   background: url(base/img/loader.gif);
+   background: url(base/img/article.png);
+   background: url(base/img/clear.gif);
+   background: url(base/img/dragandfollow.png);
+   background: url(base/img/shareicon.png);
+   background: url(base/cursor/closedhand.cur);
+   background: url(base/cursor/openhand.cur);
+}
+
+/* External Links
+
+  XHTML skeleton:
+  (start code)
+  TODO
+  (end code)
+*/
+a.external {
+    text-decoration: none;
+}
+
+a.external:hover {
+    text-decoration: underline;
+}
+
+/* Tooltip
+
+  XHTML skeleton:
+  (start code)
+  <div class="nv-tooltip">
+    Lorem ipsum dolor sit amet.
+  </div>
+  (end code)
+*/
+.uwa-tooltip {
+    z-index: 1000;
+    padding: 0.5em;
+    text-align: left;
+    border: 1px solid #EBEBA9;
+    border-bottom-color: #C3C370;
+    border-right-color: #C3C370;
+    background: #FFFFE0;
+    color: #000;
+}
+
+.rtl .uwa-tooltip {
+    text-align: right;
+}
+
+/*
+.nv-tooltip::after {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 30px;
+    border: 10px solid transparent;
+    border-bottom-color: #EBEBA9;
+    border-left-width: 0;
+}
+*/
+
+/* Datagrid
+
+  XHTML skeleton:
+  (start code)
+  TODO
+  (end code)
+*/
+.nv-datagrid {
+    width: 99%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+}
+
+/* IE6 : fixe */
+* html .nv-datagrid {
+    width: 93%;
+}
+
+    .nv-datagrid th {
+        font-weight: bold;
+        background: #EFF5FF;
+        border-bottom: 1px solid #C1D8FF;
+        padding: 3px;
+    }
+
+    .nv-datagrid td {
+        border: 1px solid #efefef;
+        padding: 3px;
+        margin: 0;
+    }
+
+    .nv-datagrid tfoot td{
+        border-top: 1px solid #DDD;
+    }
+
+    /* Odd/Even */
+    .nv-datagrid .odd{
+        background: transparent;
+    }
+
+    .nv-datagrid .even{
+        background: #F6F9FF;
+    }
+
+
+/* Richlist , ThumbnailedList , Productlist
+
+  XHTML skeleton:
+  (start code)
+  TODO
+  (end code)
+*/
+.nv-feedList li {
+    background: url(base/img/bullet.png) no-repeat;
+    background-position: 0 5px;
+    padding: 1px 10px;
+}
+
+.nv-richList,
+.nv-thumbnailedList,
+.nv-productList{
+    margin: 0;
+    padding: 0;
+}
+    .nv-thumbnailedList .item,
+    .nv-richList .item,
+    .nv-productList .item {
+        background-image: none;
+        margin: 0;
+        padding: 5px;
+    }
+
+    /* IE : fixe */
+    * html .nv-thumbnailedList .item,
+    * html .nv-richList .item,
+    * html .nv-productList .item {
+        height: 1%;
+    }
+
+    .nv-feedList a a.link-action,
+    .nv-thumbnailedList a a.link-action,
+    .nv-richList a a.link-action,
+    .nv-productList a a.link-action {
+        float: right;
+        padding: 0 5px 0 0;
+    }
+
+    .nv-productList .item{
+        padding: 0 5px;
+    }
+
+    /* Clear */
+    /* Contain floats: h5bp.com/q */
+    .nv-feedList .item:before, .nv-feedList .item:after,
+    .nv-thumbnailedList .item:before, .nv-thumbnailedList .item:after,
+    .nv-richList .item:before, .nv-richList .item:after,
+    .nv-productList .item:before, .nv-productList .item:after {
+        content: "";
+        display: table;
+    }
+
+    .nv-feedList .item:after,
+    .nv-thumbnailedList .item:after,
+    .nv-richList .item:after,
+    .nv-productList .item:after {
+        clear: both;
+    }
+
+    .nv-feedList .item,
+    .nv-thumbnailedList .item,
+    .nv-richList .item,
+    .nv-productList .item {
+        zoom: 1;
+    }
+
+    .nv-thumbnailedList .item h3,
+    .nv-thumbnailedList .item h3 a,
+    .nv-richList .item h3,
+    .nv-richList .item h3 a,
+    .nv-productList .price {
+        margin: 0;
+        font-size: 1em;
+    }
+
+    .nv-feedList .item .age,
+    .nv-thumbnailedList .item .age,
+    .nv-richList .item .age,
+    .nv-productList .age {
+        color: #AAAAAA;
+        white-space: nowrap;
+    }
+
+    .nv-thumbnailedList .even,
+    .nv-richList .even,
+    .nv-productList .even {
+         background-color: #F6F9FF;
+    }
+
+    .nv-thumbnailedList .item h3 a,
+    .nv-richList .item h3 a{
+        cursor: pointer;
+    }
+
+    .nv-thumbnailedList .item .thumbnail,
+    .nv-productList .item img.thumbnail {
+        float: left;
+        margin-right: 5px;
+    }
+
+    .nv-thumbnailedList .item img.thumbnail{
+        width: 92px;
+        height: 52px;
+    }
+
+    .nv-productList .item img.thumbnail{
+        width: 50px;
+        height: 50px;
+    }
+
+    .nv-thumbnailedList .item h3,
+    .nv-thumbnailedList .item .description{
+        text-align: left;
+    }
+
+    .nv-thumbnailedList .has-thumbnail h3,
+    .nv-thumbnailedList .has-thumbnail .description {
+        margin-left: 97px;
+        margin-right: 0;
+    }
+
+    .rtl .nv-thumbnailedList .item h3,
+    .rtl .nv-thumbnailedList .item .description {
+        text-align: right;
+    }
+
+    .rtl .nv-thumbnailedList .has-thumbnail h3,
+    .rtl .nv-thumbnailedList .has-thumbnail .description {
+        margin-left: 0;
+        margin-right: 97px;
+    }
+
+    .nv-productList .item .description{
+        margin: 0 0 0 55px;
+        padding: 5px 0;
+        line-height: 1em;
+    }
+
+    .nv-thumbnailedList .read,
+    .nv-thumbnailedList .read h3,
+    .nv-thumbnailedList .read h3 a {
+        color: #999999;
+    }
+
+    .nv-feedList .time-infos,
+    .nv-thumbnailedList .time-infos {
+        color: #AAA;
+    }
+
+/* EmailList
+
+  XHTML skeleton:
+  (start code)
+  <dl class="nv-emailList">
+    <dt class="read">
+      <a href="#" title="Read e-mail">
+      <span class="sender">Sender</span> - My e-mail subject #1</a>
+    </dt>
+    <dd>
+      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus condimentum.</p>
+    </dd>
+
+    <dt class="read even">
+      <a href="#" title="Read e-mail">
+      <span class="sender">Sender</span> - My e-mail subject #2</a>
+    </dt>
+    <dd>
+      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus condimentum.</p>
+    </dd>
+  </dl>
+  (end code)
+*/
+dl.nv-emailList dt {
+    color: #333;
+    margin: 0;
+}
+
+dl.nv-emailList dt a{
+    display: block;
+    background: transparent;
+    border-bottom: 1px solid #FFF;
+}
+
+dl.nv-emailList dt a:hover{
+    background: #FFFFE0;
+    border-bottom: 1px solid #DCDC87;
+}
+
+dl.nv-emailList .read .sender {
+    font-weight: normal;
+}
+
+dl.nv-emailList .unread .sender{
+    font-weight: bold;
+}
+
+dl.nv-emailList dd {
+    margin: 0;
+    border-bottom: 1px solid #DDE8F5;
+    margin-bottom: 4px;
+}
+
+dl.nv-emailList dd p {
+    color: #549B3F;
+    padding: 2px 2px 0 6px;
+    margin: 5px 5px 5px 8px;
+    border-left: 4px solid #DFEBFF;
+}
+
+/* SearchList
+
+  XHTML skeleton:
+  (start code)
+  TODO
+  (end code)
+*/
+.nv-searchList .item h3,
+.nv-searchList .item h3 a {
+    color: #00C;
+}
+
+.nv-searchList .item h3 a:visited{
+    color: #551A8B;
+}
+.nv-searchList .item p a {
+    color: green;
+}
+
+
+/* ProductList
+
+  XHTML skeleton:
+  (start code)
+  TODO
+  (end code)
+*/
+.nv-productList .offer{
+    float: right;
+    color: #36C;
+}
+.nv-productList .price,
+.nv-productList .product,
+.nv-productList .merchant{
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+.nv-productList .merchant{
+    color: #36C;
+}
+
+
+/*@import "base/icons.css";*/
+
+/* to have a nicer look & feel, we import parts of the netvibes garlic theme */
+/*
+  Script: core.css
+
+    This file is part of UWA JS Runtime.
+
+  About: License
+
+    Copyright 2006-2012 Netvibes, a Dassault Systèmes company.
+    All rights reserved.
+*/
+
+/* Module header
+*******************************************************************************/
+
+.moduleHeader,
+.white-module .moduleHeader{
+    background: #5d5d5d url(themes/blueberry/img/moduleheader.png) repeat-x top center;
+    padding: 4px 0;
+    border: 1px solid #494949;
+}
+
+/* blue */
+.blue-module .moduleHeader{
+    background: #0fceda url(themes/blueberry/img/moduleheader_blue.png) repeat-x top center;
+    border: 1px solid #11b8ca;
+}
+/* yellow */
+.yellow-module .moduleHeader{
+    background: #fcbe13 url(themes/blueberry/img/moduleheader_yellow.png) repeat-x top center;
+    border: 1px solid #faa014;
+}
+/* green */
+.green-module .moduleHeader{
+    background: #c3df00 url(themes/blueberry/img/moduleheader_green.png) repeat-x top center;
+    border: 1px solid #b4d600;
+}
+/* red */
+.red-module .moduleHeader{
+    background: #eb470d url(themes/blueberry/img/moduleheader_red.png) repeat-x top center;
+    border: 1px solid #e23511;
+}
+/* orange */
+.orange-module .moduleHeader{
+    background: #e81c70 url(themes/blueberry/img/moduleheader_orange.png) repeat-x top center;
+    border: 1px solid #de184e;
+}
+
+/* Module header : links
+*******************************************************************************/
+
+.moduleHeader a,
+.moduleHeader a:hover,
+.moduleHeader .title,
+.moduleHeader .title a,
+.moduleHeader .title a:hover,
+.moduleHeader .title em,
+.moduleHeader .title em a {
+    color: #FFF;
+}
+
+.moduleHeader .share,
+.moduleHeader .edit,
+.moduleHeader .refresh,
+.moduleHeader .close,
+.moduleHeader .maximize,
+.moduleHeader .minimize,
+.moduleHeader .action {
+    background: transparent url(themes/blueberry/img/actions.png) no-repeat;
+    height: 16px;
+    width: 16px;
+    text-indent: -9999px;
+    padding: 0 1px 0 2px;
+    margin: 0 2px;
+}
+
+.moduleHeader .edit {
+    background-position: 0 -429px;
+}
+
+.moduleHeader .refresh {
+    background-position: 0 -190px;
+}
+
+/* Edit content
+*******************************************************************************/
+
+.moduleEdit{
+    background: #F5F5F5 url(themes/blueberry/img/moduleedit.png) repeat-x center top;
+    border: 0;
+    border-bottom: 1px solid #DDD;
+}
+
+/* Module Footer
+*******************************************************************************/
+
+.moduleFooter {
+   bottom: 0;
+   background: #FFF;
+}
+
+/*@import "themes/blueberry/icons.css";*/
+
+html, body {
+    height: 100%;
+    background: #FFF;
+}
+
+/* fix possible issue with Netvibes because .module is now .moduleContent */
+.module {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.moduleHeader {
+    cursor: move;
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMGAConfiguration" xmlns:tns="DS_DELMIAMGAConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="Config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Preferences">
+          <xs:complexType>
+            <xs:all>
+              <xs:element name="LeftBloc" type="tns:BlocType"/>
+              <xs:element name="RightBloc" type="tns:BlocType"/>
+            </xs:all>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Title" type="xs:string" use="required"/>
+      <xs:attribute name="Description" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="BlocType">
+    <xs:sequence>
+      <xs:element name="ConnectionTypes" type="tns:ConnectionTypesType" maxOccurs="1" minOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="considerAllNodes" type="xs:boolean" use="required"/>
+    <xs:attribute name="handleSelection" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ConnectionTypesType">
+    <xs:all>
+      <xs:element name="ProductImplementLink" minOccurs="0"/>
+      <xs:element name="ProcessImplementLink" minOccurs="0"/>
+      <xs:element name="SystemImplementLink" minOccurs="0"/>
+      <xs:element name="ProductImplementLinkOcc" minOccurs="0"/>
+      <xs:element name="ProcessImplementLinkOcc" minOccurs="0"/>
+      <xs:element name="DELFmiProcessImplementCnx" minOccurs="0"/>
+      <xs:element name="MfgProductionPlanning" minOccurs="0"/>
+      <xs:element name="DELSysSpecificationLinksDiscipline" minOccurs="0"/>
+      <xs:element name="DELAsmProcessCanUseCnx" minOccurs="0"/>
+      <xs:element name="DELLmiProductionSystemOutputCnxToMBOM" minOccurs="0"/>
+      <xs:element name="HistorizationLinkRefRef" minOccurs="0"/>
+      <xs:element name="MfgProcessAlternate" minOccurs="0"/>
+      <xs:element name="DELLmiMaterialPathCnxCust" minOccurs="0"/>
+      <xs:element name="PLMDocConnection" minOccurs="0"/>
+      <xs:element name="DELLmiTimeConstraintCnx" minOccurs="0"/>
+    </xs:all>
+  </xs:complexType>
+</xs:schema>

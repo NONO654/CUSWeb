@@ -1,0 +1,2 @@
+/*! Copyright 2014 Dassault Systèmes */
+if(typeof cola==="object"){define("DS/WebCola",cola)}else{if(require.toUrl("DS/WebCola").indexOf("3.0.0/cola.min")===-1){WEBCOLA_BASEPATH=require.toUrl("DS/WebCola/3.0.0/");if(WEBCOLA_BASEPATH.indexOf("?")>-1){WEBCOLA_BASEPATH=WEBCOLA_BASEPATH.substring(0,WEBCOLA_BASEPATH.indexOf("?"))}require.config({paths:{"DS/WebCola":WEBCOLA_BASEPATH+"cola.min"},shim:{"DS/WebCola":{exports:"cola"}}})}}define("DS/D3Cola/D3Cola",["DS/WebCola"],function(a){return a});

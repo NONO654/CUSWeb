@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="urn:com:dassault_systemes:webservice" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<types>
+<xs:schema elementFormDefault="qualified" targetNamespace="urn:com:dassault_systemes:webservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <xs:annotation>
+  <xs:appinfo>
+   <webserviceSchema/>
+  </xs:appinfo>
+ </xs:annotation>
+ <xs:element name="checkAndEditFilter">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iFilterXML" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Configuration filter to be checked and updated. The format is described in the XML schema CfgExpressionDefinition.xsd</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="checkAndEditFilterResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oStatus" nillable="true" type="xs:int">
+     <xs:annotation>
+      <xs:documentation>Output status: -1 if the service failed ; 0 if the filter is not updated ; 1 if the filter is updated</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="oFilterXML" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Updated configuration filter. The format need to be compliant with the XML schema CfgExpressionDefinition.xsd</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="oUserMessage" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Message to be displayed to the user, or empty string if no message is required.</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+</xs:schema></types>
+<message name="checkAndEditFilterInput">
+ <part element="tns:checkAndEditFilter" name="parameters"/>
+</message>
+<message name="checkAndEditFilterOutput">
+ <part element="tns:checkAndEditFilterResponse" name="parameters"/>
+</message>
+<portType name="IConfigurationService">
+ <documentation>Interface which defines the configuration web service.</documentation>
+ <operation name="checkAndEditFilter">
+  <documentation>Method to be implemented by an external system to check the coherency and to modify the configuration filter edited by the user.</documentation>
+  <input message="tns:checkAndEditFilterInput"/>
+  <output message="tns:checkAndEditFilterOutput"/>
+ </operation>
+</portType>
+<binding name="IConfigurationServiceBinding" type="tns:IConfigurationService">
+ <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+ <operation name="checkAndEditFilter">
+  <soap:operation soapAction="checkAndEditFilter" style="document"/>
+  <input>
+   <soap:body use="literal"/>
+  </input>
+  <output>
+   <soap:body use="literal"/>
+  </output>
+ </operation>
+</binding>
+ <service name="ConfigurationService">
+  <port binding="tns:IConfigurationServiceBinding" name="ConfigurationServicePort">
+   <soap:address location="http://tourteldsy:8091/ematrix/webservice?id=configuration"/>
+  </port>
+ </service>
+</definitions>

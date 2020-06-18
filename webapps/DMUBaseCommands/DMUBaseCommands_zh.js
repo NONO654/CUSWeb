@@ -1,0 +1,1 @@
+define("DS/DMUBaseCommands/DMUBaseCommands_zh",{});define("DS/DMUBaseCommands/assets/nls/DMUBaseCommands",{defaultSelectLabel:"选择实体"});

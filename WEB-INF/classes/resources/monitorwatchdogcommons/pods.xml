@@ -1,0 +1,166 @@
+<pods>
+    <common>
+        <component name="MonitoringAgent"/>
+        <component name="OperationAgent"/>
+        <component name="BackupEngine"/>
+        <component name="FailoverEngine"/>
+    </common>
+    <pod name="n!volve">
+        <vm name="MT_LoadBalancer4"/>
+        <vm name="MT_ReverseProxySSL">
+            <component name="ReverseProxy" diagnostics="true"/>
+        </vm>
+        <vm name="MT_LoadBalancer7"/>
+        <!--
+        <vm name="MT_LicenseServer">
+            <component name="DSLS" diagnostics="true"/>
+        </vm>
+        -->
+        <vm name="MT_Database"/>
+        <vm name="MT_Store"/>
+        <vm name="MT_LB7INDEX"/>
+        <!--
+        <vm name="MT_RTCollaboration">
+            <component name="ApacheDS" diagnostics="true"/>
+            <component name="RTC" diagnostics="true"/>
+        </vm>
+        -->
+        <vm name="MT_Metadata">
+            <component name="Tomcat" diagnostics="true"/>
+            <component name="TomcatCAS" diagnostics="true"/>
+        </vm>
+        <vm name="MT_3DIndex">
+            <component name="IndexAndThumbnailBuild" diagnostics="true"/>
+        </vm>
+        <!--
+        <vm name="MT_LogicalEntry"/>
+        -->
+        <vm name="MT_FTSExalead"/>
+        <vm name="MT_FTSMQLClient"/>
+    </pod>
+  <pod name="n!volve_monotenant">
+    <vm name="Collaboration">
+      <component name="DSLS"/>
+      <component name="ReverseProxy"/>
+      <component name="TomcatFirst"/>
+    </vm>
+    <vm name="AuthAndRTCollab">
+      <component name="RTC" diagnostics="true"/>
+    </vm>
+    <vm name="3DIndex">
+      <component name="TomcatFirst" diagnostics="true"/>
+      <component name="IndexServer" diagnostics="true"/>
+    </vm>
+  </pod>
+  <pod name="3DSWYM">
+        <vm name="PassportHttpdTomcatServer"/>
+        <vm name="PassportMysqldMaster"/>
+        <vm name="PassportMysqldSlave"/>
+        <vm name="Filer"/>
+        <vm name="OpenLdapServer"/>
+        <vm name="SwymMysqldMaster"/>
+        <vm name="SwymMysqldSlave"/>
+        <vm name="SwymHttpdTomcatServer"/>
+        <vm name="BatchServer"/>
+        <vm name="BatchVideoServer"/>
+        <vm name="SWYM_LB4"/>
+        <vm name="SWYM_LB7"/>
+        <vm name="SWYM_LB_RP"/>
+        <vm name="SWYM_EXALEAD"/>
+    </pod>
+    <pod name="3DSWYMOSY">
+        <vm name="OSY_Proxy"/>
+    </pod>
+    <pod name="Kafka">
+        <vm name="Kafka"/>
+        <vm name="Zookeeper"/>
+    </pod>
+    <pod name="E4LLEV6">
+        <vm name="E4AllMonoVM"/>
+    </pod>
+    <pod name="E4LLEV6PIX">
+        <vm name="E4AllMonoVMPIX"/>
+    </pod>
+    <pod name="E4LLEV6SXI">
+      <vm name="E4AllMonoVMSXI"/>
+     </pod>
+    <pod name="E4LLEV6PIXSXI">
+      <vm name="E4AllMonoVMPIXSXI"/>
+     </pod>
+  <pod name="RTC1">
+      <vm name="TigaseVM">
+      <component name="RTC" diagnostics="true"/>
+    </vm>
+    </pod>
+    <pod name="6WTAG">
+        <vm name="Tag_LoadBalancer7"/>
+        <vm name="Tag_ReverseProxySSL">
+            <component name="ReverseProxy" diagnostics="true"/>
+        </vm>
+        <vm name="Tag_LoadBalancer4"/>
+        <!--
+        <vm name="Tag_LicenseServer"/>
+        -->
+        <vm name="Tag_Database"/>
+        <vm name="Tag_Metadata"/>
+        <!--
+        <vm name="Tag_FTSExalead"/>
+        <vm name="Tag_FTSMQLClient"/>
+        -->
+    </pod>
+    <pod name="MyApps">
+        <vm name="MyApps_LoadBalancer7"/>
+        <vm name="MyApps_ReverseProxySSL">
+            <component name="ReverseProxy" diagnostics="true"/>
+        </vm>
+        <vm name="MyApps_LoadBalancer4"/>
+        <!--
+        <vm name="MyApps_LicenseServer"/>
+        -->
+        <vm name="MyApps_Database"/>
+        <vm name="MyApps_Metadata"/>
+    </pod>
+  <pod name="FederatedSearch">
+    <vm name="FederatedSearch_LoadBalancer7"/>
+    <vm name="FederatedSearch_ReverseProxySSL">
+      <component name="ReverseProxy" diagnostics="true"/>
+    </vm>
+    <vm name="FederatedSearch_LoadBalancer4"/>
+    <vm name="FederatedSearch_Metadata"/>
+  </pod> 
+  <pod name="DSLS">
+        <vm name="DSLSVM">
+            <component name="DSLS" diagnostics="true"/>
+        </vm>
+    </pod>
+  <pod name="IFWE">
+    <vm name="IFWE_LoadBalancer7"/>
+    <vm name="IFWE_ReverseProxySSL"/>
+    <vm name="IFWE_LoadBalancer4"/>
+    <vm name="IFWE_Compass"/>
+    <vm name="IFWE_Filer"/>
+    <vm name="IFWE_MysqldMaster"/>
+    <vm name="IFWE_MysqldSlave"/>
+    <vm name="IFWE_Database"/>
+  </pod>
+  <pod name="PASSPORT">
+    <vm name="PASSPORT_LB4"/>
+    <vm name="PASSPORT_LB_RP"/>
+    <vm name="PASSPORT_LB7"/>
+    <vm name="PASSPORT_HttpdTomcatServer"/>
+    <vm name="PASSPORT_MysqldMaster"/>
+    <vm name="PASSPORT_MysqldSlave"/>
+    <vm name="PASSPORT_Filer"/>
+    <vm name="PASSPORT_OpenLdapServer"/>
+  </pod>
+  <pod name="NFS">
+    <vm name="NFSServer"/>
+  </pod>
+  <non_pod>
+        <vm name="CommonIT"/>
+        <vm name="NonPOD_*"/>
+        <vm name="NFS"/>
+        <vm name="MonitoringServerBatch"/>
+        <vm name="PodController"/>
+    </non_pod>
+</pods>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="com.dassault_systemes.sma.plugin.TextParserPIFastparser" version="3DX.0" extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflTextParserPIFastParser" nlsID="dispname">Fast Parser</DisplayName>
+	<Description nlsFile="SMAWflTextParserPIFastParser" nlsID="desc">Prepare and parse ASCII text files using fast parser</Description>
+	<LongDescription>FastParser Plug-in for Text Parser</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>TextParserFormat</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.sma.plugin.TextParserPIFastparser</Value>
+		</Attribute>
+		<Attribute name="SupportsDesignSource">
+			<Value>false</Value>
+		</Attribute>
+		<Attribute name="SupportsRuntimeSource">
+			<Value>false</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAWflTextParserPIFastParser16.png" targetFilename="SMAWflTextParserPIFastParser16.png"/>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflTextParserPIFastParser32.png" targetFilename="SMAWflTextParserPIFastParser32.png"/>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflTextParserPIFastParser.CATNls" targetFilename="SMAWflTextParserPIFastParser.CATNls"/>
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflTextParserPIFastParser.sypstyle" targetFilename="SMAWflTextParserPIFastParser.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflTextParserPIFastParserEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refExtensionName="SMAWflTextParser" refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+						<StreamRef refStreamName="NLS"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="mode" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="DesignTemplate" type="file" valuetype="single" mode="input">
+			<Value/>
+		</Property>
+		<Property name="DesignTemplateDisplayName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="RuntimeFile" type="file" valuetype="single" mode="input">
+			<Value/>
+		</Property>
+		<Property name="RuntimeFileDisplayName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+	</Properties>
+</wfext:Extension>

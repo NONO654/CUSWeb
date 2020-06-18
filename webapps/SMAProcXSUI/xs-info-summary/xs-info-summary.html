@@ -1,0 +1,70 @@
+<!--------------------------------------------------------------------
+[xs-canvas HTML Document]
+
+Project:		Experience Studio
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:46:01 GMT
+Assigned to:	Aravind Mohan (zb8)
+Primary use:	xs-info-summary.html
+Description:    Used to display the summary of errors and warnings
+--------------------------------------------------------------------->
+<!-- Importing base -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-alert-message/sp-alert-message.html">
+
+<dom-module id="xs-info-summary">
+  <!-- <link rel="import" type="css" href="xs-info-summary.css"> -->
+  <template>
+    <style>
+    .status {
+      vertical-align: middle;
+      font-size: 1.2em;
+      cursor: pointer; }
+      .status .icon {
+        font-family: "entypo"; }
+      .status .count {
+        text-decoration: underline; }
+      .status .warning:before {
+        color: #ff7900;
+        content: '\e83d'; }
+      .status .error:before {
+        color: #ea4f37;
+        content: '\e813'; }
+
+    .infodialog-alert {
+      cursor: pointer;
+      margin: 5px; }
+
+    .modalinfosummary {
+      text-align: left;
+    }
+    </style>
+
+		<div class="status" on-click="_onShowSummary">
+
+			<template is="dom-if" if="{{_warningCount}}">
+				<span class="icon warning"></span>
+				<span class="count">{{_warningCount}}</span>
+			</template>
+
+			<template is="dom-if" if="{{_errorCount}}">
+				<span class="icon error"></span>
+				<span class="count">{{_errorCount}}</span>
+			</template>
+		</div>
+
+        <!--Dialog to show any issues with the Experience-->
+        <sp-modal id="modal" class="modalinfosummary" heading="Summary" height="300px" width="800px">
+            <section>
+                <template is="dom-repeat" items="{{infos}}" as="item">
+                    <sp-alert-message visible class="infodialog-alert" on-click="_onClick"
+                    				  message="{{item.description}}" heading="{{item.title}}"
+                    				  type="{{item.type}}" showCloseButtonFlag="false"></sp-alert-message>
+                </template>
+            </section>
+        </sp-modal>
+	</template>
+  <script src="xs-info-summary.js"></script>
+</dom-module>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<description xmlns="urn:com:dassault_systemes:widl" xmlns:managed="urn:com:dassault_systemes:widl:managed" xmlns:upr="http://www.3ds.com/xsd/3DXML_WSUPRTypes" xmlns:plm="http://www.3ds.com/xsd/3DXML/PLM" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd urn:com:dassault_systemes:widl:managed ..\xsd\widlmanaged.xsd">
+	<imports>
+		<import location="DELDigProdOrchestrationService.widl"/>
+	</imports>
+  <entities targetNamespace="urn:com:dassault_systemes:webservice">
+    <schemaImports>
+      <schemaImport location="3DXML_WSCommonTypes.xsd"/>
+      <schemaImport location="3DXML_WSUPRTypes.xsd"/>
+    </schemaImports>
+  </entities>
+  <representations>
+		<representation xsi:type="managed:ManagedMappingType">
+      <managed:types>
+        <managed:type class="com.dassault_systemes.VPLMJWebServices.ws.types.EntityType[][]" entityRef="upr:ListOfEntityTypeArray"/>
+        <managed:type class="com.dassault_systemes.VPLMJWebServices.ws.types.ExpandBaseResult" entityRef="upr:ExpandBaseResultType"/>
+        <managed:type class="com.dassault_systemes.VPLMJWebServices.ws.types.ListOfWSIType[]" entityRef="upr:ListOfWSITypeArray"/>
+        <managed:type class="java.lang.String[][]" entityRef="upr:ListOfStringTypeArray" generated="false"/>
+      </managed:types>
+      <managed:holders>
+        <managed:holder id="upr_holder1" class="com.dassault_systemes.VPLMJWebServices.ws.types.holders.ListOfEntityTypeHolder" entityRef="plm:ListOfEntityType"/>
+        <managed:holder id="upr_holder2" class="com.dassault_systemes.VPLMJWebServices.ws.types.holders.ListOfEntityTypeArrayHolder" entityRef="upr:ListOfEntityTypeArray"/>
+        <managed:holder id="upr_holder3" class="com.dassault_systemes.VPLMJWebServices.ws.types.holders.ExpandBaseResultHolder" entityRef="upr:ExpandBaseResultType"/>
+        <managed:holder id="upr_holder4" class="com.dassault_systemes.VPLMJWebServices.ws.types.holders.ListOfWSITypeHolder" entityRef="plm:ListOfWSIType"/>
+        <managed:holder id="upr_holder5" class="com.dassault_systemes.VPLMJWebServices.ws.types.holders.ListOfWSITypeArrayHolder" entityRef="upr:ListOfWSITypeArray"/>
+        <managed:holder id="upr_holder6" class="com.dassault_systemes.VPLMJWebServices.ws.types.holders.ListOfStringTypeArrayHolder" entityRef="upr:ListOfStringTypeArray"/>
+      </managed:holders>
+      <managed:serializers>
+        <managed:serializer id="upr_ser1" class="com.dassault_systemes.VPLMJWebServices.ws.xml.ExpandBaseResultSerializer" entityRef="upr:ExpandBaseResultType"/>
+      </managed:serializers>
+      <managed:interfaces>
+				<managed:interface class="com.dassault_systemes.DELJDigProdWS.itf.IDELDigProdOrchestrationService" entityRef="tns:IDELDigProdOrchestrationService"/>
+			</managed:interfaces>
+			<managed:implementations>
+				<managed:implementation class="com.dassault_systemes.DELJDigProdWS.impl.DELDigProdOrchestrationService" entityRef="tns:DELDigProdOrchestrationService"/>
+			</managed:implementations>
+		</representation>
+	</representations>
+</description>

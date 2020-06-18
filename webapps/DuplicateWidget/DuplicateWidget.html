@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?> 
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/"> 
+ <!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<head>   
+    
+    <title>Hello World Widget App</title>
+	
+	<!-- Application Metas Start -->
+	
+    <meta name="description" content="CAA Web Apps basic use case " />
+    <meta name="keywords" content="CAA Use Case" />
+   	
+	<!-- Application Metas End -->
+	
+	    <!-- Load UWA stand alone environment(for running widgets in stand alone mode) --> 
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    
+    <!-- The DS AMD loader -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+	
+	<!-- Application JS Start -->
+    <script >
+	'use strict';
+    
+    var dependencies = dependencies || [];
+    
+    require(
+        // dependencies
+        ['DS/DuplicateWidget/DuplicateWidget'].concat(dependencies),
+        function( DuplicateWidget ) {   
+       
+			var MyWidget = {	
+					        			
+				onLoad: function() {
+					var that = this;
+					that.widgetUI = new DuplicateWidget(widget, widget.body, {
+						physicalid: '6468B556046D0000C6140355C2E20500',
+// 						callback: function(data){
+// 			   	        	console.log('Received data via the callback: ' + data);
+// 			   	        }
+					});
+				   	
+				},
+	   	        onRefresh: function() {
+					console.log('onRefresh');
+	   	        }
+	   	        
+	    	};// end var
+
+			//The "onLoad" event is the very first event triggered when the widget is fully loaded. 
+			widget.addEvent('onLoad', MyWidget.onLoad);
+   			widget.addEvent('onRefresh', MyWidget.onRefresh);
+
+   			
+        } // end function
+	);// end require
+    </script>
+	<!-- Application JS End -->
+</head>
+<body>
+</body>
+</html>

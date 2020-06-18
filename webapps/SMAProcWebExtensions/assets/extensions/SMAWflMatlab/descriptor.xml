@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.Matlab" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflMatlab" nlsID="dispname">MATLAB</DisplayName>
+	<Description nlsFile="SMAWflMatlab" nlsID="desc">Exchanges data with MATLAB</Description>
+	<LongDescription nlsFile="SMAWflMatlab" nlsID="longdesc">Sends data to MATLAB, executes commands and scripts, and retrieves data from MATLAB.</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>600</Value>
+			<Value>500</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflMatlab.png" targetFilename="large/I_SMAWflMatlab.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflMatlab.CATNls" targetFilename="SMAWflMatlab.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflMatlab_Japanese.CATNls" targetFilename="SMAWflMatlab_Japanese.CATNls" locale="Japanese" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflMatlab.dll" targetFilename="win_b64/SMAWflMatlab.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflMatlabUI.sypstyle" targetFilename="SMAWflMatlabUI.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflMatlabEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflMatlabHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<!-- Setup default parameter values to a reasonable configuration
+    
+    1. channel : Possible Values:
+             0==Uninitialized 1==JMatLink 2==Java Socket (unshared) 3==Java Socket (shared)
+			 Initial Value = 2
+			 The UI/sypintro variable : @channel
+			 The methods: int Getchannel(); 
+						  Setchannel(int &iValue);
+    2. matlabCommand : Possible Values:
+        String value consisting of: Full path and file name of Matlab executable
+        Initial Value = empty
+        The UI/sypintro variable : @matlabCommand
+        The methods: CATUnicodeString GetmatlabCommand();
+                     SetmatlabCommand(CATUnicodeString &iDefaultPath);
+    3. captureConsole : Possible Values:
+            TRUE, FALSE
+            Initial Value: FALSE
+            The UI/sypintro variable : @captureConsole
+            The methods: CATBoolean GetcaptureConsole();
+            SetcaptureConsole(CATBoolean &iCaptureOutput);
+    4. consoleErrorStringList : User input error strings stored in the string variable for 
+        consoleErrorStringList and is used to raise an error
+        Possible Values:
+        Any string value input by user
+        Initial Value = empty
+        The UI/sypintro variable : @consoleErrorStringList
+        The methods: CATUnicodeString GetconsoleErrorStringList();
+        SetconsoleErrorStringList(CATUnicodeString &iStrings);
+    5.engineClosePolicy : ClosePolicy of the engine
+        Initial Value = 1
+        The UI/sypintro variable : @engineClosePolicy
+        The methods: int GetengineClosePolicy();
+        SetengineClosePolicy(int &iPolicy);
+    6. reusePolicy : Possible Values: any string value
+        String value consisting of reUse policy
+        Initial Value = empty
+        The UI/sypintro variable : @reusePolicy
+        The methods: CATUnicodeString GetreusePolicy();
+        SetreusePolicy(CATUnicodeString &ireuseValue);
+    7. runHidden : MATLAB runs under background or foreground
+        Possible Values:
+        TRUE, FALSE
+        Initial Value: FALSE
+        The UI/sypintro variable : @runHidden
+        The methods: CATBoolean GetrunHidden();
+        SetrunHidden(CATBoolean &iIsToRunHidden);
+    
+    8. errorsIgnored : Possible values: True, False
+        If TRUE
+        Will cause (some) M-Script errors be ignored
+        If FALSE
+        All errors will be used : displayed or published...
+
+        The UI/sypintro variable : @errorsIgnored
+        The methods: CATBoolean GeterrorsIgnored();
+        SeterrorsIgnored(CATBoolean &iToIgnore)
+        errorsIgnored
+        is set to TRUE if the ignoredErrorText is non-empty
+        is set to FALSE if the ignoredErrorText is empty
+        
+     9. ignoredErrorTest : Ignore M-Script error if message contains this string
+        The possible valeus: empty or non-empty string
+        The UI/sypintro variable : @ignoredErrorText
+        The methods: CATUnicodeString GetignoredErrorText();
+        SetignoredErrorText(CATUnicodeString &iErrText)
+        ignoredErrorText is set to empty string if the errorsIgnored variable is FALSE
+        and the input is iErrText is empty.
+        ignoredErrorText is set to non-empty string and the errorsIgnored is set / reset to TRUE.-->
+
+	<Properties>
+
+		<Property name="initialize actions" tag="initialize actions" type="aggregate" valuetype="single">
+		</Property>
+		<!-- Execution-steps template easiest to establish via declaration:  -->
+		<Property name="execution actions" tag="execution actions" type="aggregate" valuetype="single">
+			<Property name="execution actions0" type="aggregate" valuetype="single">
+				<Property name="ID0" type="String" valuetype="single">
+					<Value>Input Mappings</Value>
+				</Property>
+				<Property name="Type0" type="String" valuetype="single">
+					<Value>Mapping</Value>
+				</Property>
+				<Property name="Enable0" type="boolean" valuetype="single">
+					<Value>true</Value>
+				</Property>
+				<Property name="Content0" type="String" valuetype="single">
+					<Value/>
+				</Property>
+			</Property>
+			<Property name="execution actions1" type="aggregate" valuetype="single">
+				<Property name="ID1" type="String" valuetype="single">
+					<Value>Commands</Value>
+				</Property>
+				<Property name="Type1" type="String" valuetype="single">
+					<Value>Command</Value>
+				</Property>
+				<Property name="Enable1" type="boolean" valuetype="single">
+					<Value>true</Value>
+				</Property>
+				<Property name="Content1" type="String" valuetype="single">
+					<Value/>
+				</Property>
+			</Property>
+			<Property name="execution actions2" type="aggregate" valuetype="single">
+				<Property name="ID2" type="String" valuetype="single">
+					<Value>Output Mappings</Value>
+				</Property>
+				<Property name="Type2" type="String" valuetype="single">
+					<Value>Mapping</Value>
+				</Property>
+				<Property name="Enable2" type="boolean" valuetype="single">
+					<Value>true</Value>
+				</Property>
+				<Property name="Content2" type="String" valuetype="single">
+					<Value/>
+				</Property>
+			</Property>
+		</Property>
+		<Property name="finalize actions" tag="finalize actions" type="aggregate" valuetype="single">
+		</Property>
+
+		<Property name="channel" tag="channel"
+            type="integer"
+            valuetype="single">
+			<Value>2</Value>
+		</Property>
+
+		<Property name="matlabCommand" tag="matlabCommand"
+                  type="String"
+                  valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="captureConsole" tag="captureConsole"
+                  type="boolean"
+                  valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="captureConsoleMode" tag="captureConsoleMode"
+            type="integer"
+            valuetype="single">
+			<Value>0</Value>
+		</Property>
+
+		<Property name="consoleErrorStringList" tag="consoleErrorStringList"
+            valuetype ="String">
+			<Value/>
+		</Property>
+
+		<Property name="showMatlabGUI" tag="showMatlabGUI"
+                  type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="errorsIgnored" tag="errorsIgnored"
+                  type="boolean"
+                  valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="ignoredErrorText" tag="ignoredErrorText"
+                  type="String">
+			<Value/>
+		</Property>
+
+		<Property name="engineClosePolicy" tag="engineClosePolicy"
+                  type="integer"
+                  valuetype="single">
+			<Value>1</Value>
+		</Property>
+
+		<Property name="reusePolicy" tag="reusePolicy"
+                  type="String">
+			<Value/>
+		</Property>
+
+		<Property name="maxConcurrent" tag="maxConcurrent"
+          type="Integer">
+			<Value>1</Value>
+		</Property>
+	</Properties>
+
+</wfext:Extension>
+

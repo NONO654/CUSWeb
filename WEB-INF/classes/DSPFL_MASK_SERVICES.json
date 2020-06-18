@@ -1,0 +1,525 @@
+{
+	"dsmvpfl:ModelBaseMask": [
+		 {
+            "property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask",
+            "application":"X_PORTFOLIO"
+        },
+		
+         {
+            "property": "attribute[Marketing Name]",
+            "key": "title",
+            "example": "Model 01",
+            "application":"X_PORTFOLIO"
+        }
+	],
+    "dsmvpfl:ModelVersionBaseMask": [
+    {
+            "property": "to[Products].from.name",
+            "key": "modelName",
+            "label":"XPortfolio.Label.Attribute.ModelName",
+            "example": "Model01"
+        },
+        {
+            "property": "to[Products].from.physicalid",
+            "key": "modelID",
+            "label":"XPortfolio.Label.Attribute.ModelId",
+            "example": "D43DC670000029F45BA222F200000284"
+        },
+        {
+        	"property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask"
+        },
+        {
+            "property": "attribute[Marketing Name]",
+            "key": "title",
+            "example": "Front Seat ",
+            "application":"X_PORTFOLIO"
+        },
+		{
+            "property": "attribute[Base Price]",
+            "key": "basePrice",
+            "example": "0",
+            "application":"X_PORTFOLIO"
+        },
+        {
+        	 "property": "computed",
+           	 "key": "isRoot",
+           	 "label":"XPortfolio.Label.Attribute.IsRoot",
+             "function": "isRootMV",
+             "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+	 		 "application":"X_PORTFOLIO"
+		}, 
+		{
+		 	"property": "computed",
+            "key": "isLeaf",
+            "label":"XPortfolio.Label.Attribute.IsLeaf",
+            "function": "isLeafMV",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+			"application":"X_PORTFOLIO"
+		}
+        
+    
+  
+        
+    ],   
+   "dsmvpfl:ModelVersionUIMask": [
+        {
+        	"property": "reuseMask",
+            "mask": "dsmvpfl:ModelVersionBaseMask"
+        },   
+        {
+        	"property": "computed",
+        	"key":"image",
+        	"label":"XPortfolio.Label.Attribute.Image",
+        	"program":"com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+        	"function":"getImageURL",
+        	"fileFormat": "generic,mxImage,mxLarge Image,mxMedium Image,mxSmall Image,mxThumbnail Image,Image",
+            "application":"X_PORTFOLIO"
+        }
+       
+	],	
+	
+	"dsmvpfl:ProductConfigurationBaseMask": [
+        {
+        	"property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Marketing Name]",
+            "key": "title",
+            "example": "Front Seat ",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Completeness Status]",
+            "key": "completenessStatus",
+            "label":"XPortfolio.Label.Attribute.CompletenessStatus",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Evaluate Rules]",
+            "key": "evalRules",
+            "label":"XPortfolio.Label.Attribute.EvalRules",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Multi Selection Allowed]",
+            "key": "multiSelection",
+            "label":"XPortfolio.Label.Attribute.MultiSelection",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Rule Compliancy Status]",
+            "key": "compliancyStatus",
+            "label":"XPortfolio.Label.Attribute.CompliancyStatus",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Rule Evaluation Mode]",
+            "key": "evalMode",
+            "label":"XPortfolio.Label.Attribute.EvalMode",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Selection Mode]",
+            "key": "selectMode",
+            "label":"XPortfolio.Label.Attribute.SelectMode",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[List Price]",
+            "key": "listPrice",
+            "label": "XPortfolio.Label.Attribute.ListPrice",
+            "application":"X_PORTFOLIO"
+        }
+	],
+	
+	   "dsmvpfl:ProductConfigurationUIMask": [
+        {
+        	"property": "reuseMask",
+            "mask": "dsmvpfl:ProductConfigurationBaseMask"
+        },   
+        {
+        	"property": "computed",
+        	"key":"image",
+        	"label":"XPortfolio.Label.Attribute.Image",
+        	"program":"com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+        	"function":"getImageURL",
+        	"fileFormat": "generic,mxImage,mxLarge Image,mxMedium Image,mxSmall Image,mxThumbnail Image,Image",
+            "application":"X_PORTFOLIO"
+        }
+	],
+    "dsmvpfl:RuleBaseMask": [
+        {
+        	"property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask"
+        },
+		{
+            "property": "computed",
+            "key": "ruleType",
+            "label":"XPortfolio.Label.Attribute.RuleType",
+            "function": "getRuleType",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "example": "Matrix Rule",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Layout Data]",
+            "key": "layoutData",
+            "label":"XPortfolio.Label.Attribute.LayoutData",
+            "application":"X_PORTFOLIO",
+            "example": "My Layout Data"
+        },
+        {
+            "property": "attribute[Master Expression]",
+            "key": "masterExpression",
+            "label":"XPortfolio.Label.Attribute.MasterExpression",
+            "application":"X_PORTFOLIO",
+            "example": ""
+        },
+        {
+            "property": "attribute[Compiled Expression]",
+            "key": "compiledExpression",
+            "label":"XPortfolio.Label.Attribute.CompiledExpression",
+            "application":"X_PORTFOLIO"
+        }
+	],
+	  "dsmvpfl:RuleUIMask": [
+        {
+        	"property": "reuseMask",
+            "mask": "dsmvpfl:RuleBaseMask"
+        },
+        {
+        	"property": "computed",
+        	"key":"image",
+        	"label":"XPortfolio.Label.Attribute.Image",
+        	"program":"com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+        	"function":"getImageURL",
+        	"fileFormat": "generic,mxImage,mxLarge Image,mxMedium Image,mxSmall Image,mxThumbnail Image,Image",
+            "application":"X_PORTFOLIO"
+        }
+	],
+	"dsmvpfl:ModelVersionRulesBaseMask": [
+        {
+            "property": "computed",
+            "key": "rules",
+            "function": "getLocalRules",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "mask": "dsmvpfl:RuleBaseMask",
+            "maskAppliesTo": "bus",
+            "fetchOnce":"true",
+            "application":"X_PORTFOLIO"
+        }
+	],
+	"dsmvpfl:ModelVersionRulesUIMask": [
+        {
+            "property": "computed",
+            "key": "rules",
+            "function": "getLocalRules",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "mask": "dsmvpfl:RuleUIMask",
+            "maskAppliesTo": "bus",
+             "fetchOnce":"true",
+            "application":"X_PORTFOLIO"
+        }
+	],
+	 "dsmvpfl:VariantValuesBaseMask": [
+	        {
+            "property": "computed",
+            "key": "values",
+            "function": "getOptionsFromFeature",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "mask": "dsmvpfl:ValueBaseMask",
+            "maskAppliesTo": "bus",
+            "fetchOnce":"true",
+            "application":"X_PORTFOLIO"
+        }
+        
+	],
+
+	  "dsmvpfl:VariantValuesUIMask": [
+	         {
+            "property": "computed",
+            "key": "values",
+            "function": "getOptionsFromFeature",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "mask": "dsmvpfl:ValueUIMask",
+            "maskAppliesTo": "bus",
+            "fetchOnce":"true",
+            "application":"X_PORTFOLIO"
+        }
+	],
+	 "dsmvpfl:VariabilityGroupOptionsBaseMask": [
+	         {
+            "property": "computed",
+            "key": "options",
+            "function": "getOptionsFromFeature",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "mask": "dsmvpfl:OptionBaseMask",
+            "maskAppliesTo": "bus",
+            "fetchOnce":"true",
+            "application":"X_PORTFOLIO"
+        }
+        
+	],
+
+	  "dsmvpfl:VariabilityGroupOptionsUIMask": [
+	         {
+            "property": "computed",
+            "key": "options",
+            "function": "getOptionsFromFeature",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "mask": "dsmvpfl:OptionUIMask",
+            "maskAppliesTo": "bus",
+             "fetchOnce":"true",
+            "application":"X_PORTFOLIO"
+        }
+	],
+	 "dsmvpfl:ValueBaseMask": [
+        {
+            "property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Display Name]",
+            "key": "title",
+            "example": "Front Seat ",
+            "application":"X_PORTFOLIO"
+        }
+        
+	],
+
+	  "dsmvpfl:ValueUIMask": [
+        {
+            "property": "reuseMask",
+            "mask": "dsmvpfl:ValueBaseMask",
+            "application":"X_PORTFOLIO"
+        },
+        {
+        	"property": "computed",
+        	"key":"image",
+        	"label":"XPortfolio.Label.Attribute.Image",
+        	"program":"com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+        	"function":"getImageURL",
+        	"fileFormat": "generic,mxImage,mxLarge Image,mxMedium Image,mxSmall Image,mxThumbnail Image,Image",
+			  "application":"X_PORTFOLIO"
+        }
+	],
+		 "dsmvpfl:OptionBaseMask": [
+        {
+            "property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Display Name]",
+            "key": "title",
+            "example": "Front Seat ",
+             "application":"X_PORTFOLIO"
+        }
+        
+	],
+
+	  "dsmvpfl:OptionUIMask": [
+        {
+            "property": "reuseMask",
+            "mask": "dsmvpfl:OptionBaseMask",
+            "application":"X_PORTFOLIO"
+        },
+        {
+        	"property": "computed",
+        	"key":"image",
+        	"label":"XPortfolio.Label.Attribute.Image",
+        	"program":"com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+        	"function":"getImageURL",
+        	"fileFormat": "generic,mxImage,mxLarge Image,mxMedium Image,mxSmall Image,mxThumbnail Image,Image",
+        	"application":"X_PORTFOLIO"
+        }
+	],
+	
+	 "dsmvpfl:VariantBaseMask": [
+        {
+            "property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Display Name]",
+            "key": "title",
+           	"example": "Front Seat ",
+            "application":"X_PORTFOLIO"
+        }
+        
+	],
+
+	  "dsmvpfl:VariantUIMask": [
+        {
+            "property": "reuseMask",
+            "mask": "dsmvpfl:VariantBaseMask",
+            "application":"X_PORTFOLIO"
+        },
+        {
+        	"property": "computed",
+        	"key":"image",
+        	"label":"XPortfolio.Label.Attribute.Image",
+        	"program":"com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+        	"function":"getImageURL",
+        	"fileFormat": "generic,mxImage,mxLarge Image,mxMedium Image,mxSmall Image,mxThumbnail Image,Image",
+            "application":"X_PORTFOLIO"
+        }
+	],
+		 "dsmvpfl:VariabilityGroupBaseMask": [
+        {
+            "property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Display Name]",
+            "key": "title",
+            "example": "Front Seat ",
+            "application":"X_PORTFOLIO"
+        }
+        
+	],
+
+	  "dsmvpfl:VariabilityGroupUIMask": [
+        {
+            "property": "reuseMask",
+            "mask": "dsmvpfl:VariabilityGroupBaseMask",
+            "application":"X_PORTFOLIO"
+        },
+         {
+        	"property": "computed",
+        	"key":"image",
+        	"label":"XPortfolio.Label.Attribute.Image",
+        	"program":"com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+        	"function":"getImageURL",
+        	"fileFormat": "generic,mxImage,mxLarge Image,mxMedium Image,mxSmall Image,mxThumbnail Image,Image",
+             "application":"X_PORTFOLIO"
+        }
+	],
+		 "dsmvpfl:ParameterBaseMask": [
+        {
+            "property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "attribute[Display Name]",
+            "key": "title",
+            "example": "Front Seat ",
+            "application":"X_PORTFOLIO"
+        }
+         ,
+        {
+            "property": "computed",
+            "key": "kind",
+            "label":"XPortfolio.Label.Attribute.Kind",
+            "function": "getKind",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "example": "LENGTH",
+            "application":"X_PORTFOLIO"
+        }
+        ,
+        {
+            "property": "computed",
+            "key": "dimension",
+            "label":"XPortfolio.Label.Attribute.Dimension",
+            "function": "getDimension",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "example": "LENGTH",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "computed",
+            "key": "minValue",
+            "label":"XPortfolio.Label.Attribute.MinValue",
+            "function": "getMinValue",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "example": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflOpenAPIImpl.getMinMaxValueJson",
+            "application":"X_PORTFOLIO"
+        },
+        {
+            "property": "computed",
+            "key": "maxValue",
+            "label":"XPortfolio.Label.Attribute.MaxValue = MaxValue",
+            "function": "getMaxValue",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "example": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflOpenAPIImpl.getMinMaxValueJson",
+            "application":"X_PORTFOLIO"
+        }
+	],
+	 "dsmvpfl:ParameterUIMask": [
+        {
+            "property": "reuseMask",
+            "mask": "dsmvpfl:ParameterBaseMask",
+            "application":"X_PORTFOLIO"
+        },
+         {
+        	"property": "computed",
+        	"key":"image",
+        	"label":"XPortfolio.Label.Attribute.Image",
+        	"program":"com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+        	"function":"getImageURL",
+        	"fileFormat": "generic,mxImage,mxLarge Image,mxMedium Image,mxSmall Image,mxThumbnail Image,Image",
+             "application":"X_PORTFOLIO"
+        }
+	],
+	"dsmvpfl:ModelMask.Common": [{
+            "property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask"
+        },
+        {
+            "property": "from[Main Product].to.last.physicalid",
+            "key": "latestModelVersion",
+            "maskAppliesTo": "bus",
+            "mask": "dsmveno:DefaultErBusMask",
+            "application":"X_PORTFOLIO"
+        }
+    ],
+    "dsmvpfl:ModelVersionPCsBaseMask": [{
+            "property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask"
+        },
+        {
+            "property": "from[Product Configuration].to.physicalid",
+            "key": "productConfigurations",
+            "maskAppliesTo": "bus",
+            "mask": "dsmvpfl:ProductConfigurationBaseMask",
+            "application":"X_PORTFOLIO"
+        }
+    ],
+     "dsmvpfl:ModelVersionPCsUIMask": [{
+            "property": "reuseMask",
+            "mask": "dsmveno:DefaultErBusMask"
+        },
+        {
+            "property": "from[Product Configuration].to.physicalid",
+            "key": "productConfigurations",
+            "maskAppliesTo": "bus",
+            "mask": "dsmvpfl:ProductConfigurationUIMask",
+            "application":"X_PORTFOLIO"
+        }
+    ],
+    "dsmvpfl:ReferenceModelMask.Common": [{
+    		"property": "reuseMask",
+            "mask": "dsmveno:DefaultBusMask"
+        },
+        {
+            "property": "computed",
+            "key": "attachedModels",
+            "function": "getAttachedModels",
+            "program": "com.dassault_systemes.enovia.xapps.dspfl.impl.dspflComputedProperties",
+            "maskAppliesTo": "bus",
+            "mask": "dsmvpfl:ModelMask.Common",
+            "application":"X_PORTFOLIO"
+        }
+    ]
+}
+
+
+

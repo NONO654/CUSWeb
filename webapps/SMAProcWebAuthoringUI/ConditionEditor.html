@@ -1,0 +1,173 @@
+<dom-module id="cmp-condition-editor">
+    <template>
+        <style>
+        .flex-container-grey {
+            display: -webkit-flex;
+            display: flex;
+            width: 100%;
+            height: 40px;
+            background-color: lightgrey;
+        }
+        .flex-container-grey-expression {
+            display: -webkit-flex;
+            display: flex;
+            width: 100%;
+            height: 100px;
+            background-color: lightgrey;
+        }
+
+        .flex-item-fi-label {
+            background-color: darkgrey;
+            width: 100%;
+            height: 40px;
+        }
+
+        .flex-item-condition-radio {
+            background-color: lightgrey;
+            width: 98%;
+            height: 40px;
+        }
+
+        .flex-item-expression-editor {
+            background-color: lightgrey;
+            width: 98%;
+            height: 100px;
+        }
+        .flex-item-horizontal-spacer {
+            background-color: lightgrey;
+            width: 20px;
+            height: 100%;
+        }
+
+        .flex-group {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .flex-container {
+          padding: 0;
+          margin: 0;
+          list-style: none;
+          border: 0px solid silver;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          flex: 0 0 auto;
+          align-items: center;
+        }
+
+        .flex-container-not-visible {
+          display: none;
+        }
+
+        .flex-item {
+          padding: 0px;
+          margin: 0px;
+          color: white;
+          font-size: 14px;
+          text-align: left;
+        }
+
+        .horizontal-space {
+          height: 40px;
+        }
+
+        .height-standard {
+          height: 30px;
+        }
+
+        .horizontal-space {
+          height: 10px;
+        }
+
+        .vertical-space {
+          width: 10px;
+        }
+
+        .margin-left {
+          width: 20px;
+          height: 40px;
+        }
+        .width-validation {
+          width:40px;
+        }
+        .width-chooser {
+          width: 200px;
+        }
+
+        .lightgrey {
+          background: #fafafa;
+        }
+
+        .red {
+          background: red;
+        }
+
+        .gold {
+          background: gold;
+        }
+
+        .blue {
+          background: deepskyblue;
+        }
+
+        .green {
+          background: green;
+        }
+        .orange {
+          background: orange;
+        }
+        .pink {
+          background: pink;
+        }
+        .white {
+          background: white;
+        }
+        .condition-radio + label{
+            margin-left: 56px;
+        }
+
+        .condition-radio-input{
+            margin-right: 1px;
+        }
+
+        .fi-name-label
+        {
+            color: black;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        .condition-radio-label
+        {
+            font-weight: normal;
+            color: black;
+        }
+
+        pcw-sdk-calculator-editor
+        {
+            width:100%;
+        }
+
+        </style>
+        <div class="flex-group lightgrey">
+            <div class="flex-container height-standard lightgrey">
+                <div class="flex-item">
+                    <label class="fi-name-label control-label">{{flowItemName}}</label></div>
+            </div>
+            <div class="flex-container height-standard lightgrey">
+                <div class="flex-item margin-left lightgrey"></div>
+                <div class="flex-item">
+                    <label class="condition-radio condition-radio-label"><input type="radio" class="condition-radio-input" name="{{conditionRadioName}}" id="ae" on-change="onExecutionModeChanged"/>Always execute</label>
+                    <label class="condition-radio condition-radio-label"><input type="radio" class="condition-radio-input" name="{{conditionRadioName}}" id="ce" on-change="onExecutionModeChanged"/>Conditionally execute <pcw-help-icon path="SedUserMap/sed-c-SimProc-CondSyntax.htm" topic="Conditional Expressions in Branches"></pcw-help-icon></label>
+                    <label class="condition-radio condition-radio-label"><input type="radio" class="condition-radio-input" name="{{conditionRadioName}}" id="ne" on-change="onExecutionModeChanged"/>Never execute</label>
+                </div>
+            </div>
+            <div id='{{expEditorPanel}}' name="{{expEditorPanel}}" class$="{{_showHideExpEditor('flex-container', _showExpEditor)}}">
+                <pcw-sdk-calculator-editor id="expEditor" restrict-undeclared-parameter only-logical-expression  max-lines="10"></pcw-sdk-calculator-editor>
+            </div>
+            <div class="flex-container horizontal-space white"></div>
+            <div class="flex-container horizontal-space white"></div>
+        </div>
+    </template>
+</dom-module>

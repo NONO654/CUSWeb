@@ -1,0 +1,15 @@
+m|WebClientSession\WebApplicationBase.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.3.19005
+r|G:\R421\BSF\.
+t|win_b64\webapps\WebApplicationBase\WebApplicationBase.js|1546658229|16907
+s|WebClientSession\WebApplicationBase.mweb\src\W3AASGNodeHolder.js|1513769085|12465
+s|WebClientSession\WebApplicationBase.mweb\src\W3AIManager.js|1518707879|4558
+s|WebClientSession\WebApplicationBase.mweb\src\VCXIModelNavigable.js|1518707879|3971
+s|WebClientSession\WebApplicationBase.mweb\src\W3AISGNodeHolder.js|1489661676|8372
+s|WebClientSession\WebApplicationBase.mweb\src\W3AAManager.js|1518707879|4497
+s|WebClientSession\WebApplicationBase.mweb\src\W3AManagerSet.js|1532614640|11865
+s|WebClientSession\WebApplicationBase.mweb\src\WebApplicationBase.js|1531987358|10495
+s|WebClientSession\WebApplicationBase.mweb\src\VCXAModelNavigable.js|1542806616|8751
+s|WebClientSession\WebApplicationBase.mweb\src\WebComponentsMap.js|1545039634|12030

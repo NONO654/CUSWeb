@@ -1,0 +1,30 @@
+/*
+ *	Product Connector Customization
+ */
+
+// PACKAGE <ConnectorQualicationPrefix>;
+PACKAGE PLM;
+
+/*
+ * Compatibility
+ */
+
+METHOD rel_VPMInstance.GetReference() :
+	GetReferencePHYSICALAbstractReference().As_VPMReference();
+
+
+/*
+ *	Product Extensions
+ */
+
+METHOD rel_VPMInstance.SubProducts() -doc :
+	GetReference().SubProducts()
+CATEGORY I18N("Category.Navigation")
+LABEL I18N("Method.Navigation.Sub_Products")
+HELPTEXT I18N("Method.Sub_Products_Description");
+
+METHOD VPMReference.getAllSubProducts() -doc :
+	SubProducts.*(SubProducts)
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.GetAllSubProducts")
+HELPTEXT I18N("Method.Tooltip.GetAllSubProducts");

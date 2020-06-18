@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="urn:com:dassault_systemes:webservice" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <types>
+  <xs:schema targetNamespace="urn:com:dassault_systemes:webservice:messages">
+   <xs:import namespace="urn:com:dassault_systemes:webservice" schemaLocation="../xsd/IPersonService.xsd"/>
+  </xs:schema>
+ </types>
+ <message name="createPersonInput">
+  <part element="tns:createPerson" name="parameters"/>
+ </message>
+ <message name="createPersonOutput">
+  <part element="tns:createPersonResponse" name="parameters"/>
+ </message>
+ <message name="createPersonErrorType">
+  <part element="tns:createPersonErrorType" name="details"/>
+ </message>
+ <message name="queryPersonInput">
+  <part element="tns:queryPerson" name="parameters"/>
+ </message>
+ <message name="queryPersonOutput">
+  <part element="tns:queryPersonResponse" name="parameters"/>
+ </message>
+ <message name="queryPersonErrorType">
+  <part element="tns:queryPersonErrorType" name="details"/>
+ </message>
+ <message name="updatePersonInput">
+  <part element="tns:updatePerson" name="parameters"/>
+ </message>
+ <message name="updatePersonOutput">
+  <part element="tns:updatePersonResponse" name="parameters"/>
+ </message>
+ <message name="updatePersonErrorType">
+  <part element="tns:updatePersonErrorType" name="details"/>
+ </message>
+ <portType name="IPersonService">
+  <documentation>Interface attached to a person</documentation>
+  <operation name="createPerson">
+   <input message="tns:createPersonInput"/>
+   <output message="tns:createPersonOutput"/>
+   <fault message="tns:createPersonErrorType" name="createPersonErrorType"/>
+  </operation>
+  <operation name="queryPerson">
+   <input message="tns:queryPersonInput"/>
+   <output message="tns:queryPersonOutput"/>
+   <fault message="tns:queryPersonErrorType" name="queryPersonErrorType"/>
+  </operation>
+  <operation name="updatePerson">
+   <input message="tns:updatePersonInput"/>
+   <output message="tns:updatePersonOutput"/>
+   <fault message="tns:updatePersonErrorType" name="updatePersonErrorType"/>
+  </operation>
+ </portType>
+ <binding name="IPersonServiceBinding" type="tns:IPersonService">
+  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="createPerson">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="createPersonErrorType">
+    <soap:fault name="createPersonErrorType" use="literal"/>
+   </fault>
+  </operation>
+  <operation name="queryPerson">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="queryPersonErrorType">
+    <soap:fault name="queryPersonErrorType" use="literal"/>
+   </fault>
+  </operation>
+  <operation name="updatePerson">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="updatePersonErrorType">
+    <soap:fault name="updatePersonErrorType" use="literal"/>
+   </fault>
+  </operation>
+ </binding>
+ <service name="PersonService">
+  <port binding="tns:IPersonServiceBinding" name="IPersonService">
+   <soap:address location="http://localhost:9081/dummyURI/PersonService"/>
+  </port>
+ </service>
+</definitions>

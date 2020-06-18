@@ -1,0 +1,1 @@
+define("DS/RTAudioVideoAPI/RTAudioVideoAPI_ja",{});define("DS/RTAudioVideoAPI/assets/nls/feed",{startAudioCall:"音声通話を開始",startVideoCall:"ビデオ通話を開始",callNotAvailable:"通話を開始できるユーザーがいません",callUnavailable:"通話を利用できません"});

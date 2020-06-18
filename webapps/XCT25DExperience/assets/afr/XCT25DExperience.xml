@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+    <Template syp:name="3DShare_simpleAfrWorkshopInterface" Target="CATCmdInterface">
+        <CATCmdInterface  WkbInterface="CATI3DShare_simpleAfrWorkshopConfiguration"/>
+    </Template>
+
+    <Template syp:name="3DSHARE_Scenario_SwitchVariants" Target="CATCmdHeadersList">
+        <CATCmdHeadersList>
+            <CATCommandHeader ID="SwitchVariants" ClassName="DS/XCT25DCommands/XCT25DSwitchVariantsCmd" ResourceFile="XCT25DExperience/XCT25DExperience"/>
+            <CATCommandHeader ID="Fullscreen" ClassName="DS/XCT25DCommands/XCT25DFullscreenCmd" ResourceFile="XCT25DExperience/XCT25DExperience"/>
+        	<CATCommandHeader ID="ExperienceSearch" ClassName="DS/XCT25DCommands/XCT25DExperienceSearchCmd" ResourceFile="XCT25DExperience/XCT25DExperience"/>
+        </CATCmdHeadersList>
+    </Template>
+
+    <Template syp:name="3DShare_simpleAfrWorkshopAccess" Target="CATCmdWorkbench">
+        <CATCmdWorkbench Name="XCT25DExperience">
+            <CATCmdContainer Name="Actions" Visibility="1" RepresentationType="AfrActionBarSection">
+                <!--CATCmdStarter Name="Explode" Command="Explode"/-->
+                <CATCmdStarter Name="SwitchVariants" Command="SwitchVariants"/>
+                <CATCmdStarter Name="Fullscreen" Command="Fullscreen"/>
+                <CATCmdStarter Name="ExperienceSearch" Command="ExperienceSearch"/>
+            </CATCmdContainer>
+        </CATCmdWorkbench>
+    </Template>
+</Styles>

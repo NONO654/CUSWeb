@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Forge tester</title>
+	<script src="../AmdLoader/AmdLoader.js"></script>
+	<script>
+		require(['DS/Forge/Forge'], function (forge) {
+			console.log('Forge', forge);
+			if (document.body && document.body.textContent) {
+				var desc = 'forge object properties:\n';
+				for (var prop in forge) {
+					desc +=  '  * ' + prop + ': ' + typeof forge[prop] + '\n';
+				}
+				document.body.style.whiteSpace = 'pre-wrap'
+				document.body.textContent = desc;
+			}
+		});
+	</script>
+</head>
+
+<body></body>
+</html>

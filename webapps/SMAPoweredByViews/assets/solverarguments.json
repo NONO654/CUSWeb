@@ -1,0 +1,299 @@
+[{
+	"Application Version": "3DX",
+	"physicalid": "D6159B568D190000D35CFB5885220E00",
+	"Connector Kind": "application",
+	"name": "Abaqus/Standard_3DX",
+	"Title": "Abaqus/Standard_3DX",
+	"Application Name": "Abaqus/Standard",
+	"connectoroptions": [{
+		"optionType": "Option-Value",
+		"name": "job",
+		"description": "The name of all files generated during the run and the name of files that are read in the continue, convert, and recover phases.",
+		"defaultValues": null,
+		"id": "1",
+		"required": "True",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Standalone",
+		"name": "analysis",
+		"description": "Abaqus performs a complete analysis.",
+		"defaultValues": null,
+		"id": "2",
+		"required": "False",
+		"separatorValue": " "
+	},
+	{
+		"optionType": "Standalone",
+		"name": "datacheck",
+		"description": "Abaqus performs only a data check; no analysis will be performed. Abaqus saves all files necessary to continue the analysis.",
+		"defaultValues": null,
+		"id": "3",
+		"required": "False",
+		"separatorValue": " "
+	},
+	{
+		"optionType": "Standalone",
+		"name": "parametercheck",
+		"description": "Abaqus only checks the input parameters when you are using parametric. Abaqus does not perform an analysis or data check.",
+		"defaultValues": null,
+		"id": "4",
+		"required": "False",
+		"separatorValue": " "
+	},
+	{
+		"optionType": "Standalone",
+		"name": "continue",
+		"description": "The analysis begins at the point at which a previous data check run ended.",
+		"defaultValues": null,
+		"id": "5",
+		"required": "False",
+		"separatorValue": " "
+	},
+	{
+		"optionType": "Option-Value",
+		"Choices": ["select",
+		"odb",
+		"state",
+		"all"],
+		"name": "convert",
+		"description": "Which files will be postprocessed.select\nodb\nstate\nall",
+		"defaultValues": null,
+		"id": "6",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Standalone",
+		"name": "syntaxcheck",
+		"description": "Abaqus only checks the syntax of the input file and does not consume any license tokens.",
+		"defaultValues": null,
+		"id": "7",
+		"required": "False",
+		"separatorValue": " "
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "input",
+		"description": "The input file name, with or without the .inp extension. If this option is not supplied, Abaqus looks for an input file called job-name.inp in the current directory.",
+		"defaultValues": null,
+		"id": "8",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "user",
+		"description": "The name of a FORTRAN source or object file that contains any user subroutines to be used in the analysis. The name of the user routine may contain a path name and may be given with or without a file extension.",
+		"defaultValues": null,
+		"id": "9",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "oldjob",
+		"description": "The name of the files from a previous run from which a restart or postprocessing run is to be started or from which results are to be imported. A path or file extension is not allowed.",
+		"defaultValues": null,
+		"id": "10",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"Choices": ["append",
+		"new"],
+		"name": "fil",
+		"description": "Joins the output from restarted analyses into a single, continuous results file. You can choose whether the data from the old results file specified in a restart run are included at the beginning of the new results file (default). If you specify fil=new, the new results file will contain only the data from the point in the analysis where the restart occurred.append\nnew",
+		"defaultValues": "append",
+		"id": "11",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "globalmodel",
+		"description": "The name of the global models results file or output database file from which the results are to be interpolated to drive a submodel analysis.",
+		"defaultValues": null,
+		"id": "12",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "cpus",
+		"description": "The number of processors to use during an analysis run if parallel processing is available.",
+		"defaultValues": "1",
+		"id": "13",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "domains",
+		"description": "This option specifies the number of parallel domains in Abaqus/Explicit. If the value is greater than 1, the domain decomposition will be performed regardless of the values of the parallel and cpus options. However, if parallel=domain, the value of cpus must be evenly divisible into the value of domains. The default value is set equal to the number of processors used during the analysis run if parallel=domain and 1 if parallel=loop. The default value can be changed in the environment file.",
+		"defaultValues": null,
+		"id": "14",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"Choices": ["mpi",
+		"threads"],
+		"name": "mp_mode",
+		"description": "If this option is set equal to mpi, the MPI-based parallelization method will be used when applicable. Set mp_mode=threads to use the thread-based parallelization method. The default value is mpi on all platforms except Windows, which supports only thread-based parallel execution. The default setting on all other platforms can be changed in the environment file.mpi\nthreads",
+		"defaultValues": "mpi",
+		"id": "15",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"Choices": ["all",
+		"solver"],
+		"name": "standard_parallel",
+		"description": "The default parallel execution mode in Abaqus/Standard if you do not specify the parallel mode on the abaqus command line. If this parameter is set equal to ALL, both the element operations and the solver will run in parallel. If this parameter is set equal to SOLVER, only the solver will run in parallel. The default parallel execution mode is ALL.all\nsolver",
+		"defaultValues": "all",
+		"id": "16",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "memory",
+		"description": "The maximum amount of memory that can be allocated by the analysis input file processor. The default is sufficient for most problems.",
+		"defaultValues": null,
+		"id": "17",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Standalone",
+		"name": "interactive",
+		"description": "Whether to run the  job interactively. Abaqus outputs the log file to the screen.",
+		"defaultValues": null,
+		"id": "18",
+		"required": "False"
+	},
+	{
+		"optionType": "Standalone",
+		"name": "background",
+		"description": "Submit the job to run in the background, which is the default.",
+		"defaultValues": null,
+		"id": "19",
+		"required": "False"
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "queue",
+		"description": "Submit the job to a batch queue. If the option appears with no value, the job will be submitted to the system default queue. The available queues are site specific.",
+		"defaultValues": null,
+		"id": "20",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "after",
+		"description": "Specify the time at which the job will start in the selected batch queue.",
+		"defaultValues": null,
+		"id": "21",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"Choices": ["single",
+		"full"],
+		"name": "output_precision",
+		"description": "The precision of the nodal field output written to the output database file (job-name.odb).single\nfull",
+		"defaultValues": "single",
+		"id": "22",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"Choices": ["environment",
+		"local",
+		"memory",
+		"release",
+		"support",
+		"system",
+		"all"],
+		"name": "information",
+		"description": "This option writes information about the installation and the environment that is in effect to the screen or to the file job-name.log.  For output information for each value of this option, see Execution procedure for obtaining information, Section 3.2.1 of the Abaqus Analysis Users Guide.  If the information option is used in conjunction with the analysis option, the job must be run in the background to write the information text to the log file.environment\nlocal\nmemory\nrelease\nsupport\nsystem\nall",
+		"defaultValues": "single",
+		"id": "24",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "scratch",
+		"description": "Full path name of the directory to be used for scratch files. The default value on UNIX is the value of the $TMPDIR environment variable or /tmp if $TMPDIR is not defined. On Windows the default value is the value of the %TEMP% environment variable or \\TEMP if %TEMP% is not defined. During the analysis a subdirectory will be created under this directory to hold the analysis scratch files. The name of the subdirectory is constructed from the users user name, the job ID, and the jobs process number. The subdirectory and its contents are deleted upon completion of the analysis.",
+		"defaultValues": null,
+		"id": "25",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "port",
+		"description": "This option is used to specify the TCP/UDP port number for co-simulation between Abaqus and AcuSolve (see Preparing an Abaqus analysis for co-simulation,\" Section 13.1.2 of the Abaqus Analysis Users Guide). Set port equal to the port number used for the connection. The default value is 48000. The default port number that Abaqus uses to initiate communication can be set with the cosimulation_port parameter in the environment file (see \"Using the Abaqus environment settings,\" Section 3.3.1 of the Abaqus Analysis Users Guide).",
+		"defaultValues": null,
+		"id": "26",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "host",
+		"description": "This option is used to specify the host name for co-simulation between Abaqus and AcuSolve (see \"Preparing an Abaqus analysis for co-simulation, Section 13.1.2 of the Abaqus Analysis Users Guide). This option specifies the name of the machine that is hosting the connection. The host option is required if AcuSolve initiates communication. If Abaqus initiates communication, do not specify the host name.",
+		"defaultValues": null,
+		"id": "27",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "timeout",
+		"description": "This option is used to specify a timeout value for co-simulation connection (see Preparing an Abaqus analysis for co-simulation, Section 13.1.2 of the Abaqus Analysis Users Guide). This option specifies the timeout period in seconds. Abaqus terminates if it does not receive any communication from the external program during the time specified. The default value is 3600 seconds. The default timeout value that Abaqus uses can be set with the cosimulation_timeout parameter in the environment file (see Using the Abaqus environment settings, Section 3.3.1 of the Abaqus Analysis Users Guide).",
+		"defaultValues": null,
+		"id": "28",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"Choices": ["yes",
+		"no"],
+		"name": "unconnected_regions",
+		"description": "This option is used to request that Abaqus/Standard create element and node sets for unconnected regions in the analysis output database. Set unconnected_regions=yes to create element and node sets that are named MESH COMPONENT N, where N is the component number.yes\nno",
+		"defaultValues": null,
+		"id": "29",
+		"required": "False",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"Choices": ["odb",
+		"sim",
+		"both"],
+		"name": "resultsformat",
+		"description": "This option specifies the output format of the results.This option is not applicable for Abaqus/CFD.odb\nsim\nboth",
+		"defaultValues": "odb",
+		"id": "30",
+		"required": "True",
+		"separatorValue": "="
+	},
+	{
+		"optionType": "Option-Value",
+		"name": "gpus",
+		"description": "The value of this parameter is the number of GPGPUs to be used in an Abaqus/Standard analysis",
+		"id": "31",
+		"required": "False",
+		"separatorValue": "="
+	}]
+}]

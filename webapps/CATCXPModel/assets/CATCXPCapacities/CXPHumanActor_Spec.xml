@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IdeaExperienceCapacities>
+  <Header>
+    <Version>0.1</Version>
+  </Header>
+
+	<ExperienceObject>
+
+		<CXPEvent id="ClickablePressEvent" >
+			<NaturalLanguageInfo capacityType="SensorEvent" alias="is clicked" icon="icons/caps/I_CXPClick.png" />
+		</CXPEvent>
+
+    <CXPFunction id="startAnimation" body="startAnimation" returnValue="Boolean">
+      <Variable name="name" type="String"/>
+      <NaturalLanguageInfo capacityType="DriverState" alias="starts animation" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="name" />
+    </CXPFunction>
+
+    <CXPFunction id="stopCurrentAnimation" body="stopCurrentAnimation" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="DriverState" alias="stop current animation" icon="icons/caps/I_CXPMoveGo.png" />
+    </CXPFunction>
+
+    <CXPEvent id="HumanAnimationStartedEvent" targetParam="animation">
+      <Variable name="animationName" type="String"/>
+      <NaturalLanguageInfo capacityType="SensorEvent" alias="has started animation" icon="icons/caps/I_CXPClick.png" exposedVariable="animationName" />
+    </CXPEvent>
+
+    <CXPEvent id="HumanAnimationFinishedEvent" targetParam="animation">
+      <Variable name="animationName" type="String"/>
+      <NaturalLanguageInfo capacityType="SensorEvent" alias="has finished animation" icon="icons/caps/I_CXPClick.png" exposedVariable="animationName"/>
+    </CXPEvent>
+
+    <CXPEvent id="HumanAnimationStoppedEvent" targetParam="animation">
+      <Variable name="animationName" type="String"/>
+      <NaturalLanguageInfo capacityType="SensorEvent" alias="has stopped animation" icon="icons/caps/I_CXPClick.png" exposedVariable="animationName" />
+    </CXPEvent>
+
+	</ExperienceObject>
+  
+</IdeaExperienceCapacities> 

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  /*
+  */
+  -->
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="VQDTShareAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DSHAREAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="VQDTShareAfrWorkshopHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <!-- Application -->
+      
+      <!-- <CATCommandHeader ID = "VisualizationModes"   ClassName = "DS/3DPlayCommands/CmdVisualizationModes"            ResourceFile = "3DPlay/3DPlayExperience3D" />  -->
+      <CATCommandHeader ID = "Zoom"     ClassName = "DS/ViewerCommands/VisuZoomViewCmd"    ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Pan"      ClassName = "DS/ViewerCommands/VisuPanViewCmd"     ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Rotate"   ClassName = "DS/ViewerCommands/VisuRotateViewCmd"  ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Reframe"  ClassName = "DS/ViewerCommands/VisuReframeViewCmd" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "VisuOrthographicView"  		ClassName = "DS/ViewerCommands/VisuOrthographicViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuPerspectiveView"  		ClassName = "DS/ViewerCommands/VisuPerspectiveViewCmd" 	SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "ViewSelector" 				ClassName = "DS/3DPlayCommands/CmdViewSelector"         ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "VisuNoShadingEdges" 			ClassName = "DS/ViewerCommands/VisuNoShadingEdgesCmd" 			SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuShading" 					ClassName = "DS/ViewerCommands/VisuShadingCmd" 					SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuShadingEdges" 			ClassName = "DS/ViewerCommands/VisuShadingEdgesCmd" 			SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuShadingMaterial" 			ClassName = "DS/ViewerCommands/VisuShadingMaterialCmd" 			SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuShadingMaterialEdges" 	ClassName = "DS/ViewerCommands/VisuShadingMaterialEdgesCmd" 	SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuNoShadingEdges" 			ClassName = "DS/ViewerCommands/VisuNoShadingEdgesCmd" 			SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuShadingEdgesHiddenEdges" 	ClassName = "DS/ViewerCommands/VisuShadingEdgesHiddenEdgesCmd" 	SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuShadingEdgesNoSmoothEdges"  ClassName = "DS/ViewerCommands/VisuShadingEdgesNoSmoothEdgesCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuShadingIllustration" 		ClassName = "DS/ViewerCommands/VisuShadingIllustrationCmd" 		SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+
+      <CATCommandHeader ID = "VisuNoEnv" ClassName = "DS/ViewerCommands/VisuNoEnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuV6Env" ClassName = "DS/ViewerCommands/VisuV6EnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuCleanSpaceEnv" ClassName = "DS/ViewerCommands/VisuCleanSpaceEnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuDarkBlueEnv" ClassName = "DS/ViewerCommands/VisuDarkBlueEnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuDarkGreyEnv" ClassName = "DS/ViewerCommands/VisuDarkGreyEnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuShinyEnv" ClassName = "DS/ViewerCommands/VisuShinyEnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+
+      <CATCommandHeader ID ="measure2CmdHdr" ClassName="DS/DMUMeasure/DMUCreateMeasureCmd" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "3dPlay" Value = "3dPlay" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID = "AnnotationCommands" ClassName = "DS/3DPlayAnnotation3D/AnnotationCommands" ResourceFile = "3DPlay/3DPlayExperience3D" />
+ 	  <CATCommandHeader ID = "VisibilityCommands" ClassName = "DS/3DPlayCommands/VisibilityCommands" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Explode" ClassName = "DS/3DPlayCommands/CmdExplode" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      
+      <CATCommandHeader ID = "PlaceDefect" ClassName = "DS/DELMOMVQDTExperience/Commands/CmdPlaceDefect" ResourceFile = "DELMOMVQDTExperience/VQDTShare" />
+      <CATCommandHeader ID = "DeleteDefect" ClassName = "DS/DELMOMVQDTExperience/Commands/CmdDeleteDefect" ResourceFile = "DELMOMVQDTExperience/VQDTShare" />
+      <CATCommandHeader ID = "AddAnnotation" ClassName = "DS/DELMOMVQDTExperience/Commands/CmdAddAnnotation" ResourceFile = "DELMOMVQDTExperience/VQDTShare" />
+      <CATCommandHeader ID = "MultiSelect" ClassName = "DS/DELMOMVQDTExperience/Commands/CmdMultiSelect" ResourceFile = "DELMOMVQDTExperience/VQDTShare" />
+      </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="VQDTShareAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="VQDTShareWorkbench">
+      <CATCmdContainer Name = "SectionViews" Visibility = "1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name = "Rotate"        Command = "Rotate"  Responsive="Long Large"/>
+        <CATCmdStarter Name = "Pan"           Command = "Pan"     Responsive="Long Large"/>
+        <CATCmdStarter Name = "Zoom"          Command = "Zoom"    Responsive="Long Large"/>
+        <CATCmdStarter Name = "Reframe"       Command = "Reframe" Responsive="Long Large"/>
+        <CATCmdContainer Name = "ViewsActions" Visibility = "1" RepresentationType="AfrActionBarDropDown" Responsive="Small Medium">
+          <CATCmdStarter Name = "Rotate"        Command = "Rotate" />
+          <CATCmdStarter Name = "Pan"           Command = "Pan" />
+          <CATCmdStarter Name = "Zoom"          Command = "Zoom" />
+          <CATCmdStarter Name = "Reframe"       Command = "Reframe" />
+        </CATCmdContainer>
+        <CATCmdSeparator Name = "VisuMode_Separator"/>
+        <CATCmdStarter Name = "ViewSelector"          Command = "ViewSelector" Responsive="Small Medium Long Large"/>
+        <CATCmdStarter Name = "VisibilityCommands"  Command = "VisibilityCommands" Responsive="Medium Long Large"/>
+        <CATCmdContainer Name = "CameraViews" Visibility = "1" RepresentationType="AfrActionBarDropDown" Responsive="Medium Long Large">
+          <CATCmdStarter Name = "OrthoView"  Command = "VisuOrthographicView" />
+          <CATCmdStarter Name = "PerspView"  Command = "VisuPerspectiveView" />
+        </CATCmdContainer>
+        <CATCmdContainer Name = "Rendering" Visibility = "1" RepresentationType="AfrActionBarDropDown" Responsive="Medium Long Large">
+          <CATCmdStarter Name = "ShadingEdges"  Command = "VisuShadingEdges" />
+          <CATCmdStarter Name = "Shading"  Command = "VisuShading" />
+          <CATCmdStarter Name = "ShadingEdgesNoSmoothEdges"  Command = "VisuShadingEdgesNoSmoothEdges" />
+          <CATCmdStarter Name = "ShadingEdgesHiddenEdges"  Command = "VisuShadingEdgesHiddenEdges" />
+          <CATCmdStarter Name = "ShadingMaterialEdges"  Command = "VisuShadingMaterialEdges" />
+          <CATCmdStarter Name = "ShadingMaterial"  Command = "VisuShadingMaterial" />
+          <CATCmdStarter Name = "VisuShadingIllustration"  Command = "VisuShadingIllustration" />
+          <CATCmdStarter Name = "Wireframe"  Command = "VisuNoShadingEdges" />
+        </CATCmdContainer>
+      </CATCmdContainer>
+
+      <CATCmdContainer Name = "SectionTools" Visibility = "1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name = "Explode"       		Command = "Explode" />
+        <CATCmdStarter Name = "Measure"  			Command = "measure2CmdHdr" />
+		<CATCmdStarter Name = "AnnotationCommands"  Command = "AnnotationCommands"  Responsive="Medium Long Large"/>
+      </CATCmdContainer>
+      
+	  <CATCmdContainer Name = "SectionReports" Visibility = "1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name = "Multi Select"  	Command = "MultiSelect" />
+        <CATCmdStarter Name = "Place Defect"  	Command = "PlaceDefect" />
+        <CATCmdStarter Name = "Add Annotation"  Command = "AddAnnotation" />
+        <CATCmdStarter Name = "Delete Defect"   Command = "DeleteDefect" />
+      </CATCmdContainer>
+      
+    </CATCmdWorkbench>
+  </Template>
+</Styles>
+

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <cross-domain-policy>
+   <allow-access-from domain="*" />
+</cross-domain-policy> -->
+<!-- XML Column Definition 
+   dataIndex   : the JSON key to be used for setting and getting data in table. 
+               This must not be modified for 'computed' type columns
+   Type     : type column definition namely 'basic','attribute','computed'
+               basic       - basic info select on Characterisitic,
+               attribute   - attribute info select on Characteristic
+               computed - Characteristic info that is isVisibleed using API call
+               
+               basic, attribute column type can be added by user as additional columns.
+               computed column type is restricted for OOTB defined columns and not supposed to be extended.
+   Selectable  : used to identify the column mapping to exact attribute or basic select on Characteristic
+               basic info requires basic info identifier
+               attribute info requires symbollic name of the attrbute to be isVisibleed
+               Computed columns are mapped using dataIndex
+   text     : text to be used as Table column header
+   isEditable  : marks the column as editable or non-editable
+   width    : determines the width of the column relative to table
+   isFixed     : determines, if column can be dragged
+ -->
+<Root>
+<ColumnDefinition>
+      <dataIndex>charCategory</dataIndex>
+      <Type>attribute</Type>
+      <Selectable>attribute_CharacteristicCategory</Selectable>
+      <text>Category</text>
+      <isEditable>false</isEditable>
+      <width>10%</width>
+      <isFixed>true</isFixed>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+  <ColumnDefinition>
+      <dataIndex>sequenceOrder</dataIndex>
+      <!--This Attribute Value will be rendered from API -->
+      <Type>computed</Type>
+      <isEditable>false</isEditable>
+      <text>SequenceOrder</text>
+      <width>5%</width>
+      <isFixed>true</isFixed>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth> 
+   </ColumnDefinition>
+   <ColumnDefinition>
+      <dataIndex>Title</dataIndex>
+      <Type>attribute</Type>
+      <Selectable>attribute_Title</Selectable>
+      <text>Title</text>
+      <label>Title</label>
+      <required>true</required>
+      <width>10%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+      <ColumnDefinition>
+      <dataIndex>dimension</dataIndex>
+      <!--This Attribute Value will be rendered from API -->
+      <Type>computed</Type>
+      <isEditable>false</isEditable>
+      <text>Dimension</text>
+      <width>10%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+    <ColumnDefinition>
+      <dataIndex>minimal</dataIndex>
+      <!--This Attribute Value will be rendered from API -->
+      <Type>computed</Type>
+      <text>Minimum</text>
+      <width>6%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+   <ColumnDefinition>
+      <dataIndex>minIncluded</dataIndex>
+      <!--This Attribute Value will be rendered from API -->
+      <Type>computed</Type>
+      <text>Included</text>
+      <width>4%</width>
+      <isVisible>true</isVisible>
+      <isEditable>false</isEditable>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+    <ColumnDefinition>
+      <dataIndex>nominal</dataIndex>
+      <!--This Attribute Value will be rendered from API -->
+      <Type>computed</Type>
+      <text>Value</text>
+      <width>6%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+      <ColumnDefinition>
+      <dataIndex>maximal</dataIndex>
+      <!--This Attribute Value will be rendered from API -->
+      <Type>computed</Type>
+      <text>Maximum</text>
+      <width>6%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+    <ColumnDefinition>
+      <dataIndex>maxIncluded</dataIndex>
+      <!--This Attribute Value will be rendered from API -->
+      <Type>computed</Type>
+      <text>Included</text>
+      <isEditable>false</isEditable>
+      <width>4%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+      <ColumnDefinition>
+      <dataIndex>displayUnit</dataIndex>
+      <!--This Attribute Value will be rendered from API -->
+      <Type>computed</Type>
+      <text>DisplayUnit</text>
+      <selector>true</selector>
+      <range>displayUnitSelector</range>
+      <width>10%</width>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+   <ColumnDefinition>
+      <dataIndex>precision</dataIndex>
+      <Type>attribute</Type>
+      <Selectable>attribute_MeasurementPrecision</Selectable>
+      <text>Precision</text>
+      <width>6%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+    <ColumnDefinition>
+      <dataIndex>priority</dataIndex>
+      <Type>attribute</Type>
+      <Selectable>attribute_ParameterPriority</Selectable>
+      <text>Priority</text>
+      <width>5%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+   <ColumnDefinition>
+      <dataIndex>description</dataIndex>
+      <Type>basic</Type>
+      <Selectable>Description</Selectable>
+      <text>Description</text>
+      <width>10%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+   <ColumnDefinition>
+      <dataIndex>testMethods</dataIndex>
+      <Type>computed</Type>
+      <text>TestMethod</text>
+      <width>16%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+   <ColumnDefinition>
+      <dataIndex>notes</dataIndex>
+      <Type>attribute</Type>
+      <Selectable>attribute_CharacteristicNotes</Selectable>
+      <text>Notes</text>
+      <width>10%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+   <ColumnDefinition>
+      <dataIndex>missedTargetAction</dataIndex>
+      <Type>attribute</Type>
+      <Selectable>attribute_MissedTargetActionRequired</Selectable>
+      <text>MissedTargetActionRequired</text>
+      <selector>true</selector>
+      <range>missedTargetActionSelector</range>
+      <width>15%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+   <ColumnDefinition>
+      <dataIndex>characteristicMasterName</dataIndex>
+      <!--This Attribute Value will be rendered from API -->
+      <Type>computed</Type>
+      <isEditable>false</isEditable>
+      <text>CharacteristicMaster</text>
+      <width>15%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+   <ColumnDefinition>
+      <dataIndex>overwriteAllowedOnChild</dataIndex>
+      <!--This Attribute Value will be rendered from API -->
+      <Type>computed</Type>
+      <text>OverwriteAllowedOnChild</text>
+      <width>10%</width>
+      <isVisible>true</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>
+   <!--<ColumnDefinition>
+      <dataIndex>originatedFrom</dataIndex> -->
+      <!--This Attribute Value will be rendered from API -->
+      <!--<Type>computed</Type>
+      <isEditable>false</isEditable>
+      <text>OriginatedFrom</text>
+      <width>10%</width>
+      <isVisible>false</isVisible>
+      <minWidth>20</minWidth>
+   </ColumnDefinition>  -->
+   </Root>

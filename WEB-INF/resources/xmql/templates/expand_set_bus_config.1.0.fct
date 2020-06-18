@@ -1,0 +1,8 @@
+Language: xMQL
+
+start transaction;
+mod set ${setname} add bus ${rootids};
+execute program ConfigFilterFactory init ${filterName} ${filterContent};
+label ${label} expand set ${setname} ${fromkw} ${tokw} relationship ${relpattern} type ${typepattern} ${fixedpointskw} ${fixedpointsids} ${withrootskw} ${preventduplicateskw} filter ${filterName} recurse to ${recurselevel} select businessobject ${selectbo,noescape= } ${wherebokw} ${wherebo} select relationship ${selectrel,noescape= } ${whererelkw} ${whererel} dump | tcl terse;
+execute program ConfigFilterFactory release ${filterName};
+abort transaction;

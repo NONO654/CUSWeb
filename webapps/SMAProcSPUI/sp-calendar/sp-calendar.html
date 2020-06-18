@@ -1,0 +1,169 @@
+<!--------------------------------------------------------------------
+[sp-calendar HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:44:11 GMT
+Assigned to:	Aravind Mohan
+Primary use:	TODO: Write where this component is being used
+Description:    TODO: Description about the component
+--------------------------------------------------------------------->
+
+<!--------------------------------------------------------------------
+
+[Table of contents]
+TODO: Update this according to your template
+1. main
+	2. nav
+		2.1. header / Tools
+		2.2. header / Fields
+		2.3. header / Rules
+	3. section / Tools
+	4. section / Fields
+	5. section / Rules
+
+--------------------------------------------------------------------->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../sp-input/sp-input.html">
+<link rel="import" href="../sp-button-type/sp-button-type.html">
+
+<dom-module id="sp-calendar">
+  <link rel="import" type="css" href="sp-calendar.css">
+  <template>
+      <div class="date-container">
+         <div class="date">
+            <sp-input id="dateinput" class="date-input"
+                      value="{{toDisplayDate(date)}}" preventinput
+                      placeholder="Pick a date" readonly$="{{readonly}}"
+                      haserror="{{haserror}}"
+                      on-click="onInputClick"></sp-input>
+        </div>
+
+        <div id="cover" class="cover" on-click="onCoverClick"></div>
+
+        <div id="datepicker" class="datepicker">
+            <div class="datepicker-calendar">
+                <div class="today-button"><span on-click="onSetTodaysDate">Today</span></div>
+                <div class="datepicker-title">
+                    <div class="datepicker-label"><span>{{_computeExpression1(month)}}</span>
+                        <select id="month" class="datepicker-select datepicker-select-month" on-change="onMonthChange">
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="4">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option selected="" value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                    <div class="datepicker-label"><span>{{year}}</span>
+                        <select id="year" class="datepicker-select datepicker-select-year" on-change="onYearChange">
+                            <option value="1994">1994</option>
+                            <option value="1995">1995</option>
+                            <option value="1996">1996</option>
+                            <option value="1997">1997</option>
+                            <option value="1998">1998</option>
+                            <option value="1999">1999</option>
+                            <option value="2000">2000</option>
+                            <option value="2001">2001</option>
+                            <option value="2002">2002</option>
+                            <option value="2003">2003</option>
+                            <option value="2004">2004</option>
+                            <option value="2005">2005</option>
+                            <option value="2006">2006</option>
+                            <option value="2007">2007</option>
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013" index="2013">2013</option>
+                            <option value="2014" selected="" index="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                            <option value="2029">2029</option>
+                            <option value="2030">2030</option>
+                            <option value="2031">2031</option>
+                            <option value="2032">2032</option>
+                            <option value="2033">2033</option>
+                            <option value="2034">2034</option>
+                        </select>
+                    </div>
+                    <button class="datepicker-prev" type="button" on-click="onShowPreviousMonth">Previous Month</button>
+                    <button class="datepicker-next" type="button" on-click="onShowNextMonth">Next Month</button>
+                </div>
+                <table cellpadding="0" cellspacing="0" class="datepicker-table" on-click="onDayPick">
+                    <thead>
+                        <tr>
+                            <th scope="col"><abbr title="Sunday">Sun</abbr>
+                            </th>
+                            <th scope="col"><abbr title="Monday">Mon</abbr>
+                            </th>
+                            <th scope="col"><abbr title="Tuesday">Tue</abbr>
+                            </th>
+                            <th scope="col"><abbr title="Wednesday">Wed</abbr>
+                            </th>
+                            <th scope="col"><abbr title="Thursday">Thu</abbr>
+                            </th>
+                            <th scope="col"><abbr title="Friday">Fri</abbr>
+                            </th>
+                            <th scope="col"><abbr title="Saturday">Sat</abbr>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="dateContent">
+
+
+                        <!-- Commented this out because IE sucks! -->
+                        <!--
+						<template repeat="{{week in weeks}}">
+							<tr>
+								<template repeat="{{date in week}}">
+									<td
+										data- class="{{ {'is-empty': date.dayInWeek < 0, 'is-selected': date.value == day } | tokenList }}" day="{{date.value}}">
+										<template if="{{ date.dayInWeek != -1 }}">
+											<button class="datepicker-button datepicker-day"
+													type="button" data-day="{{date.value}}">{{ date.value }}</button>
+										</template>
+									</td>
+								</template>
+							</tr>
+						</template>
+	-->
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="time" on-click="onTimestampInputClick" class$="{{_computeClass(displaytime, readonly)}}">
+                <input id="hourInput" class="number-input" on-change="onTimeChanged" value$="[[time.hour]]" type="number" min="0" max="24" step="1"><span><b>:</b></span><!--
+                --><input id="minInput" class="number-input" on-change="onTimeChanged" value$="[[time.minute]]" type="number" min="0" max="60" step="1"><span><b>:</b></span><!--
+                --><input id="secInput" class="number-input" on-change="onTimeChanged" value$="[[time.second]]" type="number" min="0" max="60" step="1"><!--
+                --><input id="ampmInput" class="number-input ampm" autocomplete="" size="2" maxlength="2" on-change="onTimeChanged" value="{{time.ampm::input}}">
+
+        <span class="time-icon font-icon" title="Set to Now" on-click="onSetCurrentTime"></span>
+
+        </div>
+</div>
+    </template>
+  <script type="text/javascript" src="sp-calendar.js"></script>
+</dom-module>

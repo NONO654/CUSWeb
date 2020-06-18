@@ -1,0 +1,30 @@
+<dom-module id="ra-expression-editor">
+  <style>
+    :host {
+        display: flex;
+        flex-direction: column;
+        height: 200px;
+        width: inherit;
+     }
+    .output {
+        height: 1.5rem;
+        margin: 5px 0px;
+    }
+
+    .valid {
+        border: 1px solid #DDD;
+    }
+
+    .invalid {
+        border: 1px solid #fcc;
+    }
+
+   </style>
+   <template>
+      <pcw-editor id="editor" expression="{{expression}}" singleLine="true"></pcw-editor>
+      <pcw-expression-ctrl context="{{context}}" id="controls" style="flex-grow:0;"></pcw-expression-ctrl>
+      <ra-expression-eval expression="{{expression}}"  id="expressionEval" message="Alternative: 1" slider="1"></ra-expression-eval>
+      <div id="progressDock">
+      </div>
+   </template>
+</dom-module>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.Calculator" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflCalculator" nlsID="displayname">Calculator</DisplayName>
+	<Description nlsFile="SMAWflCalculator" nlsID="description">>Calculator</Description>
+	<LongDescription nlsFile="SMAWflCalculator" nlsID="longdesc">Calculator</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.component.Calculator</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>600</Value>
+			<Value>500</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="I_SMAWflCalculator16.png" targetFilename="small/I_SMAWflCalculator16.png" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflCalculator.png" targetFilename="large/I_SMAWflCalculator.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflCalculator.CATNls" targetFilename="SMAWflCalculator.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflCalculator_ja.CATNls" targetFilename="SMAWflCalculator_ja.CATNls" locale="Japanese" />
+		<Stream name="Properties" streamKind="properties" sourceFilename="SMAWflCalculator.properties" targetFilename="SMAWflCalculator.properties"/>
+		<Stream name="Properties_Japanese" streamKind="properties" sourceFilename="SMAWflCalculator_ja.properties" targetFilename="SMAWflCalculator_ja.properties" locale="Japanese" />
+		<Stream name="CodeJar" streamKind="jar" sharedLoader="false" sourceFilename="SMAWflCalculator.jar" targetFilename="SMAWflCalculator.jar" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflCalculator.dll" targetFilename="win_b64/SMAWflCalculator.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflCalculator.sypstyle" targetFilename="SMAWflCalculator.sypstyle"/>
+		<Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebCalculator/cmp-calculator/cmp-calculator.html" targetFilename="SMAProcWebCalculator/cmp-calculator/cmp-calculator.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-calculator</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>SMAWflWebExtensionEditor</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_stylesheet"/>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation language="java">
+					<Class>com.engineous.component.calculator.CalculatorEditor</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflCalculatorEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation language="web" platform="win_b64">
+					<Module>DS/SMAProcWebCalculator/CalculatorHandler</Module>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_stylesheet"/>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation language="java">
+					<Class>com.engineous.component.calculator.CalculatorHandler</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflCalculatorHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="PreferenceEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflCalculatorEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+	<Properties>
+
+		<!--  Calculator properties -->
+		<Property name="expression" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+	</Properties>
+</wfext:Extension>

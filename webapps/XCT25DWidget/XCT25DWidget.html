@@ -1,0 +1,1424 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+    <!-- Application Metas -->
+    <title>2.5D Viewer</title>
+
+    <meta name="author" content="3DS" />
+    <meta name="apiVersion" content="1.3" />
+    <mete name="brand" content="3DEXCITE" />
+    <meta name="description" content="3DPlay widget for displaying 2.5D Viewer experience." />
+    <meta name="autoRefresh" content="0" />
+
+
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+
+    <!-- Application Standalone emulation files -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css">
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        // Any script tag contains a "var UWA" declaration will be executed
+        // only in standalone mode
+        var UWA = {},
+            // Give another name to define/require for the curl AMD loader.
+            curl = {
+                defineName: "curl_define",
+                requireName: "curl_require"
+            };
+        //,dependencies = ["UWA/Drivers/Alone", "widget"];
+
+        require.config(
+            // paths
+            {
+                baseUrl: "../",
+                UWA: "http://uwa.netvibes.com/lib/UWA/js/"
+            }
+        );
+        //]]>
+
+    </script>
+
+    <!-- <link rel="stylesheet" type="text/css" href="../3DPlayWidget/3DPlayWidgetCss.css" /> -->
+
+    <script type="text/javascript" src="../TopBarProxy/TopBarProxy.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+    <script type="text/javascript" src="../WebVisualization/WebVisualization.js"></script>
+
+
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../3DPlayWidget/assets/3DPlayWidget.css" />
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+    <widget:preferences>
+        <preference name="PLATFORM" type="text" label="PLATFORM" defaultvalue="" />
+        <preference name="MODELID" type="text" label="MODEL ID" defaultvalue="" />
+        <preference name="CollabSpacePref" type="hidden" label="PrefHidden" defaultvalue="" />
+    </widget:preferences>
+
+
+    <!-- Application JavaScript Source -->
+    <!--script type="text/javascript">
+            /*global require, widget*/
+            require([
+                "DS/XCT25DWidget/XCT25DWidget"
+            ], function(XCT25DWidget) {
+                "use strict";
+
+                new XCT25DWidget({
+                    widget: widget
+                });
+            });
+
+        </script-->
+
+
+    <script type="text/javascript">
+        require([
+                     "DS/PlatformAPI/PlatformAPI",
+                     "UWA/Utils/InterCom",
+                     "WebappsUtils/WebappsUtils",
+                     "DS/Utilities/Css",
+                     "DS/UIKIT/Popover",
+                     "DS/UIKIT/Dropdown",
+                     "DS/Core/Events",
+                     "DS/RuntimeView/NLSManager",
+                     "DS/WebSystem/Nls",
+                     "DS/3DPlayHelper/3DPlayHelper",
+                     "DS/WebSystem/Environment"
+                ],
+                function (PublicAPI, UWAUtilsInterCom, WebappsUtils, WUXCSS, Popover, Dropdown, WUXEvents, NLSManager, Nls, Player3DPlayWeb, Environment) {
+
+                    var play3D;
+                    var isDev = false;
+                    var IsIpad = UWA.Utils.Client.Platform.ipad;
+
+                    var w = widget;
+                    var platformType = "SWYM"; // EV6 | SWYM
+                    var listenSocket;
+                    var WuxEvt = WUXEvents;
+                    var NlsReady = false;
+
+
+                    // KEY
+                    // values are stored in CATNls file
+                    var widgetMsg = {
+                        QUERY_ERROR: {
+                            level: "error"
+                        },
+                        MY_APPS_ERROR: {
+                            level: "pref"
+                        },
+                        SWYM_ERROR: {
+                            level: "primary"
+                        },
+                        UNAUTHORIZED_MODEL: {
+                            level: "primary"
+                        },
+                        EMPTY_MODEL_ID: {
+                            level: "pref"
+                        },
+                        EMPTY_MODEL_ID_IPAD: {
+                            level: "pref"
+                        },
+                        BAD_TYPE: {
+                            level: "primary"
+                        },
+                        BAD_ID_TYPE: {
+                            level: "pref"
+                        },
+                        UNKNOWN_MODEL: {
+                            level: "pref"
+                        }
+                    };
+
+                    var nlsKey = new Array();
+                    for (key in widgetMsg) {
+                        nlsKey.push(key);
+                    };
+
+                    //ThreeDPlay.loadNls("3DPlayWidget");
+                    Nls.nls("3DPlayWidget/3DPlayWidget", nlsKey,
+                        function (nlsA) {
+
+                            for (var i = 0; i < nlsA.length; i++) {
+                                widgetMsg[nlsKey[i]].msg = nlsA[i];
+                            }
+                            WuxEvt.publish({
+                                event: "NlsReady"
+                            }); // not sure about that...
+                            NlsReady = true;
+                        });
+
+                    var x3dw = {
+                        currentModelId: "",
+                        myAppsUrl: "",
+                        isPlayerRunning: false,
+                        swymToken: "",
+                        swymServerUrl: "",
+                        SwymConfig: "",
+                        platformUrl: "",
+                        defaultModel: "3DPlayWidget/assets/3DS_emblem.cgr",
+                        myAppsReturnList: "",
+                        collabSpaceData: {},
+
+                        // DOM ELEMENTS
+                        widgetSplashScreen: "",
+                        canvasDiv: "",
+                        IconHolder: "",
+                        CurrentUser: "",
+                        wrongIdType: false,
+                        shopperExperienceTitle: "3D Merchandising Review",
+                        defaultExperience: "DS/XCT25DExperience/XCT25DExperiencePlayer",
+                        currentUserHahskey: "",
+                        defaultSwymUrl: "",
+                        editInProgress: false,
+
+
+
+                        // RD5 MAXIMIZE
+                        widgetMode: "windowed",
+                        widgetHeight: 500,
+
+                        onEdit: function () {
+                            x3dw.editInProgress = true;
+                        },
+
+                        load: function () {
+
+                            UWA.log("-- Load --");
+                            if (NlsReady) {
+                                x3dw.widgetInit();
+                            } else {
+                                WuxEvt.subscribeOnce({
+                                    event: "NlsReady"
+                                }, function () {
+
+                                    x3dw.widgetInit();
+
+                                });
+                            }
+
+
+
+                        },
+                        widgetInit: function () {
+                            UWA.log("-- WidgetInit --");
+
+                            this.wrongIdType = false;
+                            // console.warn("-- Preferences passed by Transient --");
+                            // console.dir(w.getValue("CollabSpacePref"))
+                            this.setLevelInstance(); // is Dev or not
+                            this.createCanvasDiv();
+                            if (IsIpad) {
+
+                                if (Environment.isSet("3DPlay.OldIosSwitch")) {
+                                    iOsManager.createIOSSplashScreen(); // legacy, to delete
+                                } else {
+                                    x3dw.startPlayer();
+                                }
+
+
+                            } else {
+                                //Listen only on Win
+                                listenSocket = new UWAUtilsInterCom.Socket("listener_01");
+                                listenSocket.subscribeServer("uwa.embedded");
+                                listenSocket.addListener("3DPlayWidget", this.onInterComMessage.bind(this));
+
+                            }
+
+                            this.handleLegacyPref(); // IR migration 14x>15x Fix for Beta4
+                            this.fillPlatformList();
+
+                            if (this.checkModelIdPref()) {
+
+                                if (platformType == "SWYM") {
+
+                                    this.getSwymConfig();
+
+                                } else {
+
+
+                                    this.updateWidgetTitle("");
+                                    // need to waiting for MyApps list to be able to match EnvId with EnvURl
+                                    WuxEvt.subscribeOnce({
+                                        event: "PlatformListReady"
+                                    }, function (data) {
+
+                                        x3dw.parseCollabSpacePref(data);
+
+                                    });
+
+                                }
+
+                            } else {
+
+                                console.warn("BAD MODEL ID PREF ");
+                                //clientMessage.msg("BAD_ID_TYPE");
+                            }
+
+                            //this.updateHeight();
+
+                        },
+                        refresh: function () {
+                            if (x3dw.editInProgress) {
+                                x3dw.editInProgress = false;
+                                return;
+                            }
+
+                            UWA.log("-- Refresh --");
+                            x3dw.updateHeight();
+
+                            if (!IsIpad && x3dw.isPlayerRunning) {
+                                UWA.log("--- need to dispose!---");
+                                play3D.instance.dispose();
+                                x3dw.isPlayerRunning = false;
+                                x3dw.canvasDiv.empty(); // clear viewer if needed
+                            }
+
+                            x3dw.load(); // to keep current experience running, to clean asap!
+
+
+                        },
+                        parseCollabSpacePref: function (pData) {
+
+                            var jsonCollabPref = JSON.parse(w.getValue("CollabSpacePref"));
+                            x3dw.collabSpaceData = jsonCollabPref;
+
+                            if (jsonCollabPref.data.items[0].serviceId == "2DLayout") {
+
+                                var layout = jsonCollabPref.data.items[0];
+
+                                x3dw.updateWidgetTitle(jsonCollabPref.data.items[0].displayName);
+                                var jsonObj = {
+                                    experience: layout.experience,
+                                    asset: layout.asset,
+                                };
+
+                                //var pParam= { asset: jsonObj  };
+                                x3dw.startPlayer(jsonObj);
+
+
+                            } else {
+
+
+                                var params = x3dw.getParam4CollabSpace(jsonCollabPref);
+                                x3dw.startPlayer(params);
+                                x3dw.updateWidgetTitle(jsonCollabPref.data.items[0].displayName);
+
+
+                            }
+
+
+                        },
+                        setLevelInstance: function () {
+
+                            if (window.parent.dsBaseUrl.indexOf("vdevpril") > -1) {
+                                isDev = true;
+
+                                console.log("//-- On DEv Mode -- //");
+                            }
+
+                        },
+                        checkModelIdPref: function () {
+                            var valid = false;
+
+                            if (w.getValue("MODELID") == "" && w.getValue("CollabSpacePref") == "") {
+
+                                clientMessage.msg("EMPTY_MODEL_ID");
+
+                            } else {
+                                if (w.getValue("CollabSpacePref") && w.getValue("MODELID") == "") {
+
+                                    //console.warn("CollabSpacePref!!");
+                                    //console.log(w.getValue("CollabSpacePref"));
+                                    platformType = "EV6";
+                                    return true;
+
+
+                                } else if (this.isModelTypeOk(w.getValue("MODELID"))) {
+
+                                    valid = true;
+                                    this.currentModelId = w.getValue("MODELID");
+
+                                } else {
+
+                                    valid = false;
+                                    clientMessage.msg("BAD_ID_TYPE");
+
+                                }
+
+                            }
+                            return valid;
+
+                        },
+                        handleLegacyPref: function () { // for migration issue. 14x to 15x preference value changes
+                            if (w.getValue("ModelId") && w.getValue("MODELID") == "") {
+                                UWA.log("~14xPREF");
+                                widget.setValue("MODELID", w.getValue("ModelId"));
+                            }
+                        },
+                        isModelTypeOk: function (modelId) {
+
+                            if (isNaN(modelId)) {
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        },
+                        fillPlatformList: function () {
+
+                            this.getMyAppsUrl();
+                            if (w.getValue("PLATFORM") != "") {
+                                this.platformUrl = w.getValue("PLATFORM");
+                                serverH.setPlatformType(this.platformUrl);
+                            }
+
+                        },
+                        getMyAppsUrl: function () {
+
+                            //populate the app configuration properties
+                            var appconfig = PublicAPI.getAllApplicationConfigurations(true);
+                            var myappsbaseUrl = PublicAPI.getApplicationConfiguration("app.urls.myapps");
+                            this.myAppsUrl = myappsbaseUrl;
+                            this.getSwymTenants(this.myAppsUrl);
+
+                        },
+                        getSwymTenants: function (url) {
+
+                            var myAppsUrl = url + "/resources/AppsMngt/environment/list";
+                            x3dw.doQuery(myAppsUrl, {},
+                                function (json) {
+                                    //values stores the differnt user tenants
+                                    console.info("__________");
+                                    console.log(json);
+                                    console.info("__________");
+                                    var values = json.cstorage;
+                                    if (json.success) {
+
+                                        // console.log("--Success new List My Apps");
+                                        var app = serverH.toMyAppsList(json); // return a correct key-value for preferences list
+                                        x3dw.myAppsReturnList = json;
+                                        x3dw.setSwymTenants(app);
+                                        WuxEvt.publish({
+                                            event: "PlatformListReady",
+                                            data: json
+                                        });
+                                    } else {
+
+                                        clientMessage.msg("MY_APPS_ERROR");
+
+                                    }
+
+
+                                },
+                                function () {
+
+                                    //UWA.log("Error in getting Swym tenants from MyApps", arguments);
+                                    clientMessage.msg("MY_APPS_ERROR");
+
+                                });
+
+                        },
+                        setSwymTenants: function (values) {
+
+                            var options = [];
+                            var urlPref;
+                            var defValue = null;
+                            var oldValue = widget.getValue("PLATFORM") || widget.getValue("SwymUrl"); // for legacy value IR-356071-3DEXPERIENCER2015x
+                            var imax = values.length;
+
+                            for (var i = 0; i < imax; i++) {
+                                if (oldValue && (oldValue === values[i].url)) {
+                                    //set this value as the default one
+                                    defValue = oldValue;
+
+                                }
+                                var tmpObj = {
+                                    "label": values[i].displayName,
+                                    "value": values[i].url
+                                };
+                                options.push(tmpObj);
+
+                            } // end loop
+
+                            if (!defValue) {
+                                //if no old value or the old value matches none of the returned tenants, take the first tenant as default
+                                defValue = options[0].value;
+
+                            }
+                            UWA.log(options);
+
+                            var urlPref = {
+                                "type": "list",
+                                "name": "PLATFORM",
+                                "label": "PLATFORM",
+                                "defaultValue": defValue,
+                                "options": options
+                            };
+                            widget.addPreference(urlPref);
+                            widget.setValue("PLATFORM", defValue);
+
+
+                        },
+
+                        doQuery: function (url, data, onComplete, onFailure) {
+
+                            var config = {
+                                timeout: 100000,
+                                method: "GET",
+                                data: data,
+                                type: "json",
+                                proxy: "passport",
+                                headers: {
+                                    "Accept": "application/json",
+                                    "x-swym": this.swymToken || ""
+                                },
+                                onComplete: onComplete,
+                                onFailure: onFailure ? onFailure : function (json) {
+                                    UWA.log("arguments onFailure");
+                                    UWA.log(arguments);
+
+                                    clientMessage.msg("QUERY_ERROR");
+                                }
+                            };
+
+                            UWA.Data.request(url, config);
+                        },
+                        getMediaDatas: function (json) {
+
+                            var curModId = widget.getValue("MODELID");
+                            var Mediaurl = "{0}/api/media/getmedia/id_media/{1}".format(widget.getValue("PLATFORM"), curModId);
+                            x3dw.doQuery(Mediaurl, {}, function (e) {
+                                //UWA.log("- retour GetMedia -");
+                                // UWA.log(e);
+
+
+                                if (e.error) {
+
+                                    clientMessage.msg("QUERY_ERROR");
+                                    return;
+                                }
+
+
+                                if (e.errorcode == "ERROR_MODEL_NOT_FOUND" || e.errorcode == "ERROR_ACCESS_DENIED") {
+                                    // UWA.log(" ! Model unknown or Access Denied",e.errormsg);
+                                    clientMessage.msg("UNKNOWN_MODEL");
+                                    x3dw.updateWidgetTitle("");
+                                    return;
+
+                                } else if (e.result.media_type != "3d_model") {
+
+                                    UWA.log(" [!] Bad Type");
+                                    clientMessage.msg("BAD_TYPE");
+                                    return;
+
+                                } else if (!x3dw.isModelStreamable(e)) { // true if : download_origi =1 || admin || owner (Swym only for now)
+
+                                    clientMessage.msg("UNAUTHORIZED_MODEL");
+                                    return;
+
+                                } else {
+
+                                    //console.log(e.result.community_title);
+                                    x3dw.updateWidgetTitle(e.result.title);
+
+                                    if (x3dw.isPlayerRunning) {
+                                        UWA.log("Refresh, player is running");
+                                        var swymModelUri = x3dw.getModelUri(widget.getValue("PLATFORM"), curModId);
+                                        var proxyModelUri = x3dw.getProxifyUrl(swymModelUri);
+                                        play3D.instance.dispose();
+                                        play3D.instance.load(proxyModelUri);
+                                        //x3dw.hideEventAnimation();
+                                    } else {
+
+
+                                        if (IsIpad) {
+                                            //console.log("IsIpad> ",IsIpad);
+
+                                            iOsManager.set3DPLayURL({
+                                                "id": curModId
+                                            });
+                                        } else {
+                                            //x3dw.hideEventAnimation();
+                                            x3dw.startPlayer(x3dw.returnParam4Swym(curModId));
+
+
+                                        }
+
+
+                                        //iOsManager.set3DPLayURL({"id":curModId});
+
+
+                                    }
+
+
+                                }
+
+                            });
+
+
+                        },
+                        getCurrentUser: function (tenantType) { // swym getCurrentUser
+
+                            var UserApiUrl = widget.getValue("PLATFORM") + "/api/user/getCurrent?";
+
+                            x3dw.doQuery(UserApiUrl, {}, function (e) {
+                                //UWA.log("Get Connect User hash_key ");
+                                //console.log(e.result.hash_key);
+                                if (e.error) {
+
+                                    clientMessage.msg("QUERY_ERROR");
+                                    return;
+
+                                } else {
+
+                                    x3dw.CurrentUser = e.result;
+                                    // UWA.log(" x3dw.currentUser");
+                                    // UWA.log(x3dw.CurrentUser);
+                                    x3dw.currentUserHahskey = e.result["hash_key"];
+                                    x3dw.getMediaDatas();
+
+                                }
+
+
+                            });
+
+                        },
+                        getSwymConfig: function () {
+
+                            var configApiUrl = widget.getValue("PLATFORM") + "/api/index/getconfig?";
+                            x3dw.doQuery(configApiUrl, {}, function (json) {
+                                UWA.log("Get Swym Config from : " + configApiUrl);
+
+                                if (json.error || json.errorid) {
+
+                                    clientMessage.msg("SWYM_ERROR");
+                                    return;
+
+                                } else {
+
+                                    x3dw.SwymConfig = json.result.config;
+                                    UWA.log(x3dw.SwymConfig);
+                                    if (x3dw.currentUserHahskey != "") {
+
+                                        x3dw.getMediaDatas();
+
+                                    } else {
+
+                                        x3dw.getCurrentUser();
+
+                                    }
+
+
+                                }
+
+
+                            });
+
+
+                        },
+                        getModelUri: function (domainUri, modId) {
+
+                            return "{0}/api/media/stream3dxmlfile/id/{1}".format(domainUri, modId);
+
+                        },
+                        getProxifyUrl: function (pUrl) {
+
+                            var proxyModelUri = UWA.Data.proxifyUrl(pUrl, {
+                                method: "GET",
+                                proxy: "passport",
+                                type: "text",
+                                headers: {
+                                    "Accept": "application/json",
+                                    "X-SWYM": this.swymToken
+                                }
+                            });
+
+                            return proxyModelUri;
+                        },
+                        isModelStreamable: function (mData) { // based on current viewer & download_original file flag
+                            //UWA.log("via mediaData : ", mData.result["user.hash_key"]);
+
+                            if (mData.result.download_original_file == "1") return true;
+                            if (this.currentUserHahskey == mData.result["user.hash_key"]) {
+                                UWA.log("---- OWNER -----");
+                                return true;
+                            } else {
+                                UWA.log("---- [ NON OWNER ] -----");
+                                return false;
+                            }
+
+                        }, // end isModelStreamable
+                        updateWidgetTitle: function (mediaTitle) {
+
+                            var widgetT = "3DPlay";
+                            widget.setTitle("");
+                            if (mediaTitle != "") {
+
+                                widgetT = mediaTitle;
+
+                            }
+                            widget.setTitle(widgetT);
+
+                        },
+
+                        createCanvasDiv: function () {
+                            widget.body.empty();
+                            this.canvasDiv = UWA.createElement("div", {
+                                id: "canvas-div",
+                                html: ""
+                            });
+                            this.declareDraggableZoneEvents();
+                            this.canvasDiv.inject(widget.body);
+
+                        },
+                        declareDraggableZoneEvents: function () {
+
+                            this.canvasDiv.ondrop = function (event) {
+                                event.preventDefault();
+
+                                // O7P: Changed order so thar searchitems are checked first
+                                var data = event.dataTransfer.getData("text/searchitems");
+                                if (data === "") {
+                                    data = event.dataTransfer.getData("text");
+                                }
+                                var json = JSON.parse(data);
+                                for (var i = 0; i < json.data.items.length; i++) {
+                                    var item = json.data.items[i];
+                                    if (!item.envId) {
+                                        item.envId = "OnPremise";
+                                    }
+
+                                }
+                                x3dw.onDropEvent(json);
+
+                            };
+                            this.canvasDiv.ondragover = function (event) {
+                                event.preventDefault();
+                                event.dataTransfer.dropEffect = "copy";
+                            }
+
+                        },
+                        prepareSplashScreenThumbnail: function () {
+
+                            var ThumbnailUri = widget.getValue("PLATFORM") + "/api/media/streammedia/id/" + widget.getValue("MODELID") + "/type/resize/to_width/";
+                            //this.currentThumbnailUri=widget.getValue("PLATFORM")+"/api/media/streammedia/id/"+modelId+"/type/resize/to_width/";
+                            var winSize = widget.getViewportDimensions();
+                            var bestWidth = winSize.width;
+                            var wHeight = winSize.height;
+                            var ratio = 1.33;
+
+                            if ((bestWidth / wHeight) > ratio) {
+                                bestWidth = Math.round(wHeight * ratio);
+                            }
+
+
+                            var uriBestWidth = ThumbnailUri + bestWidth;
+                            var IosSplashDiv = UWA.createElement("div", {
+                                id: "splash-div",
+                                styles: {
+                                    height: "100%",
+                                    "background-size": "100%",
+                                    "background-position": "50%",
+                                    "background-image": "url(" + uriBestWidth + ")",
+                                    "background-repeat": "no-repeat"
+
+                                }
+                            });
+                            return IosSplashDiv;
+                        },
+                        startPlayer: function (pParams) {
+
+                            var options = {
+                                //loading:"autoplay",
+                                loading: "autoplay",
+                                // splashscreen:this.IosSplashDiv,
+                                splashscreen: {
+                                    custom: this.prepareSplashScreenThumbnail() // for IosManagement
+                                },
+
+                                callbacks: {
+                                    asset: {
+
+                                        LoadingFinished: function (data) {
+                                                // dirty, to fix asap!
+                                                //console.log(pParams);
+                                                if (platformType == "EV6") {
+
+                                                    //console.log("___ TU PEUX STOCKER LES PREFS LA ___");
+                                                    x3dw.saveCollabSpacePref();
+                                                }
+
+                                                // if( (pParams.asset.dtype || pParams.input.asset.dtype)
+                                                //     &&
+                                                //     (pParams.asset.provider=="EV6" || pParams.asset.provider=="EV6" )){
+                                                //         console.log("___ TU PEUX STOCKER LES PREFS LA ___");
+                                                //         x3dw.saveCollabSpacePref();
+                                                // }
+
+
+                                            }
+                                            //LoadingError: function (error) { console.log("LoadingError", error); }
+
+                                    }
+                                }
+                            };
+                            if (pParams === null || pParams === undefined) { // empty, default 3DS model
+                                pParams = this.getParam4Default();
+                            } else {
+                                clientMessage.cleanMsgDom();
+                                if (pParams.experience === null || pParams.experience === undefined) {
+                                    pParams.experience = {
+                                        filename: x3dw.defaultExperience
+                                    };
+                                }
+
+                            }
+                            if (x3dw.isPlayerRunning) {
+                                play3D.load(pParams);
+                            } else {
+                                play3D = new Player3DPlayWeb({
+                                    container: "canvas-div",
+                                    input: pParams,
+                                    options: options
+                                });
+                            }
+
+                            x3dw.isPlayerRunning = true;
+                        },
+
+                        getParam4Default: function () {
+
+                            var jsonObj = {
+                                input: {
+                                    experience: {
+                                        filename: x3dw.defaultExperience
+                                    },
+                                },
+                                asset: {
+                                    "provider": "FILE",
+                                    "format": "cgr",
+                                    "filename": WebappsUtils.getWebappsBaseUrl() + x3dw.defaultModel
+                                }
+                            };
+
+                            return jsonObj;
+
+                        },
+                        getParam4Enovia: function (iMess) { // for Shopper(Enovia) InterCom Events
+
+                            var fctName = iMess.dispatchevent.fctname;
+                            var fctParams = iMess.dispatchevent.fctparam;
+                            if (x3dw.isPlayerRunning) {
+                                // second and n calls, loader
+
+                                return {
+                                    input: {
+                                        experience: iMess.dispatchevent.experienceid,
+                                        asset: fctParams
+                                    }
+                                };
+
+                            } else {
+                                // first call, constructor
+
+                                return {
+                                    experience: iMess.dispatchevent.experienceid,
+                                    asset: fctParams
+                                };
+
+                            }
+
+
+                        },
+                        returnParam4Swym: function (modelId) {
+
+                            var swymModelUri = this.getModelUri(widget.getValue("PLATFORM"), modelId);
+                            var proxifySwymUrl = this.getProxifyUrl(swymModelUri);
+                            var jsonObj = {
+                                asset: {
+                                    "provider": "FILE",
+                                    "format": "xmlv43",
+                                    "filename": proxifySwymUrl,
+                                    "requireAuth": "null"
+                                }
+                            };
+
+                            return jsonObj;
+
+                        },
+                        returnParam4Ev6: function (pServer, pPhyId) {
+                            var jsonObj = {
+                                asset: {
+                                    "provider": "EV6",
+                                    "physicalid": pPhyId,
+                                    "serverurl": pServer,
+                                    "requiredAuth": "passport"
+                                }
+                            };
+
+                            return jsonObj;
+                        },
+                        getParam4Swym: function (iMess) { // out for now, InterCom Event for Swym Content
+
+                            var fctParams = iMess.dispatchevent.fctparam;
+                            var modelUri = this.getModelUri(fctParams.tenanturi, fctParams.mediaid);
+                            var proxifyUri = this.getProxifyUrl(modelUri);
+                            var ob = { //experience: this.defaultExperience,
+                                asset: proxifyUri
+                            };
+                            return ob;
+
+                        },
+                        getParam4CollabSpace: function (iMess) { // testing purpose, to merge with Intercom
+                            var part = iMess.data.items;
+                            var sUrl = this.findServerUrlById(part[0].envId, part[0].serviceId);
+                            x3dw.updateWidgetTitle("");
+                            if (sUrl) {
+                                // console.warn("RÃ©solution Url > ",sUrl);
+                                var jsonObj = {
+
+                                    "provider": "EV6",
+                                    "physicalid": part[0].objectId,
+                                    "serverurl": sUrl,
+                                    "dtype": part[0].objectType,
+                                    "requiredAuth": "passport"
+
+                                };
+
+                                w.setValue("MODELID", "");
+                                if (x3dw.isPlayerRunning) {
+                                    return {
+                                        input: {
+                                            asset: jsonObj,
+                                            experience: {
+                                                filename: x3dw.defaultExperience
+                                            },
+                                            asset: jsonObj
+                                        }
+                                    };
+                                } else {
+                                    return {
+                                        experience: {
+                                            filename: x3dw.defaultExperience
+                                        },
+                                        asset: jsonObj
+                                    };
+                                }
+                            } else {
+                                console.warn(" [!] EnvId inconnu ");
+                            }
+
+                        },
+                        saveCollabSpacePref: function () {
+                            w.setValue("CollabSpacePref", JSON.stringify(x3dw.collabSpaceData));
+                        },
+                        // for 3DSpace Drag&Drop proto
+                        findServerUrlById: function (envId, envType) {
+
+                            var env = x3dw.myAppsReturnList.environments;
+                            var imax = env.length;
+                            console.log("env ", env);
+                            var cstorageUri = false;
+                            for (var i = 0; i < imax; i++) {
+                                if (env[i].id == envId) {
+                                    envType == "3DSpace" ? cstorageUri = env[i].cstorage : cstorageUri = env[i].swym;
+                                }
+
+                            } // end loop
+
+                            return cstorageUri;
+                        },
+                        onDropEvent: function (dragData) {
+                            var dataNode = dragData.data.items;
+                            if (dataNode[0].serviceId == "3DSpace") {
+
+                                //console.info("___3D SPACE > DATA RECEIVED BY DROP! ___: ",dragData);
+                                params = this.getParam4CollabSpace(dragData);
+                                x3dw.updateWidgetTitle(dataNode[0].displayName);
+                                x3dw.collabSpaceData = dragData;
+                                platformType = "EV6";
+                                x3dw.startPlayer(params);
+
+                            } else {
+
+                                // console.info("___3D/SWYM > DATA RECEIVED BY DROP! ___: ",dragData);
+
+                                var sUrl = this.findServerUrlById(dataNode[0].envId, dataNode[0].serviceId);
+                                widget.setValue("PLATFORM", sUrl);
+                                widget.setValue("MODELID", dataNode[0].objectId);
+                                widget.setValue("CollabSpacePref", "");
+                                x3dw.refresh();
+                            }
+
+                        },
+
+                        onInterComMessage: function (iMess) {
+                            console.info("____ INTERCOM EVENT ___: ", iMess);
+                            var fctName = iMess.dispatchevent.fctname;
+                            var fctParams = iMess.dispatchevent.fctparam;
+
+                            if (fctName === "Load" || fctName === "ChangeModel") {
+                                var exp = iMess.dispatchevent.experienceid;
+                                var params = {};
+                                clientMessage.cleanMsgDom();
+
+                                if (exp.indexOf("ENOSHO") === 0) {
+
+                                    params = this.getParam4Enovia(iMess);
+                                    platformType = "SHOPPER";
+                                    x3dw.updateWidgetTitle(x3dw.shopperExperienceTitle);
+
+                                } else {
+                                    // out for now
+                                    params = this.getParam4Swym(iMess);
+
+                                }
+                                if (play3D === null || play3D === undefined || !x3dw.isPlayerRunning) {
+                                    x3dw.canvasDiv.empty();
+                                    play3D = new Player3DPlayWeb("canvas-div", params, {
+                                        loading: "autoplay"
+                                    }, widget);
+                                    x3dw.isPlayerRunning = true;
+                                } else {
+
+
+                                    if (exp.indexOf("ENOSHO") === 0) { // should be remove after NWL fix
+                                        console.log("ENOSHO : Send to load >", params);
+
+                                        play3D.load(params);
+                                        platformType = "SHOPPER";
+
+
+                                    } else {
+                                        //console.log("play3D.instance.load(params)      :",params);
+
+                                        widget.setValue("PLATFORM", fctParams.tenanturi);
+                                        widget.setValue("MODELID", fctParams.mediaid);
+                                        this.getMediaDatas();
+                                        //play3D.instance.load(params);
+                                    }
+
+                                    // play3D.load() > best Practice
+                                }
+                            } else {
+                                clientMessage.msg("EVENT_ERROR");
+                                // console.warn("Bad or Unknown Event Catch : >",iMess);
+                            }
+                        }, // end onInterComMessage
+                        // RD5 MAXIMIZE
+                        onViewChange: function (iEvent) {
+                            x3dw.widgetMode = iEvent.type;
+                            x3dw.widgetHeight = iEvent.height;
+                            //console.info("widget view change!> ",iEvent.height);
+
+                            x3dw.updateHeight();
+
+                        },
+
+                        updateHeight: function () {
+                            // var height = widget.getInt("WidgetHeight");
+
+                            // if(this.widgetMode === "maximized"){
+                            //     height = this.widgetHeight;
+                            // }
+                            w.body.setStyle("height", widget.getViewportDimensions().height + "px");
+                            // w.body.setStyle("height", this.widgetHeight + "px");
+                        }
+
+
+                    }; // end x3dw{}
+
+                    var clientMessage = {
+
+                        popContainer: "",
+                        popOver: "",
+                        dropDown: "",
+
+                        msg: function (pMsg) {
+
+                            //console.log("clientMessage.msg : ",this[pMsg].msg, " lvl: ",this[pMsg].level);
+
+                            x3dw.updateWidgetTitle("");
+
+                            this.createMsgDom();
+                            this.cleanMsgDom();
+
+                            if (IsIpad) { // overwrite message for Ipad
+                                widgetMsg["EMPTY_MODEL_ID"].msg = widgetMsg["EMPTY_MODEL_ID_IPAD"].msg + "<span class=\"fonticon fonticon-cog\"></span>";
+
+                            }
+
+                            if (widgetMsg[pMsg].level == "pref") {
+
+                                this.popOver = new Popover({
+
+                                    target: this.popContainer,
+                                    position: "bottom bottom-right",
+                                    body: widgetMsg[pMsg].msg, //+" <span class="fonticon fonticon-cog"></span> ",
+                                    closeOnClick: false,
+                                    bound: false
+
+                                });
+                                this.popOver.toggle();
+
+                            } else {
+
+
+                                this.dropDown = new Dropdown({
+                                    target: this.popContainer,
+                                    position: "bottom bottom-right",
+                                    body: "<p>" + widgetMsg[pMsg].msg + "</p>",
+                                    closeOnClick: false,
+                                    bound: false
+                                });
+
+                                this.dropDown.toggle();
+
+                            };
+
+
+                            if (x3dw.isPlayerRunning) {
+                                UWA.log("-- Player is running -- ");
+                                //play3D.instance.dispose();
+                            };
+
+                            if (!IsIpad) {
+
+                                x3dw.startPlayer(); // default Model > 3DS Emblem
+                                //x3dw.isPlayerRunning = false;
+
+                            }
+
+                        },
+                        createMsgDom: function () {
+                            if (!document.getElementById("msgContainer")) {
+                                this.popContainer = UWA.createElement("div", {
+                                    id: "msgContainer",
+                                    html: ""
+                                });
+                                this.popContainer.inject(widget.body, "before");
+
+                            }
+
+                        },
+                        cleanMsgDom: function () {
+
+                            if (clientMessage.dropDown != "") {
+
+                                clientMessage.dropDown.hide();
+                                clientMessage.dropDown = "";
+                            }
+                            if (clientMessage.popOver != "") {
+
+                                clientMessage.popOver.hide();
+                                clientMessage.popOver = "";
+                            }
+
+                        },
+                        refreshMsgPosition: function () { // IR-350396-3DEXPERIENCER2016x
+
+                            if (clientMessage.dropDown != "") {
+
+                                clientMessage.dropDown.updatePosition();
+                            }
+                            if (clientMessage.popOver != "") {
+                                clientMessage.popOver.updatePosition();
+                            }
+
+
+                        }
+
+
+                    }; // end clientMessage
+
+                    var serverH = { // server Helper for MyApps, Enov etc.
+
+                        //Ev6Mask:  "3dexperience",
+
+                        toMyAppsList: function (rawApp) {
+
+                            var listA = rawApp["environments"];
+                            var imax = listA.length;
+                            //console.warn("-- nb Instance --",imax);
+                            var tmpArray = [];
+
+                            for (var i = 0; i < imax; i++) {
+
+                                var displayName = listA[i].displayName;
+                                var SwymObj = {
+                                    "displayName": "Swym " + displayName,
+                                    "url": listA[i].swym
+                                };
+                                tmpArray.push(SwymObj);
+
+
+                            } // end loop
+                            if (isDev) {
+
+                                tmpArray.push({
+                                    "displayName": "Default Swym ",
+                                    "url": x3dw.defaultSwymUrl
+                                });
+
+                            }
+
+                            return tmpArray;
+
+                        },
+
+                        setPlatformType: function (pValue) {
+
+                                // Is there really no better way to check the type of the plateform that this (very!) dirty test ??
+                                //if(pValue.indexOf(this.Ev6Mask) > -1){
+                                if (pValue.indexOf("/enovia") > -1 || pValue.indexOf("-space.") > -1 || pValue.indexOf("/3dexperience") > -1) {
+
+                                    // console.warn("-- EV6 PLATFORM --");
+                                    platformType = "EV6";
+                                    UWA.log(platformType);
+
+                                } else {
+                                    platformType = "SWYM";
+                                    //console.warn("-- /SWYM/ --");
+                                    UWA.log(platformType);
+
+                                }
+
+
+                            } // end setPlatformType
+
+                    };
+
+                    var iOsManager = {
+
+                        IconHolder: "",
+                        currentThumbnailUri: "",
+
+                        set3DPLayURL: function (item) {
+
+                            var proxyTicket, casTGC, threeDPlayUrl, baseUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                            var proxyP = x3dw.getProxifyUrl("ticket?url=V6");
+                            console.warn("ProxiFyUrl Tiket : ", proxyP);
+
+                            var passportUri = "https://" + window.location.hostname + "/api/passport/ticket?url=V6"; // POD !
+                            if (isDev) {
+                                var passportUri = "https://" + window.location.hostname + ":444/uwp/api/passport/ticket?url=V6"; // local Instance
+                            }
+
+
+                            //console.log(proxyTicket, casTGC, threeDPlayUrl, baseUrl);
+
+                            console.warn("passportUri : ", passportUri);
+
+                            UWA.Data.request(passportUri, {
+                                //proxy : "passport",
+                                type: "json",
+                                timeout: 15000,
+                                onComplete: function (result) {
+                                    proxyTicket = result.result;
+                                    casTGCUrl = x3dw.SwymConfig.passport.passport_fe_url + "/cas/getcastgc?userid=" + x3dw.CurrentUser.login + "&service=V6&ticket=" + proxyTicket + "&callback=" + baseUrl + "gettgc.html";
+                                    console.warn("casTGCUrl : ", casTGCUrl);
+
+                                    //use CORS instead of iframe techniq
+                                    var requestSettings = {
+                                        timeout: 15000,
+                                        method: "GET",
+                                        type: "text",
+                                        onFailure: function (e) {
+                                            // If user login data cannot be retrieved then return without TGC
+                                            console.warn("--ko >", e);
+                                        },
+                                        onComplete: function (data) {
+                                            // console.log("--- onComplete Passport TGC ---");
+                                            // console.log(data);
+                                            var reg = new RegExp("castgc=(.*-cas)");
+                                            var tgc = reg.exec(data);
+
+                                            var backSlash = encodeURI("\\"),
+                                                doubleQuotes = encodeURI("\""),
+                                                passportURL = x3dw.SwymConfig.passport.passport_fe_url,
+                                                tagServerUrl = x3dw.SwymConfig.tenant.tag_server_url,
+                                                tenantID = x3dw.SwymConfig.tenant.online_instance_id,
+                                                URL3DSwym = widget.getValue("PLATFORM");
+
+                                            //CAT3DShareWkb
+                                            threeDPlayUrl = "threedshare://?-Url=" + tagServerUrl + "&--AppName=\"CAT3DShareWkb\"&-object=" + item.id + "&-tenant=" + tenantID + "&-MyAppsURL=" + tagServerUrl + "&-backURL=" + URL3DSwym + "&MX_ONLINE_INSTANCE&" + tenantID + "&-T3DSWYMER_CAS_URL=" + passportURL + "&-T3DSWYMER_URL=" + URL3DSwym + "&Cloud&1&DSYPLMBO_EXTAUTH&1&-e&CATUNILoadFromWebCmdHdr&Open&-Cas=\"CASTGC=" + tgc[1] + "\"";
+
+                                            ThreeDShareURL = threeDPlayUrl;
+
+
+                                            iOsManager.createIosThumbnail(item.id, threeDPlayUrl);
+                                            // iOsManager.add3DPlayIcon(item, threeDPlayUrl);
+
+                                        }
+                                    };
+
+                                    //send request
+
+
+                                    var request = UWA.Ajax.getRequest(casTGCUrl, requestSettings);
+                                    request.withCredentials = true;
+                                    request.send(null);
+                                },
+                                onFailure: function (e) {
+
+                                    console.warn(e);
+
+                                }
+                            });
+                        },
+                        tryToLaunch3DPlay: function (threedshareUrl) {
+
+                            console.warn(" tryToLaunch3DPlay on click = ", threedshareUrl);
+                            var iTunesLink = "itms://itunes.apple.com/us/app/3dplay/id825988585?ls=1&mt=8";
+
+                            //change location to the url containing threedshare
+                            window.location = threedshareUrl;
+
+                            //plus is used to convert date to timestamp
+                            var clickedAt = +new Date;
+                            setTimeout(function () {
+                                //if after 1 s this code is executed, it means the app is not installed, so we redirect to the app store
+                                // To avoid failing on return to MobileSafari, ensure freshness!
+                                if (+new Date - clickedAt < 1010) {
+                                    var loadApp = confirm("To experience this content you need to install 3DPlay");
+                                    if (loadApp == true) {
+                                        window.location = iTunesLink;
+                                    }
+                                }
+                            }, 1000);
+
+                        },
+                        createIOSSplashScreen: function () {
+                            widget.body.empty();
+
+                            var mainFragment = document.createDocumentFragment();
+                            // Initialize main div style
+                            // options.div.setAttribute("style", "position:relative;overflow:hidden;");
+                            var compass = new UWA.Element("img", {
+                                attributes: {
+                                    src: WebappsUtils.getWebappsBaseUrl() + "3DPlay/assets/images/LogoDs.png"
+                                }
+                            });
+
+                            x3dw.widgetSplashScreen = WUXCSS.verticalAlign(compass);
+                            x3dw.widgetSplashScreen.addClassName("SHAREPluginless_background");
+                            mainFragment.appendChild(x3dw.widgetSplashScreen);
+                            widget.body.appendChild(mainFragment);
+                            this.returnThumbnailBestSize();
+
+                        },
+                        hideSplashScreen: function () {
+
+                            clientMessage.cleanMsgDom();
+                            x3dw.widgetSplashScreen.setAttribute("style", "display:none;");
+
+                        },
+
+                        createIosThumbnail: function (modelId, threedshareUrl) {
+
+                            widget.body.empty();
+                            this.currentThumbnailUri = widget.getValue("PLATFORM") + "/api/media/streammedia/id/" + modelId + "/type/resize/to_width/";
+                            clientMessage.cleanMsgDom();
+
+                            var mainFragment = document.createDocumentFragment();
+                            // Initialize main div style
+                            // options.div.setAttribute("style", "position:relative;overflow:hidden;");
+                            var playIcon = new UWA.Element("img", {
+
+                                src: widget.getValue("PLATFORM") + "/webapps/swym/assets/media/3DPlay-icon.png",
+                                styles: {
+                                    "cursor": "pointer",
+                                },
+                                events: {
+
+                                    click: function (evt) {
+
+                                        iOsManager.tryToLaunch3DPlay(threedshareUrl);
+
+                                    }
+                                }
+
+                            });
+
+                            x3dw.widgetSplashScreen = WUXCSS.verticalAlign(playIcon);
+                            x3dw.widgetSplashScreen.addClassName("IOSThumbnail_background");
+
+                            var backUri = this.currentThumbnailUri + this.returnThumbnailBestSize();
+                            x3dw.widgetSplashScreen.style.backgroundImage = "url(" + backUri + ")";
+
+                            mainFragment.appendChild(x3dw.widgetSplashScreen);
+                            widget.body.appendChild(mainFragment);
+
+
+                        },
+                        updateIosThumbnailSize: function () {
+                            if (x3dw.widgetSplashScreen) {
+
+                                var b = this.currentThumbnailUri + this.returnThumbnailBestSize();
+                                x3dw.widgetSplashScreen.style.backgroundImage = "url(" + b + ")";
+
+                            }
+
+                        },
+                        returnThumbnailBestSize: function () {
+
+                            var winSize = widget.getViewportDimensions();
+                            var bestWidth = winSize.width;
+                            var wHeight = winSize.height;
+                            var ratio = 1.33;
+
+                            if ((winSize.width / wHeight) > ratio) {
+                                bestWidth = Math.round(wHeight * ratio);
+                            }
+
+                            return bestWidth;
+
+                        }
+
+                    }; // end IosManager
+
+                    widget.x3dw = x3dw;
+
+                    if (widget.launched) {
+                        x3dw.load();
+
+                    } else {
+                        widget.onLoad = function () {
+                            x3dw.load();
+                        };
+                    }
+                    widget.onEdit = x3dw.onEdit;
+                    widget.onRefresh = x3dw.refresh;
+                    widget.onViewChange = x3dw.onViewChange;
+                    widget.onResize = function (evt) {
+                        clientMessage.refreshMsgPosition();
+                        //console.info("onResize!! ");
+                        //console.info(widget.getViewportDimensions().height);
+                        widget.body.setStyle("height", widget.getViewportDimensions().height + "px");
+                        if (IsIpad) {
+                            // to resize thumbnail on IOS IR-313222-3DEXPERIENCER2015x
+                            // doing nothing on Win for now
+                            iOsManager.updateIosThumbnailSize();
+                        }
+
+                    };
+
+                }) // end callback AMD
+
+    </script>
+</head>
+
+<body>
+    Loading...
+</body>
+
+</html>

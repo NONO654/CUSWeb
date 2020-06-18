@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMGAConfiguration" xmlns:tns="DS_DELMIAMGAConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="IndexMapping">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="Relation" type="tns:IndexMappingType" minOccurs="0"/>
+        <xs:element name="Entity" type="tns:IndexMappingType" minOccurs="0"/>
+      </xs:all>
+      <xs:attribute name="Title" type="xs:string" use="required" />
+      <xs:attribute name="Description" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="IndexMappingType">
+    <xs:sequence>
+      <xs:element name="Key" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="index" type="xs:string" use="required"/>
+          <xs:attribute name="database" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

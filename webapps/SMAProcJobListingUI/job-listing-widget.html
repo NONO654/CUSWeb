@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+ <!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<head>
+
+    <title>Job Monitor</title>
+
+	<!-- Application Metas Start -->
+    <meta name="description" content="Simulation Details Widget" />
+   	<meta name="author" content="Dassault Systèmes" />
+    <meta name="description" content="Lists the jobs" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="debugMode" content="true" />
+	<meta name="autoRefresh" content="0" />
+
+
+	<!-- Application Metas End -->
+
+	<!-- Load the web components polyfill -->
+    <script type="text/javascript" src="../Polymer-1.1.4/webcomponents-lite.min.js"></script>
+
+	<!-- Load AmdLoader -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+	<!-- Load the UWA framework -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+
+	<script type="text/javascript" src="../W3DXComponents/W3DXComponents.js"></script>
+
+    <!-- Load any external JS or CSS file -->
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+    <link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+
+
+
+    <!-- Load Polymer and any other web components -->
+    <link rel="import" href="../Polymer-1.1.4/polymer.html"/>
+    <link rel="import" href="../SMAProcSPUI/sp-job-log/sp-job-log.html"/>
+    <link rel="import" href="../SMAProcSP/sp-6wtagger/sp-6wtagger.html"/>
+    <link rel="import" href="../SMAProcSP/sp-cos/sp-cos.html"/>
+    <link rel="import" href="../SMAProcPSUI/ps-parameter-history/ps-parameter-history.html"/>
+    <link rel="import" href="Components/ps-progress/ps-progress.html"/>
+
+    <preference name="view-access" type="list" label="view_label" defaultValue="Owned">
+        <option value="Owned" label="owned_label" />
+        <option value="*" label="all_label" />
+    </preference>
+    <preference name="nb-items" type="range" label="nb_label" defaultValue="500" step="50" min="50" max="500"></preference>
+
+    <script type="text/javascript" src="JobListingWidget.js"></script>
+
+
+    <script type="text/javascript">
+
+    	widget.addEvents({
+
+    		onLoad: function() {
+     			require(['DS/SMAProcJobListingUI/JobListingWidget'], function(JobListingWidget){
+    				JobListingWidget.onLoad.call(null, arguments);
+    			});
+    		},
+
+    		onRefresh : function() {
+            	require('DS/SMAProcJobListingUI/JobListingWidget').onRefresh.call(null, arguments);
+        	},
+
+        	onStorageChange : function() {
+            	require('DS/SMAProcJobListingUI/JobListingWidget').onStorageChange.apply(null, arguments);
+        	},
+        	onEdit : function(event) {
+            	require('DS/SMAProcJobListingUI/JobListingWidget').onEdit.apply(null, arguments);
+        	},
+        	endEdit : function(event) {
+            	require('DS/SMAProcJobListingUI/JobListingWidget').endEdit.apply(null, arguments);
+        	}
+    	});
+
+
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+	
+	<Template syp:name="3DSHAREAfrWorkshopInterface" Target="CATCmdInterface">
+		<CATCmdInterface  WkbInterface= "CATI3DSHAREFixedAfrWorkshopConfiguration"/>
+	  </Template>
+	
+    <!-- Command headers -->
+    <Template syp:name="3DSHAREAfrWorkshopHeaders" Target="CATCmdHeadersList">
+        <CATCmdHeadersList>
+            <!-- ClassName and ResourceFile attributes handle AMD path, e.g.  MyModule/MyFileWithoutExtension -->
+            <CATCommandHeader ID = "MultiSelect" ClassName = "DS/DELMOMWKIExperience/commands/CmdMultiSelect" ResourceFile = "DELMOMWKIExperience/DELMOMWki" />
+        </CATCmdHeadersList>
+    </Template>
+
+    <!-- Command Starters -->
+    <Template syp:name="3DSHAREAfrWorkshopAccess" Target="CATCmdWorkbench">
+        <CATCmdWorkbench Name="3DSHAREWorkbench">
+            <CATCmdContainer Name = "SectionViews" Visibility = "1" RepresentationType="AfrActionBarSection">
+				<CATCmdStarter Name = "Multi Select"  Command = "MultiSelect" 		Responsive="Long Large" />
+			</CATCmdContainer>
+
+        </CATCmdWorkbench>
+    </Template>
+</Styles>

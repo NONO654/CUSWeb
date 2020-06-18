@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2017 , Dassault Systemes. All rights reserved. -->
+<head>
+    <title>Manufacturing Issue Management</title>
+    <!-- Application Metas Start -->
+    <meta name="author" content="Dassault Systèmes" />
+    <meta name="brand" content="DELMIA" />
+    <meta name="autoRefresh" content="0" />
+    <meta name="description" content="Manufacturing Issue Management widget" />
+    <meta name="keywords" content="Mfg Issue Management" />
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+    <link rel='stylesheet' type='text/css' href='../c/UWA/assets/css/standalone.css' />
+    <script type='text/javascript' src='../c/UWA/js/UWA_Standalone_Alone.js'></script>
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+    <!--<link rel="manifest" href="/manifest.json" />!-->
+
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+    <widget:preferences>
+    </widget:preferences>
+    <!-- Application JavaScript Source -->
+    <script type="text/javascript">
+
+        var issue = null;
+        _tasks = {
+            subscriberTokens: [],
+            current: null
+        };
+        require(['DS/IssueManagementWebInWin/MfgIssueManagement',
+            'DS/UWPClientCode/PublicAPI',
+            'DS/Core/Core',
+        ], function (MfgIssueManagement, PublicAPI, DSCore) {
+            DSCore.setFullscreen();
+
+            window.widget.id = "preview-8bd4b9";
+
+            var myUrl = location.href;
+            var myUrlres = myUrl.split("?");
+            var myUrlres2 = myUrlres[1].split("=");
+            var myUrlres3 = myUrlres[2].split("=");
+            var userDetails = myUrlres3[1].split(";");
+
+            var FirstName = userDetails[0].split(":");
+            var LastName = userDetails[1].split(":");
+            var address = userDetails[2].split(":");
+            var telephone = userDetails[3].split(":");
+            var email = userDetails[4].split(":");
+            var login = userDetails[5].split(":");
+
+            var user = { firstName: FirstName[1], lastName: LastName[1], address: address[1], telephone: telephone[1], email: email[1], login: login[1] };
+            PublicAPI._setUser(user);
+
+            MfgIssueManagement.InitWebInWin(login[1]);
+            MfgIssueManagement.subscribeToTasks();
+        });
+    </script>
+</head>
+<body>
+
+    <div class="spinner spinner-lg spinning fade in" style="transform: translate3d(0px, 0px, 0px); display: inline-block; margin-top: 20%; margin-left: 45%;">
+        <span class="spinner-bar"></span>
+        <span class="spinner-bar spinner-bar1"></span>
+        <span class="spinner-bar spinner-bar2"></span>
+        <span class="spinner-bar spinner-bar3"></span>
+    </div>
+</body>
+</html>

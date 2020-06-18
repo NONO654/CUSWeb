@@ -1,0 +1,74 @@
+<dom-module id="cmp-gateway-view">
+  <template>
+      <style>
+      :host {
+          display: inline-block;
+          position: absolute;
+          box-sizing: border-box;
+      }
+      :host([hidden]) {
+          display: none;
+      }
+      :host([selected]) #gatewayView {
+          border: thick solid #78befa;
+      }
+      :host([disabled]) #gatewayView {
+          /* background-color:#787878;
+          border: thick solid #787878; */
+          opacity: .7;
+          pointer-events: none;
+      }
+      :host([disabled]) #gatewayView:hover {
+          border: thick solid #787878;
+      }
+      :host([loading]) #loaderIcon {
+          display: block;
+          position: relative;
+          top: -25px;
+          left: 15px;
+          width: 30px;
+          height: 30px;
+          pointer-events: none;
+      }
+      #gatewayView {
+        display: block;
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        border: thick solid #3D6680;
+        border-radius: 10%;
+        background: #3D6680;
+        transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        top: 8px;
+        left: 8px;
+        position: relative;
+      }
+      #gatewayView:hover {
+         border: thick dashed #78befa;
+     }
+
+      #loaderIcon /deep/ .spinner-bar {
+        background-color: white;
+      }
+
+      /*KSA7:
+      Fix for IR-604218-3DEXPERIENCER2018x, the inital width and height of 100px results in gateway being clicked, although user
+      intends to add an adapter in the edges
+      */
+      .holder {
+        width: 60px;
+        height: 60px;
+      }
+
+      #loaderIcon {
+        display: none;
+      }
+
+      </style>
+      <div class="holder">
+        <div id="gatewayView"></div>
+        <div id="loaderIcon"></div>
+      </div>
+  </template>
+</dom-module>

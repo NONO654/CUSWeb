@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="com.dassault_systemes.sma.plugin.TextParserPIGeneral" version="3DX.0" extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflTextParserPIGeneral" nlsID="dispname">General Text</DisplayName>
+	<Description nlsFile="SMAWflTextParserPIGeneral" nlsID="desc">Read/write general text data between text sources and parameters</Description>
+	<LongDescription>
+    Text Parser General Plug-in
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>TextParserFormat</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.sma.plugin.TextParserPIGeneral</Value>
+		</Attribute>
+		<Attribute name="SupportsDesignSource">
+			<Value>true</Value>
+		</Attribute>
+		<Attribute name="SupportsRuntimeSource">
+			<Value>true</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAWflTextParserPIGeneral16.png" targetFilename="SMAWflTextParserPIGeneral16.png"/>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflTextParserPIGeneral32.png" targetFilename="SMAWflTextParserPIGeneral32.png"/>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflTextParserPIGeneral.CATNls" targetFilename="SMAWflTextParserPIGeneral.CATNls"/>
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflTextParserPIGeneral.sypstyle" targetFilename="SMAWflTextParserPIGeneral.sypstyle"/>
+		<Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebTextParser/cmp-textparser-general/cmp-textparser-general.html" targetFilename="SMAProcWebTextParser/cmp-textparser-general/cmp-textparser-general.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-textparser-general</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflTextParserPIGeneralEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refExtensionName="SMAWflTextParser" refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+						<StreamRef refStreamName="NLS"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="sourceSpec" type="aggregate" valuetype="single">
+			<Property name="mode" type="string" valuetype="single">
+				<Value>read</Value>
+			</Property>
+			<Property name="type" type="string" valuetype="single">
+				<Value>file</Value>
+			</Property>
+			<Property name="lineEnd" type="string" valuetype="single">
+				<Value>default</Value>
+			</Property>
+			<Property name="runtimeSourceFile" type="file" valuetype="single" mode="input">
+				<Value/>
+			</Property>
+			<Property name="runtimeSourceParameter" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="runtimeSourceDisplayName" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="designSourceFile" type="file" valuetype="single" mode="input">
+				<Value/>
+			</Property>
+			<Property name="designSourceDisplayName" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="startIndex" type="integer" valuetype="single">
+				<Value>0</Value>
+			</Property>
+			<Property name="endIndex" type="integer" valuetype="single">
+				<Value>-1</Value>
+			</Property>
+		</Property>
+		<Property name="wordSeparators" type="string" valuetype="single">
+			<Value>, \t</Value>
+		</Property>
+		<Property name="otherSeparators" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+	</Properties>
+</wfext:Extension>

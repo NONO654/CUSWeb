@@ -1,0 +1,50 @@
+<!---------------------------------------------------------------------------------------------------------------
+[cmp-loop HTML Document]
+
+Project:        cmp
+Version:        1.0
+Last change:    Thu, 19 Nov 2015 20:03:26 GMT
+Assigned to:    Vishakha Motwani
+Primary use:    Loop adapter editor
+Description:    To be used with cmp-do-until-loop, cmp-for-loop, cmp-for-each-loop and cmp-while-loop components
+----------------------------------------------------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../cmp-loop-parameter-mapper.html">
+<!--Importing other loop components-->
+<link rel="import" href="../cmp-do-until-loop/cmp-do-until-loop.html" />
+<link rel="import" href="../cmp-for-loop/cmp-for-loop.html" />
+<link rel="import" href="../cmp-for-each-loop/cmp-for-each-loop.html" />
+
+<dom-module id="cmp-loop">
+    <template>
+        <style>
+            :host {
+                display: block;
+                padding: 10px;
+            }
+            :host([hidden]) {
+                display: none;
+            }
+            #pluginchooser {
+                margin: 0;
+                vertical-align: middle;
+            }
+            label {
+                width: 5.5em;
+                font-weight: normal;
+            }
+        </style>
+        <label>Loop Type: </label><pcw-extension-chooser
+            id="pluginchooser"
+            extensions="com.dassault_systemes.sma.plugin.LoopPIDoUntil, com.dassault_systemes.sma.plugin.LoopPIFor, com.dassault_systemes.sma.plugin.LoopPIForEach, com.dassault_systemes.sma.plugin.LoopPIWhile"
+            chooserlabel="">
+        </pcw-extension-chooser>
+        <!--Respective loop details based on the selection-->
+         <cmp-do-until-loop id="dountilloop" hidden></cmp-do-until-loop>
+         <cmp-for-loop id="forloop" hidden></cmp-for-loop>
+         <cmp-for-each-loop id="foreachloop" hidden></cmp-for-each-loop>
+         <cmp-do-until-loop id="whileloop" hidden></cmp-do-until-loop>
+    </template>
+    <script type="text/javascript" src="cmp-loop.js"></script>
+</dom-module>

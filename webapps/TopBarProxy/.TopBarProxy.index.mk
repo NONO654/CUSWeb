@@ -1,0 +1,11 @@
+m|TopBar\TopBarProxy.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19214
+r|G:\R421\BSF\.
+t|win_b64\webapps\TopBarProxy\TopBarProxy.js|1564791439|10375
+s|TopBar\TopBarProxy.mweb\src\Menu.js|1452878723|5789
+s|TopBar\TopBarProxy.mweb\src\Debuggable.js|1412932928|501
+s|TopBar\TopBarProxy.mweb\src\MenuItem.js|1465552671|13215
+s|TopBar\TopBarProxy.mweb\src\TopBarProxy.js|1460985785|24022
+s|TopBar\TopBarProxy.mweb\src\MenuBarItem.js|1564043500|2242

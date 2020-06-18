@@ -1,0 +1,533 @@
+// ===========================================================
+// PACKAGE   : VPMViewsDS
+// ===========================================================
+// Generated : Thu May  4 11:29:14 2006
+// Updated: Monday 13 2006
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 4 entities :
+// - CAAVPMReferenceView
+// - CAAVPMRefViewInstance
+// - CAAVPMRepresentationView
+// - CAAVPMRepViewInstance
+//
+//
+// This example proposes to order presentation like //a) ident //b) desciption //c) state of dev //d) owner
+//  And keep same order in every mask 
+//
+// ===========================================================
+ENTITY CAAVPMReferenceView
+// ===========================================================
+// --- attributes: 15
+ATTR PLM_ExternalID;Y;N;$
+ATTR E_viewName;Y;N;$
+//+VALUE below is help value but can be mandatory if mask defined it  / any_customer_classification 
+VALUE UndefView
+VALUE FunctionalDesignView
+VALUE LogicalDesignView
+VALUE PhysicalDesignView
+VALUE FunctionalSimulationView
+VALUE LogicalSimulationView
+VALUE PhysicalSimulationView
+VALUE FunctionalManufacturingView
+VALUE LogicalManufacturingView
+VALUE PhysicalManufactutingView
+ATTR majorrevision;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR V_description;N;N;$
+ATTR V_discipline;N;N;$
+ATTR V_usage;N;N;$
+ATTR current;N;N;$
+ATTR reserved;N;N;$
+ATTR reservedby;N;N;$
+ATTR modified;N;N;$
+ATTR originated;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR E_viewName;Y
+FATTR V_description;Y
+//FATTR V_discipline;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+//a) ident
+FATTR PLM_ExternalID;Y
+FATTR E_viewName;Y
+//b) definition
+FATTR project;Y
+//c) state of dev
+FATTR current;Y
+//d) ownership
+FATTR owner;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+//a) ident
+FATTR PLM_ExternalID;Y
+FATTR E_viewName;Y
+FATTR majorrevision;Y
+//b) desciption
+FATTR V_description;Y
+FATTR V_usage;Y
+FATTR V_discipline;Y
+FATTR project;Y
+//c) state of dev
+FATTR current;Y
+FATTR reserved;Y
+FATTR reservedby;Y
+FATTR modified;Y
+FATTR originated;Y
+//d) owner
+FATTR owner;Y
+FATTR organization;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+//a) ident
+FATTR PLM_ExternalID;N
+FATTR E_viewName;N
+FATTR majorrevision;N
+//b) desciption
+FATTR V_description;N
+FATTR V_usage;N
+FATTR V_discipline;N
+FATTR project;N
+//c) state of dev
+FATTR current;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR originated;N
+//d) owner
+FATTR owner;N
+FATTR organization;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR E_viewName;N
+FATTR majorrevision;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+//a) ident
+FATTR PLM_ExternalID;Y
+FATTR E_viewName;N
+FATTR majorrevision;N
+//b) desciption
+FATTR V_description;Y
+FATTR V_usage;N
+FATTR V_discipline;N
+FATTR project;N
+//c) state of dev
+FATTR current;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR originated;N
+ //d) owner
+FATTR owner;N
+FATTR organization;N
+// ===========================================================
+ENTITY CAAVPMRefViewInstance
+// ===========================================================
+ATTR PLM_ExternalID;N;N;$
+
+ATTR reserved;N;N;$
+ATTR reservedby;N;N;$
+ATTR modified;N;N;$
+ATTR originated;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR reservedby;Y
+FATTR reserved;Y
+FATTR modified;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR reservedby;N
+FATTR reserved;N
+FATTR modified;N
+FATTR originated;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR reservedby;N
+FATTR reserved;N
+FATTR modified;N
+FATTR originated;N
+
+// ===========================================================
+ENTITY CAAVPMRepresentationView
+// ===========================================================
+//a) ident 
+ATTR PLM_ExternalID;Y;N;$
+ATTR E_viewName;Y;N;$
+//+VALUE below is help value but can be mandatory if mask redefined by customer  / any_customer_classification 
+VALUE UndefView
+VALUE FunctionalDesignView
+VALUE LogicalDesignView
+VALUE PhysicalDesignView
+VALUE FunctionalSimulationView
+VALUE LogicalSimulationView
+VALUE PhysicalSimulationView
+VALUE FunctionalManufacturingView
+VALUE LogicalManufacturingView
+VALUE PhysicalManufactutingView
+//-VALUE
+ATTR majorrevision;N;N;$
+
+//b) desciption 
+ATTR V_description;N;N;$
+ATTR V_nature;N;N;$
+ATTR V_discipline;N;N;$
+ATTR V_usage;N;N;$
+ATTR project;N;N;$
+
+//c) state of dev 
+ATTR current;N;N;$
+ATTR reserved;N;N;$
+ATTR reservedby;N;N;$
+//d) owner
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR modified;N;N;$
+ATTR originated;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR E_viewName;Y
+FATTR V_description;Y
+//FATTR V_nature;Y
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR E_viewName;Y
+FATTR V_usage;Y
+FATTR project;Y
+FATTR current;Y
+FATTR owner;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR E_viewName;Y
+FATTR majorrevision;Y
+FATTR V_description;Y
+FATTR V_nature;Y
+FATTR V_usage;Y
+FATTR V_discipline;Y
+FATTR project;Y
+
+FATTR current;Y
+FATTR reserved;Y
+FATTR reservedby;Y
+FATTR modified;Y
+FATTR originated;Y
+
+FATTR owner;Y
+FATTR organization;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR E_viewName;N
+FATTR majorrevision;N
+FATTR V_description;N
+FATTR V_nature;N
+FATTR V_usage;N
+FATTR V_discipline;N
+FATTR project;N
+
+FATTR current;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR originated;N
+
+FATTR owner;Y
+FATTR organization;Y
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR E_viewName;N
+FATTR majorrevision;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR E_viewName;N
+FATTR majorrevision;N
+FATTR V_description;Y
+FATTR V_nature;N
+FATTR V_usage;N
+FATTR V_discipline;N
+FATTR project;N
+
+FATTR current;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR originated;N
+
+FATTR owner;N
+FATTR organization;N
+
+// ===========================================================
+ENTITY CAAVPMRepViewInstance
+// ===========================================================
+// --- attributes
+ATTR PLM_ExternalID;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR reservedby;N;N;$
+ATTR reserved;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR reserved;Y
+FATTR reservedby;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR reserved;Y
+FATTR reservedby;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR reservedby;N
+FATTR reserved;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR reservedby;N
+FATTR reserved;N
+
+// ===========================================================
+ENTITY CAAVPMRefViewConnection
+// ===========================================================
+ATTR PLM_ExternalID;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR reservedby;N;N;$
+ATTR reserved;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR reservedby;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR originated;N
+FATTR modified;N
+FATTR reservedby;N
+FATTR reserved;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR modified;N
+FATTR reservedby;N
+FATTR reserved;N
+// - unordered
+
+// ===========================================================
+ENTITY CAAVPMRefViewPort
+// ===========================================================
+ATTR V_FunctionalName;Y;N;$
+ATTR PLM_ExternalID;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR reservedby;N;N;$
+ATTR reserved;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR V_FunctionalName;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR V_FunctionalName;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR V_FunctionalName;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR reservedby;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR V_FunctionalName;N
+FATTR originated;N
+FATTR modified;N
+FATTR reservedby;N
+FATTR reserved;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR V_FunctionalName;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR V_FunctionalName;N
+FATTR PLM_ExternalID;Y
+FATTR modified;N
+FATTR reservedby;N
+FATTR reserved;N
+// - unordered
+// ===========================================================
+// End of VPMViewsDS package's DEFAULT mask file
+// ===========================================================
+

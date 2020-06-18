@@ -1,0 +1,1 @@
+define("DS/W3DDashboardSearchActions/W3DDashboardSearchActions_ko",{});define("DS/W3DDashboardSearchActions/assets/nls/main",{goToDashboard:"열기",type:"유형",typeValue:"대시보드",title:"제목",creationDate:"생성 날짜",modificationDate:"수정 날짜",responsible:"담당",propertiesFacet:"속성",membersFacet:"멤버"});

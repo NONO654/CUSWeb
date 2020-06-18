@@ -1,0 +1,48 @@
+/* Rule ENONT_OneClickBaselineMaturity (ThisObject: *Reference, Parameters: RuleContext)                */
+/* Code provided for TE (TEAM ENVIRONMENT) Product Modeler Automatic Maturity Change for PLMPreCheckWSDeliverCreate &  PLMPreCheckWSDeliverUpdate OpeningID   */
+/* NOT CONTRACTUAL and PROPERTY OF TE (TEAM ENVIRONMENT) DEFINITION, ANY CHANGE MAY HAPPEN WITHOUT NOTICE                     */
+/*                                                                                                          */
+/* Parameters contains many information such as name, user, security ...                                    */
+/* To be tailored when TE (TEAM ENVIRONMENT) Maturities will be in place                                                      */
+
+Let ThisMaturity(String)
+Let ThisName(String)
+Let DeliveryRuleValue(String)
+
+Validation=true
+
+ThisName=""
+if  (ThisObject->HasAttribute("V_Name") == true ) {  
+      ThisName=ThisObject->GetAttributeString("V_Name")
+}
+
+ThisMaturity=""
+if  (ThisObject->HasAttribute("V_maturity") == true ) {  
+      ThisMaturity=ThisObject->GetAttributeString("V_maturity")
+}
+
+/*********** Applicability of the rule ********/
+if ((ThisObject->IsSupporting("PLMCoreReference") == false) and (ThisObject->IsSupporting("PLMCoreRepReference") == false) ) {
+    Trace (1, "ENONT_OneClickBaselineMaturity: Invalid Object type ")    
+    Parameters.Message="wrong usage of rule ENOAP_PolicyChooser_Resource on type "
+    Parameters.Severity=3 
+	Report("Error",Parameters.Message, Parameters.Message)     
+}
+
+DeliveryRuleValue = "true"
+RetrieveEWSDeliveryRuleParameter(DeliveryRuleValue)
+
+/*DELIVER RULE FROM WSP ONLY*/ 
+if(DeliveryRuleValue == "true")
+{
+if ( (ThisMaturity <> "FROZEN") and (ThisMaturity <> "RELEASED") and (ThisMaturity <> "OBSOLETE") ) {
+    Trace (1, "Workspace Object "+ThisName+" cannot be delivered due to its maturity " + ThisMaturity)    
+    Validation = false
+	
+	/*Differed resolution of NLS - if needed , ENONT_DWS_Controls.CATNls catalog is in ENONTCustomization*/   
+    Parameters.NLSMessage=BuildDeferredMessageNLS("ENONT_DWS_Controls","TeamDeliverCheck")
+	
+    /*Immediate resolution of NLS */	
+	/* Parameters.Message=BuildMessageNLS("ENONT_DWS_Controls","TeamDeliverCheck") */
+}
+}

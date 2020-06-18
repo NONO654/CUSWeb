@@ -1,0 +1,45 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="ad-tool-remove-dialog">
+  <link rel="import" type="css" href="ad-tool-remove-dialog.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+ 
+ 		<div id="myModal" class="modal fade">	   
+			<div class="modal-wrap">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onCancel">&times;</button>
+			        <h4>Remove Selected <span class="singular">Tool</span><span class="plural">Tools</span></h4>
+			      </div>
+			      <div id="dialogContent" class="modal-body">
+					<div class="content-text">Are you sure you want to remove the following <span class="singular">tool</span><span class="plural">tools</span>:</div>
+					<div id="listContainer">
+                        <ul>
+				            <template is="dom-repeat" items="{{selectedTools}}" as="tool">
+				                <li class="content-text" title="{{tool.description}}">{{tool.name}}</li>               
+				            </template>
+			            </ul>
+                      </div>		
+			      </div>
+			      <div class="modal-footer">
+                   	<div id="showAgainSection" class="toggle toggle-primary">
+			      		<input type="checkbox" id="toolShowAgainCheckbox">
+			      		<label class="control-label" for="toolShowAgainCheckbox">Do not show this dialog again</label>
+                   	</div>
+			        <button id="okButton" type="button" class="btn btn-primary" on-click="onAccept">OK</button>
+			        <button id="cancelButton" type="button" class="btn btn-default" on-click="onCancel">Cancel</button>
+			      </div>
+	 		    </div>
+ 		    </div>
+ 		</div>
+ 		<div id="myModalOverlay" class="modal-overlay fade hidden"></div>
+ 		
+
+ 	</template>
+  <script src="ad-tool-remove-dialog.js"></script>
+</dom-module>
+
+

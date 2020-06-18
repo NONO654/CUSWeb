@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.Ncga" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationNcga" nlsID="dispname">NCGA</DisplayName>
+	<Description nlsFile="SMAWflOptimizationNcga" nlsID="desc">Neighborhood Cultivation Genetic Algorithm</Description>
+	<LongDescription nlsFile="SMAWflOptimizationNcga" nlsID="longdesc">
+		<![CDATA[NCGA - Neighborhood Cultivation Genetic Algorithm
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Multi-objective Exploratory Technique
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for discontinuous design spaces
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Not well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>No
+
+</span><span style="font-weight:bold">Features:
+</span><span>Each objective is treated separately and a Pareto front is constructed by selecting feasible non-dominated designs.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.Ncga</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationNcga.CATNls" targetFilename="SMAWflOptimizationNcga.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationNcga_Japanese.CATNls" targetFilename="SMAWflOptimizationNcga_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.ncga.NCGA</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="maxConcurrent" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="reusePolicy" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+		<Property name="LogMessagesFileName" type="string" valuetype="single">
+			<Value>NCGA-output.txt</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Population Size" type="integer" valuetype="single">
+				<Value>10</Value>
+			</Property>
+			<Property name="Number of Generations" type="integer" valuetype="single">
+				<Value>20</Value>
+			</Property>
+			<Property name="Crossover Type" type="integer" valuetype="single">
+				<Value>1</Value>
+			</Property>
+			<Property name="Crossover Rate" type="real" valuetype="single">
+				<Value>1.0</Value>
+			</Property>
+			<Property name="Use Optimal Mutation Rate" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Mutation Rate" type="real" valuetype="single">
+				<Value>0.01</Value>
+			</Property>
+			<Property name="Gene Size" type="integer" valuetype="single">
+				<Value>20</Value>
+			</Property>
+			<Property name="Save Technique Log" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Use initialization file" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Initialization File" type="file" valuetype="single" mode="input">
+				<Value>
+					<![CDATA[<rawFN></rawFN><toOption>5</toOption><del>N</del><type>text/plain</type><rwEnc>UTF8</rwEnc><dataEnc>UTF8</dataEnc><handlerType>com.dassault_systemes.sma.datahandler.DataHandlerPLM</handlerType><hconfig><from></from><at>0</at><dlen>0</dlen><zdata></zdata></hconfig>]]>
+				</Value>
+			</Property>
+			<Property name="Iterations for Constraint Violations" type="integer" valuetype="single">
+				<Value>0</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Use fixed random seed" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Random seed value" type="integer" valuetype="single">
+				<Value>-1</Value>
+			</Property>
+		</Property>
+
+		<Property name="Parameters" type="aggregate" valuetype="single">
+			<Property name="ParetoFile" type="file" valuetype="single">
+				<Value>
+					<![CDATA[<rawFN>{rundir}/NCGA_pareto_profile.txt</rawFN><toOption>11</toOption><del>N</del><type>text/plain</type><rwEnc>UTF8</rwEnc><dataEnc>UTF8</dataEnc><handlerType>com.dassault_systemes.sma.datahandler.DataHandlerInline</handlerType><hconfig><from></from><at>0</at><dlen>0</dlen><zdata></zdata></hconfig>]4]>]]>
+				</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

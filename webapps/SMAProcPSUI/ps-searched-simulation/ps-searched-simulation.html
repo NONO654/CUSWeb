@@ -1,0 +1,74 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel-message/sp-updatepanel-message.html">
+<link rel="import" href="../ps-simulation-abstract-list/ps-simulation-abstract-list.html">
+<link rel="import" href="../ps-simulation-item/ps-simulation-item.html">
+
+<dom-module id="ps-searched-simulation">
+  <link rel="import" type="css" href="ps-searched-simulation.css">
+  <template>
+
+        <sp-variable id="runSimulation" name="runSimulation" value="false"></sp-variable>
+
+        <!--This UI less component is used for parsing URL query string-->
+        <sp-queryparams id="queryparams"></sp-queryparams>
+
+         <!--Requests subset of simulations on refresh-->
+        <sp-mcsservice id="simlistWS"  uri="simulations"  on-request="onRefreshReq">
+        </sp-mcsservice>
+
+        <div class="sidebar">
+            <!-- content from ps-simulation-abstract-list-->
+             <ps-simulation-abstract-list
+                 id="simAbstractList"
+                 settings="{{settings}}"
+                 selecteditems="{{selecteditems}}"
+                 simlist="{{simlist}}"
+                 simidlist="{{simidlist}}"
+                 refreshed-data="[[refreshedData]]"
+                 sidebarmode="{{sidebarmode}}"
+                 activeitemindex="{{activeitemindex}}"
+                 on-refresh="onRefresh"
+                 >
+             </ps-simulation-abstract-list>
+
+            <div id="list" class="processlist">
+                <template is="dom-repeat" items="{{simlist}}" as="item" index-as="itemIndex">
+                    <sp-updatepanel state="{{item.$state}}" updateswhen="is-updating,is-deleting" on-click="onShowUpdateError" data-id$="{{item.id}}">
+                        <!-- State messages -->
+                        <sp-updatepanel-message class="update-panel-message" to="is-updating" message="Saving changes"></sp-updatepanel-message>
+                        <sp-updatepanel-message class="update-panel-message failing" to="is-failingtorun" message="Failed to Run" ></sp-updatepanel-message>
+                        <sp-updatepanel-message class="update-panel-message failing" to="is-failingtoanalyze" message="Failed to Analyze Results" on-click="raFailedMsg">></sp-updatepanel-message>
+                        <sp-updatepanel-message class="update-panel-message failing" to="is-failingtoabort" message="Failed to Abort" ></sp-updatepanel-message>
+                        <sp-updatepanel-message class="update-panel-message failing" from="is-updating" to="is-failing" message="Failed to save"></sp-updatepanel-message>
+                        <sp-updatepanel-message class="update-panel-message deleting" to="is-deleting" message="Deleting"></sp-updatepanel-message>
+                        <sp-updatepanel-message class="update-panel-message failing" from="is-deleting" to="is-failing" message="Failed to delete"></sp-updatepanel-message>
+
+                        <!-- Simulations-->
+                        <ps-simulation-item
+                            simitem="{{item}}"
+                            on-click="onSimItemClick"
+                            on-multiselect="onMultiSelect"
+                            on-multiunselect="onMultiUnselect"
+                            simulation-factory="{{simulationFactory}}"
+                            data-activeindex$="{{_computeDataActiveindex(activeitemid, item)}}"
+                            data-itemindex$="{{itemIndex}}"
+                            class$="{{_computeClass(activeitemid, item)}}">
+                        </ps-simulation-item>
+                    </sp-updatepanel>
+                </template>
+                <sp-modal id="errorMsgModal" class="errorModal" heading="Error" width="50%" height="50%" >
+						<section>
+							<div id ="errorMsg" > </div>
+	            		</section>
+				</sp-modal>
+            </div>
+        </div>
+
+    </template>
+  <script type="text/javascript" src="ps-searched-simulation.js"></script>
+</dom-module>

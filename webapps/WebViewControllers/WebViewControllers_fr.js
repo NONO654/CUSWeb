@@ -1,0 +1,1 @@
+define("DS/WebViewControllers/WebViewControllers_fr",{});define("DS/WebViewControllers/assets/nls/WebNextableViewController",{next:"Suivant",back:"Précédent",finish:"Terminer"});

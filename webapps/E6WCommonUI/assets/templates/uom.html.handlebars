@@ -1,0 +1,91 @@
+
+    <div class="field-group primary">
+            {{#if label}}
+            	<label>{{label}}
+           		{{~#if required~}}
+                		<sup class="required-field">*</sup>
+                {{~/if~}}
+                {{~#if customButtons~}}
+                <span class="actions">
+                   {{~#each customButtons~}}
+                      <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                          <span class="fonticon {{iconClass}}"></span>
+                      </button>
+                   {{~/each~}}
+                </span>
+                {{~/if~}}
+             </label>
+            {{/if}}
+             {{~#if toleranceName~}}
+                 <label>{{fieldLabel}}
+       				        {{~#if required~}}
+       		        		    <sup class="required-field">*</sup>
+                       {{~/if~}}
+                 </label>
+             {{/if~}}
+             <div class="input-group-wrapper">
+            {{~#if readWrite~}}
+                \{{~#if canEdit~}}
+    	            <div class="input-group">
+                        <span class="input-element">
+                            <input class="form-control data-entry" type="number-as-text" inputmode="numeric" pattern="^[0-9]*[.]?[0-9]*$" {{#if minimumValue}}min="{{minimumValue}}" {{/if}} value="\{{~ {{name}} ~}}"/>
+                        </span>
+                  </div>
+                  <div class="input-group">
+                        <span class="input-element">
+                            <select class="form-control ddv-uom">
+            	                 {{#each uomValues}}
+                                   <option value="{{@index}}">{{.}}</option>
+                                {{/each}}
+                            </select>
+                        </span>
+    	            </div>
+                \{{~else~}}
+    	          <div class="input-group">
+                  <span class="input-element">
+                    <span class="read-only">\{{~ readOnlyValue {{name}} ~}}&nbsp;\{{#ifEmpty {{name}} }}\{{else}}{{uomValues.[0]}}\{{/ifEmpty}}</span>
+                  </span>
+                </div>
+                \{{~/if~}}
+            {{~else~}}
+            <div class="input-group">
+              <span class="input-element">
+                <span class="read-only">\{{~ readOnlyValue {{name}} ~}}&nbsp;\{{#ifEmpty {{name}} }}\{{else}}{{uomValues.[0]}}\{{/ifEmpty}}</span>
+              </span>
+            </div>
+            {{/if~}}
+              </div>
+          </div>
+
+             {{~#if toleranceName~}}
+                  <div class="field-group tolerance">
+                      <label>{{toleranceLabel}}
+            				        {{~#if required~}}
+            		        		    <sup class="required-field">*</sup>
+                            {{~/if~}}
+                      </label>
+                      <div class="input-group-wrapper">
+                     {{~#if readWrite~}}
+                         \{{~#if canEdit~}}
+                            <div class="input-group">
+                                   <span class="input-element">
+                                       <input class="form-control data-entry" type="number-as-text" inputmode="numeric" pattern="[0-9]*" value="\{{~ {{toleranceName}} ~}}"/>
+                                   </span>
+                            </div>
+                         \{{~else~}}
+                              <div class="input-group">
+                                     <span class="input-element">
+                                       <span class="read-only">\{{~ {{toleranceName}} ~}}</span>
+                                     </span>
+                              </div>
+                         \{{~/if~}}
+                     {{~else~}}
+                         <div class="input-group">
+                                <span class="input-element">
+                                  <span class="read-only">\{{~ {{toleranceName}} ~}}</span>
+                                </span>
+                         </div>
+                     {{/if~}}
+                 </div>
+                  </div>
+              {{/if~}}

@@ -1,0 +1,42 @@
+
+<Scripts>
+  <!--Attribute initialization when Creating online data-->
+  <Script OpeningID="PLMIdentificationInitialization" Type="DELLmiTransformationSystemReference"    ScriptName="ENONT_PLMReference_BLInitialization" >
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" /> 
+  </Script>
+
+  <!--Attribute initialization recovery when  going back from offline to online-->
+  <Script OpeningID="PLMFinalizationForOffline"     Type="DELLmiTransformationSystemReference"    ScriptName="ENONT_Reconnect" >
+    <Condition Attribute="OperationId"  Value="Create"/>
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+
+
+  <!--Adding Instance inside the structure-->
+  <Script OpeningID="PLMInstanceAggregationCheck"     Type="DELLmiTransformationSystemReference"    ScriptName="ENONT_StandardAggregation" >
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+
+  <!--Operation reusable without cloning: PLMAuthoringDefaultPropagationScope-->
+  <Script OpeningID="PLMAuthoringDefaultPropagationScope" Type="DELLmiTransformationSystemReference"  ScriptName="ENONT_OperationValidation" >
+      <Condition Attribute="Policy" Value="VPLM_SMB_Definition" /> 
+  </Script>
+
+  <!--Importing Data from various sources-->  
+  <Script OpeningID="PLMImportExportAttributesValuation" Type="DELLmiTransformationSystemReference"    ScriptName="ENONT_PLMReference_BLInitialization" >
+    <Condition Attribute="OperationId" Value="DataExchangeImport"/>
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+
+  <Script OpeningID="PLMImportExportAttributesValuation" Type="DELLmiTransformationSystemReference"    ScriptName="ENONT_ImportVPM" >
+    <Condition Attribute="OperationId" Value="BriefcaseImport"/>
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+
+
+  <Script OpeningID="PLMImportExportAttributesValuation" Type="DELLmiTransformationSystemReference"    ScriptName="ENONT_PLMReference_BLInitialization" >
+    <Condition Attribute="OperationId" Value="FBDIImport" />
+    <Condition Attribute="Policy" Value="VPLM_SMB_Definition" />
+  </Script>
+
+</Scripts>

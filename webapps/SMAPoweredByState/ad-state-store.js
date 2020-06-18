@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define(["DS/Redux/Redux","DS/SMAPoweredByState/ad-state-reducer","DS/SMAPoweredByState/ad-state-middleware"],function(a,e,d){var b={};var c=null;b.createStoreFromState=function(f){var g=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__||a.compose;c=a.createStore(e["default"],f,g(d["default"]))};b.getStore=function(){if(!c){b.createStoreFromState()}return c};return b});

@@ -1,0 +1,269 @@
+<dom-module is="xs-wg-item-style">
+  <template>
+    <style>
+      :host {
+        min-height: 2px;
+        /* 	border: thin dashed lightgrey; */
+        /* 	margin: 2px; */ }
+
+      :host(.full-width) {
+        width: 100%;
+        padding: 0px;
+        display: block; }
+
+      :host {
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+        border-width: 0 thin thin 0; }
+        :host .content {
+          padding: 5px; }
+
+      :host(.is-collapsed) {
+        display: none; }
+
+      .content {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        transition: all 0.5s;
+        -webkit-user-select: none; }
+
+      :host([break]) .content {
+        background-color: transparent;
+        border: none;
+        box-shadow: none; }
+
+      /*Using the cmp_ id selector for all xs_wg_* components*/
+      #content > ::content *[id*="cmp_"] {
+        /*     padding: 5px; */
+        overflow: hidden; }
+
+      .overlay {
+        left: 0;
+        right: 0;
+        top: 0;
+        position: absolute;
+        background: transparent;
+        height: 100%;
+        display: none;
+        z-index: 3;
+        /* 	border-bottom: thin dashed #cccccc; */ }
+
+      .remove {
+        z-index: 15;
+        position: absolute;
+        top: 5px;
+        right: 70px;
+        box-sizing: border-box;
+        display: none;
+        text-align: center;
+        color: #2980b9;
+        opacity: 0.3;
+        transition: opacity 0.2s;
+        cursor: pointer; }
+
+      .remove:hover {
+        opacity: 1; }
+
+      .name {
+        display: none;
+        position: absolute;
+        right: 0px;
+        top: 10px;
+        background-color: white;
+        color: black;
+        padding: 0 4px 2px 4px;
+        opacity: 0;
+        transition: all 0.4s;
+        border-radius: 5px;
+        border: thin solid gray;
+        z-index: 15; }
+
+      #nametag {
+        padding: 0 4px 2px 4px; }
+
+      .is-xs-wg-input-text .name {
+        background-color: black; }
+
+      .wg-notify-tag {
+        position: absolute;
+        height: 60%;
+        width: 5px;
+        left: -5px;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        display: none; }
+
+      .xs-wg-item-hint {
+        display: block;
+        margin-left: 15px;
+        color: #77797c;
+        /*To preserve line breaks*/
+        word-wrap: break-word; }
+
+      :host-context(.design) .is-selected .xs-wg-item-hint {
+        display: block; }
+
+      :host-context(.design) .is-selected .hint:hover span {
+        display: block; }
+
+      .wg-notify-tag:hover .xs-wg-item-hint {
+        display: block; }
+
+      .is-having-errors .wg-notify-tag {
+        display: block;
+        background-color: #e74c3c; }
+
+      .col-resize-handle {
+        display: none;
+        position: absolute;
+        height: 100%;
+        width: 5px;
+        top: 0;
+        right: 0px;
+        background-color: #c3c3c3;
+        cursor: col-resize;
+        z-index: 4; }
+
+      :host-context(.design) .col-resize-handle {
+        display: block; }
+
+      :host-context(.design) .overlay {
+        display: block; }
+
+      :host-context(.design) .is-selected.overlay {
+        background: rgba(180, 230, 243, 0.32); }
+
+      :host(.full-width) .col-resize-handle {
+        display: none; }
+
+      :host-context(.design) .name{
+        display: block;
+      }
+
+      :host-context(.design):hover .name {
+        opacity: 0.8; }
+
+      :host-context(.design):hover .remove {
+        display: block; }
+
+      .content[draggable=false] .remove {
+        display: none;
+      }
+
+      :host([hidden]) {
+        display: block !important;
+        min-height: 0; }
+
+      .hidden-mask {
+        background-image: repeating-linear-gradient(135deg, rgba(224, 197, 197, 0.3), rgba(0, 0, 0, 0.3) 1px, transparent 2px, transparent 3px, rgba(0, 0, 0, 0.3) 3px);
+        left: 0;
+        right: 0;
+        top: 0;
+        position: absolute;
+        height: 100%;
+        display: none;
+        z-index: 3; }
+
+      :host-context(.design) #content.is-hidden {
+        display: block; }
+        :host-context(.design) #content.is-hidden .hidden-mask {
+          display: block; }
+
+      #content.is-hidden {
+        display: none; }
+
+      :host(:host-context(.design)[break]) .name {
+        display: none; }
+
+      :host-context(.design).is-dragover {
+        transition: all 0s;
+        overflow: hidden;
+        box-sizing: border-box;
+        outline: 2px dashed #368ec4;
+        width: calc(100% - 10px);
+        margin: 5px;
+        background: #eef2f5;
+        z-index: 20; }
+        :host-context(.design).is-dragover .content {
+          transition: all 0s; }
+
+      :host-context(.design) {
+        cursor: move; }
+
+      .fonticon {
+        font-family: entypo;
+        font-style: normal;
+        font-weight: normal;
+        speak: none;
+        text-decoration: inherit;
+        margin: 0 0.2em;
+        text-align: center;
+        /* For safety - reset parent styles, that can break glyph codes*/
+        font-variant: normal;
+        text-transform: none;
+        color: #77797c;
+        font-size: 20px; }
+        .fonticon.error-icon:before {
+          color: #ea4f37;
+          content: '\e813'; }
+
+      .fonticon-trash:before {
+        content: '\e846'; }
+
+      .wg-item-error-container {
+        padding-left: 10px;
+        z-index: 10;
+        display: none; }
+        .wg-item-error-container.is-visible {
+          display: inline-block; }
+        .wg-item-error-container .error-message {
+          font-family: "3ds-Light";
+          color: #CC092F;
+          font-size: 14px; }
+
+      .hint {
+        position: absolute;
+        top: 15px;
+        left: 700px;
+        vertical-align: middle; }
+
+      .hint:hover span {
+        display: inline; }
+
+      .hint:hover:before {
+        color: #acd2e6;
+        color: #368ec4; }
+
+      .hint:before {
+        content: '\e81e';
+        color: #368ec4; }
+
+      .hint span {
+        display: none; }
+
+      .wg-item-error-container {
+        display: none; }
+        .wg-item-error-container.is-visible {
+          display: inline-block; }
+        .wg-item-error-container .error-icon {
+          margin-right: 0;
+          vertical-align: middle; }
+
+      #mandatoryFlag {
+        display: none;
+        position: absolute;
+        height: 100%;
+        color: red;
+        padding-left: 5px;
+        font-size: large;
+        width: 3px;
+        top: 40%; }
+        #mandatoryFlag.is-visible {
+          display: inline-block; }
+
+    </style>
+  </template>
+</dom-module>

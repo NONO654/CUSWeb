@@ -1,0 +1,360 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../ad-custom-drm-fields/ad-custom-drm-fields.html">
+<link rel="import" href="../ad-credentials-fields/ad-credentials-fields.html">
+
+<dom-module id="ad-create-job-compute">
+	<link rel="import" type="css" href="ad-create-job-compute.css">
+	<template>
+		<form class="compute-form">
+			<!-- Compute Location -->
+			<div class="form-group">
+				<label class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Location"></sp-nls>
+				</label>
+				<!-- <span id="cloudComputePopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleCloudComputePopover" on-mouseout="_toggleCloudComputePopover" on-click="_toggleCloudComputePopover"></span>
+				<div id="cloudComputePopover" class="popover bottom in hidden" on-click="_toggleCloudComputePopover">
+					<h3 class="popover-title">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Location"></sp-nls>
+					</h3>
+					<div id="cloudComputePopoverBody" class="popover-body">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="LocationPopover"></sp-nls>
+					</div>
+				</div> -->
+				<div id="location">
+					<div class="toggle toggle-primary">
+						<input type="radio" name="locationRadio" id="onCloudOption" value="cloud" on-click="executionOptionsChanged" checked>
+						<label class="control-label" for="onCloudOption">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ComputeOnCloud"></sp-nls>
+						</label>
+					</div>
+					<div class="toggle toggle-primary">
+						<input type="radio" name="locationRadio" id="onPremisesOption" value="fiper" on-click="executionOptionsChanged">
+						<label class="control-label" for="onPremisesOption">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ComputeOnPremises"></sp-nls>
+						</label>
+					</div>
+				</div>
+
+				<span id="tenantIdError" class="alert-message alert-warning hidden">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="TenantIdNotSet"></sp-nls>
+				</span>
+			</div>
+
+			<!-- Common for On-Cloud and On-Premises -->
+			<div id="licensingSection">
+				<div class="form-group">
+					<label for="licenseType" class="control-label">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="LicenseType"></sp-nls>
+					</label>
+					<!-- NLS elements need to be outside of option, bound to label attribute - seem to be stripped out when content of the option -->
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Credits" value={{Credits}} no-view></sp-nls>
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Tokens" value={{Tokens}} no-view></sp-nls>
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="TraditionalTokens" value={{TraditionalTokens}} no-view></sp-nls>
+					<select id="licenseType" class="form-control" on-change="executionOptionsChanged">
+						<option id="creditOption" value="credits">[[Credits]]</option>
+						<option id="tokenOption" value="tokens">[[Tokens]]</option>
+						<option id="traditionalTokenOption" value="traditionalTokens">[[TraditionalTokens]]</option>
+					</select>
+				</div>
+
+				<!-- Queue jobs for Tokens Licensing -->
+				<div id="queueSection">
+					<div class="form-group" id="queuing">
+						<div class="toggle toggle-switch ">
+							<input type="checkbox" id="queuingToggle" checked="[[queuing]]" on-change="executionOptionsChanged"></input>
+							<label for="queuingToggle" class="control-label">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Queuing"></sp-nls>
+							</label>
+
+							<span id="queuingPopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleQueuingPopover" on-mouseout="_toggleQueuingPopover" on-click="_toggleQueuingPopover"></span>
+							<div id="queuingPopover" class="popover bottom in hidden" on-click="_toggleQueuingPopover">
+								<h3 class="popover-title">
+									<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Queuing"></sp-nls>
+								</h3>
+								<div id="featuresPopoverBody" class="popover-body">
+									<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="QueuingPopover"></sp-nls>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- UVM Licensing -->
+				<div id="uvmSection">
+					<div class="form-group" id="featuresDiv">
+						<label for="features" class="control-label">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Features"></sp-nls>
+						</label>
+
+						<span id="featuresPopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleFeaturesPopover" on-mouseout="_toggleFeaturesPopover" on-click="_toggleFeaturesPopover"></span>
+						<div id="featuresPopover" class="popover bottom in hidden" on-click="_toggleFeaturesPopover">
+							<h3 class="popover-title">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Features"></sp-nls>
+							</h3>
+							<div id="featuresPopoverBody" class="popover-body">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="FeaturesPopover"></sp-nls>
+							</div>
+						</div>
+
+						<!-- NLS elements need to be outside of option, bound to label attribute - seem to be stripped out when content of the option -->
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Linear" value={{Linear}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Frequency" value={{Frequency}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="LinearDynamics" value={{LinearDynamics}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="NonLinear" value={{NonLinear}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Explicit" value={{Explicit}} no-view></sp-nls>
+						<select id="features" class="form-control" on-change="executionOptionsChanged">
+							<option value="1">[[Linear]]</option>
+							<option value="2">[[Frequency]]</option>
+							<option value="3">[[LinearDynamics]]</option>
+							<option value="4">[[NonLinear]]</option>
+							<option value="5">[[Explicit]]</option>
+						</select>
+					</div>
+					<div class="form-group" id="modelSizeDiv">
+						<label for="modelSize" class="control-label">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ModelSize"></sp-nls>
+						</label>
+
+						<span id="modelSizePopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleModelSizePopover" on-mouseout="_toggleModelSizePopover" on-click="_toggleModelSizePopover"></span>
+						<div id="modelSizePopover" class="popover bottom in hidden" on-click="_toggleModelSizePopover">
+							<h3 class="popover-title">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ModelSize"></sp-nls>
+							</h3>
+							<div id="modelSizePopoverBody" class="popover-body">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ModelSizePopover"></sp-nls>
+							</div>
+						</div>
+
+						<!-- NLS elements need to be outside of option, bound to label attribute - seem to be stripped out when content of the option -->
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ModelSize1" value={{ModelSize1}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ModelSize2" value={{ModelSize2}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ModelSize3" value={{ModelSize3}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ModelSize4" value={{ModelSize4}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ModelSize5" value={{ModelSize5}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ModelSize6" value={{ModelSize6}} no-view></sp-nls>
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ModelSize7" value={{ModelSize7}} no-view></sp-nls>
+						<select id="modelSize" class="form-control" on-change="executionOptionsChanged">
+							<option id="modelSizeOption1" value="1">[[ModelSize1]]</option>
+							<option id="modelSizeOption2" value="2">[[ModelSize2]]</option>
+							<option id="modelSizeOption3" value="3">[[ModelSize3]]</option>
+							<option id="modelSizeOption4" value="4">[[ModelSize4]]</option>
+							<option id="modelSizeOption5" value="5">[[ModelSize5]]</option>
+							<option id="modelSizeOption6" value="6">[[ModelSize6]]</option>
+							<option id="modelSizeOption7" value="7">[[ModelSize7]]</option>
+						</select>
+					</div>
+					<div class="form-group" id="performanceDiv">
+						<label for="performance" class="control-label">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Performance"></sp-nls>
+						</label>
+
+						<span id="performancePopoverIcon" class="fonticon fonticon-help" on-mouseover="_togglePerformancePopover" on-mouseout="_togglePerformancePopover" on-click="_togglePerformancePopover"></span>
+						<div id="performancePopover" class="popover bottom in hidden" on-click="_togglePerformancePopover">
+							<h3 class="popover-title">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Performance"></sp-nls>
+							</h3>
+							<div id="performancePopoverBody" class="popover-body">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="PerformancePopover"></sp-nls>
+							</div>
+						</div>
+
+						<div class="sliderGroup">
+							<div class="slider">
+								<input type="range" class="form-control performanceSliderInput" id="performance"
+									min="1" value="[[performance]]" max="7" step="1"
+									on-input="_performanceChanged" on-change="_performanceChanged"></input>
+								<div class="labels">
+									<span class="min">
+										<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="PerformanceEconomical"></sp-nls>
+									</span>
+									<span class="max">
+										<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="PerformanceFast"></sp-nls>
+									</span>
+								</div>
+							</div>
+							<div class="sliderRatio">
+								<span id="sliderRatioSpan">[[performance]]</span>/7
+							</div>
+						</div>
+
+						<span id="computeCapacity" class="alert-message alert-primary hidden"></span>
+
+					</div>
+					<div id="uvmEstimateDiv">
+						<div class="form-group">
+							<label for="softwareEstimate" class="control-label">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="SoftwareEstimate"></sp-nls>
+							</label>
+							<input type="text" id="softwareEstimate" class="form-control input-sm" readonly></input>
+						</div>
+						<div class="form-group">
+							<label for="hardwareEstimate" class="control-label">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="HardwareEstimate"></sp-nls>
+							</label>
+							<input type="text" id="hardwareEstimate" class="form-control" readonly></input>
+						</div>
+						<div class="form-group">
+							<label for="cpuEstimate" class="control-label">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="CPUEstimate"></sp-nls>
+							</label>
+							<input type="text" id="cpuEstimate" class="form-control" readonly></input>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- On-Cloud -->
+			<div id="onCloudSection">
+				<div class="form-group" id="OSSelectorSection">
+					<label for="operatingSystem" class="control-label">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="OperatingSystem"></sp-nls>
+					</label>
+					<select id="operatingSystem" class="form-control" on-change="executionOptionsChanged">
+					</select>
+				</div>
+			</div>
+
+			<!-- On-Premises -->
+			<div id="onPremisesSection" class="hidden">
+
+				<div class="form-group">
+					<label for="cosServersSelect" class="control-label">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="COSServer"></sp-nls>
+					</label>
+
+					<span id="cosServersSelectPopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleCosServersSelectPopover" on-mouseout="_toggleCosServersSelectPopover" on-click="_toggleCosServersSelectPopover"></span>
+					<div id="cosServersSelectPopover" class="popover bottom in hidden" on-click="_toggleCosServersSelectPopover">
+						<h3 class="popover-title">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="COSServer"></sp-nls>
+						</h3>
+						<div id="cosServersSelectPopoverBody" class="popover-body">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="CosServersSelectPopover"></sp-nls>
+						</div>
+					</div>
+
+					<div class="selectWithIcon">
+						<select id="cosServersSelect" class="form-control" on-change="cosServerChanged"></select>
+						<span id="cosServersRefreshIcon" class="fonticon fonticon-refresh selectIcon" on-click="refreshCosServers"></span>
+					</div>
+				</div>
+
+				<div id="cosDRMs" class="form-group hidden">
+					<label for="drmMode" class="control-label">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="COSDRM"></sp-nls>
+					</label>
+					<div class="selectWithIcon">
+						<select id="drmMode" class="form-control" on-change="executionOptionsChanged"></select>
+					</div>
+				</div>
+
+				<div id="fiperDRM">
+					<div class="form-group">
+						<label for="stationsSelect" class="control-label">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Station"></sp-nls>
+						</label>
+
+						<span id="stationsSelectPopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleStationsSelectPopover" on-mouseout="_toggleStationsSelectPopover" on-click="_toggleStationsSelectPopover"></span>
+						<div id="stationsSelectPopover" class="popover bottom in hidden" on-click="_toggleStationsSelectPopover">
+							<h3 class="popover-title">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="Station"></sp-nls>
+							</h3>
+							<div id="stationsSelectPopoverBody" class="popover-body">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="StationsSelectPopover"></sp-nls>
+							</div>
+
+						</div>
+
+						<div class="selectWithIcon">
+							<select id="stationsSelect" class="form-control" on-change="executionOptionsChanged"></select>
+							<span id="stationsRefreshIcon" class="fonticon fonticon-refresh selectIcon close" on-click="refreshStations"></span>
+						</div>
+
+						<span id="noStationsAlert" class="alert-message alert-error hidden">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="NoStationsFoundAlert"></sp-nls>
+						</span>
+						<span id="stationsError" class="alert-message alert-error hidden"></span>
+					</div>
+				</div>
+
+				<ad-custom-drm-fields id="customDRM" class="hidden" on-drmoptionschanged="executionOptionsChanged"></ad-custom-drm-fields>
+
+				<ad-credentials-fields id="credFields" on-updatecredentials="onUpdateCredentials"></ad-credentials-fields>
+
+				<div id="execDirFields">
+					<div class="form-group">
+						<label for="executionDirectoriesSelect" class="control-label">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="ExecutionDirectory"></sp-nls>
+						</label>
+						<div class="selectWithIcon">
+							<select id="executionDirectoriesSelect" class="form-control" on-change="executionOptionsChanged" disabled$="[[isBatchJob]]"></select>
+							<!-- <span id="executionDirectoriesRefreshIcon" class="fonticon fonticon-refresh selectIcon" on-click="refreshExecutionDirectories"></span> -->
+						</div>
+						<span id="executionDirectoriesError" class="alert-message alert-error hidden"></span>
+					</div>
+
+					<div class="toggle toggle-switch ">
+						<input type="checkbox" id="removeExecutionDirectory" on-change="executionOptionsChanged"></input>
+						<label for="removeExecutionDirectory" class="control-label">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="RemoveExecutionDirectory"></sp-nls>
+						</label>
+
+						<span id="removeExecutionDirectoryPopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleRemoveExecutionDirectoryPopover"  on-mouseout="_toggleRemoveExecutionDirectoryPopover" on-click="_toggleRemoveExecutionDirectoryPopover"></span>
+						<div id="removeExecutionDirectoryPopover" class="popover bottom in hidden" on-click="_toggleRemoveExecutionDirectoryPopover" on-mouseleave="_toggleRemoveExecutionDirectoryPopover">
+							<h3 class="popover-title">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="RemoveExecutionDirectory"></sp-nls>
+							</h3>
+							<div id="removeExecutionDirectoryPopoverBody" class="popover-body">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="RemoveExecutionDirectoryPopover"></sp-nls>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="batchJobFields" class="hidden">
+					<div class="form-group">
+						<div>
+							<label class="control-label">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="BatchConfiguration"></sp-nls>
+							</label>
+							<span id="batchConfigurationPopoverIcon" class="fonticon fonticon-help" on-mouseover="_toggleBatchConfigurationPopover"  on-mouseout="_toggleBatchConfigurationPopover" on-click="_toggleBatchConfigurationPopover"></span>
+							<div id="batchConfigurationPopover" class="popover bottom in hidden" on-click="_toggleBatchConfigurationPopover" on-mouseleave="_toggleBatchConfigurationPopover">
+								<h3 class="popover-title">
+									<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="BatchConfiguration"></sp-nls>
+								</h3>
+								<div id="batchConfigurationPopoverBody" class="popover-body">
+									<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="BatchConfigurationPopover"></sp-nls>
+								</div>
+							</div>
+						</div>
+						<div class="toggle toggle-primary">
+							<input type="radio" name="batchModeRadio" id="sequentialOption" value="sequential" on-click="batchModeChanged">
+							<label class="control-label" for="sequentialOption">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="BatchModeSequential"></sp-nls>
+							</label>
+						</div>
+						<div class="toggle toggle-primary">
+							<input type="radio" name="batchModeRadio" id="allParallelOption" value="allparallel" on-click="batchModeChanged" checked>
+							<label class="control-label" for="allParallelOption">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="BatchModeAllParallel"></sp-nls>
+							</label>
+						</div>
+						<div class="toggle toggle-primary">
+							<input type="radio" name="batchModeRadio" id="someParallelOption" value="someparallel" on-click="batchModeChanged">
+							<label class="control-label" for="someParallelOption">
+								<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADCreateJobCompute" nlskey="BatchModeSomeParallel"></sp-nls>
+							</label>
+						</div>
+						<div id="maxBatchSizeWrapper">
+							<div id="maxBatchSizeContainer">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+	</template>
+	<script type="text/javascript" src="ad-create-job-compute.js"></script>
+</dom-module>

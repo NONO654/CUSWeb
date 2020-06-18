@@ -1,0 +1,9 @@
+m|UWPClient\FrameLayout.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\FrameLayout\frame-layout.html|1531550811|20848
+s|UWPClient\FrameLayout.mweb\src\frame-layout.html|1518529004|20848
+t|win_b64\webapps\FrameLayout\FrameLayout.css|1568749446|416
+s|UWPClient\FrameLayout.mweb\src\frame-layout.css|1467894167|574

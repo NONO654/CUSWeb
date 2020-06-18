@@ -1,0 +1,672 @@
+$separatorSize: 4px;
+$expanderSize: 22px;
+$auxiliaryView-toolbar-height: 45px;
+$drag-row-height: 5px;
+$drag-column-width: 5px;
+
+.invisible {
+	visibility: hidden !important;
+}
+
+.notransition * {
+	@include transition(none !important);
+}
+
+/*Start: Bloc Layout */
+.bl-container {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.bl-row {
+	position: relative;
+    width: 100%;
+    overflow: hidden;
+    .bl-row-content {
+		position: absolute;
+		top: $drag-row-height;
+		right: 0;
+		bottom: 0;
+		left: 0;
+    }
+    .no-drag-row {
+    	top: 0;
+    }
+    .bl-drag-row {
+	    width: 100%;
+	    height: $drag-row-height;
+	    top: 0;
+	    right: 0;
+	    left: 0;
+	    cursor: row-resize;
+	    background-color: #f1f1f1;
+    }
+}
+
+.bl-column {
+	position: relative;
+	float: left;
+    height: 100%;
+    overflow: hidden;
+    .bl-column-content {
+		position: absolute;
+		top: 0;
+		right: $drag-column-width;
+		bottom: 0;
+		left: 0;
+    }
+    .no-drag-column {
+    	right: 0;
+    }
+    .bl-drag-column {
+	    width: $drag-column-width;
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	    bottom: 0;
+	    cursor: col-resize;
+	    background-color: #f1f1f1;
+    }
+}
+
+/*	Resize Column just below first drop layer */
+div.bl-drag-column {
+	position: relative;
+	z-index: 85;
+	right: 0px !important;
+}
+
+/*	Resize inside bloc layout	*/
+div.bl-drag-column {
+	pointer-events: auto;
+}
+
+/*	Pass mouse events through to enable resize	*/
+div.bl-column-content {
+	position: relative;
+	pointer-events: none;
+    right: 0px !important;
+}
+
+/*End: Bloc Layout */
+
+/*	Auxiliary view same height	*/
+div.app-container .auxiliaryBloc-container .auxiliaryView-toolbar {
+	height: 40px;
+}
+
+.leftBloc-container, .bottomBloc-container, .rightBloc-container, .auxiliaryBloc-container {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+/*Start: AuxiliaryView*/
+.auxiliaryBloc-container {
+	overflow: auto;
+}
+
+.auxiliaryView-toolbar {
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		right: 5px;
+		height: 45px;
+		overflow: hidden;
+	}
+	.auxiliaryView-container {
+		position: absolute;
+		top: 0px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+
+	/*	Click on MGA Auxiliary filters and treelistview	*/
+	div.auxiliaryBloc-container {
+		pointer-events: auto;
+	}
+
+	/*End: AuxiliaryView*/
+
+
+/*	No background effect */
+.wux-afr-framewindow
+{
+	background: none !important;
+}
+
+/*	Needed for new bloclayout	*/
+main.app-container {
+	height: 100%;
+}
+
+/*	Catch all events in our containers	*/
+.module-container, .actionView-Container
+{
+	position: relative;
+	pointer-events: all;
+	height: 100%;
+	/*overflow: hidden;*/
+}
+
+.module-container
+{
+	border-top: 2px solid rgba(192, 192, 192, 0);
+	border-top-style: inset;
+
+	/* -webkit-transition: border 500ms ease;
+    -moz-transition: border 500ms ease;
+    -ms-transition: border 500ms ease;
+    -o-transition: border 500ms ease;
+    transition: border 500ms ease; */
+}
+
+.module-container.focus
+{
+    border-top: 2px solid #368ec4;
+}
+
+/*
+	Fix for panel having 'verticallyStretchableFlag' enabled and whose content is not shown,
+	when it is grouped with other panels by tab
+*/
+.wux-windows-docking-element-docking-zone .wux-windows-windowgroup-content > .wux-windows-window[attached-to-group="tab"] {
+	height: 100%;
+}
+
+.wux-panels-sidepanel-lateral-handle
+{
+    background-color: #f5f5f5 !important;
+    opacity: 1 !important;
+}
+
+.wux-panels-sidepanel-lateral-handle:hover
+{
+    background-color: #ebebeb !important;
+    opacity: 1 !important;
+}
+
+.wux-panels-sidepanel-lateral-handle.wux-panels-sidepanel-lateral-handle-left
+{
+    box-shadow: 1px 1px 0  #cfcfcf, 0 1px 0 !important;
+}
+
+div.wux-panels-sidepanel {
+	width: 100%;
+}
+
+/*	Pass mouse events on childs for clicks in div	*/
+div.wux-panels-panelbase {
+	pointer-events: all;
+}
+
+/*	For side panel not to recover drag handle (little higher than needed for easier manipulation)	*/
+div.wux-panels-sidepanel {
+	width: calc(100% - 20px);
+}
+
+/*	No gray background in side panels	*/
+div.wux-panels-panelbase.wux-panels-sidepanel {
+	background-color: white;
+}
+
+
+/*	Side panel's handles smaller	*/
+div.wux-panels-sidepanel-lateral-handle {
+	width: 22px;
+}
+
+div.wux-panels-panelbase.wux-panels-sidepanel.wux-panels-sidepanel-left {
+	margin-left: 20px;
+}
+
+div.wux-panels-panelbase.wux-panels-sidepanel.wux-panels-sidepanel-right {
+	margin-right: 20px;
+}
+
+/*Start: Drop Zone*/
+.module-container > .drop-zone-container .actionView-Container >.drop-zone-container {
+	height: 100%;
+	width: 100%;
+	position: relative;
+	float: left;
+}
+
+.module-container > .drop-zone-container >.dropLayer, .actionView-Container > .drop-zone-container > .dropLayer {
+	  width: 100%;
+		position: absolute;
+    top: 50%;
+    text-align: center;
+    pointer-events: none;
+     z-index: 85;
+    opacity: 1;
+    color: darkgray;
+}
+
+.drop-zone-container >.dropLayer > .dropViewImage {
+    font-size: 6em;
+}
+
+.drop-zone-container >.dropLayer > .dropViewText {
+    font-size: 20px;
+}
+/*End: Drop Zone*/
+
+main > .app-messages {
+	height: 0px;
+}
+
+.app-ProgressInd {
+	line-height: 0px;
+}
+
+
+
+/*Start: TreeListView & GraphView*/
+.tree-list-container, .graph-container {
+	@include transition(all .2s ease);
+	/* background: white; */
+}
+
+.tree-list-container {
+	position: relative;
+    height: 100%;
+    display: block;
+}
+
+div.egraph_views_RootLayer, div.egraph_views_layers, .egraph_views_roverlay_pos, div.graphView-container {
+	height: 100vh;
+}
+.withoutToolBarRegion
+{
+		display: block;
+    position: absolute;
+		height:100%;
+    width: 100%;
+}
+
+.showToolBar .graph-container {
+	//transform: translateY(0) rotateX(0deg);
+	background-color: white;
+}
+
+.tree-list-container .wux-tree-treelistview, .graph-container .graphView-container
+{
+    display: block;
+    position: absolute;
+		height:100%;
+    width: 100%;
+}
+
+/*TLV, GV With ToolBar*/
+.showToolBar .tree-list-container .wux-tree-treelistview, .showToolBar .graph-container .graphView-container{
+		margin-top: 45px;
+		height: calc(100% - 45px);
+		width: 100%;
+}
+
+.tree-list-container .toolbar-container, .graph-container .toolbar-container
+{
+    position: absolute;
+    height: 0px;
+    width: 100%;
+}
+
+/*toolbar-container With ToolBar*/
+.showToolBar .tree-list-container .toolbar-container , .showToolBar .graph-container .toolbar-container
+{
+		position: absolute;
+		height: 45px;
+}
+
+.graph-container {
+	//transform: translateY(100vh) rotateX(90deg);
+}
+
+.showGraphView .tree-list-container {
+	//transform: rotateX(-90deg);
+	height: 0px;
+}
+
+.showGraphView .graph-container {
+	//transform: translateY(0) rotateX(0deg);
+	background-color: white;
+}
+/*End: TreeListView & GraphView */
+
+// /*Start:ALERT	*/
+
+.app-messages {
+		float: right;
+}
+
+.pad_alert div.alert-message {
+	width: 100%;
+	left: 0;
+}
+
+.alert-root {
+  z-index: 9999999;
+	width: 100%;
+}
+
+div.app-messages div.alert.alert-root {
+	visibility: visible;
+}
+
+// /*End: ALERT	*/
+
+div.actionViewLateralHandleRight
+{
+    height: 100%;
+    right: -1px;
+    z-index: 99999;
+    background: #f4f5f6;
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    cursor: default;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    opacity: 0.55;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    border-left: 1px solid #fff;
+    box-shadow: -1px 0 0 rgba(0, 0, 0, 0.2), 1px 0 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+    background-size: contain;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    width: 32px;
+    background-image:url("assets/icons/expanderBigRightArrow@2x.png");
+}
+
+div.actionViewLateralHandleRight:hover {
+
+    opacity:1;
+    background-image:url("assets/icons/expanderBigRightArrow@2x.png");
+}
+
+
+/*********************************/
+/***	View Customisation		**/
+/*********************************/
+
+/**		Normal crosshiglight : any focus + node not selected 	**/
+div.crosshighlight {
+	background-color: #CBD9E7 !important;
+}
+
+/**		Crosshighlight when node has focus + is selected	**/
+div.wux-datagrid:focus .wux-datagrid-cell.wux-datagrid-cell-highlighted.wux-datagrid-row-highlighted.crosshighlight, div.wux-tree-fixed-treelistview:focus .wux-datagrid-cell.wux-datagrid-cell-highlighted.wux-datagrid-row-highlighted.crosshighlight {
+	background-color: #0375B5!important;
+}
+
+/**		Crosshighlight when node doesn't have focus + is selected	**/
+div.wux-datagrid .wux-datagrid-cell.wux-datagrid-cell-highlighted.crosshighlight {
+	background-color: #A5BFD6!important;
+}
+
+div.wux-panels-panelbase-content {
+	padding: 0px;
+	height: 100%;
+	position: relative;
+}
+
+div.wux-panels-panelbase-content > div {
+	height: 100%;
+	position: relative;
+}
+
+/**		Column resize	**/
+div.separator {
+	width: 4px;
+    height: 100vh;
+    background-color: #C0C0C0;
+    float: left;
+    left: calc( 50% - 4px );
+    position: absolute;
+    cursor: col-resize;
+    z-index: 99;
+    @include transition(all .2s ease);
+}
+
+/**		COLORS AND INDICATORS	**/
+.color-none {
+	color: transparent !important;
+}
+
+.color-ok {
+	color: #005686 !important;
+}
+
+.color-nok {
+	color: red !important;
+}
+
+.color-scoped {
+	color: #42A2DA !important;
+}
+
+.color-notsure {
+	color: orange !important;
+}
+
+span.indicator {
+	display: block;
+	text-align: center;
+}
+
+span.default-indicator::before {
+	content: '■';
+}
+
+span.downdoublearrow-indicator::before {
+	content: '&dArr;';
+}
+
+span.updoublearrow-indicator::before {
+	content: '&uArr;';
+}
+
+span.uparrow-indicator::before {
+	content: '&uarr;';
+}
+
+span.downarrow-indicator::before {
+	content: '&darr;';
+}
+
+span.diamond-indicator::before {
+	content: '&diams;';
+}
+
+span.bullet-indicator::before {
+	content: '\2022';
+    font-size: 4.5rem;
+}
+
+/*********************/
+/*** FOR SIDEPANEL  **/
+/*********************/
+.wux-panels-sidepanel-lateral-onglet
+{
+	bottom: 0px;
+    height: 40px;
+    width: 40px;
+    background-color: #f4f5f6;
+    position: fixed;
+    padding: 3px;
+    border-right: 1px solid #fff;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    box-shadow: -1px 0 1px rgba(0, 0, 0, 0.2), 1px 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.wux-panels-sidepanel-lateral-handle:hover .wux-panels-sidepanel-lateral-onglet
+{
+    background-color: #ebebeb !important;
+}
+
+.wux-panels-panelbase[data-isopen="true"] .wux-panels-sidepanel-lateral-handle-right .wux-panels-sidepanel-lateral-onglet
+{
+    opacity: 0;
+	@include transition(right 0.2s ease-out, opacity 0.5s ease-out);
+	right: -42px;
+}
+
+.wux-panels-panelbase[data-isopen="false"] .wux-panels-sidepanel-lateral-handle-right .wux-panels-sidepanel-lateral-onglet
+{
+    opacity: 1;
+	@include transition(right 0.2s ease-out);
+    right: -1px;
+}
+
+.wux-panels-panelbase[data-isopen="true"] .wux-panels-sidepanel-lateral-handle-left .wux-panels-sidepanel-lateral-onglet
+{
+    opacity: 0;
+	@include transition(left 0.2s ease-out, opacity 0.5s ease-out);
+	left: -42px;
+}
+
+.wux-panels-panelbase[data-isopen="false"] .wux-panels-sidepanel-lateral-handle-left .wux-panels-sidepanel-lateral-onglet
+{
+    opacity: 1;
+	@include transition(left 0.2s ease-out);
+    left: -1px;
+}
+
+.wux-panels-panelbase[data-isopen="false"] .dropLayer
+{
+    display:none;
+}
+
+.wux-panels-panelbase {
+    @include transition(width 0.2s ease-out !important);
+}
+
+.bl-column {
+    @include transition(width 0.2s ease-out);
+}
+
+.bl-drag-column
+{
+    width: 5px !important;
+}
+
+.wux-layouts-gridengine .wux-scroller {
+    border: 0px solid #f4f5f6 !important;
+}
+
+button.docMgmtCell {
+	padding : 0px 5px 0px 5px;
+	margin-right: 5px;
+}
+
+button.docMgmtCell .wux-layouts-treeview-icon {
+	margin-right: 0px;
+}
+
+.MGA-DELWebMfgAssetsDefUICommands-DocumentMgmtUI-Dialog .wux-layouts-treeview-icon{
+	margin-right : 0px;
+	margin-left : 10px;
+}
+
+.wux-layouts-treeview-icon {
+    margin-bottom : 2px;
+    margin-top : 2px;
+}
+
+.multiValueCell .wux-layouts-treeview-icons {
+    display: inline-block;
+    margin-bottom : 2px;
+    margin-top : 2px;
+}
+
+
+.multiValueCell .wux-layouts-treeview-label {
+    overflow : hidden;
+    text-overflow : ellipsis;
+    display: inline-block;
+}
+
+.tableView-preferences-toggle {
+    transform: scale(0.5);
+    margin-top: auto!important;
+}
+
+.editor-read-only {
+    color: grey!important;
+}
+
+.widget-layout-block-MFN {
+		display: inline-flex;
+		height: 300px;
+    	width: 100%;
+    	padding: 25px;
+}
+.widget-layout-block-MFN .div0{
+		height : 99%;
+		width  : 30%;
+		margin-right: 10px;
+}
+.widget-layout-block-MFN .div1{
+		height : 99%;
+		width  : 35%;
+}
+.widget-layout-block-MFN .div2{
+		height : 99%;
+		width  : 35%;
+}
+.widget-layout-block-MFN #AV{
+		margin : 8% 2% 2% 2%;
+		height : 85%;
+		width  : 80%;
+}
+.widget-layout-block-MFN #LV{
+		margin-top : 8%;
+		height : 40%;
+		width  : 80%;
+}
+.widget-layout-block-MFN #LGV{
+		height : 40%;
+		width  : 80%;
+		margin : 2%;
+}
+.widget-layout-block-MFN #RV{
+		margin-top : 8%;
+		height : 40%;
+		width  : 80%;
+}
+.widget-layout-block-MFN #RGV{
+		height : 40%;
+		width  : 80%;
+		margin : 2%;
+}
+.widget-layout-block-MFN .border-selected {
+    	border: solid 4px #005686;
+}
+.widget-layout-block-MFN .border-unselected {
+    	border: solid 4px #b4b6ba;
+}
+
+/*
+For focus line on toolbar-container
+
+.toolbar-container
+{
+		border-bottom: 2px solid rgba(192, 192, 192, 0);
+    border-bottom-style: inset;
+    -webkit-transition: border 500ms ease;
+    -moz-transition: border 500ms ease;
+    -ms-transition: border 500ms ease;
+    -o-transition: border 500ms ease;
+    transition: border 500ms ease;
+}
+
+.focus .toolbar-container
+{
+    border-bottom: 2px solid #368ec4;
+}
+*/

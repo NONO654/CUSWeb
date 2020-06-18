@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.Lsgrg2" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationLsgrg2" nlsID="dispname">LSGRG</DisplayName>
+	<Description nlsFile="SMAWflOptimizationLsgrg2" nlsID="desc">LSGRG optimization algorithm</Description>
+	<LongDescription nlsFile="SMAWflOptimizationLsgrg2" nlsID="longdesc">
+		<![CDATA[Large Scale Generalized Reduced Gradient
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Direct Numerical Technique
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for non-linear design spaces
+   &#8226; Not well-suited for discontinuous design spaces
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>Yes
+
+</span><span style="font-weight:bold">Features:
+</span><span>   &#8226; Exploits local area around initial design point
+   &#8226; Follows active constraints to improve the design
+   &#8226; Handles inequality and equality constraints directly
+   
+LSGRG uses generalized reduced gradient algorithm for solving constrained non-linear optimization problems. The algorithm uses a search direction such that any active constraints remain precisely active for some small move in that direction. The generalized reduced gradient method is an extension of an earlier reduced gradient method, which solved equality-constrained problems only. The modification involves adding one slack variable to each inequality constraint to give the general form: 
+   Minimize F(X)
+   
+Subject to:
+   gj(X) + Xj+n = 0 for j =1,m
+   
+   hk(X) = 0 for k = 1,l
+   
+   XLi.le.Xi.le.Ui for i =1,n
+   
+   Xj+n.ge.0 for j = 1,m
+
+The basic concept of the generalized reduced gradient method is to recognize that for each equality constraint, we can define one dependent design variable, thereby reducing the total number of independent design variables. Assuming the equality constraints are initially satisfied, for any change in the decision variables, the equality constraints must remain satisfied for feasibility. Using this requirement, GRG algorithm first finds a search direction in the decision variables (independent variables), and then for each proposed move in this search direction updates the vector of dependent variables so that the constraints remain satisfied. 
+
+If the initial design is not feasible, the first step is to obtain a feasible point from which feasibility is maintained thereafter. This is called Phase 1 of optimization with LSGRG2. The Phase 1 objective function is the sum of the constraint violations plus, optionally, a fraction of the true objective. This optimization phase terminates either with a message that the problem is infeasible or with a feasible solution. If an infeasibility message is produced, the program may have become stuck at a local minimum of the Phase 1 objective (or too large a part of the true objective was incorporated), and the problem may actually have feasible solutions. The suggested remedy, if you suspect that this is so, is to choose a different starting point (or reduce the proportion of the true objective) and try again. 
+
+Phase 2 begins with a feasible solution, either found by Phase 1 or with the user provided starting point if it is feasible, and attempts to optimize the objective function provided by the user. It produces a sequence of feasible points, whose objective value never worsens (and usually improves).]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.Lsgrg2</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationLsgrg2.CATNls" targetFilename="SMAWflOptimizationLsgrg2.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationLsgrg2_Japanese.CATNls" targetFilename="SMAWflOptimizationLsgrg2_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.lsgrg2.LSGRG2</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="maxConcurrent" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="reusePolicy" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+		<Property name="LogMessagesFileName" type="string" valuetype="single">
+			<Value>LSGRG2-output.txt</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Max Iterations" type="integer" valuetype="single">
+				<Value>40</Value>
+			</Property>
+			<Property name="Convergence Epsilon" type="real" valuetype="single">
+				<Value>0.001</Value>
+			</Property>
+			<Property name="Rel Step Size" type="real" valuetype="single">
+				<Value>0.001</Value>
+			</Property>
+			<Property name="Convergence Iterations" type="integer" valuetype="single">
+				<Value>3</Value>
+			</Property>
+			<Property name="Binding Constraint Epsilon" type="real" valuetype="single">
+				<Value>0.0001</Value>
+			</Property>
+			<Property name="Phase 1 Objective Ratio" type="real" valuetype="single">
+				<Value>1.0</Value>
+			</Property>
+			<Property name="Save Technique Log" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

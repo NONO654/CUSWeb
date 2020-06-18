@@ -1,0 +1,44 @@
+{{!++subtemplate++}}
+{{!++id:date++}}
+{{!--
+    template for date fields
+    This template accepts date fields as input
+    this is made editable based on a canEdit field on the input being true
+    {
+        "displayValue": "Oct 1, 2014",
+        "actualValue": "1412178608000"
+    }
+ --}}
+{{#if label}}
+      <label>{{label}}
+      {{~#if required~}}
+            <sup class="required-field">*</sup>
+        {{~/if~}}
+        {{~#if customButtons~}}
+        <span class="actions">
+           {{~#each customButtons~}}
+              <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                  <span class="fonticon {{iconClass}}"></span>
+              </button>
+           {{~/each~}}
+        </span>
+        {{~/if~}}
+     </label>
+{{/if}}
+<div class="field-group">
+     <div class="input-group-wrapper">
+       <div class="input-group start">
+{{~#if readWrite~}}
+  \{{~#if canEdit~}}
+  <span class="input-element start">
+      <input type="date" class="form-control data-entry" {{#if fieldHTMLId}}id="{{fieldHTMLId}}{{viewId}}"{{else}}id="{{name}}{{viewId}}"{{/if}} value="\{{makeHTML5Date {{name}}.actualValue }}" />
+  </span>
+  \{{~else~}}
+      <span class="read-only">\{{readOnlyValue {{name}}.displayValue}}</span>
+  \{{~/if~}}
+{{~else~}}
+      <span class="read-only">\{{readOnlyValue {{name}}.displayValue}}</span>
+{{~/if~}}
+</div>
+</div>
+</div>

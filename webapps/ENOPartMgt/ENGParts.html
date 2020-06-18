@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+ <!-- Copyright 2016 , Dassault Systemes. All rights reserved. -->
+<head>
+<meta name="author" content="Dassault Systèmes" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="debugMode" content="true" />
+<meta name="autoRefresh" content="0" />
+<title>My Engineering Parts</title>
+
+<script type="text/javascript" src="../WebUX/WebUX.js"></script>
+<script type="text/javascript" src="../WebVisualization/WebVisualization.js"></script>
+<script type="text/javascript" src="../../../common/scripts/emxUICore.js" ></script>
+<script type="text/javascript" src="../../../common/scripts/emxUIConstants.js" ></script>
+<script>
+		'use strict';
+		require(['DS/ENOPartMgt/scripts/ENGPartWidget'], function (ENGPartWidget) {
+
+			widget.addEvents({
+		        onLoad : function(event) {
+		        	ENGPartWidget.onLoad.call();
+		        },
+
+		        onRefresh : function() {
+		        	ENGPartWidget.onRefresh.call();
+		        },
+		        onSearch :function(searchtext){
+		        	ENGPartWidget.onSearch(searchtext).call();
+		        },
+		        onResetSearch :function(){
+		        	ENGPartWidget.onResetSearch.call();
+		        }
+		    });
+		}) ;
+</script>
+
+</head>
+<body></body>
+</html>

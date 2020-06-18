@@ -1,0 +1,63 @@
+<!-- Copyright 2016, Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-cosservice/sp-cosservice.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-timer/sp-timer.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSPUI/sp-checkbox/sp-checkbox.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../../SMAProcSP/sp-font/sp-entypo.html">
+
+<dom-module id="sp-job-log">
+  <link rel="import" type="css" href="sp-job-log.css">
+  <template>
+
+        <sp-timer id="jobLogTimer" on-tick="refreshJobLog" wait="10000"></sp-timer>
+        <sp-dashboard id="dashboard"></sp-dashboard>
+        <sp-variable id="mcsBaseURL" name="mcsBaseURL" ></sp-variable>
+        <sp-mcsservice id="sim_options_ws" on-dataready="useSimOptionsLogLevel"></sp-mcsservice>
+
+
+
+        <sp-cosservice id="jobLogFromCOS" object-id="{{jobObjectId}}" cos-server-id="{{cosServerId}}">
+        </sp-cosservice>
+        <sp-mcsservice id="jobLogFromMCS" data="{{jobLogEntry}}" uri="{{_computeMcsJobLogUri(jobObjectId)}}" on-dataready="parseJobLogFromMCS" on-error="clearLogState">
+        </sp-mcsservice>
+
+        <sp-updatepanel id="updatePanel" state="{{logState}}" updateswhen="is-getting" class="fullHeight flexFullHeight">
+            <div id="custommessage" class="noJob">
+            </div>
+            <div id="joblog" class="fullHeight flexFullHeight">
+
+                <iframe name="datagridFrame" id="datagridFrame" class="datagridFrame flexFullHeight" on-load="_onIframeLoad" src="logs-data-grid-table.html"></iframe>
+                <iframe id="CsvExpFrame"  class="hide"></iframe>
+                <template is="dom-if" if="{{_computeIf(jobObjectId, jobExecutionStatus, logLength)}}">
+                    <div class="jobDetails">
+                        <span class="jobDetailsHeader">Job Started</span>
+                        <span class="jobDetailsData">{{jobProperties.startTime}}</span>
+
+                        <template is="dom-if" if="{{!isRunningJob}}">
+                            <span class="jobDetailsHeader">Job Ended</span>
+                            <span class="jobDetailsData">{{jobProperties.endTime}}</span>
+                        </template>
+
+                        <span class="jobDetailsHeader">Duration</span>
+                        <span class="jobDetailsData">{{jobProperties.duration}}</span>
+
+                        <template is="dom-if" if="{{isRunningJob}}">
+                            <span class="jobDetailsHeader">Station(s)</span>
+                            <span class="jobDetailsData">{{jobProperties.station}}</span>
+
+                            <sp-checkbox label="Auto Scroll" title="Auto Scroll" on-click="toggleAutoScroll" checked="true" style="display:inline-block!important;"></sp-checkbox>
+                            <span class="autoScroll"> Auto Scroll</span>
+                         </template>
+                     </div>
+                </template>
+            </div>
+        </sp-updatepanel>
+    </template>
+  <script type="text/javascript" src="sp-job-log.js"></script>
+</dom-module>

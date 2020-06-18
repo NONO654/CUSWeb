@@ -1,0 +1,83 @@
+// ===========================================================
+// PACKAGE   : PLMBRIDGE_CfgStaticMapping
+// ===========================================================
+// Generated : Thu May  4 11:29:14 2006
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 1 entities :
+// - PLMCfgStaticMapping
+
+// ===========================================================
+ENTITY PLMCfgStaticMapping
+// ===========================================================
+// --- attributes: 5
+ATTR PLM_ExternalID;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR reservedby;N;N;$
+ATTR reserved;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+FATTR originated;Y
+FATTR modified;Y
+FATTR reservedby;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;N
+FATTR originated;N
+FATTR modified;N
+FATTR reservedby;N
+FATTR reserved;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+FATTR modified;N
+FATTR reservedby;N
+FATTR reserved;N
+// ===========================================================
+// End of DEFAULT mask customization file
+// ===========================================================

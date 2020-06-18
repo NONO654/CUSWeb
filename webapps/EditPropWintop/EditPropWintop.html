@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+  <head>
+    <!-- Application Metas -->
+	<!-- These information will be displayed in the widget preferences -->
+    <title>Properties</title>
+    
+    <meta name="author" content="G5C" />
+    <meta name="brand" content="ENOVIA" />    
+    <meta name="description" content="Edit properties widget" />
+    <!-- UWA Environment -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<!-- Load UWA environment --> 
+	<link rel="stylesheet" type="text/css" href="./EditPropWintop.css" /> <!-- Hide UWA layout -->
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" /> 
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script> 
+	<!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+	<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+	<script type="text/javascript" src="./EditPropWidget.js"></script> 
+     
+    <widget:preferences>
+        <widget:preference name="readOnly" type="hidden" label="read Only" defaultValue="false" />
+        <widget:preference name="editProperty_collapseIC" type="hidden" label="is IC collapse" defaultValue="false" />
+        <widget:preference name="editProperties_editMode" type="hidden" label="Edit mode" defaultValue="false" />     
+        <widget:preference name="SelectedItem" type="hidden" label="SelectedItem" defaultValue="" />  
+        <widget:preference name="securityContext" type="hidden" label="securityContext" defaultValue="" />        
+        <widget:preference name="loadData" type="hidden" label="loadData" defaultValue="true" />  
+        <widget:preference name="autoDock" type="hidden" label="Automatic dock" defaultValue="true" /> 
+        <widget:preference name="isTransient" type="hidden" label="isTransient" defaultValue="false" />  
+        <widget:preference name="asynchronousRequest" type="hidden" label="asynchronousRequest" defaultValue="false" />
+        <widget:preference name="changeControl" type="hidden" label="changeControl" defaultValue="" />      
+        <widget:preference name="transactionId" type="hidden" label="Transaction id set in the case of merge" defaultValue="" />                
+    </widget:preferences>
+        
+    <script type="text/javascript">
+        /*
+          We create the global MyWidget object.
+          This object will be used to store variables and functions.
+        */
+        window.top.performance.mark("end_EP_TransientLoaded");
+        window.top.performance.mark("start_EP_HTMLProperties");
+
+        var launchProperties = function(){
+        	//Once the options are ready we launch the panel (Should have been loaded by ther others EditPropWidget in case of concatenated build. Else it's a little more long in debug)
+        	require(['DS/EditPropWidget/EditPropWidgetHTML']);
+        }
+        
+        /**
+        *	Set the options of the widget
+        *	@param {String} options.myAppsBaseUrl - the url to my apps url	
+        *	@param {String} [options.userId] - The current id of the user
+        *	@param {String} [options.lang] - language of the browser
+        */
+        var setOptions = function(options){
+        	if (!window["COMPASS_CONFIG"]) window["COMPASS_CONFIG"] = {};
+       		
+           	if (options.myAppsBaseUrl) window["COMPASS_CONFIG"].myAppsBaseUrl = options.myAppsBaseUrl;
+           	if (options.userId) window["COMPASS_CONFIG"].userId = options.userId;
+           	if (options.lang) window["COMPASS_CONFIG"].lang = options.lang;     
+           	
+           	launchProperties();
+        }
+        
+        window.currentPropertiesOptions = {};
+        /**
+        *	Set the options of properties
+        *	@param {String} [options.selected] - list of selected items (EditPropModel with at least objectId. (It's better with metatype ))
+        */
+        var setPropertiesOptions = function(options){        	
+        	if (options.selected && Array.isArray(options.selected)) {
+        		if (currentPropertiesOptions.component) currentPropertiesOptions.component.initDatas(options.selected);
+        		else currentPropertiesOptions.selected = options.selected;
+        	}
+        }
+        
+        //Load EditPropWidgetHTML and its prerequisite in order to load quicker
+        require([
+            'DS/WidgetServices/WidgetServices',
+            'DS/EditPropWidget/constants/EditPropConstants',
+            'DS/EditPropWidget/models/EditPropModel',
+            'DS/EditPropWidget/EditPropWidget',
+            'DS/WidgetServices/securityContextServices/SecurityContextServices',
+            'DS/MessageBus/MessageBus',
+            "DS/UWPClientCode/PublicAPI"
+        ], function(WidgetServices){      
+        	WidgetServices._getMyappsUrl(function(myApps){
+        		if (myApps) launchProperties();
+        		else {
+                	var loadAuto = WidgetServices.getUrlParameter("auto");
+                	if (loadAuto === "true"){ //Launch an approximative myAppsBaseUrl. Above all for debug
+                		 setOptions({
+               				myAppsBaseUrl: "https://" + location.host + "/3DSpace/resources/AppsMngt",
+               				userId: "all",
+               				lang: "en"
+               			});
+                	}
+        		}
+        	});        	 
+        });
+        
+        /* Example 
+        setOptions({
+			myAppsBaseUrl: "https://vdevpril040dsy.ux.dsone.3ds.com/3DSpace/resources/AppsMngt",
+			userId: "all",
+			lang: "en"
+		});
+        
+        setPropertiesOptions({
+        	selected: [{
+        		"objectId": "1371B556E06200005B99DD5A445A0100"
+        	},{
+        		"objectId": "1371B556E06200005B99DD5A8C590100"
+        	}]
+        });
+        */
+        console.log("Example : ");
+
+        console.log("setOptions({myAppsBaseUrl: 'https://" + location.host + "/3DSpace/resources/AppsMngt',userId: 'all',lang: 'en'});");
+        console.log("setPropertiesOptions({selected: [{'objectId': '1371B556E06200005B99DD5A445A0100'},{'objectId': '1371B556E06200005B99DD5A8C590100'}]});");
+        
+    </script>
+  </head>
+  <body class="editPropWidgetHTML">
+  </body>
+</html>
+

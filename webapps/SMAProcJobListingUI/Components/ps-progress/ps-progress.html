@@ -1,0 +1,125 @@
+
+<script type="text/javascript">
+require(
+	[
+		"UWA/Core",
+		"UWA/Element",
+		"UWA/Event",
+		"UWA/Utils"
+	], 
+function(UWA, Element, Event, Utils) {
+
+
+	var _progressBarPrototype, _sanitizedAttributes
+		_name = 'ps-progress';
+
+	_sanitizedAttributes = ["id", "min", "max", "value", "indeterminate"];
+
+	_progressBarPrototype = Object.create(window.HTMLElement.prototype);
+
+	_progressBarPrototype.name = _name;
+
+
+	_progressBarPrototype.min = 0;
+
+	_progressBarPrototype.max = 100;
+
+	_progressBarPrototype.ratio = 0;
+
+	_progressBarPrototype.value = 0;
+
+	_progressBarPrototype.indeterminate = false;
+
+    _progressBarPrototype.observed = {
+        value: _progressBarPrototype.value
+    }
+
+
+	_progressBarPrototype.calcRatio = function(value) {
+		var clampValue = Math.min(this.max, Math.max(this.min, value));
+		return (clampValue - this.min)/(this.max - this.min);
+	};
+
+	_progressBarPrototype.update = function() {
+		this.ratio = this.calcRatio(this.value);
+
+		this.elements.progress.setStyles({
+			'transform': 'scaleX(' + this.ratio + ')'
+		});
+
+		this.elements.progress.toggleClassName('indeterminate', this.indeterminate);
+	};
+
+
+
+	_progressBarPrototype.createdCallback = function() {
+		var attributes,
+			pickedAttribute,i,
+			attributesHash = {},
+			that = this;
+
+		this.elements = {};
+
+		attributes = Array.prototype.slice.call(this.attributes, 0);
+
+		attributes.forEach(function(attr) {
+			attributesHash[attr.name] = attr.value;
+		});
+
+		for (i = _sanitizedAttributes.length -1 ; i >= 0; i--) {
+			pickedAttribute = _sanitizedAttributes[i];
+			if (attributesHash.hasOwnProperty(pickedAttribute)) {
+				that[pickedAttribute] = attributesHash[pickedAttribute];
+			}
+		}
+
+		this.buildSkeleton();
+		//this.value = parseInt(newValue); 
+        this.update();
+		//this.attributeChangedCallback('value', null, this.value);
+	};
+
+	_progressBarPrototype.attributeChangedCallback = function(attrName, oldValue, newValue) {
+		
+		if (attrName === "value" || attrName === "min" || attrName === "max") {
+			newValue = parseInt(newValue);	
+		}
+
+		if (attrName === "indeterminate") {
+			newValue = /true/i.test(newValue);
+		}
+		
+		this[attrName] = newValue;	
+		this.update();
+	};
+
+	_progressBarPrototype.buildSkeleton = function() {
+		
+		var elements = this.elements,
+			that = this;
+
+		// safe check if user called buildSkeleton directly
+		if (this.container) {
+			return
+		}
+
+		elements.container = UWA.createElement('div', {
+			'class': this.name + '-container'
+		});
+
+		elements.progress = UWA.createElement('div', {
+			'class': this.name + '-bar'
+		}).inject(elements.container);
+
+		elements.container.inject(this);
+
+	};
+
+	window.PSProgressElement = document.registerElement('ps-progress',{
+		prototype:_progressBarPrototype
+	});
+
+
+
+})
+</script>

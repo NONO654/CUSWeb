@@ -1,0 +1,1 @@
+define("DS/PropertiesAdmin/PropertiesAdmin_zh",{});define("DS/PropertiesAdmin/assets/nls/propertiesAdmin",{Download:"下载",Origin:"原始",Upload:"上传",ChooseJson:"请选择 json 文件",uploadDone:"选项已更新",notJson:"该文件无法解析为 Json",DownloadTooltip:"下载设置对象",UploadTooltip:"用 json 文件替换设置",OriginTooltip:"下载原始设置",wrongNameMsg:"文件名不以设置名称开头。是否要继续？",wrongNameTitle:"文件名不匹配"});

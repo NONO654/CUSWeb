@@ -1,0 +1,71 @@
+<dom-module id="cmp-parameter-create">
+    <template>
+
+        <sp-notification id="notification" position="TR" width="200"></sp-notification>
+        <div id="containercreate" class="param-create-container" on-keyup="onKeyUp" data-mode="single">
+            <div class="main-container" id="count"> <!--Change class name-->
+                <span class="custom-header">Number of parameters: </span>
+            </div>
+            <div class="main-container" id="name">
+                <span class="custom-header">Name: </span>
+            </div>
+            <div class="main-container" id="structure">
+                <span class="custom-header">Structure: </span>
+            </div>
+            <div class="main-container" id="mode">
+                <span class="multi-custom-header">Mode: </span>
+            </div>
+            <div class="main-container" id="datatype">
+                <span class="custom-header">Type: </span>
+            </div>
+            <div class="main-container" id="multiline">
+                <span class="custom-header">Multi-line: </span>
+            </div>
+            <div class="main-container" id="scalarValues">
+                <span class="custom-header">Value: </span>
+            </div>
+            <div id="arrayValues">
+                <div class="main-container" id="dimensions">
+                    <span class="custom-header">Number of dimensions: </span>
+                </div>
+                <div class="main-container">
+                    <span class="custom-header">Dimension sizes: </span>
+                    <div class="array-dimension-container" id="dimensionsControls"></div>
+                </div>
+                <div class="main-container" id="resizableDims">
+                    <span class="custom-header">Dimensions are resizable: </span>
+                </div>
+            </div>
+            <div class="main-container" id="description">
+                <span class="custom-header">Description: </span>
+            </div>
+            <div class="main-container" id="expression">
+                <span class="custom-header">Expression: </span>
+            </div>
+            <div class="main-container" id="choices">
+                <span class="custom-header">Choices: </span>
+            </div>
+        </div>
+
+        <sp-modal id="mappedParameterDialog" width="525px" height="300px" heading="Confirm Modify" on-close="onCancelConfirmation">
+            <section id="dialogText">
+                <span id="modifyMessage" class="modifyMessage"></span><br>
+            </section>
+            <footer>
+                <button id="modifyButton" is="sp-button-type" on-click="changeParameterProperties">Yes</button>
+                <button id="discardButton" is="sp-button-type" primary="" on-click="onCancelConfirmation" >No</button>
+            </footer>
+        </sp-modal>
+
+        <sp-modal id="preserveMappingDialog" width="525px" height="300px" heading="Confirm Modify" on-close="onPreserveCloseConfirmation">
+            <section id="dialogText">
+                <span id="preserveMessage" class="deleteMessage"></span><br>
+            </section>
+            <footer>
+                <button id="preserveMapping" is="sp-button-type" on-click="onPreserveMappings">Yes</button>
+                <button id="discardMapping" is="sp-button-type" primary="" on-click="onPreserveModify" >No</button>
+            </footer>
+        </sp-modal>
+    </template>
+
+</dom-module>

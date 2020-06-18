@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Styles
+  xmlns:syp="http://www.3ds.com/xsd/SYP">
+  <Template syp:name="SMAWebAuthoringWorkbenchInterface"
+            Target="CATCmdInterface">
+    <CATCmdInterface WkbInterface="SMAIWflAuthoringWorkbenchAddin"/>
+  </Template>
+  <Template syp:name="SMAWebAuthoringWorkbenchHeaders"
+            Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID="SMAProcWebActionBarCreateProcessHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflCreateProcessCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarSearchProcessHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflSearchProcessCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarRefreshProcessHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflRefreshProcessCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarCloseProcessHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflCloseProcessCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarEmptyActivityCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="Arg1"
+                               Value="EmptyActivity"
+                               Mode="In"/>
+          <CATCommandHeaderArg ID="Image"
+                               Value="/SMAProcWebApp/assets/icons/32/I_SMAWflActivity.png"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAProcWebActionBarGatewayCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="Arg1"
+                               Value="EmptyActivity"
+                               Mode="In"/>
+          <CATCommandHeaderArg ID="Image"
+                               Value="/SMAProcWebApp/assets/icons/32/I_SMAWflUIWorkflowGateway.png"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAProcWebActionBarZoomInHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcViewCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarZoomOutHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcViewCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarFitAllCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcViewCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflActionBarAnnotationCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/myDefaultCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarLifecycleCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcAutLifecycleCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarRelExplorerCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcAutRelExplorerCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarPropertiesCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcAutPropertiesCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflActionBarExperienceCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcAutExperienceCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflAutImmNewParamCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/myDefaultCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflActionBarPan"
+                        ClassName="DS/SMAProcWebCmds/myDefaultCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarEditCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcExtensionEditorCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebExecutionOptionCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcExecutionOptionsCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebStepExecutionOptionCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcExecutionOptionsCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActivityOptionsCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcExecutionOptionsCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflRenameCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcRenameCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflDeleteCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcDeleteCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflSetMainStepCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcSetMainStepCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflClearMainStepCmdHdr"
+                      ClassName="DS/SMAProcWebCmds/SMAProcClearMainStepCmd"
+                      ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                      SharedLibraryName="SMAWebCmdHeader"
+                      Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarDownloadCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Download"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <!--ActionBar Commands for Functions-->
+      <CATCommandHeader ID="SMAProcWebActionBarUploadCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Upload"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAProcWebActionBarOSCommandCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.OSCommand"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAProcWebActionBarDeleteContentCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.DeleteContent"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarCalculatorCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Calculator"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarCreateActFromTempCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Instantiate"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarScriptCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Script"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarAbaqusCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Abaqus"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarMatlabCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Matlab"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarCSEDirectorCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.CSEDirector"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarApproxModelCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.ApproxModel"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarIsightV5AdapterCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.IsightV5Adapter"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarKWCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Knowledgeware"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarPhysicsSimulationCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.smacomponent.Reference"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarExcelAdaptorCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Excel"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarReportGenerationCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.ReportGeneration"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarDataMatchingCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.smaexe.adapter.datamatching"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBar3DXVBScriptCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.3DXVBScript"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarUpdateAttributesCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.updateattributes"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarV6UtilityCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.V6Utility"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarV6ApplicationCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.v6application"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarTextParserCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.TextParser"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarToscaInputCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.ToscaInput"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarToscaExecCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.ToscaExec"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarForemanCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Foreman"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarMFTCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.MFT"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <!--End : ActionBar Commands for Functions-->
+      <!--ActionBar Commands for Drivers-->
+      <CATCommandHeader ID="SMAWflActionBarMonteCarloCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.MonteCarlo"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarOptCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Optimization"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarLoopCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                               Value="com.dassault_systemes.sma.adapter.Loop"
+                               Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflResetAllPositionCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcViewCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarAutParametersCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflAutParametersCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarAutPLMContentsCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflAutPLMContentsCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflAutAttributeGrpsCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflAutAttributeGrpsCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflAutDataFlowCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflAutDataFlowCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcDisconnectCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcDisconnectCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcAutGatewayEditorCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcAutGatewayEditorCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflChangeStationCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/myDefaultCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarOpenInPSCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcOpenInPSCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarRunCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcRunCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflLaunchResAnalyticsCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/myDefaultCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflAutImmParamCloseCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/myDefaultCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflAutImmDFHideShowCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/myDefaultCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflAutImmParamViewChangeCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/myDefaultCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflAutImmParamMgmtCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/myDefaultCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebActionBarOpenInPCNCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflAutOpenInPCN"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAWflAutImpactGraphCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflAutImpactGraphCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader ID="SMAProcWebEditImageCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcWebEditImageCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1"/>
+      <CATCommandHeader
+                        ID="SMAWflActionBarGenericAdapterCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAWflFlowItemCmd"
+                        SharedLibraryName="SMAWebCmdHeader"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="type"
+                                     Value=""
+                                     Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="SMAWflActionBarCustomAdapterCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcListCustomAdapterCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"/>
+      <CATCommandHeader ID="SMAProcWebSupportabilityCmdHdr"
+                        ClassName="DS/SMAProcWebCmds/SMAProcSupportabilityCmd"
+                        ResourceFile="SMAProcWebApp/SMAWebCmdHeader"
+                        HelpResourceFile="SMAProcWebApp/help"
+                        Available="1"/>
+    </CATCmdHeadersList>
+  </Template>
+  <Template syp:name="SMAWebAuthoringWorkbenchAccess"
+            Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="SMAWebAuthoringWorkbench"
+                     RepresentationType="AfrActionBar">
+      <CATWorkbenchOptions ToolbarsExclusive="1"/>
+      <CATCmdContainer Name="FixedSection"
+                       RepresentationType="AfrActionBarFixedSection">
+        <CATCmdStarter Name="SMAProcWebActionBarCreateProcess"
+                       Command="SMAProcWebActionBarCreateProcessHdr"/>
+        <CATCmdStarter Name="SMAProcWebActionBarSearchProcess"
+                       Command="SMAProcWebActionBarSearchProcessHdr"/>
+        <CATCmdStarter Name="SMAProcWebActionBarRefreshProcess"
+                       Command="SMAProcWebActionBarRefreshProcessHdr"/>
+        <CATCmdStarter Name="SMAProcWebActionBarCloseProcess"
+                       Command="SMAProcWebActionBarCloseProcessHdr"/>
+      </CATCmdContainer>
+      <CATCmdContainer Name="Add"
+                       RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="SMAWflActionBarEmptyActivity"
+                       Command="SMAProcWebActionBarEmptyActivityCmdHdr"/>
+        <CATCmdStarter Name="SMAWflActionBarGateway"
+                       Command="SMAProcWebActionBarGatewayCmdHdr"/>
+        <CATCmdSeparator Name="Sep1"/>
+        <!--
+        <CATCmdStarter Name="SMAWflActionBarKW" Command="SMAWflActionBarKWCmdHdr"/><CATCmdStarter Name="SMAWflActionBarV6Utility" Command="SMAWflActionBarV6UtilityCmdHdr"/><CATCmdStarter Name="SMAWflActionBarExcelAdaptor" Command="SMAWflActionBarExcelAdaptorCmdHdr"/><CATCmdStarter Name="SMAWflActionBarReportGeneration" Command="SMAWflActionBarReportGenerationCmdHdr"/><CATCmdStarter Name="SMAWflActionBarV6Application" Command="SMAWflActionBarV6ApplicationCmdHdr"/>
+        <CATCmdStarter Name="SMAProcWebActionBarOSCommandCmdHdr"
+                       Command="SMAProcWebActionBarOSCommandCmdHdr"/>
+        <CATCmdStarter Name="SMAWflActionBarCalculatorCmdHdr"
+                       Command="SMAWflActionBarCalculatorCmdHdr"/><CATCmdStarter Name="SMAWflActionBarTextParser" Command="SMAWflActionBarTextParserCmdHdr"/><CATCmdStarter Name="SMAWflActionBarScript" Command="SMAWflActionBarScriptCmdHdr"/><CATCmdStarter Name="SMAWflActionBarAbaqus" Command="SMAWflActionBarAbaqusCmdHdr"/><CATCmdStarter Name="SMAWflActionBarCSEDirector" Command="SMAWflActionBarCSEDirectorCmdHdr"/><CATCmdStarter Name="SMAWflActionBarApproxModel" Command="SMAWflActionBarApproxModelCmdHdr"/>
+        -->
+        <CATCmdStarter Name="SMAProcWebActionBarDownloadCmdHdr"
+                       Command="SMAProcWebActionBarDownloadCmdHdr"/>
+        <CATCmdStarter Name="SMAProcWebActionBarUploadCmdHdr"
+                       Command="SMAProcWebActionBarUploadCmdHdr"/>
+        <CATCmdStarter Name="SMAProcWebActionBarDeleteContentCmdHdr"
+                       Command="SMAProcWebActionBarDeleteContentCmdHdr"/>
+        <!--
+        <CATCmdStarter Name="SMAWflActionBarUpdateAttributes" Command="SMAWflActionBarUpdateAttributesCmdHdr"/><CATCmdStarter Name="SMAWflActionBarMatlab"
+                       Command="SMAWflActionBarMatlabCmdHdr"
+                       Weight="0"/><CATCmdStarter Name="SMAWflActionBarIsightV5Adapter"
+                       Command="SMAWflActionBarIsightV5AdapterCmdHdr"
+                       Weight="0"/><CATCmdStarter Name="SMAWflActionBarPhysicsSimulation"
+                       Command="SMAWflActionBarPhysicsSimulationCmdHdr"
+                       Weight="0"/><CATCmdStarter Name="SMAWflActionBarDataMatching"
+                       Command="SMAWflActionBarDataMatchingCmdHdr"
+                       Weight="0"/><CATCmdStarter Name="SMAWflActionBar3DXVBScript"
+                       Command="SMAWflActionBar3DXVBScriptCmdHdr"
+                       Weight="0"/><CATCmdStarter Name="SMAWflActionBarToscaInput" Command="SMAWflActionBarToscaInputCmdHdr" Weight="0"/><CATCmdStarter Name="SMAWflActionBarToscaExec" Command="SMAWflActionBarToscaExecCmdHdr" Weight="0"/><CATCmdStarter Name="SMAWflActionBarToscaExec" Command="SMAWflActionBarForemanCmdHdr" Weight="0"/><CATCmdSeparator Name="Sep2"/><CATCmdStarter Name="SMAWflActionBarMonteCarlo" Command="SMAWflActionBarMonteCarloCmdHdr"/><CATCmdStarter Name="SMAWflActionBarOpt" Command="SMAWflActionBarOptCmdHdr"/><CATCmdStarter Name="SMAWflActionBarLoop"
+                       Command="SMAWflActionBarLoopCmdHdr"/><CATCmdSeparator Name="Sep2"/><CATCmdStarter Name="SMAWflActionBarCustomAdapter" Command="SMAWflActionBarCustomAdapterCmdHdr"/>
+        -->
+      </CATCmdContainer>
+      <CATCmdContainer Name="Data"
+                       RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="SMAWflParameters"
+                       Command="SMAProcWebActionBarAutParametersCmdHdr"/>
+        <CATCmdStarter Name="SMAWflContents"
+                       Command="SMAProcWebActionBarAutPLMContentsCmdHdr"/>
+        <CATCmdStarter Name="SMAWflProperties"
+                       Command="SMAProcWebActionBarPropertiesCmdHdr"/>
+        <CATCmdStarter Name="SMAWfLifecycle"
+                       Command="SMAProcWebActionBarLifecycleCmdHdr"/>
+        <CATCmdStarter Name="SMAWflRelExplorer"
+                       Command="SMAProcWebActionBarRelExplorerCmdHdr"/>
+      </CATCmdContainer>
+      <CATCmdContainer Name="View"
+                         RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="SMAProcWebActionBarZoomInHdr"
+                           Command="SMAProcWebActionBarZoomInHdr"/>
+        <CATCmdStarter Name="SMAProcWebActionBarZoomOutHdr"
+                           Command="SMAProcWebActionBarZoomOutHdr"/>
+        <CATCmdStarter Name="SMAProcWebActionBarFitAllCmdHdr"
+                           Command="SMAProcWebActionBarFitAllCmdHdr"/>
+        <!--
+            <CATCmdStarter Name="SMAWflActionBarPan"
+                           Command="SMAWflActionBarPan"/><CATCmdStarter Name="SEDResetAllPositionToolbar"
+                           Command="SMAWflResetAllPositionCmdHdr"/>
+            -->
+      </CATCmdContainer>
+      <CATCmdContainer Name="Execution"
+                       RepresentationType="AfrActionBarSection">
+        <!-- <CATCmdStarter Name = "SMAWflActionBarChangeStation" Command = "SMAWflChangeStationCmdHdr" /> -->
+        <CATCmdStarter Name="SMAWflOpenInPCN"
+                       Command="SMAProcWebActionBarOpenInPCNCmdHdr"/>
+        <CATCmdStarter Name="SMAProcWebActionBarOpenInPSCmd"
+                       Command="SMAProcWebActionBarOpenInPSCmdHdr" />
+        <CATCmdStarter Name="SMAProcWebActionBarRunCmd"
+                       Command="SMAProcWebActionBarRunCmdHdr" />
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

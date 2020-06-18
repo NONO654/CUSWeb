@@ -1,0 +1,1 @@
+define("DS/DELWebMfgAssetsDefBIModel/BIModel",["UWA/Core","UWA/Class/Model"],function(c,b){var a=b.extend({name:"BIModel"});return a});define("DS/DELWebMfgAssetsDefBIModel/BIModelCollection",["DS/DELWebMfgAssetsDefBIModel/BIModel","UWA/Class/Collection"],function(a,b){var c=b.extend({name:"BIModelCollection",model:a,});return c});

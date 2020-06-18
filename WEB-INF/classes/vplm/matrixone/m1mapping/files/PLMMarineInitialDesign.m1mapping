@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="PLMMarineInitialDesign" />
+    <m1.package name="PLMMarineInitialDesign" />
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="SSM_DesignSpaceMainPurpose" />
+      <m1.interface name="SSM_DesignSpaceMainPurpose" />
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="SSM_Generated" />
+      <m1.interface name="SSM_Generated" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="CreationMethod" />
+        <m1.attribute name="SSM_Generated.CreationMethod" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- Extension -->
+    <pattern.VPLM_EXTENSION>
+      <vplm.Extension name="SSM_ManufacturingSpaceMainPurpose" />
+      <m1.interface name="SSM_ManufacturingSpaceMainPurpose" />
+
+    </pattern.VPLM_EXTENSION>
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="SSM_SpaceSystemInstance" />
+      <m1.relationship name="SSM_SpaceSystemInstance" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="SSM_SpaceSystem" />
+      <m1.type name="SSM_SpaceSystem" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="SSM_DesignSpaceRef" />
+      <m1.type name="SSM_DesignSpaceRef" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_EstimatedFloorArea" />
+        <m1.attribute name="SSM_DesignSpaceRef.V_EstimatedFloorArea" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="V_FloorArea" />
+        <m1.attribute name="SSM_DesignSpaceRef.V_FloorArea" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="SSM_ManufacturingSpaceRef" />
+      <m1.type name="SSM_ManufacturingSpaceRef" />
+
+    </pattern.VPLM_CLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

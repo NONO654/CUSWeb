@@ -1,0 +1,31 @@
+{% extends 'MailTemplate_LayoutV2.html' %}
+
+{% block icone %}
+<td width="75" style="vertical-align: top;">
+	<img alt="icone User" src="cid:{{ userIcon }}" height="64" width="64" style="display: block;">
+</td>
+{% endblock %}
+
+{% block content %} 
+<p>{{ invitation }}</p>
+<p>{{ message }}</p>
+
+<h3>{{ launch }}</h3>
+
+<table>
+  <tr>
+    <td style="vertical-align: top; padding-right: 5px;">1.</td>
+    <td>{{ passport }}
+      <ul>
+        <li>{{ signin }}</li>
+        <li>{{ signup }}</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; padding-right: 5px;">2.</td>
+    <td>{{ dashboard }}</td>
+  </tr>
+</table>
+<p>{{ guidance }}</p>
+{% endblock %}

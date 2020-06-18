@@ -1,0 +1,621 @@
+<included>
+
+    <property name="MYAPPS" value="MYAPPS_" />
+    <property name="MYAPPS_LOG" value="/mnt/log/myapps" />
+    <property name="MYAPPS_JPO" value="/mnt/log/jpo" />
+    <property name="AUDITLOG_PATTERN" value="%msg%n" />
+    <property name="MYAPPS_PATTERN" value="%d %contextName %-5level %logger{36} %m%n" />
+    <property name="MYAPPS_PATTERN2" value="%d{yyyy-MM-dd HH:mm:ss.SSS,GMT} GMT ${HOSTNAME} [%thread] %-5level %logger{64} - %msg%n" />
+    <property name="MYAPPS_ROLLING_MAX_INDEX" value="7" />
+    <property name="MYAPPS_ROLLING_TRIGGER_SIZE" value="10MB" />
+    <property name="MYAPPS_DEFAULT_LOG_LEVEL" value="info" />
+
+    <!-- stdout appender -->
+    <appender name="${MYAPPS}stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File appenders -->
+
+    <!-- everything.log -->
+    <appender name="${MYAPPS}everything" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/everything.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/everything%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <!-- mqldriver.log -->
+    <appender name="${MYAPPS}mqldriver" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/mqldriver.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/mqldriver%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <!-- auditlog.log -->
+    <appender name="${MYAPPS}auditlog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/auditlog.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${AUDITLOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/auditlog%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- ticket.log -->
+    <appender name="${MYAPPS}ticket" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/ticket.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/ticket%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <!-- reloc.log -->
+    <appender name="${MYAPPS}reloc" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_JPO}/reloc.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_JPO}/reloc%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <!-- update.log -->
+    <appender name="${MYAPPS}updateTenant" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_JPO}/updateTenant.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_JPO}/updateTenant%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <!-- updateNetvibesServices.log -->
+    <appender name="${MYAPPS}update" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_JPO}/updateNetvibesServices.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_JPO}/updateNetvibesServices%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <!-- addTenant.log -->
+    <appender name="${MYAPPS}addTenant" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_JPO}/addTenant.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_JPO}/addTenant%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <!-- deleteTenant.log -->
+    <appender name="${MYAPPS}deleteTenant" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_JPO}/deleteTenant.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_JPO}/deleteTenant%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- push.log -->
+    <appender name="${MYAPPS}push" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/push.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/push%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- dsls.log -->
+    <appender name="${MYAPPS}dsls" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/dsls.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/dsls%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- mail.log -->
+    <appender name="${MYAPPS}mail" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/mail.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/mail%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- passport.log -->
+    <appender name="${MYAPPS}passport" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/passport.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/passport%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- mql_error.log -->
+    <appender name="${MYAPPS}mqlerror" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/mql_error.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/mql_error%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- mql.log -->
+    <appender name="${MYAPPS}mql" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/mql.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/mql%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- profiler.log -->
+    <appender name="${MYAPPS}profiler" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/profiler.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/profiler%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+      
+    <!-- supportServices.log -->
+    <appender name="${MYAPPS}supportServices" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/supportServices.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/supportServices%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <!-- probes.log -->
+    <appender name="${MYAPPS}probes" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/probes.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/probes%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+    
+    <!-- messagebus.log -->
+    <appender name="${MYAPPS}messagebus" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${MYAPPS_LOG}/messagebus.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>${MYAPPS_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${MYAPPS_LOG}/messagebus%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>${MYAPPS_ROLLING_MAX_INDEX}</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>${MYAPPS_ROLLING_TRIGGER_SIZE}</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!-- END File appenders -->
+
+    <!-- Loggers -->
+
+    <!-- Core -->
+
+    <!-- set core default level to debug and log to both stdout and everything.log -->
+    
+    <logger name="com.dassault_systemes.i3dx.appsservices.util.AuditLog" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}auditlog" />
+    </logger>
+    
+    <logger name="com.dassault_systemes.i3dx.appsmodel" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}everything" />
+    </logger>
+
+    <logger name="com.dassault_systemes.i3dx.appsdrivers.matrix.mql" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}mqldriver" />
+    </logger>
+
+    <!-- mql logs defaults to info and logs to mql.log -->
+    <logger name="com.dassault_systemes.i3dx.appsmodel.matrix.mql" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}mql" />
+    </logger>
+    <logger name="com.dassault_systemes.i3dx.appsmodel.matrix.MQLCommand" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}mql" />
+    </logger>
+    <logger name="com.dassault_systemes.i3dx.appsmodel.matrix.mql.parsers.MQLParserBus" level="warn" additivity="false">
+        <appender-ref ref="${MYAPPS}mql" />
+    </logger>
+
+    <!-- mql errors log to mqlerror.log and everything.log and stdout -->
+    <logger name="mqlerror" additivity="false">
+        <appender-ref ref="${MYAPPS}mqlerror" />
+        <appender-ref ref="${MYAPPS}everything" />
+    </logger>
+
+    <!-- set default matrix transaction managment log level to warn -->
+    <logger name="com.dassault_systemes.i3dx.appsmodel.matrix.Matrix" level="warn" additivity="false">
+        <appender-ref ref="${MYAPPS}everything" />
+    </logger>
+
+    <!-- set dsls log to dsls.log -->
+    <logger name="com.dassault_systemes.i3dx.appsmodel.AppsLicenses" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}dsls" />
+    </logger>
+    <logger name="com.dassault_systemes.i3dx.appsmodel.licenses" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}dsls" />
+    </logger>
+    
+    <logger name="com.dassault_systemes.i3dx.supportservices.core" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}supportServices" />
+    </logger>
+    
+    <!-- /Core -->
+
+    <!-- Java Services -->
+
+    <!-- set java services default level to debug and log to both stdout and everything.log -->
+    <logger name="com.dassault_systemes.i3dx.appsservices" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}everything" />
+    </logger>
+
+    <!-- log ticket consumption to extra ticket.log file -->
+    <logger name="com.dassault_systemes.i3dx.appsservices.FirstManagerServices" level="all">
+        <appender-ref ref="${MYAPPS}ticket" />
+    </logger>
+    <logger name="com.dassault_systemes.i3dx.appsservices.ticket" level="all">
+        <appender-ref ref="${MYAPPS}ticket" />
+    </logger>
+
+    <!-- make mail log to mail.log -->
+    <logger name="com.dassault_systemes.i3dx.appsservices.mail" level="all" additivity="false">
+        <appender-ref ref="${MYAPPS}mail" />
+    </logger>
+
+    <!-- set Security logs level to warn -->
+    <logger name="com.dassault_systemes.i3dx.appsservices.util.Security" level="warn" additivity="false" />
+
+    <!-- make SOAPUtil and CASUtil log to passport.log only -->
+    <logger name="com.dassault_systemes.i3dx.appsservices.util.SOAPUtil" level="all" additivity="false">
+        <appender-ref ref="${MYAPPS}passport" />
+    </logger>
+    <logger name="com.dassault_systemes.i3dx.appsservices.util.CASUtil" level="all" additivity="false">
+        <appender-ref ref="${MYAPPS}passport" />
+    </logger>
+
+    <!-- make Push log to push.log only -->
+    <logger name="com.dassault_systemes.i3dx.appsservices.push" level="all" additivity="false">
+        <appender-ref ref="${MYAPPS}push" />
+    </logger>
+
+    <!-- make PCS log to profiler.log only -->
+    <logger name="com.dassault_systemes.i3dx.appsmodel.util.PCS" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}profiler" />
+    </logger>
+
+    <!-- make some classes log level default to warn -->
+    <logger name="com.dassault_systemes.i3dx.appsservices.LicensesServices" level="warn" additivity="false" />
+    <logger name="com.dassault_systemes.i3dx.appsservices.PersonServices" level="warn" additivity="false" />
+    <logger name="com.dassault_systemes.i3dx.appsservices.PlatformServices" level="warn" additivity="false" />
+
+    <!-- JPO -->
+    <logger name="MyAppsSelfExperience_mxJPO" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}everything" />
+    </logger>
+
+    <logger name="MyAppsRegister3DPassport_mxJPO" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}everything" />
+    </logger>
+    
+    <logger name="MyAppsRelocTenant_mxJPO" level="debug" additivity="false">
+        <appender-ref ref="${MYAPPS}reloc" />
+    </logger>
+    
+    <logger name="MyAppsUpdateTenantURL_mxJPO" level="debug" additivity="false">
+        <appender-ref ref="${MYAPPS}updateTenant" />
+    </logger>
+    
+    <logger name="MyAppsAddTenant_mxJPO" level="debug" additivity="false">
+        <appender-ref ref="${MYAPPS}addTenant" />
+    </logger>
+
+    <logger name="MyAppsDeleteTenant_mxJPO" level="debug" additivity="false">
+        <appender-ref ref="${MYAPPS}deleteTenant" />
+    </logger>
+
+    <logger name="MyAppsUsersDump_mxJPO" level="debug" additivity="false">
+        <appender-ref ref="${MYAPPS}everything" />
+    </logger>
+
+    <logger name="PushUsers_mxJPO" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}everything" />
+    </logger>
+    
+    <logger name="MyAppsUpdateCEnvServicesNetvibes_mxJPO" level="debug" additivity="false">
+        <appender-ref ref="${MYAPPS}update" />
+    </logger>
+
+	 <logger name="com.dassault_systemes.i3dx.supportservices" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}supportServices" />
+    </logger>
+	
+	<logger name="com.dassault_systemes.i3dx.rest.supportservices" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}supportServices" />
+    </logger>
+    
+    <logger name="com.dassault_systemes.i3dx.appsservices.probes" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}probes" />
+    </logger>
+    
+    <!-- UsersGroup -->
+    <logger name="com.dassault_systemes.i3dx.appsservices.messagebus" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}messagebus" />
+    </logger>
+    
+    <logger name="com.dassault_systemes.i3dx.appsservices.group" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}messagebus" />
+    </logger>
+    
+   	<logger name="com.dassault_systemes.i3dx.rest.appservices.UsersGroupResources" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}messagebus" />
+    </logger>    
+	
+    <!-- /Java Services -->
+
+    <!-- Web Services -->
+
+    <!-- set web services default level to debug and log to both stdout and everything.log -->
+    <logger name="com.dassault_systemes.i3dx.rest.appservices" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}everything" />
+    </logger>
+
+    <!-- set rest util default level to warn -->
+    <logger name="com.dassault_systemes.i3dx.rest.util" level="warn" additivity="false">
+        <appender-ref ref="${MYAPPS}everything" />
+    </logger>
+    
+	<logger name="com.dassault_systemes.i3dx.rest.supportservices.support" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}supportServices" />
+    </logger>
+    
+	<logger name="com.dassault_systemes.i3dx.rest.appservices.ProbeResource" level="${MYAPPS_DEFAULT_LOG_LEVEL}" additivity="false">
+        <appender-ref ref="${MYAPPS}probes" />
+    </logger>
+
+    <!-- /Web Services -->
+
+    <!-- END Loggers -->
+
+</included>
+
+<!-- configuration instructions at http://logback.qos.ch/manual/configuration.html -->
+
+<!--
+
+    levels
+    ======
+    - order
+    trace < debug < info < warn < error
+
+    - logging
+    a logger will log messages having higher or equal levels than its own level
+
+    - special levels
+    off: no logs
+    all: all levels
+
+    filters
+    =======
+    filters can be applied to appenders to log only specific levels
+
+    - deny logs with a strictly lower level than info
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <level>info</level>
+    </filter>
+
+    - only allow logs for info level
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <level>info</level>
+        <onMatch>accept</onMatch>
+        <onMismatch>deny</onMismatch>
+    </filter>
+
+    config
+    ======
+
+    root logger logs all levels to stdout using stdout appender
+
+    all children loggers by default use root stdout appender and root level
+
+    in order to override a logger's level for a class or package use
+    <logger name="package.name.Class" level="all" />
+    or
+    <logger name="package.name" level="all" />
+
+    logging to files
+    ================
+
+    in order to log messages to a file a RollingFileAppender must be defined
+    log files will roll automaticaly when reaching maxFileSize size
+    log files having an index higher than maxBackupIndex will be deleted
+    here at most 10 files of 10MB will be kept
+
+    <appender name="fileEverything" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/var/log/myapps/everything.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d %-5plevel %logger{36} %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>/var/log/myapps/everything%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>9</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    then you must configure a logger that uses this appender
+    <logger name="package.name.Class" level="all">
+        <appender-ref ref="fileAppender" />
+    </logger>
+
+    this logger will log to the file through the fileAppender appender
+    and also to stdout through root's stdout appender
+
+    in order to prevent using parent's appender, use additivity="false"
+    <logger name="package.name.Class" level="all" additivity="false">
+        <appender-ref ref="fileAppender" />
+    </logger>
+
+    if a file appender is defined for a package, all classes in that package will use this appender
+    unless their logger is configured using additivity="false"
+
+-->

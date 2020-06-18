@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2018 , Dassault Systemes. All rights reserved. -->
+<head>
+    <meta charset="utf-8" />
+    <title>Process Apps Administration</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Process Apps Administration Widget" />
+    <meta name="debugMode" content="false"/>
+    <meta name="apiVersion" content="1.3" />
+    <meta name="autoRefresh" content="0" />
+    <!-- Application Metas End -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <!-- Load the UWA framework -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+    <!-- Application JS Start -->
+    <style>
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        border: 0;
+        padding: 0;
+    }
+
+    .module {width:auto; margin:0; border: 0}
+    .module,
+    .moduleWrapper,
+    .moduleContent {
+        height: 100%;
+    }
+    .moduleContent {
+        padding: 0;
+    }
+    .moduleHeader, .moduleFooter{
+        display:none;
+    }
+
+    </style>
+    <script>
+        var UWA;
+        define('DS/i3DXCompassPlatformServices/i3DXCompassPlatformServices', function() {
+            return {
+                getServiceUrl: function (opts){
+                    var THREEDSPACE_URL_OVERRIDE_KEY = 'SMA_3DSPACE_URL';
+                    var serviceUrl = localStorage.getItem(THREEDSPACE_URL_OVERRIDE_KEY) || require.toUrl('DS/SMAProcWebAdminWidget/assets/stubs');
+                    console.warn('Overriding i3DXCompassPlatformServices.getServiceUrl with:' + serviceUrl +
+                        '\nUse localStorage.setItem("'+THREEDSPACE_URL_OVERRIDE_KEY+'", "...") to set a different URL.');
+                    setTimeout(function(){ opts.onComplete(serviceUrl);}, 0);
+                }
+            };
+        });
+    </script>
+
+    <script>
+    /* global widget, require */
+    require([
+        'UWA/Core',
+        'DS/SMAProcWebCMMUtils/SMAJSCMMAuthoringUtils',
+        'DS/SMAProcWebCMMUtils/SMAJSCMMConfig',
+        'DS/i3DXCompassPlatformServices/i3DXCompassPlatformServices',
+        'DS/SMAProcWebAdminWidget/smaAdminWidgetConnector',
+        'DS/WAFData/WAFData',
+        'DS/UIKIT/Mask',
+        'DS/Logger/Logger',
+        'i18n!DS/SMAProcWebAdminWidget/assets/nls/SMAProcWebAdminWidgetNLS',
+    ], function (
+        UWA, 
+        SMAJSCMMAuthoringUtils, 
+        SMAJSCMMConfig, 
+        PlatformServices, 
+        smaAdminWidgetConnector, 
+        WAFData, 
+        Mask, 
+        Logger,
+        i18nSMAProcWebAdminWidgetNLS
+        ) {
+        'use strict';
+        var logger = Logger.getLogger(widget);
+        var myWidget = {
+            onLoad: function () {
+                Mask.mask(widget.body);
+                SMAJSCMMConfig.fetchTenantId(true).then(function(currentPlatformId){
+                    myWidget.tenant = currentPlatformId;
+                    SMAJSCMMAuthoringUtils.initialize(currentPlatformId, {
+                        onSuccess:function(data){
+                            logger.log('SMAJSCMMAuthoringUtils.initialize success cb: ', data);
+                            SMAJSCMMAuthoringUtils.isAuthorized('Process_Composer', {
+                                onSuccess: function(){
+                                    SMAJSCMMAuthoringUtils.getListSecurityContext({
+                                        onSuccess:function (securityContextsList) {
+                                            var collabspaces = securityContextsList && securityContextsList.cspaces || [];
+                                            var contextPreference = {
+                                                name: 'collabspaces',
+                                                label: i18nSMAProcWebAdminWidgetNLS['Collaborative Space'],
+                                                type: 'list'
+                                            };
+                                            contextPreference.options = collabspaces.map(function(cspace, index) {
+                                                if (cspace.isDefault || index === 0) {
+                                                    contextPreference.defaultValue = cspace.name;
+                                                    SMAJSCMMAuthoringUtils.setCurrentContext(cspace.name);
+                                                }
+                                                return {value: cspace.name, label: cspace.displayName};
+                                            });
+                                            if (widget.getValue('collabspaces')){
+                                                myWidget.Context = widget.getValue('collabspaces');
+                                                SMAJSCMMAuthoringUtils.setCurrentContext(widget.getValue('collabspaces'));
+                                            }
+                                            widget.addPreference(contextPreference);
+                                            myWidget.onRefresh();
+                                            Mask.unmask(widget.body);                                                    
+                                        },
+                                        onFailure:function(data){
+                                            logger.warn('SMAJSCMMAuthoringUtils.getListSecurityContext onFailure', data);
+                                        }
+                                    });
+                                },
+                                onFailure: myWidget.onWidgetFailure
+                            });
+                        },
+                        onFailure: myWidget.onWidgetFailure
+                    });
+                });
+            },
+            
+            onWidgetFailure: function () {
+                var div = new UWACore.createElement('div', {
+                    style: 'text-align: center;',
+                    html: i18nSMAProcWebAdminWidgetNLS['Unauthorized.Access']
+                });
+                div.inject(widget.body);
+                Mask.unmask(widget.body);
+            },
+
+            onRefresh: function () {
+                SMAJSCMMAuthoringUtils.fetchCsrfToken().then(function(csrfResponse) {
+                    widget.body.empty();
+                    var connectorView = new smaAdminWidgetConnector(csrfResponse.body.csrf.CSRFToken, myWidget.Context);
+                    connectorView.initConnector();
+                    connectorView.LHSDockingElement.inject(widget.body);
+                }.bind(this))
+            },
+
+            endEdit: function() {
+                 var context = widget.getValue('collabspaces');
+                 var isPrefChanged = false;
+                 if(myWidget.Context !== context) {
+                    isPrefChanged = true;
+                    SMAJSCMMAuthoringUtils.setCurrentContext(context);
+                    myWidget.Context = context;
+                 }
+                 var tenant = widget.getValue('x3dPlatformId');
+                 if(myWidget.tenant !== tenant) {
+                    isPrefChanged = true;
+                    SMAJSCMMConfig.setCurrentTenant(context);
+                    myWidget.tenant = tenant;
+                 }
+                 if(isPrefChanged) {
+                    myWidget.onRefresh();
+                 }
+            }
+        };
+
+        widget.addEvent('onLoad', myWidget.onLoad);
+        widget.addEvent('onRefresh', myWidget.onRefresh);
+        widget.addEvent('endEdit', myWidget.endEdit);
+    });
+
+    </script>
+</head>
+<body></body>
+</html>

@@ -1,0 +1,62 @@
+.circleMenuView
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  left: 15%;
+  top: -15%;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  transform: scale(0);
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
+.infraView > .floatableCollectionView .circleMenuView,
+.pageView > .pageFloatableCollectionView .circleMenuView
+{
+    transition: none;
+}
+.infraView.focused > .floatableCollectionView .circleMenuView,
+.pageView.focused > .pageFloatableCollectionView .circleMenuView
+{
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
+.circleMenuView.active
+{
+  opacity: 1;
+  z-index: 5;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+}
+.circleMenuView.circleMenuHidden
+{
+    display: none;
+}
+.circleMenuView .buttonView
+{
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  width: 30%;
+  height: 30%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #627A8F;
+  pointer-events: all;
+}
+.circleMenuView .buttonView .buttonIconImage
+{
+  height: 60%;
+}
+.circleMenuView .buttonView.disabled
+{
+    background-color: #b3bdc6;
+    pointer-events: none;
+}
+.editStickyNote
+{
+  filter: grayscale(100%);
+  pointer-events: none;
+}

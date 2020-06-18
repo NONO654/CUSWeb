@@ -1,0 +1,21 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../ad-sidepanel/ad-sidepanel.html">
+<link rel="import" href="../../SMAProcSPUI/sp-job-log/sp-job-log.html">
+
+<dom-module id="ad-job-log-sidepanel">
+ 	 <template>
+    	<style include="sp-uikit-styles"></style>
+    	
+		<ad-sidepanel id="sidePanel" class="hidden" panel-orientation="{{panelOrientation}}" panel-title="{{panelTitle}}" on-refresh="onRefresh"
+					  show-accept="{{showAccept}}" show-cancel="{{showCancel}}" show-refresh="{{showRefresh}}" 
+					  accept-tooltip="{{acceptTooltip}}" cancel-tooltip="{{cancelTooltip}}" refresh-tooltip="{{refreshTooltip}}">
+			<div id="jobLogWrapper" style="width:670px"></div>
+ 		        <sp-job-log id="spJobLog" job-object-id="{{jobId}}" job-execution-status="{{jobState}}" cos-server-id="{{jobEedServer}}" 
+		        			eedjob-id="{{jobEedId}}">
+		        </sp-job-log>
+		</ad-sidepanel>
+	</template>
+  	<script src="ad-job-log-sidepanel.js"></script>
+</dom-module>

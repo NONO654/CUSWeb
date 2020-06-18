@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="urn:com:dassault_systemes:widl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd" xmlns:tns="http://cbp.enovia.ws/basic" xmlns:err="http://www.3ds.com/wserror" xmlns:q1="http://cbp.enovia.ws/CBPXML">
+	<entities targetNamespace="http://cbp.enovia.ws/basic">
+		<schemaImports>
+			<schemaImport location="wserrors.xsd"/>
+			<schemaImport location="CBPXML.xsd"/>
+		</schemaImports>
+		<interfaces>
+			<interface name="IPLMRelationshipService" scope="public">
+				<documentation>
+					Interface for Relationship operations.
+				</documentation>
+				
+				<method name="getRelAttributes">
+					<documentation>
+						Get the attributes of a relationship connection.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="connectionId" type="xs:string" direction="in">
+						<documentation>The id of the relationship connection.</documentation>
+					</param>
+					<param name="attributeNames" type="q1:ListOfString" direction="out">
+						<documentation>The connection's attribute names.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getRelAttributeValues">
+					<documentation>
+						Get the attribute values of a relationship connection.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="connectionId" type="xs:string" direction="in">
+						<documentation>The id of the relationship connection.</documentation>
+					</param>
+					<param name="attributes" type="q1:ListOfNameValue" direction="out">
+						<documentation>The connection's attribute values.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="setRelAttributeValues">
+					<documentation>
+						Set the attribute values of a relationship connection.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="connectionId" type="xs:string" direction="in">
+						<documentation>The id of the relationship connection.</documentation>
+					</param>
+					<param name="attributes" type="q1:ListOfNameValue" direction="in">
+						<documentation>The connection's attribute values.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+			</interface>
+		</interfaces>
+		<implementations>
+			<implementation name="PLMRelationshipService" serviceid="relationshipService" implements="tns:IPLMRelationshipService">
+				<documentation>
+					A service to provide Relationship operations.
+				</documentation>
+			</implementation>
+		</implementations>
+	</entities>
+</description>

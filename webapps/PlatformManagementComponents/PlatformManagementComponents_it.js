@@ -1,0 +1,1 @@
+define("DS/PlatformManagementComponents/PlatformManagementComponents_it",{});define("DS/PlatformManagementComponents/assets/nls/pmc",{selectplatform:"Seleziona la piattaforma",useoption:"Utilizzare questa opzione per concedere processi senza concedere l'accesso a una piattaforma"});

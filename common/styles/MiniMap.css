@@ -1,0 +1,257 @@
+
+html {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /*background-color: #DDDDDD;
+    width: 100%;
+    height: 100%;*/
+    margin: 0;
+    padding: 0;
+}
+/*-- Messing up text selections in SB
+
+::selection {
+    background-color: transparent;
+}
+::-moz-selection {
+    background-color: transparent;
+}--*/
+
+.hidden {
+    display: none;
+}
+
+.viewport {
+    width: 100%; 
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.node {
+    position: absolute;
+}
+
+g.isolated-root g.body,
+div.isolated-root div.body,
+g.isolated-root path.edge {
+/*    display: none;*/
+    visibility: hidden;
+}
+
+g.isolated-root g.isolated g.body,
+div.isolated-root div.isolated div.body,
+g.isolated-root g.isolated path.edge {
+/*    display: block;*/
+    visibility: visible;
+}
+
+g.isolated-root g.isolated g.body.hidden,
+div.isolated-root div.isolated div.body.hidden,
+g.isolated-root g.isolated path.edge.hidden {
+    display: none;
+}
+
+/*** Connection styling ***/
+path.edge {
+    stroke: rgb(95,95,95);
+    stroke-width: 2.0px;
+    fill: none;
+}
+
+/*** Sample HTML node styling ***/
+.node > .body {
+    /*border: 1px solid #3d3d3d;
+    border-radius: 3px;
+    padding: 0 0 6px 0;
+    background: #3d3d3d;*/
+    white-space: nowrap;
+}
+.node.selected > .body {
+    /*background: #42a2da;
+    border: 1px solid #42a2da;*/
+}
+
+/*** Sample SVG node styling ***/
+.body > rect.bg {
+    fill: #FFFFFF;
+    stroke: #000000;
+    stroke-width: 2;
+}
+.node.selected > .body > rect.bg {
+    fill: lightblue;
+}
+
+.body > text.text {
+    text-anchor: middle;
+}
+
+
+/*** Context Menu ***/
+.context-menu {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    background: white;
+}
+
+.context-menu-item {
+    padding: 1px;    
+}
+
+.context-menu-item > button {
+    width: 100%;
+    border: none;
+    text-align: left;
+    background: none;
+}
+.context-menu-item > button > .content {
+    padding: 2px 5px 0 28px;
+    white-space: nowrap;
+}
+
+.context-menu-item > button > .icon {
+    position: absolute;
+    top: -1px;
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+}
+
+.context-menu-item.separator {
+    border-top: 1px solid #9d9e9f;
+    border-bottom: 1px solid #ffffff;
+    padding: 0;
+}
+
+/*** Mini Map***/
+
+
+
+
+/*** test controls holder ***/
+.controls {
+    display: inline-block;
+    position: absolute;
+    top: 25px;
+}
+
+
+/*** SVG & Hybrid search result edge styling***/
+.search-active path.edge {
+    opacity: .55;
+}
+
+.search-active path.edge.search-path
+{
+    opacity: 1;
+}
+
+/*** SVG search result node styling***/
+.search-active g.node > g.body {
+    opacity: .55;
+}
+
+.search-active g.node.search-result > g.body,
+.search-active g.node.search-path > g.body
+{
+    opacity: 1;
+}
+
+g.node.search-result > g.body > rect.bg {
+    fill: #90EE90;
+}
+
+/*** Hybrid search result node styling ***/
+.search-active div.node > div.body
+{
+    opacity: .55;
+}
+
+.search-active div.node.search-result > div.body,
+.search-active div.node.search-path > div.body,
+.search-active path.edge.search-path
+{
+    opacity: 1;
+}
+
+div.node.search-result > div.body {
+    background: #90EE90;
+}
+
+
+
+/*---------------------------------------------------------------------------------------------------------------------------
+ * the following styles have been moved to emxUIDefault.css
+ * --------------------------------------------------------------------------------------------------------------------------
+.slider {
+}
+
+.slider > .thumb {
+    position: absolute;
+    top: 0;
+    left:8px;
+    width: 22px;
+    height: 10px;
+    cursor: pointer;
+    background: url("../images/emxUiTreeViewZoomControlHandle.png") no-repeat scroll 0 -5px transparent;
+    z-index: 1;
+}
+
+.slider > .track {
+    position: absolute;
+    top: 10px;
+    bottom: 8px;
+    left: 16px;
+    width: 2px;
+    background: #c9c9c9;
+    border-left: solid 1px #fff;
+    z-index: 1;
+}
+
+.slider > .increment {
+    position: absolute;
+    top: 5px;
+    left: 9px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.slider > .decrement {
+    position: absolute;
+    bottom: 3px;
+    left: 10px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    z-index: 1;
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

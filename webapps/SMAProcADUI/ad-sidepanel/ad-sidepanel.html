@@ -1,0 +1,36 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="ad-sidepanel">
+  <link rel="import" type="css" href="ad-sidepanel.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+    	
+		<div id="expandedView" class="sidebar-main-expanded">
+			<div class="sidebar-header chrome-pull-fix" draggable="false">
+				<h4 class="sidebar-title pull-left">{{panelTitle}}</h4>
+				<div class="pull-right">
+	                <button id="collapse" class="btn btn-xs" title="Collapse this window" on-click="onCollapse">
+	                	<span id="leftCollapseText" class$="{{_computeLeftCollapseTextClass(panelOrientation)}}"></span>
+	                	<span id="rightCollapseText" class$="{{_computeRightCollapseTextClass(panelOrientation)}}"></span>
+	                </button>
+	                <button id="refresh" on-click="onRefresh" title="{{_computeRefreshBtnTitle(acceptTooltip)}}" class$="{{_computeRefreshBtnClass(showRefresh)}}"><span class="fonticon fonticon-cw"></span></button>
+	                <button id="accept" on-click="onAccept" title="{{_computeAcceptBtnTitle(acceptTooltip)}}" class$="{{_computeAcceptBtnClass(showAccept)}}"><span class="fonticon fonticon-check"></span></button>
+	                <button id="cancel" on-click="onCancel" title="{{_computeCancelBtnTitle(cancelTooltip)}}" class$="{{_computeCancelBtnClass(showCancel)}}"><span class="fonticon fonticon-cancel"></span></button>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<content></content>
+		</div>
+		<div id="collapsedView" class="sidebar-main-collapsed hidden">
+            <button id="expand" class="btn btn-xs" title="Expand this window" on-click="onExpand">
+               	<span id="leftExpandText" class$="{{_computeLeftExpandTextClass(panelOrientation)}}"></span>
+            	<span id="rightExpandText" class$="{{_computeRightExpandTextClass(panelOrientation)}}"></span>
+            </button>
+		</div>
+ 	</template>
+  <script src="ad-sidepanel.js"></script>
+</dom-module>
+
+

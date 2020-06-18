@@ -1,0 +1,115 @@
+// ===========================================================
+// PACKAGE   : PLMAsd_Fasteners
+// ===========================================================
+// Generated : Thu May  4 11:29:14 2006
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 2 entities :
+// - PLMAsd_FastenerInstance
+// - PLMAsd_FastenerType
+
+// ===========================================================
+ENTITY PLMAsd_FastenerInstance
+// ===========================================================
+// --- attributes: 4
+ATTR V_FastenersCount;Y;N;$
+ATTR V_ZonesCount;Y;N;$
+ATTR V_ForecastCount;Y;N;$
+ATTR V_FastenerNameList;Y;N;$
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_FastenersCount;Y
+FATTR V_ZonesCount;Y
+FATTR V_ForecastCount;Y
+FATTR V_FastenerNameList;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_FastenersCount;Y
+FATTR V_ZonesCount;Y
+FATTR V_ForecastCount;Y
+FATTR V_FastenerNameList;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_FastenersCount;N
+FATTR V_ZonesCount;N
+FATTR V_ForecastCount;N
+FATTR V_FastenerNameList;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_FastenersCount;N
+FATTR V_ZonesCount;N
+FATTR V_ForecastCount;Y
+FATTR V_FastenerNameList;N
+
+// ===========================================================
+ENTITY PLMAsd_FastenerType
+// ===========================================================
+// --- attributes: 1
+ATTR V_Description;Y;N;$
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Description;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Description;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Description;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Description;N
+// ===========================================================
+// End of PLMAsd_Fasteners package's DEFAULT mask file
+// ===========================================================

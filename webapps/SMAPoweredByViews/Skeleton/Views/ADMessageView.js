@@ -1,0 +1,1 @@
+define("DS/SMAPoweredByViews/Skeleton/Views/ADMessageView",["UWA/Core","DS/SMAPoweredByViews/Skeleton/Views/ADGenericFileMonView"],function(c,d){var a="logs-view";var b=d.extend({name:a,tagName:"div",domEvents:{},init:function(e){["container","template","tagName","domEvents"].forEach(function(f){delete e[f]});e||(e={});e.fileType=".msg";this._parent(e)}});return b});

@@ -1,0 +1,1 @@
+define("DS/ENOXCADCATIAV5UI/ENOXCADCATIAV5UI_ko",{});define("DS/ENOXCADCATIAV5UI/assets/nls/ENOXCADFileNameValidationNls",{Size_error:"파일 이름에 포함 가능한 최대 문자 수는 {maxSupportedLength}자입니다.",Unsupported_char:"파일 이름에 잘못된 문자 {char}이(가) 포함됨",Space_Leading_Trailing:"예상치 않은 선행 및 후행 공백이 있음",Space_Leading:"예상치 않은 선행 공백이 있음",Space_Trailing:"예상치 않은 후행 공백이 있음"});

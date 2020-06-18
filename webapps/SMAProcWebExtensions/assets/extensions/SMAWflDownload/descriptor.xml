@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.Download" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflDownload" nlsID="dispname">Download</DisplayName>
+	<Description nlsFile="SMAWflDownload" nlsID="desc">Download Data</Description>
+	<LongDescription nlsFile="SMAWflDownload" nlsID="longdesc">Download Data</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>700</Value>
+			<Value>500</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="I_SMAWflDownload16.png" targetFilename="small/I_SMAWflDownload16.png" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflDownload.png" targetFilename="large/I_SMAWflDownload.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflDownload.CATNls" targetFilename="SMAWflDownload.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflDownload_ja.CATNls" targetFilename="SMAWflDownload_ja.CATNls" locale="Japanese" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflDownload.dll" targetFilename="win_b64/SMAWflDownload.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflDownloadUI.sypstyle" targetFilename="SMAWflDownloadUI.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflDownloadEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflDownloadHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="ExtensionUpdater">
+			<Implementations>
+				<Implementation name="Updater" language="cpp" platform="win_b64">
+					<LateType>SMAWflDownloadUpdater_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+	<Properties>
+		<Property name="rules" type="string" valuetype="single">
+			<Value>
+				<![CDATA[<ExportRules lastId="0"/>]]>
+			</Value>
+		</Property>
+		<Property name="ProcessContent" type="boolean">
+			<Value>false</Value>
+		</Property>
+	</Properties>
+</wfext:Extension>

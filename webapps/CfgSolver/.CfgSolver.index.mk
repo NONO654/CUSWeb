@@ -1,0 +1,13 @@
+m|ENOXPortfolioFoundationsUX\CfgSolver.mweb
+b|j|c,m
+b|c|n,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|ENOXPortfolioFoundationsUX\CfgSolver.mweb\LocalGenerated\win_b64\CfgSolverDebug.css|1537389046|2006
+s|WebUiAssets\ProtectedInterfaces\_variables.uikit.scss|1513852502|5361
+s|ENOXPortfolioFoundationsUX\CfgSolver.mweb\src\CfgSolverDebug.scss|1537190020|672
+t|win_b64\webapps\CfgSolver\CfgSolverDebug.css|1568749490|477
+g|ENOXPortfolioFoundationsUX\CfgSolver.mweb\LocalGenerated\win_b64\CfgSolverDebug.css|1537389046|2006
+t|win_b64\webapps\CfgSolver\CfgSolver.js|1548794906|10418
+s|ENOXPortfolioFoundationsUX\CfgSolver.mweb\src\CfgSolverServices.js|1548765420|19947
+s|ENOXPortfolioFoundationsUX\CfgSolver.mweb\src\CfgSolverDebug.js|1537189828|14715

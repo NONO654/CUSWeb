@@ -1,0 +1,1 @@
+define("DS/SMAMpwControls/SMAMpwControls_zh",{});define("DS/SMAMpwControls/assets/nls/SMAMpwLegend",{frameSelectorPlaceHolder:"选择一个框架...",scaleFactor:"变形比例",playOnlyTooltip:"将动画锁定到当前选择",min:"最小值：",max:"最大值："});

@@ -1,0 +1,19 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<dom-module id="ra-table-top-row">
+	<link rel="import" type="css" href="ra-table-top-row.css"/>
+	<template>
+		<span id="groupToggle" class="fonticon"></span>
+		<template is="dom-if" if="{{detailsView}}">
+			<template is="dom-repeat" items="{{groupStack}}">
+				 <span>{{item.name}}</span><span class="fonticon fonticon-right-open"></span>
+			</template>
+	    </template>
+		<template is="dom-if" if="{{!detailsView}}">
+			<span class="ra-table-hierarchy-details">...</span>
+	    </template>
+	    <span>{{rowData.name}}</span>
+    </template>
+	<script type="text/javascript" src="ra-table-top-row.js"></script>
+</dom-module>

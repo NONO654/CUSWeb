@@ -1,0 +1,1 @@
+define("DS/LifecycleControls/LifecycleControls_de",{});define("DS/LifecycleControls/assets/nls/CommandDialog",{okButton:"OK",cancelButton:"Abbrechen"});define("DS/LifecycleControls/assets/nls/CustomizeColumns",{CustomizeColumns:"Spalten anpassen",newTarget:"Neues Ziel"});

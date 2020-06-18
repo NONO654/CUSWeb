@@ -1,0 +1,14 @@
+m|SMAMpwResultsWebUX\SMAMpwManagers.mweb
+b|j|c,m
+b|c|n,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAMpwManagers\SMAMpwManagers.js|1564791436|11576
+s|SMAMpwResultsWebUX\SMAMpwManagers.mweb\src\_copyright.js|1476171824|64
+s|SMAMpwResultsWebUX\SMAMpwManagers.mweb\src\SMAMpwMatOverrideManager.js|1510582437|9994
+s|SMAMpwResultsWebUX\SMAMpwManagers.mweb\src\SMAMpwResultProbingManager.js|1539880331|18702
+s|SMAMpwResultsWebUX\SMAMpwManagers.mweb\src\SMAMpwTextureMapProcessor.js|1563707980|9085
+t|win_b64\webapps\SMAMpwManagers\assets\textures\SMAMpwPassFail.jpg|1531550902|554
+s|SMAMpwResultsWebUX\SMAMpwManagers.mweb\src\assets\textures\SMAMpwPassFail.jpg|1473347471|554
+t|win_b64\webapps\SMAMpwManagers\SMAMpwResultProbing.css|1568749463|463
+s|SMAMpwResultsWebUX\SMAMpwManagers.mweb\src\SMAMpwResultProbing.css|1485166954|605

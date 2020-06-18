@@ -1,0 +1,129 @@
+// ===========================================================
+// PACKAGE   : RFLVPMSystemTypeExpositionDS
+// ===========================================================
+// Generated : Tue Nov  30 11:59:13 2006
+// Updated: Wed Jul 18 02:54:00 2011   Adding Organisation logic (Query, Read, Write)
+// -----------------------------------------------------------
+//For SMB this is the sub-class of attribute, they have to be always presented to user in that order
+//a) ident
+//b) description 
+//c) state of dev
+//d) ownership
+//
+//******** V_discipline is currently unpublished, When published it must expose VALUE ******* Will transform in real dictionary type with Unicorn
+//******** V_usage must not be published (soon internal - 3DPart R206 exception)
+//******** V_nature is published if really used, and in RO only
+//******** ATTR V_ApplicabilityDate;N;N;$ is unused in SMB deployment
+//******** ATTR reserved;N;N;$ is "useless" as long as SMB uses optimistic locking and do not lock explicitely info... & reservedby not NULL is equivalent
+//******** FATTR reservedby;N should not be provided in Write Mask (as long as it is not updated in session)/ Compass reflect latest info and MUST be prefered
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value
+//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 1 entity :
+// - RFLVPMSystemTypeExpositionInstanceDS
+
+// ===========================================================
+ENTITY RFLVPMSystemTypeExpositionInstanceDS
+// ===========================================================
+ATTR PLM_ExternalID;N;N;$
+ATTR originated;N;N;$
+ATTR reservedby;N;N;$
+ATTR modified;N;N;$
+ATTR V_Identifier;Y;N;$
+ATTR V_Direction;Y;Y;Out
+//d) ownership
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Identifier;Y
+FATTR V_Direction;Y
+FATTR PLM_ExternalID;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_Identifier;Y
+FATTR V_Direction;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_Identifier;Y
+FATTR V_Direction;Y
+FATTR reservedby;Y
+FATTR modified;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_Identifier;N
+FATTR V_Direction;N
+FATTR originated;N
+FATTR reservedby;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_Identifier;N
+FATTR V_Direction;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_Identifier;N
+FATTR V_Direction;Y
+FATTR originated;N
+//FATTR reservedby;N
+FATTR modified;N
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// - unordered
+// ===========================================================
+// End of RFLVPMSystemTypeExpositionDS package's DEFAULT mask file
+// ===========================================================
+

@@ -1,0 +1,13 @@
+m|CATCreaDesWebUIServices\CATCreaDesWebUIServices.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18338
+r|G:\R421\BSF\.
+t|win_b64\webapps\CATCreaDesWebUIServices\CATCreaDesWebUIServices.js|1543959095|40636
+s|CATCreaDesWebUIServices\CATCreaDesWebUIServices.mweb\src\CATCrDGrid.js|1464793722|12946
+s|CATCreaDesWebUIServices\CATCreaDesWebUIServices.mweb\src\CATCrDStrokeInterpreter.js|1450176464|12749
+s|CATCreaDesWebUIServices\CATCreaDesWebUIServices.mweb\src\CATCrDShaders.js|1543831668|27458
+s|CATCreaDesWebUIServices\CATCreaDesWebUIServices.mweb\src\CATCrDSettings.js|1450176439|5975
+s|CATCreaDesWebUIServices\CATCreaDesWebUIServices.mweb\src\CATCrDWebMathServices.js|1455705100|6423
+s|CATCreaDesWebUIServices\CATCreaDesWebUIServices.mweb\src\CATCrDWebUIServices.js|1543824255|30975
+s|CATCreaDesWebUIServices\CATCreaDesWebUIServices.mweb\src\CATCrDCircle.js|1450176413|17000

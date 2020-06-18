@@ -1,0 +1,10 @@
+m|DELMGAApp\DELMGAApplicationServices.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.7.19198
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELMGAApplicationServices\DELMGAApplicationServices.js|1563393709|7746
+s|DELMGAApp\DELMGAApplicationServices.mweb\src\LayoutConfig.js|1531755047|472
+s|DELMGAApp\DELMGAApplicationServices.mweb\src\LayoutService.js|1545893179|8493
+s|DELMGAApp\DELMGAApplicationServices.mweb\src\Commands\CommandsService.js|1562932330|11485
+s|DELMGAApp\DELMGAApplicationServices.mweb\src\Services.js|1530192774|509

@@ -1,0 +1,99 @@
+<!--------------------------------------------------------------------
+[xs-player HTML Document]
+
+Project:		xs
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:46:05 GMT
+Assigned to:	Aravind Mohan
+Primary use:	TODO: Write where this component is being used
+Description:    TODO: Description about the component
+--------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-queryparams/sp-queryparams.html">
+<link rel="import" href="../../SMAProcSP/sp-webservice/sp-webservice.html">
+
+<link rel="import" href="../../SMAProcSPUI/sp-alert-message/sp-alert-message.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel-message/sp-updatepanel-message.html">
+
+<link rel="import" href="../xs-canvas/xs-canvas.html">
+
+<dom-module id="xs-player">
+  <!-- <link rel="import" type="css" href="xs-player.css"> -->
+  <template>
+        <style>
+        :host {
+          flex-grow: 1;
+          display: -ms-flexbox !important;
+          display: -webkit-flex !important;
+          flex-direction: column !important;
+          display: flex !important;
+          }
+
+        @Supports (-moz-transform: translate(0,0)){
+            :host{
+              height: 1px;
+            }
+          }
+
+        @media all and (-ms-high-contrast: none), (ms-high-contrast: active) {
+          :host{
+            height: 1px;
+          }
+        }
+
+        .upnl-msg {
+          position: fixed;
+          left: 20%;
+          padding: 10px; }
+
+        .upnl-msg.success-msg {
+          color: #6ebd45;
+          visibility: hidden; }
+
+        .upnl-msg.success-msg.is-visible {
+          visibility: visible; }
+
+        .plr-upnl {
+          flex-grow: 1;
+          display: -ms-flexbox !important;
+          display: -webkit-flex !important;
+          flex-direction: column !important;
+          display: flex !important;
+          height: 100%;
+          flex-direction: column;}
+
+        .canvas {
+          display: flex;
+          flex-direction: column;}
+        </style>
+
+
+        <!-- Get the relevant view -->
+        <sp-mcsservice getasap id="templateView" on-dataready="onViewReady" uri="{{_computeUri(simid)}}">
+        </sp-mcsservice>
+
+        <!-- Get available widgets. This widget meta information is used for rendering -->
+        <sp-webservice id="meta" on-dataready="onMetaReady"  handleprefix="false" getasap uri="{{_computeUri2()}}">
+        </sp-webservice>
+
+
+        <sp-updatepanel class="plr-upnl" updateswhen="is-getting" state="[[state]]">
+            <!-- State messages -->
+            <sp-updatepanel-message class="upnl-msg" from="is-getting" to="is-failing"
+                                    message="Unable to get data" state="[[state]]">
+            </sp-updatepanel-message>
+            <!-- <sp-updatepanel-message class="upnl-msg update-msg" to="is-updating"
+                                    message="Saving changes.." state="[[state]]">
+            </sp-updatepanel-message>             -->
+
+            <!-- Actual UI -->
+            <xs-canvas id="canvas" on-xs-reload="reload" class="canvas" uid="[[simid]]" state="{{state}}"
+                       meta="{{meta}}" mode={{mode}}>
+            </xs-canvas>
+        </sp-updatepanel>
+    </template>
+  <script type="text/javascript" src="xs-player.js"></script>
+</dom-module>

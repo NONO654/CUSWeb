@@ -1,0 +1,44 @@
+/*
+ *	Logical Connector Customization
+ */
+
+// PACKAGE <ConnectorQualicationPrefix>;
+PACKAGE PLM;
+/*
+ *	Compatibility method
+ */
+
+METHOD RFLVPMLogicalReference.name() : {
+	PLM_ExternalID;
+};
+
+METHOD rel_RFLVPMLogicalInstance.name() : {
+	PLM_ExternalID;
+};
+
+METHOD rel_RFLVPMLogicalInstance.SubComponents() -doc :
+	GetReference().SubComponents()
+CATEGORY I18N("Category.Navigation")
+LABEL I18N("Method.Navigation.Sub_Components")
+HELPTEXT I18N("Method.Sub_Components_Description");
+
+// ** Reference Extension methods
+METHOD RFLVPMLogicalReference.getPNGDiagrams() -doc :
+	LogicalRepresentations.`2DPicture`
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.Get2DDiagram")
+HELPTEXT I18N("Method.Tooltip.Get2DDiagram");
+
+METHOD RFLVPMLogicalReference.getAllSubComponents() -doc :
+	SubComponents.*(SubComponents)
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.GetAllSubComponents")
+HELPTEXT I18N("Method.Tooltip.GetAllSubComponents");
+
+//IR 194655
+METHOD RFLVPMLogicalReference.getAllPorts() -doc :
+	SubComponents.AllPorts $+ SubComponents.*(SubComponents).AllPorts
+CATEGORY I18N("Category.Extensions")
+LABEL I18N("Method.Extension.GetAllPorts")
+HELPTEXT I18N("Method.Tooltip.GetAllPorts");
+

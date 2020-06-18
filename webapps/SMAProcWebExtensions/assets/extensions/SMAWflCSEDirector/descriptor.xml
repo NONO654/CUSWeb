@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.CSEDirector" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflCSEDirector" nlsID="dispname">CSEDirector</DisplayName>
+	<Description nlsFile="SMAWflCSEDirector" nlsID="desc">Executes the Co-Simulation Engine Director Process</Description>
+	<LongDescription nlsFile="SMAWflCSEDirector" nlsID="longdesc">Executes the Co-Simulation Engine Director Process.</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.component.CSEDirector</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>1000</Value>
+			<Value>700</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAWflCSEDirector16.gif" targetFilename="SMAWflCSEDirector16.gif" />
+		<!--<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflCSEDirector32.gif" targetFilename="SMAWflCSEDirector32.gif" />-->
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflCSEDirector32.png" targetFilename="SMAWflCSEDirector32.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflCSEDirector.CATNls" targetFilename="SMAWflCSEDirector.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflCSEDirector_Japanese.CATNls" targetFilename="SMAWflCSEDirector_ja.CATNls" locale="Japanese" />
+		<Stream name="Properties" streamKind="properties" sourceFilename="SMAWflCSEDirector_CATNls.properties" targetFilename="SMAWflCSEDirector.properties"/>
+		<Stream name="Properties_Japanese" streamKind="properties" sourceFilename="SMAWflCSEDirector_JapaneseCATNls.properties" targetFilename="SMAWflCSEDirector_ja.properties" locale="Japanese" />
+		<Stream name="CodeJar" streamKind="jar" sharedLoader="false" sourceFilename="SMAWflCSEDirector.jar" targetFilename="SMAWflCSEDirector.jar" />
+		<!--For cppEditor-->
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflCSEDirector.dll" targetFilename="win_b64/SMAWflCSEDirector.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflCSEDirectorUI.sypstyle" targetFilename="SMAWflCSEDirectorUI.sypstyle"/>
+		<Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+		<Stream name="Web_Editor" streamKind="amd" sharedLoader="false" platform="win_b64" sourceFilename="DS/SMAProcWebCSEDirector/CmpCsedirector" targetFilename=""/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflCSEDirectorEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation language="java">
+					<Class>com.engineous.component.CSEDirector.CSEDirectorEditor</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.component.CSEDirector.CSEDirectorHandler</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflCSEDirectorHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="ConfigureAdapter">
+			<Implementations>
+				<Implementation name="ConfigureAdapter" language="cpp" platform="win_b64">
+					<LateType>SMAWflCSEDirectorConfig_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-csedirector</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+	<Properties>
+		<!--  CSECfg properties -->
+		<Property name="InputSourceFile" type="file" valuetype="single" mode="input">
+			<Value/>
+		</Property>
+		<Property name="CSECfgFileDisplayName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<!--<Property name="director options" type="aggregate" valuetype="single">
+      <Value/>
+    </Property>-->
+		<Property name="WebMonitoring" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+		<Property name="CloudParams" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="ExperimentParams" type="aggregate" valuetype="single">
+			<Property name="Algorithm" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="ExperimentDuration" type="real" valuetype="single">
+				<Value>0.0</Value>
+			</Property>
+			<Property name="NegotiationMethod" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="ConstantDT" type="real" valuetype="single">
+				<Value>0.0</Value>
+			</Property>
+			<Property name="LeadActor" type="string" valuetype="single">
+				<Value/>
+			</Property>
+			<Property name="MasterActor" type="string" valuetype="single">
+				<Value/>
+			</Property>
+		</Property>
+	</Properties>
+
+</wfext:Extension>

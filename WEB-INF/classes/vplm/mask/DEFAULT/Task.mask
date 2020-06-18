@@ -1,0 +1,1229 @@
+// ===========================================================
+// PACKAGE   : ProjectSpace (TST)
+// ===========================================================
+// Created  : 2009 December 7     AB6
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+// --- entities: 7
+// ===========================================================
+ENTITY Project Space
+// ===========================================================
+ATTR originated;N;N
+ATTR Originator;N;N
+ATTR owner;N;N
+ATTR name;Y;N
+ATTR description;N;N
+ATTR current;N;N
+ATTR Title;N;N
+ATTR Constraint Date;N;N
+ATTR Notes;N;N
+ATTR Percent Complete;N;N
+ATTR Schedule Duration Units;N;N
+ATTR Task Actual Duration;N;N
+ATTR Task Actual Finish Date;N;N
+ATTR Task Actual Start Date;N;N
+ATTR Task Estimated Duration;N;N
+ATTR Task Estimated Finish Date;N;N
+ATTR Task Estimated Start Date;N;N
+ATTR Approver Selection;N;N
+ATTR Baseline Current End Date;N;N
+ATTR Baseline Current Start Date;N;N
+ATTR Baseline Initial End Date;N;N
+ATTR Baseline Initial Start Date;N;N
+ATTR Default Constraint Type;N;N
+ATTR Effort Notifications;N;N
+ATTR Effort Submission;N;N
+ATTR Escalation Date;N;N
+ATTR Estimated Duration Keyword Values;N;N
+ATTR File Store Symbolic Name;N;N
+ATTR Previous Project State;N;N
+ATTR Project Visibility;N;N
+ATTR Recurrence Interval;N;N
+ATTR Resource Plan Preference;N;N
+ATTR Schedule Based On;N;N
+ATTR Schedule From;N;N
+ATTR Send Reminder;N;N
+ATTR Task Approval;N;N
+ATTR Task Assignment Reminder Duration;N;N
+ATTR Task Assignment Reminder Recurrence Interval;N;N
+ATTR reserved;N;N
+ATTR reservedby;N;N
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR current;N
+FATTR Constraint Date;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Approver Selection;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Default Constraint Type;N
+FATTR Effort Notifications;N
+FATTR Effort Submission;N
+FATTR Escalation Date;N
+FATTR Estimated Duration Keyword Values;N
+FATTR File Store Symbolic Name;N
+FATTR Previous Project State;N
+FATTR Project Visibility;N
+FATTR Recurrence Interval;N
+FATTR Resource Plan Preference;N
+FATTR Schedule Based On;N
+FATTR Schedule From;N
+FATTR Send Reminder;N
+FATTR Task Approval;N
+FATTR Task Assignment Reminder Duration;N
+FATTR Task Assignment Reminder Recurrence Interval;N
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR current;N
+FATTR Constraint Date;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Approver Selection;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Default Constraint Type;N
+FATTR Effort Notifications;N
+FATTR Effort Submission;N
+FATTR Escalation Date;N
+FATTR Estimated Duration Keyword Values;N
+FATTR File Store Symbolic Name;N
+FATTR Previous Project State;N
+FATTR Project Visibility;N
+FATTR Recurrence Interval;N
+FATTR Resource Plan Preference;N
+FATTR Schedule Based On;N
+FATTR Schedule From;N
+FATTR Send Reminder;N
+FATTR Task Approval;N
+FATTR Task Assignment Reminder Duration;N
+FATTR Task Assignment Reminder Recurrence Interval;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR current;N
+FATTR Constraint Date;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Approver Selection;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Default Constraint Type;N
+FATTR Effort Notifications;N
+FATTR Effort Submission;N
+FATTR Escalation Date;N
+FATTR Estimated Duration Keyword Values;N
+FATTR File Store Symbolic Name;N
+FATTR Previous Project State;N
+FATTR Project Visibility;N
+FATTR Recurrence Interval;N
+FATTR Resource Plan Preference;N
+FATTR Schedule Based On;N
+FATTR Schedule From;N
+FATTR Send Reminder;N
+FATTR Task Approval;N
+FATTR Task Assignment Reminder Duration;N
+FATTR Task Assignment Reminder Recurrence Interval;N
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR current;N
+FATTR Constraint Date;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Approver Selection;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Default Constraint Type;N
+FATTR Effort Notifications;N
+FATTR Effort Submission;N
+FATTR Escalation Date;N
+FATTR Estimated Duration Keyword Values;N
+FATTR File Store Symbolic Name;N
+FATTR Previous Project State;N
+FATTR Project Visibility;N
+FATTR Recurrence Interval;N
+FATTR Resource Plan Preference;N
+FATTR Schedule Based On;N
+FATTR Schedule From;N
+FATTR Send Reminder;N
+FATTR Task Approval;N
+FATTR Task Assignment Reminder Duration;N
+FATTR Task Assignment Reminder Recurrence Interval;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR name;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR name;Y
+FATTR owner;N
+FATTR description;Y
+FATTR current;N
+FATTR Project Visibility;Y
+FATTR Originator;N
+FATTR originated;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR Percent Complete;N
+FATTR Project Visibility;N
+FATTR Schedule From;Y
+FATTR Task Estimated Start Date;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Actual Start Date;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Duration;N
+FATTR Default Constraint Type;N
+// ===========================================================
+ENTITY Workspace
+// ===========================================================
+ATTR originated;N;N
+ATTR Originator;N;N
+ATTR owner;N;N
+ATTR name;Y;N
+ATTR description;Y;N
+ATTR Title;N;N
+ATTR current;N;N
+ATTR Constraint Date;N;N
+ATTR Notes;N;N
+ATTR Percent Complete;N;N
+ATTR Schedule Duration Units;N;N
+ATTR Task Actual Duration;N;N
+ATTR Task Actual Finish Date;N;N
+ATTR Task Actual Start Date;N;N
+ATTR Task Estimated Duration;N;N
+ATTR Task Estimated Finish Date;N;N
+ATTR Task Estimated Start Date;N;N
+ATTR Customer;N;N
+ATTR Primary Key;N;N
+ATTR Project Function;N;N
+ATTR Project Name;N;N
+ATTR Project Number;N;N
+ATTR Project Type;N;N
+ATTR Project Visibility;N;N
+ATTR Scope;N;N
+ATTR reserved;N;N
+ATTR reservedby;N;N
+ATTR policy;Y;N
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR name;Y
+FATTR description;Y
+FATTR policy;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR current;N
+FATTR Constraint Date;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Customer;N
+FATTR Primary Key;N
+FATTR Project Function;N
+FATTR Project Name;N
+FATTR Project Number;N
+FATTR Project Type;N
+FATTR Project Visibility;N
+FATTR Scope;N
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR current;N
+FATTR Constraint Date;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Customer;N
+FATTR Primary Key;N
+FATTR Project Function;N
+FATTR Project Name;N
+FATTR Project Number;N
+FATTR Project Type;N
+FATTR Project Visibility;N
+FATTR Scope;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR current;N
+FATTR Constraint Date;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Customer;N
+FATTR Primary Key;N
+FATTR Project Function;N
+FATTR Project Name;N
+FATTR Project Number;N
+FATTR Project Type;N
+FATTR Project Visibility;N
+FATTR Scope;N
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR current;N
+FATTR Constraint Date;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Customer;N
+FATTR Primary Key;N
+FATTR Project Function;N
+FATTR Project Name;N
+FATTR Project Number;N
+FATTR Project Type;N
+FATTR Project Visibility;N
+FATTR Scope;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR name;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR name;Y
+FATTR owner;N
+FATTR current;N
+FATTR Originator;N
+FATTR originated;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR description;Y
+FATTR policy;N
+// ===========================================================
+ENTITY Task
+// ===========================================================
+ATTR originated;N;N
+ATTR Originator;N;N
+ATTR owner;N;N
+ATTR name;Y;N
+ATTR description;N;N
+ATTR Title;N;N
+ATTR current;N;N
+ATTR Baseline Current End Date;N;N
+ATTR Baseline Current Start Date;N;N
+ATTR Baseline Initial End Date;N;N
+ATTR Baseline Initial Start Date;N;N
+ATTR Constraint Date;N;N
+ATTR Critical Task;N;N
+ATTR Effort Notifications;N;N
+ATTR Estimated Duration Keyword;N;N
+ATTR Notes;N;N
+ATTR Percent Complete;N;N
+ATTR Project Role;N;N
+ATTR Schedule Duration Units;N;N
+ATTR Task Actual Duration;N;N
+ATTR Task Actual Finish Date;N;N
+ATTR Task Actual Start Date;N;N
+ATTR Task Approval;N;N
+ATTR Task Constraint Type;N;N
+ATTR Task Estimated Duration;N;N
+ATTR Task Estimated Finish Date;N;N
+ATTR Task Estimated Start Date;N;N
+ATTR Task Requirement;N;N
+ATTR Status;N;N
+ATTR Synopsis;N;N
+ATTR Task Estimated Duration Maximum;N;N
+ATTR Task Estimated Duration Minimum;N;N
+ATTR reserved;N;N
+ATTR reservedby;N;N
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+FATTR Status;N
+FATTR Synopsis;N
+FATTR Task Estimated Duration Maximum;N
+FATTR Task Estimated Duration Minimum;N
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+FATTR Status;N
+FATTR Synopsis;N
+FATTR Task Estimated Duration Maximum;N
+FATTR Task Estimated Duration Minimum;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+FATTR Status;N
+FATTR Synopsis;N
+FATTR Task Estimated Duration Maximum;N
+FATTR Task Estimated Duration Minimum;N
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+FATTR Status;N
+FATTR Synopsis;N
+FATTR Task Estimated Duration Maximum;N
+FATTR Task Estimated Duration Minimum;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR name;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR name;Y
+FATTR owner;N
+FATTR description;Y
+FATTR current;N
+FATTR originated;N
+FATTR Originator;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR Percent Complete;N
+FATTR Task Constraint Type;Y
+FATTR Constraint Date;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;Y
+FATTR Project Role;Y
+// ===========================================================
+ENTITY Milestone
+// ===========================================================
+ATTR originated;N;N
+ATTR Originator;N;N
+ATTR owner;N;N
+ATTR name;Y;N
+ATTR description;N;N
+ATTR Title;N;N
+ATTR current;N;N
+ATTR Baseline Current End Date;N;N
+ATTR Baseline Current Start Date;N;N
+ATTR Baseline Initial End Date;N;N
+ATTR Baseline Initial Start Date;N;N
+ATTR Constraint Date;N;N
+ATTR Critical Task;N;N
+ATTR Effort Notifications;N;N
+ATTR Estimated Duration Keyword;N;N
+ATTR Notes;N;N
+ATTR Percent Complete;N;N
+ATTR Project Role;N;N
+ATTR Schedule Duration Units;N;N
+ATTR Task Actual Duration;N;N
+ATTR Task Actual Finish Date;N;N
+ATTR Task Actual Start Date;N;N
+ATTR Task Approval;N;N
+ATTR Task Constraint Type;N;N
+ATTR Task Estimated Duration;N;N
+ATTR Task Estimated Finish Date;N;N
+ATTR Task Estimated Start Date;N;N
+ATTR Task Requirement;N;N
+ATTR reserved;N;N
+ATTR reservedby;N;N
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR name;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR name;Y
+FATTR owner;N
+FATTR description;Y
+FATTR current;N
+FATTR originated;N
+FATTR Originator;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR Percent Complete;N
+FATTR Task Constraint Type;Y
+FATTR Constraint Date;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;Y
+FATTR Project Role;Y
+// ===========================================================
+ENTITY Phase
+// ===========================================================
+ATTR originated;N;N
+ATTR Originator;N;N
+ATTR owner;N;N
+ATTR name;Y;N
+ATTR description;N;N
+ATTR Title;N;N
+ATTR current;N;N
+ATTR Baseline Current End Date;N;N
+ATTR Baseline Current Start Date;N;N
+ATTR Baseline Initial End Date;N;N
+ATTR Baseline Initial Start Date;N;N
+ATTR Constraint Date;N;N
+ATTR Critical Task;N;N
+ATTR Effort Notifications;N;N
+ATTR Estimated Duration Keyword;N;N
+ATTR Notes;N;N
+ATTR Percent Complete;N;N
+ATTR Project Role;N;N
+ATTR Schedule Duration Units;N;N
+ATTR Task Actual Duration;N;N
+ATTR Task Actual Finish Date;N;N
+ATTR Task Actual Start Date;N;N
+ATTR Task Approval;N;N
+ATTR Task Constraint Type;N;N
+ATTR Task Estimated Duration;N;N
+ATTR Task Estimated Finish Date;N;N
+ATTR Task Estimated Start Date;N;N
+ATTR Task Requirement;N;N
+ATTR reserved;N;N
+ATTR reservedby;N;N
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR name;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR name;Y
+FATTR owner;N
+FATTR description;Y
+FATTR current;N
+FATTR originated;N
+FATTR Originator;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR Percent Complete;N
+FATTR Task Constraint Type;Y
+FATTR Constraint Date;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;Y
+FATTR Project Role;Y
+// ===========================================================
+ENTITY Gate
+// ===========================================================
+ATTR originated;N;N
+ATTR Originator;N;N
+ATTR owner;N;N
+ATTR name;Y;N
+ATTR description;N;N
+ATTR Title;N;N
+ATTR current;N;N
+ATTR Baseline Current End Date;N;N
+ATTR Baseline Current Start Date;N;N
+ATTR Baseline Initial End Date;N;N
+ATTR Baseline Initial Start Date;N;N
+ATTR Constraint Date;N;N
+ATTR Critical Task;N;N
+ATTR Effort Notifications;N;N
+ATTR Estimated Duration Keyword;N;N
+ATTR Notes;N;N
+ATTR Percent Complete;N;N
+ATTR Project Role;N;N
+ATTR Schedule Duration Units;N;N
+ATTR Task Actual Duration;N;N
+ATTR Task Actual Finish Date;N;N
+ATTR Task Actual Start Date;N;N
+ATTR Task Approval;N;N
+ATTR Task Constraint Type;N;N
+ATTR Task Estimated Duration;N;N
+ATTR Task Estimated Finish Date;N;N
+ATTR Task Estimated Start Date;N;N
+ATTR Task Requirement;N;N
+ATTR reserved;N;N
+ATTR reservedby;N;N
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR owner;N
+FATTR Title;N
+FATTR Originator;N
+FATTR originated;N
+FATTR Baseline Current End Date;N
+FATTR Baseline Current Start Date;N
+FATTR Baseline Initial End Date;N
+FATTR Baseline Initial Start Date;N
+FATTR Constraint Date;N
+FATTR Critical Task;N
+FATTR Effort Notifications;N
+FATTR Estimated Duration Keyword;N
+FATTR Notes;N
+FATTR Percent Complete;N
+FATTR Project Role;N
+FATTR Schedule Duration Units;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Approval;N
+FATTR Task Constraint Type;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;N
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR name;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR name;Y
+FATTR owner;N
+FATTR description;Y
+FATTR current;N
+FATTR originated;N
+FATTR Originator;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR Percent Complete;N
+FATTR Task Constraint Type;Y
+FATTR Constraint Date;N
+FATTR Task Actual Duration;N
+FATTR Task Actual Finish Date;N
+FATTR Task Actual Start Date;N
+FATTR Task Estimated Duration;N
+FATTR Task Estimated Finish Date;N
+FATTR Task Estimated Start Date;N
+FATTR Task Requirement;Y
+FATTR Project Role;Y
+// --------------------------------------------------
+ENTITY Subtask
+// --------------------------------------------------
+ATTR owner;N;N
+// -----------------------------------------------------------
+FUNC tree
+// -----------------------------------------------------------
+FATTR owner;N
+// --------------------------------------------------
+ENTITY Dependency
+// --------------------------------------------------
+ATTR Dependency Type;N;Y;FS
+VALUE FF
+VALUE FS
+VALUE SF
+VALUE SS
+ATTR Lag Time;N;N
+ATTR Estimated Duration Keyword;N;N
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR Dependency Type;N
+FATTR Lag Time;N
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR Dependency Type;Y
+FATTR Lag Time;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR Dependency Type;N
+FATTR Lag Time;N
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR Dependency Type;N
+FATTR Lag Time;N

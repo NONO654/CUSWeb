@@ -1,0 +1,1096 @@
+/* -------------------------------------------------------------------------
+	Thumbnail Gallery Stylesheet for Windows/Mac Platforms
+	emxUIThumbnailGallery.css
+	
+	Release: 2015x
+	Version: 2.3
+
+	Copyright (c) 1992-2018 Dassault Systemes ENOVIA Corp. All Rights Reserved.
+	This program contains proprietary and trade secret information 
+	of Dassault Systemes ENOVIA Corp. Copyright notice is precautionary only
+	and does not evidence any actual or intended publication of such program
+   ------------------------------------------------------------------------- */
+
+body.thumbnail-gallery {background:#fff;}
+
+div#mx_divThumbnailBody {
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+}
+
+div#mx_divTreeGraphBody {
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+}
+
+body.dialog div#mx_divThumbnailBody {bottom:33px;}
+body.dialog div#mx_divTreeGraphBody {bottom:33px;}
+
+body.thumbnail-gallery div#pageContentDiv {
+	overflow-y:auto;
+	top:0;
+	left:0;
+	right:0;
+	bottom:24px;
+	padding:17px;
+	background:transparent;
+}
+
+div#pageContentDiv .content {
+	padding-bottom:6px;
+	clear:left;
+	display:inline-block;
+}
+
+.thumbnail-tile {
+	position:relative;
+	display:inline-block;
+	margin:0 8px 10px 0;
+	border:1px solid #5b5d5e;
+	background:#5b5d5e;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	cursor:pointer;
+}
+
+.thumbnail-tile:hover {
+	background-color:#8edeed;
+	border:1px solid #8edeed;
+
+}
+
+.thumbnail-tile.selected{
+	background:#42a2da;
+	border-color:#42a2da;
+}
+
+
+/* D&D drop YES for thumbnail view*/
+.thumbnail-tile.drop-yes {
+	border:2px solid #57b847;
+	background:#beddb1;
+}
+
+/* D&D drop NO for thumbnail view*/
+.thumbnail-tile.drop-no {
+	border:2px dotted #ea4f37;
+	background:#ffcbc2;
+}
+
+
+
+/* display with thumbnails*/
+#mx_divTreeGraphBody.orientation-top div.thumbnail-tile,
+#mx_divTreeGraphBody.orientation-right div.thumbnail-tile,
+#mx_divTreeGraphBody.orientation-bottom div.thumbnail-tile,
+#mx_divTreeGraphBody.orientation-left div.thumbnail-tile {
+	position:relative;
+	display:inline-block;
+	margin:0;
+	border:2px solid #5b5d5e;
+	background:#5b5d5e;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	cursor:pointer;
+}
+
+#mx_divTreeGraphBody.orientation-top div.thumbnail-tile.selected,
+#mx_divTreeGraphBody.orientation-right div.thumbnail-tile.selected,
+#mx_divTreeGraphBody.orientation-bottom div.thumbnail-tile.selected,
+#mx_divTreeGraphBody.orientation-left div.thumbnail-tile.selected {
+	background:#42a2da;
+	border-color:#42a2da;
+}
+
+/* dragged object display with thumbnails*/
+#mx_divTreeGraphBody.orientation-top div.thumbnail-tile.drag-yes,
+#mx_divTreeGraphBody.orientation-right div.thumbnail-tile.drag-yes,
+#mx_divTreeGraphBody.orientation-bottom div.thumbnail-tile.drag-yes,
+#mx_divTreeGraphBody.orientation-left div.thumbnail-tile.drag-yes {
+	opacity: .5;
+}
+
+
+/* D&D drop YES display with thumbnails*/
+#mx_divTreeGraphBody.orientation-top div.thumbnail-tile.drop-yes,
+#mx_divTreeGraphBody.orientation-right div.thumbnail-tile.drop-yes,
+#mx_divTreeGraphBody.orientation-bottom div.thumbnail-tile.drop-yes,
+#mx_divTreeGraphBody.orientation-left div.thumbnail-tile.drop-yes {
+	border:2px solid #57b847;
+	background:#beddb1;
+	outline: 0 none; /*clears outline set in emxUIDefault.css*/
+}
+
+/* D&D drop NO display with thumbnails*/
+#mx_divTreeGraphBody.orientation-top div.thumbnail-tile.drop-no,
+#mx_divTreeGraphBody.orientation-right div.thumbnail-tile.drop-no,
+#mx_divTreeGraphBody.orientation-bottom div.thumbnail-tile.drop-no,
+#mx_divTreeGraphBody.orientation-left div.thumbnail-tile.drop-no {
+	border:2px dotted #ea4f37;
+	background:#ffcbc2;
+	outline: 0 none; /*clears outline set in emxUIDefault.css*/
+}
+
+
+/* sets a different background color for the nodes when they are not displaying thumbnails*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile {
+	position:relative;
+	display:inline-block;
+	margin:0;
+	padding:0;
+	border:2px solid #5b5d5e;
+	background:#f0f0f0;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	cursor:pointer;
+}
+
+/* dragged object display with NO thumbnails*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile.drag-yes,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile.drag-yes,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile.drag-yes,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile.drag-yes {
+	opacity: .5;
+}
+
+
+/* D&D drop status YES display with NO thumbnails*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile.drop-yes,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile.drop-yes,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile.drop-yes,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile.drop-yes {
+	border:2px solid #57b847;
+	background:#beddb1;
+}
+
+/* D&D drop status N0 display with NO thumbnails*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile.drop-no,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile.drop-no,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile.drop-no,
+#mx_divTreeGraphBodyorientation-left.thumbnail-delete div.thumbnail-tile.drop-no  {
+	border:2px dotted #ea4f37;
+	background:#ffcbc2;
+}
+
+/* sets the selection highlight color for the nodes when they are not displaying thumbnails*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile.selected,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile.selected,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile.selected,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile.selected{
+	background:#42a2da;
+	border-color:#42a2da;
+}
+
+
+.thumbnail-tile .thumbnail-container {
+	position:relative;
+	display:block;
+	font-size:0;
+	margin:2px;
+	width:144px;
+	height:108px;
+	text-align:center;
+	overflow:hidden;
+	background:#f8f8f8;
+	white-space:nowrap;
+	/*z-index:1;*/
+}
+
+
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile div.thumbnail-container,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile div.thumbnail-container,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile div.thumbnail-container,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile div.thumbnail-container {
+	position:relative;
+	display:block;
+	font-size:0;
+	margin:3px;
+	padding: 2px;
+	width:180px;
+	height:55px;
+	text-align:center;
+	overflow:hidden;
+	background:#f0f0f0;
+	white-space:nowrap;
+	z-index:1;
+	text-align: left;
+}
+
+
+.thumbnail-tile .thumbnail-container:before {
+	content: " ";
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+	margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+.thumbnail-tile .thumbnail-container img {
+	display:inline-block;
+	vertical-align:middle;
+	width:auto;
+	height:auto;
+	max-width:100%;
+	max-height:100%;
+}
+
+.thumbnail-tile .thumbnail-container div {
+	display:block;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	overflow:hidden;
+	outline:1px solid red;
+	height:auto;
+}
+
+.thumbnail-tile .thumbnail-container img {cursor:pointer;}
+
+
+
+/* Plus/minus image rotation settings*/
+
+img.tree-expanded {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	margin-top: -2px;
+}
+
+div#mx_divTreeGraphBody.orientation-left img.tree-expanded {
+    display: inline;
+    vertical-align: top;
+    margin-top: 46px;
+}
+
+div#mx_divTreeGraphBody.orientation-left.thumbnail-delete img.tree-expanded {
+    display: inline;
+    vertical-align: top;
+    margin-top: 20px;
+}
+
+div#mx_divTreeGraphBody.orientation-right img.tree-expanded {
+    display: inline;
+    vertical-align: top;
+    margin-top: 46px;
+    padding-right: 150px;
+    margin-left: -175px;
+}
+
+div#mx_divTreeGraphBody.orientation-right.thumbnail-delete img.tree-expanded {
+    display: inline;
+    vertical-align: top;
+    margin-top: 20px;
+    padding-right: 150px;
+    margin-left: -216px;
+}
+
+div#mx_divTreeGraphBody.orientation-bottom img.tree-expanded {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: -140px;
+    padding-bottom: 116px;
+}
+
+div#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete img.tree-expanded {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: -91px;
+    padding-bottom: 60px;
+}
+
+
+
+.thumbnail-tile .thumbnail-container img[src$="icon64x64ImageNotFound.png"] {
+	border:none;
+	cursor:default;
+	
+}
+
+
+/* ---------------------------------
+   Row Grouping
+   --------------------------------- */
+
+body.thumbnail-gallery.grouped div#pageContentDiv {padding:0;}
+
+div#pageContentDiv .rg1,
+div#pageContentDiv .rg2,
+div#pageContentDiv .rg3 {
+    clear:left;
+    margin-top:10px;
+    padding: 5px;
+}
+
+div#pageContentDiv .heading {margin-top:0;}
+
+div#pageContentDiv .heading table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+div#pageContentDiv .heading table tr td {
+    font-family:"3DS Regular";
+    font-weight:normal;
+    padding:0;
+}
+
+div#pageContentDiv .heading table tr td input[type="checkbox"] {
+    height:16px;
+    width:16px;
+    vertical-align:middle;
+    margin-right:6px;
+}
+
+div#pageContentDiv .heading table tr td img {
+    margin:0 6px 0 0;
+    vertical-align:middle;
+}
+
+div#pageContentDiv .rg1 {padding-left:1em;}
+
+div#pageContentDiv .rg1.heading {
+	background: #dae6ec;
+	border: none;
+	border-top: solid 3px #a0a0a0;
+	border-bottom: solid 1px #a0a0a0;
+}
+
+div#pageContentDiv .rg2 {padding-left:2.5em;}
+
+div#pageContentDiv .rg2.heading {
+	background: #dae6ec;
+	border: none;
+	border-top: solid 2px #a0a0a0;
+	border-bottom: solid 1px #a0a0a0;
+}
+
+div#pageContentDiv .rg3 {padding-left:4em;}
+
+div#pageContentDiv .rg3.heading {
+	background: #dae6ec;
+	border: none;
+	border-top: solid 1px #a0a0a0;
+	border-bottom: solid 1px #a0a0a0;
+}
+
+/* ------------------------------------
+	Text Content
+   ------------------------------------ */
+
+.thumbnail-tile p{
+	clear:left;
+	height:24px;
+	width:120px;
+	margin:0;
+	padding:0;
+	font-size:10px;
+	color:#333;
+	line-height:12px;
+	white-space:nowrap;
+	overflow:hidden;
+}
+
+.thumbnail-tile p.first-child{
+	height:14px;
+	margin-top:3px;
+}
+
+.thumbnail-tile p a.object:hover{text-decoration:underline;}
+
+.thumbnail-tile ul{
+	position:absolute;
+	background:#5b5d5e;
+	top:82px;
+	left:0;
+	right:0;
+	padding:5px 2px 2px 2px;
+	z-index:2;
+	transition:top 0.25s;
+}
+
+/* for node styling when the thumbnail is not shown and the transitional animation when the mode is switched */
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul{
+	position:absolute;
+	background:#f0f0f0;
+	top:-1px !important;
+	left:0;
+	right:0;
+	padding:5px 2px 3px 2px;
+	z-index:2;
+	transition: background .3s ease-in;
+	-moz-transition: background .3s ease-in;
+	transition: background .3s ease-in;
+	height: 100%;
+}
+
+/* changes the TNR text to black*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul li{color: black;}
+
+/* changes the object link text to black*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul li.object a {color: black;}
+
+/* hides the thumbnail so it doesn't bleed through the layers */
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile div.thumbnail-container img,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile div.thumbnail-container img,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile div.thumbnail-container img,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile div.thumbnail-container img{display:none;}
+
+/* shows the type icon when the above styles are active */
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile div.thumbnail-container ul li img,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile div.thumbnail-container ul li img,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile div.thumbnail-container ul li img,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile div.thumbnail-container ul li img{display:block;}
+
+.thumbnail-tile ul li{
+	color: #fff;
+	font-size:9pt;
+	line-height:12pt;
+	text-align:left;
+	overflow:hidden;
+	white-space:nowrap;
+	padding-left: 17px;
+}
+
+.thumbnail-tile ul li.object{
+	color: #fff;
+    padding-left:17px;
+    margin-bottom:1px;
+}
+
+.thumbnail-tile ul li.object a{
+	color: #fff;
+}
+
+.thumbnail-tile ul li.label {display:none;}
+
+.thumbnail-tile ul li span.icon{
+    top:6px;
+    left:0;
+    height:16px;
+}
+
+/* ------------------------------------
+	Image Badges
+   ------------------------------------ */
+
+.thumbnail-tile .thumbnail-container .badge {
+	position:absolute;
+	height:16px;
+	width:16px;
+	top:0;
+	left:0;
+	overflow:hidden;
+}
+
+.thumbnail-tile .thumbnail-container .badge-3D,
+.thumbnail-delete div.thumbnail-tile div.thumbnail-container .badge-3D{
+	background-repeat: no-repeat;
+	background-color: gray;
+	background-position: 1px 1px;
+	border: solid 1px gray;
+	border-radius: 3px;
+	position:absolute;
+	height:32px;
+	width:32px;
+	top:2px;
+	left:2px;
+	overflow:hidden;
+}
+
+.thumbnail-delete div.thumbnail-tile div.thumbnail-container .badge-3D {
+	top: 0;
+	right:1px;
+	left: auto;
+	z-index: 2;
+	}
+	
+/* shows the 3D badge icon when the thumbnails are turned off */	
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile div.thumbnail-container span.badge-3D img,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile div.thumbnail-container span.badge-3D img,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile div.thumbnail-container span.badge-3D img,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile div.thumbnail-container span.badge-3D  img {display: block;}
+
+/* ------------------------------------
+    Viewer Launch Button
+   ------------------------------------ */
+
+.thumbnail-tile .thumbnail-container .viewer.icon {
+    display:none;
+    position:absolute;
+    top:2px;
+    right:2px;
+    height: 32px;
+    width: 32px;
+    background:url("../images/utilActionViewLarger.png") 0 0 no-repeat;
+}
+
+/* -------------------------------------------------------------------------
+   Page Footer
+   ------------------------------------------------------------------------- */
+
+div#divPageFoot,
+div.page-foot {
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    color:#6e6e6e;
+    background:#f0f0f0;
+    border-top:1px solid #e6e7e8;
+    padding:1px;
+    z-index: 3;
+}
+
+/* -------------------------------------------------------------------------
+   Facet Colorization II Node Colors
+   ------------------------------------------------------------------------- */	
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.blue,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.blue,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.blue,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.blue,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.blue,
+
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.blue li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.blue li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.blue li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.blue li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.blue li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.blue li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.blue li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.blue li{
+	background-color: #0072b2;
+	border-color: #0072b2;
+	color: #fff;
+}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.green,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.green,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.green,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.green,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.green li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.green li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.green li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.green li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.green li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.green li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.green li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.green li{
+	background-color: #009e73;
+	border-color: #009e73;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.yellow,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.yellow,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.yellow,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.yellow {
+	background-color: #f0e442;
+	border-color: #f0e442;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.red,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.red,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.red,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.red,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.red li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.red li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.red li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.red li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.red li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.red li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.red li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.red li{
+	background-color: #ff4f44;
+	border-color: #ff4f44;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.orange,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.orange,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.orange,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.orange,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.orange li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.orange li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.orange li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.orange li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.orange li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.orange li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.orange li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.orange li{
+	background-color:  #e69f00;
+	border-color: #e69f00;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.violet,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.violet,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.violet,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.violet,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.violet li,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.violet li.object a,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.violet li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.violet li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.violet li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.violet li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.violet li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.violet li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.violet li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.violet li{
+	background-color: #cc79a7;
+	border-color: #cc79a7;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.light-blue,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.light-blue,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.light-blue,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.light-blue,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.light-bluet li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.light-blue li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.light-blue li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.light-blue li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.light-blue li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.light-blue li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.light-blue li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.light-blue li{
+	background-color: #56b4e9;
+	border-color: #56b4e9;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.light-green,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.light-green,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.light-green,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.light-green {
+	background-color: #b1dd9f;
+	border-color: #b1dd9f;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.light-yellow,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.light-yellow,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.light-yellow,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.light-yellow{
+	background-color: #ffed31;
+	border-color: #ffed31;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.pink,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.pink,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.pink,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.pink{
+	background-color: #ff9584;
+	border-color: #ff9584;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.light-orange,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.light-orange,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.light-orange,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.light-orange {
+	background-color:  #ffbb69;
+	border-color: #ffbb69;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.light-violet,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.light-violet,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.light-violet,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.light-violet{
+	background-color: #ffceca;
+	border-color: #ffceca;
+	}
+	
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-blue,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.dark-blue,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.dark-blue,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.dark-blue ,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-blue li,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-blue li.object a,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.dark-blue li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.dark-blue li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.dark-blue li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.dark-blue li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.dark-blue li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.dark-blue li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.dark-blue li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.dark-blue li{
+	background-color: #004a80;
+	border-color: #004a80;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-green,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.dark-green,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.dark-green,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.dark-green,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-green li,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-green li.object a,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.dark-green li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.dark-green li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.dark-green li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.dark-green li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.dark-green li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.dark-green li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.dark-green li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.dark-green li{
+	background-color: #406618;
+	border-color: #406618;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.light-brown,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.light-brown,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.light-brown,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.light-brown,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.light-brown li,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.light-brown li.object a,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.light-brown li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.light-brown li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.light-brown li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.light-brown li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.light-brown li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.light-brown li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.light-brown li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.light-brown li{
+	background-color: #a3620a;
+	border-color: #a3620a;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.maroon,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.maroon,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.maroon,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.maroon,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.maroon li,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.maroon li.object a,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.maroon li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.maroon li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.maroon li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.maroon li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.maroon li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.maroon li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.maroon li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.maroon li{
+	background-color: #c10f14;
+	border-color: #c10f14;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.brown,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.brown,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.brown,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.brown,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.brown li,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.brown li.object a,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.brown li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.brown li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.brown li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.brown li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.brown li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.brown li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.brown li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.brown li{
+	background-color:  #713811;
+	border-color: #713811;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-violet,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.dark-violet,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.dark-violet,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.dark-violet,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-violet li,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-violet li.object a,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.dark-violet li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.dark-violet li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.dark-violet li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.dark-violet li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.dark-violet li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.dark-violet li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.dark-violet li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.dark-violet li{
+	background-color: #7600b2;
+	border-color: #7600b2;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-gray,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.dark-gray,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.dark-gray,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.dark-gray,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-gray li,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.dark-gray li.object a,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.dark-gray li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.dark-gray li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.dark-gray li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.dark-gray li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.dark-gray li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.dark-gray li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.dark-gray li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.dark-gray li{
+	background-color: #464646;
+	border-color: #464646;
+	color: #fff;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.gray,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ulgray,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.gray,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.gray{
+	background-color: #b7b7b7;
+	border-color: #b7b7b7;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.light-gray,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.light-gray,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.light-gray,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.light-gray {
+	background-color: #e2e2e2;
+	border-color: #e2e2e2;
+	}
+	
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.light-magenta,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.light-magenta,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.light-magenta,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.light-magenta{
+	background-color: #f16eaa;
+	border-color: #f16eaa;
+	}
+	
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.light-cyan,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.light-cyan,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.light-cyan,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.light-cyan{
+	background-color: #00bff3;
+	border-color: #00bff3;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.bright-green,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.bright-green,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.bright-green,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.bright-green{
+	background-color:  #00ff00;
+	border-color: #00ff00;
+	}
+
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.vermilion,
+#mx_divTreeGraphBody.orientation-right .thumbnail-tile .thumbnail-container ul.vermilion,
+#mx_divTreeGraphBody.orientation-bottom .thumbnail-tile .thumbnail-container ul.vermilion,
+#mx_divTreeGraphBody.orientation-left .thumbnail-tile .thumbnail-container ul.vermilion,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.vermilion li,
+#mx_divTreeGraphBody.orientation-top .thumbnail-tile .thumbnail-container ul.vermilion li.object.a,
+/* changes the object link & meda data text to white*/
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.vermilion li.object a,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.vermilion li.object a,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.vermilion li.object a,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.vermilion li.object a,
+#mx_divTreeGraphBody.orientation-top.thumbnail-delete div.thumbnail-tile ul.vermilion li,
+#mx_divTreeGraphBody.orientation-right.thumbnail-delete div.thumbnail-tile ul.vermilion li,
+#mx_divTreeGraphBody.orientation-bottom.thumbnail-delete div.thumbnail-tile ul.vermilion li,
+#mx_divTreeGraphBody.orientation-left.thumbnail-delete div.thumbnail-tile ul.vermilion li{
+	background-color: #d55e00;
+	border-color: #d55e00;
+	color: #fff;
+	}
+	
+/* -------------------------------------------------------------------------
+   Facet Colorization II Thumbnail Colors
+------------------------------------------------------------------------- */	
+
+.thumbnail-tile ul.blue {
+	background-color: #0072b2;
+	border-color: #0072b2;
+}
+
+.thumbnail-tile ul.green{
+	background-color: #009e73;
+	border-color: #009e73;
+	}
+.thumbnail-tile ul.yellow,
+.thumbnail-tile ul.yellow li,
+.thumbnail-tile ul.yellow li a.object{
+	background-color: #f0e442;
+	border-color: #f0e442;
+	color: #5b5d5e;
+	}
+
+.thumbnail-tile ul.red{
+	background-color: #ff4f44;
+	border-color: #ff4f44;
+	}
+
+.thumbnail-tile ul.orange{
+	background-color:  #e69f00;
+	border-color: #e69f00;
+	}
+
+.thumbnail-tile ul.violet{
+	background-color: #cc79a7;
+	border-color: #cc79a7;
+	}
+
+.thumbnail-tile ul.light-blue,
+.thumbnail-tile ul.light-blue li,
+.thumbnail-tile ul.light-blue li a.object{
+	background-color: #56b4e9;
+	border-color: #56b4e9;
+	color: #5b5d5e;
+	}
+
+.thumbnail-tile .light-green,
+.thumbnail-tile ul.light-green li,
+.thumbnail-tile ul.light-green li a.object {
+	background-color: #b1dd9f;
+	border-color: #b1dd9f;
+	color: #5b5d5e;
+	}
+
+.thumbnail-tile ul.light-yellow,
+.thumbnail-tile ul.light-yellow li,
+.thumbnail-tile ul.light-yellow li a.object{
+	background-color: #ffed31;
+	border-color: #ffed31;
+	color: #5b5d5e;
+	}
+
+.thumbnail-tile ul.pink,
+.thumbnail-tile ul.pink li,
+.thumbnail-tile ul.pink li a.object{
+	background-color: #ff9584;
+	border-color: #ff9584;
+	color: #5b5d5e;
+	}
+
+.thumbnail-tile  ul.light-orange,
+.thumbnail-tile ul.light-orange li,
+.thumbnail-tile ul.light-orange li a.object {
+	background-color:  #ffbb69;
+	border-color: #ffbb69;
+	color: #5b5d5e;
+	}
+
+.thumbnail-tile ul.light-violet,
+.thumbnail-tile ul.light-violet li,
+.thumbnail-tile ul.light-violet li a.object{
+	background-color: #ffceca;
+	border-color: #ffceca;
+	color: #5b5d5e;
+	}
+	
+.thumbnail-tile ul.dark-blue {
+	background-color: #004a80;
+	border-color: #004a80;}
+
+.thumbnail-tile .thumbnail-container ul.dark-green{
+	background-color: #406618;
+	border-color: #406618;
+	}
+
+.thumbnail-tile ul.light-brown{
+	background-color: #a3620a;
+	border-color: #a3620a;
+	}
+
+.thumbnail-tile ul.maroon{
+	background-color: #c10f14;
+	border-color: #c10f14;
+	}
+
+.thumbnail-tile ul.brown{
+	background-color:  #713811;
+	border-color: #713811;
+	}
+.thumbnail-tile ul.dark-violet{
+	background-color: #7600b2;
+	border-color: #7600b2;
+	}
+
+.thumbnail-tile ul.dark-gray{
+	background-color: #464646;
+	border-color: #464646;}
+
+.thumbnail-tile ul.gray,
+.thumbnail-tile ul.gray li,
+.thumbnail-tile ul.gray li a.object {
+	background-color: #b7b7b7;
+	border-color: #b7b7b7;
+	color: #5b5d5e;
+	}
+
+.thumbnail-tile ul.light-gray,
+.thumbnail-tile ul.light-gray li,
+.thumbnail-tile ul.light-gray li a.object {
+	background-color: #e2e2e2;
+	border-color: #e2e2e2;
+	color: #5b5d5e;
+	}
+
+.thumbnail-tile ul.light-magenta,
+.thumbnail-tile ul.light-magenta li,
+.thumbnail-tile ul.light-magenta li a.object{
+	background-color: #f16eaa;
+	border-color: #f16eaa;
+	color: #5b5d5e;
+	}
+
+.thumbnail-tile ul.light-cyan,
+.thumbnail-tile ul.light-cyan li,
+.thumbnail-tile ul.light-cyan li a.object{
+	background-color: #00bff3;
+	border-color: #00bff3;
+	color: #5b5d5e;
+	}
+
+.thumbnail-tile ul.bright-green,
+.thumbnail-tile ul.bright-green li,
+.thumbnail-tile ul.bright-green li a.object{
+	background-color:  #00ff00;
+	border-color: #00ff00;
+	color: #5b5d5e;
+	}
+
+.thumbnail-tile ul.vermilion{
+	background-color: #d55e00;
+	border-color: #d55e00;
+	}
+
+
+

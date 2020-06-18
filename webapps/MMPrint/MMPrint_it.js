@@ -1,0 +1,1 @@
+define("DS/MMPrint/MMPrint_it",{});define("DS/MMPrint/assets/nls/MMPrint",{printErrorTitle:"Errore di stampa",printRealSizeError:"La stampa in dimensioni reali non è supportata"});

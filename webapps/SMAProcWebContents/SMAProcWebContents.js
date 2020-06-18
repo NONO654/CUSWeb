@@ -1,0 +1,1 @@
+define("DS/SMAProcWebContents/SMAProcWebContents",{});

@@ -1,0 +1,1 @@
+define("DS/RTAudioVideoAPI/RTAudioVideoAPI_ru",{});define("DS/RTAudioVideoAPI/assets/nls/feed",{startAudioCall:"Начать аудиовызов",startVideoCall:"Начать видеовызов",callNotAvailable:"Нет доступных пользователей для начала вызова",callUnavailable:"Вызов недоступен"});

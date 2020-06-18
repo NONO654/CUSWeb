@@ -1,0 +1,1 @@
+define("DS/OnePart3DSearch/OnePart3DSearch_ko",{});define("DS/OnePart3DSearch/assets/nls/onepart",{facet:{properties:{title:"속성"}},action:{openInOnePart:{title:"OnePart에서 열기..."}},error:{cannotRetrieveAppInfo:"앱 정보를 검색하는 중 오류 발생"}});

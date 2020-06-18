@@ -1,0 +1,75 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="ad-execdir-login-dialog">
+  <link rel="import" type="css" href="ad-execdir-login-dialog.css">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+        
+ 		<div id="myModal" class="modal fade">	   
+			<div class="modal-wrap">
+			    <div class="modal-content">
+			    	<form action="/" method="post" name="loginExecDirForm" id="loginExecDirForm">
+						<div class="modal-header">
+						  	<button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onCancel">&times;</button>
+						  	<h4>Enter Execution Directory Credentials</h4>
+						</div>
+						<div id="dialogContent" class="modal-body">
+							<div class="content-section-body">
+						      <table>
+						          <tbody><tr id="windowsDomainRow" class="hidden">
+						              <td>
+						                  <span class="content-label">Domain:</span>
+						              </td>
+						              <td>
+						              	<span id="windowsDomain" class="content-field"></span>
+						              </td>
+						          </tr>
+						          <tr id="windowsUserRow" class="hidden">
+						              <td>
+						                  <span class="content-label">Windows User:</span>
+						              </td>
+						              <td>
+						              	<span id="windowsUser" class="content-field"></span>
+						              </td>
+						          </tr>
+						          <tr id="windowsPasswordRow" class="hidden">
+						              <td>
+						                  <span class="content-label">Windows Password:</span>
+						              </td>
+						              <td>
+						                  <span class="content-field"><input id="windowsPassword" name="windowsPassword" type="password" placeholder="<Enter a password>"></span>
+						              </td>
+						          </tr>
+						          <tr id="linuxUserRow" class="hidden">
+						              <td>
+						                  <span class="content-label">Linux User:</span>
+						              </td>
+						              <td>
+						              	<span id="linuxUser" class="content-field"></span>
+						              </td>
+						          </tr>
+						          <tr id="linuxPasswordRow" class="hidden">
+						              <td>
+						                  <span class="content-label">Linux Password:</span>
+						              </td>
+						              <td>
+						                  <span class="content-field"><input id="linuxPassword" name="linuxPassword" type="password" placeholder="<Enter a password>"></span>
+						              </td>
+						          </tr>
+						       </tbody></table>
+							</div>
+						</div>
+						<div class="modal-footer">
+						  	<button id="okButton" type="submit" form="runForm" class="btn btn-primary" on-click="onAccept">OK</button>
+						  	<button id="cancelButton" type="button" class="btn btn-default" on-click="onCancel">Cancel</button>
+						</div>
+			    	</form>
+	 		    </div>
+ 		    </div>
+		</div>
+ 		<div id="myModalOverlay" class="modal-overlay fade hidden"></div>
+    </template>
+  <script type="text/javascript" src="ad-execdir-login-dialog.js"></script>
+</dom-module>

@@ -1,0 +1,68 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-variable/sp-variable.html">
+<link rel="import" href="../../SMAProcSP/sp-mcsservice/sp-mcsservice.html">
+
+
+<dom-module id="ps-list-view-properties">
+  <style no-shim="">@import/* escape polymer-element CSS inlining */ url("../../UIKIT/UIKIT.css");</style>
+  <link rel="import" type="css" href="ps-list-view-properties.css">
+  <template>
+        <!-- Manage simulation data -->
+        <sp-mcsservice id="simulationProp" data="{{simulation}}" uri="{{_computeUri(activeitem)}}">
+        </sp-mcsservice>
+        <template is="dom-if" if="{{activeitem}}">
+            <div class="font-3dsregular">
+                <header class="header">
+                    <h4>Properties</h4>
+                </header>
+                <div class="ps-properties-table">
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <td class="ps-properties-table-label">Title</td>
+                                <td>{{simulation.attributes.title}}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-properties-table-label">Description</td>
+                                <td>{{simulation.attributes.description}}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-properties-table-label">Revision</td>
+                                <td>{{simulation.basics.revision}}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-properties-table-label">Owner</td>
+                                <td>{{simulation.basics.owner}}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-properties-table-label">Created</td>
+                                <td>{{simulation.basics.originated}}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-properties-table-label">Modified</td>
+                                <td>{{simulation.basics.modified}}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-properties-table-label">Simulation Kind</td>
+                                <td>{{_getSimulationKind(simulation.attributes)}}</td>
+                            </tr>
+                            <tr>
+	                            <td class="ps-properties-table-label">Latest Execution Status</td>
+	                            <td>{{activeitem.latestExecution.state}}</td>
+                            </tr>
+                            <tr>
+                                <td class="ps-properties-table-label">Experience</td>
+                                <td>{{simulation.experienceTitle}}</td>
+                            </tr>
+                        </tbody>    
+                    </table>
+                </div>    
+            </div>
+    	</template>
+    </template>
+  <script type="text/javascript" src="ps-list-view-properties.js"></script>
+</dom-module>
+
+

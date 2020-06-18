@@ -1,0 +1,48 @@
+<!--------------------------------------------------------------------
+[sp-updatepanel HTML Document]
+
+Project:		  sp
+Version:		  1.0
+Last change:    Wed, 07 Oct 2015 15:13:59 GMT
+Assigned to:	Aravind Mohan
+Primary use:	Any component which has async UI
+Description:  Use this component to wrap content which does asynchronous 
+							updates and needs a indicator to show the updates. 
+--------------------------------------------------------------------->
+
+<!--------------------------------------------------------------------
+
+[Table of contents]
+
+1. content
+2. div.overlay
+3. div.spinner-container
+	2.1. div.spinner-image
+--------------------------------------------------------------------->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel-message/sp-updatepanel-message.html">
+
+<dom-module id="sp-updatepanel">
+  <link rel="import" type="css" href="sp-updatepanel.css">
+  <template>
+		
+		<!-- Get all the state message sections -->
+		<content select="[data-upnl-state]"></content>
+		<content select="*"></content>
+				
+		<div class$="{{computeClass(isupdating)}}"></div>
+		
+		<div class$="{{computeClass2(isupdating)}}">
+			<div class="spinner">
+				<div class="spinner spinner-lg spinning fade in">
+					<span class="spinner-bar"></span>
+					<span class="spinner-bar spinner-bar1"></span>
+					<span class="spinner-bar spinner-bar2"></span>
+					<span class="spinner-bar spinner-bar3"></span>
+				</div>
+			</div>
+		</div>
+    </template>
+  <script type="text/javascript" src="sp-updatepanel.js"></script>
+</dom-module>

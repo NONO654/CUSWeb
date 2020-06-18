@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.doe.AdaptiveDOE" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAExeDOEAdaptiveDOEPlugin" nlsID="dispname">Adaptive DOE</DisplayName>
+	<Description nlsFile="SMAExeDOEAdaptiveDOEPlugin" nlsID="desc">Adaptive DOE</Description>
+	<LongDescription nlsFile="SMAExeDOEAdaptiveDOEPlugin" nlsID="longdesc">
+		<![CDATA[Adaptive DOE]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DOE_Technique</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.smaexe.plugin.doe.AdaptiveDOE</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeDOEAdaptiveDOEPlugin32.gif" targetFilename="SMAExeDOEAdaptiveDOEPlugin32.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeDOEAdaptiveDOEPlugin.CATNls" targetFilename="SMAExeDOEAdaptiveDOEPlugin.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeDOEAdaptiveDOEPlugin_ja.CATNls" targetFilename="SMAExeDOEAdaptiveDOEPlugin_ja.CATNls" locale="Japanese" />
+	</Streams>
+
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.doe.AdaptiveDOE.AdaptiveDOE</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+	<Properties>
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="File" type="file" valuetype="single" mode="input">
+			</Property>
+			<Property name="Subflow Evaluations" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Significant Effect" type="integer" valuetype="single">
+				<Value>0</Value>
+			</Property>
+			<Property name="Convergence Quality" type="integer" valuetype="single">
+				<Value>0</Value>
+			</Property>
+			<Property name="Step Size" type="real" valuetype="single">
+				<Value>1.0e-2</Value>
+			</Property>
+			<Property name="Use Header Row" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[True]]>
+				</Value>
+			</Property>
+			<Property name="Header Row" type="integer" valuetype="single">
+				<Value>1</Value>
+			</Property>
+			<Property name="Data Starts on Row" type="integer" valuetype="single">
+				<Value>2</Value>
+			</Property>
+			<Property name="Fixed Seed" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[false]]>
+				</Value>
+			</Property>
+			<Property name="Random Seed" type="integer" valuetype="single">
+				<Value>-1</Value>
+			</Property>
+		</Property>
+
+		<Property name="factor attributes" type="aggregate" valuetype="single">
+			<Property name="Column" type="integer" valuetype="single">
+				<Value>
+					<![CDATA[0]]>
+				</Value>
+			</Property>
+			<Property name="Cluster" type="integer" valuetype="single">
+				<Value>
+					<![CDATA[0]]>
+				</Value>
+			</Property>
+			<Property name="Lower" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+			<Property name="Upper" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+		</Property>
+
+		<Property name="Generates Values" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[True]]>
+			</Value>
+		</Property>
+
+		<Property name="Estimated Runs" type="integer" valuetype="single">
+			<Value>0</Value>
+		</Property>
+	</Properties>
+</wfext:Extension>

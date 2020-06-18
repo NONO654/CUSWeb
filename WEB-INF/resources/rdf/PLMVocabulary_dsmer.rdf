@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+  <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+  <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+  <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+  <!ENTITY ds6w "http://www.3ds.com/vocabularies/ds6w#" >
+  <!ENTITY dsc "http://www.3ds.com/vocabularies/3dsCore#" >
+]>
+
+<rdf:RDF 
+  xmlns:dsmer="http://www.3ds.com/vocabularies/dsmer/"
+  xml:base="http://www.3ds.com/vocabularies/dsmer/"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:ds6w="http://www.3ds.com/vocabularies/ds6w#"
+  xmlns:dsc="http://www.3ds.com/vocabularies/dsc#">
+  
+  <owl:Ontology rdf:about="http://www.3ds.com/vocabularies/dsmer/">
+	  <rdfs:label xml:lang="en">3D Merchandising Vocabulary</rdfs:label>
+	  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This ontology defines the 3D Merchandising vocabulary for 6W tags.</rdfs:comment>
+	  <owl:versionInfo>R2016x</owl:versionInfo>
+  </owl:Ontology>
+  
+  <owl:DatatypeProperty rdf:about="nature">
+	  <rdfs:label xml:lang="en">Nature</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the nature of a sellable product's representation (eg. product, furniture, point of sale material etc.)</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="presentation">
+	  <rdfs:label xml:lang="en">Presentation</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;how"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the way the product is exposed (eg. packaged, not packaged, exposed etc.)</rdfs:comment>
+  </owl:DatatypeProperty>
+ 
+  <owl:DatatypeProperty rdf:about="3dModelSource">
+	  <rdfs:label xml:lang="en">3D Model Source</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the data source used for a product's representation (eg. box, photo modeling etc.)</rdfs:comment>
+  </owl:DatatypeProperty> 
+  
+  <owl:DatatypeProperty rdf:about="hangerModel">
+	  <rdfs:label xml:lang="en">Hanger model</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;how"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the model of a hanger used to expose the product.</rdfs:comment>
+  </owl:DatatypeProperty> 
+
+  <owl:DatatypeProperty rdf:about="foldingType">
+	  <rdfs:label xml:lang="en">Folding type</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;how"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the folding type of a clothing's representation (eg. left folding, top folding etc.)</rdfs:comment>
+  </owl:DatatypeProperty> 
+
+  <owl:DatatypeProperty rdf:about="assortment">
+	  <rdfs:label xml:lang="en">Assortment</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the assortment to which a gondola/ scene/ store is attached.</rdfs:comment>
+  </owl:DatatypeProperty>  
+  
+  <owl:DatatypeProperty rdf:about="subAssortment">
+	  <rdfs:label xml:lang="en">Sub Assortment</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the sub assortment to which a composition is attached.</rdfs:comment>
+  </owl:DatatypeProperty>  
+  
+  <owl:DatatypeProperty rdf:about="publication">
+	  <rdfs:label xml:lang="en">Publication</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the publication of a composition.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="elementCount">
+	  <rdfs:label xml:lang="en">Element count</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;integer"/>
+	  <rdfs:comment xml:lang="en">Describes the element count of the composition.</rdfs:comment>
+  </owl:DatatypeProperty> 
+
+  <owl:DatatypeProperty rdf:about="gondolaSectionAsset">
+	  <rdfs:label xml:lang="en">Gondola section asset</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the gondola section asset of a composition.</rdfs:comment>
+  </owl:DatatypeProperty>  
+
+  <owl:DatatypeProperty rdf:about="retailOrganization">
+	  <rdfs:label xml:lang="en">Retail organization</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;who"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the Business unit or a Department of a Retail object.</rdfs:comment>
+  </owl:DatatypeProperty>   
+  
+  <owl:DatatypeProperty rdf:about="categorySize">
+	  <rdfs:label xml:lang="en">Category size</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the Category size of the related SubAssortment or Inventory.</rdfs:comment>
+  </owl:DatatypeProperty>  
+  
+   <owl:DatatypeProperty rdf:about="director">
+	  <rdfs:label xml:lang="en">Director</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;who"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the director of the retail store.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="insertion">
+	  <rdfs:label xml:lang="en">Insertion</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;how"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the way the representation can be put on a support.</rdfs:comment>
+  </owl:DatatypeProperty> 
+  
+  <owl:DatatypeProperty rdf:about="price">
+	  <rdfs:label xml:lang="en">Price</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the price of the product.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="pcb">
+	  <rdfs:label xml:lang="en">PCB</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;integer"/>
+	  <rdfs:comment xml:lang="en">Describes the number of products in the box delivered by a supplier.</rdfs:comment>
+  </owl:DatatypeProperty>   
+  
+  <owl:DatatypeProperty rdf:about="retailStoreSurface">
+	  <rdfs:label xml:lang="en">Retail store surface</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the surface of the retail store.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+   <owl:DatatypeProperty rdf:about="businessInfoId">
+	  <rdfs:label xml:lang="en">Business identifier</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the business identifier of the retail store.</rdfs:comment>
+  </owl:DatatypeProperty> 
+  
+  <owl:DatatypeProperty rdf:about="marketingTagIdentifier">
+	  <rdfs:label xml:lang="en">Marketing tag identifier</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the marketing tag's identifier.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+  <owl:DatatypeProperty rdf:about="gondolaSectionBackType">
+	  <rdfs:label xml:lang="en">Gondola section back type</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the gondola section asset's back type.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+  <owl:DatatypeProperty rdf:about="gondolaSectionBaseExist">
+	  <rdfs:label xml:lang="en">Gondola section base</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;boolean"/>
+	  <rdfs:comment xml:lang="en">Describes the gondola section asset's base existence.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+  <owl:DatatypeProperty rdf:about="gondolaSectionBaseHeight">
+	  <rdfs:label xml:lang="en">Gondola section base height</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the gondola section asset's base height.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+  <owl:DatatypeProperty rdf:about="shelfTabletDepth">
+	  <rdfs:label xml:lang="en">Shelf tablet's depth</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the shelf tablet's depth.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+  <owl:DatatypeProperty rdf:about="shelfTabletAngle">
+	  <rdfs:label xml:lang="en">Shelf tablet's angle</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the shelf tablet's angle.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+   <owl:DatatypeProperty rdf:about="shelfTabletBracketHeight">
+	  <rdfs:label xml:lang="en">Shelf tablet bracket's height</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the shelf tablet bracket's height.</rdfs:comment>
+  </owl:DatatypeProperty> 
+  
+  <owl:DatatypeProperty rdf:about="shelfGridExist">
+	  <rdfs:label xml:lang="en">Shelf grid</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;boolean"/>
+	  <rdfs:comment xml:lang="en">Describes the shelf grid's existence.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+  <owl:DatatypeProperty rdf:about="pegtype">
+	  <rdfs:label xml:lang="en">Peg type</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;string"/>
+	  <rdfs:comment xml:lang="en">Describes the peg's type.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+  <owl:DatatypeProperty rdf:about="pegBarDepth">
+	  <rdfs:label xml:lang="en">Peg bar's type</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the peg bar's depth.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+  <owl:DatatypeProperty rdf:about="pegDiameter">
+	  <rdfs:label xml:lang="en">Peg's diameter</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the peg's diameter.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+  <owl:DatatypeProperty rdf:about="pegAngle">
+	  <rdfs:label xml:lang="en">Peg's angle</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the peg's angle.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+  <owl:DatatypeProperty rdf:about="pegHookPriceSupportExist">
+	  <rdfs:label xml:lang="en">Peg hook price support</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;boolean"/>
+	  <rdfs:comment xml:lang="en">Describes the peg hook's price support's existence.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+    <owl:DatatypeProperty rdf:about="pegSupportHeight">
+	  <rdfs:label xml:lang="en">Peg support's height</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the peg support's height.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+    <owl:DatatypeProperty rdf:about="pegSupportBarHeight">
+	  <rdfs:label xml:lang="en">Peg support bar's height</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the peg support bar's angle.</rdfs:comment>
+  </owl:DatatypeProperty>
+  
+    <owl:DatatypeProperty rdf:about="pegSupportBarDepth">
+	  <rdfs:label xml:lang="en">Peg support bar's depth</rdfs:label>
+	  <rdfs:subPropertyOf rdf:resource="&ds6w;what"/>
+	  <rdfs:range rdf:resource="&xsd;double"/>
+	  <rdfs:comment xml:lang="en">Describes the peg support bar's depth.</rdfs:comment>
+  </owl:DatatypeProperty>
+</rdf:RDF>  

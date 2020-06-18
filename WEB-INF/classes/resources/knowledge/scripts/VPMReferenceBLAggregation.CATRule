@@ -1,0 +1,176 @@
+Let Reference (PLMEntity)
+Let ScaleValueAggregating(STRING)
+Let ScaleValueAggregated(STRING)
+
+set Reference = Parameters->GetAttributeObject("ReferenceToInstantiate")
+Validation = true
+
+if (Reference.IsSupporting("VPMReference") == false )
+{
+  if(Reference.IsSupporting("VPMRepReference")==false)
+  {
+	if(Reference.IsSupporting("VPMDECCT5ComponentForTeam")==false)
+	{
+		if(Reference.IsSupporting("VPMDECCT5AssemblyForTeam")==false)
+		{	
+			if(Reference.IsSupporting("VPMDECCT5EmbeddedAssemblyForTeam")==false)
+			{	
+				if(Reference.IsSupporting("VPMDECINVAssemblyForTeam")==false)
+				{	
+					if(Reference.IsSupporting("VPMDECINVComponentForTeam")==false)
+					{			
+						if(Reference.IsSupporting("VPMDECINViAssemblyForTeam")==false)
+						{
+							if(Reference.IsSupporting("VPMDECINViPartForTeam")==false)
+							{
+								if(Reference.IsSupporting("VPMDECSLWAssemblyInstanceForTeam")==false)
+								{
+									if(Reference.IsSupporting("VPMDECSLWComponentInstanceForTeam")==false)
+									{
+										if(Reference.IsSupporting("VPMDECUGAssemblyForTeam")==false)
+										{
+											if(Reference.IsSupporting("VPMDECUGComponentForTeam")==false)
+											{
+												if(Reference.IsSupporting("VPMDECCT5Component")==false)
+												{
+													if(Reference.IsSupporting("VPMDECCT5Assembly")==false)
+													{
+														if(Reference.IsSupporting("VPMDECSLWAssembly")==false)
+														{
+															if(Reference.IsSupporting("VPMDECSLWComponent")==false)
+															{
+																if(Reference.IsSupporting("VPMDECCgrViewable")==false)
+																{
+																	if(Reference.IsSupporting("VPMDECUGAssembly")==false)
+																	{
+																		if(Reference.IsSupporting("VPMDECUGComponent")==false)
+																		{						
+																			if(Reference.IsSupporting("VPMDECSLWAssemblyInstance")==false)
+																			{	
+																				if(Reference.IsSupporting("VPMDECSLWComponentInstance")==false)
+																				{
+																					if(Reference.IsSupporting("VPMDECProEAssembly")==false)
+																					{
+																						if(Reference.IsSupporting("VPMDECProEComponent")==false)
+																						{
+																							if(Reference.IsSupporting("VPMDECProEAssemblyInstance")==false)
+																							{
+																								if(Reference.IsSupporting("VPMDECProEComponentInstance")==false)
+																								{
+																									if(Reference.IsSupporting("VPMDECProEManufactureAssembly")==false)
+																									{	
+																										if(Reference.IsSupporting("VPMDECCIGComponent")==false)
+																										{
+																											if(Reference.IsSupporting("VPMDECCSPAssembly")==false)
+																											{
+																												if(Reference.IsSupporting("VPMDECCSPComponent")==false)
+																												{
+																													if(Reference.IsSupporting("VPMDECCSPEmbeddedComponent")==false)
+																													{
+																														if(Reference.IsSupporting("VPMDECINVAssembly")==false)
+																														{
+																															if(Reference.IsSupporting("VPMDECINVComponent")==false)
+																															{
+																																if(Reference.IsSupporting("VPMDECINViAssembly")==false)
+																																{
+																																	if(Reference.IsSupporting("VPMDECINViPart")==false)
+																																	{
+																																		if(Reference.IsSupporting("XCADAssemblyRepReference")==false)
+																																		{
+																																			Validation = false
+																																			/*Parameters.Message = "The reference to add can not be aggregated by the father reference."*/
+																																			Parameters.NLSMessage = BuildDeferredMessageNLS("VPMReferenceBLAggregation", "FatherValidationCheck.Title")
+																																		    Parameters.Message=BuildMessageNLS("VPMReferenceBLAggregation","FatherValidationCheck.Title")
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+    }
+  }
+}
+
+if(Validation == true and ThisObject.IsSupporting("VPMReference") == true)
+{
+  if(ThisObject.V_isTerminal == true)
+  {
+    if(Reference.IsSupporting("VPMReference") == true)
+    {
+      Validation = false
+      
+      if (ThisObject.V_usage == "3DPart")
+      {
+        /*Parameters.Message = "The reference to add can not be aggregated by a 3DPart."*/
+		Parameters.NLSMessage = BuildDeferredMessageNLS("VPMReferenceBLAggregation", "3DPartValidationCheck.Title")
+		Parameters.Message=BuildMessageNLS("VPMReferenceBLAggregation","3DPartValidationCheck.Title")
+      }
+      else
+      {
+        /*Parameters.Message = "The reference to add can not be aggregated by a terminal reference."*/
+		Parameters.NLSMessage = BuildDeferredMessageNLS("VPMReferenceBLAggregation", "TerminalValidationCheck.Title")
+		Parameters.Message=BuildMessageNLS("VPMReferenceBLAggregation","TerminalValidationCheck.Title")
+      }
+    }
+  }
+}
+
+if(Validation == true and ThisObject.HasAttribute("V_Scale")  == true)
+{
+	if(Reference.HasAttribute("V_Scale")  == true)
+	{
+		ScaleValueAggregating = ThisObject->GetAttributeString("V_Scale")
+		ScaleValueAggregated = Reference->GetAttributeString("V_Scale")
+		if(ScaleValueAggregating=="NanometricScale" and ScaleValueAggregated<>"NanometricScale")
+			Validation=false
+		if(ScaleValueAggregating=="ExtraSmallScale")
+		{
+			if ( ScaleValueAggregated=="ExtraLargeScale" or ScaleValueAggregated=="LargeScale" or ScaleValueAggregated=="NormalScale" or ScaleValueAggregated=="SmallScale" )
+			Validation=false
+		}
+		if(ScaleValueAggregating=="SmallScale")
+		{
+			if ( ScaleValueAggregated=="ExtraLargeScale" or ScaleValueAggregated=="LargeScale" or ScaleValueAggregated=="NormalScale" )
+				Validation=false
+		}
+		if(ScaleValueAggregating=="NormalScale")
+		{
+			if ( ScaleValueAggregated=="ExtraLargeScale" or ScaleValueAggregated=="LargeScale" )
+				Validation=false
+		}
+		if(ScaleValueAggregating=="LargeScale" and ScaleValueAggregated=="ExtraLargeScale")
+			Validation=false
+			
+		if(Validation==false)
+		  Parameters.Message = "The reference to add cannot be inserted because it has a greater dimension range than the aggregating reference"
+		  Parameters.NLSMessage = BuildDeferredMessageNLS("VPMReferenceBLAggregation", "ValidationCheck.Title")
+		  Parameters.Message=BuildMessageNLS("VPMReferenceBLAggregation","ValidationCheck.Title")
+	}
+}

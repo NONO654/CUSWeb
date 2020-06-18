@@ -1,0 +1,29 @@
+<dom-module id="cmp-execution-option">
+   <template>
+      <style>
+         :host {
+            display: block;
+         }
+         .exe-optn-modal  {
+            --sp-modal-header: {
+            padding: 0px 20px;
+            };
+            --sp-modal-body: {
+               padding: 0px 10px 10px 20px;
+               margin: 0px 10px 10px 0;
+            };
+         }
+
+      </style>
+      <sp-modal id="options_md" class="exe-optn-modal" heading="Execution Options" height="100%" width="600px" on-close="onClose">
+         <section>
+            <sp-notification id="notification" position="TR" width="300"></sp-notification>
+            <sp-exe-options id="exeOptions" class="exe-options" on-change="exeOptionsChange"></sp-exe-options>
+         </section>
+         <footer>
+            <button is="sp-button-type" class="button-exe-options-close" on-click="onOk" primary>Ok</button>
+            <button is="sp-button-type" class="button-exe-options-wait" on-click="onCancel" >Cancel</button>
+         </footer>
+      </sp-modal>
+   </template>
+</dom-module>

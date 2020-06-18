@@ -1,0 +1,229 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+    <meta charset="utf-8">
+    <title>SMAProcWebCommonContents</title>
+
+    <script type="text/javascript" src="../Polymer-1.11.3/webcomponents-lite.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+    <!--
+
+        Notes:
+
+        1. Don't include UWA as commented out below. This will mess with Polymer lifecyle such as calling ready twice.
+        2. Avoid default values for Object and Array type if possible
+        3. Since this is using shady dom, use unique id for querySelector, otherwise it might point to some
+        4. somehow, order of html imports matters
+            other dom instance
+    -->
+
+
+    <script>
+
+        localStorage.setItem('tst-mode', true);
+    </script>
+
+    <style>
+        .section {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .xcontainer {
+            width: 400px;
+            padding: 5px 0px;
+            display: block;
+            margin-left: 0px;
+        }
+
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            background-color: lightgray;
+            width: 100%;
+        }
+
+        .sep {
+            margin-top: 10px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <template>
+        <section>
+            <h2>pcw-sdk-file-chooser</h2>
+            <p>
+                1. Default file content chooser
+            </p>
+            <p class="code">
+                &lt;pcw-sdk-file-chooser id="comp1" plm-types="DOCUMENT" /&gt;
+            </p>
+            <div class="xcontainer">
+                <pcw-sdk-file-chooser id="comp1" plm-types="DOCUMENT"></pcw-sdk-file-chooser>
+            </div>
+
+            <br/>
+            <br/>
+
+            <p>
+                2. File content chooser with preselected parameter, category and file (with upload mode)
+            </p>
+            <p class="code">
+                &lt;pcw-sdk-file-chooser id="comp2" plm-types="DOCUMENT" mode="upload" /&gt;</p>
+            <div class="xcontainer">
+                <pcw-sdk-file-chooser id="comp2" plm-types="DOCUMENT" mode="upload"></pcw-sdk-file-chooser>
+            </div>
+
+            <br/>
+            <br/>
+
+            <p>
+                3. Dsiabled File content chooser
+            </p>
+            <p class="code">
+                &lt;pcw-sdk-file-chooser id="comp3" plm-types="DOCUMENT" disabled /&gt;
+            </p>
+            <div class="xcontainer">
+                <pcw-sdk-file-chooser id="comp3" plm-types="DOCUMENT" disabled></pcw-sdk-file-chooser>
+            </div>
+
+            <br/>
+            <div><strong>Rule:</strong></div>
+            <div id="rule" class="code"></div>
+
+            <br/>
+
+            <p>
+                <strong>Simulation Data:</strong>
+            </p>
+
+            <div id="simData"></div>
+        </section>
+    </template>
+
+    <script>
+        require([
+            'UWA/Core', 'UWA/Data', 'DS/Core/Core', 'UWA/Element',
+            'DS/ApplicationFrame/FrameWindow',
+            'DS/ApplicationFrame/FrameWindowsManager',
+            'DS/SMAProcWebContents/ContentChooser',
+            'DS/SMAProcWebContents/PlmobjectChooser',
+            'DS/SMAProcWebContents/FileChooser',
+            'DS/SMAProcWebContents/FakeContentService',
+            'DS/SMAProcWebContents/PolyUtils',
+            'DS/SMAProcWebCommonControls/FileChooser'
+        ],
+            function (UWA, UWAData, WUXCore, UWAElement,
+                FrameWindow, FrameWindowsManager, ContentChooser, PlmobjectChooser, FileChooser, FakeContentService, PolyUtils) {
+
+                function getSimData(list) {
+                    return list.map(function (simData) {
+                        return '<tr><td>{0}</td><td>{1}</td></tr>'.format(simData.getFieldValue('simDataRelationshipUUID'), simData.getFieldValue('title'));
+                    });
+                }
+
+                function getAllSimData(container) {
+                    var tds = ['<tr><td colspan=2><strong>Simulation Data</strong></td></tr>'];
+                    var simDataList = container._dataContainer._simDataList;
+
+                    if (simDataList) {
+                        tds = tds.concat(getSimData(simDataList));
+                    }
+
+                    tds.push('<tr><td colspan=2><strong>Temp simulation data</strong></td></tr>');
+                    var tempList = container._dataContainer._TEMPsimDataList;
+                    if (tempList) {
+                        tds = tds.concat(getSimData(tempList));
+                    }
+
+                    tds.push('<tr><td colspan=2><strong>To be Removed simulation data</strong></td></tr>');
+                    var removedList = container._dataContainer._TEMPsimDataToRemove;
+                    if (removedList) {
+                        tds = tds.concat(getSimData(removedList));
+                    }
+
+                    return tds.join('\n');
+
+                }
+
+
+                WUXCore.setFullscreen();
+                widget.addEvent('onLoad', function onLoad() {
+                    //we need a frame for webux diaglog (in this case parameter add dialog)
+
+                    var frmWindow = new FrameWindow().inject(document.body);
+
+                    frmWindow.elements.container.setStyles({ background: 'white', 'overflow-y': 'scroll' });
+
+                    var uiFrame = frmWindow.getUIFrame();
+
+                    var template = document.querySelector('template');
+
+                    var div = UWA.createElement('div', {
+                        styles: {
+                            padding: '20px'
+                        }
+                    });
+                    div.innerHTML = template.innerHTML;
+
+                    div.inject(uiFrame);
+
+                    var service = new FakeContentService();
+
+                    var dataContainer = service.getDataContainer();
+
+                    service.setActivity(dataContainer);
+
+                    var param = dataContainer.findParameterByName('Parameter2');
+                    var paramOut = dataContainer.findParameterByName('ParameterOut');
+
+
+                    PolyUtils.whenComponentReady('#comp1', div).then(function (el) {
+                        el.setContentService(service);
+                        el.setModel('content', dataContainer);
+
+                    });
+
+                    PolyUtils.whenComponentReady('#comp2').then(function (el) {
+                        el.setContentService(service);
+                        el.setModel('param', dataContainer, paramOut, 'upload.txt');
+                    });
+
+                    PolyUtils.whenComponentReady('#comp3').then(function (el) {
+                        el.setContentService(service);
+                        el.setModel('param', dataContainer, param, 'upload.txt');
+                    });
+
+                    document.addEventListener('data-change', function (e) {
+                        var rule = e.target.getRule();
+                        document.querySelector('#rule').textContent = rule;
+
+                        var simDataContainer = document.querySelector('#simData');
+                        var table = '<table width="80%" border><tr><th>Relationship ID</th><th>Content Name</th></tr>';
+
+                        var activity = dataContainer;
+
+                        console.log(activity);
+
+                        var simDataContent = getAllSimData(activity);
+
+                        var contentTable = table + simDataContent + '</table>';
+                        simDataContainer.innerHTML = contentTable;
+
+                    });
+
+                });
+            });
+
+    </script>
+</body>
+
+</html>

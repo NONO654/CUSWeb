@@ -1,0 +1,1 @@
+define("DS/ENXScene/ENXScene_de",{});define("DS/ENXScene/assets/nls/ENXScene",{default_view_label:"Standardansicht",treelistview_label:"Strukturbaumansicht",graphview_label:"Diagrammansicht",tileview_label:"Kachelansicht",thumbnailview_label:"Miniaturbildansicht",datagridview_label:"Datenrasteransicht",storedObjectMgt_label:"Während Aktualisierung zu ladende Objekte auswählen"});

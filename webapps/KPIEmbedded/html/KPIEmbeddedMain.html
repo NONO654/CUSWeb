@@ -1,0 +1,17 @@
+<div class="kpi-main-view">
+    <div class="kpi-scoring-section">
+        <div class="close-icon"><span class="fonticon fonticon-wrong"></span></div>
+        <div class="kpi-scoring-infos">
+            <div class="kpi-scoring-value">{{{globalScore}}}</div>
+            <div class="kpi-scoring-label">GLOBAL SCORING</div>
+        </div>
+    </div>
+    <div class="kpi-all-infos">
+    {{~#each kpis~}}
+    <div data-kpi-idx="{{@index}}" class="kpi-infos {{#if objectiveNotAchieved}}kpi-not-achieved{{/if}} clickable">
+        <div class="kpi-value">{{label}}</div>
+        <div class="kpi-name">{{name}}</div>
+    </div>
+    {{~/each~}}
+    </div>
+</div>

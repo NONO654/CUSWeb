@@ -1,0 +1,61 @@
+<dom-module id="ra-expression-eval">
+    <style>
+        :host {
+            display: flex;
+            flex-direction:column;
+            width: inherit;
+            height: inherit;
+        }
+
+        .output {
+            margin: 5px 0px;
+            height: 1.5rem;
+        }
+
+        td {
+            border: 1px solid #DDD;
+        }
+
+        .tryTable {
+        width: 100%
+        }
+        #SliderTryValue {
+        text-align: right;
+        font-weight: bold;
+        }
+        .tryResult {
+        text-align: right;
+        font-weight: bold;
+        }
+        .tryInput {
+        text-align: right;
+        }
+        .tryParam {
+        text-align: left;        
+        }
+        
+    </style>
+    <template>
+      <div id="sliderDock">
+      </div>
+      <table id="tryTable">
+        <tr>
+          <td>
+            <div style="flex-grow:0;">
+              <div style="display:flex;flex-direction:row;align-items:center;">
+                <button id="calc" style="margin-right:5px;height:1.5rem;">Test Expression</button>
+                <span id="validator" class="output" style="flex-grow:2;display:inline-block;">[[message]]</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="tryResult" id="SliderTryValue"/>
+          </td>
+          <td>
+            <table id="tryValues">
+            </table>
+          </td>
+        </tr>
+      </table>
+    </template>
+</dom-module>

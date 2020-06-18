@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Process Experience Studio</title>
+
+    <style>
+         body,html{margin:0;height:100%;overflow:hidden;font-size:14px}
+        .xs-loader{height:100%;width:100%;background-color:#fff;opacity:1;will-change:opacity;position:absolute;z-index:1}
+        .xs-loader>div{top:calc(50% - 25px);left:calc(50% - 45px);position:absolute;display:block}
+        .xs-spinner{height:50px;display:flex}
+        .xs-spinner>span{background-color:#005686;height:100%;width:3px;display:inline-block;margin-right:3px;animation:xs-stretchdelay 1.2s infinite ease-in-out}
+        .xs-spinner>div{text-align:center;height:100%;line-height:50px;padding-left:5px}
+        .xs-spinner .rect2{animation-delay:-1.1s}
+        .xs-spinner .rect3{animation-delay:-1s}
+        .xs-spinner .rect4{animation-delay:-.9s}
+        @keyframes xs-stretchdelay{0%,100%,40%{transform:scaleY(.4)}20%{transform:scaleY(1)}}
+    </style>
+
+    <script src="../../AmdLoader/AmdLoader.js"></script> 
+    <link rel="import" id="designerImport" href="../xs-designer/xs-designer.html" async>
+
+    <!--ENOVIA specific scripts for accessing global utilities.This is specially required for launching JSPs-->
+    <script async src="../../../common/scripts/emxUICore.js" data-merge-ignore="true"></script>
+    <script async src="../../../common/scripts/emxUIModal.js" data-merge-ignore="true"></script>
+    <script async src="../../../common/scripts/emxUIPopups.js" data-merge-ignore="true"></script>
+    <script async src="../../../common/scripts/emxUIConstants.js" data-merge-ignore="true"></script>
+    <!-- Making this lazy load - will cause any issues ?? -->
+</head>
+
+<body id="xsbody">
+    <div id="loader" class="xs-loader">
+        <div>
+            <div class="xs-spinner">
+                <span class="rect1"></span>
+                <span class="rect2"></span>
+                <span class="rect3"></span>
+                <span class="rect4"></span>
+                <div>Loading...</div>
+            </div>
+        </div>  
+     </div>
+
+    <script>
+        (function (window) {
+            'use strict';
+            var webComponentsSupported = ('registerElement' in document
+            && 'import' in document.createElement('link')
+            && 'content' in document.createElement('template'));
+            
+            // Polyfill browser with UWA promise if not available
+            var promiseSupported = (window.Promise !== undefined);
+            
+            function polyfillPromiseObject(callback) {
+                if(promiseSupported) {
+                    callback();
+                } else {
+                    require(['UWA/Class/Promise'], function (UWAPromise) {
+                        window.Promise = UWAPromise;
+                        callback();
+                    });
+                }
+            }
+
+            /**
+             * lazy loads the xs-designer then removes the loader
+             */
+            function finishLazyLoading() {
+
+                /**
+                 * Parses url to read parameters
+                 * @param {String} url URL which is to be parsed
+                 * @returns {Object} URL parameters as object
+                 */
+                function getURLParams(url) {
+                    var stringToParse, queryParams = {}, param, paramName, paramValue, i;
+                    stringToParse = url.replace('?', '').split('&');
+                    for (i = 0; i < stringToParse.length; i++) {
+                        param = stringToParse[i].split('=');
+                        if (param.length > 0) {
+                            paramName = decodeURIComponent(param[0]);
+                            if (paramName.length > 0) {
+                                paramValue = param.length === 2 ? decodeURIComponent(param[1]) : true;
+                                queryParams[paramName] = paramValue;
+                            }
+                        }
+                    }
+                    return queryParams;
+                }
+
+                /**
+                 * Removes loader from UI
+                 */
+                function removeLoader() {
+                    setTimeout(function(){
+                        var loader = document.getElementById('loader');
+                        loader.parentNode.removeChild(loader);
+                    }, 10);
+                }
+
+                /**
+                 * When designer(required shell) is loaded then add that element
+                 */
+                function onImportLoaded() {
+                    var xsDesigner, params, xsbody;
+                    params = getURLParams(window.location.search);
+                    xsbody = document.getElementById('xsbody');
+                    xsDesigner = document.createElement('xs-designer');
+                    // App is visible and ready to load some data!
+                    xsDesigner.templateid = params.templateId;
+                    xsDesigner.templatetitle = params.templateTitle;
+                    xsDesigner.simid = params.simId;
+                    xsDesigner.viewid = params.viewId;
+                    // Once designer is attached then remove the loader
+                    xsDesigner.addEventListener('xs-designer-loaded', removeLoader);
+                    xsbody.appendChild(xsDesigner);
+                }
+
+                var link = document.querySelector('#designerImport');
+
+                // Go if the async Import loaded quickly. Otherwise wait for it.
+                if (link.import && link.import.readyState === 'complete') {
+                    onImportLoaded();
+                } else {
+                    link.addEventListener('load', onImportLoaded);
+                }
+            }
+
+            if (!webComponentsSupported) {
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = '../../Polymer-1.6.1/webcomponents-lite.min.js';
+                script.onload = function() {
+                    polyfillPromiseObject(finishLazyLoading);
+                };
+                document.head.appendChild(script);
+            } else {
+                polyfillPromiseObject(finishLazyLoading);
+            }
+        }(this));
+    </script>
+</body>
+
+</html>

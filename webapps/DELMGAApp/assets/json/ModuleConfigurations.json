@@ -1,0 +1,149 @@
+{
+	"ROUTINGS":{
+			"moduleIcon" : "PART",
+			"moduleTitle": "",
+			"isAuthoringAllowed" : true,
+			"registerRoots": true,
+			"pprTypes": ["SYSTEM", "OPERATION"],
+			"addToAuxIfNotAcceptedType":true,
+			"implementing": true,
+			"implemented": false,
+			"enableCrossHighlight" : true,
+			"linkTypes": ["DELLmiProductionSystemOutputCnxToMBOM","DELAsmProcessCanUseCnx","ProcessImplementLink","ProcessImplementLinkOcc","DELLmiTimeConstraintCnx","ProductImplementLink","PLMDocConnection"],
+			"views" : {
+					"treeListView": {
+							"enableDragAndDrop" : true,
+							"showTagger" : true,
+							"headerContextualCommands": ["SizeColumnToFit", "SortAToZ", "SortZToA", "HideColumn"],
+							"contextualCommands": ["Relations", "EditAttribute", "ActionBar_ChangeOwner", "ActionBar_Attributes", "ExpandAll", "Refresh", "ExploreInWebApp"]
+							}
+			},
+
+			"columnConfigName": "ROUTINGS.columnConfigPath",
+			"exportCSVPreferencesXML": "exportCSVPreferencesXML",
+			"exportCSVFileName": "MGA",
+			"registerViewPreference": true,
+			"registerLayoutPreference": true
+	},
+
+	"MANUFACTURING":{
+			"moduleIcon" : "PART",
+			"moduleTitle": "",
+			"isAuthoringAllowed" : true,
+			"registerRoots": true,
+			"pprTypes": ["PROCESS"],
+			"implementing": false,
+			"implemented": true,
+			"enableCrossHighlight" : true,
+			"linkTypes": ["ProcessImplementLink","ProcessImplementLinkOcc","DELLmiProductionSystemOutputCnxToMBOM","PLMDocConnection"],
+			"dragDropManager": "WUXGenericLinksDragDrop",
+			"views" : {
+					"treeListView": {
+							"enableDragAndDrop" : true,
+							"showTagger" : false,
+							"headerContextualCommands": ["SizeColumnToFit", "SortAToZ", "SortZToA", "HideColumn"],
+							"contextualCommands": ["Relations", "EditAttribute", "ActionBar_ChangeOwner", "ActionBar_Attributes", "ExpandAll", "Refresh", "ExploreInWebApp"]
+					}
+			},
+
+			"columnConfigName": "MANUFACTURING.columnConfigPath",
+			"registerViewPreference": true,
+			"registerLayoutPreference": true,
+			"disableExpandFilter": true,
+			"disableLoadRecent": true
+	},
+
+	"RESOURCE":{
+			"moduleIcon" : "PART",
+			"moduleTitle": "",
+			"isAuthoringAllowed" : true,
+			"registerRoots": true,
+			"pprTypes": ["RESOURCE"],
+			"implementing": false,
+			"implemented": true,
+			"enableCrossHighlight" : true,
+			"linkTypes": ["DELAsmProcessCanUseCnx","PLMDocConnection"],
+			"dragDropManager": "WUXGenericLinksDragDrop",
+			"views" : {
+					"treeListView": {
+							"enableDragAndDrop" : true,
+							"showTagger" : false,
+							"headerContextualCommands": ["SizeColumnToFit", "SortAToZ", "SortZToA", "HideColumn"],
+							"contextualCommands": ["Relations", "EditAttribute", "ActionBar_ChangeOwner", "ActionBar_Attributes", "ExpandAll", "Refresh", "ExploreInWebApp"]
+					}
+			},
+
+			"columnConfigName": "RESOURCE.columnConfigPath",
+			"registerViewPreference": true,
+			"registerLayoutPreference": true,
+			"disableExpandFilter": true,
+			"disableLoadRecent": true
+	},
+
+	"EGRAPHMOD": {
+			"displayNodeConfigXML":"egraphViewNodePreferenceXML",
+			"displayLinkConfigXML":"egraphViewLinkPreferenceXML",
+			"editLinkConfigXML":"editLinkAttrsConfigXML",
+			"titleGraph":"GraphView.PanelTitle",
+			"showReloadAction":true,
+			"showGraphViewFilter":true,
+			"graphType":0,
+			"toggleCmdId" : "ShowGraphView"
+	},
+	"PRODUCTFLOWMOD": {
+			"displayNodeConfigXML":"egraphViewNodePreferenceXML",
+			"displayLinkConfigXML":"egraphViewLinkPreferenceXML",
+			"editLinkConfigXML":"editLinkAttrsConfigXML",
+			"titleGraph":"ProductFlowCmd.Title",
+			"showReloadAction":true,
+			"showGraphViewFilter":false,
+			"graphType":1,
+			"toggleCmdId" : "ProductFlowCmd"
+	},
+
+  "LINKS" :{
+		  "frameWindow": "",
+      "relatedCmdId" : "Relations",
+      "relationsDialogDisplayAttributeConfigXML" 	: "relationsDialogDisplayAttributeConfigXML",
+      "editLinkAttrsConfigXML"							: "editLinkAttrsConfigXML",
+			"pprTypes": {
+					"SYSTEM": {
+							"icon":"SYSTEM",
+							"view":"PPRTYPE.SYSTEM"
+					},
+					"OPERATION":{
+							"icon":"SYSTEM",
+							"view":"PPRTYPE.SYSTEM"
+					}
+			}
+  },
+
+	"INSTCMDMOD":{
+		"insertFormAttributeXML" : "insertFormAttributeXML"
+	},
+
+	"AUXILIARY" :{
+			"withLinksResolved" : false,
+			"registerRoots": true,
+			"pprTypes": ["PROCESS", "PRODUCT", "PART","RESOURCE","SYSTEM", "OPERATION"],
+			"linkTypes": ["ProductImplementLink", "PROCESS_ProcessImplementLink"],
+			"displayBadge" : {
+					"linkType":"ProductImplementLink",
+					"badgeIcon":"Scope"
+				},
+			"views" : {
+				"treeListView": {
+					"enableDragAndDrop" : true,
+					"showTagger": true,
+					"showSelection": true,
+					"headerContextualCommands": [ "SizeColumnToFit", "SortAToZ", "SortZToA"],
+					"contextualCommands": ["Relations", "ActionBar_ChangeOwner", "ActionBar_Attributes", "ExpandAll", "Refresh", "ExploreInWebApp"]
+				}
+			},
+			"columnConfigName": "AUXILIARY.columnConfigPath"
+		},
+
+		"DOCUMENTSMOD" : {
+			"pprTypes": ["PROCESS","SYSTEM", "OPERATION","RESOURCE"]
+		}
+}

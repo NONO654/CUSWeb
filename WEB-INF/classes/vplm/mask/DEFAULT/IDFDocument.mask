@@ -1,0 +1,95 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY IDF Versioned Model
+// --------------------------------------------------
+ATTR name;Y;N
+ATTR revision;N;N
+ATTR Title;N;N
+ATTR description;N;N
+ATTR current;N;N
+ATTR owner;N;N
+ATTR modified;N;N
+ATTR Originator;N;N
+ATTR originated;N;N
+// --------------------------------------------------
+FUNC Tree
+// --------------------------------------------------
+FATTR name;Y
+FATTR revision;Y
+// --------------------------------------------------
+FUNC Create
+// --------------------------------------------------
+// --------------------------------------------------
+FUNC EZQuery
+// --------------------------------------------------
+FATTR name;Y
+FATTR revision;Y
+FATTR Title;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR modified;Y
+FATTR Originator;Y
+FATTR originated;Y
+// --------------------------------------------------
+FUNC List
+// --------------------------------------------------
+// --------------------------------------------------
+FUNC Query
+// --------------------------------------------------
+FATTR name;Y
+FATTR revision;Y
+FATTR Title;Y
+FATTR current;Y
+FATTR owner;Y
+FATTR modified;Y
+FATTR Originator;Y
+FATTR originated;Y
+// --------------------------------------------------
+FUNC Read
+// --------------------------------------------------
+FATTR name;N
+FATTR revision;N
+FATTR Title;N
+FATTR current;N
+FATTR owner;N
+FATTR modified;N
+FATTR Originator;N
+FATTR originated;N
+// --------------------------------------------------
+FUNC Write
+// --------------------------------------------------
+FATTR name;N
+FATTR revision;N
+FATTR description;N
+FATTR Title;N
+FATTR current;N
+FATTR owner;N
+FATTR modified;N
+FATTR Originator;N
+FATTR originated;N

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="DS_DELMIAMGAConfiguration" xmlns:tns="DS_DELMIAMGAConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="Config">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="DELAsmProcessCanUseCnx" type="tns:EditLinkType" minOccurs="0"/>
+        <xs:element name="HistorizationLinkRefRef" type="tns:EditLinkType" minOccurs="0"/>
+        <xs:element name="HistorizationLinkRefRef_inverse" type="tns:EditLinkType" minOccurs="0"/>
+        <xs:element name="DELLmiProductionSystemOutputCnxToMBOM" type="tns:EditLinkType" minOccurs="0"/>
+        <xs:element name="DELLmiMaterialPathCnxCust" type="tns:EditLinkType" minOccurs="0"/>
+        <xs:element name="DELLmiMaterialPathCnxCust_inverse" type="tns:EditLinkType" minOccurs="0"/>
+        <xs:element name="DELLmiTimeConstraintCnx" type="tns:EditLinkType" minOccurs="0"/>
+        <xs:element name="DELLmiTimeConstraintCnx_inverse" type="tns:EditLinkType" minOccurs="0"/>
+        <xs:element name="ProcessImplementLinkOcc" type="tns:EditLinkType" minOccurs="0"/>
+        <xs:element name="ProcessImplementLinkOcc_inverse" type="tns:EditLinkType" minOccurs="0"/>
+      </xs:all>
+      <xs:attribute name="Title" type="xs:string" use="required" />
+      <xs:attribute name="Description" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="EditLinkType">
+    <xs:sequence>
+      <xs:element name="Attribute" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+          <xs:attribute name="dicoType" type="xs:string" use="required"/>
+          <xs:attribute name="readOnly" type="xs:boolean" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

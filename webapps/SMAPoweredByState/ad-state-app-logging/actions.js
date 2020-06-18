@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define(["DS/SMAPoweredByState/ad-state-app-logging/action-types"],function(b){var a={};a.enableReduxLogger=function(){return{type:b.ENABLE_REDUX_LOGGER}};a.disableReduxLogger=function(){return{type:b.DISABLE_REDUX_LOGGER}};return a});

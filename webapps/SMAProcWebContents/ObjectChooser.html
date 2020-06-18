@@ -1,0 +1,37 @@
+<dom-module id="pcw-sdk-object-chooser">
+    <template>
+        <style>
+            :host {
+                display: block;
+                width: 100%;
+            }
+
+            .content>pcw-sdk-content-dropdown {
+                display: inline-block;
+            }
+
+            .content>pcw-sdk-parameter-chooser {
+                display: none;
+            }
+
+            .param pcw-sdk-content-dropdown {
+                display: none;
+            }
+
+            .param pcw-sdk-parameter-chooser {
+                display: inline-block;
+            }
+        </style>
+
+        <pcw-sdk-content-toolbar id="toolbar" category="[[category]]" plm-types="{{plmTypes}}" file-types="{{fileTypes}}" hidden$="[[disabled]]"></pcw-sdk-content-toolbar>
+
+        <div style="display:flex;">
+            <pcw-sdk-combo-box id="selectCategory" style="width:120px;margin-right:5px;" disabled="{{disabled}}"></pcw-sdk-combo-box>
+            <div class$="[[category]]" style="flex-grow:2;">
+                <pcw-sdk-content-dropdown id="contentDropDown" plm-types="{{plmTypes}}" data-handler="{{dataHandler}}" disabled="{{disabled}}"></pcw-sdk-content-dropdown>
+                <pcw-sdk-parameter-chooser id="parameterChooser" disabled="{{disabled}}" datatype="Object" source="" structure="Scalar" mode="[[parameterMode]]"
+                    autoselect></pcw-sdk-parameter-chooser>
+            </div>
+        </div>
+    </template>
+</dom-module>

@@ -1,0 +1,1 @@
+define("DS/OnePart3DSearch/OnePart3DSearch_zh",{});define("DS/OnePart3DSearch/assets/nls/onepart",{facet:{properties:{title:"特性"}},action:{openInOnePart:{title:"在 OnePart 中打开..."}},error:{cannotRetrieveAppInfo:"检索应用信息时出错"}});

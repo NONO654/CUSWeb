@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+
+      <!-- Application Metas -->
+      <title>3D Explore Viewer</title>
+      <meta name="author" content="Dassault Systèmes" />
+      <meta name="brand" content="ENOVIA" />
+      <meta name="autoRefresh" content="0" />
+      <meta name="description" content="ENOVIA 3D Explore Viewer" />
+
+      <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+      <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+
+      <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+      <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+      <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+      <script type="text/javascript" src="ENX3DScene.js"></script>
+      <script type="text/javascript" src="ENX3DSceneV2.js"></script>
+      <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+      <widget:preferences>
+      </widget:preferences>
+
+      <!-- Application JavaScript Source -->
+      <script type="text/javascript">
+            window.top.performance.mark('ENX3DScene_app_load_html');
+            'use strict';
+            var widgetDomain = null,
+                  getURLParameter = function(parameterName) {
+                        function localGetURLParameter(name) {
+                              return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(widgetDomain) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+                        }
+                        if (widgetDomain === null) {
+                              widgetDomain = decodeURIComponent((new RegExp('[?|&]widgetDomain=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+                        }
+                        if (widgetDomain) {
+                              return localGetURLParameter(parameterName);
+                        } else {
+                              return null;
+                        }
+                  };
+            var x3DScene;
+            if (getURLParameter('activateLandingPage') !== 'false') {
+                  x3DScene = new ENX3DSceneV2({
+                        'widget': widget
+                  });
+                  // x3DScene = new ENX3DSceneLandingPage({
+                  //       'widget': widget
+                  // });
+            } else {
+                  x3DScene = new ENX3DScene({
+                        'widget': widget
+                  });
+            }
+            widget.onDestroy = function() {
+                  x3DScene.onDestroy();
+            };
+            //]]>
+      </script>
+</head>
+
+<body>
+      <div class="spinner spinner-lg spinning fade in" style="transform: translate3d(0px, 0px, 0px); display: inline-block; margin-top: 20%; margin-left: 45%;">
+            <span class="spinner-bar"></span>
+            <span class="spinner-bar spinner-bar1"></span>
+            <span class="spinner-bar spinner-bar2"></span>
+            <span class="spinner-bar spinner-bar3"></span>
+      </div>
+</body>
+
+</html>

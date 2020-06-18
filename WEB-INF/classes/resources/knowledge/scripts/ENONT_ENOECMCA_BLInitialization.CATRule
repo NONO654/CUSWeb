@@ -1,0 +1,57 @@
+/* Define constants*/
+Let ModelingType(Type)
+Let ModelingTypeName(String)
+Let AbbreviatedBaseTypeName(String)
+Let Separator(String) 
+Let TypeTitle(STRING)
+Let TypePackage(STRING)
+Let NamingTypePrefix(STRING)
+Let SiteAffix(STRING)
+Let NamingTypeSuffix(STRING)
+Let IDType(STRING)
+Let ID(STRING)
+Let IDNumber(STRING)
+Let IDVNumber(STRING)
+Let NumberAlignment(INTEGER)
+Let IdStringAsPrefix=""
+Let ObjectCustoType=""
+Let UniqueKeyForCustoType=""
+
+/* Init some constants */
+NumberAlignment=8
+AbbreviatedBaseTypeName="CA" 
+Separator="-"
+SiteAffix=""
+
+/* Verify input parameters */
+if ( Parameters->HasAttribute("IdString") == true ) {
+    IdStringAsPrefix = Parameters->GetAttributeString("IdString")
+}
+
+/* PrimaryType is the custom type of a DS Modeling type */
+ModelingType = ThisObject.ModelerType
+if (ModelingType<>NULL){
+   ModelingTypeName=ModelingType.Name 
+}
+
+/* Retrieve Naming parameters */
+RetrieveNamingParametersWithSeparator(ModelingTypeName,NamingTypePrefix,SiteAffix,NamingTypeSuffix,Separator,AbbreviatedBaseTypeName)
+
+/* Management of Common Abbreviation requires the ModelingTypeName to be rerouted*/
+if (ModelingTypeName <> AbbreviatedBaseTypeName) {
+	NumberAlignment=NumberAlignment+1 
+}
+
+/* Numbering on AbbreviatedBaseType */
+STAutoNumbers(AbbreviatedBaseTypeName, NumberAlignment, IDNumber, IDVNumber)
+
+/* Define name */
+ID=NamingTypePrefix
+
+if (SiteAffix<>"") ID=ID+Separator+SiteAffix+Separator
+
+ID=ID+IDNumber
+
+if (NamingTypeSuffix<>"") ID=ID+Separator+NamingTypeSuffix
+
+ThisObject.name = ID

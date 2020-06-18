@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Copyright 2018, Dassault Systemes. All rights reserved. -->
+
+        <!-- Widget title -->
+        <title>Layout switcher</title>
+
+        <!-- Widget metas -->
+        <meta name="description" content="Dock layout" />
+        <meta name="charset" content="utf-8" />
+
+        <!-- Special widget metas for layout -->
+        <meta name="header" content="false" />
+        <meta name="border" content="false" />
+
+        <!-- Widget js code -->
+        <script type="text/javascript">
+            require(['DS/LayoutSwitcher/Switcher'], function (Switcher) {
+                function init () {
+                    var switcher = new Switcher({ widget: widget });
+
+                    widget.addEvents({
+                        onHide: switcher.hide.bind(switcher),
+                        onShow: switcher.show.bind(switcher),
+                        onRefresh: switcher.refresh.bind(switcher),
+                        onDuplicate: switcher.duplicateWidget.bind(switcher),
+                        onRemove: switcher.removeWidget.bind(switcher)
+                    });
+                }
+
+                if (widget.launched) {
+                    init();
+                } else {
+                    widget.addEvent('onLoad', init);
+                }
+            });
+        </script>
+    </head>
+
+    <!-- Widget HTML code -->
+    <body></body>
+
+</html>

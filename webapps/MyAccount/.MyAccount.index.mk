@@ -1,0 +1,16 @@
+m|TopFrame\MyAccount.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\MyAccount\MyAccount.css|1568749455|4704
+g|TopFrame\MyAccount.mweb\LocalGenerated\win_b64\MyAccount.css|1531550742|6111
+t|win_b64\webapps\MyAccount\MyAccount.js|1531550872|8621
+s|TopFrame\MyAccount.mweb\src\EditableTabView.js|1528386302|24535
+s|TopFrame\MyAccount.mweb\src\Column.js|1508248766|6467
+t|win_b64\webapps\MyAccount\assets\images\banner_xs.jpg|1531550871|31432
+s|TopFrame\MyAccount.mweb\src\assets\images\banner_xs.jpg|1507640006|31432
+t|win_b64\webapps\MyAccount\assets\images\banner_lg.jpg|1531550871|370045
+s|TopFrame\MyAccount.mweb\src\assets\images\banner_lg.jpg|1507640005|370045
+t|TopFrame\MyAccount.mweb\LocalGenerated\win_b64\MyAccount.css|1531550742|6111
+s|TopFrame\MyAccount.mweb\src\MyAccount.scss|1508248763|6122

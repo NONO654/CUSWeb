@@ -1,0 +1,1 @@
+define(["DS/SMAPoweredByHandler/abaqus/CreateWizardFacets"],function(b){var a=[b[2]],c=JSON.parse(JSON.stringify(b[3]));c.custom={fileSavingDisplayed:false,generateResultsDisabled:true};a.push(c);return a});

@@ -1,0 +1,11 @@
+m|CAT3DAnnotationWebUXServices\CAT3DAnnotationWorkers.mweb
+b|j|n,m
+b|c|c,m
+v|6.421.9.19282
+r|G:\R421\BSF\.
+t|win_b64\webapps\CAT3DAnnotationWorkers\CAT3DAnnotationWorkers.js|1531551068|75
+s|CAT3DAnnotationWebUXServices\CAT3DAnnotationWorkers.mweb\src\CAT3DAnnotationWorkers.js|1455529482|101
+t|win_b64\webapps\CAT3DAnnotationWorkers\CAT3DAnnotationLoadWorker.js|1570650890|17556
+s|CAT3DAnnotationWebUXServices\CAT3DAnnotationWorkers.mweb\src\CAT3DAnnotationLoadWorker.js|1570096693|53334
+t|win_b64\webapps\CAT3DAnnotationWorkers\_copyright.js|1531551066|63
+s|CAT3DAnnotationWebUXServices\CAT3DAnnotationWorkers.mweb\src\_copyright.js|1480428882|63

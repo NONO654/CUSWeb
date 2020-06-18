@@ -1,0 +1,80 @@
+
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+    <!-- Application Infos -->
+    <title>PLMParameter</title>
+    <meta name="author" content="Netvibes" />
+    <meta name="description" content="Sample code for a UWA widget with Highcharts Lib usage" />
+    <meta name="apiVersion" content="1.3" />
+    <meta name="debugMode" content="false" />
+    <meta name="strictMode" content="false" />
+    <meta name="autoRefresh" content="0" />
+
+	
+
+    <!-- UWA Environment -->
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+	<script type="text/javascript" src="../PARParameterComponent/PARComponent.js"></script>
+
+	<widget:preferences>
+       <widget:preference name="preferreddimensionsMRU" type="hidden" defaultValue="" />
+    </widget:preferences>
+    
+    <style type="text/css" >
+    .sample{
+        border:solid 1px lightgrey;
+        width:70%;
+        min-width:400px;
+        margin:10px;
+        padding:5px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #main{
+        width:80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    </style>
+
+
+    <!-- Sample code -->
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+    <script type="text/javascript">
+        /*global require, widget*/
+        var MyWidget = null,
+            environment = null,
+            depends = ['DS/PARParameterComponent/PARComponent'],
+            standaloneDepends = 'UWA/Environments/Standalone';
+
+        if (typeof widget === "undefined") {
+            depends.push(standaloneDepends);
+        }
+
+        require(depends, function(Component, Standalone) {
+            'use strict';
+
+            if (typeof widget === "undefined") {
+                environment = new Standalone();
+                environment.launchWidget();
+                MyWidget = environment.getWidget();
+            } else {
+                MyWidget = widget;
+            }
+
+            
+            if (typeof MyWidget === "object") {
+                MyWidget.addEvent('onLoad', Component.onLoad);
+            }
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>

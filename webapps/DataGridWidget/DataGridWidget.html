@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+
+        <!-- Application Metas -->
+        <title>Title of the App</title>
+        <meta name="author" content="John Doe" />
+        <meta name="description" content="A descriptive description" />
+
+        <!-- Application Standalone emulation files -->
+        <link rel="stylesheet" type="text/css"
+            href="http://uwa.netvibes.com/lib/c/UWA/assets/css/standalone.css" />
+        <script type="text/javascript"
+            src="http://uwa.netvibes.com/lib/c/UWA/js/UWA_Standalone_Alone.js"></script>
+        
+    <script type="text/javascript">
+    require(
+        // dependencies
+        [
+         	'UWA/Controls/Input',
+
+            'DS/DataGridWidget/DataGridWidget'
+        ],
+
+        // execute this callback, passing all dependencies as params
+
+        function(Input, datagrid) {
+            var WIWI = {
+                onLoad: function() { //Needed to be sure to have a widget.body
+					var that= this;
+					that.myDataGrid=new datagrid();
+					
+					widget.body.setContent(that.myDataGrid);
+					
+					that.myDataGrid.addHeader([
+					{
+						text: 'id',
+						dataIndex: 'id',
+						sortKey: function(item){
+							return item;
+							//alert('youpi1 ' +item);
+						},
+						sortable:true
+					},
+					{
+						text: 'userName',
+						dataIndex: 'userName',
+						   className: "hideAdvanced",
+						sortKey: function(item){
+							return item;
+						},
+						sortable:true
+					},
+					{
+						text: 'sortable',
+						dataIndex: 'button',
+						sortKey: function(item){
+							return item.firstChild.value;
+						}
+					}
+					]);
+					
+					that.myDataGrid.AddDatasInTable([
+					{
+						'id': '1',
+						'userName':'Guillaume',
+						'button': new UWA.Controls.Input.Select().putOptions([{value: "test1", label: "test1"},{value: "test1", label: "test1"},{value: "test1", label: "test1"}])
+					},
+					{
+						'id': '3',
+						'userName':'Francois',
+						'button': new UWA.Controls.Input.Select().putOptions([{value: "test2", label: "test2"},{value: "test2", label: "test2"},{value: "test2", label: "test2"}])
+					},
+					{
+						'id': '2',
+						'userName':'Frederic',
+						'button':  new UWA.Controls.Input.Select().putOptions([{value: "test3", label: "test3"},{value: "test3", label: "test3"},{value: "test3", label: "test3"}])
+					}
+					]);
+             //WidgetCore.helloWorld(widget);
+                },
+                onRefresh: function(){
+					var that= this;
+                	that.myDataGrid.onRefresh();
+                }
+            };
+            widget.addEvent('onLoad', WIWI.onLoad);
+            widget.addEvent('onRefresh', WIWI.onRefresh);
+        });
+   
+        </script>
+      </head>
+      <body>
+            <p>Loading...</p>
+      </body>
+</html>

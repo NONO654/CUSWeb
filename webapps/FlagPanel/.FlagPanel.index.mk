@@ -1,0 +1,14 @@
+m|Web3DUX\FlagPanel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\FlagPanel\FlagPanel.js|1555721289|14429
+s|Web3DUX\FlagPanel.mweb\src\FlagPanelManager.js|1516805390|8054
+s|Web3DUX\FlagPanel.mweb\src\FlagPanel.js|1555079741|30052
+s|Web3DUX\FlagPanel.mweb\src\FlagPanelEnums.js|1516804152|370
+t|win_b64\webapps\FlagPanel\FlagPanel.css|1568749446|4244
+g|Web3DUX\FlagPanel.mweb\LocalGenerated\win_b64\FlagPanel.css|1531550740|7327
+t|Web3DUX\FlagPanel.mweb\LocalGenerated\win_b64\FlagPanel.css|1531550740|7327
+s|Web3DUX\FlagPanel.mweb\src\FlagPanel.scss|1490947846|5242
+s|WebUiAssets\ProtectedInterfaces\_variables.uikit.scss|1513852502|5361

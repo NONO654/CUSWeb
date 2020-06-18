@@ -1,0 +1,1 @@
+define("DS/SPYUI/SPYUI_ja",{});define("DS/SPYUI/assets/nls/CATSimNavDataCameraSelector",{"static":"静止カメラ",tracking:"カメラの追跡",focus:"フォーカス"});define("DS/SPYUI/assets/nls/CATSimNavDataOverlaysManager",{title:"ストリームライン",nameAttr:"名前"});define("DS/SPYUI/assets/nls/CATSimNavDataSpeedControl",{title:"速度:"});

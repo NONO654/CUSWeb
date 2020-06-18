@@ -1,0 +1,14 @@
+m|MPFModels\MPFCompanyConstraintsModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19096
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFCompanyConstraintsModel\MPFCompanyConstraintsModel.js|1554530788|1671
+s|MPFModels\MPFCompanyConstraintsModel.mweb\src\CompanyConstraintsModel.js|1552407611|3245
+s|MPFModels\MPFCompanyConstraintsModel.mweb\src\CompanyConstraintsCollection.js|1543826751|801
+s|MPFModels\MPFCompanyConstraintsModel.mweb\src\CompanyConstraintsDataProxy.js|1543827194|929
+s|MPFModels\MPFCompanyConstraintsModel.mweb\src\MPFCompanyConstraintsModel.js|1543595906|0
+t|win_b64\webapps\MPFCompanyConstraintsModel\MPFCompanyConstraintsModel_en.js|1554530789|797
+s|MPFModels\MPFCompanyConstraintsModel.mweb\src\assets\nls\CompanyConstraintsModel_en.json|1551863442|740
+t|win_b64\webapps\MPFCompanyConstraintsModel\assets\nls\CompanyConstraintsModel_en.json|1554530787|740
+s|MPFModels\MPFCompanyConstraintsModel.mweb\src\assets\nls\CompanyConstraintsModel_en.json|1551863442|740

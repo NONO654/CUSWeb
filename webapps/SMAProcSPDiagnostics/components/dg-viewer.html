@@ -1,0 +1,220 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+
+<dom-module id="dg-viewer">
+  <style>
+    :host {
+      display: block;
+    }
+
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-content: stretch;
+      align-items: stretch;
+    }
+
+    .flex-item {
+      order: 0;
+      flex: 0 1 auto;
+      align-self: auto;
+    }
+
+    .message-container {
+      background: #242424;
+      color: white;
+      font-family: consolas;
+      font-size: smaller;
+      line-height: 1.3em;
+    }
+
+    .message-item {
+      padding: 0px 20px 2px 20px;
+      border-left: solid #03a9f400;
+    }
+
+    .message-item:hover {
+      border-left-color: #03A9F4;
+    }
+
+    .message-item[data-type="info"] {
+      color: #D5D5D5;
+      border-top: thin solid #4848487d;
+    }
+
+    .message-item[data-type="error"] {
+      color: #FF8080;
+      background: #290000;
+      border-top: thin solid #5C0000;
+    }
+
+    .message-item[data-type="error"]::before {
+      content: 'x';
+      color: white;
+      background: #EB3941;
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 2px;
+      margin-left: -15px;
+      font-size: xx-small;
+      font-weight: bold;
+      line-height: 9px;
+    }
+
+    .message-item[data-type="warn"] {
+      color: #F3D395;
+      background: #332B00;  
+      border-top: thin solid #665500;
+    }
+
+    .message-item:last-child {
+      border-bottom: thin solid;
+    }
+
+    .reference {
+      color: #ABABAB;
+    }
+
+    .origin {
+      color: #ABABAB;
+      text-decoration: underline;
+      float: right;      
+    }
+
+    .title {
+      word-wrap: break-word;
+    }
+
+
+    .content {
+      display: block;
+    }
+
+    [data-content-visible="false"] .content {
+      display: none;
+    }
+
+  
+    .collapse-icon {
+      display: inline-block;
+      margin-right: -5px;
+    }
+
+    .collapse-icon::before {
+      content: '\25b6';
+      margin-right: 2px;
+      color: #d5d5d5;
+    }
+
+    [data-content-visible="true"] > .collapse-icon {      
+      transform: rotate(90deg);
+    }
+    
+    .message-item:not([data-has-content]) .collapse-icon {
+      display: none;
+    }
+
+    .content-text {
+      color: #7CDCF0;
+      font-family: consolas;
+      font-size: small;
+      border: none;
+      background-color: transparent;
+      resize: none;
+      outline: none;
+      width: 100%;
+      margin-left: 10px;
+      overflow: hidden;
+    }
+
+    .message-item[data-type="error"] .content-text {
+      color:#D76EEC;
+    }
+
+
+  </style>
+
+  <template>
+
+    <div class="message-container flex-container" on-click="_toggleContent">
+      <template is="dom-repeat" items="{{value}}">
+        <div class="message-item flex-item" data-type$="[[item.msgType]]" data-content-visible="false" 
+          data-has-content$="{{item.hasContent}}">
+          <span class="collapse-icon"></span>
+          <span class="title">[[item.title]]</span>
+          <span class="origin">[[item.origin]]</span>
+          <div class="reference">
+            <span>[[item.$appName]]</span>
+            <span>-</span>
+            <span>[[item.$dateTime]]</span>
+          </div>
+          <div class="content">
+            <textarea class="content-text" disabled>[[item.content]]</textarea>
+          </div>
+        </div>
+      </template>
+    </div>
+
+  </template>
+  <script>
+    (function () {
+
+
+      Polymer({
+        is: 'dg-viewer',
+        
+        properties: {
+          value: {
+            type: Array
+          }
+        },
+
+        attached: function () {
+          this.value = [];
+        },
+
+        _toggleContent: function (ev) {
+          const msgItem = ev.srcElement.parentElement;
+
+          if (msgItem.classList.contains('message-item') && msgItem.hasAttribute('data-has-content')) {
+            ev.stopPropagation();
+            msgItem.dataset.contentVisible = !JSON.parse(msgItem.dataset.contentVisible);
+
+            // update the textarea size to allow its height to auto expand with the content
+            const textarea = msgItem.querySelector('.content-text');
+            window.requestAnimationFrame(() => textarea.style.height = textarea.scrollHeight + 'px');
+          }
+        },
+
+        // {title, content, origin, msgType}
+        _transform: function (data) {
+          const hasContent = !!data.content;
+
+          return {...data, hasContent};
+        },
+        
+        append: function (data) {
+          // transform the data to desired format
+          const val = this._transform(data);
+
+          //TODO: No need to show the content for all items 
+          this.push('value', val);
+        }
+
+
+
+      });
+    })();
+  </script>
+</dom-module>
+
+
+
+
+

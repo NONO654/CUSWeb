@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<probe name="CheckIndex" kind="default" unplug="true">
+	<option name="checkindex" shortname="checkindex" optional="true" hidden="false">
+		<description>
+			Validate database indexes
+		</description>
+		
+		<parameter name="MatrixRMI" optional="false" multiple="false">
+			<short-description>
+				MatrixRMI directory path
+			</short-description>
+			<description>
+				Path of the server
+			</description>
+		</parameter>
+	</option>
+	
+	<implementation>
+		<class>
+			com.dassault_systemes.infra.monitoring.mcs.CheckIndexProbe
+		</class>
+	</implementation>
+	
+	<period minutes="5"/>
+</probe>

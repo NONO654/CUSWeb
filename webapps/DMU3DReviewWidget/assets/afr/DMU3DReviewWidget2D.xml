@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="DMU3DReviewWidget2DHdr" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <!-- 2D commands from ENOPAD3DViewer AFR -->
+      <CATCommandHeader ID="RemoveAllHdr"             ClassName="DS/ENOPAD3DViewer/commands/PAD3DViewerRemoveAllCmd"        ResourceFile="ENOPAD3DViewer/ENOPAD3DViewer"/>
+      <CATCommandHeader ID="VisuReframeView"          ClassName="DS/ViewerCommands/VisuReframeViewCmd"                      ResourceFile="ViewerCommands/ViewerCommands" HelpResourceFile = "ViewerCommands/ViewerCommandsIDs"/>
+      <CATCommandHeader ID="VisuPanView"              ClassName="DS/ViewerCommands/VisuPanViewCmd"                          ResourceFile="ViewerCommands/ViewerCommands" HelpResourceFile = "ViewerCommands/ViewerCommandsIDs"/>
+      <CATCommandHeader ID="VisuZoomView"             ClassName="DS/ViewerCommands/VisuZoomViewCmd"                         ResourceFile="ViewerCommands/ViewerCommands" HelpResourceFile = "ViewerCommands/ViewerCommandsIDs"/>
+      <CATCommandHeader ID="VisuVisibleSpace"         ClassName="DS/ViewerCommands/VisuVisibleSpaceCmd"                     ResourceFile="ViewerCommands/ViewerCommands" HelpResourceFile = "ViewerCommands/ViewerCommandsIDs"/>
+
+      <!-- 2D commands from 3DReview AFR -->
+      <CATCommandHeader ID="CATWebUXSlideShowHdr" ClassName="DS/CATWebUXSlideShow/CATWebUXSlideShowCmd" ResourceFile="CATWebUXSlideShow/CATWebUXSlideShow" HelpResourceFile="CATWebUXSlideShow/CATWebUXSlideShow" Behavior="CATAfrHeaderCheck">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="ControllerID" Value="DMU3DMarkupSlideShow" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID="markerTextCmdHdr"         ClassName="DS/DMUMarker/DMUMarkerTextCreateCmd"                       ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUMarker/DMUMarker" />
+      <CATCommandHeader ID="markerCircleCmdHdr"       ClassName="DS/DMUMarker/DMUMarkerCircleCreateCmd"                     ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUMarker/DMUMarker" />
+      <CATCommandHeader ID="markerArrowCmdHdr"        ClassName="DS/DMUMarker/DMUMarkerArrowCreateCmd"                      ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUMarker/DMUMarker" />
+      <CATCommandHeader ID="markerPictureCmdHdr"      ClassName="DS/DMUMarker/DMUMarkerPictureCreateCmd"                    ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUMarker/DMUMarker" />
+      <CATCommandHeader ID="slideCmdHdr"              ClassName="DS/DMUSlideEdition/DMUCreateSlideCmd"                      ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUSlideEdition/DMUSlideEdition" />
+      <CATCommandHeader ID="slidePlayCmdHdr"          ClassName="DS/DMUPlaySlide/commands/DMUPlaySlideCmd"                  ResourceFile="DMUBaseCommands/3DPlayPro" HelpResourceFile = "DMUPlaySlide/DMUPlaySlide" Behavior="CATAfrHeaderCheck"/>
+      <CATCommandHeader ID="saveCmdHdr"               ClassName="DS/DMUPersistence/DMUSaveCmd"                              ResourceFile="DMUPersistence/DMUPersistence" HelpResourceFile = "DMUPersistence/DMUPersistence" />
+      <CATCommandHeader ID="loadCmdHdr"               ClassName="DS/DMUPersistence/DMULoadCmd"                              ResourceFile="DMUPersistence/DMUPersistence" HelpResourceFile = "DMUPersistence/DMUPersistence" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="3dReview" Value="3dReview" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <!-- Debug command used to load JSON models DO NOT ADD STARTER OF THIS CMD -->
+      <CATCommandHeader ID="LoadJSONCmdHdr" ClassName="DS/DMUReadPersistence/CAT3DReviewTestLoadCmd" />
+    </CATCmdHeadersList>
+  </Template>
+  
+  <Template syp:name="3DDesignReviewAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DDesignReviewWorkbench">
+      <CATCmdContainer Name="PADFixedArea" RepresentationType="AfrActionBarFixedSection">
+        <CATCmdStarter Name="CATWebUXSlideShowHdrStr" Command="CATWebUXSlideShowHdr" />
+      </CATCmdContainer>
+      <CATCmdContainer Name="PADView" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Command="VisuReframeView" Name="PADPADReframeCmd"/>
+        <CATCmdStarter Command="VisuPanView" Name="PADPanCmd"/>
+        <CATCmdStarter Command="VisuZoomView" Name="PADZoomCmd"/>
+        <CATCmdStarter Command="VisuVisibleSpace" Name="VisuVisibleSpaceCmd"/>
+        <CATCmdSeparator Name="PadViews_Separator"/>
+        <CATCmdStarter Command="RemoveAllHdr" Name="PADRemoveAll"/>
+      </CATCmdContainer>
+
+      <CATCmdContainer     Name="Review" Visibility="1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter     Name="Load"                Command="loadCmdHdr"           />
+        <CATCmdStarter     Name="Save"                Command="saveCmdHdr"           />
+        <CATCmdContainer Name="Marker3D" Visibility="1" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter     Name="MarkerText"          Command="markerTextCmdHdr"     />
+          <CATCmdStarter     Name="MarkerCircle"        Command="markerCircleCmdHdr"   />
+          <CATCmdStarter     Name="MarkerArrow"         Command="markerArrowCmdHdr"    />
+          <CATCmdStarter     Name="MarkerPicture"       Command="markerPictureCmdHdr" />
+        </CATCmdContainer>
+        <CATCmdStarter Name="Slide" Command="slideCmdHdr" />
+        <CATCmdStarter Name="PlaySlide" Command="slidePlayCmdHdr" />
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

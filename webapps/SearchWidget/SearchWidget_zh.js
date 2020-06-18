@@ -1,0 +1,1 @@
+define("DS/SearchWidget/SearchWidget_zh",{});define("DS/SearchWidget/assets/nls/langSW",{hintSearch:"搜索...",peopleTile:"人员",CSTitle:"协作区",OrgTitle:"组织",UserGrpTitle:"用户组",MoreButton:"更多",ErrorTimeOut:"超时：搜索无法继续",UnknownError:"出现错误","This character is forbidden : {0}":"禁止使用该字符：{0}",WarningNotFound:"未发现结果",AR_SearchButton:"搜索"});

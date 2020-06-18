@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<title>Apps</title>
+<meta name="author" content="Julien EDMOND"/>
+<meta name="description" content="A descriptive description"/>
+
+<link rel="icon" type="image/x-icon" href="#MYAPPSBASEURL#/widget/appslist/favicon.png"/>
+<link rel="stylesheet" type="text/css"
+      href="#MYAPPSBASEURL#/widget/appslist/apps.css"/>
+<style type="text/css">
+    .border .moduleContent,
+    .moduleContent {
+        padding: 0;
+    }
+
+    .information {
+        border: 1px solid #DDD;
+        padding: 8px;
+        text-align: justify;
+        margin: 5px;
+    }
+
+    .head {
+        padding: 8px;
+        line-height: 20px;
+        text-align: left;
+        vertical-align: middle;
+        border-top: 1px solid #DDD;
+        background-color: #F0F0F0
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .line {
+        padding: 8px;
+        line-height: 20px;
+        text-align: left;
+        vertical-align: middle;
+        border-top: 1px solid #DDD;
+    }
+
+    .legal-row {
+        float: left;
+        width: 33%;
+    }
+
+    .input {
+        width: 45%;
+    }
+
+    .accordion-open div {
+        background: transparent url(img/actions.png) no-repeat 0 -127px;
+        padding-left: 20px;
+    }
+
+    .accordion-closed div {
+        background: transparent url(img/actions.png) no-repeat 0 -288px;
+        padding-left: 20px;
+    }
+
+    .add-img:hover {
+        opacity: 0.8;
+    }
+
+    .add-img {
+        vertical-align: middle;
+        cursor: pointer;
+        height: 20px;
+        margin-left: 5px;
+        margin-right: 20px;
+        opacity: 0.3;
+        transition: all 0.3s ease 0s;
+        width: 20px;
+    }
+</style>
+
+<script type="text/javascript">
+//<![CDATA[
+require(
+        [
+            'UWA/Core',
+            'UWA/Fx'
+        ],
+        /**
+         *
+         * @param {UWA} UWA
+         * @param {Fx} Fx
+         */
+         function (UWA, Fx) {
+            'use strict';
+
+            var tools = {
+                /**
+                 * Manage error
+                 *
+                 */
+                error: {
+                    /**
+                     * Check if the error is a passport forbidden (cas session lost)
+                     *
+                     */
+                    isPassportForbiden: function (error) {
+                        return error.match(/.*passport_forbidden*/i) !== null;
+                    },
+                    /**
+                     * Check if the error is a curl error timeout
+                     *
+                     */
+                    isCurlTimeout: function (error) {
+                        UWA.log(error);
+                        //Error in cURL request: Operation timed out after 10001 milliseconds with 0 bytes received
+                        return error.match(/.*curl.*.*operation.*timed out.*/i) !== null;
+                    }
+                },
+                /**
+                 * Display custom alert message
+                 * @param message
+                 * @param type
+                 */
+                message: function (message, type) {
+                    /*
+                    TODO Implement me when possible - For WP migration
+                    var myControl = new UWA.Controls.Notify();
+                    myControl.addMessage(message);
+                    myControl.inject(widget.body, 'top');
+                    myControl.showMessage('Hello');
+                    return ;
+                    */
+                    var content = document.body.getElement('#divTabs .uwa-scroller-wrapper'),
+                            customMessadeDiv = document.body.getElement('#custom-message'),
+                            fx = null,
+                            divTabsPaddingLeft,
+                            left,
+                            customMessadeDivOpacity;
+                    if (!customMessadeDiv) {
+                        customMessadeDiv = UWA.createElement('div', {
+                            'id': 'custom-message',
+                            'class': 'alert'
+                        });
+                        content.grab(customMessadeDiv, 'top');
+                    } else {
+                        //Div exist remove alert class
+                        customMessadeDiv.removeClassName('alert-success');
+                        customMessadeDiv.removeClassName('alert-error');
+                    }
+
+                    //Set css alert class + set text
+                    customMessadeDiv.setText(message);
+                    customMessadeDiv.addClassName('alert-' + type);
+
+                    divTabsPaddingLeft = parseInt(document.getElementById('divTabs').getStyle('padding-left'), 10);
+                    left = ((document.body.getWidth() - customMessadeDiv.getWidth()) / 2) - divTabsPaddingLeft;
+                    customMessadeDiv.setStyles({
+                        'left': left + 'px'
+                    });
+
+                    //show
+                    fx = new Fx(customMessadeDiv, {
+                        duration: 450,
+                        transition: 'linear',
+                        events: {
+                            onStart: function () {
+                                // Callback trigered when Animation Start
+                            },
+                            onComplete: function () {
+                                // Callback trigered when Animation End
+                            }
+                        }
+                    });
+
+                    customMessadeDivOpacity = document.body.getElement('#custom-message').getOpacity();
+                    if (isNaN(customMessadeDivOpacity) || customMessadeDivOpacity < 1) {
+                        // Run Show Fx
+                        fx.start({
+                            opacity: [0, 1]
+                        });
+                    }
+
+                    //hide
+                    fx = new Fx(customMessadeDiv, {
+                        duration: 450,
+                        transition: 'linear',
+                        events: {
+                            onStart: function () {
+                                // Callback trigered when Animation Start
+                            },
+                            onComplete: function () {
+                                // Callback trigered when Animation End
+                            }
+                        }
+                    });
+
+
+                    //hide after 5sc
+                    setTimeout(function () {
+                        var customMessadeDivOpacity = document.body.getElement('#custom-message').getOpacity();
+                        if (customMessadeDivOpacity === 1) {
+                            // Run Hide Fx
+                            fx.start({
+                                opacity: [1, 0]
+                            });
+                        }
+                    }, 3000);
+
+                }
+            };
+
+            /**
+             * Success alert
+             * @param message
+             */
+            tools.message.success = function (message) {
+                tools.message(message, 'success');
+            };
+
+            /**
+             * Error alert
+             * @param message
+             */
+            tools.message.alert = function (message) {
+                tools.message(message, 'error');
+            };
+
+            /**
+             * Ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             * @param method
+             */
+            tools.request = function (url, params, callbacks, method) {
+                method = method || 'GET';
+
+                var requestSettings = {
+                            timeout: 15000,
+                            method: method,
+                            type: 'json',
+                            headers: {
+                                Accept: 'application/ds-json',
+                                'Accept-Language': MyWidget.getLang()
+                            },
+                            onComplete: function (data) {
+                                var RowData = data,
+                                        error;
+                                //manage empty response
+                                data = (data && data !== '') ? UWA.Json.decode(data) : {};
+                                if (data) {
+                                    if ((data.code && data.code !== '0') || data.error) {
+                                        error = (data.message && data.message !== '') ? data.message : data.error;
+                                        if (tools.error.isPassportForbiden(error)) {
+                                            location.reload();
+                                        } else if (tools.error.isCurlTimeout(error)) {
+                                            //if curl timeout error
+                                            //no problem its normal.... reload widgets....
+                                            MyWidget.onLoad();
+                                        } else {
+                                            widget.unmask();
+                                            tools.message.alert(error);
+                                        }
+                                    } else {
+                                        if (typeof callbacks.onComplete === 'function') {
+                                            callbacks.onComplete(data);
+                                        }
+                                    }
+                                } else {
+                                    tools.message.alert(RowData);
+                                }
+                            },
+                            onFailure: function (data) {
+                                if (typeof callbacks.onFailure === 'function') {
+                                    callbacks.onFailure(data.error);
+                                } else {
+                                    UWA.log(data.error);
+                                }
+                            }
+                        },
+                        urlWithParams,
+                        proxUrl;
+
+
+                params = UWA.Utils.toQueryString(params);
+                params = (params.length > 0) ? '?' + params : '';
+                urlWithParams = url + params;
+                proxUrl = UWA.Data.proxifyUrl(urlWithParams, {proxy: 'passport'});
+                UWA.Ajax.request(proxUrl, requestSettings);
+            };
+
+            /**
+             * GET ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.get = function (url, params, callbacks) {
+                tools.request(url, params, callbacks, 'GET');
+            };
+
+            /**
+             * PUT ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.put = function (url, params, callbacks) {
+                tools.request(url, params, callbacks, 'GET');
+            };
+
+            /**
+             * POST ajax request for myapps backend
+             * @param url
+             * @param params
+             * @param callbacks
+             */
+            tools.request.post = function (url, params, callbacks) {
+                tools.request(url, params, callbacks, 'POST');
+            };
+
+            /**
+             * Widget unmask
+             */
+            widget.unmask = function () {
+                var loadingDiv = widget.getElement('.widget-loading');
+                if (loadingDiv) {
+                    loadingDiv.setStyles({
+                        display: 'none'
+                    });
+                }
+            };
+
+            /**
+             * Widget mask
+             */
+            widget.mask = function () {
+                var loadingDiv = widget.getElement('.widget-loading'),
+                        widgetSize = widget.body.getSize();
+                if (!loadingDiv) {
+                    widget.body.grab(UWA.createElement('div', {
+                        'class': 'widget-loading'
+                    }), 'top');
+
+                    loadingDiv = widget.getElement('.widget-loading');
+                }
+
+                //sync size of loader
+                loadingDiv.setStyles({
+                    height: widgetSize.height + 'px',
+                    width: widgetSize.width + 'px',
+                    display: 'block'
+                });
+            };
+
+            /**
+             *
+             * @type {{}}
+             */
+            tools.proxy = {};
+            /**
+             *
+             * @type {string}
+             */
+            tools.proxy.baseUrl = '#MYAPPSBASEURL#' + '/';
+            /**
+             *
+             * @type {string}
+             */
+            tools.proxy.baseUrlBackend = tools.proxy.baseUrl + 'resources/AppsMngt/';
+            /**
+             *
+             * @type {string}
+             */
+            tools.proxy.userlegal = tools.proxy.baseUrlBackend + 'user/getlegal';
+            /**
+             *
+             * @type {string}
+             */
+            tools.proxy.environmentSetlegal = tools.proxy.baseUrlBackend + 'environment/setlegal/index.php';
+
+            var MyWidget = {
+                data: {},
+                /**
+                 * Get the user lang
+                 * @returns {string}
+                 */
+                getLang: function () {
+                    return widget.lang.substr(0,2);
+                },
+                /**
+                 * Load I18n
+                 * @param callback - the callback function
+                 */
+                loadI18n: function () {
+                     var params = {};
+                     tools.proxy.i18n = tools.proxy.baseUrl + 'widget/legalManagement/lang/' + MyWidget.getLang()  + '.json';
+                     tools.request.get(tools.proxy.i18n, params, {
+                         onComplete: function(data){
+                            UWA.i18n(data);
+                            MyWidget.onInit();
+                         }
+                     });
+
+                },
+                /**
+                 * Return the filename of a file path
+                 * @param filepath
+                 * @returns {string}
+                 */
+                getFileName: function (filepath) {
+                    var n = filepath.lastIndexOf('/');
+                    return filepath.substr(n + 1);
+                },
+                /**
+                 * Save the TOS
+                 * @param platformId
+                 * @param url
+                 */
+                saveToS: function (platformId, url) {
+                    var params = {
+                        envid: platformId,
+                        tos: url
+                    };
+                    tools.request.post(tools.proxy.environmentSetlegal, params, {
+                        onComplete: function () {
+                            MyWidget.setData(platformId, 'tos', url);
+                            tools.message.success(UWA.i18n('Term of service has been updated'));
+                        }
+                    });
+                },
+                /**
+                 * Save the data Privacy
+                 * @param platformId
+                 * @param url
+                 */
+                saveDP: function (platformId, url) {
+                    var params = {
+                        envid: platformId,
+                        dp: url
+                    };
+                    tools.request.post(tools.proxy.environmentSetlegal, params, {
+                        onComplete: function () {
+                            tools.message.success(UWA.i18n('Data Privacy has been updated'));
+                            MyWidget.setData(platformId, 'dp', url);
+                        }
+                    });
+                },
+                /**
+                 * The the data
+                 * @param platformId
+                 * @param key
+                 * @param value
+                 */
+                setData: function (platformId, key, value) {
+                    var i = 0, len = MyWidget.data.length;
+                    for (; i < len; i++) {
+                        if (MyWidget.data[i].id === platformId) {
+                            MyWidget.data[i][key] = value;
+                            var father = widget.getElement('#platform-' + MyWidget.data[i].id + '-' + widget.id);
+                            var platformDetails = widget.getElement('#platform-details-' + MyWidget.data[i].id + '-' + widget.id);
+                            if (platformDetails) {
+                                platformDetails.destroy();
+                            }
+                            MyWidget.buildPlaformLegalDetails(father, MyWidget.data[i].id, MyWidget.data[i]);
+                        }
+                    }
+                },
+                /**
+                 * Build the Platform details
+                 * @param father
+                 * @param platformId
+                 * @param data
+                 */
+                buildPlaformLegalDetails: function (father, platformId, data) {
+                    var wrapper = UWA.createElement('div', {
+                        id: 'platform-details-' + platformId + '-' + widget.id
+                    });
+
+                    UWA.createElement('div', {
+                        'class': 'line',
+                        html: [
+                            {
+                                'class': 'edit',
+                                styles: (data.tos === '') ? '' : {display: 'none'},
+                                html: [
+                                    {
+                                        'class': 'legal-row',
+                                        tag: 'div',
+                                        text: UWA.i18n('Term of use')
+                                    },
+                                    {
+                                        'class': 'input',
+                                        tag: 'input',
+                                        value: (data.tos) ? data.tos : '',
+                                        events: {
+                                            keypress: function (event) {
+                                                if (event.keyCode === 13) {
+                                                    var url = this.value;
+                                                    var img = this.getParent().getElement('.add-img');
+                                                    img.src = tools.proxy.baseUrl + 'widget/legalManagement/img/loader-legal.gif';
+                                                    MyWidget.saveToS(platformId, url);
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        'class': 'add-img',
+                                        tag: 'img',
+                                        src: tools.proxy.baseUrl + 'widget/userslist/img/inviteuser.png',
+                                        events: {
+                                            click: function () {
+                                                var url = this.getParent().getElement('input').value;
+                                                this.src = tools.proxy.baseUrl + 'widget/legalManagement/img/loader-legal.gif';
+                                                MyWidget.saveToS(platformId, url);
+                                            }
+                                        }
+                                    },
+                                    (data.tos === '') ? {} : {
+                                        tag: 'a',
+                                        text: UWA.i18n('Cancel'),
+                                        href: '#',
+                                        events: {
+                                            click: function () {
+                                                this.getParent().getParent().getElement('.view').show();
+                                                this.getParent().hide();
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                'class': 'view ',
+                                styles: (data.tos === '') ? {display: 'none'} : '',
+                                html: [
+                                    {
+                                        'class': 'legal-row',
+                                        tag: 'div',
+                                        text: UWA.i18n('Term of use')
+                                    },
+                                    {
+                                        'class': 'legal-row',
+                                        html: '<a href="' + data.tos + '">' + MyWidget.getFileName(data.tos) + '</a>'
+                                    },
+                                    {
+                                        tag: 'a',
+                                        text: UWA.i18n('Edit'),
+                                        href: '#',
+                                        events: {
+                                            click: function () {
+                                                this.getParent().getParent().getElement('.edit').show();
+                                                this.getParent().hide();
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }).inject(wrapper);
+
+                    UWA.createElement('div', {
+                        'class': 'line',
+                        html: [
+                            {
+                                'class': 'edit',
+                                styles: (data.dp === '') ? '' : {display: 'none'},
+                                html: [
+                                    {
+                                        'class': 'legal-row',
+                                        tag: 'div',
+                                        text: UWA.i18n('Data Privacy')
+                                    },
+                                    {
+                                        'class': 'input',
+                                        tag: 'input',
+                                        value: (data.dp) ? data.dp : '',
+                                        events: {
+                                            keypress: function (event) {
+                                                if (event.keyCode === 13) {
+                                                    var url = this.value;
+                                                    var img = this.getParent().getElement('.add-img');
+                                                    img.src = tools.proxy.baseUrl + 'widget/legalManagement/img/loader-legal.gif';
+                                                    MyWidget.saveDP(platformId, url);
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        'class': 'add-img',
+                                        tag: 'img',
+                                        src: tools.proxy.baseUrl + 'widget/userslist/img/inviteuser.png',
+                                        events: {
+                                            click: function () {
+                                                var url = this.getParent().getElement('input').value;
+                                                this.src = tools.proxy.baseUrl + 'widget/legalManagement/img/loader-legal.gif';
+                                                MyWidget.saveDP(platformId, url);
+                                            }
+                                        }
+                                    },
+                                    (data.dp === '') ? {} : {
+                                        tag: 'a',
+                                        text: UWA.i18n('Cancel'),
+                                        href: '#',
+                                        events: {
+                                            click: function () {
+                                                this.getParent().getParent().getElement('.view').show();
+                                                this.getParent().hide();
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                'class': 'view ',
+                                styles: (data.dp === '') ? {display: 'none'} : '',
+                                html: [
+                                    {
+                                        'class': 'legal-row',
+                                        tag: 'div',
+                                        text: UWA.i18n('Data Privacy')
+                                    },
+                                    {
+                                        'class': 'legal-row',
+                                        html: '<a href="' + data.dp + '">' + MyWidget.getFileName(data.dp) + '</a>'
+                                    },
+                                    {
+                                        tag: 'a',
+                                        text: UWA.i18n('Edit'),
+                                        href: '#',
+                                        events: {
+                                            click: function () {
+                                                this.getParent().getParent().getElement('.edit').show();
+                                                this.getParent().hide();
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }).inject(wrapper);
+                    wrapper.inject(father, 'after');
+                },
+                /**
+                 * Build the platform accordion
+                 * @param data
+                 */
+                buildPlaformLegal: function (data) {
+                    UWA.createElement('div', {
+                        'class': 'head accordion-closed pointer',
+                        id: 'platform-' + data.id + '-' + widget.id,
+                        html: {
+                            tag: 'div',
+                            text: data.displayName
+                        },
+                        events: {
+                            'click': function () {
+                                var platformDetails = null;
+                                if (this.hasClassName('accordion-closed')) {
+                                    this.removeClassName('accordion-closed');
+                                    this.addClassName('accordion-open');
+                                    platformDetails = widget.getElement('#platform-details-' + data.id + '-' + widget.id);
+                                    if (platformDetails) {
+                                        platformDetails.show();
+                                    } else {
+                                        MyWidget.buildPlaformLegalDetails(this, data.id, data);
+                                    }
+                                } else {
+                                    this.removeClassName('accordion-open');
+                                    this.addClassName('accordion-closed');
+                                    platformDetails = widget.getElement('#platform-details-' + data.id + '-' + widget.id);
+                                    if (platformDetails) {
+                                        platformDetails.hide();
+                                    }
+                                }
+                            }
+                        }
+                    }).inject(widget.body);
+
+
+                },
+                /**
+                 * Build the information panel.
+                 */
+                buildInformationPanel: function () {
+                    UWA.createElement('div', {
+                        'class': 'information',
+                        text: UWA.i18n('LegalTextInformation')
+                    }).inject(widget.body);
+                },
+                /**
+                 * Init of widget.
+                 */
+                onInit: function () {
+                    widget.setTitle(UWA.i18n('WidgetTitle'));
+                    MyWidget.onLoad();
+                },
+                /**
+                 * The onLoad() function is the first one,
+                 * it will be triggered by widget "onLoad" event.
+                 */
+                onLoad: function () {
+                    widget.mask();
+                    tools.request.get(tools.proxy.userlegal, {}, {
+                        onComplete: function (data) {
+                            widget.body.empty();
+                            data = data.tos;
+                            MyWidget.data = data;
+                            var i = 0, len = data.length;
+                            for (; i < len; i++) {
+                                if (data[i].manager) {
+                                    MyWidget.buildPlaformLegal(data[i]);
+                                }
+                            }
+                            MyWidget.buildInformationPanel();
+                        }
+                    });
+
+                }
+            };
+
+            /**
+             * The "onLoad" event is the very first event triggered when
+             * the widget is fully loaded or when the preferences are validated.
+             * Here, we add MyWidget.onLoad() function as "onLoad" event
+             * listener on the widget.
+             */
+            widget.addEvents({
+                'onLoad': MyWidget.loadI18n,
+                'onRefresh': MyWidget.onLoad
+            });
+        });
+//]]>
+</script>
+</head>
+<body>
+<div style="height: 300px"></div>
+</body>
+</html>

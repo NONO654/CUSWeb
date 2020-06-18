@@ -1,0 +1,9 @@
+m|VCXWebGUIInfra\VCXWebGUIInfra.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\VCXWebGUIInfra\VCXWebGUIInfra.js|1548105494|11281
+s|VCXWebGUIInfra\VCXWebGUIInfra.mweb\src\VCXArcBar.js|1547739812|26130
+t|win_b64\webapps\VCXWebGUIInfra\VCXWebGUIInfra.css|1568749473|1340
+s|VCXWebGUIInfra\VCXWebGUIInfra.mweb\src\VCXArcBar.css|1541498010|1668

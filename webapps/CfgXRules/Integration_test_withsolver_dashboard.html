@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+	<title>Expression Rules</title>
+	<meta charset="ISO-8859-1" />
+	<meta name="author" content="Dassault Syst�mes" />
+    <meta name="description" content="ENOVIA Enterprise Rules" />
+    <meta name="apiVersion" content="1.3" />
+    <meta name="debugMode" content="false" />
+    <meta name="strictMode" content="false" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../UWA2/js/UWA_Standalone_Alone.js"></script> <!-- omagad proxy otherwise, take it on wrong level -->
+    <!-- <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script> -->
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+    <!--
+    <link rel="stylesheet" type="text/css" href="assets/styles/wrappedTable.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles/wrappedController.css">
+   -->
+   	<widget:preferences>
+        <preference name="view" type="list" label="View" defaultValue="Normal">
+            <option value="normal" label="Normal" />
+            <option value="channel" label="Channel" />
+        </preference>
+    </widget:preferences>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        'use strict';
+        require(["DS/CfgXRules/RuleExpressionComponent/Presenter/RuleExpressionPresenter",
+        "DS/CfgXRules/Commons/Presenters/VariabilityCriteriaSelector",
+        "DS/CfgXRules/Commons/Utils/dictionaryCfgConverter",
+        "DS/CfgXRules/RuleExpressionComponent/LanguageInformationComponent/Model/LanguageInformationModelFTR",
+        "DS/CfgXRules/RuleExpressionComponent/Presenter/RuleExpressionComponentExpressionGenerator",
+        "DS/CfgXRules/RuleExpressionComponent/Presenter/RuleExpressionComponentWrappedExpressionGenerator",
+        "DS/CfgXRules/Commons/Utils/SolverServices",
+        "DS/UIKIT/UIKIT"
+        ],
+            function (RuleExpressionPresenter,
+                VariabilityCriteriaSelector,
+                dictionaryCfgConverter,
+                LanguageInformationModelNextGen,
+                RuleExpressionComponentExpressionGenerator,
+                RuleExpressionComponentWrappedExpressionGenerator,
+                SolverServices,
+                randomUIKIT)
+            {
+                widget.body.style.height = "100%";
+                var solverKey = null;
+                //widget.onDestroy = function (e)
+                //{
+                //    console.log("destroy widget");
+                //    if (solverKey)
+                //    {
+                //        console.log("destroy solver");
+                //        SolverServices.release(solverKey);
+                //    }
+                //}
+                //widget.onRefresh = function(e)
+                //{                   
+                //    console.log("refresh widget");     
+                //    if (solverKey)
+                //    {
+                //        console.log("destroy solver");
+                //        SolverServices.release(solverKey);
+                //    }
+                //    widget.refresh();
+                //}
+
+
+
+                widget.addEvents(
+                {
+                    onLoad: function ()
+                    {
+                        var theRules = [];
+                        theRules = [{
+                            id: "MR-0000001",
+                            type: "table",
+                            solverExpression: 'MREV1:{"version":"1.0.1","expression":"NOT ( id_battery1 ) OR NOT ( id_color1 )","defaultExpression":""}',
+                            name: "my matrix rule name 1"
+                        }];
+                        var fullDictionary = {
+                            _version: "2.0",
+                            portfolioClasses: [{
+                                name: "Model",
+                                id: "Model_classId",
+                                portfolioComponents: [{
+                                    name: "Model1",
+                                    id: "Model_ID",
+                                    portfolioClasses: [],
+                                    rules: theRules,
+                                    variantClasses: [{
+                                        id: "idbattery",
+                                        name: "Battery",
+                                        variants: [
+                                        { name: "battery1", id: "id_battery1" },
+                                        { name: "battery2", id: "id_battery2" },
+                                        { name: "battery3", id: "id_battery3" }],
+                                        isInherited: false
+                                    }, {
+                                        name: "Color",
+                                        id: "idcolor",
+                                        variants: [
+                                        { name: "color1", id: "id_color1" },
+                                        { name: "color2", id: "id_color2" }],
+                                        isInherited: true
+                                    }],
+                                    options: [{ name: "option", id: "optionid" },
+                                    { name: "option2", id: "optionid2" },
+                                    { name: "option3", id: "optionid3" }],
+
+                                    packs: [{ name: "apack", id: "packid", content: ["optionid", "optionid2"] }]
+                                }]
+
+                            }]
+                        };
+
+                        var currentExpression = {};
+                        currentExpression.items = [];
+                        currentExpression.items.push({ id: "idbattery" }, { id: "notfound" });
+                        //currentExpression.items.push({ id: "idbattery" });
+                        var autoCompletePartialRuleModel = {
+                            currentExpression: currentExpression
+                        };
+
+                        var onSolverDicoLoaded = function (res)
+                        {
+                            var ruleExprModel = {
+                                fullDictionary: fullDictionary,
+                                autoCompleteRuleModel: autoCompletePartialRuleModel,
+                                languageInformation: LanguageInformationModelSample,
+                                solverKey: solverKey,
+                                editable: true
+                            };
+
+                            var slideInAction = {
+                                text: "Open Dictionary",
+                                title: "Open Dictionary",
+                                icon: "plus",
+                                selected: false,
+                                handler: function (that)
+                                {
+                                    var dicoV1 = dictionaryCfgConverter.convertFromV2toV1(fullDictionary);
+                                    console.log("V1 youuuuu");
+                                    if (!this.criteriaSelector)
+                                    {
+                                        this.criteriaSelector = new VariabilityCriteriaSelector({
+                                            parentContainer: that.container,
+                                            actionView: this,
+                                            dictionaryJSON: dicoV1
+                                        });
+
+                                        this.criteriaSelector.subscribe('changeView', function () { });
+
+                                        this.criteriaSelector.subscribe('onAddAction', function (subDictionary)
+                                        {
+                                            console.log('onSelectCriteria');
+                                            //that._localModelEvent.subscribe({ event: "onPlus" }, respondToPlus);
+                                            mRuleExpressionPresenter.publish("onPlus", subDictionary);
+                                        });
+                                    }
+
+                                    this.criteriaSelector.toggle();
+                                }
+                            };
+
+                            var mRuleExpressionPresenter = new RuleExpressionPresenter(ruleExprModel);
+                            widget.body.empty();
+                            mRuleExpressionPresenter.inject(widget.body);
+                            mRuleExpressionPresenter.addAction(slideInAction);
+                            mRuleExpressionPresenter.render();
+                            //mRuleExpressionPresenter.updateActions([slideInAction]);
+
+
+                            var acallback = function ()
+                            {
+                                console.log("listening to change.. Here you are!");
+                            };
+                            var asavecallback = function (expression)
+                            {
+                                console.log("saved");
+                                console.log(expression);
+                                var nbError = mRuleExpressionPresenter.getErrorsCount();
+                                console.log("nbError = " + nbError);
+                                var toto = RuleExpressionComponentExpressionGenerator.generateExpression(expression);
+                                var titi = RuleExpressionComponentExpressionGenerator.generateDependencies(expression);
+                                console.log(titi);
+                                console.log(toto);
+                                var test3 = RuleExpressionComponentWrappedExpressionGenerator.generateFullExpressionForExpressionModeler(expression, null);
+                                console.log(test3);
+                                mRuleExpressionPresenter.publish("onDone", null);
+                            }
+                            //mRuleExpressionPresenter.subscribe("onChangeExpression", acallback);
+                            mRuleExpressionPresenter.subscribe("onSave", asavecallback);
+                        }
+
+                        solverKey = null;
+                        var create_OK = SolverServices.create(false, null, []); // async, callback, additionalParams
+                        if (create_OK)
+                        {
+                            solverKey = create_OK.solverKey;
+                            console.log(solverKey);
+                            var data = {
+                                solverKey: solverKey,
+                                jsonData: fullDictionary
+                                //jsonDico: fullDictionary,
+                                //jsonRules: rules
+                            };
+                            SolverServices.initialize2(data, true, onSolverDicoLoaded, []);
+                        }
+
+                        //var languageInfos = [{
+                        //    title: "my 1st title",
+                        //    content: "a little description regarding the 1st sample"
+                        //},
+                        //{
+                        //    title: "my 2nd title",
+                        //    content: "a little description regarding the 2nd sample"
+                        //}];
+                        //var dictionary = Joe.getDictionary( ... );
+                        //var fullDictionary = dictionary.dictionary;
+                        //var solverKey = dictionary.solverKey;
+
+                        //var solverKey = "asolverkey";
+
+
+
+
+                    }
+                });
+            });
+        //]>
+    </script>
+</head>
+    <body>
+	    <p>Loading...</p>
+    </body>
+</html>

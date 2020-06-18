@@ -1,0 +1,1 @@
+define("DS/CATWebUXSlideShow/CATWebUXSlideShow_es",{});define("DS/CATWebUXSlideShow/assets/nls/CATWebUXSlideShow",{previousSlide:"Vista anterior",nextSlide:"Vista siguiente",exitSlideShow:"Salir de la presentación",slideShowCannotBeLaunched:"No hay nada que mostrar en el modo de presentación"});

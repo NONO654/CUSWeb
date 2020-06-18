@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+        <title>Content Configuration</title>
+        <!-- Copyright 2017, Dassault Systemes. All rights reserved -->
+        <!-- @fullReview ZUR 15/11/23 2017x Param Skeleton -->  
+        <!-- @fullReview ZUR 17/07/10 IR-533849-3DEXPERIENCER2018x, IR-501674-3DEXPERIENCER2018x and IR-506844-3DEXPERIENCER2018x -->      
+        <!-- Application Metas -->
+        <meta name="author" content="Dassault Systemes" />
+        <meta name="description" content="Test" />
+        <meta name="apiVersion" content="1.3" />
+        <meta name="debugMode" content="false" />
+        <meta name="strictMode" content="false" />
+
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+        <script type="text/javascript" src="../UWA2/js/Class/Model.js"></script>
+        <script type="text/javascript" src="../UWA2/js/Class/Collection.js"></script>
+        <script type="text/javascript" src="../UWA2/js/Class/View.js"></script>
+
+        <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+        <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+        <script type="text/javascript" src="../FedDictionaryAccess/FedDictionaryAccess.js"></script>
+        <script type="text/javascript" src="../ParameterizationSkeleton/ParameterizationSkeleton.js"></script> 
+        <script type="text/javascript" src="../PlatformManagementComponents/PlatformManagementComponents.js"></script>
+        <script type="text/javascript" src="../i3DXCompassPlatformServices/i3DXCompassPlatformServices.js"></script> 
+
+        <script type="text/javascript" src="../egraph/egraph.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../egraph/egraph.css" ></link>
+        <link rel="stylesheet" type="text/css" href="../ParameterizationSkeleton/ParameterizationSkeleton.css" ></link>
+        
+        <!-- rem  -->
+        <widget:preferences>         
+        </widget:preferences>
+
+        <style type="text/css">
+        </style>
+
+        <!-- Application JavaScript Source -->
+        <script type="text/javascript">
+
+//<![CDATA[
+/*global widget, require, define*/
+'use strict';
+
+require([
+
+    // UWA
+    'UWA/Core',
+    'UWA/Class/Model',
+    'UWA/Class/Collection',
+    'UWA/Class/View',
+
+    // WebApps
+    'WebappsUtils/WebappsUtils',
+    'DS/W3DXComponents/Skeleton',
+    'DS/W3DXComponents/ContentSet',
+    'DS/i3DXCompassPlatformServices/i3DXCompassPlatformServices',
+    'DS/W3DXComponents/Collections/ActionsCollection',
+    'DS/ParameterizationSkeleton/Utils/ParameterizationGenericServices',
+    'DS/ParameterizationSkeleton/Views/ParametersLayoutView',
+    'DS/ParameterizationSkeleton/Views/ParametersLayoutViewUtilities',
+    'DS/ParameterizationSkeleton/Views/ParametersParentView',
+    'DS/ParameterizationSkeleton/Views/ParameterizationLifecycle/LifecycleDescriptionView',
+    'DS/ParameterizationSkeleton/Utils/ParameterizationURLHandler',
+    'i18n!DS/ParameterizationSkeleton/assets/nls/ParamSkeletonNLS'
+], function (UWA, Model, Collection, View, WebappsUtils, Skeleton, ContentSet, i3DXCompassPlatformServices, ActionsCollection,  GenericServices, ParametersLayoutView, ParametersLayoutViewUtilities, ParametersParentView, LifecycleDescriptionView, URLHandler, ParamSkeletonNLS) {
+
+    function renderViewHelper (displayedView) {
+        UWA.log(displayedView);
+    }    
+    
+    var self = {
+        bones: null,
+        height: 'auto',
+        licenceAlert: null,
+        unMaximizedHeight: null,
+        generalViewOpts :  {
+                contents : {
+                    useInfiniteScroll : false,
+                    usePullToRefresh : false
+                }
+        },
+
+        setBodyHeight: function (height) {
+            if (height) {
+                if (height !== 'auto') {
+                    height += 'px';
+                }
+                widget.body.setStyle('height', height);
+            }
+        },
+
+        buildSkeleton : function() {
+
+            var pSkeleton = new Skeleton(
+
+            { // Renderers map                
+                domains: {
+                    collection: 'DS/ParameterizationSkeleton/Collection/ParameterizationDomainsListCollection',
+                    view: null,
+                    swipe: false,
+                    viewOptions: self.generalViewOpts, 
+                    idCardOptions: {
+                        actions: function () {
+                            return null;
+                        },
+                        facets: function () {
+
+                            if (this._attributes.domainid === "MappingManagement") {
+                                return [{
+                                    text: "VPM / ENG",
+                                    icon: 'tools',
+                                    handler: Skeleton.getRendererHandler('mappingVPMPartrenderer')
+                                }]; 
+                            } else if (this._attributes.domainid === "XENManagement") {//FUN090928 : SSV1
+                                return [{
+                                    text: "XEN",
+                                    icon: 'tools',
+                                    handler: Skeleton.getRendererHandler('xEngineeringPartNumberRenderer')
+                                }];
+                            }
+
+                            return [{
+                                text: 'Edit',
+                                icon: 'tools',//linkedin//eye
+                                handler: Skeleton.getRendererHandler('parentRenderer')
+                            }];
+                        }
+                    }
+                },
+                //FUN090928 : SSV1
+                xEngineeringPartNumberRenderer: {
+                    collection: 'DS/ParameterizationSkeleton/Collection/ParameterizationXEngineeringCollection',
+                    view: 'DS/ParameterizationSkeleton/Views/ParameterizationXEngineering/PartNumberingLayoutView', 
+                    viewOptions: function (model) {
+                        return {
+                              domainid: model.get('domainid')
+                        };
+                    },
+                    idCardOptions: {
+                        attributesMapping: {
+                            title: 'title'
+                       },                       
+                    },
+                },
+                mappingVPMPartrenderer: {
+                    collection: 'DS/ParameterizationSkeleton/Collection/ParameterizationMappingCollection',
+                    view: 'DS/ParameterizationSkeleton/Views/ParameterizationMapping/MappingLayoutView', 
+                    viewOptions: function (model) {
+                        return {
+                              domainid: model.get('domainid')
+                        };
+                    },
+                    idCardOptions: {
+                        attributesMapping: {
+                            title: 'title'
+                       },                       
+                    },
+                },
+            
+                parentRenderer: {
+                    collection: 'DS/ParameterizationSkeleton/Collection/ParameterizationParentCollection',
+                    view: ParametersParentView,
+                    swipe: false,
+                    viewOptions: function (model) {
+                        var searchTitle = 'Search',
+                        domainName = model.get('domainid');
+                        if (domainName === 'AttributeDef') {
+                            searchTitle = ParamSkeletonNLS.SearchTypes;
+                        } else if (domainName === 'LifecycleTopology'){
+                            searchTitle = ParamSkeletonNLS.SearchPolicies;
+                        }
+                    return {
+                            contents: {
+                                useInfiniteScroll : false,
+                                usePullToRefresh : false                      
+                            },
+                            domainid: model.get('domainid'),
+                            actions: {
+                                collection: new ActionsCollection([
+                                    {
+                                        id: 'searchItems',
+                                        title: searchTitle,
+                                        icon: 'search',
+                                        overflow: false
+                                }])
+                            },
+                            events : {
+                                onActionClick   : function (actionsView, actionView, event) {
+                                    if (event.model.id === "searchItems") {
+                                        var that = this;
+                                        that.pSkeleton = pSkeleton;
+                                        ParametersLayoutViewUtilities.showSearchInput.call(this, that);
+                                     
+                                    }
+                                }
+                            }
+                        };
+                    },
+                    idCardOptions: {
+                        attributesMapping: {
+                            title: 'title'
+                        },
+                        actions: function () {                         
+
+                                var iAddtooltip = ParamSkeletonNLS.AddAttributeTxt, 
+                                    actionsArr = [];
+
+                                if (this._attributes.domainid === "LifecycleTopology") {
+                                    iAddtooltip = ParamSkeletonNLS.AddNewRule;
+                                } 
+
+                                if (this._attributes.id !== "AttributeSynchronization") {
+                                    actionsArr.push({
+                                       text: iAddtooltip,
+                                       icon: 'plus-circled',
+                                       handler: function(view) {
+                                           view.showAddElementsModal();//showAddAttributesModal                                        
+                                       }                                   
+                                   });
+                                }
+
+                                if (this._attributes.domainid === "XCADParameterization") {
+                                  actionsArr = [];
+                                }
+
+                                if (this._attributes.domainid === "LifecycleTopology") {
+                                    actionsArr.push({ 
+                                        text: ParamSkeletonNLS.RemoveElement,
+                                        icon: 'erase',
+                                        handler: function(view) {
+                                            view.removeElement();
+                                        }
+                                    });
+                                    actionsArr.push({
+                                        text: ParamSkeletonNLS.RestoreStates,
+                                        icon: 'reply',
+                                        handler: function(view){
+                                            view.restoreStates();
+                                       }
+                                    });
+                                }
+
+                                return actionsArr;        
+                      },
+                      facets: function () {
+
+                            if (this._attributes.domainid === "LifecycleTopology") {
+                                return [{
+                                    text: ParamSkeletonNLS.EditText,
+                                    icon: 'tools',//linkedin//eye
+                                    handler: Skeleton.getRendererHandler('commonLevel2renderer')
+                                }, {
+                                    text: ParamSkeletonNLS.AboutText,
+                                    icon: 'help',
+                                    handler: Skeleton.getRendererHandler('aboutfacet')
+                                }];
+                            }
+
+                            return [{
+                                    text: ParamSkeletonNLS.EditText,
+                                    icon: 'tools',
+                                    handler: Skeleton.getRendererHandler('commonLevel2renderer')
+                            }];
+                        }, 
+                  }
+              },
+              commonLevel2renderer: {
+                    collection: 'DS/ParameterizationSkeleton/Collection/ParameterizationCommonCollection',
+                    view: 'DS/ParameterizationSkeleton/Views/ParametersCommonView',
+                    swipe: false, 
+                    viewOptions: function (model) {
+                        return {
+                              domainid: model.get('domainid')
+                        };
+                    },
+                    idCardOptions: {
+                        attributesMapping: {
+                            title: 'title'
+                       },                       
+                  },
+              },//of commonLevel2renderer
+              aboutfacet : {
+                    collection: 'DS/ParameterizationSkeleton/Collection/LifecycleDescriptionCollection',
+                    view: LifecycleDescriptionView,
+                    swipe: false,
+                    viewOptions: self.generalViewOpts,
+                    collectionOptions: {
+                        type: 'mainFacet'
+                    },
+                    idCardOptions: {
+                        attributesMapping: {
+                            title: 'title'
+                        },
+                        // Actions are extra buttons that will be added next to the IdCard, they receive the current View as parameter. fetchMode: 'once'
+                        actions: function () {
+                            return [{
+                                    text: 'Edit',
+                                    icon: 'pencil',
+                                    handler: function(view) {
+                                        UWA.log('Context (this) is set to the IdCard, first argument is the view rendered in current panel.');
+                                    }
+                                }];
+                        }                
+                    },
+                    fetchMode: 'once' //once //always
+                }, 
+
+
+          },
+          
+            // Skeleton options
+            {
+                // Renderer that is going to be used for the Root (panel 0), if not specified the first declared renderer is used
+                root: 'domains',
+                startRoute: '/domains/AttributeDef/?facet=0',
+                // Option to activate the ChannelView in the root (see 'DS/W3DXComponents/Views/Item/SkeletonRootView') for more details
+                useRootChannelView: false, //widget.getValue('view') === 'channel',
+
+                /* Extra function to call to test if layout should be changed, should return truthy or falsy value
+                * It is used when the Skeleton changes size, to test if it shoudl change from one column(contracted = default) to two columns (expanded)*/
+                responsiveTrigger: function () {
+                    var viewType = widget.getView().type;
+
+                    // If channel view is active then set responsive trigger to maximize
+                    if (widget.getValue('view') === 'channel') {
+                        return viewType === 'maximized' || viewType === 'fullscreen';
+                    } else {
+                        // If normal view, then let the width threshold of the skeleton set the responsiveness
+                        return false;
+                    }
+                },
+
+                // Extra Skeleton event callbacks
+                events: {
+                    onItemClick: function (model) {
+                        UWA.log(model);
+                    },
+                    onSlide: function (view, model) {
+                        UWA.log(view);
+                        UWA.log(model);
+                    }
+                }
+            });
+
+            return pSkeleton;
+
+        },
+        onLoad: function () {
+
+            if (self.bones) { // Destroy Skeleton instance to recreate it
+                self.bones.destroy();
+            }
+
+            if (self.licenceAlert) { // If license alert is there, hide it
+                self.licenceAlert.hide();
+            }
+       
+            /*var generalViewOpts = {
+                useInfiniteScroll : false,//par défaut : false
+                usePullToRefresh : false
+            };*/     
+
+            var iAlertObj, optionName,
+                tenantID = "",
+                tenantName = "",
+                iProceed = true,
+                isFoundinOptions = false,
+                gOptions = [],
+                dashboardTenantOpt = "",
+                iPreferences = [];                  
+                  
+              // Skeleton instantiation            
+            if ((UWA.is(widget.getValue('x3dPlatformId'))) &&
+                    (widget.getValue('x3dPlatformId') !== '')) {
+
+                tenantID = widget.getValue('x3dPlatformId');
+                URLHandler.setTenant(tenantID);
+                widget.setTitle(tenantID);
+                tenantName = tenantID;
+                dashboardTenantOpt = tenantID;
+            }
+            i3DXCompassPlatformServices.getServiceUrl({
+                serviceName: '3DSpace',
+                onComplete: function (iData) {
+                    iData.forEach(function (model) {                                        
+                        if (model.url === undefined) {
+                            UWA.log('url is undefined, skipping ' + model.platformId);
+                        } else {
+                            gOptions.push({
+                                id: model.platformId,
+                                url: model.url
+                            });
+                        }                       
+                    });//for each
+
+                    if (tenantID === "") {
+                        if (gOptions.length >= 1) {
+                            //get the first one in that case
+                            tenantID = gOptions[0].id;
+                            URLHandler.setTenant(tenantID);
+                            widget.setTitle(gOptions[0].id);
+                        } else {
+                            iProceed = false;
+                            UWA.log("Paramaterization::No License on this platform");  
+
+                            widget.setBody([{
+                                 tag: 'div',
+                                 id: 'parameterizationSkeleton-widget-empty-content'
+                            }]);                      
+                            self.licenceAlert = ParametersLayoutViewUtilities.buildNoLicenseUI();
+                            self.licenceAlert.add({ className: "warning", message: ParamSkeletonNLS.NoAccessLicensePlatformText });
+                        }
+                    }// if (tenantID === "") 
+
+                    if (iProceed === true) {
+                        //at this point we are sure that we have a valid tenantid
+                        gOptions.forEach(function (opt) {  
+                            if (opt.id === tenantID) {
+                                isFoundinOptions = true;                                
+                                URLHandler.setURL(opt.url);                           
+                            }                     
+                        });//for each
+
+                        if (isFoundinOptions === true) {//NZV : IR-583204-3DEXPERIENCER2019x
+                            GenericServices.getSessionInfo()
+                                .then(function (sessionInfo) {
+                                    if(sessionInfo.isadmin == true) {
+                                        self.bones = self.buildSkeleton();
+                                        widget.body.setContent(self.bones.render());//Render and add to DOM*/         
+                                         UWA.log("Paramaterization::User is admin to this tenant");                             
+                                    } else {
+                                        UWA.log("Paramaterization::User is not admin to this tenant");
+                                        widget.setBody([{
+                                             tag: 'div',
+                                             id: 'parameterizationSkeleton-widget-empty-content'
+                                        }]);
+
+                                        self.licenceAlert = ParametersLayoutViewUtilities.buildNoLicenseUI();
+                                        self.licenceAlert.add({ className: "error", message: ParamSkeletonNLS.NoAdminPrivileges });
+                                    }
+                                })['catch']( function (sessionError) {
+                                    self.bones = self.buildSkeleton();
+                                    widget.body.setContent(self.bones.render());//Render and add to DOM*/  
+                                    UWA.log("Paramaterization:: Service call failed!");
+                                    UWA.log(sessionError);
+                                });
+                              //var predicateList = GenericServices.getPredicates();
+                                // GenericServices.loginStep()
+                                //     .then(function (userTicket) {
+                                //         GenericServices.loginToRDFServer(userTicket)
+                                //             .then(function (dummyResult) {
+                                //                 //predicateList = GenericServices.getPredicates();
+                                //                 GenericServices.getPredicatesObject()
+                                //                     .then(function (result) {
+
+                                //                         console.log(result);
+
+                                //                         })
+                                //                     .catch(function (eMessage){
+
+                                //                         console.log(eMessage);
+
+                                //                         });
+                                //                 })
+                                //             ['catch'] (function (eMessage) {
+                                //                 console.log("loginToRDFServer failed" +eMessage)
+                                //                 });
+
+                                //         })
+                                //     ['catch'](function (eMessage) {
+                                //         console.log("loginStep failed"+eMessage)
+                                //         });
+                              
+
+                        } else {
+                            UWA.log("Paramaterization::No License on this platform::2");   
+                            widget.setBody([{
+                                 tag: 'div',
+                                 id: 'parameterizationSkeleton-widget-empty-content'
+                            }]);
+
+                            self.licenceAlert = ParametersLayoutViewUtilities.buildNoLicenseUI();
+                            self.licenceAlert.add({ className: "warning", message: ParamSkeletonNLS.NoAccessLicensePlatformText });
+                        }
+                    }
+                    //build the selector
+                    i3DXCompassPlatformServices.getPlatformConfig({
+                        onComplete: function (platformsInfo) {
+                            var tenantDisplayName = ""
+                            gOptions.forEach(function (opt) {
+                                optionName = "";
+                                optionName = ParametersLayoutViewUtilities.getObjValFromACollection(opt.id, platformsInfo, "platformId", "displayName")                           
+                                if(optionName === "") {
+                                    optionName = opt.id;
+                                }
+                                if(tenantID ===  opt.id ) {
+                                    tenantDisplayName = optionName;
+                                     widget.setTitle(optionName);
+                                }                                
+                                iPreferences.push({
+                                   label: optionName,
+                                   value: opt.id,
+                                   id: opt.id
+                                });
+                            });
+                            if (dashboardTenantOpt !== "") {
+                                if (!ParametersLayoutViewUtilities.isDashboardChoosenTenantInPreferences(dashboardTenantOpt, iPreferences)) {
+                                    iPreferences.push({
+                                        label: tenantDisplayName,
+                                        value: dashboardTenantOpt,
+                                        id: dashboardTenantOpt
+                                    });
+                                 }
+                            } 
+                            if (iPreferences.length >= 1) {
+                                widget.addPreference({
+                                    type: 'list',
+                                    id: 'x3dPlatformId',
+                                    name: 'x3dPlatformId',
+                                    label: ParamSkeletonNLS.SelectPlatform,
+                                    defaultValue: widget.getValue('x3dPlatformId'), 
+                                    options: iPreferences
+                                });
+                             }
+                             UWA.log(iPreferences);
+                        }
+                    });//End of i3DXCompassPlatformServices.getPlatformConfig
+               }//onComplete of getServiceUrl
+            });//i3DXCompassPlatformServices.getServiceUrl         
+        },
+
+        // Widget Event
+        onViewChange: function (event) {
+            if ((event.type !== 'fullscreen') && (event.type !== 'maximized')) {
+                if (UWA.is(self.unMaximizedHeight)) {
+                    self.bones.setHeight(self.unMaximizedHeight);
+                    self.unMaximizedHeight = null;
+                }
+            } else {
+                if (UWA.is(event.height)) {
+                    self.unMaximizedHeight = self.bones.container.clientHeight;
+                    self.bones.setHeight(event.height);
+                }
+            }
+        }
+    };
+
+
+    /*
+    * Widget events
+    */
+    widget.addEvents({
+        onLoad :self.onLoad,
+        onRefresh :self.onLoad,
+        onViewChange: self.onViewChange
+    });
+});
+
+
+//]]>
+        </script>
+      </head>
+      <body>
+      </body>
+</html>

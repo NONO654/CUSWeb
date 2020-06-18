@@ -1,0 +1,27 @@
+<!--------------------------------------------------------------------
+[cae-session HTML Document]
+
+Project:        cae
+Version:        1.0
+Assigned to:    Thomas Esterle (tee1)
+Primary use:    Throughout the CAE UI
+Description:    Encapsulates an CAE process.
+--------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../../SMAProcSP/sp-clientstorage/sp-clientstorage.html">
+<link rel="import" href="../../SMAProcADUI/ad-session/ad-session.html">
+
+<dom-module id="cae-session">
+  <template>
+    <sp-variable id="mcsBaseURL" name="mcsBaseURL"></sp-variable>
+		<sp-variable id="mcsWSBaseURL" name="mcsWSBaseURL"></sp-variable>
+		<sp-variable id="inDash" name="inDash"></sp-variable>
+		<sp-variable id="securityContext" name="securityContext" value="{{securityContext}}"></sp-variable>
+		<sp-dashboard id="isDash"></sp-dashboard>
+    <sp-clientstorage id="storage"></sp-clientstorage>
+    <ad-session id="session" query-process-i-d="{{queryProcessID}}" process-i-d="{{processID}}" managed-data="{{managedData}}" process="{{process}}"></ad-session>
+	</template>
+  <script src="cae-session.js"></script>
+</dom-module>

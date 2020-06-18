@@ -1,0 +1,196 @@
+<!--
+ **  Copyright Dassault Systemes, 2007, 2008
+-->
+<Root>
+<!-- Contains list of host -->
+  <HostList>
+    <Host MachineName="localhost"
+          ExecutionEngineDirectory=""
+          BaseDirectory="D:\temp"
+          SSHCommand="ssh -n -o BatchMode=yes"
+          platform="x86"
+          operatingSystem="Windows XP 5.1"
+          description="My host">
+      <!-- For each host list application to be connected to host -->
+      <Add>
+        <ApplicationList>
+      		<!-- Use Job bat script since cae can run jobs and generate ODB's -->
+          <Application Name="Abaqus/CAE" Version="6.8"
+                       ExecPath="$(EXECENGPATH)\bin\smaRunAbaqusJob.bat"
+                       WorkingDirectory=""/>
+          <Application Name="Abaqus/Standard" Version="6.8"
+                       ExecPath="$(EXECENGPATH)\bin\smaRunAbaqusJob.bat"
+                       WorkingDirectory=""/>
+          <Application Name="Abaqus/Explicit" Version="6.8"
+                       ExecPath="$(EXECENGPATH)\bin\smaRunAbaqusJob.bat"
+                       WorkingDirectory=""/>
+          <Application Name="Abaqus/Viewer" Version="6.8"
+                       ExecPath="$(EXECENGPATH)\bin\smaRunAbaqus.bat"
+                       WorkingDirectory=""/>
+          <Application Name="Odb to Cgr" Version="Version 6"
+                       ExecPath="$(EXECENGPATH)\odbtocgr\SMASLM3DOdbToCgrDir.bat"
+                       WorkingDirectory=""/>
+          <Application Name="VPMSimulation" Version="Version 6 "
+                       ExecPath="$(EXECENGPATH)\bin\smaRunVPMSimulation.bat"
+                       WorkingDirectory=""/>
+          <Application Name="V5 Export" Version="Version 6"
+                       ExecPath="$(EXECENGPATH)\bin\smaPLMBatch.bat"
+                       WorkingDirectory=""/>
+          <Application Name="3DXML Export" Version="Version 6"
+                       ExecPath="$(EXECENGPATH)\bin\smaPLMBatch.bat"
+                       WorkingDirectory=""/>
+          <Application Name="Fastener Export" Version="Version 6"
+                       ExecPath="$(EXECENGPATH)\bin\smaPLMBatch.bat"
+                       WorkingDirectory=""/>
+          <Application Name="ExternalSimulationExport" Version="Version 6"
+                       ExecPath="$(EXECENGPATH)\bin\smaPLMBatch.bat"
+                       WorkingDirectory=""/>
+          <Application Name="DesignerCentralExport" Version="Version 6"
+                       ExecPath="$(EXECENGPATH)\bin\smaDesignDownloadApplication.bat"
+                       WorkingDirectory=""/>
+          <Application Name="Simflow" Version="5.5"
+                ExecPath="$(SCE_SIMFLOW_CMD)"
+                WorkingDirectory=""/>
+        </ApplicationList>
+      </Add>
+      <!-- For each host list applications to be disconnected from host -->
+      <Delete>
+        <ApplicationList></ApplicationList>
+      </Delete>
+    </Host>
+    <Host MachineName="venus.abaqus.com"
+          ExecutionEngineDirectory="/q/qa/SLM/ExecutionEngine_R209"
+          BaseDirectory="/s/scratch/dev/infslm"
+          SSHCommand="ssh -n -o BatchMode=yes"
+          platform="i386" operatingSystem="Linux 2.6.13-15-smp"
+          description="general linux box with Java 1.5">
+      <Add>
+        <ApplicationList>
+
+          <Application Name="Abaqus/CAE" Version="6.8"
+                       ExecPath="/v/releases/releaseFrozen/$(PLATFORM)/6.9-2/exec/abq692.exe"
+                       WorkingDirectory="" />
+          <Application Name="Abaqus/Standard" Version="6.8"
+                       ExecPath="/v/releases/releaseFrozen/$(PLATFORM)/6.9-2/exec/abq692.exe"
+                       WorkingDirectory="" />
+          <Application Name="Abaqus/Explicit" Version="6.8"
+                       ExecPath="/v/releases/releaseFrozen/$(PLATFORM)/6.9-2/exec/abq692.exe"
+                       WorkingDirectory="" />
+          <Application Name="Abaqus/Viewer" Version="6.8"
+                       ExecPath="/v/releases/releaseFrozen/$(PLATFORM)/6.9-2/exec/abq692.exe"
+                       WorkingDirectory="" />
+        </ApplicationList>
+      </Add>
+      <Delete>
+        <ApplicationList></ApplicationList>
+      </Delete>
+    </Host>
+    <Host MachineName="trident.abaqus.com"
+          ExecutionEngineDirectory="/q/qa/SLM/ExecutionEngine_R208"
+          BaseDirectory="$(TMPDIR)"
+          SSHCommand="ssh -n -o BatchMode=yes"
+          platform="i386" operatingSystem="Linux 2.6.8-24.14-smp"
+          description="head node of LSF cluster">
+      <Add>
+        <ApplicationList>
+           <Application Name="Abaqus/Standard" Version="6.8"
+                       ExecPath="/v/releases/releaseFrozen/$(PLATFORM)/6.9-2/exec/abq692.exe"
+                       WorkingDirectory="" />
+          <Application Name="Abaqus/Explicit" Version="6.8"
+                       ExecPath="/v/releases/releaseFrozen/$(PLATFORM)/6.9-2/exec/abq692.exe"
+                       WorkingDirectory="" />
+        </ApplicationList>
+      </Add>
+      <Delete>
+        <ApplicationList></ApplicationList>
+      </Delete>
+    </Host>
+    <Host MachineName="Trivium" description="Simulia Execution Engine system server"
+          ExecutionEngineDirectory="" BaseDirectory="\"
+          StagingDirectory="" SSHCommand="" platform=""
+          operatingSystem=""
+          Vault="eService Production"
+          ServiceUrl="http://172.17.28.48:9080/FiperWSRouter/services/Fiper"
+          ModelName="com.engineous.model.SCEConnectorModel"
+          ModelVersion="*.*.*">
+  <!-- List applications to be runnable through the Simulia Execution Engine  -->
+      <Add>
+        <ApplicationList>
+          <Application Name="Abaqus/CAE" Version="6.8"
+            ExecPath="{root simcentral}/bin/smaRunAbaqusJob.bat"
+            WorkingDirectory="">
+            <ServerData OS="Windows" MaxTime="500" LogStdOut="True"
+                       ReturnCodes="1:5" LogLevel="Info"/>
+          </Application>
+          <Application Name="Abaqus/Standard" Version="6.8"
+             ExecPath="{root simcentral}/bin/smaRunAbaqusJob.bat"
+             WorkingDirectory="">
+             <ServerData Station="xxx" MaxTime="25" LogStdOut="True"
+                        LogStdErr="True" ReturnCodes="1" />
+          </Application>
+          <Application Name="Notepad" Version="1.0" ExecPath="notepad.exe"
+             WorkingDirectory="">
+             <ServerData OS="Windows" MaxTime="500" LogStdOut="True"
+                        ReturnCodes="1" LogLevel="Info"/>
+          </Application>
+          <Application Name="cmd" Version="1" ExecPath="cmd.exe /c dir c:"
+             WorkingDirectory="">
+             <ServerData Station="" OS="Windows" OSName="" Others=""
+                        MaxTime="600" LogStdOut="True" LogStdErr="False"
+                        ReturnCodes="0,1,2" LogLevel="Debug"/>
+          </Application>
+        </ApplicationList>
+      </Add>
+  <!-- For each host list applications to be removed from the Simulia Execution Engine  -->
+      <Delete>
+        <ApplicationList></ApplicationList>
+      </Delete>
+    </Host>
+    <Host MachineName="Cary" ExecutionEngineDirectory=""
+          BaseDirectory="\"
+          StagingDirectory="" SSHCommand=""
+          platform="" operatingSystem=""
+          description="A second Simulia Execution Engine server" Vault="eService Production"
+          ServiceUrl="http://172.17.67.123:9085/FiperWSRouter/services/Fiper"
+          ModelName="com.engineous.model.SCEConnectorModel"
+          ModelVersion="*.*.*" >
+      <Add>
+        <ApplicationList>
+          <Application Name="Abaqus/CAE" Version="6.8"
+                ExecPath="{root simcentral}/bin/smaRunAbaqusJob.bat"
+                WorkingDirectory="">
+                <ServerData Station="xxx yyy" MaxTime="500" LogStdOut="True"
+                           LogStdErr="True" ReturnCodes="1" />
+          </Application>
+          <Application Name="Notepad" Version="1.0" ExecPath="notepad.exe"
+                WorkingDirectory="">
+                <ServerData OS="Windows" MaxTime="500" LogStdOut="True"
+                           ReturnCodes="1:5" LogLevel="Info"/>
+          </Application>
+          <Application Name="cmd" Version="1" ExecPath="cmd.exe /c dir c:"
+                       WorkingDirectory="">
+          </Application>
+        </ApplicationList>
+      </Add>
+    </Host>
+    <Host MachineName="acme" ExecutionEngineDirectory=""
+          BaseDirectory="\"
+          StagingDirectory="" SSHCommand=""
+          platform="" operatingSystem=""
+          description="A second Simulia Execution Engine server" Vault="eService Production"
+          ServiceUrl="http://acme:9087/SCE-SEE/services"
+          ModelName="com.engineous.model.SCEConnectorModel"
+          ModelVersion="*.*.*" >
+      <Add>
+        <ApplicationList>
+          <Application Name="Simflow" Version="5.5"
+                ExecPath="Simflow"
+                WorkingDirectory="">
+                <ServerData Station="dummy" MaxTime="500" LogStdOut="True"
+                           LogStdErr="True" ReturnCodes="1" />
+          </Application>
+        </ApplicationList>
+      </Add>
+    </Host>
+  </HostList>
+</Root>

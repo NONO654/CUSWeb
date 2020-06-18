@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html id="matrixRulePage">
+	<head>
+	<link rel="stylesheet" type="text/css" href="../../common/styles/emxUIDefault.css">
+	<link rel="stylesheet" type="text/css" href="../../common/styles/emxUIStructureBrowser.css">
+	<link rel="stylesheet" type="text/css" href="../../common/styles/emxUIForm.css">
+	
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<script language="Javascript" src="../../common/scripts/emxUIConstants.js"></script>
+	<script language="Javascript" src="../../common/scripts/emxUICore.js"></script>
+	
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+	 
+	<script>
+		var parentId;
+		var Name;
+		var Revision;
+		var frameName = "";
+		var productID;
+
+		function onLoad() {
+	
+			require([
+				"DS/CfgRules/scripts/CfgMatrixRulesWebServices",
+				"i18n!DS/CfgRules/assets/nls/MatrixRule",
+			], function (CfgMatrixRulesWebServices,MR_NLS)
+			{
+				var moduleFooter = document.getElementsByClassName("moduleFooter")[0];
+				moduleFooter.style.display = "none";
+				
+				parentId = CfgMatrixRulesWebServices.getObjectIDFromURL("contextObjId");
+				Name = CfgMatrixRulesWebServices.getObjectIDFromURL("Name");
+				ModelName = CfgMatrixRulesWebServices.getObjectIDFromURL("ModelName");
+				Revision = CfgMatrixRulesWebServices.getObjectIDFromURL("Revision");
+				frameName = CfgMatrixRulesWebServices.getObjectIDFromURL("postProcess");
+				productID  = CfgMatrixRulesWebServices.getObjectIDFromURL("parentOID");
+				
+				document.getElementById("buttonDefineRuleTable").onclick=function() {
+					var inputText = document.getElementById("strName");
+					if(inputText.value == "") alert(MR_NLS.MR_ValidName);
+					else
+					{
+						document.getElementById("matrixRulePage").style.cursor = "wait";
+					
+						var effectivity = '"effectivity":"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?><CfgEffectivityExpression xmlns:xs=\\"http://www.w3.org/2001/XMLSchema-instance\\" xmlns=\\"urn:com:dassault_systemes:config\\" xs:schemaLocation=\\"urn:com:dassault_systemes:config CfgEffectivityExpression.xsd\\"><Expression><Context  HolderType=\\"Model\\" HolderName=\\"' + ModelName+ '\\"><TreeSeries Type=\\"ProductState\\" Name=\\"'+ModelName+'\\"><Single Name=\\"'+Name+'\\" Revision=\\"'+Revision+'\\"></Single></TreeSeries></Context></Expression></CfgEffectivityExpression>"';
+		                var text = '{"configurationRule":{"revision":"-","mathematicalExpression":"","name":"' + 
+                					document.getElementById("strName").value + '","description":"' + document.getElementById("strDescription").value +
+                					'","policy":"ConfigurationRule","attributes":{"Originator":""},"type":"ConfigurationRule",'+effectivity+'},"version":"1.0.1"}';
+                		var objectId = CfgMatrixRulesWebServices.createRule(text,parentId);
+						
+						if(objectId !== null){
+							window.parent.parent.closeSlideInPanel();
+							objectId = objectId.replace("pid:",'');
+							var contentFrame = findFrame (getTopWindow(), "content");							
+							contentFrame.location.href = "../../common/emxTree.jsp?objectId="+objectId+"&mode=insert&parentOID="+productID+"&AppendParameters=true&DefaultCategory=RuleTable&";
+
+						}
+					}
+				};
+				
+				document.getElementById("buttonCancel").onclick=function() {
+					window.parent.parent.closeSlideInPanel();
+				};
+				
+				document.getElementById("buttonDone").onclick=function() 
+				{
+					var inputText = document.getElementById("strName");
+					if(inputText.value == "") alert(MR_NLS.MR_ValidName);
+					else
+					{
+						document.getElementById("matrixRulePage").style.cursor = "wait";
+						
+						var effectivity = '"effectivity":"<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?><CfgEffectivityExpression xmlns:xs=\\"http://www.w3.org/2001/XMLSchema-instance\\" xmlns=\\"urn:com:dassault_systemes:config\\" xs:schemaLocation=\\"urn:com:dassault_systemes:config CfgEffectivityExpression.xsd\\"><Expression><Context  HolderType=\\"Model\\" HolderName=\\"' + ModelName+ '\\"><TreeSeries Type=\\"ProductState\\" Name=\\"'+ModelName+'\\"><Single Name=\\"'+Name+'\\" Revision=\\"'+Revision+'\\"></Single></TreeSeries></Context></Expression></CfgEffectivityExpression>"';
+		                var text = '{"configurationRule":{"revision":"-","mathematicalExpression":"","name":"' + 
+        		        document.getElementById("strName").value + '","description":"' + document.getElementById("strDescription").value +
+		                '","policy":"ConfigurationRule","attributes":{"Originator":""},"type":"ConfigurationRule",'+effectivity+'},"version":"1.0.1"}';
+						var objectId = CfgMatrixRulesWebServices.createRule(text,parentId);
+						
+						if(objectId !== null){
+							window.parent.parent.closeSlideInPanel();
+							var listFrame = findFrame(getTopWindow(),frameName);
+							listFrame.editableTable.loadData();
+							listFrame.rebuildView();
+						}
+					}
+				};
+				
+				document.getElementById("buttonDefineRuleTable").innerHTML = MR_NLS.MR_DefineRule;
+				document.getElementById("buttonDefineRuleTable").setAttribute('title',MR_NLS.MR_DefineRule);
+				document.getElementById("buttonDone").innerHTML = MR_NLS.MR_Done;
+				document.getElementById("buttonDone").setAttribute('title',MR_NLS.MR_Done);
+				document.getElementById("buttonCancel").innerHTML = MR_NLS.MR_Cancel;
+				document.getElementById("buttonCancel").setAttribute('title',MR_NLS.MR_Cancel);
+				document.getElementById("labelDescription").innerHTML = MR_NLS.MR_Description;
+				document.getElementById("labelName").innerHTML = MR_NLS.MR_Name;
+				document.getElementById("labelCreatePage").innerHTML = MR_NLS.MR_Create;
+				document.getElementById("labelBasics").innerHTML = MR_NLS.MR_Basics;
+				document.getElementById("labelMandatory").innerHTML = MR_NLS.MR_Mandatory;
+				document.getElementById("strDescription").setAttribute('title',MR_NLS.MR_DescriptionTitle);
+				document.getElementById("strName").setAttribute('title',MR_NLS.MR_Name);
+				
+			});
+		}
+	
+	</script>
+	
+	</head>
+	<body onload="onLoad();" class="slide-in-panel">
+	
+	<div id="content" style="height:94%;">
+		<div id="pageHeadDiv">
+			<table>
+				<tbody>
+					<tr>
+						<td class="page-title">
+						<h2 id ="labelCreatePage"></h2>
+						</td>
+					
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<table class="form">
+		<tbody>
+			<tr>
+				<td id ="labelMandatory" class="createRequiredNotice"></td>
+			</tr>
+			<tr>
+				<td id ="labelBasics" class="heading1"></td>
+			</tr>
+			<tr>
+				<td valign="middle" width="150" class="createLabelRequired">
+					<label id="labelName" for="Name"></label>
+				</td>
+			</tr>
+			<table class="">
+				<tbody>
+					<tr>
+						<td  valign="middle" class="createInputField">
+							<input value="" id="strName" name="Name" type="text" fieldlabel="Name" title="Name" size="20"> 
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+
+			<table>
+			<tbody>
+				<tr>
+					<td valign="middle" width="150" class="createLabel">
+						<label id="labelDescription" for="Description"></label>
+					</td>
+				</tr>
+			</tbody>
+			</table>
+			<tr>
+				<td>
+					<table class="textarea">
+						<tbody>
+							<tr>
+								<td valign="middle" class="createInputField" colspan="0">
+									<textarea cols="25" rows="5" name="Description" id="strDescription" fieldlabel="Description" title="Description"></textarea>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+	
+	<div id="divPageFoot" style="height:5%; width:100%; bottom:0px;">
+		<div style="float:right;padding: 5px 10px 5px 0; width:95%">
+			<button id="buttonDefineRuleTable" class="btn-default" style="width: 44%; overflow: hidden; text-overflow: ellipsis;" ></button>
+			<button id="buttonDone" class="btn-primary" style="width: 25%; overflow: hidden; text-overflow: ellipsis;"></button>
+			<button id="buttonCancel" class="btn-default" style="width: 25%; overflow: hidden; text-overflow: ellipsis;"></button>
+		</div>
+	</div>
+	
+	</body>
+</html>

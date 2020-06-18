@@ -1,0 +1,23 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../ad-redux-behaviour/ad-redux-behaviour.html">
+<link rel="import" href="../ad-app-header/ad-app-header.html">
+<link rel="import" href="../ad-file-chooser/ad-file-chooser.html">
+<link rel="import" href="../ad-study-properties-container/ad-study-properties-container.html">
+
+<dom-module id="ad-app-header-container">
+	<template>
+		<ad-app-header
+			id="pres"
+			store="[[store]]"
+			on-uploadfiles="uploadFiles"
+			on-addreference="addReferencedContent"
+			on-closestudy="closeStudy"
+			on-refreshapp="refreshApp"
+			on-openstudyproperties="onOpenStudyProperties"
+			>
+		</ad-app-header>
+		<ad-file-chooser id="fileChooser"></ad-file-chooser>
+		<ad-study-properties-container id="studyProperties"></ad-study-properties-container>
+	</template>
+	<script type="text/javascript" src="ad-app-header-container.js"></script>
+</dom-module>

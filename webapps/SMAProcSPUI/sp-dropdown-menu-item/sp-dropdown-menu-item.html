@@ -1,0 +1,34 @@
+<!--------------------------------------------------------------------
+[sp-dropdown-menu-item HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:    Tue, 06 Oct 2015 17:54:31 GMT
+Assigned to:	Vijaya Lakshmi
+Primary use:	Drop down menu items to be used when consuming sp-dropdown-menu
+Description:    This component represents the items of the sp-dropdown-menu component.
+                This should be used only in conjunction with sp-dropdown-menu
+--------------------------------------------------------------------->
+
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<dom-module id="sp-dropdown-menu-item">
+  <link rel="import" type="css" href="sp-dropdown-menu-item.css">
+  <template>
+        <!--Using a main container since we do not want these styles at :host level which has the lowest specificity-->
+        <div class$="{{computeClass(disabled, labeltype)}}">
+            <template is="dom-if" if="{{icon}}">
+                <!--Meant for only HTML Unicode symbols.Not for images-->
+                <span class="fonticon">{{ icon }}</span>
+            </template>
+            <!--Label should be ignored when it's divider-->
+            <template is="dom-if" if="{{computeIf(labeltype)}}">
+                <span class="title">{{ label }}</span>
+            </template>
+        </div>
+    </template>
+  <script type="text/javascript" src="sp-dropdown-menu-item.js"></script>
+</dom-module>
+
+

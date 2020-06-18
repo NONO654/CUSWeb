@@ -1,0 +1,9 @@
+m|WebappsUtils\Logger.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\Logger\Logger.js|1531550844|4147
+s|WebappsUtils\Logger.mweb\src\Logger.js|1422221217|18223
+s|WebappsUtils\Logger.mweb\src\Appenders\Quake.js|1422220410|2724
+s|WebappsUtils\Logger.mweb\src\Appenders\GelfHttp.js|1422220526|2568

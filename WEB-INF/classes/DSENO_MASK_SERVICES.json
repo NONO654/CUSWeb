@@ -1,0 +1,133 @@
+{
+	"dsmveno:BaseMask": [
+		"dsmveno:basic.id",
+		"dsmveno:basic.type",
+		"dsmveno:basic.modified",
+		"dsmveno:basic.created"
+	],
+	"dsmveno:VPMNameDescriptionMask": [
+		"dsmveno:attribute.reference.name",
+		"dsmveno:attribute.reference.title",
+		"dsmveno:attribute.reference.description"
+	],
+	"dsmveno:ERNameDescriptionMask": [
+		"dsmveno:basic.name",
+		"dsmveno:attribute.title",
+		"dsmveno:basic.description"
+	],
+	"dsmveno:BusBasicPropertiesMask": [
+		"dsmveno:basic.revision",
+		"dsmveno:basic.state",
+		"dsmveno:basic.owner",
+		"dsmveno:basic.organization",
+		"dsmveno:basic.collabspace"
+	],
+	"dsmveno:DefaultBusPrivateMask": [
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:BaseMask"
+		},
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:BusBasicPropertiesMask"
+		}
+	],
+	"dsmveno:DefaultErBusMask": [
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:ERNameDescriptionMask"
+		},
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:DefaultBusPrivateMask"
+		}
+	],
+	"dsmveno:DefaultBusMask": [
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:VPMNameDescriptionMask"
+		},
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:DefaultBusPrivateMask"
+		}
+	],
+	"dsmveno:DefaultRelMask": [
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:BaseMask"
+		},
+		"dsmveno:attribute.instance.name",
+		"dsmveno:attribute.instance.description"
+	],
+	"dsmveno:DefaultImageMask": [
+		"dsmveno:basic.image"
+	],
+	"dsmveno:RepresentationMask.Common": [
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:DefaultBusMask"
+		},
+		"dsmveno:basic.thumbnails"
+	],
+	"dsmveno:RepresentationInstanceMask.Common": [
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:DefaultRelMask"
+		},
+		{
+			"property": "to.physicalid",
+			"key": "Referenced Representations",
+			"mask": "dsmveno:RepresentationMask.Common",
+			"maskAppliesTo": "bus"
+		}
+	],
+	"dsmveno:DocumentMask.Common": [
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:DefaultErBusMask"
+		},
+		"dsmveno:basic.docStreams"
+	],
+	"dsmveno:ItemLightVersionMask.Common": [
+		"dsmveno:basic.id",
+		"dsmveno:attribute.reference.title",
+		"dsmveno:attribute.reference.description",
+		"dsmveno:basic.type",
+		"dsmveno:basic.revision",
+		"dsmveno:basic.state"
+	],
+	"dsmveno:InstanceGroupByMask.Common": [
+		"dsmveno:basic.instance.to.id",
+		"dsmveno:basic.instance.to.type",
+		"dsmveno:attribute.instance.to.title",
+		"dsmveno:attribute.instance.to.description",
+		"dsmveno:basic.instance.to.modified",
+		"dsmveno:basic.instance.to.created",
+		"dsmveno:basic.instance.to.revision",
+		"dsmveno:basic.instance.to.state",
+		"dsmveno:basic.instance.to.owner",
+		"dsmveno:basic.instance.to.organization",
+		"dsmveno:basic.instance.to.collabspace",
+		"dsmveno:program.Number of Instances"
+	],
+	"dsmveno:ModelMask.Common": [
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:DefaultErBusMask"
+		},
+		{
+			"property": "from[Main Product].to.last.physicalid",
+			"key": "latestModelVersion",
+			"maskAppliesTo": "bus",
+			"mask": "dsmveno:DefaultErBusMask"
+		}
+	],
+	"dsmveno:CPTestMask.CustomArgs": [
+		{
+			"property": "reuseMask",
+			"mask": "dsmveno:DefaultErBusMask"
+		},
+		"dsmveno:program.ComputedData"
+	]
+}

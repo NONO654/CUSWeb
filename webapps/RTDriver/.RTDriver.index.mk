@@ -1,0 +1,12 @@
+m|InstantMessagingInfra\RTDriver.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.7.19203
+r|G:\R421\BSF\.
+t|win_b64\webapps\RTDriver\RTDriver.js|1563824692|26898
+s|InstantMessagingInfra\RTDriver.mweb\src\RTDriver.js|1555600799|15863
+s|InstantMessagingInfra\RTDriver.mweb\src\RTGroup.js|1484042458|991
+s|InstantMessagingInfra\RTDriver.mweb\src\drivers\NODE.js|1563464620|33427
+s|InstantMessagingInfra\RTDriver.mweb\src\RTUser.js|1484044195|1042
+s|InstantMessagingInfra\RTDriver.mweb\src\RTUserStatus.js|1443703593|423
+s|InstantMessagingInfra\RTDriver.mweb\src\RTDetectClient.js|1512659539|879

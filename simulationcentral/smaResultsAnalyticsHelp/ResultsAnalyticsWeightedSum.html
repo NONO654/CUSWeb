@@ -1,0 +1,169 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msolistparagraphcxspfirst, li.msolistparagraphcxspfirst, div.msolistparagraphcxspfirst
+	{mso-style-name:msolistparagraphcxspfirst;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msolistparagraphcxspmiddle, li.msolistparagraphcxspmiddle, div.msolistparagraphcxspmiddle
+	{mso-style-name:msolistparagraphcxspmiddle;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msolistparagraphcxsplast, li.msolistparagraphcxsplast, div.msolistparagraphcxsplast
+	{mso-style-name:msolistparagraphcxsplast;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msopapdefault, li.msopapdefault, div.msopapdefault
+	{mso-style-name:msopapdefault;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif";}
+.MsoChpDefault
+	{font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple>
+
+<div class="WordSection1" style="scroll:auto; width:100%; height:100%">
+
+<p class=MsoNormal style='margin-left:.25in'><b>Weighted Sum Ranking Method</b></p>
+
+<p class=MsoNormal style='margin-left:.25in'>Weighted Sum is the best known and
+simplest method for evaluating the goodness of multiple alternatives in
+terms of several objectives. The score value of each data point is simply a
+sum of all objective values, each multiplied by the <a
+href="ResultsAnalyticsScoring.html">final weight factor calculated as described
+previously</a>. For the Weighted Sum method to be valid all objectives must be
+normalized and brought into the same range, otherwise effects of different
+objective functions will not be equally represented.</p>
+
+<p class=MsoNormal style='margin-left:.25in'>The Overall Score values of each
+alternative are calculated as follows:</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>a.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>All thresholds are evaluated; if any &quot;Must Have&quot; thresholds
+are violated for a given alternative, its Overall Score value is set to 0.0
+independent of the objective values</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>b.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Individual parameter objective values are calculated as follows
+(&quot;higher = better&quot; formulation is used):</p>
+
+<ul>
+<li class=MsoListParagraph style='margin-left:0.70in;'>
+For minimization parameters, raw_obj_val = -1*parameter_val</li>
+
+<li class=MsoListParagraph style='margin-left:0.70in;'>
+For maximization parameters, raw_obj_val = parameter_val</li>
+
+<li class=MsoListParagraph style='margin-left:0.70in;'>
+For target parameters, raw_obj_val = -1*Abs(target - parameter_val)</li>
+</ul>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>c.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Raw objective values calculated as shown above for each objective
+parameter are scaled to be within [1...100] range - this is a scaled parameter
+objective value</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>d.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Scaled objective values are multiplied by the <a
+href="ResultsAnalyticsScoring.html">final weight factor calculated as described
+previously</a> - this is a scaled and weighted parameter objective value</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>e.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>For each data point, all scaled and weighted objective values are
+added up to get the weighted sum - this is the raw score for the data point</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>f.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Raw scores for all data points are scaled to be within [1...100] range
+- this is the Overall Score displayed in the table (recall that if the data
+point has any &quot;Must Have&quot; thresholds violated, its Overall Score
+value is set to 0.0). The Overall Score of each data point also becomes the
+score of the top level (root) parameter group.</p>
+
+<p class=MsoListParagraph style='margin-left:.75in;text-indent:-.25in'>g.<span
+style='font-size:7.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>For each parameter group other than the top level (root) group, the
+score is calculated as the sum of scores of all sub-groups and parameters. No
+scaling is done for group scores - only the sum of all children scores is taken
+as the score.</p>
+
+</div>
+
+</body>
+
+</html>
+

@@ -1,0 +1,242 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"Balloon Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-link:"Balloon Text";
+	font-family:"Tahoma","sans-serif";}
+p.msolistparagraphcxspfirst, li.msolistparagraphcxspfirst, div.msolistparagraphcxspfirst
+	{mso-style-name:msolistparagraphcxspfirst;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msolistparagraphcxspmiddle, li.msolistparagraphcxspmiddle, div.msolistparagraphcxspmiddle
+	{mso-style-name:msolistparagraphcxspmiddle;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	margin-bottom:.0001pt;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msolistparagraphcxsplast, li.msolistparagraphcxsplast, div.msolistparagraphcxsplast
+	{mso-style-name:msolistparagraphcxsplast;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msochpdefault, li.msochpdefault, div.msochpdefault
+	{mso-style-name:msochpdefault;
+	margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";}
+p.msopapdefault, li.msopapdefault, div.msopapdefault
+	{mso-style-name:msopapdefault;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:0in;
+	line-height:115%;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+.MsoChpDefault
+	{font-size:10.0pt;
+	font-family:"Calibri","sans-serif";}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple>
+
+<div class="WordSection1" style="scroll:auto; width:100%; height:100%">
+
+<p class=MsoNormal style='margin-left:.25in'><b>TOPSIS Ranking Method</b></p>
+
+<p class=MsoNormal style='margin-left:.25in'>TOPSIS (Technique for Order of
+Preference by Similarity to Ideal Solution) is a multi-criteria ranking method
+that employs the concepts of the positive ideal point (best objective values
+for all criteria) and the negative ideal point (worst objective values in all
+criteria) in the objective domain. Alternatives are ranked based on the
+shortest geometric distance from the positive ideal point and the longest
+geometric distance from the negative ideal point in terms of the objective
+values. For the distance calculations of TOPSIS to be valid all objectives must
+be normalized such that their values are all in the same range. The <a
+href="ResultsAnalyticsScoring.html">final weight factors calculated as described
+previously</a> are applied to each objective value when making distance
+calculations and then comparing alternatives.</p>
+
+<p class=MsoNormal style='margin-left:.25in'>The Overall Score values of each
+alternative are calculated as follows:</p>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>a.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>All
+thresholds are evaluated; if any &quot;Must Have&quot; thresholds are violated
+for a given data point, its Overall Score value is set to 0.0 independent of
+the objective values</p>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>b.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Individual
+parameter objective values are calculated as follows (&quot;higher =
+better&quot; formulation is used):</p>
+
+<ul>
+<li class=MsoListParagraph style='margin-left:0.7in;'>
+For minimization parameters, raw_obj_val = -1*parameter_val</li>
+
+<li class=MsoListParagraph style='margin-left:0.7in;'>
+For maximization parameters, raw_obj_val = parameter_val</li>
+
+<li class=MsoListParagraph style='margin-left:0.7in;'>
+For target parameters, raw_obj_val = -1*Abs(target - parameter_val)</li>
+</ul>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>c.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Raw objective values for each objective parameter are scaled to be
+within [1...100] range - this is a scaled parameter objective value</p>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>d.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>For
+each objective parameter (data column), the sum of squares is calculated</p>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>e.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Each
+objective value is normalized by the square root of sum of squares for that
+column - this is a normalized objective value</p>
+
+<p class=MsoListParagraph style='margin-left:1.5in'><img border=0 width=102
+height=81 src="ResultsAnalyticsTOPSIS_files/image001.png"></p>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>f.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>The <a href="ResultsAnalyticsScoring.html">final weight factor
+calculated as described previously</a> is applied to each normalized objective
+- this is a normalized and weighted objective value</p>
+
+<p class=MsoListParagraph style='margin-left:1.5in'><span style='font-size:
+12.0pt;line-height:115%;font-family:"Times New Roman","serif"'><img border=0
+width=84 height=35 src="ResultsAnalyticsTOPSIS_files/image002.png"></span></p>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>g.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>For
+each objective parameter (data column), min and max normalized and weighted
+objective values are determined; these values form the Positive Ideal Point
+(maximum objective values), and the Negative ideal Point (minimum objective
+values)</p>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>h.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>For
+each objective value (calculated in &quot;e&quot;), &nbsp;the single axis
+distances from the Positive and Negative Ideal Points are calculated, and then
+squared (POSij and NEGij)</p>
+
+<p class=MsoNormal style='margin-left:99.0pt'><img border=0 width=161
+height=36 src="ResultsAnalyticsTOPSIS_files/image003.png"><span
+style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman","serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><img border=0 width=161 height=36
+src="ResultsAnalyticsTOPSIS_files/image004.png"></p>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>i.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>For each data point (row), the Euclidian distances from the Positive
+and Negative Ideal Points are calculated as the square root of the sums POSij
+and NEGij</p>
+
+<p class=MsoNormal style='margin-left:99.0pt'><img border=0 width=127
+height=51 src="ResultsAnalyticsTOPSIS_files/image005.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img border=0 width=128 height=51
+src="ResultsAnalyticsTOPSIS_files/image006.png"></p>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>j.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>The TOPSIS raw score for each data point is calculated as </p>
+
+<p class=MsoNormal style='margin-left:99.0pt'><img border=0 width=125
+height=66 src="ResultsAnalyticsTOPSIS_files/image007.png"></p>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>k.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Raw
+scores for all data points are scaled to be within [1...100] range - this is
+the Overall Score displayed in the table (recall that if the data point has any
+&quot;Must Have&quot; thresholds violated, its Overall Score value is set to
+0.0). The Overall Score of each data point also becomes the score of the top
+level (root) parameter group.</p>
+
+<p class=MsoListParagraph style='margin-left:54.75pt;text-indent:-18.75pt'>l.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>For each parameter group other than the top level (root) group, the
+score is calculated as the sum of scores of all sub-groups and parameters. No
+scaling is done for group scores - only the sum of all children scores is taken
+as the score.</p>
+
+<p class=MsoListParagraph style='margin-left:.75in'>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

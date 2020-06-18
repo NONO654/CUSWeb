@@ -1,0 +1,1 @@
+define("DS/XCTCSIServiceProxy/XCTCSIServiceProxy_ru",{});define("DS/XCTCSIServiceProxy/assets/nls/XCTCSIServiceProxy",{msg_uploadFromIRS:"Загрузить из xStudio",error_failedToConnectToHypervisor:"Сбой при подключении к гипервизору",error_loginFailed:"Ошибка входа"});

@@ -1,0 +1,25 @@
+<!--------------------------------------------------------------------
+[sp-alert-message HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:    Wed, 07 Oct 2015 19:58:15 GMT
+Assigned to:	Vijaya Kantamneni
+Primary use:	Used to display feedback to user in a nice format
+Description:    Formats message based on its type.Supports info,success,warning,error states
+--------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<dom-module id="sp-alert-message">
+  <link rel="import" type="css" href="sp-alert-message.css">
+  <template>
+        <div class$="[[computeClass(type)]]">
+            <button on-click="_onClose" class$="[[computeClass2(closable)]]">x</button>
+            <span class="icon fonticon"></span>
+            <span><strong class="heading">[[heading]]</strong><span>[[message]]</span></span>
+            <span class$="[[_computeClass3(showCloseButtonFlag)]]" on-click="_removeMessage"></span>
+        </div>
+    </template>
+  <script type="text/javascript" src="sp-alert-message.js"></script>
+</dom-module>

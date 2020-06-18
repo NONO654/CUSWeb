@@ -1,0 +1,1 @@
+define("DS/ENOXVersionExplorerModelManager/ENOXVersionExplorerModelManager_fr",{});define("DS/ENOXVersionExplorerModelManager/assets/nls/SemanticRelationships",{X_MODEL:{E:"Evolution",F:"Fixer",S:"Etude",B:"Branche",SP:"Fractionner"},P_PRIME:{E:"Evolution",F:"Fixer",S:"Etude",SO:"Dérivé",SP:"Fractionner",I:"Intégrer"}});

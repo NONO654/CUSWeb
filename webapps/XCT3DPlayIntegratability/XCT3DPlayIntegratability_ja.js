@@ -1,0 +1,1 @@
+define("DS/XCT3DPlayIntegratability/XCT3DPlayIntegratability_ja",{});define("DS/XCT3DPlayIntegratability/assets/nls/XCT3DPlayIntegratability",{warning_objectTypeNotSupported_title:"オブジェクト タイプがサポートされていません。",error_loadingMultipleFiles_title:"複数エクスペリエンスの読み込みは不可能です。最初の 1 つだけが読み込まれます。"});

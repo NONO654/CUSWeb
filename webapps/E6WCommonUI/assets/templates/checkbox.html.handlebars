@@ -1,0 +1,26 @@
+	    {{!--
+	        template for checkbox fields
+		       for a config like
+		       {
+		                readWrite: 'true',
+			    		name: 'dsBPM:isMandatory',
+			    		//this is the name of the attribute in the value/model object which will be sent to the form for display
+			    		label: i18n('emxBusinessProcessManagement.Label.parameterValue', 'Mandatory'),
+			    		type: 'checkbox',
+			    		fieldHTMLId:'isMandatory'
+		       }
+		--}}
+
+    		 <div class="toggle toggle-switch">
+	             <input class="data-entry" {{#if fieldHTMLId}}id="{{fieldHTMLId}}Checkbox{{viewId}}"{{else}}id="{{name}}Checkbox{{viewId}}"{{/if}} type="checkbox" \{{#E6Wif {{name}} 'TRUE'}} checked \{{/E6Wif}} value = "\{{ {{name}} }}"
+	                   {{~#if readWrite~}}
+            		\{{~#if canEdit~}}
+            		\{{~else~}}
+            		disabled
+            		\{{~/if~}}
+            		{{~else~}}
+            		disabled
+        	      {{~/if}}
+        	      >
+	             <label class="control-label" for="{{#if fieldHTMLId}}{{fieldHTMLId}}Checkbox{{viewId}}{{else}}{{name}}Checkbox{{viewId}}{{/if}}">{{#if icon}}<span class="fonticon {{icon}}"></span>{{/if}}{{label}}</label>
+             </div>

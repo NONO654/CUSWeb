@@ -1,0 +1,77 @@
+<div class="lcm-selectionpanel-main-container is-mobile">
+  <div class="">
+    <span class="">[[panel-title]]</span>
+    <br />
+    <input
+      class=""
+      id="containsRadio"
+      type="radio"
+      name="incOrEx"
+      value="include"
+      checked
+      data-wuxcontrol="Radio"
+      data-wuxlabel="[[panel-contains]]"
+      data-wuxchecked="true"
+      data-wuxstyle="display:inline-block"
+      data-bind="event=change, function=onChangeContains"
+    />
+    <label data-delete-element="true"> [[panel-contains]]</label>
+    <input
+      class=""
+      id="notContainsRadio"
+      type="radio"
+      name="incOrEx"
+      value="exclude"
+      data-wuxcontrol="Radio"
+      data-wuxlabel="[[panel-notContains]]"
+      data-wuxstyle="display:inline-block"
+      data-bind="event=change, function=onChangeNotContains"
+    />
+    <label data-delete-element="true">[[panel-notContains]]</label>
+    <br />
+    <input
+      class="enolcm-dup-input enolcm-dup-title-input"
+      id="titleEdit"
+      data-wuxcontrol="LineEditor"
+      data-wuxstyle="height: 24px"
+      data-bind="event=keydown, key=13, function=addSelection;attribute=value, property=title"
+    />
+  </div>
+  <div class="lcm-dup-mobile-marginy-20 is-mobile"></div>
+  <div class="">
+    <span class="">[[panel-tags]]</span>
+    <div class="enolcm-dup-placeholder" id="groupListPlaceholder"></div>
+  </div>
+  <div class="" style="margin-top: 4px">
+    <button
+      id="addSelBtn"
+      class="enolcm-dup-btn"
+      data-wuxcontrol="Button"
+      data-wuxlabel="[[panel-add]]"
+      data-wuxstyle="display:inline-block"
+      data-bind="event=click, function=addSelection"
+    >
+      <span>[[panel-add]]</span>
+    </button>
+    <button
+      id="removeSelBtn"
+      class="enolcm-dup-btn"
+      data-wuxcontrol="Button"
+      data-wuxlabel="[[panel-remove]]"
+      data-wuxstyle="display:inline-block"
+      data-bind="event=click, function=removeSelection"
+    >
+      <span>[[panel-remove]]</span>
+    </button>
+    <button
+      id="clearSelBtn"
+      class="enolcm-dup-btn"
+      data-wuxcontrol="Button"
+      data-wuxlabel="[[panel-clear]]"
+      data-wuxstyle="display:inline-block"
+      data-bind="event=click, function=clearSelection"
+    >
+      <span>[[panel-clear]]</span>
+    </button>
+  </div>
+</div>

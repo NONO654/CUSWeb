@@ -1,0 +1,1 @@
+define("DS/DELMOMWKIExperience/DELMOMWKIExperience_ja",{});define("DS/DELMOMWKIExperience/assets/nls/DELMOMWKIExperience",{ViewsLbl:"ビュー",NoViewsLbl:"ビューなし",NoViewsOperLbl:"操作のビューなし"});

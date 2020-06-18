@@ -1,0 +1,16 @@
+m|DELPPWBehaviors\DELPPWModelBehaviors.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19218
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELPPWModelBehaviors\DELPPWModelBehaviors.js|1565121480|48940
+s|DELPPWBehaviors\DELPPWModelBehaviors.mweb\src\ModelBehavior.js|1564048672|55226
+s|DELPPWBehaviors\DELPPWModelBehaviors.mweb\src\AttributeBehavior.js|1532440983|5378
+s|DELPPWBehaviors\DELPPWModelBehaviors.mweb\src\DocumentBehavior.js|1559310673|20822
+s|DELPPWBehaviors\DELPPWModelBehaviors.mweb\src\LinkBehavior.js|1561440070|21446
+s|DELPPWBehaviors\DELPPWModelBehaviors.mweb\src\MfgItemBehavior.js|1556606944|4686
+s|DELPPWBehaviors\DELPPWModelBehaviors.mweb\src\DuplicateAdvBehavior\DuplicateAdvUI.js|1532752925|6531
+s|DELPPWBehaviors\DELPPWModelBehaviors.mweb\src\ImplementBehavior.js|1564745317|32772
+s|DELPPWBehaviors\DELPPWModelBehaviors.mweb\src\AssignProductBehavior.js|1564048600|21208
+s|DELPPWBehaviors\DELPPWModelBehaviors.mweb\src\ResourceBehavior.js|1532440983|1514
+s|DELPPWBehaviors\DELPPWModelBehaviors.mweb\src\DuplicateAdvBehavior\DuplicateAdvBehavior.js|1564048614|9482

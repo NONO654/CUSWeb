@@ -1,0 +1,1 @@
+CKEDITOR.plugins.setLang("widget","km",{move:"ចុចហើយទាញដើម្បីផ្លាស់ទី"});

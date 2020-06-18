@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta name="author" content="MXZ" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Views test page</title>
+
+<!-- Definition of require : -->
+<!-- <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script> -->
+
+<!-- This is required to configure RequireJS with the appropriate pathes : -->
+<!-- <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script> -->
+
+
+<link rel="stylesheet" href="js/infra/drivers/jqueryui/jquery-ui.css" />
+<script type="text/javascript" src="js/infra/drivers/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/infra/drivers/jqueryui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/infra/drivers/jquery-tmpl-master/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/Site.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/GeneralHelper.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/MemoryStorage.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/LocalStorage.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/Cache.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/Transport.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/UcwaMain.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/AutoDiscovery.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/Authentication.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/Events.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/Mime.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/Index.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/Batch.js"></script>
+<script type="text/javascript" src="js/infra/drivers/UCWA/OperationResource.js"></script>
+<script type="text/javascript" src="js/infra/drivers/LyncApi.js"></script>
+
+
+<script>
+
+	var driver = undefined;
+
+	
+		
+	function logToCollab () {
+		var login = document.getElementById('loginInput').value;
+		var pass = document.getElementById('passwordInput').value;
+
+		driver = new LyncApi();
+
+		var domain = driver.UserSignIn('p8d@lync2013.local','p8d',$("#demoiframe"),onLoginLync);
+		
+	}
+
+	function onLoginLync(sip, message){
+		var a;
+
+		a='azerty';
+	}
+
+	function sendMsg(toContact,txt) {
+		if (driver)
+		{
+			driver.sendMessage(toContact + '@lw5-p8d-dsy',txt);
+		}
+	}
+
+	function buildBuddy(roster) {
+
+		for (var group in roster) {
+			var groupDIV = document.getElementById(group);
+	        if (!groupDIV)
+	        {
+	            var buddyDIV = document.getElementById('buddylist').innerHTML;
+	            var groupHTML = '<div id="' + group + '" style="margin: 5px; border:1px solid gray;" >' + roster[group].getName() + ':<br></div><br>';
+	            document.getElementById('buddylist').innerHTML = (buddyDIV) ? buddyDIV + groupHTML: groupHTML;
+	        }
+
+	        var users = roster[group].getUsers();
+	        for (var user in users)
+	        {
+	        	var groupDIV = document.getElementById(group).innerHTML;
+	            if (groupDIV)
+	            {
+	            	var userId = users[user].getId();
+	                var contactDIV = document.getElementById(group + userId);
+	                var contactHTML = '';
+	                if (!contactDIV)
+	                {
+
+	                	var colorStatus = 'gray';
+	                	if (users[user].getStatus() === 'available')
+	                		colorStatus = 'green';
+
+	                    contactHTML = '<div id="' + group + userId +'" style="display: flex;flex-direction:row;" ><div id="' + group + userId +'Status" style="background:' + colorStatus + '; width:10px;height:10px;margin: 5px;"></div><div>' + users[user].getName() + '</div></div>';
+	                    var groupHTML = document.getElementById(group).innerHTML;
+	                    document.getElementById(group).innerHTML = groupHTML + contactHTML;
+	                }
+	                else
+	                {
+	                	var divStatus = document.getElementById( group + userId +'Status');
+						if (users[user].getStatus() === 'available')
+							divStatus.style.background = 'green';
+						if (users[user].getStatus() === 'away')
+							divStatus.style.background = 'yellow';
+						if (users[user].getStatus() === 'xa' || users[user].getStatus() === 'unavailable')
+							divStatus.style.background = 'gray';
+
+	                }
+
+	            }
+	        }
+        }
+	}
+
+	function getStatus(user)
+	{
+		if (driver)
+		{
+			driver.getStatus(user + '@lw5-p8d-dsy');
+		}
+	}
+
+	function updateStatus(userStatus){
+		var divStatus = document.getElementbyId("' + group + userId +'Status");
+		if (userStatus.status === 'Online')
+			divStatus.userStatus.style.background = 'green';
+	}
+
+	function buildStatus ()
+	{
+		require(['DS/InstantMessaging/js/infra/RTUserStatus'], function (RTUserStatus) {
+
+			var sList = document.getElementById("statusList");
+			for (var userStatus in RTUserStatus)
+			{
+				var option = document.createElement("option");
+				option.text = userStatus;
+				sList.add(option);
+			}
+			
+		});
+	}
+
+	function changeStatus(listStatus)
+	{
+		var sList = document.getElementById("statusList");
+		var idx = sList.selectedIndex;
+		var content = sList.options[idx].innerHTML;
+		  
+		if (driver)
+			driver.setMyStatus(content, content);
+	}
+
+	function searchContact(value) {
+		if (driver)
+			driver.searchContact(value);
+		
+	}
+
+	function onMessagereceived(msg)
+	{
+		UWA.log('=> MSG - FROM :' + msg.from + ' - TYPE : ' + msg.typeMsg + ' - MSG : ' + msg.msgText);
+		var msgReceived = document.getElementById('msgReceived').innerHTML;
+        var msgView = '<div style="border: 1px solid black;margin:2px;">=> ' + msg.from + ' : ' + msg.msgText + '</div>';
+
+        document.getElementById('msgReceived').innerHTML = msgView + msgReceived;
+	}
+
+	function createGroup(groupName)
+	{
+		if (driver)
+		{
+			driver.addGroup(groupName);
+		}
+	}
+
+	function addContact(userName,groupName)
+	{
+		if (driver)
+		{
+			driver.addContact(userName + '@lw5-p8d-dsy',groupName);
+		}
+	}
+
+	function removeGroup(groupName)
+	{
+		if (driver)
+		{
+			driver.removeGroup(groupName);
+		}
+	}
+
+
+	function removeUser(userName,groupName)
+	{
+		if (driver)
+		{
+			driver.removeContact(userName + '@lw5-p8d-dsy',groupName);
+		}
+	}
+
+/*
+	var addWindowEvent = window.addEventListener;
+	!addWindowEvent && (addWindowEvent = window.attachEvent);
+
+	addWindowEvent("load", function() {
+        "use strict";
+        
+		var driver = undefined;
+		
+		function logToCollab () {
+			var login = document.getElementbyId('loginInput');
+			var pass = document.getElementbyId('passwordInput');
+
+			require(['DS/InstantMessaging/js/infra/RTDriver'], function (rtDriver) {
+				UWA.log('3DIM - DRIVER loaded');
+				var optt = {
+					driverName:'XMPP',
+	            	credentials: { jid: login+'@lw5-p8d-dsy', user: login, password: pass },
+	            	url: 'http://localhost:7070/http-bind/',
+	            	logger: true
+				};
+				
+				driver = new rtDriver(optt);
+				driver.login();
+				
+			});
+		}
+		
+    });
+*/
+</script>
+</head>
+<body>
+	
+	<div style="display:flex; flex-direction:row;">
+
+		<div style="border: 1px solid black; margin: 5px; padding:5px;">
+			<div id="connectUser" style="border: 1px solid gray; margin: 5px; padding:5px;">
+				Login:<br>
+				<input id="loginInput" type="text" name="login" value='p8d'>
+				<br>
+				Password:<br>
+				<input id="passwordInput" type="text" name="lastname" value='p8d'>
+				<div id="connectToServer" style="border: 1px solid blue; margin: 2px;border-radius:2px; width:100px;" onclick="logToCollab();">
+					Connect
+				</div>
+			</div>
+
+			<div style="border: 1px solid green; margin: 5px;padding:5px;width: 200px;">
+				Chat:<br>
+				<input id="loginToSend" type="text" name="loginToSend" value='pma'>
+				<br>
+				<textarea id="SendMsg" wrap="virtual" style="margin: 5px;"></textarea>
+				<div id="connectToServer" style="border: 1px solid blue; margin: 2px;border-radius:2px; width:100px;" onclick="sendMsg(document.getElementById('loginToSend').value,document.getElementById('SendMsg').value);">
+					Send
+				</div>
+				<div id="getStatus" style="border: 1px solid blue; margin: 2px;border-radius:2px; width:100px;" onclick="getStatus(document.getElementById('loginToSend').value);">
+					Status
+				</div>
+				<div id="getStatus" style="border: 1px solid blue; margin: 2px;border-radius:2px; width:100px;" onclick="searchContact(document.getElementById('loginToSend').value);">
+					Search
+				</div>
+			</div>
+			<div style="border: 1px solid brown; margin: 5px;padding:5px;width: 200px;">
+				Group:<br>
+				<input id="groupName" type="text" name="groupName" value=''><br>
+				User to Add:<br>
+				<input id="addContatctName" type="text" name="addContatctName" value=''>
+				<div id="createGroup" style="border: 1px solid blue; margin: 2px;border-radius:2px; width:100px;" onclick="createGroup(document.getElementById('groupName').value);">
+					CreateGroup
+				</div>
+				<div id="removeGroup" style="border: 1px solid blue; margin: 2px;border-radius:2px; width:100px;" onclick="removeGroup(document.getElementById('groupName').value);">
+					RemoveGroup
+				</div>
+				<div id="addContact" style="border: 1px solid blue; margin: 2px;border-radius:2px; width:100px;" onclick="addContact(document.getElementById('addContatctName').value,document.getElementById('groupName').value);">
+					AddUser
+				</div>
+				<div id="removeUser" style="border: 1px solid blue; margin: 2px;border-radius:2px; width:100px;" onclick="removeUser(document.getElementById('addContatctName').value,document.getElementById('groupName').value);">
+					RemoveUser
+				</div>
+			</div>
+		</div>
+
+		<div id="msgReceived" style="border: 1px solid red; margin: 5px;padding:5px;flex:1;width: 460px;">
+		</div>
+
+		<div id="completbuddylist" style="border: 1px solid black; margin: 5px;padding:5px;">
+			<div id="mYStatus" style="border: 1px solid black; margin: 5px;padding:5px;" onchange="changeStatus(this);">
+				Status:<br>
+				<select name="statusList" id="statusList">
+				</select> 
+			</div>
+			<div id="buddylist" style="border: 1px solid black; margin: 5px;padding:5px;">
+				BuddyList:<br>
+			</div>
+		</div>
+
+	</div>
+
+	<iframe src="about:blank" style="width: 80%; height: 80%; background:yellow;" id="demoiframe"></iframe>
+
+</body>
+</html>

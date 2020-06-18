@@ -1,0 +1,1 @@
+define("DS/MVAInput/MVAInput_de",{});define("DS/MVAInput/assets/nls/MVAInput",{MVA_input_Placeholder:"Wert hinzufügen","The item already exists":"Das Element ist bereits vorhanden."});

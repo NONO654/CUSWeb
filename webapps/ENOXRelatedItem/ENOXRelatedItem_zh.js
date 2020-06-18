@@ -1,0 +1,1 @@
+define("DS/ENOXRelatedItem/ENOXRelatedItem_zh",{});define("DS/ENOXRelatedItem/assets/nls/ENOXRelatedItem",{ConfirmationButton:"确定",CancelButton:"取消",SearchPlaceHolder:"在此处键入以搜索所需的项目",noResultMessage:"未找到匹配项目...",WarningForMultipleItemsSelection:"只能放置或选择一个项目...",AllowedTypes:"允许的类型是： ",TypesNotAllowed:"。因此，不会添加以下项目： "});

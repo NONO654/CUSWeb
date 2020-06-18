@@ -1,0 +1,41 @@
+<!-- Import base component common to all widgets-->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+
+<!--Import SP UI components-->
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+
+<dom-module id="xs-wg-input-text">
+  <!-- <link rel="import" type="css" href="xs-wg-input-text.css"> -->
+  <template>
+	  <!-- Including the base widget style -->
+	  <style include="xs-wg-base"></style>
+    <style>
+    :host {
+      /* 	display: inline;     */
+      display: flex;
+      flex-direction: column; }
+
+    .input-field {
+      display: inline-block; }
+
+    .range-info {
+      margin-left: 10px;
+      display: none;
+      color: #77797C; }
+
+    .range-info.is-visible {
+      display: inline; }
+    </style>
+
+    <label class="xs-wg-label">{{calculateLabel(label,mandatory)}}</label>
+	  <sp-input id="input" class="input-field" readonly="{{readonly}}"
+				placeholder="{{placeholder}}" value="{{value}}" title="{{value}}"
+				required="{{mandatory}}"
+				haserror="{{_adp.hasError}}"
+				on-keypress="_keypressed">
+	  </sp-input>
+	  <span>{{_displayRange(min, max)}}</span>
+
+	</template>
+  <script src="xs-wg-input-text.js"></script>
+</dom-module>

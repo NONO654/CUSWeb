@@ -1,0 +1,1 @@
+define("DS/OnePart3DSearch/OnePart3DSearch_ja",{});define("DS/OnePart3DSearch/assets/nls/onepart",{facet:{properties:{title:"プロパティ"}},action:{openInOnePart:{title:"OnePart で開く..."}},error:{cannotRetrieveAppInfo:"アプリケーション情報の取得中にエラーが発生しました"}});

@@ -1,0 +1,96 @@
+<div class="main-container-v">
+  <fieldset>
+    <legend>[[panel-box-actions]]</legend>
+
+    <select
+      class="enolcm-dup-select enolcm-dup-actions-v"
+      id="groupAction"
+      data-wuxcontrol="DropdownBtn"
+      data-wuxstyle="width: 100%; margin-bottom: 2px; padding: 0px 4px 24px 2px;"
+      data-bind="event=change, function=onChangeActionCombo;event=click, function=applyAction"
+    >
+      <!-- prettier-ignore   -->
+      {{actions}}
+    </select>
+  </fieldset>
+
+  <fieldset>
+    <legend>[[panel-box-newTitle]]</legend>
+    <span>[[panel-addText]]</span><br />
+    <input
+      class="enolcm-dup-input"
+      id="addTextEdit"
+      data-wuxcontrol="LineEditor"
+      data-wuxstyle="height: 24px; width: calc(100% - 130px); display: inline-block"
+      data-bind="event=keydown, key=13, function=addText;attribute=value, property=addText"
+    />
+    <select
+      class=""
+      id="addtextBtn"
+      style="display:inline-block"
+      data-wuxcontrol="DropdownBtn"
+      data-wuxstyle="display:inline-block; width:120px"
+      data-bind="event=change, function=onChangeAddCombo;event=click, function=addText"
+    >
+      <option value="before">[[panel-beforeName]]</option>
+      <option value="after">[[panel-afterName]]</option>
+    </select>
+    <br />
+    <input
+      class="enolcm-dup-checkbox"
+      type="checkbox"
+      id="applyChildrenCheck"
+      data-wuxcontrol="Checkbox"
+      data-wuxlabel="[[panel-applyToChildren]]"
+      data-bind="event=change, function=onApplyChildrenChange"
+    />
+    <label id="applyChildrenLabel" data-delete-element="true">
+      [[panel-applyToChildren]]
+    </label>
+    <hr class="dup-hr" />
+
+    <span style="display: inline-block; width: 60px">[[panel-find]]</span>
+    <input
+      class="enolcm-dup-input"
+      id="findTextEdit"
+      data-wuxcontrol="LineEditor"
+      data-wuxstyle="display:inline-block; height: 24px; width: calc(100% - 70px); margin-bottom: 2px;"
+      data-bind="event=keydown, key=13, function=replace;attribute=value, property=findText"
+    />
+    <br />
+    <div class="lcm-dup-mobile-marginy-15 is-mobile"></div>
+    <span style="display: inline-block; width: 60px">[[panel-replace]]</span>
+    <input
+      class="enolcm-dup-input"
+      id="replaceTextEdit"
+      data-wuxcontrol="LineEditor"
+      data-wuxstyle="display:inline-block; height: 24px; width: calc(100% - 70px); margin-bottom: 2px;"
+      data-bind="event=keydown, key=13, function=replace;attribute=value, property=replaceText"
+    />
+    <br />
+    <div class="lcm-dup-mobile-marginy-15 is-mobile"></div>
+    <div style="text-align: right; margin-right: 6px">
+      <button
+        class="enolcm-dup-btn"
+        id="replaceBtn"
+        data-wuxcontrol="Button"
+        data-wuxlabel="[[panel-replace2]]"
+        data-bind="event=click, function=replace"
+      >
+        <span>[[panel-replace2]]</span>
+      </button>
+    </div>
+  </fieldset>
+
+  <div style="text-align: center">
+    <button
+      class="enolcm-dup-btn"
+      id="replaceBtn"
+      data-wuxcontrol="Button"
+      data-wuxlabel="[[panel-reset]]"
+      data-bind="event=click, function=reset"
+    >
+      <span>[[panel-reset]]</span>
+    </button>
+  </div>
+</div>

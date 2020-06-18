@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script	type="text/javascript" src="../../AmdLoader/AmdLoader.js"></script>
+<script type="text/javascript" src="../../c/UWA/js/UWA_W3C_Alone.js"></script>
+
+<script type="text/javascript" src="../../3DPlay/3DPlay.js"></script>
+<script type="text/javascript" src="../../3DPlayHelper/3DPlayHelper.js"></script>
+<script type="text/javascript" src="../../SimReviewHelper/SimReviewHelper.js"></script>
+<link rel="stylesheet" href="SMAAnalytics3DPlayer.css" />
+
+<script type="text/javascript">
+//<![CDATA[	
+
+	function initialize3DPlay(){
+	
+        // doing this in a require call makes sure that UWA is loaded
+        require(['DS/3DPlayHelper/3DPlayHelper'],function() {
+			
+            var queryStringKeyValue = window.location.search.replace('?', '').split('&');
+            var inputObject  = {};
+            if (queryStringKeyValue != '') {
+                for (i = 0; i < queryStringKeyValue.length; i++) {
+                    inputObject[queryStringKeyValue[i].split('=')[0]] = queryStringKeyValue[i].split('=')[1];
+                }
+            }
+                
+            var plmID = inputObject['plmid'];
+            var serverUrl = decodeURIComponent(inputObject['serverurl']);
+            var premise = decodeURIComponent(inputObject['premise']);
+                        
+            var simNavSyncServerID= null;
+            if(inputObject.hasOwnProperty('simsyncserverid')){
+                simNavSyncServerID = inputObject['simsyncserverid'];
+            }
+            var filePlayDiv = document.getElementById('_3dplayerdiv');
+            
+            
+            playerDefinition = {
+                     experience : '3DPlayFullSimulation',
+                     asset : {
+                         provider : 'EV6',
+                         physicalid : plmID,
+                         serverurl : serverUrl,                      
+                         dtype: 'DesignSight',
+                         requiredAuth: 'passport',
+                         tenant: premise
+                     }
+            };
+            playerSettings = {
+                    fullScreen: false,                      
+                    loading: 'autoplay',
+                    simNavSyncServer: {
+                      server: 'RAE3DPlay'
+					}
+                };
+                
+            player = new Player3DPlayWeb({
+                            container: filePlayDiv.id,
+                            input: playerDefinition,
+                            options: playerSettings
+                    });
+            
+        });
+	};
+	
+	function reload(){
+        if(player !== undefined){
+            player.load({ 
+                input:{
+                    asset: playerDefinition.asset,
+                    experience: playerDefinition.experience
+                }
+            });
+        }
+    }
+
+//]]>
+</script>
+</head>
+<body>
+
+<div id="_3dplayerdiv" class="sim-ui-3dplay-container">	
+</div>
+</body>
+</html>

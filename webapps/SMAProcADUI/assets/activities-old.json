@@ -1,0 +1,375 @@
+[ 
+    {
+	   "basics": {
+	        "revision": "-",
+	        "name": "My pre-processor1-1111111",
+	        "type": "Simulation Activity"
+	    },
+		"id" : "204A0A0E0000237C538E1B5500000093",
+	    "connections": {},
+		"attributes" : {
+			"title" : "My pre-processor",
+			"description" : "This is my custom pre-processing application",
+			"definition": {
+				"flowItem": {
+					"id": "",
+					"activeImplementationId": "",
+					"sequenceFlows": [],
+					"ExecutionConfig": {
+						"properties": {
+							"affinities": {
+							},
+							"keepdirtype": "2"
+						}
+					},
+					"implementations": [
+						{
+							"workflowConfig": {
+							},
+							"firstChildID": "",
+							"mainFlowItemID": "",
+							"sequenceFlows": [],
+							"children": [ {
+									"FlowItem" : {
+										"id": "FunctionStepb326f0ca-b7b1-4595-bb5a-30577aacb300",
+										"type": "",
+										"name": "Download",
+										"stepConfig": {
+											"extensionWrittenVersion": "",
+											"extensionName": "com.dassault_systemes.sma.adapter.Download",
+											"id": "",
+											"properties": {
+												"rules": [
+												]
+											}
+										}
+									}
+								},
+								{
+									"FlowItem" : {
+										"id": "FunctionStepd7854f54-b920-49ab-a81a-0d987b517764",
+										"type": "",
+										"name": "Main",
+										"stepConfig": {
+											"extensionWrittenVersion": "",
+											"extensionName": "com.dassault_systemes.sma.adapter.OSCommand",
+											"id": "",
+											"properties": {
+												"commandType": "Command",
+												"command": "mypreprocessor.exe",
+												"PredefinedCommandOptions": ""
+											}
+										}
+										}
+								},
+								{
+									"FlowItem" : {
+										"id": "FunctionStepd4f6a8d8-88a8-4987-afcf-863b76ac0278",
+										"type": "",
+										"name": "Upload",
+										"stepConfig": {
+											"extensionWrittenVersion": "",
+											"extensionName": "com.dassault_systemes.sma.adapter.Upload",
+											"id": "",
+											"properties": {
+												"rules": [
+													{
+														"id" : "1",
+														"name": "__AllFiles__",
+														"enabled": "true",
+														"sourceFileName": "*",
+														"importCategory": "Internal Data",
+														"titleSpecification": "titleEqualsFileName",
+														"importDocType_C": "Simulation Document - NonVersioned",
+														"importDocPolicy_C": "Simulation Document",
+														"contentRel_C": "referenced",
+														"impactRel_C": "output",
+														"exportEmptyFolders": "false",
+														"exportWithoutFiles": "false"
+													}
+												]
+											}
+										},
+										"ExecutionConfig": {
+											"properties": {
+												"isExecutable": "false"
+											}
+										}
+									}
+								}
+							]
+						}
+					],
+					"children": [
+						
+					]
+				}
+			}
+		}
+    },
+	{
+		"basics": {
+			"revision": "-",
+			"name": "Run ls-51402347915379",
+			"type": "Simulation Activity"
+		},
+		"id": "F4E98717000014045396218B0000012E",
+		"connections": {
+			
+		},
+		"attributes": {
+			"title": "Run ls",
+			"description": "Run ls to output contents of directory into a file",
+			"definition": {
+				"flowItem": {
+					"id": "",
+					"activeImplementationId": "",
+					"sequenceFlows": [],
+					"ExecutionConfig": {
+						"properties": {
+							"affinities": {
+							},
+							"keepdirtype": "2"
+						}
+					},
+					"implementations": [
+						{
+							"workflowConfig": {
+							},
+							"firstChildID": "",
+							"mainFlowItemID": "",
+							"sequenceFlows": [],
+							"children": [ 
+								{
+									"FlowItem" : {
+										"id": "FunctionStepb326f0ca-b7b1-4595-bb5a-30577aacb300",
+										"type": "",
+										"name": "Download",
+										"stepConfig": {
+											"extensionWrittenVersion": "",
+											"extensionName": "com.dassault_systemes.sma.adapter.Download",
+											"id": "",
+											"properties": {
+												"rules": [
+													{
+														"id" : "1",
+														"name": "__foo.txt__",
+														"enabled": "false",
+														"exportSource": "Internal Data",
+														"sourceDocTitle": "foo.txt",
+														"sourceFileName": "foo.txt",
+														"exportDocType": "All",
+														"contentRel": "referenced",
+														"impactRel": "all",
+														"exportMethod": "download",
+														"exportPath": "excludeCategoryFolder",
+														"exportEmptyFolders": "False",
+														"exportWithoutFiles": "False"
+													}
+												]
+											}
+										}
+									}
+								},
+								{
+									"FlowItem" : {
+										"id": "FunctionStepd7854f54-b920-49ab-a81a-0d987b517764",
+										"type": "",
+										"name": "Main",
+										"stepConfig": {
+											"extensionWrittenVersion": "",
+											"extensionName": "com.dassault_systemes.sma.adapter.OSCommand",
+											"id": "",
+											"properties": {
+												"commandType": "Command",
+												"command": "ls &gt; dir.txt",
+												"PredefinedCommandOptions": ""
+											}
+										}
+									}
+								},
+								{
+									"FlowItem" : {
+										"id": "FunctionStepd4f6a8d8-88a8-4987-afcf-863b76ac0278",
+										"type": "",
+										"name": "Upload",
+										"stepConfig": {
+											"extensionWrittenVersion": "",
+											"extensionName": "com.dassault_systemes.sma.adapter.Upload",
+											"id": "",
+											"properties": {
+												"rules": [
+													{
+														"id" : "1",
+														"name": "__AllFiles__",
+														"enabled": "true",
+														"sourceFileName": "*",
+														"importCategory": "Internal Data",
+														"titleSpecification": "titleEqualsFileName",
+														"importDocType_C": "Simulation Document - NonVersioned",
+														"importDocPolicy_C": "Simulation Document",
+														"contentRel_C": "referenced",
+														"impactRel_C": "output",
+														"exportEmptyFolders": "false",
+														"exportWithoutFiles": "false"
+													}
+												]
+											}
+										}
+									}
+								}
+							]
+						}
+					],
+					"children": [
+						
+					]
+				}
+			}
+		}
+	},
+	{
+		"basics": {
+			"revision": "-",
+			"name": "Run Abaqus-72354243523452345",
+			"type": "Simulation Activity"
+		},
+		"id": "F4E98717000014045396218B0000012E",
+		"connections": {
+			
+		},
+		"attributes": {
+			"title": "Abaqus / CAE",
+			"description": "Run Abaqus/CAE",
+			"definition": {
+				"flowItem": {
+					"id": "",
+					"activeImplementationId": "",
+					"sequenceFlows": [],
+					"ExecutionConfig": {
+						"properties": {
+							"affinities": {
+								
+							},
+							"keepdirtype": "2"
+						}
+					},
+					"implementations": [
+						{
+							"workflowConfig": {
+							},
+							"firstChildID": "",
+							"mainFlowItemID": "",
+							"sequenceFlows": [],
+							"children": [ 
+								{
+									"FlowItem" : {
+										"id": "FunctionStepb326f0ca-b7b1-4595-bb5a-30577aacb300",
+										"type": "",
+										"name": "Download",
+										"stepConfig": {
+											"extensionWrittenVersion": "",
+											"extensionName": "com.dassault_systemes.sma.adapter.Download",
+											"id": "",
+											"properties": {
+												"rules": [
+													{
+														"id": "1",
+														"name": "__foo.txt__",
+														"enabled": "false",
+														"exportSource": "Internal Data",
+														"sourceDocTitle": "foo.txt",
+														"sourceFileName": "foo.txt",
+														"exportDocType": "All",
+														"contentRel": "referenced",
+														"impactRel": "all",
+														"exportMethod": "download",
+														"exportPath": "excludeCategoryFolder",
+														"exportEmptyFolders": "False",
+														"exportWithoutFiles": "False"
+													}
+												]
+											}
+										}
+									}
+								},
+								{
+									"FlowItem" : {
+										"id": "FunctionStepd7854f54-b920-49ab-a81a-0d987b517764",
+										"type": "",
+										"name": "Main",
+										"stepConfig": {
+											"extensionWrittenVersion": "",
+											"extensionName": "com.dassault_systemes.sma.adapter.OSCommand",
+											"id": "",
+											"properties": {
+												"commandType": "PredefinedCommand",
+												"command": "",
+												"PredefinedCommandOptions": {
+													"Application": {
+														"appName": "Abaqus/CAE",
+														"appVersion": "6.8",
+														"Values": [
+															{
+																"id": "1",
+																"name": "cae",
+																"optionType": "Standalone",
+																"separator": "",
+																"value": ""
+															},
+															{
+																"id": "2",
+																"name": "database",
+																"optionType": "Option-Value",
+																"separator": "",
+																"value": "mydatabase"
+															}
+														]
+													}
+												}
+											}
+										}
+									}
+								},
+								{
+									"FlowItem" : {
+										"id": "FunctionStepd4f6a8d8-88a8-4987-afcf-863b76ac0278",
+										"type": "",
+										"name": "Upload",
+										"stepConfig": {
+											"extensionWrittenVersion": "",
+											"extensionName": "com.dassault_systemes.sma.adapter.Upload",
+											"id": "",
+											"properties": {
+												"rules": [
+													{
+														"id": "1",
+														"name": "__AllFiles__",
+														"enabled": "true",
+														"sourceFileName": "*",
+														"importCategory": "Internal Data",
+														"titleSpecification": "titleEqualsFileName",
+														"importDocType_C": "Simulation Document - NonVersioned",
+														"importDocPolicy_C": "Simulation Document",
+														"contentRel_C": "referenced",
+														"impactRel_C": "output",
+														"exportEmptyFolders": "false",
+														"exportWithoutFiles": "false"
+													}
+												]
+											}
+										}
+									}
+								}
+							]
+						}
+					],
+					"children": {
+						
+					}
+				}
+			}
+		}
+	}	
+]
+

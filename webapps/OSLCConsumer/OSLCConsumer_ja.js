@@ -1,0 +1,1 @@
+define("DS/OSLCConsumer/OSLCConsumer_ja",{});define("DS/OSLCConsumer/assets/nls/OSLCConsumerNls",{selectRepository:"リポジトリ:",selectProvider:"プロバイダー:",selectSingleObject:"ダイアログ送信前に、ただ 1 つのアーティファクトを選択してください。",processing:"処理しています..."});

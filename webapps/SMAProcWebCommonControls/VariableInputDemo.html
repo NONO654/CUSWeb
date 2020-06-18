@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SMAProcWebCommonControls pcw-variable-input showpage</title>
+  <link rel="stylesheet" href="../UIKIT/UIKIT.css" />
+
+  <script src="../AmdLoader/AmdLoader.js"></script>
+  <script>
+    function logEvent (event) {
+      console.log('Received:', event);
+      var serializedDetail = null;
+      try {
+          serializedDetail = JSON.stringify(event && event.detail);
+      } catch (e) {
+          console.error('Error:', e);
+          serializedDetail = 'Error while serializing, see console.'
+      }
+      document.getElementById('eventLog').textContent += 'received: "' + event.type + '", details: ' + serializedDetail + '\n';
+    }
+    require(['DS/SMAProcWebCommonControls/VariableInput'], function (PCWVariableInput) {
+      console.log('pcw-variable-input component loaded');
+      document.addEventListener('pcw-variable-changed', logEvent);
+    });
+  </script>
+</head>
+<body>
+    <h2>pcw-variable-input</h2>
+    <pcw-variable-input id="message" type="string" value="sample Text" label="Enter Message"></pcw-variable-input>
+    <hr />
+    <pcw-variable-input id="numberID" type="integer" value="0" label="Enter number"></pcw-variable-input>
+    <hr />
+    <pcw-variable-input id="textareaID" type="string" subtype="multiline" value="Some longer Text" label="Enter Text"></pcw-variable-input>
+    <hr />
+    <pcw-variable-input id="boolID" type="boolean"></pcw-variable-input>
+
+	<hr/>
+    Event log:
+    <pre id="eventLog"></pre>
+</body>
+</html>

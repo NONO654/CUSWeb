@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?> 
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/"> 
+ <!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<head>   
+    
+    <title>FCS Administration</title>
+    
+    <!-- Application Metas Start -->
+    <meta name="strictMode" content="true" />
+    
+    <widget:preferences>
+        <preference name="advancedMode" type="boolean" label="Advanced Mode" defaultValue="false"/>
+    </widget:preferences>
+       
+    <!-- Application Metas End -->
+
+    <!-- Application JS Start -->
+    <script>
+'use strict';
+             
+        
+require(
+[
+    'DS/FCSAdmUI/FCSApp',
+    'css!DS/FCSAdmUI/FCSAdmUI'
+],      
+
+function (FCSApp) {
+    var self = new FCSApp({
+        context: widget.contextId
+    }); ;
+    
+    widget.addEvents({
+        onLoad: function () {
+            self.FCSLoading(this);
+        },
+        onReload: function () {
+            self.reload(this);
+        },
+        onRefresh: function () {
+            self.reload(this);
+        }
+    });
+});
+    </script>
+    <!-- Application JS End -->
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!--------------------------------------------------------------------
+[sp-tag HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:    Fri, 20 Nov 2015 08:00:05 GMT
+Assigned to:	Thomas Esterle
+Primary use:	sp-multi-value-textfield
+Description:    This element symbolizes a value and styles it so it looks like a tag
+                TO-DO add a delete button
+--------------------------------------------------------------------->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+
+<dom-module id="sp-tag">
+  <link rel="import" type="css" href="sp-tag.css">
+  <template>
+    <div class="tag" readonly$="{{readonly}}">
+		<span class="content" title="{{value}}">{{value}}</content></span> 
+    <template is="dom-if" if="{{!readonly}}">
+      <span class = "fonticon fonticon-clear remove" title="Remove" on-click="removeMe"></span>
+    </template>
+    </div>
+  </template>
+  <script type="text/javascript" src="sp-tag.js"></script>
+</dom-module>
+
+

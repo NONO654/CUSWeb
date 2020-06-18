@@ -1,0 +1,1 @@
+define("DS/RTPresenceAPI/RTPresenceAPI_ru",{});define("DS/RTPresenceAPI/assets/nls/feed",{Contact:"Контакт"});

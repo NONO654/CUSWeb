@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+      <title>Filter</title>
+      <meta name="author" content="Dassault Systèmes" />
+      <meta name="brand" content="ENOVIA" />
+      <meta name="description" content="ENOVIA Next Gen Filtering" />
+      <meta name="charset" content="utf-8" />
+      <!-- <meta name="autoRefresh" content="0" /> -->
+
+      <!-- UWA and UIKit stylesheets -->
+      <script src="../AmdLoader/AmdLoader.js"></script>
+      <link rel="stylesheet" href="../UIKIT/UIKIT.css">
+      <script src="../UIKIT/UIKIT.js"></script>
+      <link rel="stylesheet" href="../c/UWA/assets/css/standalone.css">
+      <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+      <!--      <script src="../c/UWA/js/UWA_W3C_Alone.js"></script>-->
+
+      <!-- NextGenFilter Purpose -->
+      <link rel="stylesheet" href="ENONextGenFilterUX.css">
+
+      <script>
+            (function() {
+                  'use strict';
+                  var FilterWidget = {
+                        onLoadCB: function() {
+                              var that = this;
+                              require(['DS/ENONextGenFilterUX/views/GlobalFilterView',
+                                       'DS/ENONextGenFilterUX/models/GlobalFilterModel'
+                                     ], function(GlobalFilterView, GlobalFilterModel) {
+                                    // get RootID
+                                    var contentX3D = (widget.getValue('X3DContentId')) ? JSON.parse(widget.getValue('X3DContentId')) : null,
+                                          widgetViewtype = (widget.getView) ? widget.getView().type : "",
+                                          stringIDS = '[';
+
+                                    if (contentX3D !== null && widget.getValue('lastRootNodeID') === undefined && !widget.getValue('clearInPreview')) {
+                                          var contextX3DData = contentX3D.data;
+                                          if (contextX3DData !== null && contextX3DData.items.length > 0) {
+                                                var selectionArray = contextX3DData.items;
+                                                for (var i = 0; i < selectionArray.length; i++) {
+                                                      stringIDS += '"' + selectionArray[i].objectId + '"';
+                                                      stringIDS += ((selectionArray.length - 1) === i ? ']' : ',');
+                                                }
+                                                widget.setValue('lastRootNodeID', stringIDS);
+                                                //widget.setValue('lastAnchorID', selectionArray[0].objectId);
+                                          }
+                                    } else {
+                                          stringIDS = null;
+                                    }
+                                    //2- Create the view, which creates its collection, and inserts itself in the DOM
+                                    var globalMdl = new GlobalFilterModel({
+                                        state:'init'
+                                    });
+
+                                    //new FilterUIGlobalFilterView({}
+                                    new GlobalFilterView({
+                                          model: globalMdl,
+                                          widget: widget,
+                                          rootID: stringIDS,
+                                          widgetViewtype: widgetViewtype,
+                                          container: widget.body // Should be document.body in WebInWin
+                                    });
+
+                                    });
+                        },
+                };
+                  widget.addEvent('onLoad', FilterWidget.onLoadCB);
+
+            }());
+
+      </script>
+</head>
+
+</html>

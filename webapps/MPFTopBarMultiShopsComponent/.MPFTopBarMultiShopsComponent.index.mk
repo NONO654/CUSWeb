@@ -1,0 +1,12 @@
+m|MPFComponents\MPFTopBarMultiShopsComponent.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFTopBarMultiShopsComponent\MPFTopBarMultiShopsComponent.js|1554530794|4356
+s|MPFComponents\MPFTopBarMultiShopsComponent.mweb\src\MPFTopBarMultiShopsComponent.js|1514971746|0
+s|MPFComponents\MPFTopBarMultiShopsComponent.mweb\src\TopBarMultiShopsComponent.js|1550072678|9499
+t|MPFComponents\MPFTopBarMultiShopsComponent.mweb\LocalGenerated\win_b64\MPFTopBarMultiShopsComponent.css|1540605151|159
+s|MPFComponents\MPFTopBarMultiShopsComponent.mweb\src\MPFTopBarMultiShopsComponent.scss|1522836084|139
+t|win_b64\webapps\MPFTopBarMultiShopsComponent\MPFTopBarMultiShopsComponent.css|1568749454|121
+g|MPFComponents\MPFTopBarMultiShopsComponent.mweb\LocalGenerated\win_b64\MPFTopBarMultiShopsComponent.css|1540605151|159

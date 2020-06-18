@@ -1,0 +1,314 @@
+{  
+	"scenarios": [
+		{
+			"name": "pcw_BasicCheck",
+			"sequence": [
+        "sp_FetchDefaults", "license", "createSimulation", "createActivity",
+        "createCalculatorStep", "createParameterA", "createParameterB", "updateCalculatorStep",
+        "deleteSimulation"
+      ],
+      "odt": {
+				"odt_enabled": true
+			}
+    },
+	  {
+      "name": "pcw_JobCheck",
+      "caption":"Basic calculator job submission on default linux station",
+			"sequence": [
+        "sp_FetchDefaults", "license", "createSimulation", "createActivity",
+        "createCalculatorStep", "createParameterA", "createParameterB", "updateCalculatorStep",
+        "buildJob", "pubkey", "encryptCredentials", "run"
+      ],
+      "description":"Basic calculator expression b=a*2 gets evaluated on local linux station, please check value of b after execution (it should be double of value of a). Assertion checks yet to be added.",
+      "odt": {
+				"odt_enabled": true
+			}
+    },
+    {
+      "name": "pcw_JobPrivateStationCheck",
+      "caption":"Basic calculator job submission on private station",
+			"sequence": [
+        "sp_FetchDefaults", "license", "createSimulation", "createActivity", "updateStationAffinity",
+        "createCalculatorStep", "createParameterA", "createParameterB", "updateCalculatorStep",
+        "stationInfo1","buildJob","pubkey", "encryptCredentials" ,"run","claim"
+      ],
+      "description":"Basic calculator expression b=a*2 gets evaluated on private station, please check value of b after execution (it should be double of value of a). Assertion checks yet to be added."
+    },
+    {
+      "name": "pcw_CheckAllMCSServices",
+      "caption":"Checks all MCS services for PCW",
+			"sequence": [
+        "sp_FetchDefaults", "license", "createSimulation", "getSimulation","createActivity","getActivity","createGateway",
+        "getMetaData", "getExecutionOptions", "createCalculatorStep", "createParameterA", "createParameterB", "createPath",
+        "PathDetails","deletePath","updateCalculatorStep","ticket", "pcw_JobCheck"
+      ],
+      "description":"Basic calculator expression b=a*2 gets evaluated on private station, please check value of b after execution (it should be double of value of a). Assertion checks yet to be added.",
+      "odt": {
+				"odt_enabled": true
+			}
+		}
+  ],
+
+  "mcs": [
+    {
+			"name": "createSimulation",
+			"caption": "creates a new simulation",
+			"url": "${ctx.mcs.e6w}/SMA_Process?SecurityContext=${ctx.mcs.sec}",
+      "method": "POST",
+      "backend_id": "SimulationService:updateSimulation",
+      "_title": "DIAGNOSTICS_PROCESS",
+      "$beforeSend": "cmp:createSimulation_$beforeSend",
+      "$afterReceive": {
+        "ctx.simulation.id": "this.response.data.datarecords.datagroups[0].physicalId"
+      },
+      "$assertions": [
+        "this.response.data.success"
+      ]
+    },
+    {
+			"name": "createActivity",
+			"caption": "creates a new activity in a simulation",
+			"url": "${ctx.mcs.e6w}/SMA_Activity?SecurityContext=${ctx.mcs.sec}",
+			"method": "POST",
+      "backend_id": "SimulationService:updateActivity",
+      "_parentId": "ctx.simulation.id",
+      "_title": "Diagnostic-Activity-1",
+      "$beforeSend": "cmp:createActivity_$beforeSend",
+      "$afterReceive": {
+        "ctx.activity.id": "this.response.data.datarecords.datagroups[0].physicalId",
+        "ctx.activity.cestamp": "this.response.data.datarecords.datagroups[0].cestamp"
+      },
+      "$assertions": [
+        "this.response.data.success"
+      ]
+    },
+    {
+			"name": "createGateway",
+			"caption": "creates a new gateway in an activity",
+			"url": "${ctx.mcs.e6w}/SMA_Gateway?SecurityContext=${ctx.mcs.sec}",
+			"method": "POST",
+      "backend_id": "GatewayServices:updateGateway",
+      "_parentId": "ctx.activity.id",
+      "_title": "Diagnostic-Gateway-1",
+      "$beforeSend": "cmp:createGateway_$beforeSend",
+      "$afterReceive": {
+        "ctx.activity.cestamp": "this.response.data.datarecords.datagroups[0].dataelements.cestamp.value[0].value"
+      },
+      "$assertions": [
+        "this.response.data.success"
+      ]
+    },
+    {
+			"name": "createTemplate",
+			"caption": "creates a new template",
+			"url": "${ctx.mcs.e6w}/SMA_Template?SecurityContext=${ctx.mcs.sec}",
+			"method": "POST",
+      "backend_id": "SimulationTemplateService:updateTemplate",
+      "_sourceId": "ctx.simulation.id",
+      "$beforeSend": "cmp:createTemplate_$beforeSend",
+      "$afterReceive": {
+        "ctx.template.id": "this.response.data.datarecords.datagroups[0].physicalId"
+      },
+      "$assertions": [
+        "this.response.data.success"
+      ]
+    },
+    {
+			"name": "updateStationAffinity",
+			"caption": "updates activity station name to localhost",
+			"url": "${ctx.mcs.e6w}/SMA_ActExeOption?SecurityContext=${ctx.mcs.sec}",
+			"method": "POST",
+      "backend_id": "SimulationService:updateActivity",
+      "_activityId": "ctx.activity.id",
+      "_Host": "localhost",
+      "_cestamp": "ctx.activity.cestamp",     
+      "$beforeSend": "cmp:updateStationAffinity_$beforeSend",      
+      "$afterReceive": {
+        "ctx.activity.cestamp": "this.response.parsedData.datarecords.datagroups[0].dataelements.cestamp.value[0].value"
+      },
+      "$assertions": [
+        "this.response.data.success"
+      ]
+    },
+	  {
+			"name": "createCalculatorStep",
+			"caption": "creates a new step in an activity",
+			"url": "${ctx.mcs.e6w}/SMA_Step?SecurityContext=${ctx.mcs.sec}",
+			"method": "POST",
+      "backend_id": "StepsService:updateStep",
+      "_name": "Calculator",
+      "_extensionName": "com.dassault_systemes.sma.adapter.Calculator",
+      "$beforeSend": "cmp:createStep_$beforeSend",
+      "$afterReceive": {
+        "ctx.activity.cestamp": "this.response.data.datarecords.datagroups[0].dataelements.cestamp.value[0].value",
+        "ctx.activity.step.id": "this.response.data.datarecords.datagroups[0].dataelements.StepId.value[0].value"
+      },
+      "$assertions": [
+        "this.response.data.success"
+      ]
+    },
+    {
+			"name": "createParameterA",
+			"caption": "creates a new parameter (parameter a) in an activity",
+			"url": "${ctx.mcs.e6w}/SMA_Parameter?SecurityContext=${ctx.mcs.sec}",
+      "method": "POST",
+      "_id": "ctx.activity.id",
+      "_name": "a",
+      "_value": "5",
+      "backend_id": "ParameterService:updateParameter",
+      "$beforeSend": "cmp:createParameter_$beforeSend",
+      "$afterReceive": {
+        "ctx.activity.cestamp": "this.response.data.datarecords.datagroups[0].dataelements.cestamp.value[0].value"
+      },
+      "$assertions": [
+        "this.response.data.success"
+      ]
+    },
+    {
+			"name": "createParameterB",
+			"caption": "creates a new parameter (parameter b) in an activity",
+			"url": "${ctx.mcs.e6w}/SMA_Parameter?SecurityContext=${ctx.mcs.sec}",
+      "method": "POST",
+      "_id": "ctx.activity.id",
+      "_name": "b",
+      "_value": "0",
+      "backend_id": "ParameterService:updateParameter",
+      "$beforeSend": "cmp:createParameter_$beforeSend",
+      "$afterReceive": {
+        "ctx.activity.cestamp": "this.response.data.datarecords.datagroups[0].dataelements.cestamp.value[0].value"
+      },
+      "$assertions": [
+        "this.response.data.success"
+      ]
+    },
+    {
+			"name": "getActivity",
+			"caption": "Gets a single Activity",
+			"url": "${ctx.mcs.e6w}/SMA_Activity?objectId=${ctx.activity.id}",
+			"method": "GET",
+      "backend_id": "SimulationService:getSimulation",
+      "$beforeSend": {
+        "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "eno_csrf_token": "ctx.mcs.csrf"
+        }
+      },
+      "$assertions": [
+        "this.response.data.success"
+      ]
+    },
+    {
+			"name": "getMetaData",
+			"caption": "Gets Meta Data of a Process",
+			"url": "${ctx.mcs.e6w}/SMA_MetaData?objectId=${ctx.simulation.id}",
+			"method": "GET",
+      "backend_id": "TypeMetaDataServices:getTypeData",
+      "$beforeSend": {
+        "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "eno_csrf_token": "ctx.mcs.csrf"
+        }
+      },
+      "$assertions": [
+        "this.response.data.success"
+      ]
+    },
+    {
+			"name": "updateCalculatorStep",
+			"caption": "updates the calculator step with b=a*2",
+			"url": "${ctx.mcs.e6w}/SMA_Step?SecurityContext=${ctx.mcs.sec}",
+      "method": "POST",
+      "_stepId": "ctx.activity.step.id",
+      "_activityId": "ctx.activity.id",
+      "_expression": "'b'='a'*2",
+      "backend_id": "StepsService:updateStep",
+      "$beforeSend": "cmp:updateCalculatorStep_$beforeSend",
+      "$assertions": [
+        "this.response.data.success"
+      ]
+    },
+    {
+			"name": "JobIds",
+			"caption": "Gets the job id's",
+			"url": "${ctx.mcs.e6w}/SMA_JobIds",
+			"method": "GET",
+      "backend_id": "SimulationWJobs:getSimulationJobIds",
+      "$beforeSend": {
+        "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "eno_csrf_token": "ctx.mcs.csrf"
+        }
+      }
+    },
+    {
+			"name": "JobDetails",
+			"caption": "Gets the job details",
+			"url": "${ctx.mcs.e6w}/SMA_JobDetails",
+			"method": "GET",
+      "backend_id": "SimulationWJobs:getSimJobDetails",
+      "$beforeSend": {
+        "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "eno_csrf_token": "ctx.mcs.csrf"
+        }
+      }
+    },
+      {
+        "name": "simulationFilter",
+        "caption": "simulations/filter",
+        "url": "${ctx.mcs.rooturl}/simulations/filter",
+        "method": "POST",
+        "backend_id": "SimulationEntity:getSimulationsBasedOnIds",
+        "$beforeSend": "sp:filterPayloadPrep"
+      },
+      {
+        "name": "createPath",
+        "caption": "creates a new path between process and activity",
+        "url": "${ctx.mcs.e6w}/SMA_Path?SecurityContext=${ctx.mcs.sec}",
+        "method": "POST",
+        "_simulationId": "ctx.simulation.id",
+        "_activityId": "ctx.activity.id",
+        "backend_id": "PathService:updatePath",
+        "$beforeSend": "cmp:createPath_$beforeSend",
+        "$afterReceive": {
+          "ctx.path.referenceId": "this.response.parsedData.datarecords.datagroups[0].dataelements.referenceId.value[0].value"
+        },
+        "$assertions": [
+          "this.response.data.success"
+        ]
+      },
+      {
+        "name": "PathDetails",
+        "caption": "Gets the path details",
+        "url": "${ctx.mcs.e6w}/SMA_Path?ownerId=${ctx.simulation.id}&referenceId=${ctx.path.referenceId}",
+        "method": "GET",
+        "backend_id": "Pathservice:getPath",
+        "$beforeSend": {
+          "headers": {
+          "content-type": "application/x-www-form-urlencoded",
+          "eno_csrf_token": "ctx.mcs.csrf"
+          }
+        },
+        "$assertions": [
+          "this.response.data.success"
+        ]
+      },
+      {
+        "name": "deletePath",
+        "caption": "deletes the path between process and activity",
+        "url": "${ctx.mcs.e6w}/SMA_Path?SecurityContext=${ctx.mcs.sec}",
+        "method": "POST",
+        "_simulationId": "ctx.simulation.id",
+        "_referenceId": "ctx.path.referenceId",
+        "backend_id": "PathService:updatePath",
+        "$beforeSend": "cmp:deletePath_$beforeSend",
+        "$afterReceive": {
+          "ctx.activity.cestamp": "this.response.data.datarecords.datagroups[0].dataelements.cestamp.value[0].value"
+        },
+        "$assertions": [
+          "this.response.data.success"
+        ]
+      }
+  ]
+
+}

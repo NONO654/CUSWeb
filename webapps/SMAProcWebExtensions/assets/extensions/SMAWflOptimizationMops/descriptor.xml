@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.Mops" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationMops" nlsID="dispname">Multi-Objective Particle Swarm</DisplayName>
+	<Description nlsFile="SMAWflOptimizationMops" nlsID="desc">Multi-Objective Particle Swarm optimization algorithm</Description>
+	<LongDescription nlsFile="SMAWflOptimizationMops" nlsID="longdesc">
+		<![CDATA[Multi-Objective Particle Swarm
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Stochastic search algorithm
+
+</span><span style="font-weight:bold">Parameter Types:
+</span><span>   &#8226; Real
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Not well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>No
+
+</span><span style="font-weight:bold">Features:
+</span><span>Multi-Objective Particle swarm optimization (MOPS) mimics the social behavior of animal groups such as flocks of birds or fish shoals. The process of finding an optimal design point is likened to the food-foraging activity of these organisms. Particle swarm optimization is a population-based search procedure where individuals (called particles) continuously change position (called state) within the search area. In other words, these particles 'fly' around in the design space looking for the best position. The best position encountered by a particle and its neighbors along with the current velocity and inertia are used to decide the next position of the particle.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.Mops</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationMops.CATNls" targetFilename="SMAWflOptimizationMops.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationMops_Japanese.CATNls" targetFilename="SMAWflOptimizationMops_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.mops.MultiObjectiveParticleSwarm</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="maxConcurrent" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="reusePolicy" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Maximum Iterations" type="integer" valuetype="single">
+				<Value>50</Value>
+			</Property>
+			<Property name="Number of Particles" type="integer" valuetype="single">
+				<Value>10</Value>
+			</Property>
+			<Property name="Inertia" type="real" valuetype="single">
+				<Value>0.9</Value>
+			</Property>
+			<Property name="Global Increment" type="real" valuetype="single">
+				<Value>0.9</Value>
+			</Property>
+			<Property name="Particle Increment" type="real" valuetype="single">
+				<Value>0.9</Value>
+			</Property>
+			<Property name="Maximum Velocity" type="real" valuetype="single">
+				<Value>0.1</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Use fixed random seed" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Random seed value" type="integer" valuetype="single">
+				<Value>-1</Value>
+			</Property>
+		</Property>
+
+		<Property name="Parameters" type="aggregate" valuetype="single">
+			<Property name="ParetoFile" type="file" valuetype="single">
+				<Value>
+					<![CDATA[<rawFN>{rundir}/MOPS_pareto_profile.txt</rawFN><toOption>11</toOption><del>N</del><type>text/plain</type><rwEnc>UTF8</rwEnc><dataEnc>UTF8</dataEnc><handlerType>com.dassault_systemes.sma.datahandler.DataHandlerInline</handlerType><hconfig><from></from><at>0</at><dlen>0</dlen><zdata></zdata></hconfig>]]>
+				</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

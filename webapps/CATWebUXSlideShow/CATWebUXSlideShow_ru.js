@@ -1,0 +1,1 @@
+define("DS/CATWebUXSlideShow/CATWebUXSlideShow_ru",{});define("DS/CATWebUXSlideShow/assets/nls/CATWebUXSlideShow",{previousSlide:"Предыдущий вид",nextSlide:"Следующий вид",exitSlideShow:"Выйти из слайд-шоу",slideShowCannotBeLaunched:"Нет данных для отображения в режиме слайд-шоу"});

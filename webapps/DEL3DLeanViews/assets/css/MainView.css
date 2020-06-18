@@ -1,0 +1,174 @@
+@font-face {
+    font-family: '3ds';
+    src: url('../font/3dslight.eot');
+    src: url('../font/3dslight.eot?#iefix') format('embedded-opentype'),
+         url('../font/3dslight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal
+}
+@font-face {
+    font-family: '3ds';
+    src: url('../font/3dsregular.eot');
+    src: url('../font/3dsregular.eot?#iefix') format('embedded-opentype'),
+         url('../font/3dsregular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal
+}
+@font-face {
+    font-family: '3ds';
+    src: url('../font/3dsbold.eot');
+    src: url('../font/3dsbold.eot?#iefix') format('embedded-opentype'),
+         url('../font/3dsbold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal
+}
+@font-face {
+    font-family: '3dslight';
+    src: url('../font/3dslight.eot');
+    src: url('../font/3dslight.eot?#iefix') format('embedded-opentype'),
+         url('../font/3dslight.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal
+}
+@font-face {
+    font-family: '3dsregular';
+    src: url('../font/3dsregular.eot');
+    src: url('../font/3dsregular.eot?#iefix') format('embedded-opentype'),
+         url('../font/3dsregular.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal
+}
+html body
+{
+    font-family: '3ds', sans-serif;
+    -ms-text-size-adjust: 0;
+    -webkit-text-size-adjust: 0;
+    font-size: 0.75vw;
+    line-height: 0.75vw;
+}
+html input, html button, html select, html textarea
+{
+    color: initial;
+    font-family: '3ds', sans-serif;
+    font-size: 0.75vw;
+    line-height: 0.75vw;
+}
+img {
+    pointer-events: none;
+}
+html, 
+body
+{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+*
+{
+    backface-visibility: hidden;
+    touch-action: none !important;
+}
+.mainView *
+{
+    box-sizing: content-box;
+}
+.mainView p
+{
+    margin: 0;
+}
+.mainView
+{
+    width : 100%;
+    height : 100%;
+    display: flex;
+}
+.mainContent
+{
+    width: auto;
+    height : 100%;
+    background: #f0f0f0;
+    flex: 1;
+}
+.deleted
+{
+ opacity: 0 !important;
+ transition: all 0.8s  !important;
+}
+.changelogButton, 
+.connectionButton
+{
+    position: fixed;
+    top: 0;
+    width: 2.6em;
+    height: 2.6em;
+    z-index: 32;
+    border-bottom-left-radius: 100%;
+    cursor: pointer;
+}
+.changelogButton
+{
+    right: 0;
+    display: none;
+}
+.connectionButton
+{
+    right: 2.3em;
+    top: 0.2em;
+    width: 1.3em;
+    display: none;
+}
+.mapFocused ~ .connectionButton
+{
+    display: block;
+}
+.onGuidedMeeting .connectionButton
+{
+    display: block;
+    right: 0.5em;
+}
+.sidePanelOpened.right ~ .connectionButton
+{
+    display: none;
+}
+.mapFocused ~ .changelogButton
+{
+    display: block;
+}
+.sidePanelOpened.right ~ .changelogButton
+{
+    display: none;
+}
+.changelogButton > img
+{
+    float: right;
+    margin-top: 15%;
+    margin-right: 15%;
+    width: 50%;
+}
+.connectionButton > img
+{
+    float: right;
+    margin-top: 15%;
+    margin-left: 15%;
+    width: 100%;
+}
+.changelogChanged 
+{
+  animation: megaphone-outer 3000ms infinite;
+}
+@keyframes megaphone-outer 
+{
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33.3333% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+    filter: drop-shadow(0 0 0.35em #239de8);
+  }
+  66.6666% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}

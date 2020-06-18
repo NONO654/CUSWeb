@@ -1,0 +1,60 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+
+<dom-module id="ad-create-job-inputs">
+	<template>
+		<link rel="stylesheet" href="ad-create-job-inputs.css">
+		<div id="inputsContainer">
+			<div id="actionsRow" class='actions-row'>
+				<div class="note">
+					<span id="topMessage"></span>
+				</div>
+				<div class="action-items">
+					<span id="addInputs" class="action-item action-item-add fonticon fonticon-2x fonticon-plus" title="Add Inputs"></span>
+					<span id="menu" on-click="onMenuClick" class="action-item fonticon fonticon-menu-dot fonticon-2x"></span>
+				</div>
+			</div>
+			<div id="tableContainer">
+				<table id="inputTable" class="table table-condensed table-responsive input-table">
+					<thead id="tableHead">
+						<tr id="tableHeaderRow" class="table-head-row"></tr>
+					</thead>
+					<tbody id="tableBody">
+					</tbody>
+				</table>
+			</div>
+			<div id="footerRow" class='footer-row'>
+				<div class="note">
+					<span class="fonticon fonticon-drag-drop"></span>
+					<sp-nls nlspath="{{nlspath}}" nlskey="DropInputsNote"></sp-nls>
+				</div>
+			</div>
+		</div>
+		<div id="uploadContainer"
+			class="upload-container hidden">
+			<div id="uploadActionContaienr" class="upload-actions">
+				<span id="noFileNote" class="upload-dnd no-file-message"><sp-nls nlspath="{{nlspath}}" nlskey="NoInputFilesFound"></sp-nls></span>
+				<div id="uploadFiles" on-click="uploadFiles" class="upload-actions-item">
+					<span title="Upload Files" class="upload-icon fonticon fonticon-3x fonticon-upload local-file"></span>
+					<span class="link"><sp-nls nlspath="{{nlspath}}" nlskey="FromDisk"></sp-nls></span>
+				</div>
+				<div id="addRef" on-click="onAddReferenceContent" class="upload-actions-item">
+					<span title="Add reference" class="upload-icon fonticon fonticon-3x fonticon-search add-ref"></span>
+					<span class="link"><sp-nls nlspath="{{nlspath}}" nlskey="From3DX"></sp-nls></span>
+				</div>
+				<div class="upload-dnd upload-actions-item-dnd">
+					<span id="dndNote" class="dnd-note"><sp-nls nlspath="{{nlspath}}" nlskey="DndNote"></sp-nls></span>
+				</div>
+			</div>
+		</div>
+		<sp-search id="spSearch"
+			plm-types="3DShape,Chapter,DesignSight,FEM,GenerativeStress,Material,PLMCoreRepReference,PLMReference,Part,PlmParameter,Products,Requirement,SpotFastener,Test Case,Use Case,VPMReference,XRep,DOCUMENTS"
+			on-change="onChange"
+			multi-select="true">
+		</sp-search>
+		<div id="spinnerContainer" class="spinner-container"></div>
+	</template>
+	<script type="text/javascript" src="ad-create-job-inputs.js"></script>
+</dom-module>

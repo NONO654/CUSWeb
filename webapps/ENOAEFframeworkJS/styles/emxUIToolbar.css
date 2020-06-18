@@ -1,0 +1,635 @@
+/* -------------------------------------------------------------------------
+	Toolbar Stylesheet for Windows/Mac Platforms
+	emxUIToolbar.css
+	
+	Release: 2018x
+	Version: 1.8
+	
+	Copyright (c) 1992-2018 Dassault Systemes ENOVIA Corp. All Rights Reserved.
+	This program contains proprietary and trade secret information 
+	of Dassault Systemes ENOVIA Corp. Copyright notice is precautionary only
+	and does not evidence any actual or intended publication of such program
+   ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+	Toolbar Base Styles
+   ------------------------------------------------------------------------- */
+
+div.toolbar-container,
+div.toolbar-subcontainer,
+div.toolbar-frame,
+div.toolbar {
+    position:relative;
+    font-size:0;
+    line-height:0;
+    padding:0;
+}
+
+div.toolbar-container,
+div.toolbar-subcontainer {
+	border-color:#d8d8d8;
+	border-style:solid;
+	border-width:1px 0;
+	background: #f8f8f8;
+	border-top:none;
+}
+
+div.toolbar-frame {
+	border:none;
+	border-top:1px solid #FFF;
+	border-bottom:1px solid transparent;
+	padding:0 6px;
+	overflow:hidden;
+	white-space:nowrap;
+}
+div.toolbar-container div.toolbar-frame {
+	height:36px;	
+}
+
+div.toolbar-subcontainer div.toolbar-frame {padding:4px 10px;}
+	
+div.folded {height:48px;}
+
+div.toolbar,
+div.toolbar-panel {
+	display:inline-block;
+	margin-right:4px;
+	padding-right:4px;
+	border-right:1px solid #C3C3C3;
+}
+
+#divToolbarContainer div.toolbar table,
+#divMassUpdate div.toolbar table,
+#divListFilter div.toolbar table,
+#mx_divFilters div.toolbar table {
+	background:none;
+    border-collapse: separate;
+    border-spacing: 2px 0;
+    
+    width:auto;
+    height:auto;
+}
+
+.toolbar td {padding:0;}
+
+#divToolbarContainer div.toolbar table tr td,
+#divToolbarContainer div.toolbar-panel table tr td {
+	display:inline-block;
+	position:relative;
+	min-height:0;
+	border:1px solid transparent;
+}
+
+div.toolbar table tr td.toolbar-panel-label {
+	white-space:nowrap;
+	-moz-user-select:none;
+}
+
+div.toolbar table tr td.toolbar-panel-input {
+	white-space:nowrap;
+	margin:0;
+	padding-top:0;
+}
+
+span.choice {-moz-user-select:none;}
+
+
+/* -------------------------------------------------------------------------
+	Toolbar Buttons
+	additional classes for making small icons appear as big buttons added
+	on 5/9/2014. The additioal classes are for icon-button-16x16 and
+	menu-button-16x16
+   ------------------------------------------------------------------------- */
+
+td.icon-button,
+td.icon-button-16x16,
+/*td.text-button,*/
+td.icon-and-text-button,
+td.overflow-button,
+td.menu-arrow {
+    padding:4px 3px 4px 4px;
+    line-height:12px;
+    cursor:pointer;
+	cursor:hand;
+	color:#333;
+	white-space:nowrap;
+	-moz-user-select:none;
+}
+
+
+#divToolbarContainer div.toolbar table tr td.text-button{
+    color: #3D3D3D;
+    background-color: #F1F1F1;
+    padding:8px 10px 8px 7px;
+    font-size: 14px;
+    line-height:11px;
+    border: 1px solid #B4B6Ba;
+    border-radius: 3px;
+    top: 1px;
+    margin-bottom: 2px;
+    cursor:hand;
+    color:#333;
+    white-space:nowrap;
+    -moz-user-select:none;
+}
+
+#divToolbarContainer div.toolbar table tr td.text-button:hover {
+    color: #3D3D3D;
+    background-color: #E2E4E3;
+    border-color: #77797C;
+    border-radius: 3px;
+}
+#divToolbarContainer div.toolbar table tr td.text-button:active {
+    color: #3D3D3D;
+    background-color: #B4B6Ba;
+    border-color: #3D3D3D;
+    border-radius: 3px;
+}
+
+td.icon-button,
+td.icon-button-16x16,
+td.text-button,
+td.icon-and-text-button,
+td.menu-arrow {margin-right:4px;}
+
+
+
+td.icon-and-text-button {
+    padding-left:21px;
+    line-height:12px;
+}
+
+td.icon-button,
+td.icon-button-16x16 {padding:16px;}
+
+
+td.menu-arrow {
+    padding:16px 5px 16px 6px;
+    border-left:none;
+}
+
+td.menu-button {padding-right:14px;}
+
+td.icon-button.combo-button,
+td.icon-button-16x16.combo-button,
+td.icon-and-text-button.combo-button  {margin-right: 0;}
+
+td.icon-button.menu-button {padding-left:30px;}
+td.icon-button-16x16.menu-button-16x16 {padding-left:30px;}
+
+td.menu-button img,
+td.icon-button img,
+td.icon-button-16x16 img,
+td.menu-arrow img {
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    margin:0;
+}
+
+
+td.icon-button-16x16 img {
+    background-image: url('../images/emxUtilButtonBgd.png');
+    border-radius: 2px;
+    border: 1px solid #898b8e;
+    padding: 5px;
+    top:3px;
+    left: 2px;
+}
+
+td.icon-and-text-button img {
+    display:block;
+    position:absolute;
+    top:2px;
+    left:3px;
+}
+
+td.menu-button-16x16 img[src*="utilMenuArrow.gif"] {
+    background: none;
+    border: none;
+    top:14px;
+    left:34px;
+    padding: 1px;
+}
+
+
+td.menu-button img[src*="utilMenuArrow.gif"] {
+    top:15px;
+    right:3px;
+    left:auto;
+}
+
+td.menu-arrow img {
+    top:15px;
+    left:2px;
+}
+
+/* menu arrow for combo buttons */
+div#pageHeadDiv div.toolbar table tr td.menu-arrow,
+div#pageHeadDiv div.toolbar table tr td.menu-arrow.button-hover {
+    border-left:none;
+    border-radius: 0 2px 2px 0;
+    }
+
+/* background for the overflow button */
+td.overflow-button {        
+	background-position:right top;
+	background-repeat:no-repeat;  
+}
+
+/* highlight for hover */
+
+div#pageHeadDiv div.toolbar table tr td.button-hover {
+    border: 1px solid #E2E4E3;
+    border-radius: 2px 0 0 2px;
+    background-color: #E2E4E3;
+}
+
+div#pageHeadDiv div.toolbar table tr td.combo-button.button-hover {
+    border: 1px solid #E2E4E3;
+    border-bottom: 1px solid #E2E4E3;
+    border-right: 1px solid #77797c;
+    border-radius: 2px 0 0 2px;
+    background-color: #E2E4E3;
+}
+
+/* highlight for active (down) state */
+td.menu-button-active,
+td.button-active {background:#B4B6Ba;}
+
+/* disabled style */
+td.button-disabled,
+td.button-disabled + .menu-arrow {
+	opacity:0.3;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    cursor:default;
+}
+
+
+/* -------------------------------------------------------------------------
+	Toolbar Separator
+   ------------------------------------------------------------------------- */
+
+.separator {
+	-moz-box-sizing:border-box;
+	border-left:1px solid #c3c3c3;
+	height:32px;
+	margin: 0 8px 0 5px;
+	overflow:hidden;
+}
+
+
+/* -------------------------------------------------------------------------
+	Input Elements/Form Controls
+   ------------------------------------------------------------------------- */
+
+.toolbar input,
+.toolbar select,
+.toolbar option {
+	margin:0;
+	padding:1px;
+	height:auto;
+	white-space:nowrap;
+}
+
+.toolbar select {
+    height:26px;
+    padding:1px;
+}
+
+.toolbar select.expand {background-color:#CFF;}
+
+.toolbar input.button,
+.toolbar input[type="button"],
+.toolbar input[type="submit"] {
+	white-space:nowrap;
+	padding:4px 8px;
+}
+ 
+.toolbar input[type="checkbox"],
+.toolbar input[type="radio"] {
+	margin:0;
+	vertical-align:text-top;
+}
+
+.toolbar input[type="text"] {
+	-moz-user-select:normal;
+	height:16px;
+}
+
+/*--For labels and fields that appear in a toolbar--*/
+
+.toolbar-frame table tr td div.menu-dialog-head {
+  display: inline-block;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+
+/* -------------------------------------------------------------------------
+	Search, Structure Browser and SB Compare Toolbar Buttons 
+   ------------------------------------------------------------------------- */
+
+div#mx_divStructureCompareButtons,
+div#mx_divStructureBrowserButtons {text-align:right; margin-top:-2px;}
+
+#pageHeadDiv input.mx_btn-apply {
+    color: white;
+    background-color: #368EC4;
+    margin-right:10px;
+}
+
+#pageHeadDiv input.mx_btn-apply:hover {
+    color: #FFFFFF;
+    border-color: #005686;
+    background-color: #005686;
+}
+
+#pageHeadDiv input.mx_btn-apply:active {
+    color: #FFFFFF;
+    border-color: #368EC4;
+    background-color: #003C5A;
+}
+
+#pageHeadDiv input.mx_btn-close,
+#pageHeadDiv input.mx_btn-cancel,
+#pageHeadDiv input.mx_btn-done,
+#pageHeadDiv input.mx_btn-reset,
+#pageHeadDiv input.mx_btn-previous,
+#pageHeadDiv input.mx_btn-lookup,
+#pageHeadDiv input.mx_btn-search,
+#pageHeadDiv input.mx_btn-validate {
+    color: #3D3D3D;
+    background-color: #F1F1F1;
+    border-color: #B4B6Ba;
+    margin-right:10px;
+}
+
+#pageHeadDiv input.mx_btn-close:hover,
+#pageHeadDiv input.mx_btn-cancel:hover,
+#pageHeadDiv input.mx_btn-done:hover,
+#pageHeadDiv input.mx_btn-reset:hover,
+#pageHeadDiv input.mx_btn-previous:hover,
+#pageHeadDiv input.mx_btn-lookup:hover,
+#pageHeadDiv input.mx_btn-search:hover,
+#pageHeadDiv input.mx_btn-validate:hover {
+    color: #3D3D3D;
+    background-color: #E2E4E3;
+    border-color: #77797C;
+}
+
+#pageHeadDiv input.mx_btn-close:active,
+#pageHeadDiv input.mx_btn-cancel:active,
+#pageHeadDiv input.mx_btn-done:active,
+#pageHeadDiv input.mx_btn-reset:active,
+#pageHeadDiv input.mx_btn-lookup:active,
+#pageHeadDiv input.mx_btn-search:active,
+#pageHeadDiv input.mx_btn-validate:active {
+    color: #3D3D3D;
+    background-color: #B4B6Ba;
+    border-color: #3D3D3D;
+}
+
+input[disabled="true"] {color:#777;}
+
+div.toolbar.dialog-actions {
+	position:absolute;
+	right:0;
+	border:none;
+	margin-right:0;
+	padding-right:0;
+} 
+
+div.toolbar.dialog-actions table {margin-top:0;}
+
+/* Apply
+input.mx_btn-apply {background:url("../images/buttonSBBackgrounds.png") 0 -1px no-repeat;}
+input[disabled="true"].mx_btn-apply {background-position:-15px -21px;}
+
+/* Reset 
+input.mx_btn-reset {background:url("../images/buttonSBBackgrounds.png") 0 -160px no-repeat;}
+input[disabled="true"].mx_btn-reset {background-position:-15px -180px;}
+
+/* Close/Cancel 
+input.mx_btn-close,
+input.mx_btn-cancel {background:url("../images/buttonSBBackgrounds.png") -15px -40px no-repeat;}
+
+input[disabled="true"].mx_btn-close,
+input[disabled="true"].mx_btn-cancel {background-position:0 -60px;}
+
+/* Done  
+input.mx_btn-done {background:url("../images/buttonSBBackgrounds.png") -15px -121px no-repeat;}
+input[disabled="true"].mx_btn-done {background-position:0 -141px;}
+
+/* Search 
+input.mx_btn-search {background:url("../images/buttonSBBackgrounds.png") -15px -121px no-repeat;}
+input[disabled="true"].mx_btn-search {background-position:0 -141px;}
+
+/* Previous 
+input.mx_btn-previous {background:url("../images/buttonSBBackgrounds.png") -15px -200px no-repeat;}
+input[disabled="true"].mx_btn-previous {background-position:0 -220px;}*/
+
+/* Lookup 
+input.mx_btn-lookup {background:url("../images/buttonSBBackgrounds.png") -15px -240px no-repeat;}
+input[disabled="true"].mx_btn-lookup {background-position:0 -260px;}
+
+/* Validate  
+input.mx_btn-validate {background:url("../images/buttonSBBackgrounds.png") -15px -121px no-repeat;}
+input[disabled="true"].mx_btn-validate {background-position:0 -141px;}
+
+
+/* -------------------------------------------------------------------------
+	Filter Bar 
+   ------------------------------------------------------------------------- */
+
+#mx_divFilters {
+	position:relative;
+	padding-left:6px;
+    overflow:hidden;
+	height: auto;
+	border-top: solid 1px #fff;
+}
+
+/* remove toolbar separators from the filter toolbar */
+#mx_divFilters div.toolbar {border:none;}
+
+#mx_divFilters td.label {
+	padding:4px;
+	font-weight:normal;
+	color:#5b5d5e;
+}
+
+#mx_divFilters td.input {
+	padding:2px 10px 2px 0;
+	font-weight:normal;
+}
+
+span.filtered {
+	padding-left:18px;
+	background:url("../images/iconColHeadFilterApplied.gif") 0 0 no-repeat;
+}
+
+#mx_divFilters .close-button {
+	position:absolute;
+	top:5px;
+	right:16px;
+	height:16px;
+	width:16px;
+}
+.toolbar.spacer {border-right: 0;height: 26px;}
+
+
+/* -------------------------------------------------------------------------
+	Find In Page Controls 
+   ------------------------------------------------------------------------- */
+
+.find-in-wrapper {
+    background-color: #f8f8f8;
+    position: absolute;
+    display: inline-block;
+    right: 0;
+}
+    
+.toolbar.find-in-controls {
+    padding: 2px 2px 2px 6px;
+    /*--background-color:#e2e4e3;--*/
+    margin-right: 2px;
+    display: none;
+    vertical-align: top;
+    border-right: 0;
+}
+  
+/*--.toolbar.find-in-controls:before {
+    display: block;
+    position: absolute;
+    top:10px;
+    right: -6px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 0 7px 7px;
+    border-color: transparent #e2e4e3 transparent;
+}--*/
+
+.toolbar.find-in-controls.open {display: inline-block;}
+
+.toolbar.find-in-button,
+.toolbar.find-in-controls .find-in-string,
+.toolbar.find-in-controls .find-in-results,
+.toolbar.find-in-controls .btn-grp {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.toolbar.find-in-button {
+    border: 0;
+    margin-right: -4px;
+}
+    
+.btn.btn-default.find-in-previous,
+.btn.btn-default.find-in-next {
+    height: 30px;
+    min-width: 30px;
+}
+    
+.btn.btn-default.find-in-previous:after,
+.btn.btn-default.find-in-next:after{
+    display: block;
+    position: absolute;
+    top:7px;
+    left: 10px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 7px 7px 0;
+    border-color: transparent #5b5d5e transparent;
+} 
+   
+.btn.btn-default.find-in-next:after {
+    border-width: 7px 0 7px 7px;
+    left: 11px;
+}
+    
+.find-in-string input[type="text"] {
+    height: 30px;
+    width: 250px;
+    padding-right: 64px;
+    padding-left: 12px;
+    margin-right: 2px;
+}
+    
+.find-in-results {
+    position: absolute;
+    color: #5b5d5e;
+    right: 96px;
+    top: 8px;
+    font-size: 13px;
+    background-color: #d5e8f2;
+    padding: 0 4px;
+    border-radius: 3px;
+}
+
+.find-in-cancel {
+    position: absolute;
+    display: inline-block;
+    right: 72px;
+    top: 5px;
+}
+    
+.find-in-cancel button.cancel {
+    height: 22px;
+    width: 22px;
+    border: none;
+    background-color: transparent;
+    background-image: url(../images/utilFindInCancel.png);
+    background-repeat: no-repeat;
+    background-position: 1px 3px;
+    vertical-align: top;
+}
+    
+.find-in-cancel button.cancel:hover {opacity: .5;}
+
+/* -------------------------------------------------------------------------
+	Row grouping Filter Bar Adjustments
+   ------------------------------------------------------------------------- */
+
+div#mx_divFilters.toolbar-subcontainer div,
+div#mx_divFilters.toolbar-subcontainer div table td{line-height: 0;}
+
+div#mx_divFilters.toolbar-subcontainer div table {height: 30px;}
+
+div#mx_divFilters.toolbar-subcontainer div table td.label {
+    font-size: 14px;
+    line-height: 30px;
+}
+
+/*UIKIT Patch*/
+div#mx_divStructureBrowserRGButtons input[type="button"] {line-height: normal;}
+
+/* -------------------------------------------------------------------------
+	Mass Update Toolbar Adjustments
+   ------------------------------------------------------------------------- */
+
+div#divMassUpdate .toolbar-frame .toolbar table td {line-height: 0;}
+
+div#divMassUpdate.toolbar-subcontainer div.toolbar-frame {padding: 2px 10px;}
+
+div#divMassUpdate .toolbar-frame .toolbar table td input.mx_btn-apply,
+div#divMassUpdate .toolbar-frame .toolbar table td input.mx_btn-reset {margin-top: 2px;}
+div#divMassUpdate .toolbar-frame .toolbar table td.toolbar-panel-label {padding-right: 4px;}
+
+/* -------------------------------------------------------------------------
+	History Filter Toolbar Adjustments
+   ------------------------------------------------------------------------- */
+
+div#divRevisionHistoryFilter div.toolbar table {width: auto;}
+
+div#divRevisionHistoryFilter div.toolbar table td input[type="button"] {margin: 0 4px 0 4px;}
+
+div#divRevisionHistoryFilter div.toolbar table td input[type="text"] {
+        margin: 0 6px;
+	padding: 4px;
+}

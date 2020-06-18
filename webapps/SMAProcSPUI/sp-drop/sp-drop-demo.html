@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../../Polymer-1.1.4/webcomponents-lite.min.js"></script>
+<link rel="import" href="sp-drop.html"/>
+<script>
+function onReady() {
+    document.getElementById('dynamicDrop').addEventListener('onObjectDrop', function(){
+        console.log('onObjectDrop', this, arguments);
+        
+        document.getElementById('dynamicDrop').injectContent(document.getElementById('dynamicContent'));
+       /*  document.getElementById('dynamicDrop').setAttributes({
+        	"open-object":true
+        }); */
+        
+    })
+}
+
+document.addEventListener('DOMContentLoaded', onReady);
+</script>
+</head>
+<body>
+<h1>Drop</h1>
+Sample data
+<pre>{"protocol":"3DXContent","version":"0.1","source":"SIMDISB_AP","data":{"items":[{"objectId":"BC359B56C73A0000FC806D5678D60200","objectType":"Simulation","displayName":"r2gTestMethod1"}]}}</pre>
+
+<sp-drop open-object><h2>Dropped</h2></sp-drop>
+
+<h2 id="dynamicContent">Dynamic content</h2>
+<hr />
+<sp-drop id="dynamicDrop" open-object></sp-drop>
+</body>
+</html>

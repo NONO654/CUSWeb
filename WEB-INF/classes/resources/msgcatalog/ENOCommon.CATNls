@@ -1,0 +1,91 @@
+<meta charset="UTF-8"/>
+//---------------------------------------------------------------------------
+// Path_CustomSchemaDir
+//---------------------------------------------------------------------------
+Path_CustomSchemaDir.Title  = "Custom Schema Path";
+Path_CustomSchemaDir.Label1 = "Specify directory where custom schema files exist.";
+Path_CustomSchemaDir.Resume = "Custom Schema Path:  /p1";
+Path_CustomSchemaDir.Resume.Title  = "Custom Schema Path";
+StudioInstall.Path_CustomSchemaDir.Resume.Title = "Custom Schema Path";
+
+//---------------------------------------------------------------------------
+// Path_CustomSchemaDir
+//---------------------------------------------------------------------------
+CustomSchemaDir.Title  = "Custom Schema Path";
+CustomSchemaDir.Label1 = "Specify directory where custom schema files exist.";
+CustomSchemaDir.Resume = "Custom Schema Path:  /p1";
+//---------------------------------------------------------------------------
+// Check_SchemaToInstall
+//---------------------------------------------------------------------------
+Check_SchemaToInstall.Title  = "Schema Chooser";
+Check_SchemaToInstall.Label1 = "Specify schema to be installed.";
+Check_SchemaToInstall.Label2 = "Click Next to continue.";
+//---------------------------------------------------------------------------
+// Specify Schema Types 
+//---------------------------------------------------------------------------
+Check_SchemaToInstall.KeyNone = "None";
+Check_SchemaToInstall.KeyAll = "All";
+Check_SchemaToInstall.Resume = "Schema Type: /p1";
+
+
+//---------------------------------------------------------------------------
+// An UIGroup contains Text_DataTBS and Text_IndexTBS
+// Text_DataTBS
+//---------------------------------------------------------------------------
+Text_DataTBS.Title  = "Production Vault Details";
+Text_DataTBS.Label1 = "Specify the Data and Index table spaces for eService Production vault.";
+Text_DataTBS.Label2 = "In order to use the database's default storage area, leave the fields blank.";
+Text_DataTBS.Label3 = "\n";
+Text_DataTBS.Label4 = "Data table space";
+Text_DataTBS.Resume = "Data table space: /p1";
+//---------------------------------------------------------------------------
+// Text_IndexTBS
+//---------------------------------------------------------------------------
+Text_IndexTBS.Label1 = "\n";
+Text_IndexTBS.Label2 = "Index table space";
+Text_IndexTBS.Resume = "Index table space: /p1";
+
+
+//---------------------------------------------------------------------------
+// BOOL_UpdateDB
+//---------------------------------------------------------------------------
+
+BOOL_UpdateDB.Title = "Database Update Option";  
+BOOL_UpdateDB.Label1 = "Do you want to update database?";  
+BOOL_UpdateDB.Label2 = "If unchecked, database will not be updated";  
+BOOL_UpdateDB.Label3 = "You have to manually run tcl programs generated";  
+BOOL_UpdateDB.CheckButton = "Update database";  
+BOOL_UpdateDB.Resume.true = "Database will be updated";  
+BOOL_UpdateDB.Resume.false = "Database will not be updated";  
+
+
+//---------------------------------------------------------------------------
+// Text_SuperUserName
+//---------------------------------------------------------------------------
+Text_SuperUserName.Title  = "Super User//Password";
+Text_SuperUserName.Label1 = "Specify the name of the user having both Business and System Administration Privileges."; 
+Text_SuperUserName.Resume = "Super User name: /p1";
+
+//---------------------------------------------------------------------------
+// Text_SuperUserPwd
+//---------------------------------------------------------------------------
+Text_SuperUserPwd.Title  = "Super User//Password";
+Text_SuperUserPwd.Label1 = "Specify the password of the user having both Business and System Administration Privileges.";
+
+//---------------------------------------------------------------------------
+// Hot Fix installer - Creator password check
+//---------------------------------------------------------------------------
+ConnectionCreatorFailed.Title="Database Connection Error for Super User";
+ConnectionCreatorFailed.Text="The following error has been reported:\n/p1";
+//---------------------------------------------------------------------------
+// IR-240244V6R2014: Check that there is no trace to Stdout activated (otherwise error message and Quit/Retry buttons only, see InsCommonInstallerOnly.xml)
+//---------------------------------------------------------------------------
+tracesToStdoutDetected.Title="Stdout mql traces detection";
+tracesToStdoutDetected.Text="Some mql traces to Stdout are activated.\nThis may prevent the installation from completing successfully.\nPlease deactivate the mql traces or redirect them to a file.";
+
+//---------------------------------------------------------------------------
+// IR-431459: Check that there are no SLF4J duplicate bindings in MX_CLASSPATH (otherwise error message and Quit/Retry buttons only)
+//---------------------------------------------------------------------------
+SLF4JCheckerJarTempCopy_failed.Text="Unable to copy the jar for the SLF4J check\nfrom /P1\nto /P2\n(rc = /P3).\n/P4\n/P5\nPlease enable the copy, then click Retry.";
+SLF4JCheck_failed.Title="SLF4J check";
+SLF4JCheck_failed.Text="The SLF4J init failed:\n/P1\nThis may prevent the installation from completing successfully.\nPlease correct the SLF4J state (at least for the installation time), then click Retry.";

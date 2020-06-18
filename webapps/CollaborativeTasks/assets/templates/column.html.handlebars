@@ -1,0 +1,24 @@
+{{!--
+    template file for individual kanban columns
+    version: SCM.15
+    class of the containing div is: "column"
+ --}}
+<div class="header">
+	<div class="title">
+		<span class="thumbnail profile-image">{{!-- insert profile image here --}}</span>
+		<label>{{filteredByValue.displayValue}}<span class="object-count">{{#if filteredCount}}({{filteredCount}}){{/if}}</span>
+			{{#if completedTaskFilterOn}}<span class="object-count fonticon fonticon-filter"></span>{{/if}}
+		</label>
+	</div>
+</div>{{!-- /.header --}}
+
+<div class="body ui-droppable">
+	<div class="cards task-list ">
+		<div class="card drop-target-marker">
+			<label>{{i18n "emxCollaborativeTasks.Label.DropHere"}}</label>
+		</div>
+		<div class="top-buffer"></div>
+		{{!-- task views go here --}}
+		<div class="bottom-buffer"></div>
+	</div>{{!-- /.tasks --}}
+</div>{{!-- /.body --}}

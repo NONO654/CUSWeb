@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="30 seconds">
+  <jmxConfigurator />
+
+  <property file="C:/DassaultSystemes/R2019x/3DSpace/server/win_b64/code/bin/enovia.ini"/>
+
+  <define name="kernelName" class="com.matrixone.util.KernelPropertyDefiner"/>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+
+    <!-- encoders are assigned by default the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS,GMT} | %-24([%thread]) | %-5level | %-36logger{36} | %marker | %X{sessionId} | %X{requestId} | %msg%n%ex</pattern>
+    </encoder>
+
+  </appender>
+
+  <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+    <file>C:/DassaultSystemes/R2019x/3DSpace/server/logs/${MX_TRACE_FILE_NAME:-3DXServer}_${kernelName}.log</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+
+      <!-- rollover daily -->
+      <fileNamePattern>C:/DassaultSystemes/R2019x/3DSpace/server/logs/${MX_TRACE_FILE_NAME:-3DXServer}_${kernelName}_%d{yyyy-MM-dd, UTC}_%i.log</fileNamePattern>
+
+      <!-- or whenever the file size reaches 64MB -->
+      <maxFileSize>64MB</maxFileSize>
+
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS,GMT} | %-24([%thread]) | %-5level | %-36logger{36} | %marker | %X{sessionId} | %X{requestId} | %msg%n%ex</pattern>
+    </encoder>
+
+  </appender>
+
+
+  <root level="info">
+
+    <appender-ref ref="ROLLING" />
+
+  </root>
+
+  <appender name="HttpMonitoring" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>C:/DassaultSystemes/R2019x/3DSpace/server/logs/${MX_TRACE_FILE_NAME:-3DXServer}_HttpMonitoring.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>C:/DassaultSystemes/R2019x/3DSpace/server/logs/${MX_TRACE_FILE_NAME:-3DXServer}_HttpMonitoring_%d{yyyy-MM-dd_HH, UTC}_%i.log</fileNamePattern>
+      <maxFileSize>64MB</maxFileSize>
+    </rollingPolicy>
+    <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+      <layout class="com.dassault_systemes.i3dx.monitoring.logger.JsonLayout" >
+        <MDCKeys>requestId,serviceName,startTime,frameContextId,sessionId,endTime,userName,serverProcess,url,httpMethod,requestSize,requestSize,tenant,statusCode,clientStepName</MDCKeys>
+      </layout>
+    </encoder>
+  </appender>
+
+  <appender name="DelayHttpMonitoring" class="com.dassault_systemes.i3dx.monitoring.logger.MonitoringAppender">
+    <appender-ref ref="HttpMonitoring" />
+  </appender>
+
+
+  <logger name="i3DXMonitoringServer" level="DEBUG" additivity="FALSE" >
+    <appender-ref ref="DelayHttpMonitoring" />
+  </logger>
+
+  <appender name="KernelMonitoring" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>C:/DassaultSystemes/R2019x/3DSpace/server/logs/${MX_TRACE_FILE_NAME:-3DXServer}_KernelMonitoring.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>C:/DassaultSystemes/R2019x/3DSpace/server/logs/${MX_TRACE_FILE_NAME:-3DXServer}_KernelMonitoring_%d{yyyy-MM-dd_HH, UTC}_%i.log</fileNamePattern>
+      <maxFileSize>64MB</maxFileSize>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
+
+
+  <logger name="i3DXMonitoringKernel" level="DEBUG" additivity="FALSE" >
+    <appender-ref ref="KernelMonitoring" />
+  </logger>
+  <include optional="true" resource="../classes/SMASLMLoggingConfig.xml" />
+</configuration>
+

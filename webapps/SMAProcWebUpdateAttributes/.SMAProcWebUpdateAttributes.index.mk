@@ -1,0 +1,9 @@
+m|SMAProcWebExtensionEditors\SMAProcWebUpdateAttributes.mweb
+b|j|n,m
+b|c|n,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAProcWebUpdateAttributes\cmp-update-attributes.js|1540011425|1672
+s|SMAProcWebExtensionEditors\SMAProcWebUpdateAttributes.mweb\src\cmp-update-attributes.js|1538688108|4659
+t|win_b64\webapps\SMAProcWebUpdateAttributes\cmp-update-attributes.html|1540605195|1437
+s|SMAProcWebExtensionEditors\SMAProcWebUpdateAttributes.mweb\src\cmp-update-attributes.html|1539613356|1437

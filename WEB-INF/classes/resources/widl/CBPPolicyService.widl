@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="urn:com:dassault_systemes:widl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd" xmlns:tns="http://cbp.enovia.ws/basic" xmlns:err="http://www.3ds.com/wserror" xmlns:q1="http://cbp.enovia.ws/CBPXML">
+	<entities targetNamespace="http://cbp.enovia.ws/basic">
+		<schemaImports>
+			<schemaImport location="wserrors.xsd"/>
+			<schemaImport location="CBPXML.xsd"/>
+		</schemaImports>
+		<interfaces>
+			<interface name="IPLMPolicyService" scope="public">
+				<documentation>
+					Interface for Policy operations.
+				</documentation>
+
+				<method name="promoteObject">
+					<documentation>
+						Promote a business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="demoteObject">
+					<documentation>
+						Demote a business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="setState">
+					<documentation>
+						Set the state of an object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="state" type="xs:string" direction="in">
+						<documentation>The target state of the business object.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="listStates">
+					<documentation>
+						Return the list of states associated with the given business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="states" type="q1:ListOfString" direction="out">
+						<documentation>The list of states.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+			
+			</interface>
+		</interfaces>
+		<implementations>
+			<implementation name="PLMPolicyService" serviceid="policyService" implements="tns:IPLMPolicyService">
+				<documentation>
+					A service to provide Policy operations.
+				</documentation>
+			</implementation>
+		</implementations>
+	</entities>
+</description>

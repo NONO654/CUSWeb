@@ -1,0 +1,129 @@
+<!-- Copyright 2015 , Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="sp-credits-calculator">
+	<link rel="import" type="css" href="sp-credits-calculator.css">
+	<template>
+		<div class="creditsContainer">
+		
+			<div class="content-section-body">
+				<table>
+					<tbody>
+						<tr>
+                            <td class="content-cell">
+                                <label for="location" class="content-label">License Type:</label>
+                            </td>
+                            <td class="content-cell">
+                                <div id="licenseTypeContainer" class="content-field"></div>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="estimatorSection">			
+				<div class="content-section-heading">Credits/Tokens Estimator</div>		
+				<div class="content-section-body">
+	                <table>
+	                   <tbody> 
+	                        <tr>
+	                            <td class="content-cell">
+	                                <label for="features" class="content-label">Features:</label>
+	                            </td>
+	                            <td class="content-cell">
+	                                <div id="featuresContainer" class="content-field"></div>
+	                            </td>
+	                            <td>&nbsp;</td>
+	                        </tr> 
+	                        <tr>
+	                            <td class="content-cell">
+	                                <label for="modelSize" class="content-label">Model Size:</label>
+	                            </td>
+	                            <td class="content-cell">
+	                                <div id="modelSizeContainer" class="content-field"></div>
+	                            </td>
+	                            <td>&nbsp;</td>
+	                        </tr> 
+	                        <tr>
+	                            <td class="content-cell">
+	                                <label for="performance" class="content-label">Performance:</label>
+	                            </td>
+	                            <td class="content-cell">
+	                                <div id="performanceContainer">
+	                                    <div class="rangeInput">
+	                                        <div id="perfRangeSlider" class="rangeInOut">
+	                                            <input type="range" class="form-control mySelections myRange" id="performance" min="1" value="1" max="7" step="1" on-input="onSelectionChange" on-change='onSelectionChange' value="{{perfIndex::change}}">
+	                                            <em id="rangeOutput"></em>
+	                                        </div>
+	                                        <div class="rangeMinMax">
+	                                            <em id="rangeValMin">Economical</em>
+	                                            <em id="rangeValMax">Fast</em>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </td>
+	                            <td>
+	                                <div id="perfOutputContainer">
+	                                    
+	                                </div>
+	                            </td>
+	                            <td>&nbsp;</td>
+	                        </tr>   
+	                    </tbody>
+	                 </table>
+					<div class="content-section-heading">Estimate</div>
+					<div class="content-section-body">
+					
+	                    <table>
+	                       <tbody>
+	                            <tr>
+	                                <td class="content-cell">
+	                                    <label for="creditsSWOutput" class="content-label">Software:</label>
+	                                </td>
+	                                <td class="content-cell">
+	                                    <input id="creditsSWOutput" class="form-control mySelections" readonly>
+	                                </td>
+	                                <td>&nbsp;</td>
+	                            </tr> 
+	                            <tr>
+	                                <td class="content-cell">
+	                                    <label for="creditsHWOutput" class="content-label">Hardware:</label>
+	                                </td>
+	                                <td class="content-cell">
+	                                    <input id="creditsHWOutput" class="form-control mySelections" readonly>
+	                                </td>
+	                                <td>&nbsp;</td>
+	                            </tr> 
+	                            <tr>
+	                                <td class="content-cell">
+	                                    <label for="numCores" class="content-label">Cores:</label>
+	                                </td>
+	                                <td class="content-cell">
+	                                    <input id="numCores" class="form-control mySelections" readonly>
+	                                </td>
+	                                <td>&nbsp;</td>
+	                            </tr> 
+	
+	                        </tbody>
+	                     </table>
+	
+					</div>
+					<div class="longWarning">
+						<span class="alert-message alert-primary">
+							 This is only an estimate (based on the user-provided input).  The actual cost of this job may vary.  Please review the job log for the actual cost, determined based on the input file contents.
+						</span>
+					</div>
+					<div id="warningNote" class="hidden longWarning">
+						<span class="alert-message alert-primary">
+							 This configuration is currently limited to <span>{{maxCores}}</span> cores.
+						</span>
+					</div>
+	            <br>
+	
+			 </div>
+			</div>
+		</div>
+	</template>
+	<script type="text/javascript" src="sp-credits-calculator.js"></script>
+</dom-module>

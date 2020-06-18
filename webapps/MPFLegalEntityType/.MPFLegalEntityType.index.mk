@@ -1,0 +1,9 @@
+m|MPFModels\MPFLegalEntityType.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.5.19054
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFLegalEntityType\MPFLegalEntityType.js|1550891652|1801
+s|MPFModels\MPFLegalEntityType.mweb\src\LegalEntity.js|1549015309|3858
+s|MPFModels\MPFLegalEntityType.mweb\src\MPFLegalEntityType.js|1549012191|0
+s|MPFModels\MPFLegalEntityType.mweb\src\LegalEntityType.js|1549033579|2700

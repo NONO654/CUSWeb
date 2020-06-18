@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <meta name="inline" content="true" />
+      <meta name="debugMode" content="true" />
+      <title>Isight Results Analytics</title>
+      <script type="text/javascript" src="../webapps/c/UWA/js/UWA_Standalone_Alone.js"></script>
+      <link rel="stylesheet" href="../webapps/UIKIT/UIKIT.css" type="text/css" />
+      <style>
+         .moduleHeader,.moduleFooter
+         { display:none !important; }
+      </style>
+   </head>
+   <body>
+      <div class="embeddedWidget" style="display:none;position:absolute;margin:0px;padding:0px;right:0px;left:0px;top:0px;bottom:0px;">
+         <iframe id="widgetframe" style="position:absolute;margin:0px;padding:0px;right:0px;left:0px;top:0px;bottom:0px;width:100%;height:100%;border:0;"></iframe>
+         <script type="text/javascript">
+            //========================================================
+            /**
+             * Load the Results Analytics HTML.
+             * The 'adviseLaunchInfo' object is bound to the window
+             * and is used by the RA html to receive data from the
+             * parent.
+             */
+            //========================================================
+            function loadAnalyticsHTML(payload){
+                if (typeof payload !== 'undefined' && payload !== null){
+                    sessionStorage.userLang = payload.language;
+            
+                    window.adviseLaunchInfo = {
+                        'platformId': payload.platformId,
+                    	'dashboardURL': payload.dashboardURL || '',
+                        'mcsUri': payload.mcsUri || '',
+                        'widgetID': payload.widgetId || '',
+                        'secCtx':  payload.secCtx,
+                        'widgetViewType': payload.viewType || 'maximized',
+                        'caseID': payload.caseId || '',
+                        'userId': payload.userId,
+                        'eedServerID': payload.eedServerId,
+                        'eedJobID': payload.eedJobId,
+                        'eerName': payload.eerName || '',
+                        'stationDisplayName': payload.stationDisplayName|| '',
+                        'stationIP': payload.stationIP || '',
+                        'servantURL': payload.servantURL,
+                        'token': payload.token,
+                        'noServant': false,
+                        'timeout' : payload.timeout,
+                        'secureStation' : payload.secureStation,
+                        'datasetsList' : payload.datasetsList,
+                        'platformServices' : payload.platformServices,
+                        'switches': payload.switches
+                    };
+                    
+                    // User list for joining collaborate session
+                    if (typeof payload.collaborationUser !== 'undefined' && 
+                            payload.collaborationUser !== null){
+                        window.adviseLaunchInfo.isJoiningSession = true;
+                        window.adviseLaunchInfo.collaborationUser = payload.collaborationUser;
+                    }
+                    if (typeof payload.userList !== 'undefined' &&
+                            payload.userList !== null){
+                        window.adviseLaunchInfo.userList = payload.userList;
+                    }
+            
+                    var analyticsFrame = document.getElementById('widgetframe');
+                    analyticsFrame.onload = function(){
+                        var me = this;
+                        if (typeof me.setServantFromParent !== 'function'){
+                            me = this.contentWindow;
+                        }
+                        if (typeof me.setServantFromParent === 'function'){
+                            document.querySelector('.embeddedWidget').style.display = 'block';
+                            me.setServantFromParent(window.adviseLaunchInfo);
+                    }
+                    };
+                    analyticsFrame.setAttribute('src', '../webapps/SMAAnalyticsUI/smaResultsAnalyticsLaunched.html');
+                }
+            };
+            
+            //========================================================
+            /**
+             * [widgetResizeHandler description]
+             * @type {[type]}
+             */
+            //========================================================
+            function widgetResizeHandler(oMsg, aFrame){
+                var analyticsFrameWindow= aFrame.contentWindow ? aFrame.contentWindow : aFrame.contentDocument.defaultView;
+                window._WIDGET_VIEW_TYPE = oMsg.WIDGET_RESIZE;
+                analyticsFrameWindow.postMessage(window._WIDGET_VIEW_TYPE, window.location.origin);
+            }
+            
+            //========================================================
+            /**
+             * Call from widget to get the definition and session data
+             */
+            //========================================================             
+            function getSessionData(aFrame){
+                 var analyticsFrameWindow= aFrame.contentWindow ? aFrame.contentWindow : aFrame.contentDocument.defaultView;
+                 analyticsFrameWindow.postMessage('GET_SESS_DEF', window.location.origin);
+            }
+             
+            //========================================================
+            /**
+             * Event handler to process messages received from the
+             * 3DDashboard widget frame
+             */
+            //========================================================
+            function analyticsMessageHandler(msg){
+                var analyticsFrame = document.getElementById('widgetframe');
+                if (typeof msg !== 'undefined' && msg !== null){
+                    var msgTxt = msg.data || '';
+                    if (msgTxt.length > 0){
+            
+                        if (msgTxt.indexOf('SERVANT_STARTED') > -1){
+            
+                            loadAnalyticsHTML(JSON.parse(msgTxt).SERVANT_STARTED);
+            
+                        } else if (msgTxt.indexOf('WIDGET_RESIZE') > -1){
+            
+                            widgetResizeHandler(JSON.parse(msgTxt), analyticsFrame);
+            
+                        } else if (msgTxt.indexOf('GET_SESS_DEF') > -1){
+                        	
+                        	getSessionData(analyticsFrame);
+                       	
+                        }
+                    }
+                }
+            };
+            
+            //========================================================
+            /**
+             * Posts a message to the calling frame indicating
+             * that the launch sequence is complete..
+             */
+            //========================================================
+            function adviseLaunchDone(){
+                parent.postMessage('LAUNCH_COMPLETE', '*');
+            };
+            
+            //========================================================
+            /**
+             * 
+             */
+            //========================================================
+            function postMessageToWidget(message){
+            	parent.postMessage(message, '*');
+           	};
+           	
+            //========================================================
+            /**
+             * [savePreProcessComplete description]
+             * @return {[type]} [description]
+             */
+            //========================================================
+            function savePreProcessComplete(str){
+                parent.postMessage('SET_SESS_DEF::' + str, '*');
+            };
+            
+            //========================================================
+            /**
+             * Onload event
+             */
+            //========================================================
+            function load(){
+                window.addEventListener('message', analyticsMessageHandler);
+            };
+            
+            window.onload = load;
+         </script>
+      </div>
+   </body>
+</html>

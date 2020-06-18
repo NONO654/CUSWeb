@@ -1,0 +1,102 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+
+<link rel="import" href="dg-item-style.html">
+<link rel="import" href="dg-details.html">
+
+<dom-module id="dg-about">
+  <template>
+    <style include="dg-item-style"></style>
+
+    <style>
+
+      :host {
+        border: none;
+      }
+
+      .tools {
+        display: flex;
+      }
+
+      .download-button {
+        width: 100%;
+        padding: 10px;
+      }
+      .download-button::before {
+        content: '\2913';
+        font-size: large;
+        margin-right: 5px;
+        line-height: 0.1em;
+        font-weight: bold;
+      }
+
+      .heading {
+        cursor: pointer;
+        background: #e2e4e3;
+        padding: 6px;
+        border-bottom: thin solid #d3d3d3;
+        color: #2f84da;
+        font-size: 1.17em;
+      }      
+
+      .about {
+        margin-top: 10px;
+      }
+
+    </style>
+
+    <div class="container">
+      <div class="tools">
+        <button class="download-button secondary-button method label" on-click="download">Download diagnostics data</button>
+      </div>
+      <div class="about">          
+        <section class="heading" on-click="_toggleAboutVisibility">
+          <label data-item="label">About</label>
+        </section>
+        <dg-details value="{{value}}" ctx="{{ctx}}" visible="{{aboutVisible}}" hide-refresh-button></dg-details>
+      </div>
+    </div>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+      
+      // TODO: Show the release notes here (fetch it dynamically from a common readme file)
+
+      Polymer({
+        is: 'dg-about',
+        
+        properties: {
+          ctx: {
+            type: Object
+          },
+          value: {
+            type: Object
+          },
+          aboutVisible: {
+            type: Boolean,
+            value: true
+          }
+        },
+        download: function () {
+          this.fire('serialize-request');
+        },
+        _toggleAboutVisibility: function () {
+          this.aboutVisible = !this.aboutVisible;
+        },
+        serializeData: function () {
+          const about = this.value;
+          about.timestamp = Date.now();
+          
+          return about;
+        }
+      });
+    })();
+  </script>
+</dom-module>
+
+
+
+
+

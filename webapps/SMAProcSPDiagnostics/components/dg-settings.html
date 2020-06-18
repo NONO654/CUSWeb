@@ -1,0 +1,95 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+
+<link rel="import" href="dg-item-style.html">
+<link rel="import" href="dg-details.html">
+
+<dom-module id="dg-settings">
+  <template>
+    <style include="dg-item-style"></style>
+
+    <style>
+
+      :host {
+        border: none;
+      }
+
+      .setting-item {
+        border: thin solid #cacece;
+        border-bottom: none;
+        margin-bottom: 4px;
+        border-radius: 2px;
+      }
+
+      .heading {
+        cursor: pointer;
+        background: #e2e4e3;
+        padding: 6px;
+        border-bottom: thin solid #d3d3d3;
+        color: #2f84da;
+        font-size: 1.17em;
+      }      
+
+      .settings {
+        margin-top: 10px;
+      }
+
+    </style>
+
+    <div class="container">
+      <div class="settings" on-click="toggleDetails">
+        <template is="dom-repeat" items="{{value}}">
+          <div class="setting-item">
+            <section class="heading">
+              <label data-item="label">{{item.caption}}</label>
+            </section>
+            <dg-details value="{{item}}" ctx="{{ctx}}" visible hide-refresh-button></dg-details>
+          </div>
+        </template>
+      </div>
+
+      <h1>TODO</h1>
+    </div>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+      
+      //TODO: allow setting to ignore content in recordConsole and other such configurations
+
+      Polymer({
+        is: 'dg-settings',
+        
+        properties: {
+          ctx: {
+            type: Object
+          },
+          value: {
+            type: Object
+          }
+        },      
+        toggleDetails: function (event) {
+          const targ = event.target;  
+          
+          // if its label then query from its parent
+          const elem = targ.dataset.item === 'label' ? targ.parentElement : targ;
+          const details = elem.parentElement.querySelector('dg-details');
+          
+          if (details) {
+            details.visible = !details.visible;
+            event.stopPropagation();
+          }  
+        },       
+        serializeData: function () {         
+          return this.value;
+        }
+      });
+    })();
+  </script>
+</dom-module>
+
+
+
+
+

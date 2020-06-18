@@ -1,0 +1,51 @@
+<!--------------------------------------------------------------------
+[sp-notification HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:    Fri, 13 Nov 2015 17:26:31 GMT
+Assigned to:	Fouad EL Hasni (FEI)
+Primary use:	display a coach mark for the app
+Description:    display a coach mark for the app
+--------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<dom-module id="sp-coachmark">
+  <link rel="import" type="css" href="sp-coachmark.css">
+  <link rel="import" type="css" href="sp-coachmark-uikit.css">
+  <template>
+        <div id="overlay" class="modal-overlay fade"></div>
+        <div id="coachmark" class="modal fade">
+            <div id="content" class="modal-content">
+                <div id="slider" class="slider" style$="{{_computeStyle(modalHeight, modalWidth)}}">
+                    <div id="slides">
+                        <div id="overflow">
+                            <div id="inner" class="innerMove">
+                                <content id="articles" select="article"></content>
+                                <content></content>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="labels"></div>
+                    <div id="rArrow" class="arrowSlider" on-click="next">
+                        <span></span>
+                    </div>
+                    <div id="lArrow" class="arrowSlider" on-click="previous">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="toggle coach-check">
+                    <input type="checkbox" id="stShow" value="">
+                    <label class="control-label" for="stShow">
+                        <span class="font-3dsregular">Do not show at startup</span>
+                    </label>
+                </div>
+                <span id="close" class="coach-close"></span>
+            </div>
+        </div>
+	</template>
+  <script src="sp-coachmark.js"></script>
+</dom-module>
+
+

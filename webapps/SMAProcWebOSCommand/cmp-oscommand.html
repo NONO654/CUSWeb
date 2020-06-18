@@ -1,0 +1,656 @@
+<link rel="import" href="../SMAProcSP/sp-base/sp-base.html" />
+<link rel="import" href="../SMAProcSPUI/sp-tab/sp-tab.html" />
+<link rel="import" href="../SMAProcSPUI/sp-checkbox/sp-checkbox.html" />
+<link rel="import" href="../SMAProcSPUI/sp-tree-table/sp-tree-table.html" />
+<link rel="import" href="../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+
+<dom-module id="cmp-oscommand">
+<template>
+<style>
+:host {
+  display:block;
+}
+:host([hidden]) {
+  display:none;
+}
+.inline {
+    width: 100%;
+    display: -moz-inline-box;
+    display: -webkit-inline-box;
+    display: inline-flex;
+    height: 30px;
+}
+#pre {
+     width: 100%;
+}
+sp-checkbox{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 5px;
+}
+#cmd, #cmdArgs, #scriptArgs, #cmdPreview {
+/*     min-width: 410px; */
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#cmd, #editortext{
+    width: 100%;
+    resize: vertical;
+    height: unset;
+}
+#types, #lineEndings{
+    position: relative;
+    margin-top: 5px;
+}
+
+#apps, #appBtn{
+    width: 300px;
+}
+#releasedAppOnly {
+    display:inherit;
+}
+
+.osclabel {
+    min-width: 180px;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-right: 0px;
+    font-weight: normal;
+}
+.envlabel {
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-right: 4px;
+}
+.longlabel{
+    width: auto;
+    height: 1.1em;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 5px;
+    font-weight: normal;
+}
+.number {
+    width: 200px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.full-width {
+    width: 100%;
+    margin-right: 10px;
+    margin-bottom: 3px;
+}
+pcw-sdk-parameter-chooser.full-width {
+    margin: auto;
+}
+
+.envPanel {
+    display: none;
+}
+.envPanel.is-visible {
+    display:block;
+    width: 100%;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+#execution {
+    padding: 0;
+}
+.collapsiblePanelLabel {
+    height:  32px;
+}
+.collapsiblePanel{
+    font-size: 14px;
+    font-weight: bold;
+    color: #77797C;
+    line-height: 30px;
+}
+.collapsiblePanelLabel:hover {
+    background-color: #F1F1F1;
+}
+.collapsiblePanelLabel:hover .collapsiblePanel, .collapsiblePanelLabel:hover > .fonticon {
+    color: #3D3D3D;
+}
+#execution > div:not(:first-child) {
+    border-top: 1px #D1D4D4 solid;
+}
+.collapsiblePanelLabel > .fonticon {
+    color: #B4B6BA;
+    display:inline-block;
+    width:26px;
+    height:26px;
+    padding-top:3px;
+}
+.command-pane {
+    display: none;
+}
+.command-pane.is-visible {
+    display:block;
+    width: 100%;
+}
+.envVarItem{
+    width: 100%;
+    margin-right: 10px;
+    background-color: transparent;
+}
+.envVarItem:hover{
+    background-color: #F1F1F1;
+}
+.envVarItem.selected {
+    background-color: #e6e8ea;
+}
+.cmd-block {
+    display: -moz-inline-stack;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.btn-grp {
+    display:block;
+}
+.editBtn {
+    margin-top: 0px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    position: relative;
+    min-width: 100px;
+}
+ .flexrow {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    -moz-justify-content: flex-start;
+    -ms-justify-content: flex-start;
+    -o-justify-content: flex-start;
+    justify-content: flex-start;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    -webkit-flex: none;
+    -moz-flex: none;
+    -ms-flex: none;
+    -o-flex: none;
+    flex: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.fonticon {
+    font-family: entypo;
+    font-style: normal;
+    font-weight: normal;
+    /*   font-size: 2em; */
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin: 0 .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+}
+.envtoolbar .btn {
+    padding: 0;
+}
+.fonticon-right-dir:before {
+    line-height: 24px;
+    font-size: 24px;
+    font-weight: normal;
+    font-family: entypo;
+    content: '\e884';
+    padding-left: 4px;
+}
+.fonticon-down-dir:before {
+    line-height: 20px;
+    font-size: 20px;
+    font-weight: normal;
+    font-family: entypo;
+    content: '\e882';
+    padding-left: 4px;
+}
+.fonticon-up:before {
+    line-height: 20px;
+    font-size: 20px;
+    font-weight: normal;
+    font-family: entypo;
+    content: '\e881';
+    padding-left: 4px;
+}
+.fonticon-down:before {
+    line-height: 20px;
+    font-size: 20px;
+    font-weight: normal;
+    font-family: entypo;
+    content: '\e87e';
+    padding-left: 4px;
+}
+.fonticon-plus:before {
+    line-height: 20px;
+    font-size: 20px;
+    font-weight: normal;
+    font-family: entypo;
+    content: '\e815';
+    padding-left: 4px;
+}
+.fonticon-minus:before {
+    line-height: 20px;
+    font-size: 20px;
+    font-weight: normal;
+    font-family: entypo;
+    content: '\e818';
+    padding-left: 4px;
+}
+.fonticon-right-open {
+    font-size: 21px;
+    font-weight: normal;
+    font-family: entypo;
+    content: '\e874';
+}
+.fonticon-down-open {
+    font-size: 21px;
+    font-weight: normal;
+    font-family: entypo;
+    content: '\e872';
+}
+.btn {
+    height: 22px;
+    width: 22px;
+    min-width: 22px;
+    position: relative;
+    padding-right: 4px;
+    padding-left: 4px;
+    padding-bottom: 6px;
+    margin-top: auto;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    border: 1px solid;
+    border-radius: 4px;
+    border-color: #b4b6ba;
+    display: inline-block;
+}
+.no-btn-width .btn {
+    width: auto;
+    min-width: auto;
+}
+.center{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.envinput  {
+    height: 38px;
+    width: 100%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.envinput #input {
+    height: 34px;
+    width: 272px;
+}
+
+.form-control::shadow {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 34px;
+    width: 100%;
+}
+.failedPanel, .logPanel, .waitPanel, .exeEnvPanel {
+    display: none;
+}
+.is-visiblefailedPanel.is-visible, .is-visiblelogPanel.is-visible, .is-visiblewaitPanel.is-visible, .is-visibleexeEnvPanel.is-visible {
+    display:block;
+    margin-right: 10px;
+    margin-left: 34px;
+}
+.bottommargin {
+    margin-bottom: 10px;
+}
+.form-control {
+  height: 34px;
+  padding: 6px 12px;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555;
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+/*   margin-left: 20px;  */
+}
+.form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+}
+.form-control.placeholder {
+  color: #999;
+}
+.form-control[disabled],
+.form-control[disabled] + .select-choice{
+  cursor: not-allowed;
+  background-color: #eee;
+  color: #c0c0c0;
+  opacity: 1;
+}
+.form-control.input-sm {
+    padding: 1px 10px;
+    height: 22px;
+}
+.readonly {
+    color: #77797c;
+    border-color: #b4b6ba;
+    background-color: #f5f6f7;
+}
+.text-field{
+    overflow-x: auto;
+}
+
+.param {
+    color: blue;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+textarea {
+    resize: vertical;
+}
+textarea#cmdPreview {
+    resize: none;
+    height: 25px;
+}
+
+#basic fieldset {
+    padding-left: 1em;
+    margin-top: 8px;
+}
+#basic fieldset > label {
+    margin-left: -1em;
+}
+
+.envVar {
+    margin-left: -10px;
+    width: calc(100% + 20px);
+}
+</style>
+<main class="cmp-oscommand" id="main">
+<sp-tab>
+<!-- Basic Options tab -->
+<section id="basic" name="basic" data-id="basic" data-header="Basic Options" data-selected="true">
+    <div class="inline typeSelect">
+        <label class="osclabel" for="types">Type</label>
+
+        <select if="sMenu" class="form-control input-sm" id="types" name="types"></select>
+    </div>
+
+    <!-- Command Preview -->
+    <div>
+        <div class="inline" id="pre">
+            <label class="osclabel" for="cmdPreview">Command preview</label>
+
+            <textarea type="text" id="cmdPreview" class="form-control input-sm" disabled></textarea>
+        </div>
+    </div>
+
+    <fieldset>
+    <label>{{_getTitle(_cmdIndex, _cmdType)}}</label>
+    <!-- Type: Command -->
+    <div class$="{{_commandPaneClass(_cmdIndex)}}">
+        <div class="cmd-block">
+            <div class="full-width">
+                <textarea id="cmd" class="text-field form-control input-sm" placeholder="Enter command" rows="1" value="{{_command::input}}"></textarea>
+                <!-- <pcw-help-icon path="SedUserMap/sed-c-OSCommand-CommandLine.htm" topic="Command Line Syntax"></pcw-help-icon> -->
+            </div>
+            <div class="inline">
+                <label class="osclabel" for="cmdPreview">Insert parameter</label>
+
+                <pcw-sdk-parameter-chooser id="cmdParam" class="full-width" create on-pcw-parameter-selected="addParamToCommand"></pcw-sdk-parameter-chooser>
+                <!-- <pcw-help-icon path="SedUserMap/sed-t-OSCommand-SingleLine.htm" topic="Single Line Command Options"></pcw-help-icon> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Type: Shell -->
+    <div class$="{{_shellPaneClass(_cmdIndex)}}">
+        <div class="inline">
+            <label class="osclabel">Command Arguments</label>
+
+            <input type="text" id="cmdArgs" class="form-control input input-sm" placeholder="Enter command arguments" value="{{_intpArgument::input}}" />
+        </div>
+        <div class="inline">
+            <label class="osclabel" for="scriptArgs">Script Arguments</label>
+
+            <input type="text" class="form-control input input-sm" id="scriptArgs" placeholder="Enter script arguments" value="{{_scriptArgument::input}}" />
+        </div>
+        <div class="inline">
+            <label class="osclabel" for="lineEndings">Line Endings</label> <select if="sMenu" class="form-control input-sm" id="lineEndings"
+                name="lineEndings"></select>
+        </div>
+
+        <!-- Shell script editor -->
+        <fieldset id="editor" name="editor">
+            <label>Editor</label><br />
+            <div class="btn-grp no-btn-width">
+                <button class="editBtn btn btn-default btn-sm " id="btnClear" on-click="onClearEditor">Clear Script</button>
+                <span class="btn btn-default btn-file btn-sm ">
+                  Load Script...<input type="file" name="file" id="fileSelector" accept="{{accept}}" on-change="loadFile">
+                </span>
+                <!-- <pcw-help-icon path="SedUserMap/sed-c-OSCommand-ParametersEnter.htm" topic="Entering Parameters"></pcw-help-icon> -->
+            </div>
+            <div class="full-width">
+                <textarea id="editortext" placeholder="Enter script contents" class="form-control" rows="10"  value="{{_scriptText::input}}"></textarea>
+            </div>
+            <div class="inline">
+                <label class="osclabel">Insert parameter</label>
+
+                <pcw-sdk-parameter-chooser id="scriptParam" class="full-width" create on-pcw-parameter-selected="addParamToScript"></pcw-sdk-parameter-chooser>
+            <div>
+
+        </fieldset>
+    </div>
+
+    <!--  Predefined Applications -->
+
+    <sp-updatepanel id="updatePanel"></sp-updatepanel>
+
+    <div class$="{{_predefinedAppsClass(_cmdIndex)}}">
+        <div>
+            <div class="bottommargin">
+                <label class="longlabel" for="apps">Application</label>
+
+                <select if="sMenu" class="form-control input-sm" id="apps" name="apps">
+                    <option class="placeholder" data-placeholder="" selected="">Select application</option>
+                </select>
+                    <label class="longlabel" for="releasedAppOnly">
+                    <sp-checkbox id="releasedAppOnly" on-click="onRelAppChange" checked="{{onRelAppOn}}"></sp-checkbox>
+                    Show released applications only</label>
+            </div>
+        </div>
+        <p style="text-align:center;margin: 1em;"><strong>Command Line Options edition is disabled for this beta test.</strong></p>
+        <label class="osclabel" hidden>Command Line Options</label>
+
+        <section class="connector-table"  hidden>
+            <sp-tree-table id="optionstable" class="table"></sp-tree-table>
+        </section>
+    </div>
+    </fieldset>
+
+    <div class="full-width">
+        <div class="inline collapsiblePanelLabel envVar" on-click="onToggleEnvVar">
+            <span id="envToggleIcon" class="fonticon fonticon-right-dir"></span>
+            <span class="collapsiblePanel">Environment Variables</span>
+        </div>
+        <div class$="{{_showHideClass(_showEnvVarPanel, 'envPanel')}}">
+            <div class="flexrow envtoolbar">
+                <button id="addEnvVar"class="btn" on-click="onAddVar" title="Add environment variable">
+                    <span class="fonticon fonticon-plus"></span>
+                </button>
+                <button id="removeEnvVar" class="btn" on-click="onRemoveVar" title="Remove selected environment variable">
+                    <span class="fonticon fonticon-minus"></span>
+                </button>
+                <button id="moveUpEnvVar" class="btn" on-click="onMoveVarUp" title="Move selected environment variable up">
+                    <span class="fonticon fonticon-up"></span>
+                </button>
+                <button id="moveDownEnvVar" class="btn" on-click="onMoveVarDown" title="Move selected environment variable down">
+                    <span class="fonticon fonticon-down"></span>
+                </button>
+            </div>
+            <div id="envDefPanel">
+                <template is="dom-repeat" items="{{_oscmd_env_vars}}">
+                    <div class="envVarItem" on-click="onSelectVar">
+                        <div class="inline center">
+                            <input type="text" class="form-control input-sm envinput center" placeholder="Variable name" value="{{item.name::input}}" />
+                            <label class="envlabel center"> = </label>
+                            <input type="text" class="form-control input-sm envinput center" placeholder="Variable value" value="{{item.value::input}}" />
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="inline">
+                <label class="osclabel">Set variable value</label>
+
+                <pcw-sdk-parameter-chooser id="envParam" class="full-width" create on-pcw-parameter-selected="setParamAsEnvVar"></pcw-sdk-parameter-chooser>
+                <!-- <pcw-help-icon path="SedUserMap/sed-t-OSCommand-EnvVariables.htm" topic="Configuring Environment Variables"></pcw-help-icon> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  Execution Options tab -->
+
+<section id="execution" name="execution" data-id="execution" data-header="Execution Options">
+
+    <!-- Consider Execution Failed If -->
+    <div>
+        <div class="inline collapsiblePanelLabel" on-click="onToggleFailedPanel">
+            <span id="failedToggleIcon" class="fonticon fonticon-right-dir"></span>
+            <span class="collapsiblePanel">Consider Execution Failed If</span>
+        </div>
+        <div class$="{{_showHideClass(_showFailedPanel, 'failedPanel')}}">
+            <div class="inline">
+                <sp-checkbox checked="{{_returnCode}}"></sp-checkbox>
+                <label class="longlabel" for="rcVal">Return code (i.e. 0:2, -33:42, 122:135) is other than</label>
+
+            </div>
+            <input type="text" class="form-control input-sm full-width bottommargin" id="rcVal" placeholder="Enter return code(s)" value="{{_maxrcSuccess::input}}" />
+            <div class="inline">
+                <sp-checkbox id="failedIfStdOut" checked="{{_stdOutVal}}"></sp-checkbox>
+                <label class="longlabel" for="failedIfStdOut">There is output to Standard Output Stream</label>
+            </div>
+            <div class="inline">
+                <sp-checkbox id="failedIfStdErr" checked="{{_stdErrVal}}"></sp-checkbox>
+                <label class="longlabel" for="failedIfStdErr">There is output to Standard Error Stream</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Log Output -->
+    <div>
+        <div class="inline collapsiblePanelLabel" on-click="onToggleLogPanel">
+            <span id="logToggleIcon" class="fonticon fonticon-right-dir"></span>
+            <span class="collapsiblePanel">Log Output</span>
+        </div>
+        <div class$="{{_showHideClass(_showLogPanel, 'logPanel')}}">
+            <div class="inline">
+                <sp-checkbox id="logStdErr" on-click="onLogChange" checked="{{_logStderr}}"></sp-checkbox>
+                <label class="longlabel" for="logStdErr">Log Standard Error</label>
+            </div>
+            <div class="inline">
+                <sp-checkbox id="logStdOut" on-click="onLogChange" checked="{{_logStdout}}"></sp-checkbox>
+                <label class="longlabel" for="logStdOut">Log Standard Output</label>
+            </div>
+            <div class="bottommargin">
+                <label class="longlabel" for="logLines">Log at most (lines)</label>
+
+                <input class="number form-control input-sm" type="number" id="logLines" placeholder="Enter number of lines"
+                    value="{{_linesToLog}}" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Wait for file -->
+    <div>
+        <div class="inline collapsiblePanelLabel" on-click="onToggleWaitPanel">
+            <span id="waitToggleIcon" class="fonticon fonticon-right-dir"></span>
+            <span class="collapsiblePanel">Wait for file</span>
+        </div>
+        <div class$="{{_showHideClass(_showWaitPanel, 'waitPanel')}}">
+            <div class="inline">
+                <sp-checkbox id="waitForFile" checked="{{_waitForFile}}"></sp-checkbox>
+                <label class="longlabel" for="waitForFile">Wait for file after program finishes</label>
+            </div>
+            <div class="bottommargin">
+                <label class="longlabel" for="waitFilename">File</label>
+
+                <input class="form-control input-sm full-width" type="text" id="waitFilename" placeholder="Enter filename"
+                     value="{{_waitFile::input}}" />
+            </div>
+            <div class="bottommargin">
+                <label class="longlabel" for="findString">Find this string in file</label>
+
+                <input class="form-control input-sm full-width" type="text" id="findString" placeholder="Enter string"
+                     value="{{_waitString::input}}" />
+            </div>
+            <div class="bottommargin">
+                <label class="longlabel" for="waitDelay">Delay in seconds after file or string is found</label>
+
+                <input class="form-control input-sm number" type="number" id="waitDelay" placeholder="Enter time to delay"
+                    value="{{_waitDelay}}::input" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Execution Env -->
+    <div>
+        <div class="inline collapsiblePanelLabel" on-click="onToggleExeEnvPanel">
+            <span id="exeEnvToggleIcon" class="fonticon fonticon-right-dir"></span>
+            <span class="collapsiblePanel">Execution Environment</span>
+        </div>
+        <div class$="{{_showHideClass(_showExeEnvPanel, 'exeEnvPanel')}}">
+            <div>
+                <div class="inline">
+                    <sp-checkbox id="runAsJob" checked="{{_makeJob}}"></sp-checkbox>
+                    <label class="longlabel" for="runAsJob">Run command/script as Windows Job or Unix Process Group (recommended)</label>
+                </div>
+            </div>
+            <div class="bottommargin">
+                <div class="inline">
+                    <label class="longlabel" for="exitCodeParam">Save exit code in parameter</label>
+
+                    <pcw-sdk-parameter-chooser id="exitCodeParam" class="full-width" create autoselect on-pcw-parameter-selected="setExitCodeParam"></pcw-sdk-parameter-chooser>
+                </div>
+            </div>
+            <div class="bottommargin">
+                <div class="inline">
+                    <sp-checkbox checked="{{_unix}}"></sp-checkbox>
+                    <label class="longlabel" for="xwinDisplay">Set X_Windows display on Unix</label>
+
+                </div>
+                <input class="full-width form-control input-sm" type="text" id="xwinDisplay" placeholder="Enter XWin display setting"
+                    value="{{_hostname::input}}" />
+            </div>
+            <div>
+                <div class="inline">
+                    <sp-checkbox checked="{{_releaseConcurrency}}"></sp-checkbox>
+                    <label class="longlabel">Command uses no local system resources</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <pcw-help-icon path="SedUserMap/sed-t-OSCommand-ExecConfig.htm" topic="Configuring Execution Options"></pcw-help-icon> -->
+</section>
+</sp-tab> </main> </template>
+<script type="text/javascript" src="cmp-oscommand.js"></script>
+</dom-module>

@@ -1,0 +1,1 @@
+define("DS/MPFBankAccountConstraintsModel/MPFBankAccountConstraintsModel_en",{});define("DS/MPFBankAccountConstraintsModel/assets/nls/BankAccountConstraintsModel",{isRequired:"{0} is required",isInvalid:"{0} is invalid",iban:"iban",swift:"swift",bsbNumber:"BSB number",abaNumber:"ABA number",transitNumber:"transit number",accountNumber:"account number",bankNumber:"bank number"});

@@ -1,0 +1,1 @@
+define("DS/MPFStepNavigationComponent/MPFStepNavigationComponent_en",{});define("DS/MPFStepNavigationComponent/assets/nls/StepNavigationComponent",{"Company Settings":"Company Settings",Information:"Information"});

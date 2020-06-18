@@ -1,0 +1,2 @@
+/*!  Copyright 2018 Dassault Systemes. All rights reserved. */
+define("DS/SMAPoweredByTracker/ad-tracker/ad-usage",["DS/Usage/UsageManager","DS/Usage/TrackerAPI"],function(d,f){var c={};var a=true,b="/upload",i="SIMABQX_AP",g={counter:"counter",timer:"timer"};try{d.init({uploadPath:"",service:i})}catch(h){console.error(h)}function j(l){if(a){try{d.init({uploadPath:l.uploadPath||b,service:l.service||i});f.init()}catch(k){console.error(k);a=false}}}function e(k){var l;j(k);if(k.item&&a){l=f.getTracker(g.counter,k.item)}return l}c.getCounterTracker=e;return c});

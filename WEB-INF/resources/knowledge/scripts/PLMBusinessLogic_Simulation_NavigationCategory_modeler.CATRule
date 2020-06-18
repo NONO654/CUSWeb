@@ -1,0 +1,72 @@
+/*
+This file is only dedicated to simulation Extensions, cause of lack of system in R1.X+1.
+*/
+Let rattrapDiscipline(String)
+
+Let Discipline=""
+Discipline = ThisObject.V_discipline
+
+if (Discipline == "dsc_Model_Category_Ref")
+{
+	Parameters->SetAttributeString("NavRepName","PSM_CAT_1_3DNAVREP.cgr")
+	Parameters->SetAttributeString("IconName","I_PSMCategory_1")
+}
+else if (Discipline == "dsc_Scenario_Category_Ref")
+{
+	Parameters->SetAttributeString("NavRepName","PSM_CAT_4_3DNAVREP.cgr")
+	Parameters->SetAttributeString("IconName","I_PSMCategory_4")
+}	
+else if (Discipline == "dsc_Result_Category_Ref")
+{
+	Parameters->SetAttributeString("NavRepName","PSM_CAT_6_3DNAVREP.cgr")
+	Parameters->SetAttributeString("IconName","I_PSMCategory_6")
+}
+else
+{
+	/*iconFilename  =  GetIconForSimulationDocument(ThisObject)*/
+
+	/*  
+	*  This  method (GetCategoryDiscipline)
+	*  Used to rattrap category icons
+	*  will  take  ThisObject  and  get  its V_discipline  
+	*  
+	*  INPUT:  
+	*  -------  
+	*  ThisObject  
+	*  
+	*  OUTPUT:  
+	*  -------  
+	*  rattrapDiscipline = V_discipline string associate to the select category
+	*/
+	  	
+	rattrapDiscipline  =  GetCategoryDiscipline(ThisObject)
+
+	if (rattrapDiscipline == "dsc_Model_Category_Ref")
+	{
+		Parameters->SetAttributeString("NavRepName","PSM_CAT_1_3DNAVREP.cgr")
+		Parameters->SetAttributeString("IconName","I_PSMCategory_1")
+	}
+	else if (rattrapDiscipline == "dsc_Scenario_Category_Ref")
+	{
+		Parameters->SetAttributeString("NavRepName","PSM_CAT_4_3DNAVREP.cgr")
+		Parameters->SetAttributeString("IconName","I_PSMCategory_4")
+	}	
+	else if (rattrapDiscipline == "dsc_Result_Category_Ref")
+	{
+		Parameters->SetAttributeString("NavRepName","PSM_CAT_6_3DNAVREP.cgr")
+		Parameters->SetAttributeString("IconName","I_PSMCategory_6")
+	}
+	else
+	{
+		Parameters->SetAttributeString("NavRepName","PSM_CAT_10_3DNAVREP.cgr")
+		Parameters->SetAttributeString("IconName","I_PSMCategory")
+	}
+}
+	
+
+/* 
+<Enumerator Name="Context"		Value="1" 
+<Enumerator Name="Specs"		Value="4" 
+<Enumerator Name="Result"		Value="6" 
+*/
+

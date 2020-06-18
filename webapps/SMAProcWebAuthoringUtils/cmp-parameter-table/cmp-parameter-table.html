@@ -1,0 +1,304 @@
+<dom-module id="cmp-parameter-table">
+    <template>
+
+        <style>
+            :host {
+                display:block;
+                height: inherit;
+            }
+            .main {
+                display: inline-block;
+                align-items: stretch;
+                justify-content: space-around;
+                height: 100%;
+                width: 100%;
+            }
+            .table{
+                position: relative;
+                height: 100%;
+                margin-bottom: 0px;
+            }
+            
+            :host[data-mode='standalone'] .table {
+                border: 1px solid #D0D2D6;
+            }
+            .param-table {
+                height: calc(100% - 41px);
+            }
+            .button {
+                display:inline-flex;
+                margin: 3px;
+                border-radius: 3px;
+                height: 30px;
+                width: 34px;
+                padding: 4px 6px;
+            }
+            .filtersPanel {
+                width: auto;
+                display: inline-flex;
+                align-items: center;
+                justify-content: flex-start;
+            }
+            .filtersButton {
+                margin-left: 3px;
+                width: 70px;
+            }
+            .label-inp{
+                display: inline-flex;
+                align-items: center;
+                justify-content: flex-start;
+                margin-left: 10px;
+            }
+            .label {
+                color: #000;
+                font-size: 14px;
+                margin-left: 5px;
+                margin-right: 2px;
+            }
+            .fixedlabel {
+                width: 80px;
+                display: block;
+                margin-right: 10px;
+                text-align: center;
+            }
+            .stretch {
+                display: flex;
+                width: 100%;
+            }
+
+            .full-width {
+                display: flex;
+                flex-flow: column;
+                align-items: stretch;
+                justify-content: space-around;
+                margin: 5px;
+            }
+            img {
+                height: 100%;
+                width: 100%;
+                padding: 0px;
+                margin: 0px;
+                border: 0px;
+
+                border-color: #000000;
+                border-style: solid;
+            }
+
+            .hidden * {
+                display: none;
+            }
+
+            .form-control {
+              height: 34px;
+              padding: 6px 12px;
+              display: inline-block;
+              vertical-align: middle;
+              background-color: #fff;
+              background-image: none;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+              font-size: 14px;
+              line-height: 1.428571429;
+              color: #555;
+              -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+              transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            /*   margin-left: 20px;  */
+            }
+            .form-control:focus {
+              border-color: #66afe9;
+              outline: 0;
+            }
+            .form-control:-moz-placeholder {
+              color: #999;
+            }
+            .form-control::-moz-placeholder {
+              color: #999;
+              opacity: 1;
+            }
+            .form-control:-ms-input-placeholder {
+              color: #999;
+            }
+            .form-control::-webkit-input-placeholder {
+              color: #999;
+            }
+            .form-control.placeholder {
+              color: #999;
+            }
+            .form-control[disabled],
+            .form-control[disabled] + .select-choice{
+              cursor: not-allowed;
+              background-color: #eee;
+              color: #c0c0c0;
+              opacity: 1;
+            }
+            .form-control[data-placeholder],
+            .form-control[data-placeholder] + .select-choice{
+              cursor: not-allowed;
+              background-color: #eee;
+              color: #c0c0c0;
+              opacity: 1;
+            }
+            .placeholder {
+              cursor: not-allowed;
+              background-color: #eee;
+              color: #c0c0c0;
+              opacity: 1;
+            }
+            .hide{
+                display: none;
+            }
+            .icon{
+                margin: 0px 8px 0px 8px;
+                font-size: 18px;
+                color: #3d3d3d;
+                opacity: 0.6;
+            }
+            .icon:hover{
+                cursor: pointer;
+                opacity: 1;
+            }
+            .icon-disabled{
+                cursor: not-allowed;
+            }
+            .deleteMessage {
+              white-space: pre;
+            }
+            .loadContainer {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 1;
+                background-color:#fff;
+                background-color:rgba(255,255,255,0.4);
+                z-index:100;
+                width:100%;
+                height:100%;
+            }
+            .loadIcon{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .overwriteDialog {
+                --sp-modal-body: {
+                    min-height: 80px;
+                };
+            }
+            #dialogText ul {
+                list-style: disc;
+            }
+            .toolbar {
+                position: relative;
+                display: inline-flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+                height: 38px;
+                margin-bottom: 3px;
+            }
+            .buttonPanel {
+                display: inline-flex;
+                align-items: center;
+                justify-content: flex-start;
+            }
+            #rulesEditor{
+                margin-left: 6px;
+              width: 400px;
+            }
+            :host[data-mode ='standalone'] #rulesEditor {
+                margin-left: 0px;
+            }
+            #iconBar{
+                white-space: normal;
+                width: 100%;
+            }
+            #rightbuttonPanel{
+                display: flex;
+                justify-content: flex-end;
+                min-width: calc(100% - 400px);
+                text-align: right;
+            }
+            #leftbuttonPanel{
+                min-width: 400px;
+            }
+        </style>
+
+        <sp-notification id="notification" position="TR" width="400"></sp-notification>
+
+        <main class="main" id="main" on-keyup="onKeyUp" on-keydown="onKeyDown">
+            <section class="toolbar" id="toolbar">
+                <div id="leftbuttonPanel" class="buttonPanel">
+                    <div id="rulesEditor" class="spreadsheet-header"></div>
+                </div>
+                <div id="rightbuttonPanel" class="buttonPanel">
+                    <div id="iconBar"></div>
+                </div>
+
+            </section>
+            <section class="param-table" id="paramTableSection">
+                <div id="paramTableSectionChild" class="table">
+                    <!-- WebUx tree will be added here via js -->
+                </div>
+            </section>
+        </main>
+        <cmp-parameter-create-modal id="paramCreateModal" name="paramCreate" multi-mode></cmp-parameter-create-modal>
+        <input type="file" style="display: none;" multiple="" accept="text/xml" id="contentChooserFile" class="inp-file-hide" />
+
+        <sp-modal id="mappedParameterDialog" width="560px" height="300px" heading="Confirm delete" on-close="onCloseConfirmation">
+            <section id="dialogText">
+                <span id="deleteMessage" class="deleteMessage"></span><br>
+            </section>
+            <footer>
+                <button id="removeButton" is="sp-button-type" on-click="removeParameters">OK</button>
+                <button id="modifyButton" is="sp-button-type" on-click="onModify">Yes</button>
+                <button id="noButton" is="sp-button-type" primary="" on-click="onCancelConfirmation">No</button>
+                <button id="discardButton" is="sp-button-type" primary="" on-click="onCancelConfirmation">Cancel</button>
+            </footer>
+        </sp-modal>
+
+        <sp-modal id="preserveMappingDialog" width="525px" height="300px" heading="Confirm Modify" on-close="onPreserveCloseConfirmation">
+            <section id="dialogText">
+                <span id="preserveMessage" class="deleteMessage"></span><br>
+            </section>
+            <footer>
+                <button id="preserveMapping" is="sp-button-type" on-click="onPreserveMappings">Yes</button>
+                <button id="discardMapping" is="sp-button-type" primary="" on-click="onPreserveModify">No</button>
+            </footer>
+        </sp-modal>
+
+        <sp-modal id="overwriteDialog" class="overwriteDialog" width="500px" height="80px" heading="Replace Duplicate Parameters" on-close="_stopEvent">
+            <section id="dialogText" style="padding-top:20px;">
+                <span>
+                    <center>Do you want to replace parameters that have the same name?</center>
+                </span>
+            </section>
+            <footer>
+                <button id="replaceButton" is="sp-button-type" primary="">Yes</button>
+                <button id="discardReplace" is="sp-button-type">No</button>
+            </footer>
+        </sp-modal>
+
+        <sp-modal id="importProcessCompletionDialog" class="importProcessCompletionDialog" width="500px" height="120px" heading="Import parameters process is complete." on-close="_stopEvent">
+            <section id="dialogText">
+                Total number of parameters processed: <span>{{imported_count}}</span>
+                <ul>
+                    <li><span>{{newlyCreated_count}}</span> parameters created</li>
+                    <li><span>{{overriden_count}}</span> parameters overwritten</li>
+                    <li><span>{{discarded_count}}</span> parameters skipped</li>
+                    <li><span>{{failed_count}}</span> parameters had errors</li>
+                </ul>
+            </section>
+            <footer>
+                <button title="Download Report file with more details on the results of the parameter import process." id="downloadbutton" is="sp-button-type" primary="">Download Report</button>
+                <button id="closeButton" is="sp-button-type">Close</button>
+            </footer>
+        </sp-modal>
+        <div class="" id="loadContainer">
+            <div class="loadIcon" id="loadIcon"></div>
+        </div>
+
+    </template>
+</dom-module>

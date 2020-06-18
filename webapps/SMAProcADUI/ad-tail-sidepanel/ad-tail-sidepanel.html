@@ -1,0 +1,18 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../ad-sidepanel/ad-sidepanel.html">
+<link rel="import" href="../ad-tail-view/ad-tail-view.html">
+
+<dom-module id="ad-tail-sidepanel">
+ 	 <template>
+    	<style include="sp-uikit-styles"></style>
+    	
+		<ad-sidepanel id="sidePanel" class="hidden" panel-orientation="{{panelOrientation}}" panel-title="{{panelTitle}}" on-refresh="onRefresh"
+					  show-accept="{{showAccept}}" show-cancel="{{showCancel}}" show-refresh="{{showRefresh}}" 
+					  accept-tooltip="{{acceptTooltip}}" cancel-tooltip="{{cancelTooltip}}" refresh-tooltip="{{refreshTooltip}}">
+			<ad-tail-view id="tailView" model="{{model}}" model-modified="{{modelModified}}" directory="{{directory}}"></ad-tail-view>
+		</ad-sidepanel>
+	</template>
+  	<script src="ad-tail-sidepanel.js"></script>
+</dom-module>

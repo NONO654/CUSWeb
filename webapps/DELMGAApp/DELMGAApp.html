@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+ <!-- Copyright 2016 , Dassault Systemes. All rights reserved. -->
+	<head>
+
+	    <title>Process Management</title>
+
+		<!-- Application Metas Start -->
+
+	    <meta name="description" content="Manufactured Process Management Widget" />
+	    <meta name="keywords" content="MGA" />
+	    <meta name="property" content="3DS" />
+	    <meta name="author" content="Dassault Systèmes" />
+	    <meta name="autoRefresh" content="0" />
+	    <meta charset="UTF-8" />
+
+		<!-- Application Metas End -->
+
+
+		<!-- Application JS Start -->
+		<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+		<!-- UWA -->
+	 	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	 	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+
+	    <script >
+		   /* global widget */
+		   ( function () {
+	            'use strict';
+
+	            require(['DS/DELMGAApp/App'], function(App){
+                var _App = new App();
+	            	widget.addEvent('onLoad', _App.onLoad);
+                widget.addEvent('onRefresh', _App.onRefresh);
+                widget.addEvent('onResize',  _App.onResize);
+                widget.addEvent('onSearch',  _App.onSearch);
+                widget.addEvent('onEdit', _App.onEdit);
+      		      widget.addEvent('endEdit', _App.onEndEdit);
+
+	            } )
+		   	}() ) ;
+	    </script>
+		<!-- Application JS End -->
+
+	</head>
+
+	<body oncontextmenu="return false;">
+	</body>
+
+</html>

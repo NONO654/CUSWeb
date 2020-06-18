@@ -1,0 +1,106 @@
+<!-- ------------------------------------------------------------------
+[xs-property-inspector HTML Document]
+
+Project:		xs
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:46:08 GMT
+Assigned to:	Vijaya Lakshmi Kantamneni
+Primary use:	TODO: Write where this component is being used
+Description:    TODO: Description about the component
+------------------------------------------------------------------- -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+<link rel="import" href="../xs-process-browser/xs-process-browser.html">
+<link rel="import" href="../xs-rule-interface/xs-rule-interface.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="xs-property-inspector-style.html">
+
+<dom-module id="xs-property-inspector">
+	<template>
+		<style include="xs-property-inspector-style"></style>
+
+		<sp-search id="objectSearch"  multi-select="false" on-change="onPropertySearch"></sp-search>
+		<template is="dom-if" if="{{!item}}">
+			<div>
+				<content></content>
+			</div>
+		</template>
+		<template is="dom-if" if="{{item}}">
+			<div class$="{{_computeClass(hideName)}}">
+				<h4 class="widget-tag-name">{{item.meta.caption}}</h4>
+				<!-- Name property -->
+				<div class="property-row">
+					<label class="label-container">Name</label>
+					<sp-input id="nameRow" readonly value="{{item.name}}" class$="{{_computeClass2(hasNameError)}}"></sp-input>
+				</div>
+				<template id="propIterator" is="dom-repeat" items="{{computeItemProps(item)}}" as="prop" indexAs="index">
+					<div data-prop$="{{prop.name}}" class$="{{_computeClass3(prop)}}">
+						<div class="label-container">
+							<label>{{prop.caption}}</label>
+							<span class="fonticon external-association" on-click="showExternalProperties" title="Show Properties"></span>
+							<span class="clear-association" on-click="onClearAssociation" title="Removes the association">Clear</span>
+						</div>
+						<div class$="{{_computeAssocClass(prop)}}">
+							<div class="property-editor">
+								<!-- If it does not have any choices -->
+								<!-- used restamp for I-->
+								<template is="dom-if" if="{{!prop.choices}}" restamp>
+									<sp-input id="{{_computeId(prop)}}" on-click="_onClick" class$="{{_computeClass4(prop)}}" placeholder="[[DEFAULTS.PLACEHOLDER]]" value="{{_prepareDisplayValue(prop)}}" readonly="{{_isForcedProp(prop,item,disabled,'true')}}" on-value-changed="_onPropValueChange" on-keypress="_onKeyPress"></sp-input>
+								</template>
+								<!-- If it has choices -->
+								<template is="dom-if" bind="" if="{{prop.choices}}" restamp>
+									<sp-input class="property-input js-input" placeholder="[[DEFAULTS.PLACEHOLDER]]" value="{{_prepareDisplayValue(prop)}}" data-js-display$="{{prop.name}}" readonly$="{{_isForcedProp(prop,item,disabled, 'true')}}"></sp-input>
+									<!-- FIXME: Can have a listener on the top to avoid listeners on each item -->
+									<div on-click="showChoice">
+										<div class="association-overlay visible-overlay" data-disabled$="{{_isForcedProp(prop, item, disabled, 'true')}}"></div>
+										<span class="dropdown-arrow" data-disabled$="{{_isForcedProp(prop, item, disabled, 'true')}}">&#9660;</span>
+									</div>
+									<div style="position:relative;">
+										<sp-dropdown-menu id="{{_computeId(prop)}}" class="dropdown-choice" data-js-prop$="{{prop.name}}" on-itemclick="_onChoiceChange">
+											<template is="dom-repeat" items="{{prop.choices}}" as="choice">
+												<sp-dropdown-menu-item label="{{choice}}" value="{{choice}}" labeltype="item"></sp-dropdown-menu-item>
+											</template>
+										</sp-dropdown-menu>
+									</div>
+								</template>
+								<div class="association-overlay" on-click="_onClick"></div>
+							</div>
+							<!-- Allow association -->
+							<button is="sp-button-type" id="{{_computeId2(prop)}}" class="associate-button" disabled$="{{_isForcedProp(prop, item)}}" on-click="onLaunchDatabrowser">...</button>
+
+							<template is="dom-if" if={{!prop.norules}}>
+								<button is="sp-button-type" id="{{_computeId2(prop)}}" class="rules-button" title="Add Rules" disabled$="{{_isForcedRuleProp(prop, item, disabled)}}" on-click="onLaunchRulesBuilder">
+									<div class="gear-text">&#9881;</div>
+								</button>
+							</template>
+						</div>
+					</div>
+				</template>
+				<!-- Hint property if a UI element chooses to expose it-->
+				<template is="dom-if" bind="" if="{{!item.meta.nohint}}">
+					<div class="property-row">
+						<label class="label-container">Hint</label>
+						<textarea id="hintRow" class="property-row-hint-input form-control" value="{{item.hint::input}}" disabled$="{{disabled}}"></textarea>
+					</div>
+				</template>
+			</div>
+		</template>
+		<!--Process browser that facilitates association of property to process data-->
+		<xs-process-browser id="processbrowser" disabled="{{disabled}}"></xs-process-browser>
+		<xs-rule-interface id="ruleInterface" disabled="{{disabled}}"></xs-rule-interface>
+		<sp-modal id="removeRuleDialog" class="warning-dialog" width="500px" heading="Confirm Your Action">
+            <section id="dialogText">
+                <span>{{_msg}}</span>
+            </section>
+            <footer>
+                <button id="okButton" is="sp-button-type" on-click="confirmAction">Yes</button>
+                <button id="dismissButton" is="sp-button-type" primary="" on-click="hideRuleConfirmDialog">No</button>
+            </footer>
+        </sp-modal>
+	</template>
+	<script type="text/javascript" src="xs-property-inspector.js"></script>
+</dom-module>

@@ -1,0 +1,1 @@
+define("DS/i3DXCompassSynchro/i3DXCompassSynchro_zh",{});define("DS/i3DXCompassSynchro/assets/nls/i3DXCompassSynchro",{waiting:"我们正在处理事情，请稍候",logout:"使用其他 3DPassport 帐户",noInvitation:"您尚未受邀使用平台。请向平台管理员请求邀请。",noAccess:"您没有访问此 3DEXPERIENCE 平台的权限。",denied:"很抱歉，访问被拒绝。"});

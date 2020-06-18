@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="author" content="Dassault Systèmes" />
+    <meta name="description" content="widget" />
+	<meta name="brand" content="ENOVIA" />
+    <meta name="autoRefresh" content="0" />
+
+   	<title></title>
+	<link rel="icon" type="image/png" href="assets/icons/16/ENOVIA_WIDGET_Favicon.png"/>
+
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+    <!-- <script type="text/javascript" src="../UIKIT/UIKIT.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../common/styles/emxUIList.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../common/styles/emxUIDefault.css" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="../csmCentral/style/csStyle.css" /> -->
+
+    <!-- <script type="text/javascript" src="../WebUX/WebUX.js"></script> -->
+
+    <script>
+
+        // (function() { 
+        //     'use strict';
+
+            widget.addEvents({
+                
+                onLoad : function(event) {
+                    "use strict";
+                    // console.log( 'CompareWidget onLoad' );
+                    require([ 'DS/CompareWidget/CompareWidget' ], function(CompareWidget) {
+                       // console.log( 'CompareWidget onLoad inside' );
+
+                        CompareWidget.onLoad.call(null);
+                    }, function( error ) { console.log( 'requirejs error', error ); });
+                },
+                
+                onViewChange : function(event) {
+                    "use strict";
+                    // console.log( 'CompareWidget onViewChange' );
+                    require([ 'DS/CompareWidget/CompareWidget' ], function (CompareWidget) {
+                        CompareWidget.onViewChange.call(null, event);  
+                    });
+                },
+
+                onRefresh : function(event) {
+                    "use strict";
+                   //  console.log( 'CompareWidget onRefresh' );
+                    require([ 'DS/CompareWidget/CompareWidget' ], function (CompareWidget) {
+                        CompareWidget.onRefresh.call(null, event);  
+                        //CompareWidget.onLoad.call(null);			
+                    });
+                },
+                
+                onResize : function(event) {
+                    "use strict";
+                    // console.log( 'CompareWidget onResize' );
+                    require([ 'DS/CompareWidget/CompareWidget' ], function (CompareWidget) {
+                        CompareWidget.onResize.call(null, arguments);
+                    });
+                    //require('DS/CompareWidget/CompareWidget').onResize.call(null, arguments);
+                },
+                
+                // onStorageChange : function() {
+                //     require('DS/CompareWidget/CompareWidget').onStorageChange.apply(null, arguments);
+                // },
+
+                onEdit : function(event) {
+                    "use strict";
+                    // console.log( 'CompareWidget onEdit' );
+                    require([ 'DS/CompareWidget/CompareWidget' ], function (CompareWidget) {
+                        CompareWidget.onEdit.apply(null, arguments);
+                    });
+                    //require('DS/CompareWidget/CompareWidget').onEdit.apply(null, arguments);
+                },
+
+                endEdit : function(event) {
+                    "use strict";
+                    // console.log( 'CompareWidget endEdit' );
+                    require([ 'DS/CompareWidget/CompareWidget' ], function (CompareWidget) {
+                        CompareWidget.endEdit.apply(null, arguments);
+                    });
+                    //require('DS/CompareWidget/CompareWidget').endEdit.apply(null, arguments);
+                }
+            });
+
+        // })();
+
+    </script>
+
+</head>
+<body></body>
+</html>

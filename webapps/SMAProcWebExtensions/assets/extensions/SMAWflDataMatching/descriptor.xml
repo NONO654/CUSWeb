@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.smaexe.adapter.datamatching" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflDataMatching" nlsID="dispname">Data Matching</DisplayName>
+	<Description nlsFile="SMAWflDataMatching" nlsID="desc">Create new Data Matching</Description>
+	<LongDescription nlsFile="SMAWflDataMatching" nlsID="longdesc">Create new Data Matching</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.smaexe.adapter.datamatching</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>1200</Value>
+			<Value>700</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="I_SMAWflDataMatching16.png" targetFilename="small/I_SMAWflDataMatching16.png" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflDataMatching.png" targetFilename="large/I_SMAWflDataMatching.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflDataMatching.CATNls" targetFilename="SMAWflDataMatching.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflDataMatching_Japanese.CATNls" targetFilename="SMAWflDataMatching_Japanese.CATNls" locale="Japanese" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflDataMatching.dll" targetFilename="win_b64/SMAWflDataMatching.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflDataMatching.sypstyle" targetFilename="SMAWflDataMatching.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflDataMatchingEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflDataMatchingHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<!--<Property name="plugin_order" type="string" valuetype="array" arraydim="[1]" sizable="true">
+    </Property>
+    <Property name="plugin_state" type="int" valuetype="array" arraydim="[1]" sizable="true">
+    </Property>-->
+		<Property name = "ScalarParameters" type="string" valuetype="single">
+			<Value>504B0304140008080800CA70B64400000000000000000000000003000000786D6CB3B1AFC8CD51284B2D2ACECCCFB35532D433505248CD4BCE4FC9CC4BB7552A2D49D3B550B2B7E3B249CB2C482D8A0F4B2CCA4C4CCA492D068AE8A30B0100504B07081D3518053E0000004B000000504B01021400140008080800CA70B6441D3518053E0000004B000000030000000000000000000000000000000000786D6C504B05060000000001000100310000006F0000000000</Value>
+		</Property>
+		<Property name = "ArrayParameters" type="string" valuetype="single">
+			<Value>504B0304140008080800CA70B64400000000000000000000000003000000786D6CB3B1AFC8CD51284B2D2ACECCCFB35532D433505248CD4BCE4FC9CC4BB7552A2D49D3B550B2B7E3B249CB2C482D8A0F4B2CCA4C4CCA492D068AE8A30B0100504B07081D3518053E0000004B000000504B01021400140008080800CA70B6441D3518053E0000004B000000030000000000000000000000000000000000786D6C504B05060000000001000100310000006F0000000000</Value>
+		</Property>
+		<Property name="GeneralProperties_NameValues" type="aggregate" valuetype="single">
+			<Property name="interpolationType" type="string" valuetype="single">
+				<Value>SIMULATION</Value>
+			</Property>
+			<Property name="hasTarget" type="boolean" valuetype="single">
+				<Value>true</Value>
+			</Property>
+		</Property>
+		<Property arraydim="[0]" name="Target_Values" valuetype="array" type="string"/>   
+		<Property name="customFunctionData" type="string" valuetype="single">
+			<Value/>
+		</Property>
+	</Properties>
+</wfext:Extension>

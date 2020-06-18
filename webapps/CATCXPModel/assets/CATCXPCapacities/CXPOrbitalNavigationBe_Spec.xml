@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IdeaExperienceCapacities>
+	<Header>
+		<Version>0.1</Version>
+	</Header>
+
+  <ExperienceObject>
+
+    <CXPService id="goTo" mode="task" fctStart="goTo" >
+      <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec;CXP3DActorOverride_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="go to" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPFunction id="isGoingTo" body="isGoingTo" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPointActor_Spec" />
+      <NaturalLanguageInfo capacityType="SensorState" alias="focus on" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPFunction>
+
+    <CXPEvent id="NavHasReachedEvent" targetParam="targetPoint">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPointActor_Spec"/>
+      <NaturalLanguageInfo capacityType="SensorEvent" alias="has Reached" icon="icons/caps/I_CXPMoveComplete.png" exposedVariable="target"/>
+    </CXPEvent>
+
+    <!--
+    <CXPService id="moveAround" mode="task" fctStart="startMoveAround" fctStop="stopMoveAround" fctIsPlaying="isMovingAround" >
+      <NaturalLanguageInfo capacityType="DriverTask" alias="move around" icon="icons/caps/I_CXPMovingAroundStart.png"/>
+    </CXPService>
+    -->
+
+    <CXPFunction id="startMoveAround" body="startMoveAround" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="DriverState" alias="starts move around" icon="icons/caps/I_CXPMovingAroundStart.png"/>
+    </CXPFunction>
+
+    <CXPFunction id="stopMoveAround" body="stopMoveAround" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="DriverState" alias="stops move around" icon="icons/caps/I_CXPMovingAroundStop.png"/>
+    </CXPFunction>
+
+    <CXPFunction id="isMovingAround" body="isMovingAround" returnValue="Boolean">
+      <NaturalLanguageInfo capacityType="SensorState" alias="is moving around" icon="icons/caps/I_CXPMovingAroundStart.png"/>
+    </CXPFunction>
+
+    <CXPService id="focusOn" mode="task" fctStart="focusOn" >
+      <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec;CXP3DActorOverride_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="focus on" icon="icons/caps/I_CXPFocus.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPFunction id="isFocusingOn" body="isFocusingOn" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPointActor_Spec" />
+      <NaturalLanguageInfo capacityType="SensorState" alias="is focusing on" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPFunction>
+
+
+  </ExperienceObject>
+</IdeaExperienceCapacities>

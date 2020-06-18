@@ -1,0 +1,43 @@
+<!--------------------------------------------------------------------
+[xs-components HTML Document]
+    Project:    xs
+    Version:    1.0
+  Primary use:  TODO: Write where this component is being used
+Description:    TODO: Description about the component
+------------------------------------------------------------------- -->
+
+<link rel="import" href="../../SMAProcSP/sp-font/sp-entypo.html" async>
+<link rel="import" href="xs-components-style.html" async>
+
+<dom-module id="xs-components">
+
+  <template>
+    <style include="xs-components-style"></style>
+    <div class="category-container">
+      <template id="catList" is="dom-repeat" items="{{categories}}" as="category">
+        <div class="category active" data-cat-id$="[[category.id]]">
+          
+          <div class="category-header" on-click="toogleCollapse">
+            <span>{{category.label}}</span>
+            <div class="left-arrow fonticon fonticon-right-dir"></div>
+            <div class="down-arrow fonticon fonticon-down-dir"></div>
+          </div>
+       
+          <div class="widget-container">
+            <template is="dom-repeat" items="{{category.widgetlist}}">
+                <div class="widget" draggable="{{_computeDraggable(disabled)}}" on-dragstart="onDragStart" on-click="onToolClick">    
+                    <div class="caption" title$="{{item.title}}">
+                      <span class$="{{_computeClass(item.tagName)}}"></span>
+                      <div>{{item.caption}}</div>
+                    </div>
+                </div>  
+            </template>
+          </div>
+
+        </div>
+      </template>
+    </div>
+
+  </template>
+  <script type="text/javascript" src="xs-components.js"></script>
+</dom-module>

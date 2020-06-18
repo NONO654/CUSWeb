@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta name="author" content="P8D" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Group view</title>
+
+<!-- Definition of require : -->
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+<!-- This is required to configure RequireJS with the appropriate pathes : -->
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+
+<!-- Web Fundamentals -->
+<script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+<script>
+
+	
+	require(['UWA/Drivers/Alone','DS/InstantMessaging/js/view/NRTListOfGroupView'], function (UWA, NRTListOfGroupView ) {
+
+		var globalView = UWA.createElement('div', {
+			styles: {
+				width: '264px',
+				height: '400px',
+				bottom: '5px',
+				right: '60px',
+				border: '1px solid grey',
+				position: 'fixed'
+			}
+
+		}).inject(document.body);
+
+		var opt = {
+			isMinimize : false,
+        	activeNoeLementView : false,
+        	events: {
+        		click:function(listOfGroup){
+        			var parent = listOfGroup.globalView.parentNode;
+					var width = parent.offsetWidth - 6;
+					var height = parent.offsetHeight;
+
+					var fx = new UWA.Fx(listOfGroup.globalView,{
+						duration : 300,
+						transition: 'linear'
+					});
+					fx.start({width:width,height:height});
+
+        		}
+        	}
+		};
+
+		var list = new NRTListOfGroupView(opt);
+		var listView = list.getView();
+		listView.inject(globalView);
+
+		opt = {
+			isMinimize : true,
+        	activeNoeLementView : false
+		};
+
+		for (var i = 0 ; i < 35 ; i++)
+		{
+			var group = new NRTListOfGroupView(opt);
+			list.addElement(group.getView());
+		}
+	});
+
+
+</script>
+</head>
+<body>
+
+
+</body>
+</html>

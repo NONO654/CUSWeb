@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+    <Template syp:name="SaveHeaders" Target="CATCmdHeadersList">
+        <CATCmdHeadersList>
+
+	            <!-- View CMDs -->
+            <CATCommandHeader ID="idFilterCmd" ClassName="DS/ENOXCAD_Save/controllers/XCAD_FilterCmd" ResourceFile="ENOXCAD_Save/myDAFRFile" Behavior="CATAfrHeaderCheck" Available="1" />
+	        <CATCommandHeader ID="idActiveDoc" ClassName="DS/ENOXCAD_Save/controllers/XCAD_ChangeSaveScopeCmd" ResourceFile="ENOXCAD_Save/myDAFRFile" Available="1" />
+            <CATCommandHeader ID="idCurrentEditor" ClassName="DS/ENOXCAD_Save/controllers/XCAD_ChangeSaveScopeCmd" ResourceFile="ENOXCAD_Save/myDAFRFile" Available="1" />
+            <CATCommandHeader ID="idSession" ClassName="DS/ENOXCAD_Save/controllers/XCAD_ChangeSaveScopeCmd" ResourceFile="ENOXCAD_Save/myDAFRFile" Available="1" />
+            <CATCommandHeader ID="ENOUPSToggleRightPanelCmd" ClassName="DS/ENOXCAD_Save/controllers/XCAD_ToggleRightPanelCmd" ResourceFile="ENOXCAD_Save/myDAFRFile" Behavior="CATAfrHeaderCheck" Available="0" />
+            
+    	        <!-- Lifecycle CMDs -->
+            <CATCommandHeader ID="ENOUPSReserveCmd" ClassName="DS/ENOXCAD_Save/controllers/XCAD_ReserveCmd" ResourceFile="ENOXCAD_Save/myDAFRFile" Available="1"/>
+            <CATCommandHeader ID="ENOUPSUnReserveCmd" ClassName="DS/ENOXCAD_Save/controllers/XCAD_UnReserveCmd" ResourceFile="ENOXCAD_Save/myDAFRFile" Available="1"/>
+
+        	    <!-- Tools CMDs -->
+            <CATCommandHeader ID="idNewRevCmd" ClassName="DS/ENOXCAD_Save/controllers/XCAD_NewRevCmd" ResourceFile="ENOXCAD_Save/myDAFRFile" Available="0" />
+            <CATCommandHeader ID="idSaveAsNewCmd" ClassName="DS/ENOXCAD_Save/controllers/XCAD_SaveAsNewCmd" ResourceFile="ENOXCAD_Save/myDAFRFile" Available="0" />
+            <CATCommandHeader ID="idNewFileNameCmd" ClassName="DS/ENOXCAD_Save/controllers/XCAD_NewFileNameCmd" ResourceFile="ENOXCAD_Save/myDAFRFile"  Behavior="CATAfrHeaderCheck" Available="0" />
+            <CATCommandHeader ID="ENOUPSSetDerivedOutputCmd" ClassName="DS/ENOXCAD_Save/controllers/XCAD_SetDerivedOutputCmd" ResourceFile="ENOXCAD_Save/myDAFRFile" Behavior="CATAfrHeaderCheck" Available="0" />
+
+        </CATCmdHeadersList>
+    </Template>
+
+    <Template syp:name="SaveHeaders" Target="CATCmdWorkbench">
+        <CATCmdWorkbench Name="3DSHAREWorkbench">
+
+            <CATCmdContainer Name="View" Visibility="1" RepresentationType="AfrActionBarSection">
+            
+                <CATCmdStarter Name="idFilterCmd" Command="idFilterCmd" />
+
+                <CATCmdContainer Name="SaveScope" Visibility="1" RepresentationType="AfrActionBarDropDown">
+                    <CATCmdStarter Name="idActiveDoc" Command="idActiveDoc" />
+                    <CATCmdStarter Name="idCurrentEditor" Command="idCurrentEditor" />
+                    <CATCmdStarter Name="idSession" Command="idSession" />
+                </CATCmdContainer>
+                
+                <CATCmdStarter Name="ENOUPSToggleRightPanelCmd" Command="ENOUPSToggleRightPanelCmd" />
+                
+            </CATCmdContainer>
+
+            <CATCmdContainer Name="Lifecycle" Visibility="1" RepresentationType="AfrActionBarSection">
+                <CATCmdStarter Name="ENOUPSReserveCmd" Command="ENOUPSReserveCmd" />   
+                <CATCmdStarter Name="ENOUPSUnReserveCmd" Command="ENOUPSUnReserveCmd" />               
+            </CATCmdContainer>
+
+            <CATCmdContainer Name="Tools" Visibility="1" RepresentationType="AfrActionBarSection">
+                <CATCmdStarter Name="idNewRevCmd" Command="idNewRevCmd" />   
+                <CATCmdSeparator Name="BasicManip_Separator" />
+                <CATCmdStarter Name="idSaveAsNewCmd" Command="idSaveAsNewCmd" />
+                <CATCmdStarter Name="idNewFileNameCmd" Command="idNewFileNameCmd" />
+                <CATCmdStarter Name="ENOUPSSetDerivedOutputCmd" Command="ENOUPSSetDerivedOutputCmd" />
+            </CATCmdContainer>
+
+        </CATCmdWorkbench>
+    </Template>
+
+</Styles>

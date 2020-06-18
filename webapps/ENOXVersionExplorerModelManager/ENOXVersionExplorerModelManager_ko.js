@@ -1,0 +1,1 @@
+define("DS/ENOXVersionExplorerModelManager/ENOXVersionExplorerModelManager_ko",{});define("DS/ENOXVersionExplorerModelManager/assets/nls/SemanticRelationships",{X_MODEL:{E:"전개",F:"고정",S:"스터디",B:"브랜치",SP:"분할"},P_PRIME:{E:"전개",F:"고정",S:"스터디",SO:"스핀오프",SP:"분할",I:"통합"}});

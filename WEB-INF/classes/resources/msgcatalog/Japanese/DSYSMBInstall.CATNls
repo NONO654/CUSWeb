@@ -1,0 +1,192 @@
+<meta charset="UTF-8"/>
+//---------------------------------------------------------------------------
+// Check_SMBECCusto
+//---------------------------------------------------------------------------
+Check_SMBECCusto.Title="チーム エンジニアリングのための EC パーツのカスタマイズ";
+Check_SMBECCusto.Label1="チェックボックスを選択または選択解除して、EC パーツのカスタマイズをインストールするかどうかを指定します";
+Check_SMBECCusto.Resume="チーム エンジニアリングのための EC パーツのカスタマイズをインストールしてください: /P1";
+InstallSMBECCusto="EC パーツのカスタマイズ";
+
+//---------------------------------------------------------------------------
+//  SMB Server Products Selection => PRF Only w/o TES configuration selected
+//---------------------------------------------------------------------------
+TESnotSelected.Title="警告";
+TESnotSelected.Text="選択した製品は TES がないとインストールできません。TES も選択してください";
+TESnotSelected.ok="OK";
+
+//---------------------------------------------------------------------------
+//  SMB Server Products Selection => PRF Only w/o MIS product selected
+//---------------------------------------------------------------------------
+PRFnotSelected.Title="警告";
+PRFnotSelected.Text="選択した製品 MIS は PRF がないとインストールできません。PRF も選択してください";
+PRFnotSelected.ok="OK";
+
+//---------------------------------------------------------------------------
+//  ALL IN ONE INSTALLER HIGH END
+//---------------------------------------------------------------------------
+CPFOnly.Title="警告";
+CPFOnly.Text="CPF 構成が選択されている必要があります。CPF を選択してください。";
+CPFOnly.ok="OK";
+
+Check_InstallTomcat.Title="Apache Tomcat アプリケーション サーバーのインストール";
+Check_InstallTomcat.Label1="Tomcat アプリケーション サーバーをインストールして ENOVIA Web アプリケーションをデプロイするには、このチェック ボックスを選択します";
+Check_InstallTomcat.Resume.true="Tomcat のインストールを選択: はい";
+Check_InstallTomcat.Resume.false="Tomcat のインストールを選択: いいえ";
+Check_InstallTomcat.CheckButton="Tomcat アプリケーション サーバーをインストールします。接続ポートを選択してください:";
+
+Check_BuildJ2EEArchive.Title="J2EE アーカイブの構築と Tomcat のインストール";
+Check_BuildJ2EEArchive.Label1="J2EE アーカイブ (.war と .ear) をビルドするにはチェック ボックスを選択します";
+Check_BuildJ2EEArchive.Resume.true="J2EE アーカイブをビルド: はい";
+Check_BuildJ2EEArchive.Resume.false="J2EE アーカイブをビルド: いいえ";
+Check_BuildJ2EEArchive.CheckButton=".ear/.war ファイルをビルドします。Web アプリケーションの名前を入力してください:";
+
+Text_WebAppNameAllinOne.Title="J2EE アプリケーション名の定義";
+//Text_WebAppNameAllinOne.Label1 = "Please enter the name of the web application"; 
+Text_WebAppNameAllinOne.Resume="Web アプリケーション名: /p1";
+
+TomcatSelectedButNoWarFiles.Title="不整合な選択";
+TomcatSelectedButNoWarFiles.Text="TomEE でアプリケーションをデプロイする場合は、'build .war' オプションを選択してください。";
+
+Port_tomcaAllinOne.Title="Tomcat 接続ポート番号";
+//Port_tomcaAllinOne.Label1 = "Please define the Tomcat connection port number:";  
+Text_Port_tomcaAllinOne.Resume="Tomcat 接続ポート: /P1";
+
+Text_SuperUserNameAllInOne.Title="スーパー ユーザーの定義、J2EE アーカイブのビルド、および Tomcat のインストール";
+Text_SuperUserNameAllInOne.Label1="ビジネスおよびシステムの両方の管理特権を持つユーザーの名前を指定してください";
+Text_SuperUserNameAllInOne.Resume="スーパー ユーザー名: /P1";
+
+Text_SuperUserPasswordAllInOne.Label1="ビジネスおよびシステムの両方の管理特権を持つユーザーのパスワードを指定してください";
+
+Check_SMBProgramCentralCusto.Title="One Click Program Central Customization のセットアップ";
+Check_SMBProgramCentralCusto.Label1="One Click Program Central Customization をインストール";
+Check_SMBProgramCentralCusto.Resume="One Click Program Central Customization をインストール: /P1";
+
+X3DCSMA_previousInstallDetected.Title="既存のインストールが検出されました";
+X3DCSMA_previousInstallDetected.Text="既存のインストールが検出されました。\nこのインストーラは、新規インストールの場合にのみ使用してください";
+
+X3DCSMA_cmdToUpdateDB.Title="データベースの更新";
+X3DCSMA_cmdToUpdateDB.Text="次のコマンドを MQL プロンプトで実行して、データベースを更新してください:\n  MQL<1>set context user creator;\n  MQL<2>run <server_installation_path>/Apps/install3DSpaceV6R2015x.tcl;\n";
+
+X3DCSMA_failure_registration_3DPassport.Title="3DPassport に 3DSpace を登録";
+X3DCSMA_failure_registration_3DPassport.Text="次のスクリプトを実行して、3DPassport に 3DSpace を登録してください:\n<server>/<os>/code/command/3DSpaceRegistrationIn3DPassport.[sh|bat]\nこのスクリプトを実行する前に、3DPassport が実行中であることを確認してください。";
+
+passportRegistration.ExecuteAppli="3DPassport に 3DSpace を登録中...";
+
+X3DCSMA_cmdToUpdateDBscript.Title="データベースの更新";
+X3DCSMA_cmdToUpdateDBscript.Text="次のスクリプトを実行して、データベースを更新してください:\n   <server_installation_path>/Apps/install3DSpaceR2019x[.sh|.bat];\n";
+
+certificates_repository.Title="証明書の場所";
+certificates_repository.Label1="証明書の場所を選択してください";
+certificates_repository.Label2="(空のままにした場合は、keytool ユーティリティを使用して手動で証明書をインポートする必要があります)";
+certificates_repository.Resume="証明書の場所: /P1";
+
+certificates_import_error.Title="証明書インポート エラー";
+certificates_import_error.Text="少なくとも 1 つの証明書がインポートされませんでした。詳細については、次の中にある INFO_import_certs.log ファイルを確認してください: \n/P1";
+
+X3DCSMA_SXI_postinstall.Title="全文検索構成ステップ";
+X3DCSMA_SXI_postinstall.Label1="3DSpace をインストールした後にインデックス付けを設定して開始するには、チェック ボックスを選択します";
+X3DCSMA_SXI_postinstall.Label2="他のアプリケーションをインストールする必要がある場合はチェック マークを付けないでください。";
+X3DCSMA_SXI_postinstall.CheckButton="3DSpace をインストールした直後に全文検索インデックス付けを構成して開始する";
+X3DCSMA_SXI_postinstall.Resume.true="全文検索構成ステップ: はい";
+X3DCSMA_SXI_postinstall.Resume.false="全文検索構成ステップ: いいえ";
+
+SXI_baseline_indexation.ExecuteAppli="検索インデックス付けを構成しています...　";
+
+
+//---------------------------------------------------------------------------
+// VPLMCentralAdminUser
+//---------------------------------------------------------------------------
+X3DCSMA_administor_name.Title="管理者の定義";
+X3DCSMA_administor_name.Label1="管理者名: ";
+X3DCSMA_administor_name.Resume="管理者名: /p1";
+
+//---------------------------------------------------------------------------
+// VPLMCentralAdminPwd
+//---------------------------------------------------------------------------
+X3DCSMA_administor_password.Title="管理者パスワード:";
+X3DCSMA_administor_password.Label1="管理者ユーザーが作成されます: admin_platform";
+X3DCSMA_administor_password.Label2="管理者パスワード:";
+
+X3DCSMA_slashvar_notwritable="インストールでは /var/DassaultSystemes/ にフォルダーを作成する必要があります。インストールを開始する前に、このフォルダーが存在することを確認してください";
+
+//---------------------------------------------------------------------------
+// Text_SuperUserName
+//---------------------------------------------------------------------------
+X3DCSMA_creator_name.Title="スーパーユーザー//パスワード";
+X3DCSMA_creator_name.Label1="ビジネスおよびシステムの両方の管理特権を持つユーザーの名前を指定してください";
+X3DCSMA_creator_name.Resume="スーパー ユーザー名: /p1";
+
+//---------------------------------------------------------------------------
+// Text_SuperUserPwd
+//---------------------------------------------------------------------------
+X3DCSMA_creator_password.Title="スーパーユーザー//パスワード";
+X3DCSMA_creator_password.Label1="ビジネスおよびシステムの両方の管理特権を持つユーザーのパスワードを指定してください";
+
+X3DCSMA_CheckCredentialsFailed.Title="認証エラー";
+X3DCSMA_CheckCredentialsFailed.Text="接続しようとして次のエラーが報告されました:\n\n/P1";
+
+X3DCSMA_upgradefailed.Title="MQL エラー";
+X3DCSMA_upgradefailed.Label1="MQL>upgrade コマンドの実行中にエラーが発生しました:\n/P1";
+X3DCSMA_upgradefailed.ExecuteAppli="MQL>upgrade コマンドを実行中...";
+
+//---------------------------------------------------------------------------
+// Reconfiguration Change creator's password
+//---------------------------------------------------------------------------
+BOOL_ChangeCreatorPassword.Title="スーパー ユーザー (creator) のパスワードを変更";
+BOOL_ChangeCreatorPassword.CheckButton="スーパー ユーザー (creator) のパスワードを変更しますか?";
+BOOL_ChangeCreatorPassword.Resume.true="スーパー ユーザーのパスワードを変更する: はい";
+BOOL_ChangeCreatorPassword.Resume.false="スーパー ユーザーのパスワードを変更する: いいえ";
+
+
+X3DCSMA_creator_old_password.Title="スーパー ユーザー (creator) の旧パスワード";
+X3DCSMA_creator_old_password.Label1="スーパー ユーザー (creator) の旧パスワード";
+X3DCSMA_creator_new_password.Title="スーパー ユーザー (creator) の新パスワード";
+X3DCSMA_creator_new_password.Label1="スーパー ユーザー (creator) の新パスワード";
+
+//---------------------------------------------------------------------------
+// Reconfiguration Change passwords
+//--------------------------------------------------------------------------- 
+BOOL_ChangeAdministratorPassword.Title="プラットフォーム管理者 (admin_platform) のパスワードを変更";
+BOOL_ChangeAdministratorPassword.CheckButton="プラットフォーム管理者 (admin_platform) のパスワードを変更しますか?";
+BOOL_ChangeAdministratorPassword.Resume.true="プラットフォーム管理者のパスワードを変更する: はい";
+BOOL_ChangeAdministratorPassword.Resume.false="プラットフォーム管理者のパスワードを変更する: いいえ";
+
+
+X3DCSMA_admin_platform_old_password.Title="プラットフォーム管理者の旧パスワード:";
+X3DCSMA_admin_platform_old_password.Label1="プラットフォーム管理者の旧パスワード:";
+X3DCSMA_admin_platform_new_password.Title="プラットフォーム管理者の新パスワード:";
+X3DCSMA_admin_platform_new_password.Label1="プラットフォーム管理者の新パスワード:";
+
+//---------------------------------------------------------------------------
+// Reconfiguration Error changing password
+//--------------------------------------------------------------------------- 
+changePasswordFailed.Title="パスワード変更中のエラー";
+changePasswordFailed.Text="パスワードの変更時に次のエラーが検出されました:\n/p1";
+
+//---------------------------------------------------------------------------
+// Reconfig Store path
+//---------------------------------------------------------------------------
+BOOL_ChangeStorePath.Title="ストア パスを変更";
+BOOL_ChangeStorePath.CheckButton="ストア パスを変更しますか?";
+BOOL_ChangeStorePath.Resume.true="ストア パスを変更する: はい";
+BOOL_ChangeStorePath.Resume.false="ストア パスを変更する: いいえ";
+
+//---------------------------------------------------------------------------
+// Reconfiguration Update Store fcurl
+//--------------------------------------------------------------------------- 
+changePasswordFailed.Title="ストアの fcsurl を変更するときにエラーが発生しました";
+changePasswordFailed.Text="ストアの fcsurl の変更時に次のエラーが検出されました:\n/p1";
+
+//---------------------------------------------------------------------------
+// Reconfiguration check creator password
+//--------------------------------------------------------------------------- 
+ConnectionSuperUserFailed.Title="接続エラー";
+ConnectionSuperUserFailed.Text="接続試行時に次のエラーが検出されました:\n/p1";
+
+//---------------------------------------------------------------------------
+// check execution of inspectdb
+//--------------------------------------------------------------------------- 
+inspectDBKO.Title="mql コマンドの実行エラー";
+inspectDBKO.Text="MQL>list コマンドの実行中にエラーが検出されました\n詳しくはログ ファイルを参照してください:\n/P1";
+inspectDBKO.ok="OK";
+inspectDBKO.quit="終了";

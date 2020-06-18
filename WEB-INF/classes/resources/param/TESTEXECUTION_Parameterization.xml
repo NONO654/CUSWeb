@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<OOTBParameterization regSuite="ProductLine">
+<Domain id="LifecycleTopology">
+		<Family id="TestExecution" collabApps="StrategicCustomerRelationship">
+			<Constant id="policyID" value="Test Execution"/>
+			<Constant id="modifyTopology" value="true"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="appType" value="CBP"/>
+			<Constant id="NLSStateFileName" value="emxProductLineStringResource.properties"/>
+			<Constant id="lang" value="en,fr"/>
+
+			<GovernedType id="TestExecution">
+				<Constant id="typeId" value="Test Execution"/>
+				<Constant id="supportedRules" value="RejectOnExperimenter,RejectOnCreator,RejectOnStandardData"/>
+			</GovernedType>
+
+			<State id="Create">
+				<Constant id="sysName" value="Create"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxProductLine.State.Create"/>
+			</State>
+			<State id="InProgress">
+				<Constant id="sysName" value="InProgress"/>
+				<Constant id="isRemovable" value="true"/>
+				<Constant id="NLSKey" value="emxProductLine.State.InProgress"/>
+			</State>
+			<State id="Review">
+				<Constant id="sysName" value="Review"/>
+				<Constant id="isRemovable" value="true"/>
+				<Constant id="NLSKey" value="emxProductLine.State.Review"/>
+			</State>
+			<State id="Complete">
+				<Constant id="sysName" value="Complete"/>
+				<Constant id="isRemovable" value="true"/>
+				<Constant id="NLSKey" value="emxProductLine.State.Complete"/>
+			</State>
+			
+			<Transition id="CreatetoInProgress">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Create"/>
+				<Constant id="targetState" value="InProgress"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="InProgresstoReview">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="InProgress"/>
+				<Constant id="targetState" value="Review"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="ReviewtoComplete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Review"/>
+				<Constant id="targetState" value="Complete"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+		</Family>
+	</Domain>
+</OOTBParameterization>
+
+

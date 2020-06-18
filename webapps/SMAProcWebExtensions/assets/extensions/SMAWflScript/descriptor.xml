@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.Script" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflScript" nlsID="dispname">Script</DisplayName>
+	<Description nlsFile="SMAWflScript" nlsID="desc">Executes a user-defined Java script</Description>
+	<LongDescription nlsFile="SMAWflScript" nlsID="longdesc">Executes Java or Python code in your workflow. This tool can be used to perform calculations that are too complex for the Calculator tool, such as those involving loops or conditional statements.</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.component.Script</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>700</Value>
+			<Value>500</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAWflScript16.gif" targetFilename="SMAWflScript16.gif" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflScript.png" targetFilename="large/I_SMAWflScript.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflScript.CATNls" targetFilename="SMAWflScript.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflScript_Japanese.CATNls" targetFilename="SMAWflScript_ja.CATNls" locale="Japanese" />
+		<Stream name="Properties" streamKind="properties" sourceFilename="SMAWflScript_CATNls.properties" targetFilename="SMAWflScript.properties"/>
+		<Stream name="Properties_Japanese" streamKind="properties" sourceFilename="SMAWflScript_JapaneseCATNls.properties" targetFilename="SMAWflScript_ja.properties" locale="Japanese" />
+		<Stream name="CodeJar" streamKind="jar" sharedLoader="false" sourceFilename="SMAWflScript.jar" targetFilename="SMAWflScript.jar" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflScript.dll" targetFilename="win_b64/SMAWflScript.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflScriptUI.sypstyle" targetFilename="SMAWflScriptUI.sypstyle"/>
+		<Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+		<Stream name="Web_Editor" streamKind="module" sharedLoader="false" platform="win_b64" sourceFilename="/webapps/SMAProcWebScript/cmp-script.js" targetFilename=""/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflScriptEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation language="java">
+					<Class>com.engineous.component.Script.ScriptEditor</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.component.Script.ScriptHandler</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflScriptHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-script</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+	<Properties>
+		<Property name="script" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+	</Properties>
+
+</wfext:Extension>

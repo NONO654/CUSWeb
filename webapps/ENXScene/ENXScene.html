@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+
+      <!-- Application Metas -->
+      <title>3D Explore Structure</title>
+      <meta name="author" content="Dassault Systèmes" />
+      <meta name="brand" content="ENOVIA" />
+      <meta name="autoRefresh" content="0" />
+      <meta name="description" content="ENOVIA 3D Explore Structure" />
+      <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+      <link rel="stylesheet" type="text/css" href="../Core/wux.css" />
+
+      <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+      <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+      <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+      <script type="text/javascript" src="../etree/etree.js"></script>
+      <script type="text/javascript" src="../egraph/egraph.js"></script>
+      <script type="text/javascript" src="ENXScene.js"></script>
+      <script type="text/javascript" src="ENXSceneV2.js"></script>
+      <!-- To support Web In Win save preferences, we must define some of the preference inside the html - F81 specs -->
+      <widget:preferences>
+            <preference name="xscene_custo" type="hidden" defaultValue="null"></preference>
+            <preference name="xscene_root_pids" type="hidden" defaultValue="[]"></preference>
+            <preference name="xscene_root_pids_detached" type="hidden" defaultValue="[]"></preference>
+            <preference name="saved_filter_ids" type="hidden" defaultValue="[]"></preference>
+            <preference name="xscene_struture" type="hidden" defaultValue="null"></preference>
+            <preference name="storedObjectMgt" type="boolean" defaultValue="true" label="storedObjectMgt_label"></preference>
+            <preference name="xsceneStoredObjects" type="hidden" defaultValue="null"></preference>
+      </widget:preferences>
+      <!-- End preferences-->
+</head>
+
+<body>
+      <div class="spinner spinner-lg spinning fade in" style="transform: translate3d(0px, 0px, 0px); display: inline-block; margin-top: 20%; margin-left: 45%;">
+            <span class="spinner-bar"></span>
+            <span class="spinner-bar spinner-bar1"></span>
+            <span class="spinner-bar spinner-bar2"></span>
+            <span class="spinner-bar spinner-bar3"></span>
+      </div>
+</body>
+<!-- Application JavaScript Source -->
+<script type="text/javascript">
+      window.top.performance.mark('enxscene_load_html');
+      //<![CDATA[
+      /*global widget, require, define*/
+      require([
+            // UWA
+            'UWA/Core',
+            // WebApps
+            'DS/WebappsUtils/WebappsUtils'
+      ], function(UWACore,
+            WebappsUtils) {
+            'use strict';
+            var widgetDomain = null,
+                  getURLParameter = function(parameterName) {
+                        function localGetURLParameter(name) {
+                              return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(widgetDomain) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+                        }
+                        if (widgetDomain === null) {
+                              widgetDomain = decodeURIComponent((new RegExp('[?|&]widgetDomain=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+                        }
+                        if (widgetDomain) {
+                              return localGetURLParameter(parameterName);
+                        } else {
+                              return null;
+                        }
+                  };
+            var xscene;
+            if (getURLParameter('activateLandingPage') !== 'false') {
+                  xscene = new ENXSceneV2({
+                        'widget': widget
+                  });
+            } else {
+                  xscene = new ENXScene({
+                        'widget': widget
+                  });
+            }
+            widget.onDestroy = function() {
+                  xscene.onDestroy();
+            };
+      });
+      //]]>
+
+</script>
+
+</html>

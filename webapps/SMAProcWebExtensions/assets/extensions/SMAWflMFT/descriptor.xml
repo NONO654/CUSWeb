@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.MFT" version="3DX.0" 
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" extensionKind="FunctionConnector">
+  <DisplayName>MFT</DisplayName>
+  <Description>Managed File Transfer</Description>
+  <Attributes>
+    <Attribute name="Category">
+      <Value>Activity</Value>
+    </Attribute>
+    <Attribute name="DefaultDialogSize">
+      <Value>600</Value>
+      <Value>500</Value>
+    </Attribute>
+  </Attributes>
+  <Streams>
+    <Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflMFT.png" targetFilename="SMAWflMFT.png" />
+    <Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebMFT/cmp-mft.html" targetFilename="SMAProcWebMFT/cmp-mft.html" />
+    <Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+  </Streams>
+  <Interfaces>
+    <Interface interfaceKind="WebtopEditor">
+      <Implementations>
+        <Implementation name="webEditor" language="web" platform="win_b64">
+          <LateType>pcw-mft-adapter</LateType>
+          <StreamRefs>
+            <StreamRef refStreamName="Web_Editor"/>
+          </StreamRefs>
+        </Implementation>
+      </Implementations>
+    </Interface>
+    <Interface interfaceKind="DesktopEditor">
+      <Implementations>
+        <Implementation name="webEditor" language="web" platform="win_b64">
+          <LateType>SMAWflWebExtensionEditor</LateType>
+          <StreamRefs>
+            <StreamRef refStreamName="Web_stylesheet"/>
+            <StreamRef refStreamName="Web_Editor"/>
+          </StreamRefs>
+        </Implementation>
+      </Implementations>
+    </Interface>
+    <Interface interfaceKind="Handler">
+      <Implementations>
+        <Implementation language="web" platform="win_b64">
+          <Module>DS/SMAProcWebMFT/MFTHandler</Module>
+          <StreamRefs>
+            <StreamRef refStreamName="Web_stylesheet"/>
+            <StreamRef refStreamName="Web_Editor"/>
+          </StreamRefs>
+        </Implementation>
+      </Implementations>
+    </Interface>
+  </Interfaces>
+
+  <Properties>
+    <!--  MFT properties -->
+    <Property name="mftPlugin" type="string" valuetype="single" mode="input">
+      <Value/>
+    </Property>
+    <Property name="mftUrl" type="string" valuetype="single" mode="input">
+      <Value/>
+    </Property>
+    <Property name="mftAdvancedOptions" type="string" valuetype="single" mode="input">
+      <Value/>
+    </Property>
+    <Property name="remoteProcesses" type="string" valuetype="single" mode="input">
+      <Value/>
+    </Property>
+    <Property name="selectedRemoteProcess" type="string" valuetype="single" mode="input">
+      <Value/>
+    </Property>
+    <Property name="parameterMappings" type="string" valuetype="single" mode="input">
+      <Value/>
+    </Property>
+    <Property name="fileMappings" type="string" valuetype="single" mode="input">
+      <Value/>
+    </Property>
+  </Properties>
+</wfext:Extension>

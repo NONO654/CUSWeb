@@ -1,0 +1,30 @@
+<!------------------------------------------------------------------------------------------------------------------------------------------
+[sp-mcsservice HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:    Tue, 13 Oct 2015 15:24:36 GMT
+Assigned to:	Raphael LANG
+Primary use:	Any component which requires capability to communicate to the MCS webservice via AJAX calls
+Description:	This component can be used to make AJAX request to send and receive JSON data from/to a MCS webservice.
+				Note that this component does not watch for security context change
+------------------------------------------------------------------------------------------------------------------------------------------->
+
+<!------------------------------------------------------------------------------------------------------------------------------------------
+see me
+[Table of contents]
+This is a UI less component
+------------------------------------------------------------------------------------------------------------------------------------------->
+<link rel="import" href="../sp-base/sp-base.html">
+<link rel="import" href="../sp-webservice/sp-webservice.html">
+<link rel="import" href="../sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../sp-csrf/sp-csrf.html">
+
+<dom-module id="sp-mcsservice">
+  <template>
+    <sp-csrf id="csrf"></sp-csrf>
+    <sp-dashboard id="dashboard"></sp-dashboard>
+    <content select="sp-data"></content>
+  </template>
+  <script type="text/javascript" src="sp-mcsservice.js"></script>
+</dom-module>

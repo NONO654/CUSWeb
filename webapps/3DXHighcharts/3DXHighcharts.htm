@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Highcharts demo</title>
+
+        <script src="../AmdLoader/AmdLoader.js"></script>
+        <!-- Application Standalone emulation files -->
+        <!--  Commented as we do not have a dependency on UWAClient -- uncomment to turn this to a widget
+
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+         -->
+
+    </head>
+    <body>
+
+        <h1>Highcharts demo</h1>
+
+        <div id="highchart"></div>
+
+    </body>
+
+    <!-- Script files -->
+    <script type="text/javascript">
+
+        require(['DS/3DXHighcharts/3DXHighcharts'], function (Highcharts){
+
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'highchart'
+                },
+
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                },
+
+                series: [{
+                    data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+                }]
+
+            });
+
+        });
+
+    </script>
+</html>

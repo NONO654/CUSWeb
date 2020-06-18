@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<html>
+<head>
+<meta name="author" content="JSY" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>ShareTo Modal</title>
+<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+<script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+
+<script>
+   var slctTenant;
+   var slctSpace;
+   function sendNotification(name, message) {
+          'use strict';
+          var textarea = document.createElement("textarea");
+          textarea.setAttribute("name", name);
+          textarea.appendChild(document.createTextNode(message));
+
+          var form = document.createElement("form");
+          form.setAttribute("method", "POST");
+          form.setAttribute("action", "jsnotif://");
+          form.appendChild(textarea);
+
+          document.documentElement.appendChild(form);
+
+          form.submit();
+
+          form.parentNode.removeChild(form);
+          form = null;
+   }
+   function UpdateWebSharePanel(message) {
+      'use strict';
+      var dec = decodeURI(message);
+      var myObject = JSON.parse(dec);
+      var myTenant = myObject.tenant;
+
+      slctTenant.add([{
+         value: myTenant,
+         label: myTenant,
+         selected: true
+      }]);
+      
+      var mySpaces = myObject.spaces;
+      slctSpace.add([{
+               value: mySpaces[0].id,
+               label: mySpaces[0].value,
+               selected: true
+            }]);
+      for (var i = 1; i < mySpaces.length; i++) {
+         slctSpace.add([{
+               value: mySpaces[i].id,
+               label: mySpaces[i].value
+            }]);
+      }
+
+   }
+   function isLoaded () {
+      'use strict';
+      sendNotification( "PanelInit", "");
+   }
+   window.addEventListener('load', function () {
+      'use strict';
+      require([ 'UWA/Drivers/Alone' , 'UWA/Core' , 'DS/UIKIT/Input/Select' , 'DS/UIKIT/Input/Button' , "i18n!DS/W3DSpace/assets/nls/ShareToModal" , 'css!DS/W3DSpace/W3DSpace.css'],
+
+         function(Alone, Core, Select, Button, DataNls) {
+         
+            function CreatePanel()
+            {
+               var bodyElem = Core.extendElement(document.body);
+               
+               var myLabel = Core.createElement('label', {text: DataNls.shareToPlatformLabel});
+               myLabel.inject(bodyElem.getElement('#field-select-tenant'));
+               
+               slctTenant = new Select({nativeSelect:true,placeholder:false});
+               slctTenant.inject(bodyElem.getElement('#field-select-tenant'));
+               
+               myLabel = Core.createElement('label', {text: DataNls.shareTo3DSpaceLabel});
+               myLabel.inject(bodyElem.getElement('#field-select-cspace'));
+
+               //slctSpace = new Select({nativeSelect:true,size:1,placeholder:false});
+			   slctSpace = new Select({nativeSelect:true,placeholder:false});
+               slctSpace.inject(bodyElem.getElement('#field-select-cspace'));
+            
+               var butAccept = new Button({
+                  className: "primary",
+                  value:  DataNls.shareToShareLabel,
+                  events: {
+                     onClick: function () {
+                        var space = {
+                           id: slctSpace.getValue().toString()
+                        };
+                        var selection = {
+                           tenant: slctTenant.getValue().toString(),
+                           spaces: space
+                        };
+
+                        var jsonText = JSON.stringify(selection);
+                        var message = encodeURI(jsonText);
+                        sendNotification( "ShareRequest", message);
+                     }
+                  }
+               }); 
+               butAccept.inject(bodyElem.getElement('#field-button-accept'));
+               
+               var butCancel = new Button({
+                  value: DataNls.shareToCancelLabel,
+                  events: {
+                     onClick: function () {
+                     clearContent();
+                     sendNotification( "CloseWindow", "");
+                     }
+                  }
+               }); 
+               butCancel.inject(bodyElem.getElement('#field-button-refuse'));
+            }         
+                     
+            function clearContent()
+            {
+               slctTenant.remove();
+               slctSpace.remove();
+            }
+
+            new CreatePanel();
+
+            sendNotification( "PanelInit", "");
+      });   
+   });
+</script>
+</head>
+   <body>
+      <form>
+         <fieldset class="field-select">
+            <div id="field-select-tenant"> </div>
+            <div id="field-select-cspace"> </div>
+         </fieldset>
+         <fieldset class="field-button">
+            <a id="field-button-accept"> </a>
+            <a id="field-button-refuse"> </a>
+         </fieldset>
+      </form>
+   </body>
+</html>

@@ -1,0 +1,48 @@
+<!-----------------------------------------------------------------------------
+[sp-edit-file HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:    Tue, 08 Dec 2015 13:39:01 GMT
+Assigned to:	Vineeth Kumar KE
+Primary use:	Edit checked in text files using an external editor.
+Description:    Facilitates building a model to open up a editor.
+-------------------------------------------------------------------------------->
+
+<!--------------------------------------------------------------------
+
+[Table of contents]
+TODO: Update this according to your template
+1. main
+	2. nav
+		2.1. header / Tools
+		2.2. header / Fields
+		2.3. header / Rules
+	3. section / Tools
+	4. section / Fields
+	5. section / Rules
+
+--------------------------------------------------------------------->
+<link rel="import" href="../sp-base/sp-base.html">
+<link rel="import" href="../sp-mcsservice/sp-mcsservice.html">
+<link rel="import" href="../sp-cosservice/sp-cosservice.html">
+<link rel="import" href="../sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../sp-cos/sp-cos.html">
+<link rel="import" href="../sp-run/sp-run.html">
+
+<dom-module id="sp-edit-file">
+  <template>
+		<!--  WEB SERVICES -->
+		<sp-mcsservice id="jobEXMLWS" uri="/resources/slmservices/simulations/edit/file" on-error="onWSError"></sp-mcsservice>
+		<sp-mcsservice id="contentWS" uri="/resources/slmservices/simulations/content" on-error="onWSError"></sp-mcsservice>
+		<sp-cosservice id="jobStatusWS" uri="job/" on-error="onWSError"></sp-cosservice>
+		
+		<!--  OTHER WEB COMPONENTS -->
+        <sp-dashboard id="spDashboard"></sp-dashboard>
+        <sp-cos id="spCos"></sp-cos>
+		<sp-run id="editRunner" timeout="60000"></sp-run>
+    </template>
+  <script type="text/javascript" src="sp-edit-file.js"></script>
+</dom-module>
+
+

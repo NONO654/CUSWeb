@@ -1,0 +1,1 @@
+define("DS/Windows/Windows_zh",{});define("DS/Windows/assets/nls/translation",{ok:"确定",open:"打开",save:"保存",cancel:"取消",close:"关闭",discard:"放弃",apply:"应用",reset:"重置",restoreDefaults:"恢复默认值",help:"帮助",saveAll:"全部保存",yes:"是",yesToAll:"全部是",no:"否",noToAll:"全部否",abort:"中止",retry:"重试",ignore:"忽略",stackingPlaceHolder:"释放以将窗口内容放置于此处"});

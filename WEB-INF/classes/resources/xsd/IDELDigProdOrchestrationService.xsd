@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema elementFormDefault="qualified" targetNamespace="urn:com:dassault_systemes:webservice" xmlns:ns1="http://www.3ds.com/wserror" xmlns:ns2="http://www.3ds.com/xsd/3DXML" xmlns:ns3="http://www.3ds.com/xsd/3DXML_WSUPRTypes" xmlns:ns4="http://www.3ds.com/xsd/3DXML/PLM" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <xs:annotation>
+  <xs:appinfo>
+   <webserviceSchema/>
+  </xs:appinfo>
+ </xs:annotation>
+ <xs:import namespace="http://www.3ds.com/wserror" schemaLocation="wserrors.xsd"/>
+ <xs:import namespace="http://www.3ds.com/xsd/3DXML" schemaLocation="3dxml/3DXML.xsd"/>
+ <xs:import namespace="http://www.3ds.com/xsd/3DXML_WSUPRTypes" schemaLocation="3DXML_WSUPRTypes.xsd"/>
+ <xs:import namespace="http://www.3ds.com/xsd/3DXML/PLM" schemaLocation="3DXML_WSCommonTypes.xsd"/>
+ <xs:element name="expandExecutionStructure">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iEntityID" nillable="false" type="xs:base64Binary">
+     <xs:annotation>
+      <xs:documentation>Identifier of a PLM Reference or PLM Instance in the Shop Order structure to expand (Shop Order, Exec System or Exec Operation)</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iLevel" nillable="false" type="xs:int">
+     <xs:annotation>
+      <xs:documentation>expand level; -1 means that all the structure will be expanded</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="expandExecutionStructureResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oResult" nillable="true" type="ns3:ExpandBaseResultType">
+     <xs:annotation>
+      <xs:documentation>Expanded Shop Order structure</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="expandExecutionStructureErrorType" type="ns1:ErrorType"/>
+ <xs:element name="getMfgItem">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iShopOrderID" nillable="false" type="xs:base64Binary">
+     <xs:annotation>
+      <xs:documentation>Identifier of the Shop Order</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getMfgItemResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oMfgItem" nillable="true" type="ns4:ListOfEntityType">
+     <xs:annotation>
+      <xs:documentation>Mfg Item for which the Shop Order was created</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getMfgItemErrorType" type="ns1:ErrorType"/>
+ <xs:element name="getUnitItem">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iShopOrderID" nillable="false" type="xs:base64Binary">
+     <xs:annotation>
+      <xs:documentation>Identifier of the Shop Order</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getUnitItemResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oUnitItem" nillable="true" type="ns2:EntityType">
+     <xs:annotation>
+      <xs:documentation>Unit Item produced/provided by the Shop Order</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getUnitItemErrorType" type="ns1:ErrorType"/>
+ <xs:element name="getUnitsInContextWSI">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iOperationID" nillable="false" type="xs:base64Binary">
+     <xs:annotation>
+      <xs:documentation>Identifier of the Operation</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getUnitsInContextWSIResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oUnits" nillable="true" type="ns3:ListOfWSITypeArray">
+     <xs:annotation>
+      <xs:documentation>List of Mfg Items / Units</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getUnitsInContextWSIErrorType" type="ns1:ErrorType"/>
+ <xs:element name="expandUnitStructure">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iUnitID" nillable="false" type="xs:base64Binary">
+     <xs:annotation>
+      <xs:documentation>Identifier of the Unit Item (PLM Reference or PLM Instance)</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iLevel" nillable="false" type="xs:int">
+     <xs:annotation>
+      <xs:documentation>expand level; -1 means that all the structure will be expanded</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="expandUnitStructureResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oResult" nillable="true" type="ns3:ExpandBaseResultType">
+     <xs:annotation>
+      <xs:documentation>Expanded Unit structure</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="expandUnitStructureErrorType" type="ns1:ErrorType"/>
+ <xs:element name="getResourcesInContext">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iOperationID" nillable="false" type="xs:base64Binary">
+     <xs:annotation>
+      <xs:documentation>Identifier of the Operation</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getResourcesInContextResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oResources" nillable="true" type="ns3:ListOfEntityTypeArray">
+     <xs:annotation>
+      <xs:documentation>List of Resources</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getResourcesInContextErrorType" type="ns1:ErrorType"/>
+ <xs:element name="installUnitWSI">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iReplacedUnit" nillable="false" type="ns4:ListOfWSIType">
+     <xs:annotation>
+      <xs:documentation>Unit to be replaced</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iSerialNumber" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Serial number of the tracked part to be installed (optional)</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iLotNumber" nillable="true" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Lot number of the tracked part to be installed (optional)</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="installUnitWSIResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oNewUnit" nillable="true" type="ns4:ListOfWSIType">
+     <xs:annotation>
+      <xs:documentation>New Unit</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="installUnitWSIErrorType" type="ns1:ErrorType"/>
+ <xs:element name="setExecutionStatusWSI">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iUnit" nillable="false" type="ns4:ListOfWSIType">
+     <xs:annotation>
+      <xs:documentation>Unit of which the status is to be updated</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iStatus" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Execution status</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="setExecutionStatusWSIResponse">
+  <xs:complexType>
+   <xs:sequence/>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="setExecutionStatusWSIErrorType" type="ns1:ErrorType"/>
+ <xs:element name="setAttributes">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iEntityID" nillable="false" type="xs:base64Binary">
+     <xs:annotation>
+      <xs:documentation>Entity that has to be modified</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iAttributeValues" nillable="false" type="ns3:ListOfStringTypeArray">
+     <xs:annotation>
+      <xs:documentation>List of attribute/value pairs to be set</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="setAttributesResponse">
+  <xs:complexType>
+   <xs:sequence/>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="setAttributesErrorType" type="ns1:ErrorType"/>
+ <xs:element name="getAttributes">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="iPLMKeyAccess" nillable="false" type="xs:string">
+     <xs:annotation>
+      <xs:documentation>Key to re-establish connection with the PLM core server</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iEntityID" nillable="false" type="xs:base64Binary">
+     <xs:annotation>
+      <xs:documentation>Entity from that the attributes have to be read</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+    <xs:element maxOccurs="1" minOccurs="1" name="iAttributes" nillable="false" type="ns2:ListOfStringType">
+     <xs:annotation>
+      <xs:documentation>List of attributes to be read</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getAttributesResponse">
+  <xs:complexType>
+   <xs:sequence>
+    <xs:element maxOccurs="1" minOccurs="1" name="oAttributeValues" nillable="true" type="ns3:ListOfStringTypeArray">
+     <xs:annotation>
+      <xs:documentation>List of attribute/value pairs</xs:documentation>
+     </xs:annotation>
+    </xs:element>
+   </xs:sequence>
+  </xs:complexType>
+ </xs:element>
+ <xs:element name="getAttributesErrorType" type="ns1:ErrorType"/>
+</xs:schema>

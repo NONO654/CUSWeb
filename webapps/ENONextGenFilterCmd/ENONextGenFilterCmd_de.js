@@ -1,0 +1,1 @@
+define("DS/ENONextGenFilterCmd/ENONextGenFilterCmd_de",{});define("DS/ENONextGenFilterCmd/assets/nls/ENONextGenFilterCmd",{RootsToFilter:"Stammobjekte zu Filter"});

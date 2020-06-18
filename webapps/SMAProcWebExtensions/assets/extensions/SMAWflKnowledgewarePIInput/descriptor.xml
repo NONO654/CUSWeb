@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.inkw" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflKnowledgeware" nlsID="displaynameIn">FROM Activity TO V6 Parameter</DisplayName>
+	<Description nlsFile="SMAWflKnowledgeware" nlsID="descriptionIn">FROM Activity TO V6 Parameter</Description>
+	<LongDescription nlsFile="SMAWflKnowledgeware" nlsID="longdescriptionIn">FROM Activity TO V6 Parameter</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>V6ParamInput</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.sma.plugin.inkw</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeKWConnector32.png" targetFilename="SMAExeKWConnector32.png" />
+		<!--<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAExeKWConnector16.png" targetFilename="SMAExeKWConnector16.png" />-->
+		<Stream name="MapToKW" streamKind="image" sourceFilename="MapToKW.png" targetFilename="MapToKW.png" />
+		<Stream name="MapFromKW" streamKind="image" sourceFilename="MapFromKW.png" targetFilename="MapFromKW.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflKnowledgeware.CATNls" targetFilename="SMAWflKnowledgeware.CATNls"/>
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflKnowledgeware.dll" targetFilename="win_b64/SMAWflKnowledgeware.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflKWConnector.sypstyle" targetFilename="SMAWflKWConnector.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation language="cpp" platform="win_b64">
+					<LateType>SMAWflKWConnEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+
+	<Properties>
+
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value>
+				<![CDATA[InputKW]]>
+			</Value>
+		</Property>
+
+		<!-- Property to store content object value will contain reference to activity content -->
+		<!-- Temporarily the value will cotain direct PLM ID of selected PLM object -->
+		<Property name="PLMObject" type="string" valuetype="single">
+			<Description nlsFile="SMAWflKnowledgeware" nlsID="PLMObject">PLMObject</Description>
+			<Value/>
+		</Property>
+
+		<!-- Property to store mapping direction 0: Map FROM activity TO kw, 1: Map FROM kw TO Activity -->
+		<Property name="mappingDirection" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[0]]>
+			</Value>
+		</Property>
+
+		<!-- Aggregate property to store all mappings -->
+		<!-- The values will contain a xml string similar to following -->
+		<!-- 
+			<kwmap kwparam="xxxxxxx" activityparam="yyyyyyyyy"/>
+		-->
+		<Property name="mappings" type="aggregate" valuetype="single">
+			<Property name="map" type="string" valuetype="single">
+				<Value/>
+			</Property>
+		</Property>
+
+	</Properties>
+</wfext:Extension>
+
+
+

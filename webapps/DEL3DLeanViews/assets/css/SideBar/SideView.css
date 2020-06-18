@@ -1,0 +1,65 @@
+.sideView
+{
+  width: 6%;
+  height: 100%;
+  transition: width 0.2s ease-in-out;
+  background: #f0f0f0;
+  position: relative;
+  z-index: 30;
+}
+.sideViewContent
+{
+  width: 100%;
+  height: 100%;
+}
+.sideView.sidePanelOpened
+{
+  width: 17%;
+}
+.sideView.sidePanelOpened .sideViewContent
+{
+  background: #627A8F !important;
+}
+.sideView.closeSidePanelWithoutTransition
+{
+  transition: none !important;
+}
+.sideView.left
+{
+  float: left !important;
+}
+.sideView.right
+{
+  float: right !important;
+}
+.mainView:not(.onGuidedMeeting) .sideView.mapFocused
+{
+    background: rgb(216, 225, 235);
+}
+.sideView.mapFocused .sideBarButton .mapNavigatorCenter .navigateM,
+{
+    pointer-events: none;
+}
+.mainView:not(.onGuidedMeeting):not(.onFreeMeeting) .sideView:not(.mapFocused):not(.pageFocused) .sideBarButton.meeting,
+.mainView:not(.onGuidedMeeting) .sideView.mapFocused .sideBarButton.toolsMenu,
+.mainView:not(.onGuidedMeeting):not(.onFreeMeeting) .sideView.mapFocused .sideBarButton.deleteMenu,
+.sideView.onCustomize .sideBarButton.deleteMenu,
+.sideView .sideBarButton.customizeMenu.disableCustomization,
+.mainView.onGuidedMeeting .sideView .sideBarButton.customizeMenu,
+.mainView.onFreeMeeting:not(.meetingLeader) .sideView .sideBarButton.customizeMenu,
+.sideView.editIssue .sideBarButton.deleteMenu,
+.sideView.editIssue .sideBarButton.customizeMenu,
+.sideView.editAction .sideBarButton.deleteMenu,
+.sideView.editAction .sideBarButton.customizeMenu
+{
+    pointer-events: none;
+    opacity: 0.5;
+}
+.mainView:not(.onGuidedMeeting):not(.meetingLeader) .sideView:not(.onMeeting) .sideBarButton.meeting .buttonView.checked
+{
+    pointer-events: none;
+}
+.mainView.onGuidedMeeting .sideView .mapButtonView
+{
+    visibility: hidden;
+}

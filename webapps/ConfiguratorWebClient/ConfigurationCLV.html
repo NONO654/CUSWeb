@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:widget="http://www.netvibes.com/ns/">
+
+
+    <head>
+
+        <!-- Title -->
+        <title>Configurator</title>
+        <!-- Title -->
+
+        <!-- Head Meta Data -->
+        <meta name="author" content="Dassault Systemes (YOE)" />
+        <meta name="description" content="Configurator NextGen Widget" />
+
+        <meta name="apiVersion" content="1.0" /> 
+        <meta name="debugMode" content="true" />
+
+        <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />     <!--To solve Slice issue on IE-->
+        <!-- Head Meta Data -->
+                
+        <!-- UWA -->
+        <!-- Application Standalone emulation files -->
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+        <link rel="stylesheet" type="text/css" href="../ConfiguratorWebView/ConfiguratorWebView.css">
+
+<!--  
+        <script type="text/javascript" src="./js/UWA_Standalone_Alone.js"></script>
+        <link rel="stylesheet" type="text/css" href="./assets/css/standalone.css" />
+        <link rel="stylesheet" type="text/css" href="./assets/Style.css">
+ -->
+  
+	  	<script src="ConfiguratorWebClient.js" type="text/javascript"></script> 
+	  	<script src="../../common/scripts/emxUIConstants.js" type="text/javascript"></script> 
+	  	<script src="../../common/scripts/emxUICore.js" type="text/javascript"></script>
+	  	<script src="../../common/scripts/emxUIUtility.js" type="text/javascript"></script>
+	  	<!--  script type="text/javascript" src="jquery-1.11.0.min.js"></script -->
+	  	
+    </head>
+    <body style="background-color:#aaa8a5" onbeforeunload="releaseSolver()">
+    	<iframe height="0%" width="0%" name="listHidden" id="listHidden" style="display: none;"></iframe>
+		<iframe name="iCFg" id="iCFg"   height="100%" width="100%" src="../ConfiguratorWebView/ConfigurationPanel.html" seamless>
+		</iframe>
+	</body>
+</html>
+
+<script>
+
+function onWidgetLoad () {
+	if(parent) {
+		parent.document.getElementById("divPageBody").style.top = "40px";
+		parent.document.getElementById("pageHeadDiv").style.top = "-35px";
+	}
+	require(['DS/ConfiguratorWebClient/ConfiguratorWebClient'],
+    function (ConfiguratorWebClient) {
+			var sAction = ConfiguratorWebClient.getParameterByName("strAction");
+			if(parent && sAction.toLowerCase() == 'view')
+			{
+				parent.document.getElementById("divPageBody").style.bottom = "0";
+				parent.document.getElementById("divPageFoot").style.display = "none";
+			}
+			var configServices = document.getElementById("iCFg").contentWindow.widget.getValue("configServices");
+			if(configServices != null)
+				ConfiguratorWebClient.updateConfigServices(configServices);
+				ConfiguratorWebClient.callSetServices();
+		
+    });	
+}
+/*
+function refreshParent()
+{
+    var sAction = getParameterByName("strAction");
+	console.log("sAction ::" + sAction);
+	if(sAction.toLowerCase() == 'create')
+	{
+		window.parent.getTopWindow().opener.parent.location.href = window.parent.getTopWindow().opener.parent.location.href;
+   		window.getTopWindow().close(); 
+	}
+	else
+	{
+			// for EDIT
+			var formViewFrame = findFrame(window.parent.getTopWindow().opener.parent.window,
+					"detailsDisplay");
+			if (formViewFrame != null && formViewFrame != "null") 
+			{
+				formViewFrame.location.href = formViewFrame.location.href;
+			}
+			refreshTablePage();
+			window.getTopWindow().close();
+		}
+}
+
+	function getConfigurationCriteria() 
+	{
+		var selectedCriteria = document.getElementById("iCFg").contentWindow.getActualConfigurationCriteria();
+		console.log("selectedCriteria -- > selectedCriteria : "+ selectedCriteria);
+		return selectedCriteria;
+	}
+	
+	function getListPriceValue() {
+		var listPrice = document.getElementById("iCFg").contentWindow.getListPrice();
+		return listPrice;
+	}
+
+	function getAppRuleParams() 
+	{
+		var appRuleParam = document.getElementById("iCFg").contentWindow.getAppRulesParam()
+		console.log("appRuleParam -- > appRuleParam : "+ appRuleParam);
+		return appRuleParam;
+	}
+
+	//This fuction will execute methods from ConfiguratorServices.js
+	function callSetServices(msg) {
+
+		//get product strcuture
+		var dictionaryData = initData();
+		
+		//Action
+		var sAction = getParameterByName("strAction");
+		//DerivedFrom
+		var pcId 	 					 = getParameterByName("derivedFromId");
+
+		
+		document.getElementById("iCFg").contentWindow.setAction(sAction);
+		document.getElementById("iCFg").contentWindow.setDictionaryJSON(dictionaryData.dictionary);
+
+		//edit or view without derived pc selected
+		if(pcId == undefined || pcId == "" )
+			pcId	= getParameterByName("pcId");
+		
+		if (sAction.toLowerCase() == 'edit' || sAction.toLowerCase() == 'view' || pcId != "") {
+			var configurationCriteriaJSON = getSelectedFeatureOptions();
+			//document.getElementById("iCFg").contentWindow.setConfigurationCriteriaJSON(new Array());
+			document.getElementById("iCFg").contentWindow.setConfigurationCriteriaJSON(configurationCriteriaJSON.configurationCriteria);
+			
+			console.log("callSetservices -- > appRuleParamJSON.rulesMode      =  " + configurationCriteriaJSON.appRuleParam.rulesMode);
+			console.log("callSetservices -- > appRuleParamJSON.multiSelection = " + configurationCriteriaJSON.appRuleParam.multiSelection);
+			console.log("callSetservices -- > appRuleParamJSON.rules 		  = " + configurationCriteriaJSON.appRuleParam.rules);
+			
+			document.getElementById("iCFg").contentWindow.setAppRulesParamJSON(configurationCriteriaJSON.appRuleParam);
+			
+			//var appFunParam = "{\"app_Func\":{\"features\": \"yes\", \"productState\": \"no\", \"manufacturingPlan\": \"no\", \"milestone\":\"yes\", \"date\":\"yes\", \"multiSelection\":\"yes\", \"build\":\"yes\", \"refine\":\"no\", \"optim\":\"no\", \"rules\":\"yes\", \"incompatibilities\":\"yes\"}}";
+			
+			var appFunParam = "{\"app_Func\": {\"features\": \"yes\",\"productState\": \"yes\",\"manufacturingPlan\": \"yes\",\"milestone\": \"yes\",\"date\": \"yes\",\"units\": \"yes\",\"multiSelection\": \"yes\",\"selectionMode_Build\": \"yes\",\"selectionMode_Refine\": \"yes\",\"rulesMode_ProposeOptimizedConfiguration\": \"no\",\"rulesMode_SelectCompleteConfiguration\": \"no\",\"rulesMode_EnforceRequiredOptions\": \"yes\",\"rulesMode_DisableIncompatibleOptions\": \"yes\"}}";
+			
+			document.getElementById("iCFg").contentWindow.setAppFuncJSONAsString(appFunParam);
+			
+			document.getElementById("iCFg").contentWindow.initPanel(false);
+			console.log("callSetservices -- > init Panel  loaded!!");
+		}
+		else 
+		{
+			//document.getElementById("iCFg").contentWindow.setConfigurationCriteriaJSON(new Array());
+
+			//var appParam = "{\"app_Func\":{\"features\": \"yes\", \"productState\": \"no\", \"manufacturingPlan\": \"no\", \"milestone\":\"yes\", \"date\":\"yes\", \"multiSelection\":\"yes\", \"build\":\"yes\", \"refine\":\"no\", \"optim\":\"no\", \"rules\":\"yes\", \"incompatibilities\":\"yes\"}}";
+
+			var appParam = "{\"app_Func\": {\"features\": \"yes\",\"productState\": \"yes\",\"manufacturingPlan\": \"yes\",\"milestone\": \"yes\",\"date\": \"yes\",\"units\": \"yes\",\"multiSelection\": \"yes\",\"selectionMode_Build\": \"yes\",\"selectionMode_Refine\": \"yes\",\"rulesMode_ProposeOptimizedConfiguration\": \"no\",\"rulesMode_SelectCompleteConfiguration\": \"no\",\"rulesMode_EnforceRequiredOptions\": \"yes\",\"rulesMode_DisableIncompatibleOptions\": \"yes\"}}"; 
+			document.getElementById("iCFg").contentWindow.setAppFuncJSONAsString(appParam);
+			//console.log("callSetservices -- > set AppFuncJSON AsString Set");
+			
+			var appRuleParam =  "{\"multiSelection\": \"false\", \"selectionMode\": \"build\",    \"refineSelectionMode\":\"select\",    \"rulesMode\":\"dependencies\",    \"rules\":\"true\" , \"completenessStatus\":\"Unknown\" , \"rulesCompliancyStatus\":\"Unknown\"}";
+			
+			//var appRuleParam =  "{\"appRulesParam\": {\"multiSelection\": \"false\",\"selectionMode\": \"selectionMode_Build\",\"rulesMode\": \"rulesMode_EnforceRequiredOptions\",\"rulesActivation\": \"true\",\"completenessStatus\": \"Unknown\",\"rulesCompliancyStatus\": \"Unknown\"}}";
+			appRuleParam = JSON.parse(appRuleParam);
+			//set app rule param
+			document.getElementById("iCFg").contentWindow.setAppRulesParamJSON(appRuleParam);
+			
+			document.getElementById("iCFg").contentWindow.initPanel(true);
+			console.log("callSetservices -- > init Panel  loaded!!");
+		}
+		
+		//This will be uncommented once experience kernal support is avialable for ONM
+		//get hyperwiser details
+		//var hypervisorData = getHypervisorDetails();
+		
+		//This will be uncommented once experience kernal support is avialable for ONM
+		//document.getElementById("iCFg").contentWindow.connectToSolverNode(hypervisorData.hypervisorIp, hypervisorData.hypervisorPort,hypervisorData.solverKey);
+		//console.log("callSetservices -- > Connected to Solver Node "+ hypervisorData.hypervisorIp + ":"+ hypervisorData.hypervisorPort + " Node : "+ hypervisorData.solverKey);
+
+	}
+
+ */
+</script>
+
+
+
+
+

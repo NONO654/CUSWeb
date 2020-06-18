@@ -1,0 +1,15 @@
+m|DELWebMfgItemDefUI\DELWebMfgItemDefUIGraphViews.mweb
+b|j|c,m
+b|c|n,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELWebMfgItemDefUIGraphViews\DELWebMfgItemDefUIGraphViews.js|1560556888|7162
+s|DELWebMfgItemDefUI\DELWebMfgItemDefUIGraphViews.mweb\src\AbstractGraphView.js|1559643362|10849
+s|DELWebMfgItemDefUI\DELWebMfgItemDefUIGraphViews.mweb\src\BodyGraphView.js|1520331879|4362
+s|DELWebMfgItemDefUI\DELWebMfgItemDefUIGraphViews.mweb\src\MBOMGraphView.js|1520331882|4381
+t|win_b64\webapps\DELWebMfgItemDefUIGraphViews\BodyGraphView.css|1568749437|0
+s|DELWebMfgItemDefUI\DELWebMfgItemDefUIGraphViews.mweb\src\BodyGraphView.css|1439390654|169
+t|win_b64\webapps\DELWebMfgItemDefUIGraphViews\AbstractGraphView.css|1568749437|235
+s|DELWebMfgItemDefUI\DELWebMfgItemDefUIGraphViews.mweb\src\AbstractGraphView.css|1559643390|287
+t|win_b64\webapps\DELWebMfgItemDefUIGraphViews\MBOMGraphView.css|1568749437|0
+s|DELWebMfgItemDefUI\DELWebMfgItemDefUIGraphViews.mweb\src\MBOMGraphView.css|1433762230|47

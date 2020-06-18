@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  /*
+  * @fullreview   fbr kgq 16:11:14 remove some tools/explode and View/Shading commands
+  * @quickreview  hlu2 18:10:25 IR-641933-3DEXPERIENCER2019x: remove duplicated commands
+  */
+  -->
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DSHAREAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DSHAREAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="3DSHAREAfrWorkshopHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <!-- Application -->
+      <CATCommandHeader ID = "VisualizationModes"   ClassName = "DS/3DPlayCommands/CmdVisualizationModes"            ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Zoom"     ClassName = "DS/ViewerCommands/VisuZoomViewCmd"    ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Pan"      ClassName = "DS/ViewerCommands/VisuPanViewCmd"     ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Rotate"   ClassName = "DS/ViewerCommands/VisuRotateViewCmd"  ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Reframe"  ClassName = "DS/ViewerCommands/VisuReframeViewCmd" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "VisuOrthographicView"  ClassName = "DS/ViewerCommands/VisuOrthographicViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuPerspectiveView"  ClassName = "DS/ViewerCommands/VisuPerspectiveViewCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "ViewSelector" ClassName = "DS/3DPlayCommands/CmdViewSelector"         ResourceFile = "3DPlay/3DPlayExperience3D" />
+
+      <CATCommandHeader ID = "VisuNoEnv" ClassName = "DS/ViewerCommands/VisuNoEnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuV6Env" ClassName = "DS/ViewerCommands/VisuV6EnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuCleanSpaceEnv" ClassName = "DS/ViewerCommands/VisuCleanSpaceEnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuDarkBlueEnv" ClassName = "DS/ViewerCommands/VisuDarkBlueEnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuDarkGreyEnv" ClassName = "DS/ViewerCommands/VisuDarkGreyEnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+      <CATCommandHeader ID = "VisuShinyEnv" ClassName = "DS/ViewerCommands/VisuShinyEnvCmd" SharedLibraryName = "ShareUI" ResourceFile = "ViewerCommands/ViewerCommands" />
+
+      <CATCommandHeader ID ="measure2CmdHdr" ClassName="DS/DMUMeasure/DMUCreateMeasureCmd" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "3dPlay" Value = "3dPlay" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+
+      <CATCommandHeader ID="section2CmdHdr" ClassName="DS/DMUSection/DMUCreateSectionCmd" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "3dPlay" Value = "3dPlay" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="LockUnlockSectionHdr" ClassName="DS/DMUSection/DMULockUnlockSection" ResourceFile="DMUBaseCommands/3DPlayPro" Behavior="CATAfrHeaderCheck" />
+
+      <!--<CATCommandHeader ID = "ShowAll" ClassName = "DS/3DPlayCommands/CmdShowAll" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "HideShow" ClassName = "DS/3DPlayCommands/CmdHideShow" ResourceFile = "3DPlay/3DPlayExperience3D" />-->
+      <CATCommandHeader ID = "VisibilityCommands" ClassName = "DS/3DPlayCommands/VisibilityCommands" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "AnnotationCommands" ClassName = "DS/3DPlayAnnotation3D/AnnotationCommands" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "AnnotationTour" ClassName = "DS/3DPlayAnnotation3D/AnnotationTour" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "3DDrawing" ClassName = "DS/3DPlayAnnotation3D/3DPlayAnnotationDrawCmd"   SharedLibraryName = "3DPlayAnnotation3D" ResourceFile = "3DPlay/3DPlayExperience3D" Available = "1"/>
+      <CATCommandHeader ID = "RemoveDrawing" ClassName = "DS/3DPlayAnnotation3D/3DPlayAnnotationDeleteCmd"   SharedLibraryName = "3DPlayAnnotation3D" ResourceFile = "3DPlay/3DPlayExperience3D" Available = "1"/>
+      <CATCommandHeader ID = "3DText"         ClassName = "DS/3DPlayAnnotation3D/3DPlayAnnotationTextCmd"   SharedLibraryName = "3DPlayAnnotation3D"  ResourceFile = "3DPlay/3DPlayExperience3D" Available = "1"/>
+      <CATCommandHeader ID = "Explode" ClassName = "DS/3DPlayCommands/CmdExplode" ResourceFile = "3DPlay/3DPlayExperience3D" />
+    
+      <!--hlu2-->
+      <CATCommandHeader ID = "HideShowFilter" ClassName = "DS/GEOHideShowFilterCmd/GEOHideShowFilterCmd" ResourceFile = "GEOHideShowFilterCmd/GEOHideShowFilterWkb"  Available = "1"/>
+
+   </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="3DSHAREAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DSHAREWorkbench">
+
+      <CATCmdContainer Name = "SectionViews" Visibility = "1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name = "Rotate"        Command = "Rotate"  Responsive="Long Large"/>
+        <CATCmdStarter Name = "Pan"           Command = "Pan"     Responsive="Long Large"/>
+        <CATCmdStarter Name = "Zoom"          Command = "Zoom"    Responsive="Long Large"/>
+        <CATCmdStarter Name = "Reframe"       Command = "Reframe" Responsive="Long Large"/>
+        <CATCmdContainer Name = "ViewsActions" Visibility = "1" RepresentationType="AfrActionBarDropDown" Responsive="Small Medium">
+          <CATCmdStarter Name = "Rotate"        Command = "Rotate" />
+          <CATCmdStarter Name = "Pan"           Command = "Pan" />
+          <CATCmdStarter Name = "Zoom"          Command = "Zoom" />
+          <CATCmdStarter Name = "Reframe"       Command = "Reframe" />
+        </CATCmdContainer>
+        <CATCmdSeparator Name = "VisuMode_Separator"/>
+        <CATCmdStarter Name = "ViewSelector"          Command = "ViewSelector" Responsive="Small Medium Long Large"/>
+        
+        <CATCmdContainer Name = "CameraViews" Visibility = "1" RepresentationType="AfrActionBarDropDown" Responsive="Medium Long Large">
+          <CATCmdStarter Name = "OrthoView"  Command = "VisuOrthographicView" />
+          <CATCmdStarter Name = "PerspView"  Command = "VisuPerspectiveView" />
+        </CATCmdContainer>
+        
+ 
+        <!--hlu2-->
+        <CATCmdStarter Name = "HideShowFilter"       Command = "HideShowFilter" Responsive="Medium Long Large"/>
+ 
+     
+      </CATCmdContainer>
+
+      <CATCmdContainer Name = "Tools" Visibility = "1" RepresentationType="AfrActionBarSection">
+        <!--CATCmdContainer Name = "VisibilityViews" Visibility = "1" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter Name = "HideShow"  Command = "HideShow" />
+          <CATCmdStarter Name = "ShowAll"  Command = "ShowAll" />
+        </CATCmdContainer-->
+
+        <CATCmdStarter Name = "VisibilityCommands"  Command = "VisibilityCommands" Responsive="Medium Long Large"/>
+        <CATCmdStarter Name = "Measure"  Command = "measure2CmdHdr"  Responsive="Medium Long Large"/>
+        <CATCmdContainer Name = "Section" Visibility = "1" RepresentationType="AfrActionBarDropDown" Responsive="Medium Long Large">
+          <CATCmdStarter Name = "Section"  Command = "section2CmdHdr" />
+          <CATCmdStarter Name="LockUnlockSection" Command="LockUnlockSectionHdr" />
+        </CATCmdContainer>
+
+        <CATCmdStarter Name = "AnnotationCommands"  Command = "AnnotationCommands"  Responsive="Long Large"/>
+        <CATCmdStarter Name = "AnnotationTour"  Command = "AnnotationTour"  Responsive="Long Large"/>
+ 
+      </CATCmdContainer>
+
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

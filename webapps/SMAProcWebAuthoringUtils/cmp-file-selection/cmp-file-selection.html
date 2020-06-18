@@ -1,0 +1,72 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../cmp-content-chooser/cmp-content-chooser.html">
+<link rel="import" href="../../SMAProcSP/sp-file-content/sp-file-content.html" />
+<dom-module id="cmp-file-selection">
+    <template>
+        <style>
+        * {
+            box-sizing: border-box;
+        }
+        :host{
+            width:180px;
+            min-width: 240px;
+            display:block;
+        }
+        #contentChooser, #parameterChooser, #filenameLabel {
+            display:block;
+            width:100%;
+        }
+        #contentGroup {
+            display: inline-block;
+        }
+        #ruleInput {
+            min-width: 180px;
+            width:100%;
+            border-radius:5px;
+            border: 1px solid #b4b6ba;
+            height:22px;
+            padding-left: 5px;
+            font-family: Arial,sans-serif;
+            font-size: 14px;
+        }
+        #filenameLabel {
+            margin-top: 5px;
+        }
+        label {
+            font-weight: normal;
+        }
+        </style>
+        <label class="content-chooser-label">Select document from:</label>
+        <div id="contentGroup">
+            <label>
+              <input type="radio" name="contentType" id="rdContent" value="content" disabled$="[[disabled]]" />
+              Content
+            </label>
+            <label>
+              <input type="radio" name="contentType" id="rdParam" value="parameter" disabled$="[[disabled]]" />
+              Parameter
+            </label>
+        </div>
+        <cmp-content-chooser
+            id="contentChooser"
+            object-types="Simulation Document,DOCUMENTS"
+            filetypes$="[[filetypes]]"
+            activity="[[activity]]"
+            documentcreate$="[[!disabled]]"
+            disabled$="[[disabled]]">
+        </cmp-content-chooser>
+        <pcw-parameter-chooser
+            id="parameterChooser"
+            datatype="Object"
+            autoselect
+            create
+            style="display:none;"
+            disabled$="[[disabled]]">
+        </pcw-parameter-chooser>
+        <label id="filenameLabel">Enter file name:
+            <input id="ruleInput" type="text" placeholder="you can use wildcards" disabled$="[[disabled]]" />
+        </label>
+        <sp-file-content id="spFileContent" ></sp-file-content>
+    </template>
+    <script type="text/javascript" src="cmp-file-selection.js"></script>
+</dom-module>

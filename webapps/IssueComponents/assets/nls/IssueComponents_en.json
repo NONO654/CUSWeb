@@ -1,0 +1,677 @@
+{
+    "maturity": {
+        "create": "New",
+        "assign": "Pending",
+        "active": "Active",
+        "review": "In Review",
+        "closed": "Closed"
+    },
+    "priorities": {
+        "title": "Priority",
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High",
+        "urgent": "Urgent"
+    },
+    "dates": {
+        "seconds": "{number} second(s)",
+        "minutes": "{number} minute(s)",
+        "hours": "{number} hour(s)",
+        "days": "{number} day(s)",
+        "months": "{number} month(s)",
+        "years": "{number} year(s)"
+    },
+    "placeholder": {
+        "reportedAgainstPlaceholder": "Search, select in 3D or drop an object to set as Reported Against.",
+        "resolvedByPlaceholder": "Search, select in 3D or drop an object to set as Resolved by.",
+        "contextPlaceholder": "Search or drop an object to set as Contexts."
+    },
+    "lifecycle": {
+        "create": "Set the Issue(s) to NEW state to indicate you start to work on it.",
+        "assign": "Set the Issue(s) to PENDING state to allow assignees to work on it.",
+        "active": "Set the Issue(s) to ACTIVE state to indicate you are working on it.",
+        "review": "Set the Issue(s) to IN REVIEW state to allow the review of your fix.",
+        "closed": "Close the issue if everything has been fixed.",
+        "partial": "The operation failed for {number} issue(s).",
+        "error": "An error occurred, please refresh your page and retry.",
+
+        "notSupported": "Only issues with same maturity state and same validation process can be promoted or demoted.",
+        "routeIndicatorTooltip": {
+            "rejectionTitle": "Rejected by:",
+            "approvalTitle": "Approved by:",
+            "rejectionText": "{name} on {date}.",
+            "approvalText": "{name} on {date}.",
+            "moreTooltip": {
+                "title": "{number} decision(s)",
+                "approvalText": "Approved on {date}",
+                "rejectionText": "Rejected on {date}"
+            },
+            "inProgressTooltip": {
+                "title": "Waiting approval from:",
+                "multiSelectionTitle": "The selected issues are waiting approvals from multiple reviewers."
+            }
+        },
+        "approveModal": {
+            "reasonLabel": "Comment:",
+            "reasonPlaceholder": "Specify some comment...",
+            "header": "Approve promotion to {approveTo} state.",
+            "reasonRequired": "Please provide a comment.",
+            "actionLabel": "Action:",
+            "actionPlaceholder": "Specify some action to be done...",
+            "okButton": "Approve",
+            "cancelButton": "Cancel"
+        },
+        "rejectModal": {
+            "reasonLabel": "Reason:",
+            "reasonPlaceholder": "Specify the reason...",
+            "header": "Reject promotion to {approveTo} state and demote to {rejectTo}.",
+            "reasonRequired": "Please provide a reason.",
+            "actionLabel": "Action:",
+            "actionPlaceholder": "Specify some action to be done...",
+            "okButton": "Reject",
+            "cancelButton": "Cancel"
+        },
+        "paths": {
+            "anyStateToClose": "Allow close from any state by the issue owner.",
+            "approve": "Approve",
+            "reject": "Reject"
+        },
+        "orgs": {
+            "Reporting": "Reporting Organization",
+            "Responsible": "Responsible Organization"
+        }
+    },
+    "routes": {
+        "header": {
+            "states": "Maturity promotion",
+            "routes": "Decisions"
+        },
+        "columns": {
+            "reviewer": "Reviewer",
+            "date": "Decision date",
+            "reason": "Reason / Comment",
+            "action": "Action",
+            "attachments": "Attachments"
+        },
+        "attachmentsManagerTitle": "Maturity promotion decision [{fromState} -> {toState}] [{status}]",
+        "status": {
+            "approved": "Approved",
+            "rejected": "Rejected",
+            "inProgress": "In Progress"
+        },
+        "confirm": "Confirm",
+        "approve": "Approve"
+    },
+    "create": {
+        "title": "issue(s)",
+        "titleTemplate": "template(s)",
+        "titleActionCreate": "New",
+        "titleActionEdit": "Edit",
+        "templateApplySuccess": "Template '{name}' has been applied successfully.",
+        "templateApplyError": "An error occurred when applying template '{name}'.",
+        "templateApplyWarningAttachments": "Some attachments referenced by the template do not exist anymore. They could not be added.",
+        "issueApplySuccess": "Issue '{title} - {name}' has been applied successfully.",
+        "issueApplyError": "An error occurred when applying issue '{title} - {name}'.",
+        "required": "Required field must not be empty.",
+        "creationSuccess": "Issue created with success.",
+        "creationTemplateSuccess": "Template created with success.",
+        "updateTemplateSuccess": "Template updated with success.",
+        "creationFailed": "An error occurred during the creation, please retry again.",
+        "validationFailed": "Some fields are not properly filled.",
+        "promotionSuccess": "Issue promoted with success.",
+        "promotionFailed": "An error occurred during the promotion.",
+        "uploadImagesFailed": "An error occurred during the upload of images.",
+        "sendButton": "Send",
+        "saveButton": "Save",
+        "saveAsDraftButton": "Save as draft",
+        "cancelButton": "Cancel",
+        "modeToggler": {
+            "multiStep": "Multi-Step",
+            "fullView": "Full-View",
+            "tooltipMultiStep": "Switch to multi-step view",
+            "tooltipFullView": "Switch to full form view"
+        },
+        "start": {
+            "title": "Create issues and templates",
+            "cancelButton": "Cancel",
+            "actionPage": {
+                "issue": {
+                    "title": "Issue",
+                    "fromBlank": "New",
+                    "fromIssue": "Duplicate an issue",
+                    "fromTemplate": "From a template"
+                },
+                "template": {
+                    "title": "Template",
+                    "fromBlank": "New",
+                    "fromIssue": "From an existing issue",
+                    "edit": "Manage",
+                    "cloneSuffix": "[DUP]"
+                }
+            }
+        },
+        "views": {
+            "properties": "Properties",
+            "relatedObjects": "Related Object(s)",
+            "team": "Team",
+            "attachments": "Attachments",
+            "moreAttributes": "More Attributes",
+            "finalize": "Finalize"
+        },
+        "properties": {
+            "labels": {
+                "title": "Title",
+                "titlePlaceholder": "Title of the new issue...",
+                "titleHelper": "A brief one-line summary of the issue.",
+                "similarIssues": "Similar issues",
+                "similarIssuesHelper": "These existing issues have a similar title. It might be better to comment there instead of creating another similar issue.",
+                "description": "Description",
+                "descriptionPlaceholder": "Write a description...",
+                "descriptionHelper": "A detailed description of the issue. A set of ready to use rich-text features are available.",
+                "resolutionRecommendation": "Proposed Fix",
+                "resolutionRecommendationPlaceholder": "How should it be done?",
+                "resolutionRecommendationHelper": "A recommendation to explain how this issue should be fixed.",
+                "priorityHelper": "The importance of the issue in relation to other issues.",
+                "priorityHelperUrgent": "Urgent: Highest priority. Indicates that this issue takes precedence over all others.",
+                "priorityHelperHigh": "High: Indicates that this issue is causing a problem and requires urgent attention.",
+                "priorityHelperMedium": "Medium: Indicates that this issue has a significant impact.",
+                "priorityHelperLow": "Low: Indicates that this issue has a relatively minor impact.",
+                "dueDate": "Due Date",
+                "dueDatePlaceholder": "Select a Due Date...",
+                "dueDateHelper": "The date by which this issue should be completed.",
+                "resolutionStatement": "Resolution Statement",
+                "resolutionStatementPlaceholder": "How was the issue(s) fixed?"
+            }
+        },
+        "related": {
+            "labels": {
+                "reportedAgainst": "Reported Against",
+                "reportedAgainstHelper": "This relationship is used to link any objects to an issue, in order to identify them as 'faulty'. For example, it can be a 3D object, a document...",
+                "reportedAgainstPlaceholder": "Search, select in 3D or drop an object to set as Reported Against.",
+                "contexts": "Contexts",
+                "contextHelper": "Also called DMU Context, it is used to attach one object to the issue, for a better understanding of the issue. It can be another 3D object with a bigger structure, to be able to see the full context of an issue.",
+                "contextPlaceholder": "Search or drop an object to set as Context."
+            },
+            "search": "Search and add an object.",
+            "remove": "Remove selected object(s).",
+            "removeErrorNoSelection": "Please select some objects to be removed.",
+            "addBalloonAvailable": "Pick a precise element in the 3D to add it to the Issue.",
+            "addBalloonNotAvailable": "Pick in 3D feature is only available from 'Issue 3D Review'.",
+            "alreadyReportedAgainst": "This object has already been added, please select another one.",
+            "dropError": "The dropped objects are not supported.",
+            "selectContextIn3D": "Pick a precise element in the 3D to select context for the Issue.",
+            "contextMultiError": "Adding multiple objects in context is not supported.",
+            "treelist": {
+                "tree": "Title",
+                "ds6w:type": "Type",
+                "ds6w:identifier": "Name",
+                "ds6wg:revision": "Revision"
+            }
+        },
+        "team": {
+            "labels": {
+                "owner": "Owner",
+                "coOwners": "Co-owners",
+                "ownerHelper": "This relationship allows you to set the person who owns the issue, giving them all access rights.",
+                "coOwnersHelper": "This relationship allows you to add co-owner to the issue, giving them same access rights as the main owner.",
+                "assignees": "Assignees",
+                "assigneesHelper": "This relationship allows you to assign people to the issue (can be several). The person will now be able to see this issue in their list, and start to work on it.",
+                "reviewers": "Reviewers",
+                "participants": "Participants",
+                "assignToMe": "Assign To Me",
+                "responsibleOrganization": "Responsible Organization",
+                "responsibleOrganizationHelper": "Set the organization responsible of this issue (automatically populated once reported against is added)."
+            },
+            "alreadyAssigned": "{name} has already been assigned.",
+            "removeAssignee": "Click to remove this user.",
+            "cannotAddOwnerAsCoOwner": "You cannot add the owner as a co-owner."
+        },
+        "attachments": {
+            "labels": {
+                "attachmentsHelper": "Attachments can provide more insight regarding the content of the issue. They can be files of any kind, existing 3DEXPERIENCE objects or annotated screenshots of the Issue 3D Review app.",
+                "attachmentsPlaceholder": "Upload/drop a file, search/drop a 3DEXPERIENCE object or take an annotated screenshot button to create and add a new attachment.",
+                "attachmentsPlaceholderNotAvailable": "Upload/drop a file or search/drop a 3DEXPERIENCE object to create and add a new attachment.",
+                "attachments": "Attachments"
+            },
+            "screenshotAvailable": "Take a screenshot.",
+            "screenshotNotAvailable": "Screenshot feature is only available from 'Issue 3D Review'.",
+            "remove": "Remove selected document(s).",
+            "removeErrorNoSelection": "Please select some documents to be removed.",
+            "attach": {
+                "fromLocalDisk": "Upload files.",
+                "from3DX": "Search 3DEXPERIENCE objects."
+            },
+            "uploadDialog": {
+                "title": "Uploading {number} file(s)...",
+                "uploadCompleted": "{success}/{total} file(s) successfully uploaded."
+            }
+        },
+        "finalize": {
+            "labels": {
+                "lifecycle": "Lifecycle",
+                "approval": "Approval",
+                "template": "Template",
+                "saveAsTemplate": "Save as Template",
+                "templateNamePlaceholder": "The template's name (required field)...",
+                "templateDescriptionPlaceholder": "The template's description...",
+                "templateOverwrite": "An existing Template with same name will be overwritten."
+            },
+            "closeDialogToggle": "Close the dialog after creation.",
+            "promoteToAssignToggle": "Promote the issue directly to 'Pending' state.",
+            "enableApproval": "Enable the approval to ensure validation and review of this issue.",
+            "saveAsTemplateToggle": "Save the form as a reusable template."
+        }
+    },
+    "templates": {
+        "title": "Select a template",
+        "titleEdit": "Manage templates",
+        "cancelButton": "Cancel",
+        "closeButton": "Close",
+        "selectButton": "Select",
+        "treeList": {
+            "shared": "Shared",
+            "tree": "Name",
+            "description": "Description",
+            "owner": "Owner",
+            "isNotShared": "This is a private template",
+            "isShared": "This template is shared",
+            "placeholder": "No template available."
+        },
+        "iconBar": {
+            "title": "Templates",
+            "create": "New",
+            "fromIssue": "New from Issue",
+            "clone": "Duplicate",
+            "edit": "Edit",
+            "delete": "Delete",
+            "share": "Share"
+        },
+        "lastUsed": {
+            "title": "Recently used"
+        },
+        "preview": {
+            "objectCount": "objects",
+            "noObject": "No object"
+        },
+        "shared": {
+            "title": "Issue shared template - {owner}",
+            "description": "This document contains an issue shared template.",
+            "file": "Issue shared template - {owner}",
+            "popover": {
+                "title": "Link to this shared template",
+                "copy": "Copy link"
+            }
+        },
+        "confirmDelete": {
+            "title": "Deleting {number} template(s)",
+            "text": "Are you sure you want to delete the selected template(s)? It will remove them <b>permanently</b> and cannot be undone.",
+            "sharedInfo": "The shared template(s) that you don't owned will be removed <b>only from your list</b>.",
+            "sharedWarning": "The shared template(s) that you owned will be removed <b>from all users</b>.",
+            "okButton": "Delete",
+            "cancelButton": "Cancel"
+        },
+        "clonePrefix": "Duplicate of {name}",
+        "errors": {
+            "get": "An error occurred when retrieving templates, please refresh your page and retry.",
+            "remove": "An error occurred when removing templates, please refresh your page and retry.",
+            "save": "An error occurred when saving templates, please refresh your page and retry."
+        },
+        "notifications": {
+            "sharedSuccess": "This template has been shared, and a shareable URL has been generated.",
+            "sharedTemplateAdded": "A shared template has been successfully added to your template list.",
+            "sharedTemplateNotValid": "This shared template is not valid anymore. It has not been added to your template list.",
+            "sharedTemplateAlreadyAdded": "This shared template is already in your template list.",
+            "sharedTemplateNotAdded": "An error occurred while adding the shared template, please refresh your page and retry.",
+            "sharedTemplateURL": "The shared template URL has been copied to your clipboard."
+        }
+    },
+    "open": {
+        "dialog": {
+            "title": "Open object(s) in...",
+            "open": "Open",
+            "cancel": "Cancel"
+        },
+        "labels": {
+            "placeholder": "Select you application",
+            "contexts": "Contexts",
+            "reportedAgainst": "Reported against",
+            "resolvedBy": "Resolved by",
+            "nothing": "Nothing to open, please select another object."
+        },
+        "error": "An error occurred while opening the selected object(s), please refresh and retry."
+    },
+    "close": {
+        "preparing": "Preparing the closure...",
+        "title": "Closing {number} Issues(s)",
+        "nothing": "There are no issues to close.",
+        "close": "Close",
+        "cancel": "Cancel",
+        "warning": "Are you sure you want to close these issues?",
+        "closable": "Closing the following issue(s) will prevent any modification, unless reopened:",
+        "indelible": "The following issue(s) are already closed:",
+        "singleSuccess": "{title} has been closed.",
+        "multipleSuccess": "{number} Issues have been closed.",
+        "error": "An error occurred during the closure, please retry."
+    },
+    "delete": {
+        "preparing": "Preparing the deletion...",
+        "title": "Deleting {number} Issues(s)",
+        "nothing": "There are no issues to delete.",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "warning": "Are you sure you want to delete this content?",
+        "deletable": "Deleting the following issue(s) will remove them <b>permanently</b> and cannot be undone:",
+        "indelible": "The following issue(s) cannot be deleted, they are not in 'New' state:",
+        "singleSuccess": "{title} has been deleted.",
+        "multipleSuccess": "{number} Issues have been deleted.",
+        "error": "An error occurred during the deletion, please retry."
+    },
+    "duplicate": {
+        "title": "Duplicate {number} issues(s).",
+        "preparing": "Preparing the duplication...",
+        "duplicate": "Duplicate",
+        "cancel": "Cancel",
+        "content": "The following issue(s) will be duplicated (<i>the duplicated issue(s) will be under your ownership in 'New' state</i>):",
+        "singleSuccess": "{title} has been duplicated.",
+        "multipleSuccess": "{number} issues have been duplicated.",
+        "multipleCopiesSuccess": "{number1} issue(s) have been duplicated {number2} times.",
+        "error": "An error occurred during the duplication, please retry.",
+        "keepAttachments": "Keep existing attachments in duplicated issues",
+        "advancedOptions": "Advanced duplicate",
+        "titleModifier": "Title Modifiers",
+        "copyCount": "Number of copies",
+        "replace": "Replace",
+        "replacePlaceholder": "Replace String from Title",
+        "suffix": "Suffix",
+        "suffixPlaceholder": "Suffix for Title",
+        "prefix": "Prefix",
+        "prefixPlaceholder": "Prefix for Title",
+        "iterator": "Iterator",
+        "iteratorPlaceholder": "Iterator pattern",
+        "replaceHelp": "Provide part of title to be replaced as a string or regular expression followed by string to be replaced with. Both parts will be separated by :. e.g. [a-z]*:Test will replace all small case strings in title with Test",
+        "suffixHelp": "Provide string to suffix Title of duplicated issues",
+        "prefixHelp": "Provide string to prefix Title of duplicated issues",
+        "iteratorHelp": "Provide the part of title to be incremented after duplication as string or regular expression. Numeric part will be incremented",
+        "confirmTitle": "Confirm duplicating {number} issues(s).",
+        "confirm": "Confirm",
+        "confirmMsg": "Issue {title} will be duplicated as"
+    },
+    "images": {
+        "title": "{count} Image(s)",
+        "actions": {
+            "download": "Download",
+            "upload": "Upload",
+            "delete": "Delete",
+            "popup": "Popup",
+            "annotate": "Markup"
+        },
+        "noImages": "No images to show.",
+        "popup": {
+            "title": "Image Display",
+            "holdIssue": "Hold Issue",
+            "releaseIssue": "Release Issue"
+        },
+        "delete": {
+            "cancel": "Cancel",
+            "confirmDeleteTitle": "Delete Image",
+            "confirmDeleteMessage": "Are you sure you want to permanently delete this image?",
+            "imageDisplayDeleteError": "Error when deleting images",
+            "okButton": "OK",
+            "pictureDeleted": "Image file(s) has been deleted."
+        },
+        "notSupported": "This file format is not supported. <br>File: {name}.",
+        "errorUpload": "Cannot upload the image {name}.",
+        "pictureUploaded": "Image file(s) has been uploaded."
+    },
+    "team": {
+        "title": "{count} Member(s)",
+        "error": {
+            "loadContent": "Cannot retrieve issue information.",
+            "alreadyAdded": "The user {name} has already been added to the {role} of selected issue(s).",
+            "isOwner": "The user {name} is the owner of the selected issue(s) and hence cannot be added as a co-owner.",
+            "update": "Failed to update Issues {role}",
+            "notSupportedDrop": "The dropped objects are not supported.",
+            "notFound": "No result found."
+        },
+        "success": {
+            "update": "Issues {role} has been updated."
+        },
+        "filter": {
+            "title": "Filter",
+            "placeholder": "Filter team members"
+        },
+        "owner": {
+            "title": "Owner",
+            "changeOwnership": "Change ownership"
+        },
+        "confirmRemoveTitle": "Remove '{user}' from '{role}'",
+        "confirmRemoveText": "Are you sure you want to remove '{user}' from '{role}'?",
+        "removeOkButton": "Remove",
+        "removeCancelButton": "Cancel",
+        "coOwners": {
+            "title": "Co-owners",
+            "add": "Add a co-owner",
+            "propagate": "Propagate this co-owner to all selected issue(s)",
+            "propagateAll": "Propagate all co-owners to all selected issue(s)",
+            "remove": "Remove co-owner from selected issue(s)",
+            "search": {
+                "placeholder": "Search a user to add as co-owner..."
+            },
+            "addSelf": "Assign to Me"
+        },
+        "assignees": {
+            "title": "Assignees",
+            "add": "Add an assignee",
+            "propagate": "Propagate this assignee to all selected issue(s)",
+            "propagateAll": "Propagate all assignees to all selected issue(s)",
+            "remove": "Remove assignee from selected issue(s)",
+            "search": {
+                "placeholder": "Search a user to add as assignee..."
+            },
+            "addSelf": "Assign yourself"
+        },
+        "participants": {
+            "title": "Participants",
+            "add": "Add a participant",
+            "propagate": "Propagate this participant to all selected issue(s)",
+            "propagateAll": "Propagate all participants to all selected issue(s)",
+            "remove": "Remove participant from selected issue(s)",
+            "search": {
+                "placeholder": "Search a user to add as participant..."
+            }
+        },
+        "common": {
+            "tooltip": "This member is assigned to all selected Issues.",
+            "label": "Is Assigned",
+            "notLabel": "Varies"
+        },
+        "notSaved": {
+            "tooltip": "This member has not been saved yet."
+        },
+        "changeLayout": "Change view Layout"
+    },
+    "search": {
+        "error": {
+            "usersNotFound": "Not able to find the users: {users}.",
+            "orgNotFound": "Not able to find the organization."
+        },
+        "info": {
+            "expressSearch": "Press Enter to add these users."
+        }
+    },
+    "resolveIssues": {
+        "title": "Resolve Issue(s)",
+
+        "okButton": "OK",
+        "cancel": "Cancel",
+
+        "reportedAgainst": "Reported Against",
+        "resolvedBy": "Resolved by",
+        "issue": "Issue",
+        "items": "{count} Item(s)",
+        "revisionFamily": "Revision Family",
+
+        "searchObjects": "Search object(s)",
+        "pickObjects": "Pick object",
+        "addObjectsForReportedAgainst": "Add to Reported Against",
+        "addObjectsForResolvedBy": "Add to Resolved By",
+        "changeViewLayout": "Change View Layout",
+
+        "tooltips": {
+            "propagateTooltip": "Propagate to selected issues.",
+            "isLastRevision": "This is the last revision",
+            "isNotLastRevision": "This is not the last revision",
+            "noIsLastRevision": "Not applicable"
+        },
+
+        "contextualMenus": {
+            "detach": "Detach",
+            "propagate": "Propagate",
+            "history": "History",
+            "compare": "Compare",
+            "whereused": "Where used",
+            "openWith": "Open with",
+            "replaceByRevision": "Replace by revision",
+            "replaceByLatestRevision": "Replace by latest revision",
+            "replaceByReleasedLatestRevision": "Replace by released latest revision",
+            "replaceByStableLatestRevision": "Replace by stable latest revision"
+        },
+
+        "label": "Title",
+        "name": "Name",
+        "type": "Type",
+        "revision": "Revision",
+        "isLastRevision": "Is Last Revision",
+        "common": "",
+        "state": "Maturity State",
+
+        "pickupError_needtoExitInspectionMode": "Cannot pick object if you are in inspection mode.",
+        "successResolved": "Related Object(s) are updated.",
+        "errorResolved": "Cannot update Related Object(s).",
+        "nothingToAdd": "Selected object(s) have been already added.",
+        "nothingToReplace": "There is no object(s) to replace.",
+        "errorFetch": "Cannot retrieve object information.",
+        "errorGetIssues": "Cannot retrieve issue information.",
+        "errorShowIssues": "Please select issue(s) which is in active state, then retry.",
+        "errorNotSupportedMultipleObject": "Multiple object is not supported.",
+        "errorNotSupportedObject": "This object is not supported.",
+        "issueNotDroppable": "This object is not supported.",
+        "propertiesTitle": "Properties",
+
+        "confirmDialog": {
+            "detachTitle": "Detach {number} object(s) from {issues} issue(s)",
+            "confirmDetach": "Are you sure you want to detach the selected object(s)?",
+            "propagateTitle": "Propagate {number} object(s) to {issues} issue(s)",
+            "confirmPropagate": "Are you sure you want to propagate the selected object(s)?",
+            "replaceByLatestRevisionTitle": "Replace {number} object(s) by latest revision in {issues} issue(s)",
+            "confirmReplaceByLatestRevision": "Are you sure you want to replace the selected object(s) by latest revision?",
+            "replaceByReleasedLatestRevisionTitle": "Replace {number} object(s) by released latest revision in {issues} issue(s)",
+            "confirmReplaceByReleasedLatestRevision": "Are you sure you want to replace the selected object(s) by released latest revision?",
+            "replaceByStableLatestRevisionTitle": "Replace {number} object(s) by stable latest revision in {issues} issue(s)",
+            "confirmReplaceByStableLatestRevision": "Are you sure you want to replace the selected object(s) by stable latest revision?",
+            "confirmReplaceByTitleMessage": "{target} replaced by {latest}"
+        },
+
+        "contexts": {
+            "okButton": "OK",
+            "cancel": "Cancel",
+            "contexts": "Contexts",
+            "columnTitle": "Title",
+            "columnName": "Name",
+            "columnType": "Type",
+            "columnRevision": "Revision",
+            "addContext": "Add Context",
+            "pickContext": "Pick Context",
+            "detachContext": "Detach Context",
+            "contextualMenus": {
+                "detach": "Detach",
+                "propagate": "Propagate",
+                "history": "History",
+                "compare": "Compare",
+                "whereused": "Where used",
+                "openWith": "Open with"
+            },
+            "errorNotSupportedMultipleObject": "Multiple object is not supported.",
+            "errorNotSupportedObject": "This object is not supported.",
+            "errorToGetContext": "Cannot retrieve context object information.",
+            "successUpdateContext": "Context has been updated.",
+            "successDetachContext": "Context has been detached.",
+            "errorUpdateContext": "Cannot update context.",
+            "errorDetachContext": "Cannot detach context.",
+            "confirmDetachContextTitle": "Detach Context",
+            "confirmDetachContextMessage": "Are you sure you want to detach this context?",
+            "confirmUpdateContextTitle": "Update Context",
+            "confirmUpdateContextMessage": "Are you sure you want to update this context?"
+        }
+    },
+    "tasks": {
+        "selectIn3D": "Please provide an existing object to add, picked from a compatible 3D application.",
+        "addObjects": "Please provide some existing object(s) to add.",
+        "takeScreenshot": "Please provide an image to add."
+    },
+    "helper": {
+        "states": {
+            "create": "Issue was created by requestor.",
+            "assign": "Requestor assigned the issue, to allow assignees to work on it.",
+            "active": "Issue is being worked on by the assignees.",
+            "review": "The proposed solution is being reviewed by the issue creator.",
+            "closed": "Solution is accepted by the creator and the issue is closed."
+        },
+        "dialog": {
+            "title": "Issue Management Applications - Help",
+            "tabStates": "States",
+            "tabShortcuts": "Shortcuts",
+            "subtitleShortcuts": "Shortcut keys",
+            "subtitleMouseOperation": "Mouse operations",
+            "workflow": "Workflow",
+            "states": {
+                "create": "Issue was created by requestor.",
+                "assign": "Requestor assigned the issue, to allow assignees to work on it.",
+                "active": "Issue is being worked on by the assignees.",
+                "review": "The proposed solution is being reviewed by the issue creator.",
+                "closed": "Solution is accepted by the creator and the issue is closed."
+            },
+            "shortcut": {
+                "key": {
+                    "shortcut": {
+                        "delete": "Delete",
+                        "arrowUp": "Up",
+                        "arrowDown": "Down",
+                        "arrowLeft": "Left",
+                        "arrowRight": "Right",
+                        "enter": "Enter",
+                        "shiftArrow": "Shift + Arrows",
+                        "ctrlA": "Ctrl + A",
+                        "ctrlC": "Ctrl + C"
+                    },
+                    "mouse": {
+                        "ctrlClick": "Ctrl + Click",
+                        "shiftClick": "Shift + Click",
+                        "doubleClick": "Double click"
+                    }
+                },
+                "detail": {
+                    "shortcut": {
+                        "delete": "Delete/Detach item",
+                        "arrowUp": "Go to previous item",
+                        "arrowDown": "Go to next item",
+                        "arrowLeft": "Collapse item/Go to previous item",
+                        "arrowRight": "Expand item/Go to next item",
+                        "enter": "Open properties panel/Submit text input",
+                        "shiftArrow": "Select multiple items",
+                        "ctrlA": "Select all items",
+                        "ctrlC": "Copy selected item"
+                    },
+                    "mouse": {
+                        "ctrlClick": "Select multiple items that you click/Unselect",
+                        "shiftClick": "Select all items in between your click",
+                        "doubleClick": "Open properties panel/Expand or Collapse item"
+                    }
+                }
+            }
+        }
+    },
+    "users": {
+        "more": "More info"
+    }
+}

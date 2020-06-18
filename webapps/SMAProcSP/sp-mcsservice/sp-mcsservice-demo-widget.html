@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+    <!-- Application Metas -->
+    <title>Web Components template widget</title>
+    <meta name="apiVersion" content="1.3" />
+    <meta name="autoRefresh" content="0" />
+
+    <!-- Load the web components polyfill -->
+    <script type="text/javascript" src="../../Polymer/platform.js"></script>
+
+    <!-- Load AmdLoader -->
+    <script type="text/javascript" src="../../AmdLoader/AmdLoader.js"></script>
+
+    <!-- Load the UWA framework -->
+    <script type="text/javascript" src="../../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../c/UWA/assets/css/standalone.css" />
+
+    <widget:preferences>
+      <widget:preference name="serviceUrl" type="text" label="Service URL" defaultValue="../bps/cspaces" />
+      <widget:preference name="collabspace" type="list" label="Collabspaces" defaultValue="">
+        <widget:option label="None" value="" />
+        <widget:option label="Dummy" value="dummy" />
+        <widget:option label="3DS Collab Space" value="ctx::VPLMProjectLeader.MyCompany.3DS Collab Space" />
+      </widget:preference>
+    </widget:preferences>
+
+    <!-- Load Polymer and any other web components -->
+    <link rel="import" href="sp-mcsservice.html"/>
+
+
+    <!-- Application Source -->
+    <style type="text/css">
+    </style>
+    <script type="text/javascript">
+    /* globals require, widget*/
+    require(['UWA/Core'],
+       function () {
+            var WebComponentWidget = {
+                onLoad: function () {
+                    var mcservices = widget.getElement('sp-mcsservice');
+                    mcservices.setAttribute('uri', widget.getValue('serviceUrl'));
+                    widget.getElement('template').model = mcservices;
+                    if (window.console && window.console.log) {
+                        window.console.log(mcservices);
+                    }
+                }
+            };
+            widget.addEvents(WebComponentWidget);
+        }
+    );
+    </script>
+</head>
+<body>
+    <h1>&lt;sp-mcsservice&gt; sample</h1>
+    <p>This component extends &lt;sp-webservice&gt; to add a SecurityContext parameter to every request if it is defined.</p>
+    <p>It will look for the security context (of the form <em>ctx::VPLMProjectLeader.MyCompany.3DS Collab Space</em>) in</p>
+    <ol>
+      <li>a <em>securityContext</em> attribute on the component</li>
+      <li>a widget preference named <em>collabspace</em> or <em>collabspace</em> if running in the dashboard</li>
+      <li>a <em>securityContext</em> property of the global scope </li>
+    </ol>
+    <p>Note that it will not observe securityContext changes to issue new calls.</p>
+    <hr />
+    <sp-mcsservice getasap uri="{{ serviceUri }}" data="{{ response }}" json="false"></sp-mcsservice>
+    <template is="auto-binding">
+        URI: <kdb>{{ uri }}</kdb>
+        <br />
+        Content: <pre>{{ data }}</pre>
+    </template>
+</body>
+</html>

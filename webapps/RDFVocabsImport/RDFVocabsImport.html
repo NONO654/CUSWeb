@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+
+<!-- Application Metas -->
+<title>Vocabularies Management</title>
+<meta name="author" content="lrg" />
+<meta name="apiVersion" content="1.3" />
+<meta name="debugMode" content="true" />
+<meta name="strictMode" content="true" />
+<meta name="description" content="A widget to manage tenant vocabularies" />
+<meta name="keywords" content="vocabulary, rdf" />
+<meta name="version" content="2.0" />
+<meta name="inline" content="true" />
+
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+<!-- UWA Application Standalone emulation files -->
+<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+ <script type="text/javascript" src="../RDFVocabsImport/RDFVocabsImport.js"></script>
+
+<!-- Application Styles -->
+<style type="text/css">
+div.select {
+    margin-left: 20px;
+}
+</style>
+
+<!-- Widget Preferences -->
+<widget:preferences>
+    <!-- <preference name="use_local_storage" type="boolean" label="Use local storage to persist todos" defaultValue="true" /> -->
+    <!-- <preference name="debug" type="boolean" label="Enable logging to debug" defaultValue="true" /> -->
+    <preference name="dflt_cs_id" type="hidden" label="the default collab storage id to show" defaultValue="" />
+</widget:preferences>
+
+<!-- This is required to configure RequireJS with the appropriate pathes : -->
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+<script type="text/javascript">
+// to prevent any error if dependencies is not defined :
+var dependencies = dependencies || [];
+
+require([
+    'DS/RDFVocabsImport/model/VocabsApp',
+    'DS/RDFVocabsImport/view/AppView'
+].concat(dependencies), function (VocabsApp, AppView) {
+
+    'use strict';
+
+    widget.addEvents({
+        /*
+        The "onLoad" event is the very first event triggered when
+        the widget is fully loaded or when the preferences are validated.
+        Here, we initialize the App when the widget is loaded. (We are sure at
+        this point that the DOM is ready) :
+        */
+        onLoad: function () {
+
+            var mainView;
+
+            VocabsApp.setup({ /* attributes */
+            }, { /* options */
+                debugMode: true
+            });
+
+            // Now create the App's main view,
+            // and -- instead of generating a new element -- bind it to the
+            // existing HTML skeleton of the App already present in the page
+            // (namely the div.vocabsview here)
+            // Note that :
+            //  * at this point, this mainView is not yet rendered in the DOM
+            //  * we don't need to keep a reference such as this.mainView because
+            //      this view will never get destroyed anyway... (really?)
+            mainView = new AppView({
+                container: widget.getElement('div.AppView'),
+                app: VocabsApp,
+                debugMode: true
+            });
+
+            // We only create the
+            // main view, it will be responsible for layouting and rendering its
+            // subviews.
+            mainView.render();
+
+            // kicks things off by calling reset() on the App:
+            //VocabsApp.reset();
+        },
+
+        /*
+        The "onRefresh" event is triggered when the widget is refreshed (manually
+        or programmatically)
+        Here we force a new fetch of the data, that also forces the re-rendering
+        of the whole view. This is done by calling our reset() API :
+        */
+        //SGA5: IR-506846: The tenant should not be displayed directly in the widget 
+        /*onRefresh: function () {
+            VocabsApp.reset();
+        }*/
+    });
+});
+</script>
+    </head>
+    <body>
+        <div class="AppView" style="padding: 20px;">
+            <table style="margin-bottom: 20px;">
+                <tbody>
+                    <tr>
+                        <td style="white-space: nowrap;" class="vocabs_for_tenant"></td>
+                        <td class="tenant_select" style="width: 99%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="vocabularies table table-striped table-bordered">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+            <div class="RDFImportView">
+                <input id="RDFFileInput" type="file" style="visibility:hidden;position:absolute;top:-50;left:-50" />
+                <input type="text" class="form-control" style="vertical-align:middle;display:inline;width:300px;border-radius:4px 0 0 4px;"/><button type="button" class="choose btn btn-default" style="border-radius:0 4px 4px 0;"></button>
+            </div>
+        </div>
+    </body>
+</html>

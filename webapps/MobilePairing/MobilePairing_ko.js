@@ -1,0 +1,1 @@
+define("DS/MobilePairing/MobilePairing_ko",{});define("DS/MobilePairing/assets/nls/mobilePairing",{description:"다음 코드를 사용하여 3DEXPERIENCE Platform에서 모바일 앱 페어링"});

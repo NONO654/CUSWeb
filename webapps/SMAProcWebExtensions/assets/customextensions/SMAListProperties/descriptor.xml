@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.listproperties" version="3DX.0" xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" extensionKind="FunctionConnector">
+    <DisplayName>Properties Showroom</DisplayName>
+    <Description>Showcase the various property types usage</Description>
+    <LongDescription>
+        Illustrate how the various property get displayed using the `generic` editor, and how their value are using the `list properties` executor.
+    </LongDescription>
+
+    <Attributes>
+        <Attribute name="Category">
+            <Value>Activity</Value>
+        </Attribute>
+        <Attribute name="DefaultDialogSize">
+            <Value>600</Value>
+            <Value>500</Value>
+        </Attribute>
+    </Attributes>
+
+    <Streams>
+        <Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebGenericEditor/cmp-generic.html" targetFilename="SMAProcWebGenericEditor/cmp-generic.html"/>
+        <Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+    </Streams>
+
+    <Interfaces>
+        <Interface interfaceKind="WebtopEditor">
+            <Implementations>
+                <Implementation name="webEditor" language="web" platform="win_b64">
+                    <LateType>cmp-generic</LateType>
+                    <StreamRefs>
+                        <StreamRef refStreamName="Web_Editor"/>
+                    </StreamRefs>
+                </Implementation>
+            </Implementations>
+        </Interface>
+        <Interface interfaceKind="DesktopEditor">
+            <Implementations>
+                <Implementation name="webEditor" language="web" platform="win_b64">
+                    <LateType>SMAWflWebExtensionEditor</LateType>
+                    <StreamRefs>
+                        <StreamRef refStreamName="Web_stylesheet"/>
+                        <StreamRef refStreamName="Web_Editor"/>
+                    </StreamRefs>
+                </Implementation>
+            </Implementations>
+        </Interface>
+    </Interfaces>
+
+    <Properties>
+        <Property name="aString" type="string" valuetype="single">
+            <Value><![CDATA[Sample string]]></Value>
+        </Property>
+        <Property name="aMultilineString" type="string" valuetype="single" subtype="multiline">
+            <Value><![CDATA[Sample
+          Multiline
+          String]]></Value>
+        </Property>
+        <Property name="aBoolean" type="boolean" valuetype="single">
+            <Value>false</Value>
+        </Property>
+        <Property name="anInteger" type="integer" valuetype="single">
+            <Value>42</Value>
+        </Property>
+        <Property name="aReal" type="real" valuetype="single">
+            <Value>3.14</Value>
+        </Property>
+        <Property name="aFile" type="file" valuetype="single" mode="input" subtype=".txt, .csv">
+            <Value/>
+        </Property>
+        <Property name="aPlmObject" type="plmobject" valuetype="single" subtype="Part, Requirement">
+            <Value/>
+        </Property>
+        <Property name="aStringWithDisplayName" type="string" valuetype="single">
+            <DisplayName>String display name</DisplayName>
+            <Value><![CDATA[Another sample string]]></Value>
+        </Property>
+        <Property name="aStringWithExpressionParamA" type="string" valuetype="single">
+            <Value />
+            <Expression>${PARAMETER[A]}</Expression>
+        </Property>
+        <Property name="aStringWithSceExpressionParamA" type="string" valuetype="single">
+            <Value />
+            <Expression syntax="SCE">${PARAMETER[A]}</Expression>
+        </Property>
+        <Property name="aStringWithExpressionRundir" type="string" valuetype="single">
+            <Value />
+            <Expression>${RUNDIR}</Expression>
+        </Property>
+        <Property name="aStringWithSceExpressionRundir" type="string" valuetype="single">
+            <Value />
+            <Expression syntax="SCE">${RUNDIR}</Expression>
+        </Property>
+
+        <Property name="anAggregate" type="aggregate" valuetype="single">
+            <Property name="anAggregateString" type="string" valuetype="single">
+                <Value/>
+            </Property>
+            <Property name="anAggregateAggregateg" type="aggregate" valuetype="single">
+                <Property name="anAggregateAggregategString" type="string" valuetype="single">
+                    <DisplayName>Aggregated string</DisplayName>
+                    <Value/>
+                </Property>
+            </Property>
+        </Property>
+    </Properties>
+</wfext:Extension>

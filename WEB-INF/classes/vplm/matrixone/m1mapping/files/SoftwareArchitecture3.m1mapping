@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns="http://www.3ds.com/enovia-matrixone/vplm-m1/mapping" version="7">
+
+  <!-- Package -->
+  <pattern.VPLM_PACKAGE>
+    <vplm.Package name="SoftwareArchitecture3" />
+    <m1.package name="SoftwareArchitecture3" />
+
+    <!-- RelationClass -->
+    <pattern.VPLM_RELATIONCLASS>
+      <vplm.PLMCoreInstance name="EEClientServerPortPrototype" />
+      <m1.relationship name="EEClientServerPortPrototype" />
+
+    </pattern.VPLM_RELATIONCLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="EEClientServerInterface" />
+      <m1.type name="EEClientServerInterface" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="isSynchronous" />
+        <m1.attribute name="EEClientServerInterface.isSynchronous" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="queueLength" />
+        <m1.attribute name="EEClientServerInterface.queueLength" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreRepReference name="EEClientServerInterfaceRep" />
+      <m1.type name="EEClientServerInterfaceRep" />
+
+    </pattern.VPLM_CLASS>
+
+    <!-- Class -->
+    <pattern.VPLM_CLASS>
+      <vplm.PLMCoreReference name="EEExecutableEntity" />
+      <m1.type name="EEExecutableEntity" />
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="WCET" />
+        <m1.attribute name="EEExecutableEntity.WCET" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+      <!-- Simple -->
+      <pattern.VPLM_SIMPLE>
+        <vplm.Simple name="minimalIntervalStart" />
+        <m1.attribute name="EEExecutableEntity.minimalIntervalStart" local="yes" />
+      </pattern.VPLM_SIMPLE>
+
+    </pattern.VPLM_CLASS>
+
+  </pattern.VPLM_PACKAGE>
+
+</mapping>

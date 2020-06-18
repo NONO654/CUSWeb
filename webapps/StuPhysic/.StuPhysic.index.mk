@@ -1,0 +1,17 @@
+m|StudioCreativeCntModelRTWeb\StuPhysic.mweb
+b|j|n,u
+b|c|c,m
+v|6.421.8.19221
+r|G:\R421\BSF\.
+t|win_b64\webapps\StuPhysic\StuCDSDynFactoryNA.js|1506086828|560
+s|StudioCreativeCntModelRTWeb\StuPhysic.mweb\src\StuCDSDynFactoryNA.js|1506086828|560
+t|win_b64\webapps\StuPhysic\StuPhysicsInteractor.js|1540979031|36336
+s|StudioCreativeCntModelRTWeb\StuPhysic.mweb\src\StuPhysicsInteractor.js|1540979031|36336
+t|win_b64\webapps\StuPhysic\StuPhysicManagerNa.js|1531125538|10632
+s|StudioCreativeCntModelRTWeb\StuPhysic.mweb\src\StuPhysicManagerNa.js|1531125538|10632
+t|win_b64\webapps\StuPhysic\StuPhysicDefine.js|1507022119|381
+s|StudioCreativeCntModelRTWeb\StuPhysic.mweb\src\StuPhysicDefine.js|1507022119|381
+t|win_b64\webapps\StuPhysic\StuPhysicRigidBody.js|1565166055|50211
+s|StudioCreativeCntModelRTWeb\StuPhysic.mweb\src\StuPhysicRigidBody.js|1565166055|50211
+t|win_b64\webapps\StuPhysic\StuCDSDynFactory.js|1506608930|159
+s|StudioCreativeCntModelRTWeb\StuPhysic.mweb\src\StuCDSDynFactory.js|1506608930|159

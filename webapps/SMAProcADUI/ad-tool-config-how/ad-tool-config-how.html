@@ -1,0 +1,93 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu/sp-dropdown-menu.html">
+<link rel="import" href="../../SMAProcSPUI/sp-dropdown-menu-item/sp-dropdown-menu-item.html">
+<link rel="import" href="../ad-tool-manager/ad-tool-manager.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="ad-tool-config-how">
+  <link rel="import" type="css" href="ad-tool-config-how.css">
+  <template>
+      <style include="sp-uikit-styles"></style>
+
+		<ad-tool-manager id="toolManager"></ad-tool-manager>
+
+        <div class="content-section-heading chrome-pull-fix">
+		    <div class="pull-left content-section-title">Tool Configuration</div>
+        </div>
+        <div class="clearfix"></div>
+       	<div class="content-section-body">
+		 	<div id="previewSection">
+			  	<div class="preview-command">
+				    <pre>&gt;&nbsp;<span id="previewPlaceholder" class="preview-placeholder" on-click="onPreviewEditStart">[Click to edit command line]</span><span id="previewText" on-click="onPreviewEditStart" title="Click to edit command line"></span><input type="text" id="previewEdit" on-change="onPreviewEditFinish" on-blur="onPreviewEditFinish" class="hidden"><button id="revertOverride" type="button" class="btn btn-xs btn-default pull-right hidden" title="Revert to pre-defined options" on-click="onRevertOverride"><span class="fonticon fonticon-back"></span></button></pre>
+			  	</div>
+		 	</div>
+	        <div class="clearfix"></div>
+       		<div id="optionsSection" class="hidden">
+	            <div class="fixed-table-container hidden-head">
+			      <div class="header-background"> </div>
+				      <div class="fixed-table-container-inner">
+				        <table id="optionsTable" class="how-table" cellspacing="0">
+				          <thead>
+				            <tr>
+				              <th class="first">
+				                <div class="th-inner"></div>
+				              </th>
+				              <th>
+				                <div class="th-inner second">Option
+					 				<button id="filterButton" title="Filter configuration options" class="btn btn-xs filter-button" style="vertical-align:text-top;margin:0px;padding:0px 5px;" on-click="onFilter">
+							    		<span class="caret"></span>
+					                </button>
+					                
+									<sp-dropdown-menu id="filterMenu"> 
+										<sp-dropdown-menu-item label="Selected options" labeltype="item" on-click="onFilterSelected" class="command-menu-item"></sp-dropdown-menu-item> 
+										<sp-dropdown-menu-item label="All options" on-click="onFilterAll" class="command-menu-item"></sp-dropdown-menu-item>
+									</sp-dropdown-menu>
+				                </div>
+				              </th>
+				              <th>
+				                <div class="th-inner">Value</div>
+				              </th>
+			                       </tr>
+			                       <tr class="hidden-header">
+			                           <th class="first">
+			                               <div class="th-inner"></div>
+			                           </th>
+			                           <th>
+			                               <div class="th-inner second">Option</div>
+			                           </th>
+			                           <th>
+			                               <div class="th-inner">Value</div>
+			                           </th>
+			                       </tr>
+			            	</thead>
+				        	<tbody id="configurationTableBody">
+							</tbody>
+				      	</table>
+				    </div>
+			 	</div>
+       		</div>
+		 	<!-- The loading and alert messages need to have the relative position declared inline in order to work in Firefox and IE -->
+       		<div id="loadingSection" class="hidden"></div>
+       		<div id="configurationErrorNone" class="hidden">
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				No tool is currently selected.
+				</div>
+       		</div>
+       		<div id="configurationErrorMultiple" class="hidden">
+				<div id="statusMessage" class="alert-message alert-warning" style="position:relative">
+				This configuration section can only be edited for a single tool.
+				</div>
+       		</div>
+       		<div id="configurationErrorOptions" class="hidden">
+				<div id="statusMessage" class="alert-message alert-error" style="position:relative">
+				An error occurred trying to retrieve options for the connector in use by this tool.  Please try again or contact your administrator.
+				</div>
+       		</div>
+        </div>
+                
+	</template>
+  <script src="ad-tool-config-how.js"></script>
+</dom-module>
+
+

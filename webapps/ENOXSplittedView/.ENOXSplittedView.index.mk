@@ -1,0 +1,9 @@
+m|ENOXAppsFoundationsUX\ENOXSplittedView.mweb
+b|j|n,u
+b|c|n,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\ENOXSplittedView\js\ENOXSplittedView.js|1494851662|8903
+s|ENOXAppsFoundationsUX\ENOXSplittedView.mweb\src\js\ENOXSplittedView.js|1494851662|8903
+t|win_b64\webapps\ENOXSplittedView\css\ENOXSplittedView.css|1568749442|300
+s|ENOXAppsFoundationsUX\ENOXSplittedView.mweb\src\css\ENOXSplittedView.css|1494841225|380

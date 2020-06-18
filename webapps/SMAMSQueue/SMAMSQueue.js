@@ -1,0 +1,2 @@
+/*! Copyright 2016 Dassault Systemes */
+define("DS/SMAMSQueue/SMAMSQueue",[],function(){var d=[];var b=false;var c=function(){if(b||d.length===0){return}b=true;var i=d.shift();var g=function(){i.onComplete.apply(null,arguments);b=false;c()};var f=function(){i.onFailure.apply(null,arguments);b=false;c()};try{i.method(g,f)}catch(h){f(h)}};var a={};a.add=function(g,f,e){d.push({method:g,onComplete:f,onFailure:e});c()};a.isBusy=function(){return b};return a});

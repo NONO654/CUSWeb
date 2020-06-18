@@ -1,0 +1,1 @@
+define("DS/HomePage/HomePage_ja",{});define("DS/HomePage/assets/nls/HomePage",{HomePage_SearchContent:"コンテンツを検索",HomePage_CreateRequirementSpecification:"要求仕様を作成",HomePage_CreateSpecificationFolder:"仕様フォルダーを作成",HomePage_Or:"または"});

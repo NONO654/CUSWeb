@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="PIMwebI3DwkbHdr" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID="PIMInteferenceListHdr" ClassName="DS/PIMwebViewController/PIMwebInteferenceListCmd" HelpResourceFile="PIMwebViewController/PIMwebViewController" ResourceFile="PIMwebViewController/PIMwebViewController" Behavior="CATAfrHeaderCheck" />
+      <CATCommandHeader ID="CATWebUXSlideShowHdr"  ClassName="DS/CATWebUXSlideShow/CATWebUXSlideShowCmd" HelpResourceFile="CATWebUXSlideShow/CATWebUXSlideShow" ResourceFile="CATWebUXSlideShow/CATWebUXSlideShow" Behavior="CATAfrHeaderCheck" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="ControllerID" Value="PIMwebSlideShow" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="PIMwebPreferencesHdr" ClassName="DS/PIMwebViewController/PIMwebPreferencesCmd" HelpResourceFile="PIMwebViewController/PIMwebViewController" ResourceFile="PIMwebViewController/PIMwebViewController" />
+
+      <CATCommandHeader ID="CATRelatedData3DGridHdr" ClassName="DS/CATRelatedData3DGrid/CATRelatedData3DGridCmd" HelpResourceFile="CATRelatedData3DGrid/CATRelatedData3DGrid" ResourceFile="CATRelatedData3DGrid/CATRelatedData3DGrid" Behavior="CATAfrHeaderCheck"/>
+      <CATCommandHeader ID="measure3CmdHdr" ClassName="DS/DMUMeasure/DMUCreateMeasureCmd" HelpResourceFile="DMUMeasure/DMUMeasure" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1">
+        <CATAfrCommandHeaderArgs>
+        <CATCommandHeaderArg ID = "3dAuthoring" Value = "3dAuthoring" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="section2CmdHdr" ClassName="DS/DMUSection/DMUCreateSectionCmd" HelpResourceFile="DMUSection/DMUSection" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1">
+        <CATAfrCommandHeaderArgs>
+        <CATCommandHeaderArg ID = "3dAuthoring" Value = "3dAuthoring" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="LockUnlockSectionHdr" ClassName="DS/DMUSection/DMULockUnlockSection" HelpResourceFile="DMUSection/DMUSection" ResourceFile="DMUBaseCommands/3DPlayPro" Behavior="CATAfrHeaderCheck" />
+    </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="PIMwebI3DwkbAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="PIMwebI3Dwkb">
+      <CATCmdContainer Name="PADFixedArea" RepresentationType="AfrActionBarFixedSection">
+        <CATCmdStarter Name="PIMwebItfShowStr" Command="CATWebUXSlideShowHdr" />
+        <CATCmdStarter Name="PIMInteferenceListStr" Command="PIMInteferenceListHdr"/>
+      </CATCmdContainer>
+      <CATCmdContainer Name="PADTools" Visibility="1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="PIMwebMeasureStr" Command="measure3CmdHdr" />
+        <CATCmdStarter Name="PIMwebSectionStr" Command="section2CmdHdr" />
+        <CATCmdStarter Name="PIMwebLockUnlockSectionStr" Command="LockUnlockSectionHdr" />
+        <CATCmdStarter Name="PIMweb3DGridStr" Command="CATRelatedData3DGridHdr"/>
+        <CATCmdSeparator Name="PIMwebToolsSep" />
+        <CATCmdStarter Name="PIMwebPreferencesStr" Command="PIMwebPreferencesHdr" />
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+
+</Styles>

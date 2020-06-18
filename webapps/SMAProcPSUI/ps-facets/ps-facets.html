@@ -1,0 +1,51 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<dom-module id="ps-facets">
+  <!-- <style no-shim="">@import/* escape polymer-element CSS inlining */ url("../../UIKIT/UIKIT.css");</style> -->
+  <link rel="import" type="css" href="../../UIKIT/UIKIT.css">
+  <link rel="import" type="css" href="ps-facets.css">
+  
+  <template>
+
+        <main class="main" id="main">		
+            <nav class="tabs">
+				<template is="dom-repeat" items="{{tabs }}" as="tab" index-as="index">
+					<header class$="{{_computeClass1(tab)}}" id="[[ tab.id ]]" on-click="onTabClick" title="[[ tab.title]]" data-index$="{{index}}" data-id$="[[ tab.id ]]" data-header$="[[ tab.header ]]">
+						<span class$="{{_computeClass(tab)}}"></span>
+						<span class="title">[[ tab.header ]]</span>
+					</header>
+				</template>
+            </nav>
+			<!-- <template is="dom-repeat" items="{{tabs}}" as="tab">
+				<div id="{{_computeId(tab)}}" class$="{{_computeClass2(tab)}}" data-for$="[[ tab.id ]]">
+					<content select="{{_computeSelect(tab)}}">
+
+					</content>
+				</div>
+			</template> -->	
+			<div id="detailscontent" class="js-content content is-selected" data-for="details" style="overflow-y: auto;height: 50vh;">
+				<content select="#details">
+				</content>
+			</div>
+			<div id="contentscontent" class="js-content content" data-for="contents">
+				<content select="#contents">
+				</content>
+			</div>
+			<div id="logcontent" class="js-content content" data-for="log">
+				<content select="#log">
+				</content>
+			</div>
+			<div id="historycontent" class="js-content content" data-for="history">
+				<content select="#history">
+				</content>
+			</div>
+			<div id="filecontent" class="js-content content" data-for="files">
+				<content select="#files">
+				</content>
+			</div>
+        </main>
+    </template>
+  <script type="text/javascript" src="ps-facets.js"></script>
+</dom-module>

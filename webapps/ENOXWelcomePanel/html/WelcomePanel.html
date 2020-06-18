@@ -1,0 +1,40 @@
+<div class="welcome-panel-element">
+	<div class="panel-content">
+		<div class="all-activity-section">
+			{{#each activities}} {{#if this.id}}
+			<div class="activity-section" id="{{this.id}}">
+				{{#if this.title}}
+				<div class="text-element">{{this.title}}</div>
+				{{/if}} {{#each actions}} {{#if this.id}}
+				<div
+					class="{{#if this.className}}{{this.className}}{{/if}} activity-btn {{#if this.isDefault}}selected{{/if}}"
+					id="{{this.id}}">
+					{{#if this.letterAsIcon}}<span class="letter-as-icon">{{this.letterAsIcon}}</span>{{else}}<span class="fonticon fonticon-{{this.fonticon}}"></span>{{/if}}
+					<div class="text-element">{{this.text}}</div>
+				</div>
+				{{/if}} {{/each}}
+			</div>
+			<div class="separator"></div>
+			{{/if}} {{/each}}
+		</div>
+		<div class="footer-section">
+		    {{#if footer}}
+		    {{#each footer}} {{#if this.id}}
+			<div class="separator"></div>
+			<div class="activity-section" id="{{this.id}}">
+				{{#if this.title}}
+				<div class="text-element">{{this.title}}</div>
+				{{/if}} {{#each actions}} {{#if this.id}}
+				<div
+					class="{{#if this.className}}{{this.className}}{{/if}} activity-btn {{#if this.isDefault}}selected{{/if}}"
+					id="{{this.id}}">
+					{{#if this.letterAsIcon}}<span class="letter-as-icon">{{this.letterAsIcon}}</span>{{else}}<span class="fonticon fonticon-{{this.fonticon}}"></span>{{/if}}
+					<div class="text-element">{{this.text}}</div>
+				</div>
+				{{/if}} {{/each}}
+			</div>
+			{{/if}} {{/each}}
+			{{/if}}
+		</div>
+	</div>
+</div>

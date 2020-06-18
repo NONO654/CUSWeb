@@ -1,0 +1,13 @@
+m|W3DDComponents\TransientWidget.mweb
+b|j|n,u
+b|c|n,u
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\TransientWidget\TransientWidget.js|1467711699|170
+s|W3DDComponents\TransientWidget.mweb\src\TransientWidget.js|1467711699|170
+t|win_b64\webapps\TransientWidget\Controller\Transient.js|1521137104|3659
+s|W3DDComponents\TransientWidget.mweb\src\Controller\Transient.js|1521137104|3659
+t|win_b64\webapps\TransientWidget\Tool\TransientMessaging.js|1467711699|771
+s|W3DDComponents\TransientWidget.mweb\src\Tool\TransientMessaging.js|1467711699|771
+t|win_b64\webapps\TransientWidget\Tool\Mapping.js|1505463316|1212
+s|W3DDComponents\TransientWidget.mweb\src\Tool\Mapping.js|1505463316|1212

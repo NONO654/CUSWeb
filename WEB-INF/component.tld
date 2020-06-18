@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib
+        PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+        "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+
+<!--
+bogus comment
+ component.tld
+
+ Copyright (c) 2003-2018 Dassault Systemes.
+ All Rights Reserved
+ This program contains proprietary and trade secret information of
+ MatrixOne, Inc.  Copyright notice is precautionary only and does
+ not evidence any actual or intended publication of such program.
+
+-->
+
+<taglib>
+  <tlibversion>1.0</tlibversion>
+  <jspversion>1.1</jspversion>
+  <shortname>fw</shortname>
+  <info>This taglib provides custom tags for the eMatrix Java Framework.</info>
+
+  <tag>
+    <name>convertCurrency</name>
+    <tagclass>com.matrixone.apps.framework.taglib.ConvertCurrencyTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>This tag is used to convert currency.</info>
+    <attribute>
+      <name>from</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>to</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>date</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>decimalSeparator</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>digitSeparatorPreference</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+  </tag>
+
+  <tag>
+    <name>convertUnit</name>
+    <tagclass>com.matrixone.apps.framework.taglib.ConvertUnitTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>This tag is used to convert units.</info>
+    <attribute>
+      <name>map</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>from</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>to</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>decimalSeparator</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>digitSeparatorPreference</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+  </tag>
+
+  <tag>
+    <name>formatNumber</name>
+    <tagclass>com.matrixone.apps.framework.taglib.FormatNumberTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>This tag is used to format number.</info>
+    <attribute>
+      <name>decimalSeparator</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>digitSeparatorPreference</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>ifExpr</name>
+    <tagclass>com.matrixone.apps.framework.taglib.IfExprTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>This tag will evaluate the body if the expression is true.</info>
+    <attribute>
+      <name>expr</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>mapKeyItr</name>
+    <tagclass>com.matrixone.apps.framework.taglib.MapKeyItrTag</tagclass>
+    <teiclass>com.matrixone.apps.framework.taglib.MapKeyItrTei</teiclass>
+    <bodycontent>JSP</bodycontent>
+    <info>This tag is used to iterate over the keys in a map.</info>
+    <attribute>
+      <name>map</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>keyName</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>valueName</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>mapListItr</name>
+    <tagclass>com.matrixone.apps.framework.taglib.MapListItrTag</tagclass>
+    <teiclass>com.matrixone.apps.framework.taglib.MapListItrTei</teiclass>
+    <bodycontent>JSP</bodycontent>
+    <info>This tag is used to iterate over a list of maps.</info>
+    <attribute>
+      <name>mapList</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>mapName</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>optionList</name>
+    <tagclass>com.matrixone.apps.framework.taglib.OptionListTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>This tag is used to display a list of options for a select.</info>
+    <attribute>
+      <name>optionMapList</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>optionKey</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>valueKey</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>valueKeyList</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>concat</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>optionList</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>valueList</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>selected</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>sortColumnHeader</name>
+    <tagclass>com.matrixone.apps.framework.taglib.SortColumnHeaderTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>This tag is used to create the sort column header urls.</info>
+    <attribute>
+      <name>title</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>sortKey</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>sortType</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>anchorClass</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>pinfo</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>sortInit</name>
+    <tagclass>com.matrixone.apps.framework.taglib.SortInitTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>This tag is used to initialize the sort column header urls.</info>
+    <attribute>
+      <name>defaultSortKey</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>defaultSortType</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>defaultSortDir</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>mapList</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>resourceBundle</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>sortAsStructure</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>ascendText</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>descendText</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>params</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>stringCount</name>
+    <tagclass>com.matrixone.apps.framework.taglib.StringCountTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>This tag is used to count strings in a list.</info>
+    <attribute>
+      <name>list</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>string</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>strings</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>exclude</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+
+  </tag>
+
+  <tag>
+    <name>swap</name>
+    <tagclass>com.matrixone.apps.framework.taglib.SwapTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>This tag is used to alternate between strings.</info>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>first</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>second</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>i18n</name>
+    <tagclass>com.matrixone.apps.framework.taglib.i18n</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <attribute>
+  <name>localize</name>
+  <required>false</required>
+    </attribute>
+  </tag>
+  
+  <tag>
+      <name>i18nScript</name>
+      <tagclass>com.matrixone.apps.framework.taglib.i18nScript</tagclass>
+      <bodycontent>JSP</bodycontent>
+      <attribute>
+    <name>localize</name>
+    <required>false</required>
+      </attribute>
+  </tag>
+  
+  <tag>    
+    <name>lzDate</name>    
+    <tagclass>com.matrixone.apps.framework.taglib.lzDate</tagclass>
+    <bodycontent>JSP</bodycontent>    <attribute> <name>localize</name>
+  <required>false</required>    </attribute>
+    <attribute>
+      <name>format</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+    <attribute>
+      <name>tz</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>displaydate</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+     <attribute>
+      <name>displaytime</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  
+  <tag>
+    <name>localize</name>
+    <tagclass>com.matrixone.apps.framework.taglib.localize</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <attribute>
+      <name>id</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <name>locale</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <name>bundle</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>mxLink</name>
+    <tagclass>com.matrixone.apps.framework.taglib.mxLinkTag</tagclass>
+    <bodycontent>empty</bodycontent>
+  <info>Link to wrap the HTML LINK tag</info>
+  <attribute>
+    <name>HREF</name>
+    <required>true</required>
+  </attribute>
+  <attribute>
+    <name>NAME</name>
+    <required>false</required>
+  </attribute>
+  <attribute>
+    <name>REL</name>
+    <required>true</required>
+  </attribute>
+  <attribute>
+    <name>TARGET</name>
+    <required>false</required>
+  </attribute>
+  <attribute>
+    <name>TYPE</name>
+    <required>false</required>
+  </attribute>
+  </tag>
+  
+  
+  <tag>
+      <name>fullName</name>
+      <tagclass>com.matrixone.apps.framework.taglib.FullNameTag</tagclass>
+      <bodycontent>JSP</bodycontent>
+      <info>This tag will display the fullName of the User with(out) type icon and hyperlink</info>
+      <attribute>
+        <name>userName</name>
+        <required>true</required>
+  <rtexprvalue>true</rtexprvalue>        
+      </attribute>
+      <attribute>
+        <name>showHyperLink</name>
+        <required>false</required>
+  <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+        <name>showTypeIcon</name>
+        <required>false</required>
+  <rtexprvalue>true</rtexprvalue>
+      </attribute>      
+  </tag>
+
+  <tag>
+    <name>editOptionList</name>
+    <tagclass>com.matrixone.apps.framework.taglib.EditOptionListTag</tagclass>
+    <bodycontent>empty</bodycontent>
+    <info>This tag is used to display a select and a textbox.</info>
+    <attribute>
+      <name>optionList</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>valueList</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>manualEntryList</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>selected</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>sortDirection</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>sortType</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>eventMap</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>disabled</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>  
+  
+  <tag>
+      <name>FormatURL</name>
+      <tagclass>com.matrixone.apps.framework.taglib.FormatURLTag</tagclass>
+      <bodycontent>JSP</bodycontent>
+      <info>parses the given text string and will format the URL text that starts with certain keywords like, "http://", "https://", "ftp://", "www.", "ftp." and "mxLink:" into hyperlink.</info>
+      <attribute>
+        <name>text</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+        <name>externalLink</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+      </attribute>
+  </tag>
+
+  <tag>
+    <name>displayTypeAheadValues</name>
+    <tagclass>com.matrixone.apps.framework.taglib.TypeAheadDisplayTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Creating code to allow popup choosers for field values.</info>
+    <attribute>
+      <name>context</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>form</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>field</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>program</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>function</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>displayField</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>hiddenField</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>characterCount</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>isdatefield</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+	<attribute>
+		<name>timeStamp</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>uiType</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>typeAheadValidate</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+        <name>selectionMode</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+        <name>rangeHelperURL</name>
+        <required>false</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>saveTypeAheadValues</name>
+    <tagclass>com.matrixone.apps.framework.taglib.TypeAheadSaveTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Save values into the field value store.</info>
+    <attribute>
+      <name>context</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>form</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>field</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>displayFieldValue</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>hiddenFieldValue</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>count</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  
+  <tag>
+    <name>commitTypeAheadValues</name>
+    <tagclass>com.matrixone.apps.framework.taglib.TypeAheadCommitTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Save the field value store to the database.</info>
+    <attribute>
+      <name>context</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <name>UOMAttribute</name>
+    <tagclass>com.matrixone.apps.framework.taglib.UOMAttributeTag</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Useful to construct html string for readonly text(view page) OR Text and combo box(edit or create page). This class useful for UOM associated attributes.</info>
+    <attribute>
+      <name>objectId</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>mode</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>format</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>fieldName</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  
+  <tag>
+        <description>
+            Encode tag's content for usage in CSS
+        </description>
+        <display-name>Encode For CSS</display-name>
+        <name>encodeForCSS</name>
+        <tag-class>com.matrixone.apps.framework.taglib.XSSEncodeForCSSTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>
+            Encode tag's content for usage in HTML
+        </description>
+        <display-name>Encode For HTML</display-name>
+        <name>encodeForHTML</name>
+        <tag-class>com.matrixone.apps.framework.taglib.XSSEncodeForHTMLTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>
+            Encode tag's content for usage in HTML Attributes
+        </description>
+        <display-name>Encode For HTML Attribute</display-name>
+        <name>encodeForHTMLAttribute</name>
+        <tag-class>com.matrixone.apps.framework.taglib.XSSEncodeForHTMLAttributeTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    
+    <tag>
+        <description>
+            Encode tag's content for usage in JavaScript
+        </description>
+        <display-name>Encode For JavaScript</display-name>
+        <name>encodeForJavaScript</name>
+        <tag-class>com.matrixone.apps.framework.taglib.XSSEncodeForJavaScriptTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>
+            Encode tag's content for usage in URLs
+        </description>
+        <display-name>Encode For URL</display-name>
+        <name>encodeForURL</name>
+        <tag-class>com.matrixone.apps.framework.taglib.XSSEncodeForURLTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+  
+</taglib>

@@ -1,0 +1,57 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY CB_TerminalExtension
+// --------------------------------------------------
+ATTR V_CBReferenceNature;Y;N;$
+FUNC Create
+FUNC EZQuery
+FATTR V_CBReferenceNature;Y
+FUNC List
+FATTR V_CBReferenceNature;N
+FUNC Query
+FATTR V_CBReferenceNature;Y
+FUNC Read
+FATTR V_CBReferenceNature;N
+FUNC Write
+FATTR V_CBReferenceNature;N
+// --------------------------------------------------
+ENTITY CB_FacetExtension
+// --------------------------------------------------
+ATTR V_CBRepresentationNature;Y;N;$
+FUNC Create
+FUNC EZQuery
+FATTR V_CBRepresentationNature;Y
+FUNC List
+FATTR V_CBRepresentationNature;N
+FUNC Query
+FATTR V_CBRepresentationNature;Y
+FUNC Read
+FATTR V_CBRepresentationNature;N
+FUNC Write
+FATTR V_CBRepresentationNature;N

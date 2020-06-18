@@ -1,0 +1,51 @@
+<% if (deletable === true) { %>
+<div class="editStickySketchButtons alignCenter">
+    <div class="editStickySketchSpacer" />
+    <div class="editStickySketchButton" id="editStickySketchDeleteButton" />
+    <div class="editStickySketchSpacer" />
+</div>
+<% } %>
+<div class="editStickySketchDrawAreaContainer" style="background: white">
+    <div class="editStickySketchDrawArea stickyNoteYellow" id="editStickySketchDrawArea">
+        <textarea id="insertKeyboardTextForStickyNoteID" class="insertKeyboardTextForStickyNote" autocorrect="off" spellcheck="false"><%- V_DEL3DL_Description %></textarea>
+        <div class="editStickyNoteViewSVG"></div>
+        <div class="postit-header">
+            <div class="postit-header-peoplePicture"></div>
+            <div class="postit-header-stickerPicture"></div>
+        </div>
+        <div class="postit-info">
+            <div class="postit-info-status">
+                <div class="postit-info-status-arrow"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="editStickySketchButtons">
+    <div class="editStickySketchButton" id="editStickySketchPenButton" />
+    <div class="editStickySketchButton" id="editStickySketchKeyboardButton" />
+    <div class="editStickySketchSeparator" />
+    <div class="editStickySketchButton" id="editStickySketchEraserButton" />
+    <div class="editStickySketchButton" id="editStickySketchClearButton" />
+    <div class="editStickySketchButton" id="editStickySketchUndoButton" />
+    <div class="editStickySketchButton" id="editStickySketchRedoButton" />
+    <div class="editStickySketchSpacer" />
+    <div class="editStickySketchButton" id="editStickySketchImageButton" />
+    <div class="editStickySketchButton" id="editStickySketchValidateButton" />
+</div>
+<div class="editStickySketchButtons editStickyColorButtons <% if (colorPicker === false) { %>editStickyColorButtonsHidden<% } %>">
+    <% _.each( colors, function( val, key ){ %>
+      <div class="editStickySketchButton <%=val%>"/>
+    <% }); %>
+</div>
+<!--PIR2 BETA ALPHA OMEGA CODE-->
+<div class="editStickyColorButtonDetails">
+    <div class="selectedColorNameArrow">
+
+    </div>
+    <div class="selectedColorNameContainer">
+        <span class="selectedColorName">
+        
+        </span>
+    </div>
+</div>
+<!--PIR2 BETA ALPHA OMEGA CODE-->

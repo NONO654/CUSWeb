@@ -1,0 +1,175 @@
+{
+"dsmveng:EngItemMask.Common": [
+    {
+        "property": "reuseMask",
+        "mask": "dsmveno:DefaultBusMask"
+    },
+    {
+        "property": "attribute[PLMEntity.V_usage]",
+        "key": "usage",
+        "example": "3DShape"
+    }
+],
+"dsmveng:EngItemMask.3DPart": [
+    {
+        "property": "reuseMask",
+        "mask": "dsmveng:EngItemMask.Common"
+    },
+    {
+        "property": "from[VPMRepInstance].to.physicalid",
+        "key": "shape",
+        "mask": "dsmveno:DefaultBusMask",
+        "maskAppliesTo": "bus"
+    }
+],
+"dsmveng:EngItemMask.Instance.Basic": [
+	{
+		"property": "reuseMask",
+		"mask": "dsmveno:BaseMask"
+	},
+		"dsmveno:basic.owner",
+		"dsmveno:basic.organization",
+		"dsmveno:basic.collabspace",
+    {
+        "property": "to.physicalid",
+        "key": "reference"
+    }
+],
+"dsmveng:EngItemMask.Instance": [
+    {
+        "property": "reuseMask",
+        "mask": "dsmveng:EngItemMask.Instance.Basic"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_1]",
+        "key": "matrix_1",
+        "example": "1.0"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_2]",
+        "key": "matrix_2",
+        "example": "0.0"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_3]",
+        "key": "matrix_3",
+        "example": "0.0"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_4]",
+        "key": "matrix_4",
+        "example": "0.0"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_5]",
+        "key": "matrix_5",
+        "example": "1.0"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_6]",
+        "key": "matrix_6",
+        "example": "0.0"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_7]",
+        "key": "matrix_7",
+        "example": "0.0"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_8]",
+        "key": "matrix_8",
+        "example": "0.0"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_9]",
+        "key": "matrix_9",
+        "example": "1.0"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_10]",
+        "key": "matrix_10",
+        "example": "0.0"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_11]",
+        "key": "matrix_11",
+        "example": "0.0"
+    },
+    {
+        "property": "attribute[LPAbstractInstance.V_matrix_12]",
+        "key": "matrix_12",
+        "example": "0.0"
+    }
+],
+"dsmveng:EngItemMask.Assembly": [
+    {
+        "property": "reuseMask",
+        "mask": "dsmveng:EngItemMask.Common"
+    },
+    {
+        "property": "from[VPMInstance].physicalid",
+        "key": "instance",
+        "mask": "dsmveng:EngItemMask.Instance.Basic",
+        "maskAppliesTo": "rel"
+    }
+],
+"dsmveng:EngItemMask.3DPart.Tst": [
+    {
+        "property": "reuseMask",
+        "mask": "dsmveng:EngItemMask.Common"
+    },
+    {
+        "property": "attribute[StreamDescriptors]",
+        "key": "stream"
+    },
+    {
+        "property": "from[VPMRepInstance].to.physicalid",
+        "key": "shape",
+        "mask": "dsmveno:DefaultBusMask",
+        "maskAppliesTo": "bus"
+    }
+],
+"dsmveng:EngItem.EnterpriseReference.Details": [
+    {
+        "property": "reuseMask",
+        "mask": "dsmveno:DefaultBusMask"
+    },
+    {
+        "property": "computed",
+        "key": "dseng:EnterpriseReference",
+        "program": "com.dassault_systemes.enovia.xapps.dseng.implementations.dsengComputedProperties",
+	"function": "getEnterpriseReferencePartNumber",
+	"example": "com.dassault_systemes.enovia.xapps.dseng.implementations.dsengOpenAPIImpl.getEnterpriseReferencePartNumber"
+    }
+],
+"dsmveng:EngItemMask.Details": [
+    {
+        "property": "reuseMask",
+        "mask": "dsmveng:EngItem.EnterpriseReference.Details"
+    },
+    "dsmveno:program.CP.EnterpriseAttributes"
+],
+"dsmveng:EngInstanceMask.Details": [
+	{
+        "property": "reuseMask",
+        "mask": "dsmveno:DefaultRelMask"
+    },
+    {
+		"property": "computed",
+		"key": "referencedObject",
+		"program": "com.dassault_systemes.enovia.xapps.dseng.implementations.dsengComputedProperties",
+		"function": "getInstanceOfDetails",
+		"example": "com.dassault_systemes.enovia.xapps.dseng.implementations.dsengOpenAPIImpl.getInstanceOfDetails"
+	}
+],
+"dsmveng:EnterpriseReference.Details": [
+	{
+        "property": "attribute[EnterpriseExtension.V_PartNumber]",
+        "key": "partNumber",
+        "example": "Part Number Value"
+    }
+]
+}
+
+
+

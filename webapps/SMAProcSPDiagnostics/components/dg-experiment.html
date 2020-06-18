@@ -1,0 +1,132 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<dom-module id="dg-experiment">
+  <style>    
+    :host {
+      display: block;
+      background: #f1f1f1;
+      color: #368ec4;      
+      border: 1px solid #e2dada;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .container {
+      padding: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .regular-checkbox {
+      -webkit-appearance: none;
+      background-color: #fafafa;
+      border: 1px solid #cacece;
+      padding: 7px;
+      border-radius: 3px;
+      display: inline-block;
+      position: absolute;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .regular-checkbox:checked {
+      background-color: #03A9F4;
+      border: 1px solid #adb8c0;
+      color: #99a1a7;
+    }
+
+    .regular-checkbox:checked:after {
+      content: '\2714';
+      font-size: 10px;
+      position: absolute;
+      top: -3px;
+      left: 3px;
+      color: white;
+    }
+
+    .caption {
+      margin-left: 25px;
+    }
+    
+    .label {
+      font-size: small;
+      cursor: pointer;
+    }
+
+    .flag {
+      background: #03A9F4;
+      font-size: smaller;
+      color: white;
+      padding: 2px;
+      margin-left: auto;
+      border: thin solid #03a9f4;
+    }
+
+    .app {
+      background: #cacece;
+      padding: 2px;
+      color: #03a9f4;
+      background-color: #fafafa;
+      border: 1px solid #03a9f4;
+    }
+
+
+  </style>
+
+  <template>
+    <div class="container" on-click="_toggle">
+      <input id="chkbox" type="checkbox" class="regular-checkbox" on-change="_onChange"/>
+      <label class="caption label">{{value.caption}}</label>
+      <label class="flag">{{value.flag}}</label>
+      <label class="app label">{{value.app}}</label>
+    </div>
+  </template>
+    
+  <script>
+    (function () {
+       
+      Polymer({
+        is: 'dg-experiment',
+        
+        properties: {
+          value: {
+            type: Object,
+            notify: true
+          },
+          on: {
+            type: Boolean,
+            reflectToAttribute: true
+          }
+        },
+        attached: function () {
+          this.on = (localStorage.getItem(this.value.flag) === 'true');
+          this.$.chkbox.checked = this.on;
+        },
+        _onChange: function (e) {
+          this.on = e.target.checked;
+          localStorage.setItem(this.value.flag, this.on);
+        },
+        _toggle: function () {
+          this.on = this.$.chkbox.checked = !this.on;
+          localStorage.setItem(this.value.flag, this.on);
+        },
+        serializeData: function () {
+          const {app, name, flag} = this.value;
+
+          return {
+              app,
+              name,
+              flag,
+              on: this.on
+          };
+        }
+      });
+    })();  
+  </script>
+</dom-module>
+
+
+
+
+

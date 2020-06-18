@@ -1,0 +1,56 @@
+<!--------------------------------------------------------------------
+[xs-wg-checkbox HTML Document]
+
+Last change:    Wed, 26 Oct 2016 19:52:29 GMT
+Primary use:	Heading
+Description:    Can be used as a header to a section
+--------------------------------------------------------------------->
+
+<!-- Import base component common to all widgets-->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+
+<dom-module id="xs-wg-heading">
+	<!-- <link rel="import" type="css" href="xs-wg-heading.css"> -->
+	<template>
+		<style>
+		:host {
+		  width: 100%;
+		  display: block;
+		  box-sizing: border-box;
+		  padding: 1.25px 3px;
+		  font-family: Arial; }
+
+		.heading-label {
+		  display: none;
+		  word-break: break-all;
+		  font-size: 17px;
+		  color: #3d3d3d;
+		  font-weight: 700;
+		  margin-bottom: 0px;
+		  margin-left: 3px;
+		  font-family: Arial; }
+
+		.heading-label-placeholder {
+		  display: none;
+		  padding: 2.5px 3px; }
+
+		.heading-label-placeholder {
+		  font-family: Arial;
+		  display: block;
+		  color: #b4b6ba; }
+
+		.data-available .heading-label-placeholder {
+		  display: none; }
+		.data-available .heading-label {
+		  display: block; }
+		</style>
+
+		<div class$="{{_computeNoDataClass(label)}}">
+			<div class="heading-label-placeholder-container">
+				<div class="heading-label-placeholder">No Text Present</div>
+			</div>
+			<label class="heading-label">{{label}}</label>
+		</div>
+	</template>
+	<script type="text/javascript" src="xs-wg-heading.js"></script>
+</dom-module>

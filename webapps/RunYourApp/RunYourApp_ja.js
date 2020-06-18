@@ -1,0 +1,1 @@
+define("DS/RunYourApp/RunYourApp_ja",{});define("DS/RunYourApp/assets/nls/RunYourApp",{urlLabel:"ウィジェットの URL",insertUrl:"URL を挿入してください。",submitURLBtn:"実行"});

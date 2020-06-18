@@ -1,0 +1,6 @@
+Language: xMQL
+
+start transaction;
+mod set ${setname} add bus ${rootids};
+label ${label} temp query bus ${type} ${name} ${revision} where "member[${setname}]==TRUE" vault ${vault} select ${select,noescape= } dump | tcl;
+abort transaction;

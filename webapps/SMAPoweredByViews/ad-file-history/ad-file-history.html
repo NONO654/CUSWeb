@@ -1,0 +1,59 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+
+<dom-module id="ad-file-history">
+	<link rel="import" type="css" href="ad-file-history.css">
+	<template>
+		<div class="fileHistoryContainer">
+			<template is="dom-repeat" items="[[fileVersions]]" as="nextVersion" sort="_sortByVersion">
+				<div class="form-group">
+					<label class="control-label label-section">
+						<span>
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADFileHistory" nlskey="Version" value={{versionLabel}} no-view></sp-nls>
+							<span class="version">[[versionLabel]]</span>
+							<span class="version">[[nextVersion.version]]</span>
+						</span>
+
+						<span class="modified">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADFileHistory" nlskey="Modified" value={{modifiedLabel}} no-view></sp-nls>
+							<span>[[modifiedLabel]]</span>
+							<span class="timestamp">[[_getFormattedDate(nextVersion.modified)]]</span>
+						</span>
+
+						<span>
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADFileHistory" nlskey="Download" value={{downloadLabel}} no-view></sp-nls>
+							<span id="downloadVersion" class="fonticon fonticon-download fonticon-1x button" on-click="downloadVersion" title="[[downloadLabel]]" hidden$="{{_isVersionInvalid(nextVersion.version)}}"></span>
+							
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADFileHistory" nlskey="DownloadZip" value={{downloadZipLabel}} no-view></sp-nls>
+							<span id="downloadVersionZip" class="fonticon fonticon-archive fonticon-1x button" on-click="downloadVersionZip" title="[[downloadZipLabel]]" hidden$="{{_isVersionInvalid(nextVersion.version)}}"></span>
+							
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADFileHistory" nlskey="DeleteVersion" value={{deleteVersionLabel}} no-view></sp-nls>
+							<span id="downloadVersion" class="fonticon fonticon-trash fonticon-1x button" on-click="deleteVersion" title="[[deleteVersionLabel]]" hidden$="{{!_allowDeleteVersion(nextVersion.version)}}"></span>
+						</span>
+
+						<span class="status">[[_getStatus(nextVersion.persistenceOperation)]]</span>
+
+					</label>
+					<div class="invalidVersionMessageContainer" hidden$="{{!_showInvalidVersionMessage(nextVersion.version)}}">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADFileHistory" nlskey="InvalidVersionMessage" value={{errorMessageVersion}} no-view></sp-nls>
+						<span class="alert-message alert-error">[[errorMessageVersion]]</span>
+					</div>
+					<div class="invalidVersionMessageContainer" hidden$="{{!_showInvalidFileMessage(nextVersion.version)}}">
+						<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADFileHistory" nlskey="InvalidFileMessage" value={{errorMessageFile}} no-view></sp-nls>
+						<span class="alert-message alert-error">[[errorMessageFile]]</span>
+					</div>
+					<div hidden$="{{_isVersionInvalid(nextVersion.version)}}">
+						<textarea id="comments" type="text" class="form-control" rows="3"
+							disabled$="{{isReadOnly}}"
+							placeholder="Enter some notes about this version..."
+							value="[[_getComments(nextVersion.comments)]]"
+							on-blur="commentsChanged">
+						</textarea>
+					</div>
+				</div>
+			</template>
+		</div>
+	</template>
+	<script type="text/javascript" src="ad-file-history.js"></script>
+</dom-module>

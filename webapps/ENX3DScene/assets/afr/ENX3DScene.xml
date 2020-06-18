@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template Target="CATCmdHeadersList" syp:name="ENX3DSCWkbHeaders">
+    <CATCmdHeadersList>
+      <!-- FUN063491: For GA officialization, the Volume Query has been removed from Product Explorer -->
+      <CATCommandHeader ClassName="DS/ENOPAD3DViewer/commands/PAD3DViewerRemoveAllCmd" ID="RemoveAllHdr" HelpResourceFile="ENOPAD3DViewer/ENOPAD3DViewerHelpForCommands" ResourceFile="ENOPAD3DViewer/ENOPAD3DViewer"/>
+      <CATCommandHeader ID="SwitchVisuOnDemandHdr" ClassName="DS/ENOPAD3DViewer/commands/PAD3DViewerSwitchVisuOnDemandCmd" ResourceFile="ENOPAD3DViewer/ENOPAD3DViewer"/>
+      <CATCommandHeader Behavior="CATAfrHeaderCheck" HelpResourceFile="ENOPAD3DViewer/ENOPAD3DViewerHelpForCommands" ClassName="DS/ENOPAD3DViewer/commands/PAD3DLineLayoutCmd" ID="PAD3DLineLayoutHdr" ResourceFile="ENOPAD3DViewer/ENOPAD3DViewer"/>
+      <CATCommandHeader ID="ActionBar_Attributes" HelpResourceFile="ENOPAD3DViewer/ENOPAD3DViewerHelpForCommands" ClassName="DS/ENOPAD3DViewer/commands/PAD3DViewerEditPropertiesCmd" ResourceFile="ENOPAD3DViewer/ENOPAD3DViewer" Available="1"/>
+
+      <CATCommandHeader ClassName="DS/ENOPAD3DViewer/commands/PAD3DViewerRelationalNavigatorCmd" ID="PAD3DViewerRelationalNavigatorHdr" HelpResourceFile="ENOPAD3DViewer/ENOPAD3DViewerHelpForCommands" ResourceFile="ENOPAD3DViewer/ENOPAD3DViewer"/>
+      <CATCommandHeader ClassName="DS/ENOPAD3DViewer/commands/PAD3DViewerNavigateOnSelectionCmd" ID="PAD3DViewerNavigateOnSelectionHdr" ResourceFile="ENOPAD3DViewer/ENOPAD3DViewer"/>
+      <CATCommandHeader ClassName="DS/ENOPAD3DViewer/commands/PAD3DViewerPrintCmd" HelpResourceFile="ENOPAD3DViewer/ENOPAD3DViewerHelpForCommands" ID="PAD3DViewerPrintHdr" ResourceFile="ENOPAD3DViewer/ENOPAD3DViewer"/>
+
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuVisibleSpaceCmd" ID="VisuVisibleSpace" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader Behavior="CATAfrHeaderCheck" ID="RootPanel" HelpResourceFile="ENXNav/ENXNavHelpForCommands" ClassName="DS/ENOPAD3DViewer/commands/PAD3DViewerRootInfoPanelCmd" ResourceFile="ENXNav/ENXNav" Available="0"/>
+      <CATCommandHeader Behavior="CATAfrHeaderCheck" ID="RightSidePanel" HelpResourceFile="ENXNav/ENXNavHelpForCommands" ClassName="DS/ENOPAD3DViewer/commands/PAD3DViewerRightSidePanel" ResourceFile="PADUtils/PADUtils" Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="PropertiesReadOnly" Value="true" Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <!--  Filtering commands -->
+      <CATCommandHeader ClassName="DS/ENOPAD3DViewer/commands/PAD3DViewerFilterDropObjectsCmd" ID="FilterDropObjects" ResourceFile="ENOPAD3DViewer/ENOPAD3DViewer"/>
+      <CATCommandHeader ClassName="DS/ENOPAD3DViewer/commands/PAD3DViewerDefineFilterCmd" ID="DefineFilterHdr" HelpResourceFile="ENOPAD3DViewer/ENOPAD3DViewerHelpForCommands" ResourceFile="ENOPAD3DViewer/ENOPAD3DViewer"/>
+
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuReframeViewCmd" ID="VisuReframeView" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuPanViewCmd" ID="VisuPanView" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuZoomViewCmd" ID="VisuZoomView" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuRotateViewCmd" ID="VisuRotateView" ResourceFile="ViewerCommands/ViewerCommands"/>
+
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuIsoViewCmd" ID="VisuIsoView" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuFrontViewCmd" ID="VisuFrontView" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuBackViewCmd" ID="VisuBackView" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuLeftViewCmd" ID="VisuLeftView" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuRightViewCmd" ID="VisuRightView" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuTopViewCmd" ID="VisuTopView" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuBottomViewCmd" ID="VisuBottomView" ResourceFile="ViewerCommands/ViewerCommands"/>
+
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingEdgesCmd" ID="VisuShadingEdges" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingCmd" ID="VisuShading" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingEdgesNoSmoothEdgesCmd" ID="VisuShadingEdgesNoSmoothEdges" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingEdgesHiddenEdgesCmd" ID="VisuShadingEdgesHiddenEdges" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingMaterialEdgesCmd" ID="VisuShadingMaterialEdges" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingMaterialCmd" ID="VisuShadingMaterial" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuNoShadingEdgesCmd" ID="VisuNoShadingEdges" ResourceFile="ViewerCommands/ViewerCommands"/>
+
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuPerspectiveViewCmd" ID="VisuPerspectiveView" ResourceFile="ViewerCommands/ViewerCommands"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuOrthographicViewCmd" ID="VisuOrthographicView" ResourceFile="ViewerCommands/ViewerCommands"/>
+
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuFilterLinesCmd" ID="VisuFilterLines" ResourceFile="ViewerCommands/ViewerCommands" Behavior="CATAfrHeaderCheck"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuFilterAxisCmd" ID="VisuFilterAxis" ResourceFile="ViewerCommands/ViewerCommands" Behavior="CATAfrHeaderCheck"/>
+      <CATCommandHeader ClassName="DS/ViewerCommands/VisuFilterPointsCmd" ID="VisuFilterPoints" ResourceFile="ViewerCommands/ViewerCommands" Behavior="CATAfrHeaderCheck"/>
+
+      <CATCommandHeader ID="measure3CmdHdr" ClassName="DS/DMUMeasure/DMUCreateMeasureCmd" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="3dAuthoring" Value="3dAuthoring" Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="section2CmdHdr" ClassName="DS/DMUSection/DMUCreateSectionCmd" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="3dPlay" Value="3dPlay" Mode="In"/>
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="LockUnlockSectionHdr" ClassName="DS/DMUSection/DMULockUnlockSection" ResourceFile="DMUBaseCommands/3DPlayPro" Behavior="CATAfrHeaderCheck"/>
+      <CATCommandHeader ID="contextualbarSectionHdr" ClassName="DS/DMUSection/DMUSectionContextCmd" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"/>
+      <CATCommandHeader ID="contextualbarMeasureHdr" ClassName="DS/DMUMeasure/DMUMeasureContextCmd" ResourceFile="DMUBaseCommands/3DPlayPro" Available="1"/>
+      <CATCommandHeader ID="FlyWalk" Available="1" ClassName="DS/3DPlayNavigationScenario/CmdFlyWalk" ResourceFile="3DPlayNavigationScenario/3DPlayNavigationScenario"/>
+
+    </CATCmdHeadersList>
+  </Template>
+
+  <Template Target="CATCmdWorkbench" syp:name="ENX3DSCWkbAccess">
+    <CATCmdWorkbench Name="ENX3DScene">
+
+      <!-- Fixed area -->
+      <CATCmdContainer Name="PADFixedArea" RepresentationType="AfrActionBarFixedSection">
+        <!-- <CATCmdStarter Name="RemoveAll" Command="RemoveAllHdr" /> -->
+      </CATCmdContainer>
+
+      <!-- View toolbar -->
+      <CATCmdContainer Name="PADView" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="RootPanel" Command="RootPanel"/>
+        <CATCmdSeparator Name="PadViews_Separator"/>
+        <CATCmdStarter Command="VisuReframeView" Name="PADPADReframeCmd"/>
+        <CATCmdContainer Name="PADViewpointProjectionMode" RepresentationType="AfrActionBarDropDown" Visibility="1">
+          <CATCmdStarter Command="VisuPerspectiveView" Name="PADVisuPerspectiveViewCmd"/>
+          <CATCmdStarter Command="VisuOrthographicView" Name="PADVisuOrthographicView"/>
+        </CATCmdContainer>
+        <CATCmdStarter Command="VisuPanView" Name="PADPanCmd"/>
+        <CATCmdStarter Command="VisuRotateView" Name="PADRotateCmd"/>
+        <CATCmdStarter Command="VisuZoomView" Name="PADZoomCmd"/>
+
+        <!-- Views -->
+        <CATCmdContainer Name="PADCameraViews" RepresentationType="AfrActionBarDropDown" Visibility="1">
+          <CATCmdStarter Command="VisuIsoView" Name="PADIsoViewCmd"/>
+          <CATCmdStarter Command="VisuBottomView" Name="PADBottomViewCmd"/>
+          <CATCmdStarter Command="VisuTopView" Name="PADTopViewCmd"/>
+          <CATCmdStarter Command="VisuRightView" Name="PADRightViewCmd"/>
+          <CATCmdStarter Command="VisuLeftView" Name="PADLeftViewCmd"/>
+          <CATCmdStarter Command="VisuBackView" Name="PADBackViewCmd"/>
+          <CATCmdStarter Command="VisuFrontView" Name="PADFrontViewCmd"/>
+        </CATCmdContainer>
+
+        <!-- Render Options -->
+        <CATCmdContainer Name="PADRendering" RepresentationType="AfrActionBarDropDown" Visibility="1">
+          <CATCmdStarter Command="VisuShading" Name="PADShading"/>
+          <CATCmdStarter Command="VisuShadingEdges" Name="PADShadingWithEdges"/>
+          <CATCmdStarter Command="VisuShadingEdgesNoSmoothEdges" Name="PADShadingWithEdgeAndNoSmoothEdges"/>
+          <CATCmdStarter Command="VisuShadingEdgesHiddenEdges" Name="PADShadingWithEdgeAndHiddenEdges"/>
+          <CATCmdStarter Command="VisuShadingMaterialEdges" Name="PADShadingMaterialWithEdges"/>
+          <CATCmdStarter Command="VisuShadingMaterial" Name="PADShadingMaterial"/>
+          <CATCmdStarter Command="VisuNoShadingEdges" Name="PADWireframe"/>
+        </CATCmdContainer>
+        <CATCmdContainer Name="PADSwitchLineIcElements" RepresentationType="AfrActionBarDropDown" Visibility="1">
+          <CATCmdStarter Command="VisuFilterAxis" Name="VisuFilterAxis" Responsive="Medium Long Large"/>
+          <CATCmdStarter Command="VisuFilterLines" Name="VisuFilterLines" Responsive="Medium Long Large"/>
+          <CATCmdStarter Command="VisuFilterPoints" Name="VisuFilterPoints" Responsive="Medium Long Large"/>
+        </CATCmdContainer>
+        <CATCmdStarter Command="VisuVisibleSpace" Name="VisuVisibleSpaceCmd"/>
+        <CATCmdSeparator Name="PadViews_Separator"/>
+        <CATCmdStarter Name="FlyWalk" Command="FlyWalk"/>
+        <CATCmdSeparator Name="PadViews_Separator"/>
+        <CATCmdStarter Command="RemoveAllHdr" Name="PADRemoveAll"/>
+        <CATCmdSeparator Name="PadViews_Separator"/>
+        <CATCmdStarter Command="RightSidePanel" Name="Right Side Panel"/>
+      </CATCmdContainer>
+
+      <!-- Tools toolbar -->
+      <CATCmdContainer Name="PADTools" RepresentationType="AfrActionBarSection">
+        <!-- FUN063491: For GA officialization, the Volume Query has been removed from Product Explorer -->
+        <CATCmdStarter Command="PAD3DLineLayoutHdr" Name="PAD3DLineLayoutCmd"/>
+        <CATCmdStarter Command="ActionBar_Attributes" Name="ActionBar_AttributesCmd"/>
+        <CATCmdStarter Command="PAD3DViewerRelationalNavigatorHdr" Name="PAD3DViewerRelationalNavigatorCmd"/>
+        <CATCmdStarter Command="DefineFilterHdr" Name="DefineFilterCmd"/>
+        <CATCmdStarter Name="CAT3DComposeMeasureStr" Command="measure3CmdHdr"/>
+        <CATCmdStarter Name="CAT3DComposeSectionStr" Command="section2CmdHdr"/>
+        <CATCmdStarter Name="CAT3DComposeLockUnlockSectionStr" Command="LockUnlockSectionHdr"/>
+        <CATCmdSeparator Name="PadViews_Separator"/>
+        <CATCmdStarter Command="PAD3DViewerPrintHdr" Name="PAD3DViewerPrintCmd"/>
+      </CATCmdContainer>
+
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

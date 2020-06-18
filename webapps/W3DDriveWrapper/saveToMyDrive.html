@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!-- 
+        <title>3DEXPERIENCE Share to My Drive</title>
+        -->
+       <head>
+		
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+        <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+        
+        <script type="text/javascript" src="../c/UWA/js/UWA_Frame_Alone.js"></script>
+        
+
+
+        
+<script type="text/javascript">
+/* global widget, require */
+ define('DS/W3DDrive/widget', ['UWA/Utils','DS/UWPClientCode/PublicAPI', 'DS/MessageBus/MessageBus'], function (Utils) {
+	    'use strict';
+	    return {
+	    	getValue: function(property){
+	    		switch(property){
+		    		case "3ddrive_uuid":
+		    			return 'D-'+Utils.getUUID();
+		    			break;
+		    		default:
+		    			return null;
+	    		}
+	    	}
+	    };
+	});
+
+(function () {
+    'use strict';
+
+    require([
+        'DS/W3DDriveWrapper/saveToMyDrive/saveToMyDriveView',
+        'DS/W3DDriveWrapper/saveToMyDrive/saveToMyDriveController',
+        'DS/W3DDrive/widget'
+    ], function (
+        View,
+        Controller
+    ) {
+    	// Win function binding
+    	window.submit = function(tenant, folderId, title){
+    		console.log(tenant.value, tenant.url, folderId, title);
+    		if(window.dscef){
+    			dscef.sendString('onSubmit',JSON.stringify({tenant_id:tenant.value,platform_instance:tenant.url,folder_id:folderId,title:title}))
+    		}
+    	}
+    	window.cancel = function(){
+    		console.log('cancel');
+    		if(window.dscef){
+    			dscef.sendString('onCancel','');
+    		}
+    	}
+    	window.finalize = function(success){
+    		console.log('Success = '+success);
+    		if(window.dscef){
+    			dscef.sendString('onFinalize',JSON.stringify({success:success}));
+    		}
+    	}
+        window.init = function(title, myAppsUrl){
+        	Controller.init(title, myAppsUrl);
+        };
+        window.addContent = function(platformId, folderId, fileName, fcsReceipt){
+        	Controller.addContent(platformId, folderId, fileName, fcsReceipt);
+        };
+        Controller.submit = window.submit;
+        Controller.cancel = window.cancel;
+        Controller.finalize = window.finalize;
+        //
+        
+        // View creation & binding
+        var view = new View();
+        view.render();
+        Controller.setView(view);
+        view.inject(document.body);
+
+        // Run the component
+         Controller.run();
+       
+    });
+}());
+</script>
+    </head>
+    <body>
+    </body>
+</html>

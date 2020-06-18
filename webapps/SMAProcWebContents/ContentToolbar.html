@@ -1,0 +1,88 @@
+<dom-module id="pcw-sdk-content-toolbar">
+    <template>
+        <style>
+            :host {
+                display: block;
+                width: 100%;
+            }
+
+            :host[disabled] {
+                display: none
+            }
+
+            .content .param {
+                display: none;
+            }
+
+            .param .content {
+                display: none;
+            }
+
+            .toolbar {
+                display: flex;
+                justify-content: flex-end;
+                margin: 10px 0px;
+            }
+
+            .toolbar>.wux-controls-button {
+                border-radius: 0px;
+            }
+
+            .toolbar>.first {
+                border-radius: 4px 0px 0px 4px;
+            }
+
+            .toolbar>.wux-controls-button:last-child {
+                border-radius: 0px 4px 4px 0px;
+            }
+
+            .wux-controls-button.content,
+            .wux-controls-button.param,
+            .wux-controls-button.always {
+                width: 30px;
+                height: 30px;
+                max-width: none;
+                min-width: unset;
+            }
+
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        </style>
+
+        <input id="inputFile" type="file" multiple accept$="[[filetypes]]" style="display: none;" />
+        <div class$="{{computeClass(category)}}">
+            <div id="progressContainer" class="always" style="display:none;width:24px;height:24px;transform: translateX(-20px) translateY(-5px) scale(0.5);">
+            </div>
+            <div class="wux-controls-button wux-controls-abstract wux-ui-state-secondary wux-ui-style-normal first param" on-tap="onParamCreate">
+                <div class="wux-button-icon-placeholder">
+                    <img class="wux-button-icon-image" src="{{_getAssetUrl('I_SMAWflUIParameterNew.png')}}">
+                </div>
+            </div>
+            <div class="wux-controls-button wux-controls-abstract wux-ui-state-secondary wux-ui-style-normal first content" on-tap="onSearch">
+                <div class="wux-button-icon-placeholder">
+                    <img class="wux-button-icon-image" src="{{_getAssetUrl('I_SMAWflSearch.png')}}">
+                </div>
+            </div>
+            <div class="wux-controls-button wux-controls-abstract wux-ui-state-secondary wux-ui-style-normal content" on-tap="onCreateNVDoc">
+                <div class="wux-button-icon-placeholder">
+                    <img class="wux-button-icon-image" src="{{_getAssetUrl('I_SMAWflCreateDocNV.png')}}">
+                </div>
+            </div>
+            <div class="wux-controls-button wux-controls-abstract wux-ui-state-secondary wux-ui-style-normal content" on-tap="onCreateVDoc">
+                <div class="wux-button-icon-placeholder">
+                    <img class="wux-button-icon-image" src="{{_getAssetUrl('I_SMAWflCreateDocV.png')}}">
+                </div>
+            </div>
+            <div class="wux-controls-button wux-controls-abstract wux-ui-state-secondary wux-ui-style-normal always">
+                <div class="wux-button-icon-placeholder">
+                    <img class="wux-button-icon-image" src="{{_getAssetUrl('I_ShowElements.png')}}">
+                </div>
+            </div>
+        </div>
+        <div>
+            <cmp-parameter-create-modal id="paramCreateModal"></cmp-parameter-create-modal>
+        </div>
+    </template>
+</dom-module>

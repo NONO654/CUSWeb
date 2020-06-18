@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define(["DS/Redux/Redux","DS/ReduxThunk/ReduxThunk","DS/ReduxPromiseMiddleware/ReduxPromiseMiddleware","DS/SMAPoweredByState/ad-state-logger","DS/SMAPoweredByTracker/ad-tracker/ad-usage-tracker"],function(a,e,f,c,d){var b={};b["default"]=a.applyMiddleware(e["default"],f["default"](),c["default"],d["default"]);return b});

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />   
+    <title>CGRViewer</title>
+    <!-- AMDLoader -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- UWA -->
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+    <!-- Web Fundamentals -->
+    <script type="text/javascript" src="../WebVisualization/WebVisualization.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../Controls/nv-patch.css" />
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+    <script type="text/javascript">
+	    function getUrlParamVal(variable) {
+	        var query = window.location.search.substring(1);
+	        var vars = query.split("&");
+	        for (var i = 0; i < vars.length; i++) {
+	            var pair = vars[i].split("=");
+	            if (pair[0] == variable) {
+	                return decodeURIComponent(pair[1]);
+	            }
+	        }
+	        return '';
+	    }
+
+        require(
+        {
+            baseUrl: '../'
+        },
+        [
+	        'UWA/Core',
+	        'DS/IterationsWidget/CGRViewerContextMenu',
+	        'DS/IterationsWidget/CGRViewer'
+        ],
+
+        function (UWA, CGRViewerContextMenu, CGRViewer) {
+            "use strict";
+            
+            function onLoad() {
+                document.body.innerHTML = '';
+                
+                window.cgrViewer = new CGRViewer();
+                window.cgrViewer.inject(document.body);
+                
+                var viewerContextMenu = new CGRViewerContextMenu(window.cgrViewer.viewer);
+                viewerContextMenu.inject(document.body);
+				
+                window.loadModels = function (paths) {
+                    window.cgrViewer.loadModels(paths);
+                };
+                window.showModel = function (path) {
+                    window.cgrViewer.showModel(path);
+                };
+                window.setViewpoint = function (vp) {
+                    window.cgrViewer.setViewpoint(vp);
+                }
+                window.cgrViewer.onViewpointMove = notifyViewpointMove;
+                notifyLoaded();
+            }
+
+            function notifyLoaded() {
+                var id = getId();
+                var funName = 'onCGRViewerFrameLoaded' + id;
+                window.parent[funName](id);
+            }
+
+            function notifyViewpointMove(vp) {
+                var id = getId();
+                var funName = 'onCGRViewerViewpointMove' + id;
+                window.parent[funName](id, vp);
+            }
+
+            function getId() {
+                var id = getUrlParamVal('id');
+                return id;
+            }
+
+            if (widget.launched) {
+                onLoad();
+            } else {
+                widget.onLoad = onLoad;
+            }
+        });
+
+        function bodyOnLoad() {	        
+	        var lang = getUrlParamVal('lang');	        
+	        var nlsJsonPath = 'text!DS/IterationsWidget/assets/nls/IterationsWidget_' + lang + '.json';
+	        var NLS = {};
+	        require([nlsJsonPath], function (nlsJson) {
+	        	"use strict";
+                NLS.json = JSON.parse(nlsJson);
+                NLS.get = function(name) {
+                    return NLS.json[name];
+                }
+                var loading = NLS.get("Loading");
+                document.body.innerHTML = '<div style="position:absolute;top:50%;width:100%;height:100%" attributes="data-rec-id:CGRViewerHtml"><center>' + loading + '</center></div>';
+                document.body.setAttribute('data-rec-id', 'CGRViewHtmlBody');
+	        });          
+        }
+
+    </script>
+</head>
+<body onload ="bodyOnLoad()">
+</body>
+</html>

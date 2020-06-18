@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.Amga" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationAmga" nlsID="dispname">AMGA</DisplayName>
+	<Description nlsFile="SMAWflOptimizationAmga" nlsID="desc">Archive based Micro Genetic Algorithm</Description>
+	<LongDescription nlsFile="SMAWflOptimizationAmga" nlsID="longdesc">
+		<![CDATA[AMGA - Archive based Micro Genetic Algorithm
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Multi-objective Exploratory Technique
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for highly non-linear search spaces
+   &#8226; Well-suited for discontinuous and non-convex search spaces
+   &#8226; Well-suited for highly constrained search spaces
+   &#8226; Designed to handle highly multi-modal functions with many local optima
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Not well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>No
+
+</span><span style="font-weight:bold">Features:
+</span><span>Each objective is treated separately and a pareto front is constructed by selecting feasible non-dominated designs.
+
+In the Archive based Micro Genetic Algorithm (AMGA), each objective parameter is treated separately. Standard genetic operation of mutation and crossover are performed on the designs. The algorithm maintains a search history and the Selection process is based on a myriad of different heuristics. It uses a three tier fitness mechanism. The first tier fitness is assigned based on the domination level of a solution in the population. The second tier fitness is based on the contribution of the solution to search history of the algorithm and the third tier fitness takes into account the diversity of the solution. By the end of the optimization run a pareto set is constructed where each design has the "best" combination of objective values and improving one objective is impossible without sacrificing one or more of the other objectives.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.Amga</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationAmga.CATNls" targetFilename="SMAWflOptimizationAmga.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationAmga_Japanese.CATNls" targetFilename="SMAWflOptimizationAmga_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.amga.Amga</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>    
+		<Property name="maxConcurrent" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="reusePolicy" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Initial Size" type="integer" valuetype="single">
+				<Value>40</Value>
+			</Property>
+			<Property name="Population Size" type="integer" valuetype="single">
+				<Value>40</Value>
+			</Property>
+			<Property name="Number of Function Evaluations" type="integer" valuetype="single">
+				<Value>500</Value>
+			</Property>
+			<Property name="Archive Size Limit" type="integer" valuetype="single">
+				<Value>500</Value>
+			</Property>
+			<Property name="Pareto Size Limit" type="integer" valuetype="single">
+				<Value>100</Value>
+			</Property>
+			<Property name="Crossover Probability" type="real" valuetype="single">
+				<Value>0.9</Value>
+			</Property>
+			<Property name="Mutation Probability" type="real" valuetype="single">
+				<Value>0.5</Value>
+			</Property>
+			<Property name="Use optimal mutation probability" type="boolean" valuetype="single">
+				<Value>true</Value>
+			</Property>
+			<Property name="Crossover Distribution Index" type="real" valuetype="single">
+				<Value>10.0</Value>
+			</Property>
+			<Property name="Mutation Distribution Index" type="real" valuetype="single">
+				<Value>20.0</Value>
+			</Property>
+			<Property name="Use fixed random seed" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Random seed value" type="integer" valuetype="single">
+				<Value>-1</Value>
+			</Property>
+			<Property name="Initialization Mode" type="string" valuetype="single">
+				<Value>Random</Value>
+			</Property>
+			<Property name="Initialization File" type="file" valuetype="single" mode="input">
+				<Value>
+					<![CDATA[<rawFN></rawFN><toOption>5</toOption><del>N</del><type>text/plain</type><rwEnc>UTF8</rwEnc><dataEnc>UTF8</dataEnc><handlerType>com.dassault_systemes.sma.datahandler.DataHandlerPLM</handlerType><hconfig><from></from><at>0</at><dlen>0</dlen><zdata></zdata></hconfig>]]>
+				</Value>
+			</Property>
+			<Property name="Diversity Option" type="string" valuetype="single">
+				<Value>Crowding</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+		</Property>
+
+		<!--<Property name="DesignVariableAttributes" type="aggregate" valuetype="single">
+      <Property name="Lower Bound" type="real" valuetype="single">
+        <Value></Value>
+      </Property>
+      <Property name="Upper Bound" type="real" valuetype="single">
+        <Value></Value>
+      </Property>
+      <Property name="Allowed Values" type="string" valuetype="single">
+        <Value></Value>
+      </Property>
+    </Property>-->
+
+		<Property name="Parameters" type="aggregate" valuetype="single">
+			<Property name="ParetoFile" type="file" valuetype="single">
+				<Value>
+					<![CDATA[<rawFN>{rundir}/AMGA_pareto_profile.txt</rawFN><toOption>11</toOption><del>N</del><type>text/plain</type><rwEnc>UTF8</rwEnc><dataEnc>UTF8</dataEnc><handlerType>com.dassault_systemes.sma.datahandler.DataHandlerInline</handlerType><hconfig><from></from><at>0</at><dlen>0</dlen><zdata></zdata></hconfig>]]>
+				</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

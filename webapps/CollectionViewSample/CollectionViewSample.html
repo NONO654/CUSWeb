@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?> 
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/"> 
+ <!-- Copyright 2017 , Dassault Systemes. All rights reserved. -->
+<head>   
+
+    <title>CollectionViewSample</title>
+
+	<link rel="icon" type="image/png" href="assets/icons/16/iconENOVIA.png"/>
+
+	<!-- Application Metas Start -->
+    <meta name="description" content="CollectionViewSample" />
+    <meta name="keywords" content="CollectionView" />
+    <meta name="autoRefresh" content="false" />
+    <meta name="debugMode" content="true" />
+	<!-- Application Metas End -->
+
+	<!-- Application JS Start -->
+    <script >
+    	/*global widget*/
+	   'use strict';
+	   require(['DS/CollectionViewSample/CollectionViewSample'], function (CollectionViewSample) {  
+            if (!widget) {
+            	throw new Error('3DBOM App must be executed in a widget environement');
+            }
+
+            widget.addEvents({
+                //The onLoad() function is the first one,
+                //it will be triggered by widget "onLoad" event.            
+                onLoad: function(event) {
+                	CollectionViewSample.onLoad.call(null, event);
+                }
+            });
+	   });	 
+    </script>
+	<!-- Application JS End -->
+</head>
+<body>
+</body>
+</html>

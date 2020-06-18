@@ -1,0 +1,1 @@
+define("DS/MobilePairing/MobilePairing_fr",{});define("DS/MobilePairing/assets/nls/mobilePairing",{description:"Utilisez les codes suivants pour associer votre application mobile à la plateforme 3DEXPERIENCE."});

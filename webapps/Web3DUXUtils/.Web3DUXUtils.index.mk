@@ -1,0 +1,10 @@
+m|Web3DUX\Web3DUXUtils.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\Web3DUXUtils\assets\textures\I_Web3DUXArrow.png|1531551014|2531
+s|Web3DUX\Web3DUXUtils.mweb\src\assets\textures\I_Web3DUXArrow.png|1434554157|2531
+t|win_b64\webapps\Web3DUXUtils\Web3DUXUtils.js|1531551015|1341
+s|Web3DUX\Web3DUXUtils.mweb\src\Web3DUXUtils.js|1434624241|1
+s|Web3DUX\Web3DUXUtils.mweb\src\Web3DUXArrow.js|1468244540|2512

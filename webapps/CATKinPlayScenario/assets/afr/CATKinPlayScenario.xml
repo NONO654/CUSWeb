@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="KinPlayAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface WkbInterface="KinPlayAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="KinPlayScenarioPlayAnimation" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID = "PlayAnimation"
+                        ClassName = "DS/SIMAnimationWebUI/CmdPlayAnimation"
+                        ResourceFile = "CATKinPlayScenario/CATKinPlayScenario"/>
+      <CATCommandHeader ID = "ChooseAnimation"
+                        ClassName = "DS/SIMAnimationWebUI/CmdChooseAnimation"
+                        ResourceFile = "CATKinPlayScenario/CATKinPlayScenario"/>
+    </CATCmdHeadersList>
+  </Template>
+
+  <Template syp:name="KinPlayAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="KinPlayScenarioPlayAnimation"  Visibility="0">
+      <CATCmdContainer Name = "Kinematics" Visibility="0">
+        <!--RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name = "PlayAnimation" Command = "PlayAnimation"/>
+        <CATCmdStarter Name = "ChooseAnimation" Command = "ChooseAnimation"/-->
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

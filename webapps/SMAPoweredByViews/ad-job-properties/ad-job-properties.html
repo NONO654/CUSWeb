@@ -1,0 +1,86 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+
+<dom-module id="ad-job-properties">
+	<link rel="import" type="css" href="ad-job-properties.css">
+	<template>
+		<div class="jobPropertiesContainer">
+			<!-- Title -->
+			<div class="form-group">
+				<label for="jobTitle" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="JobTitle"></sp-nls>
+				</label>
+				<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="JobTitlePlaceholder" value={{jobTitlePlaceholder}} no-view></sp-nls>
+				<input type="text" id="jobTitle" class="form-control" placeholder="[[jobTitlePlaceholder]]" value="[[job.title]]" required on-blur="jobTitleChanged"></input>
+			</div>
+			<!-- Description -->
+			<div class="form-group">
+				<label for="jobDescription" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="JobDescription"></sp-nls>
+				</label>
+				<!-- NOTE: IE chokes on textarea with sp-nls for placehomder, hardcoding for now -->
+				<!-- <sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="JobDescriptionPlaceholder" value={{jobDescriptionPlaceholder}} no-view></sp-nls> -->
+				<!-- <textarea id="jobDescription" class="form-control" rows="5" placeholder="[[jobDescriptionPlaceholder]]" value="[[_getjobDescription(job.description)]]"></textarea> -->
+				<textarea id="jobDescription" class="form-control" rows="3" placeholder="Enter some notes about the job..." value="[[_getJobDescription(job.description)]]" on-blur="jobDescriptionChanged" disabled="[[readonly]]"></textarea>
+			</div>
+			<!-- Job Type -->
+			<div class="form-group">
+				<label for="jobType" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="JobType"></sp-nls>
+				</label>
+				<input type="text" id="jobType" class="form-control" readonly value="[[job.jobType]]"></input>
+			</div>
+			<!-- Job Command-line -->
+			<div class="form-group">
+				<label for="jobCommand" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="JobCommand"></sp-nls>
+				</label>
+				<input type="text" id="jobCommand" class="form-control" readonly value="[[job.command]]"></input>
+			</div>
+			<!-- Status -->
+			<div class="form-group">
+				<label for="jobStatus" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="JobStatus"></sp-nls>
+				</label>
+				<input type="text" id="jobStatus" class="form-control" readonly value="[[job.status]]"></input>
+			</div>
+			<!-- Owner -->
+			<div class="form-group">
+				<label for="jobOwner" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="JobOwner"></sp-nls>
+				</label>
+				<input type="text" id="jobOwner" class="form-control" readonly value="[[job.owner]]"></input>
+			</div>
+			<!-- Started -->
+			<div class="form-group">
+				<label for="jobStarted" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="JobStarted"></sp-nls>
+				</label>
+				<input type="text" id="jobStarted" class="form-control" readonly value="[[job.started]]"></input>
+			</div>
+			<!-- Ended -->
+			<div class="form-group">
+				<label for="jobEnded" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="JobEnded"></sp-nls>
+				</label>
+				<input type="text" id="jobEnded" class="form-control" readonly value="[[job.ended]]"></input>
+			</div>
+			<!-- Station -->
+			<div class="form-group" stationempty$="[[isEmpty(job.station)]]">
+				<label for="jobStation" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="Station"></sp-nls>
+				</label>
+				<input type="text" id="jobStation" class="form-control" readonly value="[[job.station]]"></input>
+			</div>
+			<!-- Working Directory -->
+			<div class="form-group" workdirempty$="[[isEmpty(job.workDir)]]">
+				<label for="jobWorkDir" class="control-label">
+					<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADJobProperties" nlskey="WorkDir"></sp-nls>
+				</label>
+				<input type="text" id="jobWorkDir" class="form-control" readonly value="[[job.workDir]]"></input>
+			</div>
+		</div>
+	</template>
+	<script type="text/javascript" src="ad-job-properties.js"></script>
+</dom-module>

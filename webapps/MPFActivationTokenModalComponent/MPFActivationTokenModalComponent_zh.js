@@ -1,0 +1,1 @@
+define("DS/MPFActivationTokenModalComponent/MPFActivationTokenModalComponent_zh",{});define("DS/MPFActivationTokenModalComponent/assets/nls/ActivationTokenModalComponent",{tokenAlreaydyUsed:"抱歉，此代码已被使用。请与支持部门联系",tokenError:"抱歉，这不是有效的注册码",tokenSuccess:"有效的注册码",enterCode:"输入您的代码",verify:"验证"});

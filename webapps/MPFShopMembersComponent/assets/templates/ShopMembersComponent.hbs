@@ -1,0 +1,47 @@
+<div class="row">
+
+  {{#if editable}}
+    <div class="col-sm-6">
+      <div class="member-block add-member"><span class="fonticon fonticon-3x fonticon-user-add"></span> <span>{{launchModalText}}</span></div>
+    </div>
+    {{#if includeDescription}}
+      <div class="col-sm-6">
+        <div class="member-block members-info"><span class="fonticon fonticon-2x fonticon-info"></span> <span class="description">{{ invitationInformation }}</span></div>
+      </div>
+    {{/if}}
+  {{/if}}
+
+  {{#each members}}
+  <div class="col-sm-6">
+    <div class="member-block member" data-id="{{id}}">
+      <div class="image">{{{initialsDot initials}}}</div>
+      <div class="details">
+        <div class="first-line">
+          {{#ifCond state 'active'}}
+          {{firstName}} {{lastName}}
+          {{else}}
+          {{email}}
+          {{/ifCond}}
+        </div>
+        <div class="second-line">
+          {{#ifCond state 'active'}}
+          {{email}}
+          {{else}}
+          ({{I18N 'pending'}})
+          {{/ifCond}}
+        </div>
+        <div class="third-line">
+          {{#ifCond admin true}}<span>Admin</span>{{/ifCond}}
+          {{#ifCond internalManager true}}<span>Manager</span>{{/ifCond}}
+        </div>
+        {{#if ../includeArrow}}
+          {{#if removable}}
+            <span class="fonticon fonticon-2x fonticon-open-down remove-member" data-id="{{id}}" data-name="{{#ifCond state 'active'}}{{firstName}} {{lastName}}{{else}}{{email}}{{/ifCond}}"></span>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+    {{/each}}
+</div>
+<div class="row"><div class="mpf-companyFooterContainer"></div><div>

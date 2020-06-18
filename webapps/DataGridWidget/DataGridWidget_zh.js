@@ -1,0 +1,1 @@
+define("DS/DataGridWidget/DataGridWidget_zh",{});define("DS/DataGridWidget/assets/nls/datagrid",{position:"位置"});

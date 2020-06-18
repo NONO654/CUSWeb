@@ -1,0 +1,1 @@
+define("DS/ENOXPageToolBar/ENOXPageToolBar_ja",{});define("DS/ENOXPageToolBar/assets/nls/PageToolBar",{collapse:"折りたたみ",expand:"展開",information:"情報"});

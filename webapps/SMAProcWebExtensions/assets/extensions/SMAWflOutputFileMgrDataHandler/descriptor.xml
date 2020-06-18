@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.plugin.DataHandlerFileMgr" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="DataHandler">
+	<DisplayName nlsFile="SMAWflOutputFileMgrDataHandler" nlsID="dispname">File Manager</DisplayName>
+	<Description nlsFile="SMAWflOutputFileMgrDataHandler" nlsID="desc">File Manager</Description>
+	<LongDescription>File Manager</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DataHandler</Value>
+		</Attribute>
+		<Attribute name="DataHandlerKind">
+			<Value>Output</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.DataHandlerFileMgr</Value>
+		</Attribute>
+		<Attribute name="HandlerType">
+			<Value>com.dassault_systemes.plugin.DataHandlerFileMgr</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAWflOutputFileMgrDataHandler16.gif" targetFilename="SMAWflOutputFileMgrDataHandler16.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOutputFileMgrDataHandler.CATNls" targetFilename="SMAWflOutputFileMgrDataHandler.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOutputFileMgrDataHandler_Japanese.CATNls" targetFilename="SMAWflOutputFileMgrDataHandler.CATNls" locale="Japanese" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflOutputFileMgrDataHandler.dll" targetFilename="win_b64/SMAWflOutputFileMgrDataHandler.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflOutputFileMgrDataHandler.sypstyle" targetFilename="SMAWflOutputFileMgrDataHandler.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflOutputFileMgrHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="XMLTransformer">
+			<Implementations>
+				<Implementation name="XMLTransformer" language="cpp" platform="win_b64">
+					<LateType>SMAWflOutputFileMgrXMLTransformer_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<!--  FileMgr Data Handler properties -->
+
+		<Property name="rawFN" type="string" valuetype="single">
+			<Value>
+				<![CDATA[]]>
+			</Value>
+		</Property>
+
+		<Property name="toOption" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[11]]>
+			</Value>
+		</Property>
+
+		<Property name="del" type="string" valuetype="single">
+			<Value>
+				<![CDATA[N]]>
+			</Value>
+		</Property>
+
+		<Property name="type" type="string" valuetype="single">
+			<Value>
+				<![CDATA[application/octet-stream]]>
+			</Value>
+		</Property>
+
+		<Property name="rwEnc" type="string" valuetype="single">
+			<Value>
+				<![CDATA[(Automatic Local)]]>
+			</Value>
+		</Property>
+
+		<Property name="dataEnc" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="handlerType" type="string" valuetype="single">
+			<Value>
+				<![CDATA[com.dassault_systemes.plugin.DataHandlerFileMgr]]>
+			</Value>
+		</Property>
+
+		<Property name="origFname" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+	</Properties>
+</wfext:Extension>

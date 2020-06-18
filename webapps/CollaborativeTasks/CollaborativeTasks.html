@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+        <!-- Application Metas -->
+        <title></title>
+        <widget:preferences>
+            <widget:preference name="scopeId" type="hidden"></widget:preference>
+            <widget:preference name="scopeIdLabel" type="hidden"></widget:preference>
+        </widget:preferences>
+        <meta name="author" content="Dassault Systemes" />
+        <meta name="brand" content="ENOVIA" />
+        <meta name="autoRefresh" content="0" />
+        <meta name="description" content="ENOVIA Task Management Widget" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+        <!--  Libraries -->
+        <link rel="stylesheet" type="text/css" href="../VENENO6WPlugins/plugins/jqueryui/latest/css/cupertino/jquery.ui.custom.min.css" />
+
+
+        <!-- Application JavaScript Source  -->
+        <script type="text/javascript">
+            //<![CDATA[
+            //defining constants, IFWE & enoviaServer as global.
+            /*global require, enoviaServer, widget*/
+            require([
+                    'DS/Foundation/WidgetUwaUtils',
+                    'DS/CollaborativeTasks/CollaborativeTasksBootstrap'
+                    ],
+            function (WidgetUwaUtils, CollaborativeTasks) {
+                'use strict';
+                window.isIFWE = true;
+                widget['6wWidgetName'] = 'TSK_CollaborativeTasks';
+          //      enoviaServer.widgetName = 'TSK_CollaborativeTasks';
+                //this needs to happen AFTER the setup is done
+                widget.addEvents({
+                    onLoad: CollaborativeTasks.onLoad
+                });
+            });
+        //]]>
+        </script>
+    </head>
+    <body/>
+</html>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?> 
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+ <html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/"> 
+ <!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<head>   
+    
+    <title>Abaqus Study</title>
+	
+	<!-- Application Metas Start -->
+	
+    <meta name="description" content="Simulation Companion" />
+    <meta name="keywords" content="simulation companion buddy fantastic" />
+    <meta name="autoRefresh" content="0" />
+   	
+	<!-- Application Metas End -->
+	
+	<!-- Load the web components polyfill -->
+    <script type="text/javascript" src="../Polymer-1.1.4/webcomponents-lite.min.js"></script>
+	 
+	<!-- Load AmdLoader -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	
+	<!-- Load the UWA framework -->
+    <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />      
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+	<script type="text/javascript" src="../W3DXComponents/W3DXComponents.js"></script>
+
+    <!-- Load any external JS or CSS file -->
+    <script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+    <link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+
+    <!-- Load Polymer and any other web components -->
+    <link rel="import" href="../Polymer-1.1.4/polymer.html"/>
+    <link rel="import" href="../SMAProcSP/sp-dashboard/sp-dashboard.html"/>
+   	<link rel="import" href="../SMAProcSP/sp-variable/sp-variable.html"/>  
+   	<link rel="import" href="../SMAProcSP/sp-mcsservice/sp-mcsservice.html"/> 
+   	<link rel="import" href="../SMAProcSP/sp-webservice/sp-webservice.html"/> 	
+   	<link rel="import" href="../SMAProcADUI/ad-app-event-checker/ad-app-event-checker.html"/> 	
+
+<!-- 	<widget:preferences>
+		<widget:preference type="list" name="uploadFiles" label="Files to be uploaded"  defaultValue="appDefault" onchange="onUploadFilesChange">
+		    <widget:option value="appDefault" label="Default (*.com, *.dat, *.msg, *.sta, *.odb, *.sim, *.log)"></widget:option>
+		    <widget:option value="userCustom" label="Custom (set Custom Files to be uploaded preference)"></widget:option>
+		</widget:preference> -->
+	   <!-- <widget:preference type="boolean" name="uploadFiles" label="Upload these files - *.com, *.dat, *.msg, *.sta, *.odb, *.sim, *.log" defaultValue="true" ></widget:preference> -->	   
+	   <!-- <widget:preference name="customFiles" type="text" label="Custom Files to be uploaded(e.g., *.inp,*.prt)" defaultValue=""></widget:preference> -->
+	    
+<!-- 	</widget:preferences> -->
+	<!-- Application JS Start -->
+    <script >
+    function onReady () {
+        require(
+                ['DS/SMAProcRunAbaqusUI/RunAbaqusWidget'],
+                function (RunAbaqusWidget) {
+                    'use strict';
+                    if (!RunAbaqusWidget) {
+                        alert('Abaqus Study widget not found.');
+                    }
+                },
+                function ( /* err */) {
+                    'use strict';
+                    alert('Failed to load Abaqus Study widget');
+                });
+    }
+
+    if (document.createElement('sp-dashboard').isInDashboard) {
+        onReady();
+    } else {
+        window.addEventListener('WebComponentsReady', onReady);
+    }  
+	</script>
+	<!-- Application JS End -->
+    <!-- Style of the widget, here we simply add scrollers if the widget is too small -->
+    <style>
+
+    </style>
+</head>
+<body>
+</body>
+</html>

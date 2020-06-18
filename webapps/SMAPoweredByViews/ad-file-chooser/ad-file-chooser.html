@@ -1,0 +1,22 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html"><!-- Polymer and it's dependencies -->
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html"><!-- UIKIT -->
+<link rel="import" href="../ad-redux-behaviour/ad-redux-behaviour.html">
+
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html"><!-- Utility for NLS Strings -->
+<link rel="import" href="../ad-confirmation-prompt/ad-confirmation-prompt.html">
+
+<dom-module id="ad-file-chooser">
+	<template>
+
+		<!-- File Chooser -->
+		<form>
+			<input type="file" multiple$="[[multiple]]" class="hidden" on-change="onFileSelected"></input>
+		</form>
+
+		<!-- If we need to prompt the user to confirm -->
+		<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADFileChooser" nlskey="PromptMessage" value={{PromptMessage}} no-view></sp-nls>
+		<ad-confirmation-prompt id="prompt" message="[[PromptMessage]]"></ad-confirmation-prompt>
+
+	</template>
+	<script type="text/javascript" src="ad-file-chooser.js"></script>
+</dom-module>

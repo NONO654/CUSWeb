@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.doe.FractionalFactorial" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAExeDOEFractionalFactorialPlugin" nlsID="dispname">Fractional Factorial</DisplayName>
+	<Description nlsFile="SMAExeDOEFractionalFactorialPlugin" nlsID="desc">Fractional Factorial</Description>
+	<LongDescription nlsFile="SMAExeDOEFractionalFactorialPlugin" nlsID="longdesc">
+		<![CDATA[For 2 level or 3 level designs, 1/2 to 1/729 fraction (depending on the number of factors) of a full factorial design is generated.
+
+</span><span style="font-weight:bold">Advantages:
+</span><span>   + More efficient than a full factorial.
+
+</span><span style="font-weight:bold">Disadvantages:
+</span><span>   - The smaller the fraction, the fewer the effects that can be evaluated.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DOE_Technique</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.doe.FractionalFactorial</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeDOEFractionalFactorialPlugin32.gif" targetFilename="SMAExeDOEFractionalFactorialPlugin32.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeDOEFractionalFactorialPlugin.CATNls" targetFilename="SMAExeDOEFractionalFactorialPlugin.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeDOEFractionalFactorialPlugin_ja.CATNls" targetFilename="SMAExeDOEFractionalFactorialPlugin_ja.CATNls" locale="Japanese" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-fractional-factorial/cmp-doe-fractional-factorial.html" targetFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-fractional-factorial/cmp-doe-fractional-factorial.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-doe-fractional-factorial</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.doe.fractionalfactorial.FractionalFactorial</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<Property name="Auto-Assign Factors" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[False]]>
+			</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Number of Levels" type="integer" valuetype="single">
+				<Value>
+					<![CDATA[2]]>
+				</Value>
+			</Property>
+			<Property name="Generator" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+			<Property name="Fraction" type="string" valuetype="single">
+				<Value>
+					<![CDATA[1/2]]>
+				</Value>
+			</Property>
+			<Property name="Number of Runs" type="string" valuetype="single">
+				<Value>
+					<![CDATA[8]]>
+				</Value>
+			</Property>
+		</Property>
+
+		<Property name="factor attributes" type="aggregate" valuetype="single">
+			<Property name="Levels" type="string" valuetype="single">
+				<Value>
+					<![CDATA[-25 25]]>
+				</Value>
+			</Property>
+			<Property name="Relation" type="string" valuetype="single">
+				<Value>
+					<![CDATA[%]]>
+				</Value>
+			</Property>
+			<Property name="Baseline" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

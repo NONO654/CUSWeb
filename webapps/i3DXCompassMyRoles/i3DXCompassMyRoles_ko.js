@@ -1,0 +1,1 @@
+define("DS/i3DXCompassMyRoles/i3DXCompassMyRoles_ko",{});define("DS/i3DXCompassMyRoles/assets/nls/i3DXCompassMyRoles",{platform:"3DExperience platform",apps:"{0} 앱",expire:"만료: {0}",noAdditional:"이 역할에 대한 추가 정보는 없습니다."});

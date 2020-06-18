@@ -1,0 +1,31 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html" />
+
+<dom-module id="xs-content-chooser">
+  <template>
+      <link rel="stylesheet" type="text/css" href="xs-content-chooser.css" />
+      <sp-search id="objectSearch" plm-types="[[accept]]" multi-select="false" on-change="onSearchResultChange"></sp-search>
+
+      <div id="container" class="chooser-main">
+        <template is="dom-if" if="{{!displayName}}">
+          <div class="chooser-placeHolder" on-click="launchSearch">{{placeholder}}</div>
+        </template>
+        <template is="dom-if" if="{{value}}">
+          <div class="chooser-objectTitle">{{displayName}}</div>
+        </template>
+        <div class="search-buttons" readonly$={{readonly}}>
+          <template is="dom-if" if="{{value}}">
+            <button class="cancel-button operation-button" on-click="clearObject">
+              <span class="fonticon fonticon-cancel-circled"></span>
+            </button>
+      		</template>
+          <button class="search-button operation-button" on-click="launchSearch">
+            <span class="fonticon fonticon-search"></span>
+          </button>
+        </div>
+      </div>
+    </template>
+  <script type="text/javascript" src="xs-content-chooser.js"></script>
+</dom-module>

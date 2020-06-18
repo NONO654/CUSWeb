@@ -1,0 +1,227 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+//
+// MASK DEFAULT
+//
+// --------------------------------------------------
+ENTITY Requirement
+// --------------------------------------------------
+ATTR Content Data;N;N;$
+ATTR Content Text;N;N;$
+ATTR Content Type;N;N;rtf.gz.b64
+ATTR Designated User;N;N;Unassigned
+ATTR Difficulty;N;N;Low
+VALUE High
+VALUE Medium
+VALUE Low
+ATTR Estimated Cost;N;N;0.00
+ATTR Notes;N;N;$
+ATTR Originator;N;N;$
+ATTR Priority;N;N;Low
+VALUE Pre-assigned
+VALUE Medium
+VALUE Low
+VALUE High
+VALUE Urgent
+ATTR Requirement Category;N;N;$
+ATTR Requirement Classification;N;N;Functional
+VALUE None
+VALUE Functional
+VALUE Non-Functional
+VALUE Constraint
+ATTR Sponsoring Customer;N;N;$
+ATTR Synopsis;N;N;$
+ATTR Title;N;N;$
+ATTR User Requirement Importance;N;N;Least Important
+VALUE Low
+VALUE Mediocre
+VALUE High
+VALUE Very High
+VALUE Least Important
+ATTR current;N;Y;Propose
+VALUE Propose
+VALUE Approve
+VALUE Validate
+VALUE Review
+VALUE Release
+VALUE Obsolete
+ATTR description;N;N;$
+ATTR modified;N;N;$
+ATTR name;N;N;$
+ATTR organization;N;N;$
+ATTR originated;N;N;$
+ATTR owner;N;N;$
+ATTR project;N;N;$
+ATTR reserved;N;N;false
+ATTR reservedby;N;N;$
+ATTR revision;N;N;$
+//ATTR lattice;N;N;$
+
+// ---------
+FUNC Tree
+// ---------
+FATTR name;N
+FATTR revision;N
+// ---------
+FUNC Create
+// ---------
+// ---------
+FUNC EZQuery
+// ---------
+FATTR revision;Y
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR reserved;Y
+FATTR reservedby;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR Requirement Category;Y
+FATTR Designated User;Y
+FATTR Sponsoring Customer;Y
+FATTR Originator;Y
+FATTR Title;Y
+FATTR Priority;Y
+FATTR User Requirement Importance;Y
+FATTR Notes;Y
+FATTR Estimated Cost;Y
+FATTR Difficulty;Y
+FATTR Synopsis;Y
+FATTR Requirement Classification;Y
+FATTR Content Text;Y
+// ---------
+FUNC List
+// ---------
+FATTR name;N
+FATTR revision;N
+FATTR Title;N
+FATTR current;N
+FATTR organization;N
+FATTR description;N
+FATTR project;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR originated;N
+FATTR owner;N
+FATTR Requirement Category;N
+FATTR Designated User;N
+FATTR Sponsoring Customer;N
+FATTR Originator;N
+FATTR Priority;N
+FATTR User Requirement Importance;N
+FATTR Notes;N
+FATTR Estimated Cost;N
+FATTR Difficulty;N
+FATTR Synopsis;N
+FATTR Requirement Classification;N
+FATTR Content Text;N
+// ---------
+FUNC Query
+// ---------
+FATTR revision;Y
+FATTR organization;Y
+FATTR description;Y
+FATTR name;Y
+FATTR current;Y
+FATTR reserved;Y
+FATTR reservedby;Y
+FATTR modified;Y
+FATTR originated;Y
+FATTR project;Y
+FATTR owner;Y
+FATTR Requirement Category;Y
+FATTR Designated User;Y
+FATTR Sponsoring Customer;Y
+FATTR Originator;Y
+FATTR Title;Y
+FATTR Priority;Y
+FATTR User Requirement Importance;Y
+FATTR Notes;Y
+FATTR Estimated Cost;Y
+FATTR Difficulty;Y
+FATTR Synopsis;Y
+FATTR Requirement Classification;Y
+FATTR Content Text;Y
+// ---------
+FUNC Read
+// ---------
+FATTR revision;N
+FATTR organization;N
+FATTR description;N
+FATTR name;N
+FATTR current;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR Requirement Category;N
+FATTR Designated User;N
+FATTR Sponsoring Customer;N
+FATTR Originator;N
+FATTR Title;N
+FATTR Priority;N
+FATTR User Requirement Importance;N
+FATTR Notes;N
+FATTR Estimated Cost;N
+FATTR Difficulty;N
+FATTR Synopsis;N
+FATTR Requirement Classification;N
+FATTR Content Text;N
+// ---------
+FUNC Write
+// ---------
+FATTR revision;N
+FATTR organization;N
+FATTR description;Y
+FATTR name;Y
+FATTR current;N
+//FATTR lattice;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR modified;N
+FATTR originated;N
+FATTR project;N
+FATTR owner;N
+FATTR Originator;N
+FATTR Requirement Category;Y
+FATTR Designated User;Y
+FATTR Sponsoring Customer;Y
+FATTR Title;Y
+FATTR Priority;Y
+FATTR User Requirement Importance;Y
+FATTR Notes;Y
+FATTR Estimated Cost;Y
+FATTR Difficulty;Y
+FATTR Synopsis;Y
+FATTR Requirement Classification;Y
+FATTR Content Text;N

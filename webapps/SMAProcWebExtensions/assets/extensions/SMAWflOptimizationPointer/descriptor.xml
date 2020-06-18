@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.optimization.Pointer" version="3DX.0"
+  xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflOptimizationPointer" nlsID="dispname">Pointer</DisplayName>
+	<Description nlsFile="SMAWflOptimizationPointer" nlsID="desc">Pointer Automatic Optimizer</Description>
+	<LongDescription nlsFile="SMAWflOptimizationPointer" nlsID="longdesc">
+		<![CDATA[POINTER - Pointer Automatic Optimizer
+
+</span><span style="font-weight:bold">Classification:
+</span><span>   &#8226; Combination Numerical and Exploratory Technique
+
+</span><span style="font-weight:bold">Problem and Design Space:
+</span><span>   &#8226; Well-suited for linear and nonlinear design spaces
+   &#8226; Well-suited for continuous and discontinuous design spaces
+   
+</span><span style="font-weight:bold">CPU Resources:
+</span><span>   &#8226; Well-suited for long running simulations
+
+</span><span style="font-weight:bold">Gradient-Based: </span><span>Partially
+
+</span><span style="font-weight:bold">Features:
+</span><span>Automatically controls a complementary set of standard algorithms to solve an optimization problem. 
+
+Pointer is an automatic optimization engine that controls a set of standard optimization techniques. It currently controls four optimization methods: a genetic algorithm, Nelder and Mead downhill simplex, sequential quadratic programming (NLPQL), and a linear solver. This complementary set of algorithms was selected because each succeeds and fails for different topography features. It has been found that a hybrid combination of these methods solves a broad range of design optimization problems. The Pointer Automatic Optimizer can control one algorithm at a time or all four at once. As the optimization is proceeding, the technique determines which algorithms are most successful as well as optimal internal control parameters (step sizes, numbers of iterations, number of restarts, etc). This procedure is hidden from the user. The goal is to enable the non-optimization expert to successfully utilize these methods.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.optimization.Pointer</Value>
+		</Attribute>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Optimization_Technique</Value>
+		</Attribute>
+		<Attribute name="EnableRunInParallel">
+			<Value>false</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflOptimizationPointer.CATNls" targetFilename="SMAWflOptimizationPointer.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflOptimizationPointer_Japanese.CATNls" targetFilename="SMAWflOptimizationPointer_Japanese.CATNls" locale="Japanese"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.optimization.pointer.POINTER</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="maxConcurrent" type="integer" valuetype="single">
+			<Value>1</Value>
+		</Property>
+		<Property name="reusePolicy" type="string" valuetype="single">
+			<Value>any</Value>
+		</Property>
+		<Property name="LogMessagesFileName" type="string" valuetype="single">
+			<Value>POINTER-output.txt</Value>
+		</Property>
+		<Property name="ExecutesInParallel" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Maximum allowable job time (hr)" type="real" valuetype="single">
+				<Value>1.0</Value>
+			</Property>
+			<Property name="Average analysis time (sec)" type="real" valuetype="single">
+				<Value>1.0</Value>
+			</Property>
+			<Property name="Topography type" type="string" valuetype="single">
+				<Value>nonlinear</Value>
+			</Property>
+			<Property name="Save Technique Log" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Max Failed Runs" type="integer" valuetype="single">
+				<Value>5</Value>
+			</Property>
+			<Property name="Failed Run Penalty Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Failed Run Objective Value" type="real" valuetype="single">
+				<Value>1.0e30</Value>
+			</Property>
+			<Property name="Use fixed random seed" type="boolean" valuetype="single">
+				<Value>false</Value>
+			</Property>
+			<Property name="Random seed value" type="integer" valuetype="single">
+				<Value>-1</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

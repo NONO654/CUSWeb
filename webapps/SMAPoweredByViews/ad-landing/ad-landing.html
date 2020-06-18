@@ -1,0 +1,106 @@
+<!-- Copyright 2018 Dassault Systemes. All rights reserved. -->
+<dom-module id="ad-landing">
+	<style>
+		:host {
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+			padding: 0 16px 0 16px;
+			max-width: 600px;
+		}
+		:host .landingImage {
+			margin: auto;
+			width: 300px;
+			margin-top: 36px;
+		}
+		/* MESSAGES */
+		:host .message {
+			/* using color to not interfere with fade-in by opacity*/
+			color: #b4b6ba; /* icon-grey */
+			padding-bottom: 24px;
+		}
+		:host .drop {
+			padding-top: 24px;
+			display: flex;
+			flex-direction: row-reverse;
+		}
+		/* BUTTONS */
+		:host .commands {
+			display: flex;
+			flex-direction: row-reverse;
+		}
+		:host .commands > .btn {
+			margin-left: 12px;
+		}
+		/* DEFINED HIDDEN-XSS TO RESPONSIVELY HIDE/SHOW IMAGES WITH SMALLER RESOLUTION */
+		@media all and (max-width: 350px) { :host .ad-hidden-xxs { display: none; } }
+		@media all and (max-height: 450px) { :host .ad-hidden-xxs { display: none ;} }
+		@media all and (max-width: 550px) and (max-height: 475px) { :host .ad-hidden-xxs { display: none; } }
+		@media all and (max-width: 400px) and (max-height: 500px) { :host .ad-hidden-xxs { display: none; } }
+
+		/* FADE IN */
+		:host  > * {
+			-webkit-animation: fadeInOpacity 1s; /* Chrome > 12.1 */
+			   -moz-animation: fadeInOpacity 1s; /* FF < 16 */
+				-ms-animation: fadeInOpacity 1s; /* IE */
+					animation: fadeInOpacity 1s;
+		}
+		@-webkit-keyframes fadeInOpacity {
+			from {opacity: 0;}
+			to {opacity: 1;}
+		}
+		@-moz-keyframes fadeInOpacity {
+			from {opacity: 0;}
+			to {opacity: 1;}
+		}
+		@-ms-keyframes fadeInOpacity {
+			from {opacity: 0;}
+			to {opacity: 1;}
+		}
+		@keyframes fadeInOpacity {
+			from {opacity: 0;}
+			to {opacity: 1;}
+		}
+	</style>
+	<template>
+		<!-- IMAGES -->
+		<img id="adImage" hidden$="[[!isAbaqusStudy]]" class="landingImage ad-hidden-xxs" src="[[_getImageUrl(isAbaqusStudy)]]"></img>
+		<img id="scImage" hidden$="[[isAbaqusStudy]]" class="landingImage ad-hidden-xxs" src="[[_getImageUrl(isAbaqusStudy)]]"></img>
+		<!-- MESSAGES -->
+		<div class="message">
+			<h1 class="header">[[NLS.GettingStarted]]</h1>
+			<span id="adMessage" hidden$="[[!isAbaqusStudy]]">[[NLS.WelcomeNote1_AD]]</span>
+			<span id="scMessage" hidden$="[[isAbaqusStudy]]">[[NLS.WelcomeNote1_SC]]</span>
+			<span>[[NLS.WelcomeNote2]]</span>
+		</div>
+		<!-- LOADING MESSAGES -->
+		<div id="loadingContent" hidden$=[[!isLoading]]>
+			<span>[[NLS.CheckingStudy]]</span>
+			<span id="spinnerContainer"></span>
+		</div>
+		<!-- WHEN READY -->
+		<div id="readyContent" hidden$=[[isLoading]]>
+			<!-- BUTTONS -->
+			<div class="commands">
+				<button id="createStudyButton" class="btn btn-primary" on-click="_onCreateStudy">
+					<span class="fonticon fonticon-plus"></span>
+					<span>[[NLS.CreateStudy]]</span>
+				</button>
+				<button id="openStudyButton" disabled$="[[isTransientWidget]]" class="btn btn-default" on-click="_onOpenStudy">
+					<span class="fonticon fonticon-search"></span>
+					<span>[[NLS.ResumeStudy]]</span>
+				</button>
+			</div>
+			<!-- DROP MESSAGE -->
+			<div class="drop message">[[NLS.DropMessage]]</div>
+		</div>
+		<!-- SP-SEARCH -->
+		<sp-search
+			id="spSearch"
+			plm-types="Simulation&quot; AND sce_95_simulation_95_kind:&quot;adhoc"
+			on-change="_onStudySelected">
+		</sp-search>
+		<!-- CREATE STUDY -->
+		<ad-create-study id="createStudy" redux></ad-create-study>
+	</template>
+</dom-module>

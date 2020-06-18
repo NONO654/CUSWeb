@@ -1,0 +1,36 @@
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<dom-module id="xs-wg-dynamic-parameters">
+	<!-- <link rel="import" type="css" href="xs-wg-dynamic-parameters.css">-->
+  	<template>        
+      	<style>
+    		:host {
+      			display: block; }
+      			
+      	    .activity-name {
+    			white-space: nowrap;
+        		overflow: hidden;
+       		 	text-overflow: ellipsis;
+   			 }
+
+    		.button-label {
+    			display: flex;
+    		}
+
+    		.fonticon-play:before {
+      			content: '\e162'; }
+
+    		.warning {
+    			color: #EA4F37;
+    			display: block;
+    			font-family: '3ds-Light';
+    		}
+    	</style>
+      	<button is="sp-button-type" class="button" on-click="onAddParamClick" disabled$="{{disabled}}">{{label}}</button>
+      	<template is="dom-if" if="{{showMsg}}">
+    		<span class="warning">{{blockMsg}}</span>
+    	</template>
+    </template>
+<!--Import associated JavaScript file-->
+  <script type="text/javascript" src="xs-wg-dynamic-parameters.js"></script>
+</dom-module>

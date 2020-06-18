@@ -1,0 +1,13 @@
+m|MPFComponents\MPFPaginationComponent.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|MPFComponents\MPFPaginationComponent.mweb\LocalGenerated\win_b64\MPFPaginationComponent.css|1554530740|2622
+s|WebUiAssets\ProtectedInterfaces\_variables.uikit.scss|1513852502|5361
+s|MPFComponents\MPFPaginationComponent.mweb\src\MPFPaginationComponent.scss|1553006428|1189
+t|win_b64\webapps\MPFPaginationComponent\MPFPaginationComponent.js|1554530791|3917
+s|MPFComponents\MPFPaginationComponent.mweb\src\MPFPaginationComponent.js|1545388644|0
+s|MPFComponents\MPFPaginationComponent.mweb\src\PaginationComponent.js|1553017657|7589
+t|win_b64\webapps\MPFPaginationComponent\MPFPaginationComponent.css|1568749453|960
+g|MPFComponents\MPFPaginationComponent.mweb\LocalGenerated\win_b64\MPFPaginationComponent.css|1554530740|2622

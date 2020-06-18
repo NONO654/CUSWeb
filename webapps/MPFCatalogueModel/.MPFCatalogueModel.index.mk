@@ -1,0 +1,9 @@
+m|MPFModels\MPFCatalogueModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.3.18352
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFCatalogueModel\MPFCatalogueModel.js|1545169466|2114
+s|MPFModels\MPFCatalogueModel.mweb\src\CatalogueDataProxy.js|1529933927|1934
+s|MPFModels\MPFCatalogueModel.mweb\src\CatalogueModel.js|1543319292|5527
+s|MPFModels\MPFCatalogueModel.mweb\src\MPFCatalogueModel.js|1513607556|1

@@ -1,0 +1,56 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html"/>
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html"/>
+
+<dom-module id="sp-drop">
+  <link rel="import" type="css" href="sp-drop.css">
+  <template>
+        <style include="sp-uikit-styles"></style>
+        <sp-search id="objectSearch" plm-types="[[plmType]]" on-change="onChange" multiSelect="false"></sp-search>
+        <div class="spDropContainer">
+            <sp-notification id="notificationMessages" position="TR" width="400"></sp-notification>
+            <div id="dropDiv" class="spDropArea" on-drop="onDrop" on-dragover="onDragover" on-dragleave="onDragLeave">
+              <div id="parentContainer" class="parentContainer">
+                <div id="addDropContainer" class="addDropContainer">
+                  <div id="addNote" class="dropNote">
+                      <span id="addNewObjectButton" class="fonticon fonticon-2x wux-ui-3ds-plus addButton" on-click="onNewObjectClick"></span>
+                      <span class="textNote"><br />Create new
+                          <span id="createNoteText">{{computeAddNote(addNoteText, dropNoteText)}}</span>
+                      </span>
+                      <br /><br />
+                  </div>
+                  <div id="separatorTextDrop" class="dropNote separator">
+                      <span>OR</span>
+                      <br /><br />
+                  </div>
+                  <div id="dropNote" class="dropNote">
+                      <span class="fonticon fonticon-2x wux-ui-3ds-drag-drop"></span>
+                      <span class="textNote">
+                          <br />Drop
+                          <span id="dropNoteText">{{toListDisplay(accepts, dropNoteText)}}</span>
+                      </span>
+                    <br /><br />
+                  </div>
+                </div>
+                <div id="searchContainer" class="searchContainer">
+                  <div id="separatorTextSearch" class="dropNote separator">
+                      <span>OR</span>
+                      <br /><br />
+                  </div>
+                  <div id="searchNote" class="dropNote">
+                      <span class="fonticon fonticon-2x wux-ui-3ds-search addButton" on-click="onSearchObjectClick"></span>
+                      <span class="textNote">
+                          <br />Search for
+                          <span id="dropNoteText">{{toListDisplay(accepts, dropNoteText)}}</span>
+                      </span>
+                    <br /><br />
+                  </div>
+                </div>
+              </div>
+                <content id="content"></content>
+            </div>
+          </div>
+    </template>
+  <script type="text/javascript" src="sp-drop.js"></script>
+</dom-module>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.Abaqus" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflAbaqus" nlsID="dispname">Abaqus</DisplayName>
+	<Description nlsFile="SMAWflAbaqus" nlsID="desc">Exchange data with and execute Abaqus solvers or Abaqus/CAE</Description>
+	<LongDescription nlsFile="SMAWflAbaqus" nlsID="longdesc">
+       Exchange data with and execute Abaqus solvers or Abaqus/CAE
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.component.Abaqus</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>1200</Value>
+			<Value>450</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAWflAbaqus16.gif" targetFilename="SMAWflAbaqus16.gif" />
+		<!--<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflAbaqus32.gif" targetFilename="SMAWflAbaqus32.gif" />-->
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflAbaqus.png" targetFilename="large/I_SMAWflAbaqus.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflAbaqus.CATNls" targetFilename="SMAWflAbaqus.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflAbaqus_Japanese.CATNls" targetFilename="SMAWflAbaqus_ja.CATNls" locale="Japanese" />
+		<Stream name="Properties" streamKind="properties" sourceFilename="SMAWflAbaqus_CATNls.properties" targetFilename="SMAWflAbaqus.properties"/>
+		<Stream name="Properties_Japanese" streamKind="properties" sourceFilename="SMAWflAbaqus_JapaneseCATNls.properties" targetFilename="SMAWflAbaqus_ja.properties" locale="Japanese" />
+		<Stream name="CodeJar" streamKind="jar" sharedLoader="false" sourceFilename="SMAWflAbaqus.jar" targetFilename="SMAWflAbaqus.jar" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflAbaqus.dll" targetFilename="win_b64/SMAWflAbaqus.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflAbaqusUI.sypstyle" targetFilename="SMAWflAbaqusUI.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflAbaqusEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation language="java">
+					<Class>com.engineous.component.Abaqus.AbaqusEditor</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflAbaqusHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+				<!--<Implementation language="java">
+          <Class>com.engineous.component.Abaqus.AbaqusHandler</Class>
+          <StreamRefs>
+            <StreamRef refStreamName="CodeJar"/>
+          </StreamRefs>
+        </Implementation>-->
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+	<Properties>
+		<!--<Property name="InputSourceFile" type="file" valuetype="single" mode="input">-->
+		<!--<Property name="Reference_Boss_3_inp" type="file" valuetype="single" mode="input">
+      <Value/>
+    </Property>-->
+		<Property name="InputParam" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="OutputParam" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="cosim" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+		<Property name="allLinesString" type="string" valuetype="single">
+			<Value>
+				<![CDATA[]]>
+			</Value>      
+		</Property>
+		<Property name="inputLineDefs" type="string" valuetype="single">
+			<Value>
+				<![CDATA[]]>
+			</Value>
+		</Property>    
+		<!--<Property name="OutputSourceFile" type="file" valuetype="single" mode="input">
+      <Value/>
+    </Property>-->
+		<Property name="gridSystemType" type="string" valuetype="single">
+			<Value>
+				<![CDATA[NONE]]>
+			</Value>
+		</Property>    
+		<Property name="cmdProp" type="string" valuetype="single">
+			<Value>
+				<![CDATA[]]>
+			</Value>
+		</Property>
+		<Property name="waitProp" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+		<Property name="waitMaxProp" type="integer" valuetype="single">
+			<Value>0</Value>
+		</Property>
+		<Property name="additionalWaitProp" type="real" valuetype="single">
+			<Value>0.0</Value>
+		</Property>
+		<Property name="saveOutDB" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+		<Property name="ignoreErrors" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+		<Property name="logSTDOut" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+		<Property name="logSTDErr" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+		<Property name="numLinesSTDOut" type="integer" valuetype="single">
+			<Value>5</Value>
+		</Property>
+
+		<!--<Property name="configFile" type="string" valuetype="single">
+      <Value/>
+    </Property>-->
+
+		<Property name="configString" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="IncludeFiles" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="OutputFileParseOpt" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="inpInModel" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="catParams" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="Mass" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+
+		<Property name="History" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+
+		<Property name="MinMaxHistory" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+
+		<Property name="Field" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+
+		<Property name="All" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property> 
+
+		<Property name="Stress" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="Spatial" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="Element" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="Set" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="FieldComponent" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="allFrameValues" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="includeTensor" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="engMin" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="engMax" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+
+		<Property name="engMinMax" type="real" valuetype="single">
+			<Value>0.0</Value>
+		</Property>
+
+		<Property name="OutParamsFile" type="file" valuetype="single" mode="input">
+			<Value/>
+		</Property>
+
+		<Property name="OdbFileNamesProperty" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="InParamsFile" type="file" valuetype="single" mode="input">
+			<Value/>
+		</Property>
+
+		<Property name="InSelectedParams" type="file" valuetype="single" mode="input">
+			<Value/>
+		</Property>
+
+		<Property name="ComputeValues" type="boolean" valuetype="single">
+			<Value>true</Value>
+		</Property>
+
+	</Properties>
+
+</wfext:Extension>

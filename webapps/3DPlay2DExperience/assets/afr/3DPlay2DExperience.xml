@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DPlayDocumentAfrWorkshopInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DPlayProAfrWorkshopConfiguration"/>
+  </Template>
+
+  <Template syp:name="3DPlayDocumentAfrWorkshopHeaders" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+      <CATCommandHeader ID="ShareTo3DSwYm" Available="0" ClassName="DS/3DPlayCommands/CmdShareTo3DSwYm" HelpResourceFile="3DPlay/3DPlayHelpForCommands" ResourceFile="3DPlay/3DPlay"  />
+      <CATCommandHeader ID="SharePrint" Available="0" ClassName="DS/3DPlayCommands/CmdSharePrint" HelpResourceFile="3DPlay/3DPlayHelpForCommands" ResourceFile="3DPlay/3DPlay"  />
+      <CATCommandHeader ID="ShareDownload" Available="0" ClassName="DS/3DPlayCommands/CmdShareDownload" HelpResourceFile="3DPlay/3DPlayHelpForCommands" ResourceFile="3DPlay/3DPlay"  />
+
+      <CATCommandHeader ID="DownloadPDF" ClassName="DS/3DPlay2DExperience/Commands/CmdDownloadPDF" HelpResourceFile = "3DPlay2DExperience/3DPlayHelpFor2DExperienceCommands" ResourceFile="3DPlay2DExperience/3DPlay2DExperience"  />
+      <CATCommandHeader ID="Reframe" ClassName="DS/3DPlay2DExperience/Commands/CmdReframe" ResourceFile="3DPlay2DExperience/3DPlay2DExperience" />
+      <CATCommandHeader ID="FitWidth" ClassName="DS/3DPlay2DExperience/Commands/CmdFitWidth" ResourceFile="3DPlay2DExperience/3DPlay2DExperience" />
+      <CATCommandHeader ID="Zoom" ClassName="DS/3DPlay2DExperience/Commands/CmdZoom" ResourceFile="3DPlay2DExperience/3DPlay2DExperience" />
+      <CATCommandHeader ID="ZoomIn" ClassName="DS/3DPlay2DExperience/Commands/CmdZoom" ResourceFile="3DPlay2DExperience/3DPlay2DExperience">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="Scale" Value="+" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="ZoomOut" ClassName="DS/3DPlay2DExperience/Commands/CmdZoom" ResourceFile="3DPlay2DExperience/3DPlay2DExperience">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="Scale" Value="-" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="Previous" ClassName="DS/3DPlay2DExperience/Commands/CmdScrollSheet" ResourceFile="3DPlay2DExperience/3DPlay2DExperience">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="Scroll" Value="-" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="Next" ClassName="DS/3DPlay2DExperience/Commands/CmdScrollSheet" ResourceFile="3DPlay2DExperience/3DPlay2DExperience">
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID="Scroll" Value="+" Mode="In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID="ToggleView" ClassName="DS/3DPlay2DExperience/Commands/CmdToggleView" ResourceFile="3DPlay2DExperience/3DPlay2DExperience"/>
+    </CATCmdHeadersList>
+  </Template>
+  <Template syp:name="3DPlayDocumentAfrWorkshopAccess" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DPlayDocumentWorkbench">
+      <CATCmdContainer Name="Fixed Area" RepresentationType="AfrActionBarFixedSection">
+        <CATCmdContainer Name="Share" Visibility="1" RepresentationType="AfrActionBarDropDown">
+          <CATCmdStarter Name="ShareTo3DSwYm" Command="ShareTo3DSwYm" />
+          <CATCmdStarter Name="ShareDownload" Command="ShareDownload" />
+          <CATCmdStarter Name="SharePrint" Command="SharePrint" />
+        </CATCmdContainer>
+        <CATCmdStarter Name="DownloadPDF" Command="DownloadPDF" />
+      </CATCmdContainer>
+      <CATCmdContainer Name="SectionViews" Visibility="1" RepresentationType="AfrActionBarSection">
+        <CATCmdStarter Name="Zoom" Command="Zoom"/>
+        <CATCmdContainer Name="FitCommands" Visibility="1" RepresentationType="AfrActionBarDropDown">
+            <CATCmdStarter Name="Reframe" Command="Reframe" />
+            <CATCmdStarter Name="FitWidth" Command="FitWidth" />
+        </CATCmdContainer>
+        <CATCmdStarter Name="ZoomIn" Command="ZoomIn"/>
+        <CATCmdStarter Name="ZoomOut" Command="ZoomOut"/>
+        <CATCmdSeparator Name="BasicManip_Separator"/>
+        <CATCmdStarter Name="Previous" Command="Previous"/>
+        <CATCmdStarter Name="Next" Command="Next"/>
+        <CATCmdStarter Name="ToggleView" Command="ToggleView"/>
+      </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

@@ -1,0 +1,49 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSP/sp-search/sp-search.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+<link rel="import" href="../cmp-dropdown/cmp-dropdown.html">
+
+
+
+<dom-module id="cmp-content-chooser">
+<template>
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+    :host{
+      display:block;
+    }
+    #contentChooserDiv {
+      display: inline-flex;
+      width: 100%;
+      height:22px;
+    }
+    #contentDropDown {
+        flex: 1;
+    }
+    .btn-mrg {
+        margin: 0 2px; height: 22px; width:22px; border: none; background: transparent; padding:0;
+    }
+    img { width: 22px; height: 22px; }
+    </style>
+    <div id="contentChooserDiv">
+        <sp-notification id="notification" position="TR" width="300"></sp-notification>
+        <sp-search id="searchWidget" select-mode plm-types="{{objectTypes}}"></sp-search>
+        <input id="contentChooserFile" type="file" multiple accept$="[[filetypes]]" style="display: none;"/>
+        <cmp-dropdown id="contentDropDown" label="Drop Object here" disabled$="[[disabled]]"></cmp-dropdown>
+        <button on-click="onSearchClicked" class="btn-mrg" title="Launch search" disabled$="[[disabled]]">
+            <img src="../../SMAProcWebCommonControls/assets/I_SMAWflSearch.png" />
+        </button>
+        <template is="dom-if" bind="" if="{{_isStrictlyTrue(documentcreate)}}">
+            <button on-click="onNVDocCreateClicked" class="btn-mrg" title="Create non-versioned simulation document" disabled$="[[disabled]]">
+                <img src="../../SMAProcWebCommonControls/assets/I_SMAWflCreateDocNV.png" />
+            </button>
+            <button on-click="onVDocCreateClicked" class="btn-mrg" title="Create versioned simulation document" disabled$="[[disabled]]">
+                <img src="../../SMAProcWebCommonControls/assets/I_SMAWflCreateDocV.png" />
+            </button>
+        </template>
+    </div>
+</template>
+<script type="text/javascript" src="cmp-content-chooser.js"></script>
+</dom-module>

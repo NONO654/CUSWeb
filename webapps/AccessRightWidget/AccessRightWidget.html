@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+  <head>
+    <!-- Application Metas -->
+	<!-- These information will be displayed in the widget preferences -->
+    <title>Access right widget</title>
+    <meta name="author" content="G5C" />
+    <meta name="description" content="Access right widget 3" />
+    <!-- UWA Environment -->
+	<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+	<!-- Load UWA environment --> 
+	<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+	<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+	<!-- UWA/Class/View, Model and Collection will be loaded dynamically -->
+
+	<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" /> 
+	<script type="text/javascript" src="../UIKIT/UIKIT.js"></script> 
+   
+    
+    <script type="text/javascript">
+    /*
+      We create the global MyWidget object.
+      This object will be used to store variables and functions.
+    */
+    var dependencies = dependencies || [];
+
+    require(
+        // dependencies
+        [
+            'DS/AccessRightWidget/AccessRightWidget',
+         	'DS/WidgetServices/WidgetServices',
+         	'DS/WAFData/WAFData',
+        ].concat(dependencies),
+
+        // execute this callback, passing all dependencies as params
+
+        function(WidgetCore, widgetServices, WAFData) {
+        	defaultService = function(dataUrl, optionsRequest){
+        		if (dataUrl.indexOf(".json") >=0){
+        			require(["text!" + dataUrl], function(textJson){
+        				optionsRequest.onComplete.call(null, JSON.parse(textJson));
+        			});
+        		} else console.log("unknown service : " + dataUrl);        		
+        	}
+        	
+        	WAFData.handleRequest = function (dataUrl, optionsRequest) {
+        		if (dataUrl.indexOf("resources/pno/person/getsecuritycontext") >=0){
+        			optionsRequest.onComplete.call(null, {
+        				SecurityContext: "ctx::Leader.Org1.CS1"
+        			});
+        		}
+        		else defaultService(dataUrl, optionsRequest);
+        	}
+		    var tenantID = widgetServices.getTenantID();						    		    
+		    if(tenantID){
+		    	dataUrl += "&tenant=" + tenantID;
+		    }										        	
+        	WAFData.authenticatedRequest = function (dataUrl, optionsRequest) {
+        		if (dataUrl.indexOf("resources/lifecycle/product/attributeList") >=0){
+        			optionsRequest.onComplete.call(null, {
+        													"results":[{"owner":"SLMInstallerAdmin",
+        																"ownerFullName":"SLM Installer",
+        																"physicalid":"1",
+        																"organization":null,
+        																"options":{},
+        																"project":null}]});
+        		}
+        		else if (dataUrl.indexOf("resources/accessRightServices/ar/completeInput") >=0) {
+        			optionsRequest.onComplete.call(null, {
+         				"success": true,
+						"ownershipVector": [{
+											"objectID": "1",
+											"ownership": [{
+												"owner": {
+															"organization": {
+															"orgID": "Company Name"
+														},
+												"collabSpace": {
+														"collabSpaceID": "Default"
+												},
+												"comment": "1Primary"
+											},
+											"access": {
+												"logical": "Read"
+											},
+											"inheritedPath": [{
+												"inheritedFrom":{
+												"objectID": "29440.61508.38448.33203",
+												"objectTNR": "TestCollabSpace1"
+											},
+											"inheritedAccess":{
+												"logical": "Read"
+											}}]}]}]
+        			});
+         		}else if (dataUrl.indexOf("/resources/pno/ownership/update") >=0){
+         			optionsRequest.onComplete.call(null, {
+         				"success": true,
+						"ownershipVector": [{
+										"objectID": "1",
+										"ownership": [{
+											"owner": {
+														"organization": {
+														"orgID": "Company Name"
+													},
+											"collabSpace": {
+													"collabSpaceID": "Default"
+											},
+											"comment": "1Primary"
+										},
+										"access": {
+											"logical": "Read"
+										},
+										"inheritedPath": [{
+											"inheritedFrom":{
+											"objectID": "29440.61508.38448.33203",
+											"objectTNR": "TestCollabSpace1"
+										},
+										"inheritedAccess":{
+											"logical": "Read"
+										}
+									}]
+								}]
+						}]
+    				})
+         		}else if (dataUrl.indexOf("/resources/pno/ownership/checkaccess") >=0){
+         			optionsRequest.onComplete.call(	null, 
+         											{	"success":true,
+         												"boAccessRights":[{
+         																"objectID":"52C075910000184C546621C50006BF83",
+         																"accessRight":[{"access":{"physical":"changeowner"},"right":true}]
+         												}]}
+         											);
+         		}
+        		else defaultService(dataUrl, optionsRequest);
+        	}
+        	
+            var WIWI = {
+                onLoad: function() { //Needed to be sure to have a widget.body
+					var that= this;
+					widget.body.setAttribute('data-rec-id', 'AccessRightWidget');
+                    widgetServices.setODTComment(true);
+              		var ServerUrl = {
+                            "platform_services": [{
+                              "3DSpace": "https://vdevpril665dsy.ux.dsone.3ds.com",
+                              "platformId":'OnPremise'
+                            }]
+                    };
+					widgetServices.setReplayODT(true);              		
+					that.mySecondDiv=new WidgetCore(widget, widget.body,{
+		    			'setRefreshButton': true,
+		    			'setValidButton': true,
+		    			'setCloseButton': false,   
+		    			'isStandalone' : true,
+		    			'wintop' : true, 
+		    			'serverUrl' : ServerUrl.platform_services,
+						'readOnly': false,
+						'activeMultisel': true
+						});
+					
+					widget.body.setContent(that.mySecondDiv);
+					that.mySecondDiv.initData([{
+						'physicalId': '1',
+						'name': 'lhxlhx'
+					}]);
+             //WidgetCore.helloWorld(widget);
+                },
+                onRefresh: function(){
+                	this.mySecondDiv.onRefresh();
+                },
+                onResize: function(){
+                	this.mySecondDiv.onResize();
+                }
+            };
+            widget.addEvent('onLoad', WIWI.onLoad);
+            widget.addEvent('onRefresh', WIWI.onRefresh);
+            widget.addEvent('onResize', WIWI.onResize);
+        });
+   
+    </script>
+  </head>
+  <body>
+    <p>Loading...</p>
+   </body>
+</html>

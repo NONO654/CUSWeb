@@ -1,0 +1,2236 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+  <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+  <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+  <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+]>
+
+<rdf:RDF
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xmlns:xml="http://www.w3.org/XML/1998/namespace"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:ds6w="http://www.3ds.com/vocabularies/ds6w/"
+  xml:base="http://www.3ds.com/vocabularies/ds6w/">
+
+<owl:Ontology rdf:about="http://www.3ds.com/vocabularies/ds6w/">
+  <rdfs:label xml:lang="en">6W Vocabulary</rdfs:label>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This ontology defines the DS Corporate vocabulary for 6W tags.</rdfs:comment>
+  <owl:versionInfo>R2015x</owl:versionInfo>
+</owl:Ontology>
+
+
+<owl:DatatypeProperty rdf:about="how">
+  <rdfs:label xml:lang="en">How</rdfs:label>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">How</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="classification">
+  <rdfs:label xml:lang="en">Classification</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Classification</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="decisional">
+  <rdfs:label xml:lang="en">Decisional</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">Decisional</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="contextualParameter">
+  <rdfs:label xml:lang="en">Contextual Parameter</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Experiment contextual parameter</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="measuredParameter">
+  <rdfs:label xml:lang="en">Measured Parameter</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Experiment measured parameter</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="molecularFunction">
+  <rdfs:label xml:lang="en">Molecular Function</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="classification"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Elemental activities, such as catalysis or binding, describing the actions of a gene product at the molecular level</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="biologicalRole">
+  <rdfs:label xml:lang="en">Biological Role</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="classification"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Role played by a bio entity in a given interaction</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="detectionLMethod">
+  <rdfs:label xml:lang="en">Detection Method</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="classification"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Method to determine the molecules involved in the interaction</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="identificationMethod">
+  <rdfs:label xml:lang="en">Identification Method</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="classification"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Method to determine the features of the proteins involved in the interaction</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="compliancy">
+  <rdfs:label xml:lang="en">Compliancy</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Compliancy</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="processSpecification">
+  <rdfs:label xml:lang="en">Process Specification</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Process Specification</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="completeness">
+  <rdfs:label xml:lang="en">Completeness Status</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Completeness status of the configuration</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="validationStatus">
+  <rdfs:label xml:lang="en">Validation Status</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Indicates the status of validation program</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="makeOrBuy">
+  <rdfs:label xml:lang="en">Make Or Buy?</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="processSpecification"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Is the object made or bought ?</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="productionMakeOrBuy">
+  <rdfs:label xml:lang="en">Production Make Or Buy</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="makeOrBuy"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en"></rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="serviceMakeOrBuy">
+  <rdfs:label xml:lang="en">Service Make Or Buy</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="makeOrBuy"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en"></rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="processSteps">
+  <rdfs:label xml:lang="en">Process Steps</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="processSpecification"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Process Steps</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="request">
+  <rdfs:label xml:lang="en">Request</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Request</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="timeConstraint">
+  <rdfs:label xml:lang="en">Time Constraint</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">TimeConstraint</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="materialDomain">
+  <rdfs:label xml:lang="en">Material Domain</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Material Domain</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="reportableStatus">
+  <rdfs:label xml:lang="en">Reportable Status</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">This field is identify that Complaint will be reported to Regulatory body or not. Range Value: Not Reportable, Reportable, Not Applicable, Pending</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="eventExperienceCode">
+  <rdfs:label xml:lang="en">Event Experience Code</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">An Event is a customer product problem which indicate a product deficiency.</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="enclose">
+  <rdfs:label xml:lang="en">Encloses an attachment ?</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">Encloses an attachment, or not ?</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="experience">
+  <rdfs:label xml:lang="en">Experience</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Experience used to instantiate a simulation process</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="proteinEvidence">
+  <rdfs:label xml:lang="en">Protein Evidence</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Quality proof of protein existence</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="distributionStatus">
+  <rdfs:label xml:lang="en">Distribution Status</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Indicates whether the device is in commercial distribution as defined under 21 CFR  807.3(b), or not.</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="hasDomainRendering">
+  <rdfs:label xml:lang="en">Has Rendering Domain</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="materialDomain"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">Indicates whether the material has a Rendering domain or not</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="hasDomainSimulation">
+  <rdfs:label xml:lang="en">Has Simulation Domain</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="materialDomain"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">Indicates whether the material has a Simulation domain or not</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="hasDomainDrafting">
+  <rdfs:label xml:lang="en">Has Drafting Domain</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="materialDomain"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">Indicates whether the material has a Drafting domain or not</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="hasDomainLE">
+  <rdfs:label xml:lang="en">Has Linear Elastic Domain</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="materialDomain"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">Indicates whether the material has a linear Elastic domain or not</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="hasDomainComposite">
+  <rdfs:label xml:lang="en">Has Composite Domain</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="materialDomain"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">Indicates whether the material has a Composite domain or not</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="app">
+  <rdfs:label xml:lang="en">App Name</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the App captured by the Favorite</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="visibility">
+  <rdfs:label xml:lang="en">Visibility</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Indicates the visibility of the tag object, for example Public, Private or Secret,</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="isDuplicated">
+  <rdfs:label xml:lang="en">Duplicated</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">True if created by duplication of another object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="instantiationMethod">
+  <rdfs:label xml:lang="en">Instantiation method</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Describes how an Object Type instantiates PLM objects</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="featureInstantiationMethod">
+  <rdfs:label xml:lang="en">Feature instantiation method</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Describes how an Object Type instantiates User Features</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="formulationType">
+  <rdfs:label xml:lang="en">Formulation Type</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="how"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Describes the type of Formulation</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="what">
+  <rdfs:label xml:lang="en">What</rdfs:label>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">What</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="assigned">
+  <rdfs:label xml:lang="en">Assigned object</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Assigned object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="based">
+  <rdfs:label xml:lang="en">Based</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Based</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="category">
+  <rdfs:label xml:lang="en">Category</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Category of community</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="constituent">
+  <rdfs:label xml:lang="en">Constituent</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Constituent</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="cost">
+  <rdfs:label xml:lang="en">Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Cost of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="costCurrency">
+  <rdfs:label xml:lang="en">Currency</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Currency of the cost</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="estimatedCost">
+  <rdfs:label xml:lang="en">Estimated Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Estimated Cost of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="targetedCost">
+  <rdfs:label xml:lang="en">Target Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Target Cost of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="consumableCost">
+  <rdfs:label xml:lang="en">Consumable Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Consumable Cost</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="energyCost">
+  <rdfs:label xml:lang="en">Energy Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Energy Cost</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="maintenanceCost">
+  <rdfs:label xml:lang="en">Maintenance Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Maintenance Cost</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="purchaseCost">
+  <rdfs:label xml:lang="en">Purchase Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Purchase Cost</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="repairCost">
+  <rdfs:label xml:lang="en">Repair Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Repair Cost</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="materialCost">
+  <rdfs:label xml:lang="en">Material Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Item Quoted Material Cost</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="freightCost">
+  <rdfs:label xml:lang="en">Freight Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Item Freight Cost</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeCost">
+  <rdfs:label xml:lang="en">Change Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Change Cost</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="laborCost">
+  <rdfs:label xml:lang="en">Labor Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Item Labor Cost</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="laborRate">
+  <rdfs:label xml:lang="en">Labor Rate</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Labor Rate</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="totalCost">
+  <rdfs:label xml:lang="en">Total Cost</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="cost"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Total Cost</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="geometry">
+  <rdfs:label xml:lang="en">Geometry</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Geometry</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="distance">
+  <rdfs:label xml:lang="en">Distance</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="geometry"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Distance</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="surface">
+  <rdfs:label xml:lang="en">Surface</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="geometry"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Actual surface of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="declaredSurface">
+  <rdfs:label xml:lang="en">Declared Surface</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="surface"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Declared surface of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="diameter">
+  <rdfs:label xml:lang="en">Diameter</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="geometry"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Diameter of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="radius">
+  <rdfs:label xml:lang="en">Radius</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="geometry"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Radius of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="length">
+  <rdfs:label xml:lang="en">Length</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="geometry"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Length of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="height">
+  <rdfs:label xml:lang="en">Height</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="geometry"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Height of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="width">
+  <rdfs:label xml:lang="en">Width</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="geometry"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Width of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="thickness">
+  <rdfs:label xml:lang="en">Thickness</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="geometry"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Thickness of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="volume">
+  <rdfs:label xml:lang="en">Volume</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="geometry"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Actual volume of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="declaredVolume">
+  <rdfs:label xml:lang="en">Declared Volume</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="volume"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Declared volume of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="library">
+  <rdfs:label xml:lang="en">Library</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Library classification of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="type">
+  <rdfs:label xml:lang="en">Type</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Type of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="class">
+  <rdfs:label xml:lang="en">RDF Class</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Class lineage of the object : TEMPORARY PREDICATE</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="participantType">
+  <rdfs:label xml:lang="en">Participant Type</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="type"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Different type of entities (protein, gene, complexe, chemical) participating in an interaction</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="interactionType">
+  <rdfs:label xml:lang="en">Interaction Type</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="type"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Classification of existing or possible interactions beween bio entities</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="employmentType">
+  <rdfs:label xml:lang="en">Employment Type</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="type"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Type of employment of the person (employee, contractor, intern, …)</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="businessType">
+  <rdfs:label xml:lang="en">Business Type</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Business Type of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="workspace">
+  <rdfs:label xml:lang="en">Workspace</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Workspace of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="policy">
+  <rdfs:label xml:lang="en">Collaborative Policy</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Policy (lifecycle and security rules)</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="physics">
+  <rdfs:label xml:lang="en">Physics</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Related to Physics</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="min">
+  <rdfs:label xml:lang="en">Min Value</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="physics"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Minimum value</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="max">
+  <rdfs:label xml:lang="en">Max Value</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="physics"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Maximum value</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="typical">
+  <rdfs:label xml:lang="en">Typical Value</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="physics"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Typical value</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="unit">
+  <rdfs:label xml:lang="en">Unit of Measure</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="physics"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Unit of measure</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="weight">
+  <rdfs:label xml:lang="en">Weight</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="physics"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Weight of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="declaredWeight">
+  <rdfs:label xml:lang="en">Declared Weight</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="weight"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Declared weight of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="material">
+  <rdfs:label xml:lang="en">Material</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="physics"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Material of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="materialHardness">
+  <rdfs:label xml:lang="en">Material Hardness</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="material"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Material Hardness</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="moistureSensitivityLevel">
+  <rdfs:label xml:lang="en">Moisture Sensitivity Level</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="material"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Moisture Level</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="terminalPlatingSurfaceFinish">
+  <rdfs:label xml:lang="en">Terminal Plating Surface Finish</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="material"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Plating/Surface</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="preference">
+  <rdfs:label xml:lang="en">Preference</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Preference</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="status">
+  <rdfs:label xml:lang="en">Maturity State</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Maturity or State of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="processQualificationStatus">
+  <rdfs:label xml:lang="en">Process Qualification Status</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="status"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Qualification Status</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="reserved">
+  <rdfs:label xml:lang="en">Reservation</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="status"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">Object is Reserved (TRUE) or Not Reserved (FALSE)</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="jobStatus">
+  <rdfs:label xml:lang="en">Job Status</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="status"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Status of the latest job run by the Simulation</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="upToDate">
+  <rdfs:label xml:lang="en">Up To Date</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="status"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">Indicates if Simulation is up to date</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="technology">
+  <rdfs:label xml:lang="en">Technology</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Technology</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="capacity">
+  <rdfs:label xml:lang="en">Capacity</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="technology"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Capacity</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="quantityCapacity">
+  <rdfs:label xml:lang="en">Storage capacity</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="technology"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Storage capacity</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="dOF">
+  <rdfs:label xml:lang="en">Degrees of Freedom</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="technology"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Degrees of Freedom</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="environment">
+  <rdfs:label xml:lang="en">Environment</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="technology"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Environment</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="items">
+  <rdfs:label xml:lang="en">Number of Items</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="technology"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Number of items</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="spindles">
+  <rdfs:label xml:lang="en">Number of Spindles</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="technology"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Number of Spindles</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="turrets">
+  <rdfs:label xml:lang="en">Number of Turrets</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="technology"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Number of Turrets</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="masters">
+  <rdfs:label xml:lang="en">Skills</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Skills</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="language">
+  <rdfs:label xml:lang="en">Language</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Language</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="releaseType">
+  <rdfs:label xml:lang="en">Release Type</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Release Type</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="standard">
+  <rdfs:label xml:lang="en">Standard</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Standard</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="social">
+  <rdfs:label xml:lang="en">Social</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Social</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="endorsements">
+  <rdfs:label xml:lang="en">Endorsements</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="social"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Number of Endorsement</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="question">
+  <rdfs:label xml:lang="en">Question</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="social"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Question</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="answers">
+  <rdfs:label xml:lang="en">Answers</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="question"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Number of Answers</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="survey">
+  <rdfs:label xml:lang="en">Survey</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="social"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Survey</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="participants">
+  <rdfs:label xml:lang="en">Participants</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="survey"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Number of participants</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="comments">
+  <rdfs:label xml:lang="en">Comments</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="social"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Number of Comments</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="person">
+  <rdfs:label xml:lang="en">Person</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="social"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Person</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="activity">
+  <rdfs:label xml:lang="en">Activity</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="person"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Activity</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="modelNumber">
+  <rdfs:label xml:lang="en">Model Number</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">The device used at the time of Incident. It is Model Number of the used device</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="root">
+  <rdfs:label xml:lang="en">Root</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">is the node a root</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="leaf">
+  <rdfs:label xml:lang="en">Leaf</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">is the node a leaf</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="contentStructure">
+  <rdfs:label xml:lang="en">Content Structure</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">is the node a Top Level, an Intermediate, or a Leaf node</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="composed">
+  <rdfs:label xml:lang="en">Composed</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">is the object composed or not</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="interest">
+  <rdfs:label xml:lang="en">Interest</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="person"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Is interested in</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="skill">
+  <rdfs:label xml:lang="en">Skill</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="person"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">As Skill</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="kind">
+  <rdfs:label xml:lang="en">Subtype</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Weak Type or Classification of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="label">
+  <rdfs:label xml:lang="en">Title</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Label               *** NOT DISPLAYED IN TAGGER ***</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="identifier">
+  <rdfs:label xml:lang="en">Name</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Identifier      *** NOT DISPLAYED IN TAGGER ***</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="description">
+  <rdfs:label xml:lang="en">Description</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Description  *** NOT DISPLAYED IN TAGGER ***</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="simulationStudy">
+  <rdfs:label xml:lang="en">Simulation Study</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Simulation Study</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="brand">
+  <rdfs:label xml:lang="en">Brand</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Product's brand</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="color">
+  <rdfs:label xml:lang="en">Color</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Product's color</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="definedBy">
+  <rdfs:label xml:lang="en">Defined by</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name or configuration of the Object Type defining an object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="marketIntent">
+  <rdfs:label xml:lang="en">Market Intent</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">If the Services Product/Services Item is intended to be sold to customer or for internal use only </rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="feature">
+  <rdfs:label xml:lang="en">Feature</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">List of Configuration Features selected for the Services Item</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="option">
+  <rdfs:label xml:lang="en">Option</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">List of Configuration Options selected for the Services Item</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="lifeStage">
+  <rdfs:label xml:lang="en">Life Stage</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Logical Grouping of States </rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="globalType">
+  <rdfs:label xml:lang="en">Not to be displayed in UI</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Temporary predicate for federated types *** not to be displayed in UI *** - ATV request</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="docExtension">
+  <rdfs:label xml:lang="en">File type</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Document mime Type (eg .doc, .txt, .CATPart, .Drawing)</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="substance">
+  <rdfs:label xml:lang="en">Substance</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Related substance name</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="releasePhase">
+  <rdfs:label xml:lang="en">Release Phase</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Represents the stage of product definition maturity for the context object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="derivedFrom">
+  <rdfs:label xml:lang="en">Derived From</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Parent derivation</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="reportedAgainst">
+  <rdfs:label xml:lang="en">Reported Against</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Object for which the Change has been reported</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeTemplate">
+  <rdfs:label xml:lang="en">Change Template</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Change Template used to create the Change Order</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeRequest">
+  <rdfs:label xml:lang="en">Change Request</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Related Change Request </rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeOrder">
+  <rdfs:label xml:lang="en">Change Order</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Related Change Order </rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="proposedChangeAction">
+  <rdfs:label xml:lang="en">Proposed Change Action</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Change Action which is proposing the change on this item</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="realizedChangeAction">
+  <rdfs:label xml:lang="en">Realized Change Action</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Change Action which is implementing the change on this item</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="proposedChangeRequest">
+  <rdfs:label xml:lang="en">Proposed Change Request</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Change Request which is proposing the change on this item</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="realizedChangeRequest">
+  <rdfs:label xml:lang="en">Realized Change Request</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Change Request which is implementing the change on this item</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="proposedChangeOrder">
+  <rdfs:label xml:lang="en">Proposed Change Order</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Change Order which is proposing the change on this item</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="realizedChangeOrder">
+  <rdfs:label xml:lang="en">Realized Change Order</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Change Order which is implementing the change on this item</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeRequired">
+  <rdfs:label xml:lang="en">Change Required</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">Indicates object requires change control for modification</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changePolicy">
+  <rdfs:label xml:lang="en">Change Policy</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">The default policy for the Change Template</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="gender">
+  <rdfs:label xml:lang="en">Gender</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Gender</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="meeting">
+  <rdfs:label xml:lang="en">Meeting</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">The meeting where the object was discussed</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="predefinedType">
+  <rdfs:label xml:lang="en">Predefined Type</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Characterize the object by defining a more specific property</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="cadMaster">
+  <rdfs:label xml:lang="en">CAD Master</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Characterize the object by defining its CAD origin</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="xcadFileName">
+  <rdfs:label xml:lang="en">XCAD File Name</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="what"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the XCAD file associated to the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="when">
+  <rdfs:label xml:lang="en">When</rdfs:label>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">When</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="before">
+  <rdfs:label xml:lang="en">Before</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">X takes place before Y</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="meets">
+  <rdfs:label xml:lang="en">Meets</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">X meets Y</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="timeOverlaps">
+  <rdfs:label xml:lang="en">Time Overlaps</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">X overlaps with Y</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="starts">
+  <rdfs:label xml:lang="en">Starts</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">X starts Y</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="actualStart">
+  <rdfs:label xml:lang="en">Actual Start</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="starts"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">Actual start</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="plannedStart">
+  <rdfs:label xml:lang="en">Planned Start</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="starts"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">Planned start</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="during">
+  <rdfs:label xml:lang="en">During</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">X during Y</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="finishes">
+  <rdfs:label xml:lang="en">Finishes</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">X finishes Y</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="equal">
+  <rdfs:label xml:lang="en">Equal</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">X is equal to Y</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="waits">
+  <rdfs:label xml:lang="en">Waits</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">X is waiting Y</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="created">
+  <rdfs:label xml:lang="en">Creation Date</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">Creation date</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="effective">
+  <rdfs:label xml:lang="en">Effective</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Effective</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="modified">
+  <rdfs:label xml:lang="en">Modification Date</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">Modification time</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="lasts">
+  <rdfs:label xml:lang="en">Duration</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Duration of the ressource *** RENAME IN 'DURATION' ? ***</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="estimatedDuration">
+  <rdfs:label xml:lang="en">Estimated Duration</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="lasts"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Estimated Duration</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="actualDuration">
+  <rdfs:label xml:lang="en">Actual Duration</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="lasts"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Measured Duration</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="ends">
+  <rdfs:label xml:lang="en">Ends</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">End time</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="actualEnd">
+  <rdfs:label xml:lang="en">Actual End</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="ends"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">Actual end time</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="plannedEnd">
+  <rdfs:label xml:lang="en">Planned End</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="ends"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">Planned end time</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="dueDate">
+  <rdfs:label xml:lang="en">Due Date</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="ends"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">Planned due date</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="estimatedCompletionDate">
+  <rdfs:label xml:lang="en">Estimated Completion Date</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="ends"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">Estimated Completion Date</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="precedes">
+  <rdfs:label xml:lang="en">Precedes</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Precedes</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="history">
+  <rdfs:label xml:lang="en">History</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">History date</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="modelYear">
+  <rdfs:label xml:lang="en">Model Year</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Model Year</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="biologicalProcess">
+  <rdfs:label xml:lang="en">Biological Process</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Series of events accomplished by one or more ordered assemblies of molecular functions</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="publishedDate">
+  <rdfs:label xml:lang="en">Published Date</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">This date to represent the the DI record that is published/submitted to FDA</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="sent">
+  <rdfs:label xml:lang="en">Sent Date</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">The date when object was sent</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="received">
+  <rdfs:label xml:lang="en">Received Date</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">The date when object was received</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="isLastMajorRevision">
+  <rdfs:label xml:lang="en">Is Last Major Revision</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">True if no more recent major revision exits in local Database</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="isLastMinorRevision">
+  <rdfs:label xml:lang="en">Is Last Minor Revision</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;boolean"/>
+  <rdfs:comment xml:lang="en">True if no more recent minor revision exits in local Database</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="targetLaunchDate">
+  <rdfs:label xml:lang="en">Target Launch Date</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="when"/>
+  <rdfs:range rdf:resource="&xsd;dateTime"/>
+  <rdfs:comment xml:lang="en">Target Date</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="where">
+  <rdfs:label xml:lang="en">Where</rdfs:label>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Where</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="context">
+  <rdfs:label xml:lang="en">Context</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="where"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Context</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="community">
+  <rdfs:label xml:lang="en">Community</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Community</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="engineeringWorkspace">
+  <rdfs:label xml:lang="en">Engineering Workspace</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Engineering Workspace the content belongs to</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="item">
+  <rdfs:label xml:lang="en">Item</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Contextual item</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="model">
+  <rdfs:label xml:lang="en">Model</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Contextual model</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="parent">
+  <rdfs:label xml:lang="en">Parent</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Contextual parent / Next Higher Assembly</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="productConfiguration">
+  <rdfs:label xml:lang="en">Product Configuration</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Contextual product configuration</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="project">
+  <rdfs:label xml:lang="en">Collaborative Space</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Contextual project</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="release">
+  <rdfs:label xml:lang="en">Release</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Contextual release</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="folder">
+  <rdfs:label xml:lang="en">Folder</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Contextual folder</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="product">
+  <rdfs:label xml:lang="en">Product</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Contextual Product  </rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="program">
+  <rdfs:label xml:lang="en">Program</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Contextual Program</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="logicalFeature">
+  <rdfs:label xml:lang="en">Logical Feature</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Logical Feature Context for Product Configuration</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="location">
+  <rdfs:label xml:lang="en">Location</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="where"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Location</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="city">
+  <rdfs:label xml:lang="en">City</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="location"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Is located in the city</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="country">
+  <rdfs:label xml:lang="en">Country</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="location"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Is located in the country</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="postalCode">
+  <rdfs:label xml:lang="en">Postal Code</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="location"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Postal code of the location</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="state">
+  <rdfs:label xml:lang="en">State</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="location"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Is Located in the State</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="emailAddress">
+  <rdfs:label xml:lang="en">Email Address</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="location"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Email address of a person</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="phoneNumber">
+  <rdfs:label xml:lang="en">Phone Number</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="location"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Phone Number of a person</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="faxNumber">
+  <rdfs:label xml:lang="en">Fax Number</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="location"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Fax Number of a person</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="webSite">
+  <rdfs:label xml:lang="en">Web Site</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="location"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Website of an organization or person</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="subcellularComponent">
+  <rdfs:label xml:lang="en">Subcellular Component</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="location"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Cell composing entities taxonomy</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="compartment">
+  <rdfs:label xml:lang="en">Compartment</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="location"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Biological tissues taxonomy </rdfs:comment>
+</owl:DatatypeProperty>
+
+<!--  SDM: 06/25/2018: NLS is changed to make semantic (link direction) more explicit -->
+<owl:DatatypeProperty rdf:about="member">
+  <rdfs:label xml:lang="en">Member Of</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="where"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">To specify the organization (eg. group or company) which the resource (eg. person) is member of.</rdfs:comment>
+</owl:DatatypeProperty>
+
+<!--  SDM: 06/25/2018: Add inverse property of member -->
+<owl:DatatypeProperty rdf:about="hasMember">
+  <rdfs:label xml:lang="en">Has Member</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">To specify the agents (eg. persons) who are members of the resource (eg. group or company)</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="companyMember">
+  <rdfs:label xml:lang="en">Company Member</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="member"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Company Member</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="source">
+  <rdfs:label xml:lang="en">Source URL</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="where"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">source URL</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="dataSource">
+  <rdfs:label xml:lang="en">Data Source</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="source"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">To specify the source storage from where the date originates</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="organism">
+  <rdfs:label xml:lang="en">Organism</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="where"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Organism taxonomy from where the bio entities is issued or where it's hosted</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="legalContext">
+  <rdfs:label xml:lang="en">Legal Context</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="where"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Area of authority for applicable laws</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="candidateMarkets">
+  <rdfs:label xml:lang="en">Candidate Markets</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="where"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Countries or Regions targeted by the Product</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="markets">
+  <rdfs:label xml:lang="en">Markets</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="where"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Actual Markets (Country or Region) of the Services Item</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="refinedInto">
+  <rdfs:label xml:lang="en">Refined Into</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Number of requirements that are refining  a requirement</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="covers">
+  <rdfs:label xml:lang="en">Covers</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Number of requirements that covers a requirement</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="testCases">
+  <rdfs:label xml:lang="en">Test Cases</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Number of tests cases</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeControlled">
+  <rdfs:label xml:lang="en">Change Controlled</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">To indicate if an object is under control of a change management object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="usedInProject">
+  <rdfs:label xml:lang="en">Project</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Project in which the object is referenced </rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="stage">
+  <rdfs:label xml:lang="en">Stage</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Stages of Development</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="openStage">
+  <rdfs:label xml:lang="en">Open Stage</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="where"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Indicate the open stage(s) of a project</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeContext">
+  <rdfs:label xml:lang="en">Change Context</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="context"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">The context associated to the associated Change</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="ownerSite">
+  <rdfs:label xml:lang="en">Owner Site</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="where"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Site having the edition token</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="who">
+  <rdfs:label xml:lang="en">Who</rdfs:label>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Who</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="accountable">
+  <rdfs:label xml:lang="en">Accountable</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the accountable person</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="approver">
+  <rdfs:label xml:lang="en">Approver</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the approving person</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="assignee">
+  <rdfs:label xml:lang="en">Assignee</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the assigned person</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="consultant">
+  <rdfs:label xml:lang="en">Consultant</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the consultant</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="customer">
+  <rdfs:label xml:lang="en">Customer</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the customer</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="informed">
+  <rdfs:label xml:lang="en">Informed</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the Customer Company</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="responsible">
+  <rdfs:label xml:lang="en">Responsible</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Responsible name of the resource</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="manufacturer">
+  <rdfs:label xml:lang="en">Manufacturer</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="responsible"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the responsible manufacturer</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="organizationResponsible">
+  <rdfs:label xml:lang="en">Organization</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="responsible"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the responsible organization</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="originator">
+  <rdfs:label xml:lang="en">Originator</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="responsible"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the person who created</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="companyResponsible">
+  <rdfs:label xml:lang="en">Company Responsible</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="responsible"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the company responsible</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="businessUnitResponsible">
+  <rdfs:label xml:lang="en">Business Unit Responsible</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="responsible"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the responsible Business Unit</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="supplierResponsible">
+  <rdfs:label xml:lang="en">Supplier Responsible</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="responsible"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the supplier responsible</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="reservedBy">
+  <rdfs:label xml:lang="en">Reservation Owner</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="responsible"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the owner of the Reservation</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="supplier">
+  <rdfs:label xml:lang="en">Supplier</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the supplier</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="supporter">
+  <rdfs:label xml:lang="en">Supporter</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the supporter</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="reviewer">
+  <rdfs:label xml:lang="en">Reviewer</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the reviewer</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="buyerDesk">
+  <rdfs:label xml:lang="en">Buyer Desk</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Buyer Desk</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="company">
+  <rdfs:label xml:lang="en">Company</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Company</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="buyerCompany">
+  <rdfs:label xml:lang="en">Buyer Company</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="company"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Buyer Company</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="communicates">
+  <rdfs:label xml:lang="en">Communicates</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Communicates</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="vendor">
+  <rdfs:label xml:lang="en">Vendor</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Vendor</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="receiver">
+  <rdfs:label xml:lang="en">Receivers</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Receivers of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="sender">
+  <rdfs:label xml:lang="en">Sender</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Sender of the object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="copyTo">
+  <rdfs:label xml:lang="en">Copy To</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Copy of the object received by</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="role">
+  <rdfs:label xml:lang="en">Access Role</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">The Role of the user related to that object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="lastModifiedBy">
+  <rdfs:label xml:lang="en">Last Modified By</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Last modified by (user name)</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="impactedBusinessUnit">
+  <rdfs:label xml:lang="en">Impacted Business Unit</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Organizations impacted</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="interpretedBy">
+  <rdfs:label xml:lang="en">Interpreted By</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the person who interpreted</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="concludedBy">
+  <rdfs:label xml:lang="en">Concluded By</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the person who concluded</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="publishedBy">
+  <rdfs:label xml:lang="en">Published By</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Name of the person who published</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeCoordinator">
+  <rdfs:label xml:lang="en">Change Coordinator</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">The person responsible for coordination of the changes</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeReviewList">
+  <rdfs:label xml:lang="en">Reviewer List</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Review Route Template with list of people responsible to review the changes</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeApprovalList">
+  <rdfs:label xml:lang="en">Approval List</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Approval Route Template with list of people responsible to approve the changes</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeAssignee">
+  <rdfs:label xml:lang="en">Change Assignee</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Assignee for the Change</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeReviewer">
+  <rdfs:label xml:lang="en">Change Reviewer</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Reviewer for the Change</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="changeFollower">
+  <rdfs:label xml:lang="en">Follower</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Follower for the Change</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="sponsor">
+  <rdfs:label xml:lang="en">Sponsor</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">A person who supports and endorses a project/services product/services item</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="why">
+  <rdfs:label xml:lang="en">Why</rdfs:label>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Why</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="contributes">
+  <rdfs:label xml:lang="en">Contributes</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Contribution of current object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="envisions">
+  <rdfs:label xml:lang="en">Envisions</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Vision of current object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="fulfills">
+  <rdfs:label xml:lang="en">Fulfills</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Fullfillment of current object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="fulfillsCategory">
+  <rdfs:label xml:lang="en">Fulfills Category</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="fulfills"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Category fullfilled</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="fulfillsPriority">
+  <rdfs:label xml:lang="en">Fulfills Priority</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="fulfills"/>
+  <rdfs:range rdf:resource="&xsd;integer"/>
+  <rdfs:comment xml:lang="en">Priority fullfilled</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="fulfillsQuantity">
+  <rdfs:label xml:lang="en">Fulfills Quantity</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="fulfills"/>
+  <rdfs:range rdf:resource="&xsd;double"/>
+  <rdfs:comment xml:lang="en">Quantity fullfilled</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="fulfillsRationale">
+  <rdfs:label xml:lang="en">Fulfills Rationale</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="fulfills"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">FullfillsRationale</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="severity">
+  <rdfs:label xml:lang="en">Severity</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="fulfills"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Severity</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="targets">
+  <rdfs:label xml:lang="en">Targets</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Target of current object</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="targetedProduct">
+  <rdfs:label xml:lang="en">Target Product</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="targets"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Target Product</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="targetedREG">
+  <rdfs:label xml:lang="en">Target Regression</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="targets"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Target Regression</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="targetedQuality">
+  <rdfs:label xml:lang="en">Target Quality</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="targets"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Target Quality</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="difficulty">
+  <rdfs:label xml:lang="en">Difficulty</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Difficulty</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="importance">
+  <rdfs:label xml:lang="en">Importance</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Importance</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="fulfillmentType">
+  <rdfs:label xml:lang="en">Fulfillment Type</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="fulfills"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Type of the Fulfillment like Reimburse, replacement, …</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="priority">
+  <rdfs:label xml:lang="en">Priority</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Priority  </rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="requirement">
+  <rdfs:label xml:lang="en">Requirement</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Requirement</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="protocol">
+  <rdfs:label xml:lang="en">Protocol</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Related protocol</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="therapeuticTarget">
+  <rdfs:label xml:lang="en">Therapeutic Target</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Therapeutic target</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="purpose">
+  <rdfs:label xml:lang="en">Purpose</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Product Configuration Purpose</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="cause">
+  <rdfs:label xml:lang="en">Cause</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="why"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Cause</rdfs:comment>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="responsibleUid">
+  <rdfs:label xml:lang="en">Responsible Id.</rdfs:label>
+  <rdfs:subPropertyOf rdf:resource="who"/>
+  <rdfs:range rdf:resource="&xsd;string"/>
+  <rdfs:comment xml:lang="en">Responsible unique identifier of the resource</rdfs:comment>
+</owl:DatatypeProperty>
+
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+<!-- Definition of 6W Generic RDF Classes intended for Federated Categories -->
+<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+
+<owl:Class rdf:about="Biology">
+  <rdfs:label xml:lang="en">Biology</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Biology</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Systems">
+  <rdfs:label xml:lang="en">Systems</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Systems</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Location">
+  <rdfs:label xml:lang="en">Location</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Location</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="SystemsBehavior">
+  <rdfs:label xml:lang="en">Systems Behavior</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Systems Behavior</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Part">
+  <rdfs:label xml:lang="en">Part</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Part</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="MaterialAndSubstances">
+  <rdfs:label xml:lang="en">Material And Substances</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Material And Substances</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Occurrence">
+  <rdfs:label xml:lang="en">Occurrence</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Occurrence</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Classification">
+  <rdfs:label xml:lang="en">Classification</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Classification</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="EnterpriseIntelligence">
+  <rdfs:label xml:lang="en">Enterprise Intelligence</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Enterprise Intelligence</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Dashboard">
+  <rdfs:label xml:lang="en">Dashboard</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Dashboard</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Behavior">
+  <rdfs:label xml:lang="en">Behavior</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Behavior</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Change">
+  <rdfs:label xml:lang="en">Change</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Change</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="PeopleAndOrganization">
+  <rdfs:label xml:lang="en">People And Organization</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">People And Organization</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="ProductLine">
+  <rdfs:label xml:lang="en">Product Line</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Product Line</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="SocialContent">
+  <rdfs:label xml:lang="en">Social Content</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Social Content</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Document">
+  <rdfs:label xml:lang="en">Document</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Document</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="3dModel">
+  <rdfs:subClassOf rdf:resource="Document"/>
+  <rdfs:label xml:lang="en">3D Model</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">3D Model</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Drawing">
+  <rdfs:subClassOf rdf:resource="Document"/>
+  <rdfs:label xml:lang="en">Drawing</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Drawing</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Picture">
+  <rdfs:subClassOf rdf:resource="Document"/>
+  <rdfs:label xml:lang="en">Picture</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Picture</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="OfficeDocument">
+  <rdfs:subClassOf rdf:resource="Document"/>
+  <rdfs:label xml:lang="en">Office Document</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Office Document</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="MiscDocument">
+  <rdfs:subClassOf rdf:resource="Document"/>
+  <rdfs:label xml:lang="en">Miscellaneoous Document</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Miscellaneoous Document</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Sound">
+  <rdfs:subClassOf rdf:resource="Document"/>
+  <rdfs:label xml:lang="en">Sound</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Sound</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Video">
+  <rdfs:subClassOf rdf:resource="Document"/>
+  <rdfs:label xml:lang="en">Video</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Video</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="CollaborativePlaces">
+  <rdfs:label xml:lang="en">Collaborative Places</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Collaborative Places</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="TaskAndPlanning">
+  <rdfs:label xml:lang="en">Task And Planning</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Task And Planning</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Product">
+  <rdfs:label xml:lang="en">Product</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Product</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Experiences">
+  <rdfs:label xml:lang="en">Experiences</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Experiences</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Process">
+  <rdfs:label xml:lang="en">Process</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Process</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="Resource">
+  <rdfs:label xml:lang="en">Resource</rdfs:label>
+  <rdfs:comment rdf:datatype="&xsd;string">Resource</rdfs:comment>
+</owl:Class>
+
+</rdf:RDF>

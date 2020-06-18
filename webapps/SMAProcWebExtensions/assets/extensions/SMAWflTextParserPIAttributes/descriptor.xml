@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wfext:Extension xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="com.dassault_systemes.sma.plugin.TextParserPIAttributes" version="3DX.0" extensionKind="Plugin">
+	<DisplayName nlsFile="SMAWflTextParserPIAttributes" nlsID="dispname">Attribute Values</DisplayName>
+	<Description nlsFile="SMAWflTextParserPIAttributes" nlsID="desc">Read/write Activity attribute values to/from text</Description>
+	<LongDescription>
+    Text Parser Attributes Plug-in
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>TextParserFormat</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.dassault_systemes.sma.plugin.TextParserPIAttributes</Value>
+		</Attribute>
+		<Attribute name="SupportsDesignSource">
+			<Value>false</Value>
+		</Attribute>
+		<Attribute name="SupportsRuntimeSource">
+			<Value>false</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="SMAWflTextParserPIAttributes16.png" targetFilename="SMAWflTextParserPIAttributes16.png"/>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflTextParserPIAttributes32.png" targetFilename="SMAWflTextParserPIAttributes32.png"/>
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflTextParserPIAttributes.CATNls" targetFilename="SMAWflTextParserPIAttributes.CATNls"/>
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflTextParserPIAttributes.sypstyle" targetFilename="SMAWflTextParserPIAttributes.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflTextParserPIAttributesEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refExtensionName="SMAWflTextParser" refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+						<StreamRef refStreamName="NLS"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="PluginName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="mode" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="xmlFilename" type="string" valuetype="single">
+			<Value>ActivityAttributes.xml</Value>
+		</Property>
+	</Properties>
+</wfext:Extension>

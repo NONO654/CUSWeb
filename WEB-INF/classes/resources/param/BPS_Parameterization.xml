@@ -1,0 +1,677 @@
+<?xml version="1.0" ?>
+<OOTBParameterization regSuite="Framework">
+	<Domain id="AttributeDef">
+		<Family id="Document" regSuite="Framework" nlsKey="emxFramework.Type.Document">			
+			<Constant id="appType" value="CBP"/>
+			<Constant id="package" value="Document"/>
+			<Constant id="type" value="Document"/>
+		</Family>
+		<Family id="Issue" regSuite="Framework" nlsKey="emxFramework.Type.Issue">			
+			<Constant id="appType" value="CBP"/>
+			<Constant id="package" value="Issue"/>
+			<Constant id="type" value="Issue"/>
+		</Family>
+		<Family id="Route" regSuite="Framework" nlsKey="emxFramework.Type.Route">			
+			<Constant id="appType" value="CBP"/>
+			<Constant id="package" value="Route"/>
+			<Constant id="type" value="Route"/>
+		</Family>
+		<Family id="Inbox_Task" regSuite="Framework" nlsKey="emxFramework.Type.Inbox_Task">			
+			<Constant id="appType" value="CBP"/>
+			<Constant id="package" value="Inbox Task"/>
+			<Constant id="type" value="Inbox Task"/>
+		</Family>
+		<Family id="Route_Template" regSuite="Framework" nlsKey="emxFramework.Type.Route_Template">			
+			<Constant id="appType" value="CBP"/>
+			<Constant id="package" value="Route Template"/>
+			<Constant id="type" value="Route Template"/>
+		</Family>
+	</Domain>
+	<Domain id="ObjectIdentification">
+		<Family id="VersionNaming">
+			<Parameter id="VNaming_DocumentRelease" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationRevisionId">
+				<Argument id="Argument" type="string" input="combobox" default="AlphabeticalRev">
+					<Value id="NumericalRev"/>
+					<Value id="AlphabeticalRev"/>
+				</Argument>
+				<Constant id="policy" value="Document Release"/>
+				<Constant id="appType" value="CBP"/>
+			</Parameter>
+		</Family>
+		
+		<Family id="ObjectIdentifier" icon="iconParameterizationIdentification.gif">
+			<Parameter id="DocNaming" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat">	
+				<Argument id="PrefixArg" type="string" default="DOC-"/>	
+				<Argument id="SuffixArg" type="string" default=""/>	
+				<Constant id="type" value="Document"/> 	
+				<Constant id="appType" value="CBP"/>	
+				<Constant id="sogName" value="type_Document"/> 	
+				<Constant id="sogRevision" value=""/>	
+			</Parameter>			
+		</Family>
+		<Family id="ObjectIdentifier" icon="iconParameterizationIdentification.gif">
+			<Parameter id="IssueNaming" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat">	
+				<Argument id="PrefixArg" type="string" default="Iss-"/>	
+				<Argument id="SuffixArg" type="string" default=""/>	
+				<Constant id="type" value="Issue"/> 	
+				<Constant id="appType" value="CBP"/>	
+				<Constant id="sogName" value="type_Issue"/> 	
+				<Constant id="sogRevision" value=""/>	
+			</Parameter>			
+		</Family>
+		<Family id="ObjectIdentifier" icon="iconParameterizationIdentification.gif">
+			<Parameter id="RouteNaming" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat">	
+				<Argument id="PrefixArg" type="string" default="R-"/>	
+				<Argument id="SuffixArg" type="string" default=""/>	
+				<Constant id="type" value="Route"/> 	
+				<Constant id="appType" value="CBP"/>	
+				<Constant id="sogName" value="type_Route"/> 	
+				<Constant id="sogRevision" value=""/>	
+			</Parameter>			
+		</Family>
+		<Family id="VersionNaming">
+			<Parameter id="VNaming_InboxTask" processes="CNV" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationRevisionId">
+				<Argument id="Argument" type="string" input="combobox" default="NumericalRev">
+					<Value id="NumericalRev"/>
+					<Value id="AlphabeticalRev"/>
+				</Argument>
+				<Constant id="policy" value="Inbox Task"/>
+				<Constant id="appType" value="CBP"/>
+			</Parameter>
+		</Family>
+		<Family id="ObjectIdentifier" icon="iconParameterizationIdentification.gif">
+			<Parameter id="InboxTaskNaming" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat">	
+				<Argument id="PrefixArg" type="string" default="IT-"/>	
+				<Argument id="SuffixArg" type="string" default=""/>	
+				<Constant id="type" value="Inbox Task"/> 	
+				<Constant id="appType" value="CBP"/>	
+				<Constant id="sogName" value="type_InboxTask"/> 	
+				<Constant id="sogRevision" value=""/>	
+			</Parameter>			
+		</Family>
+		<Family id="VersionNaming">
+			<Parameter id="VNaming_RouteTemplate" processes="CNV" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ParameterizationRevisionId">
+				<Argument id="Argument" type="string" input="combobox" default="NumericalRev">
+					<Value id="NumericalRev"/>
+					<Value id="AlphabeticalRev"/>
+				</Argument>
+				<Constant id="policy" value="Route Template"/>
+				<Constant id="appType" value="CBP"/>
+			</Parameter>
+		</Family>
+		<Family id="ObjectIdentifier" icon="iconParameterizationIdentification.gif">
+			<Parameter id="RouteTemplateNaming" implementation="com.dassault_systemes.ootbConfiguration.deployment.impl.ObjectAutonamingFormat">	
+				<Argument id="PrefixArg" type="string" default="RT-"/>	
+				<Argument id="SuffixArg" type="string" default=""/>	
+				<Constant id="type" value="Route Template"/> 	
+				<Constant id="appType" value="CBP"/>	
+				<Constant id="sogName" value="type_RouteTemplate"/> 	
+				<Constant id="sogRevision" value=""/>	
+			</Parameter>			
+		</Family>
+	</Domain>
+			
+	<Domain id="LifecycleTopology" >
+		<Family id="Document_Release">
+			<Constant id="policyID" value="Document Release"/>
+			<Constant id="modifyTopology" value="true"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="appType" value="CBP"/>
+			<Constant id="NLSStateFileName" value="emxFrameworkStringResource.properties"/>
+			<Constant id="lang" value="en,fr"/>
+
+			<GovernedType id="Document">
+				<Constant id="typeId" value="Document"/>
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+
+			<State id="PRIVATE">
+				<Constant id="sysName" value="PRIVATE"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Document_Release.PRIVATE"/>
+				<Constant id="complementaryNLSKeys" value="current.PRIVATE"/>
+			</State>
+			<State id="IN_WORK">
+				<Constant id="sysName" value="IN_WORK"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Document_Release.IN_WORK"/>
+				<Constant id="complementaryNLSKeys" value="current.IN_WORK"/>
+			</State>
+			<State id="FROZEN">
+				<Constant id="sysName" value="FROZEN"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Document_Release.FROZEN"/>
+				<Constant id="complementaryNLSKeys" value="current.FROZEN"/>
+			</State>			
+			<State id="RELEASED">
+				<Constant id="sysName" value="RELEASED"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Document_Release.RELEASED"/>
+				<Constant id="complementaryNLSKeys" value="current.RELEASED"/>
+			</State>
+			<State id="OBSOLETE">
+				<Constant id="sysName" value="OBSOLETE"/>
+				<Constant id="isRemovable" value="true"/>
+				<Constant id="NLSKey" value="emxFramework.State.Document_Release.OBSOLETE"/>
+				<Constant id="complementaryNLSKeys" value="current.OBSOLETE"/>
+			</State>
+			<Transition id="PRIVATEtoINWORK">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="INWORKtoFROZEN">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="FROZENtoRELEASED">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="RELEASEDtoOBSOLETE">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="OBSOLETE"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="fbPRIVATEtoFROZEN">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbPRIVATEtoRELEASED">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbPRIVATEtoObsolete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="PRIVATE"/>
+				<Constant id="targetState" value="Obsolete"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbINWORKtoPRIVATE">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbINWORKtoRELEASED">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbINWORKtoObsolete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="IN_WORK"/>
+				<Constant id="targetState" value="Obsolete"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbFROZENtoPRIVATE">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbFROZENtoIN_WORK">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbFROZENtoObsolete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="FROZEN"/>
+				<Constant id="targetState" value="Obsolete"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbRELEASEDtoPRIVATE">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbRELEASEDtoIN_WORK">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbRELEASEDtoObsolete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="RELEASED"/>
+				<Constant id="targetState" value="Obsolete"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbObsoletetoPRIVATE">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Obsolete"/>
+				<Constant id="targetState" value="PRIVATE"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbObsoletetoIN_WORK">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Obsolete"/>
+				<Constant id="targetState" value="IN_WORK"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbObsoletetoFROZEN">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Obsolete"/>
+				<Constant id="targetState" value="FROZEN"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbObsoletetoRELEASED">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Obsolete"/>
+				<Constant id="targetState" value="RELEASED"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+		</Family>		
+		<Family id="Issue">
+			<Constant id="policyID" value="Issue"/>
+			<Constant id="modifyTopology" value="true"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="appType" value="CBP"/>
+			<Constant id="NLSStateFileName" value="emxFrameworkStringResource.properties"/>
+			<Constant id="lang" value="en,fr"/>
+
+			<GovernedType id="Issue">
+				<Constant id="typeId" value="Issue"/>
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+			
+			<State id="Create">
+				<Constant id="sysName" value="Create"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Issue.Create"/>
+				<Constant id="complementaryNLSKeys" value="current.Create"/>
+			</State>
+			<State id="Assign">
+				<Constant id="sysName" value="Assign"/>
+				<Constant id="isRemovable" value="true"/>
+				<Constant id="NLSKey" value="emxFramework.State.Issue.Assign"/>
+				<Constant id="complementaryNLSKeys" value="current.Assign"/>
+			</State>
+			<State id="Active">
+				<Constant id="sysName" value="Active"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Issue.Active"/>
+				<Constant id="complementaryNLSKeys" value="current.Active"/>
+			</State>
+			<State id="Review">
+				<Constant id="sysName" value="Review"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Issue.Review"/>
+				<Constant id="complementaryNLSKeys" value="current.Review"/>
+			</State>
+			<State id="Closed">
+				<Constant id="sysName" value="Closed"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Issue.Closed"/>
+				<Constant id="complementaryNLSKeys" value="current.Closed"/>
+			</State>
+			<Transition id="CreatetoAssign">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Create"/>
+				<Constant id="targetState" value="Assign"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="AssigntoActive">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Assign"/>
+				<Constant id="targetState" value="Active"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="ActivetoReview">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Active"/>
+				<Constant id="targetState" value="Review"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="ReviewtoClosed">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Review"/>
+				<Constant id="targetState" value="Closed"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="fbCreatetoActive">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Create"/>
+				<Constant id="targetState" value="Active"/>
+				<Constant id="addition" value="true"/>
+			</Transition>
+			<Transition id="fbCreatetoAReview">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Create"/>
+				<Constant id="targetState" value="Review"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbCreatetoClosed">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Create"/>
+				<Constant id="targetState" value="Closed"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbAssigntoCreate">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Assign"/>
+				<Constant id="targetState" value="Create"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbAssigntoReview">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Assign"/>
+				<Constant id="targetState" value="Review"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbAssigntoClosed">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Assign"/>
+				<Constant id="targetState" value="Closed"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbActivetoCreate">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Active"/>
+				<Constant id="targetState" value="Create"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbActivetoAssign">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Active"/>
+				<Constant id="targetState" value="Assign"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbActivetoClosed">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Active"/>
+				<Constant id="targetState" value="Closed"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbReviewtoCreate">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Review"/>
+				<Constant id="targetState" value="Create"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbReviewtoAssign">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Review"/>
+				<Constant id="targetState" value="Assign"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbReviewtoActive">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Review"/>
+				<Constant id="targetState" value="Active"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbClosedtoCreate">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Closed"/>
+				<Constant id="targetState" value="Create"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbClosedtoAssign">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Closed"/>
+				<Constant id="targetState" value="Assign"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbClosedtoActive">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Closed"/>
+				<Constant id="targetState" value="Active"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbClosedtoReview">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Closed"/>
+				<Constant id="targetState" value="Review"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+		</Family>
+		<Family id="Route">
+			<Constant id="policyID" value="Route"/>
+			<Constant id="modifyTopology" value="true"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="appType" value="CBP"/>
+			<Constant id="NLSStateFileName" value="emxFrameworkStringResource.properties"/>
+			<Constant id="lang" value="en,fr"/>
+
+			<State id="Define">
+				<Constant id="sysName" value="Define"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Route.Define"/>
+				<Constant id="complementaryNLSKeys" value="current.Define"/>
+			</State>
+			<State id="In_Process">
+				<Constant id="sysName" value="In Process"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Route.In_Process"/>
+				<Constant id="complementaryNLSKeys" value="current.In_Process"/>
+			</State>
+			<State id="Complete">
+				<Constant id="sysName" value="Complete"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Route.Complete"/>
+				<Constant id="complementaryNLSKeys" value="current.Complete"/>
+			</State>			
+			<State id="Archive">
+				<Constant id="sysName" value="Archive"/>
+				<Constant id="isRemovable" value="true"/>
+				<Constant id="NLSKey" value="emxFramework.State.Route.Archive"/>
+				<Constant id="complementaryNLSKeys" value="current.Archive"/>
+			</State>
+		
+			<Transition id="DefinetoIn_Process">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Define"/>
+				<Constant id="targetState" value="In Process"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="In_ProcesstoComplete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="In Process"/>
+				<Constant id="targetState" value="Complete"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="CompletetoArchive">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Complete"/>
+				<Constant id="targetState" value="Archive"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			
+			<Transition id="fbDefinetoComplete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Define"/>
+				<Constant id="targetState" value="Complete"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbDefinetoArchive">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Define"/>
+				<Constant id="targetState" value="Archive"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbIn_ProcesstoDefine">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="In Process"/>
+				<Constant id="targetState" value="Define"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbIn_ProcesstoArchive">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="In Process"/>
+				<Constant id="targetState" value="Archive"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbCompletetoDefine">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Complete"/>
+				<Constant id="targetState" value="Define"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbCompletetoIn_Process">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Complete"/>
+				<Constant id="targetState" value="In Process"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbArchivetoDefine">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Archive"/>
+				<Constant id="targetState" value="Define"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbArchivetoIn_Process">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Archive"/>
+				<Constant id="targetState" value="In Process"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbArchivetoComplete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Archive"/>
+				<Constant id="targetState" value="Complete"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+		</Family>
+		<Family id="Inbox_Task">
+			<Constant id="policyID" value="Inbox Task"/>
+			<Constant id="modifyTopology" value="true"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="appType" value="CBP"/>
+			<Constant id="NLSStateFileName" value="emxFrameworkStringResource.properties"/>
+			<Constant id="lang" value="en,fr"/>
+			
+			<State id="Assigned">
+				<Constant id="sysName" value="Assigned"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Inbox_Task.Assigned"/>
+				<Constant id="complementaryNLSKeys" value="current.Assigned"/>
+			</State>
+			<State id="Review">
+				<Constant id="sysName" value="Review"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Inbox_Task.Review"/>
+				<Constant id="complementaryNLSKeys" value="current.Review"/>
+			</State>
+			<State id="Complete">
+				<Constant id="sysName" value="Complete"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Inbox_Task.Complete"/>
+				<Constant id="complementaryNLSKeys" value="current.Complete"/>
+			</State>
+			<Transition id="AssignedtoReview">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Assigned"/>
+				<Constant id="targetState" value="Review"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="ReviewtoComplete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Review"/>
+				<Constant id="targetState" value="Complete"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="fbAssignedtoComplete">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Assigned"/>
+				<Constant id="targetState" value="Complete"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbReviewToAssigned">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Review"/>
+				<Constant id="targetState" value="Assigned"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbCompleteToReview">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Complete"/>
+				<Constant id="targetState" value="Review"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+			<Transition id="fbCompletetoAssigned">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Complete"/>
+				<Constant id="targetState" value="Assigned"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+		</Family>
+		<Family id="Route_Template">
+			<Constant id="policyID" value="Route Template"/>
+			<Constant id="modifyTopology" value="true"/>
+			<Constant id="renameStates" value="true"/>
+			<Constant id="appType" value="CBP"/>
+			<Constant id="NLSStateFileName" value="emxFrameworkStringResource.properties"/>
+			<Constant id="lang" value="en,fr"/>
+
+			<GovernedType id="Route_Template">
+				<Constant id="typeId" value="Route Template"/>
+				<Constant id="supportedRules" value="InconditionalReject,RejectOnExperimenter,RejectOnCreator,RejectOnStandardData,RejectIfAttributeNotValuated"/>
+			</GovernedType>
+
+			<State id="Inactive">
+				<Constant id="sysName" value="Inactive"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Route_Template.Inactive"/>
+				<Constant id="complementaryNLSKeys" value="current.Inactive"/>
+			</State>
+			<State id="Active">
+				<Constant id="sysName" value="Active"/>
+				<Constant id="isRemovable" value="false"/>
+				<Constant id="NLSKey" value="emxFramework.State.Route_Template.Active"/>
+				<Constant id="complementaryNLSKeys" value="current.Active"/>
+			</State>
+			
+			<Transition id="InactivetoActiveRoute">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Inactive"/>
+				<Constant id="targetState" value="Active"/>
+				<Constant id="addition" value="OOTB"/>
+				<Constant id="removal" value="true"/>
+			</Transition>
+			<Transition id="fbActivetoInactiveRoute">
+				<Constant id="transName" value=""/>
+				<Constant id="sourceState" value="Active"/>
+				<Constant id="targetState" value="Inactive"/>
+				<Constant id="addition" value="false"/>
+			</Transition>
+		</Family>
+    </Domain>	
+	<Domain id="EventMessaging">
+		<Family id="EventMessagingSettings">
+			<Parameter id="SystemEventMessages" implementation="com.dassault_systemes.message.impl.EventMessagingParameterization">
+				<Argument id="events" type="string" input="combobox" default="Off">
+					<Value id="On"/>
+					<Value id="Off"/>
+				</Argument>
+			</Parameter>
+		</Family>
+	</Domain>
+</OOTBParameterization>

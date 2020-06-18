@@ -1,0 +1,1 @@
+define("DS/ENOChgActionProp/ENOChgActionProp_ja",{});define("DS/ENOChgActionProp/assets/nls/ChangePropertiesFacet",{"Change Required":"変更必須:",Release_Auth:"リリース許可:",Order:"順序",Name:"名称",Title:"タイトル",Approver:"承認者",Maturity:"完成度",Comments:"コメント",Action:"状況",Completion_Date:"承認日",ECM_OBJECT_NOT_RELEASED_ERR:"オブジェクトがリリースされていません",ECM_CONFIGURED_DATA_ERR:"適用できません。データが構成されています"});

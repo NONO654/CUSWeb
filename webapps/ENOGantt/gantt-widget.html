@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+    <!-- Application Metas -->
+    <title></title>
+    <meta name="author" content="Dassault Systemes" />
+    <meta name="brand" content="ENOVIA" />
+    <meta name="autoRefresh" content="0" />
+    <meta name="description" content="ENOVIA Configurable Widget" /> 
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    
+    <link rel="stylesheet" type="text/css" href="../VENENO6WPlugins/plugins/jqueryui/latest/css/cupertino/jquery.ui.custom.min.css" />
+    <link rel="stylesheet" type="text/css" href="../E6WCommonUI/E6WCommonUI.css" />
+    
+    <script src="../VENENO6WPlugins/plugins/jquery/latest/jquery.js" ></script>
+     <script type="text/javascript" src="../VENENO6WPlugins/plugins/jqueryui/latest/js/jquery.ui.custom.js"></script>
+    <script src="../../webapps/AmdLoader/AmdLoader.js"></script>
+    <!-- Application JavaScript Source  -->
+    <script type="text/javascript">
+    //<![CDATA[ 
+    /*global widget, require*/
+    try{
+    	if (!Array.prototype.includes) {
+    	    Object.defineProperty(Array.prototype, 'includes', {
+    	        value: function(searchElement, fromIndex) {
+
+    	            if (this == null) {
+    	                throw new TypeError('"this" is null or not defined');
+    	            }
+
+    	            const o = Object(this);
+    	            // tslint:disable-next-line:no-bitwise
+    	            const len = o.length >>> 0;
+
+    	            if (len === 0) {
+    	                return false;
+    	            }
+    	            // tslint:disable-next-line:no-bitwise
+    	            const n = fromIndex | 0;
+    	            let k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+
+    	            while (k < len) {
+    	                if (o[k] === searchElement) {
+    	                    return true;
+    	                }
+    	                k++;
+    	            }
+    	            return false;
+    	        }
+    	    });
+    	}
+    	//using following method instead of new URL() as it is not supported in IE11. Can be replaced if there is any  other supported api to parse URL in IE11.
+    	function parseUri (str) {
+    		var	o   = parseUri.options,
+    			m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
+    			uri = {},
+    			i   = 14;
+
+    		while (i--) uri[o.key[i]] = m[i] || "";
+
+    		uri[o.q.name] = {};
+    		uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
+    			if ($1) uri[o.q.name][$1] = $2;
+    		});
+
+    		return uri;
+    	};
+
+    	parseUri.options = {
+    		strictMode: false,
+    		key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
+    		q:   {
+    			name:   "queryKey",
+    			parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+    		},
+    		parser: {
+    			strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+    			loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+    		}
+    	};
+    	
+    	//====Overriding alert messgae======
+/*     	var windowAlertFunction = window.alert;
+    	window.alert = function(msg){
+    		if(window.isIFWE && widget.alerter){
+    			if(msg.includes('<')){
+    				msg= msg.replace(/</g,'&lt;'); 
+    			}
+    			if(msg.includes('>')){
+    				msg= msg.replace(/>/g,'&gt;');
+    			}
+    			msg = msg.replace(/\n/g, "<br>");
+    			widget.alerter.setOption("autoHide",false);
+    			widget.alerter.add({
+					message: msg,
+					className: 'error'
+				});
+				widget.alerter.show();
+    		}else{
+    			windowAlertFunction(msg);
+    		}
+    	}; */
+    	
+    	
+    	window.languageGlobalVar = navigator.language || navigator.userLanguage; 
+    	window.languageGlobalVar = languageGlobalVar.charAt(0).toUpperCase() + languageGlobalVar.charAt(1);
+    	var supportedLang = ['De','En','Es','Fr','It','Ja','Ru','Zh'];
+    	if(supportedLang.indexOf(window.languageGlobalVar)==-1){
+    		window.languageGlobalVar ='En';
+    	}
+    	
+    require([
+		'UWA/Drivers/Alone', 
+		'DS/Core/Core',  
+		'DS/Foundation2/FoundationV2Data',
+    	'DS/UWPClientCode/PublicAPI',
+    	'ENOGantt/GanttWidget',
+    	'DS/Foundation/WidgetUwaUtils'],
+        function(Alone, Core,FoundationData, PublicAPI, GanttWidget, WidgetUwaUtils) {
+			'use strict';
+            WidgetUwaUtils.setupEnoviaServer();
+            if('undefined' == typeof widget) {
+            	//Setup storage url
+            	var url = document.URL;
+    			var storageurl = url.substring(0, url.indexOf('/webapps'))
+    			window.enoviaServer.storageUrl = storageurl;   
+            }
+            
+            // Setting security context for performing update operations.
+             	FoundationData.ajaxRequest({
+						url: '/resources/pno/person/getsecuritycontext',
+						callback: function(ajaxReturn) {
+						if(enoviaServer){
+							var json = UWA.is(ajaxReturn, 'object') ? ajaxReturn : JSON.parse(ajaxReturn);
+							if(json.SecurityContext){
+							enoviaServer.securityContext =encodeURIComponent("ctx::"+json.SecurityContext); 
+						}    	
+							 
+						}    	
+						}
+					}); 
+
+            window.isIFWE = true;
+            window.enoviaServer.showSpace = "true";
+            if('undefined' != typeof widget) {
+                var ganttWidget = new GanttWidget(); 
+            	widget.addEvent("onLoad", ganttWidget.onLoad);
+            	widget.addEvent("onRefresh", ganttWidget.onRefresh);
+            	widget.addEvent("endEdit", ganttWidget.onPreferencesChanged);
+            	widget.addEvent("onResize", ganttWidget.onResize);
+           	} else {
+            	window.isIFWE = false;
+    			var documentURL = document.URL;
+    			var url =  parseUri(documentURL);
+    			
+    			//Setup physicalId and other params
+    			enoviaServer.physicalId = url.queryKey.physicalId;
+    			enoviaServer.objectId = url.queryKey.objectId;
+    			enoviaServer.referenceId = url.queryKey.referenceId;
+    			enoviaServer.viewId = url.queryKey.viewId;
+    			
+    			//For status Report View
+    			var sessionObjIds = sessionStorage.getItem("objectId");
+    			if(sessionObjIds){
+    				enoviaServer.objectId = sessionObjIds;
+    				sessionStorage.removeItem("objectId");
+    			}
+    			enoviaServer.projectId = url.queryKey.projectId; //Boolean value to check if default loading on Status Report View.
+    			enoviaServer.initGantt = url.queryKey.initGantt; //Boolean value to check if default loading on Status Report View.
+    			enoviaServer.AddDeliverable = url.queryKey.AddDeliverable; //Boolean value to check if to show deliverable as child.
+    			
+    			// In case of On-Premise environment, where objectId is paased through URL.
+            	if(!enoviaServer.physicalId && enoviaServer.objectId !=undefined){
+            		enoviaServer.physicalId = enoviaServer.objectId;
+            	}
+    			
+                var ganttWidget = new GanttWidget(); 
+    			$( document ).ready(function(){
+            		ganttWidget.onLoad();
+            	});
+				$( window ).resize(function(){
+					ganttWidget.onResize();
+            	});
+            }
+        }
+    );
+    }catch(error){
+    	console.log(error);
+    }
+    //]]>
+    </script>
+</head>
+<body id="container"><body/>
+
+</html>

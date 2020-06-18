@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IdeaExperienceCapacities>
+	<Header>
+		<Version>0.1</Version>
+	</Header>
+
+  <ExperienceObject>
+
+
+    <CXPService id="goTo" mode="task" fctStart="goTo">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPointActor_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="go to" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPFunction id="isGoingTo" body="isGoingTo" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPointActor_Spec"/>
+      <NaturalLanguageInfo capacityType="SensorState" alias="is going to" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPFunction>  
+      
+  <CXPEvent id="NavHasReachedEvent" targetParam="targetPoint">
+    <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPointActor_Spec"/>
+    <NaturalLanguageInfo capacityType="SensorEvent" alias="has Reached" icon="icons/caps/I_CXPMoveReach.png" exposedVariable="target"/>
+  </CXPEvent>
+  
+
+    <CXPService id="followPath" mode="task" fctStart="followPath">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="follow" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPFunction id="isFollowing" body="isFollowing" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="SensorState" alias="is following" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPFunction>
+
+  <CXPEvent id="NavHasCompletedEvent" targetParam="targetPath">
+    <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+    <NaturalLanguageInfo capacityType="SensorEvent" alias="has completed" icon="icons/caps/I_CXPMoveComplete.png" exposedVariable="target"/>
+  </CXPEvent>
+
+
+    <CXPFunction id="lookAt" body="lookAt" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec;CXP3DActorOverride_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverState" alias="look at" icon="icons/caps/I_CXPMoveLookAt.png" exposedVariable="target"/>
+    </CXPFunction>
+
+  </ExperienceObject>
+	
+</IdeaExperienceCapacities>

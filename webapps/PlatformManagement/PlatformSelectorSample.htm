@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<title>Platform Selector Sample</title>
+<meta name="author" content=""/>
+<meta name="description" content=""/>
+
+<widget:preferences>
+    <preference name="use_wu" type="list" label="Use WU" defaultValue="true">
+        <option value="true" label="true" />
+        <option value="false" label="false" />
+    </preference>
+</widget:preferences>
+
+<link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css"></link>
+<link rel="stylesheet" type="text/css" href="../PlatformManagementComponents/PlatformManagementComponents.css"></link>
+<script src="../UIKIT/UIKIT.js"></script>
+<script src="../PlatformManagementComponents/PlatformManagementComponents.js"></script>
+<!--<script src="../PlatformManagement/PlatformManagement.js"></script>-->
+
+<script type="text/javascript">
+    //<![CDATA[
+    /*global widget, require */
+    require(
+            [
+                'DS/PlatformManagementComponents/View/PlatformSelector',
+                'UWA/Core'
+            ],
+            function (PlatformSelector, UWA) {
+
+                'use strict';
+                var self = {
+                    onBeforeLoad: function () {
+                        self.platformSelector = new PlatformSelector({
+                            menu: [
+                                {
+                                    'data-title': 'My nice menu', //use a tooltip
+                                    'class': 'menu-grant fonticon fonticon-plus',
+                                    events: {
+                                        click: function () {
+                                            UWA.log('item has been clicked');
+                                        }
+                                    }
+                                },
+                            ],
+                            events: {
+                                onPlatformChange: function (platformModel) {
+                                    widget.body.getElement('.info').addContent('<br>' + platformModel.get('id'));
+                                }
+                            },
+                            includeWu: widget.getValue('use_wu') === 'true',
+                            lang: widget.lang
+                        });
+                        widget.body.setContent([self.platformSelector.render(), '<div style="height: 200px;" class="info"></div>']);
+                    },
+                    onRefresh: function () {},
+                    onResize: function () {},
+                    onSearch: function () {},
+                    onResetSearch: function () {}
+                };
+                widget.addEvents({
+                    onLoad: self.onBeforeLoad,
+                    onRefresh: self.onRefresh,
+                    onResize: self.onResize,
+                    onSearch: self.onSearch,
+                    onResetSearch: self.onResetSearch
+                });
+            }
+    );
+    //]]>
+</script>
+
+</head>
+<body>
+<div style="height: 300px"></div>
+</body>
+</html>

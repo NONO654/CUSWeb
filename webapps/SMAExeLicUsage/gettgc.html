@@ -1,0 +1,16 @@
+<html>
+<head>
+</head>
+<body>
+<script type="text/javascript">
+var tgc = window.location.hash.substring(8);
+var origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+if (!tgc) {
+    tgc = 'notgc';
+}
+// Copied from i3DXCompass
+console.log("gettgc has data:", window.location, tgc);
+window.parent.parent.postMessage(JSON.stringify({target: 'com.ds.SMAExeLicUsage', castgc: tgc}), origin);
+</script>
+</body>
+</html>

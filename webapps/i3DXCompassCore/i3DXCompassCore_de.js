@@ -1,0 +1,1 @@
+define("DS/i3DXCompassCore/i3DXCompassCore_de",{});define("DS/i3DXCompassCore/assets/nls/i3DXCompassCore",{"Action is still pending... Please wait a few seconds and refresh your widget":"Die Aktion ist noch ausstehend... Bitte warten Sie einige Sekunden, und aktualisieren Sie Ihr Widget anschließend."});

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.Doe" version="3DX.0" 
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="ProcessConnector">
+	<DisplayName nlsFile="SMAExeDoeConnector" nlsID="dispname">DOE</DisplayName>
+	<Description nlsFile="SMAExeDoeConnector" nlsID="desc">Design of Experiments</Description>
+	<LongDescription nlsFile="SMAExeDoeConnector" nlsID="longdescription">Design of Experiments</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Process</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.component.DOE</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>700</Value>
+			<Value>650</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="I_SMAExeDoeConnector16.gif" targetFilename="small/I_SMAExeDoeConnector16.gif" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAExeDoeConnector.png" targetFilename="large/I_SMAExeDoeConnector.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeDoeConnector.CATNls" targetFilename="SMAExeDoeConnector.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeDoeConnector_Japanese.CATNls" targetFilename="SMAExeDoeConnector.CATNls" locale="Japanese" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebDoe/cmp-doe/cmp-doe.html" targetFilename="SMAProcWebDoe/cmp-doe/cmp-doe.html"/>
+		<Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.adapter.doe.DOEExecutor</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-doe</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>SMAWflWebExtensionEditor</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_stylesheet"/>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflDoeConnectorEditor_VLT</LateType>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflDoeHandler_VLT</LateType>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="ExtensionAPI">
+			<Implementations>
+				<Implementation name="web" language="web" platform="win_b64">
+					<LateType>DS/SMAProcWebDoe/SMAProcWebDoeAPI</LateType>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<!-- DOE properties -->
+
+	</Properties>
+
+	<ParameterList>
+		<Parameter name="Run_Number" tag="Run_Number" mode="neutral" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[0]]>
+			</Value>
+		</Parameter>
+	</ParameterList>
+</wfext:Extension>

@@ -1,0 +1,1 @@
+define("DS/MMPrint/MMPrint_ko",{});define("DS/MMPrint/assets/nls/MMPrint",{printErrorTitle:"인쇄 오류",printRealSizeError:"실제 크기로 인쇄는 지원되지 않음"});

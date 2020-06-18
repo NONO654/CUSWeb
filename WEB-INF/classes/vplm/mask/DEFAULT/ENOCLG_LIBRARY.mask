@@ -1,0 +1,152 @@
+// ===========================================================
+// PACKAGE   : ENOCLG_LIBRARY
+// ===========================================================
+// Generated : Tue November 14 17:00:00 2006
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 1 entities :
+// - ENOCLG_LibraryReference
+
+// ===========================================================
+ENTITY ENOCLG_LibraryReference
+// ===========================================================
+// --- attributes: 11
+ATTR PLM_ExternalID;Y;N;$
+ATTR V_description;N;N;$
+ATTR reservedby;N;N;$
+//XEW - Commenting V_usage + 
+//ATTR V_usage;N;N;$
+//XEW - Commenting V_usage -
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR current;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR V_AuthoringProfile;N;N;$
+//XEW - Added +
+ATTR policy;N;N;$
+//XEW - Added -
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+//XEW - Added for Create as last FATTR +
+FATTR policy;N
+//XEW - Added for Create as last FATTR -
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;N
+FATTR reservedby;N
+//XEW - Added for Write before modified but no modified +
+FATTR policy;N
+//XEW - Added for Write before modified but no modified -
+
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR reservedby;Y
+FATTR owner;Y
+FATTR originated;Y
+FATTR modified;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR reservedby;Y
+//XEW - Uncommenting V_usage +
+FATTR V_usage;Y
+//XEW - Uncommenting V_usage -
+FATTR owner;Y
+FATTR organization;Y
+FATTR current;Y
+FATTR project;Y
+FATTR originated;Y
+//XEW - Added for Query before modified +
+FATTR policy;Y
+//XEW - Added for Query before modified +
+FATTR modified;Y
+FATTR V_AuthoringProfile;N
+
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR reservedby;N
+//XEW - Uncommenting V_usage +
+FATTR V_usage;N
+//XEW - Uncommenting V_usage -
+FATTR owner;N
+FATTR organization;N
+FATTR current;N
+FATTR project;N
+FATTR originated;N
+//XEW - Added for Read before modified +
+FATTR policy;N
+//XEW - Added for Read before modified -
+FATTR modified;N
+FATTR current;N
+FATTR V_AuthoringProfile;N
+// -----------------------------------------------------------
+FUNC List
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR reservedby;N
+//XEW - Uncommenting V_usage +
+FATTR V_usage;N
+//XEW - Uncommenting V_usage -
+FATTR owner;N
+FATTR organization;N
+FATTR current;N
+FATTR project;N
+FATTR originated;N
+FATTR modified;N
+
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;N
+
+// ===========================================================
+// End of ENOCLG_LIBRARY package's DEFAULT mask file
+// ===========================================================

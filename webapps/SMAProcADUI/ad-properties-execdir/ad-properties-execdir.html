@@ -1,0 +1,92 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-access/sp-access.html">
+<link rel="import" href="../ad-util/ad-util.html">
+<link rel="import" href="../ad-station-manager/ad-station-manager.html">
+<link rel="import" href="../ad-properties-item/ad-properties-item.html">
+
+<dom-module id="ad-properties-execdir">
+  <template>
+    	<style include="sp-uikit-styles"></style>
+    	<style include="ad-properties-item"></style>
+   
+		<sp-access group="process" haswrite="{{hasWrite}}"></sp-access>
+		<ad-station-manager id="stationManager" session="{{session}}"></ad-station-manager>
+		
+		<div class="properties-section-body">
+	      <table>
+	          <tbody><tr class="properties-row">
+	              <td class="properties-label-col">
+	                  <span class="properties-label">Name:</span>
+	              </td>
+	              <td class="properties-field-col">
+	                  <span class="properties-field">	                    
+	                  	<input id="nameEdit" name="nameEdit" type="text" class="properties-field-edit" on-change="onNameChanged" on-keyup="onNameChanged" on-drop="onNameChanged" on-input="onNameChanged" readonly$="{{!hasWrite}}">
+	                  	<!-- <span class="properties-field">{{model.name}}</span> --> 
+                      </span>
+               		  <div id="nameErrorMessage" class="hidden" style="display:inline">
+                  			&nbsp;&nbsp;<span on-click="onClickNameAlert" title="The folder name cannot be blank." class="message-icon fonticon fonticon-attention text-error">
+                  		</span></div>
+				 		<!-- The inline styling in the popover appears to be necessary to get this to work -->
+				 		<!--  properly, although further investigation when time allows might produce a CSS class fix.      -->
+						<div id="nameErrorPopover" class="popover bottom in hidden" on-click="onClickNamePopover" style="min-width:200px;">
+					  		<h3 class="popover-title">Warning</h3>
+				  			<div class="popover-body">The folder name cannot be blank.</div>
+					  </div>
+	              </td>
+               	  <td>&nbsp;</td>
+	          </tr>
+	          <tr class="properties-row">
+	              <td class="properties-label-col">
+	                  <span class="properties-label">Last modified:</span>
+	              </td>
+	              <td class="properties-field-col">
+	                  <span id="lastModifiedDate" class="properties-field"></span>
+	              </td>
+                  <td>&nbsp;</td>
+	          </tr>
+	          <tr class="properties-row">
+	              <td class="properties-label-col">
+	                  <span class="properties-label">COS Server:</span>
+	              </td>
+	              <td class="properties-field-col">
+	                  <span id="serverName" class="properties-field"></span>
+		          </td>
+				  <td>&nbsp;</td>
+	          </tr>
+	          <tr class="properties-row">
+	              <td class="properties-label-col">
+	                  <span class="properties-label">Station:</span>
+	              </td>
+	              <td class="properties-field-col">
+	                <span id="stationName" class="properties-field"></span>
+               		<div id="stationErrorMessage" class="hidden" style="display:inline">
+                  			&nbsp;&nbsp;<span id="stationErrorMessageIcon" on-click="onClickStationAlert" title="" class="message-icon fonticon fonticon-attention text-warning">
+                  		</span>
+                  	</div>
+				 	<!-- The inline styling in the popover appears to be necessary to get this to work -->
+				 	<!--  properly, although further investigation when time allows might produce a CSS class fix.      -->
+					<div id="stationErrorPopover" class="popover bottom in hidden" on-click="onClickStationPopover" style="min-width:200px;">
+		  				<h3 class="popover-title">Warning</h3>
+					  	<div id="stationErrorMessageText" class="popover-body"></div>
+					</div>
+		          </td>
+               	  <td>&nbsp;</td>
+	          </tr>
+	          <tr class="properties-row">
+	              <td class="properties-label-col">
+	                  <span class="properties-label">Path:</span>
+	              </td>
+	              <td class="properties-field-col">
+	                  <div id="stationPath" class="properties-field">{{model.path}}</div>
+	              </td>
+			      <td>&nbsp;</td>
+	          </tr>
+	       </tbody></table>
+		</div>
+	</template>
+  <script src="ad-properties-execdir.js"></script>
+</dom-module>
+
+

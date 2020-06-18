@@ -1,0 +1,15 @@
+<div class="customize-bodytext">
+  <p>{{bodyText}}</p>
+</div>
+  <div id="relations-list">
+   {{#each relations}} {{#each this}}
+    <div class="toggle toggle-primary">
+
+      {{#if value}}
+      <input type="checkbox" class="customize-childtoggle" id="checkbox-{{id}}" value="{{id}}" checked=""> {{else}}
+      <input type="checkbox" class="customize-childtoggle" id="checkbox-{{id}}" value="{{id}}"> {{/if}}
+
+      <label class="control-label" for="checkbox-{{id}}">{{relationName}}</label>
+    </div>
+    {{/each}} {{/each}}
+  </div>

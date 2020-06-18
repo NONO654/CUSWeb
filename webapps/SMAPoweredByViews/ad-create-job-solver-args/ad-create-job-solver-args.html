@@ -1,0 +1,76 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html">
+
+<dom-module id="ad-create-job-solver-args">
+	<link rel="import" type="css" href="ad-create-job-solver-args.css">
+	<template>
+		<!-- <div style="display:flex; justify-content: center">
+			<div class="arrow-container" on-click="prevousIteration">
+			  <div class="arrow arrow-left"> </div>
+			</div>
+			<div id="batchSelect" style="min-width:200px;margin: 0px 20px 0px 20px;">
+			</div>
+			<div class="arrow-container" on-click="nextIteration">
+			  <div class="arrow arrow-right"> </div>
+			</div>
+		</div> -->
+		<div id="argsContainer" class="args-container form-group">
+			<div class="args-left">
+				<div id="commandPreview" class="command-preview">
+					<div class="command-preview-text">
+						<label class="control-label" for="commandInput">
+							<sp-nls nlspath="{{nlspath}}" nlskey="commandPreview"></sp-nls>
+						</label>
+						<input type="text" id="commandInput" class="form-control command-preview-input" on-input="onCommandInput"></input>
+					</div>
+					<div id="undoCommandInput" class="add-remove-button hidden">
+						<sp-nls nlspath="{{nlspath}}" nlskey="ResetCommand" value="{{ResetCommand}}" no-view></sp-nls>
+						<button class="btn btn-default btn-root btn-with-icon" type="button" on-click="onUndoCommandClick" title="[[ResetCommand]]">
+						  <span class="fonticon fonticon-reset"></span>
+						  <span>[[ResetCommand]]</span>
+						</button>
+				  	</div>
+					<div id="addRemoveButton" class="add-remove-button">
+						<sp-nls nlspath="{{nlspath}}" nlskey="AddRemoveOptions" value={{AddRemoveOptions}} no-view></sp-nls>
+						<button class="btn btn-primary" type="button" title="[[AddRemoveOptions]]" on-click="onAddRemoveOptionsClick">
+							<span class="fonticon fonticon-plus"></span>
+							<span>/</span>
+							<span class="fonticon fonticon-minus"></span>
+							<span>[[AddRemoveOptions]]</span>
+						</button>
+					</div>
+				</div>
+				<div id="editCommand" class="hidden">
+					<sp-nls nlspath="{{nlspath}}" nlskey="EditCommandPlaceHolder" value={{EditCommandPlaceHolder}} no-view></sp-nls>
+					<label class="control-label" for="commandInputEdit">
+						<sp-nls nlspath="{{nlspath}}" nlskey="editCommand"></sp-nls>
+					</label>
+					<input type="text" id="commandInputEdit" class="form-control" on-blur="onInputChange" placeholder="[[EditCommandPlaceHolder]]" value$="{{commandInput}}"></input>
+				</div>
+				<div id="commandOverrideNote" class="alert-message alert-primary hidden">
+					<sp-nls nlspath="{{nlspath}}" nlskey="CommandOverrideNote"></sp-nls>
+				</div>
+				<div id="allArgs" class="all-args hidden">
+					<ul id="inputRow"> </ul>
+				</div>
+			</div>
+			<div id="additionArgsContainer" class="add-options-panel">
+				<div class="add-option-title">
+					<sp-nls nlspath="{{nlspath}}" nlskey="AddRemoveOptions"></sp-nls>
+					<hr class="add-options-separator">
+				</div>
+				<div id="addOptionsContainer" class="add-options-container">
+					<span id="disableOptionsNote" class="disable-alert alert-message alert-primary hidden">
+						<sp-nls nlspath="{{nlspath}}" nlskey="UnsupportedArgs"></sp-nls>
+					</span>
+					<div id="additionalArgs" class="add-options"></div>
+				</div>
+				<div id="closeButtonContainer" class="close-button-container hidden">
+					<span class="fonticon fonticon-close close-button" on-click="onCloseAddOptions"></span>
+				</div>
+			</div>
+		</div>
+	</template>
+	<script type="text/javascript" src="ad-create-job-solver-args.js"></script>
+</dom-module>

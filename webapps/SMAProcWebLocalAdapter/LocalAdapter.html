@@ -1,0 +1,64 @@
+<!-- <link rel="import" href="../SMAProcWebAuthoringUtils/cmp-file-selection/cmp-file-selection.html"> -->
+<dom-module id="pcw-local-adapter">
+    <template>
+        <style>
+            :host {
+                padding: 10px;
+            }
+
+            div#container {
+                padding: 10px;
+            }
+
+            div#container>div {
+                margin: 10px 0px;
+            }
+
+            .info {
+                color: green;
+            }
+
+            .error {
+                color: red;
+            }
+        </style>
+        <div id="container">
+            <div>
+                Clicking on the Run button will export the parameters of this activity in an xml file; run the batch file content inside
+                the textare below; read the output file from batch file if any and save it to in a new string parameter.
+            </div>
+            <div style="width:400px;">
+                <label>Download</label>
+                <pcw-sdk-file-chooser id="download" filetypes=".txt,.docx,.pdf,.zip" 
+                    mode="download" ></pcw-file-chooser>
+            </div>
+            <div>
+                <label>Program</label>
+            </div>
+            <div>
+                <textarea id="batch" rows="15" cols="80" value="{{snippet::input}}"></textarea>
+            </div>
+
+            <div style="width:400px;">
+                <label>Upload</label>
+
+                <pcw-sdk-file-chooser id="upload" 
+                    filetypes=".txt,.docx,.pdf,.zip" 
+                    mode="upload">
+                </pcw-file-chooser>
+                
+            </div>
+            <div>
+                <input id="runBtn" type="button" class="btn btn-default" value="Run All" on-click="runAll" />
+                <input id="runBtn" type="button" class="btn btn-default" value="Run (Skip Upload)" on-click="runNoUpload" />
+                <input id="runBtn" type="button" class="btn btn-default" value="Run (Skip Download)" on-click="runNoDownload" />
+                <input id="runBtn" type="button" class="btn btn-default" value="Run (Skip Download and Upload)" on-click="runProgram" />
+            </div>
+            <div>
+                <label class$=[[info.class]]>[[info.message]]</label>
+            </div>
+        </div>
+
+    </template>
+    <script type="text/javascript" src="./LocalAdapter.js"></script>
+</dom-module>

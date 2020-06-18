@@ -1,0 +1,1 @@
+define("DS/ENXScene/ENXScene_en",{});define("DS/ENXScene/assets/nls/ENXScene",{default_view_label:"Default view",treelistview_label:"Tree List view",graphview_label:"Graph view",tileview_label:"Tile view",thumbnailview_label:"Thumbnail view",datagridview_label:"Datagrid view",storedObjectMgt_label:"Select object(s) to load during refresh"});

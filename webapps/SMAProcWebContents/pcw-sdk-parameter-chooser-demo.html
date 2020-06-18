@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SMAProcWebCommonContents ParameterChooser</title>
+
+    <script type="text/javascript" src="../Polymer-1.11.3/webcomponents-lite.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+    <script>
+
+        localStorage.setItem('tst-mode', true);
+    </script>
+
+    <style>
+        .section {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .xcontainer {
+            width: 600px;
+            padding: 5px 0px;
+            display: block;
+            margin-left: 0px;
+        }
+
+        pre {
+            width: 400px;
+        }
+
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            background-color: lightgray
+        }
+
+        .sep {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+</body>
+
+<template>
+    <section>
+        <h2>pcw-sdk-parameter-chooser</h2>
+        <p>
+            This is parameter chooser
+        </p>
+        <template is="dom-bind">
+            <div class="xcontainer sep">
+                Default:
+                <p class="code">
+                    &lt;pcw-sdk-parameter-chooser id="comp1" create&gt;
+                    </pcw-sdk-parameter-chooser>
+                </p>
+                <pcw-sdk-parameter-chooser id="comp1" create></pcw-sdk-parameter-chooser>
+            </div>
+
+            <br/>
+
+            <div class="xcontainer sep">
+                Parameter chooser with pre-selected parameter
+                <p class="code">
+                    &lt;pcw-sdk-parameter-chooser id="comp2" autoselect&gt;
+                    </pcw-sdk-parameter-chooser>
+                </p>
+
+                <pcw-sdk-parameter-chooser id="comp2" autoselect></pcw-sdk-parameter-chooser>
+            </div>
+
+            <div class="xcontainer sep">
+                Parameter chooser with create and autoselect attribute
+                <p class="code">
+                    &lt;pcw-sdk-parameter-chooser id="comp3" autoselect create&gt;
+                    </pcw-sdk-parameter-chooser>
+                </p>
+
+                <pcw-sdk-parameter-chooser id="comp3" autoselect create></pcw-sdk-parameter-chooser>
+            </div>
+
+            <div class="xcontainer sep">
+                Disabled Parameter
+                <p class="code">
+                    &lt;pcw-sdk-parameter-chooser id="comp4" disabled&gt;
+                    </pcw-sdk-parameter-chooser>
+                </p>
+
+                <pcw-sdk-parameter-chooser id="comp4" disabled></pcw-sdk-parameter-chooser>
+            </div>
+
+
+            <br/>
+
+            <div>Selected Parameter:</div>
+            <div class="rule" id="console"></div>
+
+        </template>
+
+    </section>
+</template>
+
+
+<script>
+
+    require(['UWA/Core', 'UWA/Data', 'DS/Core/Core', 'UWA/Element',
+        'DS/ApplicationFrame/FrameWindow', 'DS/ApplicationFrame/FrameWindowsManager',
+        'DS/SMAProcWebContents/ParameterChooser', 'DS/SMAProcWebContents/FakeContentService',
+        'DS/SMAProcWebContents/PolyUtils'],
+        function (UWA, UWAData, WUXCore, UWAElement,
+            FrameWindow, FrameWindowsManager, ParameterChooser, FakeContentService, PolyUtils) {
+
+            WUXCore.setFullscreen();
+            widget.addEvent('onLoad', function () {
+
+                var frmWindow = new FrameWindow().inject(document.body);
+
+                frmWindow.elements.container.setStyles({ background: 'white', 'overflow-y': 'scroll' });
+
+                var uiFrame = frmWindow.getUIFrame();
+
+                var template = document.querySelector('template');
+
+                var div = UWA.createElement('div', {
+                    styles: {
+                        padding: '20px'
+                    }
+                });
+                div.innerHTML = template.innerHTML;
+
+                div.inject(uiFrame);
+
+
+                var service = new FakeContentService();
+                var dataContainer = service.getDataContainer();
+
+                var param = dataContainer.findParameterByName('Parameter2');
+
+                service.setActivity(dataContainer);
+
+                PolyUtils.whenComponentReady('#comp1').then(function (el) {
+                    el.setContentService(service);
+                    el.setModel(dataContainer);
+                });
+
+                PolyUtils.whenComponentReady('#comp2').then(function (el) {
+                    el.setContentService(service);
+                    el.setModel(dataContainer, param);
+                });
+
+                PolyUtils.whenComponentReady('#comp3').then(function (el) {
+                    el.setContentService(service);
+                    el.setModel(dataContainer);
+                });
+
+                PolyUtils.whenComponentReady('#comp4').then(function (el) {
+                    el.setContentService(service);
+                    el.setModel(dataContainer, param);
+                });
+
+                document.addEventListener('pcw-parameter-selected', function (e) {
+                    document.querySelector('#console').textContent = e.detail.value.getName() + (e.detail.selectedIndices || '');
+                })
+            });
+        });
+</script>
+</body>
+
+</html>

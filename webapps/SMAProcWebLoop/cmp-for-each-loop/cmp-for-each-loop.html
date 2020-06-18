@@ -1,0 +1,174 @@
+<!--------------------------------------------------------------------
+    [cmp-for-each-loop HTML Document]
+    
+    Project:        cmp
+    Version:        1.0
+    Last change:    Thu, 19 Nov 2015 20:03:22 GMT
+    Assigned to:    Vishakha Motwani
+    Primary use:    For each loop adapter editor
+    Description:    To be used with cmp-loop
+    --------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-checkbox/sp-checkbox.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../cmp-loop-parameter-mapper.html">
+
+<dom-module id="cmp-for-each-loop">
+    
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+            :host([hidden]) {
+                display: none;
+            }
+            .inline {
+                width: 100%;
+                display: inline-flex;
+                margin-top: 5px;
+            }
+            .inline > label {
+                width: 5.5em;
+                font-weight: normal;
+            }
+            .inline > pcw-parameter-chooser,
+            .inline > cmp-loop-parameter-mapper {
+                flex: auto;
+                width: auto;
+            }
+            .inline > label.longlabel {
+                width: auto;
+                margin-right: 5px;
+            }
+            sp-checkbox{
+                margin-right: 5px;
+            }
+
+            button {
+                margin-top: auto;
+                margin-bottom: auto;
+                height: 30px;
+            }
+            
+            .parameterscontainer {
+                height:160px;
+                display: flex;
+                width: 100%;
+                padding: 0;
+                margin: 5px 0;
+            }
+
+            #parameters {
+                flex: auto;
+                height: 100%;
+                background: #E5E5ED;
+                overflow-y: auto;
+                margin:0;
+                padding: 5px;
+            }
+            
+            .btn {
+                display: block;
+                min-width: 50px;
+                position: relative;
+                padding: 5px 5px 10px 15px;
+                margin-bottom: 5px;
+                margin-left: 5px;
+                border-color: #b4b6ba;
+                text-align: center;
+            }
+            
+            .button-wrapper {
+                margin: 0;
+            }
+            
+            .paramitem {
+                padding: 5px;
+            }
+            .paramitem.selected {
+                background-color: steelblue;
+                color: white;
+            }
+            
+            .paramitem:hover {
+                background: lightgrey;
+            }
+
+            .fonticon-plus:before {
+                content: '\e815';
+                font-family: entypo;
+            }
+            
+            .fonticon-minus:before {
+                content: '\e818';
+                font-family: entypo;
+            }
+            
+            .fonticon-up:before {
+                content: '\e881';
+                font-family: entypo;
+            }
+            
+            .fonticon-down:before {
+                content: '\e87e';
+                font-family: entypo;
+            }
+        </style>
+            <!--Parameter chooser-->
+            <div class="inline">
+                <label>Parameter:</label>
+                <pcw-parameter-chooser
+                    id="paramchooser"
+                    autoselect create
+                    structure="Scalar"
+                    on-pcw-parameter-selected="onSelectConditionParam"
+                    required>
+                </pcw-parameter-chooser>
+            </div>
+
+            <!--Add, remove, update position of constants/parameters-->
+            <div class="inline">
+                <label class="longlabel">Add or remove values to/from the list below:</label>
+                <cmp-loop-parameter-mapper id="inputvalue" disabled></cmp-loop-parameter-mapper>
+            </div>
+
+            <!--Div for the list of values-->
+            <div class="parameterscontainer">
+                <div id="parameters">
+                    <template is="dom-repeat" items="{{valueList}}" as="value">
+                        <div class="paramitem" on-click="onSelect">{{ fetchPropertyValue(value) }}</div>
+                    </template>
+                </div>
+                
+                <!--'+', '-', up arrow and down arrow buttons-->
+                <div class="button-wrapper">
+                    <button id="add" is="sp-button-type" class="btn" on-click="onAdd" disabled>
+                        <span class="fonticon fonticon-plus"></span>
+                    </button>
+                    <button id="remove" is="sp-button-type" class="btn" on-click="onRemove" disabled>
+                        <span class="fonticon fonticon-minus"></span>
+                    </button>
+                    <button id="moveup" is="sp-button-type" class="btn" on-click="onMoveUp" disabled>
+                        <span class="fonticon fonticon-up"></span>
+                    </button>
+                    <button id="movedown" is="sp-button-type" class="btn" on-click="onMoveDown" disabled>
+                        <span class="fonticon fonticon-down"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="inline">
+                <sp-checkbox id="failrunpolicy"></sp-checkbox>
+                <label class="longlabel">Ignore and continue if iteration fails.</label>
+            </div>
+            
+            <!--Sequential or parallel execution of iterations-->
+            <div class="inline">
+                <sp-checkbox id="parallel" on-click="onReturnCodeChange" checked="{{returnCodeOn}}"></sp-checkbox>
+                <label class="longlabel" for="rcVal">Execute all iterations in parallel</label>
+            </div>
+
+    </template>
+    <script type="text/javascript" src="cmp-for-each-loop.js"></script>
+</dom-module>

@@ -1,0 +1,1 @@
+define("DS/RTwebrtcAPI/RTwebrtcAPI_fr",{});define("DS/RTwebrtcAPI/assets/nls/feed",{Call:"Appel",notCompatible:"Votre navigateur n'est pas compatible, veuillez utiliser Chrome ou Firefox"});

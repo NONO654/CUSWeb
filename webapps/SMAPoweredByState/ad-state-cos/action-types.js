@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define([],function(){var a={};a.REFRESH_SERVERS="REFRESH_SERVERS";a.REFRESH_STATIONS="REFRESH_STATIONS";a.REFRESH_DRM_CONFIGURATIONS="REFRESH_DRM_CONFIGURATIONS";return a});

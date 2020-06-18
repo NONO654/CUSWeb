@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2015 Dassault Systemes. All rights reserved. -->
+  <head>
+    <!-- Application Metas -->
+    <title>Physics Simulation Review</title><!-- R419 FD03  /-->
+
+    <meta name="author" content="Dassault Systemes" />
+    <meta name="description" content="Physics Simulation Review widget" />
+    <meta name="brand" content="SIMULIA" />
+    <meta name="autoRefresh" content="0" />
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+    <widget:preferences>
+
+        <!--preference name="PLATFORM" type="hidden" label="PLATFORM" defaultValue="false" /-->
+        <!--preference name="MODELID" type="hidden" label="MODEL ID" defaultValue="false" /-->
+        <preference name="CollabSpacePref" type="hidden" label="PrefHidden" defaultValue="false" />
+        <preference name="MultiWidgetsSync" type="hidden" label="SyncHidden" defaultValue="false" />
+
+    </widget:preferences>
+
+    <!-- Application JavaScript Source -->
+    <script type="text/javascript">
+        /* global require, widget */
+        require(
+        ["DS/SimReviewWidget/WidgetSimReview"],
+        function (WidgetSimReview) {
+            "use strict";
+            new WidgetSimReview({ widget: widget });
+        }
+      );
+    </script>
+</head>
+
+<body></body>
+
+</html>

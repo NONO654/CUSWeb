@@ -1,0 +1,31 @@
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+
+<!-- Importing base -->             
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<dom-module id="sp-tab">
+  <link rel="import" type="css" href="sp-tab.css">
+  <template>
+        <main class="sp-tab" id="main">     
+            <nav class="tabs">
+                <template is="dom-repeat" items="{{tabs}}" as="tab" index-as="index">
+                    <!-- Selected Header -->                    
+                    <!-- Header -->                    
+					<header class$="{{_computeTabClass(tab)}}" id="[[tab.id]]" on-click="onTabClick" 
+							data-index$="{{index}}" 
+							data-id$="[[tab.id]]" 
+							data-header$="[[tab.header]]">{{tab.header}}</header>                    
+                </template>  
+                <!--Selected tab underline-->
+                <div id="selection" class="selection"></div>
+            </nav>
+            
+            <div class="tabcontent">
+	            <content select="*">                
+	                <!-- Tab content goes here -->
+	            </content>
+            </div>
+        </main>
+    </template>
+  <script type="text/javascript" src="sp-tab.js"></script>
+</dom-module>

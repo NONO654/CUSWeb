@@ -1,0 +1,260 @@
+/* -------------------------------------------------------------------------
+	Calendar Stylesheet for Windows/Mac Platforms
+	emxUICalendar.css
+	
+	Release: 2015x
+	Version: 1.01
+	
+	Copyright (c) 1992-2018 Dassault Systemes ENOVIA Corp. All Rights Reserved.
+	This program contains proprietary and trade secret information 
+	of Dassault Systemes ENOVIA Corp. Copyright notice is precautionary only
+	and does not evidence any actual or intended publication of such program
+   ------------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------------
+   Default Settings
+   ------------------------------------------------------------------------- */
+
+.calendar-container {
+	-moz-user-select:none;
+	background-color:#fff;
+	margin:0;
+	padding:4px;
+	border:1px solid #ccc;
+	box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
+}
+
+.calendar-container th,
+.calendar-container td {
+	white-space:normal;
+	font-size: 12px;
+}
+
+/* -------------------------------------------------------------------------
+   Calendar Settings
+   ------------------------------------------------------------------------- */
+
+/* Month Table Cell */
+
+#tdMonth,
+#tdYear1,
+#tdYear {
+	font-size: 14px;
+	border:1px solid transparent;
+	cursor:pointer;
+	font-weight:bold;
+	text-align:left;
+	padding:5px 5px 5px 12px;
+}
+
+#tdMonth {
+	background:#fff url(../images/utilCalendarArrowDown.gif) no-repeat right center;
+	text-align:left;   
+} 
+ 
+#tdMonth:hover {
+	background:#efefef url(../images/utilCalendarArrowDown.gif) no-repeat right center;
+	border-radius: 4px;
+}
+ 
+/* Year Table Cell */
+#tdYear1 {
+	background:#fff url(../images/utilCalendarArrowDown.gif) no-repeat center center;
+	padding:5px 15px 5px 12px;
+}
+
+#tdYear1:hover {
+	background-color:#efefef;
+	border-radius: 4px;
+}
+
+/* Year Table Cell */
+#tdYear {
+	background:#fff;
+	border:1px solid #CCC;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	border-radius: 4px;
+	margin-left: 3px;
+} 
+ 
+/* Today Table Cell */
+#tdToday {
+	border:1px solid #FFF;
+	border-right:1px solid #737373;
+	border-bottom:1px solid #737373;
+} 
+
+/* Calendar Header Background Appearance */
+table.calendarHead {}
+
+/* Calendar Header Font Appearance */
+td.calendarHead { 
+	background-color:#c7d0db;
+	cursor:default;
+	font-family:Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular; 
+	font-weight:bold; 
+	text-align:center; 
+}
+
+th.day-name {
+	background-color:#fff;
+	color:#b4b6ba; 
+	cursor:default;
+	font-family:Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular;
+	font-weight:bold; 
+	text-align:center;        
+	border-bottom: solid 1px #bebebe;
+	padding:4px;
+} 
+
+/* Day Appearance */
+td.day { 
+	background-color:#f8f8f8;
+	cursor:pointer;
+	text-align:center;
+	padding: 4px;
+}
+
+td.day:hover {
+	color:#fff;
+	background-color:#FF8A2E;
+	font-weight: bold;
+	border-radius:4px;
+}
+
+/* Empty Cell Appearance */
+td.empty { 
+	background-color:#fdfdfd;
+	color: #bebebe;
+	cursor:pointer;
+	text-align:center;
+	padding: 4px;
+}
+
+/* Selected Day Appearance */
+td.selected { 
+	color:#fff;
+	background-color:#008ee3;
+	font-weight:bold; 
+	cursor:pointer;
+	border-radius: 4px;
+}
+
+td.hover {background-color:blue;}
+
+/* Today Appearance */
+td.today { 
+	background-color:#f8f8f8;
+	color: #008ee3;
+	font-weight: bold;
+	cursor:pointer;
+	text-align:center; 
+}
+
+/* Calendar Body Appearance */
+td.calendarBody {background-color:#fff;}
+
+.calendarBody td {}
+
+/* Left and right arrows */
+td.calendarArrow {
+	cursor:pointer;
+}
+
+#tdToday {
+	cursor:pointer;
+	padding:2px;        
+}
+
+/* The "Today" Button */
+button.btn-default.today {
+    margin-top: 4px;
+    font-size: 12px;
+    width: 100%;
+}
+
+/* -------------------------------------------------------------------------
+   Calendar Month/Year Menu Settings
+   ------------------------------------------------------------------------- */
+   
+div.monthmenu, body.monthmenu,
+div.yearmenu, body.yearmenu {
+	background-color:#EEE; 
+	border:1px solid black; 
+	position:absolute; 
+	width:150px; 
+}
+
+/* Menu Separator Line Appearance */
+.monthmenu div.menu-separator,
+.yearmenu div.menu-separator { 
+	border-bottom:1px solid #FFF; 
+	border-top:1px solid #848484; 
+	overflow:hidden;
+}
+
+.monthmenu td.menu-label,
+.yearmenu td.menu-label {
+	color:black;
+	cursor:pointer;
+	font-weight:bold;
+	padding:5px 5px 5px 12px;
+}
+
+.monthmenu tr.menu-item-selected,
+.yearmenu tr.menu-item-selected {background-color:#8e8e8e;}
+
+.monthmenu tr.menu-item-selected td.menu-label,
+.yearmenu tr.menu-item-selected td.menu-label { 
+	color:white;
+	cursor:pointer;
+	padding:5px 5px 5px 12px;
+}
+
+/* Up Button */
+.monthmenu div.upbutton,
+.yearmenu div.upbutton {
+	background:#C9C9C9 url(../images/utilActionScrollArrowUp.gif) no-repeat center center;
+	border:1px solid #EEE;
+	border-bottom:1px solid #B4B4B0;
+	border-right:1px solid #B4B4B0;
+	cursor:pointer;
+	height:14px;
+	width:100%;
+}
+
+/* Up Button (for mouse over) */
+.monthmenu div.upbutton-hover,
+.yearmenu div.upbutton-hover {
+	background:#C9C9C9 url(../images/utilActionScrollArrowUp.gif) no-repeat center center;
+	border:1px solid #EEE;
+	border-bottom:1px solid #B4B4B0;
+	border-right:1px solid #B4B4B0;
+	cursor:pointer;
+	height:14px;
+	width:100%;
+}
+
+/* Down Button */
+.monthmenu div.downbutton,
+.yearmenu div.downbutton {
+	background:#C9C9C9 url(../images/utilActionScrollArrowDown.gif) no-repeat center center;
+	border:1px solid #EEE;
+	border-bottom:1px solid #B4B4B0;
+	border-right:1px solid #B4B4B0;
+	cursor:pointer;
+	height:14px;
+	width:100%;
+}
+
+/* Down Button (for mouse over) */
+.monthmenu div.downbutton-hover,
+.yearmenu div.downbutton-hover {
+	background:#C9C9C9 url(../images/utilActionScrollArrowDown.gif) no-repeat center center;
+	border:1px solid #EEE;
+	border-bottom:1px solid #B4B4B0;
+	border-right:1px solid #B4B4B0;
+	cursor:pointer;
+	height:14px;
+	width:100%;
+}

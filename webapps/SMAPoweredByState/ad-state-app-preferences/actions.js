@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define(["DS/SMAPoweredByState/ad-state-app-preferences/action-types"],function(b){var a={};a.setDefaultJobType=function(c){if(window.widget&&window.widget.addPreference){window.widget.addPreference({name:"defaultJobType",type:"hidden",label:"defaultJobType",defaultValue:c})}return{type:b.SET_DEFAULT_JOB_TYPE,id:c}};return a});

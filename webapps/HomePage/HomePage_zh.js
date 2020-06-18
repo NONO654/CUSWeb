@@ -1,0 +1,1 @@
+define("DS/HomePage/HomePage_zh",{});define("DS/HomePage/assets/nls/HomePage",{HomePage_SearchContent:"搜索内容",HomePage_CreateRequirementSpecification:"创建需求规格",HomePage_CreateSpecificationFolder:"创建规格文件夹",HomePage_Or:"或"});

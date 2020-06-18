@@ -1,0 +1,37 @@
+<div class="xen-dnd-issues-container">
+  <div class="xen-dnd-header"></div>
+  <div class="xen-dnd-body">
+        {{#if isGlobal}}
+        {{#each items}}
+            <span>{{reason}}</span><br/>
+        {{/each}}
+
+        {{/if}}
+
+        {{#if notGlobal}}
+        <table class="table table-striped table-condensed table-responsive" style="height:300">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th >{{nls_object_info}}</th>
+                    <th>{{nls_reason}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each items}}
+                <tr >
+                    <td>{{inc  @index}}</td>
+                    <td>{{infos}}</td>
+                    <td >
+                            <span>{{reason}}</span>
+                        </span>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+
+        </table>
+        {{/if}}
+
+  </div>  
+</div>

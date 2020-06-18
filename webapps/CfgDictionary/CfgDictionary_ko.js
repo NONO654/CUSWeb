@@ -1,0 +1,1 @@
+define("DS/CfgDictionary/CfgDictionary_ko",{});define("DS/CfgDictionary/assets/nls/CfgDictionary",{option:"옵션",rule:"규칙",value:"값",variability_group:"변형 그룹",variant:"변형"});

@@ -1,0 +1,187 @@
+{
+	"relations": [
+	{
+		"name": "representation_to",
+		"computepath": "to",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "CAD Representation"}, "direction" : "to"}]}]
+	},
+	{
+		"name": "representation_from",
+		"computepath": "from",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "CAD Representation"}, "direction" : "from"}]}]
+	},
+	{
+		"name": "folder_to",
+		"computepath": "to",
+		"queries" :  [
+		              { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "Vaulted Objects"}, "direction" : "to"}]},
+		              { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "Sub Vaults"}, "direction" : "to"}]}
+		              ]
+	},
+	{
+		"name": "folder_from",
+		"computepath": "from",
+		"queries" :  [
+		              { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "Vaulted Objects"}, "direction" : "from"}]},
+		              { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "Sub Vaults"}, "direction" : "from"}]}
+		              ]
+	},
+	{
+		"name": "component_to",
+		"computepath": "to",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "CAD SubComponent"}, "direction" : "to"}]}]
+	},
+	{
+		"name": "component_from",
+		"computepath": "from",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "CAD SubComponent"}, "direction" : "from"}]}]
+	},
+	{
+		"name": "drawing_to",
+		"computepath": "to",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "Associated Drawing"}, "direction" : "from"}]}]
+	},
+	{
+		"name": "drawing_from",
+		"computepath": "from",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "Associated Drawing"}, "direction" : "to"}]}]
+	},
+	{
+		"name": "process_to",
+		"computepath": "to",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "CatProcess"}, "direction" : "to"}]}]
+	},
+	{
+		"name": "process_from",
+		"computepath": "from",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "CatProcess"}, "direction" : "from"}]}]
+	},
+	{
+		"name": "analysis_to",
+		"computepath": "to",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "CatAnalysis"}, "direction" : "to"}]}]
+	},
+	{
+		"name": "analysis_from",
+		"computepath": "from",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "CatAnalysis"}, "direction" : "from"}]}]
+	},
+	{
+		"name": "workspace_to",
+		"computepath": "to",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "Data Vaults"}, "direction" : "to"}]}]
+	},
+	{
+		"name": "workspace_from",
+		"computepath": "from",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "Data Vaults"}, "direction" : "from"}]}]
+	},
+	{
+		"name": "designtable_to",
+		"computepath": "to",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "CatDesignTable"}, "direction" : "to"}]}]
+	},
+	{
+		"name": "designtable_from",
+		"computepath": "from",
+		"queries" :  [{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "CatDesignTable"}, "direction" : "from"}]}]
+	},
+	{
+		"name" : "v6_structure_to",
+		"computepath": "to",
+		"queries" :  [
+		{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "to"}]},
+        { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "to"}]}		
+		]
+	},
+	{
+		"name" : "v6_structure_from",
+		"computepath": "from",
+		"queries" :  [
+		{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreInstance"}, "direction" : "from"}]},
+        { "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "PLMCoreRepInstance"}, "direction" : "from"}]}		
+		]
+	},
+	{
+		"name" : "v6_repreplink_to",
+		"queries" :  [
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "5","semantics" : "5"}, "direction" : "to"}],"keepTypes": ["PLMCoreRepReference"]},
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "5","semantics" : "5"}, "direction" : "to"},{"navigationType" : "SR","qualityFilter" : {"role" : "4","semantics" : "5"}, "direction" : "to","iteration" : -1}],"keepTypes": ["PLMCoreRepReference"]},
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "5","semantics" : "5"}, "direction" : "to"},{"navigationType" : "SR","qualityFilter" : {"role" : "4","semantics" : "5"}, "direction" : "to","iteration" : -1},{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "to"}],"keepTypes": ["PLMCoreRepReference"]}
+		]
+	},
+	{
+		"name" : "v6_repreplink_from",
+		"queries" :  [
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "5","semantics" : "5"}, "direction" : "from"}],"keepTypes": ["PLMCoreRepReference"]},
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "4","semantics" : "5"}, "direction" : "from","iteration" : -1},{"navigationType" : "SR","qualityFilter" : {"role" : "5","semantics" : "5"}, "direction" : "from"}],"keepTypes": ["PLMCoreRepReference"]},
+			{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "4","semantics" : "5"}, "direction" : "from","iteration" : -1},{"navigationType" : "SR","qualityFilter" : {"role" : "5","semantics" : "5"}, "direction" : "from"}],"keepTypes": ["PLMCoreRepReference"]}
+		]
+	},
+	{
+		"name" : "v6_drawing_to",
+		"queries" :  [
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "6","semantics" : "5"}, "direction" : "to"}]},
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "6","semantics" : "5"}, "direction" : "to"},{"navigationType" : "SR","qualityFilter" : {"role" : "71","semantics" : "1"}, "direction" : "to"}]}
+		]
+	},
+	{
+		"name" : "v6_drawing_from",
+		"queries" :  [
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "6","semantics" : "5"}, "direction" : "from"}]},
+		    { "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "6","semantics" : "5"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "71","semantics" : "1"}, "direction" : "from"}]}
+		]
+	},
+	{
+	  "name" : "v6_document_to",
+	  "queries" :  [
+			{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "Reference Document"}, "direction" : "to"}]},
+			{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMConnection/V_Owner"}, "direction" : "from"},{"navigationType" : "SR","qualityFilter" : {"role" : "87","semantics" : "1"}, "direction" : "to"}]}
+		]
+	},
+	{
+      "name" : "v6_document_from",
+	  "queries" :  [
+			{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "Reference Document"}, "direction" : "from"}]},
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "87","semantics" : "1"}, "direction" : "from"},{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMConnection/V_Owner"}, "direction" : "to"}]}
+		]
+	},
+	{
+	  "name" : "v6_port_owner_to",
+	  "queries" :  [
+			{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "to"}]}
+		]
+	},
+	{
+	  "name" : "v6_port_owner_from",
+	  "queries" :  [
+			{ "definition":[{"navigationType" : "relation","qualityFilter" : {"rel_type" : "VPLMrel/PLMPort/V_Owner"}, "direction" : "from"}]}
+		]
+	},
+	{
+		"name" : "v6_import_to",
+		"queries" :  [
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "5","semantics" : "5"}, "direction" : "to"}],"keepTypes": ["PLMCoreRepReference","PLMPort"]}
+		]
+	},
+	{
+		"name" : "v6_import_from",
+		"queries" :  [
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "5","semantics" : "5"}, "direction" : "from"}],"keepTypes": ["PLMCoreRepReference","PLMPort"]}
+		]
+	},
+	{
+	  "name" : "v6_publication_to",
+	  "queries" :  [
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "4","semantics" : "5"}, "direction" : "to"}],"keepTypes": ["PLMCoreRepReference","PLMPort"]}
+		]
+	},
+	{
+	  "name" : "v6_publication_from",
+	  "queries" :  [
+			{ "definition":[{"navigationType" : "SR","qualityFilter" : {"role" : "4","semantics" : "5"}, "direction" : "from"}],"keepTypes": ["PLMCoreRepReference","PLMPort"]}
+		]
+	}
+	]
+}
+

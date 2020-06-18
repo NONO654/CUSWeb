@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define(["DS/SMAPoweredByState/ad-state-domain-connector-definitions/action-types","DS/SMAPoweredByState/ad-state-domain-connector-definitions/action-impls"],function(c,b){var a={};a.refreshConnectorDefinitions=function(){return{type:c.REFRESH_CONNECTOR_DEFINITIONS,payload:{promise:b.getConnectorDefinitions()}}};return a});

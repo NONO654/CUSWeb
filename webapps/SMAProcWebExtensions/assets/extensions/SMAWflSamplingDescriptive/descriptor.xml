@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.sampling.Descriptive" version="3DX.0" 
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAExeSamplingDescriptivePlugin" nlsID="dispname">Descriptive Sampling</DisplayName>
+	<Description nlsFile="SMAExeSamplingDescriptivePlugin" nlsID="desc">Random combinations of equal probability distribution</Description>
+	<LongDescription nlsFile="SMAExeSamplingDescriptivePlugin" nlsID="longdesc"/>
+	<Attributes>      
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>Sampling_Technique</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.sampling.Descriptive</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeSamplingDescriptivePlugin32.gif" targetFilename="SMAExeSamplingDescriptivePlugin32.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeSamplingDescriptivePlugin.CATNls" targetFilename="SMAExeSamplingDescriptivePlugin.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeSamplingDescriptivePlugin_Japanese.CATNls" targetFilename="SMAExeSamplingDescriptivePlugin_Japanese.CATNls" locale="Japanese" />
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.sampling.descriptive.Descriptive</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Number of Simulations" type="integer" valuetype="single">
+				<Value>100</Value>
+			</Property>
+			<Property name="Random Seed" type="integer" valuetype="single">
+				<Value>-1</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

@@ -1,0 +1,120 @@
+// ===========================================================
+// PACKAGE   : PLMMarineInitialDesign
+// ===========================================================
+// Generated : Sep 2012
+// Owner     : BYN
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity> [@Inherits]
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+// --- entities : 6
+// - SSM_SpaceSystem
+// - SSM_Generated
+// - SSM_DesignSpaceRef
+// - SSM_ManufacturingSpaceRef
+// - SSM_DesignSpaceMainPurpose
+// - SSM_ManufacturingSpaceMainPurpose
+// ===========================================================
+
+// ===========================================================
+ENTITY SSM_SpaceSystem @Inherits
+// ===========================================================
+
+// ===========================================================
+ENTITY SSM_Generated
+// ===========================================================
+ATTR CreationMethod;N;N;$
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR CreationMethod;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR CreationMethod;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR CreationMethod;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR CreationMethod;N
+
+// ===========================================================
+ENTITY SSM_DesignSpaceRef @Inherits
+// ===========================================================
+ATTR V_FloorArea;N;N;$
+ATTR V_EstimatedFloorArea;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_EstimatedFloorArea;Y
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_FloorArea;Y
+FATTR V_EstimatedFloorArea;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_FloorArea;Y
+FATTR V_EstimatedFloorArea;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_FloorArea;N
+FATTR V_EstimatedFloorArea;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_FloorArea;N
+FATTR V_EstimatedFloorArea;Y
+
+// ===========================================================
+ENTITY SSM_ManufacturingSpaceRef @Inherits
+// ===========================================================
+
+// ===========================================================
+ENTITY SSM_DesignSpaceMainPurpose
+// ===========================================================
+
+// ===========================================================
+ENTITY SSM_ManufacturingSpaceMainPurpose
+// ===========================================================
+
+// ===========================================================
+// End of PLMMarineInitialDesign package's DEFAULT mask file
+// ===========================================================

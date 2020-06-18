@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--XML declaration file for the PLM Business Logic resources -->
+
+<src:AppResourceSet Id="CATPLMBusinessLogic" Scope="ClientAndServer"
+                     xsi:schemaLocation="urn:com:dassault_systemes:AppResourceSet AppResourceSetDescription.xsd"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xmlns:src="urn:com:dassault_systemes:AppResourceSet">
+
+  <!--Business logic relative to instance aggregation validation : C/S pour Webcore Modeler -->
+  <src:BusinessRule Id="PLMInstanceAggregationCheck" ExecutionMode="Validation">
+    <src:Parameter Name="ReferenceToInstantiate" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="Discipline" Type="String" Mode="IN"/>
+    <src:Parameter Name="CustoType" Type="String" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!--Business logic relative to object initialization (and identification) : C/S -->
+  <src:BusinessRule Id="PLMIdentificationInitialization" ExecutionMode="Execution">
+    <src:Parameter Name="OperationId" Type="String" Mode="IN"/>
+    <src:Parameter Name="IdString" Type="String" Mode="IN"/>
+    <src:Parameter Name="IdCloningString" Type="String" Mode="IN"/>
+    <src:Parameter Name="CopyFrom" Type="Feature" Mode="IN"/>
+    <src:Parameter Name="CoupledRef" Type="Feature" Mode="IN"/>
+    <src:Parameter Name="AggregatingReference" Type="Feature" Mode="IN"/>
+    <src:Parameter Name="Reference" Type="Feature" Mode="IN"/>
+    <src:Parameter Name="IncSessionId" Type="Integer" Mode="IN"/>
+    <src:Parameter Name="CustoType" Type="String" Mode="IN"/>
+    <src:Parameter Name="OperationDetail" Type="String" Mode="IN" />
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!--Business logic relative to object attribute modification validation (note that parameters should be List) : C/S -->
+  <src:BusinessRule Id="PLMAttributesValuationCheck" ExecutionMode="Validation">
+    <src:Parameter Name="CustoType" Type="String" Mode="IN"/>
+    <src:Parameter Name="ErrorAttributes" Type="List" Mode="OUT"/>
+    <src:Parameter Name="WarningAttributes" Type="List" Mode="OUT"/>
+    <src:Parameter Name="ErrorMessages" Type="List" Mode="OUT"/>
+    <src:Parameter Name="WarningMessages" Type="List" Mode="OUT"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!--Business logic relative to object attribute modification validation : C/S -->
+  <src:BusinessRule Id="PLMAttributesValuationFinalization" ExecutionMode="Validation">
+    <src:Parameter Name="Discipline" Type="String" Mode="IN"/>
+    <src:Parameter Name="CustoType" Type="String" Mode="IN"/>
+    <src:Parameter Name="ErrorAttributes" Type="List" Mode="OUT"/>
+    <src:Parameter Name="WarningAttributes" Type="List" Mode="OUT"/>
+    <src:Parameter Name="ErrorMessages" Type="List" Mode="OUT"/>
+    <src:Parameter Name="WarningMessages" Type="List" Mode="OUT"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!--Business logic relative to object attribute modification propagation : C/S -->
+  <src:BusinessRule Id="PLMAttributesPropagation" ExecutionMode="Execution">
+    <src:Parameter Name="PropagationMode" Type="String" Mode="IN"/>
+    <src:Parameter Name="EditAttributeId" Type="String" Mode="IN"/>
+    <src:Parameter Name="CustoType" Type="String" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!--Business logic relative to import (file based design import or briefcase import) and export -->
+  <src:BusinessRule Id="PLMImportExportAttributesValuation" ExecutionMode="Execution" Scope="ClientOnly">
+    <src:Parameter Name="OperationId" Type="String" Mode="IN" Criterion="true">
+      <src:PossibleValue>FBDIImport</src:PossibleValue>
+      <src:PossibleValue>DataExchangeExport</src:PossibleValue>
+      <src:PossibleValue>DataExchangeImport</src:PossibleValue>
+      <src:PossibleValue>BriefcaseExport</src:PossibleValue>
+      <src:PossibleValue>BriefcaseImport</src:PossibleValue>
+    </src:Parameter>
+    <src:Parameter Name="IdString" Type="String" Mode="IN"/>
+    <src:Parameter Name="iFileId" Type="String" Mode="IN"/>
+    <src:Parameter Name="IncSessionId" Type="Integer" Mode="IN"/>
+    <src:Parameter Name="CustoType" Type="String" Mode="IN"/>
+    <src:Parameter Name="oReferenceId" Type="String" Mode="OUT"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!--Business logic relative to object attribute construction for BatchV4V6 -->
+  <src:BusinessRule Id="PLMMigrationAttributesValuation" ExecutionMode="Execution" Scope="ClientOnly">
+    <src:Parameter Name="OperationId" Type="String" Mode="IN"/>
+    <src:Parameter Name="IdString" Type="String" Mode="IN"/>
+    <src:Parameter Name="IncSessionId" Type="Integer" Mode="IN"/>
+    <src:Parameter Name="CustoType" Type="String" Mode="IN"/>
+    <src:Parameter Name="oReferenceId" Type="String" Mode="OUT"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!--Business logic relative to establishment of some relations : C/S -->
+  <src:BusinessRule Id="PLMRelationEstablishmentCheck" ExecutionMode="Validation">
+    <src:Parameter Name="RelationType" Type="String" Mode="IN" Criterion="true">
+      <src:PossibleValue>CATMaterialToReferenceLink</src:PossibleValue>
+      <src:PossibleValue>PLMDocConnection</src:PossibleValue>
+      <src:PossibleValue>PLMFolderConnection</src:PossibleValue>
+      <src:PossibleValue>CandidateResourceLinkScope</src:PossibleValue>
+      <src:PossibleValue>CandidateResourceLink</src:PossibleValue>
+      <src:PossibleValue>CapableResourceLink</src:PossibleValue>
+      <src:PossibleValue>DELLinkToProduct</src:PossibleValue>
+      <src:PossibleValue>DELLinkToMBOM</src:PossibleValue>
+      <src:PossibleValue>MfgProcessAlternate</src:PossibleValue>
+      <src:PossibleValue>PLMLinkToUPRTargetObject</src:PossibleValue>
+	  <src:PossibleValue>MfgProductionPlanning</src:PossibleValue>
+	  <src:PossibleValue>RFLPLMImplementConnection</src:PossibleValue>
+    </src:Parameter>
+    <src:Parameter Name="Target" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+	<src:Parameter Name="Source" Type="ObjectType" Mode="IN"/>
+  </src:BusinessRule>
+
+  <!--Business logic relative to PLM Copy  -->
+  <src:BusinessRule Id="PLMAuthoringDefaultPropagationScope" ExecutionMode="Computation" Scope="ClientOnly">
+    <src:Parameter Name="OperationId" Type="String" Mode="IN" />
+    <src:Parameter Name="OperationDetail" Type="String" Mode="IN" />
+    <src:Parameter Name="RootContext" Type="ObjectType" Mode="OUT" />
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!--Business logic relative to establishment of some relations : C/S -->
+  <src:BusinessRule Id="PLMRelationSuppressionCheck" ExecutionMode="Validation">
+    <src:Parameter Name="RelationType" Type="String" Mode="IN" Criterion="true">
+      <src:PossibleValue>CATMaterialToReferenceLink</src:PossibleValue>
+      <src:PossibleValue>PLMDocConnection</src:PossibleValue>
+      <src:PossibleValue>PLMFolderConnection</src:PossibleValue>
+	  <src:PossibleValue>MfgProductionPlanning</src:PossibleValue>
+	  <src:PossibleValue>RFLPLMImplementConnection</src:PossibleValue>
+    </src:Parameter>
+    <src:Parameter Name="Target" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+	<src:Parameter Name="Source" Type="ObjectType" Mode="IN"/>
+  </src:BusinessRule>
+
+  <!--Business logic relative to the delete operation validation -->
+  <src:BusinessRule Id="PLMDeleteCheck" ExecutionMode="Validation" Scope="ClientOnly">
+    <src:Parameter Name="Discipline" Type="String" Mode="IN"/>
+    <src:Parameter Name="CustoType" Type="String" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+  <!--Business logic relative to object finalization when switching to Online mode -->
+  <src:BusinessRule Id="PLMFinalizationForOffline" ExecutionMode="Execution" Scope="ClientOnly">
+    <src:Parameter Name="OperationId" Type="String" Mode="IN"/>
+    <src:Parameter Name="IdString" Type="String" Mode="IN"/>
+    <src:Parameter Name="AggregatingReference" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="Reference" Type="ObjectType" Mode="IN"/>
+    <src:Parameter Name="CustoType" Type="String" Mode="IN"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+
+</src:AppResourceSet>

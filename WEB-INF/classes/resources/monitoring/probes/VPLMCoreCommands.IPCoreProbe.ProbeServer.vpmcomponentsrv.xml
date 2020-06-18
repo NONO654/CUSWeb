@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<probe name="VPLMCoreCommands.IPCoreProbe.ProbeServer.vpmcomponentsrv" kind="default" unplug="false" needs_key_store="true">
+    <option name="vpmcomponentsrv" shortname="vpmprb" optional="true" hidden="false">
+        <description>
+            Activate monitoring of VPM Component Server
+        </description>
+		<parameter name="URL" optional="false" multiple="false">
+            <short-description>
+                Server URL
+            </short-description>
+            <description>
+                URL of the server to be monitored, in the form protocol://host:port/rootURI
+            </description>
+            <default_value>
+                http://localhost:8080/enovia
+            </default_value>
+        </parameter>
+    </option>
+    <implementation>
+        <class>
+            com.dassault_systemes.infra.vpm.probes.ProbeServer
+        </class>
+    </implementation>
+    <period minutes="5"/>
+</probe>

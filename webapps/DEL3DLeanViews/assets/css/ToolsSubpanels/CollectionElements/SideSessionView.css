@@ -1,0 +1,75 @@
+.sideSessionView
+{
+  height: 10%;
+  background-color: #c7c7c7;
+  width: 98%;
+  position: absolute;
+  border-radius: 5em;
+}
+.sideSessionView.animateScroll {
+	transition: top .3s ease-out;
+}
+div.sideSessionContainer {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	height: 100%;
+
+	/* Because we can toggle availability by clicking this div */
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.sideSessionContainer > img.sideSessionThumbnail {
+  height: 100%;
+  float: left;
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  border-radius: 100%;
+  background: white;
+ max-width: 5.7em;
+ position: relative;
+}
+
+.sideSessionContainer > div.sideSessionInfoContainer {
+  height: 100%;
+  margin-left: 5%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  font-style: italic;
+}
+
+.sideSessionContainer > div.sideSessionInfoContainer > p.sideSessionFullName {
+  font-weight: bold;
+  color: #585858;
+  margin-top: 3%;
+  margin-left: 5%;
+}
+
+.sideSessionContainer > div.sideSessionInfoContainer > p.sideSessionEmployment {
+  color: gray;
+  font-size: smaller;
+  line-height: 200%;
+  margin-left: 5%;
+}
+
+/*	To use when availability on session will be implemented */
+div.sideSessionContainer:before
+{
+  /*content: ' ';*/
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: -1.35em;
+  bottom: -1.35em;
+  border-bottom: 1.3em solid transparent;
+  border-left: 1.3em solid transparent;
+  border-right: 1.3em solid transparent;
+  border-top: 1.3em solid #78befa;
+  transform: rotate(-45deg);
+}

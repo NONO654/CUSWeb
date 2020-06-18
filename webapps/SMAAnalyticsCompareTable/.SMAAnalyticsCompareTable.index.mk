@@ -1,0 +1,12 @@
+m|SMAAnalyticsComponents\SMAAnalyticsCompareTable.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19260
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAAnalyticsCompareTable\SMAAnalyticsCompareTable.css|1568749458|17585
+s|SMAAnalyticsComponents\SMAAnalyticsCompareTable.mweb\src\styles.css|1552338005|22340
+t|win_b64\webapps\SMAAnalyticsCompareTable\SMAAnalyticsCompareTable.js|1554530799|96223
+s|SMAAnalyticsComponents\SMAAnalyticsCompareTable.mweb\src\SMAAnalyticsDetailsTable.js|1508791553|15439
+s|SMAAnalyticsComponents\SMAAnalyticsCompareTable.mweb\src\SMAAnalyticsHierarchicalTable.js|1552420733|220759
+s|SMAAnalyticsComponents\SMAAnalyticsCompareTable.mweb\src\SMAAnalyticsCollectionsObject.js|1508791553|45245
+s|SMAAnalyticsComponents\SMAAnalyticsCompareTable.mweb\src\SMAAnalyticsHierarchyObject.js|1508790934|23971

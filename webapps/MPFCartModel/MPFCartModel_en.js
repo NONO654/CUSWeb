@@ -1,0 +1,1 @@
+define("DS/MPFCartModel/MPFCartModel_en",{});define("DS/MPFCartModel/assets/nls/CartModel",{years:"years",year:"year",months:"months",month:"month",days:"days",day:"day",hours:"hours",hour:"hour",minutes:"minutes",minute:"minute",fewSeconds:"few seconds",errorFieldsMax:"{field} must have a maximum value of {value}"});

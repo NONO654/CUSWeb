@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--XML declaration file for the PLM Business Logic for typing -->
+
+<src:AppResourceSet Id="CATPLMBusinessLogicForTyping" Scope="ClientAndServer"
+                     xsi:schemaLocation="urn:com:dassault_systemes:AppResourceSet AppResourceSetDescription.xsd"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xmlns:src="urn:com:dassault_systemes:AppResourceSet">
+
+  <!--Business logic for computing the name of the deployment extension to add for an object of a given type-->
+  <src:BusinessRule Id="INFRADeploymentExtensionComputation" ExecutionMode="Computation">
+    <src:Parameter Name="DeploymentExtensionName" Type="String" Mode="OUT"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+    <src:Parameter Name="CustomerExtensionsToAdd" Type="List" Mode="OUT"/>
+  </src:BusinessRule>
+
+  <!--Business logic for computing the attribute used as logical name of an object  -->
+  <src:BusinessRule Id="INFRALogicalNameAttribute" ExecutionMode="Computation">
+    <src:Parameter Name="AttributeName" Type="String" Mode="OUT"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+    <src:Parameter Name="AdditionalAttributes" Type="List" Mode="OUT"/>
+  </src:BusinessRule>
+  
+  <!--Business logic for determining the policy to use (or the list of policies) when creating an object-->
+  <src:BusinessRule Id="INFRAAuthorizedPolicies" ExecutionMode="Computation">
+    <src:Parameter Name="PolicyName" Type="String" Mode="OUT"/>
+    <src:Parameter Name="OperationId" Type="String" Mode="IN"/>
+    <src:Parameter Name="PossiblePolicies" Type="List" Mode="IN"/>
+    <src:Parameter Name="OtherPolicies" Type="List" Mode="OUT"/>
+    <src:Parameter Name="AggregatingReference" Type="Feature" Mode="IN"/>
+    <src:Parameter Name="IsAggregated" Type="Boolean" Mode="IN" Criterion="true"/>
+  </src:BusinessRule>
+  
+  <!--Business logic for accessing information on policy states to determine behaviors-->
+  <src:BusinessRule Id="INFRAMaturityStateInformation" ExecutionMode="Computation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+    <src:Parameter Name="State" Type="String" Mode="IN"/>
+    <src:Parameter Name="IsFrozen" Type="Boolean" Mode="OUT"/>
+    <src:Parameter Name="MetaStateName" Type="String" Mode="OUT"/>
+  </src:BusinessRule>
+
+  <!--Business logic for defining method to access transient attributes (read it)-->
+  <src:BusinessRule Id="INFRAComputedAttribute" ExecutionMode="Computation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+    <src:Parameter Name="AttributeName" Type="String" Mode="IN" Criterion="true"/>
+    <src:Parameter Name="ComputedValue" Type="ObjectType" Mode="OUT"/>
+  </src:BusinessRule>
+
+  <!--Business logic for defining method to access transient attributes (write it)-->
+  <src:BusinessRule Id="INFRAComputedAttributeWrite" ExecutionMode="Execution">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+    <src:Parameter Name="AttributeName" Type="String" Mode="IN" Criterion="true"/>
+    <src:Parameter Name="InputValue" Type="ObjectType" Mode="IN"/>
+  </src:BusinessRule>
+
+  <!--Business logic for computing the name of the deployment extension to add for an object of a given type-->
+  <src:BusinessRule Id="INFRAInstanceTypeSelection" ExecutionMode="Computation">
+    <src:Parameter Name="InstanceTypeName" Type="String" Mode="OUT"/>
+    <src:Parameter Name="DeploymentExtensionName" Type="String" Mode="OUT"/>
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+    <src:Parameter Name="CustomerExtensionsToAdd" Type="List" Mode="OUT"/>
+    <src:Parameter Name="AggregatingReference" Type="Feature" Mode="IN"/>
+  </src:BusinessRule>
+
+  <!--Business logic for determining the vault to use (or the list of vaults) when creating an object or searching an object-->
+  <src:BusinessRule Id="INFRAVaultsSelection" ExecutionMode="Computation">
+    <src:Parameter Name="OperationId" Type="String" Mode="IN" Criterion="true"/>
+    <src:Parameter Name="DefaultVaultNameForCreation" Type="String" Mode="OUT"/>
+    <src:Parameter Name="OtherVaultsForCreation" Type="List" Mode="OUT"/>
+    <src:Parameter Name="VaultsForSearch" Type="List" Mode="OUT"/>
+  </src:BusinessRule>
+
+  <!--Business logic for determining the store to use (or the list of vaults) when creating an object or searching an object-->
+  <!--Postponed ...
+  <src:BusinessRule Id="INFRAStoreSelection" ExecutionMode="Computation">
+    <src:Parameter Name="StoreName" Type="String" Mode="OUT"/>
+  </src:BusinessRule>
+  -->
+
+  <!-- Business logic to prevent some custo (customer/deployment) extensions from being added -->
+  <src:BusinessRule Id="INFRACustoExtensionCheck" ExecutionMode="Validation">
+    <src:Parameter Name="Policy" Type="String" Mode="IN" Criterion="true"/>
+    <src:Parameter Name="CustoExtensionName" Type="String" Mode="IN"/>
+  </src:BusinessRule>
+
+</src:AppResourceSet>

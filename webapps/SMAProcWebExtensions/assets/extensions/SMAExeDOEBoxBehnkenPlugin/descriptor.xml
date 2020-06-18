@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.doe.BoxBehnken" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAExeDOEBoxBehnkenPlugin" nlsID="dispname">Box-Behnken</DisplayName>
+	<Description nlsFile="SMAExeDOEBoxBehnkenPlugin" nlsID="desc">Box-Behnken</Description>
+	<LongDescription nlsFile="SMAExeDOEBoxBehnkenPlugin" nlsID="longdesc">
+		<![CDATA[Box-Behnken design belongs to a class of incomplete three level factorial designs that are useful for estimating the coefficients of a second degree polynomial. These designs either meet, or approximately meet, the criterion of rotatability. They consist of several orthogonal blocks, along with the center point.
+
+</span><span style="font-weight:bold">Advantages:
+</span><span>   + Box-Behnken can be used where corner points cannot be evaluated (for example, when simulations fail at corners).
+
+</span><span style="font-weight:bold">Disadvantages:
+</span><span>   - Box-Behnken is defined only for 3 to 21 factors.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DOE_Technique</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.doe.BoxBehnken</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeDOEBoxBehnkenPlugin32.gif" targetFilename="SMAExeDOEBoxBehnkenPlugin32.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeDOEBoxBehnkenPlugin.CATNls" targetFilename="SMAExeDOEBoxBehnkenPlugin.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeDOEBoxBehnkenPlugin_ja.CATNls" targetFilename="SMAExeDOEBoxBehnkenPlugin_ja.CATNls" locale="Japanese" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-box-behnken/cmp-doe-box-behnken.html" targetFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-box-behnken/cmp-doe-box-behnken.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-doe-box-behnken</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.doe.boxbehnken.BoxBehnken</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<Property name="Auto-Assign Factors" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[false]]>
+			</Value>
+		</Property>
+
+		<Property name="factor attributes" type="aggregate" valuetype="single">
+			<Property name="Levels" type="string" valuetype="single">
+				<Value>
+					<![CDATA[-10 0 10]]>
+				</Value>
+			</Property>
+			<Property name="Relation" type="string" valuetype="single">
+				<Value>
+					<![CDATA[%]]>
+				</Value>
+			</Property>
+			<Property name="Baseline" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

@@ -1,0 +1,1 @@
+define("DS/CAT3DComposeConstraints/CAT3DComposeConstraints_fr",{});define("DS/CAT3DComposeConstraints/assets/nls/CAT3DComposeConstraintsView",{cstCoincidence:"Coïncidence",cstContact:"Contact",plane:"Plan",sidePanel:"Aligner les alternatives"});

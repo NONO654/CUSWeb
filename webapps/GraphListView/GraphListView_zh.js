@@ -1,0 +1,1 @@
+define("DS/GraphListView/GraphListView_zh",{});define("DS/GraphListView/assets/nls/ColumnsTitles",{colGraph:"图表",colTitle:"标题 "});

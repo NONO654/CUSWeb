@@ -1,0 +1,1 @@
+define("DS/ENOXPageToolBar/ENOXPageToolBar_en",{});define("DS/ENOXPageToolBar/assets/nls/PageToolBar",{collapse:"Collapse",expand:"Expand",information:"Information"});

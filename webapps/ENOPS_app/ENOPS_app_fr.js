@@ -1,0 +1,1 @@
+define("DS/ENOPS/ENOPS_app_fr",{});define("DS/ENOPS_app/assets/nls/ENOPS_app",{hasNONPS:"Possède un document CAD lié",newProduct:"Nouveau produit"});

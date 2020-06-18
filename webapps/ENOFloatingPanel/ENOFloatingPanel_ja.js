@@ -1,0 +1,1 @@
+define("DS/ENOFloatingPanel/ENOFloatingPanel_ja",{});define("DS/ENOFloatingPanel/assets/nls/ENOFloatingPanel",{EFP_ClosePanel:"閉じる",EFP_MaximizePanel:"最大化",EFP_RestorePanel:"元に戻す",EFP_PinWidget:"ウィジェットを固定"});

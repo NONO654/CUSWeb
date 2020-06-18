@@ -1,0 +1,12 @@
+m|MPFCore\MPFConnector.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19110
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFConnector\MPFConnector.js|1555721294|5357
+s|MPFCore\MPFConnector.mweb\src\NoConnector.js|1549453262|717
+s|MPFCore\MPFConnector.mweb\src\Connector.js|1549446904|730
+s|MPFCore\MPFConnector.mweb\src\AppsConnector.js|1549461376|3197
+s|MPFCore\MPFConnector.mweb\src\MarketplaceConnector.js|1554191757|8405
+s|MPFCore\MPFConnector.mweb\src\MPFConnector.js|1549462671|0
+s|MPFCore\MPFConnector.mweb\src\EchoConnector.js|1549459433|695

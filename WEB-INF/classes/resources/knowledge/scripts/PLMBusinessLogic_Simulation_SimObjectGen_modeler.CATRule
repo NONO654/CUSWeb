@@ -1,0 +1,94 @@
+Let Prefix=""
+Let incAttr=""
+Let Operation=""
+Let CopyFrom(SIMObjSimulationObjectGeneric)
+Let CopyFromId=""
+Let BufferStart=""
+Let BufferEnd=""
+Let AttrSize=0
+Let Reference(PLMEntity)
+Let New_PLMExternalID=""
+
+Operation=Parameters->GetAttributeString("OperationId")
+
+if (Parameters->HasAttribute("IncSessionId") == true) {
+      incAttr = ToString(Parameters->GetAttributeInteger("IncSessionId"))
+}
+
+ if( Operation=="New")
+{
+  /* new */ 
+  if (Parameters->HasAttribute("IdString") == true)
+  {
+      Prefix = Parameters->GetAttributeString("IdString")
+      if (Prefix == NULL) Prefix = ""
+  }
+
+  if (Parameters->HasAttribute("CoupledRef") == true)
+  {
+    Set Reference = Parameters ->GetAttributeObject("CoupledRef")  
+  } 
+
+
+  if (Parameters->HasAttribute("IncSessionId") == true) 
+  {
+      if ( Reference == NULL ) 
+      {
+       /* Adding Unique Server Key to Assuming PLM_ExternalID is part of ThisObject 'Identifier Set' */
+       New_PLMExternalID = Prefix +  "Simulation" + GetUniqueKey( Parameters->GetAttributeString("CustoType"))
+      }
+      else 
+      {
+       /* Adding Unique Server Key to Assuming PLM_ExternalID is part of ThisObject 'Identifier Set' */
+       New_PLMExternalID = Reference.PLM_ExternalID +  "Simulation" + GetUniqueKey( Parameters->GetAttributeString("CustoType"))
+      }
+      ThisObject.V_description = "SimulationObject created by " + Parameters.UserID
+  }
+}
+  if( Operation=="ImportAsNew" OR Operation=="Cloning" )
+{
+    /* cloning */
+    Prefix = ""
+    if (Parameters->HasAttribute("IdCloningString") == true)
+    {
+	 Prefix = Parameters->GetAttributeString("IdCloningString")
+    }
+	   
+	if ( Parameters->HasAttribute("CopyFrom") == true)
+    {
+     Set CopyFrom = Parameters->GetAttributeObject("CopyFrom")
+     CopyFromId = CopyFrom->GetAttributeString("PLM_ExternalID") 
+    }
+    if ( Prefix <> "" )
+    {
+      New_PLMExternalID  =  Prefix  + CopyFromId + "-" +incAttr
+    }
+    else
+    {
+      New_PLMExternalID  =   "Clone-"  + CopyFromId + "-"+ incAttr
+    }
+    
+    if( Operation=="Cloning" )
+    {
+		ThisObject.V_description = "Simulation cloned by " + Parameters.UserID
+	}
+	else
+	{
+		ThisObject.V_description = "Simulation imported as New from " + Parameters.UserID
+    }
+}
+
+
+
+AttrSize=  New_PLMExternalID.Length() 
+if ( AttrSize> 60 ) 
+{
+  BufferStart = New_PLMExternalID.Extract(0,8) 
+  BufferEnd = New_PLMExternalID.Extract( AttrSize- 49, 49 )
+  New_PLMExternalID = BufferStart + "..." + BufferEnd
+} 
+
+if ( New_PLMExternalID <> "" )
+{
+	ThisObject.PLM_ExternalID  = New_PLMExternalID
+}

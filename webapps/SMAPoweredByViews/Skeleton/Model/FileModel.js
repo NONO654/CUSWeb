@@ -1,0 +1,2 @@
+/*!  Copyright 2018 Dassault Systemes. All rights reserved. */
+define("DS/SMAPoweredByViews/Skeleton/Model/FileModel",["UWA/Core","UWA/Class/Model"],function(b,a){return a.extend({defaults:function(){return{title:"",fileType:"",subtitle:"",date:"",content:"",image:"",status:"",displayStatus:"",displayStatusTable:"",fileStatus:"",statusTooltip:"",icon:"",type:"",modified:"",modifiedTimeStamp:"",versionCount:"",readOnly:false,latestVersion:"",latestVersionInvalid:false,uploadingJob:null}}})});

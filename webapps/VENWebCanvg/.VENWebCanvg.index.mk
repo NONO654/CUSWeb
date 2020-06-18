@@ -1,0 +1,9 @@
+m|VENWebCanvg\VENWebCanvg.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\VENWebCanvg\VENWebCanvg.js|1531550996|76632
+s|VENWebCanvg\VENWebCanvg.mweb\src\CanvgTools.js|1493382171|170552
+s|VENWebCanvg\VENWebCanvg.mweb\src\StackBlur.js|1493382151|27806
+s|VENWebCanvg\VENWebCanvg.mweb\src\rgbcolor.js|1493382136|12176

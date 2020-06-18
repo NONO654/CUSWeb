@@ -1,0 +1,15 @@
+<link rel="import" href="../sp-base/sp-base.html">
+<link rel="import" href="../sp-dashboard/sp-dashboard.html">
+<link rel="import" href="../sp-webservice/sp-webservice.html">
+<link rel="import" href="../sp-costickets/sp-costickets.html">
+<link rel="import" href="../sp-cos/sp-cos.html">
+
+<dom-module id="sp-cosservice">
+  <template>
+    <sp-dashboard id="dashboard"></sp-dashboard>
+    <content select="sp-data"></content>
+    <sp-cos id="spCos"></sp-cos>
+    <sp-costickets id="spCosticket" cos-ticket-url="{{cosTicketUrl}}" on-error="_spCosticketErrorHandler"></sp-costickets>
+  </template>
+  <script type="text/javascript" src="sp-cosservice.js"></script>
+</dom-module>

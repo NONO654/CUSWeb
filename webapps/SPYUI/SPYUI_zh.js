@@ -1,0 +1,1 @@
+define("DS/SPYUI/SPYUI_zh",{});define("DS/SPYUI/assets/nls/CATSimNavDataCameraSelector",{"static":"静态相机",tracking:"跟踪相机",focus:"焦点"});define("DS/SPYUI/assets/nls/CATSimNavDataOverlaysManager",{title:"流线",nameAttr:"名称"});define("DS/SPYUI/assets/nls/CATSimNavDataSpeedControl",{title:"速度："});

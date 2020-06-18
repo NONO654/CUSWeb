@@ -1,0 +1,181 @@
+
+<dom-module id="cmp-parameter-auto-mapping">
+        <template>
+            <style>
+                .containermap{
+                    position: relative;
+                    height: 100%;
+                    width: 100%;
+                    margin: 0px;
+                    background: white;
+                    overflow-y: auto;
+                    box-sizing: border-box;
+                    padding: 0px;
+                }
+
+                .mappingmsg {
+                    padding-top: 5px;
+                }
+
+                .placeholdermsg {
+                    margin: auto;
+                    text-align: center;
+                    font-size: 14px;
+                    color:#3d3d3d;
+                }
+                .tableContent{
+                    position: absolute;
+                    height: calc(100% - 35px);
+                    width: calc(100% - 225px);
+                    display: inline-block;
+                }
+                .containermap[data-placeholderstate="3"] .tableContent{
+                    width: calc(100%);
+                }
+                .mappingmsgcontainer {
+                    font-size: 14px;
+                    width: 225px;
+                    float: right;
+                    border-left: 1px solid rgb(232, 234, 234);
+                    height: calc(100% - 26px);
+                    border-top: 1px solid rgb(232, 234, 234);
+                    
+                }
+
+                .containermap[data-placeholderstate="1"] .placeholder-state1 {
+                    position: absolute;
+                    top: 50%;
+                    width: 224px;
+                    text-align: center;
+                    color: #3d3d3d;
+                    display: block;
+                }
+                .containermap[data-placeholderstate="1"] .placeholder-state2 {
+                    display: none;
+                }
+               .containermap[data-placeholderstate="2"] .placeholder-state1 {
+                    display: none;
+                }
+                .containermap[data-placeholderstate="2"] .placeholder-state2 {
+                    position: absolute;
+                    top: 50%;
+                    width: 224px;
+                    text-align: center;
+                    color: #3d3d3d;
+                    display: block;
+                }
+                .containermap[data-placeholderstate="3"] .mappingmsgcontainer {
+                    display: none;
+                }
+                #modeChangeConfirmation{
+                    position: fixed;
+                    z-index: 1010;
+                    max-width: 320px;
+                    padding: 8px;
+                    background-color: #fff;
+                    background-clip: padding-box;
+                    border: 1px solid rgba(0, 0, 0, 0.2);
+                    border-radius: 6px;
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+                    white-space: normal;
+                    width: 320px;
+                    height: auto;
+                    display: none;
+                }
+                #modeChangeConfirmation:after{
+                    position: absolute;
+                    width: 16px;
+                    height: 16px;
+                    border-top: 0px solid #ffffff;
+                    border-right: 2px solid #ffffff;
+                    border-bottom: 2px solid #ffffff;
+                    border-left: 0px solid #ffffff;
+                    top:100%;
+                    left: 50%;
+                    margin-left: -8px;
+                    content: '';
+                    transform: rotate(45deg);
+                    margin-top: -8px;
+                    background: #fff;
+                }
+                .modeChangeText{
+                    width: 304px;
+                    height: auto;
+                }
+                #modeChangeOkButton{
+                    float: right;
+                }
+                #modeChangeCancelButton{
+                    float: right;
+                    margin-left: 5px;
+                }
+                #routemodecontainer {
+                    margin-left: 6px;
+                }
+                .reseticon {
+                    display: none;
+                    float: right;
+                    cursor: pointer;
+                    color: #77797C;
+                    font-size: 1.5em;
+                    margin: 4px 4px 0 0;
+                }
+                .reseticon[disabled] {
+                    pointer-events: none;
+                    color: #b4b6ba;
+                }
+
+                .reseticon:hover {
+                    color: #3d3d3d;
+                }
+                .info-icon {
+                    color: #3d3d3d;
+                    font-size: 14px;
+                }
+                .mappingmode {
+                    font-size: 13px;
+                    margin-right: 15px;
+                }
+                
+            </style>
+            
+            <sp-notification id="notification" position="TR" width="400"></sp-notification>
+            
+            <div id="modeChangeConfirmation">
+                    <div class="modeChangeText">
+                        <span id='modeChangeHeader'>The source and destination parameters are not compatible. Modify these parameter modes and proceed with mapping?</span>
+                        <br/>
+                        <ul id="modeChangeInfo" style="list-style-type:square; padding-top: 5px;">
+
+                        </ul>
+                    </div>
+                    <input id="modeChangeCancelButton" type="button" value="Cancel" on-click="modeChangeCancelButton" class="wux-controls-button wux-controls-abstract wux-ui-style-normal wux-ui-state-secondary"></input>
+                    <input id="modeChangeOkButton" type="button" value="OK" class="wux-controls-button wux-controls-abstract wux-ui-style-normal wux-ui-state-primary"></input>                  
+            </div>
+
+            <div  id="container" class="containermap" data-placeholderstate$="{{placeholderstate}}">
+                <div id="routemodecontainer">
+                    <span class="mappingmode">Mapping Mode :</span>
+                    <div class="wux-ui-3ds wux-ui-3ds-reset reseticon" disabled$="{{_calculateSelectionState(selectionstate)}}"title="Reset selection" on-click="resetSelection"></div>
+                </div>
+                <div id="tableContent" class="tableContent">
+                    <!-- Mapping table will come here -->
+                </div>
+                <div id="mappingmsgcontainer" class="mappingmsgcontainer" >
+                    <div class="placeholder-state1">
+                        <span class="fonticon fonticon-info info-icon"></span>
+                        <span >
+                            Select parameters
+                        </span>
+                    </div>
+                    <div class="placeholder-state2">
+                        <span class="fonticon fonticon-info info-icon"></span>
+                        <span >
+                            Select destination activities
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+</dom-module>

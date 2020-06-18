@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!--<meta name="resource-fetch-mode" content="DIRECT" />-->
+        <meta name="autoRefresh" content="0" />
+        <title>3DSpace</title>
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+        <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+        <widget:preferences>
+            <preference name="firstlyLoading" type="hidden" defaultValue="true"></preference>
+            <preference name="is3DSpaceWidget" type="hidden" defaultValue="true"></preference>
+        </widget:preferences>
+<script type="text/javascript">
+/* global widget, require */
+
+define('DS/W3DDrive/widget', ['DS/W3DDrive/initWidget','DS/W3DDrive/Utils/W3DSpacePreferencesUpgrade'], function (initWidget,W3DSpacePreferencesUpgrade) {
+    'use strict';
+    W3DSpacePreferencesUpgrade(widget);
+    return initWidget(widget);
+});
+
+(function () {
+    'use strict';
+
+    widget.addEvents({
+
+        onLoad: function () {
+            require([
+                'DS/W3DDrive/Utils/Preferences',
+                'DS/W3DDrive/w3DDriveApp'
+            ], function (
+                Preferences
+            ) { //SRI3
+                Preferences.runHistory('myCollabSpaces/content');
+            });
+        },
+
+        onRefresh: function () {
+            require([
+                'DS/W3DContentApp/BusEvent'
+            ], function (
+                W3DDriveBusEvent
+            ) {
+                W3DDriveBusEvent.dispatchEvent('onRefresh');
+            });
+        },
+
+        onSearch: function (query) {
+            require([
+                'DS/W3DContentApp/SearchProxy'
+            ], function (
+                W3DDriveSearchProxy
+            ) {
+                W3DDriveSearchProxy.setQuery(query);
+            });
+        },
+
+        onResetSearch: function () {
+            require([
+                'DS/W3DContentApp/SearchProxy'
+            ], function (
+                W3DDriveSearchProxy
+            ) {
+                W3DDriveSearchProxy.resetQuery();
+            });
+        },
+
+        onPlatformChange : function() {
+            //TODO
+            console.log("reload page to see change");
+        }
+    });
+}());
+</script>
+    </head>
+    <body>
+    </body>
+</html>

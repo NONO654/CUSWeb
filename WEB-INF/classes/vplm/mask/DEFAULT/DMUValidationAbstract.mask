@@ -1,0 +1,128 @@
+// ===========================================================
+// PACKAGE   : DMUValidationAbstract
+// ===========================================================
+// Generated : Wednesday, August 28, 2007 9:44:42 AM
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+// --- entities: 1
+// ===========================================================
+ENTITY DMUValidationValidationAbstract
+// ===========================================================
+// --- attributes:
+//a) ident
+ATTR PLM_ExternalID;Y;N;$
+ATTR revision;N;N;$
+//b) description
+ATTR V_description;N;N;$
+//c) state of dev
+ATTR policy;N;N;$
+ATTR current;N;N;$
+//d) ownership
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR policy;N
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+//a) ident
+FATTR PLM_ExternalID;Y
+FATTR revision;Y
+//b) description
+FATTR V_description;Y
+//c) state of dev
+FATTR current;Y
+//d) ownership
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;N
+FATTR revision;N
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+//a) ident
+FATTR PLM_ExternalID;Y
+FATTR revision;Y
+//b) description
+FATTR V_description;Y
+//c) state of dev
+FATTR policy;Y
+FATTR current;Y
+//d) ownership
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+//a) ident
+FATTR PLM_ExternalID;N
+FATTR revision;N
+//b) description
+FATTR V_description;N
+//c) state of dev
+FATTR policy;N
+FATTR current;N
+//d) ownership
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+//a) ident
+FATTR PLM_ExternalID;Y
+FATTR revision;N
+//b) description
+FATTR V_description;Y
+//c) state of dev
+FATTR policy;N
+FATTR current;N
+//d) ownership
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+
+// ===========================================================
+// End of DEFAULT mask file
+// ===========================================================

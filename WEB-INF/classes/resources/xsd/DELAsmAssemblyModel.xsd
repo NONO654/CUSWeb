@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2006. All rights reserved. -->
+<xs:schema targetNamespace="http://www.3ds.com/xsd/DELUPRExtensions" xmlns:xs3d="http://www.3ds.com/xsd/3DXML" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.3ds.com/xsd/DELUPRExtensions" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:annotation>
+                <xs:appinfo>
+                        <webserviceSchema/>
+                </xs:appinfo>
+        </xs:annotation>
+	<xs:import namespace="http://www.3ds.com/xsd/3DXML" schemaLocation="3dxml/3DXML.xsd"/>
+  <xs:complexType name="DELAsmUnitRefType">
+    <xs:annotation>
+      <xs:documentation>Unit Reference extension definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xs3d:ExtensionType">
+        <xs:sequence>
+          <xs:element name="V_SerialNumber" type="xs:string" minOccurs="0" />
+          <xs:element name="V_LotNumber" type="xs:string" minOccurs="0" />
+          <xs:element name="V_LinkedProcess" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DELAsmUnitInstType">
+    <xs:annotation>
+      <xs:documentation>Unit Instance extension definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xs3d:ExtensionType">
+        <xs:sequence>
+          <xs:element name="V_PlannedSerialNumber" type="xs:string" minOccurs="0" />
+          <xs:element name="V_PlannedLotNumber" type="xs:string" minOccurs="0" />
+          <xs:element name="V_ExecutionStatus" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DELAsmCreateAssemblyFunctionRefType">
+    <xs:annotation>
+      <xs:documentation>Create Assembly Function Reference extension definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xs3d:ExtensionType">
+        <xs:sequence>
+          <xs:element name="V_MAName" type="xs:string" minOccurs="0" />
+          <xs:element name="V_MANumber" type="xs:string" minOccurs="0" />
+          <xs:element name="V_Outsourced" type="xs:int" minOccurs="0" />
+          <xs:element name="V_PersistMfgAssembly" type="xs:boolean" minOccurs="0" />
+          <xs:element name="V_Manufacturing_Decision" type="xs:int" minOccurs="0" />
+          <xs:element name="V_AssemblyComposition" type="xs:int" minOccurs="0" />
+          <xs:element name="V_SerialNumberReq" type="xs:string" minOccurs="0" />
+          <xs:element name="V_LotNumberReq" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DELAsmElementaryEndItemFunctionRefType">
+    <xs:annotation>
+      <xs:documentation>Elementary End Item Function Reference extension definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xs3d:ExtensionType">
+        <xs:sequence>
+          <xs:element name="V_SerialNumberReq" type="xs:string" minOccurs="0" />
+          <xs:element name="V_LotNumberReq" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DELAsmRemoveMaterialFunctionRefType">
+    <xs:annotation>
+      <xs:documentation>Remove Material Function Reference extension definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xs3d:ExtensionType">
+        <xs:sequence>
+          <xs:element name="V_RemoveMaterialSubType" type="xs:int" minOccurs="0" />
+          <xs:element name="V_DiameterOfFeature" type="xs:double" minOccurs="0" />
+          <xs:element name="V_DepthOfFeature" type="xs:double" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DELAsmGenericFunctionRefType">
+    <xs:annotation>
+      <xs:documentation>Generic Function Reference extension definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xs3d:ExtensionType">
+        <xs:sequence>
+          <xs:element name="V_ImplSemiFinishedPart" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DELAsmProduceFunctionRefType">
+    <xs:annotation>
+      <xs:documentation>Produce Function Reference extension definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xs3d:ExtensionType">
+        <xs:sequence>
+          <xs:element name="V_MAName" type="xs:string" minOccurs="0" />
+          <xs:element name="V_MANumber" type="xs:string" minOccurs="0" />
+          <xs:element name="V_Outsourced" type="xs:int" minOccurs="0" />
+          <xs:element name="V_PersistMfgAssembly" type="xs:boolean" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DELAsmMBOMFunctionRefType">
+    <xs:annotation>
+      <xs:documentation>MBOM Function Reference extension definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xs3d:ExtensionType">
+        <xs:sequence>
+          <xs:element name="V_MakeOrBuy" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DELAsmSplitFunctionRefType">
+    <xs:annotation>
+      <xs:documentation>Split Function Reference extension definition</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xs3d:ExtensionType">
+        <xs:sequence>
+          <xs:element name="V_NumberOfPieces" type="xs:int" minOccurs="0" />
+          <xs:element name="V_XSplitDirection" type="xs:double" minOccurs="0" />
+          <xs:element name="V_YSplitDirection" type="xs:double" minOccurs="0" />
+          <xs:element name="V_ZSplitDirection" type="xs:double" minOccurs="0" />
+          <xs:element name="V_CustoSplitDirection" type="xs:double" minOccurs="0" />
+          <xs:element name="V_NameCustoSplitDir" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

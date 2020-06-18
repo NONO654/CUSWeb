@@ -1,0 +1,1 @@
+define("DS/ENOXCADCATIAV5UI/ENOXCADCATIAV5UI_zh",{});define("DS/ENOXCADCATIAV5UI/assets/nls/ENOXCADFileNameValidationNls",{Size_error:"文件名不能包含多于 {maxSupportedLength} 个字符",Unsupported_char:"文件名包含无效字符：{char}",Space_Leading_Trailing:"存在意外的前导空格和拖尾空格",Space_Leading:"存在意外的前导空格",Space_Trailing:"存在意外的拖尾空格"});

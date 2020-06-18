@@ -1,0 +1,1 @@
+define("DS/i3DXCompassMyRoles/i3DXCompassMyRoles_ja",{});define("DS/i3DXCompassMyRoles/assets/nls/i3DXCompassMyRoles",{platform:"3DExperience Platform",apps:"{0} 個のアプリケーション",expire:"有効期限: {0}",noAdditional:"このロールの追加の情報はありません"});

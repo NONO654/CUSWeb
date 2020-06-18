@@ -1,0 +1,42 @@
+<!-- Importing base -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html" async>
+<link rel="import" href="../../SMAProcXSWidgets/xs-wg-plm-data/xs-wg-plm-data.html">
+
+<dom-module id="xs-auto-create">
+  <link rel="import" type="css" href="xs-auto-create.css">
+  <template>
+    <xs-wg-plm-data id="plmdata"></xs-wg-plm-data>
+    <sp-modal id="modalcontainer" class="mediummodal" heading="" width="700px" height="600px" on-close="onDismiss">
+        <header>
+            <span class="heading">{{_computeHeading(heading)}}</span>
+        </header>
+        <section class="browsewindow">
+          <div class="header">
+            <sp-input id="searchprocessbrowser" type="search" placeholder="Search by title" value="{{_searchKey}}"></sp-input>
+          </div>
+          <sp-updatepanel class="updatepanel" id="updatepanel" state="{{_state}}" updateswhen="1,2,3,4,5">
+            <div id="content" class$="{{_computeClass(_hideTreeModel)}}">
+            <!-- Tree to get rendered here -->
+            </div>
+            <div class$="{{_computeClass1(_hideTreeModel)}}">
+              <span class="msgforuser">No matches</span>
+            </div>
+          </sp-updatepanel>
+        </section>
+        <footer class="footer">
+            <div>
+                <div class="supported-types">Supported Types: <span>{{_listSupportedTypes(dataFilterKey)}}</span></div>
+            </div>
+            <div class="actionButton">
+                <button is="sp-button-type" id="confirmbutton" primary on-click="onOkay" disabled$="{{_computeDisabled(treeIsValidSelection,disabled)}}" >Ok</button>
+                <button is="sp-button-type" id="dismissbutton" on-click="onDismiss">Cancel</button>
+            </div>
+        </footer>
+    </sp-modal>
+  </template>
+  <script src="xs-auto-create.js"></script>
+</dom-module>

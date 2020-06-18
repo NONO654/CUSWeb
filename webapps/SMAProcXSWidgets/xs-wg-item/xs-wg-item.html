@@ -1,0 +1,40 @@
+<!--------------------------------------------------------------------
+[xs-wg-item HTML Document]
+
+Project:		xs
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:46:47 GMT
+Assigned to:	zb8, d6u
+Primary use:	Wrapper for each UI element added to the canvas.
+Description:    Represents an item added to canvas through tools.
+------------------------------------------------------------------- -->
+<link rel="import" href="../xs-wg-base/xs-wg-base.html">
+<link rel="import" href="../xs-wg-rule/xs-wg-rule.html">
+<link rel="import" href="../xs-wg-rule-trigger/xs-wg-rule-trigger.html">
+<link rel="import" href="xs-wg-item-style.html">
+
+<dom-module id="xs-wg-item">
+
+	<template>
+		<style include="xs-wg-item-style"></style>
+		<!--
+			TODO: Use a conditoinal template and differentiate the designer and player mode
+			Add the event handlers only if its a designer mode
+		 -->
+ 		<div id="content" draggable="{{isDraggable}}" class$="{{_computeClass(state,_hidden)}}">
+ 			<div class="hidden-mask"></div>
+			<div id="overlay" class="overlay" data-name$="{{name}}"></div>
+
+			<!-- Marks that the UI element is mandatory (assumes the ui elements uses 'mandatory' property) -->
+			<div id="mandatoryFlag" class$="{{_isMandatory(widget.mandatory)}}"></div>
+			<!--UI element is inserted here-->
+			<content></content>
+			<template is="dom-repeat" items="{{_hints}}">
+				<span class="xs-wg-item-hint">{{item}}</span>
+			</template>
+			<div class="remove fonticon fonticon-trash" title="Delete" on-click="confirmDelete"></div>
+			<span id="nametag" class="name">{{name}}</span>
+		</div>
+	</template>
+	<script type="text/javascript" src="xs-wg-item.js"></script>
+</dom-module>

@@ -1,0 +1,16 @@
+m|DELPPWPlugins\DELPPWModelPlugins.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.9.19301
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELPPWModelPlugins\DELPPWModelPlugins.js|1572298157|39031
+s|DELPPWPlugins\DELPPWModelPlugins.mweb\src\ChangeActionPlugin.js|1562134184|4234
+s|DELPPWPlugins\DELPPWModelPlugins.mweb\src\DocumentPlugin.js|1563270148|37043
+s|DELPPWPlugins\DELPPWModelPlugins.mweb\src\AttributePlugin.js|1562048952|29656
+s|DELPPWPlugins\DELPPWModelPlugins.mweb\src\ResourcePlugin\ResourcePlugin.js|1532438853|4080
+s|DELPPWPlugins\DELPPWModelPlugins.mweb\src\BI\BIPlugin.js|1561044676|9451
+s|DELPPWPlugins\DELPPWModelPlugins.mweb\src\ResourcePlugin\WebServicePlugin.js|1532438853|6409
+s|DELPPWPlugins\DELPPWModelPlugins.mweb\src\DatabasePlugin\DatabasePlugin.js|1571993457|44579
+s|DELPPWPlugins\DELPPWModelPlugins.mweb\src\MfgItem\MfgItemPlugin.js|1564149171|6534
+s|DELPPWPlugins\DELPPWModelPlugins.mweb\src\Graph\EGraphPlugin.js|1536300688|1519
+s|DELPPWPlugins\DELPPWModelPlugins.mweb\src\DicoPlugin.js|1552307172|5832

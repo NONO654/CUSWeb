@@ -1,0 +1,2 @@
+/*!  Copyright 2017 Dassault Systemes. All rights reserved. */
+define([],function(){var a={};a.defaultJobType=function(b){return !b.app.preferences.defaultJobType?null:b.app.preferences.defaultJobType};return a});

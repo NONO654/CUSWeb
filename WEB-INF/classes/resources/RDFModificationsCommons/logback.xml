@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" packagingData="true" debug="true">
+
+  <!-- Allows to differenciate applications logging to the same target -->
+  <!-- Use ${CONTEXT_NAME} to use it anywhere -->
+  <contextName>${SCS_LOG_CONTEXT:-Default}</contextName>
+  
+  <!-- Properties can be used everywhere a value is exepected, with the syntax ${PROPERTY_NAME} -->
+  <!-- Environment variables can also be used the same way -->
+  <!-- Properties can also be defined in a property file in the class path -->
+  <!-- The scope can be either "local" (default), "context" or "system" (i.e. the current JVM) -->
+  <!--property scope="local" resource="XKafkaToJMS_logback.properties" /-->
+  <property name="LOG_PATTERN" value="%date{ISO8601, UTC} [%thread] %-5level %logger{36} - %message%n"/>
+  
+  <!-- SCS_LOG_DIR: Logging directory -->
+  <property name="SCS_LOG_DIRECTORY" value="${SCS_LOG_DIR:-logs}" scope="system"/>
+  
+  <!-- SCS_LOG_LEVEL: Global log level (expected: ALL, TRACE, DEBUG, INFO, WARN, ERROR, OFF) -->
+  <property name="LOG_LEVEL" value="${SCS_LOG_LEVEL:-INFO}"/>
+  
+  <!-- SCS_LOG_LEVEL_FILE: Global log level (expected: ALL, TRACE, DEBUG, INFO, WARN, ERROR, OFF) -->
+  <property name="LOG_LEVEL_FILE" value="${SCS_LOG_LEVEL_FILE:-ALL}"/>
+  
+  <!-- SCS_LOG_LEVEL_CONSOLE: Global log level (expected: ALL, TRACE, DEBUG, INFO, WARN, ERROR, OFF) -->
+  <property name="LOG_LEVEL_CONSOLE" value="${SCS_LOG_LEVEL_CONSOLE:-ALL}"/>
+  
+  <!-- Properties can be computed on the fly -->
+  <!--define name="myFileExists" class="ch.qos.logback.core.property.FileExistsPropertyDefiner">
+    <path>/path/to/a/file</path>
+  </define-->
+  <!--define name="myResourceInClassPath" class="ch.qos.logback.core.property.ResourceExistsPropertyDefiner">
+    <resource>resource.name</resource>
+  </define-->
+  
+  <!-- Conditional statements allow to manage logging on different systems (c.f. https://logback.qos.ch/manual/configuration.html#conditional ) -->
+  <!--if condition='isDefined("SCS_LOG_DIRECTORY")'>
+    <then></then>
+    <else></else>
+  </if-->
+
+
+  <!-- Standard console appender -->
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender"> 
+    <!-- This is the minimum logging level accepted by this appender --> 
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>${LOG_LEVEL_CONSOLE}</level>
+    </filter>
+    <!-- Default target is System.err -->
+    <!--target>System.out</target-->
+    <!-- encoders are assigned the type
+    ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>${LOG_PATTERN}</pattern>
+    </encoder>
+  </appender>
+  
+  
+  <!-- Standard rolling file appender -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	
+    <!-- This is the minimum logging level accepted by this appender --> 
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>${LOG_LEVEL_FILE}</level>
+    </filter>
+	 
+    <!-- If specified, this will be the active logging file (not supported in prudent mode) -->
+    <!--file>${SCS_LOG_DIRECTORY}/${CONTEXT_NAME}.log</file-->
+    
+    <!-- Support multiple-JVM writing to the same log file -->
+    <prudent>true</prudent>
+    
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- daily rollover. Make sure the path matches the one in the file element or else
+			the rollover logs are placed in the working directory. -->
+			<fileNamePattern>${SCS_LOG_DIRECTORY}/${CONTEXT_NAME}_%d{yyyy-MM-dd, UTC}.%i.traces</fileNamePattern>
+      
+      <!-- Force split when active log file would exceed this size -->
+      <maxFileSize>100MB</maxFileSize>
+      
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+      
+      <!-- Do not keep more than this size of logs -->
+      <totalSizeCap>2GB</totalSizeCap>
+		</rollingPolicy>
+    
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+  
+  <!--logger name="com.dassault_systemes" level="DEBUG" additivity="true"-->
+    <!-- This logger will write to its appenders AND to its ancestors' appenders -->
+    <!--appender-ref ref="FILE2"/-->
+  <!--/logger-->
+  
+  <!-- Kafka writes far too much in TRACE or DEBUG modes -->
+  <logger name="org.apache.kafka" level="INFO" additivity="false">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="FILE"/>
+  </logger>
+
+  <!-- ActiveMQ writes far too much in TRACE or DEBUG modes -->
+  <logger name="org.apache.activemq" level="INFO" additivity="false">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="FILE"/>
+  </logger>
+  	
+  <root level="${LOG_LEVEL}">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="FILE"/>
+  </root>
+
+  <!-- Shutting logback down should not be a requirement if the JVM shuts down, because all the 
+       output streams should be automatically flushed and acquired resources released.
+       However it may be required in the case of more complex operations, such as remote logging,
+       to ensure not losing any event being processed at shutdown time.
+       In this case, be aware that the safe logging of future events is not guaranteed once the 
+       shutdown hook kicks in, notably the events logged in the application's own shutdown hooks. -->
+  <!--shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook">
+    <delay>3000</delay>
+  </shutdownHook--> 
+  
+</configuration>

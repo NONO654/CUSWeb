@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' ?><fiper_Model rootComponentId="Process343ecf73-6dd8-5b2195c5-13ec0" version="6.418.0">
+  <Properties modelId="Process343ecf73-6dd8-5b2195c5-13ec0" modelName="LocalAdapterProcess" modelVersion="6.418.0" />
+  <Component id="Process343ecf73-6dd8-5b2195c5-13ec0" appid="###processId###" name="LocalAdapterProcess" parentId="" type="com.dassault_systemes.sma.adapter.Task">
+    <Controlflow from="Activity343ecf73-6dd8-5b2195de-14054" parentId="Process343ecf73-6dd8-5b2195c5-13ec0" to="" />
+    <Controlflow from="" parentId="Process343ecf73-6dd8-5b2195c5-13ec0" to="Activity343ecf73-6dd8-5b2195de-14054" />
+    <Variable name="fastpath" role="Property" structure="Scalar" type="Boolean">
+      <Value><![CDATA[true]]></Value>
+    </Variable>
+  </Component>
+  <Relationship child="Activity343ecf73-6dd8-5b2195de-14054" parent="Process343ecf73-6dd8-5b2195c5-13ec0" />
+  <Component id="Activity343ecf73-6dd8-5b2195de-14054" appid="###activityId###" name="LocalActivity-111529104018189#LocalActivity" parentId="Process343ecf73-6dd8-5b2195c5-13ec0" type="com.dassault_systemes.sma.adapter.Task" containsteps="true">
+    <Variable name="ActivityTitle" mode="local" role="Property" structure="Scalar" type="com.engineous.datatype.String">
+      <Value><![CDATA[LocalActivity]]></Value>
+    </Variable>
+    <Variable name="affinities" role="Property" structure="Aggregate">
+      <Variable name="Host" role="Property" structure="Scalar" type="com.engineous.datatype.String">
+        <Value>{localhost}</Value>
+      </Variable>
+      <Variable name="Group" role="Property" structure="Scalar" type="com.engineous.datatype.String">
+        <Value><![CDATA[Activity343ecf73-6dd8-5b2195de-14054]]></Value>
+      </Variable>
+    </Variable>
+    <Variable name="keepdirtype" role="Property" type="integer" structure="Scalar">
+      <Value>2</Value>
+    </Variable>
+    <Controlflow from="FunctionStep343ecf73-6dd8-5b24649b-1817f" parentId="Activity343ecf73-6dd8-5b2195de-14054" to="FunctionStep343ecf73-6dd8-5b2195e1-1406c" />
+    <Controlflow from="FunctionStep343ecf73-6dd8-5b2826d6-19ea2" parentId="Activity343ecf73-6dd8-5b2195de-14054" to="" />
+    <Controlflow from="FunctionStep343ecf73-6dd8-5b2195e1-1406c" parentId="Activity343ecf73-6dd8-5b2195de-14054" to="FunctionStep343ecf73-6dd8-5b2826d6-19ea2" />
+    <Controlflow from="" parentId="Activity343ecf73-6dd8-5b2195de-14054" to="FunctionStep343ecf73-6dd8-5b24649b-1817f" />
+  </Component>
+  <Relationship child="FunctionStep343ecf73-6dd8-5b2195e1-1406c" parent="Activity343ecf73-6dd8-5b2195de-14054" />
+  <Component id="FunctionStep343ecf73-6dd8-5b2195e1-1406c" appid="###activityId###" name="LocalActivity-111529104018189#OS Command" parentId="Activity343ecf73-6dd8-5b2195de-14054" type="com.dassault_systemes.sma.adapter.OSCommand" step="true">
+    <Variable name="StepTitle" mode="local" role="Property" structure="Scalar" type="com.engineous.datatype.String">
+      <Value><![CDATA[OS Command]]></Value>
+    </Variable>
+    <Variable mode="local" name="affinities" role="Property" structure="Aggregate" type="com.engineous.datatype.String">
+      <Variable mode="local" name="Group" role="Property" structure="Scalar" type="com.engineous.datatype.String">
+        <Value><![CDATA[Activity343ecf73-6dd8-5b2195de-14054]]></Value>
+      </Variable>
+      <Variable mode="local" name="ApplicationName" role="Property" structure="Scalar" type="com.engineous.datatype.String">
+        <Value></Value>
+      </Variable>
+      <Variable mode="local" name="ApplicationVersion" role="Property" structure="Scalar" type="com.engineous.datatype.String">
+        <Value></Value>
+      </Variable>
+    </Variable>
+    <Variable name="intpName" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value>Windows Batch</Value>
+    </Variable>
+    <Variable name="intpCommand" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value>cmd.exe</Value>
+    </Variable>
+    <Variable name="scriptExtension" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value>bat</Value>
+    </Variable>
+    <Variable name="intpArgument" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value>/C</Value>
+    </Variable>
+    <Variable name="scriptArgument" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value />
+    </Variable>
+    <Variable name="scriptContentType" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value><![CDATA[<rawFN></rawFN><toOption>10</toOption><del>N</del><type>text/plain</type><rwEnc>(Automatic Local)</rwEnc><dataEnc></dataEnc>]]></Value>
+    </Variable>
+    <Variable name="commandType" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value>Script</Value>
+    </Variable>
+    <Variable name="scriptText" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value>###code###</Value>
+    </Variable>
+    <Variable name="command" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value />
+    </Variable>
+    <Variable name="maxrcSuccess" role="Property" structure="Aggregate" sizeable="true">
+      <Variable name="success" tag="success" role="Property" type="com.engineous.datatype.String" structure="Array" dims="[1]">
+        <Value index="[0]">0</Value>
+      </Variable>
+    </Variable>
+    <Variable name="hostname" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value />
+    </Variable>
+    <Variable name="unix" role="Property" type="boolean" structure="Scalar">
+      <Value>false</Value>
+    </Variable>
+    <Variable name="stdOutVal" role="Property" type="boolean" structure="Scalar">
+      <Value><![CDATA[false]]></Value>
+    </Variable>
+    <Variable name="stdErrVal" role="Property" type="boolean" structure="Scalar">
+      <Value><![CDATA[false]]></Value>
+    </Variable>
+    <Variable name="logStderr" role="Property" type="boolean" structure="Scalar">
+      <Value><![CDATA[true]]></Value>
+    </Variable>
+    <Variable name="logStdout" role="Property" type="boolean" structure="Scalar">
+      <Value><![CDATA[false]]></Value>
+    </Variable>
+    <Variable name="linesToLog" role="Property" type="integer" structure="Scalar">
+      <Value><![CDATA[21]]></Value>
+    </Variable>
+    <Variable name="waitFile" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value />
+    </Variable>
+    <Variable name="waitString" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value />
+    </Variable>
+    <Variable name="waitDelay" role="Property" type="integer" structure="Scalar">
+      <Value><![CDATA[0]]></Value>
+    </Variable>
+    <Variable name="makeJob" role="Property" type="boolean" structure="Scalar">
+      <Value><![CDATA[true]]></Value>
+    </Variable>
+    <Variable name="releaseConcurrency" role="Property" type="boolean" structure="Scalar">
+      <Value><![CDATA[false]]></Value>
+    </Variable>
+    <Variable name="oscmd_env_vars" role="Property" type="com.engineous.datatype.String" structure="Array" dims="[0]" sizeable="true" />
+    <Variable name="PredefinedCommandOptions" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value />
+    </Variable>
+    <Variable name="retvalParam" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value />
+    </Variable>
+    <Variable name="ViewData" role="Property" structure="Aggregate" />
+  </Component>
+  <Relationship child="FunctionStep343ecf73-6dd8-5b24649b-1817f" parent="Activity343ecf73-6dd8-5b2195de-14054" />
+  <Component id="FunctionStep343ecf73-6dd8-5b24649b-1817f" appid="###activityId###" name="LocalActivity-111529104018189#Download" parentId="Activity343ecf73-6dd8-5b2195de-14054" type="com.dassault_systemes.sma.adapter.Download" step="true">
+    <Variable name="StepTitle" mode="local" role="Property" structure="Scalar" type="com.engineous.datatype.String">
+      <Value><![CDATA[Download]]></Value>
+    </Variable>
+    <Variable mode="local" name="affinities" role="Property" structure="Aggregate" type="com.engineous.datatype.String">
+      <Variable mode="local" name="Group" role="Property" structure="Scalar" type="com.engineous.datatype.String">
+        <Value><![CDATA[Activity343ecf73-6dd8-5b2195de-14054]]></Value>
+      </Variable>
+    </Variable>
+    <Variable name="rules" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value><![CDATA[<ExportRules lastId="1">###downloadString###</ExportRules>]]></Value>
+    </Variable>
+    <Variable name="ProcessContent" role="Property" type="boolean" structure="Scalar">
+      <Value>false</Value>
+    </Variable>
+    <Variable name="ViewData" role="Property" structure="Aggregate" />
+  </Component>
+  <Relationship child="FunctionStep343ecf73-6dd8-5b2826d6-19ea2" parent="Activity343ecf73-6dd8-5b2195de-14054" />
+  <Component id="FunctionStep343ecf73-6dd8-5b2826d6-19ea2" appid="###activityId###" name="LocalActivity-111529104018189#Upload" parentId="Activity343ecf73-6dd8-5b2195de-14054" type="com.dassault_systemes.sma.adapter.Upload" step="true">
+    <Variable name="StepTitle" mode="local" role="Property" structure="Scalar" type="com.engineous.datatype.String">
+      <Value><![CDATA[Upload]]></Value>
+    </Variable>
+    <Variable mode="local" name="affinities" role="Property" structure="Aggregate" type="com.engineous.datatype.String">
+      <Variable mode="local" name="Group" role="Property" structure="Scalar" type="com.engineous.datatype.String">
+        <Value><![CDATA[Activity343ecf73-6dd8-5b2195de-14054]]></Value>
+      </Variable>
+    </Variable>
+    <Variable name="rules" role="Property" type="com.engineous.datatype.String" structure="Scalar">
+      <Value><![CDATA[<ImportRules lastId="1">###uploadString###</ImportRules>]]></Value>
+    </Variable>
+    <Variable name="processUnchangedFiles" role="Property" type="boolean" structure="Scalar">
+      <Value>true</Value>
+    </Variable>
+    <Variable name="isInteractive" role="Property" type="boolean" structure="Scalar">
+      <Value>false</Value>
+    </Variable>
+    <Variable name="ProcessContent" role="Property" type="boolean" structure="Scalar">
+      <Value>false</Value>
+    </Variable>
+    <Variable name="ViewData" role="Property" structure="Aggregate" />
+  </Component>
+</fiper_Model>

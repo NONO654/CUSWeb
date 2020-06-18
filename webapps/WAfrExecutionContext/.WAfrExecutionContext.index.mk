@@ -1,0 +1,9 @@
+m|WAfrFoundation\WAfrExecutionContext.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.7.19173
+r|G:\R421\BSF\.
+t|win_b64\webapps\WAfrExecutionContext\WAfrExecutionContext.js|1561163842|26918
+s|WAfrFoundation\WAfrExecutionContext.mweb\src\mod_Component.js|1512654668|18454
+s|WAfrFoundation\WAfrExecutionContext.mweb\src\WAfrExecutionContext.js|1519214321|0
+s|WAfrFoundation\WAfrExecutionContext.mweb\src\mod_ExecutionContext.js|1560936325|95530

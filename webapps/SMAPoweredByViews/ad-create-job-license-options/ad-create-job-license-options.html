@@ -1,0 +1,110 @@
+<dom-module id="ad-create-job-license-options">
+	<style>
+		/* Flex to align slider, ratio and slider labels */
+		:host .sliderGroup {
+			display: flex;
+			flex-direction: row;
+		}
+		:host .slider {
+			display: flex;
+			flex-direction: column;
+			flex: auto;
+		}
+		:host .labels {
+			display: flex;
+			justify-content: space-between;
+			margin: 0 12px 0 12px;
+		}
+		:host .sliderRatio {
+			margin: 10px 10px 0 10px;
+		}
+		/* Make sure alert-message aligns and wraps correctly */
+		:host .popover-body, :host .alert-message {
+			display: block;
+		}
+		/* Expect slider to be styled by external stylsheet, globally applied to input[type=range] */
+	</style>
+	<template>
+		<!-- OVERALL LICENSING SECTION (shown only if 3DEXPEHRENCE is On-Cloud) -->
+		<div id="licenseSection" hidden$="[[!isCloudEnabled]]">
+			<!-- LICENSE TYPE -->
+			<div class="form-group">
+				<label for="licenseTypeSelect" class="control-label">[[NLS.LicenseType]]</label>
+				<select id="licenseTypeSelect" class="form-control" value="[[licenseType]]" on-change="_onLicenseTypeChanged">
+					<option id="creditOption" value="credits">[[NLS.Credits]]</option>
+					<option id="tokenOption" value="tokens">[[NLS.Tokens]]</option>
+					<option id="traditionalTokenOption" disabled$="[[_isCloudCompute(drmMode)]]" value="traditionalTokens">[[NLS.TraditionalTokens]]</option>
+				</select>
+			</div>
+			<!-- UVM SECTION -->
+			<div id="uvmSection" hidden$="[[_isUVMSectionHidden(licenseType)]]">
+				<!-- FEATURES -->
+				<div class="form-group" id="featuresDiv">
+					<label for="features" class="control-label">[[NLS.Features]]</label>
+					<ad-popover title="[[NLS.Features]]" body="[[NLS.FeaturesPopover]]"></ad-popover>
+					<select id="featuresSelect" class="form-control" value="[[features]]" on-change="_onFeaturesChanged">
+						<option value="1">[[NLS.Linear]]</option>
+						<option value="2">[[NLS.Frequency]]</option>
+						<option value="3">[[NLS.LinearDynamics]]</option>
+						<option value="4">[[NLS.NonLinear]]</option>
+						<option value="5">[[NLS.Explicit]]</option>
+					</select>
+				</div>
+				<!-- MODEL SIZE -->
+				<div class="form-group" id="modelSizeDiv">
+					<label for="modelSize" class="control-label">[[NLS.ModelSize]]</label>
+					<ad-popover title="[[NLS.ModelSize]]" body="[[NLS.ModelSizePopover]]"></ad-popover>
+					<select id="modelSizeSelect" class="form-control" value="[[modelSize]]" on-change="_onModelSizeChanged">
+						<option id="modelSizeOption1" value="1" disabled$="[[_isModelSizeOptionDisabled(modelSizeLimit, 1)]]">[[NLS.ModelSize1]]</option>
+						<option id="modelSizeOption2" value="2" disabled$="[[_isModelSizeOptionDisabled(modelSizeLimit, 2)]]">[[NLS.ModelSize2]]</option>
+						<option id="modelSizeOption3" value="3" disabled$="[[_isModelSizeOptionDisabled(modelSizeLimit, 3)]]">[[NLS.ModelSize3]]</option>
+						<option id="modelSizeOption4" value="4" disabled$="[[_isModelSizeOptionDisabled(modelSizeLimit, 4)]]">[[NLS.ModelSize4]]</option>
+						<option id="modelSizeOption5" value="5" disabled$="[[_isModelSizeOptionDisabled(modelSizeLimit, 5)]]">[[NLS.ModelSize5]]</option>
+						<option id="modelSizeOption6" value="6" disabled$="[[_isModelSizeOptionDisabled(modelSizeLimit, 6)]]">[[NLS.ModelSize6]]</option>
+						<option id="modelSizeOption7" value="7" disabled$="[[_isModelSizeOptionDisabled(modelSizeLimit, 7)]]">[[NLS.ModelSize7]]</option>
+					</select>
+				</div>
+				<!-- PERFORMANCE -->
+				<div class="form-group" id="performanceDiv">
+					<!-- LABEL AND POPOVER -->
+					<label for="performance" class="control-label">[[NLS.Performance]]</label>
+					<ad-popover title="[[NLS.Performance]]" body="[[NLS.PerformancePopover]]"></ad-popover>
+					<!-- PERFORMANCE SLIDER -->
+					<div class="sliderGroup">
+						<div class="slider">
+							<input type="range" class="form-control performanceInput" id="performanceInput"
+								min="1" value="[[performance]]" max="7" step="1" on-change="_onPerformanceChanged"></input>
+							<div class="labels">
+								<span class="min">[[NLS.PerformanceEconomical]]</span>
+								<span class="max">[[NLS.PerformanceFast]]</span>
+							</div>
+						</div>
+						<div class="sliderRatio"><span id="sliderRatioSpan">[[performance]]</span>/7</div>
+					</div>
+					<!-- COMPUTE CAPACITY -->
+					<div id="computeCapacity" hidden$="[[!_isCloudCompute(drmMode)]]">
+						<span class="alert-message alert-primary">[[_getCpuLimitString(cpuLimit)]]</span>
+					</div>
+				</div>
+				<!-- ESTIMATES -->
+				<div id="uvmEstimateDiv">
+					<!-- SOFTWARE ESTIMATE -->
+					<div class="form-group">
+						<label for="softwareRateInput" class="control-label">[[NLS.SoftwareEstimate]]</label>
+						<input type="text" id="softwareRateInput" class="form-control input-sm" readonly value="[[_getSoftwareRateString(licenseType, softwareRate)]]"></input>
+					</div>
+					<!-- HARDWARE ESTIMATE -->
+					<div class="form-group">
+						<label for="hardwareEstimateInput" class="control-label">[[NLS.HardwareEstimate]]</label>
+						<input type="text" id="hardwareRateInput" class="form-control" readonly value="[[_getHardwareRateString(hardwareRate)]]"></input>
+					</div>
+					<!-- CORES ESTIMATE -->
+					<div class="form-group">
+						<label for="cpuEstimateInput" class="control-label">[[NLS.CPUEstimate]]</label>
+						<input type="text" id="cpuEstimateInput" class="form-control" readonly value="[[cpus]]"></input>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+</dom-module>

@@ -1,0 +1,1017 @@
+{
+	"ra-avsrawscatterchartmatrix": {
+		"Caption": "A matrix of scatter charts",
+		"title": "Scatter Matrix Chart",
+		"icon": "MultiScatterMatrix.png",
+		"source": "avsCharts",
+		"uiprops": {
+		    "zoomable" : "none",
+			"usesTime": false,
+			"multiSeries": true,
+			"dimensions": [
+				{
+					"dim": "x",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "y",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "color",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "size",
+					"required": false,
+					"uipanel": "ra-sizeparametercontrol"
+				},
+				{
+					"dim": "shape",
+					"required": false,
+					"uipanel": "ra-shapeparametercontrol"
+				}
+			]
+		},
+		"defaults": [
+			{
+				"type": "scatter",
+				"x": {
+					"data": {
+						"type": "raw"
+					}
+				},
+				"y": {
+					"data": {
+						"type": "raw"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				},
+				"size": {
+					"baseSize": 5
+				},
+				"shape": {
+					
+				},
+				"label": {
+					
+				},
+				"constraints": []
+			}
+		]
+	},
+	"ra-avsrawbarchart": {
+		"Caption": "Simple bar chart",
+		"title": "Bar Chart",
+		"icon": "2DBar-NoBorder.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "x",
+			"usesTime": false,
+			"multiSeries": true,
+			"dimensions": [
+				{
+					"dim": "y",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "yline",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "color",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "label",
+					"required": false,
+					"uipanel": "ra-labelparametercontrol"
+				},
+				{
+					"dim": "constraints",
+					"required": false,
+					"uipanel": "ra-constraintsparametercontrol"
+				}
+			]
+		},
+		"defaults": [
+			{
+				"type": "bar",
+				"x": {
+					"data": {
+						"type": "raw",
+						"guid": "Index"
+					},
+					"axisProperties": {
+						"style": "tabular"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			},
+			{
+				"type": "bar",
+				"x": {
+					"axisProperties": {
+						"visible": false
+					}
+				},
+				"y": {
+					"axisProperties": {
+						"position": "end"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			}
+		]
+	},
+	"ra-avshistogramchart": {
+		"Caption": "Simple Histogram chart",
+		"title": "Histogram Chart",
+		"icon": "Histogram.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "none",
+			"usesTime": false,
+			"multiSeries": true,
+			"dimensions": [
+				{
+					"dim": "x",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+                {
+                    "dim": "constraints",
+                    "required": false,
+                    "uipanel": "ra-constraintsparametercontrol"
+                }
+			]
+		},
+		"defaults": [
+			{
+				"type": "bar",
+				"bordersOn": true,
+				"axisAsPercent": true,
+				"barWidth": 0.95,
+				"x": {
+					"axisProperties": {
+						"majorTickMarks": {
+							"visible": false
+						}
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				},
+				"surface": {                    
+                    "color": "#368ec4",
+                    "opacity": 0.65
+                },
+				"generateStatistics": false,
+				"constraints": []
+			}
+		]
+	},
+	"ra-avsrawlinechart": {
+		"Caption": "Simple line chart",
+		"title": "Line Chart",
+		"icon": "LinePlot.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "x",
+			"usesTime": false,
+			"multiSeries": "multiChart",
+			"dimensions": [
+				{
+					"dim": "y",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "yline",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "color",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "label",
+					"required": false,
+					"uipanel": "ra-labelparametercontrol"
+				},
+				{
+					"dim": "constraints",
+					"required": false,
+					"uipanel": "ra-constraintsparametercontrol"
+				}
+			]
+		},
+		"defaults": [
+			{
+				"type": "line",
+				"x": {
+					"data": {
+						"type": "raw",
+						"guid": "Index"
+					},
+					"axisProperties": {
+						"style": "tabular"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			},
+			{
+				"type": "line",
+				"x": {
+					"axisProperties": {
+						"visible": false
+					}
+				},
+				"y": {
+					"axisProperties": {
+						"position": "end"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			}
+		]
+	},
+	"ra-avsrawbarlinechart": {
+		"hidden": "true",
+		"Caption": "Bar plot overlaid with a line plot",
+		"title": "Bar/Line Chart",
+		"icon": "BarAndLine.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "x",
+			"usesTime": false,
+			"multiSeries": false,
+			"dimensions": [
+				{
+					"dim": "x",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "y",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "yline",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "color",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "colorline",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "constraints",
+					"required": false,
+					"uipanel": "ra-constraintsparametercontrol"
+				}
+			]
+		},
+		"defaults": [
+			{
+				"type": "bar",
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			},
+			{
+				"type": "line",
+				"x": {
+					"axisProperties": {
+						"visible": false
+					}
+				},
+				"y": {
+					"series": [
+						{
+							"type": "raw"
+						}
+					],
+					"axisProperties": {
+						"position": "end"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			}
+		]
+	},
+	"ra-avsscatterchart": {
+		"hidden": "true",
+		"Caption": "Scatter plot with bins along both X and Y axis",
+		"title": "Binned Scatter Chart",
+		"icon": "ScatterPlot.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "all",
+			"usesTime": false,
+			"multiSeries": false,
+			"dimensions": [
+				{
+					"dim": "x",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "y",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "color",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "size",
+					"required": false,
+					"uipanel": "ra-sizeparametercontrol"
+				},
+				{
+					"dim": "shape",
+					"required": false,
+					"uipanel": "ra-shapeparametercontrol"
+				},
+				{
+					"dim": "label",
+					"required": false,
+					"uipanel": "ra-labelparametercontrol"
+				},
+				{
+					"dim": "constraints",
+					"required": false,
+					"uipanel": "ra-constraintsparametercontrol"
+				}
+			]
+		},
+		"defaults": [
+			{
+				"type": "scatter",
+				"x": {
+					"data": {
+						"type": "raw"
+					}
+				},
+				"y": {
+					"data": {
+						"type": "raw"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				},
+				"size": {
+					
+				},
+				"shape": {
+					
+				},
+				"label": {
+					
+				},
+				"constraints": []
+			}
+		]
+	},
+	"ra-avsrawscatterchart": {
+		"Caption": "Simple scatter plot",
+		"title": "Scatter Chart",
+		"icon": "ScatterPlot.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "all",
+			"usesTime": false,
+			"multiSeries": false,
+			"dimensions": [
+				{
+					"dim": "x",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "y",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "color",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "size",
+					"required": false,
+					"uipanel": "ra-sizeparametercontrol"
+				},
+				{
+					"dim": "shape",
+					"required": false,
+					"uipanel": "ra-shapeparametercontrol"
+				},
+				{
+					"dim": "label",
+					"required": false,
+					"uipanel": "ra-labelparametercontrol"
+				},
+				{
+					"dim": "constraints",
+					"required": false,
+					"uipanel": "ra-constraintsparametercontrol"
+				}
+			]
+		},
+		"defaults": [
+			{
+				"type": "scatter",
+				"x": {
+					"data": {
+						"type": "raw"
+					}
+				},
+				"y": {
+					"data": {
+						"type": "raw"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				},
+				"size": {
+					
+				},
+				"shape": {
+					
+				},
+				"label": {
+					
+				},
+				"constraints": []
+			}
+		]
+	},
+    "ra-avsrawscatterchart-multiseries": {
+        "hidden": "true",
+        "Caption": "Simple scatter plot that allows multiple series distinguished by shape",
+        "title": "Multi-Series Scatter Chart",
+        "icon": "ScatterPlot.png",
+        "source": "avsCharts",
+        "uiprops": {
+            "zoomable" : "all",
+            "usesTime": false,
+            "multiSeries": false,
+            "dimensions": [
+                {
+                    "dim": "x",
+                    "required": true,
+                    "uipanel": "ra-spatialparametercontrol"
+                },
+                {
+                    "dim": "y",
+                    "required": true,
+                    "uipanel": "ra-spatialparametercontrol"
+                },
+                {
+                    "dim": "color",
+                    "required": false,
+                    "uipanel": "ra-colorparametercontrol"
+                },
+                {
+                    "dim": "size",
+                    "required": false,
+                    "uipanel": "ra-sizeparametercontrol"
+                },
+                {
+                    "dim": "shape",
+                    "required": false,
+                    "uipanel": "ra-shapeparametercontrol"
+                },
+                {
+                    "dim": "label",
+                    "required": false,
+                    "uipanel": "ra-labelparametercontrol"
+                },
+                {
+                    "dim": "constraints",
+                    "required": false,
+                    "uipanel": "ra-constraintsparametercontrol"
+                }
+            ]
+        },
+        "defaults": [
+            {
+                "type": "scatter",
+                "x": {
+                    "data": {
+                        "type": "raw"
+                    }
+                },
+                "y": {
+                    "data": {
+                        "type": "raw"
+                    }
+                },
+                "color": {
+                    "type": "fixed",
+                    "defaultColor": "#368ec4"
+                },
+                "size": {
+                    
+                },
+                "shape": {
+                    
+                },
+                "label": {
+                    
+                },
+                "constraints": []
+            }
+        ]
+    },
+	"ra-avsscatterlinechart": {
+		"hidden": "true",
+		"Caption": "Scatter plot overlaid with a line plot",
+		"title": "Scatter/Line Chart",
+		"icon": "ScatterAndLine.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "all",
+			"usesTime": false,
+			"multiSeries": false,
+			"dimensions": [
+				{
+					"dim": "x",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "y",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "yline",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "color",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "colorline",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "size",
+					"required": false,
+					"uipanel": "ra-sizeparametercontrol"
+				},
+				{
+					"dim": "shape",
+					"required": false,
+					"uipanel": "ra-shapeparametercontrol"
+				},
+				{
+					"dim": "label",
+					"required": false,
+					"uipanel": "ra-labelparametercontrol"
+				},
+				{
+					"dim": "constraints",
+					"required": false,
+					"uipanel": "ra-constraintsparametercontrol"
+				}
+			]
+		},
+		"defaults": [
+			{
+				"type": "scatter",
+				"x": {
+					"data": {
+						"type": "raw"
+					}
+				},
+				"y": {
+					"data": {
+						"type": "raw"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				},
+				"size": {
+					
+				},
+				"shape": {
+					
+				},
+				"label": {
+					
+				},
+				"constraints": []
+			},
+			{
+				"type": "line",
+				"x": {
+					"axisProperties": {
+						"visible": false
+					}
+				},
+				"y": {
+					"series": [
+						{
+							"type": "aggregation",
+							"aggregationType": "MEAN"
+						}
+					],
+					"axisProperties": {
+						"position": "end"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			}
+		]
+	},
+	"ra-avscumulativechart": {
+		"Caption": "Cumulative distribution plot",
+		"title": "Cumulative Frequency Chart",
+		"icon": "CumulativeFrequency.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "none",
+			"usesTime": false,
+			"multiSeries": true,
+			"dimensions": [
+				{
+					"dim": "x",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+                    "dim": "constraints",
+                    "required": false,
+                    "uipanel": "ra-constraintsparametercontrol"
+                }
+			]
+		},
+		"defaults": [
+			{
+				"type": "bar",
+				"layout": "cumulative",
+				"bordersOn": true,
+				"axisAsPercent": true,
+				"barWidth": 0.95,
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				},
+                "surface": {                    
+                    "color": "#368ec4",
+                    "opacity": 0.65
+                },
+                "generateStatistics": false,
+				"constraints": []
+			}
+		]
+	},
+	"ra-avsbarchart": {
+		"hidden": "true",
+		"Caption": "A bar chart with binning along X axis",
+		"title": "Binned Bar Chart",
+		"icon": "2DBar-NoBorder.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "x",
+			"usesTime": false,
+			"multiSeries": true,
+			"dimensions": [
+				{
+					"dim": "x",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "y",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "color",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "constraints",
+					"required": false,
+					"uipanel": "ra-constraintsparametercontrol"
+				}
+			]
+		},
+		"defaults": [
+			{
+				"type": "bar",
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			}
+		]
+	},
+	"ra-avslinechart": {
+		"hidden": "true",
+		"Caption": "Line chart with binning along X Axis",
+		"title": "Binned Line Chart",
+		"icon": "LinePlot.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "x",
+			"usesTime": false,
+			"multiSeries": true,
+			"dimensions": [
+				{
+					"dim": "x",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "y",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "yline",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "color",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "constraints",
+					"required": false,
+					"uipanel": "ra-constraintsparametercontrol"
+				}
+			]
+		},
+		"defaults": [
+			{
+				"type": "line",
+				"x": {
+					"data": {
+						"type": "raw",
+						"guid": "Index"
+					},
+					"axisProperties": {
+						"style": "tabular"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			},
+			{
+				"type": "line",
+				"x": {
+					"axisProperties": {
+						"visible": false
+					}
+				},
+				"y": {
+					"series": [
+						{
+							"type": "aggregation",
+							"aggregationType": "MEAN"
+						}
+					],
+					"axisProperties": {
+						"position": "end"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			}
+		]
+	},
+	"ra-avsbarlinechart": {
+		"hidden": "true",
+		"Caption": "Bar and line plot with binning along X Axis",
+		"title": "Binned Bar/Line Chart",
+		"icon": "BarAndLine.png",
+		"source": "avsCharts",
+		"uiprops": {
+            "zoomable" : "x",
+			"usesTime": false,
+			"multiSeries": false,
+			"dimensions": [
+				{
+					"dim": "x",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "y",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "yline",
+					"required": true,
+					"uipanel": "ra-spatialparametercontrol"
+				},
+				{
+					"dim": "color",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "colorline",
+					"required": false,
+					"uipanel": "ra-colorparametercontrol"
+				},
+				{
+					"dim": "constraints",
+					"required": false,
+					"uipanel": "ra-constraintsparametercontrol"
+				}
+			]
+		},
+		"defaults": [
+			{
+				"type": "bar",
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			},
+			{
+				"type": "line",
+				"x": {
+					"axisProperties": {
+						"visible": false
+					}
+				},
+				"y": {
+					"series": [
+						{
+							"type": "aggregation",
+							"aggregationType": "MEAN"
+						}
+					],
+					"axisProperties": {
+						"position": "end"
+					}
+				},
+				"color": {
+					"type": "fixed",
+					"defaultColor": "#368ec4"
+				}
+			}
+		]
+	},
+	   "ra-correlationtable": {
+        "Caption": "A Table Showing the Correlation Between Parameters",
+        "title": "Correlation Table",
+        "icon": "Correlation_Table.png",
+        "source": "chartTables",
+        "uiprops": {
+            "dimensions": [
+                {
+                    "dim": "x",
+                    "required": true,
+                    "uipanel": "ra-spatialparametercontrol"
+                },
+                {
+                    "dim": "y",
+                    "required": true,
+                    "uipanel": "ra-spatialparametercontrol"
+                }
+            ]
+        },
+        "defaults": [
+            {
+                "type": "table",
+				"applyFilters": true,
+                "x": {
+                    "data": {
+                        "type": "raw"
+                    }
+                },
+                "y": {
+                    "data": {
+                        "type": "raw"
+                    }
+                }
+            }
+        ]
+    },
+    "ra-reliabilitytable": {
+        "Caption": "A Table Showing the Probabilities of Success and Failure of with respect to the Constraints",
+        "title": "Reliability Table",
+        "icon": "Reliability_Table.png",
+        "source": "chartTables",
+        "uiprops": {
+            "dimensions": {}
+        },
+        "defaults": [
+            {
+                "type": "table"
+            }
+        ]
+    },
+    
+    "ra-avsparettochart" : {            
+        "Caption" : "Pareto chart",
+        "title" : "Pareto Chart",
+        "icon" : "Pareto.png",
+        "source" : "avsCharts",
+            "uiprops" : {
+                "usesTime" : false,
+                "multiSeries" : true,
+                "dimensions" : [
+                    {"dim":"x", "required":true, "uipanel":"ra-spatialparametercontrol"},
+                    {"dim":"y", "required":true, "uipanel":"ra-spatialparametercontrol"}
+                ]
+            },
+            "defaults" : [{
+                "bar" : { "color" : { "positive": "#368ec4", "negative": "#c43636"} },
+                "line" : { "color" : "#44403d"}
+            }]
+    },   
+    
+    "ra-avscapabilitychart" : {            
+        "Caption" : "Capability chart",
+        "title" : "Capability Chart",
+        "icon" : "CapabilityChart.png",
+        "source" : "avsCharts",
+        "uiprops" : {
+            "usesTime" : false,
+            "multiSeries" : true,
+            "dimensions" : [
+            	{"dim":"mean", "required":true, "uipanel":"ra-labelparametercontrol"},
+                {"dim":"std dev", "required":true, "uipanel":"ra-labelparametercontrol"},                
+                {"dim":"min", "required":true, "uipanel":"ra-labelparametercontrol"},
+                {"dim":"max", "required":true, "uipanel":"ra-labelparametercontrol"},                    
+                {"dim": "constraints", "required": false, "uipanel": "ra-constraintsparametercontrol"}                    
+            ]
+        },
+        "defaults" : [{
+            "seriesColor" : "#368ec4",
+            "selectedColor" : "#ff00ff",
+            "constraint" : { "color": "#ff3333",                             
+                             "zIndex": 1    
+                            }
+        }]
+    }       
+}

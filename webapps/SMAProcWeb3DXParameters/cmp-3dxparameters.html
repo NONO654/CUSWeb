@@ -1,0 +1,127 @@
+<link rel="import" href="../SMAProcSP/sp-base/sp-base.html" />
+<link rel="import" href="../SMAProcWebAuthoringUtils/cmp-plmobject-selection/cmp-plmobject-selection.html">
+<dom-module id="cmp-3dxparameters">
+<template>
+    <style>
+    :host {
+        display: block;
+        margin: 1em;
+    }
+    .ie11table { display: table; width: 100%;}
+    .ie11tr { display: table-row; }
+    .ie11td { display: table-cell; padding: 0.25em; }
+    .header .ie11td {font-weight: 600; border-bottom: 1px #ccc solid; }
+    .ie11tr:nth-child(odd) { background-color: #F9F9F9; }
+    </style>
+    <p>Mapping from <kbd>[[source]]</kbd> to <kbd>[[destination]]</kbd></p>
+    <cmp-plmobject-selection id="plmObjectChooser" disabled></cmp-plmobject-selection>
+    <div class="ie11table">
+        <div class="ie11tr header">
+            <div class="ie11td">3DX Parameter</div>
+            <div class="ie11td">Direction</div>
+            <div class="ie11td">Activity Parameter</div>
+        </div>
+        <template is="dom-repeat" items="[[mappings]]">
+            <div class="ie11tr">
+              <div class="ie11td">[[item.kwparameter]]</div>
+              <div class="ie11td">[[item.direction]]</div>
+              <div class="ie11td">[[item.parameter]]</div>
+            </div>
+        </template>
+  </div>
+  <h5>Execution options</h5>
+  <ul>
+      <li><input type="checkbox" disabled checked$="[[stdout]]" /> Log standard output</li>
+      <li><input type="checkbox" disabled checked$="[[stderr]]" /> Log error output</li>
+  </ul>
+</template>
+<script>
+(function(){
+    'use strict';
+    var PARAMETERS = 'Actvity Parameters';
+    var KW_PARAMETERS = '3DX Parameters';
+    Polymer({
+        is: 'cmp-3dxparameters',
+        properties: {
+            ExtensionEditorImpl: {
+                value: function () {
+                    return {
+                        UpdateUI: this.UpdateUI.bind(this),
+                        Apply: this.Apply.bind(this)
+                    };
+                }
+            },
+            source: { type: String },
+            destination: { type: String },
+            mappings: { type: Array },
+            stdout: {type: Boolean},
+            stderr: {type: Boolean}
+        },
+        UpdateUI: function (act, step, extensionConfig) {
+            console.log('cmp-3dxparameters load', act, step, extensionConfig);
+            var mappingDirectionProperty = extensionConfig.getPropertyByName('mappingDirection');
+            var mappingDirection = mappingDirectionProperty ? mappingDirectionProperty.getValue() : 0;
+
+            var plmObjectProperty = extensionConfig.getPropertyByName('PLMObject');
+            var plmObject = plmObjectProperty ? plmObjectProperty.getValue() : 0;
+
+            var me = this;
+            // TODO replace by plmObjectChooser SDK component once available
+            require(['DS/SMAProcWebCommonControls/FileChooser'],
+                function () {
+                    me.$.plmObjectChooser.activity = act;
+                    me.$.plmObjectChooser.setRuleXML(plmObject);
+                },
+                console.error.bind(console, 'Failed to load filechooser')
+            );
+
+            if (mappingDirection === 0) {
+                this.source = PARAMETERS;
+                this.destination = KW_PARAMETERS;
+            } else {
+                this.source = KW_PARAMETERS;
+                this.destination = PARAMETERS;
+            }
+
+            var mappingsProperty = extensionConfig.getPropertyByName('mappings');
+            var mappings = mappingsProperty ? mappingsProperty.getProperties().map(function(property) {
+                var propertyValue = property && property.getValue();
+                if (propertyValue) {
+                    var parsedMapping;
+                    try {
+                        parsedMapping = (new DOMParser()).parseFromString(propertyValue, 'text/xml').firstChild;
+                    } catch (e) {
+                        console.warn('Invalid mapping: ' + propertyValue);
+                        return null;
+                    }
+                    var parameterName = parsedMapping.getAttribute('activityparam');
+                    var kwParameterName = parsedMapping.getAttribute('kwparam');
+                    var kwparamunit = parsedMapping.getAttribute('kwparamunit');
+                    var plmobject = parsedMapping.getAttribute('plmobject');
+
+                    return {
+                        kwparameter: kwParameterName,
+                        direction: (mappingDirection === 0? '←' : '→'),
+                        parameter: parameterName,
+                        kwparamunit: kwparamunit,
+                        plmobject: plmobject
+                    };
+                } else {
+                    return null;
+                }
+            }).filter(function (p) {
+                return p;
+            }) : [];
+            this.mappings = mappings;
+
+            var stdoutProperty = extensionConfig.getPropertyByName('stdout');
+            this.stdout = stdoutProperty ? stdoutProperty.getValue() : false;
+
+            var stderrProperty = extensionConfig.getPropertyByName('stderr');
+            this.stderr = stderrProperty ? stderrProperty.getValue() : false;
+        },
+        Apply: function () {}
+    });
+})();
+</script>
+</dom-module>

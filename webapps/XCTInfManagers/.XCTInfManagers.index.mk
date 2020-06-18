@@ -1,0 +1,11 @@
+m|XCTInfrastructureWeb\XCTInfManagers.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.7.19166
+r|G:\R421\BSF\.
+t|win_b64\webapps\XCTInfManagers\XCTInfManagers.js|1560556877|7515
+s|XCTInfrastructureWeb\XCTInfManagers.mweb\src\XCTInfCommandManager.js|1560263756|3485
+s|XCTInfrastructureWeb\XCTInfManagers.mweb\src\XCTInfDragAndDropManager.js|1507621977|14208
+s|XCTInfrastructureWeb\XCTInfManagers.mweb\src\XCTInfLoaderManager.js|1545039304|2465
+s|XCTInfrastructureWeb\XCTInfManagers.mweb\src\XCTInfCEFManager.js|1506063914|1290
+s|XCTInfrastructureWeb\XCTInfManagers.mweb\src\XCTInfManagers.js|1498655171|102

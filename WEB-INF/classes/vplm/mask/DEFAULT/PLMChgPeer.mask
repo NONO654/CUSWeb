@@ -1,0 +1,101 @@
+// ===========================================================
+// PACKAGE   : PLMChgPeer
+// ===========================================================
+// Manually created : March 19, 2008
+// -----------------------------------------------------------
+// Syntax:
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+//  with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 1 entity :
+// - PLMChgPeer
+
+// ===========================================================
+ENTITY PLMChgPeer
+// ===========================================================
+// --- attributes: 5
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR V_discipline;Y;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+FATTR PLM_ExternalID;Y
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR V_discipline;Y
+FATTR originated;Y
+FATTR modified;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR V_discipline;Y
+FATTR originated;Y
+FATTR modified;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR V_discipline;N
+FATTR originated;N
+FATTR modified;N
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR V_discipline;N
+FATTR originated;N
+FATTR modified;N
+
+// ===========================================================
+// End of PLMChgPeer package's DEFAULT mask file
+// ===========================================================

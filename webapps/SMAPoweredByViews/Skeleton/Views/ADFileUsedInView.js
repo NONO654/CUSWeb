@@ -1,0 +1,2 @@
+/*!  Copyright 2018 Dassault Systemes. All rights reserved. */
+define("DS/SMAPoweredByViews/Skeleton/Views/ADFileUsedInView",["UWA/Core","UWA/Class/View"],function(b,a){return a.extend({tagName:"div",render:function(){var c=[];c.push({tag:"span",styles:{opacity:"0.3",margin:"36px 10px 0 36px"},"class":"fonticon fonticon-tools fonticon-2x"});c.push({tag:"span",styles:{opacity:"0.3","font-size":"36px"},"class":"font-3dsregular",text:"Under Construction"});this.container.setContent(c);return this}})});

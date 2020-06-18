@@ -1,0 +1,1 @@
+define("DS/SMAProcWebCmds/SMAProcWebCmds_zh",{});define("DS/SMAProcWebCmds/assets/nls/SMAProcExtensionEditorCmd",{StepCanOnlyBeEditedInPCN:"只能在 Process Composer 本机应用程序中编辑此步骤",OpenProcessInPCN:"在 Process Composer 本机应用程序中打开此进程"});

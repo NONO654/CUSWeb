@@ -1,0 +1,299 @@
+{
+  "action_bar": {
+    "standard": {
+      "file": "PowerByHome.xml",
+      "module": "PowerByHome"
+    },
+    "touch": {
+      "file": "PowerByHome.xml",
+      "module": "PowerByHome"
+    }
+  },
+  "padsettings": {
+    "pswebinwin": {
+      "run_options": {
+        "default_view": {
+          "value": "treelistview",
+          "preference": {
+            "type": "hidden"
+          }
+        },
+        "propertiesFacet": {
+          "value": [
+            "properties"
+          ]
+        }
+      },
+      "debug_options": {
+        "activateWebView": {
+          "value": true,
+          "preference": {
+            "type": "boolean",
+            "label": "Activate the web view"
+          }
+        },
+        "enopad_webapis": {
+          "value": false
+        },
+        "filterNls": {
+          "value": ["ds6w:type", "ds6w:status"]
+        }
+      },
+      "webapi_options": {
+        "fetch": {
+          "select_predicate": ["bo.PLMReference.v_versionid"],
+          "select_file": ["icon", "thumbnail_2d"]
+        },
+        "navigate": {
+          "select_bo": ["physicalid", "ds6w:type", "ds6w:reservedBy"],
+          "select_rel": ["physicalid", "ds6w:type"],
+          "select_ds6w_facet": [],
+          "compute_select_bo": ["thumbnail_2d", "icon"],
+          "q.iterative_filter_query_bo": "[ds6w:globalType]:\"ds6w:Document\" OR [ds6w:globalType]:\"ds6w:Part\""
+        }
+      }
+    }
+  },
+  "view_settings": {
+    "basicTreelistopts": {
+      "version": "1.0.0",
+      "apiVersion": 2,
+      "defaultCellHeight": 26,
+      "iconsSize": 20,
+      "height": "auto",
+      "useAsyncPreExpand": true,
+      "isEditable": false,
+      "resize": {
+        "columns": true
+      },
+      "headersDimensions": {
+        "height": 30
+      },
+      "performances": {
+        "debounceCellInternalUpdateTimer": 1,
+        "useRequestAnimationFrame": true
+      },
+      "selection": {
+        "unselectAllOnEmptyArea": true,
+        "toggle": false,
+        "enableListSelection": true
+      },
+      "enableTreeColumnEllipsisOverflow": true,
+      "enableActiveUI": false,
+      "enableKeyboardNavigation": true,
+      "columns": []
+    },
+    "columnDefinition": [{
+      "dataIndex": "tree",
+      "ds6w": "ds6w:label",
+      "width": 200,
+      "customisation": {
+        "exportable": {
+          "lock": true,
+          "value": true
+        },
+        "layout": {
+          "lock": true,
+          "hidden": false
+        }
+      }
+    }, {
+      "dataIndex": "ds6wg:revision",
+      "ds6w": "ds6wg:revision",
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": false
+        }
+      }
+    }, {
+      "dataIndex": "sessionStatus",
+      "minWidth": 60,
+      "maxWidth": 60,
+      "customisation": {
+        "exportable": {
+          "lock": true,
+          "value": false
+        },
+        "layout": {
+          "lock": false,
+          "hidden": false
+        }
+      }
+    }, {
+      "dataIndex": "ds6w:reserved",
+      "ds6w": "ds6w:reserved",
+      "minWidth": 40,
+      "maxWidth": 40,
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": false
+        }
+      }
+    }, {
+      "dataIndex": "ds6w:status",
+      "ds6w": "ds6w:status",
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": false
+        }
+      }
+    }, {
+      "dataIndex": "filename",
+      "width": 100,
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": false
+        }
+      }
+    }, {
+      "dataIndex": "ds6w:identifier",
+      "ds6w": "ds6w:identifier",
+      "width": 100,
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": false
+        }
+      }
+    }, {
+      "dataIndex": "ds6w:type",
+      "ds6w": "ds6w:type",
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": false
+        }
+      }
+    }, {
+      "dataIndex": "ds6w:cadMaster",
+      "ds6w": "ds6w:cadMaster",
+      "customisation": {
+      "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": false
+        }
+      }
+    }, {
+      "dataIndex": "ds6w:created",
+      "ds6w": "ds6w:created",
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": true
+        }
+      }
+    }, {
+      "dataIndex": "ds6w:description",
+      "ds6w": "ds6w:description",
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": true
+        }
+      }
+    }, {
+      "dataIndex": "instanceName",
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": true
+        }
+      }
+    }, {
+      "dataIndex": "familyDescription",
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": true
+        }
+      }
+    }, {
+      "dataIndex": "ds6w:modified",
+      "ds6w": "ds6w:modified",
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": true
+        }
+      }
+    }, {
+      "dataIndex": "ds6w:reservedBy",
+      "ds6w": "ds6w:reservedBy",
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": true
+        }
+      }
+    }, {
+      "dataIndex": "ds6w:responsible",
+      "ds6w": "ds6w:responsible",
+      "customisation": {
+        "exportable": {
+          "lock": false,
+          "value": true
+        },
+        "layout": {
+          "lock": false,
+          "hidden": true
+        }
+      }
+    }]
+  }
+}

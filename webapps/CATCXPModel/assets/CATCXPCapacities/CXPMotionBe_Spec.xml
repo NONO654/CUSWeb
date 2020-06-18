@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IdeaExperienceCapacities>
+  <Header>
+    <Version>0.1</Version>
+  </Header>
+  <Capacities>
+    <Capacity alias="Goes To"       guid="BC4716E3-EE53-4B50-A4FC-B4D6EF50CF29" id="goTo"                    picturePath="icons/caps/I_CXPMoveGo.png"       targetID="CXP3DActor_Spec;CXP3DActorOverride_Spec"  type="driver"/>
+    <Capacity alias="Looks At"      guid="86A9C226-CC9A-462C-B263-1D1D9D200F6B" id="lookAt"                  picturePath="icons/caps/I_CXPMoveLookAt.png"   targetID="CXP3DActor_Spec;CXP3DActorOverride_Spec"  type="driver"/>
+    <Capacity alias="Follows"       guid="1A3789BF-93D7-4052-953D-63B7D20A4204" id="followPath"              picturePath="icons/caps/I_CXPMoveFollow.png"   targetID="CXPVirtualPathActor_Spec"                 type="driver"/>
+    <Capacity alias="Is Going To"   guid="DB463A00-1370-4B30-B4A4-606B2B20E2D6" id="isGoingTo"               picturePath="icons/caps/I_CXPMoveGo.png"       targetID="CXP3DActor_Spec;CXP3DActorOverride_Spec"  type="sensor"/>
+    <Capacity alias="Is Following"  guid="4C52053F-4E4E-48C5-8416-8C884E2E3652" id="isFollowing"             picturePath="icons/caps/I_CXPMoveFollow.png"   targetID="CXPVirtualPathActor_Spec"                 type="sensor"/>
+    <Capacity alias="Has Reached"   guid="77248BCF-FAE7-4CB4-824D-BFF1F96C0108" id="MotionHasReachedEvent"   picturePath="icons/caps/I_CXPMoveReach.png"    targetID="CXP3DActor_Spec;CXP3DActorOverride_Spec"  type="sensorEvent"  targetParam="targetActor"/>
+    <Capacity alias="Has Completed" guid="7BD61187-0966-4B47-8D91-046826DC2951" id="MotionHasCompletedEvent" picturePath="icons/caps/I_CXPMoveComplete.png" targetID="CXPVirtualPathActor_Spec"                 type="sensorEvent"  targetParam="path"/>
+    <Capacity alias="Has Looked At" guid="DE818FE5-8CE6-4CBB-8EA5-43AA43493FE0" id="MotionHasLookedAtEvent"  picturePath="icons/caps/I_CXPMoveLookAt.png"   targetID="CXP3DActor_Spec;CXP3DActorOverride_Spec"  type="sensorEvent"  targetParam="targetActor"/>
+  </Capacities>
+
+  <ExperienceObject>
+
+
+
+    <CXPService id="goesTo" fctStart="goTo" fctIsPlaying="isGoingTo" fctPause="pauseGoTo" fctResume="resumeGoTo" fctStop="stopGoTo" mode="task">
+      <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec;CXP3DActorOverride_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="goes to" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPService id="lookAt" fctStart="lookAt" fctIsPlaying="isLookingAt" fctPause="pauseLookAt" fctResume="resumeLookAt" fctStop="stopLookAt" mode="task">
+      <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec;CXP3DActorOverride_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="looks at" icon="icons/caps/I_CXPMoveLookAt.png" exposedVariable="target"/>
+    </CXPService>
+
+    <CXPService id="followPath" fctStart="followPath" fctIsPlaying="isFollowingAPath" fctPause="pauseFollowPath" fctResume="resumeFollowPath" fctStop="stopFollowPath" mode="task" >
+      <Variable name="targetPath" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="DriverTask" alias="follows" icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="targetPath"/>
+    </CXPService>
+
+    <CXPFunction id="isGoingTo" body="isGoingTo" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec;CXP3DActorOverride_Spec"/>
+      <NaturalLanguageInfo capacityType="SensorState" alias="is going to" icon="icons/caps/I_CXPMoveGo.png" exposedVariable="target"/>
+    </CXPFunction>
+
+    <CXPFunction id="isFollowing" body="isFollowing" returnValue="Boolean">
+      <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+      <NaturalLanguageInfo capacityType="SensorState" alias="is following " icon="icons/caps/I_CXPMoveFollow.png" exposedVariable="target"/>
+    </CXPFunction>
+
+    <CXPEvent id="MotionHasReachedEvent" targetParam="targetActor">
+        <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec;CXP3DActorOverride_Spec"/>
+        <NaturalLanguageInfo capacityType="SensorEvent" alias="has reached" icon="icons/caps/I_CXPMoveReach.png" exposedVariable="target"/>
+    </CXPEvent>
+
+    <CXPEvent id="MotionHasCompletedEvent" targetParam="path">
+        <Variable name="target" type="Object" restrictiveTypes="CXPVirtualPathActor_Spec"/>
+        <NaturalLanguageInfo capacityType="SensorEvent" alias="has completed" icon="icons/caps/I_CXPMoveComplete.png" exposedVariable="target"/>
+    </CXPEvent>
+
+    <CXPEvent id="MotionHasLookedAtEvent" targetParam="targetActor">
+        <Variable name="target" type="Object" restrictiveTypes="CXP3DActor_Spec;CXP3DActorOverride_Spec"/>
+        <NaturalLanguageInfo capacityType="SensorEvent" alias="has looked at" icon="icons/caps/I_CXPMoveComplete.png" exposedVariable="target"/>
+    </CXPEvent>
+
+  </ExperienceObject>
+</IdeaExperienceCapacities>
+ 
+

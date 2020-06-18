@@ -1,0 +1,1 @@
+define("DS/ENOXTriptych/ENOXTriptych_ko",{});define("DS/ENOXTriptych/assets/nls/ENOXTriptych",{_close:"닫기"});

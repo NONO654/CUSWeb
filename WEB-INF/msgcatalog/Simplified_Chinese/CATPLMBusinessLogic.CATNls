@@ -1,0 +1,235 @@
+<meta charset="UTF-8"/>
+CATPLMBusinessLogic.Alias="PLM 业务逻辑实施";
+CATPLMBusinessLogic.Description="定义开口以使用业务规则自定义 PLM 系统。";
+
+PLMInstanceAggregationCheck.Alias="实例聚集检查";
+PLMInstanceAggregationCheck.Description="能够集成业务逻辑，以通过实例验证其他项中的参考聚集。";
+
+PLMInstanceAggregationCheck.ThisObject.Alias="聚集的参考";
+PLMInstanceAggregationCheck.ThisObject.Description="此业务逻辑实际上是我们尝试将实例聚集其中的参考。";
+
+PLMInstanceAggregationCheck.ReferenceToInstantiate.Alias="参考实例化";
+PLMInstanceAggregationCheck.ReferenceToInstantiate.Description="此参数包含我们要在其他参考下聚集的参考";
+
+PLMIdentificationInitialization.Alias="属性初始化";
+PLMIdentificationInitialization.Description="能够集成业务逻辑，以预先评估创建时对象的 PLM 属性。";
+
+PLMIdentificationInitialization.ThisObject.Alias="要创建的参考。";
+PLMIdentificationInitialization.ThisObject.Description="此业务逻辑实际上是我们要创建的参考。它尚不是 PLM 对象。而是 PLM 代理。";
+
+PLMIdentificationInitialization.OperationId.Alias="对此对象执行的操作。";
+PLMIdentificationInitialization.OperationId.Description="精确对象的创建上下文：PLM 新命令中的“新建”，在复制中使用时为“克隆”，通过应用程序创建对象时为“隐式”，其他所有情况下均为“默认”。";
+
+PLMIdentificationInitialization.IdString.Alias="建议的前缀。";
+PLMIdentificationInitialization.IdString.Description="包含为评估标识符属性而建议的前缀。";
+
+PLMIdentificationInitialization.IdCloningString.Alias="在复制模式下建议的前缀。";
+PLMIdentificationInitialization.IdCloningString.Description="包含为在复制上下文中评估标识符属性而建议的前缀。";
+
+PLMIdentificationInitialization.CopyFrom.Alias="已复制的对象。";
+PLMIdentificationInitialization.CopyFrom.Description="包含在复制上下文中复制的原始对象。对读取其部分属性非常有用。";
+
+PLMIdentificationInitialization.CoupledRef.Alias="已耦合的参考。";
+PLMIdentificationInitialization.CoupledRef.Description="包含复制展示时复制的参考。";
+
+PLMIdentificationInitialization.AggregatingReference.Alias="聚集的参考。";
+PLMIdentificationInitialization.AggregatingReference.Description="已创建的实例的聚集参考（如果进行实例初始化）。";
+
+PLMIdentificationInitialization.Reference.Alias="实例参考。";
+PLMIdentificationInitialization.Reference.Description="我们初始化的实例的参考（如果进行实例初始化）。";
+
+PLMIdentificationInitialization.IncSessionId.Alias="在会话中递增。";
+PLMIdentificationInitialization.IncSessionId.Description="在会话中递增以帮助评估识别的属性的整数。";
+
+PLMAttributesValuationCheck.Alias="属性评估检查";
+PLMAttributesValuationCheck.Description="能够在最终用户修改属性之后集成业务逻辑。";
+
+PLMAttributesValuationCheck.ThisObject.Alias="已修改对象。";
+PLMAttributesValuationCheck.ErrorAttributes.Description="此业务逻辑实际上是已在其上修改属性的 PLM 对象。";
+
+PLMAttributesValuationCheck.ErrorAttributes.Alias="属性出错。";
+PLMAttributesValuationCheck.ErrorAttributes.Description="包含修改后出错的属性列表。";
+
+PLMAttributesValuationCheck.WarningAttributes.Alias="属性警告。";
+PLMAttributesValuationCheck.ErrorAttributes.Description="包含修改后已产生警告的属性列表。";
+
+PLMAttributesValuationCheck.ErrorMessages.Alias="错误消息。";
+PLMAttributesValuationCheck.ErrorMessages.Description="包含要产生的错误消息的列表。";
+
+PLMAttributesValuationCheck.WarningMessages.Alias="警告消息。";
+PLMAttributesValuationCheck.WarningMessages.Description="包含要产生的警告消息的列表。";
+
+PLMAttributesValuationFinalization.Alias="属性评估最终检查";
+PLMAttributesValuationFinalization.Description="能够在最终用户修改属性之后集成业务逻辑。";
+
+PLMAttributesValuationFinalization.ThisObject.Alias="已修改对象。";
+PLMAttributesValuationFinalization.ErrorAttributes.Description="此业务逻辑实际上是已在其上修改属性的 PLM 对象。";
+
+PLMAttributesValuationFinalization.ErrorAttributes.Alias="属性出错。";
+PLMAttributesValuationFinalization.ErrorAttributes.Description="包含修改后出错的属性列表。";
+
+PLMAttributesValuationFinalization.WarningAttributes.Alias="属性警告。";
+PLMAttributesValuationFinalization.ErrorAttributes.Description="包含修改后已产生警告的属性列表。";
+
+PLMAttributesValuationFinalization.ErrorMessages.Alias="错误消息。";
+PLMAttributesValuationFinalization.ErrorMessages.Description="包含要产生的错误消息的列表。";
+
+PLMAttributesValuationFinalization.WarningMessages.Alias="警告消息。";
+PLMAttributesValuationFinalization.WarningMessages.Description="包含要产生的警告消息的列表。";
+
+PLMAttributesPropagation.Alias="属性评估传播";
+PLMAttributesPropagation.Description="能够在最终用户修改属性之后集成业务逻辑，以传播信息：属性修改或属性可视性。";
+
+PLMAttributesPropagation.ThisObject.Alias="已修改对象。";
+PLMAttributesPropagation.ThisObject.Description="此业务逻辑实际上是已在其上修改属性的 PLM 对象。";
+
+PLMAttributesPropagation.PropagationMode.Alias="传播模式。";
+PLMAttributesPropagation.PropagationMode.Description="指明我们是希望业务逻辑传播属性值（评估），还是属性可视性（编辑）。";
+
+PLMAttributesPropagation.EditAttributeId.Alias="已修改属性。";
+PLMAttributesPropagation.EditAttributeId.Description="已修改的属性名称。";
+
+PLMImportExportAttributesValuation.Alias="导入/导出评估传播";
+PLMImportExportAttributesValuation.Description="能够在导入（以评估 PLM 属性）或导出（以从 PLM 属性提取信息）时集成业务逻辑。";
+
+PLMImportExportAttributesValuation.ThisObject.Alias="要导出的对象，或要在导入时评估的 PLM 代理。";
+PLMImportExportAttributesValuation.ThisObject.Description="此业务逻辑实际上是已导出的 PLM 对象，或即将在导入时创建的对象（PLM 代理）。";
+
+PLMImportExportAttributesValuation.OperationId.Alias="对此对象执行的操作。";
+PLMImportExportAttributesValuation.OperationId.Description="精确此业务逻辑的用法上下文：在基于文件的导出时为 DataExchangeExport，在基于文件的导入时为 DataExchangeImport，在导入公文包时为 BriefcaseImport。";
+
+PLMImportExportAttributesValuation.IdString.Alias="建议的前缀。";
+PLMImportExportAttributesValuation.IdString.Description="包含为评估标识符属性而建议的前缀。";
+
+PLMImportExportAttributesValuation.iFileId.Alias="文件名";
+PLMImportExportAttributesValuation.iFileId.Description="已导入的文件名。";
+
+PLMImportExportAttributesValuation.oReferenceId.Alias="要创建的文件名";
+PLMImportExportAttributesValuation.oReferenceId.Description="即将导出的文件名。";
+
+PLMImportExportAttributesValuation.IncSessionId.Alias="在会话中递增。";
+PLMImportExportAttributesValuation.IncSessionId.Description="在会话中递增以帮助评估识别的属性的整数。";
+
+PLMImportExportAttributesValuation.GlobalWarningMessage.ComponentType="用于部件类型：/p1。 \n";
+PLMImportExportAttributesValuation.WarningMessage.Truncation="属性 /p1 已被截断为 /p2 个字符。\n";
+
+PLMRelationEstablishmentCheck.Alias="关系建立检查";
+PLMRelationEstablishmentCheck.Description="能够集成业务逻辑，以验证两个对象之间的关系建立。";
+
+PLMRelationEstablishmentCheck.RelationType.Alias="关系类型。";
+PLMRelationEstablishmentCheck.RelationType.Description="关系类型。在 PLM 中，所有关系都有一个特定类型";
+
+PLMRelationEstablishmentCheck.Target.Alias="目标。";
+PLMRelationEstablishmentCheck.RelationType.Description="要通过关系参考的对象";
+
+PLMCustoTypeMapping.Alias="自定义类型映射计算";
+PLMCustoTypeMapping.Description="能够在共存方案中集成业务逻辑，以根据源自定义类型和属性设置对象的目标自定义类型。";
+
+PLMCustoTypeMapping.ThisObject.Alias="实体对象。";
+PLMCustoTypeMapping.ThisObject.Description="此业务逻辑实际上是要在尚未具有自定义类型（不使用）的情况下创建的目标对象。";
+
+PLMCustoTypeMapping.OperationId.Alias="对此对象执行的操作。";
+PLMCustoTypeMapping.OperationId.Description="精确此业务逻辑的用法上下文：在共存交换期间共存";
+
+PLMCustoTypeMapping.SourceObject.Alias="源对象。";
+PLMCustoTypeMapping.SourceObject.Description="代表具有其自定义类型和属性的源对象的 PLMProxy。";
+
+PLMCustoTypeMapping.SourceProvider.Alias="源提供程序名称";
+PLMCustoTypeMapping.SourceProvider.Description="源对象的提供程序的名称。";
+
+PLMCustoTypeMapping.TargetProvider.Alias="目标提供程序的名称";
+PLMCustoTypeMapping.TargetProvider.Description="目标对象的提供程序的名称。";
+
+PLMAttributesMapping.Alias="属性映射执行";
+PLMAttributesMapping.Description="能够在共存方案中集成业务逻辑，以映射外部属性。";
+
+PLMAttributesMapping.ThisObject.Alias="目标对象。";
+PLMAttributesMapping.ThisObject.Description="此业务逻辑实际上是在其上设置属性的目标对象的代理。";
+
+PLMAttributesMapping.OperationId.Alias="对此对象执行的操作。";
+PLMAttributesMapping.OperationId.Description="精确此业务逻辑的用法上下文：在共存交换期间共存";
+
+PLMAttributesMapping.SourceObject.Alias="源对象。";
+PLMAttributesMapping.SourceObject.Description="代表具有其自定义类型和属性的源对象的 PLMProxy。";
+
+PLMAttributesMapping.SourceProvider.Alias="源提供程序名称";
+PLMAttributesMapping.SourceProvider.Description="源对象的提供程序的名称。";
+
+PLMAttributesMapping.TargetProvider.Alias="目标提供程序名称";
+PLMAttributesMapping.TargetProvider.Description="目标对象的提供程序的名称。";
+
+ContactAdministrator="联系您的管理员以解决以下问题。";
+
+PLMRelationSuppressionCheck.Alias="关系取消检查";
+PLMRelationSuppressionCheck.Description="能够集成业务逻辑，以验证两个对象之间关系的取消。";
+
+PLMRelationSuppressionCheck.RelationType.Alias="关系类型。";
+PLMRelationSuppressionCheck.RelationType.Description="关系类型。在 PLM 中，所有关系都有一个特定类型";
+
+PLMRelationSuppressionCheck.Target.Alias="目标。";
+PLMRelationSuppressionCheck.RelationType.Description="通过关系参考以及我们要断开连接的对象。";
+
+PLMFinalizationForOffline.Alias="脱机属性最终化";
+PLMFinalizationForOffline.Description="启用此项可在重新连接脱机会话时最终确定新建对象的属性值。";
+
+PLMFinalizationForOffline.ThisObject.Alias="已创建参考。";
+PLMFinalizationForOffline.ThisObject.Description="此业务逻辑实际上是在脱机会话期间已创建的参考。";
+
+PLMFinalizationForOffline.OperationId.Alias="对此对象执行的操作。";
+PLMFinalizationForOffline.OperationId.Description="在此模式下，只能最终化新操作";
+
+PLMFinalizationForOffline.IdString.Alias="建议的前缀。";
+PLMFinalizationForOffline.IdString.Description="包含为评估标识符属性而建议的前缀。";
+
+PLMFinalizationForOffline.AggregatingReference.Alias="聚合参考。";
+PLMFinalizationForOffline.AggregatingReference.Description="已创建的实例的聚合参考（在实例最终化时）。";
+
+PLMFinalizationForOffline.Reference.Alias="实例的参考。";
+PLMFinalizationForOffline.Reference.Description="我们初始化的实例的参考（在实例最终化时）。";
+
+PLMCoexDelete.Alias="共存删除检查";
+PLMCoexDelete.Description="检查是否应当删除目标档案库中的输入实例。";
+
+PLMCoexDelete.ThisObject.Alias="实例。";
+PLMCoexDelete.ThisObject.Description="要检查的实例";
+
+PLMCoexDelete.AggregatingReference.Alias="父级对象。";
+PLMCoexDelete.AggregatingReference.Description="实例的母级参考。";
+
+PLMCoexDelete.AggregatedReference.Alias="子级对象。";
+PLMCoexDelete.AggregatedReference.Description="实例的子级参考。";
+
+PLMMigrationAttributesValuation.Alias="迁移属性赋值";
+PLMMigrationAttributesValuation.Description="能够在 BatchV4V6 上下文中集成业务逻辑";
+PLMMigrationAttributesValuation.ThisObject.Alias="已修改对象";
+PLMMigrationAttributesValuation.ThisObject.Description="此业务逻辑实际上是已在其上修改属性的 PLM 对象";
+PLMMigrationAttributesValuation.OperationId.Alias="对此对象执行的操作";
+PLMMigrationAttributesValuation.OperationId.Description="明确使用此业务逻辑的上下文：仅 BatchV4V6 适合此情况";
+PLMMigrationAttributesValuation.IdString.Alias="建议的前缀";
+PLMMigrationAttributesValuation.IdString.Description="包含为赋值标识符属性而建议的前缀";
+PLMMigrationAttributesValuation.CustoType.Alias="自定义类型";
+PLMMigrationAttributesValuation.CustoType.Description="说明对象的自定义类型";
+PLMMigrationAttributesValuation.OriginalRepRefPropertiesModel.Alias="展示参考属性列表";
+PLMMigrationAttributesValuation.OriginalRepRefPropertiesModel.Description="使用 V4 模型检索原始展示参考的属性列表";
+PLMMigrationAttributesValuation.MigrationProperties.Alias="用户迁移属性列表";
+PLMMigrationAttributesValuation.MigrationProperties.Description="检索用户迁移属性列表";
+
+PLMAuthoringDefaultPropagationScope.Alias="操作传播";
+PLMAuthoringDefaultPropagationScope.Description="允许或不允许传播操作";
+PLMAuthoringDefaultPropagationScope.ThisObject.Alias="已修改对象";
+PLMAuthoringDefaultPropagationScope.ThisObject.Description="此业务逻辑实际上是已在其上修改属性的 PLM 对象";
+PLMAuthoringDefaultPropagationScope.OperationId.Alias="对此对象执行的操作";
+PLMAuthoringDefaultPropagationScope.OperationId.Description="明确使用此业务逻辑的上下文：仅 Cloning 适合此情况";
+PLMAuthoringDefaultPropagationScope.OperationDetail.Alias="操作详细信息";
+PLMAuthoringDefaultPropagationScope.OperationDetail.Description="包含操作详细信息";
+PLMAuthoringDefaultPropagationScope.RootContext.Alias="操作上下文";
+PLMAuthoringDefaultPropagationScope.RootContext.Description="说明操作上下文";
+PLMAuthoringDefaultPropagationScope.Propagate.Alias="说明继续操作";
+PLMAuthoringDefaultPropagationScope.Propagate.Description="包含有关继续操作或不继续操作的决策";
+
+PLMDeleteCheck.Alias="删除操作检查";
+PLMDeleteCheck.Description="能够集成业务逻辑，以验证对象删除";
+PLMDeleteCheck.ThisObject.alias="要删除的对象";
+PLMDeleteCheck.ThisObjectDescription="此业务逻辑实际上是在其上启动删除操作的对象。";
+PLMDeleteCheck.OperationId.Alias="对此对象执行的操作";
+PLMDeleteCheck.OperationId.Description="明确此业务逻辑的用法上下文：在执行对象删除操作的过程中使用。";

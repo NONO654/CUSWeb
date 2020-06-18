@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.ReportGeneration" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflReportGeneration" nlsID="displayname">Report Generation</DisplayName>
+	<Description nlsFile="SMAWflReportGeneration" nlsID="description">Report Generation</Description>
+	<LongDescription>Report Generation</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.component.ReportGeneration</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>1000</Value>
+			<Value>700</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflReportGeneration.png" targetFilename="large/I_SMAWflReportGeneration.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflReportGeneration.CATNls" targetFilename="SMAWflReportGeneration.CATNls"/>
+		<!--<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflLoop_Japanese.CATNls" targetFilename="SMAWflReportGeneration.CATNls" locale="Japanese" />-->
+		<Stream name="Properties" streamKind="properties" sourceFilename="SMAWflLoop_CATNls.properties" targetFilename="SMAWflReportGeneration.properties"/>
+		<!--<Stream name="Properties_Japanese" streamKind="properties" sourceFilename="SMAWflLoop_JapaneseCATNls.properties" targetFilename="SMAWflLoop_ja.properties" locale="Japanese" />-->
+		<Stream name="CodeJar" streamKind="jar" sharedLoader="false" sourceFilename="SMAWflReportGeneration.jar" targetFilename="SMAWflReportGeneration.jar" />
+		<!--For cppEditor-->
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflReportGeneration.dll" targetFilename="win_b64/SMAWflReportGeneration.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflReportGeneration.sypstyle" targetFilename="SMAWflReportGeneration.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.component.ReportGeneration</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflReportGenerationEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.engineous.component.ReportGeneration.ReportGenerationHandler</Class>
+					<StreamRefs>
+						<StreamRef refStreamName="CodeJar"/>
+					</StreamRefs>
+				</Implementation>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflReportGenerationHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+		<!--  Report Generation properties -->
+
+		<Property name="ReportGenerationFileConfig" type="file" valuetype="single" mode="input">
+			<Value/>
+		</Property>
+		<Property name="UploadReportFileConfig" type="file" valuetype="single" mode="output">
+			<Value/>
+		</Property>
+		<Property name="templateFileDisplayName" type="string" valuetype="single">
+			<Value/>
+		</Property>      
+	</Properties>
+</wfext:Extension>

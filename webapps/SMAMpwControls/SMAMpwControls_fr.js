@@ -1,0 +1,1 @@
+define("DS/SMAMpwControls/SMAMpwControls_fr",{});define("DS/SMAMpwControls/assets/nls/SMAMpwLegend",{frameSelectorPlaceHolder:"Sélectionner une image...",scaleFactor:"Echelle de déformation",playOnlyTooltip:"Verrouiller l'animation sur la sélection actuelle",min:"Min :",max:"Max :"});

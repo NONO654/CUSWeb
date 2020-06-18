@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.IsightV5Adapter" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAWflExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflIsightV5Adapter" nlsID="dispname">Isight</DisplayName>
+	<Description nlsFile="SMAWflIsightV5Adapter" nlsID="desc">Runs an Isight model.</Description>
+	<LongDescription nlsFile="SMAWflIsightV5Adapter" nlsID="longdesc">Runs an Isight model as a black box, with a selected subset of the model's parameters as inputs and outputs.</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>1000</Value>
+			<Value>600</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon16" streamKind="icon16" sourceFilename="I_SMAWflIsightV5Adapter16.png" targetFilename="small/I_SMAWflIsightV5Adapter16.png" />
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="I_SMAWflIsightV5Adapter.png" targetFilename="large/I_SMAWflIsightV5Adapter.png" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAWflIsightV5Adapter.CATNls" targetFilename="SMAWflIsightV5Adapter.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAWflIsightV5Adapter_Japanese.CATNls" targetFilename="SMAWflIsightV5Adapter_Japanese.CATNls" locale="Japanese" />
+		<Stream name="EditorDLL_win_b64" streamKind="dll" sharedLoader="false" platform="win_b64" sourceFilename="win_b64/SMAWflIsightV5Adapter.dll" targetFilename="win_b64/SMAWflIsightV5Adapter.dll" />
+		<Stream name="Editor_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflIsightV5Adapter.sypstyle" targetFilename="SMAWflIsightV5Adapter.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="cppEditor" language="cpp" platform="win_b64">
+					<LateType>SMAWflIsightV5AdapterEditor_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+						<StreamRef refStreamName="Editor_stylesheet"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Handler">
+			<Implementations>
+				<Implementation name="cppHandler" language="cpp" platform="win_b64">
+					<LateType>SMAWflIsightV5AdapterHandler_VLT</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="EditorDLL_win_b64"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+	<Properties>
+
+		<Property name="SourceLocaleFile" type="file" valuetype="single" mode="input">
+			<Value>
+				<ExtensionConfig extensionName = "com.dassault_systemes.sma.datahandler.DataHandlerPLM-In">
+					<Properties>
+						<Property name="toOption" type="integer" valuetype="single">
+							<Value>
+								<![CDATA[5]]>
+							</Value>
+						</Property>
+						<Property name="exportPath" type="string" valuetype="single">
+							<Value>
+								<![CDATA[{rundir}]]>
+							</Value>
+						</Property>
+						<Property name="exportPattern" type="string" valuetype="single">
+							<Value/>
+						</Property>
+						<Property name="handlerType" type="string" valuetype="single">
+							<Value>
+								<![CDATA[com.dassault_systemes.sma.datahandler.DataHandlerPLM]]>
+							</Value>
+						</Property>
+						<Property name="Rule" type="string" valuetype="single">
+							<Value>
+								<![CDATA[]]>
+							</Value>
+						</Property>
+					</Properties>
+				</ExtensionConfig>
+			</Value>
+		</Property>
+
+		<Property name="FileParameterMappings" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="AppDataKey" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="InputNameValueFileTemplate" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="OutputNameValueFileTemplate" type="string" valuetype="single">
+			<Value/>
+		</Property>
+
+		<Property name="SupportingFiles" type="aggregate" valuetype="single" mode="input">
+		</Property>
+
+		<Property name="ReturnJobFile" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[false]]>
+			</Value>
+		</Property>
+
+		<!--NOT SUPPORTING 'Integrated SEE' TYPE, FOR NOW:
+    <Property name="SelectedEngineType" type="integer" valuetype="single">
+      <Value><![CDATA[0]]></Value>
+    </Property>
+	-->
+
+		<Property name="SelectedProfileType" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[0]]>
+			</Value>
+		</Property>
+
+		<!--NOT SUPPORTING USER-PROVIDED PROFILE DATA, FOR NOW:
+    <Property name="ServerName" type="string" valuetype="single">
+      <Value><![CDATA[]]></Value>
+    </Property>
+
+    <Property name="Port" type="integer" valuetype="single">
+      <Value><![CDATA[0]]></Value>
+    </Property>
+
+    <Property name="JMSPort" type="integer" valuetype="single">
+      <Value><![CDATA[0]]></Value>
+    </Property>
+	-->
+
+		<Property name="CopyJobLog" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[false]]>
+			</Value>
+		</Property>
+
+		<Property name="JobLogLevel" type="integer" valuetype="single">
+			<Value>
+				<![CDATA[0]]>
+			</Value>
+		</Property>
+
+	</Properties>
+
+</wfext:Extension>

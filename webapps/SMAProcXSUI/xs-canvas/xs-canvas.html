@@ -1,0 +1,265 @@
+<!--------------------------------------------------------------------
+[xs-canvas HTML Document]
+
+Project:		Experience Studio
+Version:		1.0
+Last change:    Wed, 11 Nov 2015 15:45:58 GMT
+Assigned to:	Aravind Mohan (zb8)
+Primary use:	xs-designer.html
+Description:    The template view layout gets painted on this.
+--------------------------------------------------------------------->
+<!-- Importing base -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+<!-- Importing components -->
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+<link rel="import" href="../xs-widget-interface/xs-widget-interface.html">
+<link rel="import" href="../xs-widget-binder/xs-widget-binder.html">
+<link rel="import" href="../xs-info-summary/xs-info-summary.html">
+<link rel="import" href="../../SMAProcSPUI/sp-notification/sp-notification.html">
+
+<!-- Importing application widgets -->
+<link rel="import" href="../../SMAProcXSWidgets/xs-wg-page/xs-wg-page.html">
+<link rel="import" href="../../SMAProcXSWidgets/xs-wg-layout/xs-wg-layout.html">
+<link rel="import" href="../../SMAProcXSWidgets/xs-wg-section/xs-wg-section.html">
+<link rel="import" href="../../SMAProcXSWidgets/xs-wg-item/xs-wg-item.html">
+<link rel="import" href="../../SMAProcXSWidgets/xs-wg-plm-data/xs-wg-plm-data.html">
+
+
+<dom-module id="xs-canvas">
+  <!-- <link rel="import" type="css" href="xs-canvas.css"> -->
+  <template>
+    <style>
+    :host {
+        flex-grow: 1;
+        display: -ms-flexbox !important;
+        display: -webkit-flex !important;
+        flex-direction: column !important;
+        display: flex !important;
+        margin: 10px 5px 10px 10px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        display: block;
+        height: 100%;
+        min-height: calc(100% - 20px); }
+        :host .canvas-empty-text h1:after {
+            content: 'No layout available to display';
+            text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.3), 0px -1px 0px rgba(0, 0, 0, 0.7); }
+
+    :host(.design) .canvas-empty-text h1:after {
+        content: 'Start by clicking or dragging a component from the left'; }
+
+    :host(.design) xs-wg-item {
+        cursor: move; }
+
+    :host(.design) .showextraspaceatbottom{
+        position: relative;
+        width: 100%;
+        height: calc(100% - 50px);
+    }
+
+    :host(.design) .extraspace {
+        display: block;
+        min-height: 50px;
+        width: 100%;
+        position: relative; }
+
+    /* :host(.design) .extraspaceattop { */
+    /* .extraspaceattop{
+        display: block;
+        height: 25px;
+        width: 100%;
+        position: relative; } */
+
+    .extraspace {
+        display: none; }
+
+    /* .extraspaceattop {
+      display: none;
+    } */
+
+    .showextraspaceatbottom {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .showextraspaceatbottom::-webkit-scrollbar {
+        width: 8px;
+        margin-left: 10px;
+        margin-bottom: 10px; }
+    .showextraspaceatbottom::-webkit-scrollbar-thumb {
+        background-color: #E2E4E3;
+        border-radius: 3px;
+        background-clip: padding-box; }
+    .showextraspaceatbottom::-webkit-scrollbar-thumb:hover {
+        background-color: #B4B6BA; }
+
+    .placeholder {
+        position: relative;
+        height: 8px;
+        display: block;
+        box-sizing: border-box;
+        min-height: 0.5em;
+        margin: 0px;
+        transition: background-color 0.3s, min-height 0.2s; }
+    .placeholder:last-child, .placeholder:only-of-type {
+        /* All the style goes here */
+        height: 20em; }
+    .placeholder .message {
+        color: #e6e7e9;
+        position: absolute;
+        font-size: 2em;
+        top: 15%;
+        left: 50%;
+        visibility: hidden; }
+    .placeholder .row-empty-message {
+        color: #e6e7e9;
+        position: absolute;
+        font-size: 2em;
+        top: 15%;
+        left: 50%;
+        visibility: hidden;
+        top: 30%;
+        left: 40%;
+        visibility: visible;
+        color: #898b8e; }
+    .placeholder.is-over {
+        min-height: 5em;
+        border: thin dashed gray; }
+    .placeholder.is-over .message {
+        visibility: visible; }
+    .placeholder.is-over .row-empty-message {
+        visibility: visible;
+        visibility: hidden; }
+    .placeholder.is-over .message:before, .placeholder.is-over .row-empty-message:before {
+        content: 'Γ£ô '; }
+    .placeholder.is-over .message:after, .placeholder.is-over .row-empty-message:after {
+        /*content: 'Γûí';*/ }
+
+    .xs-canvas-template {
+        position: absolute;
+        bottom: -1000px;
+        width: 100%;
+        transition: all 0.3s cubic-bezier(0.06, 1, 0.63, 0.945); }
+
+    .xs-canvas-template.is-visible {
+        position: relative;
+        display: block;
+        bottom: 0;
+        top: 2px;
+        /* height: 100%;
+        overflow-y: auto; */
+         }
+
+    .xs-canvas-template.is-visible::-webkit-scrollbar {
+        width: 8px;
+        margin-left: 10px;
+        margin-bottom: 10px; }
+    .xs-canvas-template.is-visible::-webkit-scrollbar-thumb {
+        background-color: #E2E4E3;
+        border-radius: 3px;
+        background-clip: padding-box; }
+    .xs-canvas-template.is-visible::-webkit-scrollbar-thumb:hover {
+        background-color: #B4B6BA; }
+
+    .canvas-empty-text {
+        display: none;
+        position: fixed;
+        top: 40%;
+        left: 40%;
+        color: #b4b6ba; }
+        .canvas-empty-text.is-visible {
+            display: block; }
+
+    .info-summary {
+        display: block;
+        width: 100px;
+        left: calc(100% - 100px);
+        position: relative;
+        text-align: end; }
+
+    .updpnl {
+        position: relative;
+        flex-grow: 1;
+        display: -ms-flexbox !important;
+        display: -webkit-flex !important;
+        flex-direction: column !important;
+        display: flex !important;
+        height: calc(100% - 20px);
+        flex-direction: column; }
+
+    .notification {
+        position: fixed;
+        width: 900px;
+        right: 20px;
+        top: 40px;
+        z-index: 80; }
+
+    .savedmessage {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: 10px;
+        height: 25px; }
+
+    .messagetodisplay {
+        text-shadow: 0px 1px 0 #b3b3b3;
+        width: 100%;
+        text-align: right;
+        color: grey;
+        font-weight: lighter; }
+
+    .nomessagetodisplay, :host(.design) .messagetodisplay, :host(.preview) .messagetodisplay {
+        display: none; }
+
+    :host(.design) .info-summary, :host(.preview) .info-summary {
+        display: block;}
+    </style>
+
+
+		<!-- Provides the communication bridge -->
+		<xs-widget-interface id="wginterface"></xs-widget-interface>
+
+		<!-- Get the plm data -->
+		<xs-wg-plm-data id="wgplmdata" kind="" path="" uid="{{uid}}"
+						on-plmdatasave="_onPLMDataSave"
+						on-plmdatasuccess="_onPLMDataSuccess"
+						on-plmdataerror="_onPLMDataError"
+						on-plmdatachange="_onCOSDataChange"
+						on-datarefresh="_onDataRefresh">
+		</xs-wg-plm-data>
+
+		<!-- Notification for save -->
+		<sp-notification id="notification" class="notification" position="TR" width="400"></sp-notification>
+
+		<!-- Binds the ui elements  -->
+		<xs-widget-binder id="binder" hostid="autobind"></xs-widget-binder>
+    <!-- Display the errors and warnings as summary -->
+    <span id="savedmessage" class="savedmessage">
+      <span class="messagetodisplay">{{_savedMessage}}</span>
+      <xs-info-summary id="info" class="info-summary"></xs-info-summary>
+    </span>
+
+		<sp-updatepanel id="updpnl" class="updpnl">
+			<!-- The layout goes inside this -->
+      <!-- TODO: Remove showextraspaceatbottom class at the earliest -->
+      <div id="showextraspaceatbottom" class="showextraspaceatbottom">
+			<div id="template" class="xs-canvas-template"
+					on-itemselect="onItemSelect"
+					on-itemremove="onItemRemove"
+					on-itemassociate="onItemAssociate"
+					on-itemdisassociate="onItemDisassociate"
+					on-plmdatachange="_onPLMDataChange"
+					on-datarefresh="_onDataRefresh"></div>
+    </div>
+		</sp-updatepanel>
+
+		<!-- If the canvas is empty, display a placeholder message -->
+		<div id="emptytext" class="canvas-empty-text">
+            <h1></h1>
+		</div>
+
+	</template>
+  <script type="text/javascript" src="xs-canvas.js"></script>
+</dom-module>

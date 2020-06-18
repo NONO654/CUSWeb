@@ -1,0 +1,1 @@
+define("DS/W3DXNavigationMenu/W3DXNavigationMenu_en",{});define("DS/W3DXNavigationMenu/assets/nls/NavigationMenuDefault",{AddItem:"Add item",NoObjectFound:"No item found",Search:"Search",tooltipMenu:"Menu",Loading:"Loading..."});

@@ -1,0 +1,1 @@
+define("DS/MPFCountrySelectComponent/MPFCountrySelectComponent_zh",{});define("DS/MPFCountrySelectComponent/assets/nls/countries",{BEL:"比利时",FRA:"法国",SGP:"新加坡",USA:"美国",DEU:"德国"});define("DS/MPFCountrySelectComponent/assets/nls/countrySelectComponent",{placeholder:"选择国家/地区",label:"国家/地区"});

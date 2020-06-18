@@ -1,0 +1,1 @@
+define("DS/WidgetServices/WidgetServices_de",{});define("DS/WidgetServices/assets/nls/SecurityContextNls",{ErrorSecurityContextEmpty:"Benutzer weist keinen bevorzugten Sicherheitskontext auf",ErrorSecurityContext:"Beim Aufrufen des Sicherheitskontexts ist ein Fehler aufgetreten",ErrorTimeOut:"Der Server braucht zu lange, um den Sicherheitskontext abzurufen"});

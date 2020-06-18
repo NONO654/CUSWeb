@@ -1,0 +1,10 @@
+m|WebComponentModeler\WebComponentModeler.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19138
+r|G:\R421\BSF\.
+t|win_b64\webapps\WebComponentModeler\WebComponentModeler.js|1558142585|5737
+s|WebComponentModeler\WebComponentModeler.mweb\src\WebComponentBase.js|1495552051|8588
+s|WebComponentModeler\WebComponentModeler.mweb\src\CATWebInterface.js|1487935301|3257
+s|WebComponentModeler\WebComponentModeler.mweb\src\WebFactory.js|1557241284|11180
+s|WebComponentModeler\WebComponentModeler.mweb\src\WebComponentModelerBase.js|1497271293|3601

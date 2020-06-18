@@ -1,0 +1,12 @@
+m|DELWebMfgItemDefUI\DELWebMfgItemDefUIViews.mweb
+b|j|c,m
+b|c|n,m
+v|6.421.9.19311
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELWebMfgItemDefUIViews\DELWebMfgItemDefUIViews.js|1573159892|31791
+s|DELWebMfgItemDefUI\DELWebMfgItemDefUIViews.mweb\src\BodyView.js|1571923173|35784
+s|DELWebMfgItemDefUI\DELWebMfgItemDefUIViews.mweb\src\ActionView.js|1572956229|9747
+s|DELWebMfgItemDefUI\DELWebMfgItemDefUIViews.mweb\src\DropView.js|1508151444|5837
+s|DELWebMfgItemDefUI\DELWebMfgItemDefUIViews.mweb\src\MBOMView.js|1571923196|45274
+t|win_b64\webapps\DELWebMfgItemDefUIViews\DropView.css|1568749437|733
+s|DELWebMfgItemDefUI\DELWebMfgItemDefUIViews.mweb\src\DropView.css|1508153286|1220

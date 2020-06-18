@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Application Metas -->
+    <title>Filter Explicit Management</title>
+    <!-- Application Standalone emulation files -->
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+    <!-- Include CSS for styling of the elements we are testing in that page : -->
+    <link rel="stylesheet" href="../UIKIT/UIKIT.css" type="text/css" />
+    <link rel="stylesheet" href="../ENOFilterExplicitWebInWin/ENOFilterExplicitWebInWin.css" type="text/css" />
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var readyNotif = "Filter_Ready";
+            CATCefSendString("Filter_Ready");
+        };
+
+        function BuildGoodPaths(BadPath, url, securityContext) {
+            require(['UWA/Core',
+                 'UWA/Drivers/Alone',
+                 'DS/ENOFilterExplicitWebInWin/views/filterRepairUI'
+            ], function (UWACore, UWAAlone, filterRepairUI) {
+                var filterUIObj = new filterRepairUI({
+                    brokenPaths: BadPath,
+                    url: url,
+                    ctx: securityContext
+                });
+                filterUIObj.fetchData().then(function (res) {
+                    filterUIObj.render().inject(document.body);
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
+

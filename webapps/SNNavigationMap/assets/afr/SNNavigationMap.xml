@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+    <!-- Command headers -->
+    <Template syp:name="SNNavigationMapCommandHeaders" Target="CATCmdHeadersList">
+        <CATCmdHeadersList>
+            <!-- ClassName and ResourceFile attributes handle AMD path, e.g.  MyModule/MyFileWithoutExtension -->
+            <CATCommandHeader ID="setAnchor" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+            <CATCommandHeader ID="computePaths" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+            <CATCommandHeader ID="Customize" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+            <CATCommandHeader ID="refreshMap" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+            <CATCommandHeader ID="fitAll" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+            <CATCommandHeader ID="searchMap" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+            <CATCommandHeader ID="printMap" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+            <CATCommandHeader ID="initMultiSelection" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+            <CATCommandHeader ID="stopMultiSelection" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+            <CATCommandHeader ID="selectAll" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+            <CATCommandHeader ID="clearSelection" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+            <CATCommandHeader ID="clearMap" ClassName="DS/SNNavigationMap/commands/SNNavigationMapCommands" ResourceFile="SNNavigationMap/SNNavigationMap" Available="1" />
+        </CATCmdHeadersList>
+    </Template>
+
+    <!-- Command Starters -->
+    <Template syp:name="SNNavigationMapWkbAccess" Target="CATCmdWorkbench">
+        <CATCmdWorkbench Name="SNNavigationMapWkb">
+            <!-- Define a fixed Section -->
+            <CATCmdContainer Name="ViewSection" Visibility="0" RepresentationType="AfrActionBarSection">
+              <CATCmdStarter Name="Set Anchor" Command="setAnchor" />
+              <CATCmdStarter Name="Compute Paths" Command="computePaths" />
+              <CATCmdStarter Name="Fit All" Command="fitAll" />
+              <CATCmdStarter Name="Clear" Command="clearMap" />
+            </CATCmdContainer>
+            <CATCmdContainer Name="ToolsSection" Visibility="1" RepresentationType="AfrActionBarSection">
+            <!-- <CATCmdContainer Name="Navigation" RepresentationType="AfrActionBarSection">-->
+                <CATCmdStarter Name="Customize" Command="Customize" />
+                <CATCmdStarter Name="Refresh" Command="refreshMap" />
+                <CATCmdContainer Name="MultiSelectonCmds" Visibility="1" RepresentationType="AfrActionBarDropDown">
+                  <CATCmdStarter Name="Multi Selection" Command="initMultiSelection" />
+                  <CATCmdStarter Name="Stop MultiSelection" Command="stopMultiSelection" />
+                  <CATCmdStarter Name="Select All" Command="selectAll" />
+                  <CATCmdStarter Name="Clear Selection" Command="clearSelection" />
+                </CATCmdContainer>
+                <CATCmdStarter Name="Search" Command="searchMap" />
+                <CATCmdStarter Name="Print" Command="printMap" />
+          </CATCmdContainer>
+        </CATCmdWorkbench>
+    </Template>
+</Styles>

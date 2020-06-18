@@ -1,0 +1,83 @@
+<div class="settings_SettingsContainer kpisettingsview">
+
+    <label for="title"><%- getNLS('V_DEL3DL_Title.label') %>: </label>
+    <input class="title" id="title" type="text" placeholder="<%- getNLS(get('type')) %>" <% if (get('V_DEL3DL_Title')) { %>value="<%- get('V_DEL3DL_Title') %>"<% } %>></input>
+    <br/>
+
+    <label for="xaxistitle"><%- getNLS('V_DEL3DL_X_Axis_Title.label') %>: </label>
+    <input class="xaxistitle" data-key="V_DEL3DL_X_Axis_Title" id="xaxistitle" type="text" placeholder="<%- getNLS('V_DEL3DL_X_Axis_Title.placeholder') %>" value="<%- get('V_DEL3DL_X_Axis_Title') %>"></input>
+    <br/>
+
+    <label for="yaxistitle"><%- getNLS('V_DEL3DL_Y_Axis_Title.label') %>: </label>
+    <input class="yaxistitle" data-key="V_DEL3DL_Y_Axis_Title" id="yaxistitle" type="text" placeholder="<%- getNLS('V_DEL3DL_Y_Axis_Title.placeholder') %>" value="<%- get('V_DEL3DL_Y_Axis_Title') %>"></input>
+    <br/>
+
+    <label for="yaxismin"><%- getNLS('V_DEL3DL_Y_Axis_Min.label') %>: </label>
+    <input class="yaxismin" data-key="V_DEL3DL_Y_Axis_Min" id="yaxismin" type="number" placeholder="<%- getNLS('V_DEL3DL_Y_Axis_Min.placeholder') %>" value="<%- get('V_DEL3DL_Y_Axis_Min') %>"></input>
+    <br/>
+
+    <label for="yaxismax"><%- getNLS('V_DEL3DL_Y_Axis_Max.label') %>: </label>
+    <input class="yaxismax" data-key="V_DEL3DL_Y_Axis_Max" id="yaxismax" type="number" placeholder="<%- getNLS('V_DEL3DL_Y_Axis_Max.placeholder') %>" value="<%- get('V_DEL3DL_Y_Axis_Max') %>"></input>
+    <br/>
+
+    <label for="objective"><%- getNLS('V_DEL3DL_Target.label') %>: </label>
+    <div id="slidecontainer">
+        <div class="objectiveBefore"></div>
+        <div class="objectiveAfter"></div>
+        <input class="objective slider" data-key="V_DEL3DL_Target" id="objective" type="range" min="<%- get('V_DEL3DL_Y_Axis_Min') %>" max="<%- get('V_DEL3DL_Y_Axis_Max') %>" value="<%- get('V_DEL3DL_Target') %>" step="1">
+        <span class="rangeindicator"><%- get('V_DEL3DL_Target') %></span>
+    </div>
+    <br/>
+
+    <br/>
+    <label for="workingweek"><%- getNLS('V_DEL3DL_Work_Week.label') %>: </label>
+
+    <input type="checkbox" data-key="V_DEL3DL_Work_Week" name="workingweek" value="1" id="workingweekChoice1" <% if (hasMonday) { %>checked="checked"<% } %>>
+    <label for="workingweekChoice1"><%- getNLS('monday') %></label>
+
+    <input type="checkbox" data-key="V_DEL3DL_Work_Week" name="workingweek" value="2" id="workingweekChoice2" <% if (hasTuesday) { %>checked="checked"<% } %>>
+    <label for="workingweekChoice2"><%- getNLS('tuesday') %></label>
+
+    <input type="checkbox" data-key="V_DEL3DL_Work_Week" name="workingweek" value="3" id="workingweekChoice3" <% if (hasWednesday) { %>checked="checked"<% } %>>
+    <label for="workingweekChoice3"><%- getNLS('wednesday') %></label>
+
+    <input type="checkbox" data-key="V_DEL3DL_Work_Week" name="workingweek" value="4" id="workingweekChoice4" <% if (hasThursday) { %>checked="checked"<% } %>>
+    <label for="workingweekChoice4"><%- getNLS('thursday') %></label>
+
+    <input type="checkbox" data-key="V_DEL3DL_Work_Week" name="workingweek" value="5" id="workingweekChoice5" <% if (hasFriday) { %>checked="checked"<% } %>>
+    <label for="workingweekChoice5"><%- getNLS('friday') %></label>
+
+    <input type="checkbox" data-key="V_DEL3DL_Work_Week" name="workingweek" value="6" id="workingweekChoice6" <% if (hasSaturday) { %>checked="checked"<% } %>>
+    <label for="workingweekChoice6"><%- getNLS('saturday') %></label>
+
+    <input type="checkbox" data-key="V_DEL3DL_Work_Week" name="workingweek" value="0" id="workingweekChoice7" <% if (hasSunday) { %>checked="checked"<% } %>>
+    <label for="workingweekChoice7"><%- getNLS('sunday') %></label>
+
+    <br/>
+
+    <label for="snap"><%- getNLS('V_DEL3DL_Round_Value.label') %>: </label>
+    <!-- <label class="checkboxContainer">
+        <input class="snap" data-key="V_DEL3DL_Round_Value" type="checkbox" checked="checked">
+        <span class="checkmark"></span>
+    </label> -->
+    <input class="snapprecision" data-key="V_DEL3DL_Round_Value" id="snapprecision" type="number" placeholder="<%- getNLS('V_DEL3DL_Round_Value.placeholder') %>" min="0" value="<%- get('V_DEL3DL_Round_Value') %>"></input>
+    <br/>
+
+    <label for="above"><%- getNLS('V_DEL3DL_Above_Color.label') %>: </label>
+    <div class="aboveContainer">
+    <% _.each( colors, function( val, key ){ %>
+        <div class="aboveColor <%=val%>">
+        </div>
+    <% }) %>
+    </div>
+    <br/>
+
+    <label for="below"><%- getNLS('V_DEL3DL_Below_Color.label') %>: </label>
+    <div class="belowContainer">
+    <% _.each( colors, function( val, key ){ %>
+        <div class="belowColor <%=val%>">
+        </div>
+    <% }) %>
+    </div>
+    <br/>
+</div>

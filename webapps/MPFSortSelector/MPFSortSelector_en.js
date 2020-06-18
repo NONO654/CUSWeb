@@ -1,0 +1,1 @@
+define("DS/MPFSortSelector/MPFSortSelector_en",{});define("DS/MPFSortSelector/assets/nls/SortSelector",{sortedBy:"Sorted by {name}"});

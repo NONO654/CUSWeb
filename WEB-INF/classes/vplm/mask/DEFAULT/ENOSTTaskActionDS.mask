@@ -1,0 +1,314 @@
+// ===========================================================
+// PACKAGE   : ENOSTTaskActionDS
+// ===========================================================
+// Manually created : August 20, 2009
+//
+//For TEAM below is the mask attribute rules,
+//Team defines 4 "subclass" of attributes. Presentation have to be aligned to the Team Rules
+//a) identification
+//b) description 
+//c) state of dev
+//d) ownership
+//
+//******** V_discipline is currently unpublished, When published it must expose VALUE *******
+//******** V_usage must not be published (soon internal - 3DPart R206 exception)
+//******** V_nature is published if really used, and in RO only
+//******** ATTR V_ApplicabilityDate;N;N;$ is unused in SMB deployment
+//******** ATTR reserved;N;N;$ is "useless" as long as SMB uses optimistic locking and do not lock explicitely info... & reservedby not NULL is equivalent
+//******** FATTR reservedby;N should not be provided in Write Mask (as long as it is not updated in session)
+//
+//Obviously non versionable object do not present majorrevision
+//          only personal managemnent modeler present owner as a short cut (EZQUERY)
+
+// -----------------------------------------------------------
+// Remind Syntax:
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+//  with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 2 entities :
+// - ENOSTTaskAction
+// - ENOSTTaskChildAction
+
+// ===========================================================
+ENTITY ENOSTTaskAction
+// ===========================================================
+// --- attributes: 16
+
+//ATTR V_abstract;N;N;$ unused: see V_Name
+
+// --- attributes: 
+//a) ident
+ATTR V_Name;Y;N;$
+// Not versionable: ATTR majorrevision;N;N;$
+ATTR PLM_ExternalID;Y;N;$
+
+//b) description
+//ATTR V_discipline;N;N;$
+//VALUE Unpublished
+
+//ATTR V_usage;N;N;$
+//VALUE Unpublished
+
+ATTR V_description;N;N;$
+ATTR originated;N;N;$
+ATTR V_start_date;N;N;$
+ATTR V_end_date;N;N;$
+ATTR V_duration;N;N;$
+
+ATTR V_priority;N;N;Low
+ATTR V_delIntervalTime;N;N;$
+
+ATTR E_fromExternalId;N;N;$
+
+//c) state of dev
+ATTR modified;N;N;$
+
+ATTR current;N;N;$
+VALUE Unspec
+VALUE In_work
+VALUE Completed
+
+ATTR reservedby;N;N;$
+
+ATTR V_actual_start_date;N;N;$
+ATTR V_actual_end_date;N;N;$
+
+//d) ownership
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y
+FATTR PLM_ExternalID;N
+FATTR V_description;Y
+FATTR V_start_date;Y
+FATTR V_end_date;Y
+FATTR V_priority;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+//a) ident
+FATTR V_Name;Y
+//FATTR majorrevision;Y    //NO VERSIONING
+//b) description
+//FATTR V_discipline;Y //NO PUBLISHED DISCIPLINE
+//FATTR V_usage;Y      //NO PUBLISHED USAGE
+FATTR V_start_date;Y
+FATTR V_end_date;Y
+//c) state of dev
+FATTR current;Y
+FATTR V_actual_start_date;Y
+FATTR V_actual_end_date;Y
+//FATTR reservedby;Y
+//d) owner: deviation added owner because task are personal managementg
+FATTR owner;N
+//FATTR organization;N
+FATTR project;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;N
+//FATTR majorrevision;N       //NO VERSIONING
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+//a) ident
+FATTR V_Name;Y
+//FATTR majorrevision;Y	//NO VERSIONING
+//FATTR PLM_ExternalID;Y   //NO VERSIONING
+//b) description
+//FATTR V_discipline;Y     //NO PUBLISHED DISCIPLINE
+//FATTR V_usage;Y	// NO USAGE
+//FATTR E_versionComment;Y //NO VERSIONING
+FATTR V_description;Y
+
+FATTR V_start_date;Y
+FATTR V_end_date;Y
+FATTR V_duration;Y
+FATTR V_priority;Y
+FATTR V_delIntervalTime;Y
+
+FATTR originated;Y
+FATTR E_fromExternalId;Y
+
+//c) state of dev
+FATTR V_actual_start_date;Y
+FATTR modified;Y
+FATTR V_actual_end_date;Y
+
+FATTR current;Y
+FATTR reservedby;Y
+
+//d) owner
+FATTR owner;Y
+FATTR organization;Y
+FATTR project;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+//a) ident (used for Properties Read & List) Innaceptable as first in List Mode... so removed.
+FATTR V_Name;N 
+//FATTR majorrevision;N           //NO VERSIONING
+FATTR PLM_ExternalID;N
+//b) description
+//FATTR V_discipline;N       //NO PUBLISHED DISCIPLINE
+//FATTR E_versionComment;N   //NO VERSIONING
+FATTR V_description;N
+
+FATTR V_start_date;N
+FATTR V_end_date;N
+FATTR V_duration;N
+FATTR V_priority;N
+FATTR V_delIntervalTime;N
+
+FATTR originated;N
+FATTR E_fromExternalId;N
+
+//c) state of dev
+FATTR V_actual_start_date;N
+FATTR modified;N
+FATTR V_actual_end_date;N
+FATTR current;N
+FATTR reservedby;N
+
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR V_Name;Y 
+//FATTR majorrevision;N           //NO VERSIONING
+FATTR PLM_ExternalID;N
+//b) description
+//FATTR V_discipline;N       //NO PUBLISHED DISCIPLINE
+//FATTR E_versionComment;N   //NO VERSIONING
+FATTR V_description;Y
+
+FATTR V_start_date;Y
+FATTR V_end_date;Y
+FATTR V_duration;N
+FATTR V_priority;Y
+FATTR V_delIntervalTime;Y
+
+FATTR originated;N
+FATTR E_fromExternalId;N
+
+//c) state of dev
+FATTR V_actual_start_date;N
+FATTR modified;N
+FATTR V_actual_end_date;N
+FATTR current;N
+FATTR reservedby;N
+
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// - unordered
+// ===========================================================
+ENTITY ENOSTTaskChildAction
+// ===========================================================
+// Notice the "postit", personal management behavior is not supposed to deploy instance
+// --- attributes: 7
+ATTR PLM_ExternalID;N;N;$
+ATTR originated;N;N;$
+ATTR reservedby;N;N;$
+ATTR modified;N;N;$
+//d) ownership
+ATTR owner;Y;N;$
+ATTR organization;N;N;$ 
+ATTR project;N;N;$
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+//FATTR V_description;Y	//TO BE REVISITED ?
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+//FATTR V_description;Y	//TO BE REVISITED ?
+//FATTR owner;Y	//TO BE REVISITED ?
+FATTR reservedby;Y
+FATTR modified;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+//FATTR V_description;N	//TO BE REVISITED ?
+FATTR originated;N
+//FATTR owner;N	//TO BE REVISITED ?
+FATTR reservedby;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+//FATTR V_description;Y	//TO BE REVISITED ?
+FATTR originated;N
+//FATTR owner;N	//TO BE REVISITED ?
+FATTR reservedby;N
+FATTR modified;N
+//d) owner
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+// - unordered
+// ===========================================================
+// End of ENOSTTaskActionDS package's TEAM Production mask file
+// ===========================================================

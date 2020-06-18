@@ -1,0 +1,42 @@
+<!-- Common dependencies - components should each load all of it's HTML dependencies to be self-sufficient -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html"><!-- Polymer and it's dependencies -->
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html"><!-- UIKIT -->
+<link rel="import" href="../../SMAProcSPUI/sp-nls/sp-nls.html"><!-- Utility for NLS Strings -->
+
+<dom-module id="ad-confirmation-prompt">
+
+	<!-- Load component stylesheets outside of template -->
+	<link rel="import" type="css" href="ad-confirmation-prompt.css">
+
+	<!-- Local DOM template -->
+	<template>
+		<!-- Local DOM here -->
+		<div id="modal" class="modal fade">
+			<div class="modal-wrap">
+				<div class="modal-content">
+					<div class="modal-header heading">
+						<sp-nls class="h4" id="header" nlspath="DS/SMAPoweredByViews/assets/nls/ADConfirmationPrompt" nlskey="Header"></sp-nls>
+						<!-- Close button -->
+						<button id="closeIcon" type="button" class="close" aria-hidden="true" on-click="onClose"><span class="fonticon fonticon-close"></span></button>
+					</div>
+					<div id="body" class="modal-body">
+						<!-- User provided message -->
+						<span id="message" class="message">[[message]]</span>
+					</div>
+					<div id="footer" class="modal-footer">
+						<button id="closeButton" type="button" class="btn" on-click="onClose">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADConfirmationPrompt" nlskey="Cancel"></sp-nls>
+						</button>
+						<button id="okButton" type="button" class="btn btn-primary" on-click="onOk">
+							<sp-nls nlspath="DS/SMAPoweredByViews/assets/nls/ADConfirmationPrompt" nlskey="OK"></sp-nls>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+
+	<!-- Load web-component Javascript -->
+	<script type="text/javascript" src="ad-confirmation-prompt.js"></script>
+
+</dom-module>

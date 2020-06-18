@@ -1,0 +1,1 @@
+define("DS/CfgApplicabilityUX/CfgApplicabilityUX_zh",{});define("DS/CfgApplicabilityUX/assets/nls/CfgApplicabilityNLS",{CFG_EmptyApplicability_Expression:"未为此上下文定义适用性",CFG_Applicability_Summary:"适用性汇总",Applicability_Title_Edit:"编辑",Edit_Denied:"不允许编辑操作"});

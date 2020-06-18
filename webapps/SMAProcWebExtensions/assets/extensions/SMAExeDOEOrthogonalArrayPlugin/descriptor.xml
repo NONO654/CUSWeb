@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.plugin.doe.OrthogonalArray" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="Plugin">
+	<DisplayName nlsFile="SMAExeDOEOrthogonalArrayPlugin" nlsID="dispname">Orthogonal Array</DisplayName>
+	<Description nlsFile="SMAExeDOEOrthogonalArrayPlugin" nlsID="desc">Orthogonal Array</Description>
+	<LongDescription nlsFile="SMAExeDOEOrthogonalArrayPlugin" nlsID="longdesc">
+		<![CDATA[Performs a fractional factorial experiment (fractional subset) to maintain orthogonality (independence) among the various factors and interactions.
+
+</span><span style="font-weight:bold">Advantages:
+</span><span>   + Avoids a costly full-factorial experiment (all combinations of all factors at all levels). Uses specific combinations of factors at different levels to greatly reduce the number of designs and still obtain meaningful factor effect information.
+
+</span><span style="font-weight:bold">Disadvantages:
+</span><span>   - Reported factor effects might, in fact, be due to interactions of other factors (confounding). Requires assumption that various interaction effects are negligible.]]>
+	</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Plugin</Value>
+		</Attribute>
+		<Attribute name="PluginType">
+			<Value>DOE_Technique</Value>
+		</Attribute>
+		<Attribute name="JavaName">
+			<Value>com.engineous.plugin.doe.OrthogonalArray</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAExeDOEOrthogonalArrayPlugin32.gif" targetFilename="SMAExeDOEOrthogonalArrayPlugin32.gif" />
+		<Stream name="NLS" streamKind="NLS" sourceFilename="SMAExeDOEOrthogonalArrayPlugin.CATNls" targetFilename="SMAExeDOEOrthogonalArrayPlugin.CATNls"/>
+		<Stream name="NLS_Japanese" streamKind="NLS" sourceFilename="SMAExeDOEOrthogonalArrayPlugin_ja.CATNls" targetFilename="SMAExeDOEOrthogonalArrayPlugin_ja.CATNls" locale="Japanese" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-orthogonal-array/cmp-doe-orthogonal-array.html" targetFilename="SMAProcWebDoeTechniquesImplementation/cmp-doe-orthogonal-array/cmp-doe-orthogonal-array.html"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-doe-orthogonal-array</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="Runtime">
+			<Implementations>
+				<Implementation language="java">
+					<Class>com.dassault_systemes.smaexe.plugin.doe.orthogonalarray.OrthogonalArray</Class>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+	<Properties>
+
+		<Property name="Technique Options" type="aggregate" valuetype="single">
+			<Property name="Array" type="string" valuetype="single">
+				<Value>
+					<![CDATA[L4]]>
+				</Value>
+			</Property>
+			<Property name="User-specified" type="boolean" valuetype="single">
+				<Value>
+					<![CDATA[False]]>
+				</Value>
+			</Property>
+		</Property>
+
+		<Property name="Auto-Assign Factors" type="boolean" valuetype="single">
+			<Value>
+				<![CDATA[True]]>
+			</Value>
+		</Property>
+
+		<Property name="factor attributes" type="aggregate" valuetype="single">
+			<Property name="# Levels" type="integer" valuetype="single">
+				<Value>
+					<![CDATA[2]]>
+				</Value>
+			</Property>
+			<Property name="Levels" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+			<Property name="Relation" type="string" valuetype="single">
+				<Value>
+					<![CDATA[%]]>
+				</Value>
+			</Property>
+			<Property name="Baseline" type="string" valuetype="single">
+				<Value>
+					<![CDATA[]]>
+				</Value>
+			</Property>
+		</Property>
+	</Properties>
+</wfext:Extension>

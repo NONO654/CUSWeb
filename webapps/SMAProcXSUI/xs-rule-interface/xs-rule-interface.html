@@ -1,0 +1,30 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-button-type/sp-button-type.html">
+<link rel="import" href="../../SMAProcSPUI/sp-modal/sp-modal.html">
+<link rel="import" href="../xs-rule-builder/xs-rule-builder.html">
+
+<dom-module id="xs-rule-interface">
+<template>
+ <!-- <link rel="import" type="css" href="xs-rule-interface.css"> -->
+  <sp-modal id="modalcontainer" class="mediummodal1" heading="{{_computeHeading(item,propModel)}}" width="700px" height="500px">
+    <section class="body">
+      <!--rules listing-->
+      <template id="ruleList" is="dom-repeat" items="{{allRules}}" as="rules">
+			     <xs-rule-builder sequence="{{index}}" rule-node="{{rules}}"
+            disabled = "{{disabled}}" view-info="{{viewInfo}}" meta="{{meta}}" prop-name="{{propModel.caption}}"></xs-rule-builder>
+      </template>
+      <!--add new rule button-->
+      <template is="dom-if" if="{{!disabled}}" restamp>
+        <div>
+          <button is="sp-button-type" class="new-rule" on-click="addNewRule" title="Add Rule">Add Rule</button>
+        </div>
+      </template>
+
+    </section>
+    <footer>
+	   <button is="sp-button-type" primary="" title="OK" on-click="closeRule">OK</button>
+    </footer>
+  </sp-modal>
+</template>
+  <script type="text/javascript" src="xs-rule-interface.js"></script>
+</dom-module>

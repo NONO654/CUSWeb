@@ -1,0 +1,23 @@
+<div class="access-view">
+    <span class="fonticon fonticon-user-add"></span>
+    <div class="" id="access-members" style="display: none;"></div>
+    <div class="access-scroller-view"></div>
+    <div class="members-list" style="height: 100%;">
+        {{#if hasAccesses}}
+            {{#each accesses}}
+            <div class="card-user col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img class="avatar" src="{{picture}}">
+                <div class="content">
+                    <h4 class="card-title">{{name}}</h4>
+                    <h5 class="card-subtitle">{{accessright}}</h5>
+                </div>
+                <div class="card-thumbnail-action-block">
+                    <span class="fonticon fonticon-open-down" data-model-id="{{id}}"></span>
+                </div>
+            </div>
+            {{/each}}
+        {{else}}
+            <span class="no-accesses">{{NLS.noAccesses}}</span>
+        {{/if}}
+    </div>
+</div>

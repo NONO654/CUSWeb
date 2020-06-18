@@ -1,0 +1,1 @@
+define("DS/IssueServices/IssueServices_zh",{});define("DS/IssueServices/assets/nls/IssueServices",{migration:{refresh:"重新加载此页面",upgrading:"正在更新。请稍候",upgrade:"该 Widget 已升级，请刷新您的浏览器页面以获得最新版本。",preferences:{error:"在迁移首选项过程中出现错误。"}},support:{swym:"3DSwym 不可用，有些功能可能受限。",browser:"不建议该应用程序使用 {name} {version}。为实现最佳体验，请使用建议的浏览器：{supported}",unknown:"未知"}});

@@ -1,0 +1,153 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/Tree      : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY VPMDECINVComponent
+// --------------------------------------------------
+//a) ident
+// same a V_Name //ATTR PLM_ExternalID;N;N;$
+ATTR V_Name;N;N;$
+ATTR majorrevision;N;N;$
+//b) description
+ATTR V_IsFinalized;N;N;$
+ATTR originated;N;N;$
+ATTR V_description;N;N;$
+ATTR organization;Y;N;$
+ATTR V_isLastVersion;N;N;true
+ATTR V_ProjectApplicability;N;N;$
+ATTR current;N;N;$
+//ATTR V_ApplicabilityDate;N;N;$
+//ATTR V_CustoDiscipline;N;N;$
+//ATTR V_discipline;N;N;$
+//ATTR V_isTerminal;N;N;false
+//ATTR V_isVPLMControlled;N;N;true
+//ATTR V_nature;N;Y;Specification
+//ATTR V_sec_level;N;N;0
+//ATTR V_usage;N;N;$
+//c) state of dev
+ATTR modified;N;N;$
+ATTR reserved;N;N;$
+ATTR reservedby;N;N;$
+//d) ownership
+ATTR project;N;N;$
+ATTR owner;Y;N;$
+
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+//a) ident
+FATTR V_Name;Y
+FATTR majorrevision;Y
+//b) description
+FATTR originated;Y
+FATTR organization;Y
+FATTR V_isLastVersion;Y
+FATTR V_ProjectApplicability;Y
+FATTR current;Y
+//c) state of dev
+FATTR modified;Y
+FATTR reservedby;Y
+FATTR reserved;Y
+//d) ownership
+FATTR project;Y
+FATTR owner;Y
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+//a) ident
+FATTR V_Name;Y
+FATTR majorrevision;Y
+//b) description
+FATTR originated;Y
+FATTR organization;Y
+FATTR V_isLastVersion;Y
+FATTR V_ProjectApplicability;Y
+FATTR current;Y
+//c) state of dev
+FATTR modified;Y
+FATTR reservedby;Y
+FATTR reserved;Y
+//d) ownership
+FATTR project;Y
+FATTR owner;Y
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+//a) ident
+FATTR V_Name;N
+FATTR majorrevision;N
+//b) description
+
+FATTR originated;N
+FATTR V_description;N
+FATTR organization;N
+FATTR V_isLastVersion;N
+FATTR V_ProjectApplicability;N
+FATTR current;N
+//c) state of dev
+FATTR modified;N
+FATTR reservedby;N
+FATTR reserved;N
+//d) ownership
+FATTR project;N
+FATTR owner;N
+
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+//a) ident
+FATTR V_Name;N
+FATTR majorrevision;N
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+//a) ident
+FATTR V_Name;N
+FATTR majorrevision;N
+//b) description
+
+FATTR originated;N
+FATTR V_description;N
+FATTR organization;N
+FATTR V_isLastVersion;N
+FATTR V_ProjectApplicability;N
+FATTR current;N
+//c) state of dev
+FATTR modified;N
+FATTR reservedby;N
+FATTR reserved;N
+//d) ownership
+FATTR project;N
+FATTR owner;N

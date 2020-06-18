@@ -1,0 +1,72 @@
+/* Rule ENONT_PLMPort_BLInitialization (ThisObject: PLMPort, Parameters: RuleContext)                       */
+/* NOT CONTRACTUAL and PROPERTY OF TE (TEAM ENVIRONMENT) DEFINITION, ANY CHANGE MAY HAPPEN WITHOUT NOTICE   */
+/* Parameters contains many information such as name, user, security ... depending on Operation             */
+/* Notice this BL operates for Several OpeningID and Many OperationId (New, Cloning, ...)                   */
+Let OperationId=""
+
+Let UserPrefix(String)
+
+Let ModelingType(Type)
+Let ModelingTypeName(String)
+
+Let TypeTitle(String)
+Let IDNumber(String)
+Let IDVNumber(String)
+Let ID(String)
+
+Let NameSize=0 
+   
+         /* checking Rule calling context  */ 
+
+if (ThisObject->IsSupporting("PLMPort") == false) {
+    Trace (1, "ENONT_PLMPort_BLInitialization: ERROR, Called on an Invalid Object type"  )    
+    Parameters.Message="wrong usage of rule ENONT_PLMPort_BLInitialization"
+    Parameters.Severity=3 
+	Report("Error",Parameters.Message, Parameters.Message)     
+} else {
+    if (Parameters->HasAttribute("OperationId") == true) {
+	  OperationId = Parameters->GetAttributeString("OperationId")
+      Trace (1, "ENONT_PLMPort_BLInitialization, Operation: ", OperationId   )
+    }      
+    if (Parameters->HasAttribute("OperationDetail") == true) {
+      Trace (1, "ENONT_PLMPort_BLInitialization, OperationDetails: ", Parameters->GetAttributeString("OperationDetail")   )
+    }  
+
+    Parameters.Severity=0 
+}
+
+          /* getting information from RuleContext parameters  */ 
+
+if ( UserPrefix == "" and Parameters->HasAttribute("IdString") == true )
+    UserPrefix = Parameters->GetAttributeString("IdString")
+if (UserPrefix == NULL)
+	UserPrefix = ""
+
+           /* Getting Information from current object*/ 
+
+/* PrimaryType is the custom type of a DS Modeling type */
+ModelingType = ThisObject.ModelerType
+if (ModelingType<>NULL){
+   ModelingTypeName=ModelingType.Name 
+}
+
+          /* Retrieve default NLS prefix for the title */ 
+		  
+/*find the default title for the type (RACE V2 will use the NLS of the type (somehow different from RACE V1) which is good mitigation as long as it is only default title*/
+TypeTitle=ModelingType.UserName
+
+          /* Apply business logic  for Creation */ 
+if(OperationId<>"ImportAsNew" and OperationId<>"Cloning") {
+	STAutoNumbers(ModelingTypeName, 8, IDNumber, IDVNumber)
+	Trace (1, "ENONT_PLMPort_BLInitialization, Allocated Numbers for type ", ModelingTypeName, " are ID=", IDNumber,", VN=", IDVNumber )
+
+	ID=UserPrefix+TypeTitle+IDNumber
+
+	if ( ThisObject->HasAttribute("PLM_ExternalID") == true ) {
+		NameSize=ID.Length()
+		if (NameSize>100) {
+			ID=ID.Extract(0,96)+ "..."
+		}
+		ThisObject->SetAttributeString("PLM_ExternalID",ID)
+	}
+}

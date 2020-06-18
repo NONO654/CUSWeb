@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<!-- Copyright 2017 , Dassault Systemes. All rights reserved. -->
+  <head>
+    <title></title>
+    <meta name="description" content="Form to create the company for the private Marketplace" />
+    <meta name="keywords" content="Marketplace Enterprise" />
+    <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+    <link rel="stylesheet" type="text/css" href="../MP3DPWAPConfig/assets/css/MP3DPWAP.css" />
+    <script>
+      require([
+        'DS/MPFMenuComponent/MenuComponent',
+        'i18n!DS/MPFCompanyComponent/assets/nls/CompanyComponent'
+      ], function (MenuComponent, I18N) {
+        'use strict';
+        var steps = [{ complete: false, label: I18N.get('information'), name: 'information', saveNeeded: true },
+          { complete: false, label: I18N.get('addresses'), name: 'addresses', saveNeeded: false },
+          { complete: false, label: I18N.get('members'), name: 'members', saveNeeded: false }];
+        var menuComponent = new MenuComponent({ baseURL: 'my-company', container: widget.body, steps: steps, topic: widget.getValue('companyTopic') });
+        widget.addEvent('onLoad', menuComponent.load.bind(menuComponent));
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

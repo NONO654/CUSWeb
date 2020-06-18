@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+        <!-- Widget Infos -->
+        <title>Run Your App</title>
+        <meta name="author" content="Dassault Systèmes" />
+        <meta name="description" content="UWA container" />
+        <meta name="apiVersion" content="1.3" />
+
+        <!-- Widget Preferences -->
+        <widget:preferences>
+            <widget:preference name="moduleUrl" label="urlLabel" type="text" defaultValue=""/>
+        </widget:preferences>
+
+        <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+        <!-- UWA Environment -->
+        <link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+        <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="../UIKIT/UIKIT.css" />
+        <script type="text/javascript" src="../UIKIT/UIKIT.js"></script>
+
+        <!-- Widget Styles -->
+        <style type="text/css">
+
+            .runyourapp-input-wrap {
+                overflow: hidden;
+                padding-right: 0.7em;
+            }
+
+            .runyourapp-input-wrap > input {
+                height: 37px;
+            }
+
+            .runyourapp-btn {
+                float: right;
+            }
+
+            .runyourapp-container {
+                margin: auto;
+                max-width: 1170px;
+                padding-top: 11px;
+            }
+
+            .runyourapp-error {
+                padding: 20px 5px;
+                text-align: center;
+            }
+
+        </style>
+
+        <script type="text/javascript">
+        //<![CDATA[
+        /* global widget, require */
+
+        require(
+        [
+            // UWA
+            'UWA/Core',
+            'UWA/Event',
+            'UWA/Element',
+
+            // UIKIT
+            'DS/UIKIT/Input/Button',
+            'DS/UIKIT/Input/Text',
+
+            //UWP
+            'DS/UWPClientCode/Data/Widgets',
+
+            // i18n
+            'i18n!DS/RunYourApp/assets/nls/RunYourApp'
+        ],
+        function (UWA, Event, Element, Btn, Txt, Data, i18nRunYourApp) {
+            'use strict';
+
+            function findWidget (id) {
+                return parent.UWA.Widgets.instances.detect(function (e) {
+                    return e.id === id;
+                }) || widget;
+            }
+
+            function failure (message) {
+                // Reset the preference because that was a bad input.
+                widget.setValue('moduleUrl', '');
+                resetMessage();
+                displayMessage(message);
+            }
+
+            function displayMessage (message) {
+
+                var errorDiv = Element.getElement.call(document, '.runyourapp-error');
+
+                if (message && message.length && errorDiv) {
+
+                    errorDiv.addContent({
+                        tag: 'span',
+                        'class': 'fonticon fonticon-attention '
+                    });
+
+                    errorDiv.addContent({
+                        tag: 'p',
+                        text: message
+                    });
+                }
+            }
+
+            function resetMessage () {
+                var errorDiv = Element.getElement.call(document, '.runyourapp-error');
+                errorDiv && errorDiv.empty();
+            }
+
+            function onLoad () {
+                var moduleUrl = widget.getValue('moduleUrl');
+
+                if (moduleUrl && moduleUrl !== widget.getUrl()) {
+                    try {
+                        findWidget(widget.id).mutate(moduleUrl, {failureCb: failure});
+                    } catch (e) {
+                        displayMessage(UWA.i18n(e.message));
+                    }
+                } else {
+                    displayAddUrl();
+                }
+            }
+
+            /**
+             * Inject the add URL form in the widget body
+             */
+            function displayAddUrl () {
+
+                var bodyWidget = widget.body,
+                    addUrlSubmit,
+                    addUrlInput;
+
+                bodyWidget.empty();
+
+                addUrlInput = new Txt({
+                    placeholder: i18nRunYourApp.insertUrl,
+                    attributes: { autofocus: true },
+                    events: {
+                        onKeyDown: function (e) {
+                            var key = Event.whichKey(e),
+                                value = this.getValue().trim();
+
+                            if (value && key === 'return') {
+                                widget.setValue('moduleUrl', value);
+                                onLoad();
+                            }
+                        },
+                        onClick: function (e) {
+                            resetMessage();
+                        }
+                    }
+                });
+
+                addUrlSubmit = new Btn({
+                    className: 'primary runyourapp-btn',
+                    value: i18nRunYourApp.submitURLBtn,
+                    events: {
+                        onClick: function (e) {
+                            Event.stop(e);
+
+                            var value = addUrlInput.getValue().trim();
+
+                            if (value) {
+                                widget.setValue('moduleUrl', value);
+                                onLoad();
+                            }
+                        }
+                    }
+                });
+
+                bodyWidget.addContent({
+                    tag: 'div',
+                    'class': 'runyourapp-container',
+                    html: [
+                        addUrlSubmit,
+                        {
+                            'class': 'runyourapp-input-wrap',
+                            html: addUrlInput
+                        }
+                    ]
+                });
+
+                bodyWidget.addContent({
+                    tag: 'div',
+                    'class': 'runyourapp-error'
+                });
+            }
+
+            widget.addEvent('onLoad', onLoad);
+        });
+
+        //]]>
+        </script>
+    </head>
+    <body></body>
+</html>

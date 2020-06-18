@@ -1,0 +1,546 @@
+// ===========================================================
+// PACKAGE   : RFLVPMLogicalDS
+// ===========================================================
+// Generated : Fri Feb  16 11:59:13 2007
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value
+//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 6 entities :
+// - RFLVPMLogicalReferenceDS
+// - RFLVPMLogicalInstanceDS
+// - RFLVPMLogicalPortDS
+// - RFLVPMLogicalConnectionDS
+// - RFLVPMLogicalRepReferenceDS
+// - RFLVPMLogicalRepInstanceDS
+
+// ===========================================================
+ENTITY RFLVPMLogicalReferenceDS
+// ===========================================================
+// --- attributes: 11
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR current;N;N;$
+ATTR majorrevision;N;N;$
+ATTR V_usage;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR current;N
+FATTR majorrevision;N
+FATTR V_description;N
+FATTR organization;N
+FATTR project;N
+FATTR owner;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR current;N
+FATTR majorrevision;N
+FATTR V_description;N
+FATTR organization;N
+FATTR project;N
+FATTR owner;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR current;N
+FATTR majorrevision;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N 
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR majorrevision;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR current;N
+FATTR majorrevision;N
+FATTR V_description;Y
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+
+// ===========================================================
+ENTITY RFLVPMLogicalInstanceDS
+// ===========================================================
+// --- attributes: 8
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+
+// ===========================================================
+ENTITY RFLVPMLogicalPortDS
+// ===========================================================
+// --- attributes: 11
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR V_Direction;Y;Y;In
+VALUE In
+VALUE Out
+VALUE InOut
+VALUE NoDirection
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR V_Direction;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+FATTR V_Direction;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+FATTR V_Direction;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+FATTR V_Direction;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_Direction;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+FATTR V_Direction;Y
+// - unordered
+
+// ===========================================================
+ENTITY RFLVPMLogicalConnectionDS
+// ===========================================================
+// --- attributes: 9
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+
+// ===========================================================
+ENTITY RFLVPMLogicalRepInstanceDS
+// ===========================================================
+// --- attributes: 8
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+
+// ===========================================================
+ENTITY RFLVPMLogicalRepReferenceDS
+// ===========================================================
+// --- attributes: 10
+ATTR PLM_ExternalID;N;N;$
+ATTR V_description;N;N;$
+ATTR owner;Y;N;$
+ATTR organization;Y;N;$
+ATTR project;N;N;$
+ATTR reservedby;N;N;$
+ATTR originated;N;N;$
+ATTR modified;N;N;$
+ATTR current;N;N;$
+ATTR majorrevision;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR V_description;Y
+// - unordered
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR current;N
+FATTR majorrevision;N
+FATTR V_description;N
+FATTR organization;N
+FATTR project;N
+FATTR owner;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR current;N
+FATTR majorrevision;N
+FATTR V_description;N
+FATTR organization;N
+FATTR project;N
+FATTR owner;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+FATTR current;N
+FATTR majorrevision;N
+FATTR V_description;N
+FATTR owner;N
+FATTR organization;N
+FATTR project;N 
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;N
+// - unordered
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+FATTR PLM_ExternalID;Y
+FATTR current;N
+FATTR majorrevision;N
+FATTR V_description;Y
+FATTR owner;N
+FATTR organization;N
+FATTR project;N
+FATTR reservedby;N
+FATTR originated;N
+FATTR modified;N
+// - unordered
+// ===========================================================
+// End of RFLVPMLogicalDS package's DEFAULT mask file
+// ===========================================================

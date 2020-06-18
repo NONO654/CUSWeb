@@ -1,0 +1,28 @@
+<!--------------------------------------------------------------------
+[sp-input HTML Document]
+
+Project:		sp
+Version:		1.0
+Last change:    Fri, 13 Nov 2015 15:08:01 GMT
+Assigned to:	Aravind Mohan
+Primary use:	Input form element styled as per UIKIT
+Description:    Input form element supporting different types
+--------------------------------------------------------------------->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+
+<dom-module id="sp-input">
+  <link rel="import" type="css" href="sp-input.css">
+  <template>
+        <!--Supporting label in different positions relative to input box will be a challenge.So removing it-->
+		<!--<label class="input-label">{{label}}</label>-->
+		<input type="{{type}}"  class="form-control input"
+               value="{{value::input}}"
+               placeholder="{{placeholder}}"
+               required$="{{required}}"
+               disabled$="{{readonly}}"
+               readonly$="{{preventinput}}">
+    </template>
+  <script type="text/javascript" src="sp-input.js"></script>
+</dom-module>

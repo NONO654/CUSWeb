@@ -1,0 +1,85 @@
+<div class="topbar-wrapperContainer">
+
+	<div class="topbar-mainContainer">
+		<div class="topbar-leftMenu-container">
+
+			<div id="topbar-all-variants" tabindex="1" class = "topbar-icon-display topbar-filter">
+				<span class = "wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-number-sign"><sub id="topbar-all-variants-sub" class="topbar-num">0</sub></span>
+			</div>
+			<!-- <span class = "fonticon fonticon-list"><sub id="topbar-all-variants-sub">0</sub></span> -->
+
+			<div id="topbar-chosen-variants" tabindex="1" class = "topbar-icon-display topbar-filter topbar-filter-chosen-selected">
+				<span class = "fonticon fonticon-user " ><sub id="topbar-chosen-variants-sub" class="topbar-num">0</sub></span>
+			</div>
+
+			<div id="topbar-unselected-variant" tabindex="1" class = "topbar-filter topbar-icon-display ">
+					<span id = "topbar-unselected-base" class = "wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-option-empty">
+						<sub id="topbar-unselected-variant-sub" class="topbar-rule-sub-base topbar-num">0</sub>
+					{{#check_3D allowRefine}}
+						<sup class="fonticon fonticon-open-down topbar-rule-dropdown-base topbar-refine-mode"></sup>
+						<!-- <span class = "fonticon fonticon-open-down topbar-refine-mode"></span> -->
+						<!-- <span class = "fonticon topbar-refine-enabled"></span> -->
+					{{/check_3D}}
+					</span>
+			</div>
+
+			<div id="topbar-rule-variants" tabindex="1" class = "topbar-icon-display topbar-filter">
+				<!-- <span class = "fonticon fonticon-3ds-how"><sub id="topbar-rule-variants-sub">0</sub></span> -->
+				<span class = "topbar-select topbar-sup-span wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-shield-empty">
+					<sub id="topbar-rule-variants-sub" class="topbar-rule-sub-base topbar-num">0</sub>
+					<sup id="topbar-rules-assistance" class="fonticon fonticon-open-down topbar-rule-dropdown-base"></sup>
+				</span>
+			</div>
+
+			<div id="topbar-mand-variants" tabindex="1" class = "topbar-icon-display topbar-filter topbar-filter-mand-selected">
+				<span class = "fonticon fonticon-attention " ><sub id="topbar-mand-variants-sub" class="topbar-num">0</sub></span>
+			</div>
+
+			<div id="topbar-conflicting-variants" tabindex="1" class = "topbar-icon-display topbar-filter topbar-filter-conflicts-selected">
+				<span class = "fonticon fonticon-alert"><sub id="topbar-conflicting-variants-sub" class="topbar-num">0</sub></span>
+			</div>
+		</div>
+
+		<div class="topbar-rightMenu-container">
+			<div id="topbar-search-variants" class = "topbar-select topbar-icon-display">
+				<span class = "fonticon fonticon-search"></span>
+			</div>
+		 <div id="topbar-toggle-view" class = "topbar-select topbar-icon-display">
+            <span class = "wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-view-list"></span>
+        </div>
+			<div id="topbar-sort-variants" class = "topbar-select topbar-icon-display">
+				<span id = "topbar-sort-variants-base"></span>
+			</div>
+
+			{{#each sort}}
+				<div id="topbar-sort-item-{{this.id}}"  class = "topbar-sort-order">
+				{{#topbar_sort_type_check this.type 'string'}}
+					<span class = "fonticon fonticon-sort-alpha-asc topbar-order-style order-asc"></span>
+					<span class = "fonticon fonticon-sort-alpha-desc topbar-order-style order-desc"></span>
+				{{else}}
+					<span class = "fonticon fonticon-sort-num-asc topbar-order-style order-asc"></span>
+					<span class = "fonticon fonticon-sort-num-desc topbar-order-style order-desc"></span>
+				{{/topbar_sort_type_check}}
+				</div>
+			{{/each}}
+
+			<!-- <div id="topbar-rules-assistance" class = "topbar-select topbar-icon-display">
+				<span class = "topbar-sup-span fonticon fonticon-3ds-how">
+				<span class = "topbar-sup-span wux-ui-3ds wux-ui-3ds-1x wux-ui-3ds-shield-empty">
+					<sup id="topbar-rule-assistance-level-icon"></sup>
+				</span>
+			</div>
+			 -->
+			{{#check_3D add3DButton}}
+			<div id="topbar-3D-button" class = "topbar-select topbar-icon-display">
+				<span class = "fonticon fonticon-compass-3d"></span>
+			</div>
+			{{/check_3D}}
+		</div>
+
+		<div class="topbar-MidMenu-Container"></div>
+
+	</div>
+
+
+</div>

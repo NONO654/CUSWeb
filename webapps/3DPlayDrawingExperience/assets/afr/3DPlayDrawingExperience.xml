@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+/*
+* @quickreview T9N  18:10:15 IR-634904-3DEXPERIENCER2019x Remove of responsive AB behavior.
+*/
+-->
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+  <Template syp:name="3DPlayDrawingExperienceAfrInterface" Target="CATCmdInterface">
+    <CATCmdInterface  WkbInterface= "CATI3DSHAREDrawingExperienceAfrInterface"/>
+  </Template>
+
+  <Template syp:name="3DPlayDrawingExperienceAfrHeaderList" Target="CATCmdHeadersList">
+    <CATCmdHeadersList>
+        <CATCommandHeader ID="ShareTo3DSwYm" Available="0" ClassName="DS/3DPlayCommands/CmdShareTo3DSwYm" HelpResourceFile = "3DPlay/3DPlayHelpForCommands" ResourceFile="3DPlay/3DPlay"  />
+        <CATCommandHeader ID="SharePrint" Available="0" ClassName="DS/3DPlayCommands/CmdSharePrint" HelpResourceFile = "3DPlay/3DPlayHelpForCommands" ResourceFile="3DPlay/3DPlay"  />
+        <CATCommandHeader ID="ShareDownload" Available="0" ClassName="DS/3DPlayCommands/CmdShareDownload" HelpResourceFile = "3DPlay/3DPlayHelpForCommands" ResourceFile="3DPlay/3DPlay"  />
+
+      <CATCommandHeader ID = "Zoom" ClassName = "DS/ViewerCommands/VisuZoomViewCmd" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Pan" ClassName = "DS/ViewerCommands/VisuPanViewCmd" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "Reframe" ClassName = "DS/ViewerCommands/VisuReframeViewCmd" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "ScaleP" ClassName = "DS/3DPlayDrawingExperience/CmdScale" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDrawingExperience/3DPlayDrawingExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "Scale" Value = "+" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "ScaleM" ClassName = "DS/3DPlayDrawingExperience/CmdScale" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDrawingExperience/3DPlayDrawingExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "Scale" Value = "-" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "Previous" ClassName = "DS/3DPlayDrawingExperience/CmdScrollSheet" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDrawingExperience/3DPlayDrawingExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "ScrollSheet" Value = "Previous" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "Next" ClassName = "DS/3DPlayDrawingExperience/CmdScrollSheet" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlayDrawingExperience/3DPlayDrawingExperience" >
+        <CATAfrCommandHeaderArgs>
+          <CATCommandHeaderArg ID = "ScrollSheet" Value = "Next" Mode = "In" />
+        </CATAfrCommandHeaderArgs>
+      </CATCommandHeader>
+      <CATCommandHeader ID = "AnnotationCommands" ClassName = "DS/3DPlayAnnotation3D/AnnotationCommands" HelpResourceFile = "3DPlay/3DPlayHelpForCommands2D" ResourceFile = "3DPlay/3DPlayExperience3D" />
+      <CATCommandHeader ID = "AnnotationTour" ClassName = "DS/3DPlayAnnotation3D/AnnotationTour" ResourceFile = "3DPlay/3DPlayExperience3D" />
+    </CATCmdHeadersList>
+  </Template>
+  <Template syp:name="3DPlayDrawingExperienceAfrWorkbench" Target="CATCmdWorkbench">
+    <CATCmdWorkbench Name="3DPlayDrawingExperienceWorkbench">
+        <CATCmdContainer Name="Fixed Area" RepresentationType="AfrActionBarFixedSection">
+          <CATCmdContainer Name = "Share" Visibility = "1" RepresentationType="AfrActionBarDropDown" >
+            <CATCmdStarter Name = "ShareTo3DSwYm"  Command = "ShareTo3DSwYm" />
+            <CATCmdStarter Name = "ShareDownload"  Command = "ShareDownload" />
+            <CATCmdStarter Name = "SharePrint"  Command = "SharePrint" />
+          </CATCmdContainer>
+        </CATCmdContainer>
+        <CATCmdContainer Name = "SectionViews" Visibility = "1" RepresentationType="AfrActionBarSection">
+          <CATCmdStarter Name = "Pan" Command = "Pan" />
+          <CATCmdStarter Name = "Zoom" Command = "Zoom" />
+          <CATCmdStarter Name = "Reframe" Command = "Reframe" />
+          <CATCmdSeparator Name = "BasicManip_Separator"/>
+          <CATCmdStarter Name = "ScaleP" Command = "ScaleP" />
+          <CATCmdStarter Name = "ScaleM" Command = "ScaleM"  />
+          <CATCmdSeparator Name = "BasicManip_Separator"/>
+
+          <CATCmdStarter Name = "Previous" Command = "Previous" />
+          <CATCmdStarter Name = "Next" Command = "Next" />
+          <CATCmdSeparator Name = "BasicManip_Separator"/>
+
+          <CATCmdStarter Name = "AnnotationCommands"  Command = "AnnotationCommands" />
+          <CATCmdStarter Name = "AnnotationTour"  Command = "AnnotationTour" />
+
+          <CATCmdSeparator Name = "BasicManip_Separator"/>
+        </CATCmdContainer>
+    </CATCmdWorkbench>
+  </Template>
+</Styles>

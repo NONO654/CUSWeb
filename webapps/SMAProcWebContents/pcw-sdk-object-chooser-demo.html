@@ -1,0 +1,174 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+    <meta charset="utf-8">
+    <title>SMAProcWebCommonContents</title>
+
+    <script type="text/javascript" src="../Polymer-1.11.3/webcomponents-lite.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+    <!--
+        Notes:
+
+        1. Don't include UWA as commented out below. This will mess with Polymer lifecyle such as calling ready twice.
+        2. Avoid default values for Object and Array type if possible
+        3. Since this is using shady dom, use unique id for querySelector, otherwise it might point to some
+            other dom instance
+    -->
+
+    <script>
+
+        localStorage.setItem('tst-mode', true);
+    </script>
+
+    <style>
+        .section {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .xcontainer {
+            width: 400px;
+            padding: 5px 0px;
+            display: block;
+            margin-left: 0px;
+        }
+
+        pre {
+            width: 400px;
+        }
+
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            background-color: lightgray
+        }
+
+        .sep {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <template>
+        <section>
+            <h2>pcw-sdk-object-chooser</h2>
+            <p>
+                This is object chooser. It does not generate any rule.
+            </p>
+            <div class="xcontainer sep">
+                1. Object chooser mode
+                <pcw-sdk-object-chooser id="comp1" plm-types="DOCUMENT"></pcw-sdk-object-chooser>
+            </div>
+
+            <br/>
+            <br/>
+
+            <div class="xcontainer sep">
+                2. Object parameter chooser mode with pre-selected parameter
+                <pcw-sdk-object-chooser id="comp2" plm-types="DOCUMENT,Physical Product,Product,VPMReference"></pcw-sdk-object-chooser>
+            </div>
+
+            <br/>
+            <br/>
+
+            <div class="xcontainer sep">
+                2. Disabled component
+                <pcw-sdk-object-chooser id="comp3" plm-types="DOCUMENT,Physical Product,Product,VPMReference" disabled></pcw-sdk-object-chooser>
+            </div>
+
+            <br/>
+            <br/>
+
+            <div class="sep">Selected Value:
+                <div id="selectedContent"></div>
+            </div>
+        </section>
+
+    </template>
+
+    <script>
+
+        require([
+            'UWA/Core', 'UWA/Data', 'DS/Core/Core', 'UWA/Element',
+            'DS/ApplicationFrame/FrameWindow',
+            'DS/ApplicationFrame/FrameWindowsManager',
+            'DS/SMAProcWebContents/ContentChooser',
+            'DS/SMAProcWebContents/PlmobjectChooser',
+            'DS/SMAProcWebContents/FileChooser',
+            'DS/SMAProcWebContents/FakeContentService',
+            'DS/SMAProcWebContents/PolyUtils',
+            'DS/SMAProcWebCommonControls/FileChooser'
+        ],
+            function (UWA, UWAData, WUXCore, UWAElement,
+                FrameWindow, FrameWindowsManager, ContentChooser, PlmobjectChooser, FileChooser, FakeContentService, PolyUtils) {
+
+                WUXCore.setFullscreen();
+                widget.addEvent('onLoad', function () {
+                    //we need a frame for webux diaglog (in this case parameter add dialog)
+
+                    var frmWindow = new FrameWindow().inject(document.body);
+
+                    frmWindow.elements.container.setStyles({ background: 'white', 'overflow-y': 'scroll' });
+
+                    var uiFrame = frmWindow.getUIFrame();
+
+                    var template = document.querySelector('template');
+
+                    var div = UWA.createElement('div', {
+                        styles: {
+                            padding: '20px'
+                        }
+                    });
+                    div.innerHTML = template.innerHTML;
+
+                    div.inject(uiFrame);
+
+                    console.log('demo ready');
+
+                    var service = new FakeContentService();
+
+                    var dataContainer = service.getDataContainer();
+                    service.setActivity(dataContainer);
+
+                    var param = dataContainer.findParameterByName('Parameter2');
+
+                    console.log('demo ready');
+
+                    PolyUtils.whenComponentReady('#comp1').then(function (el) {
+                        el.setContentService(service);
+                        el.setModel('content', dataContainer);
+                    });
+
+                    PolyUtils.whenComponentReady('#comp2').then(function (el) {
+                        el.setContentService(service);
+                        el.setModel('param', dataContainer, param);
+                    });
+
+                    PolyUtils.whenComponentReady('#comp3').then(function (el) {
+                        el.setContentService(service);
+                        el.setModel('param', dataContainer, param);
+                    });
+
+                    document.addEventListener('object-change', function (e) {
+                        var item = e.detail.value.item || '';
+
+                        if (item) {
+                            item = item.getName();
+                        }
+
+                        document.querySelector('#selectedContent').textContent = e.detail.value.category + ', ' + item;
+
+                    });
+
+                });
+            });
+
+    </script>
+</body>
+
+</html>

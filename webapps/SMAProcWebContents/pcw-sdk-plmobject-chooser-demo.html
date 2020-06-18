@@ -1,0 +1,162 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+
+<head>
+    <meta charset="utf-8">
+    <title>SMAProcWebCommonContents</title>
+
+    <script type="text/javascript" src="../Polymer-1.11.3/webcomponents-lite.js"></script>
+    <script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+    <script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+    <script type="text/javascript" src="../WebUX/WebUX.js"></script>
+    <!--
+        Notes:
+
+        1. Don't include UWA as commented out below. This will mess with Polymer lifecyle such as calling ready twice.
+        2. Avoid default values for Object and Array type if possible
+        3. Since this is using shady dom, use unique id for querySelector, otherwise it might point to some
+            other dom instance
+    -->
+
+
+    <script>
+
+        localStorage.setItem('tst-mode', true);
+    </script>
+
+    <style>
+        .section {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .xcontainer {
+            width: 500px;
+            padding: 5px 0px;
+            display: block;
+            margin-left: 0px;
+            margin-top: 10px;
+        }
+
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            background-color: lightgray;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <template>
+        <section>
+            <h2>pcw-sdk-plmobject-chooser</h2>
+            <p>
+                This is a wrapper around pcw-sdk-object-chooser that can generate rule string
+            </p>
+
+            <section>
+                <div class="xcontainer">
+                    1. Default Mode
+                    <p class="code">
+                        &lt;pcw-sdk-plmobject-chooser id="comp1" plm-types="DOCUMENT,Physical Product,Product,VPMReference"&gt;
+                    </p>
+                    <pcw-sdk-plmobject-chooser id="comp1" plm-types="DOCUMENT,Physical Product,Product,VPMReference"></pcw-sdk-plmobject-chooser>
+                </div>
+
+                <div class="xcontainer">
+                    2. Parameter Mode
+                    <p class="code">
+                        &lt;pcw-sdk-plmobject-chooser id="comp2" plm-types="DOCUMENT,Physical Product,Product,VPMReference"&gt;
+                    </p>
+                    <pcw-sdk-plmobject-chooser id="comp2" plm-types="DOCUMENT,Physical Product,Product,VPMReference"></pcw-sdk-plmobject-chooser>
+                </div>
+
+                <div class="xcontainer">
+                    2. Disabled Mode
+                    <p class="code">
+                        &lt;pcw-sdk-plmobject-chooser id="comp3" plm-types="DOCUMENT,Physical Product,Product,VPMReference" disabled/&gt;
+                    </p>
+                    <pcw-sdk-plmobject-chooser id="comp3" plm-types="DOCUMENT,Physical Product,Product,VPMReference" disabled></pcw-sdk-plmobject-chooser>
+                </div>
+
+            </section>
+
+            <br/>
+            <br/>
+
+            <div>Rule:</div>
+            <div id="rule"></div>
+
+        </section>
+    </template>
+    <script>
+
+        require([
+            'UWA/Core', 'UWA/Data', 'DS/Core/Core', 'UWA/Element',
+            'DS/ApplicationFrame/FrameWindow',
+            'DS/ApplicationFrame/FrameWindowsManager',
+            'DS/SMAProcWebContents/ContentChooser',
+            'DS/SMAProcWebContents/PlmobjectChooser',
+            'DS/SMAProcWebContents/FileChooser',
+            'DS/SMAProcWebContents/FakeContentService',
+            'DS/SMAProcWebContents/PolyUtils',
+            'DS/SMAProcWebCommonControls/FileChooser'
+        ],
+            function (UWA, UWAData, WUXCore, UWAElement,
+                FrameWindow, FrameWindowsManager, ContentChooser, PlmobjectChooser, FileChooser, FakeContentService, PolyUtils) {
+
+                WUXCore.setFullscreen();
+                widget.addEvent('onLoad', function () {
+                    //we need a frame for webux diaglog (in this case parameter add dialog)
+
+                    var frmWindow = new FrameWindow().inject(document.body);
+
+                    frmWindow.elements.container.setStyles({ background: 'white', 'overflow-y': 'scroll' });
+
+                    var uiFrame = frmWindow.getUIFrame();
+
+                    var template = document.querySelector('template');
+
+                    var div = UWA.createElement('div', {
+                        styles: {
+                            padding: '20px'
+                        }
+                    });
+                    div.innerHTML = template.innerHTML;
+
+                    div.inject(uiFrame);
+                    var service = new FakeContentService();
+                    var dataContainer = service.getDataContainer();
+
+                    service.setActivity(dataContainer);
+
+                    var param = dataContainer.findParameterByName('Parameter2');
+
+                    PolyUtils.whenComponentReady('#comp1').then(function (el) {
+                        el.setContentService(service);
+                        el.setModel('content', dataContainer);
+                    });
+
+                    PolyUtils.whenComponentReady('#comp2').then(function (el) {
+                        el.setContentService(service);
+                        el.setModel('param', dataContainer, param);
+                    });
+
+                    PolyUtils.whenComponentReady('#comp3').then(function (el) {
+                        el.setContentService(service);
+                        el.setModel('param', dataContainer, param);
+                    });
+
+                    document.addEventListener('data-change', function (e) {
+                        var rule = e.target.getRule();
+                        document.querySelector('#rule').textContent = rule;
+                        console.log(dataContainer);
+                    });
+                });
+            });
+    </script>
+</body>
+
+</html>

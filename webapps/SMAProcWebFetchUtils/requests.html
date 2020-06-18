@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SMAProcWebFetchUtils TS trial</title>
+  <link rel="stylesheet" href="../UIKIT/UIKIT.css" />
+  <script src="../AmdLoader/AmdLoader.js"></script>
+  <style>
+    body {
+      xpadding: 1em;
+    }
+
+    fieldset>fieldset {
+      padding-left: 2em;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+  </style>
+  <script>
+    require(['DS/SMAProcWebFetchUtils/requests'], function(requests) {
+      console.log("Request module loaded");
+      var getUrl = function() {
+        return document.getElementById('url').value;
+      };
+      var getAuthenticatedRequestOptions = function() {
+        return {
+          method: document.getElementById('method').value,
+          type: document.getElementById('type').value,
+          headers: document.getElementById('headers').value,
+          data: document.getElementById('payload').value
+        }
+      };
+      var get3DSpaceOptions = function() {
+        var authenticatedRequestOptions = getAuthenticatedRequestOptions();
+        authenticatedRequestOptions.tenant = document.getElementById('tenant').value;
+        authenticatedRequestOptions.securityContext = document.getElementById('securityContext').value;
+        authenticatedRequestOptions.csrfToken = document.getElementById('csrfToken').value;
+        authenticatedRequestOptions.csrfTokenName = document.getElementById('csrfTokenName').value;
+        return authenticatedRequestOptions;
+      };
+      var getE6wServiceOptions = function() {
+        var threeDSpaceOptions = get3DSpaceOptions();
+        return threeDSpaceOptions
+      }
+
+      var logSuccess = function(response) {
+        console.info('Success:', response)
+        document.getElementById('responseBody').value = response.body;
+        document.getElementById('responseHeaders').value = JSON.stringify(response.headers, null, 2);
+        document.getElementById('responseError').value = '';
+      };
+      var logError = function(error) {
+        console.warn('Error:', error);
+        document.getElementById('responseBody').value = error.body;
+        document.getElementById('responseHeaders').value = JSON.stringify(error.headers, null, 2);
+        document.getElementById('responseError').value = error.message;
+      };
+
+      document.getElementById('fetchAuthenticatedRequest').addEventListener('click', function() {
+        requests.fetchAuthenticatedRequest(getUrl(), getAuthenticatedRequestOptions()).then(logSuccess, logError);
+      });
+
+      document.getElementById('fetch3DSpace').addEventListener('click', function() {
+        requests.fetch3DSpace(getUrl(), get3DSpaceOptions()).then(logSuccess, logError);
+      });
+
+      document.getElementById('fetchE6wService').addEventListener('click', function() {
+        requests.fetchE6wService(getUrl(), getE6wServiceOptions()).then(logSuccess, logError);
+      });
+    }, console.error.bind(console, 'Error loading request module:'));
+  </script>
+</head>
+
+<body>
+  <form class="col-md-6">
+    <fieldset>
+      <legend>fetchAuthenticatedRequest</legend>
+      <div class="form-group">
+        <label for="url">URL</label>
+        <input id="url" value="/3DSpace/resources/bps/cspaces" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="method">Method</label>
+        <input id="method" value="" list="methods" class="form-control" placeholder="GET" />
+        <datalist id="methods">
+                  <option value="GET" />
+                  <option value="HEAD" />
+                  <option value="POST" />
+                  <option value="PUT" />
+                  <option value="DELETE" />
+                  <option value="CONNECT" />
+                  <option value="OPTIONS" />
+                  <option value="TRACE" />
+                  <option value="PATCH" />
+              </datalist>
+      </div>
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input id="type" value="" list="types" placeholder="json" class="form-control" />
+        <datalist id="types">
+                  <option value="json" />
+                  <option value="text" />
+                  <option value="arraybuffer" />
+                  <option value="blob" />
+                  <option value="document" />
+                  <option value="xml" />
+              </datalist>
+      </div>
+      <div class="form-group">
+        <label for="headers">Headers</label>
+        <textarea id="headers" class="form-control" placeholder="{'X-Requested-With':'XMLHttpRequest'}"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="payload">Payload</label>
+        <textarea id="payload" class="form-control" placeholder="{}"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="button" id="fetchAuthenticatedRequest" value="fetchAuthenticatedRequest" class="btn btn-default" />
+      </div>
+      <fieldset>
+        <legend>fetch3DSpace</legend>
+        <div class="form-group">
+          <label for="tenant">tenant</label>
+          <input id="tenant" value="" placeholder="OnPremise" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="securityContext">SecurityContext</label>
+          <input id="securityContext" value="" placeholder="ctx::VPLMProjectLeader.MyCompany.3DS Collab Space" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="csrfToken">CSRF token</label>
+          <input id="csrfToken" value="" placeholder="37G3-H46O-BDJL-SQH0-7DSM-N7LG-L1NU-HNRR" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="csrfTokenName">CSRF token name</label>
+          <input id="csrfTokenName" value="" placeholder="ENO_CSRF_TOKEN" class="form-control" />
+        </div>
+        <div class="form-group">
+          <input type="button" id="fetch3DSpace" value="fetch3DSpace" class="btn btn-default" />
+        </div>
+        <fieldset>
+          <legend>fetchE6wService</legend>
+          <div class="form-group">
+            <input type="button" id="fetchE6wService" value="fetchE6wService" class="btn btn-default" />
+          </div>
+        </fieldset>
+      </fieldset>
+    </fieldset>
+  </form>
+
+  <form class="col-md-6">
+    <fieldset>
+      <legend>Response</legend>
+      <div class="form-group">
+        <label>Body</label>
+        <textarea id="responseBody" class="form-control" readonly rows="9"></textarea>
+      </div>
+      <div class="form-group">
+        <label>headers</label>
+        <textarea id="responseHeaders" class="form-control" readonly></textarea>
+      </div>
+      <div class="form-group">
+        <label>Error</label>
+        <textarea id="responseError" class="form-control" readonly></textarea>
+      </div>
+    </fieldset>
+  </form>
+</body>
+
+</html>

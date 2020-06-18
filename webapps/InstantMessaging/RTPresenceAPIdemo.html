@@ -1,0 +1,53 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../c/UWA/assets/css/standalone.css" />
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+<link href="http://web3dinfra/WUXShowRoom/i_framed_sample.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../UIKIT/UIKIT.css">
+<script type="text/javascript" src="../c/UWA/js/UWA_Standalone_Alone.js"></script>
+<script>
+	var pne1RTUPApi;
+	require(['UWA/Drivers/Alone', 'DS/RTPresenceAPI/RTPresenceAPI', 'DS/UIKIT/Input/Button', 'DS/RTUserPresenceAPI/RTUserPresenceAPI'], function (UWA, RTPresence, Button, RTUserPresenceAPI) {		
+		new RTPresence({login:'ii9', button:true, clickable:true, tenant:'hyper3dsy', content:document.getElementById("ii9Presence")});
+		new RTPresence({login:'pne1', button:false, clickable:false, tenant:'hyper3dsy', content:document.getElementById("pne1Presence")});
+		new RTPresence({login:'p8d', fonticon:true, username: 'Paul Simard', tenant:'global', content:document.getElementById("p8dPresence")});
+		new RTPresence({login:'t5r', button:false, tenant:'global', username:"Thierry Olivier", content:document.getElementById("t5rPresence")});
+
+		new RTUserPresenceAPI({onclick:function(){alert("hello world");}, devEnv:true, login:'ii9', tenantId:'hyper3dsy', renderTo:document.getElementById("ii9UserPresence")});
+		pne1RTUPApi = new RTUserPresenceAPI({size:"20px", devEnv:true, login:'pne1', tenantId:'hyper3dsy', renderTo:document.getElementById("pne1UserPresence")});
+		pne1RTUPApi = new RTUserPresenceAPI({size:"80px", devEnv:true, login:'pne1', tenantId:'hyper3dsy', renderTo:document.getElementById("pne1UserPresence")});
+		pne1RTUPApi = new RTUserPresenceAPI({size:"40px", devEnv:true, login:'pne1', tenantId:'hyper3dsy', renderTo:document.getElementById("pne1UserPresence")});
+		new RTUserPresenceAPI({devEnv:true, login:'p8d', tenantId:'global', renderTo:document.getElementById("p8dUserPresence")});
+		new RTUserPresenceAPI({devEnv:true, noAvatar:true, login:'p8d', tenantId:'global', renderTo:document.getElementById("p8dUserPresence")});
+		var t5rp = new RTUserPresenceAPI({devEnv:true, login:'t5r', tenantId:'global', username:"Thierry Olivier"/*, content:document.getElementById("t5rUserPresence")*/});
+		t5rp.render().inject(document.getElementById("t5rUserPresence"));
+		
+		document.getElementById("destroyPne1").onclick = function () { 
+			pne1RTUPApi.destroy() 
+		};
+	});
+
+</script>
+</head>
+<body>
+	<article id="presences"><h3>Presence API V2 : </h3>
+		<div id="t5rUserPresence">Thierry Olivier </div>
+		<p/>
+		<div id="ii9UserPresence">Adrien Berton </div>
+		<p/>
+		<div id="pne1UserPresence">Pierre Negre </div>
+		<button id="destroyPne1">Destroy</button>
+		<p/>
+		<div id="p8dUserPresence">Paul Simard </div>
+	</article>
+	<article id="presences"><h3>Presence API : </h3>
+		<div id="t5rPresence">Thierry Olivier </div>
+		<p/>
+		<div id="ii9Presence">Adrien Berton </div>
+		<p/>
+		<div id="pne1Presence">Pierre Negre </div>
+		<p/>
+		<div id="p8dPresence">Paul Simard </div>
+	</article>
+</body>
+</html>

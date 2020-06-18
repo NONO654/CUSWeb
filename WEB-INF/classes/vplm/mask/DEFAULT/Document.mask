@@ -1,0 +1,381 @@
+// ==============================================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ==============================================================================
+MASK DEFAULT
+// --------------------------------------------------
+ENTITY DOCUMENTS
+// --------------------------------------------------
+ATTR name;Y;N
+ATTR revision;N;N
+ATTR description;N;N
+ATTR owner;N;N
+ATTR originated;N;N
+ATTR Access Type;Y;Y;Inherited
+VALUE Inherited
+VALUE Specific
+ATTR Designated User;N;N;Unassigned
+ATTR Checkin Reason;N;N
+ATTR Originator;N;N
+ATTR Title;N;N
+ATTR Language;N;Y;English
+VALUE Chinese
+VALUE English
+VALUE French
+VALUE German
+VALUE Italian
+VALUE Japanese
+VALUE Korean
+ATTR current;N;N
+ATTR reserved;N;N
+ATTR reservedby;N;N
+ATTR Is Version Object;N;N
+// --------------------------------------------------
+FUNC Tree
+// --------------------------------------------------
+FATTR Title;Y
+FATTR revision;Y
+// --------------------------------------------------
+FUNC Create
+// --------------------------------------------------
+// --------------------------------------------------
+FUNC EZQuery
+// --------------------------------------------------
+FATTR name;Y
+FATTR description;Y
+FATTR Access Type;Y
+FATTR Designated User;Y
+FATTR Checkin Reason;Y
+FATTR Originator;Y
+FATTR Title;Y
+FATTR Language;Y
+FATTR revision;Y
+FATTR current;Y
+// --------------------------------------------------
+FUNC List
+// --------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR Access Type;N
+FATTR Designated User;N
+FATTR Checkin Reason;N
+FATTR Originator;N
+FATTR Title;N
+FATTR Language;N
+FATTR revision;N
+FATTR current;N
+// --------------------------------------------------
+FUNC Query
+// --------------------------------------------------
+FATTR name;Y
+FATTR description;Y
+FATTR Access Type;Y
+FATTR Designated User;Y
+FATTR Checkin Reason;Y
+FATTR Originator;Y
+FATTR Title;Y
+FATTR Language;Y
+FATTR revision;Y
+FATTR current;Y
+// --------------------------------------------------
+FUNC Read
+// --------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR Access Type;N
+FATTR Designated User;N
+FATTR Checkin Reason;N
+FATTR Originator;N
+FATTR Title;N
+FATTR Language;N
+FATTR revision;N
+FATTR current;N
+// --------------------------------------------------
+FUNC Write
+// --------------------------------------------------
+FATTR name;Y
+FATTR revision;N
+FATTR Title;Y
+FATTR current;N
+FATTR description;Y
+FATTR owner;N
+FATTR originated;N
+FATTR Originator;N
+FATTR reserved;N
+FATTR reservedby;N
+FATTR Checkin Reason;Y
+FATTR Designated User;Y
+FATTR Language;Y
+// --------------------------------------------------
+ENTITY Document
+// --------------------------------------------------
+ATTR name;Y;N
+ATTR revision;N;N
+ATTR description;N;N
+ATTR owner;N;N
+ATTR originated;N;N
+ATTR Access Type;Y;Y;Inherited
+VALUE Inherited
+VALUE Specific
+ATTR Designated User;N;N;Unassigned
+ATTR Checkin Reason;N;N
+ATTR Originator;N;N
+ATTR Title;N;N
+ATTR Language;N;Y;English
+VALUE Chinese
+VALUE English
+VALUE French
+VALUE German
+VALUE Italian
+VALUE Japanese
+VALUE Korean
+ATTR File Version;N;N;$
+ATTR Version;N;N;$
+ATTR Version Date;N;N;$
+ATTR current;N;N
+ATTR reserved;N;N
+ATTR reservedby;N;N
+ATTR Is Version Object;N;N
+ATTR policy;N;N;$
+// --------------------------------------------------
+FUNC Tree
+// --------------------------------------------------
+FATTR Title;Y
+FATTR revision;Y
+// --------------------------------------------------
+FUNC Create
+// --------------------------------------------------
+FATTR Title;Y
+FATTR name;N
+FATTR description;Y
+FATTR policy;N
+// --------------------------------------------------
+FUNC EZQuery
+// --------------------------------------------------
+FATTR Title;Y
+FATTR name;Y
+FATTR revision;Y
+FATTR current;Y
+FATTR description;Y
+FATTR policy;Y
+FATTR owner;Y
+FATTR originated;N
+// --------------------------------------------------
+FUNC List
+// --------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR Access Type;N
+FATTR Designated User;N
+FATTR Checkin Reason;N
+FATTR Originator;N
+FATTR Title;N
+FATTR Language;N
+FATTR revision;N
+FATTR current;N
+FATTR File Version;N
+FATTR Version;N
+FATTR Version Date;N
+// --------------------------------------------------
+FUNC Query
+// --------------------------------------------------
+FATTR name;Y
+FATTR description;Y
+FATTR Access Type;Y
+FATTR Designated User;Y
+FATTR Checkin Reason;Y
+FATTR Originator;Y
+FATTR Title;Y
+FATTR Language;Y
+FATTR revision;Y
+FATTR current;Y
+FATTR File Version;Y
+FATTR Version;Y
+FATTR Version Date;Y
+FATTR Is Version Object;N
+// --------------------------------------------------
+FUNC Read
+// --------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR Access Type;N
+FATTR Designated User;N
+FATTR Checkin Reason;N
+FATTR Originator;N
+FATTR Title;N
+FATTR Language;N
+FATTR revision;N
+FATTR current;N
+FATTR File Version;N
+FATTR Version;N
+FATTR Version Date;N
+// --------------------------------------------------
+FUNC Write
+// --------------------------------------------------
+FATTR Title;Y
+FATTR name;Y
+FATTR revision;N
+FATTR current;N
+FATTR description;Y
+FATTR policy;N
+FATTR owner;N
+FATTR originated;N
+// --------------------------------------------------
+ENTITY Generic Document
+// --------------------------------------------------
+ATTR name;Y;N
+ATTR revision;N;N
+ATTR description;N;N
+ATTR owner;N;N
+ATTR originated;N;N
+ATTR Access Type;Y;Y;Inherited
+VALUE Inherited
+VALUE Specific
+ATTR Designated User;N;N;Unassigned
+ATTR Checkin Reason;N;N
+ATTR Originator;N;N
+ATTR Title;N;N
+ATTR Language;N;Y;English
+VALUE Chinese
+VALUE English
+VALUE French
+VALUE German
+VALUE Italian
+VALUE Japanese
+VALUE Korean
+ATTR Release Type;N;N;Design Release
+VALUE Design Release
+VALUE Production Release
+ATTR Approver;N;N;$
+ATTR Design Group Owner;N;N;$
+ATTR Created On;N;N;$
+ATTR current;N;N
+ATTR reserved;N;N
+ATTR reservedby;N;N
+ATTR Is Version Object;N;N
+// --------------------------------------------------
+FUNC Tree
+// --------------------------------------------------
+FATTR Title;Y
+FATTR revision;Y
+// --------------------------------------------------
+FUNC Create
+// --------------------------------------------------
+FATTR name;Y
+FATTR Title;Y
+FATTR description;Y
+FATTR Access Type;Y
+FATTR Release Type;Y
+FATTR Design Group Owner;Y
+FATTR Created On;Y
+FATTR Language;Y
+// --------------------------------------------------
+FUNC EZQuery
+// --------------------------------------------------
+FATTR name;Y
+FATTR description;Y
+FATTR Access Type;Y
+FATTR Designated User;Y
+FATTR Checkin Reason;Y
+FATTR Originator;Y
+FATTR Title;Y
+FATTR Language;Y
+FATTR revision;Y
+FATTR current;Y
+FATTR Release Type;Y
+FATTR Approver;Y
+FATTR Design Group Owner;Y
+FATTR Created On;Y
+FATTR Is Version Object;N
+// --------------------------------------------------
+FUNC List
+// --------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR Access Type;N
+FATTR Designated User;N
+FATTR Checkin Reason;N
+FATTR Originator;N
+FATTR Title;N
+FATTR Language;N
+FATTR revision;N
+FATTR current;N
+FATTR Release Type;N
+FATTR Approver;N
+FATTR Design Group Owner;N
+FATTR Created On;N
+// --------------------------------------------------
+FUNC Query
+// --------------------------------------------------
+FATTR name;Y
+FATTR description;Y
+FATTR Access Type;Y
+FATTR Designated User;Y
+FATTR Checkin Reason;Y
+FATTR Originator;Y
+FATTR Title;Y
+FATTR Language;Y
+FATTR revision;Y
+FATTR current;Y
+FATTR Release Type;Y
+FATTR Approver;Y
+FATTR Design Group Owner;Y
+FATTR Created On;Y
+FATTR Is Version Object;N
+// --------------------------------------------------
+FUNC Read
+// --------------------------------------------------
+FATTR name;N
+FATTR description;N
+FATTR Access Type;N
+FATTR Designated User;N
+FATTR Checkin Reason;N
+FATTR Originator;N
+FATTR Title;N
+FATTR Language;N
+FATTR revision;N
+FATTR current;N
+FATTR Release Type;N
+FATTR Approver;N
+FATTR Design Group Owner;N
+FATTR Created On;N
+// --------------------------------------------------
+FUNC Write
+// --------------------------------------------------
+FATTR name;Y
+FATTR revision;N
+FATTR Title;Y
+FATTR current;N
+FATTR description;Y
+FATTR owner;N
+FATTR Approver;Y
+FATTR originated;N
+FATTR Originator;N
+FATTR Created On;Y
+FATTR Checkin Reason;Y
+FATTR Design Group Owner;Y
+FATTR Designated User;Y
+FATTR Language;Y
+FATTR Release Type;Y

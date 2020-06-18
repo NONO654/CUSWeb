@@ -1,0 +1,175 @@
+// ===========================================================
+// PACKAGE   : PLMPIMInterfereExt
+// ===========================================================
+// Generated : Wed Nov 28 2008
+// ===========================================================
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = requires attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values
+//                    Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help valuem//                    Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create        : attr appears in creation panels
+//                    Read/List/Tree: attr appears in browse/query result panels
+//                    Write         : attr appears in properties panels
+//                    Query/EZQuery : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable
+//                    Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+
+// 2 entities :
+// - PLMPIMMetricReferenceClashContact extension of PLMPIMMetricReference
+// - PLMPIMMetricReferenceClearance extension of PLMPIMMetricReference
+
+// ===========================================================
+ENTITY PLMPIMMetricReferenceClashContact
+// ===========================================================
+// extension
+// --- attributes: 13
+ATTR V_Itf_Penetration_Value;Y;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Itf_Penetration_Value;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Itf_Penetration_Value;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Itf_Penetration_Value;Y
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Itf_Penetration_Value;N
+
+// ===========================================================
+ENTITY PLMPIMMetricReferenceContact
+// ===========================================================
+// extension
+// --- attributes: 13
+
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+
+// ===========================================================
+ENTITY PLMPIMMetricReferenceClearance
+// ===========================================================
+// extension
+// --- attributes: 13
+ATTR V_Itf_Distance_Min;Y;N;$
+ATTR V_Itf_Distance_Min_Point1;Y;N;$
+ATTR V_Itf_Distance_Min_Point2;Y;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Itf_Distance_Min;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Itf_Distance_Min;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Itf_Distance_Min;Y
+FATTR V_Itf_Distance_Min_Point1;Y
+FATTR V_Itf_Distance_Min_Point2;Y
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+// - ordered
+// - unordered
+FATTR V_Itf_Distance_Min;N
+FATTR V_Itf_Distance_Min_Point1;N
+FATTR V_Itf_Distance_Min_Point2;N
+
+// ===========================================================
+// End of PLMPIMInterfereExt package's DEFAULT mask file
+// ===========================================================

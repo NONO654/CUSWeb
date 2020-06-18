@@ -1,0 +1,205 @@
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+
+
+<link rel="import" href="dg-details.html">
+<link rel="import" href="dg-service.html">
+<link rel="import" href="dg-item-style.html">
+
+<dom-module id="dg-scenario">
+  <style>    
+    .service-item {
+      background: #e2e4e3;
+      margin-top: 5px;
+      margin-left: 25px;
+      border-radius: 2px;
+      font-size: smaller;    
+    }
+  </style>
+
+  <template>
+    <style include="dg-item-style"></style>
+    <div class="container">      
+      <!-- Header -->
+      <section class="heading" on-click="toggleDetails" data-status$="{{status}}">
+        <button class="method label" on-click="run">Run</button>
+        <label class="name label">{{value.name}}</label>
+        <label class="caption label">{{value.caption}}</label>
+        <label class="response" data-status$="{{status}}">
+          <span class="status label">{{status}}</span>
+          <span class="timetaken label">{{response.timetaken}}</span>
+          <div class="loadingspinner"></div>
+        </label>
+      </section>
+      
+      <dg-details value="{{details}}" visible="{{showdetails}}" hide-refresh-button>
+        <section>
+          <template is="dom-repeat" items="{{services}}">
+            <template is="dom-if" if="{{item.url}}">
+              <dg-service class="service-item" name$="{{item.name}}" data-test-id$="{{item.name}}" 
+                request="{{item}}" ctx="{{ctx}}" data-scenario-level$="{{value.name}}" 
+                apps="{{config.apps}}" data-serialize-subkey="services"></dg-service>
+            </template>
+            <template is="dom-if" if="{{item.sequence}}">
+              <dg-scenario class="service-item" value="{{item}}" name$="{{item.name}}" 
+                data-test-id$="{{item.name}}" ctx="[[ctx]]" 
+                data-scenario-level$="{{value.name}}" config="[[config]]" data-serialize-subkey="scenarios"></dg-scenario>
+            </template>
+          </template>
+        </section>
+      </dg-details>
+    </div>
+  </template>  
+  <script>
+    (function () {
+
+      Polymer({
+        is: 'dg-scenario',
+        
+        properties: {
+          value: {
+            type: Object
+          },
+          details: {
+            type: Object
+          },
+          status: {
+            type: String,
+            reflectToAttribute: true
+          },
+          showdetails: {
+            type: Boolean
+          },
+          response: {
+            type: Object
+          },
+          config: {
+            type: Object
+          },
+          ctx: {
+            type: Object
+          },
+          services: {
+            type: Array
+          }
+
+        },
+        attached: function () {
+          // build the details
+          this.details = Object.assign({}, this.value);
+          // remove the sequence from the list
+          delete this.details['sequence'];
+
+          // concatenate all the config that has services and scenarios
+          const config = this.config.cos.concat(this.config.mcs).concat(this.config.scenarios);
+
+          // get all the services(+scenario) for this scenario
+          this.services = this.value.sequence.map(name => {
+            // find the service that matches this name
+            const service = config.find(item => item.name === name);
+
+            !service && console.warn(`Missing ${name} in scenario ${this.name}`);
+            
+            return service;
+          });
+
+          // refresh the details
+          this.querySelector('dg-details').refresh();
+          this.async( () => {
+            this.async( () => {
+              // helps in refreshing the details
+              this.querySelectorAll('dg-service').forEach(item => item.buildContext());
+            });
+          });
+        },
+        run: async function (event) {
+          event && event.stopPropagation();
+          
+          // set the initial status as pending
+          this.status = 'pending';              
+
+          // for timing
+          const t0 = performance.now();
+
+          try {
+            // get all the services(+scenario) at this level
+            const services = this.querySelectorAll(`[data-scenario-level="${this.value.name}"]`);
+
+            let status = this.status;
+
+            // run all items in sequence          
+            for (const service of services) {
+              // check if category was not found
+              !service && console.info('Service not found. Check scenario definition');
+
+              console.group('%c' + service.name, 'color:#03A9F4;font-size:medium;background:white;padding:2px;border-radius:2px;');
+
+              // run
+              await service.run();
+
+              console.groupEnd();
+
+              // get the status
+              status = service.status;
+              
+              // stop further run if this service failed
+              if (status === 'failed') {
+                break;
+              }
+            }
+            
+            // update the status
+            this.status = status;
+          } catch (error) {
+            // in case of any error set the status to failed
+            this.status = 'failed';
+            console.warn(`Error running scenario ${this.value.name}`, error);
+          } finally {
+            // get the time taken for all runs
+            const t1 = performance.now();
+            const timetaken = Math.round((t1-t0) * 1/10)/100 + 's';
+            
+            // refresh the response
+            this.response = {timetaken};
+          }
+        },
+        toggleDetails: function () {
+          this.showdetails = !this.showdetails;
+        },
+        serializeData: function () {
+          let serialized = null;
+          
+          // serialize all sub scenarios and sub services
+          ['scenarios', 'services'].forEach(subkey => {
+            const subItem = [].reduce.call(this.querySelectorAll(`[status][data-serialize-subkey="${subkey}"]`), (serial, item) => {
+              const val = item.serializeData();
+
+              // if it returned a value (i.e. if it was executed)
+              if (val) {
+                serial[item.name] = val;
+              }
+
+              return serial;
+            }, {});
+
+            // if sub items returned serialized data
+            if (Object.keys(subItem).length) {
+              serialized = serialized || {};
+              serialized[subkey] = subItem;
+            }
+          });
+
+          const {status, response} = this;
+          serialized = {...serialized, status, response};          
+          
+          return serialized;
+        }
+      });
+    })();
+  </script>
+</dom-module>
+
+
+
+
+

@@ -1,0 +1,1 @@
+define("DS/MobilePairing/MobilePairing_ja",{});define("DS/MobilePairing/assets/nls/mobilePairing",{description:"次のコードを使用し、モバイル アプリケーションと 3DEXPERIENCE Platform をペアリングします"});

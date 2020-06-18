@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="urn:com:dassault_systemes:webservice" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:com:dassault_systemes:webservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <types>
+  <xs:schema targetNamespace="urn:com:dassault_systemes:webservice:messages">
+   <xs:import namespace="urn:com:dassault_systemes:webservice" schemaLocation="../xsd/IProjectService.xsd"/>
+  </xs:schema>
+ </types>
+ <message name="createProjectInput">
+  <part element="tns:createProject" name="parameters"/>
+ </message>
+ <message name="createProjectOutput">
+  <part element="tns:createProjectResponse" name="parameters"/>
+ </message>
+ <message name="createProjectErrorType">
+  <part element="tns:createProjectErrorType" name="details"/>
+ </message>
+ <message name="queryProjectInput">
+  <part element="tns:queryProject" name="parameters"/>
+ </message>
+ <message name="queryProjectOutput">
+  <part element="tns:queryProjectResponse" name="parameters"/>
+ </message>
+ <message name="queryProjectErrorType">
+  <part element="tns:queryProjectErrorType" name="details"/>
+ </message>
+ <message name="updateProjectInput">
+  <part element="tns:updateProject" name="parameters"/>
+ </message>
+ <message name="updateProjectOutput">
+  <part element="tns:updateProjectResponse" name="parameters"/>
+ </message>
+ <message name="updateProjectErrorType">
+  <part element="tns:updateProjectErrorType" name="details"/>
+ </message>
+ <portType name="IProjectService">
+  <documentation>Interface for Creating a Project</documentation>
+  <operation name="createProject">
+   <documentation>Method for Creating a Project</documentation>
+   <input message="tns:createProjectInput"/>
+   <output message="tns:createProjectOutput"/>
+   <fault message="tns:createProjectErrorType" name="createProjectErrorType"/>
+  </operation>
+  <operation name="queryProject">
+   <input message="tns:queryProjectInput"/>
+   <output message="tns:queryProjectOutput"/>
+   <fault message="tns:queryProjectErrorType" name="queryProjectErrorType"/>
+  </operation>
+  <operation name="updateProject">
+   <documentation>Method for Updating a Project</documentation>
+   <input message="tns:updateProjectInput"/>
+   <output message="tns:updateProjectOutput"/>
+   <fault message="tns:updateProjectErrorType" name="updateProjectErrorType"/>
+  </operation>
+ </portType>
+ <binding name="IProjectServiceBinding" type="tns:IProjectService">
+  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="createProject">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="createProjectErrorType">
+    <soap:fault name="createProjectErrorType" use="literal"/>
+   </fault>
+  </operation>
+  <operation name="queryProject">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="queryProjectErrorType">
+    <soap:fault name="queryProjectErrorType" use="literal"/>
+   </fault>
+  </operation>
+  <operation name="updateProject">
+   <soap:operation soapAction="" style="document"/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="updateProjectErrorType">
+    <soap:fault name="updateProjectErrorType" use="literal"/>
+   </fault>
+  </operation>
+ </binding>
+ <service name="ProjectService">
+  <port binding="tns:IProjectServiceBinding" name="IProjectService">
+   <soap:address location="http://localhost:9081/dummyURI/ProjectService"/>
+  </port>
+ </service>
+</definitions>

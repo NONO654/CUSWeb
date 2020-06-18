@@ -1,0 +1,1 @@
+define("DS/i3DXCompassCore/i3DXCompassCore_ko",{});define("DS/i3DXCompassCore/assets/nls/i3DXCompassCore",{"Action is still pending... Please wait a few seconds and refresh your widget":"작업이 아직 보류 중입니다. 몇 호 후에 위젯을 새로 고치십시오."});

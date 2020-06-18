@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+	<Template syp:name="CompareViewerHeaders" Target="CATCmdHeadersList">
+		<CATCmdHeadersList>
+		
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuReframeViewCmd" ID="VisuReframeView" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuPanViewCmd" ID="VisuPanView" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuZoomViewCmd" ID="VisuZoomView" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuRotateViewCmd" ID="VisuRotateView" ResourceFile="ViewerCommands/ViewerCommands"/>
+
+            
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuIsoViewCmd" ID="VisuIsoView" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuFrontViewCmd" ID="VisuFrontView" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuBackViewCmd" ID="VisuBackView" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuLeftViewCmd" ID="VisuLeftView" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuRightViewCmd" ID="VisuRightView" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuTopViewCmd" ID="VisuTopView" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuBottomViewCmd" ID="VisuBottomView" ResourceFile="ViewerCommands/ViewerCommands"/>
+
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingEdgesCmd" ID="VisuShadingEdges" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingCmd" ID="VisuShading" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingEdgesNoSmoothEdgesCmd" ID="VisuShadingEdgesNoSmoothEdges" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingEdgesHiddenEdgesCmd" ID="VisuShadingEdgesHiddenEdges" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingMaterialEdgesCmd" ID="VisuShadingMaterialEdges" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuShadingMaterialCmd" ID="VisuShadingMaterial" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuNoShadingEdgesCmd" ID="VisuNoShadingEdges" ResourceFile="ViewerCommands/ViewerCommands"/>
+		    
+		    <CATCommandHeader ClassName="DS/ViewerCommands/VisuPerspectiveViewCmd" ID="VisuPerspectiveView" ResourceFile="ViewerCommands/ViewerCommands"/>
+            <CATCommandHeader ClassName="DS/ViewerCommands/VisuOrthographicViewCmd" ID="VisuOrthographicView" ResourceFile="ViewerCommands/ViewerCommands"/>
+                  
+			<CATCommandHeader ID="measure3CmdHdr"
+				ClassName="DS/DMUMeasure/DMUCreateMeasureCmd" ResourceFile="DMUBaseCommands/3DPlayPro"
+				Available="1">
+				<CATAfrCommandHeaderArgs>
+					<CATCommandHeaderArg ID="3dAuthoring" Value="3dAuthoring"
+						Mode="In" />
+				</CATAfrCommandHeaderArgs>
+			</CATCommandHeader>
+
+			<CATCommandHeader ID="section2CmdHdr"
+				ClassName="DS/DMUSection/DMUCreateSectionCmd" ResourceFile="DMUBaseCommands/3DPlayPro"
+				Available="1">
+				<CATAfrCommandHeaderArgs>
+					<CATCommandHeaderArg ID="3dPlay" Value="3dPlay"
+						Mode="In" />
+				</CATAfrCommandHeaderArgs>
+			</CATCommandHeader>
+      		<CATCommandHeader ID="LockUnlockSectionHdr" ClassName="DS/DMUSection/DMULockUnlockSection" ResourceFile="DMUBaseCommands/3DPlayPro" Behavior="CATAfrHeaderCheck" />
+		</CATCmdHeadersList>
+	</Template>
+
+	<Template syp:name="CompareViewerWkbAccess" Target="CATCmdWorkbench">
+		<CATCmdWorkbench Name="CompareViewerWkb">
+
+			<!-- View toolbar -->
+			<CATCmdContainer Name="PADView" RepresentationType="AfrActionBarSection">
+				<CATCmdStarter Command="VisuReframeView" Name="ReframeCmd"/>
+				<CATCmdContainer Name="PADViewpointProjectionMode" RepresentationType="AfrActionBarDropDown" Visibility="1">
+                      <CATCmdStarter Command="VisuPerspectiveView"  Name="PADVisuPerspectiveViewCmd"/>
+                      <CATCmdStarter Command="VisuOrthographicView" Name="PADVisuOrthographicView"/>
+                </CATCmdContainer>                        
+                <CATCmdStarter Command="VisuPanView" Name="PanCmd"/>
+                <CATCmdStarter Command="VisuRotateView" Name="RotateCmd"/>
+                <CATCmdStarter Command="VisuZoomView" Name="ZoomCmd"/>
+
+				<!-- Views -->
+				<CATCmdContainer Name="CameraViews" Visibility="1"
+					RepresentationType="AfrActionBarDropDown">
+					<CATCmdStarter Command="VisuIsoView" Name="IsoViewCmd"/>
+                    <CATCmdStarter Command="VisuBottomView" Name="BottomViewCmd"/>
+                    <CATCmdStarter Command="VisuTopView" Name="TopViewCmd"/>
+                    <CATCmdStarter Command="VisuRightView" Name="RightViewCmd"/>
+                    <CATCmdStarter Command="VisuLeftView" Name="LeftViewCmd"/>
+                    <CATCmdStarter Command="VisuBackView" Name="BackViewCmd"/>
+                    <CATCmdStarter Command="VisuFrontView" Name="FrontViewCmd"/>
+				</CATCmdContainer>
+
+				<!-- Render Options -->
+				<!--CATCmdContainer Name="Rendering" RepresentationType="AfrActionBarDropDown" Visibility="1">			
+					<CATCmdStarter Command="VisuShadingEdges" Name="ShadingWithEdges"/>
+                    <CATCmdStarter Command="VisuShading" Name="Shading"/>
+                    <CATCmdStarter Command="VisuShadingEdgesNoSmoothEdges" Name="ShadingWithEdgeAndNoSmoothEdges"/>
+                    <CATCmdStarter Command="VisuShadingEdgesHiddenEdges" Name="ShadingWithEdgeAndHiddenEdges"/>
+                    <CATCmdStarter Command="VisuShadingMaterialEdges" Name="ShadingMaterialWithEdges"/>
+                    <CATCmdStarter Command="VisuShadingMaterial" Name="ShadingMaterial"/>
+                    <CATCmdStarter Command="VisuNoShadingEdges" Name="Wireframe"/>
+				</CATCmdContainer-->
+
+			</CATCmdContainer>
+
+			<!-- Tools toolbar -->
+			<CATCmdContainer Name="PADTools" RepresentationType="AfrActionBarSection">
+				<CATCmdStarter Name="Measure" Command="measure3CmdHdr" />
+				<CATCmdStarter Name="Section" Command="section2CmdHdr" />
+				 <CATCmdStarter Name="LockUnlockSectionStr" Command="LockUnlockSectionHdr" />
+			</CATCmdContainer>
+			
+		</CATCmdWorkbench>
+	</Template>
+</Styles>

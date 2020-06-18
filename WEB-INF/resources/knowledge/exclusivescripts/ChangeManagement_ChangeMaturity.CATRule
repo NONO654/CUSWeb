@@ -1,0 +1,215 @@
+let isPublished (Boolean)
+let iFromState=""
+let iTransition=""
+let i(Integer)
+let s(Integer)
+let psKO(Integer)
+let progressStatusList(List)
+let StatusValue(String)
+let mainOperation=""
+let ListImpl(List)
+let implementedItemsList(List)
+let implementedItem(KweImplementedItemFamily)
+let BeforeECA(KweImplementedItemFamilyMember)
+let AfterECA(KweImplementedItemFamilyMember)
+let beforeList(List)
+let afterList(List)
+let BeforeObjectList(List)
+let AfterObjectList(List)
+let FamilyObjects(List)
+let familyMember(PLMEntity)
+let ListImplProductMaturity(List)
+let ListImplProcessMaturity(List)
+let ListImplFunctionalMaturity(List)
+let ListImplLogicalMaturity(List)
+let ListChild (List)
+let ListChildMaturity (List)
+i=1
+s=0
+psKO=0
+Validation = true
+iFromState = Parameters.GetAttributeString("CurrentState")
+iTransition = Parameters.GetAttributeString("Transition")
+Trace(1,"Entering the BL - ChangeMaturity for ECAs - Default BL")
+if ( iFromState == "DesignWork" and iTransition == "Propose" )
+{
+Trace(1,"UE5 --- DesignWork to Review")
+		Set ListChild=ThisObject.children
+		Trace(1,"children size = " + ListChild.Size() )
+		if ( ListChild.Size() > 0)
+		{
+				ListChildMaturity= ListChild.Filter("PLMCoreReference","x.V_maturity <> \"Completed\" and  x.V_maturity <> \"Review\" ")
+				Trace(1,"ListChildMaturity size = " + ListChildMaturity.Size() )
+				if (ListChildMaturity.Size() > 0)
+				{
+						Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_ChildECA_NotWA", "")
+						Validation=false
+				}
+		}
+		Trace(1,"avant le get implemented items ")
+		implementedItemsList=ThisObject.GetImplementedItems()
+		Trace(1,"Number of families retrieved = " + implementedItemsList.Size() )
+		for implementedItem inside implementedItemsList
+		{
+				mainOperation = implementedItem.GetMainOperation()
+				Trace(1,"MainOperation of Family ------------------- " + mainOperation)
+				BeforeECA = implementedItem.GetBeforeECA()
+				AfterECA = implementedItem.GetAfterECA()
+				beforeList = BeforeECA.GetObjectPLMID()
+				afterList = AfterECA.GetObjectPLMID()
+				FamilyObjects.RemoveAll()
+				
+				if( afterList.Size() > 0)
+				{
+					Trace(1,"Adding an after")
+					FamilyObjects.Append( afterList.GetItem(1) )
+				}
+				if( beforeList.Size() > 0)
+				{
+					Trace(1,"Adding a before")
+					FamilyObjects.Append( beforeList.GetItem(1) )
+				}
+				
+				if ( FamilyObjects.Size() > 0)
+				{
+						ListImplProductMaturity=FamilyObjects.Filter("VPMReference"," x.V_maturity <> \"\" and x.V_maturity <> \"FROZEN\" and  x.V_maturity <> \"RELEASED\" and  x.V_maturity <> \"OBSOLETE\" ")
+						Trace(1,"ListImplProductMaturity size = " + ListImplProductMaturity.Size() )
+						if ( ListImplProductMaturity.Size() > 0)
+						{
+								Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_ImplItems_NotWA", "")
+								Validation=false
+						}
+						ListImplProcessMaturity=FamilyObjects.Filter("DELFmiFunctionReference","x.V_maturity <> \"\" and x.V_maturity <> \"FROZEN\" and  x.V_maturity <> \"RELEASED\" and  x.V_maturity <> \"OBSOLETE\" ")
+						Trace(1,"ListImplProcessMaturity size = " + ListImplProcessMaturity.Size() )
+						if (ListImplProcessMaturity.Size() > 0)
+						{
+								Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_ImplItems_NotWA", "")
+								Validation=false
+						}
+						ListImplFunctionalMaturity=FamilyObjects.Filter("RFLPLMFunctionalReference","x.V_maturity <> \"\" and x.V_maturity <> \"FROZEN\"  and  x.V_maturity <> \"RELEASED\" and  x.V_maturity <> \"OBSOLETE\"  ")
+						Trace(1,"ListImplFunctionalMaturity size = " + ListImplFunctionalMaturity.Size() )
+						if ( ListImplFunctionalMaturity.Size() > 0)
+						{
+								Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_ImplItems_NotWA", "")
+								Validation=false
+						}
+						ListImplLogicalMaturity=FamilyObjects.Filter("RFLVPMLogicalReference","x.V_maturity <> \"\" and x.V_maturity <> \"FROZEN\"  and  x.V_maturity <> \"RELEASED\" and  x.V_maturity <> \"OBSOLETE\"  ")
+						Trace(1,"ListImplLogicalMaturity size = " + ListImplLogicalMaturity.Size() )
+						if (ListImplLogicalMaturity.Size() > 0)
+						{
+								Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_ImplItems_NotWA", "")
+								Validation=false
+						}
+				}
+		}
+		progressStatusList=ThisObject.progressStatus
+		s=progressStatusList.Size()
+		for i while i <=s
+		{
+				StatusValue=progressStatusList.GetItem(i)
+				if (( StatusValue <> "Implemented") and (StatusValue <>"NoActionNeeded"))
+						psKO=psKO+1
+		}
+		if (psKO > 1)
+		{
+				Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_AffItemsPS_NotOK", "")
+				Validation=false
+		}
+}
+else if ( iFromState == "DesignWork" and iTransition == "Stop" )
+{
+		Trace(1,"UE5 --- DesignWork to Create")
+		Set ListChild=ThisObject.children
+		if ( ListChild.Size() > 0 )
+		{
+				ListChildMaturity=ListChild.Filter("PLMCoreReference","x.V_maturity <> \"Create\" ")
+				if ( ListChildMaturity.Size() > 0 )
+				{
+						Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_ChildECA_NotPR", "")
+						Validation=false
+				}
+		}
+}
+else if ( iFromState == "Review" and iTransition == "Complete" )
+{
+		Trace(1,"UE5 --- Review to Completed")
+		isPublished=ThisObject.isPublished
+		Trace (1,"UE5 Trace test isPublished", isPublished)
+		if (isPublished == "false" )
+		{
+				Trace(3,"UE5 --- Review to Completed --- isPublished = false")
+				Validation=false
+		}
+		Set ListChild=ThisObject.children
+		if ( ListChild.Size() > 0)
+		{
+				ListChildMaturity=ListChild.Filter("PLMCoreReference","x.V_maturity <> \"\" and x.V_maturity <> \"Completed\" ")
+				if ( ListChildMaturity.Size() > 0 )
+				{
+						Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_ChildECA_NotSH", "")
+						Validation=false
+				}
+		}
+		Trace(1,"avant le get implemented items ")
+		implementedItemsList=ThisObject.GetImplementedItems()
+		Trace(1,"Number of families retrieved = " + implementedItemsList.Size() )
+		for implementedItem inside implementedItemsList
+		{
+				mainOperation = implementedItem.GetMainOperation()
+				Trace(1,"MainOperation of Family ------------------- " + mainOperation)
+				BeforeECA = implementedItem.GetBeforeECA()
+				AfterECA = implementedItem.GetAfterECA()
+				beforeList = BeforeECA.GetObjectPLMID()
+				afterList = AfterECA.GetObjectPLMID()
+				FamilyObjects.RemoveAll()
+			
+				if( afterList.Size() > 0)
+				{
+					Trace(1,"Adding an after")
+					FamilyObjects.Append( afterList.GetItem(1) )
+				}
+				if( beforeList.Size() > 0)
+				{
+					Trace(1,"Adding a before")
+					FamilyObjects.Append( beforeList.GetItem(1) )
+				}
+				
+				Trace(1,"Objets in the Family ------------------" + FamilyObjects.Size())
+
+				if ( FamilyObjects.Size() > 0)
+				{
+						ListImplProductMaturity=FamilyObjects.Filter("VPMReference"," x.V_maturity <> \"\" and  x.V_maturity <> \"RELEASED\" and  x.V_maturity <> \"OBSOLETE\" ")
+						Trace(1,"ListImplProductMaturity size = " + ListImplProductMaturity.Size() )
+						if ( ListImplProductMaturity.Size() > 0)
+						{
+								Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_ImplItems_NotSH", "")
+								Validation=false
+						}
+						ListImplProcessMaturity=FamilyObjects.Filter("DELFmiFunctionReference","x.V_maturity <> \"\" and  x.V_maturity <> \"RELEASED\" and  x.V_maturity <> \"OBSOLETE\" ")
+						Trace(1,"ListImplProcessMaturity size = " + ListImplProcessMaturity.Size() )
+						if (ListImplProcessMaturity.Size() > 0)
+						{
+								Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_ImplItems_NotSH", "")
+								Validation=false
+						}
+						ListImplFunctionalMaturity=FamilyObjects.Filter("RFLPLMFunctionalReference","x.V_maturity <> \"\" and  x.V_maturity <> \"RELEASED\" and  x.V_maturity <> \"OBSOLETE\"  ")
+						Trace(1,"ListImplFunctionalMaturity size = " + ListImplFunctionalMaturity.Size() )
+						if ( ListImplFunctionalMaturity.Size() > 0)
+						{
+								Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_ImplItems_NotSH", "")
+								Validation=false
+						}
+						ListImplLogicalMaturity=FamilyObjects.Filter("RFLVPMLogicalReference","x.V_maturity <> \"\" and  x.V_maturity <> \"RELEASED\" and  x.V_maturity <> \"OBSOLETE\"  ")
+						Trace(1,"ListImplLogicalMaturity size = " + ListImplLogicalMaturity.Size() )
+						if (ListImplLogicalMaturity.Size() > 0)
+						{
+								Parameters.NLSMessage = BuildDeferredMessageNLS("PLMActionEditor", "ErrorProp_ImplItems_NotSH", "")
+								Validation=false
+						}
+				}
+		}
+}
+
+
+
+

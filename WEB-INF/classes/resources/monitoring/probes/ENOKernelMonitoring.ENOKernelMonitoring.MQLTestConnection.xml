@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<probe name="MQLTestConnection" kind="default" unplug="true">
+	<option name="mqlconnect" shortname="mqlconnect" optional="true" hidden="false">
+		<description>
+			Check the connection to nuodb
+		</description>
+		
+		<parameter name="MQLfilePath" optional="false" multiple="false">
+			<short-description>
+				MQL Filepath
+			</short-description>
+			<description>
+				Path of the shell to launch MQL
+			</description>
+		</parameter>
+		<parameter name="timeout" optional="false" multiple="false">
+			<short-description>
+				Timeout
+			</short-description>
+			<description>
+				If the timeout is reached then the MQL test connection is failed
+			</description>
+		</parameter>
+	</option>
+	
+	<implementation>
+		<class>
+			com.dassault_systemes.infra.monitoring.mcs.MQLTestConnectionProbe
+		</class>
+	</implementation>
+	
+	<period minutes="5"/>
+</probe>

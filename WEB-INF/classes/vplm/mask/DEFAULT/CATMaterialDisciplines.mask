@@ -1,0 +1,99 @@
+// ===========================================================
+// PACKAGE   : CATMaterialRef
+// ===========================================================
+// Generated : Thursday, September 28, 2006 12:18:59 PM
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+// --- entities: 6
+// ===========================================================
+ENTITY dsc_matref_ref_Material @Inherits
+// ===========================================================
+ATTR V_Density;N;N;$
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_Density;Y
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_Density;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_Density;N
+
+// ===========================================================
+ENTITY dsc_matref_ref_Covering @Inherits
+// ===========================================================
+// ===========================================================
+ENTITY dsc_matref_ref_Core @Inherits
+// ===========================================================
+
+// ===========================================================
+ENTITY dsc_matref_ref_Vector @Inherits
+// ===========================================================
+// ===========================================================
+ENTITY dsc_matref_ref_CoveringVector @Inherits
+// ===========================================================
+// ===========================================================
+ENTITY dsc_matref_ref_CoreVector @Inherits
+// ===========================================================
+
+// ===========================================================
+ENTITY dsc_matref_rep_Composite @Inherits
+// ===========================================================
+// ===========================================================
+ENTITY dsc_matref_rep_Analysis @Inherits
+// ===========================================================
+// ===========================================================
+ENTITY dsc_matref_rep_Rendering @Inherits
+// ===========================================================
+// ===========================================================
+ENTITY dsc_matref_rep_Drafting @Inherits
+// ===========================================================
+// ===========================================================
+ENTITY dsc_matref_rep_SmaOptions @Inherits
+// ===========================================================
+// ===========================================================
+ENTITY dsc_matref_rep_Sample @Inherits
+// ===========================================================
+// ===========================================================
+ENTITY dsc_matref_rep_RDM_DAV @Inherits
+// ===========================================================
+// ===========================================================
+ENTITY dsc_matref_rep_Optis @Inherits
+// ===========================================================
+
+
+// ===========================================================
+ENTITY dsc_mat_cnx_Core @Inherits
+// ===========================================================
+// ===========================================================
+ENTITY dsc_mat_cnx_Covering @Inherits
+// ===========================================================
+

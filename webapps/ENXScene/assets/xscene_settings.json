@@ -1,0 +1,578 @@
+{
+    "action_bar": {
+        "standard": {
+            "file": "ENXScene.xml",
+            "module": "ENXScene"
+        },
+        "touch": {
+            "file": "ENXSceneTouch.xml",
+            "module": "ENXScene"
+        },
+        "webinwin": {
+            "file": "ENXSceneWebInWin.xml",
+            "module": "ENXScene"
+        }
+    },
+    "padsettings": {
+        "enxscene": {
+            "run_options": {
+                "authorized_root_types": {
+                    "value": ["CatProcess", "CatAnalysis", "MCAD Assembly", "MCAD Component", "CATDrawing", "VPMReference", "VPMRepReference", "ENOStrRefinementSpecification", "Change Action"]
+                },
+                "type_kind": {
+                    "value": {
+                        "Product": ["VPMReference", "VPMRepReference"],
+                        "Filter": ["ENOStrRefinementSpecification"],
+                        "Change": ["Change Action"]
+                    }
+                },
+                "unsupported_root_types": {
+                    "value": ["CATAnalysisResults", "CATAnalysisComputations"]
+                },
+                "no_type_filter_bo": {
+                    "value": ["ThumbnailViewable", "CGRViewable", "PGPRep", "dsc_mat_cnx_Core_Design", "VPMPort", "PLMConnection", "CATMCXMechanicalConnection"]
+                },
+                "authorized_types": {
+                    "value": ["CATProduct", "CATProcess", "CATPart", "CATDrawing", "CATAnalysis", "VPMReference", "VPMRepReference", "CATIA Embedded Component", "3DShape", "CATIA CGR", "CATShape", "CATIA V4 Model", "CATIA Design Table", "SW Assembly Instance", "SW Component Instance"]
+                },
+                "type_filter_bo": {
+                    "value": ["CATProduct", "CATProcess", "CATPart", "CATDrawing", "CATAnalysis", "VPMReference", "VPMRepReference", "CATIA Embedded Component", "3DShape", "CATIA CGR", "CATShape", "CATIA V4 Model", "CATIA Design Table", "SW Assembly Instance", "SW Component Instance"]
+                },
+                "activate_autodownload": {
+                    "value": false
+                },
+                "default_view": {
+                    "value": "treelistview",
+                    "preference": {
+                        "type": "hidden"
+                    }
+                },
+                "activateBIFilter": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "activateFilter_label"
+                    },
+                    "dispatch": true
+                },
+                "touchDropInvite": {
+                    "value": true
+                },
+                "webInWin_context_availability": {
+                    "value": ["solidworks", "catiav5"]
+                },
+                "authoringModeNotSupported": {
+                    "value": true
+                },
+                "focusonPublic": {
+                    "value": true
+                },
+                "changeControlActivation": {
+                    "value": true,
+                    "dispatch": true,
+                    "activatedBySetting": "authorizeChangeControl"
+                },
+                "changeControlPosition": {
+                    "value": "bottom-right",
+                    "dispatch": true,
+                    "activatedBySetting": "authorizeChangeControl"
+                },
+                "propertiesFacet": {
+                    "value": ["properties",
+                        "relations",
+                        {
+                            "require": "DS/PADUtils/commands/facets/RelatedDocumentsFacet",
+                            "alwaysVisible": true,
+                            "services": ["3DSpace"],
+                            "actions": [{
+                                    "name": "createDocument",
+                                    "text": "createDocument",
+                                    "icon": "plus"
+                                }
+
+                            ],
+                            "inheritance": true,
+                            "content": null,
+                            "facet": {
+                                "name": "relateddocuments",
+                                "icon": "docs"
+                            },
+                            "options": {
+                                "kindOfDocuments": ["DOCUMENT"]
+                            }
+                        }, {
+                            "require": "DS/ENODODisplay/commands/facets/DerivedOutputFacet",
+                            "inheritance": true,
+                            "alwaysVisible": true,
+                            "services": ["3DSpace"],
+                            "content": null,
+                            "facet": {
+                                "name": "derivedoutputs",
+                                "icon": "link"
+                            },
+                            "options": {
+                                "activateActions": false
+                            }
+                        }
+                    ]
+                }
+            },
+            "debug_options": {
+                "welcomeonempty": {
+                    "value": true
+                },
+                "dynamic_authorized_types": {
+                    "value": true
+                },
+                "activateNlsApi": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate NLS from API"
+                    }
+                },
+                "filterNls": {
+                    "value": ["ds6w:type"]
+                },
+                "enopad_webapis_debug": {
+                    "value": false
+                },
+                "enopad_webapis": {
+                    "value": false
+                },
+                "activate_security_count": {
+                    "value": false
+                },
+                "cvservlet_fetch_v2": {
+                    "value": true
+                },
+                "activate_newDropInvite": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Use the new drop feedback based on tooltip"
+                    }
+                },
+                "activate_reloadFilter": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Reload Filter"
+                    }
+                },
+                "activateDropInviteWithFilter": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate Drop invite with Filter"
+                    }
+                },
+                "touchDropInvite": {
+                    "value": true
+                },
+                "open_in_v5_v2": {
+                    "value": true
+                },
+                "FocusCtxCommandAvailable": {
+                    "value": true
+                },
+                "globalTypeFiltering": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Use the globalType for filter the expand results"
+                    }
+                },
+                "authorizeChangeControl": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Authorize Change Control"
+                    }
+                },
+                "settypes": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Use compass setTypes API on selection"
+                    }
+                },
+                "refresh_v2": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate Refresh V2 - 3DEXPERIENCER2018xFD02"
+                    }
+                },
+                "multiexpandActivated": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate Multi Expand - 3DEXPERIENCER2017xFD06"
+                    }
+                },
+                "columnParametrization": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate Column Parametrization Product Explorer - 3DEXPERIENCER2018xFD01"
+                    }
+                },
+                "activate_loadPopUp": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate Load Stored Obj Chooser - 3DEXPERIENCER2018xFD03"
+                    }
+                },
+                "expandAllwithApplyFilter": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Perform Expand All with ApplyFilter"
+                    }
+                },
+                "structureAppearCollapseAfterApplyFilter": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Structure stay collapsed in the view after applying a filter"
+                    }
+                },
+                "activateOpenWithPlatform": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate Platform OpenWith"
+
+                    }
+                },
+                "ofwCadMaster": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate OFW with CadMaster"
+
+                    }
+                },
+                "ExpandSynthesisON": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "FUN086708 - Activate Expand Synthesis (needs to be TRUE)"
+
+                    }
+                },
+                "activateFUN087933": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate New Filter command UX integration (FUN087933)"
+                    }
+                },
+                "activateFUN078214": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "FUN078214 -Support Search in Current Dashboard - 3DEXPERIENCER2018xFD04"
+                    }
+                },
+                "activate_FUN082641": {
+                    "value": true,
+                    "_note": "Connected to MaxDashSearch in SharedSettings"
+                },
+                "parse_timeout": {
+                    "value": 30000,
+                    "preference": {
+                        "type": "text",
+                        "label": "Parse Timeout"
+                    }
+                },
+                "activateTreeOptionsInWidgetBody": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate TreeListOptions rendering in Widget Body"
+                    }
+                },
+                "activateFUN085903": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate Hide the Terminal representation (FUN085903)"
+                    }
+                },
+                "alwaysExpandPath": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Always expand with path"
+
+                    }
+                },
+                "activateTXO": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate TXO"
+
+                    }
+                },
+                "activateDGV": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate DataGridView"
+
+                    }
+                },
+                "activateGroupByCtx": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Activate Group By Ctx Menu"
+
+                    }
+                }
+            },
+            "webapi_options": {
+                "fetch": {
+                    "select_predicate": ["ds6w:cadMaster", "ds6w:reserved", "ds6w:reservedBy", "ds6w:globalType"],
+                    "select_file": ["icon", "thumbnail_2d"]
+                },
+                "navigate": {
+                    "select_bo": ["physicalid", "ds6w:cadMaster", "ds6w:reserved", "ds6w:reservedBy", "ds6w:globalType"],
+                    "select_rel": ["physicalid", "ds6w:type", "ds6w:label", "ro.plminstance.V_treeorder", "matrixtxt"],
+                    "compute_select_bo": ["thumbnail_2d", "icon"],
+                    "q.iterative_filter_query_bo": "[ds6w:globalType]:\"ds6w:Document\" OR [ds6w:globalType]:\"ds6w:Part\"",
+                    "no_type_filter_rel": ["XCADBaseDependency"]
+                }
+            }
+        }
+    },
+    "view_settings": {
+        "basic_treelistopts": {
+            "version": "1.0.0",
+            "apiVersion": 2,
+            "defaultCellHeight": 38,
+            "iconsSize": 22,
+            "height": "auto",
+            "useAsyncPreExpand": true,
+            "isEditable": false,
+            "allowUnsafeHTMLContent": false,
+            "resize": {
+                "columns": true
+            },
+            "headersDimensions": {
+                "height": 38
+            },
+            "performances": {
+                "debounceCellInternalUpdateTimer": 1,
+                "useRequestAnimationFrame": true
+            },
+            "selection": {
+                "unselectAllOnEmptyArea": true,
+                "toggle": false,
+                "enableListSelection": true
+            },
+            "enableTreeColumnEllipsisOverflow": true,
+            "enableActiveUI": true,
+            "enableKeyboardNavigation": true,
+            "columns": []
+        },
+        "defaultAttributes": [{
+            "name": "hide_show",
+            "hardcoded": true
+        }, {
+            "name": "find_in_ctx",
+            "hardcoded": true
+        }, {
+            "name": "ds6w:label",
+            "tree": true
+        }, {
+            "name": "instanceName",
+            "hardcoded": true
+        }, {
+            "name": "instanceMatrix",
+            "hardcoded": true
+        }, {
+            "name": "ds6wg:revision"
+        }, {
+            "name": "ds6w:cadMaster"
+        }, {
+            "name": "ds6w:type"
+        }, {
+            "name": "ds6w:description"
+        }, {
+            "name": "ds6w:responsible"
+        }],
+        "available_attr": [{
+            "name": "ds6w:label",
+            "type": "string",
+            "tree": true,
+            "layout": {
+                "width": 200,
+                "minWidth": 100,
+                "maxWidth": 300,
+                "removable": false,
+                "hidden": false
+            },
+            "exportable": {
+                "lock": true,
+                "value": true
+            },
+            "cv_type": "select_bo"
+        }, {
+            "name": "ds6wg:revision",
+            "type": "string",
+            "layout": {
+                "width": 70,
+                "minWidth": 30,
+                "maxWidth": 100,
+                "removable": true,
+                "hidden": false
+            },
+            "exportable": {
+                "lock": false,
+                "value": true
+            },
+            "cv_type": "select_bo"
+        }, {
+            "name": "ds6w:type",
+            "type": "string",
+            "layout": {
+                "width": 100,
+                "minWidth": 50,
+                "maxWidth": 200,
+                "removable": true,
+                "hidden": false
+            },
+            "exportable": {
+                "lock": false,
+                "value": true
+            },
+            "cv_type": "select_bo"
+        }, {
+            "width": 50,
+            "minWidth": 50,
+            "name": "ds6w:cadMaster",
+            "isSortable": true,
+            "isHidden": false,
+            "exportable": {
+                "lock": false,
+                "value": true
+            },
+            "layout": {
+                "removable": true,
+                "hidden": false,
+                "width": 50,
+                "minWidth": 50
+            },
+            "cv_type": "select_bo"
+        }, {
+            "name": "ds6w:description",
+            "type": "string",
+            "layout": {
+                "width": 150,
+                "minWidth": 80,
+                "maxWidth": 400,
+                "removable": true,
+                "hidden": false
+            },
+            "exportable": {
+                "lock": false,
+                "value": true
+            },
+            "cv_type": "select_bo"
+        }, {
+            "name": "ds6w:responsible",
+            "type": "string",
+            "layout": {
+                "width": 100,
+                "minWidth": 100,
+                "maxWidth": 300,
+                "removable": true,
+                "hidden": false
+            },
+            "exportable": {
+                "lock": false,
+                "value": true
+            },
+            "cv_type": "select_ds6w_facet"
+        }, {
+            "name": "ds6w:reserved",
+            "text": "",
+            "type": "string",
+            "layout": {
+                "width": 40,
+                "minWidth": 10,
+                "maxWidth": 100,
+                "removable": true,
+                "hidden": true
+            },
+            "exportable": {
+                "lock": false,
+                "value": false
+            }
+        }, {
+            "name": "ds6w:modified",
+            "type": "date",
+            "layout": {
+                "width": 150,
+                "minWidth": 100,
+                "maxWidth": 250,
+                "removable": true,
+                "hidden": false
+            },
+            "exportable": {
+                "lock": false,
+                "value": true
+            },
+            "cv_type": "select_bo"
+        }, {
+            "name": "ds6w:created",
+            "type": "date",
+            "layout": {
+                "width": 200,
+                "minWidth": 100,
+                "maxWidth": 300,
+                "removable": true,
+                "hidden": false
+            },
+            "exportable": {
+                "lock": false,
+                "value": true
+            },
+            "cv_type": "select_bo"
+        }, {
+            "name": "ds6w:identifier",
+            "type": "string",
+            "layout": {
+                "width": 200,
+                "minWidth": 50,
+                "maxWidth": 400,
+                "removable": true,
+                "hidden": true
+            },
+            "exportable": {
+                "lock": false,
+                "value": true
+            },
+            "cv_type": "select_bo"
+        }, {
+            "name": "ds6w:reservedBy",
+            "type": "string",
+            "layout": {
+                "width": 200,
+                "minWidth": 100,
+                "maxWidth": 400,
+                "removable": true,
+                "hidden": true
+            },
+            "exportable": {
+                "lock": false,
+                "value": false
+            }
+        }]
+    }
+}

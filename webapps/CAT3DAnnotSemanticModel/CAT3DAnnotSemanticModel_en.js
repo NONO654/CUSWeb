@@ -1,0 +1,1 @@
+define("DS/CAT3DAnnotSemanticModel/CAT3DAnnotSemanticModel_en",{});define("DS/CAT3DAnnotSemanticModel/assets/nls/CAT3DAnnotSemanticModel",{rootAttrName:"Geometrical"});

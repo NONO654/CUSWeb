@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>ReduxPromiseMiddleware tester</title>
+	<script src="../AmdLoader/AmdLoader.js"></script>
+	<script>
+		require(['DS/ReduxPromiseMiddleware/ReduxPromiseMiddleware'], function (reduxPromiseMiddleware) {
+			console.log('ReduxPromiseMiddleware', reduxPromiseMiddleware);
+			if (document.body && document.body.textContent) {
+				var desc = 'redux-promise-middleware object properties:\n';
+				for (var prop in reduxPromiseMiddleware) {
+					desc +=  '  * ' + prop + ': ' + typeof reduxPromiseMiddleware[prop] + '\n';
+				}
+				document.body.style.whiteSpace = 'pre-wrap'
+				document.body.textContent = desc;
+			}
+		});
+	</script>
+</head>
+
+<body></body>
+</html>

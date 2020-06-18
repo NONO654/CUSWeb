@@ -1,0 +1,1 @@
+define("DS/ENOXEmptyContent/ENOXEmptyContent_ko",{});define("DS/ENOXEmptyContent/assets/nls/ENOXEmptyContent",{defaultBottomSentence:"위의 지침 준수",defaultSearchText:"콘텐츠에서 검색",defaultDropText:"여기에 콘텐츠 놓기",or:"또는",emptyPage:"페이지가 비어 있습니다."});

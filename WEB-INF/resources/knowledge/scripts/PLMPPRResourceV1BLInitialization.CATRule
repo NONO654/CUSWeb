@@ -1,0 +1,80 @@
+/* -------------------------------------------------------------------------*/
+/* PLMPPRResourceV1BLInitialization.CATRule.CATRule							*/
+/*																			*/
+/*                                                                          */
+/* -------------------------------------------------------------------------*/
+/* Variables declaration                                                    */
+/* -------------------------------------------------------------------------*/
+Let Name(String)
+set Name = ""
+Let Operation = ""
+Let ObjectCustoType=""
+Let UniqueKey=""
+Let ShortName=""
+Let CompleteName=""
+Let Prefix=""
+Let SizeMaxPLMExternalID=100
+Let FinalIndex=0
+Let UniqueKeySize=0
+
+/* Search for OperationId */
+if (Parameters->HasAttribute("OperationId") == true){
+     set Operation = Parameters->GetAttributeString("OperationId") 
+}
+
+if (Parameters->HasAttribute("CustoType"))
+{
+	if ((Operation<>"ImportAsNew") and (Operation<>"Cloning"))
+	{
+		ObjectCustoType = Parameters->GetAttributeString("CustoType")
+		if ( ObjectCustoType<>"ENOSTProductReference")
+		{
+			Prefix=""
+			if (Parameters->HasAttribute("IdString") == true) 
+			{
+				Prefix = Parameters->GetAttributeString("IdString")
+				if (Prefix == NULL) Prefix = ""
+			}
+			/* Resource string specific */
+			/* Currently the same as Discipline */
+			/* For future we will have a BL by type of Resource*/
+				
+			ShortName = Prefix + ThisObject.V_discipline
+
+			UniqueKey = GetUniqueKey( ObjectCustoType )
+	
+			CompleteName = ShortName + UniqueKey
+
+			/* PLM_ExternalID max size = 100, 4 is kept for Instance creation ".123" */
+			if ( CompleteName.Length() <= SizeMaxPLMExternalID - 4) 
+			{
+				ThisObject.PLM_ExternalID = CompleteName
+			}
+			else
+			{
+				UniqueKeySize = UniqueKey.Length()
+				FinalIndex = SizeMaxPLMExternalID - 4 - 3 - 1 - UniqueKeySize
+				if (FinalIndex>0)
+				{
+					ShortName = ShortName.Extract(0,FinalIndex) + "..."
+					ThisObject.PLM_ExternalID = ShortName + UniqueKey
+				}
+				else
+				{	
+					FinalIndex = SizeMaxPLMExternalID - 4 - 3 - 1
+					CompleteName = CompleteName.Extract(0,FinalIndex) + "..."
+					ThisObject.PLM_ExternalID = CompleteName
+				}
+			}
+		}
+	}
+}
+
+if (ThisObject.HasAttribute("PLM_ExternalID") == true)
+{
+	Name = ThisObject.PLM_ExternalID
+	Name = ReplaceSubText(Name,"ErgoHuman","Worker")
+	Name = ReplaceSubText(Name,"Human","Worker")
+	ThisObject->SetAttributeString("PLM_ExternalID",Name)
+}
+

@@ -1,0 +1,159 @@
+{{!++subtemplate++}}
+{{!++id:person++}}
+{{!--
+    template for person fields
+    for a config like:
+       {
+            name: 'assignees',
+            label: i18n('emxCollaborativeTasks.Label.TaskAssignedTo', 'Assigned To'),
+            type: 'person',
+            W: 'who',
+            cssClass: ''
+   }
+    This template accepts 4 different types of inputs:
+   1) array of person objects
+   { assignees:[
+    {
+        name:'bcc',
+        firstname: 'Benoit',
+        lastname: 'CERRINA',
+        physicalId: 'xasasa009'
+    }
+    ,
+    {
+        name:'tws',
+        firstname: 'John',
+        lastname: 'WILLIAMS',
+        physicalId: 'xasasa010'
+    }
+   ]
+   }
+   2) individual person object
+    {assignees: {
+        name:'tws',
+        firstname: 'John',
+        lastname: 'WILLIAMS',
+        physicalId: 'xasasa010'
+    }
+    }
+   3) array of person field
+   {assignees: {
+   [
+    {
+        actualValue:'bcc',
+        displayValue: 'Benoit CERRINA',
+    }
+    ,
+    {
+        actualValue:'tws',
+        displayValue: 'John  WILLIAMS',
+    }
+   ]
+   }
+   4) individual person field
+   {assignees:
+   {
+        actualValue:'tws',
+        displayValue: 'John  WILLIAMS',
+    }
+    }
+ --}}
+  {{#if label }}<label>{{label}}
+    {{~#if required~}}
+            <sup class="required-field">*</sup>
+        {{~/if~}}
+    {{~#if readWrite~}}
+              \{{#if canEdit}}
+                <span class="actions">
+                  {{~#if customButtons~}}
+                     {{~#each customButtons~}}
+                        <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                            <span class="fonticon {{iconClass}}"></span>
+                        </button>
+                     {{~/each~}}
+
+                  {{~/if~}}
+
+                <button class="btn ds-group-plus">
+                    <span class="fonticon fonticon-plus"></span>
+                </button>
+
+          </span>
+          \{{else}}
+          {{~#if customButtons~}}
+          <span class="actions">
+             {{~#each customButtons~}}
+                <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                    <span class="fonticon {{iconClass}}"></span>
+                </button>
+             {{~/each~}}
+          </span>
+          {{~/if~}}
+            \{{/if}}
+          {{else}}
+          {{~#if customButtons~}}
+          <span class="actions">
+             {{~#each customButtons~}}
+                <button class="btn custom-button" data-custom-button-index="{{@index}}" title= "{{toolTip}}">
+                    <span class="fonticon {{iconClass}}"></span>
+                </button>
+             {{~/each~}}
+          </span>
+          {{~/if~}}
+          {{~/if~}}
+
+  </label>
+{{/if}}
+
+    {{!--input and button should only be there if this field is editable--}}
+<ul class="object-list {{#if readWrite~}}\{{#if canEdit}}drop-target\{{/if}}{{~/if~}}">
+    {{~#if readWrite~}}
+        \{{#if canEdit}}
+            <li class="chooser ds-group-add" >
+              <input type="text" class="form-control" placeholder="{{placeHolder}}"/>
+              <button class="btn"><span class="fonticon fonticon-search"></span></button>
+            </li>
+         \{{/if}}
+    {{~/if~}}
+    \{{#eachLimit {{name}} -1 }}                               {{!-- eachLimit with a -1 limit doesn't
+                                                                     actually take a limit (maybe we should),
+                                                                     but it can deal with arrays or
+                                                                     individual objects--}}
+    <li data-field-name="{{name}}-item"  \{{#if busType}} data-type="\{{busType}}" \{{/if}} \{{#if type}} data-type="\{{type}}" \{{/if}}  \{{#if physicalId}} data-id="\{{physicalId}}"\{{/if}}>
+    <span class="draggable-item" \{{#if physicalId}}draggable="true"\{{/if}}>
+        <span class="thumbnail profile-image">
+        \{{#if actualValue}}                       {{!-- case of field --}}
+            <img draggable="false" oncontextmenu="return false" src="\{{userPictureUrl actualValue}}"
+             title="\{{ displayValue }}" data-actualvalue="\{{actualValue}}"/>
+        </span>
+        <span data-field-name="display-value">
+          \{{~#if physicalId}}<a  draggable="false" oncontextmenu="return false" title="\{{ displayValue }}">\{{/if~}}
+                \{{ displayValue }}
+          \{{~#if physicalId}}</a>\{{/if~}}
+        </span>
+        \{{else}}                                  {{!-- case of person objects --}}
+            <img draggable="false" oncontextmenu="return false" src="\{{userPictureUrl name type image}}"
+                 title="\{{ firstname }} \{{ lastname }}"  data-actualvalue="\{{name}}"/>
+        </span>
+        <span data-field-name="display-value">
+        \{{~#if physicalId}}<a  draggable="false" oncontextmenu="return false" title="\{{ firstname }} \{{ lastname }}">\{{/if~}}
+            \{{ firstname }} \{{ lastname }}
+        \{{~#if physicalId}}</a>\{{/if~}}
+        </span>
+        \{{/if}}
+        </span>
+        <span class="actions">
+          {{~#if readWrite~}}
+             \{{#if ../canEdit}}
+                  <button class="btn"><span class="fonticon fonticon-cancel-circled ds-group-remove" data-field-name="{{name}}"></span></button>
+              \{{/if}}
+          {{~/if~}}
+        </span>
+    </li>
+    \{{/eachLimit}}
+    {{~#if readWrite}}
+      \{{#if canEdit}}\{{else}}\{{#if {{name}} }}\{{else}}<li class="read-only">--</li>\{{/if}}\{{/if}}
+    {{~else}}
+      \{{#if {{name}} }}\{{else}}<li class="read-only">--</li>\{{/if}}
+    {{~/if}}
+</ul>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- Copyright 2014 , Dassault Systemes. All rights reserved. -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+<meta name="author" content="Dassault Systèmes" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="debugMode" content="true" />
+<meta name="autoRefresh" content="0" />
+<!--<meta name="resource-fetch-mode" content="DIRECT" />-->
+<title>3DSpace Control Center</title>
+<widget:preferences>
+    <preference name="collab-storage" type="list" label="storage_label" defaultValue="">
+        <option value="" label="loading_label" />
+    </preference>
+</widget:preferences>
+
+<script>
+    widget.addEvents({
+        
+        onLoad : function(event) {
+            require([ 'DS/W3DSpace/W3DSpaceControlCenter' ], function(W3DSpaceControlCenter) {
+                W3DSpaceControlCenter.onLoad.call(null, event);
+            });
+        },
+        
+        onRefresh : function() {
+            require('DS/W3DSpace/W3DSpaceControlCenter').onRefresh.call(null, arguments);
+        },
+        
+        onStorageChange : function() {
+            require('DS/W3DSpace/W3DSpaceControlCenter').onStorageChange.apply(null, arguments);
+        },
+        onEdit : function(event) {
+            require('DS/W3DSpace/W3DSpaceControlCenter').onEdit.apply(null, arguments);
+        },
+        endEdit : function(event) {
+            require('DS/W3DSpace/W3DSpaceControlCenter').endEdit.apply(null, arguments);
+        }
+    });
+</script>
+
+</head>
+<body></body>
+</html>

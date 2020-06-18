@@ -1,0 +1,1 @@
+define("DS/ENOREQ/ENOREQ_AP_fr",{});define("DS/ENOREQ_AP/assets/nls/ENOREQ_AP",{hasNONPS:"Possède un document CAD lié"});

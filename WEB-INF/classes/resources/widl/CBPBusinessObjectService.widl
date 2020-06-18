@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="urn:com:dassault_systemes:widl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:com:dassault_systemes:widl ..\xsd\widlbase.xsd" xmlns:tns="http://cbp.enovia.ws/basic" xmlns:err="http://www.3ds.com/wserror" xmlns:q1="http://cbp.enovia.ws/CBPXML">
+	<entities targetNamespace="http://cbp.enovia.ws/basic">
+		<schemaImports>
+			<schemaImport location="wserrors.xsd"/>
+			<schemaImport location="CBPXML.xsd"/>
+		</schemaImports>
+		<interfaces>
+			<interface name="IPLMBusinessObjectService" scope="public">
+				<documentation>
+					Interface for Business Object operations.
+				</documentation>
+
+				<method name="getObjectId">
+					<documentation>
+						Get a business object's id.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="tnrv" type="q1:TNRV" direction="in">
+						<documentation>The business object's type, name, revision, and vault.</documentation>
+					</param>					
+					<param name="objectId" type="xs:string" direction="out">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="cloneObject">
+					<documentation>
+						Clone a business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object to clone.</documentation>
+					</param>
+					<param name="name" type="xs:string" direction="in">
+						<documentation>The cloned business object's name.</documentation>
+					</param>
+					<param name="attributes" type="q1:ListOfNameValue" direction="in">
+						<documentation>The cloned business object's attributes.</documentation>
+					</param>				
+					<param name="flag" type="xs:boolean" direction="in">
+						<documentation>Files copying option flag. Set to true if the files are to be copied to the cloned object.</documentation>
+					</param>
+					<param name="clonedObjectId" type="xs:string" direction="out">
+						<documentation>The id of the cloned business object.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="reviseObject">
+					<documentation>
+						Revise a business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="attributes" type="q1:ListOfNameValue" direction="in">
+						<documentation>The revised business object's attributes.</documentation>
+					</param>					
+					<param name="flag" type="xs:boolean" direction="in">
+						<documentation>Files copying option flag. Set to true if the files are to be copied to the revised object.</documentation>
+					</param>
+					<param name="revisedObjectId" type="xs:string" direction="out">
+						<documentation>The id of the revised business object.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getAttributes">
+					<documentation>
+						Get the attributes of a business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="attributeNames" type="q1:ListOfString" direction="out">
+						<documentation>The business object's attribute names.</documentation>
+					</param>	
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getAttributeValues">
+					<documentation>
+						Get the attribute values of a business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="attributes" type="q1:ListOfNameValue" direction="out">
+						<documentation>The business object's attribute values.</documentation>
+					</param>	
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="setAttributeValues">
+					<documentation>
+						Set the attribute values of a business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="attributes" type="q1:ListOfNameValue" direction="in">
+						<documentation>The business object's attribute values.</documentation>
+					</param>	
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getBasicInfo">
+					<documentation>
+						Get basic information for a given business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="tnrv" type="q1:TNRV" direction="out">
+						<documentation>The business object's type, name, revision, and vault.</documentation>
+					</param>
+					<param name="policy" type="xs:string" direction="out">
+						<documentation>The business object's policy.</documentation>
+					</param>
+					<param name="owner" type="xs:string" direction="out">
+						<documentation>The business object's owner.</documentation>
+					</param>
+					<param name="locker" type="xs:string" direction="out">
+						<documentation>The business object's locker.</documentation>
+					</param>
+					<param name="description" type="xs:string" direction="out">
+						<documentation>The business object's description.</documentation>
+					</param>
+					<param name="state" type="xs:string" direction="out">
+						<documentation>The business object's state.</documentation>
+					</param>
+					<param name="lastRevision" type="xs:string" direction="out">
+						<documentation>The business object's last revision.</documentation>
+					</param>
+					<param name="originated" type="xs:dateTime" direction="out">
+						<documentation>Timestamp when the business object was created.</documentation>
+					</param>
+					<param name="modified" type="xs:dateTime" direction="out">
+						<documentation>Timestamp when the business object was last modified.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+				
+				<method name="setBasicInfo">
+					<documentation>
+						Set basic information for a given business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="basicInfo" type="q1:ListOfNameValue" direction="in">
+						<documentation>The business object's basic info. Values can be given for the following names: policy, owner, locker, description, name.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="checkinStart">
+					<documentation>
+						Get a URL and ticket for checking in a file to a business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="format" type="xs:string" direction="in">
+						<documentation>The format of the file. Empty string means "generic".</documentation>
+					</param>
+					<param name="filename" type="xs:string" direction="in">
+						<documentation>The name of the file to checkin.</documentation>
+					</param>
+					<param name="store" type="xs:string" direction="in">
+						<documentation>The store in which the file will be placed. Empty string means use the default store.</documentation>
+					</param>
+					<param name="locationOverride" type="xs:string" direction="in">
+						<documentation>The preferred checkin store's location. Empty string means use the default location.</documentation>
+					</param>
+					<param name="unlockFlag" type="xs:boolean" direction="in">
+						<documentation>True to unlock the business object.</documentation>
+					</param>
+					<param name="appendFlag" type="xs:boolean" direction="in">
+						<documentation>True to add the file to any existing files, false to replace all existing files with the given file.</documentation>
+					</param>
+					<param name="connectURL" type="xs:string" direction="in">
+						<documentation>The URL of the MCS (Metadata Collaboration Server).</documentation>
+					</param>
+					<param name="actionURL" type="xs:string" direction="out">
+						<documentation>The URL used to perform the checkin to the FCS (File Collaboration Server).</documentation>
+					</param>
+					<param name="ticket" type="xs:string" direction="out">
+						<documentation>The ticket used to perform the checkin to the FCS (File Collaboration Server).</documentation>
+					</param>					
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="checkinEnd">
+					<documentation>
+						Complete the checkin process.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="store" type="xs:string" direction="in">
+						<documentation>The store in which the file was placed.</documentation>
+					</param>
+					<param name="receipt" type="xs:string" direction="in">
+						<documentation>The returned receipt from the FCS (File Collaboration Server).</documentation>
+					</param>					
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="checkoutStart">
+					<documentation>
+						Checkout a file from a business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="format" type="xs:string" direction="in">
+						<documentation>The format of the file. Empty string means "generic".</documentation>
+					</param>
+					<param name="filename" type="xs:string" direction="in">
+						<documentation>The name of the file to checkout.</documentation>
+					</param>					
+					<param name="lockFlag" type="xs:boolean" direction="in">
+						<documentation>True to lock the business object.</documentation>
+					</param>
+					<param name="zipFlag" type="xs:boolean" direction="in">
+						<documentation>True to zip the checked out file.</documentation>
+					</param>
+					<param name="locationOverride" type="xs:string" direction="in">
+						<documentation>The preferred checkout store's location. Empty string means use the default location.</documentation>
+					</param>
+					<param name="connectURL" type="xs:string" direction="in">
+						<documentation>The URL of the MCS (Metadata Collaboration Server).</documentation>
+					</param>
+					<param name="actionURL" type="xs:string" direction="out">
+						<documentation>The URL used to perform the checkout from the FCS (File Collaboration Server).</documentation>
+					</param>
+					<param name="ticket" type="xs:string" direction="out">
+						<documentation>The ticket used to perform the checkout from the FCS (File Collaboration Server).</documentation>
+					</param>					
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getRevision">
+					<documentation>
+						Get a revision of a business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="revisionChoice" type="xs:string" direction="in">
+						<documentation>The choice of the revision. Valid choices are: previous, next, first, last.</documentation>
+					</param>
+					<param name="reqObjectId" type="xs:string" direction="out">
+						<documentation>The id of the requested object revision.</documentation>
+					</param>			
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getImage">
+					<documentation>
+						Get the image file of a business object.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+						<param name="imageContent" type="q1:FileContent" direction="out">
+						<documentation>The image file name and content.</documentation>
+					</param>		
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+				<method name="getInfoFromSelects">
+					<documentation>
+						Get business object information using select statements.
+					</documentation>
+					<param name="CBPKey" type="xs:string" direction="in">
+						<documentation>The web service authorization key.</documentation>
+					</param>					
+					<param name="objectId" type="xs:string" direction="in">
+						<documentation>The id of the business object.</documentation>
+					</param>
+					<param name="selects" type="q1:ListOfString" direction="in">
+						<documentation>The list of select statements.</documentation>
+					</param>
+					<param name="results" type="q1:ListOfString" direction="out">
+						<documentation>The list of result values.</documentation>
+					</param>
+					<fault type="err:ErrorType">
+						<documentation>
+							Raised when an error is detected in the web
+							service infrastructure.
+						</documentation>
+					</fault>
+				</method>
+
+			</interface>
+		</interfaces>
+		<implementations>
+			<implementation name="PLMBusinessObjectService" serviceid="businessObjectService" implements="tns:IPLMBusinessObjectService">
+				<documentation>
+					A service to provide Business Object operations.
+				</documentation>
+			</implementation>
+		</implementations>
+	</entities>
+</description>

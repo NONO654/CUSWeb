@@ -1,0 +1,172 @@
+{
+    "action_bar": {
+        "standard": {
+            "file": "ENOPAD_v2.xml",
+            "module": "ENOPAD_v2"
+        },
+        "touch": {
+            "file": "ENOPAD_v2.xml",
+            "module": "ENOPAD_v2"
+        }
+    },
+    "padsettings": {
+        "enopad": {
+            "run_options": {
+                "authorized_root_types": {
+                    "value": ["MCAD Assembly", "MCAD Component", "MCAD Representation", "CATDrawing"]
+                },
+                "unsupported_root_types":{
+                    "value": ["CATAnalysisResults", "CATAnalysisComputations"]
+                },
+                "dnd": {
+                    "value": "MOVE",
+                    "preference": {
+                        "type": "list",
+                        "label": "dnd_label",
+                        "options": [{
+                            "value": "MOVE",
+                            "label": "MOVE_label"
+                        }, {
+                            "value": "COPY",
+                            "label": "COPY_label"
+                        }]
+                    }
+                },
+                "activateBIFilter": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "activateFilter_label"
+                    },
+                    "dispatch": true
+                },
+                "confirmationDialog": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "confirmationDialog_label"
+                    },
+                    "dispatch": true
+                },
+                "useIndexAccleration": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "useIndexAccleration_label"
+                    },
+                    "dispatch": true
+                },
+                "local_preferences": {
+                    "value": false
+                },
+                "touchDropInvite": {
+                    "value": true
+                },
+                "EditModeActivated":{
+                  "value": true,
+                  "preference": {
+                      "type": "hidden",
+                      "label": "",
+                      "defaultValue": true
+                  }
+                }
+            },
+            "debug_options": {
+                "dynamic_authorized_types": {
+                    "value": true,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Use dynamically authorized types"
+                    }
+                },
+                "activateNlsApi":{
+                  "value": true,
+                  "preference": {
+                      "type": "boolean",
+                      "label": "Activate NLS from API"
+                  }
+                },
+                "filterNls":{
+                  "value": ["ds6w:type"]
+                },
+                "rootListAsPanel": {
+                    "value": true
+                },
+                "refresh": {
+                    "value": "asresult_smart",
+                    "preference": {
+                        "type": "list",
+                        "label": "DEV activation: Refresh behavior",
+                        "options": [{
+                            "value": "basic",
+                            "label": "Refresh & collapse"
+                        }, {
+                            "value": "asresult_basic",
+                            "label": "As Result - Basic"
+                        }, {
+                            "value": "asresult_smart",
+                            "label": "As Result - Smart (with newly inserted & deleted)"
+                        }]
+                    }
+                },
+                "enopad_widget_reload": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Reload widget customization each time"
+                    }
+                },
+                "tree_order_in_label": {
+                    "value": false,
+                    "preference": {
+                        "type": "boolean",
+                        "label": "Add TreeOrder in Label"
+                    }
+                }
+            },
+            "webapi_options": {
+                "fetch": {
+                    "intent": "explore_2D",
+                    "select_predicate": ["relcount"]
+                },
+                "navigate": {
+                    "select_bo": ["physicalid", "ds6w:type", "relcount", "ds6w:reservedBy"],
+                    "select_rel": ["physicalid", "ds6w:type"],
+                    "select_ds6w_facet": [],
+                    "compute_select_bo": ["thumbnail_2d", "icon"]
+                }
+            },
+            "layout_options": {}
+        }
+    },
+    "view_settings": {
+        "buildTreeListOpts": {
+            "intent": "explore_2D"
+        },
+        "basic_treelistopts": {
+            "version": "1.0.0",
+            "apiVersion": 2,
+            "defaultCellHeight": 38,
+            "iconsSize": 20,
+            "height": "auto",
+            "useAsyncPreExpand": true,
+            "isEditable": false,
+            "resize": {
+                "columns": true
+            },
+            "headersDimensions": {
+                "height": 38
+            },
+            "performances": {
+                "debounceCellInternalUpdateTimer": 1,
+                "useRequestAnimationFrame": true
+            },
+            "selection": {
+                "unselectAllOnEmptyArea": true,
+                "toggle": false,
+                "enableListSelection":true
+            },
+            "columns": []
+        }
+    }
+}

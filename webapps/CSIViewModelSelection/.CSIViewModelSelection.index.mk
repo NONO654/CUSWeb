@@ -1,0 +1,9 @@
+m|CSIViewModelWebUx\CSIViewModelSelection.mweb
+b|j|n,u
+b|c|n,u
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\CSIViewModelSelection\CSIViewModelSelectionObjectFactory.js|1523447526|754
+s|CSIViewModelWebUx\CSIViewModelSelection.mweb\src\CSIViewModelSelectionObjectFactory.js|1523447526|754
+t|win_b64\webapps\CSIViewModelSelection\CSIViewModelSelection.js|1463554956|0
+s|CSIViewModelWebUx\CSIViewModelSelection.mweb\src\CSIViewModelSelection.js|1463554956|0

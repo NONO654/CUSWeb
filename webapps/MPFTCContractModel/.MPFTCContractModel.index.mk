@@ -1,0 +1,16 @@
+m|MPFModels\MPFTCContractModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.3.18352
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFTCContractModel\MPFTCContractModel.js|1545169472|8440
+s|MPFModels\MPFTCContractModel.mweb\src\SoftwareAgreementByLanguageDataProxy.js|1529933717|1584
+s|MPFModels\MPFTCContractModel.mweb\src\SoftwareAgreementDataProxy.js|1539087089|2329
+s|MPFModels\MPFTCContractModel.mweb\src\SoftwareAgreementModel.js|1543316022|2021
+s|MPFModels\MPFTCContractModel.mweb\src\TCContractCollection.js|1529933668|676
+s|MPFModels\MPFTCContractModel.mweb\src\TCContractDataProxy.js|1529933656|2537
+s|MPFModels\MPFTCContractModel.mweb\src\TCContractModel.js|1542710537|9652
+s|MPFModels\MPFTCContractModel.mweb\src\TCDocumentDataProxy.js|1536845052|2765
+s|MPFModels\MPFTCContractModel.mweb\src\TCDocumentModel.js|1542618012|2892
+s|MPFModels\MPFTCContractModel.mweb\src\MPFTCContractModel.js|1508247719|0
+s|MPFModels\MPFTCContractModel.mweb\src\CartBiddingDocumentDataProxy.js|1539087459|1713

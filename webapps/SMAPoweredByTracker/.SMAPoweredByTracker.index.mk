@@ -1,0 +1,14 @@
+m|SMAPoweredByCommon\SMAPoweredByTracker.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.8.19245
+r|G:\R421\BSF\.
+t|win_b64\webapps\SMAPoweredByTracker\assets\alerts_to_track.json|1554530799|1684
+s|SMAPoweredByCommon\SMAPoweredByTracker.mweb\src\assets\alerts_to_track.json|1552318800|1684
+t|win_b64\webapps\SMAPoweredByTracker\SMAPoweredByTracker.js|1567453791|3276
+s|SMAPoweredByCommon\SMAPoweredByTracker.mweb\src\ad-tracker\action-types.js|1554473168|520
+s|SMAPoweredByCommon\SMAPoweredByTracker.mweb\src\ad-tracker\reducer.js|1554473170|1703
+s|SMAPoweredByCommon\SMAPoweredByTracker.mweb\src\ad-tracker\ad-usage-tracker.js|1554473169|3766
+s|SMAPoweredByCommon\SMAPoweredByTracker.mweb\src\ad-tracker\actions.js|1554473169|900
+s|SMAPoweredByCommon\SMAPoweredByTracker.mweb\src\ad-tracker\ad-usage.js|1567001705|3149
+s|SMAPoweredByCommon\SMAPoweredByTracker.mweb\src\ad-tracker\selectors.js|1567000705|952

@@ -1,0 +1,1 @@
+define("DS/MPFMenuComponent/MPFMenuComponent_zh",{});define("DS/MPFMenuComponent/assets/nls/MenuComponent",{back:"返回",finish:"完成",loading:"正在加载",next:"下一步"});

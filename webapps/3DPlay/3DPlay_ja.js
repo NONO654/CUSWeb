@@ -1,0 +1,1 @@
+define("DS/3DPlay/3DPlay_ja",{});define("DS/3DPlay/assets/nls/3DPlay",{DivMissing:"3DPlayWeb - 呼び出しが正しくありません。ドキュメントを参照してください。",BrowserNoWebGL:"ブラウザは WebGL をサポートしていません。",BrowserNotSupported:"ブラウザはサポートされていません。",BrowserNotFullySupported:"ブラウザではコンテンツを完全にサポートしていない可能性があります。",SplashLoading:"ロードしています...",SplashConverting:"変換しています...",ScripNotFoundError:"必要なスクリプトが見つかりません:"});

@@ -1,0 +1,1 @@
+define("DS/DMUSlideEdition/DMUSlideEdition_fr",{});define("DS/DMUSlideEdition/assets/nls/DMUSlideEdition",{normalSlideTitle:"Diapositive",createSlideMessage:"créé"});

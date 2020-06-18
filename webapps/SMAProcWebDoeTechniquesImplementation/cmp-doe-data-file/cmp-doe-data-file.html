@@ -1,0 +1,97 @@
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-radio-buttons/sp-radio-buttons.html">
+<link rel="import" href="../../SMAProcWebAuthoringUtils/cmp-file-selection/cmp-file-selection.html">
+<link rel="import" href="../../SMAProcWebAuthoringUtils/cmp-runtime-file-selection/cmp-runtime-file-selection.html">
+
+<dom-module id="cmp-doe-data-file">
+
+	<template>
+		<style>
+		.margin-auto {
+			margin: auto;
+		}
+
+		.display-flex {
+			display: inline-flex;
+		}
+
+		.points-div {
+			margin-bottom: 5px;
+		}
+
+		.margin-top {
+			margin-top: 5px;
+		}
+
+		sp-input {
+			width: 40%;
+		}
+
+		.headerrow {
+			margin-top: 10px;
+			margin-left: 0px;
+			margin-right: 0px;
+		}
+
+		.margin-left {
+			margin-left: 5px;
+		}
+
+		.negative-margin {
+			margin-left: -0.2em;
+		}
+
+		#fileChooser {
+			width:100%;
+		}
+
+		.command-pane {
+		    display: none;
+		}
+
+		.is-visible {
+		    display:block;
+		    padding-top: 0.8em;
+		}
+
+		.command-pane.is-visible {
+		    display:block;
+		    width: 100%;
+		    padding-top: 10px;
+		}
+		label {
+			font-weight: normal;
+		}
+		</style>
+		<div class="points-div">
+			<sp-radio-buttons id="filetype" options="Document (Input),Run-time File" selectedindex="{{ index }}" on-optionselect="updateFileType"></sp-radio-buttons>
+		</div>
+		<div class$="{{_computeClass(index)}}">
+			<div>
+				<cmp-file-selection id="fileChooser" filetypes=".xlsx,.csv,.inp,.txt" on-fileselected="_fileSelectEvent"></cmp-file-selection>
+			</div>
+		 </div>
+		 <div class$="{{_computeClass2(index)}}">
+		 	<cmp-runtime-file-selection id="runtimefilechooser"></cmp-runtime-file-selection>
+		 </div>
+		 <div class="display-flex margin-top">
+				<sp-checkbox class="headerrow" checked="{{ techniqueOptions.useHeaderRow }}"></sp-checkbox>
+				<label class="margin-auto">Use header row: </label>
+				<sp-input type="number" id="headerrow" readonly="{{ !techniqueOptions.useHeaderRow }}" value="{{ techniqueOptions.headerRow }}"></sp-input>
+			</div>
+			<div class="display-flex margin-top">
+				<label class="margin-auto">Data starts on row: </label>
+				<sp-input class="negative-margin" type="number" id="datarow" value="{{ techniqueOptions.dataRow }}"></sp-input>
+			</div>
+
+			 <button is="sp-button-type" class="margin-top" on-click="onScanParams">Scan for parameters...</button>
+			 <sp-tree-table id="scannedparamstable" class="command-pane" width="[[tablewidth]]" height="[[tableheight]]" fixedwidth></sp-tree-table>
+
+		 <div class="display-flex margin-top">
+			 	<sp-checkbox class="margin-top" checked="false" readonly="true"></sp-checkbox>
+				<label class="margin-left">Store file contents in Activity </label>
+			 </div>
+	</template>
+
+	<script type="text/javascript" src="cmp-doe-data-file.js"></script>
+</dom-module>

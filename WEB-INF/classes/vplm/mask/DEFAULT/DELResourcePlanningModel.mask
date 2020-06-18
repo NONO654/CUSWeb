@@ -1,0 +1,87 @@
+// ===========================================================
+// PACKAGE   : DELResourcePlanningModel
+// ===========================================================
+// Generated : Dienstag, 4. Dezember 2007 08:39:47
+// -----------------------------------------------------------
+// Syntax: 
+//   MASK DEFAULT
+//   ENTITY <entity>
+//   ATTR   <attr>;<required>;<are_values_authorized_values>;<def_val>
+//   VALUE  <value>
+//   FUNC   <method>
+//   FATTR  <attr>;<modif>
+// with: <entity>   = entity name
+//       <attr>     = atribute name
+//       <required> = required attr logical flag (Y or N)
+//       <are_values_authorized_values>
+//                  = authorized values logical flag (Y or N):
+//                    N -> help values / Y -> authorized values
+//       <def_val>  = default value
+//       <value>    = a string value (can have blanks)
+//                    When <are_values_authorized_values> equals:
+//                    N -> an help value / Y -> an authorized value
+//       <method>   = one of the following operations:
+//                    Create         : attr appears in creation panels
+//                    Read/List/Tree : attr appears in browse/query result panels
+//                    Write          : attr appears in properties panels
+//                    Query/EZQuery  : attr appears in query condition panels
+//       <modif>    = writable field logical flag (Y or N):
+//                    N -> NOT modifiable / Y -> modifiable
+// ===========================================================
+MASK DEFAULT
+// --- entities: 1
+// ===========================================================
+ENTITY PLMDELResPlanningPremisesTyping
+// ===========================================================
+// --- attributes: 5
+ATTR V_GoalNumberOfPointFasteners;N;N;$
+ATTR V_GoalLengthOfCurveFasteners;N;N;$
+ATTR V_TimePerFastener;N;N;$
+ATTR V_CurveFasteningRate;N;N;$
+ATTR V_ResourceNoOfMulticycles;N;N;$
+// -----------------------------------------------------------
+FUNC Create
+// -----------------------------------------------------------
+FATTR V_GoalNumberOfPointFasteners;Y
+FATTR V_GoalLengthOfCurveFasteners;Y
+FATTR V_TimePerFastener;Y
+FATTR V_CurveFasteningRate;Y
+FATTR V_ResourceNoOfMulticycles;Y
+// -----------------------------------------------------------
+FUNC Query
+// -----------------------------------------------------------
+FATTR V_GoalNumberOfPointFasteners;Y
+FATTR V_GoalLengthOfCurveFasteners;Y
+FATTR V_TimePerFastener;Y
+FATTR V_CurveFasteningRate;Y
+FATTR V_ResourceNoOfMulticycles;Y
+// -----------------------------------------------------------
+FUNC Write
+// -----------------------------------------------------------
+FATTR V_GoalNumberOfPointFasteners;Y
+FATTR V_GoalLengthOfCurveFasteners;Y
+FATTR V_TimePerFastener;Y
+FATTR V_CurveFasteningRate;Y
+FATTR V_ResourceNoOfMulticycles;Y
+// -----------------------------------------------------------
+FUNC Tree
+// -----------------------------------------------------------
+// -----------------------------------------------------------
+FUNC EZQuery
+// -----------------------------------------------------------
+FATTR V_GoalNumberOfPointFasteners;Y
+FATTR V_GoalLengthOfCurveFasteners;Y
+FATTR V_TimePerFastener;Y
+FATTR V_CurveFasteningRate;Y
+FATTR V_ResourceNoOfMulticycles;Y
+// -----------------------------------------------------------
+FUNC Read
+// -----------------------------------------------------------
+FATTR V_GoalNumberOfPointFasteners;N
+FATTR V_GoalLengthOfCurveFasteners;N
+FATTR V_TimePerFastener;N
+FATTR V_CurveFasteningRate;N
+FATTR V_ResourceNoOfMulticycles;N
+// ===========================================================
+// End of DEFAULT mask file
+// ===========================================================

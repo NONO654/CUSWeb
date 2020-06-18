@@ -1,0 +1,1146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by LOD (DASSAULT SYSTEMES) -->
+<!-- @COPYRIGHT DASSAULT SYSTEMES 2005. All rights reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.3ds.com/xsd/3DXML" targetNamespace="http://www.3ds.com/xsd/3DXML" elementFormDefault="qualified" attributeFormDefault="unqualified" version="4.3">
+	<!-- Mathematics Definitions-->
+	<xs:simpleType name="ListOfIntType">
+		<xs:list itemType="xs:int"/>
+	</xs:simpleType>
+	<xs:simpleType name="ListOfUnsignedIntType">
+		<xs:list itemType="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="ListOfFloatType">
+		<xs:list itemType="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="ListOfDoubleType">
+		<xs:list itemType="xs:double"/>
+	</xs:simpleType>
+	<xs:complexType name="ListOfStringType">
+		<xs:sequence>
+			<xs:element name="item" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="Matrix4x3Type">
+		<xs:annotation>
+			<xs:documentation>A 4 by 3 matrix of double used for positioning elements in 3d space</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="ListOfDoubleType">
+			<xs:length value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Vector3DType">
+		<xs:restriction base="ListOfDoubleType">
+			<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Vector2DType">
+		<xs:restriction base="ListOfDoubleType">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Point3DType">
+		<xs:restriction base="ListOfDoubleType">
+			<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Point2DType">
+		<xs:restriction base="ListOfDoubleType">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PlaneType">
+		<xs:annotation>
+			<xs:documentation>A 3d plane defined by its equation : ax+by+cz+d=0. The lists contains the four parameters sorted as they appear in the equation</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="ListOfFloatType">
+			<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AxisSystemType">
+		<xs:annotation>
+			<xs:documentation>An oriented axis system defined by an origin and three vectors</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Origin" type="Point3DType"/>
+			<xs:element name="X" type="Vector3DType"/>
+			<xs:element name="Y" type="Vector3DType"/>
+			<xs:element name="Z" type="Vector3DType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="DirectionType">
+		<xs:annotation>
+			<xs:documentation>A simple type to identify one of the three directions of an axis system</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="X"/>
+			<xs:enumeration value="Y"/>
+			<xs:enumeration value="Z"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Strings definition-->
+	<xs:simpleType name="UUIDType">
+		<xs:annotation>
+			<xs:documentation>A Universal Unique IDentifier. This identifier can be used to uniquely  identify an element</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9,A-F,a-f]{8}-[0-9,A-F,a-f]{4}-[0-9,A-F,a-f]{4}-[0-9,A-F,a-f]{16}|[0-9,A-F,a-f]{8}-[0-9,A-F,a-f]{4}-[0-9,A-F,a-f]{4}-[0-9,A-F,a-f]{4}-[0-9,A-F,a-f]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Links through URN -->
+	<xs:simpleType name="LinkType">
+		<xs:annotation>
+			<xs:documentation> A persistent identifier for resource location. The resource can be external or internal to the current .3dxml file</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:anyURI">
+			<xs:annotation>
+				<xs:documentation>3DXML URI allows to create link between files into the same archive (link between two archives is not possible)</xs:documentation>
+				<xs:documentation>3DXML URI could be:</xs:documentation>
+				<xs:documentation>1- A link to another entity into the same .3DXML file. (ie. identifier>)</xs:documentation>
+				<xs:documentation>2- A link to another entity into .3DXML file. (ie. urn:3DXML:myFile.3dxml#identifier>)</xs:documentation>
+				<xs:documentation>3- A link to .3DRep file. (ie. urn:3DXML:myFile.3DRep>)</xs:documentation>
+				<xs:documentation>4- A link to a file with the following extension : jpg, jpeg, bmp, tif, dds, tga, png, ...</xs:documentation>
+			</xs:annotation>
+			<xs:pattern value="urn:3DXML:.*"/>
+			<xs:pattern value="(0|[1-9][0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="archiveURIType" final="#all">
+		<xs:annotation>
+			<xs:documentation>Either link to internal object (belows to same 3dxml file)</xs:documentation>
+			<xs:documentation>Or link to external object (belows to another 3dxml file in same archive)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="LinkType">
+			<xs:pattern value="(urn:3DXML:[^\*\?\\/:|>]*\.(3dxml|3DXML)#)?(0|[1-9][0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="indexLinkType">
+		<xs:annotation>
+			<xs:documentation>Link to internal object (Same 3dxml file)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="LinkType">
+			<xs:pattern value="(0|[1-9][0-9]*)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RepresentationLinkType">
+		<xs:annotation>
+			<xs:documentation>A persistent identifier for representation content (Geometrical / Technological) location</xs:documentation>
+			<xs:documentation>Content must be in the same archive</xs:documentation>
+			<xs:documentation>Representationlink content must not a 3DXML</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="LinkType">
+			<xs:pattern value="urn:3DXML:[^\*\?\\/:|>]*\.3DRep"/>
+			<xs:pattern value="urn:3DXML:[^\*\?\\/:|>]*\..*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="InstancesPathType">
+		<xs:annotation>
+			<xs:documentation>Identification through Instance Path </xs:documentation>
+			<xs:documentation>The path must be composed with Ids of InstanceType (included inherited type) objects only</xs:documentation>
+			<xs:documentation>except : Path with only one element, it must be an Id of ReferenceType (included inherited type)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="id" type="archiveURIType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Header -->
+	<xs:simpleType name="RelationRoleType">
+		<xs:annotation>
+			<xs:documentation>The role of a relation between related resources. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IsVersionOf"/>
+			<xs:enumeration value="HasVersion"/>
+			<xs:enumeration value="IsReplacedBy"/>
+			<xs:enumeration value="Replaces"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="RelationType">
+		<xs:annotation>
+			<xs:documentation>A reference to a related resource. Four roles are defined for now: 
+			IsVersionOf means that the current resource has been derived from the other resource. 
+			IsReplacedBy means that the current resource is now obsolete and should be replaced by the other resource.
+			HasVersion and Replaces are respectively the opposites of IsVersionOf and IsReplacedBy
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="role" type="RelationRoleType"/>
+		<xs:attribute name="resource" type="xs:string"/>
+	</xs:complexType>
+	<xs:complexType name="HeaderType">
+		<xs:annotation>
+			<xs:documentation>A collection of metadata relative to the file (author, date, title, ...)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SchemaVersion" type="xs:decimal" fixed="4.3">
+				<xs:annotation>
+					<xs:documentation>The version of 3dxml generic schema on which the file is based. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Title" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A name given to the file. 
+					Should be explicit enough to define a name by which the file can be formally known. 
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Abstract, table of contents or free text. 
+					A description should give an insight of what is contained in the file and what it is used for. This field should be limited to a few lines. 
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Subject" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The topic of the content of the file chosen from a classification system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Source" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A Reference to a resource from which the present file is derived.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Author" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An entity (a person, an organization, or a service) primarily responsible for making the content of the resource.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Contributor" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An entity  (a person, an organization, or a service) responsible for making contributions to the content of the resource.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Generator" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name and version of the software used to generate the file.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Rights" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Information about rights held in and over the resource (includes copyright, Intellectual Property Rights,...).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Created" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A date associated with the creation of  the resource (ISO 8601 YYYY-MM-DD format)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Modified" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A date associated with the last modification of the resource (ISO 8601 YYYY-MM-DD format)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Issued" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A date associated with the publication of the resource (ISO 8601 YYYY-MM-DD format)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Identifier" type="UUIDType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An unambiguous reference to the resource within a given context.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Language" type="xs:language" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The language of the intellectual content of the file. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Header -->
+	<!-- Abstract  -->
+	<xs:simpleType name="V_natureEnum">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Specification</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2">
+				<xs:annotation>
+					<xs:documentation>Definition</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3">
+				<xs:annotation>
+					<xs:documentation>Presentation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="EntityType" abstract="true">
+		<xs:sequence>
+			<xs:element name="C_created" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Creation time and date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="C_modified" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Last update time and date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PLM_ExternalID" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>External Identification name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="V_description" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description - free field</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="V_discipline" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Internal Use Only</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="V_usage" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Deprecated from v4.1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="V_Name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Common naming support</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="V_nature" type="V_natureEnum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Internal Use Only</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:unsignedInt" use="required">
+			<xs:annotation>
+				<xs:documentation>Unique internal 3DXML identifier</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Deprecated from v4.0 - Use PLMExternal_ID attribute</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="wsi" type="xs:base64Binary" use="optional">
+			<xs:annotation>
+				<xs:documentation>Internal use only</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!-- Abstract -->
+	<!-- Core -->
+	<xs:complexType name="ReferenceType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Reference is the smallest atom of the structure. It defines a reusable entity</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="EntityType">
+				<xs:sequence>
+					<xs:element name="V_version" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Version of object</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="V_maturity" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Maturity of object</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InstanceType" final="restriction">
+		<xs:annotation>
+			<xs:documentation>Instance manifests the usage of a Reference</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="EntityType">
+				<xs:sequence>
+					<xs:element name="IsAggregatedBy" type="indexLinkType"/>
+					<xs:element name="IsInstanceOf" type="archiveURIType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PLMCoreReferenceType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>PLMCoreReference is the Modeling object for handling Core References</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ReferenceType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PLMCoreRepReferenceType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>PLMCoreReferenceRep is the Modeling object for handling Core Representations</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ReferenceType">
+				<xs:sequence>
+					<xs:element name="PLMRelation" type="PLMRelationType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="format" type="RepresentationFormatType" use="required"/>
+				<xs:attribute name="associatedFile" type="RepresentationLinkType" use="required"/>
+				<xs:attribute name="version" type="xs:float">
+					<xs:annotation>
+						<xs:documentation>Version of format</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PLMConnectionType">
+		<xs:complexContent>
+			<xs:extension base="EntityType">
+				<xs:sequence>
+					<xs:element name="IsAggregatedBy" type="indexLinkType"/>
+					<xs:element name="PLMRelation" type="PLMRelationType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PLMRelationType">
+		<xs:annotation>
+			<xs:documentation> Allow to make a relation between two objets through path</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="C_Semantics" type="xs:string"/>
+			<xs:element name="C_Role" type="xs:string"/>
+			<xs:element name="Ids" type="InstancesPathType">
+				<xs:annotation>
+					<xs:documentation>Ids contains list of identifier objects, path of pointed object</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExtensionType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>The base Extension type. Is not instanciated. Is used only if we need to have common attributes for all Extensions</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<!-- Core -->
+	<!-- Product -->
+	<xs:complexType name="Reference3DExtensionType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Extension that can be used only to specialize 3D References</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ExtensionType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Instance3DExtensionType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Extension that can be used only to specialize 3D Instances</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ExtensionType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ReferenceRepExtensionType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Extension that can be used only to specialize Representation References</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ExtensionType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InstanceRepExtensionType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Extension that can be used only to specialize Representation Instances</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ExtensionType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Reference3DType" abstract="false" final="restriction">
+		<xs:complexContent>
+			<xs:extension base="PLMCoreReferenceType">
+				<xs:sequence>
+					<xs:element name="Extension" type="Reference3DExtensionType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Instance3DType" abstract="false" final="restriction">
+		<xs:annotation>
+			<xs:documentation>Instance3D is the Modeling object for handling 3D Instances</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="InstanceType">
+				<xs:sequence>
+					<xs:element name="RelativeMatrix" type="Matrix4x3Type"/>
+					<xs:element name="Extension" type="Instance3DExtensionType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ReferenceRepType" abstract="false" final="restriction">
+		<xs:annotation>
+			<xs:documentation>ReferenceRep is the Modeling object for handling Representations</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PLMCoreRepReferenceType">
+				<xs:sequence>
+					<xs:element name="Extension" type="ReferenceRepExtensionType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="qualifier" use="optional" fixed="SUBSTITUTE">
+					<xs:annotation>
+						<xs:documentation>
+						The substitute representation replaces all the representations found in the same branch tree under it.
+				</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InstanceRepType" abstract="false" final="restriction">
+		<xs:annotation>
+			<xs:documentation>InstanceRep is the Modeling object for handling Representation Instances</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="InstanceType">
+				<xs:sequence>
+					<xs:element name="Extension" type="InstanceRepExtensionType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- ____________________________________________________________________________________________________ -->
+	<xs:complexType name="ProductStructureType">
+		<xs:choice maxOccurs="unbounded">
+			<xs:element name="Reference3D" type="Reference3DType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A reference object to be used for representing re-usable 3D data.  A 3D representation can be associated to this reference.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Instance3D" type="Instance3DType" minOccurs="0"/>
+			<xs:element name="ReferenceRep" type="ReferenceRepType" minOccurs="0"/>
+			<xs:element name="InstanceRep" type="InstanceRepType" minOccurs="0"/>
+		</xs:choice>
+		<xs:attribute name="root" type="xs:unsignedInt" use="optional"/>
+	</xs:complexType>
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- Process Structure -->
+	<xs:complexType name="DELFmiFunctionReferenceType" abstract="false" final="restriction">
+		<xs:complexContent>
+			<xs:extension base="PLMCoreReferenceType">
+				<xs:sequence>
+					<xs:element name="V_EstimatedTime" type="xs:time">
+						<xs:annotation>
+							<xs:documentation>Defines estimated time of execution. Can be used as specification to roughly review the process flow.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PROCESSType">
+		<xs:choice maxOccurs="unbounded">
+			<xs:element name="DELFmiFunctionReference" type="DELFmiFunctionReferenceType" minOccurs="0"/>
+			<xs:element name="DELFmiFunctionInstance" type="InstanceType" minOccurs="0"/>
+		</xs:choice>
+		<xs:attribute name="root" type="xs:unsignedInt" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="DELFmiFunctionalModelImplementCnxType">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="DELFmiProcessImplementCnx" type="PLMConnectionType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- Ressource -->
+	<xs:complexType name="PLMDELResTypingExtensionType" final="#all">
+		<xs:annotation>
+			<xs:documentation>Resource Modeler main extension</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Reference3DExtensionType">
+				<xs:sequence>
+					<xs:element name="V_MainType" default="UserDefined">
+						<xs:annotation>
+							<xs:documentation>Most important attribute of a resource, describing its main type from a given list</xs:documentation>
+							<xs:documentation>Organizational, Robot, Worker,NCMachine, Inspect, ToolDevice, Storage, Transport, Conveyor, ControlDevice, UserDefined</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="Organizational"/>
+								<xs:enumeration value="Robot"/>
+								<xs:enumeration value="Worker"/>
+								<xs:enumeration value="NCMachine"/>
+								<xs:enumeration value="Inspect"/>
+								<xs:enumeration value="ToolDevice"/>
+								<xs:enumeration value="Storage"/>
+								<xs:enumeration value="Transport"/>
+								<xs:enumeration value="Conveyor"/>
+								<xs:enumeration value="ControlDevice"/>
+								<xs:enumeration value="UserDefined"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DELRmiResourceModelImplCnxType" final="#all">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="PLMDELImplCnx" type="PLMConnectionType"/>
+		</xs:sequence>
+		<xs:attribute name="root" type="xs:unsignedInt" use="optional"/>
+	</xs:complexType>
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- PPRContext -->
+	<xs:complexType name="PLMDELPPRContextExtensionType" final="#all">
+		<xs:annotation>
+			<xs:documentation>PPR Context extension</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Reference3DExtensionType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PLMDELPPRResourceExtensionType" final="#all">
+		<xs:annotation>
+			<xs:documentation>PPR Resource extension for PPR modeler</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Instance3DExtensionType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DELPPRContextModelProcessCnxType" final="#all">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="PLMDELPPRProcessCnx" type="PLMConnectionType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- Material -->
+	<xs:complexType name="CATMatConnectionType">
+		<xs:complexContent>
+			<xs:extension base="PLMConnectionType">
+				<xs:sequence>
+					<xs:element name="V_Layer" type="xs:unsignedInt"/>
+					<xs:element name="V_Applied" type="xs:unsignedInt"/>
+					<xs:element name="V_Matrix_1" type="xs:float"/>
+					<xs:element name="V_Matrix_2" type="xs:float"/>
+					<xs:element name="V_Matrix_3" type="xs:float"/>
+					<xs:element name="V_Matrix_4" type="xs:float"/>
+					<xs:element name="V_Matrix_5" type="xs:float"/>
+					<xs:element name="V_Matrix_6" type="xs:float"/>
+					<xs:element name="V_Matrix_7" type="xs:float"/>
+					<xs:element name="V_Matrix_8" type="xs:float"/>
+					<xs:element name="V_Matrix_9" type="xs:float"/>
+					<xs:element name="V_Matrix_10" type="xs:float"/>
+					<xs:element name="V_Matrix_11" type="xs:float"/>
+					<xs:element name="V_Matrix_12" type="xs:float"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CATMatReferenceType">
+		<xs:annotation>
+			<xs:documentation>Material definition reference. Can aggregate Material domains.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PLMCoreReferenceType">
+				<xs:sequence>
+					<xs:element name="V_AlternateName" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>detailed Name</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MaterialDomainType">
+		<xs:annotation>
+			<xs:documentation>Material domains define matter's physics and aspect. Domains are instanciated in CATMaterialRef section. One of this domain deals with rendering. It is pointing specific domain reps via a PLMRelation</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PLMCoreRepReferenceType">
+				<xs:sequence>
+					<xs:element name="V_MatDomain" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Domain Identifier</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MaterialDomainInstanceType">
+		<xs:annotation>
+			<xs:documentation>Material's domains are instanciated in CATMaterialRef section. Each type of domain is instanciated only once</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="InstanceType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CATMaterialRefType" final="#all">
+		<xs:annotation>
+			<xs:documentation>Complex type handling several Material Reference, associated material domains and instances of this domains</xs:documentation>
+		</xs:annotation>
+		<xs:choice maxOccurs="unbounded">
+			<xs:element name="CATMatReference" type="CATMatReferenceType" minOccurs="0"/>
+			<xs:element name="MaterialDomain" type="MaterialDomainType" minOccurs="0"/>
+			<xs:element name="MaterialDomainInstance" type="MaterialDomainInstanceType" minOccurs="0"/>
+		</xs:choice>
+		<xs:attribute name="root" type="xs:unsignedInt" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="CATRepresentationImageType">
+		<xs:complexContent>
+			<xs:extension base="ReferenceRepType">
+				<xs:annotation>
+					<xs:documentation>Handles image representation. Define type and name</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="V_PrimaryMimeType" type="xs:string" minOccurs="0"/>
+					<xs:element name="V_PrimaryFileName" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CATRepImageType" final="#all">
+		<xs:annotation>
+			<xs:documentation>Handles image representations. Used in material for textures</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CATRepresentationImage" type="CATRepresentationImageType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="root" type="xs:unsignedInt" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="CATMaterialType" final="#all">
+		<xs:annotation>
+			<xs:documentation>Complex type handling connections between 3D instances and Material references</xs:documentation>
+			<xs:documentation>A material connection defines what material reference is used, how it is used, where it is applied and in which context.	</xs:documentation>
+			<xs:documentation>It also describe how the material is positionned on his support thanks to coefficients of a matrix.</xs:documentation>
+			<xs:documentation>The material usage is defined with “V_Applied” that can be valuated with:</xs:documentation>
+			<xs:documentation>		1= Occurrence is “MadeOf” a Core material</xs:documentation>
+			<xs:documentation>		2= Occurrence is “DressBy” a “Covering” material</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="CATMatConnection" type="CATMatConnectionType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- DELHumanModel -->
+	<xs:simpleType name="V_Gender_Enum">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:documentation>Woman</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>Man</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="PLMResourceManikinRefExtensionType" final="#all">
+		<xs:annotation>
+			<xs:documentation>Human Modeler main extension</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Reference3DExtensionType">
+				<xs:sequence>
+					<xs:element name="V_Population" type="xs:string" minOccurs="0"/>
+					<xs:element name="V_Gender" type="V_Gender_Enum" minOccurs="0"/>
+					<xs:element name="V_Weight" type="xs:double" minOccurs="0"/>
+					<xs:element name="V_Stature" type="xs:double" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- PCS -->
+	<!-- ____________________________________________________________________________________________________ -->
+	<xs:complexType name="PCSEnvironmentExtensionType">
+		<xs:annotation>
+			<xs:documentation>An extension specializing a Reference3D, which instances many PCS products and contexts. Those resources are specialized by a PCSResourceType child.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="Reference3DExtensionType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PCSResourceExtensionType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>An extension specializing an Instance3D into a PCS resource (Product or Context).</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Instance3DExtensionType">
+				<xs:attribute name="id" type="xs:unsignedInt" use="required"/>
+				<xs:attribute name="name" type="xs:string" use="required"/>
+				<xs:attribute name="description" type="xs:string" use="optional"/>
+				<xs:attribute name="default" type="xs:boolean" use="optional" default="true"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PCSProductExtensionType">
+		<xs:annotation>
+			<xs:documentation>An extension specializing an Instance3D into a PCS Product.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PCSResourceExtensionType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PCSContextExtensionType">
+		<xs:annotation>
+			<xs:documentation>An extension specializing an Instance3D into a PCS Context.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PCSResourceExtensionType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- Representations FORMAT-->
+	<!-- ____________________________________________________________________________________________________ -->
+	<xs:simpleType name="RepresentationFormatType">
+		<xs:annotation>
+			<xs:documentation>Types of formats for representation object</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="UVR">
+				<xs:annotation>
+					<xs:documentation>Default Geometrical representation</xs:documentation>
+				</xs:annotation>
+			</xs:pattern>
+			<xs:pattern value="TECHREP">
+				<xs:annotation>
+					<xs:documentation>Technological representation format</xs:documentation>
+				</xs:annotation>
+			</xs:pattern>
+			<xs:pattern value="TESSELLATED">
+				<xs:annotation>
+					<xs:documentation>Tessellated geometrical format (Binary or XML)</xs:documentation>
+				</xs:annotation>
+			</xs:pattern>
+			<xs:pattern value="BEHAVIORAL">
+				<xs:annotation>
+					<xs:documentation>behavioral representation format</xs:documentation>
+				</xs:annotation>
+			</xs:pattern>
+			<xs:pattern value=".*">
+				<xs:annotation>
+					<xs:documentation>standard format (jpeg, bmp, xls, ...)</xs:documentation>
+				</xs:annotation>
+			</xs:pattern>
+			<!-- Extra Format jpeg, bmp, xls, ...-->
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- v3/v4  3DXML Compatibility  -->
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- Default View Items-->
+	<!-- Default View / View point-->
+	<xs:complexType name="ViewpointType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>A base type for viewpoint definition</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="id" type="xs:unsignedInt" use="optional"/>
+		<xs:attribute name="name" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="Viewpoint3DType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Base object for 3D viewpoints definition</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ViewpointType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--  Default View /  View Point / inherited type -->
+	<xs:complexType name="CustomViewpoint3DType" abstract="false">
+		<xs:annotation>
+			<xs:documentation>An arbitrary viewpoint with a custom view transformation and a custom projection matrix. This object can be used to define non-standard viewpoint such as assymetric viewpoints.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Viewpoint3DType">
+				<xs:sequence>
+					<xs:element name="ViewMatrix" type="Matrix4x3Type"/>
+					<xs:element name="ProjectionMatrix" type="Matrix4x3Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProjectionViewpointType" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Standard 3D viewpoint definition. The projection viewpoint object defines the position and the orientation of the viewpoint. The targetDistance attribute defines the point along the sight direction on which the viewpoint is focused on. This focused point should be used as rotation center for viewpoint manipulations. Optional near clipping plane and far clipping plane can also be defined.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Viewpoint3DType">
+				<xs:sequence>
+					<xs:element name="Position" type="Point3DType"/>
+					<xs:element name="Sight" type="Vector3DType"/>
+					<xs:element name="Right" type="Vector3DType"/>
+					<xs:element name="Up" type="Vector3DType"/>
+				</xs:sequence>
+				<xs:attribute name="targetDistance" type="xs:float" use="required"/>
+				<xs:attribute name="nearPlaneDistance" type="xs:float" use="optional" default="1.0"/>
+				<xs:attribute name="farPlaneDistance" type="xs:float" use="optional" default="10000.0"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PerspectiveViewpointType" abstract="false">
+		<xs:annotation>
+			<xs:documentation>A viewpoint with a perspective projection. The mandatory attributes fieldOfView defines the visualized angle.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ProjectionViewpointType">
+				<xs:attribute name="fieldOfView" type="xs:float" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ParallelViewpointType" abstract="false">
+		<xs:annotation>
+			<xs:documentation>A viewpoint with a parallel projection. The mandatory attributes visualized hegiht defines the visualized area.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ProjectionViewpointType">
+				<xs:attribute name="visualizedHeight" type="xs:float" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--  Default View / Defaultview Property Items -->
+	<xs:complexType name="OccurencePropertyType">
+		<xs:annotation>
+			<xs:documentation>A base type used to add a property to an occurence of the unfolded tree. This element can be derived to carry on graphic properties, relative positioning, or any other data. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OccurenceId" type="InstancesPathType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--  Default View / Defaultview Property /  * / Color -->
+	<!--  Default View / Defaultview Property /  Graphic Properties / SurfaceAttribute / Color -->
+	<!--  Default View / Defaultview Property /  Graphic Properties / LineAtributes / Color -->
+	<!--  Default View / Defaultview Property /  Graphic Properties /  PointAttributes / Color  -->
+	<xs:complexType name="ColorType" abstract="true">
+		<xs:annotation>
+			<xs:documentation> A base object for color coding</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<!--  Default View / Defaultview Property /  * /  Color / inherited Type-->
+	<xs:complexType name="RGBAColorType" abstract="false">
+		<xs:annotation>
+			<xs:documentation>A color with four components red, green, blue and alpha</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ColorType">
+				<xs:attribute name="red" type="xs:float" use="required"/>
+				<xs:attribute name="green" type="xs:float" use="required"/>
+				<xs:attribute name="blue" type="xs:float" use="required"/>
+				<xs:attribute name="alpha" type="xs:float" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--  Default View / Defaultview Property /  Graphic Properties /  SurfaceAttribute / Material / BlendType -->
+	<!-- XMLMesh /  SurfaceAttribute / MaterialApplication / BlendType-->
+	<xs:simpleType name="TextureBlendFunctionType">
+		<xs:annotation>
+			<xs:documentation> Define the way textures blend in case of multi-texturing</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="REPLACE"/>
+			<xs:enumeration value="ADD"/>
+			<xs:enumeration value="ALPHA_TRANSPARENCY"/>
+			<xs:enumeration value="LIGHTMAP"/>
+			<xs:enumeration value="BURN"/>
+			<xs:enumeration value="INVERT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--  Default View / Defaultview Property /  Graphic Properties /  SurfaceAttribute / Material / BlendType -->
+	<!-- XMLMesh /  SurfaceAttribute / MaterialApplication / MappingSideType-->
+	<xs:simpleType name="MappingSideType">
+		<xs:annotation>
+			<xs:documentation> Define on which triangle's face the textures will be mapped</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FRONT"/>
+			<xs:enumeration value="BACK"/>
+			<xs:enumeration value="FRONT_AND_BACK"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--  Default View / Defaultview Property /  Graphic Properties /  SurfaceAttribute / MaterialApplication -->
+	<!-- XMLMesh / SurfaceAttributes / MaterialApplication -->
+	<xs:complexType name="MaterialApplicationType" abstract="false">
+		<xs:annotation>
+			<xs:documentation>Type for material application on 3D.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MaterialId">
+				<xs:complexType>
+					<xs:attribute name="id" type="archiveURIType" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="mappingChannel" type="xs:unsignedInt" use="required"/>
+		<xs:attribute name="mappingSide" type="MappingSideType" use="optional"/>
+		<xs:attribute name="blendType" type="TextureBlendFunctionType" use="optional"/>
+	</xs:complexType>
+	<!-- XMLMesh / SurfaceAttributes -->
+	<xs:complexType name="SurfaceAttributesType" abstract="false">
+		<xs:annotation>
+			<xs:documentation>A description of rendering attributes of faces and surfaces. Surface rendering attributes can either be defined by aggregation of a color, or aggregation of a material application object which himself aggregates or reference a shared material (through its unqiue identifier).</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="Color" type="ColorType"/>
+			<xs:sequence>
+				<xs:element name="MaterialApplication" type="MaterialApplicationType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:choice>
+	</xs:complexType>
+	<!--  Default View / Defaultview Property /  Graphic Properties / LineAtributes / LineType -->
+	<xs:simpleType name="LineTypeType">
+		<xs:annotation>
+			<xs:documentation>A simple enumeration describing patterns used to render edges and wires</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SOLID"/>
+			<xs:enumeration value="DOTTED"/>
+			<xs:enumeration value="DASHED"/>
+			<xs:enumeration value="DOT-DASHED"/>
+			<xs:enumeration value="PHANTOM"/>
+			<xs:enumeration value="SMALL-DOTTED"/>
+			<xs:enumeration value="JIS-AXIS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--  Default View / Defaultview Property /  Graphic Properties / LineAtributes-->
+	<xs:complexType name="LineAttributesType" abstract="false">
+		<xs:annotation>
+			<xs:documentation>A description of rendering attributes of edges, wires and curves. It includes a line type, a thickness and a color.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Color" type="ColorType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="lineType" type="LineTypeType" use="optional" default="SOLID"/>
+		<xs:attribute name="thickness" type="xs:float" use="optional" default="1"/>
+	</xs:complexType>
+	<!--  Default View / Defaultview Property /  Graphic Properties /  PointAttribute / PointSymbol-->
+	<xs:simpleType name="PointSymbolType">
+		<xs:annotation>
+			<xs:documentation>A simple enumeration describing the type of symbol used to render points</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CROSS"/>
+			<xs:enumeration value="PLUS"/>
+			<xs:enumeration value="CONCENTRIC"/>
+			<xs:enumeration value="COINCIDENT"/>
+			<xs:enumeration value="FULLCIRCLE"/>
+			<xs:enumeration value="FULLSQUARE"/>
+			<xs:enumeration value="STAR"/>
+			<xs:enumeration value="DOT"/>
+			<xs:enumeration value="SMALLDOT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--  Default View / Defaultview Property /  Graphic Properties /  PointAttributes -->
+	<xs:complexType name="PointAttributesType" abstract="false">
+		<xs:annotation>
+			<xs:documentation>A description of rendering attributes of points. It includes a symbol type and a color.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Color" type="ColorType"/>
+		</xs:sequence>
+		<xs:attribute name="symbolType" type="PointSymbolType" use="optional" default="DOT"/>
+	</xs:complexType>
+	<!--  Default View  / Defaultview Property /  Graphic Properties / GeneralAttributes-->
+	<xs:complexType name="GeneralAttributesType">
+		<xs:annotation>
+			<xs:documentation>Description of general attributes of scene graph node such as : visibility, selectability</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="visible" type="xs:boolean" use="optional" default="true"/>
+		<xs:attribute name="selectable" type="xs:boolean" use="optional" default="true"/>
+	</xs:complexType>
+	<!--  Default View  / Defaultview Property /  Graphic Properties-->
+	<xs:complexType name="GraphicPropertiesType">
+		<xs:annotation>
+			<xs:documentation>A type describing graphic properties (attributes and material) </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SurfaceAttributes" type="SurfaceAttributesType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation> : Surface attribute could not be a material application in Defaultview Property scope, it must only be a color </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LineAttributes" type="LineAttributesType" minOccurs="0"/>
+			<xs:element name="PointAttributes" type="PointAttributesType" minOccurs="0"/>
+			<xs:element name="GeneralAttributes" type="GeneralAttributesType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--  Default View / Defaultview Property -->
+	<xs:complexType name="DefaultViewPropertyType">
+		<xs:annotation>
+			<xs:documentation>A type derived from OccurencePropertyType that associates graphic properties, relative positioning  and representation to an occurrence of the unfolded tree</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="OccurencePropertyType">
+				<xs:sequence>
+					<xs:element name="RelativePosition" type="Matrix4x3Type" minOccurs="0"/>
+					<xs:element name="GraphicProperties" type="GraphicPropertiesType" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- DefaultView -->
+	<xs:complexType name="DefaultViewType">
+		<xs:annotation>
+			<xs:documentation>DefaultViewType object defines alternative configuration of the product structure model in terms of viewpoint, graphic properties, relative positioning and representations</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Viewpoint" type="Viewpoint3DType" minOccurs="0"/>
+			<xs:element name="DefaultViewProperty" type="DefaultViewPropertyType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- ____________________________________________________________________________________________________ -->
+	<!-- Model -->
+	<!-- ____________________________________________________________________________________________________ -->
+	<xs:element name="Model_3dxml">
+		<xs:annotation>
+			<xs:documentation>The 3dxml model including among others data, the  structure, the visualization parameters and the representations</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Header" type="HeaderType">
+					<xs:annotation>
+						<xs:documentation>A collection of metadata relative to the file (author, date, title, ...)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ProductStructure" type="ProductStructureType" minOccurs="0"/>
+				<xs:element name="PROCESS" type="PROCESSType" minOccurs="0"/>
+				<xs:element name="DefaultView" type="DefaultViewType" minOccurs="0"/>
+				<xs:element name="DELFmiFunctionalModelImplementCnx" type="DELFmiFunctionalModelImplementCnxType" minOccurs="0"/>
+				<xs:element name="CATMaterialRef" type="CATMaterialRefType" minOccurs="0"/>
+				<xs:element name="CATRepImage" type="CATRepImageType" minOccurs="0"/>
+				<xs:element name="CATMaterial" type="CATMaterialType" minOccurs="0"/>
+				<xs:element name="DELPPRContextModelProcessCnx" type="DELPPRContextModelProcessCnxType" minOccurs="0"/>
+				<xs:element name="DELRmiResourceModelImplCnx" type="DELRmiResourceModelImplCnxType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+		<!-- ____________________________________________________________________________________________________ -->
+		<!-- keys -->
+		<!-- ____________________________________________________________________________________________________ -->
+		<xs:key name="EntityKey">
+			<xs:selector xpath="./ProductStructure/Reference3D|./ProductStructure/Instance3D|./ProductStructure/ReferenceRep|./ProductStructure/InstanceRep"/>
+			<xs:field xpath="@id"/>
+		</xs:key>
+		<xs:key name="ReferenceRepKey">
+			<xs:selector xpath="./ProductStructure/ReferenceRep"/>
+			<xs:field xpath="@id"/>
+		</xs:key>
+		<xs:key name="Reference3DKey">
+			<xs:selector xpath="./ProductStructure/Reference3D"/>
+			<xs:field xpath="@id"/>
+		</xs:key>
+		<xs:keyref name="AggregationRef" refer="Reference3DKey">
+			<xs:selector xpath="./ProductStructure/Instance3D|./ProductStructure/InstanceRep"/>
+			<xs:field xpath="IsAggregatedBy"/>
+		</xs:keyref>
+		<xs:keyref name="RootRef" refer="Reference3DKey">
+			<xs:selector xpath="./ProductStructure"/>
+			<xs:field xpath="@root"/>
+		</xs:keyref>
+	</xs:element>
+	<!-- Model -->
+</xs:schema>

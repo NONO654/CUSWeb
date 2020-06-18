@@ -1,0 +1,1 @@
+define("DS/etree/etree_ru",{});define("DS/etree/assets/nls/overviewui",{zoom_in:"Увеличить масштаб",zoom_out:"Уменьшить масштаб",zoom_default:"Восстановить масштаб по умолчанию",zoom_fit:"Поместить все"});

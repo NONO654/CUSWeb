@@ -1,0 +1,16 @@
+m|VCXWebKernel\VCXWebKernelTools.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.6.19138
+r|G:\R421\BSF\.
+t|win_b64\webapps\VCXWebKernelTools\VCXWebKernelTools.js|1558142579|59796
+s|VCXWebKernel\VCXWebKernelTools.mweb\src\VCXFileWriter.js|1487933763|3252
+s|VCXWebKernel\VCXWebKernelTools.mweb\src\VCXMathTools.js|1542040583|14303
+s|VCXWebKernel\VCXWebKernelTools.mweb\src\VCXEnums.js|1499234929|1940
+s|VCXWebKernel\VCXWebKernelTools.mweb\src\VCXMeshServices.js|1533805225|68439
+s|VCXWebKernel\VCXWebKernelTools.mweb\src\VCXPixelImage.js|1542725830|63257
+s|VCXWebKernel\VCXWebKernelTools.mweb\src\VCXXmlServices.js|1487933884|1854
+s|VCXWebKernel\VCXWebKernelTools.mweb\src\VCXFileServices.js|1557473263|25639
+s|VCXWebKernel\VCXWebKernelTools.mweb\src\VCXPixelImageSvg.js|1523607201|10432
+s|VCXWebKernel\VCXWebKernelTools.mweb\src\VCXMimeTypeServices.js|1487933884|6614
+s|VCXWebKernel\VCXWebKernelTools.mweb\src\VCXLogServices.js|1506936999|2819

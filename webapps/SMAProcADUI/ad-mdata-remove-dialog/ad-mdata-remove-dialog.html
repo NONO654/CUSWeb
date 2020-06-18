@@ -1,0 +1,64 @@
+<!-- Copyright 2016 Dassault Systemes. All rights reserved. -->
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<link rel="import" href="../../SMAProcSPUI/sp-uikit-styles/sp-uikit-styles.html">
+
+<dom-module id="ad-mdata-remove-dialog">
+  <link rel="import" type="css" href="ad-mdata-remove-dialog.css">
+  <template>
+      <style include="sp-uikit-styles"></style>
+        
+ 		<div id="myModal" class="modal fade">	   
+			<div class="modal-wrap">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button id="closeButton" type="button" class="close" aria-hidden="true" on-click="onCancel">&times;</button>
+			        <h4>Remove Selected Managed Data</h4>
+			      </div>
+			      <div id="dialogContent" class="modal-body">
+					<div id="questionText" class="content-text">
+						Are you sure you want to remove the following Managed Data?
+					</div>
+					<div id="listContainer">
+                        <ul>
+				            <template is="dom-repeat" items="{{selectedObjects}}" as="mdataInstance">
+ 				                <li class="content-text" title="{{mdataInstance.name}}">{{mdataInstance.name}}<template is="dom-if" if="{{mdataInstance.isReference}}">&nbsp;[Referenced]</template></li>
+				            </template>   
+				            <template is="dom-repeat" items="{{selectedSimulations}}" as="mdataInstance">
+				                <li class="content-text" title="{{mdataInstance.name}}">{{mdataInstance.name}}</li>               
+				            </template>   
+			            </ul>
+                      </div>
+					<div class="content-text">&nbsp;</div>
+					<div id="simulationsSection" class="content-text">
+						<div>
+							<span class="referenced-message">Referenced data will be removed from Managed Data, but will not be deleted from the repository.</span> 
+							<span class="simulations-message"><span class="simulations-singular">The </span>Simulation<span class="simulations-plural">s</span> will be removed from Managed Data, but will not be deleted from the repository.</span> 
+							<span class="both-message">Referenced data and Simulations will be removed from Managed Data, but will not be deleted from the repository.</span>
+							<span class="mixed-message"><span class="fonticon fonticon-attention text-error"></span>Simulation Companion does not support deleting owned content and referenced content together. Please try to delete them separately.</span> 
+							<span class="multipleRef-message"><span class="fonticon fonticon-attention text-error"></span>Simulation Companion does not support deleting multiple referenced content simultaneously. Please try to delete them separately.</span>
+						</div>
+	                   	<div id="simulationsContent" class="toggle toggle-primary simulations-content">
+	                    	<input type="checkbox" id="deleteSimulationsCheckbox" value="deleteSimulations">
+	                    	<label class="control-label" for="deleteSimulationsCheckbox">Also delete the Simulation<span class="simulations-plural">s</span> from the repository</label>
+	                   	</div>
+					</div>
+			      </div>
+			      <div class="modal-footer">
+                   	<div id="showAgainSection" class="toggle toggle-primary">
+			      		<input type="checkbox" id="mdataShowAgainCheckbox">
+			      		<label class="control-label" for="mdataShowAgainCheckbox">Do not show this dialog again</label>
+                   	</div>
+			        <button id="okButton" type="button" class="btn btn-primary" on-click="onAccept">OK</button>
+			        <button id="cancelButton" type="button" class="btn btn-default" on-click="onCancel">Cancel</button>
+			      </div>
+	 		    </div>
+ 		    </div>
+ 		</div>
+ 		<div id="myModalOverlay" class="modal-overlay fade hidden"></div>
+ 		
+
+ 	</template>
+  <script src="ad-mdata-remove-dialog.js"></script>
+</dom-module>
+
+

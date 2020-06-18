@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.LocalAdapter" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+  <DisplayName>Local Adapter</DisplayName>
+  <Description>Local Adapter</Description>
+  <LongDescription>Local Adapter deployment</LongDescription>
+
+  <Attributes>
+    <Attribute name="Category">
+      <Value>Activity</Value>
+    </Attribute>
+    <Attribute name="DefaultDialogSize">
+      <Value>600</Value>
+      <Value>500</Value>
+    </Attribute>
+  </Attributes>
+
+  <Streams>
+    <Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebLocalAdapter/LocalAdapter.html" targetFilename="SMAProcWebLocalAdapter/LocalAdapter.html"/>
+    <Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+  </Streams>
+
+  <Interfaces>
+      <Interface interfaceKind="WebtopEditor">
+          <Implementations>
+              <Implementation name="webEditor" language="web" platform="win_b64">
+                  <LateType>pcw-local-adapter</LateType>
+                  <StreamRefs>
+                      <StreamRef refStreamName="Web_Editor"/>
+                  </StreamRefs>
+              </Implementation>
+          </Implementations>
+      </Interface>
+      <Interface interfaceKind="DesktopEditor">
+          <Implementations>
+              <Implementation name="webEditor" language="web" platform="win_b64">
+                  <LateType>SMAWflWebExtensionEditor</LateType>
+                  <StreamRefs>
+                      <StreamRef refStreamName="Web_stylesheet"/>
+                      <StreamRef refStreamName="Web_Editor"/>
+                  </StreamRefs>
+              </Implementation>
+          </Implementations>
+      </Interface>
+  </Interfaces>
+
+  <Properties>
+    <!--  Hello World Adapter properties -->
+    <Property name="program" type="string" valuetype="single" subtype="multiline">
+      <Value><![CDATA[]]></Value>
+    </Property>
+    <Property name="signature" type="string" valuetype="single">
+      <Value><![CDATA[]]></Value>
+    </Property>
+        <Property name="upload" type="file" mode="output" valuetype="single">
+      <Value><![CDATA[]]></Value>
+    </Property>
+    <Property name="download" type="file" mode="input" valuetype="single" subtype=".txt,.docx,.pdf,.zip">
+      <Value><![CDATA[]]></Value>
+    </Property>
+
+  </Properties>
+</wfext:Extension>

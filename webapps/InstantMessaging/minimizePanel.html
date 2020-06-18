@@ -1,0 +1,322 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta name="author" content="P8D" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Group view</title>
+
+<link rel="stylesheet" href="../UIKIT/UIKIT.css">
+
+<!-- Definition of require : -->
+<script type="text/javascript" src="../AmdLoader/AmdLoader.js"></script>
+
+<!-- This is required to configure RequireJS with the appropriate pathes : -->
+<script type="text/javascript" src="../WebappsUtils/WebappsUtils.js"></script>
+
+
+<!-- Web Fundamentals -->
+<script type="text/javascript" src="../WebUX/WebUX.js"></script>
+
+
+<script>
+
+	
+	require(['UWA/Drivers/Alone','DS/InstantMessaging/js/view/RTMinimizePanelView'], function (UWA, RTMinimizePanelView ) {
+
+		var panel = new RTMinimizePanelView();
+		panel.getView().inject(document.body);
+/*
+		var btAdd = UWA.createElement('div', {
+			text:'Add Top Element',
+			styles: {
+				width: '150',
+				height: '32px',
+				top: '5px',
+				left: '5px',
+				border: '1px solid grey',
+				position: 'fixed',
+				padding:'5px'
+			},
+			events: {
+				mouseover: function() {
+					btAdd.style.cursor='pointer';
+				},
+				mouseout: function() {
+					btAdd.style.cursor='default';
+				},
+				click:function(){
+					var v = UWA.createElement('div', {
+						styles: {
+							width: '42px',
+							height: '42px',
+							marginTop: '2px',
+							background: "#" + Math.random().toString(16).slice(2, 8),
+  							borderRadius: '3px'
+						}
+					});
+					panel.addElement({view:v, position:'top', forceDisplay:false});
+				}
+			}
+
+		}).inject(document.body);
+*/
+
+		var btEmail = UWA.createElement('div', {
+			text:'Mail',
+			styles: {
+				width: '150',
+				height: '32px',
+				top: '5px',
+				left: '5px',
+				border: '1px solid grey',
+				position: 'fixed',
+				padding:'5px'
+			},
+			events: {
+				mouseover: function() {
+					btAdd.style.cursor='pointer';
+				},
+				mouseout: function() {
+					btAdd.style.cursor='default';
+				},
+				click:function(){
+					window.location.href='mailto:mail@example.org?subject=hello&body=zaerzerzaerazraze';
+				}
+			}
+
+		}).inject(document.body);
+
+		var btAdd2 = UWA.createElement('div', {
+			text:'Add Bot Element',
+			styles: {
+				width: '150',
+				height: '32px',
+				top: '40px',
+				left: '5px',
+				border: '1px solid grey',
+				position: 'fixed',
+				padding:'5px'
+			},
+			events: {
+				mouseover: function() {
+					btAdd2.style.cursor='pointer';
+				},
+				mouseout: function() {
+					btAdd2.style.cursor='default';
+				},
+				click:function(){
+					var v = UWA.createElement('div', {
+						styles: {
+							width: '42px',
+							height: '42px',
+							marginTop: '2px',
+							background: "#" + Math.random().toString(16).slice(2, 8),
+  							borderRadius: '3px'
+						}
+					});
+					panel.addElement({view:v, position:'bottom', forceDisplay:false});
+				}
+			}
+
+		}).inject(document.body);
+
+		var btAdd3 = UWA.createElement('div', {
+			text:'Add Force Bot Elem',
+			styles: {
+				width: '150',
+				height: '32px',
+				top: '75px',
+				left: '5px',
+				border: '1px solid grey',
+				position: 'fixed',
+				padding:'5px'
+			},
+			events: {
+				mouseover: function() {
+					btAdd3.style.cursor='pointer';
+				},
+				mouseout: function() {
+					btAdd3.style.cursor='default';
+				},
+				click:function(){
+					var idElement = guid();
+					var v = UWA.createElement('div', {
+						styles: {
+							width: '50px',
+							height: '50px',
+							marginTop: '6px',
+							background: "#" + Math.random().toString(16).slice(2, 8),
+  							borderRadius: '8px',
+  							border: '4px solid orange'
+						},
+						events: {
+							mouseover: function() {
+								v.style.cursor='pointer';
+							},
+							mouseout: function() {
+								v.style.cursor='default';
+							},
+							click:function(){
+								panel.removeElement({idElement:idElement, view:v, show:true});
+							}
+						}
+					});
+					panel.addElement({idElement:idElement, view:v, position:'bottom', show:true});
+				}
+			}
+
+		}).inject(document.body);
+
+		var btAdd4 = UWA.createElement('div', {
+			text:'Add Force Bot Elem',
+			styles: {
+				width: '150',
+				height: '32px',
+				top: '110px',
+				left: '5px',
+				border: '1px solid grey',
+				position: 'fixed',
+				padding:'5px'
+			},
+			events: {
+				mouseover: function() {
+					btAdd4.style.cursor='pointer';
+				},
+				mouseout: function() {
+					btAdd4.style.cursor='default';
+				},
+				click:function(){
+					var idElement = guid();
+					var v = UWA.createElement('div', {
+						styles: {
+							width: '300px',
+							height: '74px',
+							marginTop: '6px',
+							background: "#" + Math.random().toString(16).slice(2, 8),
+  							borderRadius: '3px'
+						},
+						events: {
+							mouseover: function() {
+								v.style.cursor='pointer';
+							},
+							mouseout: function() {
+								v.style.cursor='default';
+							},
+							click:function(){
+								panel.removeElement({idElement:idElement, view:v, show:true});
+							}
+						}
+					});
+					panel.addElement({idElement:idElement, view:v, position:'bottom', show:true});
+
+					var fx = new UWA.Fx(v,{
+						duration : 250,
+						transition: 'linear'
+					});
+					setTimeout(function(){ fx.start({width:50,height:50}); }, 3000);
+				}
+			}
+
+		}).inject(document.body);
+
+		var btAdd5 = UWA.createElement('div', {
+			text:'Add Contact',
+			styles: {
+				width: '150',
+				height: '32px',
+				top: '145px',
+				left: '5px',
+				border: '1px solid grey',
+				position: 'fixed',
+				padding:'5px'
+			},
+			events: {
+				mouseover: function() {
+					btAdd5.style.cursor='pointer';
+				},
+				mouseout: function() {
+					btAdd5.style.cursor='default';
+				},
+				click:function(){
+					var idElement = guid();
+					panel.addContact({
+						id : idElement, 
+						pathPicture :'https://dsdev006-euw1-18dna10423-3dswym.3dexperience.3ds.com/api/user/getpicture/login/lxm/format',
+						userName :'Layal Dergham',
+						infoTxt :'Hello, how are you ? Have you some news from the last project ?',
+						events:{
+							click  : function (){
+								alert('Click on notif !');
+							}
+						}
+					});
+
+					
+				}
+			}
+
+		}).inject(document.body);
+
+		var btAdd6 = UWA.createElement('div', {
+			text:'Add Notif',
+			styles: {
+				width: '150',
+				height: '32px',
+				top: '180px',
+				left: '5px',
+				border: '1px solid grey',
+				position: 'fixed',
+				padding:'5px'
+			},
+			events: {
+				mouseover: function() {
+					btAdd6.style.cursor='pointer';
+				},
+				mouseout: function() {
+					btAdd6.style.cursor='default';
+				},
+				click:function(){
+					var idElement = guid();
+//					panel.addNotification({id:idElement, pathPicture:'https://dsdev006-euw1-18dna10423-3dswym.3dexperience.3ds.com/api/user/getpicture/login/lxm/format'});
+					panel.addNotification({
+						id : idElement, 
+						pathPicture :'https://dsdev006-euw1-18dna10423-3dswym.3dexperience.3ds.com/api/user/getpicture/login/lxm/format',
+						userName :'Layal Dergham',
+						infoTxt :'Hello, how are you ? Have you some news from the last project ?',
+						events:{
+							click  : function (){
+								alert('Click on notif !');
+							}
+						}
+					});
+
+					
+				}
+			}
+
+		}).inject(document.body);
+
+
+		
+		
+	});
+
+	function guid() {
+	  function s4() {
+	    return Math.floor((1 + Math.random()) * 0x10000)
+	      .toString(16)
+	      .substring(1);
+	  }
+	  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+	    s4() + '-' + s4() + s4() + s4();
+	}
+
+
+</script>
+</head>
+<body>
+
+
+</body>
+</html>

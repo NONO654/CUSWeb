@@ -1,0 +1,12 @@
+m|MPFModels\MPFKYCDocumentModel.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.2.18331
+r|G:\R421\BSF\.
+t|win_b64\webapps\MPFKYCDocumentModel\MPFKYCDocumentModel.js|1540605183|3745
+s|MPFModels\MPFKYCDocumentModel.mweb\src\KycDocumentModel.js|1536247565|3499
+s|MPFModels\MPFKYCDocumentModel.mweb\src\KycDocumentService.js|1510737759|906
+s|MPFModels\MPFKYCDocumentModel.mweb\src\KycDocumentStatus.js|1510680763|1173
+s|MPFModels\MPFKYCDocumentModel.mweb\src\KycDocumentCollection.js|1510739826|816
+s|MPFModels\MPFKYCDocumentModel.mweb\src\MPFKYCDocumentModel.js|1513949611|0
+s|MPFModels\MPFKYCDocumentModel.mweb\src\ShopKycDocumentDataProxy.js|1491905035|1442

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfext:Extension name="com.dassault_systemes.sma.adapter.CSEClient" version="3DX.0"
+   xmlns:wfext="http://www.3ds.com/SMAExeExtensionsNoTypesUQ"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   extensionKind="FunctionConnector">
+	<DisplayName nlsFile="SMAWflCSEClient" nlsID="displayname">CSS Client Execution</DisplayName>
+	<Description nlsFile="SMAWflCSEClient" nlsID="description">CSS Client Execution</Description>
+	<LongDescription nlsFile="SMAWflCSEClient" nlsID="longdesc">CSS Client Execution</LongDescription>
+	<Attributes>
+		<Attribute name="Category">
+			<Value>Activity</Value>
+		</Attribute>
+		<Attribute name="DefaultDialogSize">
+			<Value>600</Value>
+			<Value>500</Value>
+		</Attribute>
+	</Attributes>
+	<Streams>
+		<Stream name="Icon32" streamKind="icon32" sourceFilename="SMAWflCSEClient32.png" targetFilename="large/SMAWflCSEClient32.png" />
+		<Stream name="Web_Editor" streamKind="webpage" sharedLoader="false" platform="win_b64" sourceFilename="SMAProcWebGenericEditor/cmp-generic.html" targetFilename="SMAProcWebGenericEditor/cmp-generic.html"/>
+		<Stream name="Web_stylesheet" streamKind="stylesheet" sharedLoader="false" sourceFilename="SMAWflWebExtensionUI.sypstyle" targetFilename="SMAWflWebExtensionUI.sypstyle"/>
+	</Streams>
+	<Interfaces>
+		<Interface interfaceKind="WebtopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>cmp-generic</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+		<Interface interfaceKind="DesktopEditor">
+			<Implementations>
+				<Implementation name="webEditor" language="web" platform="win_b64">
+					<LateType>SMAWflWebExtensionEditor</LateType>
+					<StreamRefs>
+						<StreamRef refStreamName="Web_stylesheet"/>
+						<StreamRef refStreamName="Web_Editor"/>
+					</StreamRefs>
+				</Implementation>
+			</Implementations>
+		</Interface>
+	</Interfaces>
+
+	<Properties>
+		<!--  CSEClient Execute properties -->
+		<Property name="clientModel" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="BehaviorPath" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="jobName" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="clientSolverParams" type="string" valuetype="single">
+			<Value/>
+		</Property>
+		<Property name="Co-simulation" type="boolean" valuetype="single">
+			<Value>false</Value>
+		</Property>
+		<Property name="spec" type="file" valuetype="single" mode="input">
+			<Value/>
+		</Property>
+		<Property name="mapSpec" type="file" valuetype="single" mode="input">
+			<Value/>
+		</Property>
+		<Property name="interaction" type="string" valuetype="single">
+			<Value/>
+		</Property>
+	</Properties>
+</wfext:Extension>

@@ -1,0 +1,55 @@
+{{!++subtemplate++}}
+{{!++id:imageUpload++}}
+{{!--
+    template for image upload fields
+
+   for a config like
+   {
+            name: 'image',
+            label: i18n('emxCollaborativeTasks.Label.Image', 'Image'),
+            type: 'imageUpload',
+            W: 'what',
+            cssClass: ''
+    }
+   this template accept values of the form
+   {
+    data: <file drop data>
+   }
+ --}}
+{{#if label}}
+      <label>{{label}}</label>
+{{/if}}
+<div class="field-group">
+      <div class="input-group-wrapper">
+            <div class="input-group">
+                  <div class="input-element">
+                        <div class="form-control object-image ds-drop-target drop-target idle">
+                              <!-- add class at this level to change messaging: waiting/dropping/uploading/replacing -->
+                              <img src="\{{ {{name}} }}" />
+                              <div class="ds-drop-target-overlay">
+                                    <div class="actions">
+                                          <button class="btn plan-image-clear disabled">
+                                              <span class="fonticon fonticon-clear"></span>
+                                          </button>
+                                    </div>
+                                    <div class="ds-drop-target-message drop">
+                                          <span class="fonticon fonticon-drag-drop"></span>
+                                          <span class="ds-drop-target-label">{{i18n 'emxFoundation.Image.Drop'}}</span>
+                                    </div>
+
+                                    <div class="ds-drop-target-message upload">
+                                          <span>{inject spinner here}</span>
+                                          <span class="ds-drop-target-label">{{i18n 'emxFoundation.Image.Upload'}}</span>
+                                    </div>
+
+                                    <div class="ds-drop-target-message replace">
+                                          <span class="fonticon fonticon-replace"></span>
+                                          <span class="ds-drop-target-label">{{i18n 'emxFoundation.Image.Replace'}}</span>
+                                    </div>
+
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>

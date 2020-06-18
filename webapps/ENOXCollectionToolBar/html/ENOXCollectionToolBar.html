@@ -1,0 +1,64 @@
+<div class="enox-collection-toolbar-container">
+
+    <!-- LEFT MENU - Multiselect check and item counter -->
+
+    {{#if withmultisel}} <div class="enox-collection-toolbar-withmultisel"></div>{{/if}}
+    {{#if showItemCount}} <div class="enox-collection-toolbar-item-count">
+      <div class="enox-collection-toolbar-item-count-inner-wrapper">
+      <div class="enox-collection-toolbar-item-count-inner">
+        {{currentNbitems}} {{#if itemCountDisplayName}}{{itemCountDisplayName}}{{else}}{{itemName}}{{/if}}
+      </div></div></div>{{/if}}
+
+	<div class="enox-collection-toolbar-right-menu-wrapper">
+	<div class="enox-collection-toolbar-right-menu">
+
+	    {{#if filter}}<div class="enox-collection-toolbar-search-textbox-container"></div>
+	    	<div class="enox-collection-toolbar-filter enox-collection-toolbar-icon"></div>
+	    {{/if}}
+        {{#if withmultisel}}
+       {{#if filter}}<div class="enox-collection-toolbar-divider"></div>{{/if}}
+    		<div class="enox-collection-toolbar-multiselection-wrapper">
+    		<div class="enox-collection-toolbar-multiselection enox-collection-toolbar-icon">
+    		<span class="fonticon fonticon-select-on"></span>
+	    	<sub class = "enox-collection-toolbar-multiselect-count">{{#if currentNbSelections}} {{currentNbSelections}}{{/if}}</sub>
+         	<span id = "enox-collection-toolbar-multiselect-options" class="fonticon fonticon-open-down"></span>
+	    		</div>
+    		</div>
+
+    	{{/if}}
+
+		{{#if actions}}
+    {{#if withmultisel}}<div id= "enox-collection-toolbar-multiselect-divider" class="enox-collection-toolbar-divider"></div>
+    {{else}}{{#if filter}}<div class="enox-collection-toolbar-divider"></div>
+    {{/if}}{{/if}}
+    {{#if components}} <div class="enox-collection-toolbar-finalItem"></div>{{/if}}
+    <div class="enox-collection-toolbar-actions"></div>
+    {{#if views}}<div class="enox-collection-toolbar-divider"></div>
+    {{else}}{{#if sort}}<div class="enox-collection-toolbar-divider"></div>{{/if}}
+    {{/if}}
+    {{/if}}
+
+		{{#if views}}
+    <div class="enox-collection-toolbar-switch-views enox-collection-toolbar-icon">
+		<span id="enox-collection-toolbar-views-base"></span></div>{{/if}}
+
+		{{#if sort}} <div class="enox-collection-toolbar-sort enox-collection-toolbar-icon">
+		<span id="enox-collection-toolbar-sort-base"></span></div>{{/if}}
+
+
+	<!-- check type and add sort orders -->
+	{{#if sort}}
+		{{#each sort}}
+			<div id="enox-collection-toolbar-sort-item-{{this.id}}"  class = "enox-collection-toolbar-sort-order">
+			{{#sort_type_check this.type 'string'}}
+				<span class = "fonticon fonticon-sort-alpha-asc enox-collection-toolbar-order-style order-asc"></span>
+				<span class = "fonticon fonticon-sort-alpha-desc enox-collection-toolbar-order-style order-desc"></span>
+			{{else}}
+				<span class = "fonticon fonticon-sort-num-asc enox-collection-toolbar-order-style order-asc"></span>
+				<span class = "fonticon fonticon-sort-num-desc enox-collection-toolbar-order-style order-desc"></span>
+			{{/sort_type_check}}
+			</div>
+		{{/each}}
+	{{/if}}
+</div>
+</div>

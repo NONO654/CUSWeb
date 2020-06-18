@@ -1,0 +1,10 @@
+m|CAT3DComposeWebUX\CATC3DGeometry.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.7.19159
+r|G:\R421\BSF\.
+t|win_b64\webapps\CATC3DGeometry\CATC3DGeometry.js|1559958459|6882
+s|CAT3DComposeWebUX\CATC3DGeometry.mweb\src\CATC3DGeometry.js|1475049202|0
+s|CAT3DComposeWebUX\CATC3DGeometry.mweb\src\CATC3DEquivalentGeometry.js|1556092882|15488
+s|CAT3DComposeWebUX\CATC3DGeometry.mweb\src\CATC3DGeometryEnums.js|1549871995|660
+s|CAT3DComposeWebUX\CATC3DGeometry.mweb\src\_copyright.js|1478093832|63

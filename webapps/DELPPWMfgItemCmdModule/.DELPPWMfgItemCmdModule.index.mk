@@ -1,0 +1,10 @@
+m|DELPPWModules\DELPPWMfgItemCmdModule.mweb
+b|j|c,m
+b|c|c,m
+v|6.421.0.18258
+r|G:\R421\BSF\.
+t|win_b64\webapps\DELPPWMfgItemCmdModule\DELPPWMfgItemCmdModule.js|1536974448|3759
+s|DELPPWModules\DELPPWMfgItemCmdModule.mweb\src\UpdateMfgItemCmdModule.js|1536668358|6773
+s|DELPPWModules\DELPPWMfgItemCmdModule.mweb\src\CreateMfgItemCmdModule.js|1536668311|8145
+s|win_b64\code\toolcmds\jscompressor.bat|1531520632|41
+s|win_b64\code\toolcmds\mkwebconcat.bat|1531520632|287

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Styles xmlns:syp="http://www.3ds.com/xsd/SYP">
+
+    <!-- Command headers -->
+    <Template syp:name="ENOECMHeaders" Target="CATCmdHeadersList">
+        <CATCmdHeadersList>
+            
+          <CATCommandHeader ID="AddToNewCA" ClassName="DS/ENOChgActionCMDs/scripts/Commands/AddToNewCA"
+              ResourceFile="ENOChgActionCMDs/ENOECM" Available="1"/>
+              
+   	       <CATCommandHeader ID="AddToExistingCA" ClassName="DS/ENOChgActionCMDs/scripts/Commands/AddToExistingCA"
+          ResourceFile="ENOChgActionCMDs/ENOECM" Available="1"/>
+   	  		    	   
+        </CATCmdHeadersList>
+    </Template>
+
+    <!-- Command Starters -->
+    <Template syp:name="ENOECMWkbAccess" Target="CATCmdWorkbench">
+        <CATCmdWorkbench Name="ENOECMWkb">
+            <CATCmdContainer Name="Change" RepresentationType="AfrActionBarSection">
+			
+				  <CATCmdStarter Name="Add To New Change Action" Command="AddToNewCA" />
+				  <CATCmdStarter Name="Add To Existing Change Action" Command="AddToExistingCA" />				 	  
+				  
+			  </CATCmdContainer>
+			  			  
+        </CATCmdWorkbench>
+    </Template>
+</Styles>
+
+

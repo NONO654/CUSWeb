@@ -1,0 +1,1 @@
+define("DS/ENOXVersionExplorerModelManager/ENOXVersionExplorerModelManager_ja",{});define("DS/ENOXVersionExplorerModelManager/assets/nls/SemanticRelationships",{X_MODEL:{E:"エボリューション",F:"フィックス",S:"スタディ",B:"ブランチ",SP:"分割"},P_PRIME:{E:"エボリューション",F:"フィックス",S:"スタディ",SO:"スピンオフ",SP:"分割",I:"統合"}});

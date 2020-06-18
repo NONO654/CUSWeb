@@ -1,0 +1,1 @@
+define("DS/TopFrame/TopFrame_ko",{});define("DS/TopFrame/assets/nls/topFrame",{aboutItem:"3DEXPERIENCE Platform 정보",about:"정보",support:"지지대",getStartedItem:"시작하기",getSupportItem:"지원 받기",supportCommunitiesItem:"사용자 커뮤니티",loading:"로드 중...",xAppError:"앱 로드 중 오류 발생..",actionFit:"최대화",actionMinimize:"최소화",actionClose:"닫기",mobilePairing:"모바일 페어링"});

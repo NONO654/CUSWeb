@@ -1,0 +1,1 @@
+define("DS/ENXDataGrid/ENXDataGrid_zh",{});define("DS/ENXDataGrid/assets/nls/graphToolbar",{"Show/Hide Image":"显示/隐藏图像",Rotate:"旋转","Show/Hide Minimap":"显示/隐藏迷你地图"});define("DS/ENXDataGrid/assets/nls/message",{success:"更改已保存至数据库",error:"无法将更改保存至数据库",copy:"复制",move:"移动",cancel:"取消",title:"放置操作"});

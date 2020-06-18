@@ -1,0 +1,98 @@
+<!--------------------------------------------------------------------
+[xs-data-tree-view HTML Document]
+
+------------------------------------------------------------------- -->
+
+<link rel="import" href="../../SMAProcSP/sp-base/sp-base.html">
+<script src="../../WebappsUtils/WebappsUtils.js"></script>
+<link rel="import" href="../../SMAProcSPUI/sp-input/sp-input.html">
+<link rel="import" href="../../SMAProcSPUI/sp-radio-buttons/sp-radio-buttons.html">
+<link rel="import" href="../../SMAProcSPUI/sp-updatepanel/sp-updatepanel.html">
+
+<dom-module id="xs-data-tree-view">
+    <!-- <link rel="import" type="css" href="xs-data-tree-view.css"> -->
+    <template>
+      <style>
+      :host {
+        display: block;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .header {
+        display: flex;
+        flex-direction: row;
+        padding: 5px 0;
+        justify-content: space-between;
+      }
+
+      .filter {
+        margin-right: 5px;
+      }
+
+      .browsecontent {
+        height: 100%;
+        position: relative;
+        margin-top: 2px;
+        border: 1px solid #D0D2D6;
+      }
+
+      .wux-layouts-gridengine .wux-scroller{
+        overflow-x: hidden;
+      }
+
+      .updatepanel {
+        height: calc(100% - 35px);
+      }
+
+      .wux-layouts-treeview-icon .wux-ui-3ds-right {
+          font-family: Arial;
+      }
+
+      .wux-ui-3ds-right:before {
+          content: '\e145';
+      }
+
+      .emptytree{
+        display: block;
+        margin: 2px;
+        border: 1px solid #d0d2d6;
+        height: 100%;
+      }
+
+      .hide{
+        display: none;
+      }
+
+      .msgforuser{
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      </style>
+
+
+    	    <div class="header">
+                <sp-input id="searchprocessbrowser" type="search" placeholder="Search by title" value="{{_searchKey}}"></sp-input>
+                <sp-radio-buttons id="filter" class="filter" options="Show only valid,Show all" selectedindex="0" on-optionselect="__onFilterChange"></sp-radio-buttons>
+            </div>
+            <sp-updatepanel class="updatepanel" id="updatepanel" state="{{_state}}" updateswhen="1,2,3,4,5">
+                 <div id="content" class$="{{_computeClass(_hideTreeModel)}}">
+                <!-- Tree to get rendered here -->
+                </div>
+                <div class$="{{_computeClass1(_hideTreeModel)}}">
+                  <span class="msgforuser">No matches</span>
+                </div>
+            </sp-updatepanel>
+    </template>
+    <script src="xs-data-tree-view.js"></script>
+</dom-module>

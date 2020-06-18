@@ -1,0 +1,447 @@
+<?xml version="1.0" ?>
+<OOTBParameterization regSuite="PPRObjects">
+<!--
+##############################################################
+       PPR Attributes Parameterization
+       Management Atttibutes PPR Planning Object 
+       - Manufacturing Items -used also by service Items
+       - Operations
+       - Systems
+       - Workplan
+       - Work Instructions
+##############################################################
+-->
+ <!--Attributes-->
+ <!--Attributes-->
+ <!--Attributes-->
+<Domain id="AttributeDef">
+  <!--Manuf Item Planning (the 3 group families used by Maturity Graph)-->
+  <!--Continuous Manuf Item-->
+  <Family id="DELFmiFunctionPPRContinuousReference" regSuite="PPRObjects" >
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELFmiFunctionPPRContinuousReference"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Create (NLS == Discrete) Manuf Item-->
+  <Family id="DELFmiFunctionPPRCreateReference" regSuite="PPRObjects" >
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELFmiFunctionPPRCreateReference"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Transform -->
+  <Family id="Transform">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Transform"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--All the Types Manuf Item-->
+  <Family id="DELFmiFunctionPPRReference">
+		<Constant id="appType" value="VPM"/>
+    <!--SubFamilly => required when several types are involved -->
+    <Family id="DELFmiFunctionPPRContinuousReference">
+      <Constant id="appType" value="VPM"/>
+      <Constant id="type" value="DELFmiFunctionPPRContinuousReference"/>
+      <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    </Family>
+    <!--SubFamilly => required when several types are involved -->
+    <Family id="DELFmiFunctionPPRDiscreteReference">
+      <Constant id="appType" value="VPM"/>
+      <Constant id="type" value="DELFmiFunctionPPRDiscreteReference"/>
+      <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+   </Family>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+	</Family>
+
+  <!--Every Type of Manuf Item -->
+  <!--CreateAssembly -->
+  <Family id="CreateAssembly">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="CreateAssembly"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--CreateKit -->
+  <Family id="CreateKit">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="CreateKit"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--CreateMaterial -->
+  <Family id="CreateMaterial">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="CreateMaterial"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--ProcessContinuousCreateMaterial -->
+  <Family id="ProcessContinuousCreateMaterial">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="ProcessContinuousCreateMaterial"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--ElementaryEndItem -->
+  <Family id="ElementaryEndItem">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="ElementaryEndItem"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Provide -->
+  <Family id="Provide">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Provide"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+
+  <!--Marking -->
+  <Family id="Marking">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Marking"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Annotation -->
+  <Family id="Annotation">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Annotation"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Machine -->
+  <Family id="Machine">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Machine"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--RemoveMaterial -->
+  <Family id="RemoveMaterial">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="RemoveMaterial"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Drill -->
+  <Family id="Drill">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Drill"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--PreDrill -->
+  <Family id="PreDrill">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="PreDrill"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--NoDrill -->
+  <Family id="NoDrill">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="NoDrill"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Cutting -->
+  <Family id="Cutting">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Cutting"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Grinding -->
+  <Family id="Grinding">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Grinding"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Beveling -->
+  <Family id="Beveling">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Beveling"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--SplitProcess -->
+  <Family id="SplitProcess">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="SplitProcess"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--ProcessContinuousProvide -->
+  <Family id="ProcessContinuousProvide">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="ProcessContinuousProvide"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Fasten -->
+  <Family id="Fasten">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Fasten"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Fasten -->
+  <Family id="Unfasten">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Unfasten"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Disassemble -->
+  <Family id="Disassemble">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Disassemble"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Install -->
+  <Family id="Installation">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="Installation"/>
+    <Constant id="package" value="DELAsmAssemblyModelDisciplines"/>
+    <!--DELAsmAssemblyModelDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+
+  <!--Generic Operation (All the types) -->
+  <Family id="DELLmiOperationPPRReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiOperationPPRReference"/>
+    <Constant id="package" value="DELLmiProductionOperationPPR"/>
+    <!--DELLmiProductionOperationPPR == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--General Operation-->
+  <Family id="DELLmiGeneralOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiGeneralOperationReference"/>
+    <Constant id="package" value="DELLmiProductionGeneralOperation"/>
+    <!--DELLmiProductionGeneralOperation == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Loading Operation-->
+  <Family id="DELLmiLoadingOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiLoadingOperationReference"/>
+    <Constant id="package" value="DELLmiLoadingOperationReference"/>
+    <!--DELLmiLoadingOperationReference == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Unloading Operation-->
+  <Family id="DELLmiUnLoadingOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiUnLoadingOperationReference"/>
+    <Constant id="package" value="DELLmiProductionUnloadingOperation"/>
+    <!--DELLmiProductionUnloadingOperation == nom du package (Name defined in metadata)-->
+  </Family>
+  
+ <!--Picking Operation-->
+  <!--<Family id="DELLmiPickingOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiPickingOperationReference"/>
+    <Constant id="package" value="DELLmiProductionPickingOperation"/>-->
+    <!--DELLmiProductionPickingOperation == nom du package (Name defined in metadata)-->
+  <!--</Family>-->
+  
+  <!--Curve Operation-->
+  <Family id="DELLmiCurveOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiCurveOperationReference"/>
+    <Constant id="package" value="DELLmiProductionCurveOperation"/>
+    <!--DELLmiProductionCurveOperation == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Punctual Operation-->
+  <Family id="DELLmiPunctualOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiPunctualOperationReference"/>
+    <Constant id="package" value="DELLmiProductionPunctualOperation"/>
+    <!--DELLmiProductionPunctualOperation == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Source Operation-->
+  <Family id="DELLmiSourceOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiSourceOperationReference"/>
+    <Constant id="package" value="DELLmiProductionSourceOperation"/>
+    <!--DELLmiProductionSourceOperation == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Sink Operation-->
+  <Family id="DELLmiSinkOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiSinkOperationReference"/>
+    <Constant id="package" value="DELLmiProductionSinkOperation"/>
+    <!--DELLmiProductionSinkOperation == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Buffer Operation-->
+  <Family id="DELLmiBufferOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiBufferOperationReference"/>
+    <Constant id="package" value="DELLmiProductionBufferOperation"/>
+    <!--DELLmiProductionBufferOperation == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Interrupt Operation-->
+  <Family id="DELLmiInterruptOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiInterruptOperationReference"/>
+    <Constant id="package" value="DELLmiProductionInterruptOperation"/>
+    <!--DELLmiProductionInterruptOperation == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Transfer Operation-->
+  <Family id="DELLmiTransferOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiTransferOperationReference"/>
+    <Constant id="package" value="DELLmiProductionTransferOperation"/>
+    <!--DELLmiProductionTransferOperation == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Remove Material Operation-->
+  <Family id="DELLmiRemoveMaterialOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiRemoveMaterialOperationReference"/>
+    <Constant id="package" value="DELLmiProductionRemoveMaterialOperation"/>
+    <!--DELLmiProductionRemoveMaterialOperation == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Header Operation-->
+  <Family id="DELLmiHeaderOperationReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiHeaderOperationReference"/>
+    <Constant id="package" value="DELLmiProductionHeaderOperation"/>
+    <!--DELLmiProductionHeaderOperation == nom du package (Name defined in metadata)-->
+  </Family>
+
+  <!--General System-->
+  <Family id="DELLmiGeneralSystemReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiGeneralSystemReference"/>
+    <Constant id="package" value="DELLmiProductionGeneralSystem"/>
+    <!--DELLmiProductionGeneralSystem == nom du package (Name defined in metadata)-->
+  </Family>
+  
+  <!--Production System All types-->
+  <Family id="DELLmiProductionSystemPPR">
+    <!--There is not any Abstract class for all the System excepting Workplan
+    Every new type should be added there-->
+    <Constant id="appType" value="VPM"/>
+    <!--SubFamilly => required when several types are involved -->
+    <Family id="DELLmiGeneralSystemReference">
+      <Constant id="appType" value="VPM"/>
+      <Constant id="type" value="DELLmiGeneralSystemReference"/>
+      <Constant id="package" value="DELLmiProductionGeneralSystem"/>
+      <!--DELLmiProductionGeneralSystem == nom du package (Name defined in metadata)-->
+    </Family>
+    <!--SubFamilly => required when several types are involved -->
+    <Family id="DELLmiTransformationSystemReference">
+      <Constant id="appType" value="VPM"/>
+      <Constant id="type" value="DELLmiTransformationSystemReference"/>
+      <Constant id="package" value="DELLmiProductionTransformationSystem"/>
+      <!--DELLmiProductionTransformationSystem == nom du package (Name defined in metadata)-->
+    </Family>
+    <!--SubFamilly => required when several types are involved -->
+    <Family id="DELLmiTransferSystemReference">
+      <Constant id="appType" value="VPM"/>
+      <Constant id="type" value="DELLmiTransferSystemReference"/>
+      <Constant id="package" value="DELLmiProductionTransferSystem"/>
+      <!--DELLmiProductionTransferSystem == nom du package (Name defined in metadata)-->
+    </Family>
+    <!--SubFamilly => required when several types are involved -->
+     <Family id="DELLmiStorageSystemReference">
+       <Constant id="appType" value="VPM"/>
+       <Constant id="type" value="DELLmiStorageSystemReference"/>
+       <Constant id="package" value="DELLmiProductionStorageSystem"/>
+       <!--DELLmiProductionStorageSystem == nom du package (Name defined in metadata)-->
+      </Family>
+  </Family>
+  <!--Every System type-->
+
+  <!--DELLmiTransformationSystemReference-->
+  <Family id="DELLmiTransformationSystemReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiTransformationSystemReference"/>
+    <Constant id="package" value="DELLmiProductionTransformationSystem"/>
+    <!--DELLmiProductionTransformationSystem == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--DELLmiTransferSystemReference -->
+  <Family id="DELLmiTransferSystemReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiTransferSystemReference"/>
+    <Constant id="package" value="DELLmiProductionTransferSystem"/>
+    <!--DELLmiProductionTransferSystem == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--DELLmiStorageSystemReference -->
+  <Family id="DELLmiStorageSystemReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiStorageSystemReference"/>
+    <Constant id="package" value="DELLmiProductionStorageSystem"/>
+    <!--DELLmiProductionStorageSystem == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--SourceSystem -->
+  <Family id="SourceSystem">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="SourceSystem"/>
+    <Constant id="package" value="PLMDELMIASystemDisciplines"/>
+    <!--PLMDELMIASystemDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--SinkSystem -->
+  <Family id="SinkSystem">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="SinkSystem"/>
+    <Constant id="package" value="PLMDELMIASystemDisciplines"/>
+    <!--PLMDELMIASystemDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--BufferSystem -->
+  <Family id="BufferSystem">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="BufferSystem"/>
+    <Constant id="package" value="PLMDELMIASystemDisciplines"/>
+    <!--PLMDELMIASystemDisciplines == nom du package (Name defined in metadata)-->
+  </Family>
+
+  <!--Workplan-->
+  <Family id="DELLmiWorkPlanSystemReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELLmiWorkPlanSystemReference"/>
+    <Constant id="package" value="DELLmiProductionWorkplanSystem"/>
+    <!--DELLmiProductionWorkplanSystem == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--Work Instruction-->
+  <Family id="DELWkiPPRReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELWkiPPRReference"/>
+    <Constant id="package" value="DELWkiWorkInstructionPPR"/>
+    <!--DELWkiWorkInstructionPPR == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--DELWkiSignOffReference-->
+  <Family id="DELWkiSignOffReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELWkiSignOffReference"/>
+    <Constant id="package" value="DELWkiSignOff"/>
+    <!--DELWkiSignOff == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--DELWkiInstructionReference-->
+  <Family id="DELWkiInstructionReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELWkiInstructionReference"/>
+    <Constant id="package" value="DELWkiInstruction"/>
+    <!--DELWkiInstruction == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--DELWkiAlertReference-->
+  <Family id="DELWkiAlertReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELWkiAlertReference"/>
+    <Constant id="package" value="DELWkiAlert"/>
+    <!--DELWkiAlertReference == nom du package (Name defined in metadata)-->
+  </Family>
+  <!--DELWkiDataCollectReference-->
+  <Family id="DELWkiDataCollectReference">
+    <Constant id="appType" value="VPM"/>
+    <Constant id="type" value="DELWkiDataCollectReference"/>
+    <Constant id="package" value="DELWkiDataCollect"/>
+    <!--DELWkiDataCollect == nom du package (Name defined in metadata)-->
+  </Family>
+ 
+</Domain>
+</OOTBParameterization>

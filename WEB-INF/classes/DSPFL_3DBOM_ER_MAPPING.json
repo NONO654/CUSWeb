@@ -1,0 +1,59 @@
+{
+	"dspfl:Model": {
+        "erResource": "type_Model",
+        "attributeMappingClass": "com.dassault_systemes.enovia.xapps.dspfl.dico.dspflModelAttributeDictionary"
+    },
+    "dspfl:ModelVersion": {
+        "erResource": "type_Products",
+        "attributeMappingClass": "com.dassault_systemes.enovia.xapps.dspfl.dico.dspflModelVersionAttributeDictionary"
+    },
+    "dspfl:VariantValue": {
+        "erResource": "type_VariantValue",
+        "classesWhere":"to[Configuration Options].from.attribute[Configuration Selection Type].value==Single",
+        "attributeMappingClass": "com.dassault_systemes.enovia.xapps.dspfl.dico.dspflVariabilityAttributeDictionary"
+    },
+    "dspfl:Variant": {
+        "erResource": "type_Variant",
+        "classesWhere":"attribute[Configuration Selection Type].value==Single",
+        "attributeMappingClass": "com.dassault_systemes.enovia.xapps.dspfl.dico.dspflVariabilityAttributeDictionary"
+    },
+    "dspfl:VariabilityGroup": {
+        "erResource": "type_VariabilityGroup",
+        "classesWhere":"attribute[Configuration Selection Type].value==Multiple",
+        "attributeMappingClass": "com.dassault_systemes.enovia.xapps.dspfl.dico.dspflVariabilityAttributeDictionary"
+    },
+     "dspfl:Parameter": {
+        "erResource": "type_VariantParameter",
+        "attributeMappingClass": "com.dassault_systemes.enovia.xapps.dspfl.dico.dspflVariantParameterAttributeDictionary"
+    },
+    "dspfl:Option": {
+        "erResource": "type_VariabilityOption",
+        "classesWhere":"to[Configuration Options].from.attribute[Configuration Selection Type].value==Multiple",
+        "attributeMappingClass": "com.dassault_systemes.enovia.xapps.dspfl.dico.dspflVariabilityAttributeDictionary"
+    },   
+    "dspfl:Rule":{
+    	"erResource": "type_ConfigurationRule",
+    	"attributeMappingClass": "com.dassault_systemes.enovia.xapps.dspfl.dico.dspflRuleAttributeDictionary"
+    },
+     "dspfl:ProductConfiguration":{
+    	"erResource": "type_ProductConfiguration",
+    	"attributeMappingClass": "com.dassault_systemes.enovia.xapps.dspfl.dico.dspflProductConfigurationAttributeDictionary"
+    },
+    "dspfl:VariantInstance":{
+     "erResource": "relationship_ConfigurationFeatures",
+    "attributeMappingClass": "com.dassault_systemes.enovia.xapps.dspfl.dico.dspflVariabilityInstanceAttributeDictionary"
+    },
+    "dspfl:VariabilityGroupInstance":{
+     "erResource": "relationship_ConfigurationFeatures"
+    },
+     "dspfl:ParameterInstance":{
+     "erResource": "relationship_ConfigurationFeatures"
+    },
+    "dspfl:VariantValueInstance":{
+     "erResource": "relationship_VariantValues"
+    },
+    "dspfl:OptionInstance":{
+     "erResource": "relationship_GroupedVariabilityCriteria"
+    }
+    
+}

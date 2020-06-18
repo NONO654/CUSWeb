@@ -1,0 +1,1 @@
+define("DS/3DPlayWidgetModel/3DPlayWidgetModel_zh",{});define("DS/3DPlayWidgetModel/assets/nls/prefs",{Label:"3DSpace 几何图形的首选质量",Label_External_App:"已嵌入 3DPlay：3DSpace 几何图形的首选质量",auto:"自动",base:"高质量",index:"低质量"});
